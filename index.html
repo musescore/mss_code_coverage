@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MuseScore Studio code coverage</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #f4f4f2;
+    --surface-1: #fcfcfb;
+    --line: #e2e1dc;
+    --grid: #ebeae6;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #6f6e69;
+    --accent: #2a78d6;
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --up: #157a3c;
+    --down: #b3261e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-0: #121211;
+      --surface-1: #1a1a19;
+      --line: #2e2e2c;
+      --grid: #262624;
+      --text-primary: #f0efec;
+      --text-secondary: #c3c2b7;
+      --text-muted: #9a998f;
+      --accent: #3987e5;
+      --series-1: #3987e5;
+      --series-2: #d95926;
+      --up: #4cc27a;
+      --down: #ff8a80;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-0: #121211;
+    --surface-1: #1a1a19;
+    --line: #2e2e2c;
+    --grid: #262624;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #9a998f;
+    --accent: #3987e5;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --up: #4cc27a;
+    --down: #ff8a80;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--surface-0);
+    color: var(--text-primary);
+    font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 1040px; margin: 0 auto; padding: 32px 16px 48px; }
+  a { color: var(--accent); }
+  h1 { font-size: 24px; font-weight: 600; margin: 0 0 4px; letter-spacing: -0.01em; }
+  h2 { font-size: 16px; font-weight: 600; margin: 0 0 12px; }
+  .sub { color: var(--text-secondary); margin: 0 0 24px; }
+  .card {
+    background: var(--surface-1);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+
+  .hero { display: flex; flex-wrap: wrap; gap: 16px 40px; align-items: flex-end; }
+  .stat .label { color: var(--text-secondary); font-size: 13px; }
+  .stat .value { font-size: 40px; font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; }
+  .stat .value.small { font-size: 26px; }
+  .delta { font-size: 13px; color: var(--text-secondary); }
+  .delta.up { color: var(--up); }
+  .delta.down { color: var(--down); }
+  .hero .meta { margin-left: auto; text-align: right; color: var(--text-secondary); font-size: 13px; }
+  .button {
+    display: inline-block; margin-top: 8px; padding: 7px 14px; border-radius: 7px;
+    background: var(--accent); color: #fff; text-decoration: none; font-weight: 500;
+  }
+
+  .legend { display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+  .legend i { display: inline-block; width: 14px; height: 2px; vertical-align: middle; margin-right: 6px; border-radius: 1px; }
+
+  .chart { position: relative; width: 100%; }
+  .chart svg { display: block; width: 100%; height: 280px; overflow: visible; }
+  .chart .axis text { fill: var(--text-muted); font-size: 11px; }
+  .chart .grid line { stroke: var(--grid); stroke-width: 1; }
+  .chart .series path { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .chart .series circle { stroke: var(--surface-1); stroke-width: 2; }
+  .chart .crosshair { stroke: var(--text-muted); stroke-width: 1; stroke-dasharray: 3 3; }
+  .tooltip {
+    position: absolute; pointer-events: none; min-width: 160px;
+    background: var(--surface-1); border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 10px; font-size: 12.5px; box-shadow: 0 6px 20px rgba(0,0,0,.12);
+  }
+  .tooltip .t-title { color: var(--text-secondary); margin-bottom: 4px; }
+  .tooltip .t-row { display: flex; gap: 8px; align-items: center; }
+  .tooltip .t-row i { width: 10px; height: 2px; border-radius: 1px; }
+  .tooltip .t-row span:last-child { margin-left: auto; font-weight: 600; }
+  .empty { color: var(--text-secondary); padding: 40px 0; text-align: center; }
+
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
+  th { color: var(--text-secondary); font-weight: 500; }
+  footer { color: var(--text-muted); font-size: 12.5px; margin-top: 24px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>MuseScore Studio code coverage</h1>
+  <p class="sub">Unit test coverage of <a href="https://github.com/musescore/MuseScore">musescore/MuseScore</a>, published by the <i>Check: Unit Tests (utest)</i> workflow.</p>
+
+  <section class="card hero">
+    <div class="stat">
+      <div class="label">Lines covered</div>
+      <div class="value num" id="hero-lines">—</div>
+      <div class="delta num" id="hero-lines-delta"></div>
+    </div>
+    <div class="stat">
+      <div class="label">Functions covered</div>
+      <div class="value small num" id="hero-functions">—</div>
+      <div class="delta num" id="hero-functions-delta"></div>
+    </div>
+    <div class="meta">
+      <div id="hero-meta"></div>
+      <a class="button" href="report/index.html">Open full report</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Coverage over time</h2>
+    <div class="legend">
+      <span><i style="background: var(--series-1)"></i>Lines</span>
+      <span><i style="background: var(--series-2)"></i>Functions</span>
+    </div>
+    <div class="chart" id="chart"></div>
+  </section>
+
+  <section class="card">
+    <h2>Publishes</h2>
+    <div class="table-wrap">
+      <table id="publishes">
+        <thead>
+          <tr><th>Date</th><th>Commit</th><th>Lines</th><th>Change</th><th>Functions</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>Data: <a href="history.csv">history.csv</a> · The full report shows only the latest publish.</footer>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  const $ = (id) => document.getElementById(id);
+  const fmt = (v) => (v == null || isNaN(v) ? "—" : v.toFixed(1) + "%");
+  const fmtDelta = (d) => (d == null ? "" : (d > 0 ? "+" : d < 0 ? "−" : "±") + Math.abs(d).toFixed(1) + " pp");
+  const deltaClass = (d) => "delta num" + (d > 0.05 ? " up" : d < -0.05 ? " down" : "");
+  const fmtDate = (iso) => new Date(iso).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+  const commitUrl = (sha) => "https://github.com/musescore/MuseScore/commit/" + sha;
+
+  function commitLink(sha) {
+    const a = document.createElement("a");
+    a.href = commitUrl(sha);
+    a.textContent = sha.slice(0, 7);
+    return a;
+  }
+
+  // history.csv: date,commit,lines,functions
+  function parseCsv(text) {
+    const lines = text.trim().split(/\r?\n/);
+    const header = lines.shift().split(",");
+    return lines.filter(Boolean).map((line) => {
+      const cells = line.split(",");
+      const row = {};
+      header.forEach((h, i) => { row[h] = cells[i]; });
+      row.lines = row.lines === "" ? null : Number(row.lines);
+      row.functions = row.functions === "" ? null : Number(row.functions);
+      return row;
+    }).sort((a, b) => a.date.localeCompare(b.date));
+  }
+
+  function renderHero(rows) {
+    const last = rows[rows.length - 1];
+    const prev = rows.length > 1 ? rows[rows.length - 2] : null;
+    $("hero-lines").textContent = fmt(last.lines);
+    $("hero-functions").textContent = fmt(last.functions);
+
+    [["hero-lines-delta", "lines"], ["hero-functions-delta", "functions"]].forEach(([id, key]) => {
+      const d = prev && last[key] != null && prev[key] != null ? last[key] - prev[key] : null;
+      $(id).textContent = d == null ? "first publish" : fmtDelta(d) + " since previous";
+      $(id).className = deltaClass(d);
+    });
+
+    const meta = $("hero-meta");
+    meta.replaceChildren(fmtDate(last.date) + " · ", commitLink(last.commit));
+  }
+
+  // ---------------------------------------------------------------- chart
+
+  const SVG = "http://www.w3.org/2000/svg";
+  function svgEl(name, attrs, parent) {
+    const el = document.createElementNS(SVG, name);
+    Object.entries(attrs || {}).forEach(([k, v]) => el.setAttribute(k, v));
+    if (parent) parent.appendChild(el);
+    return el;
+  }
+
+  function niceRange(values) {
+    let lo = Math.min(...values), hi = Math.max(...values);
+    if (hi - lo < 4) { const mid = (hi + lo) / 2; lo = mid - 2; hi = mid + 2; }
+    const pad = (hi - lo) * 0.15;
+    lo = Math.max(0, Math.floor((lo - pad) / 2) * 2);
+    hi = Math.min(100, Math.ceil((hi + pad) / 2) * 2);
+    return [lo, hi];
+  }
+
+  const SERIES = [
+    { key: "lines", name: "Lines", color: "var(--series-1)" },
+    { key: "functions", name: "Functions", color: "var(--series-2)" }
+  ];
+
+  function renderChart(rows) {
+    const host = $("chart");
+    host.replaceChildren();
+
+    const W = Math.max(host.clientWidth, 300), H = 280;
+    const m = { top: 12, right: 16, bottom: 28, left: 40 };
+    const iw = W - m.left - m.right, ih = H - m.top - m.bottom;
+    const values = rows.flatMap((r) => [r.lines, r.functions]).filter((v) => v != null);
+    const [lo, hi] = niceRange(values);
+
+    const t0 = new Date(rows[0].date).getTime();
+    const t1 = new Date(rows[rows.length - 1].date).getTime();
+    const xOf = (d) => (t1 === t0 ? iw / 2 : ((new Date(d).getTime() - t0) / (t1 - t0)) * iw);
+    const yOf = (v) => ih - ((v - lo) / (hi - lo)) * ih;
+
+    const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Coverage over time" }, host);
+    const g = svgEl("g", { transform: `translate(${m.left},${m.top})` }, svg);
+
+    const grid = svgEl("g", { class: "grid" }, g);
+    const axis = svgEl("g", { class: "axis" }, g);
+    const step = (hi - lo) / 4;
+    for (let i = 0; i <= 4; i++) {
+      const v = lo + step * i, y = yOf(v);
+      svgEl("line", { x1: 0, x2: iw, y1: y, y2: y }, grid);
+      const t = svgEl("text", { x: -8, y: y + 4, "text-anchor": "end" }, axis);
+      t.textContent = (Number.isInteger(v) ? v : v.toFixed(1)) + "%";
+    }
+
+    const ticks = rows.length <= 6 ? rows : [0, 0.25, 0.5, 0.75, 1].map((f) => rows[Math.round(f * (rows.length - 1))]);
+    [...new Set(ticks)].forEach((r) => {
+      const t = svgEl("text", { x: xOf(r.date), y: ih + 20, "text-anchor": "middle" }, axis);
+      t.textContent = new Date(r.date).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    });
+
+    const sg = svgEl("g", { class: "series" }, g);
+    SERIES.forEach((s) => {
+      const pts = rows.filter((r) => r[s.key] != null);
+      if (pts.length > 1) {
+        const d = pts.map((r, i) => (i ? "L" : "M") + xOf(r.date).toFixed(1) + "," + yOf(r[s.key]).toFixed(1)).join("");
+        svgEl("path", { d, stroke: s.color }, sg);
+      }
+      // markers only while sparse, so a single publish is still visible
+      if (pts.length <= 12) {
+        pts.forEach((r) => svgEl("circle", { cx: xOf(r.date), cy: yOf(r[s.key]), r: 4, fill: s.color }, sg));
+      }
+    });
+
+    // hover: crosshair + tooltip
+    const cross = svgEl("line", { class: "crosshair", y1: 0, y2: ih, visibility: "hidden" }, g);
+    const dots = SERIES.map((s) => svgEl("circle", { r: 5, fill: s.color, stroke: "var(--surface-1)", "stroke-width": 2, visibility: "hidden" }, g));
+    const hit = svgEl("rect", { x: -m.left, y: 0, width: iw + m.left + m.right, height: ih, fill: "transparent" }, g);
+    const tip = document.createElement("div");
+    tip.className = "tooltip";
+    tip.hidden = true;
+    host.appendChild(tip);
+
+    hit.addEventListener("pointermove", (ev) => {
+      const box = svg.getBoundingClientRect();
+      const x = ((ev.clientX - box.left) / box.width) * W - m.left;
+      let best = rows[0];
+      rows.forEach((r) => { if (Math.abs(xOf(r.date) - x) < Math.abs(xOf(best.date) - x)) best = r; });
+      const bx = xOf(best.date);
+      cross.setAttribute("x1", bx); cross.setAttribute("x2", bx);
+      cross.setAttribute("visibility", "visible");
+      SERIES.forEach((s, i) => {
+        if (best[s.key] == null) { dots[i].setAttribute("visibility", "hidden"); return; }
+        dots[i].setAttribute("cx", bx); dots[i].setAttribute("cy", yOf(best[s.key]));
+        dots[i].setAttribute("visibility", "visible");
+      });
+
+      tip.replaceChildren();
+      const title = document.createElement("div");
+      title.className = "t-title";
+      title.textContent = fmtDate(best.date) + " · " + best.commit.slice(0, 7);
+      tip.appendChild(title);
+      SERIES.forEach((s) => {
+        const row = document.createElement("div");
+        row.className = "t-row";
+        const sw = document.createElement("i"); sw.style.background = s.color;
+        const n = document.createElement("span"); n.textContent = s.name;
+        const v = document.createElement("span"); v.className = "num"; v.textContent = fmt(best[s.key]);
+        row.append(sw, n, v);
+        tip.appendChild(row);
+      });
+
+      tip.hidden = false;
+      const px = ((bx + m.left) / W) * box.width;
+      const left = px + 12 + tip.offsetWidth > box.width ? px - 12 - tip.offsetWidth : px + 12;
+      tip.style.left = Math.max(0, left) + "px";
+      tip.style.top = "8px";
+    });
+    hit.addEventListener("pointerleave", () => {
+      cross.setAttribute("visibility", "hidden");
+      dots.forEach((d) => d.setAttribute("visibility", "hidden"));
+      tip.hidden = true;
+    });
+  }
+
+  // ---------------------------------------------------------------- table
+
+  function renderTable(rows) {
+    const tbody = document.querySelector("#publishes tbody");
+    tbody.replaceChildren(...rows.map((r, i) => {
+      const prev = i > 0 ? rows[i - 1] : null;
+      const d = prev && r.lines != null && prev.lines != null ? r.lines - prev.lines : null;
+      const tr = document.createElement("tr");
+      const date = document.createElement("td"); date.textContent = fmtDate(r.date);
+      const commit = document.createElement("td"); commit.appendChild(commitLink(r.commit));
+      const lines = document.createElement("td"); lines.className = "num"; lines.textContent = fmt(r.lines);
+      const delta = document.createElement("td"); delta.className = deltaClass(d); delta.textContent = fmtDelta(d);
+      const funcs = document.createElement("td"); funcs.className = "num"; funcs.textContent = fmt(r.functions);
+      tr.append(date, commit, lines, delta, funcs);
+      return tr;
+    }).reverse());
+  }
+
+  // ---------------------------------------------------------------- main
+
+  fetch("history.csv", { cache: "no-store" })
+    .then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then((text) => {
+      const rows = parseCsv(text);
+      if (!rows.length) throw new Error("empty");
+
+      renderHero(rows);
+      renderChart(rows);
+      renderTable(rows);
+
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => renderChart(rows), 100);
+      });
+    })
+    .catch(() => {
+      const d = document.createElement("div");
+      d.className = "empty";
+      d.textContent = "No coverage history yet.";
+      $("chart").replaceChildren(d);
+    });
+})();
+</script>
+</body>
+</html>
