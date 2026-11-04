@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -112,13 +112,13 @@
 <span id="L54"><span class="lineNum">      54</span>              :     OBJECT_ALLOCATOR(engraving, TimeSigFrac)</span>
 <span id="L55"><span class="lineNum">      55</span>              : public:</span>
 <span id="L56"><span class="lineNum">      56</span>              :     using Fraction::Fraction;</span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC tlaBgGNC">       34662 :     constexpr TimeSigFrac(int n = 0, int d = 1)</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">       34662 :         : Fraction(n, d) {}</span></span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">       12098 :     TimeSigFrac(const Fraction&amp; f)</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">       12098 :         : TimeSigFrac(f.numerator(), f.denominator()) {}</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC tlaBgGNC">       34759 :     constexpr TimeSigFrac(int n = 0, int d = 1)</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">       34759 :         : Fraction(n, d) {}</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">       12131 :     TimeSigFrac(const Fraction&amp; f)</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">       12131 :         : TimeSigFrac(f.numerator(), f.denominator()) {}</span></span>
 <span id="L61"><span class="lineNum">      61</span>              : </span>
 <span id="L62"><span class="lineNum">      62</span>              :     // isCompound? Note: 3/8, 3/16, ... are NOT considered compound.</span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">       25518 :     bool isCompound() const { return numerator() &gt; 3 /*&amp;&amp; denominator() &gt;= 8*/ &amp;&amp; numerator() % 3 == 0; }</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">       25572 :     bool isCompound() const { return numerator() &gt; 3 /*&amp;&amp; denominator() &gt;= 8*/ &amp;&amp; numerator() % 3 == 0; }</span></span>
 <span id="L64"><span class="lineNum">      64</span>              : </span>
 <span id="L65"><span class="lineNum">      65</span>              :     // isBeatedCompound? Note: Conductors will beat the simple unit at slow tempos (&lt;60 compound units per minute)</span>
 <span id="L66"><span class="lineNum">      66</span>              :     // However, the meter is still considered to be compound (at least for our purposes).</span>
@@ -127,15 +127,15 @@
 <span id="L69"><span class="lineNum">      69</span>              :     int dUnitTicks()        const;</span>
 <span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           5 :     int ticksPerMeasure()   const { return numerator() * dUnitTicks(); }</span></span>
 <span id="L71"><span class="lineNum">      71</span>              : </span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       15098 :     int dUnitsPerBeat()     const { return isCompound() ? 3 : 1; }</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        4703 :     int beatTicks()         const { return dUnitTicks() * dUnitsPerBeat(); }</span></span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">       10242 :     int beatsPerMeasure()   const { return numerator() / dUnitsPerBeat(); }</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       15131 :     int dUnitsPerBeat()     const { return isCompound() ? 3 : 1; }</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        4710 :     int beatTicks()         const { return dUnitTicks() * dUnitsPerBeat(); }</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">       10268 :     int beatsPerMeasure()   const { return numerator() / dUnitsPerBeat(); }</span></span>
 <span id="L75"><span class="lineNum">      75</span>              : </span>
 <span id="L76"><span class="lineNum">      76</span>              :     int subbeatTicks(int level)   const;</span>
 <span id="L77"><span class="lineNum">      77</span>              :     int maxSubbeatLevel()         const;</span>
 <span id="L78"><span class="lineNum">      78</span>              : </span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        7116 :     bool isTriple()         const { return beatsPerMeasure() % 3 == 0; }</span></span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">        3126 :     bool isDuple() const { assert(!isTriple()); return beatsPerMeasure() % 2 == 0; }   // note: always test isTriple() first</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        7134 :     bool isTriple()         const { return beatsPerMeasure() % 3 == 0; }</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">        3134 :     bool isDuple() const { assert(!isTriple()); return beatsPerMeasure() % 2 == 0; }   // note: always test isTriple() first</span></span>
 <span id="L81"><span class="lineNum">      81</span>              : </span>
 <span id="L82"><span class="lineNum">      82</span>              :     // MuseScore stores tempos in quarter-notes-per-second, so conversions to conventional beats-per-minute format are provided here:</span>
 <span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">         153 :     double tempo2beatsPerMinute(double tempo)   const { return tempo * denominator() * 15.0 / dUnitsPerBeat(); }</span></span>
@@ -147,8 +147,8 @@
 <span id="L89"><span class="lineNum">      89</span>              :     BeatType strongestBeatInRange(int rtick1, int rtick2, int* dUnitsCrossed = 0, int* subbeatTick = 0, bool saveLast = false) const;   // range is exclusive</span>
 <span id="L90"><span class="lineNum">      90</span>              :     int strongestSubbeatLevelInRange(int rtick1, int rtick2, int* subbeatTick = 0) const;   // range is exclusive</span>
 <span id="L91"><span class="lineNum">      91</span>              : </span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">        1040 :     int ticksPastDUnit(int rtick)       const { return rtick % dUnitTicks(); }                   // returns 0 if rtick is exactly on a dUnit</span></span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">        1040 :     int ticksToNextDUnit(int rtick)     const { return dUnitTicks() - ticksPastDUnit(rtick); }   // returns dUnitTicks() if rtick is on a dUnit</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">        1042 :     int ticksPastDUnit(int rtick)       const { return rtick % dUnitTicks(); }                   // returns 0 if rtick is exactly on a dUnit</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">        1042 :     int ticksToNextDUnit(int rtick)     const { return dUnitTicks() - ticksPastDUnit(rtick); }   // returns dUnitTicks() if rtick is on a dUnit</span></span>
 <span id="L94"><span class="lineNum">      94</span>              : </span>
 <span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">         218 :     int ticksPastBeat(int rtick)        const { return rtick % beatTicks(); }                    // returns 0 if rtick is exactly on a beat</span></span>
 <span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">         101 :     int ticksToNextBeat(int rtick)      const { return beatTicks() - ticksPastBeat(rtick); }     // returns beatTicks() if rtick is on a beat</span></span>
@@ -166,22 +166,22 @@
 <span id="L108"><span class="lineNum">     108</span>              : class SigEvent</span>
 <span id="L109"><span class="lineNum">     109</span>              : {</span>
 <span id="L110"><span class="lineNum">     110</span>              : public:</span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        5279 :     constexpr SigEvent()</span></span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">        5279 :         : m_bar(0) {}                          ///&lt; default SigEvent is invalid</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        5295 :     constexpr SigEvent()</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">        5295 :         : m_bar(0) {}                          ///&lt; default SigEvent is invalid</span></span>
 <span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">        3056 :     SigEvent(const Fraction&amp; s, int bar = 0)</span></span>
 <span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">        3056 :         : m_timesig(s), m_nominal(s), m_bar(bar) {}</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        2551 :     SigEvent(const Fraction&amp; s, const Fraction&amp; ss, int bar = 0)</span></span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">        2551 :         : m_timesig(s), m_nominal(ss), m_bar(bar) {}</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        2567 :     SigEvent(const Fraction&amp; s, const Fraction&amp; ss, int bar = 0)</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">        2567 :         : m_timesig(s), m_nominal(ss), m_bar(bar) {}</span></span>
 <span id="L117"><span class="lineNum">     117</span>              : </span>
 <span id="L118"><span class="lineNum">     118</span>              :     bool operator==(const SigEvent&amp; e) const;</span>
 <span id="L119"><span class="lineNum">     119</span>              :     bool valid() const { return m_timesig.isValid(); }</span>
 <span id="L120"><span class="lineNum">     120</span>              :     String print() const { return m_timesig.toString(); }</span>
-<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">       24202 :     TimeSigFrac timesig() const { return m_timesig; }</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">       24218 :     TimeSigFrac timesig() const { return m_timesig; }</span></span>
 <span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">          26 :     void setTimesig(const TimeSigFrac&amp; f) { m_timesig = f; }</span></span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">        2006 :     TimeSigFrac nominal() const { return m_nominal; }</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">        2008 :     TimeSigFrac nominal() const { return m_nominal; }</span></span>
 <span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">          26 :     void setNominal(const TimeSigFrac&amp; f) { m_nominal = f; }</span></span>
 <span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">       11288 :     int bar() const { return m_bar; }</span></span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">        6351 :     void setBar(int val) { m_bar = val; }</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">        6367 :     void setBar(int val) { m_bar = val; }</span></span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
 <span id="L128"><span class="lineNum">     128</span>              : private:</span>
 <span id="L129"><span class="lineNum">     129</span>              : </span>
@@ -196,10 +196,10 @@
 <span id="L138"><span class="lineNum">     138</span>              : </span>
 <span id="L139"><span class="lineNum">     139</span>              : class TimeSigMap : public std::map&lt;int, SigEvent&gt;</span>
 <span id="L140"><span class="lineNum">     140</span>              : {</span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">        4081 :     OBJECT_ALLOCATOR(engraving, TimeSigMap)</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">        4109 :     OBJECT_ALLOCATOR(engraving, TimeSigMap)</span></span>
 <span id="L142"><span class="lineNum">     142</span>              : </span>
 <span id="L143"><span class="lineNum">     143</span>              : public:</span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">       17102 :     TimeSigMap() {}</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">       17117 :     TimeSigMap() {}</span></span>
 <span id="L145"><span class="lineNum">     145</span>              : </span>
 <span id="L146"><span class="lineNum">     146</span>              :     static const TimeSigFrac DEFAULT_TIME_SIGNATURE;</span>
 <span id="L147"><span class="lineNum">     147</span>              : </span>
@@ -213,7 +213,7 @@
 <span id="L155"><span class="lineNum">     155</span>              :     void dump() const;</span>
 <span id="L156"><span class="lineNum">     156</span>              : </span>
 <span id="L157"><span class="lineNum">     157</span>              :     const SigEvent&amp; timesig(int tick) const;</span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        2136 :     const SigEvent&amp; timesig(const Fraction&amp; f) const { return timesig(f.ticks()); }</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        2138 :     const SigEvent&amp; timesig(const Fraction&amp; f) const { return timesig(f.ticks()); }</span></span>
 <span id="L159"><span class="lineNum">     159</span>              : </span>
 <span id="L160"><span class="lineNum">     160</span>              :     void tickValues(int t, int* bar, int* beat, int* tick) const;</span>
 <span id="L161"><span class="lineNum">     161</span>              :     int bar2tick(int bar, int beat) const;</span>

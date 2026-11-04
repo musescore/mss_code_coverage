@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -93,18 +93,18 @@
 <span id="L35"><span class="lineNum">      35</span>              : using namespace mu::engraving;</span>
 <span id="L36"><span class="lineNum">      36</span>              : using namespace mu::engraving::rendering::score;</span>
 <span id="L37"><span class="lineNum">      37</span>              : </span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">       14250 : double SystemHeaderLayout::layoutBrackets(System* system, LayoutContext&amp; ctx)</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">       14366 : double SystemHeaderLayout::layoutBrackets(System* system, LayoutContext&amp; ctx)</span></span>
 <span id="L39"><span class="lineNum">      39</span>              : {</span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">       14250 :     size_t nstaves = system-&gt;staves().size();</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">       14250 :     size_t columns = system-&gt;getBracketsColumnsCount();</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">       14366 :     size_t nstaves = system-&gt;staves().size();</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">       14366 :     size_t columns = system-&gt;getBracketsColumnsCount();</span></span>
 <span id="L42"><span class="lineNum">      42</span>              : </span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">       14250 :     std::vector&lt;double&gt; bracketWidth(columns, 0.0);</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">       14366 :     std::vector&lt;double&gt; bracketWidth(columns, 0.0);</span></span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">       14250 :     std::vector&lt;Bracket*&gt; bl;</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">       14250 :     bl.swap(system-&gt;brackets());</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">       14366 :     std::vector&lt;Bracket*&gt; bl;</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">       14366 :     bl.swap(system-&gt;brackets());</span></span>
 <span id="L47"><span class="lineNum">      47</span>              : </span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">       35880 :     for (size_t staffIdx = 0; staffIdx &lt; nstaves; ++staffIdx) {</span></span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">       32888 :         for (size_t i = 0; i &lt; columns; ++i) {</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">       36120 :     for (size_t staffIdx = 0; staffIdx &lt; nstaves; ++staffIdx) {</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">       33012 :         for (size_t i = 0; i &lt; columns; ++i) {</span></span>
 <span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       22916 :             for (BracketItem* bi : ctx.dom().brackets(staffIdx)) {</span></span>
 <span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">       11658 :                 if (bi-&gt;column() != i || bi-&gt;bracketType() == BracketType::NO_BRACKET) {</span></span>
 <span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">        8156 :                     continue;</span></span>
@@ -121,20 +121,20 @@
 <span id="L63"><span class="lineNum">      63</span>              :         }</span>
 <span id="L64"><span class="lineNum">      64</span>              :     }</span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       14374 :     for (Bracket* b : bl) {</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       14490 :     for (Bracket* b : bl) {</span></span>
 <span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">         124 :         delete b;</span></span>
 <span id="L68"><span class="lineNum">      68</span>              :     }</span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       14250 :     double totalBracketWidth = 0.0;</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       14366 :     double totalBracketWidth = 0.0;</span></span>
 <span id="L71"><span class="lineNum">      71</span>              : </span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       14250 :     if (!system-&gt;brackets().empty()) {</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       14366 :     if (!system-&gt;brackets().empty()) {</span></span>
 <span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        5673 :         for (double w : bracketWidth) {</span></span>
 <span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">        3384 :             totalBracketWidth += w;</span></span>
 <span id="L75"><span class="lineNum">      75</span>              :         }</span>
 <span id="L76"><span class="lineNum">      76</span>              :     }</span>
 <span id="L77"><span class="lineNum">      77</span>              : </span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">       14250 :     return totalBracketWidth;</span></span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">       14250 : }</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">       14366 :     return totalBracketWidth;</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">       14366 : }</span></span>
 <span id="L80"><span class="lineNum">      80</span>              : </span>
 <span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">        3536 : Bracket* SystemHeaderLayout::createBracket(System* system, LayoutContext&amp; ctx, BracketItem* bi, size_t column, staff_idx_t staffIdx,</span></span>
 <span id="L82"><span class="lineNum">      82</span>              :                                            std::vector&lt;Bracket*&gt;&amp; bl, Measure* measure)</span>
@@ -262,23 +262,23 @@
 <span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">          98 :     muse::join(system-&gt;brackets(), bl);</span></span>
 <span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">          98 : }</span></span>
 <span id="L206"><span class="lineNum">     206</span>              : </span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">       14250 : double SystemHeaderLayout::totalBracketOffset(LayoutContext&amp; ctx)</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">       14366 : double SystemHeaderLayout::totalBracketOffset(LayoutContext&amp; ctx)</span></span>
 <span id="L208"><span class="lineNum">     208</span>              : {</span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">       14250 :     if (ctx.state().totalBracketsWidth() &gt;= 0) {</span></span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">       10332 :         return ctx.state().totalBracketsWidth();</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">       14366 :     if (ctx.state().totalBracketsWidth() &gt;= 0) {</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">       10407 :         return ctx.state().totalBracketsWidth();</span></span>
 <span id="L211"><span class="lineNum">     211</span>              :     }</span>
 <span id="L212"><span class="lineNum">     212</span>              : </span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        3918 :     size_t columns = 0;</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">       10122 :     for (const Staff* staff : ctx.dom().staves()) {</span></span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        7619 :         for (const BracketItem* bi : ctx.dom().brackets(staff-&gt;idx())) {</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        3959 :     size_t columns = 0;</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">       10208 :     for (const Staff* staff : ctx.dom().staves()) {</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        7664 :         for (const BracketItem* bi : ctx.dom().brackets(staff-&gt;idx())) {</span></span>
 <span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        1415 :             columns = std::max(columns, bi-&gt;column() + 1);</span></span>
 <span id="L217"><span class="lineNum">     217</span>              :         }</span>
 <span id="L218"><span class="lineNum">     218</span>              :     }</span>
 <span id="L219"><span class="lineNum">     219</span>              : </span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        3918 :     size_t nstaves = ctx.dom().nstaves();</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        3918 :     std::vector &lt; double &gt; bracketWidth(nstaves, 0.0);</span></span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">       10122 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; nstaves; ++staffIdx) {</span></span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">        7619 :         for (BracketItem* bi : ctx.dom().brackets(staffIdx)) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        3959 :     size_t nstaves = ctx.dom().nstaves();</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        3959 :     std::vector &lt; double &gt; bracketWidth(nstaves, 0.0);</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">       10208 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; nstaves; ++staffIdx) {</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">        7664 :         for (BracketItem* bi : ctx.dom().brackets(staffIdx)) {</span></span>
 <span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">        1415 :             if (bi-&gt;bracketType() == BracketType::NO_BRACKET || !bi-&gt;visible() || bi-&gt;bracketType() == BracketType::GROUP) {</span></span>
 <span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">         540 :                 continue;</span></span>
 <span id="L226"><span class="lineNum">     226</span>              :             }</span>
@@ -321,19 +321,19 @@
 <span id="L263"><span class="lineNum">     263</span>              :         }</span>
 <span id="L264"><span class="lineNum">     264</span>              :     }</span>
 <span id="L265"><span class="lineNum">     265</span>              : </span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">        3918 :     double totalBracketsWidth = 0.0;</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">       10122 :     for (double w : bracketWidth) {</span></span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">        6204 :         totalBracketsWidth = std::max(totalBracketsWidth, w);</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">        3959 :     double totalBracketsWidth = 0.0;</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">       10208 :     for (double w : bracketWidth) {</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">        6249 :         totalBracketsWidth = std::max(totalBracketsWidth, w);</span></span>
 <span id="L269"><span class="lineNum">     269</span>              :     }</span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">        3918 :     ctx.mutState().setTotalBracketsWidth(totalBracketsWidth);</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">        3959 :     ctx.mutState().setTotalBracketsWidth(totalBracketsWidth);</span></span>
 <span id="L271"><span class="lineNum">     271</span>              : </span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">        3918 :     return totalBracketsWidth;</span></span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        3918 : }</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">        3959 :     return totalBracketsWidth;</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        3959 : }</span></span>
 <span id="L274"><span class="lineNum">     274</span>              : </span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">       14337 : void SystemHeaderLayout::setBracketsXPosition(System* system, double xPosition)</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">       14453 : void SystemHeaderLayout::setBracketsXPosition(System* system, double xPosition)</span></span>
 <span id="L276"><span class="lineNum">     276</span>              : {</span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">       14337 :     std::vector&lt;Bracket*&gt; brackets = system-&gt;brackets();</span></span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">       17125 :     for (Bracket* b1 : brackets) {</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">       14453 :     std::vector&lt;Bracket*&gt; brackets = system-&gt;brackets();</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">       17241 :     for (Bracket* b1 : brackets) {</span></span>
 <span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        2788 :         BracketType bracketType = b1-&gt;bracketType();</span></span>
 <span id="L280"><span class="lineNum">     280</span>              :         // For brackets that are drawn, we must correct for half line width</span>
 <span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">        2788 :         double lineWidthCorrection = 0.0;</span></span>
@@ -354,11 +354,11 @@
 <span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">        2788 :         double x = xPosition - xOffset - b1-&gt;ldata()-&gt;bracketWidth() + lineWidthCorrection;</span></span>
 <span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">        2788 :         b1-&gt;mutldata()-&gt;setPosX(x);</span></span>
 <span id="L298"><span class="lineNum">     298</span>              :     }</span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">       14337 : }</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">       14453 : }</span></span>
 <span id="L300"><span class="lineNum">     300</span>              : </span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">       20300 : void SystemHeaderLayout::layoutBracketsVertical(System* system, LayoutContext&amp; ctx)</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">       20462 : void SystemHeaderLayout::layoutBracketsVertical(System* system, LayoutContext&amp; ctx)</span></span>
 <span id="L302"><span class="lineNum">     302</span>              : {</span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">       24221 :     for (Bracket* b : system-&gt;brackets()) {</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">       24383 :     for (Bracket* b : system-&gt;brackets()) {</span></span>
 <span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">        3921 :         int staffIdx1 = static_cast&lt;int&gt;(b-&gt;firstStaff());</span></span>
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">        3921 :         int staffIdx2 = static_cast&lt;int&gt;(b-&gt;lastStaff());</span></span>
 <span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">        3921 :         double sy = 0;                           // assume bracket not visible</span></span>
@@ -388,61 +388,61 @@
 <span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">        3921 :         bldata-&gt;bracketHeight = ey - sy;</span></span>
 <span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">        3921 :         TLayout::layoutBracket(b, bldata, ctx.conf());</span></span>
 <span id="L332"><span class="lineNum">     332</span>              :     }</span>
-<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">       20300 : }</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">       20462 : }</span></span>
 <span id="L334"><span class="lineNum">     334</span>              : </span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">       48691 : bool SystemHeaderLayout::stackLabelsVertically(System* system)</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">       49085 : bool SystemHeaderLayout::stackLabelsVertically(System* system)</span></span>
 <span id="L336"><span class="lineNum">     336</span>              : {</span>
-<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">       48691 :     const MStyle&amp; style = system-&gt;style();</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">       49085 :     const MStyle&amp; style = system-&gt;style();</span></span>
 <span id="L338"><span class="lineNum">     338</span>              :     // Ignore long/short overrides</span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">       48691 :     bool longName = system-&gt;ldata()-&gt;useLongNames();</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">       49085 :     bool longName = system-&gt;ldata()-&gt;useLongNames();</span></span>
 <span id="L340"><span class="lineNum">     340</span>              :     InstrumentNamesAlign align</span>
-<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">       48691 :         = style.styleV(longName ? Sid::instrumentNamesAlignLong : Sid::instrumentNamesAlignShort).value&lt;InstrumentNamesAlign&gt;();</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">       49085 :         = style.styleV(longName ? Sid::instrumentNamesAlignLong : Sid::instrumentNamesAlignShort).value&lt;InstrumentNamesAlign&gt;();</span></span>
 <span id="L342"><span class="lineNum">     342</span>              :     return align == InstrumentNamesAlign::CENTER_CENTER</span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">       48691 :            || (align == InstrumentNamesAlign::RIGHT_RIGHT &amp;&amp; style.styleB(Sid::instrumentNamesStackVertically));</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">       49085 :            || (align == InstrumentNamesAlign::RIGHT_RIGHT &amp;&amp; style.styleB(Sid::instrumentNamesStackVertically));</span></span>
 <span id="L344"><span class="lineNum">     344</span>              : }</span>
 <span id="L345"><span class="lineNum">     345</span>              : </span>
-<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">       14250 : void SystemHeaderLayout::computeInstrumentNameOffset(System* system, LayoutContext&amp; ctx)</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">       14366 : void SystemHeaderLayout::computeInstrumentNameOffset(System* system, LayoutContext&amp; ctx)</span></span>
 <span id="L347"><span class="lineNum">     347</span>              : {</span>
 <span id="L348"><span class="lineNum">     348</span>              :     // Get standard instrument name distance</span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">       14250 :     double instrumentNameOffset = ctx.conf().styleAbsolute(Sid::instrumentNameOffset);</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">       14366 :     double instrumentNameOffset = ctx.conf().styleAbsolute(Sid::instrumentNameOffset);</span></span>
 <span id="L350"><span class="lineNum">     350</span>              :     // Now scale it depending on the text size (which also may not follow staff scaling)</span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">       14250 :     double textSizeScaling = 1.0;</span></span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">       14250 :     double actualSize = 0.0;</span></span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">       14250 :     double defaultSize = 0.0;</span></span>
-<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">       14250 :     bool followStaffSize = true;</span></span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">       14250 :     if (ctx.state().startWithLongNames()) {</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">       14250 :         actualSize = ctx.conf().styleD(Sid::longInstrumentFontSize);</span></span>
-<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">       14250 :         defaultSize = DefaultStyle::defaultStyle().value(Sid::longInstrumentFontSize).toDouble();</span></span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">       14250 :         followStaffSize = ctx.conf().styleB(Sid::longInstrumentFontSpatiumDependent);</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">       14366 :     double textSizeScaling = 1.0;</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">       14366 :     double actualSize = 0.0;</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">       14366 :     double defaultSize = 0.0;</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">       14366 :     bool followStaffSize = true;</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">       14366 :     if (ctx.state().startWithLongNames()) {</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">       14366 :         actualSize = ctx.conf().styleD(Sid::longInstrumentFontSize);</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">       14366 :         defaultSize = DefaultStyle::defaultStyle().value(Sid::longInstrumentFontSize).toDouble();</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">       14366 :         followStaffSize = ctx.conf().styleB(Sid::longInstrumentFontSpatiumDependent);</span></span>
 <span id="L359"><span class="lineNum">     359</span>              :     } else {</span>
 <span id="L360"><span class="lineNum">     360</span> <span class="tlaUNC tlaBgUNC">           0 :         actualSize = ctx.conf().styleD(Sid::shortInstrumentFontSize);</span></span>
 <span id="L361"><span class="lineNum">     361</span> <span class="tlaUNC">           0 :         defaultSize = DefaultStyle::defaultStyle().value(Sid::shortInstrumentFontSize).toDouble();</span></span>
 <span id="L362"><span class="lineNum">     362</span> <span class="tlaUNC">           0 :         followStaffSize = ctx.conf().styleB(Sid::shortInstrumentFontSpatiumDependent);</span></span>
 <span id="L363"><span class="lineNum">     363</span>              :     }</span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC tlaBgGNC">       14250 :     textSizeScaling = actualSize / defaultSize;</span></span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">       14250 :     if (!followStaffSize) {</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC tlaBgGNC">       14366 :     textSizeScaling = actualSize / defaultSize;</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">       14366 :     if (!followStaffSize) {</span></span>
 <span id="L366"><span class="lineNum">     366</span> <span class="tlaUNC tlaBgUNC">           0 :         textSizeScaling *= DefaultStyle::defaultStyle().value(Sid::spatium).toDouble() / ctx.conf().styleD(Sid::spatium);</span></span>
 <span id="L367"><span class="lineNum">     367</span>              :     }</span>
-<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC tlaBgGNC">       14250 :     textSizeScaling = std::max(textSizeScaling, 1.0);</span></span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">       14250 :     instrumentNameOffset *= textSizeScaling;</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC tlaBgGNC">       14366 :     textSizeScaling = std::max(textSizeScaling, 1.0);</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">       14366 :     instrumentNameOffset *= textSizeScaling;</span></span>
 <span id="L370"><span class="lineNum">     370</span>              : </span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">       14250 :     system-&gt;mutldata()-&gt;setInstrumentNameOffset(instrumentNameOffset);</span></span>
-<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">       14250 : }</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">       14366 :     system-&gt;mutldata()-&gt;setInstrumentNameOffset(instrumentNameOffset);</span></span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">       14366 : }</span></span>
 <span id="L373"><span class="lineNum">     373</span>              : </span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">       14250 : void SystemHeaderLayout::computeGroupBracketsWidths(System* system, LayoutContext&amp; ctx)</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">       14366 : void SystemHeaderLayout::computeGroupBracketsWidths(System* system, LayoutContext&amp; ctx)</span></span>
 <span id="L375"><span class="lineNum">     375</span>              : {</span>
-<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">       14250 :     System::LayoutData* ldata = system-&gt;mutldata();</span></span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">       14250 :     ldata-&gt;clearGroupBracketsWidth();</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">       14366 :     System::LayoutData* ldata = system-&gt;mutldata();</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">       14366 :     ldata-&gt;clearGroupBracketsWidth();</span></span>
 <span id="L378"><span class="lineNum">     378</span>              : </span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">       14250 :     std::vector&lt;Bracket*&gt; groupBrackets;</span></span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">       17031 :     for (Bracket* bracket : system-&gt;brackets()) {</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">       14366 :     std::vector&lt;Bracket*&gt; groupBrackets;</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">       17147 :     for (Bracket* bracket : system-&gt;brackets()) {</span></span>
 <span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">        2781 :         if (bracket-&gt;bracketType() == BracketType::GROUP) {</span></span>
 <span id="L382"><span class="lineNum">     382</span> <span class="tlaUNC tlaBgUNC">           0 :             groupBrackets.push_back(bracket);</span></span>
 <span id="L383"><span class="lineNum">     383</span>              :         }</span>
 <span id="L384"><span class="lineNum">     384</span>              :     }</span>
 <span id="L385"><span class="lineNum">     385</span>              : </span>
-<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC tlaBgGNC">       14250 :     if (groupBrackets.empty()) {</span></span>
-<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">       14250 :         return;</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC tlaBgGNC">       14366 :     if (groupBrackets.empty()) {</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">       14366 :         return;</span></span>
 <span id="L388"><span class="lineNum">     388</span>              :     }</span>
 <span id="L389"><span class="lineNum">     389</span>              : </span>
 <span id="L390"><span class="lineNum">     390</span> <span class="tlaUNC tlaBgUNC">           0 :     std::sort(groupBrackets.begin(), groupBrackets.end(), [](Bracket* b1, Bracket* b2) { return b1-&gt;column() &lt; b2-&gt;column(); });</span></span>
@@ -483,7 +483,7 @@
 <span id="L425"><span class="lineNum">     425</span> <span class="tlaUNC">           0 :             ldata-&gt;setGroupBracketsWidthAtStaffIdx(staffIdx, maxGroupBracketWidth);</span></span>
 <span id="L426"><span class="lineNum">     426</span>              :         }</span>
 <span id="L427"><span class="lineNum">     427</span>              :     }</span>
-<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC tlaBgGNC">       14250 : }</span></span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC tlaBgGNC">       14366 : }</span></span>
 <span id="L429"><span class="lineNum">     429</span>              : </span>
 <span id="L430"><span class="lineNum">     430</span> <span class="tlaUNC tlaBgUNC">           0 : void SystemHeaderLayout::computeStackedBracketsWidth(Bracket* first, const std::vector&lt;Bracket*&gt;&amp; allGroupBracketsOrderedByColumn,</span></span>
 <span id="L431"><span class="lineNum">     431</span>              :                                                      double&amp; width, std::vector&lt;Bracket*&gt;&amp; stack)</span>
@@ -516,27 +516,27 @@
 <span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC tlaBgGNC">       15756 :     return result;</span></span>
 <span id="L459"><span class="lineNum">     459</span>              : }</span>
 <span id="L460"><span class="lineNum">     460</span>              : </span>
-<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">       14250 : void SystemHeaderLayout::computeInstrumentNamesWidth(System* system, LayoutContext&amp; ctx)</span></span>
+<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">       14366 : void SystemHeaderLayout::computeInstrumentNamesWidth(System* system, LayoutContext&amp; ctx)</span></span>
 <span id="L462"><span class="lineNum">     462</span>              : {</span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">       14250 :     computeGroupBracketsWidths(system, ctx);</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">       14366 :     computeGroupBracketsWidths(system, ctx);</span></span>
 <span id="L464"><span class="lineNum">     464</span>              : </span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">       14250 :     System::LayoutData* ldata = system-&gt;mutldata();</span></span>
-<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">       14250 :     ldata-&gt;setFirstColumnWidth(0.0);</span></span>
-<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">       14250 :     ldata-&gt;setSecondColumnWidth(0.0);</span></span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">       14250 :     ldata-&gt;setTotalNamesWidth(0.0);</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">       14366 :     System::LayoutData* ldata = system-&gt;mutldata();</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">       14366 :     ldata-&gt;setFirstColumnWidth(0.0);</span></span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">       14366 :     ldata-&gt;setSecondColumnWidth(0.0);</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">       14366 :     ldata-&gt;setTotalNamesWidth(0.0);</span></span>
 <span id="L469"><span class="lineNum">     469</span>              : </span>
-<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">       14250 :     std::unordered_set&lt;Part*&gt; partsWithIndividualStaffNames;</span></span>
-<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">       14250 :     std::unordered_set&lt;Part*&gt; partsWithGroupNames;</span></span>
+<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">       14366 :     std::unordered_set&lt;Part*&gt; partsWithIndividualStaffNames;</span></span>
+<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">       14366 :     std::unordered_set&lt;Part*&gt; partsWithGroupNames;</span></span>
 <span id="L472"><span class="lineNum">     472</span>              : </span>
-<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">       14250 :     std::vector&lt;InstrumentName*&gt; groupNames;</span></span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">       14250 :     std::vector&lt;InstrumentName*&gt; instrumentNames;</span></span>
-<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">       14250 :     std::vector&lt;InstrumentName*&gt; sharedStaveNames;</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">       14366 :     std::vector&lt;InstrumentName*&gt; groupNames;</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">       14366 :     std::vector&lt;InstrumentName*&gt; instrumentNames;</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">       14366 :     std::vector&lt;InstrumentName*&gt; sharedStaveNames;</span></span>
 <span id="L476"><span class="lineNum">     476</span>              : </span>
-<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">       35880 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); ++staffIdx) {</span></span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">       21630 :         const SysStaff* sysStaff = system-&gt;staff(staffIdx);</span></span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">       21630 :         const Staff* staff = ctx.dom().staff(staffIdx);</span></span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">       36120 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); ++staffIdx) {</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">       21754 :         const SysStaff* sysStaff = system-&gt;staff(staffIdx);</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">       21754 :         const Staff* staff = ctx.dom().staff(staffIdx);</span></span>
 <span id="L480"><span class="lineNum">     480</span>              : </span>
-<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">       21630 :         if (InstrumentName* groupName = sysStaff-&gt;name(InstrumentNameRole::GROUP)) {</span></span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">       21754 :         if (InstrumentName* groupName = sysStaff-&gt;name(InstrumentNameRole::GROUP)) {</span></span>
 <span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">         132 :             if (groupName-&gt;instrumentNameType() == InstrumentNameType::LONG &amp;&amp; groupName-&gt;effectiveStaffIdx() == muse::nidx) {</span></span>
 <span id="L483"><span class="lineNum">     483</span>              :                 // NOTE: We can only do this for long-name systems because they don't need to have</span>
 <span id="L484"><span class="lineNum">     484</span>              :                 // the left barline aligned with the other systems across the page.</span>
@@ -554,12 +554,12 @@
 <span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">         132 :             ldata-&gt;setTotalNamesWidth(std::max(ldata-&gt;totalNamesWidth(), nameWidthIncludingGroupBrackets(groupName, system)));</span></span>
 <span id="L497"><span class="lineNum">     497</span>              :         }</span>
 <span id="L498"><span class="lineNum">     498</span>              : </span>
-<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">       21630 :         if (!staff-&gt;show()) {</span></span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">       21754 :         if (!staff-&gt;show()) {</span></span>
 <span id="L500"><span class="lineNum">     500</span>              :             // We know that the staff is hidden in the entire score so safe to skip</span>
 <span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">         269 :             continue;</span></span>
 <span id="L502"><span class="lineNum">     502</span>              :         }</span>
 <span id="L503"><span class="lineNum">     503</span>              : </span>
-<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">       21361 :         if (InstrumentName* name = sysStaff-&gt;name(InstrumentNameRole::STAFF)) {</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">       21485 :         if (InstrumentName* name = sysStaff-&gt;name(InstrumentNameRole::STAFF)) {</span></span>
 <span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">         131 :             if (name-&gt;instrumentNameType() == InstrumentNameType::LONG &amp;&amp; !sysStaff-&gt;show()) {</span></span>
 <span id="L506"><span class="lineNum">     506</span>              :                 // NOTE: We can only do this for long-name systems because they don't need to have</span>
 <span id="L507"><span class="lineNum">     507</span>              :                 // the left barline aligned with the other systems across the page.</span>
@@ -575,22 +575,22 @@
 <span id="L517"><span class="lineNum">     517</span>              :         }</span>
 <span id="L518"><span class="lineNum">     518</span>              :     }</span>
 <span id="L519"><span class="lineNum">     519</span>              : </span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">       35880 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); ++staffIdx) {</span></span>
-<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">       21630 :         const SysStaff* sysStaff = system-&gt;staff(staffIdx);</span></span>
-<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">       21630 :         const Staff* staff = ctx.dom().staff(staffIdx);</span></span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">       21630 :         Part* part = staff-&gt;part();</span></span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">       36120 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); ++staffIdx) {</span></span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">       21754 :         const SysStaff* sysStaff = system-&gt;staff(staffIdx);</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">       21754 :         const Staff* staff = ctx.dom().staff(staffIdx);</span></span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">       21754 :         Part* part = staff-&gt;part();</span></span>
 <span id="L524"><span class="lineNum">     524</span>              : </span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">       21630 :         if (!part-&gt;show() || part-&gt;visibleStavesCount() == 0) {</span></span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">       21754 :         if (!part-&gt;show() || part-&gt;visibleStavesCount() == 0) {</span></span>
 <span id="L526"><span class="lineNum">     526</span>              :             // We know that the part is hidden in the entire score so safe to skip</span>
-<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">       13943 :             continue;</span></span>
+<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">       14067 :             continue;</span></span>
 <span id="L528"><span class="lineNum">     528</span>              :         }</span>
 <span id="L529"><span class="lineNum">     529</span>              : </span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">       21369 :         InstrumentName* instrName = sysStaff-&gt;name(InstrumentNameRole::PART);</span></span>
-<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">       21369 :         if (!instrName) {</span></span>
-<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">       13677 :             instrName = sysStaff-&gt;name(InstrumentNameRole::SHARED_STAFF);</span></span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">       21493 :         InstrumentName* instrName = sysStaff-&gt;name(InstrumentNameRole::PART);</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">       21493 :         if (!instrName) {</span></span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">       13801 :             instrName = sysStaff-&gt;name(InstrumentNameRole::SHARED_STAFF);</span></span>
 <span id="L533"><span class="lineNum">     533</span>              :         }</span>
-<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">       21369 :         if (!instrName) {</span></span>
-<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">       13677 :             continue;</span></span>
+<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">       21493 :         if (!instrName) {</span></span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">       13801 :             continue;</span></span>
 <span id="L536"><span class="lineNum">     536</span>              :         }</span>
 <span id="L537"><span class="lineNum">     537</span>              : </span>
 <span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">        7692 :         if (instrName-&gt;instrumentNameType() == InstrumentNameType::LONG &amp;&amp; instrName-&gt;effectiveStaffIdx() == muse::nidx) {</span></span>
@@ -629,9 +629,9 @@
 <span id="L571"><span class="lineNum">     571</span>              :         } else {</span>
 <span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC tlaBgGNC">         143 :             return innerName-&gt;width() + ldata-&gt;instrumentNameOffset() + nameWidthIncludingGroupBrackets(outerName, system);</span></span>
 <span id="L573"><span class="lineNum">     573</span>              :         }</span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">       14250 :     };</span></span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">       14366 :     };</span></span>
 <span id="L575"><span class="lineNum">     575</span>              : </span>
-<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">       14250 :     for (InstrumentName* sharedStaffName : sharedStaveNames) {</span></span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">       14366 :     for (InstrumentName* sharedStaffName : sharedStaveNames) {</span></span>
 <span id="L577"><span class="lineNum">     577</span> <span class="tlaUNC tlaBgUNC">           0 :         if (sharedStaffName-&gt;ldata()-&gt;column() == 0) {</span></span>
 <span id="L578"><span class="lineNum">     578</span> <span class="tlaUNC">           0 :             continue;</span></span>
 <span id="L579"><span class="lineNum">     579</span>              :         }</span>
@@ -643,11 +643,11 @@
 <span id="L585"><span class="lineNum">     585</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L586"><span class="lineNum">     586</span>              :     }</span>
 <span id="L587"><span class="lineNum">     587</span>              : </span>
-<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC tlaBgGNC">       14250 :     if (stackLabelsVertically(system)) {</span></span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC tlaBgGNC">       14366 :     if (stackLabelsVertically(system)) {</span></span>
 <span id="L589"><span class="lineNum">     589</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L590"><span class="lineNum">     590</span>              :     }</span>
 <span id="L591"><span class="lineNum">     591</span>              : </span>
-<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC tlaBgGNC">       14382 :     for (InstrumentName* groupName : groupNames) {</span></span>
+<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC tlaBgGNC">       14498 :     for (InstrumentName* groupName : groupNames) {</span></span>
 <span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">         132 :         staff_idx_t startStaff = groupName-&gt;staffIdx();</span></span>
 <span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">         132 :         staff_idx_t endStaff = groupName-&gt;ldata()-&gt;endIdxOfGroup();</span></span>
 <span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">         334 :         if (groupName-&gt;instrumentNameType() == InstrumentNameType::LONG</span></span>
@@ -664,7 +664,7 @@
 <span id="L606"><span class="lineNum">     606</span>              :         }</span>
 <span id="L607"><span class="lineNum">     607</span>              :     }</span>
 <span id="L608"><span class="lineNum">     608</span>              : </span>
-<span id="L609"><span class="lineNum">     609</span> <span class="tlaGNC">       21937 :     for (InstrumentName* instrName : instrumentNames) {</span></span>
+<span id="L609"><span class="lineNum">     609</span> <span class="tlaGNC">       22053 :     for (InstrumentName* instrName : instrumentNames) {</span></span>
 <span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC">        7687 :         if (instrName-&gt;ldata()-&gt;column() == 0) {</span></span>
 <span id="L611"><span class="lineNum">     611</span> <span class="tlaGNC">         156 :             continue;</span></span>
 <span id="L612"><span class="lineNum">     612</span>              :         }</span>
@@ -678,16 +678,16 @@
 <span id="L620"><span class="lineNum">     620</span>              :             }</span>
 <span id="L621"><span class="lineNum">     621</span> <span class="tlaGNC">        6978 :         }</span></span>
 <span id="L622"><span class="lineNum">     622</span>              :     }</span>
-<span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">       14250 : }</span></span>
+<span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">       14366 : }</span></span>
 <span id="L624"><span class="lineNum">     624</span>              : </span>
-<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">       20202 : void SystemHeaderLayout::setInstrumentNamesVerticalPos(System* system, LayoutContext&amp; ctx)</span></span>
+<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">       20364 : void SystemHeaderLayout::setInstrumentNamesVerticalPos(System* system, LayoutContext&amp; ctx)</span></span>
 <span id="L626"><span class="lineNum">     626</span>              : {</span>
-<span id="L627"><span class="lineNum">     627</span> <span class="tlaGNC">       20202 :     std::set&lt;const Part*&gt; partsWithIndividualStaffNames;</span></span>
+<span id="L627"><span class="lineNum">     627</span> <span class="tlaGNC">       20364 :     std::set&lt;const Part*&gt; partsWithIndividualStaffNames;</span></span>
 <span id="L628"><span class="lineNum">     628</span>              : </span>
-<span id="L629"><span class="lineNum">     629</span> <span class="tlaGNC">       50952 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; ctx.dom().nstaves(); ++staffIdx) {</span></span>
-<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">       30750 :         SysStaff* s = system-&gt;staff(staffIdx);</span></span>
-<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">       92250 :         for (InstrumentNameRole role : { InstrumentNameRole::STAFF, InstrumentNameRole::SHARED_STAFF }) {</span></span>
-<span id="L632"><span class="lineNum">     632</span> <span class="tlaGNC">       61500 :             if (InstrumentName* individualName = s-&gt;name(role)) {</span></span>
+<span id="L629"><span class="lineNum">     629</span> <span class="tlaGNC">       51288 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; ctx.dom().nstaves(); ++staffIdx) {</span></span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">       30924 :         SysStaff* s = system-&gt;staff(staffIdx);</span></span>
+<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">       92772 :         for (InstrumentNameRole role : { InstrumentNameRole::STAFF, InstrumentNameRole::SHARED_STAFF }) {</span></span>
+<span id="L632"><span class="lineNum">     632</span> <span class="tlaGNC">       61848 :             if (InstrumentName* individualName = s-&gt;name(role)) {</span></span>
 <span id="L633"><span class="lineNum">     633</span> <span class="tlaGNC">         174 :                 const RectF&amp; staffBBox = s-&gt;bbox();</span></span>
 <span id="L634"><span class="lineNum">     634</span> <span class="tlaGNC">         174 :                 const RectF&amp; nameBBox = individualName-&gt;ldata()-&gt;bbox();</span></span>
 <span id="L635"><span class="lineNum">     635</span> <span class="tlaGNC">         174 :                 individualName-&gt;mutldata()-&gt;setPosY(0.5 * (staffBBox.top() + staffBBox.bottom() - nameBBox.bottom() - nameBBox.top()));</span></span>
@@ -696,18 +696,18 @@
 <span id="L638"><span class="lineNum">     638</span>              :         }</span>
 <span id="L639"><span class="lineNum">     639</span>              :     }</span>
 <span id="L640"><span class="lineNum">     640</span>              : </span>
-<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">       20202 :     bool stackVertically = stackLabelsVertically(system);</span></span>
+<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">       20364 :     bool stackVertically = stackLabelsVertically(system);</span></span>
 <span id="L642"><span class="lineNum">     642</span>              : </span>
-<span id="L643"><span class="lineNum">     643</span> <span class="tlaGNC">       20202 :     staff_idx_t staffIdx = 0;</span></span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">       47366 :     for (const Part* p : ctx.dom().parts()) {</span></span>
-<span id="L645"><span class="lineNum">     645</span> <span class="tlaGNC">       27164 :         size_t nstaves = p-&gt;nstaves();</span></span>
+<span id="L643"><span class="lineNum">     643</span> <span class="tlaGNC">       20364 :     staff_idx_t staffIdx = 0;</span></span>
+<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">       47690 :     for (const Part* p : ctx.dom().parts()) {</span></span>
+<span id="L645"><span class="lineNum">     645</span> <span class="tlaGNC">       27326 :         size_t nstaves = p-&gt;nstaves();</span></span>
 <span id="L646"><span class="lineNum">     646</span>              : </span>
-<span id="L647"><span class="lineNum">     647</span> <span class="tlaGNC">       27164 :         SysStaff* s = system-&gt;staff(staffIdx);</span></span>
+<span id="L647"><span class="lineNum">     647</span> <span class="tlaGNC">       27326 :         SysStaff* s = system-&gt;staff(staffIdx);</span></span>
 <span id="L648"><span class="lineNum">     648</span>              : </span>
-<span id="L649"><span class="lineNum">     649</span> <span class="tlaGNC">       27164 :         InstrumentName* t = s-&gt;name(InstrumentNameRole::PART);</span></span>
-<span id="L650"><span class="lineNum">     650</span> <span class="tlaGNC">       27164 :         if (!t || t-&gt;effectiveStaffIdx() == muse::nidx) {</span></span>
-<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC">       15728 :             staffIdx += nstaves;</span></span>
-<span id="L652"><span class="lineNum">     652</span> <span class="tlaGNC">       27038 :             continue;</span></span>
+<span id="L649"><span class="lineNum">     649</span> <span class="tlaGNC">       27326 :         InstrumentName* t = s-&gt;name(InstrumentNameRole::PART);</span></span>
+<span id="L650"><span class="lineNum">     650</span> <span class="tlaGNC">       27326 :         if (!t || t-&gt;effectiveStaffIdx() == muse::nidx) {</span></span>
+<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC">       15890 :             staffIdx += nstaves;</span></span>
+<span id="L652"><span class="lineNum">     652</span> <span class="tlaGNC">       27200 :             continue;</span></span>
 <span id="L653"><span class="lineNum">     653</span>              :         }</span>
 <span id="L654"><span class="lineNum">     654</span>              : </span>
 <span id="L655"><span class="lineNum">     655</span> <span class="tlaGNC">       11436 :         const RectF&amp; bbox = t-&gt;ldata()-&gt;bbox();</span></span>
@@ -763,10 +763,10 @@
 <span id="L705"><span class="lineNum">     705</span> <span class="tlaGNC tlaBgGNC">         126 :         staffIdx += nstaves;</span></span>
 <span id="L706"><span class="lineNum">     706</span> <span class="tlaGNC">       11436 :     }</span></span>
 <span id="L707"><span class="lineNum">     707</span>              : </span>
-<span id="L708"><span class="lineNum">     708</span> <span class="tlaGNC">       50952 :     for (staff_idx_t idx = 0; idx &lt; system-&gt;staves().size(); ++idx) {</span></span>
-<span id="L709"><span class="lineNum">     709</span> <span class="tlaGNC">       30750 :         InstrumentName* groupName = system-&gt;staff(idx)-&gt;name(InstrumentNameRole::GROUP);</span></span>
-<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">       30750 :         if (!groupName || groupName-&gt;effectiveStaffIdx() == muse::nidx) {</span></span>
-<span id="L711"><span class="lineNum">     711</span> <span class="tlaGNC">       30750 :             continue;</span></span>
+<span id="L708"><span class="lineNum">     708</span> <span class="tlaGNC">       51288 :     for (staff_idx_t idx = 0; idx &lt; system-&gt;staves().size(); ++idx) {</span></span>
+<span id="L709"><span class="lineNum">     709</span> <span class="tlaGNC">       30924 :         InstrumentName* groupName = system-&gt;staff(idx)-&gt;name(InstrumentNameRole::GROUP);</span></span>
+<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">       30924 :         if (!groupName || groupName-&gt;effectiveStaffIdx() == muse::nidx) {</span></span>
+<span id="L711"><span class="lineNum">     711</span> <span class="tlaGNC">       30924 :             continue;</span></span>
 <span id="L712"><span class="lineNum">     712</span>              :         }</span>
 <span id="L713"><span class="lineNum">     713</span>              : </span>
 <span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">         198 :         const RectF&amp; bbox = groupName-&gt;ldata()-&gt;bbox();</span></span>
@@ -859,9 +859,9 @@
 <span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 :             groupName-&gt;mutldata()-&gt;setPosY(0.5 * (y1 + y2) - yCenter);</span></span>
 <span id="L802"><span class="lineNum">     802</span>              :         }</span>
 <span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC tlaBgGNC">         213 :     }</span></span>
-<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC">       20202 : }</span></span>
+<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC">       20364 : }</span></span>
 <span id="L805"><span class="lineNum">     805</span>              : </span>
-<span id="L806"><span class="lineNum">     806</span> <span class="tlaGNC">       14239 : void SystemHeaderLayout::setInstrumentNamesHorizontalPos(System* system)</span></span>
+<span id="L806"><span class="lineNum">     806</span> <span class="tlaGNC">       14355 : void SystemHeaderLayout::setInstrumentNamesHorizontalPos(System* system)</span></span>
 <span id="L807"><span class="lineNum">     807</span>              : {</span>
 <span id="L808"><span class="lineNum">     808</span>              :     //---------------------------------------------------</span>
 <span id="L809"><span class="lineNum">     809</span>              :     //  layout instrument names x position</span>
@@ -869,12 +869,12 @@
 <span id="L811"><span class="lineNum">     811</span>              :     //     be hidden, so layout all instrument names</span>
 <span id="L812"><span class="lineNum">     812</span>              :     //---------------------------------------------------</span>
 <span id="L813"><span class="lineNum">     813</span>              : </span>
-<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">       14239 :     System::LayoutData* ldata = system-&gt;mutldata();</span></span>
-<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">       14239 :     double totalNamesWidth = ldata-&gt;totalNamesWidth();</span></span>
-<span id="L816"><span class="lineNum">     816</span> <span class="tlaGNC">       14239 :     double firstColumnWidth = ldata-&gt;firstColumnWidth();</span></span>
+<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">       14355 :     System::LayoutData* ldata = system-&gt;mutldata();</span></span>
+<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">       14355 :     double totalNamesWidth = ldata-&gt;totalNamesWidth();</span></span>
+<span id="L816"><span class="lineNum">     816</span> <span class="tlaGNC">       14355 :     double firstColumnWidth = ldata-&gt;firstColumnWidth();</span></span>
 <span id="L817"><span class="lineNum">     817</span>              :     // Ignore long/short overrides</span>
-<span id="L818"><span class="lineNum">     818</span> <span class="tlaGNC">       28478 :     InstrumentNamesAlign align = system-&gt;style().styleV(</span></span>
-<span id="L819"><span class="lineNum">     819</span> <span class="tlaGNC">       28478 :         ldata-&gt;useLongNames() ? Sid::instrumentNamesAlignLong : Sid::instrumentNamesAlignShort).value&lt;InstrumentNamesAlign&gt;();</span></span>
+<span id="L818"><span class="lineNum">     818</span> <span class="tlaGNC">       28710 :     InstrumentNamesAlign align = system-&gt;style().styleV(</span></span>
+<span id="L819"><span class="lineNum">     819</span> <span class="tlaGNC">       28710 :         ldata-&gt;useLongNames() ? Sid::instrumentNamesAlignLong : Sid::instrumentNamesAlignShort).value&lt;InstrumentNamesAlign&gt;();</span></span>
 <span id="L820"><span class="lineNum">     820</span>              : </span>
 <span id="L821"><span class="lineNum">     821</span> <span class="tlaGNC">         270 :     auto placeFirstColumnName = [&amp;](InstrumentName* name) {</span></span>
 <span id="L822"><span class="lineNum">     822</span> <span class="tlaGNC">         270 :         const RectF&amp; bbox = name-&gt;ldata()-&gt;bbox();</span></span>
@@ -894,20 +894,20 @@
 <span id="L836"><span class="lineNum">     836</span> <span class="tlaGNC">         270 :                 name-&gt;mutldata()-&gt;setPosX(totalNamesWidth - bbox.right());</span></span>
 <span id="L837"><span class="lineNum">     837</span>              :             }</span>
 <span id="L838"><span class="lineNum">     838</span>              :         }</span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">       14509 :     };</span></span>
+<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">       14625 :     };</span></span>
 <span id="L840"><span class="lineNum">     840</span>              : </span>
-<span id="L841"><span class="lineNum">     841</span> <span class="tlaGNC">       35815 :     for (const SysStaff* s : system-&gt;staves()) {</span></span>
-<span id="L842"><span class="lineNum">     842</span> <span class="tlaGNC">       86304 :         for (InstrumentNameRole role : { InstrumentNameRole::STAFF,</span></span>
+<span id="L841"><span class="lineNum">     841</span> <span class="tlaGNC">       36055 :     for (const SysStaff* s : system-&gt;staves()) {</span></span>
+<span id="L842"><span class="lineNum">     842</span> <span class="tlaGNC">       86800 :         for (InstrumentNameRole role : { InstrumentNameRole::STAFF,</span></span>
 <span id="L843"><span class="lineNum">     843</span>              :                                          InstrumentNameRole::SHARED_STAFF,</span>
-<span id="L844"><span class="lineNum">     844</span> <span class="tlaGNC">      107880 :                                          InstrumentNameRole::PART }) {</span></span>
-<span id="L845"><span class="lineNum">     845</span> <span class="tlaGNC">       64728 :             InstrumentName* n = s-&gt;name(role);</span></span>
-<span id="L846"><span class="lineNum">     846</span> <span class="tlaGNC">       64728 :             if (n &amp;&amp; n-&gt;ldata()-&gt;column() == 0 &amp;&amp; n-&gt;effectiveStaffIdx() != muse::nidx) {</span></span>
+<span id="L844"><span class="lineNum">     844</span> <span class="tlaGNC">      108500 :                                          InstrumentNameRole::PART }) {</span></span>
+<span id="L845"><span class="lineNum">     845</span> <span class="tlaGNC">       65100 :             InstrumentName* n = s-&gt;name(role);</span></span>
+<span id="L846"><span class="lineNum">     846</span> <span class="tlaGNC">       65100 :             if (n &amp;&amp; n-&gt;ldata()-&gt;column() == 0 &amp;&amp; n-&gt;effectiveStaffIdx() != muse::nidx) {</span></span>
 <span id="L847"><span class="lineNum">     847</span> <span class="tlaGNC">         270 :                 placeFirstColumnName(n);</span></span>
 <span id="L848"><span class="lineNum">     848</span>              :             }</span>
 <span id="L849"><span class="lineNum">     849</span>              :         }</span>
 <span id="L850"><span class="lineNum">     850</span>              :     }</span>
 <span id="L851"><span class="lineNum">     851</span>              : </span>
-<span id="L852"><span class="lineNum">     852</span> <span class="tlaGNC">       14239 :     bool stackVertically = stackLabelsVertically(system);</span></span>
+<span id="L852"><span class="lineNum">     852</span> <span class="tlaGNC">       14355 :     bool stackVertically = stackLabelsVertically(system);</span></span>
 <span id="L853"><span class="lineNum">     853</span>              : </span>
 <span id="L854"><span class="lineNum">     854</span> <span class="tlaGNC">        7637 :     auto placeSecondColumnName = [&amp;](InstrumentName* name, staff_idx_t staffIdx) {</span></span>
 <span id="L855"><span class="lineNum">     855</span> <span class="tlaGNC">        7637 :         bool doStackVertically = stackVertically &amp;&amp; name-&gt;instrumentNameRole() != InstrumentNameRole::SHARED_STAFF;</span></span>
@@ -995,45 +995,45 @@
 <span id="L937"><span class="lineNum">     937</span>              :         }</span>
 <span id="L938"><span class="lineNum">     938</span> <span class="tlaGNC">         132 :     };</span></span>
 <span id="L939"><span class="lineNum">     939</span>              : </span>
-<span id="L940"><span class="lineNum">     940</span> <span class="tlaGNC">       35815 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); ++staffIdx) {</span></span>
-<span id="L941"><span class="lineNum">     941</span> <span class="tlaGNC">       21576 :         const SysStaff* s = system-&gt;staff(staffIdx);</span></span>
-<span id="L942"><span class="lineNum">     942</span> <span class="tlaGNC">       21576 :         InstrumentName* instrName = s-&gt;name(InstrumentNameRole::PART);</span></span>
-<span id="L943"><span class="lineNum">     943</span> <span class="tlaGNC">       21576 :         if (!instrName) {</span></span>
-<span id="L944"><span class="lineNum">     944</span> <span class="tlaGNC">       13898 :             instrName = s-&gt;name(InstrumentNameRole::SHARED_STAFF);</span></span>
+<span id="L940"><span class="lineNum">     940</span> <span class="tlaGNC">       36055 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); ++staffIdx) {</span></span>
+<span id="L941"><span class="lineNum">     941</span> <span class="tlaGNC">       21700 :         const SysStaff* s = system-&gt;staff(staffIdx);</span></span>
+<span id="L942"><span class="lineNum">     942</span> <span class="tlaGNC">       21700 :         InstrumentName* instrName = s-&gt;name(InstrumentNameRole::PART);</span></span>
+<span id="L943"><span class="lineNum">     943</span> <span class="tlaGNC">       21700 :         if (!instrName) {</span></span>
+<span id="L944"><span class="lineNum">     944</span> <span class="tlaGNC">       14022 :             instrName = s-&gt;name(InstrumentNameRole::SHARED_STAFF);</span></span>
 <span id="L945"><span class="lineNum">     945</span>              :         }</span>
-<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC">       21576 :         if (!instrName) {</span></span>
-<span id="L947"><span class="lineNum">     947</span> <span class="tlaGNC">       13898 :             continue;</span></span>
+<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC">       21700 :         if (!instrName) {</span></span>
+<span id="L947"><span class="lineNum">     947</span> <span class="tlaGNC">       14022 :             continue;</span></span>
 <span id="L948"><span class="lineNum">     948</span>              :         }</span>
 <span id="L949"><span class="lineNum">     949</span> <span class="tlaGNC">        7678 :         if (instrName &amp;&amp; instrName-&gt;effectiveStaffIdx() != muse::nidx &amp;&amp; instrName-&gt;ldata()-&gt;column() &gt; 0) {</span></span>
 <span id="L950"><span class="lineNum">     950</span> <span class="tlaGNC">        7505 :             placeSecondColumnName(instrName, staffIdx);</span></span>
 <span id="L951"><span class="lineNum">     951</span>              :         }</span>
 <span id="L952"><span class="lineNum">     952</span>              :     }</span>
 <span id="L953"><span class="lineNum">     953</span>              : </span>
-<span id="L954"><span class="lineNum">     954</span> <span class="tlaGNC">       35815 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); ++staffIdx) {</span></span>
-<span id="L955"><span class="lineNum">     955</span> <span class="tlaGNC">       21576 :         const SysStaff* s = system-&gt;staff(staffIdx);</span></span>
-<span id="L956"><span class="lineNum">     956</span> <span class="tlaGNC">       21576 :         InstrumentName* groupName = s-&gt;name(InstrumentNameRole::GROUP);</span></span>
-<span id="L957"><span class="lineNum">     957</span> <span class="tlaGNC">       21576 :         if (groupName &amp;&amp; groupName-&gt;effectiveStaffIdx() != muse::nidx) {</span></span>
+<span id="L954"><span class="lineNum">     954</span> <span class="tlaGNC">       36055 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); ++staffIdx) {</span></span>
+<span id="L955"><span class="lineNum">     955</span> <span class="tlaGNC">       21700 :         const SysStaff* s = system-&gt;staff(staffIdx);</span></span>
+<span id="L956"><span class="lineNum">     956</span> <span class="tlaGNC">       21700 :         InstrumentName* groupName = s-&gt;name(InstrumentNameRole::GROUP);</span></span>
+<span id="L957"><span class="lineNum">     957</span> <span class="tlaGNC">       21700 :         if (groupName &amp;&amp; groupName-&gt;effectiveStaffIdx() != muse::nidx) {</span></span>
 <span id="L958"><span class="lineNum">     958</span> <span class="tlaGNC">         132 :             placeSecondColumnName(groupName, staffIdx);</span></span>
 <span id="L959"><span class="lineNum">     959</span>              :         }</span>
 <span id="L960"><span class="lineNum">     960</span>              :     }</span>
-<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">       14239 : }</span></span>
+<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">       14355 : }</span></span>
 <span id="L962"><span class="lineNum">     962</span>              : </span>
-<span id="L963"><span class="lineNum">     963</span> <span class="tlaGNC">       14239 : void SystemHeaderLayout::setGroupBracketsHorizontalPos(System* system)</span></span>
+<span id="L963"><span class="lineNum">     963</span> <span class="tlaGNC">       14355 : void SystemHeaderLayout::setGroupBracketsHorizontalPos(System* system)</span></span>
 <span id="L964"><span class="lineNum">     964</span>              : {</span>
-<span id="L965"><span class="lineNum">     965</span> <span class="tlaGNC">       14239 :     std::vector&lt;Bracket*&gt; groupBrackets;</span></span>
-<span id="L966"><span class="lineNum">     966</span> <span class="tlaGNC">       16993 :     for (Bracket* b : system-&gt;brackets()) {</span></span>
+<span id="L965"><span class="lineNum">     965</span> <span class="tlaGNC">       14355 :     std::vector&lt;Bracket*&gt; groupBrackets;</span></span>
+<span id="L966"><span class="lineNum">     966</span> <span class="tlaGNC">       17109 :     for (Bracket* b : system-&gt;brackets()) {</span></span>
 <span id="L967"><span class="lineNum">     967</span> <span class="tlaGNC">        2754 :         if (b-&gt;bracketType() == BracketType::GROUP) {</span></span>
 <span id="L968"><span class="lineNum">     968</span> <span class="tlaUNC tlaBgUNC">           0 :             groupBrackets.push_back(b);</span></span>
 <span id="L969"><span class="lineNum">     969</span>              :         }</span>
 <span id="L970"><span class="lineNum">     970</span>              :     }</span>
-<span id="L971"><span class="lineNum">     971</span> <span class="tlaGNC tlaBgGNC">       14239 :     std::sort(groupBrackets.begin(), groupBrackets.end(), [](Bracket* b1, Bracket* b2) { return b1-&gt;column() &gt; b2-&gt;column(); });</span></span>
+<span id="L971"><span class="lineNum">     971</span> <span class="tlaGNC tlaBgGNC">       14355 :     std::sort(groupBrackets.begin(), groupBrackets.end(), [](Bracket* b1, Bracket* b2) { return b1-&gt;column() &gt; b2-&gt;column(); });</span></span>
 <span id="L972"><span class="lineNum">     972</span>              : </span>
-<span id="L973"><span class="lineNum">     973</span> <span class="tlaGNC">       14239 :     const MStyle&amp; style = system-&gt;style();</span></span>
-<span id="L974"><span class="lineNum">     974</span> <span class="tlaGNC">       14239 :     bool intoMargin = style.styleB(Sid::groupBracketHangTextIntoMargin)</span></span>
-<span id="L975"><span class="lineNum">     975</span> <span class="tlaGNC">       14239 :                       &amp;&amp; style.styleV(Sid::groupBracketTextOrientation).value&lt;Orientation&gt;() == Orientation::VERTICAL;</span></span>
-<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">       14239 :     double bracketsDist = style.styleAbsolute(Sid::groupBracketDistanceToGroupBracket);</span></span>
+<span id="L973"><span class="lineNum">     973</span> <span class="tlaGNC">       14355 :     const MStyle&amp; style = system-&gt;style();</span></span>
+<span id="L974"><span class="lineNum">     974</span> <span class="tlaGNC">       14355 :     bool intoMargin = style.styleB(Sid::groupBracketHangTextIntoMargin)</span></span>
+<span id="L975"><span class="lineNum">     975</span> <span class="tlaGNC">       14355 :                       &amp;&amp; style.styleV(Sid::groupBracketTextOrientation).value&lt;Orientation&gt;() == Orientation::VERTICAL;</span></span>
+<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">       14355 :     double bracketsDist = style.styleAbsolute(Sid::groupBracketDistanceToGroupBracket);</span></span>
 <span id="L977"><span class="lineNum">     977</span>              : </span>
-<span id="L978"><span class="lineNum">     978</span> <span class="tlaGNC">       14239 :     for (Bracket* b : groupBrackets) {</span></span>
+<span id="L978"><span class="lineNum">     978</span> <span class="tlaGNC">       14355 :     for (Bracket* b : groupBrackets) {</span></span>
 <span id="L979"><span class="lineNum">     979</span> <span class="tlaUNC tlaBgUNC">           0 :         b-&gt;mutldata()-&gt;setPosX(intoMargin ? 0.0 : -b-&gt;mutldata()-&gt;bbox().left());</span></span>
 <span id="L980"><span class="lineNum">     980</span> <span class="tlaUNC">           0 :         for (Bracket* bb : groupBrackets) {</span></span>
 <span id="L981"><span class="lineNum">     981</span> <span class="tlaUNC">           0 :             if (bb == b) {</span></span>
@@ -1044,19 +1044,19 @@
 <span id="L986"><span class="lineNum">     986</span>              :             }</span>
 <span id="L987"><span class="lineNum">     987</span>              :         }</span>
 <span id="L988"><span class="lineNum">     988</span>              :     }</span>
-<span id="L989"><span class="lineNum">     989</span> <span class="tlaGNC tlaBgGNC">       14239 : }</span></span>
+<span id="L989"><span class="lineNum">     989</span> <span class="tlaGNC tlaBgGNC">       14355 : }</span></span>
 <span id="L990"><span class="lineNum">     990</span>              : </span>
-<span id="L991"><span class="lineNum">     991</span> <span class="tlaGNC">       64528 : InstrumentName* SystemHeaderLayout::updateName(System* system, staff_idx_t staffIdx, LayoutContext&amp; ctx, const String&amp; name,</span></span>
+<span id="L991"><span class="lineNum">     991</span> <span class="tlaGNC">       64900 : InstrumentName* SystemHeaderLayout::updateName(System* system, staff_idx_t staffIdx, LayoutContext&amp; ctx, const String&amp; name,</span></span>
 <span id="L992"><span class="lineNum">     992</span>              :                                                InstrumentNameType type, InstrumentNameRole role)</span>
 <span id="L993"><span class="lineNum">     993</span>              : {</span>
-<span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC">       64528 :     SysStaff* sysStaff = system-&gt;staff(staffIdx);</span></span>
-<span id="L995"><span class="lineNum">     995</span> <span class="tlaGNC">       64528 :     InstrumentName* iname = sysStaff-&gt;name(role);</span></span>
+<span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC">       64900 :     SysStaff* sysStaff = system-&gt;staff(staffIdx);</span></span>
+<span id="L995"><span class="lineNum">     995</span> <span class="tlaGNC">       64900 :     InstrumentName* iname = sysStaff-&gt;name(role);</span></span>
 <span id="L996"><span class="lineNum">     996</span>              : </span>
-<span id="L997"><span class="lineNum">     997</span> <span class="tlaGNC">       64528 :     if (name.empty()) {</span></span>
-<span id="L998"><span class="lineNum">     998</span> <span class="tlaGNC">       56573 :         if (iname) {</span></span>
+<span id="L997"><span class="lineNum">     997</span> <span class="tlaGNC">       64900 :     if (name.empty()) {</span></span>
+<span id="L998"><span class="lineNum">     998</span> <span class="tlaGNC">       56945 :         if (iname) {</span></span>
 <span id="L999"><span class="lineNum">     999</span> <span class="tlaUNC tlaBgUNC">           0 :             ctx.mutDom().removeElement(iname);</span></span>
 <span id="L1000"><span class="lineNum">    1000</span>              :         }</span>
-<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC tlaBgGNC">       56573 :         return nullptr;</span></span>
+<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC tlaBgGNC">       56945 :         return nullptr;</span></span>
 <span id="L1002"><span class="lineNum">    1002</span>              :     }</span>
 <span id="L1003"><span class="lineNum">    1003</span>              : </span>
 <span id="L1004"><span class="lineNum">    1004</span> <span class="tlaGNC">        7955 :     if (!iname) {</span></span>
@@ -1359,23 +1359,23 @@
 <span id="L1301"><span class="lineNum">    1301</span> <span class="tlaUNC">           0 :     return str;</span></span>
 <span id="L1302"><span class="lineNum">    1302</span>              : }</span>
 <span id="L1303"><span class="lineNum">    1303</span>              : </span>
-<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaGNC tlaBgGNC">       41603 : InstrumentLabelVisibility SystemHeaderLayout::resolveInstrumentLabelVisibility(const Staff* staff, const Fraction&amp; tick,</span></span>
+<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaGNC tlaBgGNC">       41843 : InstrumentLabelVisibility SystemHeaderLayout::resolveInstrumentLabelVisibility(const Staff* staff, const Fraction&amp; tick,</span></span>
 <span id="L1305"><span class="lineNum">    1305</span>              :                                                                                LayoutContext&amp; ctx, bool firstSystem)</span>
 <span id="L1306"><span class="lineNum">    1306</span>              : {</span>
-<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaGNC">       41603 :     const InstrumentLabelVisibility local = staff-&gt;staffType(tick)-&gt;instrumentLabelVisibility();</span></span>
-<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaGNC">       41603 :     if (local != InstrumentLabelVisibility::AUTO) {</span></span>
+<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaGNC">       41843 :     const InstrumentLabelVisibility local = staff-&gt;staffType(tick)-&gt;instrumentLabelVisibility();</span></span>
+<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaGNC">       41843 :     if (local != InstrumentLabelVisibility::AUTO) {</span></span>
 <span id="L1309"><span class="lineNum">    1309</span> <span class="tlaUNC tlaBgUNC">           0 :         return local;</span></span>
 <span id="L1310"><span class="lineNum">    1310</span>              :     }</span>
 <span id="L1311"><span class="lineNum">    1311</span>              : </span>
-<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaGNC tlaBgGNC">       41603 :     if (ctx.conf().styleB(Sid::hideInstrumentNameIfOneInstrument) &amp;&amp; ctx.dom().visiblePartCount() &lt;= 1) {</span></span>
-<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaGNC">       23520 :         std::vector&lt;Part*&gt; visibleParts = ctx.dom().visibleParts();</span></span>
-<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaGNC">       23520 :         if (visibleParts.size() == 0) {</span></span>
+<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaGNC tlaBgGNC">       41843 :     if (ctx.conf().styleB(Sid::hideInstrumentNameIfOneInstrument) &amp;&amp; ctx.dom().visiblePartCount() &lt;= 1) {</span></span>
+<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaGNC">       23760 :         std::vector&lt;Part*&gt; visibleParts = ctx.dom().visibleParts();</span></span>
+<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaGNC">       23760 :         if (visibleParts.size() == 0) {</span></span>
 <span id="L1315"><span class="lineNum">    1315</span> <span class="tlaUNC tlaBgUNC">           0 :             return InstrumentLabelVisibility::HIDE;</span></span>
 <span id="L1316"><span class="lineNum">    1316</span>              :         }</span>
-<span id="L1317"><span class="lineNum">    1317</span> <span class="tlaGNC tlaBgGNC">       23520 :         if (visibleParts.size() == 1 &amp;&amp; !visibleParts.front()-&gt;isSharedPart()) {</span></span>
-<span id="L1318"><span class="lineNum">    1318</span> <span class="tlaGNC">       22825 :             return InstrumentLabelVisibility::HIDE;</span></span>
+<span id="L1317"><span class="lineNum">    1317</span> <span class="tlaGNC tlaBgGNC">       23760 :         if (visibleParts.size() == 1 &amp;&amp; !visibleParts.front()-&gt;isSharedPart()) {</span></span>
+<span id="L1318"><span class="lineNum">    1318</span> <span class="tlaGNC">       23065 :             return InstrumentLabelVisibility::HIDE;</span></span>
 <span id="L1319"><span class="lineNum">    1319</span>              :         }</span>
-<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaGNC">       23520 :     }</span></span>
+<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaGNC">       23760 :     }</span></span>
 <span id="L1321"><span class="lineNum">    1321</span>              : </span>
 <span id="L1322"><span class="lineNum">    1322</span> <span class="tlaGNC">       18778 :     const Sid sid = firstSystem ? Sid::firstSystemInstNameVisibility : Sid::subsSystemInstNameVisibility;</span></span>
 <span id="L1323"><span class="lineNum">    1323</span> <span class="tlaGNC">       18778 :     const InstrumentLabelVisibility styleVisibility = ctx.conf().styleV(sid).value&lt;InstrumentLabelVisibility&gt;();</span></span>
@@ -1385,35 +1385,35 @@
 <span id="L1327"><span class="lineNum">    1327</span> <span class="tlaGNC tlaBgGNC">       18778 :     return styleVisibility;</span></span>
 <span id="L1328"><span class="lineNum">    1328</span>              : }</span>
 <span id="L1329"><span class="lineNum">    1329</span>              : </span>
-<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaGNC">       41603 : InstrumentNameType SystemHeaderLayout::resolveInstrumentNameType(InstrumentLabelVisibility visibility)</span></span>
+<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaGNC">       41843 : InstrumentNameType SystemHeaderLayout::resolveInstrumentNameType(InstrumentLabelVisibility visibility)</span></span>
 <span id="L1331"><span class="lineNum">    1331</span>              : {</span>
-<span id="L1332"><span class="lineNum">    1332</span> <span class="tlaGNC">       41603 :     return visibility == InstrumentLabelVisibility::LONG ? InstrumentNameType::LONG : InstrumentNameType::SHORT;</span></span>
+<span id="L1332"><span class="lineNum">    1332</span> <span class="tlaGNC">       41843 :     return visibility == InstrumentLabelVisibility::LONG ? InstrumentNameType::LONG : InstrumentNameType::SHORT;</span></span>
 <span id="L1333"><span class="lineNum">    1333</span>              : }</span>
 <span id="L1334"><span class="lineNum">    1334</span>              : </span>
-<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaGNC">       14250 : void SystemHeaderLayout::setInstrumentNames(System* system, LayoutContext&amp; ctx)</span></span>
+<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaGNC">       14366 : void SystemHeaderLayout::setInstrumentNames(System* system, LayoutContext&amp; ctx)</span></span>
 <span id="L1336"><span class="lineNum">    1336</span>              : {</span>
-<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaGNC">       14250 :     if (system-&gt;vbox()) {</span></span>
+<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaGNC">       14366 :     if (system-&gt;vbox()) {</span></span>
 <span id="L1338"><span class="lineNum">    1338</span> <span class="tlaGNC">           8 :         return;</span></span>
 <span id="L1339"><span class="lineNum">    1339</span>              :     }</span>
 <span id="L1340"><span class="lineNum">    1340</span>              : </span>
-<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaGNC">       14250 :     const Measure* firstMeasure = system-&gt;firstMeasure();</span></span>
-<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaGNC">       14250 :     if (!firstMeasure) {</span></span>
+<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaGNC">       14366 :     const Measure* firstMeasure = system-&gt;firstMeasure();</span></span>
+<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaGNC">       14366 :     if (!firstMeasure) {</span></span>
 <span id="L1343"><span class="lineNum">    1343</span> <span class="tlaGNC">           8 :         return;</span></span>
 <span id="L1344"><span class="lineNum">    1344</span>              :     }</span>
 <span id="L1345"><span class="lineNum">    1345</span>              : </span>
-<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaGNC">       14242 :     Fraction tick = firstMeasure-&gt;tick();</span></span>
+<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaGNC">       14358 :     Fraction tick = firstMeasure-&gt;tick();</span></span>
 <span id="L1347"><span class="lineNum">    1347</span>              : </span>
-<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaGNC">       14242 :     bool subsSysLongName = ctx.conf().styleV(Sid::subsSystemInstNameVisibility).value&lt;InstrumentLabelVisibility&gt;()</span></span>
-<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaGNC">       14242 :                            == InstrumentLabelVisibility::LONG;</span></span>
-<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaGNC">       14242 :     bool longName = ctx.mutState().firstSystem() ? ctx.mutState().startWithLongNames() : subsSysLongName;</span></span>
+<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaGNC">       14358 :     bool subsSysLongName = ctx.conf().styleV(Sid::subsSystemInstNameVisibility).value&lt;InstrumentLabelVisibility&gt;()</span></span>
+<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaGNC">       14358 :                            == InstrumentLabelVisibility::LONG;</span></span>
+<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaGNC">       14358 :     bool longName = ctx.mutState().firstSystem() ? ctx.mutState().startWithLongNames() : subsSysLongName;</span></span>
 <span id="L1351"><span class="lineNum">    1351</span>              : </span>
-<span id="L1352"><span class="lineNum">    1352</span> <span class="tlaGNC">       14242 :     System::LayoutData* ldata = system-&gt;mutldata();</span></span>
-<span id="L1353"><span class="lineNum">    1353</span> <span class="tlaGNC">       14242 :     ldata-&gt;setUseLongNames(longName);</span></span>
+<span id="L1352"><span class="lineNum">    1352</span> <span class="tlaGNC">       14358 :     System::LayoutData* ldata = system-&gt;mutldata();</span></span>
+<span id="L1353"><span class="lineNum">    1353</span> <span class="tlaGNC">       14358 :     ldata-&gt;setUseLongNames(longName);</span></span>
 <span id="L1354"><span class="lineNum">    1354</span>              : </span>
-<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaGNC">       14242 :     InstrumentNameType type = longName ? InstrumentNameType::LONG : InstrumentNameType::SHORT;</span></span>
+<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaGNC">       14358 :     InstrumentNameType type = longName ? InstrumentNameType::LONG : InstrumentNameType::SHORT;</span></span>
 <span id="L1356"><span class="lineNum">    1356</span>              : </span>
 <span id="L1357"><span class="lineNum">    1357</span>              :     // We do not show instrument names for video export</span>
-<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaGNC">       14242 :     if (!ctx.conf().isShowInstrumentNames()) {</span></span>
+<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaGNC">       14358 :     if (!ctx.conf().isShowInstrumentNames()) {</span></span>
 <span id="L1359"><span class="lineNum">    1359</span> <span class="tlaUNC tlaBgUNC">           0 :         for (staff_idx_t idx = 0; idx &lt; system-&gt;staves().size(); ++idx) {</span></span>
 <span id="L1360"><span class="lineNum">    1360</span> <span class="tlaUNC">           0 :             updateName(system, idx, ctx, String(), type, InstrumentNameRole::STAFF);</span></span>
 <span id="L1361"><span class="lineNum">    1361</span> <span class="tlaUNC">           0 :             updateName(system, idx, ctx, String(), type, InstrumentNameRole::SHARED_STAFF);</span></span>
@@ -1423,44 +1423,44 @@
 <span id="L1365"><span class="lineNum">    1365</span> <span class="tlaUNC">           0 :         return;</span></span>
 <span id="L1366"><span class="lineNum">    1366</span>              :     }</span>
 <span id="L1367"><span class="lineNum">    1367</span>              : </span>
-<span id="L1368"><span class="lineNum">    1368</span> <span class="tlaGNC tlaBgGNC">       14242 :     updateGroupNames(system, ctx, tick);</span></span>
+<span id="L1368"><span class="lineNum">    1368</span> <span class="tlaGNC tlaBgGNC">       14358 :     updateGroupNames(system, ctx, tick);</span></span>
 <span id="L1369"><span class="lineNum">    1369</span>              : </span>
-<span id="L1370"><span class="lineNum">    1370</span> <span class="tlaGNC">       14242 :     bool firstSystem = ctx.state().firstSystem();</span></span>
+<span id="L1370"><span class="lineNum">    1370</span> <span class="tlaGNC">       14358 :     bool firstSystem = ctx.state().firstSystem();</span></span>
 <span id="L1371"><span class="lineNum">    1371</span>              : </span>
-<span id="L1372"><span class="lineNum">    1372</span> <span class="tlaGNC">       33343 :     for (size_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); /*empty*/) {</span></span>
-<span id="L1373"><span class="lineNum">    1373</span> <span class="tlaGNC">       19101 :         Part* part = ctx.dom().staff(staffIdx)-&gt;part();</span></span>
-<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaGNC">       19101 :         size_t partNstaves = part-&gt;nstaves();</span></span>
-<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaGNC">       19101 :         size_t visibleStavesCount = part-&gt;visibleStavesCount();</span></span>
+<span id="L1372"><span class="lineNum">    1372</span> <span class="tlaGNC">       33575 :     for (size_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); /*empty*/) {</span></span>
+<span id="L1373"><span class="lineNum">    1373</span> <span class="tlaGNC">       19217 :         Part* part = ctx.dom().staff(staffIdx)-&gt;part();</span></span>
+<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaGNC">       19217 :         size_t partNstaves = part-&gt;nstaves();</span></span>
+<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaGNC">       19217 :         size_t visibleStavesCount = part-&gt;visibleStavesCount();</span></span>
 <span id="L1376"><span class="lineNum">    1376</span>              : </span>
-<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaGNC">       19101 :         if (part-&gt;isSharedPart() &amp;&amp; part-&gt;show()) {</span></span>
+<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaGNC">       19217 :         if (part-&gt;isSharedPart() &amp;&amp; part-&gt;show()) {</span></span>
 <span id="L1378"><span class="lineNum">    1378</span> <span class="tlaGNC">         114 :             setSharedPartNames(toSharedPart(part), staffIdx, system, ctx, tick);</span></span>
 <span id="L1379"><span class="lineNum">    1379</span> <span class="tlaGNC">         114 :             staffIdx += partNstaves;</span></span>
 <span id="L1380"><span class="lineNum">    1380</span> <span class="tlaGNC">         114 :             continue;</span></span>
 <span id="L1381"><span class="lineNum">    1381</span>              :         }</span>
 <span id="L1382"><span class="lineNum">    1382</span>              : </span>
-<span id="L1383"><span class="lineNum">    1383</span> <span class="tlaGNC">       40390 :         for (size_t idxInPart = 0; idxInPart &lt; partNstaves; ++idxInPart) {</span></span>
-<span id="L1384"><span class="lineNum">    1384</span> <span class="tlaGNC">       21403 :             staff_idx_t globalIdx = staffIdx + idxInPart;</span></span>
-<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaGNC">       21403 :             const Staff* staff = ctx.dom().staff(globalIdx);</span></span>
+<span id="L1383"><span class="lineNum">    1383</span> <span class="tlaGNC">       40630 :         for (size_t idxInPart = 0; idxInPart &lt; partNstaves; ++idxInPart) {</span></span>
+<span id="L1384"><span class="lineNum">    1384</span> <span class="tlaGNC">       21527 :             staff_idx_t globalIdx = staffIdx + idxInPart;</span></span>
+<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaGNC">       21527 :             const Staff* staff = ctx.dom().staff(globalIdx);</span></span>
 <span id="L1386"><span class="lineNum">    1386</span>              : </span>
-<span id="L1387"><span class="lineNum">    1387</span> <span class="tlaGNC">       21403 :             InstrumentLabelVisibility visibility = resolveInstrumentLabelVisibility(staff, tick, ctx, firstSystem);</span></span>
-<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaGNC">       21403 :             InstrumentNameType staffNameType = resolveInstrumentNameType(visibility);</span></span>
-<span id="L1389"><span class="lineNum">    1389</span> <span class="tlaGNC">       21403 :             bool hide = visibility == InstrumentLabelVisibility::HIDE;</span></span>
-<span id="L1390"><span class="lineNum">    1390</span> <span class="tlaGNC">       21403 :             bool staffLongName = staffNameType == InstrumentNameType::LONG;</span></span>
+<span id="L1387"><span class="lineNum">    1387</span> <span class="tlaGNC">       21527 :             InstrumentLabelVisibility visibility = resolveInstrumentLabelVisibility(staff, tick, ctx, firstSystem);</span></span>
+<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaGNC">       21527 :             InstrumentNameType staffNameType = resolveInstrumentNameType(visibility);</span></span>
+<span id="L1389"><span class="lineNum">    1389</span> <span class="tlaGNC">       21527 :             bool hide = visibility == InstrumentLabelVisibility::HIDE;</span></span>
+<span id="L1390"><span class="lineNum">    1390</span> <span class="tlaGNC">       21527 :             bool staffLongName = staffNameType == InstrumentNameType::LONG;</span></span>
 <span id="L1391"><span class="lineNum">    1391</span>              : </span>
-<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaGNC">       21403 :             String instrumentName;</span></span>
-<span id="L1393"><span class="lineNum">    1393</span> <span class="tlaGNC">       21403 :             if (idxInPart == 0 &amp;&amp; part-&gt;show() &amp;&amp; visibleStavesCount &gt; 0 &amp;&amp; !hide) {</span></span>
+<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaGNC">       21527 :             String instrumentName;</span></span>
+<span id="L1393"><span class="lineNum">    1393</span> <span class="tlaGNC">       21527 :             if (idxInPart == 0 &amp;&amp; part-&gt;show() &amp;&amp; visibleStavesCount &gt; 0 &amp;&amp; !hide) {</span></span>
 <span id="L1394"><span class="lineNum">    1394</span> <span class="tlaGNC">        8610 :                 instrumentName = formattedInstrumentName(system, part, tick, staffLongName);</span></span>
 <span id="L1395"><span class="lineNum">    1395</span>              :             }</span>
-<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaGNC">       21403 :             updateName(system, globalIdx, ctx, instrumentName, staffNameType, InstrumentNameRole::PART);</span></span>
+<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaGNC">       21527 :             updateName(system, globalIdx, ctx, instrumentName, staffNameType, InstrumentNameRole::PART);</span></span>
 <span id="L1397"><span class="lineNum">    1397</span>              : </span>
-<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaGNC">       21403 :             String staffName;</span></span>
-<span id="L1399"><span class="lineNum">    1399</span> <span class="tlaGNC">       21403 :             if (staff-&gt;show() &amp;&amp; !hide) {</span></span>
+<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaGNC">       21527 :             String staffName;</span></span>
+<span id="L1399"><span class="lineNum">    1399</span> <span class="tlaGNC">       21527 :             if (staff-&gt;show() &amp;&amp; !hide) {</span></span>
 <span id="L1400"><span class="lineNum">    1400</span> <span class="tlaGNC">        9486 :                 staffName = staffLongName ? staff-&gt;individualStaffNameLong(tick) : staff-&gt;individualStaffNameShort(tick);</span></span>
 <span id="L1401"><span class="lineNum">    1401</span>              :             }</span>
-<span id="L1402"><span class="lineNum">    1402</span> <span class="tlaGNC">       21403 :             updateName(system, globalIdx, ctx, staffName, staffNameType, InstrumentNameRole::STAFF);</span></span>
-<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaGNC">       21403 :         }</span></span>
+<span id="L1402"><span class="lineNum">    1402</span> <span class="tlaGNC">       21527 :             updateName(system, globalIdx, ctx, staffName, staffNameType, InstrumentNameRole::STAFF);</span></span>
+<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaGNC">       21527 :         }</span></span>
 <span id="L1404"><span class="lineNum">    1404</span>              : </span>
-<span id="L1405"><span class="lineNum">    1405</span> <span class="tlaGNC">       18987 :         staffIdx += partNstaves;</span></span>
+<span id="L1405"><span class="lineNum">    1405</span> <span class="tlaGNC">       19103 :         staffIdx += partNstaves;</span></span>
 <span id="L1406"><span class="lineNum">    1406</span>              :     }</span>
 <span id="L1407"><span class="lineNum">    1407</span>              : }</span>
 <span id="L1408"><span class="lineNum">    1408</span>              : </span>
@@ -1544,61 +1544,61 @@
 <span id="L1486"><span class="lineNum">    1486</span> <span class="tlaGNC">         219 :     }</span></span>
 <span id="L1487"><span class="lineNum">    1487</span> <span class="tlaGNC">         114 : }</span></span>
 <span id="L1488"><span class="lineNum">    1488</span>              : </span>
-<span id="L1489"><span class="lineNum">    1489</span> <span class="tlaGNC">       14242 : void SystemHeaderLayout::updateGroupNames(System* system, LayoutContext&amp; ctx, const Fraction&amp; tick)</span></span>
+<span id="L1489"><span class="lineNum">    1489</span> <span class="tlaGNC">       14358 : void SystemHeaderLayout::updateGroupNames(System* system, LayoutContext&amp; ctx, const Fraction&amp; tick)</span></span>
 <span id="L1490"><span class="lineNum">    1490</span>              : {</span>
-<span id="L1491"><span class="lineNum">    1491</span> <span class="tlaGNC">       14242 :     bool firstSystem = ctx.state().firstSystem();</span></span>
+<span id="L1491"><span class="lineNum">    1491</span> <span class="tlaGNC">       14358 :     bool firstSystem = ctx.state().firstSystem();</span></span>
 <span id="L1492"><span class="lineNum">    1492</span>              : </span>
-<span id="L1493"><span class="lineNum">    1493</span> <span class="tlaGNC">       14242 :     System::LayoutData* ldata = system-&gt;mutldata();</span></span>
-<span id="L1494"><span class="lineNum">    1494</span> <span class="tlaGNC">       14242 :     ldata-&gt;clearPartsWithGroupNames();</span></span>
+<span id="L1493"><span class="lineNum">    1493</span> <span class="tlaGNC">       14358 :     System::LayoutData* ldata = system-&gt;mutldata();</span></span>
+<span id="L1494"><span class="lineNum">    1494</span> <span class="tlaGNC">       14358 :     ldata-&gt;clearPartsWithGroupNames();</span></span>
 <span id="L1495"><span class="lineNum">    1495</span>              : </span>
-<span id="L1496"><span class="lineNum">    1496</span> <span class="tlaGNC">       31746 :     for (staff_idx_t startOfGroup = 0; startOfGroup &lt; system-&gt;staves().size();) {</span></span>
-<span id="L1497"><span class="lineNum">    1497</span> <span class="tlaGNC">       17504 :         Part* curPart = ctx.dom().staff(startOfGroup)-&gt;part();</span></span>
-<span id="L1498"><span class="lineNum">    1498</span> <span class="tlaGNC">       17504 :         const Instrument* curInstrument = curPart-&gt;instrument(tick);</span></span>
-<span id="L1499"><span class="lineNum">    1499</span> <span class="tlaGNC">       17504 :         const InstrumentLabel&amp; curLabel = curInstrument-&gt;instrumentLabel();</span></span>
-<span id="L1500"><span class="lineNum">    1500</span> <span class="tlaGNC">       17504 :         if (!curInstrument-&gt;instrumentLabel().allowGroupName() || !curPart-&gt;show() || curPart-&gt;isSharedPart()) {</span></span>
+<span id="L1496"><span class="lineNum">    1496</span> <span class="tlaGNC">       31978 :     for (staff_idx_t startOfGroup = 0; startOfGroup &lt; system-&gt;staves().size();) {</span></span>
+<span id="L1497"><span class="lineNum">    1497</span> <span class="tlaGNC">       17620 :         Part* curPart = ctx.dom().staff(startOfGroup)-&gt;part();</span></span>
+<span id="L1498"><span class="lineNum">    1498</span> <span class="tlaGNC">       17620 :         const Instrument* curInstrument = curPart-&gt;instrument(tick);</span></span>
+<span id="L1499"><span class="lineNum">    1499</span> <span class="tlaGNC">       17620 :         const InstrumentLabel&amp; curLabel = curInstrument-&gt;instrumentLabel();</span></span>
+<span id="L1500"><span class="lineNum">    1500</span> <span class="tlaGNC">       17620 :         if (!curInstrument-&gt;instrumentLabel().allowGroupName() || !curPart-&gt;show() || curPart-&gt;isSharedPart()) {</span></span>
 <span id="L1501"><span class="lineNum">    1501</span> <span class="tlaGNC">         452 :             ++startOfGroup;</span></span>
 <span id="L1502"><span class="lineNum">    1502</span> <span class="tlaGNC">         452 :             continue;</span></span>
 <span id="L1503"><span class="lineNum">    1503</span>              :         }</span>
 <span id="L1504"><span class="lineNum">    1504</span>              : </span>
 <span id="L1505"><span class="lineNum">    1505</span>              :         InstrumentLabelVisibility visibility</span>
-<span id="L1506"><span class="lineNum">    1506</span> <span class="tlaGNC">       17052 :             = resolveInstrumentLabelVisibility(ctx.dom().staff(startOfGroup), tick, ctx, firstSystem);</span></span>
-<span id="L1507"><span class="lineNum">    1507</span> <span class="tlaGNC">       17052 :         InstrumentNameType type = resolveInstrumentNameType(visibility);</span></span>
-<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaGNC">       17052 :         bool hide = visibility == InstrumentLabelVisibility::HIDE;</span></span>
+<span id="L1506"><span class="lineNum">    1506</span> <span class="tlaGNC">       17168 :             = resolveInstrumentLabelVisibility(ctx.dom().staff(startOfGroup), tick, ctx, firstSystem);</span></span>
+<span id="L1507"><span class="lineNum">    1507</span> <span class="tlaGNC">       17168 :         InstrumentNameType type = resolveInstrumentNameType(visibility);</span></span>
+<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaGNC">       17168 :         bool hide = visibility == InstrumentLabelVisibility::HIDE;</span></span>
 <span id="L1509"><span class="lineNum">    1509</span>              : </span>
-<span id="L1510"><span class="lineNum">    1510</span> <span class="tlaGNC">       17052 :         std::vector&lt;Part*&gt; partsInThisGroup;</span></span>
+<span id="L1510"><span class="lineNum">    1510</span> <span class="tlaGNC">       17168 :         std::vector&lt;Part*&gt; partsInThisGroup;</span></span>
 <span id="L1511"><span class="lineNum">    1511</span>              : </span>
-<span id="L1512"><span class="lineNum">    1512</span> <span class="tlaGNC">       17052 :         staff_idx_t endOfGroup = startOfGroup;</span></span>
-<span id="L1513"><span class="lineNum">    1513</span> <span class="tlaGNC">       35812 :         while (endOfGroup &lt; system-&gt;staves().size()) {</span></span>
-<span id="L1514"><span class="lineNum">    1514</span> <span class="tlaGNC">       21686 :             Part* nextPart = ctx.dom().staff(endOfGroup)-&gt;part();</span></span>
-<span id="L1515"><span class="lineNum">    1515</span> <span class="tlaGNC">       21686 :             Instrument* nextInstrument = nextPart-&gt;instrument(tick);</span></span>
-<span id="L1516"><span class="lineNum">    1516</span> <span class="tlaGNC">       21686 :             InstrumentLabel&amp; nextLabel = nextInstrument-&gt;instrumentLabel();</span></span>
-<span id="L1517"><span class="lineNum">    1517</span> <span class="tlaGNC">       43372 :             if (nextPart != curPart</span></span>
-<span id="L1518"><span class="lineNum">    1518</span> <span class="tlaGNC">       21686 :                 &amp;&amp; (nextInstrument-&gt;id() != curInstrument-&gt;id() || !nextLabel.allowGroupName() || nextPart-&gt;isSharedPart())) {</span></span>
+<span id="L1512"><span class="lineNum">    1512</span> <span class="tlaGNC">       17168 :         staff_idx_t endOfGroup = startOfGroup;</span></span>
+<span id="L1513"><span class="lineNum">    1513</span> <span class="tlaGNC">       36044 :         while (endOfGroup &lt; system-&gt;staves().size()) {</span></span>
+<span id="L1514"><span class="lineNum">    1514</span> <span class="tlaGNC">       21802 :             Part* nextPart = ctx.dom().staff(endOfGroup)-&gt;part();</span></span>
+<span id="L1515"><span class="lineNum">    1515</span> <span class="tlaGNC">       21802 :             Instrument* nextInstrument = nextPart-&gt;instrument(tick);</span></span>
+<span id="L1516"><span class="lineNum">    1516</span> <span class="tlaGNC">       21802 :             InstrumentLabel&amp; nextLabel = nextInstrument-&gt;instrumentLabel();</span></span>
+<span id="L1517"><span class="lineNum">    1517</span> <span class="tlaGNC">       43604 :             if (nextPart != curPart</span></span>
+<span id="L1518"><span class="lineNum">    1518</span> <span class="tlaGNC">       21802 :                 &amp;&amp; (nextInstrument-&gt;id() != curInstrument-&gt;id() || !nextLabel.allowGroupName() || nextPart-&gt;isSharedPart())) {</span></span>
 <span id="L1519"><span class="lineNum">    1519</span> <span class="tlaGNC">        2926 :                 break;</span></span>
 <span id="L1520"><span class="lineNum">    1520</span>              :             }</span>
-<span id="L1521"><span class="lineNum">    1521</span> <span class="tlaGNC">       37520 :             if (nextLabel.useCustomGroupName() &amp;&amp; (nextLabel.customNameLongGroup() != curLabel.customNameLongGroup()</span></span>
-<span id="L1522"><span class="lineNum">    1522</span> <span class="tlaGNC">       18760 :                                                    || nextLabel.customNameShortGroup() != curLabel.customNameShortGroup())) {</span></span>
+<span id="L1521"><span class="lineNum">    1521</span> <span class="tlaGNC">       37752 :             if (nextLabel.useCustomGroupName() &amp;&amp; (nextLabel.customNameLongGroup() != curLabel.customNameLongGroup()</span></span>
+<span id="L1522"><span class="lineNum">    1522</span> <span class="tlaGNC">       18876 :                                                    || nextLabel.customNameShortGroup() != curLabel.customNameShortGroup())) {</span></span>
 <span id="L1523"><span class="lineNum">    1523</span> <span class="tlaUNC tlaBgUNC">           0 :                 break;</span></span>
 <span id="L1524"><span class="lineNum">    1524</span>              :             }</span>
 <span id="L1525"><span class="lineNum">    1525</span>              : </span>
-<span id="L1526"><span class="lineNum">    1526</span> <span class="tlaGNC tlaBgGNC">       18760 :             if (type == InstrumentNameType::LONG &amp;&amp; system-&gt;visibleStavesOfPart(nextPart).size() == 0) {</span></span>
+<span id="L1526"><span class="lineNum">    1526</span> <span class="tlaGNC tlaBgGNC">       18876 :             if (type == InstrumentNameType::LONG &amp;&amp; system-&gt;visibleStavesOfPart(nextPart).size() == 0) {</span></span>
 <span id="L1527"><span class="lineNum">    1527</span>              :                 // NOTE: We can only do this for long-name systems because they don't need to have</span>
 <span id="L1528"><span class="lineNum">    1528</span>              :                 // the left barline aligned with the other systems across the page.</span>
 <span id="L1529"><span class="lineNum">    1529</span> <span class="tlaGNC">          17 :                 endOfGroup += nextPart-&gt;nstaves();</span></span>
 <span id="L1530"><span class="lineNum">    1530</span> <span class="tlaGNC">          17 :                 continue;</span></span>
 <span id="L1531"><span class="lineNum">    1531</span>              :             }</span>
 <span id="L1532"><span class="lineNum">    1532</span>              : </span>
-<span id="L1533"><span class="lineNum">    1533</span> <span class="tlaGNC">       18743 :             if (nextPart-&gt;show() &amp;&amp; nextPart-&gt;visibleStavesCount() &gt; 0) {</span></span>
-<span id="L1534"><span class="lineNum">    1534</span> <span class="tlaGNC">       18727 :                 partsInThisGroup.push_back(nextPart);</span></span>
-<span id="L1535"><span class="lineNum">    1535</span> <span class="tlaGNC">       18727 :                 nextLabel.setUseCustomGroupName(curLabel.useCustomGroupName());</span></span>
-<span id="L1536"><span class="lineNum">    1536</span> <span class="tlaGNC">       18727 :                 nextLabel.setCustomNameLongGroup(curLabel.customNameLongGroup());</span></span>
-<span id="L1537"><span class="lineNum">    1537</span> <span class="tlaGNC">       18727 :                 nextLabel.setCustomNameShortGroup(curLabel.customNameShortGroup());</span></span>
+<span id="L1533"><span class="lineNum">    1533</span> <span class="tlaGNC">       18859 :             if (nextPart-&gt;show() &amp;&amp; nextPart-&gt;visibleStavesCount() &gt; 0) {</span></span>
+<span id="L1534"><span class="lineNum">    1534</span> <span class="tlaGNC">       18843 :                 partsInThisGroup.push_back(nextPart);</span></span>
+<span id="L1535"><span class="lineNum">    1535</span> <span class="tlaGNC">       18843 :                 nextLabel.setUseCustomGroupName(curLabel.useCustomGroupName());</span></span>
+<span id="L1536"><span class="lineNum">    1536</span> <span class="tlaGNC">       18843 :                 nextLabel.setCustomNameLongGroup(curLabel.customNameLongGroup());</span></span>
+<span id="L1537"><span class="lineNum">    1537</span> <span class="tlaGNC">       18843 :                 nextLabel.setCustomNameShortGroup(curLabel.customNameShortGroup());</span></span>
 <span id="L1538"><span class="lineNum">    1538</span>              :             }</span>
 <span id="L1539"><span class="lineNum">    1539</span>              : </span>
-<span id="L1540"><span class="lineNum">    1540</span> <span class="tlaGNC">       18743 :             endOfGroup += nextPart-&gt;nstaves();</span></span>
+<span id="L1540"><span class="lineNum">    1540</span> <span class="tlaGNC">       18859 :             endOfGroup += nextPart-&gt;nstaves();</span></span>
 <span id="L1541"><span class="lineNum">    1541</span>              :         }</span>
 <span id="L1542"><span class="lineNum">    1542</span>              : </span>
-<span id="L1543"><span class="lineNum">    1543</span> <span class="tlaGNC">       17052 :         if (!hide &amp;&amp; partsInThisGroup.size() &gt; 1 &amp;&amp; useGroupNames(curInstrument-&gt;group(), ctx)) {</span></span>
+<span id="L1543"><span class="lineNum">    1543</span> <span class="tlaGNC">       17168 :         if (!hide &amp;&amp; partsInThisGroup.size() &gt; 1 &amp;&amp; useGroupNames(curInstrument-&gt;group(), ctx)) {</span></span>
 <span id="L1544"><span class="lineNum">    1544</span> <span class="tlaGNC">         136 :             String name = formattedGroupName(system, curPart, tick, type == InstrumentNameType::LONG);</span></span>
 <span id="L1545"><span class="lineNum">    1545</span> <span class="tlaGNC">         136 :             InstrumentName* groupName = updateName(system, startOfGroup, ctx, name, type, InstrumentNameRole::GROUP);</span></span>
 <span id="L1546"><span class="lineNum">    1546</span>              : </span>
@@ -1614,16 +1614,16 @@
 <span id="L1556"><span class="lineNum">    1556</span> <span class="tlaGNC">         162 :                 updateName(system, idx, ctx, String(), type, InstrumentNameRole::GROUP);</span></span>
 <span id="L1557"><span class="lineNum">    1557</span>              :             }</span>
 <span id="L1558"><span class="lineNum">    1558</span> <span class="tlaGNC">         136 :         } else {</span></span>
-<span id="L1559"><span class="lineNum">    1559</span> <span class="tlaGNC">       37788 :             for (staff_idx_t idx = startOfGroup; idx &lt; endOfGroup; ++idx) {</span></span>
-<span id="L1560"><span class="lineNum">    1560</span> <span class="tlaGNC">       20872 :                 updateName(system, idx, ctx, String(), type, InstrumentNameRole::GROUP);</span></span>
+<span id="L1559"><span class="lineNum">    1559</span> <span class="tlaGNC">       38028 :             for (staff_idx_t idx = startOfGroup; idx &lt; endOfGroup; ++idx) {</span></span>
+<span id="L1560"><span class="lineNum">    1560</span> <span class="tlaGNC">       20996 :                 updateName(system, idx, ctx, String(), type, InstrumentNameRole::GROUP);</span></span>
 <span id="L1561"><span class="lineNum">    1561</span>              :             }</span>
 <span id="L1562"><span class="lineNum">    1562</span>              :         }</span>
 <span id="L1563"><span class="lineNum">    1563</span>              : </span>
-<span id="L1564"><span class="lineNum">    1564</span> <span class="tlaGNC">       17052 :         startOfGroup = endOfGroup;</span></span>
-<span id="L1565"><span class="lineNum">    1565</span> <span class="tlaGNC">       17052 :     }</span></span>
+<span id="L1564"><span class="lineNum">    1564</span> <span class="tlaGNC">       17168 :         startOfGroup = endOfGroup;</span></span>
+<span id="L1565"><span class="lineNum">    1565</span> <span class="tlaGNC">       17168 :     }</span></span>
 <span id="L1566"><span class="lineNum">    1566</span>              : </span>
-<span id="L1567"><span class="lineNum">    1567</span> <span class="tlaGNC">       35864 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); ++staffIdx) {</span></span>
-<span id="L1568"><span class="lineNum">    1568</span> <span class="tlaGNC">       21622 :         if (system-&gt;staff(staffIdx)-&gt;name(InstrumentNameRole::GROUP)) {</span></span>
+<span id="L1567"><span class="lineNum">    1567</span> <span class="tlaGNC">       36104 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; system-&gt;staves().size(); ++staffIdx) {</span></span>
+<span id="L1568"><span class="lineNum">    1568</span> <span class="tlaGNC">       21746 :         if (system-&gt;staff(staffIdx)-&gt;name(InstrumentNameRole::GROUP)) {</span></span>
 <span id="L1569"><span class="lineNum">    1569</span> <span class="tlaGNC">         132 :             Part* part = ctx.dom().staff(staffIdx)-&gt;part();</span></span>
 <span id="L1570"><span class="lineNum">    1570</span> <span class="tlaGNC">         132 :             if (!muse::contains(ldata-&gt;partsWithGroupName(), part)) {</span></span>
 <span id="L1571"><span class="lineNum">    1571</span>              :                 // name is empty here, so the InstrumentNameType is unused (see updateName)</span>
@@ -1631,7 +1631,7 @@
 <span id="L1573"><span class="lineNum">    1573</span>              :             }</span>
 <span id="L1574"><span class="lineNum">    1574</span>              :         }</span>
 <span id="L1575"><span class="lineNum">    1575</span>              :     }</span>
-<span id="L1576"><span class="lineNum">    1576</span> <span class="tlaGNC tlaBgGNC">       14242 : }</span></span>
+<span id="L1576"><span class="lineNum">    1576</span> <span class="tlaGNC tlaBgGNC">       14358 : }</span></span>
 <span id="L1577"><span class="lineNum">    1577</span>              : </span>
 <span id="L1578"><span class="lineNum">    1578</span> <span class="tlaGNC">         848 : bool SystemHeaderLayout::useGroupNames(const String&amp; instrumentGroup, LayoutContext&amp; ctx)</span></span>
 <span id="L1579"><span class="lineNum">    1579</span>              : {</span>
@@ -1650,38 +1650,38 @@
 <span id="L1592"><span class="lineNum">    1592</span> <span class="tlaGNC">         372 :     return style.styleB(Sid::othersNameByGroup);</span></span>
 <span id="L1593"><span class="lineNum">    1593</span>              : }</span>
 <span id="L1594"><span class="lineNum">    1594</span>              : </span>
-<span id="L1595"><span class="lineNum">    1595</span> <span class="tlaGNC">       14253 : void SystemHeaderLayout::updateSystemHeaderWidth(System* system, LayoutContext&amp; ctx)</span></span>
+<span id="L1595"><span class="lineNum">    1595</span> <span class="tlaGNC">       14369 : void SystemHeaderLayout::updateSystemHeaderWidth(System* system, LayoutContext&amp; ctx)</span></span>
 <span id="L1596"><span class="lineNum">    1596</span>              : {</span>
-<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaGNC">       14253 :     if (system-&gt;staves().empty()) {                 // ignore vbox</span></span>
+<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaGNC">       14369 :     if (system-&gt;staves().empty()) {                 // ignore vbox</span></span>
 <span id="L1598"><span class="lineNum">    1598</span> <span class="tlaGNC">           3 :         return;</span></span>
 <span id="L1599"><span class="lineNum">    1599</span>              :     }</span>
 <span id="L1600"><span class="lineNum">    1600</span>              : </span>
-<span id="L1601"><span class="lineNum">    1601</span> <span class="tlaGNC">       14250 :     SystemHeaderLayout::computeInstrumentNameOffset(system, ctx);</span></span>
-<span id="L1602"><span class="lineNum">    1602</span> <span class="tlaGNC">       14250 :     double instrumentNameOffset = system-&gt;ldata()-&gt;instrumentNameOffset();</span></span>
+<span id="L1601"><span class="lineNum">    1601</span> <span class="tlaGNC">       14366 :     SystemHeaderLayout::computeInstrumentNameOffset(system, ctx);</span></span>
+<span id="L1602"><span class="lineNum">    1602</span> <span class="tlaGNC">       14366 :     double instrumentNameOffset = system-&gt;ldata()-&gt;instrumentNameOffset();</span></span>
 <span id="L1603"><span class="lineNum">    1603</span>              : </span>
 <span id="L1604"><span class="lineNum">    1604</span>              :     //---------------------------------------------------</span>
 <span id="L1605"><span class="lineNum">    1605</span>              :     //  find x position of staves</span>
 <span id="L1606"><span class="lineNum">    1606</span>              :     //---------------------------------------------------</span>
-<span id="L1607"><span class="lineNum">    1607</span> <span class="tlaGNC">       14250 :     SystemHeaderLayout::layoutBrackets(system, ctx);</span></span>
-<span id="L1608"><span class="lineNum">    1608</span> <span class="tlaGNC">       14250 :     double maxBracketsWidth = SystemHeaderLayout::totalBracketOffset(ctx);</span></span>
+<span id="L1607"><span class="lineNum">    1607</span> <span class="tlaGNC">       14366 :     SystemHeaderLayout::layoutBrackets(system, ctx);</span></span>
+<span id="L1608"><span class="lineNum">    1608</span> <span class="tlaGNC">       14366 :     double maxBracketsWidth = SystemHeaderLayout::totalBracketOffset(ctx);</span></span>
 <span id="L1609"><span class="lineNum">    1609</span>              : </span>
-<span id="L1610"><span class="lineNum">    1610</span> <span class="tlaGNC">       14250 :     SystemHeaderLayout::setInstrumentNames(system, ctx);</span></span>
-<span id="L1611"><span class="lineNum">    1611</span> <span class="tlaGNC">       14250 :     SystemHeaderLayout::computeInstrumentNamesWidth(system, ctx);</span></span>
-<span id="L1612"><span class="lineNum">    1612</span> <span class="tlaGNC">       14250 :     double maxNamesWidth = system-&gt;ldata()-&gt;totalNamesWidth();</span></span>
-<span id="L1613"><span class="lineNum">    1613</span> <span class="tlaGNC">       14250 :     double indent = maxNamesWidth &gt; 0 ? maxNamesWidth + instrumentNameOffset : 0.0;</span></span>
-<span id="L1614"><span class="lineNum">    1614</span> <span class="tlaGNC">       14250 :     if (ctx.state().firstSystem() &amp;&amp; ctx.state().firstSystemIndent()) {</span></span>
-<span id="L1615"><span class="lineNum">    1615</span> <span class="tlaGNC">        5892 :         indent = std::max(indent, system-&gt;styleP(Sid::firstSystemIndentationValue) * system-&gt;mag() - maxBracketsWidth);</span></span>
-<span id="L1616"><span class="lineNum">    1616</span> <span class="tlaGNC">        5892 :         maxNamesWidth = indent - instrumentNameOffset;</span></span>
+<span id="L1610"><span class="lineNum">    1610</span> <span class="tlaGNC">       14366 :     SystemHeaderLayout::setInstrumentNames(system, ctx);</span></span>
+<span id="L1611"><span class="lineNum">    1611</span> <span class="tlaGNC">       14366 :     SystemHeaderLayout::computeInstrumentNamesWidth(system, ctx);</span></span>
+<span id="L1612"><span class="lineNum">    1612</span> <span class="tlaGNC">       14366 :     double maxNamesWidth = system-&gt;ldata()-&gt;totalNamesWidth();</span></span>
+<span id="L1613"><span class="lineNum">    1613</span> <span class="tlaGNC">       14366 :     double indent = maxNamesWidth &gt; 0 ? maxNamesWidth + instrumentNameOffset : 0.0;</span></span>
+<span id="L1614"><span class="lineNum">    1614</span> <span class="tlaGNC">       14366 :     if (ctx.state().firstSystem() &amp;&amp; ctx.state().firstSystemIndent()) {</span></span>
+<span id="L1615"><span class="lineNum">    1615</span> <span class="tlaGNC">        5970 :         indent = std::max(indent, system-&gt;styleP(Sid::firstSystemIndentationValue) * system-&gt;mag() - maxBracketsWidth);</span></span>
+<span id="L1616"><span class="lineNum">    1616</span> <span class="tlaGNC">        5970 :         maxNamesWidth = indent - instrumentNameOffset;</span></span>
 <span id="L1617"><span class="lineNum">    1617</span>              :     }</span>
 <span id="L1618"><span class="lineNum">    1618</span>              : </span>
-<span id="L1619"><span class="lineNum">    1619</span> <span class="tlaGNC">       14250 :     if (muse::RealIsNull(indent)) {</span></span>
-<span id="L1620"><span class="lineNum">    1620</span> <span class="tlaGNC">        6588 :         if (ctx.conf().styleB(Sid::alignSystemToMargin)) {</span></span>
-<span id="L1621"><span class="lineNum">    1621</span> <span class="tlaGNC">        6588 :             system-&gt;setLeftMargin(0.0);</span></span>
+<span id="L1619"><span class="lineNum">    1619</span> <span class="tlaGNC">       14366 :     if (muse::RealIsNull(indent)) {</span></span>
+<span id="L1620"><span class="lineNum">    1620</span> <span class="tlaGNC">        6626 :         if (ctx.conf().styleB(Sid::alignSystemToMargin)) {</span></span>
+<span id="L1621"><span class="lineNum">    1621</span> <span class="tlaGNC">        6626 :             system-&gt;setLeftMargin(0.0);</span></span>
 <span id="L1622"><span class="lineNum">    1622</span>              :         } else {</span>
 <span id="L1623"><span class="lineNum">    1623</span> <span class="tlaUNC tlaBgUNC">           0 :             system-&gt;setLeftMargin(maxBracketsWidth);</span></span>
 <span id="L1624"><span class="lineNum">    1624</span>              :         }</span>
 <span id="L1625"><span class="lineNum">    1625</span>              :     } else {</span>
-<span id="L1626"><span class="lineNum">    1626</span> <span class="tlaGNC tlaBgGNC">        7662 :         system-&gt;setLeftMargin(indent + maxBracketsWidth);</span></span>
+<span id="L1626"><span class="lineNum">    1626</span> <span class="tlaGNC tlaBgGNC">        7740 :         system-&gt;setLeftMargin(indent + maxBracketsWidth);</span></span>
 <span id="L1627"><span class="lineNum">    1627</span>              :     }</span>
 <span id="L1628"><span class="lineNum">    1628</span>              : }</span>
         </pre>

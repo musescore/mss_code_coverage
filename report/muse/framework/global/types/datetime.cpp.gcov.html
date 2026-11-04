@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -92,17 +92,17 @@
 <span id="L34"><span class="lineNum">      34</span>              : // ==================================</span>
 <span id="L35"><span class="lineNum">      35</span>              : // Format</span>
 <span id="L36"><span class="lineNum">      36</span>              : // ==================================</span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC tlaBgGNC">        2380 : static Date dateFromTM(const std::tm&amp; tm)</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC tlaBgGNC">        2394 : static Date dateFromTM(const std::tm&amp; tm)</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : {</span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">        2380 :     return Date(tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">        2394 :     return Date(tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday);</span></span>
 <span id="L40"><span class="lineNum">      40</span>              : }</span>
 <span id="L41"><span class="lineNum">      41</span>              : </span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">        2161 : static void toTM(std::tm&amp; tm, const Date&amp; d)</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">        2175 : static void toTM(std::tm&amp; tm, const Date&amp; d)</span></span>
 <span id="L43"><span class="lineNum">      43</span>              : {</span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">        2161 :     tm.tm_year = std::max(d.year() - 1900, 0);</span></span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">        2161 :     tm.tm_mon = std::max(d.month() - 1, 0);</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">        2161 :     tm.tm_mday = std::max(d.day(), 1);</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        2161 : }</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">        2175 :     tm.tm_year = std::max(d.year() - 1900, 0);</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">        2175 :     tm.tm_mon = std::max(d.month() - 1, 0);</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">        2175 :     tm.tm_mday = std::max(d.day(), 1);</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        2175 : }</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : </span>
 <span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">         181 : static Time timeFromTM(const std::tm&amp; tm)</span></span>
 <span id="L50"><span class="lineNum">      50</span>              : {</span>
@@ -138,15 +138,15 @@
 <span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">           4 :     return String::fromUtf8(mbstr);</span></span>
 <span id="L81"><span class="lineNum">      81</span>              : }</span>
 <span id="L82"><span class="lineNum">      82</span>              : </span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">        2155 : static String formatDate(const Date&amp; d, const char* fmt)</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">        2169 : static String formatDate(const Date&amp; d, const char* fmt)</span></span>
 <span id="L84"><span class="lineNum">      84</span>              : {</span>
 <span id="L85"><span class="lineNum">      85</span>              :     std::tm tm;</span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">        2155 :     toTM(tm, d);</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">        2169 :     toTM(tm, d);</span></span>
 <span id="L87"><span class="lineNum">      87</span>              : </span>
 <span id="L88"><span class="lineNum">      88</span>              :     char mbstr[100];</span>
-<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">        2155 :     std::strftime(mbstr, sizeof(mbstr), fmt, &amp;tm);</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">        2169 :     std::strftime(mbstr, sizeof(mbstr), fmt, &amp;tm);</span></span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">        4310 :     return String::fromUtf8(mbstr);</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">        4338 :     return String::fromUtf8(mbstr);</span></span>
 <span id="L92"><span class="lineNum">      92</span>              : }</span>
 <span id="L93"><span class="lineNum">      93</span>              : </span>
 <span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">           2 : static String formatDateTime(const DateTime&amp; dt, const char* fmt)</span></span>
@@ -163,29 +163,29 @@
 <span id="L105"><span class="lineNum">     105</span>              : // ==================================</span>
 <span id="L106"><span class="lineNum">     106</span>              : // Date</span>
 <span id="L107"><span class="lineNum">     107</span>              : // ==================================</span>
-<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">        2573 : Date::Date(int y, int m, int d)</span></span>
-<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">        2573 :     : m_year(y), m_month(m), m_day(d)</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">        2587 : Date::Date(int y, int m, int d)</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">        2587 :     : m_year(y), m_month(m), m_day(d)</span></span>
 <span id="L110"><span class="lineNum">     110</span>              : {</span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        2573 : }</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        2587 : }</span></span>
 <span id="L112"><span class="lineNum">     112</span>              : </span>
 <span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">         181 : bool Date::isNull() const</span></span>
 <span id="L114"><span class="lineNum">     114</span>              : {</span>
 <span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">         181 :     return m_year == 0 &amp;&amp; m_month == 0 &amp;&amp; m_day == 0;</span></span>
 <span id="L116"><span class="lineNum">     116</span>              : }</span>
 <span id="L117"><span class="lineNum">     117</span>              : </span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">        2165 : int Date::year() const</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">        2179 : int Date::year() const</span></span>
 <span id="L119"><span class="lineNum">     119</span>              : {</span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">        2165 :     return m_year;</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">        2179 :     return m_year;</span></span>
 <span id="L121"><span class="lineNum">     121</span>              : }</span>
 <span id="L122"><span class="lineNum">     122</span>              : </span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">        2165 : int Date::month() const</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">        2179 : int Date::month() const</span></span>
 <span id="L124"><span class="lineNum">     124</span>              : {</span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">        2165 :     return m_month;</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">        2179 :     return m_month;</span></span>
 <span id="L126"><span class="lineNum">     126</span>              : }</span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">        2161 : int Date::day() const</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">        2175 : int Date::day() const</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : {</span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">        2161 :     return m_day;</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">        2175 :     return m_day;</span></span>
 <span id="L131"><span class="lineNum">     131</span>              : }</span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
 <span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">         179 : int64_t Date::daysTo(const Date&amp; d) const</span></span>
@@ -209,29 +209,29 @@
 <span id="L151"><span class="lineNum">     151</span> <span class="tlaUNC tlaBgUNC">           0 :     return 0;</span></span>
 <span id="L152"><span class="lineNum">     152</span>              : }</span>
 <span id="L153"><span class="lineNum">     153</span>              : </span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC tlaBgGNC">        2199 : Date Date::currentDate()</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC tlaBgGNC">        2213 : Date Date::currentDate()</span></span>
 <span id="L155"><span class="lineNum">     155</span>              : {</span>
 <span id="L156"><span class="lineNum">     156</span>              :     using namespace std::chrono;</span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">        2199 :     milliseconds ms_d = duration_cast&lt; milliseconds &gt;(system_clock::now().time_since_epoch());</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">        2213 :     milliseconds ms_d = duration_cast&lt; milliseconds &gt;(system_clock::now().time_since_epoch());</span></span>
 <span id="L158"><span class="lineNum">     158</span>              : </span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">        2199 :     std::time_t sec = static_cast&lt;std::time_t&gt;(ms_d.count() / 1000);</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">        2213 :     std::time_t sec = static_cast&lt;std::time_t&gt;(ms_d.count() / 1000);</span></span>
 <span id="L160"><span class="lineNum">     160</span>              :     std::tm tm;</span>
 <span id="L161"><span class="lineNum">     161</span>              : #ifdef WIN32</span>
 <span id="L162"><span class="lineNum">     162</span>              :     bool err = localtime_s(&amp;tm, &amp;sec) != 0;</span>
 <span id="L163"><span class="lineNum">     163</span>              : #else</span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">        2199 :     bool err = localtime_r(&amp;sec, &amp;tm) == nullptr;</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">        2213 :     bool err = localtime_r(&amp;sec, &amp;tm) == nullptr;</span></span>
 <span id="L165"><span class="lineNum">     165</span>              : #endif</span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">        2199 :     assert(!err);</span></span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">        2199 :     if (err) {</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">        2213 :     assert(!err);</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">        2213 :     if (err) {</span></span>
 <span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC tlaBgUNC">           0 :         return Date();</span></span>
 <span id="L169"><span class="lineNum">     169</span>              :     }</span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC tlaBgGNC">        2199 :     return dateFromTM(tm);</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC tlaBgGNC">        2213 :     return dateFromTM(tm);</span></span>
 <span id="L171"><span class="lineNum">     171</span>              : }</span>
 <span id="L172"><span class="lineNum">     172</span>              : </span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">        2155 : String Date::toString(DateFormat format) const</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">        2169 : String Date::toString(DateFormat format) const</span></span>
 <span id="L174"><span class="lineNum">     174</span>              : {</span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">        2155 :     switch (format) {</span></span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">        2154 :     case DateFormat::ISODate:           return formatDate(*this, &quot;%Y-%m-%d&quot;);</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">        2169 :     switch (format) {</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">        2168 :     case DateFormat::ISODate:           return formatDate(*this, &quot;%Y-%m-%d&quot;);</span></span>
 <span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">           1 :     case DateFormat::LocaleShortFormat: return formatDate(*this, &quot;%x&quot;);</span></span>
 <span id="L178"><span class="lineNum">     178</span>              :     }</span>
 <span id="L179"><span class="lineNum">     179</span> <span class="tlaUNC tlaBgUNC">           0 :     return String();</span></span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -168,15 +168,15 @@
 <span id="L110"><span class="lineNum">     110</span>              : ///    Check that voices &gt; 1 contains less than measure duration</span>
 <span id="L111"><span class="lineNum">     111</span>              : //---------------------------------------------------------</span>
 <span id="L112"><span class="lineNum">     112</span>              : </span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC tlaBgGNC">          54 : Ret MasterScore::sanityCheck()</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC tlaBgGNC">          63 : Ret MasterScore::sanityCheck()</span></span>
 <span id="L114"><span class="lineNum">     114</span>              : {</span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">          54 :     std::string accumulatedErrors;</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">          63 :     std::string accumulatedErrors;</span></span>
 <span id="L116"><span class="lineNum">     116</span>              : </span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">         108 :     for (Score* score : scoreList()) {</span></span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">          54 :         Ret ret = score-&gt;sanityCheckLocal();</span></span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          54 :         if (ret) {</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">         126 :     for (Score* score : scoreList()) {</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">          63 :         Ret ret = score-&gt;sanityCheckLocal();</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          63 :         if (ret) {</span></span>
 <span id="L120"><span class="lineNum">     120</span>              :             // everything is fine in this part, let's continue</span>
-<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">          54 :             continue;</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">          63 :             continue;</span></span>
 <span id="L122"><span class="lineNum">     122</span>              :         }</span>
 <span id="L123"><span class="lineNum">     123</span>              : </span>
 <span id="L124"><span class="lineNum">     124</span> <span class="tlaUNC tlaBgUNC">           0 :         if (!accumulatedErrors.empty()) {</span></span>
@@ -184,20 +184,20 @@
 <span id="L126"><span class="lineNum">     126</span>              :         }</span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
 <span id="L128"><span class="lineNum">     128</span> <span class="tlaUNC">           0 :         accumulatedErrors += ret.text();</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC tlaBgGNC">         108 :     }</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC tlaBgGNC">         126 :     }</span></span>
 <span id="L130"><span class="lineNum">     130</span>              : </span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          54 :     if (accumulatedErrors.empty()) {</span></span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">          54 :         return muse::make_ok();</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          63 :     if (accumulatedErrors.empty()) {</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">          63 :         return muse::make_ok();</span></span>
 <span id="L133"><span class="lineNum">     133</span>              :     }</span>
 <span id="L134"><span class="lineNum">     134</span> <span class="tlaUNC tlaBgUNC">           0 :     return Ret(static_cast&lt;int&gt;(Err::FileCorrupted), accumulatedErrors);</span></span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC tlaBgGNC">          54 : }</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC tlaBgGNC">          63 : }</span></span>
 <span id="L136"><span class="lineNum">     136</span>              : </span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">          54 : Ret Score::sanityCheckLocal()</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">          63 : Ret Score::sanityCheckLocal()</span></span>
 <span id="L138"><span class="lineNum">     138</span>              : {</span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">          56 :     TRACEFUNC;</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">          65 :     TRACEFUNC;</span></span>
 <span id="L140"><span class="lineNum">     140</span>              : </span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">          54 :     StringList errors;</span></span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">          54 :     int mNumber = 1;</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">          63 :     StringList errors;</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">          63 :     int mNumber = 1;</span></span>
 <span id="L143"><span class="lineNum">     143</span>              : </span>
 <span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC tlaBgUNC">           0 :     auto excerptInfo = [this]() {</span></span>
 <span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC">           0 :         if (isMaster()) {</span></span>
@@ -206,53 +206,53 @@
 <span id="L148"><span class="lineNum">     148</span>              : </span>
 <span id="L149"><span class="lineNum">     149</span>              :         //: %1 is the name of a part score.</span>
 <span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 :         return muse::mtrc(&quot;engraving&quot;, &quot;Part score: %1&quot;).arg(name());</span></span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC tlaBgGNC">          54 :     };</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC tlaBgGNC">          63 :     };</span></span>
 <span id="L152"><span class="lineNum">     152</span>              : </span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">          54 :     setHasCorruptedMeasures(false);</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">          63 :     setHasCorruptedMeasures(false);</span></span>
 <span id="L154"><span class="lineNum">     154</span>              : </span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">        1164 :     for (Measure* m = firstMeasure(); m; m = m-&gt;nextMeasure()) {</span></span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">        1110 :         Fraction mLen = m-&gt;ticks();</span></span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">        1110 :         size_t endStaff  = staves().size();</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">        1238 :     for (Measure* m = firstMeasure(); m; m = m-&gt;nextMeasure()) {</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">        1175 :         Fraction mLen = m-&gt;ticks();</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">        1175 :         size_t endStaff  = staves().size();</span></span>
 <span id="L158"><span class="lineNum">     158</span>              : </span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">        2238 :         for (size_t staffIdx = 0; staffIdx &lt; endStaff; ++staffIdx) {</span></span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        1128 :             Rest* fmrest0 = nullptr; // full measure rest in voice 0</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        4512 :             Fraction voices[VOICES];</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">        2376 :         for (size_t staffIdx = 0; staffIdx &lt; endStaff; ++staffIdx) {</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        1201 :             Rest* fmrest0 = nullptr; // full measure rest in voice 0</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        4804 :             Fraction voices[VOICES];</span></span>
 <span id="L162"><span class="lineNum">     162</span>              : </span>
-<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">        1128 :             m-&gt;setCorrupted(staffIdx, false);</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">        1201 :             m-&gt;setCorrupted(staffIdx, false);</span></span>
 <span id="L164"><span class="lineNum">     164</span>              : </span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">        6959 :             for (Segment* s = m-&gt;first(SegmentType::ChordRest); s; s = s-&gt;next(SegmentType::ChordRest)) {</span></span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">       29155 :                 for (voice_idx_t v = 0; v &lt; VOICES; ++v) {</span></span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">       23324 :                     EngravingItem* element = s-&gt;element(staffIdx * VOICES + v);</span></span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">       23324 :                     if (!element) {</span></span>
-<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">       17522 :                         continue;</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">        7359 :             for (Segment* s = m-&gt;first(SegmentType::ChordRest); s; s = s-&gt;next(SegmentType::ChordRest)) {</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">       30790 :                 for (voice_idx_t v = 0; v &lt; VOICES; ++v) {</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">       24632 :                     EngravingItem* element = s-&gt;element(staffIdx * VOICES + v);</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">       24632 :                     if (!element) {</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">       18530 :                         continue;</span></span>
 <span id="L170"><span class="lineNum">     170</span>              :                     }</span>
 <span id="L171"><span class="lineNum">     171</span>              : </span>
-<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">        5802 :                     ChordRest* cr = toChordRest(element);</span></span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">        5802 :                     voices[v] += cr-&gt;actualTicks();</span></span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">        5802 :                     if (v == 0 &amp;&amp; cr-&gt;isRest()) {</span></span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">        1706 :                         Rest* r = toRest(cr);</span></span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">        1706 :                         if (r-&gt;durationType().isMeasure()) {</span></span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">         562 :                             fmrest0 = r;</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">        6102 :                     ChordRest* cr = toChordRest(element);</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">        6102 :                     voices[v] += cr-&gt;actualTicks();</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">        6102 :                     if (v == 0 &amp;&amp; cr-&gt;isRest()) {</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">        1796 :                         Rest* r = toRest(cr);</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">        1796 :                         if (r-&gt;durationType().isMeasure()) {</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">         596 :                             fmrest0 = r;</span></span>
 <span id="L178"><span class="lineNum">     178</span>              :                         }</span>
 <span id="L179"><span class="lineNum">     179</span>              :                     }</span>
 <span id="L180"><span class="lineNum">     180</span>              :                 }</span>
 <span id="L181"><span class="lineNum">     181</span>              :             }</span>
 <span id="L182"><span class="lineNum">     182</span>              : </span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">        1128 :             bool checkRepeats = m-&gt;isMeasureRepeatGroup(staffIdx);</span></span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">        1128 :             bool repeatsIsValid = true;</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">        1201 :             bool checkRepeats = m-&gt;isMeasureRepeatGroup(staffIdx);</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">        1201 :             bool repeatsIsValid = true;</span></span>
 <span id="L185"><span class="lineNum">     185</span>              : </span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">        1128 :             if (checkRepeats) {</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">        1201 :             if (checkRepeats) {</span></span>
 <span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC tlaBgUNC">           0 :                 repeatsIsValid = m-&gt;measureRepeatElement(staffIdx) != nullptr;</span></span>
 <span id="L188"><span class="lineNum">     188</span>              :             }</span>
 <span id="L189"><span class="lineNum">     189</span>              : </span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">        1128 :             if (!repeatsIsValid) {</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">        1201 :             if (!repeatsIsValid) {</span></span>
 <span id="L191"><span class="lineNum">     191</span> <span class="tlaUNC tlaBgUNC">           0 :                 errors &lt;&lt; muse::mtrc(&quot;engraving&quot;, &quot;&lt;b&gt;Corrupted measure&lt;/b&gt;: %1, measure %2, staff %3.&quot;)</span></span>
 <span id="L192"><span class="lineNum">     192</span> <span class="tlaUNC">           0 :                     .arg(excerptInfo()).arg(mNumber).arg(staffIdx + 1);</span></span>
 <span id="L193"><span class="lineNum">     193</span> <span class="tlaUNC">           0 :                 m-&gt;setCorrupted(staffIdx, true);</span></span>
 <span id="L194"><span class="lineNum">     194</span> <span class="tlaUNC">           0 :                 setHasCorruptedMeasures(true);</span></span>
 <span id="L195"><span class="lineNum">     195</span>              :             }</span>
 <span id="L196"><span class="lineNum">     196</span>              : </span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC tlaBgGNC">        1128 :             if (voices[0] != mLen) {</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC tlaBgGNC">        1201 :             if (voices[0] != mLen) {</span></span>
 <span id="L198"><span class="lineNum">     198</span>              :                 //: %1 describes in which score the corruption is (either `Full score` or `&quot;[part name]&quot; part score`)</span>
 <span id="L199"><span class="lineNum">     199</span> <span class="tlaUNC tlaBgUNC">           0 :                 errors &lt;&lt; muse::mtrc(&quot;engraving&quot;, &quot;&lt;b&gt;Incomplete measure&lt;/b&gt;: %1, measure %2, staff %3. Found: %4. Expected: %5.&quot;)</span></span>
 <span id="L200"><span class="lineNum">     200</span> <span class="tlaUNC">           0 :                     .arg(excerptInfo()).arg(mNumber).arg(staffIdx + 1).arg(voices[0].toString(), mLen.toString());</span></span>
@@ -265,8 +265,8 @@
 <span id="L207"><span class="lineNum">     207</span>              :                 }</span>
 <span id="L208"><span class="lineNum">     208</span>              :             }</span>
 <span id="L209"><span class="lineNum">     209</span>              : </span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC tlaBgGNC">        4512 :             for (voice_idx_t v = 1; v &lt; VOICES; ++v) {</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">        3384 :                 if (voices[v] &gt; mLen) {</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC tlaBgGNC">        4804 :             for (voice_idx_t v = 1; v &lt; VOICES; ++v) {</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">        3603 :                 if (voices[v] &gt; mLen) {</span></span>
 <span id="L212"><span class="lineNum">     212</span>              :                     //: %1 describes in which score the corruption is (either `Full score` or `&quot;[part name]&quot; part score`)</span>
 <span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC tlaBgUNC">           0 :                     errors &lt;&lt; muse::mtrc(&quot;engraving&quot;, &quot;&lt;b&gt;Voice too long&lt;/b&gt;: %1, measure %2, staff %3, voice %4. Found: %5. Expected: %6.&quot;)</span></span>
 <span id="L214"><span class="lineNum">     214</span> <span class="tlaUNC">           0 :                         .arg(excerptInfo()).arg(mNumber).arg(staffIdx + 1).arg(v + 1).arg(voices[v].toString(), mLen.toString());</span></span>
@@ -275,9 +275,9 @@
 <span id="L217"><span class="lineNum">     217</span>              :                 }</span>
 <span id="L218"><span class="lineNum">     218</span>              :             }</span>
 <span id="L219"><span class="lineNum">     219</span>              : </span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC tlaBgGNC">        8752 :             for (Segment* s = m-&gt;first(); s; s = s-&gt;next()) {</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        7624 :                 const Fraction rtick = s-&gt;rtick();</span></span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        7624 :                 if ((rtick.negative() || rtick &gt; mLen) &amp;&amp; s-&gt;hasAnnotationOrElement(staffIdx)) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC tlaBgGNC">        9278 :             for (Segment* s = m-&gt;first(); s; s = s-&gt;next()) {</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        8077 :                 const Fraction rtick = s-&gt;rtick();</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        8077 :                 if ((rtick.negative() || rtick &gt; mLen) &amp;&amp; s-&gt;hasAnnotationOrElement(staffIdx)) {</span></span>
 <span id="L223"><span class="lineNum">     223</span>              :                     //: %1 describes in which score the corruption is (either `Full score` or `&quot;[part name]&quot; part score`)</span>
 <span id="L224"><span class="lineNum">     224</span> <span class="tlaUNC tlaBgUNC">           0 :                     errors &lt;&lt; muse::mtrc(&quot;engraving&quot;,</span></span>
 <span id="L225"><span class="lineNum">     225</span>              :                                          &quot;&lt;b&gt;Element outside measure&lt;/b&gt;: %1, measure %2, staff %3. Found at: %4. Expected between 0 and %5.&quot;)</span>
@@ -289,15 +289,15 @@
 <span id="L231"><span class="lineNum">     231</span>              :             }</span>
 <span id="L232"><span class="lineNum">     232</span>              :         }</span>
 <span id="L233"><span class="lineNum">     233</span>              : </span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC tlaBgGNC">        1110 :         mNumber++;</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC tlaBgGNC">        1175 :         mNumber++;</span></span>
 <span id="L235"><span class="lineNum">     235</span>              :     }</span>
 <span id="L236"><span class="lineNum">     236</span>              : </span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">          54 :     if (errors.empty()) {</span></span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">          54 :         return muse::make_ok();</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">          63 :     if (errors.empty()) {</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">          63 :         return muse::make_ok();</span></span>
 <span id="L239"><span class="lineNum">     239</span>              :     }</span>
 <span id="L240"><span class="lineNum">     240</span>              : </span>
 <span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC tlaBgUNC">           0 :     return Ret(static_cast&lt;int&gt;(Err::FileCorrupted), errors.join(u&quot;\n&quot;).toStdString());</span></span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC tlaBgGNC">          54 : }</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC tlaBgGNC">          63 : }</span></span>
 <span id="L243"><span class="lineNum">     243</span>              : </span>
 <span id="L244"><span class="lineNum">     244</span>              : //---------------------------------------------------------</span>
 <span id="L245"><span class="lineNum">     245</span>              : //   checkKeys</span>
@@ -362,35 +362,35 @@
 <span id="L304"><span class="lineNum">     304</span>              : //    with invisible rests</span>
 <span id="L305"><span class="lineNum">     305</span>              : //---------------------------------------------------------</span>
 <span id="L306"><span class="lineNum">     306</span>              : </span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">       17186 : void Measure::checkMeasure(staff_idx_t staffIdx, bool useGapRests)</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">       17271 : void Measure::checkMeasure(staff_idx_t staffIdx, bool useGapRests)</span></span>
 <span id="L308"><span class="lineNum">     308</span>              : {</span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">       17186 :     if (isMMRest()) {</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">       17271 :     if (isMMRest()) {</span></span>
 <span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">          62 :         return;</span></span>
 <span id="L311"><span class="lineNum">     311</span>              :     }</span>
 <span id="L312"><span class="lineNum">     312</span>              : </span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">       17124 :     track_idx_t strack = staffIdx * VOICES;</span></span>
-<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">       17124 :     track_idx_t dtrack = strack + (hasVoices(staffIdx) ? VOICES : 1);</span></span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">       17124 :     Fraction stretch = score()-&gt;staff(staffIdx)-&gt;timeStretch(tick());</span></span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">       17124 :     Fraction f       = ticks() * stretch;</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">       17209 :     track_idx_t strack = staffIdx * VOICES;</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">       17209 :     track_idx_t dtrack = strack + (hasVoices(staffIdx) ? VOICES : 1);</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">       17209 :     Fraction stretch = score()-&gt;staff(staffIdx)-&gt;timeStretch(tick());</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">       17209 :     Fraction f       = ticks() * stretch;</span></span>
 <span id="L317"><span class="lineNum">     317</span>              : </span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">       35439 :     for (track_idx_t track = strack; track &lt; dtrack; track++) {</span></span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">       18315 :         Fraction expectedPos = Fraction(0, 1);</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">       18315 :         Fraction currentPos  = Fraction(0, 1);</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">       35609 :     for (track_idx_t track = strack; track &lt; dtrack; track++) {</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">       18400 :         Fraction expectedPos = Fraction(0, 1);</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">       18400 :         Fraction currentPos  = Fraction(0, 1);</span></span>
 <span id="L321"><span class="lineNum">     321</span>              : </span>
-<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">       56642 :         for (Segment* seg = first(SegmentType::ChordRest); seg; seg = seg-&gt;next(SegmentType::ChordRest)) {</span></span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">       38329 :             EngravingItem* e = seg-&gt;element(track);</span></span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">       38329 :             if (!e) {</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">       57007 :         for (Segment* seg = first(SegmentType::ChordRest); seg; seg = seg-&gt;next(SegmentType::ChordRest)) {</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">       38609 :             EngravingItem* e = seg-&gt;element(track);</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">       38609 :             if (!e) {</span></span>
 <span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">        7345 :                 continue;</span></span>
 <span id="L326"><span class="lineNum">     326</span>              :             }</span>
 <span id="L327"><span class="lineNum">     327</span>              : </span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">       30984 :             ChordRest* cr = toChordRest(e);</span></span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">       30984 :             currentPos    = seg-&gt;rtick() * stretch;</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">       31264 :             ChordRest* cr = toChordRest(e);</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">       31264 :             currentPos    = seg-&gt;rtick() * stretch;</span></span>
 <span id="L330"><span class="lineNum">     330</span>              : </span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">       30984 :             if (currentPos &lt; expectedPos) {</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">       31264 :             if (currentPos &lt; expectedPos) {</span></span>
 <span id="L332"><span class="lineNum">     332</span>              :                 LOGN(&quot;in measure overrun %6d at %d-%d track %zu&quot;, tick().ticks(),</span>
 <span id="L333"><span class="lineNum">     333</span>              :                      (currentPos / stretch).ticks(), (expectedPos / stretch).ticks(), track);</span>
 <span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">           2 :                 break;</span></span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">       30982 :             } else if (currentPos &gt; expectedPos) {</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">       31262 :             } else if (currentPos &gt; expectedPos) {</span></span>
 <span id="L336"><span class="lineNum">     336</span>              :                 LOGN(&quot;in measure underrun %6d at %d-%d track %zu&quot;, tick().ticks(),</span>
 <span id="L337"><span class="lineNum">     337</span>              :                      (currentPos / stretch).ticks(), (expectedPos / stretch).ticks(), track);</span>
 <span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">          21 :                 fillGap(expectedPos, currentPos - expectedPos, track, stretch, useGapRests);</span></span>
@@ -399,21 +399,21 @@
 <span id="L341"><span class="lineNum">     341</span>              :                 }</span>
 <span id="L342"><span class="lineNum">     342</span>              :             }</span>
 <span id="L343"><span class="lineNum">     343</span>              : </span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC tlaBgGNC">       30982 :             DurationElement* de = cr;</span></span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">       30982 :             Tuplet* tuplet = cr-&gt;topTuplet();</span></span>
-<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">       30982 :             if (tuplet) {</span></span>
-<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">         519 :                 seg = skipTuplet(tuplet);</span></span>
-<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">         519 :                 de  = tuplet;</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC tlaBgGNC">       31262 :             DurationElement* de = cr;</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">       31262 :             Tuplet* tuplet = cr-&gt;topTuplet();</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">       31262 :             if (tuplet) {</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">         533 :                 seg = skipTuplet(tuplet);</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">         533 :                 de  = tuplet;</span></span>
 <span id="L349"><span class="lineNum">     349</span>              :             }</span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">       30982 :             expectedPos = currentPos + de-&gt;ticks();</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">       31262 :             expectedPos = currentPos + de-&gt;ticks();</span></span>
 <span id="L351"><span class="lineNum">     351</span>              :         }</span>
 <span id="L352"><span class="lineNum">     352</span>              : </span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">       18315 :         if (f &gt; expectedPos) {</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">       18400 :         if (f &gt; expectedPos) {</span></span>
 <span id="L354"><span class="lineNum">     354</span>              :             // don't fill empty voices (except for the 1st)</span>
 <span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">        1352 :             if (expectedPos.isNotZero() || track2voice(track) == 0) {</span></span>
 <span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">         585 :                 fillGap(expectedPos, f - expectedPos, track, stretch);</span></span>
 <span id="L357"><span class="lineNum">     357</span>              :             }</span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">       16963 :         } else if (f &lt; expectedPos) {</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">       17048 :         } else if (f &lt; expectedPos) {</span></span>
 <span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">           1 :             LOGD(&quot;measure overrun %6d, %d &gt; %d, track %zu&quot;, tick().ticks(), expectedPos.ticks(), f.ticks(), track);</span></span>
 <span id="L360"><span class="lineNum">     360</span>              :         }</span>
 <span id="L361"><span class="lineNum">     361</span>              :     }</span>

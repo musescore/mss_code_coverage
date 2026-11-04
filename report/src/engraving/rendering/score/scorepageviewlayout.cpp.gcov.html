@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -100,70 +100,70 @@
 <span id="L42"><span class="lineNum">      42</span>              : using namespace mu::engraving;</span>
 <span id="L43"><span class="lineNum">      43</span>              : using namespace mu::engraving::rendering::score;</span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC tlaBgGNC">        3922 : void ScorePageViewLayout::initLayoutContext(const Score* score, LayoutContext&amp; ctx, const Fraction&amp; stick, const Fraction&amp; etick)</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC tlaBgGNC">        3963 : void ScorePageViewLayout::initLayoutContext(const Score* score, LayoutContext&amp; ctx, const Fraction&amp; stick, const Fraction&amp; etick)</span></span>
 <span id="L46"><span class="lineNum">      46</span>              : {</span>
 <span id="L47"><span class="lineNum">      47</span>              :     LAYOUT_CALL();</span>
 <span id="L48"><span class="lineNum">      48</span>              : </span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        3922 :     LayoutState&amp; state = ctx.mutState();</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        3963 :     LayoutState&amp; state = ctx.mutState();</span></span>
 <span id="L50"><span class="lineNum">      50</span>              : </span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">        3922 :     state.setEndTick(etick);</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">        3963 :     state.setEndTick(etick);</span></span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        3922 :     MeasureBase* m = nullptr;</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        3963 :     MeasureBase* m = nullptr;</span></span>
 <span id="L54"><span class="lineNum">      54</span>              :     {</span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">        3922 :         m = score-&gt;tick2measure(stick);</span></span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">        3922 :         if (m == nullptr) {</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">        3963 :         m = score-&gt;tick2measure(stick);</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">        3963 :         if (m == nullptr) {</span></span>
 <span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">           1 :             m = score-&gt;first();</span></span>
 <span id="L58"><span class="lineNum">      58</span>              :         }</span>
 <span id="L59"><span class="lineNum">      59</span>              : </span>
 <span id="L60"><span class="lineNum">      60</span>              :         // start layout one measure earlier to handle clefs and cautionary elements</span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        3922 :         if (m-&gt;prevMeasureMM()) {</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">         174 :             m = m-&gt;prevMeasureMM();</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">        3748 :         } else if (m-&gt;prev()) {</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        2132 :             m = m-&gt;prev();</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        3963 :         if (m-&gt;prevMeasureMM()) {</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">         178 :             m = m-&gt;prevMeasureMM();</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">        3785 :         } else if (m-&gt;prev()) {</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        2134 :             m = m-&gt;prev();</span></span>
 <span id="L65"><span class="lineNum">      65</span>              :         }</span>
 <span id="L66"><span class="lineNum">      66</span>              : </span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">        4044 :         while (!m-&gt;isMeasure() &amp;&amp; m-&gt;prev()) {</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">        4085 :         while (!m-&gt;isMeasure() &amp;&amp; m-&gt;prev()) {</span></span>
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">         122 :             m = m-&gt;prev();</span></span>
 <span id="L69"><span class="lineNum">      69</span>              :         }</span>
 <span id="L70"><span class="lineNum">      70</span>              : </span>
 <span id="L71"><span class="lineNum">      71</span>              :         // if the first measure of the score is part of a multi measure rest</span>
 <span id="L72"><span class="lineNum">      72</span>              :         // m-&gt;system() will return a nullptr. We need to find the multi measure</span>
 <span id="L73"><span class="lineNum">      73</span>              :         // rest which replaces the measure range</span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">        3922 :         if (!m-&gt;system() &amp;&amp; m-&gt;isMeasure() &amp;&amp; toMeasure(m)-&gt;hasMMRest()) {</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">        3963 :         if (!m-&gt;system() &amp;&amp; m-&gt;isMeasure() &amp;&amp; toMeasure(m)-&gt;hasMMRest()) {</span></span>
 <span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">           3 :             LOGD(&quot;  don’t start with mmrest&quot;);</span></span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">           3 :             m = toMeasure(m)-&gt;mmRest();</span></span>
 <span id="L77"><span class="lineNum">      77</span>              :         }</span>
 <span id="L78"><span class="lineNum">      78</span>              :     }</span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">        3922 :     if (!state.isLayoutAll() &amp;&amp; m-&gt;system()) {</span></span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">         579 :         System* system = m-&gt;system();</span></span>
-<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">         579 :         system_idx_t systemIndex = muse::indexOf(score-&gt;systems(), system);</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">        3963 :     if (!state.isLayoutAll() &amp;&amp; m-&gt;system()) {</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">         595 :         System* system = m-&gt;system();</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">         595 :         system_idx_t systemIndex = muse::indexOf(score-&gt;systems(), system);</span></span>
 <span id="L83"><span class="lineNum">      83</span>              : </span>
 <span id="L84"><span class="lineNum">      84</span>              :         // set current system</span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">         579 :         state.setStartTick(system-&gt;measures().front()-&gt;tick());</span></span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">         579 :         state.setCurSystem(system);</span></span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">         579 :         state.setSystemList(muse::mid(score-&gt;systems(), systemIndex));</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">         595 :         state.setStartTick(system-&gt;measures().front()-&gt;tick());</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">         595 :         state.setCurSystem(system);</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">         595 :         state.setSystemList(muse::mid(score-&gt;systems(), systemIndex));</span></span>
 <span id="L88"><span class="lineNum">      88</span>              : </span>
 <span id="L89"><span class="lineNum">      89</span>              :         // set current page</span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">         579 :         state.setPage(system-&gt;page());</span></span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">         579 :         page_idx_t pageIdx = score-&gt;pageIdx(state.page());</span></span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">         579 :         if (pageIdx == muse::nidx) {</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">         595 :         state.setPage(system-&gt;page());</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">         595 :         page_idx_t pageIdx = score-&gt;pageIdx(state.page());</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">         595 :         if (pageIdx == muse::nidx) {</span></span>
 <span id="L93"><span class="lineNum">      93</span> <span class="tlaUNC tlaBgUNC">           0 :             pageIdx = 0;</span></span>
 <span id="L94"><span class="lineNum">      94</span>              :         }</span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC tlaBgGNC">         579 :         state.setPageIdx(pageIdx);</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC tlaBgGNC">         595 :         state.setPageIdx(pageIdx);</span></span>
 <span id="L96"><span class="lineNum">      96</span>              : </span>
-<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">         579 :         MeasureBase* nextMeasure = nullptr;</span></span>
-<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">         579 :         if (systemIndex == 0) {</span></span>
-<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">         464 :             nextMeasure = ctx.conf().isShowVBox() ? score-&gt;first() : score-&gt;firstMeasure();</span></span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">         595 :         MeasureBase* nextMeasure = nullptr;</span></span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">         595 :         if (systemIndex == 0) {</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">         480 :             nextMeasure = ctx.conf().isShowVBox() ? score-&gt;first() : score-&gt;firstMeasure();</span></span>
 <span id="L100"><span class="lineNum">     100</span>              :         } else {</span>
 <span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">         115 :             System* prevSystem = score-&gt;systems().at(systemIndex - 1);</span></span>
 <span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">         115 :             nextMeasure = prevSystem-&gt;measures().back()-&gt;next();</span></span>
 <span id="L103"><span class="lineNum">     103</span>              :         }</span>
-<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">         579 :         state.setNextMeasure(nextMeasure);</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">         595 :         state.setNextMeasure(nextMeasure);</span></span>
 <span id="L105"><span class="lineNum">     105</span>              : </span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">         579 :         if (!state.nextMeasure()-&gt;prevMeasure()) {</span></span>
-<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">         540 :             state.setMeasureNumber(0);</span></span>
-<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">         540 :             state.setTick(Fraction(0, 1));</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">         595 :         if (!state.nextMeasure()-&gt;prevMeasure()) {</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">         556 :             state.setMeasureNumber(0);</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">         556 :             state.setTick(Fraction(0, 1));</span></span>
 <span id="L109"><span class="lineNum">     109</span>              :         } else {</span>
 <span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">          39 :             const MeasureBase* mb = state.nextMeasure()-&gt;prev();</span></span>
 <span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">          39 :             if (mb) {</span></span>
@@ -182,22 +182,22 @@
 <span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">          39 :             state.setTick(ctx.state().nextMeasure()-&gt;tick());</span></span>
 <span id="L125"><span class="lineNum">     125</span>              :         }</span>
 <span id="L126"><span class="lineNum">     126</span>              :     } else {</span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">        3343 :         state.setNextMeasure(ctx.conf().isShowVBox() ? score-&gt;first() : score-&gt;firstMeasure());</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">        3368 :         state.setNextMeasure(ctx.conf().isShowVBox() ? score-&gt;first() : score-&gt;firstMeasure());</span></span>
 <span id="L128"><span class="lineNum">     128</span>              :     }</span>
 <span id="L129"><span class="lineNum">     129</span>              : </span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">        3922 :     state.setPrevMeasure(nullptr);</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">        3922 : }</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">        3963 :     state.setPrevMeasure(nullptr);</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">        3963 : }</span></span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">        3922 : void ScorePageViewLayout::prepareScore(Score* score, const LayoutContext&amp; ctx)</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">        3963 : void ScorePageViewLayout::prepareScore(Score* score, const LayoutContext&amp; ctx)</span></span>
 <span id="L134"><span class="lineNum">     134</span>              : {</span>
 <span id="L135"><span class="lineNum">     135</span>              :     LAYOUT_CALL();</span>
 <span id="L136"><span class="lineNum">     136</span>              : </span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">        3922 :     if (!ctx.state().isLayoutAll() &amp;&amp; ctx.state().curSystem()) {</span></span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         579 :         system_idx_t systemIndex = muse::indexOf(score-&gt;systems(), ctx.state().curSystem());</span></span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">         579 :         score-&gt;systems().erase(score-&gt;systems().begin() + systemIndex, score-&gt;systems().end());</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">        3963 :     if (!ctx.state().isLayoutAll() &amp;&amp; ctx.state().curSystem()) {</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         595 :         system_idx_t systemIndex = muse::indexOf(score-&gt;systems(), ctx.state().curSystem());</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">         595 :         score-&gt;systems().erase(score-&gt;systems().begin() + systemIndex, score-&gt;systems().end());</span></span>
 <span id="L140"><span class="lineNum">     140</span>              :     } else {</span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">        6240 :         for (System* s : score-&gt;systems()) {</span></span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">        3256 :             for (Bracket* b : s-&gt;brackets()) {</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">        6282 :         for (System* s : score-&gt;systems()) {</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">        3273 :             for (Bracket* b : s-&gt;brackets()) {</span></span>
 <span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">         359 :                 if (b-&gt;selected()) {</span></span>
 <span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC tlaBgUNC">           0 :                     bool selected = b-&gt;selected();</span></span>
 <span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC">           0 :                     score-&gt;selection().remove(b);</span></span>
@@ -210,35 +210,35 @@
 <span id="L152"><span class="lineNum">     152</span>              :             // and ~System unlinks itself from its page</span>
 <span id="L153"><span class="lineNum">     153</span>              :         }</span>
 <span id="L154"><span class="lineNum">     154</span>              : </span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC tlaBgGNC">       32587 :         for (MeasureBase* mb = score-&gt;first(); mb; mb = mb-&gt;next()) {</span></span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">       29244 :             mb-&gt;setSystem(nullptr);</span></span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">       29244 :             if (mb-&gt;isMeasure() &amp;&amp; toMeasure(mb)-&gt;mmRest()) {</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC tlaBgGNC">       32766 :         for (MeasureBase* mb = score-&gt;first(); mb; mb = mb-&gt;next()) {</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">       29398 :             mb-&gt;setSystem(nullptr);</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">       29398 :             if (mb-&gt;isMeasure() &amp;&amp; toMeasure(mb)-&gt;mmRest()) {</span></span>
 <span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">         111 :                 toMeasure(mb)-&gt;mmRest()-&gt;setSystem(nullptr);</span></span>
 <span id="L159"><span class="lineNum">     159</span>              :             }</span>
 <span id="L160"><span class="lineNum">     160</span>              :         }</span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        3343 :         muse::DeleteAll(score-&gt;systems());</span></span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        3343 :         score-&gt;systems().clear();</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        3368 :         muse::DeleteAll(score-&gt;systems());</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        3368 :         score-&gt;systems().clear();</span></span>
 <span id="L163"><span class="lineNum">     163</span>              : </span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">        3343 :         muse::DeleteAll(score-&gt;pages());</span></span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">        3343 :         score-&gt;pages().clear();</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">        3368 :         muse::DeleteAll(score-&gt;pages());</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">        3368 :         score-&gt;pages().clear();</span></span>
 <span id="L166"><span class="lineNum">     166</span>              :     }</span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">        3922 : }</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">        3963 : }</span></span>
 <span id="L168"><span class="lineNum">     168</span>              : </span>
-<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">        3922 : void ScorePageViewLayout::layoutPageView(Score* score, LayoutContext&amp; ctx, const Fraction&amp; stick, const Fraction&amp; etick)</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">        3963 : void ScorePageViewLayout::layoutPageView(Score* score, LayoutContext&amp; ctx, const Fraction&amp; stick, const Fraction&amp; etick)</span></span>
 <span id="L170"><span class="lineNum">     170</span>              : {</span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">        3937 :     TRACEFUNC;</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">        3978 :     TRACEFUNC;</span></span>
 <span id="L172"><span class="lineNum">     172</span>              : </span>
 <span id="L173"><span class="lineNum">     173</span>              :     LAYOUT_CALL_CLEAR();</span>
 <span id="L174"><span class="lineNum">     174</span>              :     LAYOUT_CALL();</span>
 <span id="L175"><span class="lineNum">     175</span>              : </span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">        3922 :     initLayoutContext(score, ctx, stick, etick);</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">        3963 :     initLayoutContext(score, ctx, stick, etick);</span></span>
 <span id="L177"><span class="lineNum">     177</span>              : </span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">        3922 :     prepareScore(score, ctx);</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">        3963 :     prepareScore(score, ctx);</span></span>
 <span id="L179"><span class="lineNum">     179</span>              : </span>
 <span id="L180"><span class="lineNum">     180</span>              :     //! NOTE Reset pass need anyway</span>
 <span id="L181"><span class="lineNum">     181</span>              : //#ifdef MUE_ENABLE_ENGRAVING_LD_PASSES</span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        3922 :     PassResetLayoutData resetPass;</span></span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">        3922 :     resetPass.run(score, ctx);</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        3963 :     PassResetLayoutData resetPass;</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">        3963 :     resetPass.run(score, ctx);</span></span>
 <span id="L184"><span class="lineNum">     184</span>              : //#endif</span>
 <span id="L185"><span class="lineNum">     185</span>              : </span>
 <span id="L186"><span class="lineNum">     186</span>              : #ifdef MUE_ENABLE_ENGRAVING_LD_PASSES</span>
@@ -248,28 +248,28 @@
 <span id="L190"><span class="lineNum">     190</span>              :     }</span>
 <span id="L191"><span class="lineNum">     191</span>              : #endif</span>
 <span id="L192"><span class="lineNum">     192</span>              : </span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">        3922 :     doLayout(ctx);</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">        3963 :     doLayout(ctx);</span></span>
 <span id="L194"><span class="lineNum">     194</span>              : </span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">        3922 :     layoutFinished(score, ctx);</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">        3963 :     layoutFinished(score, ctx);</span></span>
 <span id="L196"><span class="lineNum">     196</span>              : </span>
 <span id="L197"><span class="lineNum">     197</span>              :     LAYOUT_CALL_PRINT();</span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        3922 : }</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        3963 : }</span></span>
 <span id="L199"><span class="lineNum">     199</span>              : </span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">        3922 : void ScorePageViewLayout::doLayout(LayoutContext&amp; ctx)</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">        3963 : void ScorePageViewLayout::doLayout(LayoutContext&amp; ctx)</span></span>
 <span id="L201"><span class="lineNum">     201</span>              : {</span>
 <span id="L202"><span class="lineNum">     202</span>              :     LAYOUT_CALL();</span>
 <span id="L203"><span class="lineNum">     203</span>              : </span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">        3922 :     LayoutState&amp; state = ctx.mutState();</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        3922 :     MeasureLayout::getNextMeasure(ctx);</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        3922 :     state.setCurSystem(SystemLayout::collectSystem(ctx));</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">        3963 :     LayoutState&amp; state = ctx.mutState();</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        3963 :     MeasureLayout::getNextMeasure(ctx);</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        3963 :     state.setCurSystem(SystemLayout::collectSystem(ctx));</span></span>
 <span id="L207"><span class="lineNum">     207</span>              : </span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        3922 :     const MeasureBase* lmb = nullptr;</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        3963 :     const MeasureBase* lmb = nullptr;</span></span>
 <span id="L209"><span class="lineNum">     209</span>              :     do {</span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">        4083 :         PageLayout::getNextPage(ctx);</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">        4083 :         PageLayout::collectPage(ctx);</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">        4124 :         PageLayout::getNextPage(ctx);</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">        4124 :         PageLayout::collectPage(ctx);</span></span>
 <span id="L212"><span class="lineNum">     212</span>              : </span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        4083 :         if (state.page() &amp;&amp; !state.page()-&gt;systems().empty()) {</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        4083 :             lmb = state.page()-&gt;systems().back()-&gt;measures().back();</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        4124 :         if (state.page() &amp;&amp; !state.page()-&gt;systems().empty()) {</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        4124 :             lmb = state.page()-&gt;systems().back()-&gt;measures().back();</span></span>
 <span id="L215"><span class="lineNum">     215</span>              :         } else {</span>
 <span id="L216"><span class="lineNum">     216</span> <span class="tlaUNC tlaBgUNC">           0 :             lmb = nullptr;</span></span>
 <span id="L217"><span class="lineNum">     217</span>              :         }</span>
@@ -283,25 +283,25 @@
 <span id="L225"><span class="lineNum">     225</span>              :         //    c) this page ends with the same measure as the previous layout</span>
 <span id="L226"><span class="lineNum">     226</span>              :         //    pageOldMeasure will be last measure from previous layout if range was completed on or before this page</span>
 <span id="L227"><span class="lineNum">     227</span>              :         //    it will be nullptr if this page was never laid out or if we collected a system for next page</span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC tlaBgGNC">        4083 :     } while (state.curSystem() &amp;&amp; !(state.rangeDone() &amp;&amp; lmb == state.pageOldMeasure()));</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC tlaBgGNC">        4124 :     } while (state.curSystem() &amp;&amp; !(state.rangeDone() &amp;&amp; lmb == state.pageOldMeasure()));</span></span>
 <span id="L229"><span class="lineNum">     229</span>              :     // &amp;&amp; page-&gt;system(0)-&gt;measures().back()-&gt;tick() &gt; endTick // FIXME: perhaps the first measure was meant? Or last system?</span>
 <span id="L230"><span class="lineNum">     230</span>              : </span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        3922 :     SystemLayout::centerPendingSystems(ctx);</span></span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">        3922 : }</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        3963 :     SystemLayout::centerPendingSystems(ctx);</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">        3963 : }</span></span>
 <span id="L233"><span class="lineNum">     233</span>              : </span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        3922 : void ScorePageViewLayout::layoutFinished(Score* score, LayoutContext&amp; ctx)</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        3963 : void ScorePageViewLayout::layoutFinished(Score* score, LayoutContext&amp; ctx)</span></span>
 <span id="L235"><span class="lineNum">     235</span>              : {</span>
 <span id="L236"><span class="lineNum">     236</span>              :     LAYOUT_CALL();</span>
 <span id="L237"><span class="lineNum">     237</span>              : </span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">        3922 :     LayoutState&amp; state = ctx.mutState();</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">        3963 :     LayoutState&amp; state = ctx.mutState();</span></span>
 <span id="L239"><span class="lineNum">     239</span>              : </span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">        3922 :     if (!state.curSystem()) {</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">        3963 :     if (!state.curSystem()) {</span></span>
 <span id="L241"><span class="lineNum">     241</span>              :         // The end of the score. The remaining systems are not needed...</span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        3912 :         muse::DeleteAll(state.systemList());</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">        3912 :         state.systemList().clear();</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        3953 :         muse::DeleteAll(state.systemList());</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">        3953 :         state.systemList().clear();</span></span>
 <span id="L244"><span class="lineNum">     244</span>              : </span>
 <span id="L245"><span class="lineNum">     245</span>              :         // ...and the remaining pages too</span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        7834 :         while (score-&gt;npages() &gt; state.pageIdx()) {</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        7916 :         while (score-&gt;npages() &gt; state.pageIdx()) {</span></span>
 <span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">          10 :             Page* p = score-&gt;pages().back();</span></span>
 <span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">          10 :             score-&gt;pages().pop_back();</span></span>
 <span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">          10 :             delete p;</span></span>
@@ -313,15 +313,15 @@
 <span id="L255"><span class="lineNum">     255</span>              :         }</span>
 <span id="L256"><span class="lineNum">     256</span>              :     }</span>
 <span id="L257"><span class="lineNum">     257</span>              : </span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">        3922 :     score-&gt;systems().insert(score-&gt;systems().end(), state.systemList().begin(), state.systemList().end());</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">        3963 :     score-&gt;systems().insert(score-&gt;systems().end(), state.systemList().begin(), state.systemList().end());</span></span>
 <span id="L259"><span class="lineNum">     259</span>              : </span>
 <span id="L260"><span class="lineNum">     260</span>              :     /* If the headers/footers involve page count, we need to re-calculate them. This needs to</span>
 <span id="L261"><span class="lineNum">     261</span>              :      * be done after laying out all pages, so that the total number of pages will be known: */</span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">        3922 :     if (state.mustRecomputeHeadersFooters()) {</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">        3963 :     if (state.mustRecomputeHeadersFooters()) {</span></span>
 <span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">           4 :         doLayoutHeadersFooters(ctx);</span></span>
 <span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">           4 :         state.setMustRecomputeHeadersFooters(false);</span></span>
 <span id="L265"><span class="lineNum">     265</span>              :     }</span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">        3922 : }</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">        3963 : }</span></span>
 <span id="L267"><span class="lineNum">     267</span>              : </span>
 <span id="L268"><span class="lineNum">     268</span> <span class="tlaUNC tlaBgUNC">           0 : void ScorePageViewLayout::layoutHeadersFooters(LayoutContext&amp; ctx)</span></span>
 <span id="L269"><span class="lineNum">     269</span>              : {</span>

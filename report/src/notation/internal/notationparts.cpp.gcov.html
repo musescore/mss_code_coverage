@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">766</td>
+            <td class="headerCovTableEntry">772</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -1260,218 +1260,231 @@
 <span id="L1202"><span class="lineNum">    1202</span>              : </span>
 <span id="L1203"><span class="lineNum">    1203</span> <span class="tlaUNC">           0 :     for (const PartInstrument&amp; pi: parts) {</span></span>
 <span id="L1204"><span class="lineNum">    1204</span> <span class="tlaUNC">           0 :         if (pi.isExistingPart) {</span></span>
-<span id="L1205"><span class="lineNum">    1205</span>              :             // Update numbering for existing parts</span>
-<span id="L1206"><span class="lineNum">    1206</span> <span class="tlaUNC">           0 :             int instrumentNumber = resolveExistingInstrumentNumber(pi.partId, pi.instrumentTemplate);</span></span>
-<span id="L1207"><span class="lineNum">    1207</span> <span class="tlaUNC">           0 :             if (Part* existingPart = score()-&gt;partById(pi.partId)) {</span></span>
-<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaUNC">           0 :                 score()-&gt;undo(new mu::engraving::ChangeInstrumentNumber(Fraction(-1, 1), existingPart, instrumentNumber));</span></span>
-<span id="L1209"><span class="lineNum">    1209</span>              :             }</span>
-<span id="L1210"><span class="lineNum">    1210</span> <span class="tlaUNC">           0 :             ++partIdx;</span></span>
-<span id="L1211"><span class="lineNum">    1211</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L1212"><span class="lineNum">    1212</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1213"><span class="lineNum">    1213</span>              : </span>
-<span id="L1214"><span class="lineNum">    1214</span> <span class="tlaUNC">           0 :         Instrument instrument = Instrument::fromTemplate(&amp;pi.instrumentTemplate);</span></span>
-<span id="L1215"><span class="lineNum">    1215</span> <span class="tlaUNC">           0 :         const String&amp; longN = instrument.longName();</span></span>
-<span id="L1216"><span class="lineNum">    1216</span> <span class="tlaUNC">           0 :         const String&amp; shortN = instrument.shortName();</span></span>
-<span id="L1217"><span class="lineNum">    1217</span>              : </span>
-<span id="L1218"><span class="lineNum">    1218</span> <span class="tlaUNC">           0 :         InstrumentTrait trait = instrument.trait();</span></span>
-<span id="L1219"><span class="lineNum">    1219</span> <span class="tlaUNC">           0 :         const String&amp; transp = trait.type == TraitType::Transposition &amp;&amp; !trait.isHiddenOnScore ? trait.name : String();</span></span>
-<span id="L1220"><span class="lineNum">    1220</span>              : </span>
-<span id="L1221"><span class="lineNum">    1221</span> <span class="tlaUNC">           0 :         Part* part = new Part(score());</span></span>
-<span id="L1222"><span class="lineNum">    1222</span> <span class="tlaUNC">           0 :         part-&gt;setSoloist(pi.isSoloist);</span></span>
-<span id="L1223"><span class="lineNum">    1223</span> <span class="tlaUNC">           0 :         part-&gt;setInstrument(instrument);</span></span>
-<span id="L1224"><span class="lineNum">    1224</span>              : </span>
-<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaUNC">           0 :         part-&gt;setLongName(muse::qtrc(&quot;notation&quot;, longN));</span></span>
-<span id="L1226"><span class="lineNum">    1226</span> <span class="tlaUNC">           0 :         part-&gt;setShortName(muse::qtrc(&quot;notation&quot;, shortN));</span></span>
-<span id="L1227"><span class="lineNum">    1227</span> <span class="tlaUNC">           0 :         part-&gt;setTransposition(muse::qtrc(&quot;notation&quot;, transp));</span></span>
-<span id="L1228"><span class="lineNum">    1228</span>              : </span>
-<span id="L1229"><span class="lineNum">    1229</span> <span class="tlaUNC">           0 :         int instrumentNumber = resolveNewInstrumentNumber(pi.instrumentTemplate, parts);</span></span>
-<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaUNC">           0 :         part-&gt;setNumber(instrumentNumber);</span></span>
-<span id="L1231"><span class="lineNum">    1231</span>              : </span>
-<span id="L1232"><span class="lineNum">    1232</span> <span class="tlaUNC">           0 :         if (Excerpt* excerpt = score()-&gt;excerpt()) {</span></span>
-<span id="L1233"><span class="lineNum">    1233</span> <span class="tlaUNC">           0 :             score()-&gt;undo(new AddPartToExcerpt(excerpt, part, partIdx));</span></span>
-<span id="L1234"><span class="lineNum">    1234</span>              :         } else {</span>
-<span id="L1235"><span class="lineNum">    1235</span> <span class="tlaUNC">           0 :             score()-&gt;undoInsertPart(part, partIdx);</span></span>
-<span id="L1236"><span class="lineNum">    1236</span>              :         }</span>
-<span id="L1237"><span class="lineNum">    1237</span> <span class="tlaUNC">           0 :         appendStaves(part, pi.instrumentTemplate, keyList);</span></span>
-<span id="L1238"><span class="lineNum">    1238</span> <span class="tlaUNC">           0 :         ++partIdx;</span></span>
-<span id="L1239"><span class="lineNum">    1239</span>              : </span>
-<span id="L1240"><span class="lineNum">    1240</span> <span class="tlaUNC">           0 :         m_partChangedNotifier.itemAdded(part);</span></span>
-<span id="L1241"><span class="lineNum">    1241</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1243"><span class="lineNum">    1243</span>              : </span>
-<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaUNC">           0 : void NotationParts::insertNewParts(const PartInstrumentList&amp; parts)</span></span>
-<span id="L1245"><span class="lineNum">    1245</span>              : {</span>
-<span id="L1246"><span class="lineNum">    1246</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
-<span id="L1247"><span class="lineNum">    1247</span> <span class="tlaUNC">           0 :     insertNewParts(parts, score()-&gt;keyList());</span></span>
-<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1249"><span class="lineNum">    1249</span>              : </span>
-<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaUNC">           0 : void NotationParts::updateSoloist(const PartInstrumentList&amp; parts)</span></span>
-<span id="L1251"><span class="lineNum">    1251</span>              : {</span>
-<span id="L1252"><span class="lineNum">    1252</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
-<span id="L1253"><span class="lineNum">    1253</span>              : </span>
-<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaUNC">           0 :     for (const PartInstrument&amp; pi: parts) {</span></span>
-<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaUNC">           0 :         Part* part = partModifiable(pi.partId);</span></span>
-<span id="L1256"><span class="lineNum">    1256</span>              : </span>
-<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaUNC">           0 :         if (pi.isExistingPart &amp;&amp; (pi.isSoloist != part-&gt;soloist())) {</span></span>
-<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaUNC">           0 :             score()-&gt;undo(new mu::engraving::SetSoloist(part, pi.isSoloist));</span></span>
-<span id="L1259"><span class="lineNum">    1259</span>              :         }</span>
-<span id="L1260"><span class="lineNum">    1260</span>              :     }</span>
-<span id="L1261"><span class="lineNum">    1261</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1262"><span class="lineNum">    1262</span>              : </span>
-<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaUNC">           0 : void NotationParts::sortParts(const PartInstrumentList&amp; parts)</span></span>
-<span id="L1264"><span class="lineNum">    1264</span>              : {</span>
-<span id="L1265"><span class="lineNum">    1265</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
-<span id="L1266"><span class="lineNum">    1266</span>              : </span>
-<span id="L1267"><span class="lineNum">    1267</span> <span class="tlaUNC">           0 :     std::vector&lt;mu::engraving::staff_idx_t&gt; staffMapping;</span></span>
+<span id="L1205"><span class="lineNum">    1205</span>              :             // Update numbering for existing parts of instruments being added</span>
+<span id="L1206"><span class="lineNum">    1206</span> <span class="tlaUNC">           0 :             if (isNewInstrument(pi.instrumentTemplate, parts)) {</span></span>
+<span id="L1207"><span class="lineNum">    1207</span> <span class="tlaUNC">           0 :                 int instrumentNumber = resolveExistingInstrumentNumber(pi.partId, pi.instrumentTemplate);</span></span>
+<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaUNC">           0 :                 if (Part* existingPart = score()-&gt;partById(pi.partId)) {</span></span>
+<span id="L1209"><span class="lineNum">    1209</span> <span class="tlaUNC">           0 :                     score()-&gt;undo(new mu::engraving::ChangeInstrumentNumber(Fraction(-1, 1), existingPart, instrumentNumber));</span></span>
+<span id="L1210"><span class="lineNum">    1210</span>              :                 }</span>
+<span id="L1211"><span class="lineNum">    1211</span>              :             }</span>
+<span id="L1212"><span class="lineNum">    1212</span> <span class="tlaUNC">           0 :             ++partIdx;</span></span>
+<span id="L1213"><span class="lineNum">    1213</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L1214"><span class="lineNum">    1214</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1215"><span class="lineNum">    1215</span>              : </span>
+<span id="L1216"><span class="lineNum">    1216</span> <span class="tlaUNC">           0 :         Instrument instrument = Instrument::fromTemplate(&amp;pi.instrumentTemplate);</span></span>
+<span id="L1217"><span class="lineNum">    1217</span> <span class="tlaUNC">           0 :         const String&amp; longN = instrument.longName();</span></span>
+<span id="L1218"><span class="lineNum">    1218</span> <span class="tlaUNC">           0 :         const String&amp; shortN = instrument.shortName();</span></span>
+<span id="L1219"><span class="lineNum">    1219</span>              : </span>
+<span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 :         InstrumentTrait trait = instrument.trait();</span></span>
+<span id="L1221"><span class="lineNum">    1221</span> <span class="tlaUNC">           0 :         const String&amp; transp = trait.type == TraitType::Transposition &amp;&amp; !trait.isHiddenOnScore ? trait.name : String();</span></span>
+<span id="L1222"><span class="lineNum">    1222</span>              : </span>
+<span id="L1223"><span class="lineNum">    1223</span> <span class="tlaUNC">           0 :         Part* part = new Part(score());</span></span>
+<span id="L1224"><span class="lineNum">    1224</span> <span class="tlaUNC">           0 :         part-&gt;setSoloist(pi.isSoloist);</span></span>
+<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaUNC">           0 :         part-&gt;setInstrument(instrument);</span></span>
+<span id="L1226"><span class="lineNum">    1226</span>              : </span>
+<span id="L1227"><span class="lineNum">    1227</span> <span class="tlaUNC">           0 :         part-&gt;setLongName(muse::qtrc(&quot;notation&quot;, longN));</span></span>
+<span id="L1228"><span class="lineNum">    1228</span> <span class="tlaUNC">           0 :         part-&gt;setShortName(muse::qtrc(&quot;notation&quot;, shortN));</span></span>
+<span id="L1229"><span class="lineNum">    1229</span> <span class="tlaUNC">           0 :         part-&gt;setTransposition(muse::qtrc(&quot;notation&quot;, transp));</span></span>
+<span id="L1230"><span class="lineNum">    1230</span>              : </span>
+<span id="L1231"><span class="lineNum">    1231</span> <span class="tlaUNC">           0 :         int instrumentNumber = resolveNewInstrumentNumber(pi.instrumentTemplate, parts);</span></span>
+<span id="L1232"><span class="lineNum">    1232</span> <span class="tlaUNC">           0 :         part-&gt;setNumber(instrumentNumber);</span></span>
+<span id="L1233"><span class="lineNum">    1233</span>              : </span>
+<span id="L1234"><span class="lineNum">    1234</span> <span class="tlaUNC">           0 :         if (Excerpt* excerpt = score()-&gt;excerpt()) {</span></span>
+<span id="L1235"><span class="lineNum">    1235</span> <span class="tlaUNC">           0 :             score()-&gt;undo(new AddPartToExcerpt(excerpt, part, partIdx));</span></span>
+<span id="L1236"><span class="lineNum">    1236</span>              :         } else {</span>
+<span id="L1237"><span class="lineNum">    1237</span> <span class="tlaUNC">           0 :             score()-&gt;undoInsertPart(part, partIdx);</span></span>
+<span id="L1238"><span class="lineNum">    1238</span>              :         }</span>
+<span id="L1239"><span class="lineNum">    1239</span> <span class="tlaUNC">           0 :         appendStaves(part, pi.instrumentTemplate, keyList);</span></span>
+<span id="L1240"><span class="lineNum">    1240</span> <span class="tlaUNC">           0 :         ++partIdx;</span></span>
+<span id="L1241"><span class="lineNum">    1241</span>              : </span>
+<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaUNC">           0 :         m_partChangedNotifier.itemAdded(part);</span></span>
+<span id="L1243"><span class="lineNum">    1243</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1245"><span class="lineNum">    1245</span>              : </span>
+<span id="L1246"><span class="lineNum">    1246</span> <span class="tlaUNC">           0 : void NotationParts::insertNewParts(const PartInstrumentList&amp; parts)</span></span>
+<span id="L1247"><span class="lineNum">    1247</span>              : {</span>
+<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L1249"><span class="lineNum">    1249</span> <span class="tlaUNC">           0 :     insertNewParts(parts, score()-&gt;keyList());</span></span>
+<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1251"><span class="lineNum">    1251</span>              : </span>
+<span id="L1252"><span class="lineNum">    1252</span> <span class="tlaUNC">           0 : void NotationParts::updateSoloist(const PartInstrumentList&amp; parts)</span></span>
+<span id="L1253"><span class="lineNum">    1253</span>              : {</span>
+<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L1255"><span class="lineNum">    1255</span>              : </span>
+<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaUNC">           0 :     for (const PartInstrument&amp; pi: parts) {</span></span>
+<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaUNC">           0 :         Part* part = partModifiable(pi.partId);</span></span>
+<span id="L1258"><span class="lineNum">    1258</span>              : </span>
+<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaUNC">           0 :         if (pi.isExistingPart &amp;&amp; (pi.isSoloist != part-&gt;soloist())) {</span></span>
+<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaUNC">           0 :             score()-&gt;undo(new mu::engraving::SetSoloist(part, pi.isSoloist));</span></span>
+<span id="L1261"><span class="lineNum">    1261</span>              :         }</span>
+<span id="L1262"><span class="lineNum">    1262</span>              :     }</span>
+<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1264"><span class="lineNum">    1264</span>              : </span>
+<span id="L1265"><span class="lineNum">    1265</span> <span class="tlaUNC">           0 : void NotationParts::sortParts(const PartInstrumentList&amp; parts)</span></span>
+<span id="L1266"><span class="lineNum">    1266</span>              : {</span>
+<span id="L1267"><span class="lineNum">    1267</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
 <span id="L1268"><span class="lineNum">    1268</span>              : </span>
-<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaUNC">           0 :     int partIndex = 0;</span></span>
-<span id="L1270"><span class="lineNum">    1270</span> <span class="tlaUNC">           0 :     for (const PartInstrument&amp; pi: parts) {</span></span>
-<span id="L1271"><span class="lineNum">    1271</span> <span class="tlaUNC">           0 :         mu::engraving::Part* currentPart = pi.isExistingPart ? partModifiable(pi.partId) : score()-&gt;parts()[partIndex];</span></span>
-<span id="L1272"><span class="lineNum">    1272</span>              : </span>
-<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaUNC">           0 :         for (mu::engraving::Staff* staff : currentPart-&gt;staves()) {</span></span>
-<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaUNC">           0 :             mu::engraving::staff_idx_t actualStaffIndex = muse::indexOf(score()-&gt;staves(), staff);</span></span>
-<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaUNC">           0 :             staffMapping.push_back(actualStaffIndex);</span></span>
-<span id="L1276"><span class="lineNum">    1276</span>              :         }</span>
-<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaUNC">           0 :         ++partIndex;</span></span>
-<span id="L1278"><span class="lineNum">    1278</span>              :     }</span>
-<span id="L1279"><span class="lineNum">    1279</span>              : </span>
-<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaUNC">           0 :     score()-&gt;undo(new mu::engraving::SortStaves(score(), staffMapping));</span></span>
-<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1282"><span class="lineNum">    1282</span>              : </span>
-<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaUNC">           0 : int NotationParts::countExistingInstruments(const InstrumentTemplate&amp; instrument) const</span></span>
-<span id="L1284"><span class="lineNum">    1284</span>              : {</span>
-<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaUNC">           0 :     int count = 0;</span></span>
-<span id="L1286"><span class="lineNum">    1286</span>              : </span>
-<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaUNC">           0 :     for (const Part* part : score()-&gt;parts()) {</span></span>
-<span id="L1288"><span class="lineNum">    1288</span> <span class="tlaUNC">           0 :         const Instrument* partInstrument = part-&gt;instrument();</span></span>
-<span id="L1289"><span class="lineNum">    1289</span>              : </span>
-<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaUNC">           0 :         if (partInstrument-&gt;id() == instrument.id) {</span></span>
-<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaUNC">           0 :             ++count;</span></span>
-<span id="L1292"><span class="lineNum">    1292</span>              :         }</span>
-<span id="L1293"><span class="lineNum">    1293</span>              :     }</span>
-<span id="L1294"><span class="lineNum">    1294</span>              : </span>
-<span id="L1295"><span class="lineNum">    1295</span> <span class="tlaUNC">           0 :     return count;</span></span>
-<span id="L1296"><span class="lineNum">    1296</span>              : }</span>
-<span id="L1297"><span class="lineNum">    1297</span>              : </span>
-<span id="L1298"><span class="lineNum">    1298</span> <span class="tlaUNC">           0 : int NotationParts::resolveExistingInstrumentNumber(const muse::ID&amp; partId, const InstrumentTemplate&amp; instrument) const</span></span>
-<span id="L1299"><span class="lineNum">    1299</span>              : {</span>
-<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaUNC">           0 :     int count = countExistingInstruments(instrument);</span></span>
-<span id="L1301"><span class="lineNum">    1301</span>              : </span>
-<span id="L1302"><span class="lineNum">    1302</span> <span class="tlaUNC">           0 :     int ordinal = 0;</span></span>
-<span id="L1303"><span class="lineNum">    1303</span>              : </span>
-<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :     for (const Part* part : score()-&gt;parts()) {</span></span>
-<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaUNC">           0 :         const Instrument* partInstrument = part-&gt;instrument();</span></span>
-<span id="L1306"><span class="lineNum">    1306</span>              : </span>
-<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaUNC">           0 :         if (partInstrument-&gt;id() != instrument.id) {</span></span>
-<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L1309"><span class="lineNum">    1309</span>              :         }</span>
+<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaUNC">           0 :     std::vector&lt;mu::engraving::staff_idx_t&gt; staffMapping;</span></span>
+<span id="L1270"><span class="lineNum">    1270</span>              : </span>
+<span id="L1271"><span class="lineNum">    1271</span> <span class="tlaUNC">           0 :     int partIndex = 0;</span></span>
+<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaUNC">           0 :     for (const PartInstrument&amp; pi: parts) {</span></span>
+<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaUNC">           0 :         mu::engraving::Part* currentPart = pi.isExistingPart ? partModifiable(pi.partId) : score()-&gt;parts()[partIndex];</span></span>
+<span id="L1274"><span class="lineNum">    1274</span>              : </span>
+<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaUNC">           0 :         for (mu::engraving::Staff* staff : currentPart-&gt;staves()) {</span></span>
+<span id="L1276"><span class="lineNum">    1276</span> <span class="tlaUNC">           0 :             mu::engraving::staff_idx_t actualStaffIndex = muse::indexOf(score()-&gt;staves(), staff);</span></span>
+<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaUNC">           0 :             staffMapping.push_back(actualStaffIndex);</span></span>
+<span id="L1278"><span class="lineNum">    1278</span>              :         }</span>
+<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaUNC">           0 :         ++partIndex;</span></span>
+<span id="L1280"><span class="lineNum">    1280</span>              :     }</span>
+<span id="L1281"><span class="lineNum">    1281</span>              : </span>
+<span id="L1282"><span class="lineNum">    1282</span> <span class="tlaUNC">           0 :     score()-&gt;undo(new mu::engraving::SortStaves(score(), staffMapping));</span></span>
+<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1284"><span class="lineNum">    1284</span>              : </span>
+<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaUNC">           0 : int NotationParts::countExistingInstruments(const InstrumentTemplate&amp; instrument) const</span></span>
+<span id="L1286"><span class="lineNum">    1286</span>              : {</span>
+<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaUNC">           0 :     int count = 0;</span></span>
+<span id="L1288"><span class="lineNum">    1288</span>              : </span>
+<span id="L1289"><span class="lineNum">    1289</span> <span class="tlaUNC">           0 :     for (const Part* part : score()-&gt;parts()) {</span></span>
+<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaUNC">           0 :         const Instrument* partInstrument = part-&gt;instrument();</span></span>
+<span id="L1291"><span class="lineNum">    1291</span>              : </span>
+<span id="L1292"><span class="lineNum">    1292</span> <span class="tlaUNC">           0 :         if (partInstrument-&gt;id() == instrument.id) {</span></span>
+<span id="L1293"><span class="lineNum">    1293</span> <span class="tlaUNC">           0 :             ++count;</span></span>
+<span id="L1294"><span class="lineNum">    1294</span>              :         }</span>
+<span id="L1295"><span class="lineNum">    1295</span>              :     }</span>
+<span id="L1296"><span class="lineNum">    1296</span>              : </span>
+<span id="L1297"><span class="lineNum">    1297</span> <span class="tlaUNC">           0 :     return count;</span></span>
+<span id="L1298"><span class="lineNum">    1298</span>              : }</span>
+<span id="L1299"><span class="lineNum">    1299</span>              : </span>
+<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaUNC">           0 : bool NotationParts::isNewInstrument(const InstrumentTemplate&amp; instrument, const PartInstrumentList&amp; parts) const</span></span>
+<span id="L1301"><span class="lineNum">    1301</span>              : {</span>
+<span id="L1302"><span class="lineNum">    1302</span> <span class="tlaUNC">           0 :     for (const PartInstrument&amp; pi : parts) {</span></span>
+<span id="L1303"><span class="lineNum">    1303</span> <span class="tlaUNC">           0 :         if (!pi.isExistingPart &amp;&amp; pi.instrumentTemplate.id == instrument.id) {</span></span>
+<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :             return true;</span></span>
+<span id="L1305"><span class="lineNum">    1305</span>              :         }</span>
+<span id="L1306"><span class="lineNum">    1306</span>              :     }</span>
+<span id="L1307"><span class="lineNum">    1307</span>              : </span>
+<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaUNC">           0 :     return false;</span></span>
+<span id="L1309"><span class="lineNum">    1309</span>              : }</span>
 <span id="L1310"><span class="lineNum">    1310</span>              : </span>
-<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaUNC">           0 :         ++ordinal;</span></span>
-<span id="L1312"><span class="lineNum">    1312</span>              : </span>
-<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaUNC">           0 :         if (part-&gt;id() == partId) {</span></span>
-<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaUNC">           0 :             return ordinal;</span></span>
-<span id="L1315"><span class="lineNum">    1315</span>              :         }</span>
-<span id="L1316"><span class="lineNum">    1316</span>              :     }</span>
-<span id="L1317"><span class="lineNum">    1317</span>              : </span>
-<span id="L1318"><span class="lineNum">    1318</span> <span class="tlaUNC">           0 :     return count;</span></span>
-<span id="L1319"><span class="lineNum">    1319</span>              : }</span>
-<span id="L1320"><span class="lineNum">    1320</span>              : </span>
-<span id="L1321"><span class="lineNum">    1321</span> <span class="tlaUNC">           0 : int NotationParts::resolveNewInstrumentNumber(const InstrumentTemplate&amp; instrument,</span></span>
-<span id="L1322"><span class="lineNum">    1322</span>              :                                               const PartInstrumentList&amp; allNewInstruments) const</span>
-<span id="L1323"><span class="lineNum">    1323</span>              : {</span>
-<span id="L1324"><span class="lineNum">    1324</span> <span class="tlaUNC">           0 :     int count = countExistingInstruments(instrument);</span></span>
+<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaUNC">           0 : int NotationParts::resolveExistingInstrumentNumber(const muse::ID&amp; partId, const InstrumentTemplate&amp; instrument) const</span></span>
+<span id="L1312"><span class="lineNum">    1312</span>              : {</span>
+<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaUNC">           0 :     int count = countExistingInstruments(instrument);</span></span>
+<span id="L1314"><span class="lineNum">    1314</span>              : </span>
+<span id="L1315"><span class="lineNum">    1315</span> <span class="tlaUNC">           0 :     int ordinal = 0;</span></span>
+<span id="L1316"><span class="lineNum">    1316</span>              : </span>
+<span id="L1317"><span class="lineNum">    1317</span> <span class="tlaUNC">           0 :     for (const Part* part : score()-&gt;parts()) {</span></span>
+<span id="L1318"><span class="lineNum">    1318</span> <span class="tlaUNC">           0 :         const Instrument* partInstrument = part-&gt;instrument();</span></span>
+<span id="L1319"><span class="lineNum">    1319</span>              : </span>
+<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaUNC">           0 :         if (partInstrument-&gt;id() != instrument.id) {</span></span>
+<span id="L1321"><span class="lineNum">    1321</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L1322"><span class="lineNum">    1322</span>              :         }</span>
+<span id="L1323"><span class="lineNum">    1323</span>              : </span>
+<span id="L1324"><span class="lineNum">    1324</span> <span class="tlaUNC">           0 :         ++ordinal;</span></span>
 <span id="L1325"><span class="lineNum">    1325</span>              : </span>
-<span id="L1326"><span class="lineNum">    1326</span> <span class="tlaUNC">           0 :     if (count &gt; 0) {</span></span>
-<span id="L1327"><span class="lineNum">    1327</span> <span class="tlaUNC">           0 :         return count + 1;</span></span>
-<span id="L1328"><span class="lineNum">    1328</span>              :     }</span>
-<span id="L1329"><span class="lineNum">    1329</span>              : </span>
-<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaUNC">           0 :     for (const PartInstrument&amp; partInstrument: allNewInstruments) {</span></span>
-<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaUNC">           0 :         const InstrumentTemplate&amp; templ = partInstrument.instrumentTemplate;</span></span>
-<span id="L1332"><span class="lineNum">    1332</span>              : </span>
-<span id="L1333"><span class="lineNum">    1333</span> <span class="tlaUNC">           0 :         if (templ.id == instrument.id) {</span></span>
-<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaUNC">           0 :             ++count;</span></span>
-<span id="L1335"><span class="lineNum">    1335</span>              :         }</span>
-<span id="L1336"><span class="lineNum">    1336</span>              :     }</span>
-<span id="L1337"><span class="lineNum">    1337</span>              : </span>
-<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaUNC">           0 :     return count &gt; 1 ? 1 : 0;</span></span>
-<span id="L1339"><span class="lineNum">    1339</span>              : }</span>
-<span id="L1340"><span class="lineNum">    1340</span>              : </span>
-<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaUNC">           0 : void NotationParts::setBracketsAndBarlines()</span></span>
-<span id="L1342"><span class="lineNum">    1342</span>              : {</span>
-<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaUNC">           0 :     score()-&gt;setBracketsAndBarlines();</span></span>
-<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1326"><span class="lineNum">    1326</span> <span class="tlaUNC">           0 :         if (part-&gt;id() == partId) {</span></span>
+<span id="L1327"><span class="lineNum">    1327</span> <span class="tlaUNC">           0 :             return ordinal;</span></span>
+<span id="L1328"><span class="lineNum">    1328</span>              :         }</span>
+<span id="L1329"><span class="lineNum">    1329</span>              :     }</span>
+<span id="L1330"><span class="lineNum">    1330</span>              : </span>
+<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaUNC">           0 :     return count;</span></span>
+<span id="L1332"><span class="lineNum">    1332</span>              : }</span>
+<span id="L1333"><span class="lineNum">    1333</span>              : </span>
+<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaUNC">           0 : int NotationParts::resolveNewInstrumentNumber(const InstrumentTemplate&amp; instrument,</span></span>
+<span id="L1335"><span class="lineNum">    1335</span>              :                                               const PartInstrumentList&amp; allNewInstruments) const</span>
+<span id="L1336"><span class="lineNum">    1336</span>              : {</span>
+<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaUNC">           0 :     int count = countExistingInstruments(instrument);</span></span>
+<span id="L1338"><span class="lineNum">    1338</span>              : </span>
+<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaUNC">           0 :     if (count &gt; 0) {</span></span>
+<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaUNC">           0 :         return count + 1;</span></span>
+<span id="L1341"><span class="lineNum">    1341</span>              :     }</span>
+<span id="L1342"><span class="lineNum">    1342</span>              : </span>
+<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaUNC">           0 :     for (const PartInstrument&amp; partInstrument: allNewInstruments) {</span></span>
+<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 :         const InstrumentTemplate&amp; templ = partInstrument.instrumentTemplate;</span></span>
 <span id="L1345"><span class="lineNum">    1345</span>              : </span>
-<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaUNC">           0 : void NotationParts::endInteractionWithScore()</span></span>
-<span id="L1347"><span class="lineNum">    1347</span>              : {</span>
-<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaUNC">           0 :     m_interaction-&gt;clearSelection();</span></span>
-<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaUNC">           0 :     m_interaction-&gt;noteInput()-&gt;endNoteInput(/*resetState=*/ true);</span></span>
-<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1351"><span class="lineNum">    1351</span>              : </span>
-<span id="L1352"><span class="lineNum">    1352</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutPartChanged(const Part* part) const</span></span>
-<span id="L1353"><span class="lineNum">    1353</span>              : {</span>
-<span id="L1354"><span class="lineNum">    1354</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(part) {</span></span>
-<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1356"><span class="lineNum">    1356</span>              :     }</span>
-<span id="L1357"><span class="lineNum">    1357</span>              : </span>
-<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaUNC">           0 :     m_partChangedNotifier.itemChanged(part);</span></span>
-<span id="L1359"><span class="lineNum">    1359</span>              : }</span>
-<span id="L1360"><span class="lineNum">    1360</span>              : </span>
-<span id="L1361"><span class="lineNum">    1361</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutPartAdded(const Part* part) const</span></span>
-<span id="L1362"><span class="lineNum">    1362</span>              : {</span>
-<span id="L1363"><span class="lineNum">    1363</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(part) {</span></span>
-<span id="L1364"><span class="lineNum">    1364</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1365"><span class="lineNum">    1365</span>              :     }</span>
-<span id="L1366"><span class="lineNum">    1366</span>              : </span>
-<span id="L1367"><span class="lineNum">    1367</span> <span class="tlaUNC">           0 :     m_partChangedNotifier.itemAdded(part);</span></span>
-<span id="L1368"><span class="lineNum">    1368</span>              : }</span>
-<span id="L1369"><span class="lineNum">    1369</span>              : </span>
-<span id="L1370"><span class="lineNum">    1370</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutPartRemoved(const Part* part) const</span></span>
-<span id="L1371"><span class="lineNum">    1371</span>              : {</span>
-<span id="L1372"><span class="lineNum">    1372</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(part) {</span></span>
-<span id="L1373"><span class="lineNum">    1373</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1374"><span class="lineNum">    1374</span>              :     }</span>
-<span id="L1375"><span class="lineNum">    1375</span>              : </span>
-<span id="L1376"><span class="lineNum">    1376</span> <span class="tlaUNC">           0 :     m_partChangedNotifier.itemRemoved(part);</span></span>
-<span id="L1377"><span class="lineNum">    1377</span>              : }</span>
-<span id="L1378"><span class="lineNum">    1378</span>              : </span>
-<span id="L1379"><span class="lineNum">    1379</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutPartReplaced(const Part* oldPart, const Part* newPart) const</span></span>
-<span id="L1380"><span class="lineNum">    1380</span>              : {</span>
-<span id="L1381"><span class="lineNum">    1381</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(oldPart &amp;&amp; newPart) {</span></span>
-<span id="L1382"><span class="lineNum">    1382</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1383"><span class="lineNum">    1383</span>              :     }</span>
-<span id="L1384"><span class="lineNum">    1384</span>              : </span>
-<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaUNC">           0 :     m_partChangedNotifier.itemReplaced(oldPart, newPart);</span></span>
-<span id="L1386"><span class="lineNum">    1386</span>              : }</span>
-<span id="L1387"><span class="lineNum">    1387</span>              : </span>
-<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutStaffChanged(const Staff* staff) const</span></span>
-<span id="L1389"><span class="lineNum">    1389</span>              : {</span>
-<span id="L1390"><span class="lineNum">    1390</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff &amp;&amp; staff-&gt;part()) {</span></span>
-<span id="L1391"><span class="lineNum">    1391</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1392"><span class="lineNum">    1392</span>              :     }</span>
-<span id="L1393"><span class="lineNum">    1393</span>              : </span>
-<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaUNC">           0 :     ChangedNotifier&lt;const Staff*&gt;&amp; notifier = m_staffChangedNotifierMap[staff-&gt;part()-&gt;id()];</span></span>
-<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaUNC">           0 :     notifier.itemChanged(staff);</span></span>
-<span id="L1396"><span class="lineNum">    1396</span>              : }</span>
+<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaUNC">           0 :         if (templ.id == instrument.id) {</span></span>
+<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaUNC">           0 :             ++count;</span></span>
+<span id="L1348"><span class="lineNum">    1348</span>              :         }</span>
+<span id="L1349"><span class="lineNum">    1349</span>              :     }</span>
+<span id="L1350"><span class="lineNum">    1350</span>              : </span>
+<span id="L1351"><span class="lineNum">    1351</span> <span class="tlaUNC">           0 :     return count &gt; 1 ? 1 : 0;</span></span>
+<span id="L1352"><span class="lineNum">    1352</span>              : }</span>
+<span id="L1353"><span class="lineNum">    1353</span>              : </span>
+<span id="L1354"><span class="lineNum">    1354</span> <span class="tlaUNC">           0 : void NotationParts::setBracketsAndBarlines()</span></span>
+<span id="L1355"><span class="lineNum">    1355</span>              : {</span>
+<span id="L1356"><span class="lineNum">    1356</span> <span class="tlaUNC">           0 :     score()-&gt;setBracketsAndBarlines();</span></span>
+<span id="L1357"><span class="lineNum">    1357</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1358"><span class="lineNum">    1358</span>              : </span>
+<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaUNC">           0 : void NotationParts::endInteractionWithScore()</span></span>
+<span id="L1360"><span class="lineNum">    1360</span>              : {</span>
+<span id="L1361"><span class="lineNum">    1361</span> <span class="tlaUNC">           0 :     m_interaction-&gt;clearSelection();</span></span>
+<span id="L1362"><span class="lineNum">    1362</span> <span class="tlaUNC">           0 :     m_interaction-&gt;noteInput()-&gt;endNoteInput(/*resetState=*/ true);</span></span>
+<span id="L1363"><span class="lineNum">    1363</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1364"><span class="lineNum">    1364</span>              : </span>
+<span id="L1365"><span class="lineNum">    1365</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutPartChanged(const Part* part) const</span></span>
+<span id="L1366"><span class="lineNum">    1366</span>              : {</span>
+<span id="L1367"><span class="lineNum">    1367</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(part) {</span></span>
+<span id="L1368"><span class="lineNum">    1368</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1369"><span class="lineNum">    1369</span>              :     }</span>
+<span id="L1370"><span class="lineNum">    1370</span>              : </span>
+<span id="L1371"><span class="lineNum">    1371</span> <span class="tlaUNC">           0 :     m_partChangedNotifier.itemChanged(part);</span></span>
+<span id="L1372"><span class="lineNum">    1372</span>              : }</span>
+<span id="L1373"><span class="lineNum">    1373</span>              : </span>
+<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutPartAdded(const Part* part) const</span></span>
+<span id="L1375"><span class="lineNum">    1375</span>              : {</span>
+<span id="L1376"><span class="lineNum">    1376</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(part) {</span></span>
+<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1378"><span class="lineNum">    1378</span>              :     }</span>
+<span id="L1379"><span class="lineNum">    1379</span>              : </span>
+<span id="L1380"><span class="lineNum">    1380</span> <span class="tlaUNC">           0 :     m_partChangedNotifier.itemAdded(part);</span></span>
+<span id="L1381"><span class="lineNum">    1381</span>              : }</span>
+<span id="L1382"><span class="lineNum">    1382</span>              : </span>
+<span id="L1383"><span class="lineNum">    1383</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutPartRemoved(const Part* part) const</span></span>
+<span id="L1384"><span class="lineNum">    1384</span>              : {</span>
+<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(part) {</span></span>
+<span id="L1386"><span class="lineNum">    1386</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1387"><span class="lineNum">    1387</span>              :     }</span>
+<span id="L1388"><span class="lineNum">    1388</span>              : </span>
+<span id="L1389"><span class="lineNum">    1389</span> <span class="tlaUNC">           0 :     m_partChangedNotifier.itemRemoved(part);</span></span>
+<span id="L1390"><span class="lineNum">    1390</span>              : }</span>
+<span id="L1391"><span class="lineNum">    1391</span>              : </span>
+<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutPartReplaced(const Part* oldPart, const Part* newPart) const</span></span>
+<span id="L1393"><span class="lineNum">    1393</span>              : {</span>
+<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(oldPart &amp;&amp; newPart) {</span></span>
+<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1396"><span class="lineNum">    1396</span>              :     }</span>
 <span id="L1397"><span class="lineNum">    1397</span>              : </span>
-<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutStaffAdded(const Staff* staff) const</span></span>
-<span id="L1399"><span class="lineNum">    1399</span>              : {</span>
-<span id="L1400"><span class="lineNum">    1400</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff &amp;&amp; staff-&gt;part()) {</span></span>
-<span id="L1401"><span class="lineNum">    1401</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1402"><span class="lineNum">    1402</span>              :     }</span>
-<span id="L1403"><span class="lineNum">    1403</span>              : </span>
-<span id="L1404"><span class="lineNum">    1404</span> <span class="tlaUNC">           0 :     ChangedNotifier&lt;const Staff*&gt;&amp; notifier = m_staffChangedNotifierMap[staff-&gt;part()-&gt;id()];</span></span>
-<span id="L1405"><span class="lineNum">    1405</span> <span class="tlaUNC">           0 :     notifier.itemAdded(staff);</span></span>
-<span id="L1406"><span class="lineNum">    1406</span>              : }</span>
-<span id="L1407"><span class="lineNum">    1407</span>              : </span>
-<span id="L1408"><span class="lineNum">    1408</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutStaffRemoved(const Staff* staff) const</span></span>
-<span id="L1409"><span class="lineNum">    1409</span>              : {</span>
-<span id="L1410"><span class="lineNum">    1410</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff &amp;&amp; staff-&gt;part()) {</span></span>
-<span id="L1411"><span class="lineNum">    1411</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1412"><span class="lineNum">    1412</span>              :     }</span>
-<span id="L1413"><span class="lineNum">    1413</span>              : </span>
-<span id="L1414"><span class="lineNum">    1414</span> <span class="tlaUNC">           0 :     ChangedNotifier&lt;const Staff*&gt;&amp; notifier = m_staffChangedNotifierMap[staff-&gt;part()-&gt;id()];</span></span>
-<span id="L1415"><span class="lineNum">    1415</span> <span class="tlaUNC">           0 :     notifier.itemRemoved(staff);</span></span>
-<span id="L1416"><span class="lineNum">    1416</span>              : }</span>
+<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaUNC">           0 :     m_partChangedNotifier.itemReplaced(oldPart, newPart);</span></span>
+<span id="L1399"><span class="lineNum">    1399</span>              : }</span>
+<span id="L1400"><span class="lineNum">    1400</span>              : </span>
+<span id="L1401"><span class="lineNum">    1401</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutStaffChanged(const Staff* staff) const</span></span>
+<span id="L1402"><span class="lineNum">    1402</span>              : {</span>
+<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff &amp;&amp; staff-&gt;part()) {</span></span>
+<span id="L1404"><span class="lineNum">    1404</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1405"><span class="lineNum">    1405</span>              :     }</span>
+<span id="L1406"><span class="lineNum">    1406</span>              : </span>
+<span id="L1407"><span class="lineNum">    1407</span> <span class="tlaUNC">           0 :     ChangedNotifier&lt;const Staff*&gt;&amp; notifier = m_staffChangedNotifierMap[staff-&gt;part()-&gt;id()];</span></span>
+<span id="L1408"><span class="lineNum">    1408</span> <span class="tlaUNC">           0 :     notifier.itemChanged(staff);</span></span>
+<span id="L1409"><span class="lineNum">    1409</span>              : }</span>
+<span id="L1410"><span class="lineNum">    1410</span>              : </span>
+<span id="L1411"><span class="lineNum">    1411</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutStaffAdded(const Staff* staff) const</span></span>
+<span id="L1412"><span class="lineNum">    1412</span>              : {</span>
+<span id="L1413"><span class="lineNum">    1413</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff &amp;&amp; staff-&gt;part()) {</span></span>
+<span id="L1414"><span class="lineNum">    1414</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1415"><span class="lineNum">    1415</span>              :     }</span>
+<span id="L1416"><span class="lineNum">    1416</span>              : </span>
+<span id="L1417"><span class="lineNum">    1417</span> <span class="tlaUNC">           0 :     ChangedNotifier&lt;const Staff*&gt;&amp; notifier = m_staffChangedNotifierMap[staff-&gt;part()-&gt;id()];</span></span>
+<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaUNC">           0 :     notifier.itemAdded(staff);</span></span>
+<span id="L1419"><span class="lineNum">    1419</span>              : }</span>
+<span id="L1420"><span class="lineNum">    1420</span>              : </span>
+<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaUNC">           0 : void NotationParts::notifyAboutStaffRemoved(const Staff* staff) const</span></span>
+<span id="L1422"><span class="lineNum">    1422</span>              : {</span>
+<span id="L1423"><span class="lineNum">    1423</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff &amp;&amp; staff-&gt;part()) {</span></span>
+<span id="L1424"><span class="lineNum">    1424</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1425"><span class="lineNum">    1425</span>              :     }</span>
+<span id="L1426"><span class="lineNum">    1426</span>              : </span>
+<span id="L1427"><span class="lineNum">    1427</span> <span class="tlaUNC">           0 :     ChangedNotifier&lt;const Staff*&gt;&amp; notifier = m_staffChangedNotifierMap[staff-&gt;part()-&gt;id()];</span></span>
+<span id="L1428"><span class="lineNum">    1428</span> <span class="tlaUNC">           0 :     notifier.itemRemoved(staff);</span></span>
+<span id="L1429"><span class="lineNum">    1429</span>              : }</span>
         </pre>
               </td>
             </tr>

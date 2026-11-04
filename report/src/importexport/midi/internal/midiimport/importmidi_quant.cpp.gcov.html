@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -213,43 +213,43 @@
 <span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">       39204 :     return shortest;</span></span>
 <span id="L156"><span class="lineNum">     156</span>              : }</span>
 <span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">       51676 : ReducedFraction reduceQuantIfDottedNote(const ReducedFraction&amp; noteLen,</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">       51675 : ReducedFraction reduceQuantIfDottedNote(const ReducedFraction&amp; noteLen,</span></span>
 <span id="L159"><span class="lineNum">     159</span>              :                                         const ReducedFraction&amp; raster)</span>
 <span id="L160"><span class="lineNum">     160</span>              : {</span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">       51676 :     auto newRaster = raster;</span></span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">       51676 :     const auto div = noteLen / raster;</span></span>
-<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">       51676 :     const double ratio = div.toDouble();</span></span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">       51676 :     if (ratio &gt; 1.45 &amp;&amp; ratio &lt; 1.55) {     // 1.5: dotted note that is larger than quantization value</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">       51675 :     auto newRaster = raster;</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">       51675 :     const auto div = noteLen / raster;</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">       51675 :     const double ratio = div.toDouble();</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">       51675 :     if (ratio &gt; 1.45 &amp;&amp; ratio &lt; 1.55) {     // 1.5: dotted note that is larger than quantization value</span></span>
 <span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">        1095 :         newRaster /= 2;                     // reduce quantization error for dotted notes</span></span>
 <span id="L166"><span class="lineNum">     166</span>              :     }</span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">       51676 :     return newRaster;</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">       51675 :     return newRaster;</span></span>
 <span id="L168"><span class="lineNum">     168</span>              : }</span>
 <span id="L169"><span class="lineNum">     169</span>              : </span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">       16088 : ReducedFraction quantizeValue(const ReducedFraction&amp; value,</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">       16087 : ReducedFraction quantizeValue(const ReducedFraction&amp; value,</span></span>
 <span id="L171"><span class="lineNum">     171</span>              :                               const ReducedFraction&amp; quant)</span>
 <span id="L172"><span class="lineNum">     172</span>              : {</span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">       16088 :     const auto valueReduced = value.reduced();</span></span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">       16088 :     const auto rasterReduced = quant.reduced();</span></span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">       16088 :     int valNum = valueReduced.numerator() * rasterReduced.denominator();</span></span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">       16088 :     const int rastNum = rasterReduced.numerator() * valueReduced.denominator();</span></span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">       16088 :     const int commonDen = valueReduced.denominator() * rasterReduced.denominator();</span></span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">       16088 :     valNum = ((valNum + rastNum / 2) / rastNum) * rastNum;</span></span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">       16088 :     return ReducedFraction(valNum, commonDen).reduced();</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">       16087 :     const auto valueReduced = value.reduced();</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">       16087 :     const auto rasterReduced = quant.reduced();</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">       16087 :     int valNum = valueReduced.numerator() * rasterReduced.denominator();</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">       16087 :     const int rastNum = rasterReduced.numerator() * valueReduced.denominator();</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">       16087 :     const int commonDen = valueReduced.denominator() * rasterReduced.denominator();</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">       16087 :     valNum = ((valNum + rastNum / 2) / rastNum) * rastNum;</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">       16087 :     return ReducedFraction(valNum, commonDen).reduced();</span></span>
 <span id="L180"><span class="lineNum">     180</span>              : }</span>
 <span id="L181"><span class="lineNum">     181</span>              : </span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">       53549 : ReducedFraction quantForLen(const ReducedFraction&amp; noteLen,</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">       53548 : ReducedFraction quantForLen(const ReducedFraction&amp; noteLen,</span></span>
 <span id="L183"><span class="lineNum">     183</span>              :                             const ReducedFraction&amp; basicQuant)</span>
 <span id="L184"><span class="lineNum">     184</span>              : {</span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">       53549 :     auto quant = basicQuant;</span></span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">       79388 :     while (quant &gt; noteLen &amp;&amp; quant &gt;= MChord::minAllowedDuration() * 2) {</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">       53548 :     auto quant = basicQuant;</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">       79387 :     while (quant &gt; noteLen &amp;&amp; quant &gt;= MChord::minAllowedDuration() * 2) {</span></span>
 <span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">       25839 :         quant /= 2;</span></span>
 <span id="L188"><span class="lineNum">     188</span>              :     }</span>
 <span id="L189"><span class="lineNum">     189</span>              : </span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">       53549 :     if (quant &gt;= MChord::minAllowedDuration() * 2) {</span></span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">       51676 :         quant = reduceQuantIfDottedNote(noteLen, quant);</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">       53548 :     if (quant &gt;= MChord::minAllowedDuration() * 2) {</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">       51675 :         quant = reduceQuantIfDottedNote(noteLen, quant);</span></span>
 <span id="L192"><span class="lineNum">     192</span>              :     }</span>
 <span id="L193"><span class="lineNum">     193</span>              : </span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">       53549 :     return quant;</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">       53548 :     return quant;</span></span>
 <span id="L195"><span class="lineNum">     195</span>              : }</span>
 <span id="L196"><span class="lineNum">     196</span>              : </span>
 <span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">        4379 : ReducedFraction quantForTuplet(const ReducedFraction&amp; tupletLen,</span></span>
@@ -354,19 +354,19 @@
 <span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">        1978 :     return { qOffTime, quant };</span></span>
 <span id="L297"><span class="lineNum">     297</span>              : }</span>
 <span id="L298"><span class="lineNum">     298</span>              : </span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">         674 : ReducedFraction findMinQuantizedOnTime(</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">         673 : ReducedFraction findMinQuantizedOnTime(</span></span>
 <span id="L300"><span class="lineNum">     300</span>              :     const std::pair&lt;const ReducedFraction, MidiChord&gt;&amp; chord,</span>
 <span id="L301"><span class="lineNum">     301</span>              :     const ReducedFraction&amp; basicQuant)</span>
 <span id="L302"><span class="lineNum">     302</span>              : {</span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">         674 :     ReducedFraction minOnTime(-1, 1);</span></span>
-<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">        1368 :     for (const auto&amp; note: chord.second.notes) {</span></span>
-<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">         694 :         const auto quant = quantForLen(note.offTime - chord.first, basicQuant);</span></span>
-<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">         694 :         const auto onTime = quantizeValue(chord.first, quant);</span></span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">         694 :         if (minOnTime == ReducedFraction(-1, 1) || onTime &lt; minOnTime) {</span></span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">         674 :             minOnTime = onTime;</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">         673 :     ReducedFraction minOnTime(-1, 1);</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">        1366 :     for (const auto&amp; note: chord.second.notes) {</span></span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">         693 :         const auto quant = quantForLen(note.offTime - chord.first, basicQuant);</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">         693 :         const auto onTime = quantizeValue(chord.first, quant);</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">         693 :         if (minOnTime == ReducedFraction(-1, 1) || onTime &lt; minOnTime) {</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">         673 :             minOnTime = onTime;</span></span>
 <span id="L309"><span class="lineNum">     309</span>              :         }</span>
 <span id="L310"><span class="lineNum">     310</span>              :     }</span>
-<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">         674 :     return minOnTime;</span></span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">         673 :     return minOnTime;</span></span>
 <span id="L312"><span class="lineNum">     312</span>              : }</span>
 <span id="L313"><span class="lineNum">     313</span>              : </span>
 <span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">         106 : ReducedFraction findMaxQuantizedTupletOffTime(</span></span>
@@ -551,8 +551,8 @@
 <span id="L493"><span class="lineNum">     493</span>              :     const ReducedFraction&amp; basicQuant)</span>
 <span id="L494"><span class="lineNum">     494</span>              : {</span>
 <span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">         915 :     auto it = std::next(chordIt);</span></span>
-<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">        1082 :     while (it != chords.end() &amp;&amp; it-&gt;second.voice != chordIt-&gt;second.voice) {</span></span>
-<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">         167 :         ++it;</span></span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">        1081 :     while (it != chords.end() &amp;&amp; it-&gt;second.voice != chordIt-&gt;second.voice) {</span></span>
+<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">         166 :         ++it;</span></span>
 <span id="L498"><span class="lineNum">     498</span>              :     }</span>
 <span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">         915 :     if (it != chords.end()) {</span></span>
 <span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">         744 :         const auto ioi = it-&gt;first - chordIt-&gt;first;</span></span>

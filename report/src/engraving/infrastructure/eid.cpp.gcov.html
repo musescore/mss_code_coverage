@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -88,21 +88,21 @@
 <span id="L30"><span class="lineNum">      30</span>              : </span>
 <span id="L31"><span class="lineNum">      31</span>              : static constexpr char SEPARATOR = '_';</span>
 <span id="L32"><span class="lineNum">      32</span>              : </span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC tlaBgGNC">      213634 : static char* toBase64Chars(char* const first, char* const last, uint64_t n)</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC tlaBgGNC">      213150 : static char* toBase64Chars(char* const first, char* const last, uint64_t n)</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : {</span>
 <span id="L35"><span class="lineNum">      35</span>              :     static constexpr char CHARS[65] = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;;</span>
 <span id="L36"><span class="lineNum">      36</span>              : </span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">      213634 :     IF_ASSERT_FAILED(static_cast&lt;size_t&gt;(last - first) &gt;= EID::MAX_UINT64_BASE64_SIZE) {</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">      213150 :     IF_ASSERT_FAILED(static_cast&lt;size_t&gt;(last - first) &gt;= EID::MAX_UINT64_BASE64_SIZE) {</span></span>
 <span id="L38"><span class="lineNum">      38</span> <span class="tlaUNC tlaBgUNC">           0 :         return first;</span></span>
 <span id="L39"><span class="lineNum">      39</span>              :     }</span>
 <span id="L40"><span class="lineNum">      40</span>              : </span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC tlaBgGNC">      213634 :     char* it = first;</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC tlaBgGNC">      213150 :     char* it = first;</span></span>
 <span id="L42"><span class="lineNum">      42</span>              :     do {</span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">      410142 :         *it++ = CHARS[n % 64];</span></span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">      410142 :         n = n / 64;</span></span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">      410142 :     } while (n != 0);</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">      409484 :         *it++ = CHARS[n % 64];</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">      409484 :         n = n / 64;</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">      409484 :     } while (n != 0);</span></span>
 <span id="L46"><span class="lineNum">      46</span>              : </span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">      213634 :     return it;</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">      213150 :     return it;</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : }</span>
 <span id="L49"><span class="lineNum">      49</span>              : </span>
 <span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">      442883 : static constexpr uint64_t charToInt(char c)</span></span>
@@ -190,26 +190,26 @@
 <span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">       75638 :     return result;</span></span>
 <span id="L133"><span class="lineNum">     133</span>              : }</span>
 <span id="L134"><span class="lineNum">     134</span>              : </span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">      106817 : char* EID::toChars(char* const first, char* const last) const</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">      106575 : char* EID::toChars(char* const first, char* const last) const</span></span>
 <span id="L136"><span class="lineNum">     136</span>              : {</span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">      106817 :     IF_ASSERT_FAILED(static_cast&lt;size_t&gt;(last - first) &gt;= MAX_STR_SIZE) {</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">      106575 :     IF_ASSERT_FAILED(static_cast&lt;size_t&gt;(last - first) &gt;= MAX_STR_SIZE) {</span></span>
 <span id="L138"><span class="lineNum">     138</span> <span class="tlaUNC tlaBgUNC">           0 :         return first;</span></span>
 <span id="L139"><span class="lineNum">     139</span>              :     }</span>
 <span id="L140"><span class="lineNum">     140</span>              : </span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC tlaBgGNC">      106817 :     char* it = toBase64Chars(first, last, m_first);</span></span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">      106817 :     *it++ = SEPARATOR;</span></span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">      106817 :     it = toBase64Chars(it, last, m_second);</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC tlaBgGNC">      106575 :     char* it = toBase64Chars(first, last, m_first);</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">      106575 :     *it++ = SEPARATOR;</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">      106575 :     it = toBase64Chars(it, last, m_second);</span></span>
 <span id="L144"><span class="lineNum">     144</span>              : </span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">      106817 :     return it;</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">      106575 :     return it;</span></span>
 <span id="L146"><span class="lineNum">     146</span>              : }</span>
 <span id="L147"><span class="lineNum">     147</span>              : </span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">       12589 : std::string EID::toStdString() const</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">       12537 : std::string EID::toStdString() const</span></span>
 <span id="L149"><span class="lineNum">     149</span>              : {</span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">       12589 :     std::string base64Repr(MAX_STR_SIZE, char {});</span></span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">       12589 :     const char* last = toChars(base64Repr.data(), base64Repr.data() + base64Repr.size());</span></span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">       12589 :     base64Repr.resize(last - base64Repr.data());</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">       12537 :     std::string base64Repr(MAX_STR_SIZE, char {});</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">       12537 :     const char* last = toChars(base64Repr.data(), base64Repr.data() + base64Repr.size());</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">       12537 :     base64Repr.resize(last - base64Repr.data());</span></span>
 <span id="L153"><span class="lineNum">     153</span>              : </span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">       12589 :     return base64Repr;</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">       12537 :     return base64Repr;</span></span>
 <span id="L155"><span class="lineNum">     155</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L156"><span class="lineNum">     156</span>              : </span>
 <span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC tlaBgGNC">       39409 : EID EID::fromStdString(const std::string&amp; s)</span></span>
@@ -249,17 +249,17 @@
 <span id="L191"><span class="lineNum">     191</span>              : // FOR UNIT TESTING</span>
 <span id="L192"><span class="lineNum">     192</span>              : // EIDs are creates sequentially instead of randomly for test repeatability</span>
 <span id="L193"><span class="lineNum">     193</span>              : </span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC tlaBgGNC">       70446 : EID EID::newUniqueTestMode(uint64_t&amp; maxVal)</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC tlaBgGNC">       70256 : EID EID::newUniqueTestMode(uint64_t&amp; maxVal)</span></span>
 <span id="L195"><span class="lineNum">     195</span>              : {</span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">       70446 :     ++maxVal;</span></span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">       70446 :     return EID(maxVal, maxVal);</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">       70256 :     ++maxVal;</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">       70256 :     return EID(maxVal, maxVal);</span></span>
 <span id="L198"><span class="lineNum">     198</span>              : }</span>
 <span id="L199"><span class="lineNum">     199</span>              : </span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">      102433 : void EID::updateMaxValTestMode(const EID&amp; curEID, uint64_t&amp; maxVal)</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">      102243 : void EID::updateMaxValTestMode(const EID&amp; curEID, uint64_t&amp; maxVal)</span></span>
 <span id="L201"><span class="lineNum">     201</span>              : {</span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">      102433 :     maxVal = std::max(maxVal, curEID.m_first);</span></span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">      102433 :     maxVal = std::max(maxVal, curEID.m_second);</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">      102433 : }</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">      102243 :     maxVal = std::max(maxVal, curEID.m_first);</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">      102243 :     maxVal = std::max(maxVal, curEID.m_second);</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">      102243 : }</span></span>
         </pre>
               </td>
             </tr>

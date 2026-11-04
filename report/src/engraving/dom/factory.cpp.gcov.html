@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -187,15 +187,15 @@
 <span id="L129"><span class="lineNum">     129</span>              : using namespace mu;</span>
 <span id="L130"><span class="lineNum">     130</span>              : using namespace mu::engraving;</span>
 <span id="L131"><span class="lineNum">     131</span>              : </span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC tlaBgGNC">        5128 : EngravingItem* Factory::createItem(ElementType type, DummyParentOr&lt;EngravingItem&gt; parent, bool isAccessibleEnabled)</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC tlaBgGNC">        5129 : EngravingItem* Factory::createItem(ElementType type, DummyParentOr&lt;EngravingItem&gt; parent, bool isAccessibleEnabled)</span></span>
 <span id="L133"><span class="lineNum">     133</span>              : {</span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">        5128 :     EngravingItem* item = doCreateItem(type, parent);</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">        5129 :     EngravingItem* item = doCreateItem(type, parent);</span></span>
 <span id="L135"><span class="lineNum">     135</span>              : </span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">        5128 :     if (item) {</span></span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">        5128 :         item-&gt;setAccessibleEnabled(isAccessibleEnabled);</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">        5129 :     if (item) {</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">        5129 :         item-&gt;setAccessibleEnabled(isAccessibleEnabled);</span></span>
 <span id="L138"><span class="lineNum">     138</span>              :     }</span>
 <span id="L139"><span class="lineNum">     139</span>              : </span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">        5128 :     return item;</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">        5129 :     return item;</span></span>
 <span id="L141"><span class="lineNum">     141</span>              : }</span>
 <span id="L142"><span class="lineNum">     142</span>              : </span>
 <span id="L143"><span class="lineNum">     143</span>              : //! The parent if it is of the given type, the dummy otherwise: a parent of the wrong</span>
@@ -206,16 +206,16 @@
 <span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">        1203 :     return parentOrDummy(dynamic_cast&lt;T*&gt;(parent), dummy);</span></span>
 <span id="L149"><span class="lineNum">     149</span>              : }</span>
 <span id="L150"><span class="lineNum">     150</span>              : </span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">        5128 : EngravingItem* Factory::doCreateItem(ElementType type, DummyParentOr&lt;EngravingItem&gt; parent)</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">        5129 : EngravingItem* Factory::doCreateItem(ElementType type, DummyParentOr&lt;EngravingItem&gt; parent)</span></span>
 <span id="L152"><span class="lineNum">     152</span>              : {</span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">        5128 :     EngravingObject* parentObject = parent;</span></span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">        5128 :     Score* score = parentObject-&gt;score();</span></span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">        5128 :     DummyParent* dummy = score-&gt;dummy();</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">        5129 :     EngravingObject* parentObject = parent;</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">        5129 :     Score* score = parentObject-&gt;score();</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">        5129 :     DummyParent* dummy = score-&gt;dummy();</span></span>
 <span id="L156"><span class="lineNum">     156</span>              :     // null when the item is to be created unattached; the cases below that need a</span>
 <span id="L157"><span class="lineNum">     157</span>              :     // parent of a particular type fall back to the dummy either way</span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        5128 :     EngravingItem* parentItem = parent.as&lt;EngravingItem&gt;();</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        5129 :     EngravingItem* parentItem = parent.as&lt;EngravingItem&gt;();</span></span>
 <span id="L159"><span class="lineNum">     159</span>              : </span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        5128 :     switch (type) {</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        5129 :     switch (type) {</span></span>
 <span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">         119 :     case ElementType::VOLTA:             return new Volta(parent);</span></span>
 <span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">         157 :     case ElementType::OTTAVA:            return new Ottava(parent);</span></span>
 <span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">          95 :     case ElementType::TEXTLINE:          return new TextLine(parent);</span></span>
@@ -307,7 +307,7 @@
 <span id="L249"><span class="lineNum">     249</span> <span class="tlaUNC tlaBgUNC">           0 :     case ElementType::TUPLET:            return new Tuplet(parentOfTypeOrDummy&lt;Measure&gt;(parentItem, dummy));</span></span>
 <span id="L250"><span class="lineNum">     250</span> <span class="tlaUNC">           0 :     case ElementType::FINGERING:         return new Fingering(parentOfTypeOrDummy&lt;Note&gt;(parentItem, dummy));</span></span>
 <span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC tlaBgGNC">          84 :     case ElementType::HBOX:              return new HBox(score);</span></span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">         695 :     case ElementType::VBOX:              return new VBox(score);</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">         696 :     case ElementType::VBOX:              return new VBox(score);</span></span>
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">         101 :     case ElementType::TBOX:              return new TBox(score);</span></span>
 <span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">           5 :     case ElementType::FBOX:              return new FBox(score);</span></span>
 <span id="L255"><span class="lineNum">     255</span> <span class="tlaUNC tlaBgUNC">           0 :     case ElementType::MEASURE:           return new Measure(score);</span></span>
@@ -388,14 +388,14 @@
 <span id="L330"><span class="lineNum">     330</span> <span class="tlaUNC">           0 :     return nullptr;</span></span>
 <span id="L331"><span class="lineNum">     331</span>              : }</span>
 <span id="L332"><span class="lineNum">     332</span>              : </span>
-<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC tlaBgGNC">        4402 : EngravingItem* Factory::createItemByName(const AsciiStringView&amp; name, DummyParentOr&lt;EngravingItem&gt; parent, bool isAccessibleEnabled)</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC tlaBgGNC">        4403 : EngravingItem* Factory::createItemByName(const AsciiStringView&amp; name, DummyParentOr&lt;EngravingItem&gt; parent, bool isAccessibleEnabled)</span></span>
 <span id="L334"><span class="lineNum">     334</span>              : {</span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">        4402 :     ElementType type = TConv::fromXml(name, ElementType::INVALID, isAccessibleEnabled);</span></span>
-<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">        4402 :     if (type == ElementType::INVALID) {</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">        4403 :     ElementType type = TConv::fromXml(name, ElementType::INVALID, isAccessibleEnabled);</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">        4403 :     if (type == ElementType::INVALID) {</span></span>
 <span id="L337"><span class="lineNum">     337</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGE() &lt;&lt; &quot;Invalid type: &quot; &lt;&lt; name;</span></span>
 <span id="L338"><span class="lineNum">     338</span> <span class="tlaUNC">           0 :         return nullptr;</span></span>
 <span id="L339"><span class="lineNum">     339</span>              :     }</span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC tlaBgGNC">        4402 :     return createItem(type, parent, isAccessibleEnabled);</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC tlaBgGNC">        4403 :     return createItem(type, parent, isAccessibleEnabled);</span></span>
 <span id="L341"><span class="lineNum">     341</span>              : }</span>
 <span id="L342"><span class="lineNum">     342</span>              : </span>
 <span id="L343"><span class="lineNum">     343</span>              : #define CREATE_ITEM_IMPL(T, P, isAccessibleEnabled) \</span>
@@ -440,11 +440,11 @@
 <span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC tlaBgGNC">         277 : CREATE_ITEM_IMPL(Ornament, DummyParentOr&lt;ChordRest&gt;, isAccessibleEnabled)</span></span>
 <span id="L383"><span class="lineNum">     383</span> <span class="tlaUNC tlaBgUNC">           0 : MAKE_ITEM_IMPL(Ornament, DummyParentOr&lt;ChordRest&gt;)</span></span>
 <span id="L384"><span class="lineNum">     384</span>              : </span>
-<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC tlaBgGNC">       27745 : CREATE_ITEM_IMPL(BarLine, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC tlaBgGNC">       27842 : CREATE_ITEM_IMPL(BarLine, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
 <span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">           4 : COPY_ITEM_IMPL(BarLine)</span></span>
 <span id="L387"><span class="lineNum">     387</span> <span class="tlaUNC tlaBgUNC">           0 : MAKE_ITEM_IMPL(BarLine, DummyParentOr&lt;Segment&gt;)</span></span>
 <span id="L388"><span class="lineNum">     388</span>              : </span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC tlaBgGNC">        2794 : CREATE_ITEM_IMPL(Beam, Score*, isAccessibleEnabled)</span></span>
+<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC tlaBgGNC">        2870 : CREATE_ITEM_IMPL(Beam, Score*, isAccessibleEnabled)</span></span>
 <span id="L390"><span class="lineNum">     390</span> <span class="tlaUNC tlaBgUNC">           0 : MAKE_ITEM_IMPL(Beam, Score*)</span></span>
 <span id="L391"><span class="lineNum">     391</span>              : </span>
 <span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC tlaBgGNC">           4 : CREATE_ITEM_IMPL(Bend, DummyParentOr&lt;Note&gt;, isAccessibleEnabled)</span></span>
@@ -468,7 +468,7 @@
 <span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">         119 : CREATE_ITEM_IMPL(Breath, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
 <span id="L411"><span class="lineNum">     411</span> <span class="tlaUNC tlaBgUNC">           0 : MAKE_ITEM_IMPL(Breath, DummyParentOr&lt;Segment&gt;)</span></span>
 <span id="L412"><span class="lineNum">     412</span>              : </span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC tlaBgGNC">       29663 : CREATE_ITEM_IMPL(Chord, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC tlaBgGNC">       30022 : CREATE_ITEM_IMPL(Chord, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
 <span id="L414"><span class="lineNum">     414</span>              : </span>
 <span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">         522 : Chord* Factory::copyChord(const Chord&amp; src, bool link)</span></span>
 <span id="L416"><span class="lineNum">     416</span>              : {</span>
@@ -483,7 +483,7 @@
 <span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">           4 : COPY_ITEM_IMPL(ChordLine)</span></span>
 <span id="L426"><span class="lineNum">     426</span> <span class="tlaUNC tlaBgUNC">           0 : MAKE_ITEM_IMPL(ChordLine, DummyParentOr&lt;Chord&gt;)</span></span>
 <span id="L427"><span class="lineNum">     427</span>              : </span>
-<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC tlaBgGNC">        6584 : CREATE_ITEM_IMPL(Clef, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC tlaBgGNC">        6608 : CREATE_ITEM_IMPL(Clef, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
 <span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">          14 : COPY_ITEM_IMPL(Clef)</span></span>
 <span id="L430"><span class="lineNum">     430</span> <span class="tlaUNC tlaBgUNC">           0 : MAKE_ITEM_IMPL(Clef, DummyParentOr&lt;Segment&gt;)</span></span>
 <span id="L431"><span class="lineNum">     431</span>              : </span>
@@ -504,14 +504,14 @@
 <span id="L446"><span class="lineNum">     446</span> <span class="tlaUNC tlaBgUNC">           0 : COPY_ITEM_IMPL(HarpPedalDiagram)</span></span>
 <span id="L447"><span class="lineNum">     447</span> <span class="tlaUNC">           0 : MAKE_ITEM_IMPL(HarpPedalDiagram, DummyParentOr&lt;Segment&gt;);</span></span>
 <span id="L448"><span class="lineNum">     448</span>              : </span>
-<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC tlaBgGNC">        6912 : CREATE_ITEM_IMPL(KeySig, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
+<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC tlaBgGNC">        6936 : CREATE_ITEM_IMPL(KeySig, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
 <span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">          18 : COPY_ITEM_IMPL(KeySig)</span></span>
 <span id="L451"><span class="lineNum">     451</span> <span class="tlaUNC tlaBgUNC">           0 : MAKE_ITEM_IMPL(KeySig, DummyParentOr&lt;Segment&gt;)</span></span>
 <span id="L452"><span class="lineNum">     452</span>              : </span>
 <span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC tlaBgGNC">          21 : CREATE_ITEM_IMPL(LaissezVib, DummyParentOr&lt;Note&gt;, isAccessibleEnabled)</span></span>
 <span id="L454"><span class="lineNum">     454</span> <span class="tlaUNC tlaBgUNC">           0 : COPY_ITEM_IMPL(LaissezVib);</span></span>
 <span id="L455"><span class="lineNum">     455</span>              : </span>
-<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC tlaBgGNC">         934 : CREATE_ITEM_IMPL(LayoutBreak, DummyParentOr&lt;MeasureBase&gt;, isAccessibleEnabled)</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC tlaBgGNC">         941 : CREATE_ITEM_IMPL(LayoutBreak, DummyParentOr&lt;MeasureBase&gt;, isAccessibleEnabled)</span></span>
 <span id="L457"><span class="lineNum">     457</span> <span class="tlaUNC tlaBgUNC">           0 : COPY_ITEM_IMPL(LayoutBreak)</span></span>
 <span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC">           0 : MAKE_ITEM_IMPL(LayoutBreak, DummyParentOr&lt;MeasureBase&gt;)</span></span>
 <span id="L459"><span class="lineNum">     459</span>              : </span>
@@ -521,7 +521,7 @@
 <span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">         239 : CREATE_ITEM_IMPL(LyricsLine, DummyParentOr&lt;EngravingItem&gt;, isAccessibleEnabled)</span></span>
 <span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC tlaBgUNC">           0 : COPY_ITEM_IMPL(LyricsLine)</span></span>
 <span id="L465"><span class="lineNum">     465</span>              : </span>
-<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC tlaBgGNC">       17069 : CREATE_ITEM_IMPL(Measure, Score*, isAccessibleEnabled)</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC tlaBgGNC">       17154 : CREATE_ITEM_IMPL(Measure, Score*, isAccessibleEnabled)</span></span>
 <span id="L467"><span class="lineNum">     467</span> <span class="tlaUNC tlaBgUNC">           0 : COPY_ITEM_IMPL(Measure)</span></span>
 <span id="L468"><span class="lineNum">     468</span>              : </span>
 <span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC tlaBgGNC">         133 : CREATE_ITEM_IMPL(MeasureRepeat, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
@@ -531,24 +531,24 @@
 <span id="L473"><span class="lineNum">     473</span> <span class="tlaUNC tlaBgUNC">           0 : COPY_ITEM_IMPL(StringTunings)</span></span>
 <span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC">           0 : MAKE_ITEM_IMPL(StringTunings, DummyParentOr&lt;Segment&gt;);</span></span>
 <span id="L475"><span class="lineNum">     475</span>              : </span>
-<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC tlaBgGNC">       35329 : CREATE_ITEM_IMPL(Note, DummyParentOr&lt;Chord&gt;, isAccessibleEnabled)</span></span>
-<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">        5479 : Note* Factory::copyNote(const Note&amp; src, bool link)</span></span>
+<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC tlaBgGNC">       35688 : CREATE_ITEM_IMPL(Note, DummyParentOr&lt;Chord&gt;, isAccessibleEnabled)</span></span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">        5506 : Note* Factory::copyNote(const Note&amp; src, bool link)</span></span>
 <span id="L478"><span class="lineNum">     478</span>              : {</span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">        5479 :     Note* copy = new Note(src, link);</span></span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">        5479 :     copy-&gt;setAccessibleEnabled(src.accessibleEnabled());</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">        5506 :     Note* copy = new Note(src, link);</span></span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">        5506 :     copy-&gt;setAccessibleEnabled(src.accessibleEnabled());</span></span>
 <span id="L481"><span class="lineNum">     481</span>              : </span>
-<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">        5479 :     return copy;</span></span>
+<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">        5506 :     return copy;</span></span>
 <span id="L483"><span class="lineNum">     483</span>              : }</span>
 <span id="L484"><span class="lineNum">     484</span> <span class="tlaUNC tlaBgUNC">           0 : MAKE_ITEM_IMPL(Note, DummyParentOr&lt;Chord&gt;)</span></span>
 <span id="L485"><span class="lineNum">     485</span>              : </span>
-<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC tlaBgGNC">         668 : CREATE_ITEM_IMPL(NoteDot, DummyParentOr&lt;Note&gt;, isAccessibleEnabled)</span></span>
-<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">         139 : CREATE_ITEM_IMPL(NoteDot, Rest*, isAccessibleEnabled)</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC tlaBgGNC">         676 : CREATE_ITEM_IMPL(NoteDot, DummyParentOr&lt;Note&gt;, isAccessibleEnabled)</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">         145 : CREATE_ITEM_IMPL(NoteDot, Rest*, isAccessibleEnabled)</span></span>
 <span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">          37 : COPY_ITEM_IMPL(NoteDot)</span></span>
 <span id="L489"><span class="lineNum">     489</span>              : </span>
 <span id="L490"><span class="lineNum">     490</span> <span class="tlaUNC tlaBgUNC">           0 : CREATE_ITEM_IMPL(NoteLine, DummyParentOr&lt;Note&gt;, isAccessibleEnabled)</span></span>
 <span id="L491"><span class="lineNum">     491</span> <span class="tlaUNC">           0 : MAKE_ITEM_IMPL(NoteLine, DummyParentOr&lt;Note&gt;);</span></span>
 <span id="L492"><span class="lineNum">     492</span>              : </span>
-<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC tlaBgGNC">        3524 : CREATE_ITEM_IMPL(Page, Score*, isAccessibleEnabled)</span></span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC tlaBgGNC">        3549 : CREATE_ITEM_IMPL(Page, Score*, isAccessibleEnabled)</span></span>
 <span id="L494"><span class="lineNum">     494</span>              : </span>
 <span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">          56 : PageLockIndicator* Factory::createPageLockIndicator(DummyParentOr&lt;System&gt; parent, const RangeLock * lock, bool isAccessibleEnabled)</span></span>
 <span id="L496"><span class="lineNum">     496</span>              : {</span>
@@ -565,14 +565,14 @@
 <span id="L507"><span class="lineNum">     507</span> <span class="tlaGNC tlaBgGNC">           2 : CREATE_ITEM_IMPL(PartialLyricsLine, DummyParentOr&lt;EngravingItem&gt;, isAccessibleEnabled)</span></span>
 <span id="L508"><span class="lineNum">     508</span> <span class="tlaUNC tlaBgUNC">           0 : COPY_ITEM_IMPL(PartialLyricsLine)</span></span>
 <span id="L509"><span class="lineNum">     509</span>              : </span>
-<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC tlaBgGNC">       18289 : CREATE_ITEM_IMPL(Rest, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
+<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC tlaBgGNC">       18391 : CREATE_ITEM_IMPL(Rest, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
 <span id="L511"><span class="lineNum">     511</span>              : </span>
-<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">        2895 : Rest* Factory::createRest(DummyParentOr&lt;Segment&gt; parent, const TDuration&amp; t, bool isAccessibleEnabled)</span></span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">        2904 : Rest* Factory::createRest(DummyParentOr&lt;Segment&gt; parent, const TDuration&amp; t, bool isAccessibleEnabled)</span></span>
 <span id="L513"><span class="lineNum">     513</span>              : {</span>
-<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">        2895 :     Rest* r = new Rest(parent, t);</span></span>
-<span id="L515"><span class="lineNum">     515</span> <span class="tlaGNC">        2895 :     r-&gt;setAccessibleEnabled(isAccessibleEnabled);</span></span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">        2904 :     Rest* r = new Rest(parent, t);</span></span>
+<span id="L515"><span class="lineNum">     515</span> <span class="tlaGNC">        2904 :     r-&gt;setAccessibleEnabled(isAccessibleEnabled);</span></span>
 <span id="L516"><span class="lineNum">     516</span>              : </span>
-<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">        2895 :     return r;</span></span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">        2904 :     return r;</span></span>
 <span id="L518"><span class="lineNum">     518</span>              : }</span>
 <span id="L519"><span class="lineNum">     519</span>              : </span>
 <span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">           1 : Rest* Factory::copyRest(const Rest&amp; src, bool link)</span></span>
@@ -585,12 +585,12 @@
 <span id="L527"><span class="lineNum">     527</span>              : </span>
 <span id="L528"><span class="lineNum">     528</span> <span class="tlaUNC tlaBgUNC">           0 : CREATE_ITEM_IMPL(Segment, DummyParentOr&lt;Measure&gt;, isAccessibleEnabled)</span></span>
 <span id="L529"><span class="lineNum">     529</span>              : </span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC tlaBgGNC">       68365 : Segment* Factory::createSegment(DummyParentOr&lt;Measure&gt; parent, SegmentType type, const Fraction&amp; t, bool isAccessibleEnabled)</span></span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC tlaBgGNC">       68952 : Segment* Factory::createSegment(DummyParentOr&lt;Measure&gt; parent, SegmentType type, const Fraction&amp; t, bool isAccessibleEnabled)</span></span>
 <span id="L531"><span class="lineNum">     531</span>              : {</span>
-<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">       68365 :     Segment* s = new Segment(parent, type, t);</span></span>
-<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">       68365 :     s-&gt;setAccessibleEnabled(isAccessibleEnabled);</span></span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">       68952 :     Segment* s = new Segment(parent, type, t);</span></span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">       68952 :     s-&gt;setAccessibleEnabled(isAccessibleEnabled);</span></span>
 <span id="L534"><span class="lineNum">     534</span>              : </span>
-<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">       68365 :     return s;</span></span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">       68952 :     return s;</span></span>
 <span id="L536"><span class="lineNum">     536</span>              : }</span>
 <span id="L537"><span class="lineNum">     537</span>              : </span>
 <span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">         177 : CREATE_ITEM_IMPL(Slur, DummyParentOr&lt;EngravingItem&gt;, isAccessibleEnabled)</span></span>
@@ -599,14 +599,14 @@
 <span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC tlaBgGNC">           1 : CREATE_ITEM_IMPL(Spacer, DummyParentOr&lt;Measure&gt;, isAccessibleEnabled)</span></span>
 <span id="L542"><span class="lineNum">     542</span> <span class="tlaUNC tlaBgUNC">           0 : MAKE_ITEM_IMPL(Spacer, DummyParentOr&lt;Measure&gt;)</span></span>
 <span id="L543"><span class="lineNum">     543</span>              : </span>
-<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC tlaBgGNC">        3536 : Staff* Factory::createStaff(Part * parent)</span></span>
+<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC tlaBgGNC">        3552 : Staff* Factory::createStaff(Part * parent)</span></span>
 <span id="L545"><span class="lineNum">     545</span>              : {</span>
-<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">        3536 :     Staff* staff = new Staff(parent);</span></span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">        3536 :     staff-&gt;setPart(parent);</span></span>
-<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">        3536 :     return staff;</span></span>
+<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">        3552 :     Staff* staff = new Staff(parent);</span></span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">        3552 :     staff-&gt;setPart(parent);</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">        3552 :     return staff;</span></span>
 <span id="L549"><span class="lineNum">     549</span>              : }</span>
 <span id="L550"><span class="lineNum">     550</span>              : </span>
-<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">       24475 : CREATE_ITEM_IMPL(StaffLines, DummyParentOr&lt;Measure&gt;, isAccessibleEnabled)</span></span>
+<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">       24568 : CREATE_ITEM_IMPL(StaffLines, DummyParentOr&lt;Measure&gt;, isAccessibleEnabled)</span></span>
 <span id="L552"><span class="lineNum">     552</span> <span class="tlaUNC tlaBgUNC">           0 : COPY_ITEM_IMPL(StaffLines)</span></span>
 <span id="L553"><span class="lineNum">     553</span>              : </span>
 <span id="L554"><span class="lineNum">     554</span> <span class="tlaUNC">           0 : CREATE_ITEM_IMPL(StaffState, DummyParentOr&lt;EngravingItem&gt;, isAccessibleEnabled)</span></span>
@@ -635,13 +635,13 @@
 <span id="L577"><span class="lineNum">     577</span>              : </span>
 <span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">          36 : CREATE_ITEM_IMPL(RehearsalMark, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
 <span id="L579"><span class="lineNum">     579</span>              : </span>
-<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">       27109 : CREATE_ITEM_IMPL(Stem, DummyParentOr&lt;Chord&gt;, isAccessibleEnabled)</span></span>
-<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">        2485 : COPY_ITEM_IMPL(Stem)</span></span>
+<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">       27469 : CREATE_ITEM_IMPL(Stem, DummyParentOr&lt;Chord&gt;, isAccessibleEnabled)</span></span>
+<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">        2511 : COPY_ITEM_IMPL(Stem)</span></span>
 <span id="L582"><span class="lineNum">     582</span>              : </span>
 <span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">         141 : CREATE_ITEM_IMPL(StemSlash, DummyParentOr&lt;Chord&gt;, isAccessibleEnabled)</span></span>
 <span id="L584"><span class="lineNum">     584</span> <span class="tlaUNC tlaBgUNC">           0 : COPY_ITEM_IMPL(StemSlash)</span></span>
 <span id="L585"><span class="lineNum">     585</span>              : </span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC tlaBgGNC">        8310 : CREATE_ITEM_IMPL(System, Score*, isAccessibleEnabled)</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC tlaBgGNC">        8350 : CREATE_ITEM_IMPL(System, Score*, isAccessibleEnabled)</span></span>
 <span id="L587"><span class="lineNum">     587</span>              : </span>
 <span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">          14 : SystemText* Factory::createSystemText(DummyParentOr&lt;Segment&gt; parent, TextStyleType textStyleType, ElementType type,</span></span>
 <span id="L589"><span class="lineNum">     589</span>              :                                       bool isAccessibleEnabled)</span>
@@ -680,17 +680,17 @@
 <span id="L622"><span class="lineNum">     622</span>              : </span>
 <span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">         747 : CREATE_ITEM_IMPL(TempoText, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
 <span id="L624"><span class="lineNum">     624</span>              : </span>
-<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">       15205 : Text* Factory::createText(DummyParentOr&lt;EngravingItem&gt; parent, TextStyleType tid, bool isAccessibleEnabled)</span></span>
+<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">       15333 : Text* Factory::createText(DummyParentOr&lt;EngravingItem&gt; parent, TextStyleType tid, bool isAccessibleEnabled)</span></span>
 <span id="L626"><span class="lineNum">     626</span>              : {</span>
-<span id="L627"><span class="lineNum">     627</span> <span class="tlaGNC">       15205 :     Text* t = new Text(parent, tid);</span></span>
-<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">       15205 :     t-&gt;setAccessibleEnabled(isAccessibleEnabled);</span></span>
+<span id="L627"><span class="lineNum">     627</span> <span class="tlaGNC">       15333 :     Text* t = new Text(parent, tid);</span></span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">       15333 :     t-&gt;setAccessibleEnabled(isAccessibleEnabled);</span></span>
 <span id="L629"><span class="lineNum">     629</span>              : </span>
-<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">       15205 :     return t;</span></span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">       15333 :     return t;</span></span>
 <span id="L631"><span class="lineNum">     631</span>              : }</span>
 <span id="L632"><span class="lineNum">     632</span>              : </span>
 <span id="L633"><span class="lineNum">     633</span> <span class="tlaUNC tlaBgUNC">           0 : COPY_ITEM_IMPL(Text)</span></span>
 <span id="L634"><span class="lineNum">     634</span>              : </span>
-<span id="L635"><span class="lineNum">     635</span> <span class="tlaGNC tlaBgGNC">         610 : CREATE_ITEM_IMPL(Tie, DummyParentOr&lt;EngravingItem&gt;, isAccessibleEnabled)</span></span>
+<span id="L635"><span class="lineNum">     635</span> <span class="tlaGNC tlaBgGNC">         611 : CREATE_ITEM_IMPL(Tie, DummyParentOr&lt;EngravingItem&gt;, isAccessibleEnabled)</span></span>
 <span id="L636"><span class="lineNum">     636</span> <span class="tlaGNC">         425 : Tie* Factory::copyTie(const Tie&amp; src)</span></span>
 <span id="L637"><span class="lineNum">     637</span>              : {</span>
 <span id="L638"><span class="lineNum">     638</span> <span class="tlaGNC">         425 :     Tie* copy = src.isLaissezVib() ? new LaissezVib(*toLaissezVib(&amp;src)) : new Tie(src);</span></span>
@@ -699,8 +699,8 @@
 <span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">         425 :     return copy;</span></span>
 <span id="L642"><span class="lineNum">     642</span>              : }</span>
 <span id="L643"><span class="lineNum">     643</span>              : </span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">        3577 : CREATE_ITEM_IMPL(TimeSig, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
-<span id="L645"><span class="lineNum">     645</span> <span class="tlaGNC">          86 : COPY_ITEM_IMPL(TimeSig)</span></span>
+<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">        3591 : CREATE_ITEM_IMPL(TimeSig, DummyParentOr&lt;Segment&gt;, isAccessibleEnabled)</span></span>
+<span id="L645"><span class="lineNum">     645</span> <span class="tlaGNC">          88 : COPY_ITEM_IMPL(TimeSig)</span></span>
 <span id="L646"><span class="lineNum">     646</span> <span class="tlaUNC tlaBgUNC">           0 : MAKE_ITEM_IMPL(TimeSig, DummyParentOr&lt;Segment&gt;)</span></span>
 <span id="L647"><span class="lineNum">     647</span>              : </span>
 <span id="L648"><span class="lineNum">     648</span> <span class="tlaGNC tlaBgGNC">          73 : CREATE_ITEM_IMPL(TremoloTwoChord, DummyParentOr&lt;Chord&gt;, isAccessibleEnabled)</span></span>
@@ -714,7 +714,7 @@
 <span id="L656"><span class="lineNum">     656</span> <span class="tlaGNC tlaBgGNC">          25 : CREATE_ITEM_IMPL(TremoloBar, DummyParentOr&lt;EngravingItem&gt;, isAccessibleEnabled)</span></span>
 <span id="L657"><span class="lineNum">     657</span> <span class="tlaUNC tlaBgUNC">           0 : MAKE_ITEM_IMPL(TremoloBar, DummyParentOr&lt;EngravingItem&gt;)</span></span>
 <span id="L658"><span class="lineNum">     658</span>              : </span>
-<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC tlaBgGNC">         831 : CREATE_ITEM_IMPL(Tuplet, DummyParentOr&lt;Measure&gt;, isAccessibleEnabled)</span></span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC tlaBgGNC">         869 : CREATE_ITEM_IMPL(Tuplet, DummyParentOr&lt;Measure&gt;, isAccessibleEnabled)</span></span>
 <span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">           4 : COPY_ITEM_IMPL(Tuplet)</span></span>
 <span id="L661"><span class="lineNum">     661</span>              : </span>
 <span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">          54 : CREATE_ITEM_IMPL(Hairpin, DummyParentOr&lt;EngravingItem&gt;, isAccessibleEnabled)</span></span>

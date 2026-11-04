@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -87,19 +87,19 @@
 <span id="L29"><span class="lineNum">      29</span>              : namespace mu::engraving {</span>
 <span id="L30"><span class="lineNum">      30</span>              : static constexpr size_t VOICES = 4;</span>
 <span id="L31"><span class="lineNum">      31</span>              : </span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC tlaBgGNC">      333242 : inline constexpr track_idx_t staff2track(staff_idx_t staffIdx, voice_idx_t voiceIdx = 0)</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC tlaBgGNC">      334828 : inline constexpr track_idx_t staff2track(staff_idx_t staffIdx, voice_idx_t voiceIdx = 0)</span></span>
 <span id="L33"><span class="lineNum">      33</span>              : {</span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">      333242 :     return staffIdx != muse::nidx ? staffIdx * VOICES + voiceIdx : muse::nidx;</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">      334828 :     return staffIdx != muse::nidx ? staffIdx * VOICES + voiceIdx : muse::nidx;</span></span>
 <span id="L35"><span class="lineNum">      35</span>              : }</span>
 <span id="L36"><span class="lineNum">      36</span>              : </span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">    36703319 : inline constexpr staff_idx_t track2staff(track_idx_t track)</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">    37377133 : inline constexpr staff_idx_t track2staff(track_idx_t track)</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : {</span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">    36703319 :     return track != muse::nidx ? track / VOICES : muse::nidx;</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">    37377133 :     return track != muse::nidx ? track / VOICES : muse::nidx;</span></span>
 <span id="L40"><span class="lineNum">      40</span>              : }</span>
 <span id="L41"><span class="lineNum">      41</span>              : </span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">     2518669 : inline constexpr voice_idx_t track2voice(track_idx_t track)</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">     2534101 : inline constexpr voice_idx_t track2voice(track_idx_t track)</span></span>
 <span id="L43"><span class="lineNum">      43</span>              : {</span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">     2518669 :     return track != muse::nidx ? track % VOICES : muse::nidx;</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">     2534101 :     return track != muse::nidx ? track % VOICES : muse::nidx;</span></span>
 <span id="L45"><span class="lineNum">      45</span>              : }</span>
 <span id="L46"><span class="lineNum">      46</span>              : </span>
 <span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">       11128 : inline constexpr track_idx_t trackZeroVoice(track_idx_t track)</span></span>
@@ -215,77 +215,79 @@
 <span id="L157"><span class="lineNum">     157</span>              :     CANNOT_REPEAT_SELECTION,</span>
 <span id="L158"><span class="lineNum">     158</span>              :     TRANSPOSE_NO_FRET_DIAGRAM,</span>
 <span id="L159"><span class="lineNum">     159</span>              :     CANNOT_EXPLODE_IMPLODE_LOCAL_TIMESIG,</span>
-<span id="L160"><span class="lineNum">     160</span>              : };</span>
-<span id="L161"><span class="lineNum">     161</span>              : </span>
-<span id="L162"><span class="lineNum">     162</span>              : /// \cond PLUGIN_API \private \endcond</span>
-<span id="L163"><span class="lineNum">     163</span>              : struct MScoreError {</span>
-<span id="L164"><span class="lineNum">     164</span>              :     MsError no;</span>
-<span id="L165"><span class="lineNum">     165</span>              :     const char* group;</span>
-<span id="L166"><span class="lineNum">     166</span>              :     const char* txt;</span>
-<span id="L167"><span class="lineNum">     167</span>              : };</span>
-<span id="L168"><span class="lineNum">     168</span>              : </span>
-<span id="L169"><span class="lineNum">     169</span>              : //---------------------------------------------------------</span>
-<span id="L170"><span class="lineNum">     170</span>              : //   MScore</span>
-<span id="L171"><span class="lineNum">     171</span>              : //    MuseScore application object</span>
-<span id="L172"><span class="lineNum">     172</span>              : //---------------------------------------------------------</span>
-<span id="L173"><span class="lineNum">     173</span>              : </span>
-<span id="L174"><span class="lineNum">     174</span>              : class MScore</span>
-<span id="L175"><span class="lineNum">     175</span>              : {</span>
-<span id="L176"><span class="lineNum">     176</span>              :     static int _hRaster, _vRaster;</span>
-<span id="L177"><span class="lineNum">     177</span>              :     static bool _verticalOrientation;</span>
-<span id="L178"><span class="lineNum">     178</span>              : </span>
-<span id="L179"><span class="lineNum">     179</span>              : public:</span>
+<span id="L160"><span class="lineNum">     160</span>              :     NO_SPACE_FOR_TUPLET,</span>
+<span id="L161"><span class="lineNum">     161</span>              :     TUPLET_NOTE_VALUE_TOO_SHORT,</span>
+<span id="L162"><span class="lineNum">     162</span>              : };</span>
+<span id="L163"><span class="lineNum">     163</span>              : </span>
+<span id="L164"><span class="lineNum">     164</span>              : /// \cond PLUGIN_API \private \endcond</span>
+<span id="L165"><span class="lineNum">     165</span>              : struct MScoreError {</span>
+<span id="L166"><span class="lineNum">     166</span>              :     MsError no;</span>
+<span id="L167"><span class="lineNum">     167</span>              :     const char* group;</span>
+<span id="L168"><span class="lineNum">     168</span>              :     const char* txt;</span>
+<span id="L169"><span class="lineNum">     169</span>              : };</span>
+<span id="L170"><span class="lineNum">     170</span>              : </span>
+<span id="L171"><span class="lineNum">     171</span>              : //---------------------------------------------------------</span>
+<span id="L172"><span class="lineNum">     172</span>              : //   MScore</span>
+<span id="L173"><span class="lineNum">     173</span>              : //    MuseScore application object</span>
+<span id="L174"><span class="lineNum">     174</span>              : //---------------------------------------------------------</span>
+<span id="L175"><span class="lineNum">     175</span>              : </span>
+<span id="L176"><span class="lineNum">     176</span>              : class MScore</span>
+<span id="L177"><span class="lineNum">     177</span>              : {</span>
+<span id="L178"><span class="lineNum">     178</span>              :     static int _hRaster, _vRaster;</span>
+<span id="L179"><span class="lineNum">     179</span>              :     static bool _verticalOrientation;</span>
 <span id="L180"><span class="lineNum">     180</span>              : </span>
-<span id="L181"><span class="lineNum">     181</span>              :     static MsError _error;</span>
-<span id="L182"><span class="lineNum">     182</span>              :     static bool _errorIsWarning;</span>
-<span id="L183"><span class="lineNum">     183</span>              : </span>
-<span id="L184"><span class="lineNum">     184</span>              :     static void registerUiTypes();</span>
+<span id="L181"><span class="lineNum">     181</span>              : public:</span>
+<span id="L182"><span class="lineNum">     182</span>              : </span>
+<span id="L183"><span class="lineNum">     183</span>              :     static MsError _error;</span>
+<span id="L184"><span class="lineNum">     184</span>              :     static bool _errorIsWarning;</span>
 <span id="L185"><span class="lineNum">     185</span>              : </span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC tlaBgUNC">           0 :     static double hRaster() { return _hRaster; }</span></span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC">           0 :     static double vRaster() { return _vRaster; }</span></span>
-<span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC">           0 :     static void setHRaster(int val) { _hRaster = val; }</span></span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaUNC">           0 :     static void setVRaster(int val) { _vRaster = val; }</span></span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">          16 :     static void setNudgeStep(double val) { nudgeStep = val; }</span></span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">          16 :     static void setNudgeStep10(double val) { nudgeStep10 = val; }</span></span>
-<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">          16 :     static void setNudgeStep50(double val) { nudgeStep50 = val; }</span></span>
-<span id="L193"><span class="lineNum">     193</span>              : </span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">         161 :     static bool verticalOrientation() { return _verticalOrientation; }</span></span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaUNC tlaBgUNC">           0 :     static void setVerticalOrientation(bool val) { _verticalOrientation = val; }</span></span>
-<span id="L196"><span class="lineNum">     196</span>              : </span>
-<span id="L197"><span class="lineNum">     197</span>              :     static bool warnPitchRange;</span>
-<span id="L198"><span class="lineNum">     198</span>              :     static bool warnGuitarBends;</span>
-<span id="L199"><span class="lineNum">     199</span>              :     static int pedalEventsMinTicks;</span>
-<span id="L200"><span class="lineNum">     200</span>              : </span>
-<span id="L201"><span class="lineNum">     201</span>              :     static double nudgeStep;</span>
-<span id="L202"><span class="lineNum">     202</span>              :     static double nudgeStep10;</span>
-<span id="L203"><span class="lineNum">     203</span>              :     static double nudgeStep50;</span>
-<span id="L204"><span class="lineNum">     204</span>              : </span>
-<span id="L205"><span class="lineNum">     205</span>              : // #ifndef NDEBUG</span>
-<span id="L206"><span class="lineNum">     206</span>              :     static bool noHorizontalStretch;</span>
-<span id="L207"><span class="lineNum">     207</span>              :     static bool noVerticalStretch;</span>
-<span id="L208"><span class="lineNum">     208</span>              :     static bool useFallbackFont;</span>
-<span id="L209"><span class="lineNum">     209</span>              : // #endif</span>
-<span id="L210"><span class="lineNum">     210</span>              :     static bool debugMode;</span>
-<span id="L211"><span class="lineNum">     211</span>              :     static bool testMode;</span>
-<span id="L212"><span class="lineNum">     212</span>              :     static bool testWriteStyleToScore;</span>
-<span id="L213"><span class="lineNum">     213</span>              : </span>
-<span id="L214"><span class="lineNum">     214</span>              :     static bool saveTemplateMode;</span>
-<span id="L215"><span class="lineNum">     215</span>              :     static bool noGui;</span>
-<span id="L216"><span class="lineNum">     216</span>              : </span>
-<span id="L217"><span class="lineNum">     217</span>              :     static bool noImages;</span>
+<span id="L186"><span class="lineNum">     186</span>              :     static void registerUiTypes();</span>
+<span id="L187"><span class="lineNum">     187</span>              : </span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC tlaBgUNC">           0 :     static double hRaster() { return _hRaster; }</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaUNC">           0 :     static double vRaster() { return _vRaster; }</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :     static void setHRaster(int val) { _hRaster = val; }</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaUNC">           0 :     static void setVRaster(int val) { _vRaster = val; }</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC tlaBgGNC">          16 :     static void setNudgeStep(double val) { nudgeStep = val; }</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">          16 :     static void setNudgeStep10(double val) { nudgeStep10 = val; }</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">          16 :     static void setNudgeStep50(double val) { nudgeStep50 = val; }</span></span>
+<span id="L195"><span class="lineNum">     195</span>              : </span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">         161 :     static bool verticalOrientation() { return _verticalOrientation; }</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC tlaBgUNC">           0 :     static void setVerticalOrientation(bool val) { _verticalOrientation = val; }</span></span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span>              :     static bool warnPitchRange;</span>
+<span id="L200"><span class="lineNum">     200</span>              :     static bool warnGuitarBends;</span>
+<span id="L201"><span class="lineNum">     201</span>              :     static int pedalEventsMinTicks;</span>
+<span id="L202"><span class="lineNum">     202</span>              : </span>
+<span id="L203"><span class="lineNum">     203</span>              :     static double nudgeStep;</span>
+<span id="L204"><span class="lineNum">     204</span>              :     static double nudgeStep10;</span>
+<span id="L205"><span class="lineNum">     205</span>              :     static double nudgeStep50;</span>
+<span id="L206"><span class="lineNum">     206</span>              : </span>
+<span id="L207"><span class="lineNum">     207</span>              : // #ifndef NDEBUG</span>
+<span id="L208"><span class="lineNum">     208</span>              :     static bool noHorizontalStretch;</span>
+<span id="L209"><span class="lineNum">     209</span>              :     static bool noVerticalStretch;</span>
+<span id="L210"><span class="lineNum">     210</span>              :     static bool useFallbackFont;</span>
+<span id="L211"><span class="lineNum">     211</span>              : // #endif</span>
+<span id="L212"><span class="lineNum">     212</span>              :     static bool debugMode;</span>
+<span id="L213"><span class="lineNum">     213</span>              :     static bool testMode;</span>
+<span id="L214"><span class="lineNum">     214</span>              :     static bool testWriteStyleToScore;</span>
+<span id="L215"><span class="lineNum">     215</span>              : </span>
+<span id="L216"><span class="lineNum">     216</span>              :     static bool saveTemplateMode;</span>
+<span id="L217"><span class="lineNum">     217</span>              :     static bool noGui;</span>
 <span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span>              :     static bool pdfPrinting;</span>
-<span id="L220"><span class="lineNum">     220</span>              :     static bool svgPrinting;</span>
-<span id="L221"><span class="lineNum">     221</span>              : </span>
-<span id="L222"><span class="lineNum">     222</span>              :     static double verticalPageGap;</span>
-<span id="L223"><span class="lineNum">     223</span>              :     static double horizontalPageGapEven;</span>
-<span id="L224"><span class="lineNum">     224</span>              :     static double horizontalPageGapOdd;</span>
-<span id="L225"><span class="lineNum">     225</span>              : </span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC tlaBgGNC">        1244 :     static void setError(MsError e, bool warning = false) { _error = e; _errorIsWarning = warning; }</span></span>
+<span id="L219"><span class="lineNum">     219</span>              :     static bool noImages;</span>
+<span id="L220"><span class="lineNum">     220</span>              : </span>
+<span id="L221"><span class="lineNum">     221</span>              :     static bool pdfPrinting;</span>
+<span id="L222"><span class="lineNum">     222</span>              :     static bool svgPrinting;</span>
+<span id="L223"><span class="lineNum">     223</span>              : </span>
+<span id="L224"><span class="lineNum">     224</span>              :     static double verticalPageGap;</span>
+<span id="L225"><span class="lineNum">     225</span>              :     static double horizontalPageGapEven;</span>
+<span id="L226"><span class="lineNum">     226</span>              :     static double horizontalPageGapOdd;</span>
 <span id="L227"><span class="lineNum">     227</span>              : </span>
-<span id="L228"><span class="lineNum">     228</span>              :     static std::string errorToString(MsError err);</span>
-<span id="L229"><span class="lineNum">     229</span>              : };</span>
-<span id="L230"><span class="lineNum">     230</span>              : } // namespace mu::engraving</span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC tlaBgGNC">        1288 :     static void setError(MsError e, bool warning = false) { _error = e; _errorIsWarning = warning; }</span></span>
+<span id="L229"><span class="lineNum">     229</span>              : </span>
+<span id="L230"><span class="lineNum">     230</span>              :     static std::string errorToString(MsError err);</span>
+<span id="L231"><span class="lineNum">     231</span>              : };</span>
+<span id="L232"><span class="lineNum">     232</span>              : } // namespace mu::engraving</span>
         </pre>
               </td>
             </tr>

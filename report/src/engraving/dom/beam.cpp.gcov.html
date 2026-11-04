@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -115,25 +115,25 @@
 <span id="L57"><span class="lineNum">      57</span>              : //   Beam</span>
 <span id="L58"><span class="lineNum">      58</span>              : //---------------------------------------------------------</span>
 <span id="L59"><span class="lineNum">      59</span>              : </span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC tlaBgGNC">        2794 : Beam::Beam(Score* parent)</span></span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        2794 :     : BeamBase(ElementType::BEAM, parent-&gt;dummy())</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC tlaBgGNC">        2870 : Beam::Beam(Score* parent)</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        2870 :     : BeamBase(ElementType::BEAM, parent-&gt;dummy())</span></span>
 <span id="L62"><span class="lineNum">      62</span>              : {</span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">        2794 :     initElementStyle(&amp;beamStyle);</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        2794 :     resetProperty(Pid::BEAM_CROSS_STAFF_MOVE);</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">        2794 : }</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">        2870 :     initElementStyle(&amp;beamStyle);</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        2870 :     resetProperty(Pid::BEAM_CROSS_STAFF_MOVE);</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">        2870 : }</span></span>
 <span id="L66"><span class="lineNum">      66</span>              : </span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">      612494 : System* Beam::system() const</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">      647717 : System* Beam::system() const</span></span>
 <span id="L68"><span class="lineNum">      68</span>              : {</span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">      612494 :     if (m_elements.empty()) {</span></span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">          46 :         return nullptr;</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">      647717 :     if (m_elements.empty()) {</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">          58 :         return nullptr;</span></span>
 <span id="L71"><span class="lineNum">      71</span>              :     }</span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">      612448 :     Measure* measure = m_elements.front()-&gt;measure();</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">      612448 :     return measure ? measure-&gt;system() : nullptr;</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">      647659 :     Measure* measure = m_elements.front()-&gt;measure();</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">      647659 :     return measure ? measure-&gt;system() : nullptr;</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : }</span>
 <span id="L75"><span class="lineNum">      75</span>              : </span>
-<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">      604090 : EngravingItem* Beam::layoutParent() const</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">      638943 : EngravingItem* Beam::layoutParent() const</span></span>
 <span id="L77"><span class="lineNum">      77</span>              : {</span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">      604090 :     return system();</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">      638943 :     return system();</span></span>
 <span id="L79"><span class="lineNum">      79</span>              : }</span>
 <span id="L80"><span class="lineNum">      80</span>              : </span>
 <span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">           4 : EngravingItem* Beam::accessibleParentItem() const</span></span>
@@ -170,69 +170,69 @@
 <span id="L112"><span class="lineNum">     112</span>              : //   Beam</span>
 <span id="L113"><span class="lineNum">     113</span>              : //---------------------------------------------------------</span>
 <span id="L114"><span class="lineNum">     114</span>              : </span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        4748 : Beam::~Beam()</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        4900 : Beam::~Beam()</span></span>
 <span id="L116"><span class="lineNum">     116</span>              : {</span>
 <span id="L117"><span class="lineNum">     117</span>              :     //</span>
 <span id="L118"><span class="lineNum">     118</span>              :     // delete all references from chords</span>
 <span id="L119"><span class="lineNum">     119</span>              :     //</span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">        2374 :     for (ChordRest* cr : m_elements) {</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">        2450 :     for (ChordRest* cr : m_elements) {</span></span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaUNC tlaBgUNC">           0 :         cr-&gt;setBeam(nullptr);</span></span>
 <span id="L122"><span class="lineNum">     122</span>              :     }</span>
 <span id="L123"><span class="lineNum">     123</span>              : </span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC tlaBgGNC">        2374 :     clearBeamSegments();</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC tlaBgGNC">        2450 :     clearBeamSegments();</span></span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">        2374 :     muse::DeleteAll(m_fragments);</span></span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">        2374 :     m_fragments.clear();</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">        4748 : }</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">        2450 :     muse::DeleteAll(m_fragments);</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">        2450 :     m_fragments.clear();</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">        4900 : }</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : </span>
 <span id="L130"><span class="lineNum">     130</span>              : //---------------------------------------------------------</span>
 <span id="L131"><span class="lineNum">     131</span>              : //   add</span>
 <span id="L132"><span class="lineNum">     132</span>              : //---------------------------------------------------------</span>
 <span id="L133"><span class="lineNum">     133</span>              : </span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">        9242 : void Beam::add(EngravingItem* e)</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">        9614 : void Beam::add(EngravingItem* e)</span></span>
 <span id="L135"><span class="lineNum">     135</span>              : {</span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">        9242 :     if (e-&gt;isChordRest()) {</span></span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">        9242 :         addChordRest(toChordRest(e));</span></span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">        9242 :         e-&gt;added();</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">        9614 :     if (e-&gt;isChordRest()) {</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">        9614 :         addChordRest(toChordRest(e));</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">        9614 :         e-&gt;added();</span></span>
 <span id="L139"><span class="lineNum">     139</span>              :     }</span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">        9242 : }</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">        9614 : }</span></span>
 <span id="L141"><span class="lineNum">     141</span>              : </span>
 <span id="L142"><span class="lineNum">     142</span>              : //---------------------------------------------------------</span>
 <span id="L143"><span class="lineNum">     143</span>              : //   remove</span>
 <span id="L144"><span class="lineNum">     144</span>              : //---------------------------------------------------------</span>
 <span id="L145"><span class="lineNum">     145</span>              : </span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">        1487 : void Beam::remove(EngravingItem* e)</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">        1541 : void Beam::remove(EngravingItem* e)</span></span>
 <span id="L147"><span class="lineNum">     147</span>              : {</span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">        1487 :     if (e-&gt;isChordRest()) {</span></span>
-<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">        1487 :         removeChordRest(toChordRest(e));</span></span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">        1487 :         e-&gt;removed();</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">        1541 :     if (e-&gt;isChordRest()) {</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">        1541 :         removeChordRest(toChordRest(e));</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">        1541 :         e-&gt;removed();</span></span>
 <span id="L151"><span class="lineNum">     151</span>              :     }</span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        1487 : }</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        1541 : }</span></span>
 <span id="L153"><span class="lineNum">     153</span>              : </span>
 <span id="L154"><span class="lineNum">     154</span>              : //---------------------------------------------------------</span>
 <span id="L155"><span class="lineNum">     155</span>              : //   addChordRest</span>
 <span id="L156"><span class="lineNum">     156</span>              : //---------------------------------------------------------</span>
 <span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        9242 : void Beam::addChordRest(ChordRest* a)</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        9614 : void Beam::addChordRest(ChordRest* a)</span></span>
 <span id="L159"><span class="lineNum">     159</span>              : {</span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        9242 :     a-&gt;setBeam(this);</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        9242 :     if (!muse::contains(m_elements, a)) {</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        9614 :     a-&gt;setBeam(this);</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        9614 :     if (!muse::contains(m_elements, a)) {</span></span>
 <span id="L162"><span class="lineNum">     162</span>              :         //</span>
 <span id="L163"><span class="lineNum">     163</span>              :         // insert element in same order as it appears</span>
 <span id="L164"><span class="lineNum">     164</span>              :         // in the score</span>
 <span id="L165"><span class="lineNum">     165</span>              :         //</span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">        9242 :         if (a-&gt;segment() &amp;&amp; !m_elements.empty()) {</span></span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">       22108 :             for (size_t i = 0; i &lt; m_elements.size(); ++i) {</span></span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">       15751 :                 Segment* s = m_elements[i]-&gt;segment();</span></span>
-<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">       15751 :                 if ((s-&gt;tick() &gt; a-&gt;segment()-&gt;tick())</span></span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">       15751 :                     || ((s-&gt;tick() == a-&gt;segment()-&gt;tick()) &amp;&amp; (a-&gt;segment()-&gt;next(SegmentType::ChordRest) == s))</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">        9614 :         if (a-&gt;segment() &amp;&amp; !m_elements.empty()) {</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">       23275 :             for (size_t i = 0; i &lt; m_elements.size(); ++i) {</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">       16622 :                 Segment* s = m_elements[i]-&gt;segment();</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">       16622 :                 if ((s-&gt;tick() &gt; a-&gt;segment()-&gt;tick())</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">       16622 :                     || ((s-&gt;tick() == a-&gt;segment()-&gt;tick()) &amp;&amp; (a-&gt;segment()-&gt;next(SegmentType::ChordRest) == s))</span></span>
 <span id="L171"><span class="lineNum">     171</span>              :                     ) {</span>
 <span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">           1 :                     m_elements.insert(m_elements.begin() + i, a);</span></span>
 <span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">           1 :                     return;</span></span>
 <span id="L174"><span class="lineNum">     174</span>              :                 }</span>
 <span id="L175"><span class="lineNum">     175</span>              :             }</span>
 <span id="L176"><span class="lineNum">     176</span>              :         }</span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">        9241 :         m_elements.push_back(a);</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">        9613 :         m_elements.push_back(a);</span></span>
 <span id="L178"><span class="lineNum">     178</span>              :     }</span>
 <span id="L179"><span class="lineNum">     179</span>              : }</span>
 <span id="L180"><span class="lineNum">     180</span>              : </span>
@@ -240,28 +240,28 @@
 <span id="L182"><span class="lineNum">     182</span>              : //   removeChordRest</span>
 <span id="L183"><span class="lineNum">     183</span>              : //---------------------------------------------------------</span>
 <span id="L184"><span class="lineNum">     184</span>              : </span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">        1487 : void Beam::removeChordRest(ChordRest* a)</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">        1541 : void Beam::removeChordRest(ChordRest* a)</span></span>
 <span id="L186"><span class="lineNum">     186</span>              : {</span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">        1487 :     if (!muse::remove(m_elements, a)) {</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">        1541 :     if (!muse::remove(m_elements, a)) {</span></span>
 <span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGD(&quot;Beam::remove(): cannot find ChordRest&quot;);</span></span>
 <span id="L189"><span class="lineNum">     189</span>              :     }</span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">        1487 :     a-&gt;setBeam(0);</span></span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">        1487 : }</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">        1541 :     a-&gt;setBeam(0);</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">        1541 : }</span></span>
 <span id="L192"><span class="lineNum">     192</span>              : </span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">        2478 : const Chord* Beam::findChordWithCustomStemDirection() const</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">        2662 : const Chord* Beam::findChordWithCustomStemDirection() const</span></span>
 <span id="L194"><span class="lineNum">     194</span>              : {</span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">       10837 :     for (const ChordRest* rest: elements()) {</span></span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">        8375 :         if (!rest-&gt;isChord()) {</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">       11934 :     for (const ChordRest* rest: elements()) {</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">        9288 :         if (!rest-&gt;isChord()) {</span></span>
 <span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          29 :             continue;</span></span>
 <span id="L198"><span class="lineNum">     198</span>              :         }</span>
 <span id="L199"><span class="lineNum">     199</span>              : </span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">        8346 :         const Chord* chord = toChord(rest);</span></span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">        8346 :         if (chord-&gt;stemDirection() != DirectionV::AUTO) {</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">        9259 :         const Chord* chord = toChord(rest);</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">        9259 :         if (chord-&gt;stemDirection() != DirectionV::AUTO) {</span></span>
 <span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">          16 :             return chord;</span></span>
 <span id="L203"><span class="lineNum">     203</span>              :         }</span>
 <span id="L204"><span class="lineNum">     204</span>              :     }</span>
 <span id="L205"><span class="lineNum">     205</span>              : </span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        2462 :     return nullptr;</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        2646 :     return nullptr;</span></span>
 <span id="L207"><span class="lineNum">     207</span>              : }</span>
 <span id="L208"><span class="lineNum">     208</span>              : </span>
 <span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">          64 : const BeamSegment* Beam::topLevelSegmentForElement(const ChordRest* element) const</span></span>
@@ -303,10 +303,10 @@
 <span id="L245"><span class="lineNum">     245</span>              :     }</span>
 <span id="L246"><span class="lineNum">     246</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L247"><span class="lineNum">     247</span>              : </span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC tlaBgGNC">       70562 : void Beam::calcBeamBreaks(const ChordRest* cr, const ChordRest* prevCr, int level, bool&amp; isBroken16, bool&amp; isBroken32) const</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC tlaBgGNC">       74274 : void Beam::calcBeamBreaks(const ChordRest* cr, const ChordRest* prevCr, int level, bool&amp; isBroken16, bool&amp; isBroken32) const</span></span>
 <span id="L249"><span class="lineNum">     249</span>              : {</span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       70562 :     BeamMode beamMode = cr-&gt;beamMode();</span></span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">       70562 :     if (cr-&gt;isRest() &amp;&amp; (beamMode == BeamMode::MID || beamMode == BeamMode::BEGIN16 || beamMode == BeamMode::BEGIN32)) {</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       74274 :     BeamMode beamMode = cr-&gt;beamMode();</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">       74274 :     if (cr-&gt;isRest() &amp;&amp; (beamMode == BeamMode::MID || beamMode == BeamMode::BEGIN16 || beamMode == BeamMode::BEGIN32)) {</span></span>
 <span id="L252"><span class="lineNum">     252</span>              :         // when a rest has beamMode MID we can just ignore it entirely and allow any beams to continue through</span>
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">         251 :         switch (beamMode) {</span></span>
 <span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">         251 :         case BeamMode::MID:</span></span>
@@ -327,30 +327,30 @@
 <span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC tlaBgGNC">         251 :         return;</span></span>
 <span id="L270"><span class="lineNum">     270</span>              :     }</span>
 <span id="L271"><span class="lineNum">     271</span>              :     // get default beam mode -- based on time signature preferences</span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">       70311 :     const Groups&amp; group = cr-&gt;staff()-&gt;group(cr-&gt;measure()-&gt;tick());</span></span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">       70311 :     BeamMode defaultBeamMode = group.baseBeamMode(cr, prevCr);</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">       74023 :     const Groups&amp; group = cr-&gt;staff()-&gt;group(cr-&gt;measure()-&gt;tick());</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">       74023 :     BeamMode defaultBeamMode = group.baseBeamMode(cr, prevCr);</span></span>
 <span id="L274"><span class="lineNum">     274</span>              : </span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">       70311 :     bool isManuallyBroken16 = level &gt;= 1 &amp;&amp; beamMode == BeamMode::BEGIN16;</span></span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">       70311 :     bool isManuallyBroken32 = level &gt;= 2 &amp;&amp; beamMode == BeamMode::BEGIN32;</span></span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">       70311 :     bool isDefaultBroken16 = beamMode == BeamMode::AUTO &amp;&amp; level &gt;= 1 &amp;&amp; defaultBeamMode == BeamMode::BEGIN16;</span></span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">       70311 :     bool isDefaultBroken32 = beamMode == BeamMode::AUTO &amp;&amp; level &gt;= 2 &amp;&amp; defaultBeamMode == BeamMode::BEGIN32;</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">       74023 :     bool isManuallyBroken16 = level &gt;= 1 &amp;&amp; beamMode == BeamMode::BEGIN16;</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">       74023 :     bool isManuallyBroken32 = level &gt;= 2 &amp;&amp; beamMode == BeamMode::BEGIN32;</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">       74023 :     bool isDefaultBroken16 = beamMode == BeamMode::AUTO &amp;&amp; level &gt;= 1 &amp;&amp; defaultBeamMode == BeamMode::BEGIN16;</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">       74023 :     bool isDefaultBroken32 = beamMode == BeamMode::AUTO &amp;&amp; level &gt;= 2 &amp;&amp; defaultBeamMode == BeamMode::BEGIN32;</span></span>
 <span id="L279"><span class="lineNum">     279</span>              : </span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">       70311 :     isBroken16 = isManuallyBroken16 || isDefaultBroken16;</span></span>
-<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">       70311 :     isBroken32 = isManuallyBroken32 || isDefaultBroken32;</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">       74023 :     isBroken16 = isManuallyBroken16 || isDefaultBroken16;</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">       74023 :     isBroken32 = isManuallyBroken32 || isDefaultBroken32;</span></span>
 <span id="L282"><span class="lineNum">     282</span>              : </span>
 <span id="L283"><span class="lineNum">     283</span>              :     // deal with beam-embedded triplets by breaking beams as if they are their underlying durations</span>
 <span id="L284"><span class="lineNum">     284</span>              :     // note that we use max(hooks, 1) here because otherwise we'd end up breaking the main (level 0) beam for</span>
 <span id="L285"><span class="lineNum">     285</span>              :     // tuplets that take up non-beamed amounts of space (eg. 16th note quintuplets)</span>
 <span id="L286"><span class="lineNum">     286</span>              :     // a tuplet's total duration needn't be a single note value, so truncate it</span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">       70311 :     if (level &gt; 0 &amp;&amp; prevCr &amp;&amp; cr-&gt;beamMode() == BeamMode::AUTO) {</span></span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">       23561 :         if (cr-&gt;tuplet() &amp;&amp; cr-&gt;tuplet() != prevCr-&gt;tuplet()) {</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">       74023 :     if (level &gt; 0 &amp;&amp; prevCr &amp;&amp; cr-&gt;beamMode() == BeamMode::AUTO) {</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">       25047 :         if (cr-&gt;tuplet() &amp;&amp; cr-&gt;tuplet() != prevCr-&gt;tuplet()) {</span></span>
 <span id="L289"><span class="lineNum">     289</span>              :             // this cr starts a tuplet</span>
 <span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">        1580 :             int beams = std::max(TDuration(cr-&gt;tuplet()-&gt;ticks(), /*truncate*/ true).hooks(), 1);</span></span>
 <span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">        1580 :             if (beams &lt;= level) {</span></span>
 <span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">        1430 :                 isBroken16 = level == 1;</span></span>
 <span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">        1430 :                 isBroken32 = level &gt;= 2;</span></span>
 <span id="L294"><span class="lineNum">     294</span>              :             }</span>
-<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">       21981 :         } else if (prevCr-&gt;tuplet() &amp;&amp; prevCr-&gt;tuplet() != cr-&gt;tuplet()) {</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">       23467 :         } else if (prevCr-&gt;tuplet() &amp;&amp; prevCr-&gt;tuplet() != cr-&gt;tuplet()) {</span></span>
 <span id="L296"><span class="lineNum">     296</span>              :             // this is a non-tuplet cr that is first after a tuplet</span>
 <span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">          45 :             int beams = std::max(TDuration(prevCr-&gt;tuplet()-&gt;ticks(), /*truncate*/ true).hooks(), 1);</span></span>
 <span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">          45 :             if (beams &lt;= level) {</span></span>
@@ -543,13 +543,13 @@
 <span id="L485"><span class="lineNum">     485</span>              : //   triggerLayout</span>
 <span id="L486"><span class="lineNum">     486</span>              : //---------------------------------------------------------</span>
 <span id="L487"><span class="lineNum">     487</span>              : </span>
-<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC tlaBgGNC">        9283 : void Beam::triggerLayout() const</span></span>
+<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC tlaBgGNC">        9516 : void Beam::triggerLayout() const</span></span>
 <span id="L489"><span class="lineNum">     489</span>              : {</span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">        9283 :     if (!m_elements.empty()) {</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">        9516 :     if (!m_elements.empty()) {</span></span>
 <span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">          69 :         m_elements.front()-&gt;triggerLayout();</span></span>
 <span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">          69 :         m_elements.back()-&gt;triggerLayout();</span></span>
 <span id="L493"><span class="lineNum">     493</span>              :     }</span>
-<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">        9283 : }</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">        9516 : }</span></span>
 <span id="L495"><span class="lineNum">     495</span>              : </span>
 <span id="L496"><span class="lineNum">     496</span>              : //---------------------------------------------------------</span>
 <span id="L497"><span class="lineNum">     497</span>              : //   acceptDrop</span>
@@ -627,55 +627,55 @@
 <span id="L569"><span class="lineNum">     569</span>              :     }</span>
 <span id="L570"><span class="lineNum">     570</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L571"><span class="lineNum">     571</span>              : </span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC tlaBgGNC">        2799 : void Beam::setNoSlope(bool b)</span></span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC tlaBgGNC">        2875 : void Beam::setNoSlope(bool b)</span></span>
 <span id="L573"><span class="lineNum">     573</span>              : {</span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">        2799 :     m_noSlope = b;</span></span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">        2875 :     m_noSlope = b;</span></span>
 <span id="L575"><span class="lineNum">     575</span>              : </span>
 <span id="L576"><span class="lineNum">     576</span>              :     // Make flat if usermodified</span>
-<span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC">        2799 :     if (m_noSlope) {</span></span>
+<span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC">        2875 :     if (m_noSlope) {</span></span>
 <span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">           9 :         int idx = directionIdx();</span></span>
 <span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">           9 :         if (userModified()) {</span></span>
 <span id="L580"><span class="lineNum">     580</span> <span class="tlaUNC tlaBgUNC">           0 :             BeamFragment* f = m_fragments.back();</span></span>
 <span id="L581"><span class="lineNum">     581</span> <span class="tlaUNC">           0 :             f-&gt;py1[idx] = f-&gt;py2[idx] = (f-&gt;py1[idx] + f-&gt;py2[idx]) * 0.5;</span></span>
 <span id="L582"><span class="lineNum">     582</span>              :         }</span>
 <span id="L583"><span class="lineNum">     583</span>              :     }</span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC tlaBgGNC">        2799 : }</span></span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC tlaBgGNC">        2875 : }</span></span>
 <span id="L585"><span class="lineNum">     585</span>              : </span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">        8404 : void Beam::computeAndSetSlope()</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">        8774 : void Beam::computeAndSetSlope()</span></span>
 <span id="L587"><span class="lineNum">     587</span>              : {</span>
-<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">        8404 :     double xDiff = m_endAnchor.x() - m_startAnchor.x();</span></span>
-<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">        8404 :     double yDiff = m_endAnchor.y() - m_startAnchor.y();</span></span>
-<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">        8404 :     if (std::abs(xDiff) &lt; 0.5 * spatium()) {</span></span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">        8774 :     double xDiff = m_endAnchor.x() - m_startAnchor.x();</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">        8774 :     double yDiff = m_endAnchor.y() - m_startAnchor.y();</span></span>
+<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">        8774 :     if (std::abs(xDiff) &lt; 0.5 * spatium()) {</span></span>
 <span id="L591"><span class="lineNum">     591</span>              :         // Temporary safeguard: a beam this short is invalid, and exists only as a temporary state,</span>
 <span id="L592"><span class="lineNum">     592</span>              :         // so don't try to compute the slope as it will be wrong. Needs a better solution in future.</span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">        2742 :         setSlope(0.0);</span></span>
+<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">        2807 :         setSlope(0.0);</span></span>
 <span id="L594"><span class="lineNum">     594</span>              :     } else {</span>
-<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">        5662 :         setSlope(yDiff / xDiff);</span></span>
+<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">        5967 :         setSlope(yDiff / xDiff);</span></span>
 <span id="L596"><span class="lineNum">     596</span>              :     }</span>
-<span id="L597"><span class="lineNum">     597</span> <span class="tlaGNC">        8404 : }</span></span>
+<span id="L597"><span class="lineNum">     597</span> <span class="tlaGNC">        8774 : }</span></span>
 <span id="L598"><span class="lineNum">     598</span>              : </span>
 <span id="L599"><span class="lineNum">     599</span>              : //---------------------------------------------------------</span>
 <span id="L600"><span class="lineNum">     600</span>              : //   getProperty</span>
 <span id="L601"><span class="lineNum">     601</span>              : //---------------------------------------------------------</span>
 <span id="L602"><span class="lineNum">     602</span>              : </span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">       21270 : PropertyValue Beam::getProperty(Pid propertyId) const</span></span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">       21257 : PropertyValue Beam::getProperty(Pid propertyId) const</span></span>
 <span id="L604"><span class="lineNum">     604</span>              : {</span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">       21270 :     switch (propertyId) {</span></span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">        1625 :     case Pid::GROW_LEFT:      return growLeft();</span></span>
-<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC">        1625 :     case Pid::GROW_RIGHT:     return growRight();</span></span>
+<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">       21257 :     switch (propertyId) {</span></span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">        1624 :     case Pid::GROW_LEFT:      return growLeft();</span></span>
+<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC">        1624 :     case Pid::GROW_RIGHT:     return growRight();</span></span>
 <span id="L608"><span class="lineNum">     608</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::BEAM_POS:       return PropertyValue::fromValue(beamPos());</span></span>
 <span id="L609"><span class="lineNum">     609</span> <span class="tlaUNC">           0 :     case Pid::BEAM_NO_SLOPE:  return noSlope();</span></span>
-<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC tlaBgGNC">        3242 :     case Pid::POSITION_LINKED_TO_MASTER:</span></span>
+<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC tlaBgGNC">        3240 :     case Pid::POSITION_LINKED_TO_MASTER:</span></span>
 <span id="L611"><span class="lineNum">     611</span>              :     case Pid::APPEARANCE_LINKED_TO_MASTER:</span>
-<span id="L612"><span class="lineNum">     612</span> <span class="tlaGNC">       13840 :         for (ChordRest* chordRest : elements()) {</span></span>
-<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">       10598 :             bool linked = chordRest-&gt;getProperty(propertyId).toBool();</span></span>
-<span id="L614"><span class="lineNum">     614</span> <span class="tlaGNC">       10598 :             if (!linked) {</span></span>
+<span id="L612"><span class="lineNum">     612</span> <span class="tlaGNC">       13834 :         for (ChordRest* chordRest : elements()) {</span></span>
+<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">       10594 :             bool linked = chordRest-&gt;getProperty(propertyId).toBool();</span></span>
+<span id="L614"><span class="lineNum">     614</span> <span class="tlaGNC">       10594 :             if (!linked) {</span></span>
 <span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
 <span id="L616"><span class="lineNum">     616</span>              :             }</span>
 <span id="L617"><span class="lineNum">     617</span>              :         }</span>
-<span id="L618"><span class="lineNum">     618</span> <span class="tlaGNC tlaBgGNC">        3242 :         return true;</span></span>
-<span id="L619"><span class="lineNum">     619</span> <span class="tlaGNC">       14778 :     default:</span></span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">       14778 :         return BeamBase::getProperty(propertyId);</span></span>
+<span id="L618"><span class="lineNum">     618</span> <span class="tlaGNC tlaBgGNC">        3240 :         return true;</span></span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaGNC">       14769 :     default:</span></span>
+<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">       14769 :         return BeamBase::getProperty(propertyId);</span></span>
 <span id="L621"><span class="lineNum">     621</span>              :     }</span>
 <span id="L622"><span class="lineNum">     622</span>              : }</span>
 <span id="L623"><span class="lineNum">     623</span>              : </span>
@@ -683,9 +683,9 @@
 <span id="L625"><span class="lineNum">     625</span>              : //   setProperty</span>
 <span id="L626"><span class="lineNum">     626</span>              : //---------------------------------------------------------</span>
 <span id="L627"><span class="lineNum">     627</span>              : </span>
-<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">        5994 : bool Beam::setProperty(Pid propertyId, const PropertyValue&amp; v)</span></span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">        6146 : bool Beam::setProperty(Pid propertyId, const PropertyValue&amp; v)</span></span>
 <span id="L629"><span class="lineNum">     629</span>              : {</span>
-<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">        5994 :     switch (propertyId) {</span></span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">        6146 :     switch (propertyId) {</span></span>
 <span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">           1 :     case Pid::GROW_LEFT:</span></span>
 <span id="L632"><span class="lineNum">     632</span> <span class="tlaGNC">           1 :         setGrowLeft(v.toDouble());</span></span>
 <span id="L633"><span class="lineNum">     633</span> <span class="tlaGNC">           1 :         break;</span></span>
@@ -697,9 +697,9 @@
 <span id="L639"><span class="lineNum">     639</span> <span class="tlaUNC">           0 :             setBeamPos(v.value&lt;PairF&gt;());</span></span>
 <span id="L640"><span class="lineNum">     640</span>              :         }</span>
 <span id="L641"><span class="lineNum">     641</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L642"><span class="lineNum">     642</span> <span class="tlaGNC tlaBgGNC">        2799 :     case Pid::BEAM_NO_SLOPE:</span></span>
-<span id="L643"><span class="lineNum">     643</span> <span class="tlaGNC">        2799 :         setNoSlope(v.toBool());</span></span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">        2799 :         break;</span></span>
+<span id="L642"><span class="lineNum">     642</span> <span class="tlaGNC tlaBgGNC">        2875 :     case Pid::BEAM_NO_SLOPE:</span></span>
+<span id="L643"><span class="lineNum">     643</span> <span class="tlaGNC">        2875 :         setNoSlope(v.toBool());</span></span>
+<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">        2875 :         break;</span></span>
 <span id="L645"><span class="lineNum">     645</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::POSITION_LINKED_TO_MASTER:</span></span>
 <span id="L646"><span class="lineNum">     646</span>              :     case Pid::APPEARANCE_LINKED_TO_MASTER:</span>
 <span id="L647"><span class="lineNum">     647</span> <span class="tlaUNC">           0 :         if (v.toBool() == true) {</span></span>
@@ -712,27 +712,27 @@
 <span id="L654"><span class="lineNum">     654</span>              :         }</span>
 <span id="L655"><span class="lineNum">     655</span>              :     // fall through</span>
 <span id="L656"><span class="lineNum">     656</span>              :     default:</span>
-<span id="L657"><span class="lineNum">     657</span> <span class="tlaGNC tlaBgGNC">        3193 :         if (!BeamBase::setProperty(propertyId, v)) {</span></span>
+<span id="L657"><span class="lineNum">     657</span> <span class="tlaGNC tlaBgGNC">        3269 :         if (!BeamBase::setProperty(propertyId, v)) {</span></span>
 <span id="L658"><span class="lineNum">     658</span> <span class="tlaUNC tlaBgUNC">           0 :             return false;</span></span>
 <span id="L659"><span class="lineNum">     659</span>              :         }</span>
-<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC tlaBgGNC">        3193 :         break;</span></span>
+<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC tlaBgGNC">        3269 :         break;</span></span>
 <span id="L661"><span class="lineNum">     661</span>              :     }</span>
-<span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">        5994 :     triggerLayout();</span></span>
-<span id="L663"><span class="lineNum">     663</span> <span class="tlaGNC">        5994 :     setGenerated(false);</span></span>
-<span id="L664"><span class="lineNum">     664</span> <span class="tlaGNC">        5994 :     return true;</span></span>
+<span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">        6146 :     triggerLayout();</span></span>
+<span id="L663"><span class="lineNum">     663</span> <span class="tlaGNC">        6146 :     setGenerated(false);</span></span>
+<span id="L664"><span class="lineNum">     664</span> <span class="tlaGNC">        6146 :     return true;</span></span>
 <span id="L665"><span class="lineNum">     665</span>              : }</span>
 <span id="L666"><span class="lineNum">     666</span>              : </span>
 <span id="L667"><span class="lineNum">     667</span>              : //---------------------------------------------------------</span>
 <span id="L668"><span class="lineNum">     668</span>              : //   propertyDefault</span>
 <span id="L669"><span class="lineNum">     669</span>              : //---------------------------------------------------------</span>
 <span id="L670"><span class="lineNum">     670</span>              : </span>
-<span id="L671"><span class="lineNum">     671</span> <span class="tlaGNC">       23867 : PropertyValue Beam::propertyDefault(Pid id) const</span></span>
+<span id="L671"><span class="lineNum">     671</span> <span class="tlaGNC">       23930 : PropertyValue Beam::propertyDefault(Pid id) const</span></span>
 <span id="L672"><span class="lineNum">     672</span>              : {</span>
-<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC">       23867 :     switch (id) {</span></span>
-<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC">        1621 :     case Pid::GROW_LEFT:      return 1.0;</span></span>
-<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">        1621 :     case Pid::GROW_RIGHT:     return 1.0;</span></span>
+<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC">       23930 :     switch (id) {</span></span>
+<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC">        1620 :     case Pid::GROW_LEFT:      return 1.0;</span></span>
+<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">        1620 :     case Pid::GROW_RIGHT:     return 1.0;</span></span>
 <span id="L676"><span class="lineNum">     676</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::BEAM_POS:       return PropertyValue::fromValue(beamPos());</span></span>
-<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC tlaBgGNC">       20625 :     default:                  return BeamBase::propertyDefault(id);</span></span>
+<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC tlaBgGNC">       20690 :     default:                  return BeamBase::propertyDefault(id);</span></span>
 <span id="L678"><span class="lineNum">     678</span>              :     }</span>
 <span id="L679"><span class="lineNum">     679</span>              : }</span>
 <span id="L680"><span class="lineNum">     680</span>              : </span>
@@ -741,23 +741,23 @@
 <span id="L683"><span class="lineNum">     683</span>              : //    add beam shape to skyline</span>
 <span id="L684"><span class="lineNum">     684</span>              : //---------------------------------------------------------</span>
 <span id="L685"><span class="lineNum">     685</span>              : </span>
-<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">        4024 : void Beam::addSkyline(Skyline&amp; sk)</span></span>
+<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">        4209 : void Beam::addSkyline(Skyline&amp; sk)</span></span>
 <span id="L687"><span class="lineNum">     687</span>              : {</span>
-<span id="L688"><span class="lineNum">     688</span> <span class="tlaGNC">        4024 :     if (m_beamSegments.empty() || !addToSkyline()) {</span></span>
+<span id="L688"><span class="lineNum">     688</span> <span class="tlaGNC">        4209 :     if (m_beamSegments.empty() || !addToSkyline()) {</span></span>
 <span id="L689"><span class="lineNum">     689</span> <span class="tlaGNC">           8 :         return;</span></span>
 <span id="L690"><span class="lineNum">     690</span>              :     }</span>
 <span id="L691"><span class="lineNum">     691</span>              : </span>
 <span id="L692"><span class="lineNum">     692</span>              :     // Only add the outer segment, no need to add the inner one</span>
-<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">        4016 :     sk.add(m_beamSegments.front()-&gt;shape());</span></span>
+<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">        4201 :     sk.add(m_beamSegments.front()-&gt;shape());</span></span>
 <span id="L694"><span class="lineNum">     694</span>              : }</span>
 <span id="L695"><span class="lineNum">     695</span>              : </span>
 <span id="L696"><span class="lineNum">     696</span>              : //---------------------------------------------------------</span>
 <span id="L697"><span class="lineNum">     697</span>              : //   tick</span>
 <span id="L698"><span class="lineNum">     698</span>              : //---------------------------------------------------------</span>
 <span id="L699"><span class="lineNum">     699</span>              : </span>
-<span id="L700"><span class="lineNum">     700</span> <span class="tlaGNC">       26569 : Fraction Beam::tick() const</span></span>
+<span id="L700"><span class="lineNum">     700</span> <span class="tlaGNC">       27685 : Fraction Beam::tick() const</span></span>
 <span id="L701"><span class="lineNum">     701</span>              : {</span>
-<span id="L702"><span class="lineNum">     702</span> <span class="tlaGNC">       26569 :     return m_elements.empty() ? Fraction(0, 1) : m_elements.front()-&gt;segment()-&gt;tick();</span></span>
+<span id="L702"><span class="lineNum">     702</span> <span class="tlaGNC">       27685 :     return m_elements.empty() ? Fraction(0, 1) : m_elements.front()-&gt;segment()-&gt;tick();</span></span>
 <span id="L703"><span class="lineNum">     703</span>              : }</span>
 <span id="L704"><span class="lineNum">     704</span>              : </span>
 <span id="L705"><span class="lineNum">     705</span>              : //---------------------------------------------------------</span>
@@ -774,13 +774,13 @@
 <span id="L716"><span class="lineNum">     716</span>              : //    calculate the ticks of all chords and rests connected by the beam</span>
 <span id="L717"><span class="lineNum">     717</span>              : //---------------------------------------------------------</span>
 <span id="L718"><span class="lineNum">     718</span>              : </span>
-<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC tlaBgGNC">        4156 : Fraction Beam::ticks() const</span></span>
+<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC tlaBgGNC">        4344 : Fraction Beam::ticks() const</span></span>
 <span id="L720"><span class="lineNum">     720</span>              : {</span>
-<span id="L721"><span class="lineNum">     721</span> <span class="tlaGNC">        4156 :     Fraction ticks = Fraction(0, 1);</span></span>
-<span id="L722"><span class="lineNum">     722</span> <span class="tlaGNC">       18076 :     for (ChordRest* cr : m_elements) {</span></span>
-<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC">       13920 :         ticks += cr-&gt;actualTicks();</span></span>
+<span id="L721"><span class="lineNum">     721</span> <span class="tlaGNC">        4344 :     Fraction ticks = Fraction(0, 1);</span></span>
+<span id="L722"><span class="lineNum">     722</span> <span class="tlaGNC">       19193 :     for (ChordRest* cr : m_elements) {</span></span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC">       14849 :         ticks += cr-&gt;actualTicks();</span></span>
 <span id="L724"><span class="lineNum">     724</span>              :     }</span>
-<span id="L725"><span class="lineNum">     725</span> <span class="tlaGNC">        4156 :     return ticks;</span></span>
+<span id="L725"><span class="lineNum">     725</span> <span class="tlaGNC">        4344 :     return ticks;</span></span>
 <span id="L726"><span class="lineNum">     726</span>              : }</span>
 <span id="L727"><span class="lineNum">     727</span>              : </span>
 <span id="L728"><span class="lineNum">     728</span>              : //---------------------------------------------------------</span>
@@ -868,75 +868,75 @@
 <span id="L810"><span class="lineNum">     810</span>              : //---------------------------------------------------------</span>
 <span id="L811"><span class="lineNum">     811</span>              : //   containsChord</span>
 <span id="L812"><span class="lineNum">     812</span>              : //---------------------------------------------------------</span>
-<span id="L813"><span class="lineNum">     813</span> <span class="tlaGNC tlaBgGNC">        8706 : bool Beam::hasAllRests()</span></span>
+<span id="L813"><span class="lineNum">     813</span> <span class="tlaGNC tlaBgGNC">        9269 : bool Beam::hasAllRests()</span></span>
 <span id="L814"><span class="lineNum">     814</span>              : {</span>
-<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">        8706 :     for (ChordRest* cr : m_elements) {</span></span>
-<span id="L816"><span class="lineNum">     816</span> <span class="tlaGNC">        8706 :         if (cr &amp;&amp; cr-&gt;isChord()) {</span></span>
-<span id="L817"><span class="lineNum">     817</span> <span class="tlaGNC">        8706 :             return false;</span></span>
+<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">        9269 :     for (ChordRest* cr : m_elements) {</span></span>
+<span id="L816"><span class="lineNum">     816</span> <span class="tlaGNC">        9269 :         if (cr &amp;&amp; cr-&gt;isChord()) {</span></span>
+<span id="L817"><span class="lineNum">     817</span> <span class="tlaGNC">        9269 :             return false;</span></span>
 <span id="L818"><span class="lineNum">     818</span>              :         }</span>
 <span id="L819"><span class="lineNum">     819</span>              :     }</span>
 <span id="L820"><span class="lineNum">     820</span> <span class="tlaUNC tlaBgUNC">           0 :     return true;</span></span>
 <span id="L821"><span class="lineNum">     821</span>              : }</span>
 <span id="L822"><span class="lineNum">     822</span>              : </span>
-<span id="L823"><span class="lineNum">     823</span> <span class="tlaGNC tlaBgGNC">       10778 : void Beam::clearBeamSegments()</span></span>
+<span id="L823"><span class="lineNum">     823</span> <span class="tlaGNC tlaBgGNC">       11224 : void Beam::clearBeamSegments()</span></span>
 <span id="L824"><span class="lineNum">     824</span>              : {</span>
-<span id="L825"><span class="lineNum">     825</span> <span class="tlaGNC">       38789 :     for (ChordRest* chordRest : m_elements) {</span></span>
-<span id="L826"><span class="lineNum">     826</span> <span class="tlaGNC">       28011 :         chordRest-&gt;setBeamlet(nullptr);</span></span>
+<span id="L825"><span class="lineNum">     825</span> <span class="tlaGNC">       41087 :     for (ChordRest* chordRest : m_elements) {</span></span>
+<span id="L826"><span class="lineNum">     826</span> <span class="tlaGNC">       29863 :         chordRest-&gt;setBeamlet(nullptr);</span></span>
 <span id="L827"><span class="lineNum">     827</span>              :     }</span>
 <span id="L828"><span class="lineNum">     828</span>              : </span>
-<span id="L829"><span class="lineNum">     829</span> <span class="tlaGNC">       10778 :     BeamBase::clearBeamSegments();</span></span>
-<span id="L830"><span class="lineNum">     830</span> <span class="tlaGNC">       10778 : }</span></span>
+<span id="L829"><span class="lineNum">     829</span> <span class="tlaGNC">       11224 :     BeamBase::clearBeamSegments();</span></span>
+<span id="L830"><span class="lineNum">     830</span> <span class="tlaGNC">       11224 : }</span></span>
 <span id="L831"><span class="lineNum">     831</span>              : </span>
 <span id="L832"><span class="lineNum">     832</span>              : //-------------------------------------------------------</span>
 <span id="L833"><span class="lineNum">     833</span>              : // BEAM SEGMENT CLASS</span>
 <span id="L834"><span class="lineNum">     834</span>              : //-------------------------------------------------------</span>
 <span id="L835"><span class="lineNum">     835</span>              : </span>
-<span id="L836"><span class="lineNum">     836</span> <span class="tlaGNC">       12917 : BeamSegment::BeamSegment(EngravingItem* b)</span></span>
-<span id="L837"><span class="lineNum">     837</span> <span class="tlaGNC">       12917 :     : parentElement(b)</span></span>
+<span id="L836"><span class="lineNum">     836</span> <span class="tlaGNC">       13291 : BeamSegment::BeamSegment(EngravingItem* b)</span></span>
+<span id="L837"><span class="lineNum">     837</span> <span class="tlaGNC">       13291 :     : parentElement(b)</span></span>
 <span id="L838"><span class="lineNum">     838</span>              : {</span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">       12917 :     DO_ASSERT(parentElement-&gt;isType(ElementType::BEAM) || parentElement-&gt;isType(ElementType::TREMOLO_TWOCHORD));</span></span>
-<span id="L840"><span class="lineNum">     840</span> <span class="tlaGNC">       12917 : }</span></span>
+<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">       13291 :     DO_ASSERT(parentElement-&gt;isType(ElementType::BEAM) || parentElement-&gt;isType(ElementType::TREMOLO_TWOCHORD));</span></span>
+<span id="L840"><span class="lineNum">     840</span> <span class="tlaGNC">       13291 : }</span></span>
 <span id="L841"><span class="lineNum">     841</span>              : </span>
-<span id="L842"><span class="lineNum">     842</span> <span class="tlaGNC">       17619 : Shape BeamSegment::shape() const</span></span>
+<span id="L842"><span class="lineNum">     842</span> <span class="tlaGNC">       18191 : Shape BeamSegment::shape() const</span></span>
 <span id="L843"><span class="lineNum">     843</span>              : {</span>
-<span id="L844"><span class="lineNum">     844</span> <span class="tlaGNC">       17619 :     Shape shape;</span></span>
-<span id="L845"><span class="lineNum">     845</span> <span class="tlaGNC">       17619 :     PointF startPoint = line.p1();</span></span>
-<span id="L846"><span class="lineNum">     846</span> <span class="tlaGNC">       17619 :     PointF endPoint = line.p2();</span></span>
-<span id="L847"><span class="lineNum">     847</span> <span class="tlaGNC">       17619 :     double _beamWidth = parentElement-&gt;isBeam()</span></span>
-<span id="L848"><span class="lineNum">     848</span> <span class="tlaGNC">       17619 :                         ? item_cast&lt;const Beam*&gt;(parentElement)-&gt;m_beamWidth</span></span>
+<span id="L844"><span class="lineNum">     844</span> <span class="tlaGNC">       18191 :     Shape shape;</span></span>
+<span id="L845"><span class="lineNum">     845</span> <span class="tlaGNC">       18191 :     PointF startPoint = line.p1();</span></span>
+<span id="L846"><span class="lineNum">     846</span> <span class="tlaGNC">       18191 :     PointF endPoint = line.p2();</span></span>
+<span id="L847"><span class="lineNum">     847</span> <span class="tlaGNC">       18191 :     double _beamWidth = parentElement-&gt;isBeam()</span></span>
+<span id="L848"><span class="lineNum">     848</span> <span class="tlaGNC">       18191 :                         ? item_cast&lt;const Beam*&gt;(parentElement)-&gt;m_beamWidth</span></span>
 <span id="L849"><span class="lineNum">     849</span> <span class="tlaUNC tlaBgUNC">           0 :                         : item_cast&lt;const TremoloTwoChord*&gt;(parentElement)-&gt;ldata()-&gt;beamWidth;</span></span>
 <span id="L850"><span class="lineNum">     850</span>              :     // This is the case of right-beamlets</span>
-<span id="L851"><span class="lineNum">     851</span> <span class="tlaGNC tlaBgGNC">       17619 :     if (startPoint.x() &gt; endPoint.x()) {</span></span>
-<span id="L852"><span class="lineNum">     852</span> <span class="tlaGNC">        1228 :         std::swap(startPoint, endPoint);</span></span>
+<span id="L851"><span class="lineNum">     851</span> <span class="tlaGNC tlaBgGNC">       18191 :     if (startPoint.x() &gt; endPoint.x()) {</span></span>
+<span id="L852"><span class="lineNum">     852</span> <span class="tlaGNC">        1245 :         std::swap(startPoint, endPoint);</span></span>
 <span id="L853"><span class="lineNum">     853</span>              :     }</span>
-<span id="L854"><span class="lineNum">     854</span> <span class="tlaGNC">       17619 :     double beamHorizontalLength = endPoint.x() - startPoint.x();</span></span>
+<span id="L854"><span class="lineNum">     854</span> <span class="tlaGNC">       18191 :     double beamHorizontalLength = endPoint.x() - startPoint.x();</span></span>
 <span id="L855"><span class="lineNum">     855</span>              :     // If beam is horizontal, one rectangle is enough</span>
-<span id="L856"><span class="lineNum">     856</span> <span class="tlaGNC">       17619 :     if (muse::RealIsEqual(startPoint.y(), endPoint.y())) {</span></span>
-<span id="L857"><span class="lineNum">     857</span> <span class="tlaGNC">       10728 :         RectF rect(startPoint.x(), startPoint.y(), beamHorizontalLength, _beamWidth / 2);</span></span>
-<span id="L858"><span class="lineNum">     858</span> <span class="tlaGNC">       10728 :         rect.adjust(0.0, -_beamWidth / 2, 0.0, 0.0);</span></span>
-<span id="L859"><span class="lineNum">     859</span> <span class="tlaGNC">       10728 :         shape.add(rect, parentElement);</span></span>
-<span id="L860"><span class="lineNum">     860</span> <span class="tlaGNC">       10728 :         return shape;</span></span>
+<span id="L856"><span class="lineNum">     856</span> <span class="tlaGNC">       18191 :     if (muse::RealIsEqual(startPoint.y(), endPoint.y())) {</span></span>
+<span id="L857"><span class="lineNum">     857</span> <span class="tlaGNC">       10920 :         RectF rect(startPoint.x(), startPoint.y(), beamHorizontalLength, _beamWidth / 2);</span></span>
+<span id="L858"><span class="lineNum">     858</span> <span class="tlaGNC">       10920 :         rect.adjust(0.0, -_beamWidth / 2, 0.0, 0.0);</span></span>
+<span id="L859"><span class="lineNum">     859</span> <span class="tlaGNC">       10920 :         shape.add(rect, parentElement);</span></span>
+<span id="L860"><span class="lineNum">     860</span> <span class="tlaGNC">       10920 :         return shape;</span></span>
 <span id="L861"><span class="lineNum">     861</span>              :     }</span>
 <span id="L862"><span class="lineNum">     862</span>              :     // If not, break the beam shape into multiple rectangles</span>
-<span id="L863"><span class="lineNum">     863</span> <span class="tlaGNC">        6891 :     double beamHeightDiff = endPoint.y() - startPoint.y();</span></span>
-<span id="L864"><span class="lineNum">     864</span> <span class="tlaGNC">        6891 :     int subBoxesCount = floor(beamHorizontalLength / parentElement-&gt;spatium());</span></span>
-<span id="L865"><span class="lineNum">     865</span> <span class="tlaGNC">        6891 :     subBoxesCount = std::max(subBoxesCount, 1); // at least one rectangle, of course (avoid division by zero)</span></span>
-<span id="L866"><span class="lineNum">     866</span> <span class="tlaGNC">        6891 :     double horizontalStep = beamHorizontalLength / subBoxesCount;</span></span>
-<span id="L867"><span class="lineNum">     867</span> <span class="tlaGNC">        6891 :     double verticalStep = beamHeightDiff / subBoxesCount;</span></span>
-<span id="L868"><span class="lineNum">     868</span> <span class="tlaGNC">        6891 :     std::vector&lt;PointF&gt; pointsOnBeamLine;</span></span>
-<span id="L869"><span class="lineNum">     869</span> <span class="tlaGNC">        6891 :     pointsOnBeamLine.reserve(subBoxesCount);</span></span>
-<span id="L870"><span class="lineNum">     870</span> <span class="tlaGNC">        6891 :     pointsOnBeamLine.push_back(startPoint);</span></span>
-<span id="L871"><span class="lineNum">     871</span> <span class="tlaGNC">       48805 :     for (int i = 0; i &lt; subBoxesCount - 1; ++i) {</span></span>
-<span id="L872"><span class="lineNum">     872</span> <span class="tlaGNC">       41914 :         PointF nextPoint = pointsOnBeamLine.back() + PointF(horizontalStep, verticalStep);</span></span>
-<span id="L873"><span class="lineNum">     873</span> <span class="tlaGNC">       41914 :         pointsOnBeamLine.push_back(nextPoint);</span></span>
+<span id="L863"><span class="lineNum">     863</span> <span class="tlaGNC">        7271 :     double beamHeightDiff = endPoint.y() - startPoint.y();</span></span>
+<span id="L864"><span class="lineNum">     864</span> <span class="tlaGNC">        7271 :     int subBoxesCount = floor(beamHorizontalLength / parentElement-&gt;spatium());</span></span>
+<span id="L865"><span class="lineNum">     865</span> <span class="tlaGNC">        7271 :     subBoxesCount = std::max(subBoxesCount, 1); // at least one rectangle, of course (avoid division by zero)</span></span>
+<span id="L866"><span class="lineNum">     866</span> <span class="tlaGNC">        7271 :     double horizontalStep = beamHorizontalLength / subBoxesCount;</span></span>
+<span id="L867"><span class="lineNum">     867</span> <span class="tlaGNC">        7271 :     double verticalStep = beamHeightDiff / subBoxesCount;</span></span>
+<span id="L868"><span class="lineNum">     868</span> <span class="tlaGNC">        7271 :     std::vector&lt;PointF&gt; pointsOnBeamLine;</span></span>
+<span id="L869"><span class="lineNum">     869</span> <span class="tlaGNC">        7271 :     pointsOnBeamLine.reserve(subBoxesCount);</span></span>
+<span id="L870"><span class="lineNum">     870</span> <span class="tlaGNC">        7271 :     pointsOnBeamLine.push_back(startPoint);</span></span>
+<span id="L871"><span class="lineNum">     871</span> <span class="tlaGNC">       52121 :     for (int i = 0; i &lt; subBoxesCount - 1; ++i) {</span></span>
+<span id="L872"><span class="lineNum">     872</span> <span class="tlaGNC">       44850 :         PointF nextPoint = pointsOnBeamLine.back() + PointF(horizontalStep, verticalStep);</span></span>
+<span id="L873"><span class="lineNum">     873</span> <span class="tlaGNC">       44850 :         pointsOnBeamLine.push_back(nextPoint);</span></span>
 <span id="L874"><span class="lineNum">     874</span>              :     }</span>
-<span id="L875"><span class="lineNum">     875</span> <span class="tlaGNC">       55696 :     for (PointF point : pointsOnBeamLine) {</span></span>
-<span id="L876"><span class="lineNum">     876</span> <span class="tlaGNC">       48805 :         RectF rect(point.x(), point.y(), horizontalStep, _beamWidth / 2);</span></span>
-<span id="L877"><span class="lineNum">     877</span> <span class="tlaGNC">       48805 :         rect.adjust(0.0, -_beamWidth / 2, 0.0, 0.0);</span></span>
-<span id="L878"><span class="lineNum">     878</span> <span class="tlaGNC">       48805 :         shape.add(rect, parentElement);</span></span>
+<span id="L875"><span class="lineNum">     875</span> <span class="tlaGNC">       59392 :     for (PointF point : pointsOnBeamLine) {</span></span>
+<span id="L876"><span class="lineNum">     876</span> <span class="tlaGNC">       52121 :         RectF rect(point.x(), point.y(), horizontalStep, _beamWidth / 2);</span></span>
+<span id="L877"><span class="lineNum">     877</span> <span class="tlaGNC">       52121 :         rect.adjust(0.0, -_beamWidth / 2, 0.0, 0.0);</span></span>
+<span id="L878"><span class="lineNum">     878</span> <span class="tlaGNC">       52121 :         shape.add(rect, parentElement);</span></span>
 <span id="L879"><span class="lineNum">     879</span>              :     }</span>
-<span id="L880"><span class="lineNum">     880</span> <span class="tlaGNC">        6891 :     return shape;</span></span>
-<span id="L881"><span class="lineNum">     881</span> <span class="tlaGNC">        6891 : }</span></span>
+<span id="L880"><span class="lineNum">     880</span> <span class="tlaGNC">        7271 :     return shape;</span></span>
+<span id="L881"><span class="lineNum">     881</span> <span class="tlaGNC">        7271 : }</span></span>
         </pre>
               </td>
             </tr>

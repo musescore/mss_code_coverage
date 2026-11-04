@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -99,23 +99,23 @@
 <span id="L41"><span class="lineNum">      41</span>              : //    be written to the file prior to others.</span>
 <span id="L42"><span class="lineNum">      42</span>              : //---------------------------------------------------------</span>
 <span id="L43"><span class="lineNum">      43</span>              : </span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">       16872 : EngravingObject* LinkedObjects::mainElement()</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">       16926 : EngravingObject* LinkedObjects::mainElement()</span></span>
 <span id="L45"><span class="lineNum">      45</span>              : {</span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">       16872 :     if (empty()) {</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">       16926 :     if (empty()) {</span></span>
 <span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC tlaBgUNC">           0 :         return nullptr;</span></span>
 <span id="L48"><span class="lineNum">      48</span>              :     }</span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC tlaBgGNC">       16872 :     MasterScore* ms = front()-&gt;score()-&gt;masterScore();</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       16872 :     const bool elements = front()-&gt;isEngravingItem();</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">       16872 :     const bool staves = front()-&gt;isStaff();</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">       33744 :     return *std::min_element(begin(), end(), [ms, elements, staves](EngravingObject* s1, EngravingObject* s2) {</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">       16778 :         if (s1-&gt;score() == ms &amp;&amp; s2-&gt;score() != ms) {</span></span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">          32 :             return true;</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC tlaBgGNC">       16926 :     MasterScore* ms = front()-&gt;score()-&gt;masterScore();</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       16926 :     const bool elements = front()-&gt;isEngravingItem();</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">       16926 :     const bool staves = front()-&gt;isStaff();</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">       33852 :     return *std::min_element(begin(), end(), [ms, elements, staves](EngravingObject* s1, EngravingObject* s2) {</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">       16832 :         if (s1-&gt;score() == ms &amp;&amp; s2-&gt;score() != ms) {</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">          34 :             return true;</span></span>
 <span id="L55"><span class="lineNum">      55</span>              :         }</span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       16746 :         if (s1-&gt;score() != s2-&gt;score()) {</span></span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       12807 :             return false;</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       16798 :         if (s1-&gt;score() != s2-&gt;score()) {</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       12805 :             return false;</span></span>
 <span id="L58"><span class="lineNum">      58</span>              :         }</span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">        3939 :         if (staves) {</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">        1406 :             return toStaff(s1)-&gt;idx() &lt; toStaff(s2)-&gt;idx();</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">        3993 :         if (staves) {</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">        1460 :             return toStaff(s1)-&gt;idx() &lt; toStaff(s2)-&gt;idx();</span></span>
 <span id="L61"><span class="lineNum">      61</span>              :         }</span>
 <span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">        2533 :         if (elements) {</span></span>
 <span id="L63"><span class="lineNum">      63</span>              :             // Now we compare either two elements from master score</span>
@@ -175,7 +175,7 @@
 <span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC tlaBgGNC">        2527 :             return tr1 &lt; tr2;</span></span>
 <span id="L118"><span class="lineNum">     118</span>              :         }</span>
 <span id="L119"><span class="lineNum">     119</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC tlaBgGNC">       16872 :     });</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC tlaBgGNC">       16926 :     });</span></span>
 <span id="L121"><span class="lineNum">     121</span>              : }</span>
         </pre>
               </td>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -90,19 +90,19 @@
 <span id="L32"><span class="lineNum">      32</span>              : using namespace mu::engraving;</span>
 <span id="L33"><span class="lineNum">      33</span>              : using namespace mu::engraving::rendering::score;</span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC tlaBgGNC">        9747 : VerticalGapData::VerticalGapData(const MStyle* style, bool first, System* sys, const Staff* st, SysStaff* sst, Spacer* nextSpacer, double y)</span></span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">        9747 :     : style(style), system(sys), sysStaff(sst), staff(st), m_fixedHeight(first)</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC tlaBgGNC">        9795 : VerticalGapData::VerticalGapData(const MStyle* style, bool first, System* sys, const Staff* st, SysStaff* sst, Spacer* nextSpacer, double y)</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">        9795 :     : style(style), system(sys), sysStaff(sst), staff(st), m_fixedHeight(first)</span></span>
 <span id="L37"><span class="lineNum">      37</span>              : {</span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">        9747 :     if (m_fixedHeight) {</span></span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">        3070 :         m_normalisedSpacing = style-&gt;styleAbsolute(Sid::staffUpperBorder);</span></span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">        3070 :         m_maxActualSpacing = m_normalisedSpacing;</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">        9795 :     if (m_fixedHeight) {</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">        3109 :         m_normalisedSpacing = style-&gt;styleAbsolute(Sid::staffUpperBorder);</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">        3109 :         m_maxActualSpacing = m_normalisedSpacing;</span></span>
 <span id="L41"><span class="lineNum">      41</span>              :     } else {</span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">        6677 :         m_normalisedSpacing = system-&gt;y() + (sysStaff ? sysStaff-&gt;bbox().y() : 0.0) - y;</span></span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">        6677 :         m_maxActualSpacing = style-&gt;styleAbsolute(Sid::maxStaffSpread);</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">        6686 :         m_normalisedSpacing = system-&gt;y() + (sysStaff ? sysStaff-&gt;bbox().y() : 0.0) - y;</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">        6686 :         m_maxActualSpacing = style-&gt;styleAbsolute(Sid::maxStaffSpread);</span></span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">        6677 :         Spacer* spacer { staff ? system-&gt;upSpacer(staff-&gt;idx(), nextSpacer) : nullptr };</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">        6686 :         Spacer* spacer { staff ? system-&gt;upSpacer(staff-&gt;idx(), nextSpacer) : nullptr };</span></span>
 <span id="L46"><span class="lineNum">      46</span>              : </span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        6677 :         if (spacer) {</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        6686 :         if (spacer) {</span></span>
 <span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           2 :             m_fixedSpacer = spacer-&gt;spacerType() == SpacerType::FIXED;</span></span>
 <span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">           2 :             m_normalisedSpacing = std::max(m_normalisedSpacing, spacer-&gt;absoluteGap());</span></span>
 <span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           2 :             if (m_fixedSpacer) {</span></span>
@@ -110,33 +110,33 @@
 <span id="L52"><span class="lineNum">      52</span>              :             }</span>
 <span id="L53"><span class="lineNum">      53</span>              :         }</span>
 <span id="L54"><span class="lineNum">      54</span>              :     }</span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">        9747 : }</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">        9795 : }</span></span>
 <span id="L56"><span class="lineNum">      56</span>              : </span>
 <span id="L57"><span class="lineNum">      57</span>              : //---------------------------------------------------------</span>
 <span id="L58"><span class="lineNum">      58</span>              : //   updateFactor</span>
 <span id="L59"><span class="lineNum">      59</span>              : //---------------------------------------------------------</span>
 <span id="L60"><span class="lineNum">      60</span>              : </span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        6839 : void VerticalGapData::updateFactor(double factor)</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        6883 : void VerticalGapData::updateFactor(double factor)</span></span>
 <span id="L62"><span class="lineNum">      62</span>              : {</span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">        6839 :     if (m_fixedHeight) {</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        1804 :         return;</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">        6883 :     if (m_fixedHeight) {</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        1843 :         return;</span></span>
 <span id="L65"><span class="lineNum">      65</span>              :     }</span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        5035 :     double f = std::max(factor, m_factor);</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">        5035 :     m_normalisedSpacing *= m_factor / f;</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        5035 :     m_factor = f;</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        5040 :     double f = std::max(factor, m_factor);</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">        5040 :     m_normalisedSpacing *= m_factor / f;</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        5040 :     m_factor = f;</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : }</span>
 <span id="L70"><span class="lineNum">      70</span>              : </span>
 <span id="L71"><span class="lineNum">      71</span>              : //---------------------------------------------------------</span>
 <span id="L72"><span class="lineNum">      72</span>              : //   addSpaceBetweenSections</span>
 <span id="L73"><span class="lineNum">      73</span>              : //---------------------------------------------------------</span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">        5310 : void VerticalGapData::addSpaceBetweenSections()</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">        5354 : void VerticalGapData::addSpaceBetweenSections()</span></span>
 <span id="L76"><span class="lineNum">      76</span>              : {</span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        5310 :     updateFactor(style-&gt;styleD(Sid::spreadSystem));</span></span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">        5310 :     if (!(m_fixedHeight | m_fixedSpacer)) {</span></span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        3807 :         m_maxActualSpacing = style-&gt;styleAbsolute(Sid::maxSystemSpread) / m_factor;</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        5354 :     updateFactor(style-&gt;styleD(Sid::spreadSystem));</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">        5354 :     if (!(m_fixedHeight | m_fixedSpacer)) {</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        3812 :         m_maxActualSpacing = style-&gt;styleAbsolute(Sid::maxSystemSpread) / m_factor;</span></span>
 <span id="L80"><span class="lineNum">      80</span>              :     }</span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">        5310 : }</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">        5354 : }</span></span>
 <span id="L82"><span class="lineNum">      82</span>              : </span>
 <span id="L83"><span class="lineNum">      83</span>              : //---------------------------------------------------------</span>
 <span id="L84"><span class="lineNum">      84</span>              : //   addSpaceAroundVBox</span>
@@ -181,9 +181,9 @@
 <span id="L123"><span class="lineNum">     123</span>              : //   factor</span>
 <span id="L124"><span class="lineNum">     124</span>              : //---------------------------------------------------------</span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">       61049 : double VerticalGapData::factor() const</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">       61123 : double VerticalGapData::factor() const</span></span>
 <span id="L127"><span class="lineNum">     127</span>              : {</span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       61049 :     return m_factor;</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       61123 :     return m_factor;</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : }</span>
 <span id="L130"><span class="lineNum">     130</span>              : </span>
 <span id="L131"><span class="lineNum">     131</span>              : //---------------------------------------------------------</span>
@@ -191,50 +191,50 @@
 <span id="L133"><span class="lineNum">     133</span>              : //    return normalised spacing</span>
 <span id="L134"><span class="lineNum">     134</span>              : //---------------------------------------------------------</span>
 <span id="L135"><span class="lineNum">     135</span>              : </span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">      108217 : double VerticalGapData::spacing() const</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">      108244 : double VerticalGapData::spacing() const</span></span>
 <span id="L137"><span class="lineNum">     137</span>              : {</span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">      108217 :     return m_normalisedSpacing + m_addedNormalisedSpace;</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">      108244 :     return m_normalisedSpacing + m_addedNormalisedSpace;</span></span>
 <span id="L139"><span class="lineNum">     139</span>              : }</span>
 <span id="L140"><span class="lineNum">     140</span>              : </span>
 <span id="L141"><span class="lineNum">     141</span>              : //---------------------------------------------------------</span>
 <span id="L142"><span class="lineNum">     142</span>              : //   addedSpace</span>
 <span id="L143"><span class="lineNum">     143</span>              : //---------------------------------------------------------</span>
 <span id="L144"><span class="lineNum">     144</span>              : </span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">       12535 : double VerticalGapData::actualAddedSpace() const</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">       12587 : double VerticalGapData::actualAddedSpace() const</span></span>
 <span id="L146"><span class="lineNum">     146</span>              : {</span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">       12535 :     return m_addedNormalisedSpace * factor();</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">       12587 :     return m_addedNormalisedSpace * factor();</span></span>
 <span id="L148"><span class="lineNum">     148</span>              : }</span>
 <span id="L149"><span class="lineNum">     149</span>              : </span>
 <span id="L150"><span class="lineNum">     150</span>              : //---------------------------------------------------------</span>
 <span id="L151"><span class="lineNum">     151</span>              : //   addSpacing</span>
 <span id="L152"><span class="lineNum">     152</span>              : //---------------------------------------------------------</span>
 <span id="L153"><span class="lineNum">     153</span>              : </span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">       25505 : double VerticalGapData::addSpacing(double step)</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">       25561 : double VerticalGapData::addSpacing(double step)</span></span>
 <span id="L155"><span class="lineNum">     155</span>              : {</span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">       25505 :     if (m_fixedHeight | m_fixedSpacer) {</span></span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">        6964 :         return 0.0;</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">       25561 :     if (m_fixedHeight | m_fixedSpacer) {</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">        7007 :         return 0.0;</span></span>
 <span id="L158"><span class="lineNum">     158</span>              :     }</span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">       18541 :     if (m_normalisedSpacing &gt;= m_maxActualSpacing) {</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">       18554 :     if (m_normalisedSpacing &gt;= m_maxActualSpacing) {</span></span>
 <span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">          58 :         m_normalisedSpacing = m_maxActualSpacing;</span></span>
 <span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          58 :         step = 0.0;</span></span>
 <span id="L162"><span class="lineNum">     162</span>              :     } else {</span>
-<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">       18483 :         double newSpacing { m_normalisedSpacing + m_addedNormalisedSpace + step };</span></span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">       18483 :         if ((newSpacing &gt;= m_maxActualSpacing)) {</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">       18496 :         double newSpacing { m_normalisedSpacing + m_addedNormalisedSpace + step };</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">       18496 :         if ((newSpacing &gt;= m_maxActualSpacing)) {</span></span>
 <span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">        2841 :             step = m_maxActualSpacing - m_normalisedSpacing - m_addedNormalisedSpace;</span></span>
 <span id="L166"><span class="lineNum">     166</span>              :         }</span>
 <span id="L167"><span class="lineNum">     167</span>              :     }</span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">       18541 :     m_addedNormalisedSpace += step;</span></span>
-<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">       18541 :     m_lastStep = step;</span></span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">       18541 :     return step;</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">       18554 :     m_addedNormalisedSpace += step;</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">       18554 :     m_lastStep = step;</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">       18554 :     return step;</span></span>
 <span id="L171"><span class="lineNum">     171</span>              : }</span>
 <span id="L172"><span class="lineNum">     172</span>              : </span>
 <span id="L173"><span class="lineNum">     173</span>              : //---------------------------------------------------------</span>
 <span id="L174"><span class="lineNum">     174</span>              : //   isFixedHeight</span>
 <span id="L175"><span class="lineNum">     175</span>              : //---------------------------------------------------------</span>
 <span id="L176"><span class="lineNum">     176</span>              : </span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">       95806 : bool VerticalGapData::isFixedHeight() const</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">       95898 : bool VerticalGapData::isFixedHeight() const</span></span>
 <span id="L178"><span class="lineNum">     178</span>              : {</span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">       95806 :     return m_fixedHeight || muse::RealIsNull(m_normalisedSpacing - m_maxActualSpacing);</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">       95898 :     return m_fixedHeight || muse::RealIsNull(m_normalisedSpacing - m_maxActualSpacing);</span></span>
 <span id="L180"><span class="lineNum">     180</span>              : }</span>
 <span id="L181"><span class="lineNum">     181</span>              : </span>
 <span id="L182"><span class="lineNum">     182</span>              : //---------------------------------------------------------</span>
@@ -251,15 +251,15 @@
 <span id="L193"><span class="lineNum">     193</span>              : //   addFillSpacing</span>
 <span id="L194"><span class="lineNum">     194</span>              : //---------------------------------------------------------</span>
 <span id="L195"><span class="lineNum">     195</span>              : </span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC tlaBgGNC">       17788 : double VerticalGapData::addFillSpacing(double step, double maxFill)</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC tlaBgGNC">       17844 : double VerticalGapData::addFillSpacing(double step, double maxFill)</span></span>
 <span id="L197"><span class="lineNum">     197</span>              : {</span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">       17788 :     if (m_fixedSpacer) {</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">       17844 :     if (m_fixedSpacer) {</span></span>
 <span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">          32 :         return 0.0;</span></span>
 <span id="L200"><span class="lineNum">     200</span>              :     }</span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">       17756 :     double actStep { ((step + m_fillSpacing / m_factor) &gt; maxFill) ? (maxFill - m_fillSpacing / m_factor) : step };</span></span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">       17756 :     double res = addSpacing(actStep);</span></span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">       17756 :     m_fillSpacing += res * m_factor;</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">       17756 :     return res;</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">       17812 :     double actStep { ((step + m_fillSpacing / m_factor) &gt; maxFill) ? (maxFill - m_fillSpacing / m_factor) : step };</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">       17812 :     double res = addSpacing(actStep);</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">       17812 :     m_fillSpacing += res * m_factor;</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">       17812 :     return res;</span></span>
 <span id="L205"><span class="lineNum">     205</span>              : }</span>
 <span id="L206"><span class="lineNum">     206</span>              : </span>
 <span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC tlaBgUNC">           0 : void VerticalGapData::setNormalisedSpacing(double newNormalisedSpacing)</span></span>
@@ -271,47 +271,47 @@
 <span id="L213"><span class="lineNum">     213</span>              : //   deleteAll</span>
 <span id="L214"><span class="lineNum">     214</span>              : //---------------------------------------------------------</span>
 <span id="L215"><span class="lineNum">     215</span>              : </span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC tlaBgGNC">        3068 : void VerticalGapDataList::deleteAll()</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC tlaBgGNC">        3107 : void VerticalGapDataList::deleteAll()</span></span>
 <span id="L217"><span class="lineNum">     217</span>              : {</span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">       12783 :     for (auto vsd : *this) {</span></span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        9715 :         delete vsd;</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">       12870 :     for (auto vsd : *this) {</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        9763 :         delete vsd;</span></span>
 <span id="L220"><span class="lineNum">     220</span>              :     }</span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        3068 : }</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        3107 : }</span></span>
 <span id="L222"><span class="lineNum">     222</span>              : </span>
 <span id="L223"><span class="lineNum">     223</span>              : //---------------------------------------------------------</span>
 <span id="L224"><span class="lineNum">     224</span>              : //   sumStretchFactor</span>
 <span id="L225"><span class="lineNum">     225</span>              : //---------------------------------------------------------</span>
 <span id="L226"><span class="lineNum">     226</span>              : </span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        7360 : double VerticalGapDataList::sumStretchFactor() const</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        7403 : double VerticalGapDataList::sumStretchFactor() const</span></span>
 <span id="L228"><span class="lineNum">     228</span>              : {</span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        7360 :     double sum { 0.0 };</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">       52590 :     for (VerticalGapData* vsd : *this) {</span></span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">       45230 :         if (!vsd-&gt;isFixedHeight()) {</span></span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">       33918 :             sum += vsd-&gt;factor();</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        7403 :     double sum { 0.0 };</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">       52689 :     for (VerticalGapData* vsd : *this) {</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">       45286 :         if (!vsd-&gt;isFixedHeight()) {</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">       33931 :             sum += vsd-&gt;factor();</span></span>
 <span id="L233"><span class="lineNum">     233</span>              :         }</span>
 <span id="L234"><span class="lineNum">     234</span>              :     }</span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        7360 :     return sum;</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        7403 :     return sum;</span></span>
 <span id="L236"><span class="lineNum">     236</span>              : }</span>
 <span id="L237"><span class="lineNum">     237</span>              : </span>
 <span id="L238"><span class="lineNum">     238</span>              : //---------------------------------------------------------</span>
 <span id="L239"><span class="lineNum">     239</span>              : //   smallest</span>
 <span id="L240"><span class="lineNum">     240</span>              : //---------------------------------------------------------</span>
 <span id="L241"><span class="lineNum">     241</span>              : </span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        7828 : double VerticalGapDataList::smallest(double limit) const</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        7846 : double VerticalGapDataList::smallest(double limit) const</span></span>
 <span id="L243"><span class="lineNum">     243</span>              : {</span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        7828 :     VerticalGapData* vdp { nullptr };</span></span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">       58404 :     for (VerticalGapData* vgd : *this) {</span></span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">       50576 :         if (vgd-&gt;isFixedHeight()) {</span></span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">       12940 :             continue;</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        7846 :     VerticalGapData* vdp { nullptr };</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">       58458 :     for (VerticalGapData* vgd : *this) {</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">       50612 :         if (vgd-&gt;isFixedHeight()) {</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">       12958 :             continue;</span></span>
 <span id="L248"><span class="lineNum">     248</span>              :         }</span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">       37636 :         if ((std::ceil(limit) == std::ceil(vgd-&gt;spacing()))) {</span></span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       12231 :             continue;</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">       37654 :         if ((std::ceil(limit) == std::ceil(vgd-&gt;spacing()))) {</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       12240 :             continue;</span></span>
 <span id="L251"><span class="lineNum">     251</span>              :         }</span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">       25405 :         if (!vdp || (vgd-&gt;spacing() &lt; vdp-&gt;spacing())) {</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">        8371 :             vdp = vgd;</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">       25414 :         if (!vdp || (vgd-&gt;spacing() &lt; vdp-&gt;spacing())) {</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">        8380 :             vdp = vgd;</span></span>
 <span id="L254"><span class="lineNum">     254</span>              :         }</span>
 <span id="L255"><span class="lineNum">     255</span>              :     }</span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">        7828 :     return vdp ? vdp-&gt;spacing() : 0.0;</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">        7846 :     return vdp ? vdp-&gt;spacing() : 0.0;</span></span>
 <span id="L257"><span class="lineNum">     257</span>              : }</span>
         </pre>
               </td>

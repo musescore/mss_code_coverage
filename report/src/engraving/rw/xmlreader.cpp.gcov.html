@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -86,9 +86,9 @@
 <span id="L28"><span class="lineNum">      28</span>              : using namespace muse::draw;</span>
 <span id="L29"><span class="lineNum">      29</span>              : </span>
 <span id="L30"><span class="lineNum">      30</span>              : namespace mu::engraving {</span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC tlaBgGNC">        3934 : XmlReader::~XmlReader()</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC tlaBgGNC">        3963 : XmlReader::~XmlReader()</span></span>
 <span id="L32"><span class="lineNum">      32</span>              : {</span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">        3934 : }</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">        3963 : }</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">         998 : PointF XmlReader::readPoint()</span></span>
 <span id="L36"><span class="lineNum">      36</span>              : {</span>
@@ -172,23 +172,23 @@
 <span id="L114"><span class="lineNum">     114</span>              : //    &lt;move&gt;2/4&lt;/move&gt;        (new style)</span>
 <span id="L115"><span class="lineNum">     115</span>              : //---------------------------------------------------------</span>
 <span id="L116"><span class="lineNum">     116</span>              : </span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC tlaBgGNC">       14311 : Fraction XmlReader::readFraction()</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC tlaBgGNC">       14343 : Fraction XmlReader::readFraction()</span></span>
 <span id="L118"><span class="lineNum">     118</span>              : {</span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">       14311 :     assert(tokenType() == XmlStreamReader::StartElement);</span></span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">       14311 :     int z = intAttribute(&quot;z&quot;, 0);</span></span>
-<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">       14311 :     int n = intAttribute(&quot;n&quot;, 1);</span></span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">       14311 :     AsciiStringView s = readAsciiText();</span></span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">       14311 :     if (!s.empty()) {</span></span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">       14124 :         size_t i = s.indexOf('/');</span></span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">       14124 :         if (i == muse::nidx) {</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">       14343 :     assert(tokenType() == XmlStreamReader::StartElement);</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">       14343 :     int z = intAttribute(&quot;z&quot;, 0);</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">       14343 :     int n = intAttribute(&quot;n&quot;, 1);</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">       14343 :     AsciiStringView s = readAsciiText();</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">       14343 :     if (!s.empty()) {</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">       14156 :         size_t i = s.indexOf('/');</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">       14156 :         if (i == muse::nidx) {</span></span>
 <span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">          59 :             return Fraction::fromTicks(s.toInt());</span></span>
 <span id="L127"><span class="lineNum">     127</span>              :         } else {</span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       14065 :             String str = String::fromAscii(s.ascii());</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">       14065 :             z = str.left(i).toInt();</span></span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">       14065 :             n = str.mid(i + 1).toInt();</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">       14065 :         }</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       14097 :             String str = String::fromAscii(s.ascii());</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">       14097 :             z = str.left(i).toInt();</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">       14097 :             n = str.mid(i + 1).toInt();</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">       14097 :         }</span></span>
 <span id="L132"><span class="lineNum">     132</span>              :     }</span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">       14252 :     return Fraction(z, n);</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">       14284 :     return Fraction(z, n);</span></span>
 <span id="L134"><span class="lineNum">     134</span>              : }</span>
 <span id="L135"><span class="lineNum">     135</span>              : </span>
 <span id="L136"><span class="lineNum">     136</span>              : //---------------------------------------------------------</span>
@@ -196,18 +196,18 @@
 <span id="L138"><span class="lineNum">     138</span>              : //    unknown tag read</span>
 <span id="L139"><span class="lineNum">     139</span>              : //---------------------------------------------------------</span>
 <span id="L140"><span class="lineNum">     140</span>              : </span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">        2718 : void XmlReader::unknown()</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">        2719 : void XmlReader::unknown()</span></span>
 <span id="L142"><span class="lineNum">     142</span>              : {</span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">        2718 :     if (XmlStreamReader::error()) {</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">        2719 :     if (XmlStreamReader::error()) {</span></span>
 <span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGD(&quot;%s &quot;, muPrintable(errorString()));</span></span>
 <span id="L145"><span class="lineNum">     145</span>              :     }</span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC tlaBgGNC">        2718 :     if (!m_docName.isEmpty()) {</span></span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">        2583 :         LOGD() &lt;&lt; &quot;tag in &lt;&quot; &lt;&lt; m_docName &lt;&lt; &quot;&gt; byte offset &quot; &lt;&lt; byteOffset() + m_byteOffsetAdjustment &lt;&lt; &quot;: &quot; &lt;&lt; name();</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC tlaBgGNC">        2719 :     if (!m_docName.isEmpty()) {</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">        2584 :         LOGD() &lt;&lt; &quot;tag in &lt;&quot; &lt;&lt; m_docName &lt;&lt; &quot;&gt; byte offset &quot; &lt;&lt; byteOffset() + m_byteOffsetAdjustment &lt;&lt; &quot;: &quot; &lt;&lt; name();</span></span>
 <span id="L148"><span class="lineNum">     148</span>              :     } else {</span>
 <span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">         135 :         LOGD() &lt;&lt; &quot;byte offset &quot; &lt;&lt; byteOffset() + m_byteOffsetAdjustment &lt;&lt; &quot;: &quot; &lt;&lt; name();</span></span>
 <span id="L150"><span class="lineNum">     150</span>              :     }</span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">        2718 :     skipCurrentElement();</span></span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        2718 : }</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">        2719 :     skipCurrentElement();</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        2719 : }</span></span>
 <span id="L153"><span class="lineNum">     153</span>              : </span>
 <span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">           1 : double XmlReader::readDouble(double min, double max)</span></span>
 <span id="L155"><span class="lineNum">     155</span>              : {</span>
@@ -267,22 +267,22 @@
 <span id="L209"><span class="lineNum">     209</span>              : //    read verbatim until end tag of current level is reached</span>
 <span id="L210"><span class="lineNum">     210</span>              : //-------------------------------------------------------------------</span>
 <span id="L211"><span class="lineNum">     211</span>              : </span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">        7300 : String XmlReader::readXml()</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">        7346 : String XmlReader::readXml()</span></span>
 <span id="L213"><span class="lineNum">     213</span>              : {</span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        7300 :     String s;</span></span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        7300 :     int level = 1;</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       15316 :     for (XmlStreamReader::TokenType t = readNext(); t != XmlStreamReader::EndElement; t = readNext()) {</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        8016 :         switch (t) {</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        7346 :     String s;</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        7346 :     int level = 1;</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       15408 :     for (XmlStreamReader::TokenType t = readNext(); t != XmlStreamReader::EndElement; t = readNext()) {</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        8062 :         switch (t) {</span></span>
 <span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">        1035 :         case XmlStreamReader::StartElement:</span></span>
 <span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        1035 :             htmlToString(level, &amp;s);</span></span>
 <span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        1035 :             break;</span></span>
 <span id="L221"><span class="lineNum">     221</span> <span class="tlaUNC tlaBgUNC">           0 :         case XmlStreamReader::EndElement:</span></span>
 <span id="L222"><span class="lineNum">     222</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC tlaBgGNC">        6981 :         case XmlStreamReader::Characters:</span></span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">        6981 :             if (!isWhitespace()) {</span></span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">        6981 :                 s += text().toXmlEscaped();</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC tlaBgGNC">        7027 :         case XmlStreamReader::Characters:</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">        7027 :             if (!isWhitespace()) {</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">        7027 :                 s += text().toXmlEscaped();</span></span>
 <span id="L226"><span class="lineNum">     226</span>              :             }</span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        6981 :             break;</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        7027 :             break;</span></span>
 <span id="L228"><span class="lineNum">     228</span> <span class="tlaUNC tlaBgUNC">           0 :         case XmlStreamReader::Comment:</span></span>
 <span id="L229"><span class="lineNum">     229</span> <span class="tlaUNC">           0 :             break;</span></span>
 <span id="L230"><span class="lineNum">     230</span>              : </span>
@@ -291,7 +291,7 @@
 <span id="L233"><span class="lineNum">     233</span> <span class="tlaUNC">           0 :             return s;</span></span>
 <span id="L234"><span class="lineNum">     234</span>              :         }</span>
 <span id="L235"><span class="lineNum">     235</span>              :     }</span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC tlaBgGNC">        7300 :     return s;</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC tlaBgGNC">        7346 :     return s;</span></span>
 <span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L238"><span class="lineNum">     238</span>              : }</span>
         </pre>

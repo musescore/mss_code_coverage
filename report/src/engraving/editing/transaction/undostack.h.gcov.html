@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -108,14 +108,14 @@
 <span id="L50"><span class="lineNum">      50</span>              :     void undo();</span>
 <span id="L51"><span class="lineNum">      51</span>              :     void redo();</span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC tlaBgGNC">       20533 :     void appendCommand(UndoableCommand* cmd) { m_commands.push_back(cmd); }</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC tlaBgGNC">       20893 :     void appendCommand(UndoableCommand* cmd) { m_commands.push_back(cmd); }</span></span>
 <span id="L54"><span class="lineNum">      54</span>              :     void append(UndoableTransaction&amp;&amp; other);</span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
 <span id="L56"><span class="lineNum">      56</span>              :     void unwind(bool cleanUp = true);</span>
 <span id="L57"><span class="lineNum">      57</span>              :     void cleanup(bool wasDone);</span>
 <span id="L58"><span class="lineNum">      58</span>              : </span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">        4126 :     const std::vector&lt;UndoableCommand*&gt;&amp; commands() const { return m_commands; }</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">        1245 :     bool empty() const { return m_commands.empty(); }</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">        4200 :     const std::vector&lt;UndoableCommand*&gt;&amp; commands() const { return m_commands; }</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">        1265 :     bool empty() const { return m_commands.empty(); }</span></span>
 <span id="L61"><span class="lineNum">      61</span>              : </span>
 <span id="L62"><span class="lineNum">      62</span>              :     bool hasCommandsMatchingFilter(UndoableCommandFilter, const EngravingItem* target) const;</span>
 <span id="L63"><span class="lineNum">      63</span>              :     bool hasCommandsNotMatchingFilters(const std::vector&lt;UndoableCommandFilter&gt;&amp; filters, const EngravingItem* target) const;</span>
@@ -133,7 +133,7 @@
 <span id="L75"><span class="lineNum">      75</span>              :         Box* startBox = nullptr;</span>
 <span id="L76"><span class="lineNum">      76</span>              :         Box* endBox = nullptr;</span>
 <span id="L77"><span class="lineNum">      77</span>              : </span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">         223 :         bool isValid() const { return !elements.empty() || staffStart != muse::nidx; }</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">         230 :         bool isValid() const { return !elements.empty() || staffStart != muse::nidx; }</span></span>
 <span id="L79"><span class="lineNum">      79</span>              :     };</span>
 <span id="L80"><span class="lineNum">      80</span>              : </span>
 <span id="L81"><span class="lineNum">      81</span>              :     const SelectionInfo&amp; undoSelectionInfo() const;</span>
@@ -179,21 +179,21 @@
 <span id="L121"><span class="lineNum">     121</span>              :     bool isLocked() const;</span>
 <span id="L122"><span class="lineNum">     122</span>              :     void setLocked(bool locked);</span>
 <span id="L123"><span class="lineNum">     123</span>              : </span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">        2975 :     bool hasActiveTransaction() const { return m_activeTransaction != nullptr; }</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">        3022 :     bool hasActiveTransaction() const { return m_activeTransaction != nullptr; }</span></span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
 <span id="L126"><span class="lineNum">     126</span>              :     void beginTransaction(Score*, const muse::TranslatableString&amp; actionName);</span>
 <span id="L127"><span class="lineNum">     127</span>              :     void endTransaction(bool rollback);</span>
 <span id="L128"><span class="lineNum">     128</span>              : </span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">         161 :     bool canUndo() const { return m_currentIndex &gt; 0; }</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">         168 :     bool canUndo() const { return m_currentIndex &gt; 0; }</span></span>
 <span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">          70 :     bool canRedo() const { return m_currentIndex &lt; m_transactions.size(); }</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">        1245 :     bool isClean() const { return m_cleanState == m_states[m_currentIndex]; }</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">        1265 :     bool isClean() const { return m_cleanState == m_states[m_currentIndex]; }</span></span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
 <span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">           2 :     size_t size() const { return m_transactions.size(); }</span></span>
 <span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">         363 :     size_t currentIndex() const { return m_currentIndex; }</span></span>
 <span id="L135"><span class="lineNum">     135</span>              : </span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">        6226 :     UndoableTransaction* activeTransaction() const { return m_activeTransaction; }</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">        6326 :     UndoableTransaction* activeTransaction() const { return m_activeTransaction; }</span></span>
 <span id="L137"><span class="lineNum">     137</span>              : </span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         198 :     UndoableTransaction* last() const { return m_currentIndex &gt; 0 ? m_transactions[m_currentIndex - 1] : nullptr; }</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         205 :     UndoableTransaction* last() const { return m_currentIndex &gt; 0 ? m_transactions[m_currentIndex - 1] : nullptr; }</span></span>
 <span id="L139"><span class="lineNum">     139</span> <span class="tlaUNC tlaBgUNC">           0 :     UndoableTransaction* prev() const { return m_currentIndex &gt; 1 ? m_transactions[m_currentIndex - 2] : nullptr; }</span></span>
 <span id="L140"><span class="lineNum">     140</span> <span class="tlaUNC">           0 :     UndoableTransaction* next() const { return canRedo() ? m_transactions[m_currentIndex] : nullptr; }</span></span>
 <span id="L141"><span class="lineNum">     141</span>              : </span>

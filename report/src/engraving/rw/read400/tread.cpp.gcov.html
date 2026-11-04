@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -228,25 +228,25 @@
 <span id="L170"><span class="lineNum">     170</span>              : {</span>
 <span id="L171"><span class="lineNum">     171</span>              : public:</span>
 <span id="L172"><span class="lineNum">     172</span>              :     template&lt;typename T&gt;</span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC tlaBgGNC">      120521 :     static bool doVisit(EngravingItem* item, XmlReader&amp; xml, ReadContext&amp; ctx)</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC tlaBgGNC">      120532 :     static bool doVisit(EngravingItem* item, XmlReader&amp; xml, ReadContext&amp; ctx)</span></span>
 <span id="L174"><span class="lineNum">     174</span>              :     {</span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">      120521 :         if (T::classof(item)) {</span></span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">        2359 :             TRead::read(static_cast&lt;T*&gt;(item), xml, ctx);</span></span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">        2359 :             return true;</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">      120532 :         if (T::classof(item)) {</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">        2360 :             TRead::read(static_cast&lt;T*&gt;(item), xml, ctx);</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">        2360 :             return true;</span></span>
 <span id="L178"><span class="lineNum">     178</span>              :         }</span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">      118162 :         return false;</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">      118172 :         return false;</span></span>
 <span id="L180"><span class="lineNum">     180</span>              :     }</span>
 <span id="L181"><span class="lineNum">     181</span>              : };</span>
 <span id="L182"><span class="lineNum">     182</span>              : </span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">        2359 : void TRead::readItem(EngravingItem* item, XmlReader&amp; xml, ReadContext&amp; ctx)</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">        2360 : void TRead::readItem(EngravingItem* item, XmlReader&amp; xml, ReadContext&amp; ctx)</span></span>
 <span id="L184"><span class="lineNum">     184</span>              : {</span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">        2359 :     bool found = ReadVisitor::visit(ReadTypes {}, item, xml, ctx);</span></span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">        2359 :     DO_ASSERT(found);</span></span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">        2359 : }</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">        2360 :     bool found = ReadVisitor::visit(ReadTypes {}, item, xml, ctx);</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">        2360 :     DO_ASSERT(found);</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">        2360 : }</span></span>
 <span id="L188"><span class="lineNum">     188</span>              : </span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">        2639 : PropertyValue TRead::readPropertyValue(Pid id, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">        2646 : PropertyValue TRead::readPropertyValue(Pid id, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L190"><span class="lineNum">     190</span>              : {</span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">        2639 :     switch (propertyType(id)) {</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">        2646 :     switch (propertyType(id)) {</span></span>
 <span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">         118 :     case P_TYPE::BOOL:</span></span>
 <span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">         118 :         return PropertyValue(bool(e.readInt()));</span></span>
 <span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">         348 :     case P_TYPE::INT:</span></span>
@@ -294,8 +294,8 @@
 <span id="L236"><span class="lineNum">     236</span> <span class="tlaUNC tlaBgUNC">           0 :     case P_TYPE::ORIENTATION:</span></span>
 <span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC">           0 :         return PropertyValue(TConv::fromXml(e.readAsciiText(), Orientation::VERTICAL));</span></span>
 <span id="L238"><span class="lineNum">     238</span>              : </span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC tlaBgGNC">         547 :     case P_TYPE::LAYOUTBREAK_TYPE:</span></span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">         547 :         return PropertyValue(TConv::fromXml(e.readAsciiText(), LayoutBreakType::NOBREAK));</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC tlaBgGNC">         554 :     case P_TYPE::LAYOUTBREAK_TYPE:</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">         554 :         return PropertyValue(TConv::fromXml(e.readAsciiText(), LayoutBreakType::NOBREAK));</span></span>
 <span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">           3 :     case P_TYPE::VELO_TYPE:</span></span>
 <span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">           3 :         return PropertyValue(TConv::fromXml(e.readAsciiText(), VeloType::OFFSET_VAL));</span></span>
 <span id="L243"><span class="lineNum">     243</span> <span class="tlaUNC tlaBgUNC">           0 :     case P_TYPE::GLISS_STYLE:</span></span>
@@ -356,20 +356,20 @@
 <span id="L298"><span class="lineNum">     298</span>              :     return PropertyValue();</span>
 <span id="L299"><span class="lineNum">     299</span>              : }</span>
 <span id="L300"><span class="lineNum">     300</span>              : </span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC tlaBgGNC">       88349 : bool TRead::readProperty(EngravingItem* item, const AsciiStringView&amp; tag, XmlReader&amp; xml, ReadContext&amp; ctx, Pid pid)</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC tlaBgGNC">       88385 : bool TRead::readProperty(EngravingItem* item, const AsciiStringView&amp; tag, XmlReader&amp; xml, ReadContext&amp; ctx, Pid pid)</span></span>
 <span id="L302"><span class="lineNum">     302</span>              : {</span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">       88349 :     if (tag == propertyName(pid)) {</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">       88385 :     if (tag == propertyName(pid)) {</span></span>
 <span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">        1729 :         readProperty(item, xml, ctx, pid);</span></span>
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">        1729 :         return true;</span></span>
 <span id="L306"><span class="lineNum">     306</span>              :     }</span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">       86620 :     return false;</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">       86656 :     return false;</span></span>
 <span id="L308"><span class="lineNum">     308</span>              : }</span>
 <span id="L309"><span class="lineNum">     309</span>              : </span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">        2639 : void TRead::readProperty(EngravingItem* item, XmlReader&amp; xml, ReadContext&amp; ctx, Pid pid)</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">        2646 : void TRead::readProperty(EngravingItem* item, XmlReader&amp; xml, ReadContext&amp; ctx, Pid pid)</span></span>
 <span id="L311"><span class="lineNum">     311</span>              : {</span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">        2639 :     double spatium = ctx.score() ? ctx.spatium() : item-&gt;spatium();</span></span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">        2639 :     PropertyValue v = readPropertyValue(pid, xml, ctx);</span></span>
-<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">        2639 :     switch (propertyType(pid)) {</span></span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">        2646 :     double spatium = ctx.score() ? ctx.spatium() : item-&gt;spatium();</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">        2646 :     PropertyValue v = readPropertyValue(pid, xml, ctx);</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">        2646 :     switch (propertyType(pid)) {</span></span>
 <span id="L315"><span class="lineNum">     315</span> <span class="tlaUNC tlaBgUNC">           0 :     case P_TYPE::ABSOLUTE: //! NOTE type mm, but stored in xml as spatium</span></span>
 <span id="L316"><span class="lineNum">     316</span> <span class="tlaUNC">           0 :         v = v.value&lt;Spatium&gt;().toAbsolute(spatium);</span></span>
 <span id="L317"><span class="lineNum">     317</span> <span class="tlaUNC">           0 :         break;</span></span>
@@ -380,36 +380,36 @@
 <span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">           4 :             v = v.value&lt;PointF&gt;() * DPMM;</span></span>
 <span id="L323"><span class="lineNum">     323</span>              :         }</span>
 <span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">         137 :         break;</span></span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">        2502 :     default:</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">        2502 :         break;</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">        2509 :     default:</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">        2509 :         break;</span></span>
 <span id="L327"><span class="lineNum">     327</span>              :     }</span>
 <span id="L328"><span class="lineNum">     328</span>              : </span>
 <span id="L329"><span class="lineNum">     329</span>              :     // Pre-4.4 compatibility: these items now use DIRECTION property</span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">        2639 :     if (pid == Pid::PLACEMENT &amp;&amp; item-&gt;hasVoiceAssignmentProperties()) {</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">        2646 :     if (pid == Pid::PLACEMENT &amp;&amp; item-&gt;hasVoiceAssignmentProperties()) {</span></span>
 <span id="L331"><span class="lineNum">     331</span> <span class="tlaUNC tlaBgUNC">           0 :         pid = Pid::DIRECTION;</span></span>
 <span id="L332"><span class="lineNum">     332</span> <span class="tlaUNC">           0 :         v = v.value&lt;PlacementV&gt;() == PlacementV::ABOVE ? PropertyValue(DirectionV::UP) : PropertyValue(DirectionV::DOWN);</span></span>
 <span id="L333"><span class="lineNum">     333</span>              :     }</span>
 <span id="L334"><span class="lineNum">     334</span>              : </span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC tlaBgGNC">        2639 :     if (pid == Pid::OFFSET &amp;&amp; ctx.mscVersion() &gt;= 302) {    // in 301 files &quot;pos&quot; is written before placement. Migrate offset after both have been read</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC tlaBgGNC">        2646 :     if (pid == Pid::OFFSET &amp;&amp; ctx.mscVersion() &gt;= 302) {    // in 301 files &quot;pos&quot; is written before placement. Migrate offset after both have been read</span></span>
 <span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">          29 :         compat::CompatUtils::migrateOffset500(item, v);</span></span>
 <span id="L337"><span class="lineNum">     337</span>              :     }</span>
 <span id="L338"><span class="lineNum">     338</span>              : </span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">        2639 :     if (!ctx.shouldSkipProperty(pid)) {</span></span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">        2639 :         item-&gt;setProperty(pid, v);</span></span>
-<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">        2639 :         if (item-&gt;isStyled(pid)) {</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">        2646 :     if (!ctx.shouldSkipProperty(pid)) {</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">        2646 :         item-&gt;setProperty(pid, v);</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">        2646 :         if (item-&gt;isStyled(pid)) {</span></span>
 <span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">         579 :             item-&gt;setPropertyFlags(pid, PropertyFlags::UNSTYLED);</span></span>
 <span id="L343"><span class="lineNum">     343</span>              :         }</span>
 <span id="L344"><span class="lineNum">     344</span>              :     }</span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">        2639 : }</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">        2646 : }</span></span>
 <span id="L346"><span class="lineNum">     346</span>              : </span>
-<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">       10642 : bool TRead::readStyledProperty(EngravingItem* item, const AsciiStringView&amp; tag, XmlReader&amp; xml, ReadContext&amp; ctx)</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">       10706 : bool TRead::readStyledProperty(EngravingItem* item, const AsciiStringView&amp; tag, XmlReader&amp; xml, ReadContext&amp; ctx)</span></span>
 <span id="L348"><span class="lineNum">     348</span>              : {</span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">       36090 :     for (const StyledProperty&amp; spp : *item-&gt;styledProperties()) {</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">       36154 :     for (const StyledProperty&amp; spp : *item-&gt;styledProperties()) {</span></span>
 <span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">       25809 :         if (readProperty(item, tag, xml, ctx, spp.pid)) {</span></span>
 <span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">         361 :             return true;</span></span>
 <span id="L352"><span class="lineNum">     352</span>              :         }</span>
 <span id="L353"><span class="lineNum">     353</span>              :     }</span>
-<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">       10281 :     return false;</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">       10345 :     return false;</span></span>
 <span id="L355"><span class="lineNum">     355</span>              : }</span>
 <span id="L356"><span class="lineNum">     356</span>              : </span>
 <span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">        3145 : bool TRead::readItemProperties(EngravingItem* item, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
@@ -841,92 +841,92 @@
 <span id="L783"><span class="lineNum">     783</span> <span class="tlaGNC">          51 :     read(toTextBase(m), xml, ctx);</span></span>
 <span id="L784"><span class="lineNum">     784</span> <span class="tlaGNC">          51 : }</span></span>
 <span id="L785"><span class="lineNum">     785</span>              : </span>
-<span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC">         783 : void TRead::read(Instrument* item, XmlReader&amp; e, ReadContext&amp; ctx, Part* part)</span></span>
+<span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC">         784 : void TRead::read(Instrument* item, XmlReader&amp; e, ReadContext&amp; ctx, Part* part)</span></span>
 <span id="L787"><span class="lineNum">     787</span>              : {</span>
-<span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">         783 :     bool customDrumset = false;</span></span>
-<span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">         783 :     bool readSingleNoteDynamics = false;</span></span>
+<span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">         784 :     bool customDrumset = false;</span></span>
+<span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">         784 :     bool readSingleNoteDynamics = false;</span></span>
 <span id="L790"><span class="lineNum">     790</span>              : </span>
-<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">         783 :     item-&gt;clearChannels();         // remove default channel</span></span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">         783 :     item-&gt;setId(e.attribute(&quot;id&quot;));</span></span>
-<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">       16480 :     while (e.readNextStartElement()) {</span></span>
-<span id="L794"><span class="lineNum">     794</span> <span class="tlaGNC">       15697 :         const AsciiStringView tag(e.name());</span></span>
-<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">       15697 :         if (tag == &quot;singleNoteDynamics&quot;) {</span></span>
+<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">         784 :     item-&gt;clearChannels();         // remove default channel</span></span>
+<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">         784 :     item-&gt;setId(e.attribute(&quot;id&quot;));</span></span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">       16497 :     while (e.readNextStartElement()) {</span></span>
+<span id="L794"><span class="lineNum">     794</span> <span class="tlaGNC">       15713 :         const AsciiStringView tag(e.name());</span></span>
+<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">       15713 :         if (tag == &quot;singleNoteDynamics&quot;) {</span></span>
 <span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">           6 :             item-&gt;setSingleNoteDynamics(e.readBool());</span></span>
 <span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">           6 :             readSingleNoteDynamics = true;</span></span>
-<span id="L798"><span class="lineNum">     798</span> <span class="tlaGNC">       15691 :         } else if (!readProperties(item, e, ctx, part, &amp;customDrumset)) {</span></span>
+<span id="L798"><span class="lineNum">     798</span> <span class="tlaGNC">       15707 :         } else if (!readProperties(item, e, ctx, part, &amp;customDrumset)) {</span></span>
 <span id="L799"><span class="lineNum">     799</span> <span class="tlaUNC tlaBgUNC">           0 :             e.unknown();</span></span>
 <span id="L800"><span class="lineNum">     800</span>              :         }</span>
 <span id="L801"><span class="lineNum">     801</span>              :     }</span>
 <span id="L802"><span class="lineNum">     802</span>              : </span>
-<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC tlaBgGNC">         783 :     item-&gt;updateInstrumentId();</span></span>
+<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC tlaBgGNC">         784 :     item-&gt;updateInstrumentId();</span></span>
 <span id="L804"><span class="lineNum">     804</span>              : </span>
-<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">         783 :     if (item-&gt;channel().empty()) { // for backward compatibility</span></span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">         784 :     if (item-&gt;channel().empty()) { // for backward compatibility</span></span>
 <span id="L806"><span class="lineNum">     806</span> <span class="tlaUNC tlaBgUNC">           0 :         InstrChannel* fallbackChannel = new InstrChannel;</span></span>
 <span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :         fallbackChannel-&gt;setName(String::fromUtf8(InstrChannel::DEFAULT_NAME));</span></span>
 <span id="L808"><span class="lineNum">     808</span> <span class="tlaUNC">           0 :         fallbackChannel-&gt;setProgram(item-&gt;recognizeMidiProgram());</span></span>
 <span id="L809"><span class="lineNum">     809</span> <span class="tlaUNC">           0 :         item-&gt;appendChannel(fallbackChannel);</span></span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC tlaBgGNC">         783 :     } else if (item-&gt;channel(0)-&gt;program() == -1) {</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC tlaBgGNC">         784 :     } else if (item-&gt;channel(0)-&gt;program() == -1) {</span></span>
 <span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC">          60 :         item-&gt;channel(0)-&gt;setProgram(item-&gt;recognizeMidiProgram());</span></span>
 <span id="L812"><span class="lineNum">     812</span>              :     }</span>
 <span id="L813"><span class="lineNum">     813</span>              : </span>
-<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">         783 :     if (!readSingleNoteDynamics) {</span></span>
-<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">         777 :         item-&gt;setSingleNoteDynamicsFromTemplate();</span></span>
+<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">         784 :     if (!readSingleNoteDynamics) {</span></span>
+<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">         778 :         item-&gt;setSingleNoteDynamicsFromTemplate();</span></span>
 <span id="L816"><span class="lineNum">     816</span>              :     }</span>
-<span id="L817"><span class="lineNum">     817</span> <span class="tlaGNC">         783 : }</span></span>
+<span id="L817"><span class="lineNum">     817</span> <span class="tlaGNC">         784 : }</span></span>
 <span id="L818"><span class="lineNum">     818</span>              : </span>
-<span id="L819"><span class="lineNum">     819</span> <span class="tlaGNC">       16671 : bool TRead::readProperties(Instrument* item, XmlReader&amp; e, ReadContext&amp; ctx, Part* part, bool* customDrumset)</span></span>
+<span id="L819"><span class="lineNum">     819</span> <span class="tlaGNC">       16687 : bool TRead::readProperties(Instrument* item, XmlReader&amp; e, ReadContext&amp; ctx, Part* part, bool* customDrumset)</span></span>
 <span id="L820"><span class="lineNum">     820</span>              : {</span>
-<span id="L821"><span class="lineNum">     821</span> <span class="tlaGNC">       16671 :     PartAudioSettingsCompat partAudioSetting;</span></span>
-<span id="L822"><span class="lineNum">     822</span> <span class="tlaGNC">       16671 :     InstrumentTrackId trackId;</span></span>
-<span id="L823"><span class="lineNum">     823</span> <span class="tlaGNC">       16671 :     if (part &amp;&amp; part-&gt;score()) {</span></span>
-<span id="L824"><span class="lineNum">     824</span> <span class="tlaGNC">       50013 :         trackId = { part-&gt;score()-&gt;parts().size() + 1, item-&gt;id() };//part is not assigned to score, _id field is not correct</span></span>
+<span id="L821"><span class="lineNum">     821</span> <span class="tlaGNC">       16687 :     PartAudioSettingsCompat partAudioSetting;</span></span>
+<span id="L822"><span class="lineNum">     822</span> <span class="tlaGNC">       16687 :     InstrumentTrackId trackId;</span></span>
+<span id="L823"><span class="lineNum">     823</span> <span class="tlaGNC">       16687 :     if (part &amp;&amp; part-&gt;score()) {</span></span>
+<span id="L824"><span class="lineNum">     824</span> <span class="tlaGNC">       50061 :         trackId = { part-&gt;score()-&gt;parts().size() + 1, item-&gt;id() };//part is not assigned to score, _id field is not correct</span></span>
 <span id="L825"><span class="lineNum">     825</span>              :     }</span>
-<span id="L826"><span class="lineNum">     826</span> <span class="tlaGNC">       16671 :     partAudioSetting.instrumentId = trackId;</span></span>
+<span id="L826"><span class="lineNum">     826</span> <span class="tlaGNC">       16687 :     partAudioSetting.instrumentId = trackId;</span></span>
 <span id="L827"><span class="lineNum">     827</span>              : </span>
-<span id="L828"><span class="lineNum">     828</span> <span class="tlaGNC">       16671 :     const AsciiStringView tag(e.name());</span></span>
-<span id="L829"><span class="lineNum">     829</span> <span class="tlaGNC">       16671 :     if (tag == &quot;longName&quot;) {</span></span>
-<span id="L830"><span class="lineNum">     830</span> <span class="tlaGNC">         726 :         item-&gt;setLongName(read500::TRead::readLegacyStaffName(e));</span></span>
-<span id="L831"><span class="lineNum">     831</span> <span class="tlaGNC">       15945 :     } else if (tag == &quot;shortName&quot;) {</span></span>
-<span id="L832"><span class="lineNum">     832</span> <span class="tlaGNC">         709 :         item-&gt;setShortName(read500::TRead::readLegacyStaffName(e));</span></span>
-<span id="L833"><span class="lineNum">     833</span> <span class="tlaGNC">       15236 :     } else if (tag == &quot;trackName&quot;) {</span></span>
-<span id="L834"><span class="lineNum">     834</span> <span class="tlaGNC">         864 :         item-&gt;setTrackName(e.readText());</span></span>
-<span id="L835"><span class="lineNum">     835</span> <span class="tlaGNC">       14372 :     } else if (tag == &quot;minPitch&quot;) {      // obsolete</span></span>
+<span id="L828"><span class="lineNum">     828</span> <span class="tlaGNC">       16687 :     const AsciiStringView tag(e.name());</span></span>
+<span id="L829"><span class="lineNum">     829</span> <span class="tlaGNC">       16687 :     if (tag == &quot;longName&quot;) {</span></span>
+<span id="L830"><span class="lineNum">     830</span> <span class="tlaGNC">         727 :         item-&gt;setLongName(read500::TRead::readLegacyStaffName(e));</span></span>
+<span id="L831"><span class="lineNum">     831</span> <span class="tlaGNC">       15960 :     } else if (tag == &quot;shortName&quot;) {</span></span>
+<span id="L832"><span class="lineNum">     832</span> <span class="tlaGNC">         710 :         item-&gt;setShortName(read500::TRead::readLegacyStaffName(e));</span></span>
+<span id="L833"><span class="lineNum">     833</span> <span class="tlaGNC">       15250 :     } else if (tag == &quot;trackName&quot;) {</span></span>
+<span id="L834"><span class="lineNum">     834</span> <span class="tlaGNC">         865 :         item-&gt;setTrackName(e.readText());</span></span>
+<span id="L835"><span class="lineNum">     835</span> <span class="tlaGNC">       14385 :     } else if (tag == &quot;minPitch&quot;) {      // obsolete</span></span>
 <span id="L836"><span class="lineNum">     836</span> <span class="tlaUNC tlaBgUNC">           0 :         int pitch = e.readInt();</span></span>
 <span id="L837"><span class="lineNum">     837</span> <span class="tlaUNC">           0 :         item-&gt;setMinPitchP(pitch);</span></span>
 <span id="L838"><span class="lineNum">     838</span> <span class="tlaUNC">           0 :         item-&gt;setMinPitchA(pitch);</span></span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC tlaBgGNC">       14372 :     } else if (tag == &quot;maxPitch&quot;) {       // obsolete</span></span>
+<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC tlaBgGNC">       14385 :     } else if (tag == &quot;maxPitch&quot;) {       // obsolete</span></span>
 <span id="L840"><span class="lineNum">     840</span> <span class="tlaUNC tlaBgUNC">           0 :         int pitch = e.readInt();</span></span>
 <span id="L841"><span class="lineNum">     841</span> <span class="tlaUNC">           0 :         item-&gt;setMaxPitchP(pitch);</span></span>
 <span id="L842"><span class="lineNum">     842</span> <span class="tlaUNC">           0 :         item-&gt;setMaxPitchA(pitch);</span></span>
-<span id="L843"><span class="lineNum">     843</span> <span class="tlaGNC tlaBgGNC">       14372 :     } else if (tag == &quot;minPitchA&quot;) {</span></span>
-<span id="L844"><span class="lineNum">     844</span> <span class="tlaGNC">         680 :         item-&gt;setMinPitchA(e.readInt());</span></span>
-<span id="L845"><span class="lineNum">     845</span> <span class="tlaGNC">       13692 :     } else if (tag == &quot;minPitchP&quot;) {</span></span>
-<span id="L846"><span class="lineNum">     846</span> <span class="tlaGNC">         680 :         item-&gt;setMinPitchP(e.readInt());</span></span>
-<span id="L847"><span class="lineNum">     847</span> <span class="tlaGNC">       13012 :     } else if (tag == &quot;maxPitchA&quot;) {</span></span>
-<span id="L848"><span class="lineNum">     848</span> <span class="tlaGNC">         680 :         item-&gt;setMaxPitchA(e.readInt());</span></span>
-<span id="L849"><span class="lineNum">     849</span> <span class="tlaGNC">       12332 :     } else if (tag == &quot;maxPitchP&quot;) {</span></span>
-<span id="L850"><span class="lineNum">     850</span> <span class="tlaGNC">         680 :         item-&gt;setMaxPitchP(e.readInt());</span></span>
-<span id="L851"><span class="lineNum">     851</span> <span class="tlaGNC">       11652 :     } else if (tag == &quot;transposition&quot;) {    // obsolete</span></span>
+<span id="L843"><span class="lineNum">     843</span> <span class="tlaGNC tlaBgGNC">       14385 :     } else if (tag == &quot;minPitchA&quot;) {</span></span>
+<span id="L844"><span class="lineNum">     844</span> <span class="tlaGNC">         681 :         item-&gt;setMinPitchA(e.readInt());</span></span>
+<span id="L845"><span class="lineNum">     845</span> <span class="tlaGNC">       13704 :     } else if (tag == &quot;minPitchP&quot;) {</span></span>
+<span id="L846"><span class="lineNum">     846</span> <span class="tlaGNC">         681 :         item-&gt;setMinPitchP(e.readInt());</span></span>
+<span id="L847"><span class="lineNum">     847</span> <span class="tlaGNC">       13023 :     } else if (tag == &quot;maxPitchA&quot;) {</span></span>
+<span id="L848"><span class="lineNum">     848</span> <span class="tlaGNC">         681 :         item-&gt;setMaxPitchA(e.readInt());</span></span>
+<span id="L849"><span class="lineNum">     849</span> <span class="tlaGNC">       12342 :     } else if (tag == &quot;maxPitchP&quot;) {</span></span>
+<span id="L850"><span class="lineNum">     850</span> <span class="tlaGNC">         681 :         item-&gt;setMaxPitchP(e.readInt());</span></span>
+<span id="L851"><span class="lineNum">     851</span> <span class="tlaGNC">       11661 :     } else if (tag == &quot;transposition&quot;) {    // obsolete</span></span>
 <span id="L852"><span class="lineNum">     852</span> <span class="tlaUNC tlaBgUNC">           0 :         Interval transpose;</span></span>
 <span id="L853"><span class="lineNum">     853</span> <span class="tlaUNC">           0 :         transpose.chromatic = e.readInt();</span></span>
 <span id="L854"><span class="lineNum">     854</span> <span class="tlaUNC">           0 :         transpose.diatonic = Interval::chromatic2diatonic(transpose.chromatic);</span></span>
 <span id="L855"><span class="lineNum">     855</span> <span class="tlaUNC">           0 :         item-&gt;setTranspose(transpose);</span></span>
-<span id="L856"><span class="lineNum">     856</span> <span class="tlaGNC tlaBgGNC">       11652 :     } else if (tag == &quot;transposeChromatic&quot;) {</span></span>
+<span id="L856"><span class="lineNum">     856</span> <span class="tlaGNC tlaBgGNC">       11661 :     } else if (tag == &quot;transposeChromatic&quot;) {</span></span>
 <span id="L857"><span class="lineNum">     857</span> <span class="tlaGNC">          25 :         Interval transpose = item-&gt;transpose();</span></span>
 <span id="L858"><span class="lineNum">     858</span> <span class="tlaGNC">          25 :         transpose.chromatic = e.readInt();</span></span>
 <span id="L859"><span class="lineNum">     859</span> <span class="tlaGNC">          25 :         item-&gt;setTranspose(transpose);</span></span>
-<span id="L860"><span class="lineNum">     860</span> <span class="tlaGNC">       11627 :     } else if (tag == &quot;transposeDiatonic&quot;) {</span></span>
+<span id="L860"><span class="lineNum">     860</span> <span class="tlaGNC">       11636 :     } else if (tag == &quot;transposeDiatonic&quot;) {</span></span>
 <span id="L861"><span class="lineNum">     861</span> <span class="tlaGNC">          25 :         Interval transpose = item-&gt;transpose();</span></span>
 <span id="L862"><span class="lineNum">     862</span> <span class="tlaGNC">          25 :         transpose.diatonic = e.readInt();</span></span>
 <span id="L863"><span class="lineNum">     863</span> <span class="tlaGNC">          25 :         item-&gt;setTranspose(transpose);</span></span>
-<span id="L864"><span class="lineNum">     864</span> <span class="tlaGNC">       11602 :     } else if (tag == &quot;instrumentId&quot;) {</span></span>
+<span id="L864"><span class="lineNum">     864</span> <span class="tlaGNC">       11611 :     } else if (tag == &quot;instrumentId&quot;) {</span></span>
 <span id="L865"><span class="lineNum">     865</span> <span class="tlaGNC">         498 :         item-&gt;setMusicXmlId(e.readText());</span></span>
-<span id="L866"><span class="lineNum">     866</span> <span class="tlaGNC">       11104 :     } else if (tag == &quot;useDrumset&quot;) {</span></span>
+<span id="L866"><span class="lineNum">     866</span> <span class="tlaGNC">       11113 :     } else if (tag == &quot;useDrumset&quot;) {</span></span>
 <span id="L867"><span class="lineNum">     867</span> <span class="tlaGNC">         180 :         item-&gt;setUseDrumset(e.readInt());</span></span>
 <span id="L868"><span class="lineNum">     868</span> <span class="tlaGNC">         180 :         if (item-&gt;useDrumset()) {</span></span>
 <span id="L869"><span class="lineNum">     869</span> <span class="tlaGNC">         180 :             item-&gt;setDrumset(new Drumset(*smDrumset));</span></span>
 <span id="L870"><span class="lineNum">     870</span>              :         }</span>
-<span id="L871"><span class="lineNum">     871</span> <span class="tlaGNC">       10924 :     } else if (tag == &quot;Drum&quot;) {</span></span>
+<span id="L871"><span class="lineNum">     871</span> <span class="tlaGNC">       10933 :     } else if (tag == &quot;Drum&quot;) {</span></span>
 <span id="L872"><span class="lineNum">     872</span>              :         // if we see one of these tags, a custom drumset will be created</span>
 <span id="L873"><span class="lineNum">     873</span> <span class="tlaGNC">        4254 :         if (!item-&gt;drumset()) {</span></span>
 <span id="L874"><span class="lineNum">     874</span> <span class="tlaUNC tlaBgUNC">           0 :             item-&gt;setDrumset(new Drumset(*smDrumset));</span></span>
@@ -936,7 +936,7 @@
 <span id="L878"><span class="lineNum">     878</span> <span class="tlaGNC">         174 :             *customDrumset = true;</span></span>
 <span id="L879"><span class="lineNum">     879</span>              :         }</span>
 <span id="L880"><span class="lineNum">     880</span> <span class="tlaGNC">        4254 :         const_cast&lt;Drumset*&gt;(item-&gt;drumset())-&gt;loadDrum(e);</span></span>
-<span id="L881"><span class="lineNum">     881</span> <span class="tlaGNC">        6670 :     } else if (tag == &quot;percussionPanelColumns&quot;) {</span></span>
+<span id="L881"><span class="lineNum">     881</span> <span class="tlaGNC">        6679 :     } else if (tag == &quot;percussionPanelColumns&quot;) {</span></span>
 <span id="L882"><span class="lineNum">     882</span>              :         // if we see one of these tags, a custom drumset will be created</span>
 <span id="L883"><span class="lineNum">     883</span> <span class="tlaUNC tlaBgUNC">           0 :         if (!item-&gt;drumset()) {</span></span>
 <span id="L884"><span class="lineNum">     884</span> <span class="tlaUNC">           0 :             item-&gt;setDrumset(new Drumset(*smDrumset));</span></span>
@@ -948,26 +948,26 @@
 <span id="L890"><span class="lineNum">     890</span> <span class="tlaUNC">           0 :         item-&gt;drumset()-&gt;setPercussionPanelColumns(e.readInt());</span></span>
 <span id="L891"><span class="lineNum">     891</span>              :     }</span>
 <span id="L892"><span class="lineNum">     892</span>              :     // support tag &quot;Tablature&quot; for a while for compatibility with existent 2.0 scores</span>
-<span id="L893"><span class="lineNum">     893</span> <span class="tlaGNC tlaBgGNC">        6670 :     else if (tag == &quot;Tablature&quot; || tag == &quot;StringData&quot;) {</span></span>
+<span id="L893"><span class="lineNum">     893</span> <span class="tlaGNC tlaBgGNC">        6679 :     else if (tag == &quot;Tablature&quot; || tag == &quot;StringData&quot;) {</span></span>
 <span id="L894"><span class="lineNum">     894</span> <span class="tlaGNC">          34 :         StringData sd;</span></span>
 <span id="L895"><span class="lineNum">     895</span> <span class="tlaGNC">          34 :         read(&amp;sd, e);</span></span>
 <span id="L896"><span class="lineNum">     896</span> <span class="tlaGNC">          34 :         item-&gt;setStringData(sd);</span></span>
-<span id="L897"><span class="lineNum">     897</span> <span class="tlaGNC">        6670 :     } else if (tag == &quot;MidiAction&quot;) {</span></span>
+<span id="L897"><span class="lineNum">     897</span> <span class="tlaGNC">        6679 :     } else if (tag == &quot;MidiAction&quot;) {</span></span>
 <span id="L898"><span class="lineNum">     898</span> <span class="tlaUNC tlaBgUNC">           0 :         NamedEventList a;</span></span>
 <span id="L899"><span class="lineNum">     899</span> <span class="tlaUNC">           0 :         read(&amp;a, e);</span></span>
 <span id="L900"><span class="lineNum">     900</span> <span class="tlaUNC">           0 :         item-&gt;addMidiAction(a);</span></span>
-<span id="L901"><span class="lineNum">     901</span> <span class="tlaGNC tlaBgGNC">        6636 :     } else if (tag == &quot;Articulation&quot;) {</span></span>
-<span id="L902"><span class="lineNum">     902</span> <span class="tlaGNC">        5135 :         MidiArticulation a;</span></span>
-<span id="L903"><span class="lineNum">     903</span> <span class="tlaGNC">        5135 :         read(&amp;a, e);</span></span>
-<span id="L904"><span class="lineNum">     904</span> <span class="tlaGNC">        5135 :         item-&gt;addMidiArticulation(a);</span></span>
-<span id="L905"><span class="lineNum">     905</span> <span class="tlaGNC">        6636 :     } else if (tag == &quot;Channel&quot; || tag == &quot;channel&quot;) {</span></span>
-<span id="L906"><span class="lineNum">     906</span> <span class="tlaGNC">        1025 :         InstrChannel* a = new InstrChannel;</span></span>
-<span id="L907"><span class="lineNum">     907</span> <span class="tlaGNC">        1025 :         read(a, e, ctx, part, trackId);</span></span>
-<span id="L908"><span class="lineNum">     908</span> <span class="tlaGNC">        1025 :         item-&gt;appendChannel(a);</span></span>
-<span id="L909"><span class="lineNum">     909</span> <span class="tlaGNC">         476 :     } else if (tag == &quot;clef&quot;) {           // sets both transposing and concert clef</span></span>
-<span id="L910"><span class="lineNum">     910</span> <span class="tlaGNC">         472 :         int idx = e.intAttribute(&quot;staff&quot;, 1) - 1;</span></span>
-<span id="L911"><span class="lineNum">     911</span> <span class="tlaGNC">         472 :         ClefType ct = TConv::fromXml(e.readAsciiText(), ClefType::G);</span></span>
-<span id="L912"><span class="lineNum">     912</span> <span class="tlaGNC">         472 :         item-&gt;setClefType(idx, ClefTypeList(ct, ct));</span></span>
+<span id="L901"><span class="lineNum">     901</span> <span class="tlaGNC tlaBgGNC">        6645 :     } else if (tag == &quot;Articulation&quot;) {</span></span>
+<span id="L902"><span class="lineNum">     902</span> <span class="tlaGNC">        5142 :         MidiArticulation a;</span></span>
+<span id="L903"><span class="lineNum">     903</span> <span class="tlaGNC">        5142 :         read(&amp;a, e);</span></span>
+<span id="L904"><span class="lineNum">     904</span> <span class="tlaGNC">        5142 :         item-&gt;addMidiArticulation(a);</span></span>
+<span id="L905"><span class="lineNum">     905</span> <span class="tlaGNC">        6645 :     } else if (tag == &quot;Channel&quot; || tag == &quot;channel&quot;) {</span></span>
+<span id="L906"><span class="lineNum">     906</span> <span class="tlaGNC">        1026 :         InstrChannel* a = new InstrChannel;</span></span>
+<span id="L907"><span class="lineNum">     907</span> <span class="tlaGNC">        1026 :         read(a, e, ctx, part, trackId);</span></span>
+<span id="L908"><span class="lineNum">     908</span> <span class="tlaGNC">        1026 :         item-&gt;appendChannel(a);</span></span>
+<span id="L909"><span class="lineNum">     909</span> <span class="tlaGNC">         477 :     } else if (tag == &quot;clef&quot;) {           // sets both transposing and concert clef</span></span>
+<span id="L910"><span class="lineNum">     910</span> <span class="tlaGNC">         473 :         int idx = e.intAttribute(&quot;staff&quot;, 1) - 1;</span></span>
+<span id="L911"><span class="lineNum">     911</span> <span class="tlaGNC">         473 :         ClefType ct = TConv::fromXml(e.readAsciiText(), ClefType::G);</span></span>
+<span id="L912"><span class="lineNum">     912</span> <span class="tlaGNC">         473 :         item-&gt;setClefType(idx, ClefTypeList(ct, ct));</span></span>
 <span id="L913"><span class="lineNum">     913</span> <span class="tlaGNC">           4 :     } else if (tag == &quot;concertClef&quot;) {</span></span>
 <span id="L914"><span class="lineNum">     914</span> <span class="tlaGNC">           2 :         int idx = e.intAttribute(&quot;staff&quot;, 1) - 1;</span></span>
 <span id="L915"><span class="lineNum">     915</span> <span class="tlaGNC">           2 :         item-&gt;setClefType(idx, ClefTypeList(TConv::fromXml(e.readAsciiText(), ClefType::G), item-&gt;clefType(idx).transposingClef));</span></span>
@@ -978,32 +978,32 @@
 <span id="L920"><span class="lineNum">     920</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
 <span id="L921"><span class="lineNum">     921</span>              :     }</span>
 <span id="L922"><span class="lineNum">     922</span>              : </span>
-<span id="L923"><span class="lineNum">     923</span> <span class="tlaGNC tlaBgGNC">       16671 :     return true;</span></span>
-<span id="L924"><span class="lineNum">     924</span> <span class="tlaGNC">       50013 : }</span></span>
+<span id="L923"><span class="lineNum">     923</span> <span class="tlaGNC tlaBgGNC">       16687 :     return true;</span></span>
+<span id="L924"><span class="lineNum">     924</span> <span class="tlaGNC">       50061 : }</span></span>
 <span id="L925"><span class="lineNum">     925</span>              : </span>
-<span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">       13441 : void TRead::read(InstrChannel* item, XmlReader&amp; e, ReadContext&amp; ctx, Part* part, const InstrumentTrackId&amp; instrId)</span></span>
+<span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">       13442 : void TRead::read(InstrChannel* item, XmlReader&amp; e, ReadContext&amp; ctx, Part* part, const InstrumentTrackId&amp; instrId)</span></span>
 <span id="L927"><span class="lineNum">     927</span>              : {</span>
-<span id="L928"><span class="lineNum">     928</span> <span class="tlaGNC">       13441 :     item-&gt;setNotifyAboutChangedEnabled(false);</span></span>
+<span id="L928"><span class="lineNum">     928</span> <span class="tlaGNC">       13442 :     item-&gt;setNotifyAboutChangedEnabled(false);</span></span>
 <span id="L929"><span class="lineNum">     929</span>              : </span>
 <span id="L930"><span class="lineNum">     930</span>              :     // synti = 0;</span>
-<span id="L931"><span class="lineNum">     931</span> <span class="tlaGNC">       13441 :     item-&gt;setName(e.attribute(&quot;name&quot;));</span></span>
-<span id="L932"><span class="lineNum">     932</span> <span class="tlaGNC">       13441 :     if (item-&gt;name() == &quot;&quot;) {</span></span>
-<span id="L933"><span class="lineNum">     933</span> <span class="tlaGNC">        9194 :         item-&gt;setName(String::fromUtf8(InstrChannel::DEFAULT_NAME));</span></span>
+<span id="L931"><span class="lineNum">     931</span> <span class="tlaGNC">       13442 :     item-&gt;setName(e.attribute(&quot;name&quot;));</span></span>
+<span id="L932"><span class="lineNum">     932</span> <span class="tlaGNC">       13442 :     if (item-&gt;name() == &quot;&quot;) {</span></span>
+<span id="L933"><span class="lineNum">     933</span> <span class="tlaGNC">        9195 :         item-&gt;setName(String::fromUtf8(InstrChannel::DEFAULT_NAME));</span></span>
 <span id="L934"><span class="lineNum">     934</span>              :     }</span>
 <span id="L935"><span class="lineNum">     935</span>              : </span>
-<span id="L936"><span class="lineNum">     936</span> <span class="tlaGNC">       13441 :     int midiPort = -1;</span></span>
-<span id="L937"><span class="lineNum">     937</span> <span class="tlaGNC">       13441 :     int midiChannel = -1;</span></span>
-<span id="L938"><span class="lineNum">     938</span> <span class="tlaGNC">       13441 :     PartAudioSettingsCompat partAudioSetting;</span></span>
-<span id="L939"><span class="lineNum">     939</span> <span class="tlaGNC">       13441 :     partAudioSetting.instrumentId = instrId;</span></span>
+<span id="L936"><span class="lineNum">     936</span> <span class="tlaGNC">       13442 :     int midiPort = -1;</span></span>
+<span id="L937"><span class="lineNum">     937</span> <span class="tlaGNC">       13442 :     int midiChannel = -1;</span></span>
+<span id="L938"><span class="lineNum">     938</span> <span class="tlaGNC">       13442 :     PartAudioSettingsCompat partAudioSetting;</span></span>
+<span id="L939"><span class="lineNum">     939</span> <span class="tlaGNC">       13442 :     partAudioSetting.instrumentId = instrId;</span></span>
 <span id="L940"><span class="lineNum">     940</span>              : </span>
-<span id="L941"><span class="lineNum">     941</span> <span class="tlaGNC">       30216 :     while (e.readNextStartElement()) {</span></span>
-<span id="L942"><span class="lineNum">     942</span> <span class="tlaGNC">       16775 :         const AsciiStringView tag(e.name());</span></span>
-<span id="L943"><span class="lineNum">     943</span> <span class="tlaGNC">       16775 :         if (tag == &quot;program&quot;) {</span></span>
-<span id="L944"><span class="lineNum">     944</span> <span class="tlaGNC">       13381 :             item-&gt;setProgram(e.intAttribute(&quot;value&quot;, -1));</span></span>
-<span id="L945"><span class="lineNum">     945</span> <span class="tlaGNC">       13381 :             if (item-&gt;program() == -1) {</span></span>
+<span id="L941"><span class="lineNum">     941</span> <span class="tlaGNC">       30218 :     while (e.readNextStartElement()) {</span></span>
+<span id="L942"><span class="lineNum">     942</span> <span class="tlaGNC">       16776 :         const AsciiStringView tag(e.name());</span></span>
+<span id="L943"><span class="lineNum">     943</span> <span class="tlaGNC">       16776 :         if (tag == &quot;program&quot;) {</span></span>
+<span id="L944"><span class="lineNum">     944</span> <span class="tlaGNC">       13382 :             item-&gt;setProgram(e.intAttribute(&quot;value&quot;, -1));</span></span>
+<span id="L945"><span class="lineNum">     945</span> <span class="tlaGNC">       13382 :             if (item-&gt;program() == -1) {</span></span>
 <span id="L946"><span class="lineNum">     946</span> <span class="tlaUNC tlaBgUNC">           0 :                 item-&gt;setProgram(e.readInt());</span></span>
 <span id="L947"><span class="lineNum">     947</span>              :             } else {</span>
-<span id="L948"><span class="lineNum">     948</span> <span class="tlaGNC tlaBgGNC">       13381 :                 e.readNext();</span></span>
+<span id="L948"><span class="lineNum">     948</span> <span class="tlaGNC tlaBgGNC">       13382 :                 e.readNext();</span></span>
 <span id="L949"><span class="lineNum">     949</span>              :             }</span>
 <span id="L950"><span class="lineNum">     950</span> <span class="tlaGNC">        3394 :         } else if (tag == &quot;controller&quot;) {</span></span>
 <span id="L951"><span class="lineNum">     951</span> <span class="tlaGNC">        2804 :             int value = e.intAttribute(&quot;value&quot;, 0);</span></span>
@@ -1066,41 +1066,41 @@
 <span id="L1008"><span class="lineNum">    1008</span>              :         }</span>
 <span id="L1009"><span class="lineNum">    1009</span>              :     }</span>
 <span id="L1010"><span class="lineNum">    1010</span>              : </span>
-<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC tlaBgGNC">       13441 :     item-&gt;setMustUpdateInit(true);</span></span>
+<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC tlaBgGNC">       13442 :     item-&gt;setMustUpdateInit(true);</span></span>
 <span id="L1012"><span class="lineNum">    1012</span>              : </span>
-<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaGNC">       13441 :     ctx.addPartAudioSettingCompat(partAudioSetting);</span></span>
+<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaGNC">       13442 :     ctx.addPartAudioSettingCompat(partAudioSetting);</span></span>
 <span id="L1014"><span class="lineNum">    1014</span>              : </span>
-<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaGNC">       13441 :     item-&gt;setNotifyAboutChangedEnabled(true);</span></span>
+<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaGNC">       13442 :     item-&gt;setNotifyAboutChangedEnabled(true);</span></span>
 <span id="L1016"><span class="lineNum">    1016</span>              : </span>
-<span id="L1017"><span class="lineNum">    1017</span> <span class="tlaGNC">       13441 :     if ((midiPort != -1 || midiChannel != -1) &amp;&amp; part &amp;&amp; part-&gt;score()-&gt;isMaster()) {</span></span>
+<span id="L1017"><span class="lineNum">    1017</span> <span class="tlaGNC">       13442 :     if ((midiPort != -1 || midiChannel != -1) &amp;&amp; part &amp;&amp; part-&gt;score()-&gt;isMaster()) {</span></span>
 <span id="L1018"><span class="lineNum">    1018</span> <span class="tlaGNC">         160 :         part-&gt;masterScore()-&gt;addMidiMapping(item, part, midiPort, midiChannel);</span></span>
 <span id="L1019"><span class="lineNum">    1019</span>              :     }</span>
-<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">       13441 : }</span></span>
+<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">       13442 : }</span></span>
 <span id="L1021"><span class="lineNum">    1021</span>              : </span>
-<span id="L1022"><span class="lineNum">    1022</span> <span class="tlaGNC">        5599 : void TRead::read(MidiArticulation* item, XmlReader&amp; e)</span></span>
+<span id="L1022"><span class="lineNum">    1022</span> <span class="tlaGNC">        5606 : void TRead::read(MidiArticulation* item, XmlReader&amp; e)</span></span>
 <span id="L1023"><span class="lineNum">    1023</span>              : {</span>
-<span id="L1024"><span class="lineNum">    1024</span> <span class="tlaGNC">        5599 :     item-&gt;name = e.attribute(&quot;name&quot;);</span></span>
-<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaGNC">       16669 :     while (e.readNextStartElement()) {</span></span>
-<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">       11070 :         const AsciiStringView tag(e.name());</span></span>
-<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC">       11070 :         if (tag == &quot;velocity&quot;) {</span></span>
-<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">        5599 :             String text(e.readText());</span></span>
-<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">        5599 :             if (text.endsWith(u&quot;%&quot;)) {</span></span>
+<span id="L1024"><span class="lineNum">    1024</span> <span class="tlaGNC">        5606 :     item-&gt;name = e.attribute(&quot;name&quot;);</span></span>
+<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaGNC">       16690 :     while (e.readNextStartElement()) {</span></span>
+<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">       11084 :         const AsciiStringView tag(e.name());</span></span>
+<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC">       11084 :         if (tag == &quot;velocity&quot;) {</span></span>
+<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">        5606 :             String text(e.readText());</span></span>
+<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">        5606 :             if (text.endsWith(u&quot;%&quot;)) {</span></span>
 <span id="L1030"><span class="lineNum">    1030</span> <span class="tlaUNC tlaBgUNC">           0 :                 text = text.left(text.size() - 1);</span></span>
 <span id="L1031"><span class="lineNum">    1031</span>              :             }</span>
-<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaGNC tlaBgGNC">        5599 :             item-&gt;velocity = text.toInt();</span></span>
-<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaGNC">       11070 :         } else if (tag == &quot;gateTime&quot;) {</span></span>
-<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaGNC">        5471 :             String text(e.readText());</span></span>
-<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaGNC">        5471 :             if (text.endsWith(u&quot;%&quot;)) {</span></span>
+<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaGNC tlaBgGNC">        5606 :             item-&gt;velocity = text.toInt();</span></span>
+<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaGNC">       11084 :         } else if (tag == &quot;gateTime&quot;) {</span></span>
+<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaGNC">        5478 :             String text(e.readText());</span></span>
+<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaGNC">        5478 :             if (text.endsWith(u&quot;%&quot;)) {</span></span>
 <span id="L1036"><span class="lineNum">    1036</span> <span class="tlaUNC tlaBgUNC">           0 :                 text = text.left(text.size() - 1);</span></span>
 <span id="L1037"><span class="lineNum">    1037</span>              :             }</span>
-<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaGNC tlaBgGNC">        5471 :             item-&gt;gateTime = text.toInt();</span></span>
-<span id="L1039"><span class="lineNum">    1039</span> <span class="tlaGNC">        5471 :         } else if (tag == &quot;descr&quot;) {</span></span>
+<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaGNC tlaBgGNC">        5478 :             item-&gt;gateTime = text.toInt();</span></span>
+<span id="L1039"><span class="lineNum">    1039</span> <span class="tlaGNC">        5478 :         } else if (tag == &quot;descr&quot;) {</span></span>
 <span id="L1040"><span class="lineNum">    1040</span> <span class="tlaUNC tlaBgUNC">           0 :             item-&gt;descr = e.readText();</span></span>
 <span id="L1041"><span class="lineNum">    1041</span>              :         } else {</span>
 <span id="L1042"><span class="lineNum">    1042</span> <span class="tlaUNC">           0 :             e.unknown();</span></span>
 <span id="L1043"><span class="lineNum">    1043</span>              :         }</span>
 <span id="L1044"><span class="lineNum">    1044</span>              :     }</span>
-<span id="L1045"><span class="lineNum">    1045</span> <span class="tlaGNC tlaBgGNC">        5599 : }</span></span>
+<span id="L1045"><span class="lineNum">    1045</span> <span class="tlaGNC tlaBgGNC">        5606 : }</span></span>
 <span id="L1046"><span class="lineNum">    1046</span>              : </span>
 <span id="L1047"><span class="lineNum">    1047</span> <span class="tlaUNC tlaBgUNC">           0 : void TRead::read(NamedEventList* item, XmlReader&amp; e)</span></span>
 <span id="L1048"><span class="lineNum">    1048</span>              : {</span>
@@ -1938,19 +1938,19 @@
 <span id="L1880"><span class="lineNum">    1880</span>              :     }</span>
 <span id="L1881"><span class="lineNum">    1881</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L1882"><span class="lineNum">    1882</span>              : </span>
-<span id="L1883"><span class="lineNum">    1883</span> <span class="tlaGNC tlaBgGNC">         749 : void TRead::read(BarLine* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L1883"><span class="lineNum">    1883</span> <span class="tlaGNC tlaBgGNC">         750 : void TRead::read(BarLine* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L1884"><span class="lineNum">    1884</span>              : {</span>
 <span id="L1885"><span class="lineNum">    1885</span>              :     // initialize span properties with staff values</span>
-<span id="L1886"><span class="lineNum">    1886</span> <span class="tlaGNC">         749 :     b-&gt;resetProperty(Pid::BARLINE_SPAN);</span></span>
-<span id="L1887"><span class="lineNum">    1887</span> <span class="tlaGNC">         749 :     b-&gt;resetProperty(Pid::BARLINE_SPAN_FROM);</span></span>
-<span id="L1888"><span class="lineNum">    1888</span> <span class="tlaGNC">         749 :     b-&gt;resetProperty(Pid::BARLINE_SPAN_TO);</span></span>
+<span id="L1886"><span class="lineNum">    1886</span> <span class="tlaGNC">         750 :     b-&gt;resetProperty(Pid::BARLINE_SPAN);</span></span>
+<span id="L1887"><span class="lineNum">    1887</span> <span class="tlaGNC">         750 :     b-&gt;resetProperty(Pid::BARLINE_SPAN_FROM);</span></span>
+<span id="L1888"><span class="lineNum">    1888</span> <span class="tlaGNC">         750 :     b-&gt;resetProperty(Pid::BARLINE_SPAN_TO);</span></span>
 <span id="L1889"><span class="lineNum">    1889</span>              : </span>
-<span id="L1890"><span class="lineNum">    1890</span> <span class="tlaGNC">        1871 :     while (e.readNextStartElement()) {</span></span>
-<span id="L1891"><span class="lineNum">    1891</span> <span class="tlaGNC">        1122 :         const AsciiStringView tag(e.name());</span></span>
-<span id="L1892"><span class="lineNum">    1892</span> <span class="tlaGNC">        1122 :         if (tag == &quot;subtype&quot;) {</span></span>
-<span id="L1893"><span class="lineNum">    1893</span> <span class="tlaGNC">         456 :             b-&gt;setBarLineType(TConv::fromXml(e.readAsciiText(), BarLineType::NORMAL));</span></span>
-<span id="L1894"><span class="lineNum">    1894</span> <span class="tlaGNC">         666 :         } else if (tag == &quot;span&quot;) {</span></span>
-<span id="L1895"><span class="lineNum">    1895</span> <span class="tlaGNC">         658 :             b-&gt;setSpanStaff(e.readBool());</span></span>
+<span id="L1890"><span class="lineNum">    1890</span> <span class="tlaGNC">        1874 :     while (e.readNextStartElement()) {</span></span>
+<span id="L1891"><span class="lineNum">    1891</span> <span class="tlaGNC">        1124 :         const AsciiStringView tag(e.name());</span></span>
+<span id="L1892"><span class="lineNum">    1892</span> <span class="tlaGNC">        1124 :         if (tag == &quot;subtype&quot;) {</span></span>
+<span id="L1893"><span class="lineNum">    1893</span> <span class="tlaGNC">         457 :             b-&gt;setBarLineType(TConv::fromXml(e.readAsciiText(), BarLineType::NORMAL));</span></span>
+<span id="L1894"><span class="lineNum">    1894</span> <span class="tlaGNC">         667 :         } else if (tag == &quot;span&quot;) {</span></span>
+<span id="L1895"><span class="lineNum">    1895</span> <span class="tlaGNC">         659 :             b-&gt;setSpanStaff(e.readBool());</span></span>
 <span id="L1896"><span class="lineNum">    1896</span> <span class="tlaGNC">           8 :         } else if (tag == &quot;spanFromOffset&quot;) {</span></span>
 <span id="L1897"><span class="lineNum">    1897</span> <span class="tlaGNC">           1 :             b-&gt;setSpanFrom(e.readInt());</span></span>
 <span id="L1898"><span class="lineNum">    1898</span> <span class="tlaGNC">           7 :         } else if (tag == &quot;spanToOffset&quot;) {</span></span>
@@ -1977,7 +1977,7 @@
 <span id="L1919"><span class="lineNum">    1919</span> <span class="tlaUNC tlaBgUNC">           0 :             e.unknown();</span></span>
 <span id="L1920"><span class="lineNum">    1920</span>              :         }</span>
 <span id="L1921"><span class="lineNum">    1921</span>              :     }</span>
-<span id="L1922"><span class="lineNum">    1922</span> <span class="tlaGNC tlaBgGNC">         749 : }</span></span>
+<span id="L1922"><span class="lineNum">    1922</span> <span class="tlaGNC tlaBgGNC">         750 : }</span></span>
 <span id="L1923"><span class="lineNum">    1923</span>              : </span>
 <span id="L1924"><span class="lineNum">    1924</span> <span class="tlaGNC">           4 : void TRead::read(Bend* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L1925"><span class="lineNum">    1925</span>              : {</span>
@@ -2000,18 +2000,18 @@
 <span id="L1942"><span class="lineNum">    1942</span>              :     }</span>
 <span id="L1943"><span class="lineNum">    1943</span> <span class="tlaGNC tlaBgGNC">           4 : }</span></span>
 <span id="L1944"><span class="lineNum">    1944</span>              : </span>
-<span id="L1945"><span class="lineNum">    1945</span> <span class="tlaGNC">         368 : void TRead::read(Box* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L1945"><span class="lineNum">    1945</span> <span class="tlaGNC">         369 : void TRead::read(Box* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L1946"><span class="lineNum">    1946</span>              : {</span>
-<span id="L1947"><span class="lineNum">    1947</span> <span class="tlaGNC">        2031 :     while (e.readNextStartElement()) {</span></span>
-<span id="L1948"><span class="lineNum">    1948</span> <span class="tlaGNC">        1295 :         if (!readProperties(b, e, ctx)) {</span></span>
+<span id="L1947"><span class="lineNum">    1947</span> <span class="tlaGNC">        2036 :     while (e.readNextStartElement()) {</span></span>
+<span id="L1948"><span class="lineNum">    1948</span> <span class="tlaGNC">        1298 :         if (!readProperties(b, e, ctx)) {</span></span>
 <span id="L1949"><span class="lineNum">    1949</span> <span class="tlaUNC tlaBgUNC">           0 :             e.unknown();</span></span>
 <span id="L1950"><span class="lineNum">    1950</span>              :         }</span>
 <span id="L1951"><span class="lineNum">    1951</span>              :     }</span>
 <span id="L1952"><span class="lineNum">    1952</span>              : </span>
-<span id="L1953"><span class="lineNum">    1953</span> <span class="tlaGNC tlaBgGNC">         368 :     if (b-&gt;score()-&gt;mscVersion() &lt; 302) {</span></span>
-<span id="L1954"><span class="lineNum">    1954</span> <span class="tlaGNC">         311 :         b-&gt;setAutoSizeEnabled(false);    // disable auto-size for older scores by default.</span></span>
+<span id="L1953"><span class="lineNum">    1953</span> <span class="tlaGNC tlaBgGNC">         369 :     if (b-&gt;score()-&gt;mscVersion() &lt; 302) {</span></span>
+<span id="L1954"><span class="lineNum">    1954</span> <span class="tlaGNC">         312 :         b-&gt;setAutoSizeEnabled(false);    // disable auto-size for older scores by default.</span></span>
 <span id="L1955"><span class="lineNum">    1955</span>              :     }</span>
-<span id="L1956"><span class="lineNum">    1956</span> <span class="tlaGNC">         368 : }</span></span>
+<span id="L1956"><span class="lineNum">    1956</span> <span class="tlaGNC">         369 : }</span></span>
 <span id="L1957"><span class="lineNum">    1957</span>              : </span>
 <span id="L1958"><span class="lineNum">    1958</span> <span class="tlaGNC">          44 : void TRead::read(HBox* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L1959"><span class="lineNum">    1959</span>              : {</span>
@@ -2036,10 +2036,10 @@
 <span id="L1978"><span class="lineNum">    1978</span> <span class="tlaGNC tlaBgGNC">         131 :     return true;</span></span>
 <span id="L1979"><span class="lineNum">    1979</span>              : }</span>
 <span id="L1980"><span class="lineNum">    1980</span>              : </span>
-<span id="L1981"><span class="lineNum">    1981</span> <span class="tlaGNC">         368 : void TRead::read(VBox* b, XmlReader&amp; xml, ReadContext&amp; ctx)</span></span>
+<span id="L1981"><span class="lineNum">    1981</span> <span class="tlaGNC">         369 : void TRead::read(VBox* b, XmlReader&amp; xml, ReadContext&amp; ctx)</span></span>
 <span id="L1982"><span class="lineNum">    1982</span>              : {</span>
-<span id="L1983"><span class="lineNum">    1983</span> <span class="tlaGNC">         368 :     TRead::read(static_cast&lt;Box*&gt;(b), xml, ctx);</span></span>
-<span id="L1984"><span class="lineNum">    1984</span> <span class="tlaGNC">         368 : }</span></span>
+<span id="L1983"><span class="lineNum">    1983</span> <span class="tlaGNC">         369 :     TRead::read(static_cast&lt;Box*&gt;(b), xml, ctx);</span></span>
+<span id="L1984"><span class="lineNum">    1984</span> <span class="tlaGNC">         369 : }</span></span>
 <span id="L1985"><span class="lineNum">    1985</span>              : </span>
 <span id="L1986"><span class="lineNum">    1986</span> <span class="tlaUNC tlaBgUNC">           0 : void TRead::read(FBox* b, XmlReader&amp; xml, ReadContext&amp; ctx)</span></span>
 <span id="L1987"><span class="lineNum">    1987</span>              : {</span>
@@ -2067,49 +2067,49 @@
 <span id="L2009"><span class="lineNum">    2009</span> <span class="tlaGNC tlaBgGNC">          32 :     return readProperties(b, e, ctx);</span></span>
 <span id="L2010"><span class="lineNum">    2010</span>              : }</span>
 <span id="L2011"><span class="lineNum">    2011</span>              : </span>
-<span id="L2012"><span class="lineNum">    2012</span> <span class="tlaGNC">        1902 : bool TRead::readProperties(Box* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L2012"><span class="lineNum">    2012</span> <span class="tlaGNC">        1905 : bool TRead::readProperties(Box* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L2013"><span class="lineNum">    2013</span>              : {</span>
-<span id="L2014"><span class="lineNum">    2014</span> <span class="tlaGNC">        1902 :     const AsciiStringView tag(e.name());</span></span>
-<span id="L2015"><span class="lineNum">    2015</span> <span class="tlaGNC">        1902 :     if (tag == &quot;height&quot;) {</span></span>
-<span id="L2016"><span class="lineNum">    2016</span> <span class="tlaGNC">         480 :         b-&gt;setBoxHeight(Spatium(e.readDouble()));</span></span>
-<span id="L2017"><span class="lineNum">    2017</span> <span class="tlaGNC">        1422 :     } else if (tag == &quot;width&quot;) {</span></span>
+<span id="L2014"><span class="lineNum">    2014</span> <span class="tlaGNC">        1905 :     const AsciiStringView tag(e.name());</span></span>
+<span id="L2015"><span class="lineNum">    2015</span> <span class="tlaGNC">        1905 :     if (tag == &quot;height&quot;) {</span></span>
+<span id="L2016"><span class="lineNum">    2016</span> <span class="tlaGNC">         481 :         b-&gt;setBoxHeight(Spatium(e.readDouble()));</span></span>
+<span id="L2017"><span class="lineNum">    2017</span> <span class="tlaGNC">        1424 :     } else if (tag == &quot;width&quot;) {</span></span>
 <span id="L2018"><span class="lineNum">    2018</span> <span class="tlaGNC">          44 :         b-&gt;setBoxWidth(Spatium(e.readDouble()));</span></span>
-<span id="L2019"><span class="lineNum">    2019</span> <span class="tlaGNC">        1378 :     } else if (tag == &quot;topGap&quot;) {</span></span>
+<span id="L2019"><span class="lineNum">    2019</span> <span class="tlaGNC">        1380 :     } else if (tag == &quot;topGap&quot;) {</span></span>
 <span id="L2020"><span class="lineNum">    2020</span> <span class="tlaGNC">          68 :         double gap = e.readDouble();</span></span>
 <span id="L2021"><span class="lineNum">    2021</span> <span class="tlaGNC">          68 :         b-&gt;setTopGap(Spatium(gap));</span></span>
 <span id="L2022"><span class="lineNum">    2022</span> <span class="tlaGNC">          68 :         if (b-&gt;score()-&gt;mscVersion() &gt;= 206) {</span></span>
 <span id="L2023"><span class="lineNum">    2023</span> <span class="tlaGNC">          68 :             b-&gt;setTopGap(Spatium(gap));</span></span>
 <span id="L2024"><span class="lineNum">    2024</span>              :         }</span>
 <span id="L2025"><span class="lineNum">    2025</span> <span class="tlaGNC">          68 :         b-&gt;setPropertyFlags(Pid::TOP_GAP, PropertyFlags::UNSTYLED);</span></span>
-<span id="L2026"><span class="lineNum">    2026</span> <span class="tlaGNC">        1310 :     } else if (tag == &quot;bottomGap&quot;) {</span></span>
+<span id="L2026"><span class="lineNum">    2026</span> <span class="tlaGNC">        1312 :     } else if (tag == &quot;bottomGap&quot;) {</span></span>
 <span id="L2027"><span class="lineNum">    2027</span> <span class="tlaGNC">          93 :         double gap = e.readDouble();</span></span>
 <span id="L2028"><span class="lineNum">    2028</span> <span class="tlaGNC">          93 :         b-&gt;setBottomGap(Spatium(gap));</span></span>
 <span id="L2029"><span class="lineNum">    2029</span> <span class="tlaGNC">          93 :         if (b-&gt;score()-&gt;mscVersion() &gt;= 206) {</span></span>
 <span id="L2030"><span class="lineNum">    2030</span> <span class="tlaGNC">          93 :             b-&gt;setBottomGap(Spatium(gap));</span></span>
 <span id="L2031"><span class="lineNum">    2031</span>              :         }</span>
 <span id="L2032"><span class="lineNum">    2032</span> <span class="tlaGNC">          93 :         b-&gt;setPropertyFlags(Pid::BOTTOM_GAP, PropertyFlags::UNSTYLED);</span></span>
-<span id="L2033"><span class="lineNum">    2033</span> <span class="tlaGNC">        1217 :     } else if (tag == &quot;leftMargin&quot;) {</span></span>
+<span id="L2033"><span class="lineNum">    2033</span> <span class="tlaGNC">        1219 :     } else if (tag == &quot;leftMargin&quot;) {</span></span>
 <span id="L2034"><span class="lineNum">    2034</span> <span class="tlaGNC">         106 :         b-&gt;setLeftMargin(e.readDouble());</span></span>
-<span id="L2035"><span class="lineNum">    2035</span> <span class="tlaGNC">        1111 :     } else if (tag == &quot;rightMargin&quot;) {</span></span>
+<span id="L2035"><span class="lineNum">    2035</span> <span class="tlaGNC">        1113 :     } else if (tag == &quot;rightMargin&quot;) {</span></span>
 <span id="L2036"><span class="lineNum">    2036</span> <span class="tlaGNC">         106 :         b-&gt;setRightMargin(e.readDouble());</span></span>
-<span id="L2037"><span class="lineNum">    2037</span> <span class="tlaGNC">        1005 :     } else if (tag == &quot;topMargin&quot;) {</span></span>
+<span id="L2037"><span class="lineNum">    2037</span> <span class="tlaGNC">        1007 :     } else if (tag == &quot;topMargin&quot;) {</span></span>
 <span id="L2038"><span class="lineNum">    2038</span> <span class="tlaGNC">         107 :         b-&gt;setTopMargin(e.readDouble());</span></span>
-<span id="L2039"><span class="lineNum">    2039</span> <span class="tlaGNC">         898 :     } else if (tag == &quot;bottomMargin&quot;) {</span></span>
+<span id="L2039"><span class="lineNum">    2039</span> <span class="tlaGNC">         900 :     } else if (tag == &quot;bottomMargin&quot;) {</span></span>
 <span id="L2040"><span class="lineNum">    2040</span> <span class="tlaGNC">         106 :         b-&gt;setBottomMargin(e.readDouble());</span></span>
-<span id="L2041"><span class="lineNum">    2041</span> <span class="tlaGNC">         792 :     } else if (tag == &quot;boxAutoSize&quot;) {</span></span>
+<span id="L2041"><span class="lineNum">    2041</span> <span class="tlaGNC">         794 :     } else if (tag == &quot;boxAutoSize&quot;) {</span></span>
 <span id="L2042"><span class="lineNum">    2042</span> <span class="tlaGNC">           5 :         b-&gt;setAutoSizeEnabled(e.readBool());</span></span>
-<span id="L2043"><span class="lineNum">    2043</span> <span class="tlaGNC">         787 :     } else if (tag == &quot;Text&quot;) {</span></span>
+<span id="L2043"><span class="lineNum">    2043</span> <span class="tlaGNC">         789 :     } else if (tag == &quot;Text&quot;) {</span></span>
 <span id="L2044"><span class="lineNum">    2044</span>              :         Text* t;</span>
-<span id="L2045"><span class="lineNum">    2045</span> <span class="tlaGNC">         740 :         if (b-&gt;isTBox()) {</span></span>
+<span id="L2045"><span class="lineNum">    2045</span> <span class="tlaGNC">         742 :         if (b-&gt;isTBox()) {</span></span>
 <span id="L2046"><span class="lineNum">    2046</span> <span class="tlaUNC tlaBgUNC">           0 :             t = toTBox(b)-&gt;text();</span></span>
 <span id="L2047"><span class="lineNum">    2047</span> <span class="tlaUNC">           0 :             TRead::read(t, e, ctx);</span></span>
 <span id="L2048"><span class="lineNum">    2048</span>              :         } else {</span>
-<span id="L2049"><span class="lineNum">    2049</span> <span class="tlaGNC tlaBgGNC">         740 :             t = Factory::createText(b);</span></span>
-<span id="L2050"><span class="lineNum">    2050</span> <span class="tlaGNC">         740 :             TRead::read(t, e, ctx);</span></span>
-<span id="L2051"><span class="lineNum">    2051</span> <span class="tlaGNC">         740 :             if (t-&gt;empty()) {</span></span>
+<span id="L2049"><span class="lineNum">    2049</span> <span class="tlaGNC tlaBgGNC">         742 :             t = Factory::createText(b);</span></span>
+<span id="L2050"><span class="lineNum">    2050</span> <span class="tlaGNC">         742 :             TRead::read(t, e, ctx);</span></span>
+<span id="L2051"><span class="lineNum">    2051</span> <span class="tlaGNC">         742 :             if (t-&gt;empty()) {</span></span>
 <span id="L2052"><span class="lineNum">    2052</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGD(&quot;read empty text&quot;);</span></span>
 <span id="L2053"><span class="lineNum">    2053</span>              :             } else {</span>
-<span id="L2054"><span class="lineNum">    2054</span> <span class="tlaGNC tlaBgGNC">         740 :                 b-&gt;add(t);</span></span>
+<span id="L2054"><span class="lineNum">    2054</span> <span class="tlaGNC tlaBgGNC">         742 :                 b-&gt;add(t);</span></span>
 <span id="L2055"><span class="lineNum">    2055</span>              :             }</span>
 <span id="L2056"><span class="lineNum">    2056</span>              :         }</span>
 <span id="L2057"><span class="lineNum">    2057</span> <span class="tlaGNC">          47 :     } else if (tag == &quot;Symbol&quot;) {</span></span>
@@ -2161,23 +2161,23 @@
 <span id="L2103"><span class="lineNum">    2103</span>              :     } else {</span>
 <span id="L2104"><span class="lineNum">    2104</span> <span class="tlaGNC">          10 :         return false;</span></span>
 <span id="L2105"><span class="lineNum">    2105</span>              :     }</span>
-<span id="L2106"><span class="lineNum">    2106</span> <span class="tlaGNC">        1892 :     return true;</span></span>
+<span id="L2106"><span class="lineNum">    2106</span> <span class="tlaGNC">        1895 :     return true;</span></span>
 <span id="L2107"><span class="lineNum">    2107</span>              : }</span>
 <span id="L2108"><span class="lineNum">    2108</span>              : </span>
-<span id="L2109"><span class="lineNum">    2109</span> <span class="tlaGNC">         588 : bool TRead::readProperties(MeasureBase* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L2109"><span class="lineNum">    2109</span> <span class="tlaGNC">         595 : bool TRead::readProperties(MeasureBase* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L2110"><span class="lineNum">    2110</span>              : {</span>
-<span id="L2111"><span class="lineNum">    2111</span> <span class="tlaGNC">         588 :     const AsciiStringView tag(e.name());</span></span>
-<span id="L2112"><span class="lineNum">    2112</span> <span class="tlaGNC">         588 :     if (tag == &quot;LayoutBreak&quot;) {</span></span>
-<span id="L2113"><span class="lineNum">    2113</span> <span class="tlaGNC">         547 :         LayoutBreak* lb = Factory::createLayoutBreak(b);</span></span>
-<span id="L2114"><span class="lineNum">    2114</span> <span class="tlaGNC">         547 :         TRead::read(lb, e, ctx);</span></span>
-<span id="L2115"><span class="lineNum">    2115</span> <span class="tlaGNC">         547 :         lb-&gt;setTrack(0);</span></span>
-<span id="L2116"><span class="lineNum">    2116</span> <span class="tlaGNC">         547 :         bool doAdd = true;</span></span>
-<span id="L2117"><span class="lineNum">    2117</span> <span class="tlaGNC">         547 :         switch (lb-&gt;layoutBreakType()) {</span></span>
-<span id="L2118"><span class="lineNum">    2118</span> <span class="tlaGNC">         498 :         case LayoutBreakType::LINE:</span></span>
-<span id="L2119"><span class="lineNum">    2119</span> <span class="tlaGNC">         498 :             if (b-&gt;lineBreak()) {</span></span>
+<span id="L2111"><span class="lineNum">    2111</span> <span class="tlaGNC">         595 :     const AsciiStringView tag(e.name());</span></span>
+<span id="L2112"><span class="lineNum">    2112</span> <span class="tlaGNC">         595 :     if (tag == &quot;LayoutBreak&quot;) {</span></span>
+<span id="L2113"><span class="lineNum">    2113</span> <span class="tlaGNC">         554 :         LayoutBreak* lb = Factory::createLayoutBreak(b);</span></span>
+<span id="L2114"><span class="lineNum">    2114</span> <span class="tlaGNC">         554 :         TRead::read(lb, e, ctx);</span></span>
+<span id="L2115"><span class="lineNum">    2115</span> <span class="tlaGNC">         554 :         lb-&gt;setTrack(0);</span></span>
+<span id="L2116"><span class="lineNum">    2116</span> <span class="tlaGNC">         554 :         bool doAdd = true;</span></span>
+<span id="L2117"><span class="lineNum">    2117</span> <span class="tlaGNC">         554 :         switch (lb-&gt;layoutBreakType()) {</span></span>
+<span id="L2118"><span class="lineNum">    2118</span> <span class="tlaGNC">         505 :         case LayoutBreakType::LINE:</span></span>
+<span id="L2119"><span class="lineNum">    2119</span> <span class="tlaGNC">         505 :             if (b-&gt;lineBreak()) {</span></span>
 <span id="L2120"><span class="lineNum">    2120</span> <span class="tlaUNC tlaBgUNC">           0 :                 doAdd = false;</span></span>
 <span id="L2121"><span class="lineNum">    2121</span>              :             }</span>
-<span id="L2122"><span class="lineNum">    2122</span> <span class="tlaGNC tlaBgGNC">         498 :             break;</span></span>
+<span id="L2122"><span class="lineNum">    2122</span> <span class="tlaGNC tlaBgGNC">         505 :             break;</span></span>
 <span id="L2123"><span class="lineNum">    2123</span> <span class="tlaGNC">          10 :         case LayoutBreakType::PAGE:</span></span>
 <span id="L2124"><span class="lineNum">    2124</span> <span class="tlaGNC">          10 :             if (b-&gt;pageBreak()) {</span></span>
 <span id="L2125"><span class="lineNum">    2125</span> <span class="tlaUNC tlaBgUNC">           0 :                 doAdd = false;</span></span>
@@ -2194,9 +2194,9 @@
 <span id="L2136"><span class="lineNum">    2136</span>              :             }</span>
 <span id="L2137"><span class="lineNum">    2137</span> <span class="tlaGNC tlaBgGNC">           8 :             break;</span></span>
 <span id="L2138"><span class="lineNum">    2138</span>              :         }</span>
-<span id="L2139"><span class="lineNum">    2139</span> <span class="tlaGNC">         547 :         if (doAdd) {</span></span>
-<span id="L2140"><span class="lineNum">    2140</span> <span class="tlaGNC">         547 :             b-&gt;add(lb);</span></span>
-<span id="L2141"><span class="lineNum">    2141</span> <span class="tlaGNC">         547 :             b-&gt;cleanupLayoutBreaks(false);</span></span>
+<span id="L2139"><span class="lineNum">    2139</span> <span class="tlaGNC">         554 :         if (doAdd) {</span></span>
+<span id="L2140"><span class="lineNum">    2140</span> <span class="tlaGNC">         554 :             b-&gt;add(lb);</span></span>
+<span id="L2141"><span class="lineNum">    2141</span> <span class="tlaGNC">         554 :             b-&gt;cleanupLayoutBreaks(false);</span></span>
 <span id="L2142"><span class="lineNum">    2142</span>              :         }</span>
 <span id="L2143"><span class="lineNum">    2143</span> <span class="tlaGNC">          41 :     } else if (tag == &quot;StaffTypeChange&quot;) {</span></span>
 <span id="L2144"><span class="lineNum">    2144</span> <span class="tlaGNC">          17 :         StaffTypeChange* stc = Factory::createStaffTypeChange(b);</span></span>
@@ -2207,7 +2207,7 @@
 <span id="L2149"><span class="lineNum">    2149</span>              :     } else {</span>
 <span id="L2150"><span class="lineNum">    2150</span> <span class="tlaGNC">          10 :         return false;</span></span>
 <span id="L2151"><span class="lineNum">    2151</span>              :     }</span>
-<span id="L2152"><span class="lineNum">    2152</span> <span class="tlaGNC">         578 :     return true;</span></span>
+<span id="L2152"><span class="lineNum">    2152</span> <span class="tlaGNC">         585 :     return true;</span></span>
 <span id="L2153"><span class="lineNum">    2153</span>              : }</span>
 <span id="L2154"><span class="lineNum">    2154</span>              : </span>
 <span id="L2155"><span class="lineNum">    2155</span> <span class="tlaUNC tlaBgUNC">           0 : void TRead::read(Bracket* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
@@ -2460,17 +2460,17 @@
 <span id="L2402"><span class="lineNum">    2402</span> <span class="tlaGNC tlaBgGNC">       16962 :     return true;</span></span>
 <span id="L2403"><span class="lineNum">    2403</span>              : }</span>
 <span id="L2404"><span class="lineNum">    2404</span>              : </span>
-<span id="L2405"><span class="lineNum">    2405</span> <span class="tlaGNC">       16273 : bool TRead::readProperties(ChordRest* ch, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L2405"><span class="lineNum">    2405</span> <span class="tlaGNC">       16337 : bool TRead::readProperties(ChordRest* ch, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L2406"><span class="lineNum">    2406</span>              : {</span>
-<span id="L2407"><span class="lineNum">    2407</span> <span class="tlaGNC">       16273 :     const AsciiStringView tag(e.name());</span></span>
+<span id="L2407"><span class="lineNum">    2407</span> <span class="tlaGNC">       16337 :     const AsciiStringView tag(e.name());</span></span>
 <span id="L2408"><span class="lineNum">    2408</span>              : </span>
 <span id="L2409"><span class="lineNum">    2409</span>              :     //! TODO Should be replaced with `ctx.mscVersion()`</span>
 <span id="L2410"><span class="lineNum">    2410</span>              :     //! But at the moment, `ctx` is not set everywhere</span>
-<span id="L2411"><span class="lineNum">    2411</span> <span class="tlaGNC">       16273 :     int mscVersion = ch-&gt;score()-&gt;mscVersion();</span></span>
+<span id="L2411"><span class="lineNum">    2411</span> <span class="tlaGNC">       16337 :     int mscVersion = ch-&gt;score()-&gt;mscVersion();</span></span>
 <span id="L2412"><span class="lineNum">    2412</span>              : </span>
-<span id="L2413"><span class="lineNum">    2413</span> <span class="tlaGNC">       16273 :     if (tag == &quot;durationType&quot;) {</span></span>
-<span id="L2414"><span class="lineNum">    2414</span> <span class="tlaGNC">       11588 :         ch-&gt;setDurationType(TConv::fromXml(e.readAsciiText(), DurationType::V_QUARTER));</span></span>
-<span id="L2415"><span class="lineNum">    2415</span> <span class="tlaGNC">       11588 :         if (ch-&gt;actualDurationType().type() != DurationType::V_MEASURE) {</span></span>
+<span id="L2413"><span class="lineNum">    2413</span> <span class="tlaGNC">       16337 :     if (tag == &quot;durationType&quot;) {</span></span>
+<span id="L2414"><span class="lineNum">    2414</span> <span class="tlaGNC">       11620 :         ch-&gt;setDurationType(TConv::fromXml(e.readAsciiText(), DurationType::V_QUARTER));</span></span>
+<span id="L2415"><span class="lineNum">    2415</span> <span class="tlaGNC">       11620 :         if (ch-&gt;actualDurationType().type() != DurationType::V_MEASURE) {</span></span>
 <span id="L2416"><span class="lineNum">    2416</span> <span class="tlaUNC tlaBgUNC">           0 :             if (mscVersion &lt; 112 &amp;&amp; (ch-&gt;isRest())</span></span>
 <span id="L2417"><span class="lineNum">    2417</span> <span class="tlaUNC">           0 :                 &amp;&amp;            // for backward compatibility, convert V_WHOLE rests to V_MEASURE</span></span>
 <span id="L2418"><span class="lineNum">    2418</span>              :                               // if long enough to fill a measure.</span>
@@ -2488,12 +2488,12 @@
 <span id="L2430"><span class="lineNum">    2430</span> <span class="tlaGNC tlaBgGNC">        8940 :                 ch-&gt;setTicks(ch-&gt;actualDurationType().fraction());</span></span>
 <span id="L2431"><span class="lineNum">    2431</span>              :             }</span>
 <span id="L2432"><span class="lineNum">    2432</span>              :         } else {</span>
-<span id="L2433"><span class="lineNum">    2433</span> <span class="tlaGNC">        2648 :             if (mscVersion &lt;= 114) {</span></span>
+<span id="L2433"><span class="lineNum">    2433</span> <span class="tlaGNC">        2680 :             if (mscVersion &lt;= 114) {</span></span>
 <span id="L2434"><span class="lineNum">    2434</span> <span class="tlaUNC tlaBgUNC">           0 :                 SigEvent event = ctx.compatTimeSigMap()-&gt;timesig(ctx.tick());</span></span>
 <span id="L2435"><span class="lineNum">    2435</span> <span class="tlaUNC">           0 :                 ch-&gt;setTicks(event.timesig());</span></span>
 <span id="L2436"><span class="lineNum">    2436</span>              :             }</span>
 <span id="L2437"><span class="lineNum">    2437</span>              :         }</span>
-<span id="L2438"><span class="lineNum">    2438</span> <span class="tlaGNC tlaBgGNC">        4685 :     } else if (tag == &quot;BeamMode&quot;) {</span></span>
+<span id="L2438"><span class="lineNum">    2438</span> <span class="tlaGNC tlaBgGNC">        4717 :     } else if (tag == &quot;BeamMode&quot;) {</span></span>
 <span id="L2439"><span class="lineNum">    2439</span>              :         // 400 and previous used begin32/begin64 for beam mode</span>
 <span id="L2440"><span class="lineNum">    2440</span>              :         // 410 uses begin16/begin32</span>
 <span id="L2441"><span class="lineNum">    2441</span> <span class="tlaGNC">          11 :         auto txt = e.readAsciiText();</span></span>
@@ -2503,23 +2503,23 @@
 <span id="L2445"><span class="lineNum">    2445</span> <span class="tlaUNC tlaBgUNC">           0 :             txt = &quot;begin16&quot;;</span></span>
 <span id="L2446"><span class="lineNum">    2446</span>              :         }</span>
 <span id="L2447"><span class="lineNum">    2447</span> <span class="tlaGNC tlaBgGNC">          11 :         ch-&gt;setBeamMode(TConv::fromXml(txt, BeamMode::AUTO));</span></span>
-<span id="L2448"><span class="lineNum">    2448</span> <span class="tlaGNC">        4674 :     } else if (tag == &quot;Articulation&quot;) {</span></span>
+<span id="L2448"><span class="lineNum">    2448</span> <span class="tlaGNC">        4706 :     } else if (tag == &quot;Articulation&quot;) {</span></span>
 <span id="L2449"><span class="lineNum">    2449</span> <span class="tlaGNC">          95 :         Articulation* atr = Factory::createArticulation(ch);</span></span>
 <span id="L2450"><span class="lineNum">    2450</span> <span class="tlaGNC">          95 :         atr-&gt;setTrack(ch-&gt;track());</span></span>
 <span id="L2451"><span class="lineNum">    2451</span> <span class="tlaGNC">          95 :         TRead::read(atr, e, ctx);</span></span>
 <span id="L2452"><span class="lineNum">    2452</span> <span class="tlaGNC">          95 :         ch-&gt;add(atr);</span></span>
-<span id="L2453"><span class="lineNum">    2453</span> <span class="tlaGNC">        4579 :     } else if (tag == &quot;Ornament&quot;) {</span></span>
+<span id="L2453"><span class="lineNum">    2453</span> <span class="tlaGNC">        4611 :     } else if (tag == &quot;Ornament&quot;) {</span></span>
 <span id="L2454"><span class="lineNum">    2454</span> <span class="tlaGNC">          14 :         Ornament* ornament = Factory::createOrnament(ch);</span></span>
 <span id="L2455"><span class="lineNum">    2455</span> <span class="tlaGNC">          14 :         ornament-&gt;setTrack(ch-&gt;track());</span></span>
 <span id="L2456"><span class="lineNum">    2456</span> <span class="tlaGNC">          14 :         TRead::read(ornament, e, ctx);</span></span>
 <span id="L2457"><span class="lineNum">    2457</span> <span class="tlaGNC">          14 :         ch-&gt;add(ornament);</span></span>
-<span id="L2458"><span class="lineNum">    2458</span> <span class="tlaGNC">        4565 :     } else if (tag == &quot;leadingSpace&quot; || tag == &quot;trailingSpace&quot;) {</span></span>
+<span id="L2458"><span class="lineNum">    2458</span> <span class="tlaGNC">        4597 :     } else if (tag == &quot;leadingSpace&quot; || tag == &quot;trailingSpace&quot;) {</span></span>
 <span id="L2459"><span class="lineNum">    2459</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGD(&quot;ChordRest: %s obsolete&quot;, tag.ascii());</span></span>
 <span id="L2460"><span class="lineNum">    2460</span> <span class="tlaUNC">           0 :         e.skipCurrentElement();</span></span>
-<span id="L2461"><span class="lineNum">    2461</span> <span class="tlaGNC tlaBgGNC">        4565 :     } else if (tag == &quot;small&quot;) {</span></span>
+<span id="L2461"><span class="lineNum">    2461</span> <span class="tlaGNC tlaBgGNC">        4597 :     } else if (tag == &quot;small&quot;) {</span></span>
 <span id="L2462"><span class="lineNum">    2462</span> <span class="tlaGNC">          13 :         ch-&gt;setSmall(e.readInt());</span></span>
-<span id="L2463"><span class="lineNum">    2463</span> <span class="tlaGNC">        4552 :     } else if (tag == &quot;duration&quot;) {</span></span>
-<span id="L2464"><span class="lineNum">    2464</span> <span class="tlaGNC">        2667 :         ch-&gt;setTicks(e.readFraction());</span></span>
+<span id="L2463"><span class="lineNum">    2463</span> <span class="tlaGNC">        4584 :     } else if (tag == &quot;duration&quot;) {</span></span>
+<span id="L2464"><span class="lineNum">    2464</span> <span class="tlaGNC">        2699 :         ch-&gt;setTicks(e.readFraction());</span></span>
 <span id="L2465"><span class="lineNum">    2465</span> <span class="tlaGNC">        1885 :     } else if (tag == &quot;ticklen&quot;) {      // obsolete (version &lt; 1.12)</span></span>
 <span id="L2466"><span class="lineNum">    2466</span> <span class="tlaUNC tlaBgUNC">           0 :         int mticks = ctx.compatTimeSigMap()-&gt;timesig(ctx.tick()).timesig().ticks();</span></span>
 <span id="L2467"><span class="lineNum">    2467</span> <span class="tlaUNC">           0 :         int i = e.readInt();</span></span>
@@ -2557,7 +2557,7 @@
 <span id="L2499"><span class="lineNum">    2499</span> <span class="tlaGNC tlaBgGNC">        1051 :     else if (!readItemProperties(ch, e, ctx)) {</span></span>
 <span id="L2500"><span class="lineNum">    2500</span> <span class="tlaGNC">         554 :         return false;</span></span>
 <span id="L2501"><span class="lineNum">    2501</span>              :     }</span>
-<span id="L2502"><span class="lineNum">    2502</span> <span class="tlaGNC">       15719 :     return true;</span></span>
+<span id="L2502"><span class="lineNum">    2502</span> <span class="tlaGNC">       15783 :     return true;</span></span>
 <span id="L2503"><span class="lineNum">    2503</span>              : }</span>
 <span id="L2504"><span class="lineNum">    2504</span>              : </span>
 <span id="L2505"><span class="lineNum">    2505</span> <span class="tlaUNC tlaBgUNC">           0 : void TRead::read(ChordLine* l, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
@@ -2851,12 +2851,12 @@
 <span id="L2793"><span class="lineNum">    2793</span> <span class="tlaUNC">           0 :     TRead::read(static_cast&lt;Symbol*&gt;(h), xml, ctx);</span></span>
 <span id="L2794"><span class="lineNum">    2794</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L2795"><span class="lineNum">    2795</span>              : </span>
-<span id="L2796"><span class="lineNum">    2796</span> <span class="tlaGNC tlaBgGNC">         547 : void TRead::read(LayoutBreak* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L2796"><span class="lineNum">    2796</span> <span class="tlaGNC tlaBgGNC">         554 : void TRead::read(LayoutBreak* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L2797"><span class="lineNum">    2797</span>              : {</span>
-<span id="L2798"><span class="lineNum">    2798</span> <span class="tlaGNC">        1100 :     while (e.readNextStartElement()) {</span></span>
-<span id="L2799"><span class="lineNum">    2799</span> <span class="tlaGNC">         553 :         const AsciiStringView tag(e.name());</span></span>
-<span id="L2800"><span class="lineNum">    2800</span> <span class="tlaGNC">         553 :         if (tag == &quot;subtype&quot;) {</span></span>
-<span id="L2801"><span class="lineNum">    2801</span> <span class="tlaGNC">         547 :             TRead::readProperty(b, e, ctx, Pid::LAYOUT_BREAK);</span></span>
+<span id="L2798"><span class="lineNum">    2798</span> <span class="tlaGNC">        1114 :     while (e.readNextStartElement()) {</span></span>
+<span id="L2799"><span class="lineNum">    2799</span> <span class="tlaGNC">         560 :         const AsciiStringView tag(e.name());</span></span>
+<span id="L2800"><span class="lineNum">    2800</span> <span class="tlaGNC">         560 :         if (tag == &quot;subtype&quot;) {</span></span>
+<span id="L2801"><span class="lineNum">    2801</span> <span class="tlaGNC">         554 :             TRead::readProperty(b, e, ctx, Pid::LAYOUT_BREAK);</span></span>
 <span id="L2802"><span class="lineNum">    2802</span> <span class="tlaGNC">           6 :         } else if (tag == &quot;pause&quot;) {</span></span>
 <span id="L2803"><span class="lineNum">    2803</span> <span class="tlaGNC">           6 :             TRead::readProperty(b, e, ctx, Pid::PAUSE);</span></span>
 <span id="L2804"><span class="lineNum">    2804</span> <span class="tlaUNC tlaBgUNC">           0 :         } else if (tag == &quot;startWithLongNames&quot;) {</span></span>
@@ -2869,7 +2869,7 @@
 <span id="L2811"><span class="lineNum">    2811</span> <span class="tlaUNC">           0 :             e.unknown();</span></span>
 <span id="L2812"><span class="lineNum">    2812</span>              :         }</span>
 <span id="L2813"><span class="lineNum">    2813</span>              :     }</span>
-<span id="L2814"><span class="lineNum">    2814</span> <span class="tlaGNC tlaBgGNC">         547 : }</span></span>
+<span id="L2814"><span class="lineNum">    2814</span> <span class="tlaGNC tlaBgGNC">         554 : }</span></span>
 <span id="L2815"><span class="lineNum">    2815</span>              : </span>
 <span id="L2816"><span class="lineNum">    2816</span> <span class="tlaUNC tlaBgUNC">           0 : void TRead::read(LedgerLine* l, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L2817"><span class="lineNum">    2817</span>              : {</span>
@@ -3324,31 +3324,31 @@
 <span id="L3266"><span class="lineNum">    3266</span> <span class="tlaUNC">           0 :     compat::CompatUtils::setTextLineTextPositionFromAlign(p);</span></span>
 <span id="L3267"><span class="lineNum">    3267</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L3268"><span class="lineNum">    3268</span>              : </span>
-<span id="L3269"><span class="lineNum">    3269</span> <span class="tlaGNC tlaBgGNC">         758 : void TRead::read(Part* p, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L3269"><span class="lineNum">    3269</span> <span class="tlaGNC tlaBgGNC">         759 : void TRead::read(Part* p, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L3270"><span class="lineNum">    3270</span>              : {</span>
-<span id="L3271"><span class="lineNum">    3271</span> <span class="tlaGNC">         758 :     p-&gt;setId(e.intAttribute(&quot;id&quot;, 0));</span></span>
+<span id="L3271"><span class="lineNum">    3271</span> <span class="tlaGNC">         759 :     p-&gt;setId(e.intAttribute(&quot;id&quot;, 0));</span></span>
 <span id="L3272"><span class="lineNum">    3272</span>              : </span>
-<span id="L3273"><span class="lineNum">    3273</span> <span class="tlaGNC">         758 :     StaffHideModes staffHideModes;</span></span>
+<span id="L3273"><span class="lineNum">    3273</span> <span class="tlaGNC">         759 :     StaffHideModes staffHideModes;</span></span>
 <span id="L3274"><span class="lineNum">    3274</span>              : </span>
-<span id="L3275"><span class="lineNum">    3275</span> <span class="tlaGNC">        3908 :     while (e.readNextStartElement()) {</span></span>
-<span id="L3276"><span class="lineNum">    3276</span> <span class="tlaGNC">        2392 :         if (!readProperties(p, e, ctx, staffHideModes)) {</span></span>
-<span id="L3277"><span class="lineNum">    3277</span> <span class="tlaGNC">         758 :             e.unknown();</span></span>
+<span id="L3275"><span class="lineNum">    3275</span> <span class="tlaGNC">        3913 :     while (e.readNextStartElement()) {</span></span>
+<span id="L3276"><span class="lineNum">    3276</span> <span class="tlaGNC">        2395 :         if (!readProperties(p, e, ctx, staffHideModes)) {</span></span>
+<span id="L3277"><span class="lineNum">    3277</span> <span class="tlaGNC">         759 :             e.unknown();</span></span>
 <span id="L3278"><span class="lineNum">    3278</span>              :         }</span>
 <span id="L3279"><span class="lineNum">    3279</span>              :     }</span>
 <span id="L3280"><span class="lineNum">    3280</span>              : </span>
-<span id="L3281"><span class="lineNum">    3281</span> <span class="tlaGNC">         758 :     read(p, staffHideModes, ctx.style().styleB(Sid::hideEmptyStaves));</span></span>
-<span id="L3282"><span class="lineNum">    3282</span> <span class="tlaGNC">         758 : }</span></span>
+<span id="L3281"><span class="lineNum">    3281</span> <span class="tlaGNC">         759 :     read(p, staffHideModes, ctx.style().styleB(Sid::hideEmptyStaves));</span></span>
+<span id="L3282"><span class="lineNum">    3282</span> <span class="tlaGNC">         759 : }</span></span>
 <span id="L3283"><span class="lineNum">    3283</span>              : </span>
-<span id="L3284"><span class="lineNum">    3284</span> <span class="tlaGNC">         995 : void TRead::read(Part* p, StaffHideModes&amp; staffHideModes, const bool globalHideEmptyStaves)</span></span>
+<span id="L3284"><span class="lineNum">    3284</span> <span class="tlaGNC">         996 : void TRead::read(Part* p, StaffHideModes&amp; staffHideModes, const bool globalHideEmptyStaves)</span></span>
 <span id="L3285"><span class="lineNum">    3285</span>              : {</span>
-<span id="L3286"><span class="lineNum">    3286</span> <span class="tlaGNC">         995 :     IF_ASSERT_FAILED(p-&gt;nstaves() &gt; 0) {</span></span>
+<span id="L3286"><span class="lineNum">    3286</span> <span class="tlaGNC">         996 :     IF_ASSERT_FAILED(p-&gt;nstaves() &gt; 0) {</span></span>
 <span id="L3287"><span class="lineNum">    3287</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L3288"><span class="lineNum">    3288</span>              :     }</span>
 <span id="L3289"><span class="lineNum">    3289</span>              : </span>
-<span id="L3290"><span class="lineNum">    3290</span> <span class="tlaGNC tlaBgGNC">         995 :     if (p-&gt;nstaves() == 1) {</span></span>
-<span id="L3291"><span class="lineNum">    3291</span> <span class="tlaGNC">         829 :         switch (staffHideModes[p-&gt;staves().front()]) { // inserts AUTO if not found</span></span>
-<span id="L3292"><span class="lineNum">    3292</span> <span class="tlaGNC">         826 :         case StaffHideMode::AUTO:</span></span>
-<span id="L3293"><span class="lineNum">    3293</span> <span class="tlaGNC">         826 :             break;</span></span>
+<span id="L3290"><span class="lineNum">    3290</span> <span class="tlaGNC tlaBgGNC">         996 :     if (p-&gt;nstaves() == 1) {</span></span>
+<span id="L3291"><span class="lineNum">    3291</span> <span class="tlaGNC">         830 :         switch (staffHideModes[p-&gt;staves().front()]) { // inserts AUTO if not found</span></span>
+<span id="L3292"><span class="lineNum">    3292</span> <span class="tlaGNC">         827 :         case StaffHideMode::AUTO:</span></span>
+<span id="L3293"><span class="lineNum">    3293</span> <span class="tlaGNC">         827 :             break;</span></span>
 <span id="L3294"><span class="lineNum">    3294</span> <span class="tlaGNC">           1 :         case StaffHideMode::ALWAYS:</span></span>
 <span id="L3295"><span class="lineNum">    3295</span> <span class="tlaGNC">           1 :             p-&gt;setHideWhenEmpty(AutoOnOff::ON);</span></span>
 <span id="L3296"><span class="lineNum">    3296</span> <span class="tlaGNC">           1 :             break;</span></span>
@@ -3358,7 +3358,7 @@
 <span id="L3300"><span class="lineNum">    3300</span> <span class="tlaGNC">           1 :         case StaffHideMode::INSTRUMENT:</span></span>
 <span id="L3301"><span class="lineNum">    3301</span> <span class="tlaGNC">           1 :             break;</span></span>
 <span id="L3302"><span class="lineNum">    3302</span>              :         }</span>
-<span id="L3303"><span class="lineNum">    3303</span> <span class="tlaGNC">         829 :         return;</span></span>
+<span id="L3303"><span class="lineNum">    3303</span> <span class="tlaGNC">         830 :         return;</span></span>
 <span id="L3304"><span class="lineNum">    3304</span>              :     }</span>
 <span id="L3305"><span class="lineNum">    3305</span>              : </span>
 <span id="L3306"><span class="lineNum">    3306</span> <span class="tlaGNC">         166 :     bool hasAuto = false;</span></span>
@@ -3413,30 +3413,30 @@
 <span id="L3355"><span class="lineNum">    3355</span>              :     }</span>
 <span id="L3356"><span class="lineNum">    3356</span>              : }</span>
 <span id="L3357"><span class="lineNum">    3357</span>              : </span>
-<span id="L3358"><span class="lineNum">    3358</span> <span class="tlaGNC">        2392 : bool TRead::readProperties(Part* p, XmlReader&amp; e, ReadContext&amp; ctx, StaffHideModes&amp; staffHideModes)</span></span>
+<span id="L3358"><span class="lineNum">    3358</span> <span class="tlaGNC">        2395 : bool TRead::readProperties(Part* p, XmlReader&amp; e, ReadContext&amp; ctx, StaffHideModes&amp; staffHideModes)</span></span>
 <span id="L3359"><span class="lineNum">    3359</span>              : {</span>
-<span id="L3360"><span class="lineNum">    3360</span> <span class="tlaGNC">        2392 :     const AsciiStringView tag(e.name());</span></span>
-<span id="L3361"><span class="lineNum">    3361</span> <span class="tlaGNC">        2392 :     if (tag == &quot;id&quot;) {</span></span>
+<span id="L3360"><span class="lineNum">    3360</span> <span class="tlaGNC">        2395 :     const AsciiStringView tag(e.name());</span></span>
+<span id="L3361"><span class="lineNum">    3361</span> <span class="tlaGNC">        2395 :     if (tag == &quot;id&quot;) {</span></span>
 <span id="L3362"><span class="lineNum">    3362</span> <span class="tlaUNC tlaBgUNC">           0 :         p-&gt;setId(e.readInt());</span></span>
-<span id="L3363"><span class="lineNum">    3363</span> <span class="tlaGNC tlaBgGNC">        2392 :     } else if (tag == &quot;Staff&quot;) {</span></span>
-<span id="L3364"><span class="lineNum">    3364</span> <span class="tlaGNC">         875 :         Staff* staff = Factory::createStaff(p);</span></span>
-<span id="L3365"><span class="lineNum">    3365</span> <span class="tlaGNC">         875 :         p-&gt;score()-&gt;appendStaff(staff);</span></span>
-<span id="L3366"><span class="lineNum">    3366</span> <span class="tlaGNC">         875 :         TRead::read(staff, e, ctx, staffHideModes);</span></span>
-<span id="L3367"><span class="lineNum">    3367</span> <span class="tlaGNC">        1517 :     } else if (tag == &quot;Instrument&quot;) {</span></span>
-<span id="L3368"><span class="lineNum">    3368</span> <span class="tlaGNC">         758 :         Instrument* instr = new Instrument;</span></span>
-<span id="L3369"><span class="lineNum">    3369</span> <span class="tlaGNC">         758 :         read(instr, e, ctx, p);</span></span>
-<span id="L3370"><span class="lineNum">    3370</span> <span class="tlaGNC">         758 :         p-&gt;setInstrument(instr, Fraction(-1, 1));</span></span>
-<span id="L3371"><span class="lineNum">    3371</span> <span class="tlaGNC">         759 :     } else if (tag == &quot;name&quot;) {</span></span>
+<span id="L3363"><span class="lineNum">    3363</span> <span class="tlaGNC tlaBgGNC">        2395 :     } else if (tag == &quot;Staff&quot;) {</span></span>
+<span id="L3364"><span class="lineNum">    3364</span> <span class="tlaGNC">         876 :         Staff* staff = Factory::createStaff(p);</span></span>
+<span id="L3365"><span class="lineNum">    3365</span> <span class="tlaGNC">         876 :         p-&gt;score()-&gt;appendStaff(staff);</span></span>
+<span id="L3366"><span class="lineNum">    3366</span> <span class="tlaGNC">         876 :         TRead::read(staff, e, ctx, staffHideModes);</span></span>
+<span id="L3367"><span class="lineNum">    3367</span> <span class="tlaGNC">        1519 :     } else if (tag == &quot;Instrument&quot;) {</span></span>
+<span id="L3368"><span class="lineNum">    3368</span> <span class="tlaGNC">         759 :         Instrument* instr = new Instrument;</span></span>
+<span id="L3369"><span class="lineNum">    3369</span> <span class="tlaGNC">         759 :         read(instr, e, ctx, p);</span></span>
+<span id="L3370"><span class="lineNum">    3370</span> <span class="tlaGNC">         759 :         p-&gt;setInstrument(instr, Fraction(-1, 1));</span></span>
+<span id="L3371"><span class="lineNum">    3371</span> <span class="tlaGNC">         760 :     } else if (tag == &quot;name&quot;) {</span></span>
 <span id="L3372"><span class="lineNum">    3372</span> <span class="tlaUNC tlaBgUNC">           0 :         p-&gt;instrument()-&gt;setLongName(e.readText());</span></span>
-<span id="L3373"><span class="lineNum">    3373</span> <span class="tlaGNC tlaBgGNC">         759 :     } else if (tag == &quot;color&quot;) {</span></span>
+<span id="L3373"><span class="lineNum">    3373</span> <span class="tlaGNC tlaBgGNC">         760 :     } else if (tag == &quot;color&quot;) {</span></span>
 <span id="L3374"><span class="lineNum">    3374</span> <span class="tlaUNC tlaBgUNC">           0 :         e.skipCurrentElement(); // Unused</span></span>
-<span id="L3375"><span class="lineNum">    3375</span> <span class="tlaGNC tlaBgGNC">         759 :     } else if (tag == &quot;shortName&quot;) {</span></span>
+<span id="L3375"><span class="lineNum">    3375</span> <span class="tlaGNC tlaBgGNC">         760 :     } else if (tag == &quot;shortName&quot;) {</span></span>
 <span id="L3376"><span class="lineNum">    3376</span> <span class="tlaUNC tlaBgUNC">           0 :         p-&gt;instrument()-&gt;setShortName(e.readText());</span></span>
-<span id="L3377"><span class="lineNum">    3377</span> <span class="tlaGNC tlaBgGNC">         759 :     } else if (tag == &quot;show&quot;) {</span></span>
+<span id="L3377"><span class="lineNum">    3377</span> <span class="tlaGNC tlaBgGNC">         760 :     } else if (tag == &quot;show&quot;) {</span></span>
 <span id="L3378"><span class="lineNum">    3378</span> <span class="tlaUNC tlaBgUNC">           0 :         p-&gt;setShow(e.readInt());</span></span>
-<span id="L3379"><span class="lineNum">    3379</span> <span class="tlaGNC tlaBgGNC">         759 :     } else if (tag == &quot;soloist&quot;) {</span></span>
+<span id="L3379"><span class="lineNum">    3379</span> <span class="tlaGNC tlaBgGNC">         760 :     } else if (tag == &quot;soloist&quot;) {</span></span>
 <span id="L3380"><span class="lineNum">    3380</span> <span class="tlaUNC tlaBgUNC">           0 :         p-&gt;setSoloist(e.readInt());</span></span>
-<span id="L3381"><span class="lineNum">    3381</span> <span class="tlaGNC tlaBgGNC">         759 :     } else if (tag == &quot;preferSharpFlat&quot;) {</span></span>
+<span id="L3381"><span class="lineNum">    3381</span> <span class="tlaGNC tlaBgGNC">         760 :     } else if (tag == &quot;preferSharpFlat&quot;) {</span></span>
 <span id="L3382"><span class="lineNum">    3382</span> <span class="tlaGNC">           1 :         String val = e.readText();</span></span>
 <span id="L3383"><span class="lineNum">    3383</span> <span class="tlaGNC">           1 :         if (val == &quot;sharps&quot;) {</span></span>
 <span id="L3384"><span class="lineNum">    3384</span> <span class="tlaUNC tlaBgUNC">           0 :             p-&gt;setPreferSharpFlat(PreferSharpFlat::SHARPS);</span></span>
@@ -3446,9 +3446,9 @@
 <span id="L3388"><span class="lineNum">    3388</span> <span class="tlaUNC tlaBgUNC">           0 :             p-&gt;setPreferSharpFlat(PreferSharpFlat::AUTO);</span></span>
 <span id="L3389"><span class="lineNum">    3389</span>              :         }</span>
 <span id="L3390"><span class="lineNum">    3390</span> <span class="tlaGNC tlaBgGNC">           1 :     } else {</span></span>
-<span id="L3391"><span class="lineNum">    3391</span> <span class="tlaGNC">         758 :         return false;</span></span>
+<span id="L3391"><span class="lineNum">    3391</span> <span class="tlaGNC">         759 :         return false;</span></span>
 <span id="L3392"><span class="lineNum">    3392</span>              :     }</span>
-<span id="L3393"><span class="lineNum">    3393</span> <span class="tlaGNC">        1634 :     return true;</span></span>
+<span id="L3393"><span class="lineNum">    3393</span> <span class="tlaGNC">        1636 :     return true;</span></span>
 <span id="L3394"><span class="lineNum">    3394</span>              : }</span>
 <span id="L3395"><span class="lineNum">    3395</span>              : </span>
 <span id="L3396"><span class="lineNum">    3396</span> <span class="tlaGNC">          23 : void TRead::read(Pedal* p, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
@@ -3502,17 +3502,17 @@
 <span id="L3444"><span class="lineNum">    3444</span> <span class="tlaUNC">           0 :     TRead::read(toTextLineBase(r), xml, ctx);</span></span>
 <span id="L3445"><span class="lineNum">    3445</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L3446"><span class="lineNum">    3446</span>              : </span>
-<span id="L3447"><span class="lineNum">    3447</span> <span class="tlaGNC tlaBgGNC">        4235 : void TRead::read(Rest* r, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L3447"><span class="lineNum">    3447</span> <span class="tlaGNC tlaBgGNC">        4267 : void TRead::read(Rest* r, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L3448"><span class="lineNum">    3448</span>              : {</span>
-<span id="L3449"><span class="lineNum">    3449</span> <span class="tlaGNC">       11260 :     while (e.readNextStartElement()) {</span></span>
-<span id="L3450"><span class="lineNum">    3450</span> <span class="tlaGNC">        7025 :         const AsciiStringView tag(e.name());</span></span>
-<span id="L3451"><span class="lineNum">    3451</span> <span class="tlaGNC">        7025 :         if (tag == &quot;Symbol&quot;) {</span></span>
+<span id="L3449"><span class="lineNum">    3449</span> <span class="tlaGNC">       11356 :     while (e.readNextStartElement()) {</span></span>
+<span id="L3450"><span class="lineNum">    3450</span> <span class="tlaGNC">        7089 :         const AsciiStringView tag(e.name());</span></span>
+<span id="L3451"><span class="lineNum">    3451</span> <span class="tlaGNC">        7089 :         if (tag == &quot;Symbol&quot;) {</span></span>
 <span id="L3452"><span class="lineNum">    3452</span> <span class="tlaUNC tlaBgUNC">           0 :             Segment* seg = toSegment(r-&gt;parent());</span></span>
 <span id="L3453"><span class="lineNum">    3453</span> <span class="tlaUNC">           0 :             Symbol* s = new Symbol(seg);</span></span>
 <span id="L3454"><span class="lineNum">    3454</span> <span class="tlaUNC">           0 :             s-&gt;setTrack(r-&gt;track());</span></span>
 <span id="L3455"><span class="lineNum">    3455</span> <span class="tlaUNC">           0 :             TRead::read(s, e, ctx);</span></span>
 <span id="L3456"><span class="lineNum">    3456</span> <span class="tlaUNC">           0 :             seg-&gt;add(s);</span></span>
-<span id="L3457"><span class="lineNum">    3457</span> <span class="tlaGNC tlaBgGNC">        7025 :         } else if (tag == &quot;Image&quot;) {</span></span>
+<span id="L3457"><span class="lineNum">    3457</span> <span class="tlaGNC tlaBgGNC">        7089 :         } else if (tag == &quot;Image&quot;) {</span></span>
 <span id="L3458"><span class="lineNum">    3458</span> <span class="tlaUNC tlaBgUNC">           0 :             if (MScore::noImages) {</span></span>
 <span id="L3459"><span class="lineNum">    3459</span> <span class="tlaUNC">           0 :                 e.skipCurrentElement();</span></span>
 <span id="L3460"><span class="lineNum">    3460</span>              :             } else {</span>
@@ -3522,17 +3522,17 @@
 <span id="L3464"><span class="lineNum">    3464</span> <span class="tlaUNC">           0 :                 TRead::read(image, e, ctx);</span></span>
 <span id="L3465"><span class="lineNum">    3465</span> <span class="tlaUNC">           0 :                 seg-&gt;add(image);</span></span>
 <span id="L3466"><span class="lineNum">    3466</span>              :             }</span>
-<span id="L3467"><span class="lineNum">    3467</span> <span class="tlaGNC tlaBgGNC">        7025 :         } else if (tag == &quot;NoteDot&quot;) {</span></span>
+<span id="L3467"><span class="lineNum">    3467</span> <span class="tlaGNC tlaBgGNC">        7089 :         } else if (tag == &quot;NoteDot&quot;) {</span></span>
 <span id="L3468"><span class="lineNum">    3468</span> <span class="tlaGNC">           3 :             NoteDot* dot = Factory::createNoteDot(r);</span></span>
 <span id="L3469"><span class="lineNum">    3469</span> <span class="tlaGNC">           3 :             TRead::read(dot, e, ctx);</span></span>
 <span id="L3470"><span class="lineNum">    3470</span> <span class="tlaGNC">           3 :             r-&gt;add(dot);</span></span>
-<span id="L3471"><span class="lineNum">    3471</span> <span class="tlaGNC">        7022 :         } else if (TRead::readStyledProperty(r, tag, e, ctx)) {</span></span>
-<span id="L3472"><span class="lineNum">    3472</span> <span class="tlaGNC">        7022 :         } else if (TRead::readProperties(r, e, ctx)) {</span></span>
+<span id="L3471"><span class="lineNum">    3471</span> <span class="tlaGNC">        7086 :         } else if (TRead::readStyledProperty(r, tag, e, ctx)) {</span></span>
+<span id="L3472"><span class="lineNum">    3472</span> <span class="tlaGNC">        7086 :         } else if (TRead::readProperties(r, e, ctx)) {</span></span>
 <span id="L3473"><span class="lineNum">    3473</span>              :         } else {</span>
 <span id="L3474"><span class="lineNum">    3474</span> <span class="tlaUNC tlaBgUNC">           0 :             e.unknown();</span></span>
 <span id="L3475"><span class="lineNum">    3475</span>              :         }</span>
 <span id="L3476"><span class="lineNum">    3476</span>              :     }</span>
-<span id="L3477"><span class="lineNum">    3477</span> <span class="tlaGNC tlaBgGNC">        4235 : }</span></span>
+<span id="L3477"><span class="lineNum">    3477</span> <span class="tlaGNC tlaBgGNC">        4267 : }</span></span>
 <span id="L3478"><span class="lineNum">    3478</span>              : </span>
 <span id="L3479"><span class="lineNum">    3479</span> <span class="tlaUNC tlaBgUNC">           0 : void TRead::read(Segment* s, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L3480"><span class="lineNum">    3480</span>              : {</span>
@@ -3689,20 +3689,20 @@
 <span id="L3631"><span class="lineNum">    3631</span>              :     }</span>
 <span id="L3632"><span class="lineNum">    3632</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L3633"><span class="lineNum">    3633</span>              : </span>
-<span id="L3634"><span class="lineNum">    3634</span> <span class="tlaGNC tlaBgGNC">         952 : void TRead::read(StaffType* t, XmlReader&amp; e, ReadContext&amp;)</span></span>
+<span id="L3634"><span class="lineNum">    3634</span> <span class="tlaGNC tlaBgGNC">         953 : void TRead::read(StaffType* t, XmlReader&amp; e, ReadContext&amp;)</span></span>
 <span id="L3635"><span class="lineNum">    3635</span>              : {</span>
-<span id="L3636"><span class="lineNum">    3636</span> <span class="tlaGNC">         952 :     t-&gt;setGroup(TConv::fromXml(e.asciiAttribute(&quot;group&quot;), StaffGroup::STANDARD));</span></span>
+<span id="L3636"><span class="lineNum">    3636</span> <span class="tlaGNC">         953 :     t-&gt;setGroup(TConv::fromXml(e.asciiAttribute(&quot;group&quot;), StaffGroup::STANDARD));</span></span>
 <span id="L3637"><span class="lineNum">    3637</span>              : </span>
-<span id="L3638"><span class="lineNum">    3638</span> <span class="tlaGNC">         952 :     if (t-&gt;group() == StaffGroup::TAB) {</span></span>
+<span id="L3638"><span class="lineNum">    3638</span> <span class="tlaGNC">         953 :     if (t-&gt;group() == StaffGroup::TAB) {</span></span>
 <span id="L3639"><span class="lineNum">    3639</span> <span class="tlaGNC">           4 :         t-&gt;setGenKeysig(false);</span></span>
 <span id="L3640"><span class="lineNum">    3640</span>              :     }</span>
 <span id="L3641"><span class="lineNum">    3641</span>              : </span>
-<span id="L3642"><span class="lineNum">    3642</span> <span class="tlaGNC">         952 :     t-&gt;setFretUseTextStyle(false);</span></span>
+<span id="L3642"><span class="lineNum">    3642</span> <span class="tlaGNC">         953 :     t-&gt;setFretUseTextStyle(false);</span></span>
 <span id="L3643"><span class="lineNum">    3643</span>              : </span>
-<span id="L3644"><span class="lineNum">    3644</span> <span class="tlaGNC">        2086 :     while (e.readNextStartElement()) {</span></span>
-<span id="L3645"><span class="lineNum">    3645</span> <span class="tlaGNC">        1134 :         const AsciiStringView tag(e.name());</span></span>
-<span id="L3646"><span class="lineNum">    3646</span> <span class="tlaGNC">        1134 :         if (tag == &quot;name&quot;) {</span></span>
-<span id="L3647"><span class="lineNum">    3647</span> <span class="tlaGNC">         878 :             t-&gt;setType(TConv::fromXml(e.readAsciiText(), StaffTypes::STANDARD));</span></span>
+<span id="L3644"><span class="lineNum">    3644</span> <span class="tlaGNC">        2088 :     while (e.readNextStartElement()) {</span></span>
+<span id="L3645"><span class="lineNum">    3645</span> <span class="tlaGNC">        1135 :         const AsciiStringView tag(e.name());</span></span>
+<span id="L3646"><span class="lineNum">    3646</span> <span class="tlaGNC">        1135 :         if (tag == &quot;name&quot;) {</span></span>
+<span id="L3647"><span class="lineNum">    3647</span> <span class="tlaGNC">         879 :             t-&gt;setType(TConv::fromXml(e.readAsciiText(), StaffTypes::STANDARD));</span></span>
 <span id="L3648"><span class="lineNum">    3648</span> <span class="tlaGNC">         256 :         } else if (tag == &quot;lines&quot;) {</span></span>
 <span id="L3649"><span class="lineNum">    3649</span> <span class="tlaGNC">           9 :             t-&gt;setLines(e.readInt());</span></span>
 <span id="L3650"><span class="lineNum">    3650</span> <span class="tlaGNC">         247 :         } else if (tag == &quot;lineDistance&quot;) {</span></span>
@@ -3776,7 +3776,7 @@
 <span id="L3718"><span class="lineNum">    3718</span> <span class="tlaUNC">           0 :             e.unknown();</span></span>
 <span id="L3719"><span class="lineNum">    3719</span>              :         }</span>
 <span id="L3720"><span class="lineNum">    3720</span>              :     }</span>
-<span id="L3721"><span class="lineNum">    3721</span> <span class="tlaGNC tlaBgGNC">         952 : }</span></span>
+<span id="L3721"><span class="lineNum">    3721</span> <span class="tlaGNC tlaBgGNC">         953 : }</span></span>
 <span id="L3722"><span class="lineNum">    3722</span>              : </span>
 <span id="L3723"><span class="lineNum">    3723</span> <span class="tlaGNC">          17 : void TRead::read(StaffTypeChange* c, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L3724"><span class="lineNum">    3724</span>              : {</span>
@@ -3793,14 +3793,14 @@
 <span id="L3735"><span class="lineNum">    3735</span>              :     }</span>
 <span id="L3736"><span class="lineNum">    3736</span> <span class="tlaGNC tlaBgGNC">          17 : }</span></span>
 <span id="L3737"><span class="lineNum">    3737</span>              : </span>
-<span id="L3738"><span class="lineNum">    3738</span> <span class="tlaGNC">         875 : void TRead::read(Staff* s, XmlReader&amp; e, ReadContext&amp; ctx, StaffHideModes&amp; staffHideModes)</span></span>
+<span id="L3738"><span class="lineNum">    3738</span> <span class="tlaGNC">         876 : void TRead::read(Staff* s, XmlReader&amp; e, ReadContext&amp; ctx, StaffHideModes&amp; staffHideModes)</span></span>
 <span id="L3739"><span class="lineNum">    3739</span>              : {</span>
-<span id="L3740"><span class="lineNum">    3740</span> <span class="tlaGNC">        3156 :     while (e.readNextStartElement()) {</span></span>
-<span id="L3741"><span class="lineNum">    3741</span> <span class="tlaGNC">        1406 :         if (!readProperties(s, e, ctx, staffHideModes)) {</span></span>
+<span id="L3740"><span class="lineNum">    3740</span> <span class="tlaGNC">        3159 :     while (e.readNextStartElement()) {</span></span>
+<span id="L3741"><span class="lineNum">    3741</span> <span class="tlaGNC">        1407 :         if (!readProperties(s, e, ctx, staffHideModes)) {</span></span>
 <span id="L3742"><span class="lineNum">    3742</span> <span class="tlaUNC tlaBgUNC">           0 :             e.unknown();</span></span>
 <span id="L3743"><span class="lineNum">    3743</span>              :         }</span>
 <span id="L3744"><span class="lineNum">    3744</span>              :     }</span>
-<span id="L3745"><span class="lineNum">    3745</span> <span class="tlaGNC tlaBgGNC">         875 : }</span></span>
+<span id="L3745"><span class="lineNum">    3745</span> <span class="tlaGNC tlaBgGNC">         876 : }</span></span>
 <span id="L3746"><span class="lineNum">    3746</span>              : </span>
 <span id="L3747"><span class="lineNum">    3747</span> <span class="tlaUNC tlaBgUNC">           0 : AutoOnOff TRead::readStaffHideMode(AsciiStringView asciiText)</span></span>
 <span id="L3748"><span class="lineNum">    3748</span>              : {</span>
@@ -3816,14 +3816,14 @@
 <span id="L3758"><span class="lineNum">    3758</span>              :     }</span>
 <span id="L3759"><span class="lineNum">    3759</span>              : }</span>
 <span id="L3760"><span class="lineNum">    3760</span>              : </span>
-<span id="L3761"><span class="lineNum">    3761</span> <span class="tlaGNC tlaBgGNC">        1406 : bool TRead::readProperties(Staff* s, XmlReader&amp; e, ReadContext&amp; ctx, StaffHideModes&amp; staffHideModes)</span></span>
+<span id="L3761"><span class="lineNum">    3761</span> <span class="tlaGNC tlaBgGNC">        1407 : bool TRead::readProperties(Staff* s, XmlReader&amp; e, ReadContext&amp; ctx, StaffHideModes&amp; staffHideModes)</span></span>
 <span id="L3762"><span class="lineNum">    3762</span>              : {</span>
-<span id="L3763"><span class="lineNum">    3763</span> <span class="tlaGNC">        1406 :     const AsciiStringView tag(e.name());</span></span>
-<span id="L3764"><span class="lineNum">    3764</span> <span class="tlaGNC">        1406 :     if (tag == &quot;StaffType&quot;) {</span></span>
-<span id="L3765"><span class="lineNum">    3765</span> <span class="tlaGNC">         875 :         StaffType st;</span></span>
-<span id="L3766"><span class="lineNum">    3766</span> <span class="tlaGNC">         875 :         TRead::read(&amp;st, e, ctx);</span></span>
-<span id="L3767"><span class="lineNum">    3767</span> <span class="tlaGNC">         875 :         s-&gt;setStaffType(Fraction(0, 1), st);</span></span>
-<span id="L3768"><span class="lineNum">    3768</span> <span class="tlaGNC">        1406 :     } else if (tag == &quot;defaultClef&quot;) {           // sets both default transposing and concert clef</span></span>
+<span id="L3763"><span class="lineNum">    3763</span> <span class="tlaGNC">        1407 :     const AsciiStringView tag(e.name());</span></span>
+<span id="L3764"><span class="lineNum">    3764</span> <span class="tlaGNC">        1407 :     if (tag == &quot;StaffType&quot;) {</span></span>
+<span id="L3765"><span class="lineNum">    3765</span> <span class="tlaGNC">         876 :         StaffType st;</span></span>
+<span id="L3766"><span class="lineNum">    3766</span> <span class="tlaGNC">         876 :         TRead::read(&amp;st, e, ctx);</span></span>
+<span id="L3767"><span class="lineNum">    3767</span> <span class="tlaGNC">         876 :         s-&gt;setStaffType(Fraction(0, 1), st);</span></span>
+<span id="L3768"><span class="lineNum">    3768</span> <span class="tlaGNC">        1407 :     } else if (tag == &quot;defaultClef&quot;) {           // sets both default transposing and concert clef</span></span>
 <span id="L3769"><span class="lineNum">    3769</span> <span class="tlaGNC">         261 :         ClefType ct = TConv::fromXml(e.readAsciiText(), ClefType::G);</span></span>
 <span id="L3770"><span class="lineNum">    3770</span> <span class="tlaGNC">         261 :         s-&gt;setDefaultClefType(ClefTypeList(ct, ct));</span></span>
 <span id="L3771"><span class="lineNum">    3771</span> <span class="tlaGNC">         270 :     } else if (tag == &quot;defaultConcertClef&quot;) {</span></span>
@@ -3914,7 +3914,7 @@
 <span id="L3856"><span class="lineNum">    3856</span>              :     } else {</span>
 <span id="L3857"><span class="lineNum">    3857</span> <span class="tlaUNC">           0 :         return false;</span></span>
 <span id="L3858"><span class="lineNum">    3858</span>              :     }</span>
-<span id="L3859"><span class="lineNum">    3859</span> <span class="tlaGNC tlaBgGNC">        1406 :     return true;</span></span>
+<span id="L3859"><span class="lineNum">    3859</span> <span class="tlaGNC tlaBgGNC">        1407 :     return true;</span></span>
 <span id="L3860"><span class="lineNum">    3860</span>              : }</span>
 <span id="L3861"><span class="lineNum">    3861</span>              : </span>
 <span id="L3862"><span class="lineNum">    3862</span> <span class="tlaGNC">           3 : void TRead::read(Stem* s, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
@@ -3987,22 +3987,22 @@
 <span id="L3929"><span class="lineNum">    3929</span>              :     }</span>
 <span id="L3930"><span class="lineNum">    3930</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L3931"><span class="lineNum">    3931</span>              : </span>
-<span id="L3932"><span class="lineNum">    3932</span> <span class="tlaGNC tlaBgGNC">         912 : void TRead::read(Text* t, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L3932"><span class="lineNum">    3932</span> <span class="tlaGNC tlaBgGNC">         914 : void TRead::read(Text* t, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L3933"><span class="lineNum">    3933</span>              : {</span>
-<span id="L3934"><span class="lineNum">    3934</span> <span class="tlaGNC">        2721 :     while (e.readNextStartElement()) {</span></span>
-<span id="L3935"><span class="lineNum">    3935</span> <span class="tlaGNC">        1809 :         const AsciiStringView tag(e.name());</span></span>
-<span id="L3936"><span class="lineNum">    3936</span> <span class="tlaGNC">        1809 :         if (tag == &quot;style&quot;) {</span></span>
-<span id="L3937"><span class="lineNum">    3937</span> <span class="tlaGNC">         876 :             TextStyleType s = TConv::fromXml(e.readAsciiText(), TextStyleType::DEFAULT);</span></span>
-<span id="L3938"><span class="lineNum">    3938</span> <span class="tlaGNC">         876 :             if (TextStyleType::TUPLET == s) {  // ugly hack for compatibility</span></span>
+<span id="L3934"><span class="lineNum">    3934</span> <span class="tlaGNC">        2727 :     while (e.readNextStartElement()) {</span></span>
+<span id="L3935"><span class="lineNum">    3935</span> <span class="tlaGNC">        1813 :         const AsciiStringView tag(e.name());</span></span>
+<span id="L3936"><span class="lineNum">    3936</span> <span class="tlaGNC">        1813 :         if (tag == &quot;style&quot;) {</span></span>
+<span id="L3937"><span class="lineNum">    3937</span> <span class="tlaGNC">         878 :             TextStyleType s = TConv::fromXml(e.readAsciiText(), TextStyleType::DEFAULT);</span></span>
+<span id="L3938"><span class="lineNum">    3938</span> <span class="tlaGNC">         878 :             if (TextStyleType::TUPLET == s) {  // ugly hack for compatibility</span></span>
 <span id="L3939"><span class="lineNum">    3939</span> <span class="tlaGNC">          41 :                 continue;</span></span>
 <span id="L3940"><span class="lineNum">    3940</span>              :             }</span>
-<span id="L3941"><span class="lineNum">    3941</span> <span class="tlaGNC">         835 :             t-&gt;initTextStyleType(s);</span></span>
-<span id="L3942"><span class="lineNum">    3942</span> <span class="tlaGNC">         933 :         } else if (!readProperties(toTextBase(t), e, ctx)) {</span></span>
+<span id="L3941"><span class="lineNum">    3941</span> <span class="tlaGNC">         837 :             t-&gt;initTextStyleType(s);</span></span>
+<span id="L3942"><span class="lineNum">    3942</span> <span class="tlaGNC">         935 :         } else if (!readProperties(toTextBase(t), e, ctx)) {</span></span>
 <span id="L3943"><span class="lineNum">    3943</span> <span class="tlaUNC tlaBgUNC">           0 :             e.unknown();</span></span>
 <span id="L3944"><span class="lineNum">    3944</span>              :         }</span>
 <span id="L3945"><span class="lineNum">    3945</span>              :     }</span>
-<span id="L3946"><span class="lineNum">    3946</span> <span class="tlaGNC tlaBgGNC">         912 :     compat::CompatUtils::migrateOffsetPre302(t, ctx.mscVersion());</span></span>
-<span id="L3947"><span class="lineNum">    3947</span> <span class="tlaGNC">         912 : }</span></span>
+<span id="L3946"><span class="lineNum">    3946</span> <span class="tlaGNC tlaBgGNC">         914 :     compat::CompatUtils::migrateOffsetPre302(t, ctx.mscVersion());</span></span>
+<span id="L3947"><span class="lineNum">    3947</span> <span class="tlaGNC">         914 : }</span></span>
 <span id="L3948"><span class="lineNum">    3948</span>              : </span>
 <span id="L3949"><span class="lineNum">    3949</span> <span class="tlaGNC">          13 : void TRead::read(TextLine* l, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L3950"><span class="lineNum">    3950</span>              : {</span>
@@ -4034,36 +4034,36 @@
 <span id="L3976"><span class="lineNum">    3976</span> <span class="tlaGNC">         920 :     TRead::read(toSlurTie(t), xml, ctx);</span></span>
 <span id="L3977"><span class="lineNum">    3977</span> <span class="tlaGNC">         920 : }</span></span>
 <span id="L3978"><span class="lineNum">    3978</span>              : </span>
-<span id="L3979"><span class="lineNum">    3979</span> <span class="tlaGNC">         887 : void TRead::read(TimeSig* s, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L3979"><span class="lineNum">    3979</span> <span class="tlaGNC">         888 : void TRead::read(TimeSig* s, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L3980"><span class="lineNum">    3980</span>              : {</span>
-<span id="L3981"><span class="lineNum">    3981</span> <span class="tlaGNC">         887 :     int n=0, z1=0, z2=0, z3=0, z4=0;</span></span>
-<span id="L3982"><span class="lineNum">    3982</span> <span class="tlaGNC">         887 :     bool old = false;</span></span>
+<span id="L3981"><span class="lineNum">    3981</span> <span class="tlaGNC">         888 :     int n=0, z1=0, z2=0, z3=0, z4=0;</span></span>
+<span id="L3982"><span class="lineNum">    3982</span> <span class="tlaGNC">         888 :     bool old = false;</span></span>
 <span id="L3983"><span class="lineNum">    3983</span>              : </span>
-<span id="L3984"><span class="lineNum">    3984</span> <span class="tlaGNC">         887 :     TimeSigType timeSigType = TimeSigType::NORMAL;</span></span>
-<span id="L3985"><span class="lineNum">    3985</span> <span class="tlaGNC">         887 :     Fraction sig;</span></span>
-<span id="L3986"><span class="lineNum">    3986</span> <span class="tlaGNC">         887 :     Fraction stretch(1, 1);</span></span>
-<span id="L3987"><span class="lineNum">    3987</span> <span class="tlaGNC">         887 :     String numeratorString;</span></span>
-<span id="L3988"><span class="lineNum">    3988</span> <span class="tlaGNC">         887 :     String denominatorString;</span></span>
+<span id="L3984"><span class="lineNum">    3984</span> <span class="tlaGNC">         888 :     TimeSigType timeSigType = TimeSigType::NORMAL;</span></span>
+<span id="L3985"><span class="lineNum">    3985</span> <span class="tlaGNC">         888 :     Fraction sig;</span></span>
+<span id="L3986"><span class="lineNum">    3986</span> <span class="tlaGNC">         888 :     Fraction stretch(1, 1);</span></span>
+<span id="L3987"><span class="lineNum">    3987</span> <span class="tlaGNC">         888 :     String numeratorString;</span></span>
+<span id="L3988"><span class="lineNum">    3988</span> <span class="tlaGNC">         888 :     String denominatorString;</span></span>
 <span id="L3989"><span class="lineNum">    3989</span>              : </span>
-<span id="L3990"><span class="lineNum">    3990</span> <span class="tlaGNC">        2886 :     while (e.readNextStartElement()) {</span></span>
-<span id="L3991"><span class="lineNum">    3991</span> <span class="tlaGNC">        1999 :         const AsciiStringView tag(e.name());</span></span>
+<span id="L3990"><span class="lineNum">    3990</span> <span class="tlaGNC">        2889 :     while (e.readNextStartElement()) {</span></span>
+<span id="L3991"><span class="lineNum">    3991</span> <span class="tlaGNC">        2001 :         const AsciiStringView tag(e.name());</span></span>
 <span id="L3992"><span class="lineNum">    3992</span>              : </span>
-<span id="L3993"><span class="lineNum">    3993</span> <span class="tlaGNC">        1999 :         if (tag == &quot;den&quot;) {</span></span>
+<span id="L3993"><span class="lineNum">    3993</span> <span class="tlaGNC">        2001 :         if (tag == &quot;den&quot;) {</span></span>
 <span id="L3994"><span class="lineNum">    3994</span> <span class="tlaGNC">          33 :             old = true;</span></span>
 <span id="L3995"><span class="lineNum">    3995</span> <span class="tlaGNC">          33 :             n = e.readInt();</span></span>
-<span id="L3996"><span class="lineNum">    3996</span> <span class="tlaGNC">        1966 :         } else if (tag == &quot;nom1&quot;) {</span></span>
+<span id="L3996"><span class="lineNum">    3996</span> <span class="tlaGNC">        1968 :         } else if (tag == &quot;nom1&quot;) {</span></span>
 <span id="L3997"><span class="lineNum">    3997</span> <span class="tlaGNC">          33 :             old = true;</span></span>
 <span id="L3998"><span class="lineNum">    3998</span> <span class="tlaGNC">          33 :             z1 = e.readInt();</span></span>
-<span id="L3999"><span class="lineNum">    3999</span> <span class="tlaGNC">        1933 :         } else if (tag == &quot;nom2&quot;) {</span></span>
+<span id="L3999"><span class="lineNum">    3999</span> <span class="tlaGNC">        1935 :         } else if (tag == &quot;nom2&quot;) {</span></span>
 <span id="L4000"><span class="lineNum">    4000</span> <span class="tlaUNC tlaBgUNC">           0 :             old = true;</span></span>
 <span id="L4001"><span class="lineNum">    4001</span> <span class="tlaUNC">           0 :             z2 = e.readInt();</span></span>
-<span id="L4002"><span class="lineNum">    4002</span> <span class="tlaGNC tlaBgGNC">        1933 :         } else if (tag == &quot;nom3&quot;) {</span></span>
+<span id="L4002"><span class="lineNum">    4002</span> <span class="tlaGNC tlaBgGNC">        1935 :         } else if (tag == &quot;nom3&quot;) {</span></span>
 <span id="L4003"><span class="lineNum">    4003</span> <span class="tlaUNC tlaBgUNC">           0 :             old = true;</span></span>
 <span id="L4004"><span class="lineNum">    4004</span> <span class="tlaUNC">           0 :             z3 = e.readInt();</span></span>
-<span id="L4005"><span class="lineNum">    4005</span> <span class="tlaGNC tlaBgGNC">        1933 :         } else if (tag == &quot;nom4&quot;) {</span></span>
+<span id="L4005"><span class="lineNum">    4005</span> <span class="tlaGNC tlaBgGNC">        1935 :         } else if (tag == &quot;nom4&quot;) {</span></span>
 <span id="L4006"><span class="lineNum">    4006</span> <span class="tlaUNC tlaBgUNC">           0 :             old = true;</span></span>
 <span id="L4007"><span class="lineNum">    4007</span> <span class="tlaUNC">           0 :             z4 = e.readInt();</span></span>
-<span id="L4008"><span class="lineNum">    4008</span> <span class="tlaGNC tlaBgGNC">        1933 :         } else if (tag == &quot;subtype&quot;) {</span></span>
+<span id="L4008"><span class="lineNum">    4008</span> <span class="tlaGNC tlaBgGNC">        1935 :         } else if (tag == &quot;subtype&quot;) {</span></span>
 <span id="L4009"><span class="lineNum">    4009</span> <span class="tlaGNC">          84 :             int i = e.readInt();</span></span>
 <span id="L4010"><span class="lineNum">    4010</span> <span class="tlaGNC">          84 :             if (s-&gt;score()-&gt;mscVersion() &lt;= 114) {</span></span>
 <span id="L4011"><span class="lineNum">    4011</span> <span class="tlaGNC">          33 :                 if (i == 0x40000104) {</span></span>
@@ -4076,12 +4076,12 @@
 <span id="L4018"><span class="lineNum">    4018</span>              :             } else {</span>
 <span id="L4019"><span class="lineNum">    4019</span> <span class="tlaGNC">          51 :                 timeSigType = TimeSigType(i);</span></span>
 <span id="L4020"><span class="lineNum">    4020</span>              :             }</span>
-<span id="L4021"><span class="lineNum">    4021</span> <span class="tlaGNC">        1849 :         } else if (tag == &quot;showCourtesySig&quot;) {</span></span>
+<span id="L4021"><span class="lineNum">    4021</span> <span class="tlaGNC">        1851 :         } else if (tag == &quot;showCourtesySig&quot;) {</span></span>
 <span id="L4022"><span class="lineNum">    4022</span> <span class="tlaGNC">          62 :             s-&gt;setShowCourtesySig(e.readInt());</span></span>
-<span id="L4023"><span class="lineNum">    4023</span> <span class="tlaGNC">        1787 :         } else if (tag == &quot;sigN&quot;) {</span></span>
-<span id="L4024"><span class="lineNum">    4024</span> <span class="tlaGNC">         854 :             sig.setNumerator(e.readInt());</span></span>
-<span id="L4025"><span class="lineNum">    4025</span> <span class="tlaGNC">         933 :         } else if (tag == &quot;sigD&quot;) {</span></span>
-<span id="L4026"><span class="lineNum">    4026</span> <span class="tlaGNC">         854 :             sig.setDenominator(e.readInt());</span></span>
+<span id="L4023"><span class="lineNum">    4023</span> <span class="tlaGNC">        1789 :         } else if (tag == &quot;sigN&quot;) {</span></span>
+<span id="L4024"><span class="lineNum">    4024</span> <span class="tlaGNC">         855 :             sig.setNumerator(e.readInt());</span></span>
+<span id="L4025"><span class="lineNum">    4025</span> <span class="tlaGNC">         934 :         } else if (tag == &quot;sigD&quot;) {</span></span>
+<span id="L4026"><span class="lineNum">    4026</span> <span class="tlaGNC">         855 :             sig.setDenominator(e.readInt());</span></span>
 <span id="L4027"><span class="lineNum">    4027</span> <span class="tlaGNC">          79 :         } else if (tag == &quot;stretchN&quot;) {</span></span>
 <span id="L4028"><span class="lineNum">    4028</span> <span class="tlaGNC">           1 :             stretch.setNumerator(e.readInt());</span></span>
 <span id="L4029"><span class="lineNum">    4029</span> <span class="tlaGNC">          78 :         } else if (tag == &quot;stretchD&quot;) {</span></span>
@@ -4099,15 +4099,15 @@
 <span id="L4041"><span class="lineNum">    4041</span> <span class="tlaGNC">          16 :             e.unknown();</span></span>
 <span id="L4042"><span class="lineNum">    4042</span>              :         }</span>
 <span id="L4043"><span class="lineNum">    4043</span>              :     }</span>
-<span id="L4044"><span class="lineNum">    4044</span> <span class="tlaGNC">         887 :     if (old) {</span></span>
+<span id="L4044"><span class="lineNum">    4044</span> <span class="tlaGNC">         888 :     if (old) {</span></span>
 <span id="L4045"><span class="lineNum">    4045</span> <span class="tlaGNC">          33 :         sig.set(z1 + z2 + z3 + z4, n);</span></span>
 <span id="L4046"><span class="lineNum">    4046</span>              :     }</span>
-<span id="L4047"><span class="lineNum">    4047</span> <span class="tlaGNC">         887 :     stretch.reduce();</span></span>
+<span id="L4047"><span class="lineNum">    4047</span> <span class="tlaGNC">         888 :     stretch.reduce();</span></span>
 <span id="L4048"><span class="lineNum">    4048</span>              : </span>
 <span id="L4049"><span class="lineNum">    4049</span>              :     // HACK: handle time signatures from scores before 3.5 differently on some special occasions.</span>
 <span id="L4050"><span class="lineNum">    4050</span>              :     // See https://musescore.org/node/308139.</span>
-<span id="L4051"><span class="lineNum">    4051</span> <span class="tlaGNC">         887 :     String version = s-&gt;score()-&gt;mscoreVersion();</span></span>
-<span id="L4052"><span class="lineNum">    4052</span> <span class="tlaGNC">         887 :     if (!version.isEmpty() &amp;&amp; (version &gt;= u&quot;3.0&quot;) &amp;&amp; (version &lt; u&quot;3.5&quot;)) {</span></span>
+<span id="L4051"><span class="lineNum">    4051</span> <span class="tlaGNC">         888 :     String version = s-&gt;score()-&gt;mscoreVersion();</span></span>
+<span id="L4052"><span class="lineNum">    4052</span> <span class="tlaGNC">         888 :     if (!version.isEmpty() &amp;&amp; (version &gt;= u&quot;3.0&quot;) &amp;&amp; (version &lt; u&quot;3.5&quot;)) {</span></span>
 <span id="L4053"><span class="lineNum">    4053</span> <span class="tlaGNC">          25 :         if ((timeSigType == TimeSigType::NORMAL) &amp;&amp; !numeratorString.isEmpty() &amp;&amp; denominatorString.isEmpty()) {</span></span>
 <span id="L4054"><span class="lineNum">    4054</span> <span class="tlaUNC tlaBgUNC">           0 :             if (numeratorString == String::number(sig.numerator())) {</span></span>
 <span id="L4055"><span class="lineNum">    4055</span> <span class="tlaUNC">           0 :                 numeratorString.clear();</span></span>
@@ -4117,11 +4117,11 @@
 <span id="L4059"><span class="lineNum">    4059</span>              :         }</span>
 <span id="L4060"><span class="lineNum">    4060</span>              :     }</span>
 <span id="L4061"><span class="lineNum">    4061</span>              : </span>
-<span id="L4062"><span class="lineNum">    4062</span> <span class="tlaGNC tlaBgGNC">         887 :     s-&gt;setSig(sig, timeSigType);</span></span>
-<span id="L4063"><span class="lineNum">    4063</span> <span class="tlaGNC">         887 :     s-&gt;setStretch(stretch);</span></span>
-<span id="L4064"><span class="lineNum">    4064</span> <span class="tlaGNC">         887 :     s-&gt;setNumeratorString(numeratorString);</span></span>
-<span id="L4065"><span class="lineNum">    4065</span> <span class="tlaGNC">         887 :     s-&gt;setDenominatorString(denominatorString);</span></span>
-<span id="L4066"><span class="lineNum">    4066</span> <span class="tlaGNC">         887 : }</span></span>
+<span id="L4062"><span class="lineNum">    4062</span> <span class="tlaGNC tlaBgGNC">         888 :     s-&gt;setSig(sig, timeSigType);</span></span>
+<span id="L4063"><span class="lineNum">    4063</span> <span class="tlaGNC">         888 :     s-&gt;setStretch(stretch);</span></span>
+<span id="L4064"><span class="lineNum">    4064</span> <span class="tlaGNC">         888 :     s-&gt;setNumeratorString(numeratorString);</span></span>
+<span id="L4065"><span class="lineNum">    4065</span> <span class="tlaGNC">         888 :     s-&gt;setDenominatorString(denominatorString);</span></span>
+<span id="L4066"><span class="lineNum">    4066</span> <span class="tlaGNC">         888 : }</span></span>
 <span id="L4067"><span class="lineNum">    4067</span>              : </span>
 <span id="L4068"><span class="lineNum">    4068</span> <span class="tlaGNC">          45 : void TRead::read(TremoloCompat&amp; t, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L4069"><span class="lineNum">    4069</span>              : {</span>
@@ -4240,11 +4240,11 @@
 <span id="L4182"><span class="lineNum">    4182</span> <span class="tlaGNC">         206 :     return readProperties(t, xml, ctx);</span></span>
 <span id="L4183"><span class="lineNum">    4183</span>              : }</span>
 <span id="L4184"><span class="lineNum">    4184</span>              : </span>
-<span id="L4185"><span class="lineNum">    4185</span> <span class="tlaGNC">        2416 : bool TRead::readProperties(TextBase* t, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
+<span id="L4185"><span class="lineNum">    4185</span> <span class="tlaGNC">        2418 : bool TRead::readProperties(TextBase* t, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>
 <span id="L4186"><span class="lineNum">    4186</span>              : {</span>
-<span id="L4187"><span class="lineNum">    4187</span> <span class="tlaGNC">        2416 :     const AsciiStringView tag(e.name());</span></span>
-<span id="L4188"><span class="lineNum">    4188</span> <span class="tlaGNC">       41051 :     for (Pid i : TextBasePropertyId) {</span></span>
-<span id="L4189"><span class="lineNum">    4189</span> <span class="tlaGNC">       38933 :         if (TRead::readProperty(t, tag, e, ctx, i)) {</span></span>
+<span id="L4187"><span class="lineNum">    4187</span> <span class="tlaGNC">        2418 :     const AsciiStringView tag(e.name());</span></span>
+<span id="L4188"><span class="lineNum">    4188</span> <span class="tlaGNC">       41089 :     for (Pid i : TextBasePropertyId) {</span></span>
+<span id="L4189"><span class="lineNum">    4189</span> <span class="tlaGNC">       38969 :         if (TRead::readProperty(t, tag, e, ctx, i)) {</span></span>
 <span id="L4190"><span class="lineNum">    4190</span> <span class="tlaGNC">         298 :             if (tag != &quot;align&quot;) {</span></span>
 <span id="L4191"><span class="lineNum">    4191</span> <span class="tlaGNC">         273 :                 return true;</span></span>
 <span id="L4192"><span class="lineNum">    4192</span>              :             }</span>
@@ -4258,11 +4258,11 @@
 <span id="L4200"><span class="lineNum">    4200</span>              :         }</span>
 <span id="L4201"><span class="lineNum">    4201</span>              :     }</span>
 <span id="L4202"><span class="lineNum">    4202</span>              : </span>
-<span id="L4203"><span class="lineNum">    4203</span> <span class="tlaGNC">        2118 :     if (tag == &quot;text&quot;) {</span></span>
-<span id="L4204"><span class="lineNum">    4204</span> <span class="tlaGNC">        1852 :         String str = e.readXml();</span></span>
-<span id="L4205"><span class="lineNum">    4205</span> <span class="tlaGNC">        1852 :         t-&gt;setXmlText(str);</span></span>
-<span id="L4206"><span class="lineNum">    4206</span> <span class="tlaGNC">        1852 :         t-&gt;checkCustomFormatting(str);</span></span>
-<span id="L4207"><span class="lineNum">    4207</span> <span class="tlaGNC">        2118 :     } else if (tag == &quot;bold&quot;) {</span></span>
+<span id="L4203"><span class="lineNum">    4203</span> <span class="tlaGNC">        2120 :     if (tag == &quot;text&quot;) {</span></span>
+<span id="L4204"><span class="lineNum">    4204</span> <span class="tlaGNC">        1854 :         String str = e.readXml();</span></span>
+<span id="L4205"><span class="lineNum">    4205</span> <span class="tlaGNC">        1854 :         t-&gt;setXmlText(str);</span></span>
+<span id="L4206"><span class="lineNum">    4206</span> <span class="tlaGNC">        1854 :         t-&gt;checkCustomFormatting(str);</span></span>
+<span id="L4207"><span class="lineNum">    4207</span> <span class="tlaGNC">        2120 :     } else if (tag == &quot;bold&quot;) {</span></span>
 <span id="L4208"><span class="lineNum">    4208</span> <span class="tlaGNC">           2 :         bool val = e.readInt();</span></span>
 <span id="L4209"><span class="lineNum">    4209</span> <span class="tlaGNC">           2 :         if (val) {</span></span>
 <span id="L4210"><span class="lineNum">    4210</span> <span class="tlaGNC">           1 :             t-&gt;setFontStyle(t-&gt;fontStyle() + FontStyle::Bold);</span></span>
@@ -4305,7 +4305,7 @@
 <span id="L4247"><span class="lineNum">    4247</span> <span class="tlaGNC tlaBgGNC">         263 :     } else if (!readItemProperties(t, e, ctx)) {</span></span>
 <span id="L4248"><span class="lineNum">    4248</span> <span class="tlaGNC">          96 :         return false;</span></span>
 <span id="L4249"><span class="lineNum">    4249</span>              :     }</span>
-<span id="L4250"><span class="lineNum">    4250</span> <span class="tlaGNC">        2022 :     return true;</span></span>
+<span id="L4250"><span class="lineNum">    4250</span> <span class="tlaGNC">        2024 :     return true;</span></span>
 <span id="L4251"><span class="lineNum">    4251</span>              : }</span>
 <span id="L4252"><span class="lineNum">    4252</span>              : </span>
 <span id="L4253"><span class="lineNum">    4253</span> <span class="tlaGNC">         309 : bool TRead::readProperties(TextLineBase* b, XmlReader&amp; e, ReadContext&amp; ctx)</span></span>

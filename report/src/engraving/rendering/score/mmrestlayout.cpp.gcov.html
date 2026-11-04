@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -779,17 +779,17 @@
 <span id="L721"><span class="lineNum">     721</span> <span class="tlaGNC">         486 :     return breakRest;</span></span>
 <span id="L722"><span class="lineNum">     722</span> <span class="tlaGNC">         494 : }</span></span>
 <span id="L723"><span class="lineNum">     723</span>              : </span>
-<span id="L724"><span class="lineNum">     724</span> <span class="tlaGNC">       30267 : void MMRestLayout::createMultiMeasureRestsIfNeed(Measure* firstMeasure, LayoutContext&amp; ctx)</span></span>
+<span id="L724"><span class="lineNum">     724</span> <span class="tlaGNC">       30491 : void MMRestLayout::createMultiMeasureRestsIfNeed(Measure* firstMeasure, LayoutContext&amp; ctx)</span></span>
 <span id="L725"><span class="lineNum">     725</span>              : {</span>
 <span id="L726"><span class="lineNum">     726</span>              :     LAYOUT_CALL() &lt;&lt; LAYOUT_ITEM_INFO(firstMeasure);</span>
 <span id="L727"><span class="lineNum">     727</span>              : </span>
-<span id="L728"><span class="lineNum">     728</span> <span class="tlaGNC">       30267 :     if (ctx.dom().nstaves() == 0) {</span></span>
+<span id="L728"><span class="lineNum">     728</span> <span class="tlaGNC">       30491 :     if (ctx.dom().nstaves() == 0) {</span></span>
 <span id="L729"><span class="lineNum">     729</span> <span class="tlaGNC">          96 :         return;</span></span>
 <span id="L730"><span class="lineNum">     730</span>              :     }</span>
 <span id="L731"><span class="lineNum">     731</span>              : </span>
-<span id="L732"><span class="lineNum">     732</span> <span class="tlaGNC">       30171 :     int mn = ctx.state().measureNumber();</span></span>
+<span id="L732"><span class="lineNum">     732</span> <span class="tlaGNC">       30395 :     int mn = ctx.state().measureNumber();</span></span>
 <span id="L733"><span class="lineNum">     733</span>              : </span>
-<span id="L734"><span class="lineNum">     734</span> <span class="tlaGNC">       30171 :     if (ctx.conf().styleB(Sid::createMultiMeasureRests)) {</span></span>
+<span id="L734"><span class="lineNum">     734</span> <span class="tlaGNC">       30395 :     if (ctx.conf().styleB(Sid::createMultiMeasureRests)) {</span></span>
 <span id="L735"><span class="lineNum">     735</span> <span class="tlaGNC">         546 :         Measure* measureToBeChecked = firstMeasure;</span></span>
 <span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC">         546 :         Measure* lastMeasure = measureToBeChecked;</span></span>
 <span id="L737"><span class="lineNum">     737</span> <span class="tlaGNC">         546 :         int n       = 0;</span></span>
@@ -824,7 +824,7 @@
 <span id="L766"><span class="lineNum">     766</span>              :             }</span>
 <span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">         383 :             ctx.mutState().setMeasureNumber(mn);</span></span>
 <span id="L768"><span class="lineNum">     768</span>              :         }</span>
-<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">       29625 :     } else if (firstMeasure-&gt;mmRest()) {</span></span>
+<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">       29849 :     } else if (firstMeasure-&gt;mmRest()) {</span></span>
 <span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">           5 :         removeMMRestElements(firstMeasure-&gt;mmRest(), ctx);</span></span>
 <span id="L771"><span class="lineNum">     771</span>              : </span>
 <span id="L772"><span class="lineNum">     772</span> <span class="tlaGNC">           5 :         if (firstMeasure-&gt;mmRestCount() &gt; 0) {</span></span>
@@ -847,19 +847,19 @@
 <span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC tlaBgGNC">           8 :     restoreMeasureElParents(firstMeasure, lastMeasure, mmrMeasure, ctx);</span></span>
 <span id="L790"><span class="lineNum">     790</span>              : }</span>
 <span id="L791"><span class="lineNum">     791</span>              : </span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">       31544 : void MMRestLayout::layoutMMRestRange(Measure* m, LayoutContext&amp; ctx)</span></span>
+<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">       31770 : void MMRestLayout::layoutMMRestRange(Measure* m, LayoutContext&amp; ctx)</span></span>
 <span id="L793"><span class="lineNum">     793</span>              : {</span>
-<span id="L794"><span class="lineNum">     794</span> <span class="tlaGNC">       31544 :     if (!m-&gt;isMMRest() || !ctx.conf().styleB(Sid::mmRestShowMeasureNumberRange)) {</span></span>
+<span id="L794"><span class="lineNum">     794</span> <span class="tlaGNC">       31770 :     if (!m-&gt;isMMRest() || !ctx.conf().styleB(Sid::mmRestShowMeasureNumberRange)) {</span></span>
 <span id="L795"><span class="lineNum">     795</span>              :         // Remove existing</span>
-<span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">       78067 :         for (unsigned staffIdx = 0; staffIdx &lt; m-&gt;mstaves().size(); ++staffIdx) {</span></span>
-<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">       46523 :             const MStaff* ms = m-&gt;mstaves().at(staffIdx);</span></span>
-<span id="L798"><span class="lineNum">     798</span> <span class="tlaGNC">       46523 :             MMRestRange* rr = ms-&gt;mmRangeText();</span></span>
-<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">       46523 :             if (rr) {</span></span>
+<span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">       78535 :         for (unsigned staffIdx = 0; staffIdx &lt; m-&gt;mstaves().size(); ++staffIdx) {</span></span>
+<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">       46765 :             const MStaff* ms = m-&gt;mstaves().at(staffIdx);</span></span>
+<span id="L798"><span class="lineNum">     798</span> <span class="tlaGNC">       46765 :             MMRestRange* rr = ms-&gt;mmRangeText();</span></span>
+<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">       46765 :             if (rr) {</span></span>
 <span id="L800"><span class="lineNum">     800</span> <span class="tlaUNC tlaBgUNC">           0 :                 ctx.mutDom().doUndoRemoveElement(rr);</span></span>
 <span id="L801"><span class="lineNum">     801</span>              :             }</span>
 <span id="L802"><span class="lineNum">     802</span>              :         }</span>
 <span id="L803"><span class="lineNum">     803</span>              : </span>
-<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC tlaBgGNC">       31544 :         return;</span></span>
+<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC tlaBgGNC">       31770 :         return;</span></span>
 <span id="L805"><span class="lineNum">     805</span>              :     }</span>
 <span id="L806"><span class="lineNum">     806</span>              : </span>
 <span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC tlaBgUNC">           0 :     String s;</span></span>

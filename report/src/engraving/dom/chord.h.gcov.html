@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -194,7 +194,7 @@
 <span id="L136"><span class="lineNum">     136</span>              : </span>
 <span id="L137"><span class="lineNum">     137</span>              : class Chord final : public ChordRest</span>
 <span id="L138"><span class="lineNum">     138</span>              : {</span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">       63108 :     OBJECT_ALLOCATOR(engraving, Chord)</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">       63880 :     OBJECT_ALLOCATOR(engraving, Chord)</span></span>
 <span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">        1852 :     DECLARE_CLASSOF(ElementType::CHORD)</span></span>
 <span id="L141"><span class="lineNum">     141</span>              : </span>
 <span id="L142"><span class="lineNum">     142</span>              : public:</span>
@@ -205,7 +205,7 @@
 <span id="L147"><span class="lineNum">     147</span>              :     void scanElements(std::function&lt;void(EngravingItem*)&gt; func) override;</span>
 <span id="L148"><span class="lineNum">     148</span>              : </span>
 <span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">        1950 :     Chord* clone() const override { return new Chord(*this, false); }</span></span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">         987 :     EngravingItem* linkedClone() override { return new Chord(*this, true); }</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">        1014 :     EngravingItem* linkedClone() override { return new Chord(*this, true); }</span></span>
 <span id="L151"><span class="lineNum">     151</span>              :     void undoUnlink() override;</span>
 <span id="L152"><span class="lineNum">     152</span>              : </span>
 <span id="L153"><span class="lineNum">     153</span>              :     void setScore(Score* s) override;</span>
@@ -217,26 +217,26 @@
 <span id="L159"><span class="lineNum">     159</span>              : </span>
 <span id="L160"><span class="lineNum">     160</span>              :     void setColor(const Color&amp; c) override;</span>
 <span id="L161"><span class="lineNum">     161</span>              :     void setStemDirection(DirectionV d);</span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">      131030 :     DirectionV stemDirection() const { return m_stemDirection; }</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">      136102 :     DirectionV stemDirection() const { return m_stemDirection; }</span></span>
 <span id="L163"><span class="lineNum">     163</span>              : </span>
 <span id="L164"><span class="lineNum">     164</span>              :     Chord* prev() const;</span>
 <span id="L165"><span class="lineNum">     165</span>              :     Chord* next() const;</span>
 <span id="L166"><span class="lineNum">     166</span>              : </span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">       82745 :     bool isUiItem() const { return m_isUiItem; }</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">       86530 :     bool isUiItem() const { return m_isUiItem; }</span></span>
 <span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC tlaBgUNC">           0 :     void setIsUiItem(bool val) { m_isUiItem = val; }</span></span>
 <span id="L169"><span class="lineNum">     169</span>              : </span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC tlaBgGNC">      252659 :     const std::vector&lt;LedgerLine*&gt;&amp; ledgerLines() const { return m_ledgerLines; }</span></span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">      304271 :     std::vector&lt;LedgerLine*&gt;&amp; ledgerLines() { return m_ledgerLines; }</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC tlaBgGNC">      257870 :     const std::vector&lt;LedgerLine*&gt;&amp; ledgerLines() const { return m_ledgerLines; }</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">      306474 :     std::vector&lt;LedgerLine*&gt;&amp; ledgerLines() { return m_ledgerLines; }</span></span>
 <span id="L172"><span class="lineNum">     172</span>              :     void resizeLedgerLinesTo(size_t newSize);</span>
 <span id="L173"><span class="lineNum">     173</span>              : </span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">      220793 :     double defaultStemLength() const { return m_defaultStemLength; }</span></span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">      139293 :     void setDefaultStemLength(double l) { m_defaultStemLength = l; }</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">      230763 :     double defaultStemLength() const { return m_defaultStemLength; }</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">      144079 :     void setDefaultStemLength(double l) { m_defaultStemLength = l; }</span></span>
 <span id="L176"><span class="lineNum">     176</span>              :     void setBeamExtension(double extension);</span>
 <span id="L177"><span class="lineNum">     177</span>              : </span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">     1391342 :     std::vector&lt;Note*&gt;&amp; notes() { return m_notes; }</span></span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">      572558 :     const std::vector&lt;Note*&gt;&amp; notes() const { return m_notes; }</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">     1416726 :     std::vector&lt;Note*&gt;&amp; notes() { return m_notes; }</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">      583635 :     const std::vector&lt;Note*&gt;&amp; notes() const { return m_notes; }</span></span>
 <span id="L180"><span class="lineNum">     180</span>              : </span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">      329562 :     const NoteParenthesisInfoList&amp; noteParentheses() const { return m_noteParens; }</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">      335855 :     const NoteParenthesisInfoList&amp; noteParentheses() const { return m_noteParens; }</span></span>
 <span id="L182"><span class="lineNum">     182</span>              :     const NoteParenthesisInfo* findNoteParenthesisInfo(const Note* note) const;</span>
 <span id="L183"><span class="lineNum">     183</span>              :     NoteParenthesisInfo* findNoteParenthesisInfo(const Parenthesis* paren);</span>
 <span id="L184"><span class="lineNum">     184</span>              :     void addNoteParenthesisInfo(NoteParenthesisInfo* noteParenInfo);</span>
@@ -258,11 +258,11 @@
 <span id="L200"><span class="lineNum">     200</span>              : </span>
 <span id="L201"><span class="lineNum">     201</span>              :     Note* findNote(int pitch, int skip = 0) const;</span>
 <span id="L202"><span class="lineNum">     202</span>              : </span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">     1971212 :     Stem* stem() const { return m_stem; }</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">      437389 :     Arpeggio* arpeggio() const { return m_arpeggio; }</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">     2034631 :     Stem* stem() const { return m_stem; }</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">      445783 :     Arpeggio* arpeggio() const { return m_arpeggio; }</span></span>
 <span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">          79 :     void setArpeggio(Arpeggio* a) { m_arpeggio = a; }</span></span>
 <span id="L206"><span class="lineNum">     206</span>              : </span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">      401168 :     Arpeggio* spanArpeggio() const { return m_spanArpeggio; }</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">      409616 :     Arpeggio* spanArpeggio() const { return m_spanArpeggio; }</span></span>
 <span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">         459 :     void setSpanArpeggio(Arpeggio* a) { m_spanArpeggio = a; }</span></span>
 <span id="L209"><span class="lineNum">     209</span>              :     void undoChangeSpanArpeggio(Arpeggio* a);</span>
 <span id="L210"><span class="lineNum">     210</span>              : </span>
@@ -274,11 +274,11 @@
 <span id="L216"><span class="lineNum">     216</span>              :     void setTremoloSingleChord(TremoloSingleChord* tr);</span>
 <span id="L217"><span class="lineNum">     217</span>              : </span>
 <span id="L218"><span class="lineNum">     218</span>              :     ChordLine* chordLine() const;</span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">       52399 :     bool endsNoteAnchoredLine() const { return m_endsNoteAnchoredLine; }</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">       53405 :     bool endsNoteAnchoredLine() const { return m_endsNoteAnchoredLine; }</span></span>
 <span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">         556 :     void setEndsNoteAnchoredLine(bool val) { m_endsNoteAnchoredLine = val; }</span></span>
 <span id="L221"><span class="lineNum">     221</span>              :     void updateEndsNoteAnchoredLine();</span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">      484835 :     StemSlash* stemSlash() const { return m_stemSlash; }</span></span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">      148076 :     bool showStemSlash() const { return m_showStemSlash; }</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">      497808 :     StemSlash* stemSlash() const { return m_stemSlash; }</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">      152825 :     bool showStemSlash() const { return m_showStemSlash; }</span></span>
 <span id="L224"><span class="lineNum">     224</span>              :     void setShowStemSlashInAdvance();</span>
 <span id="L225"><span class="lineNum">     225</span>              :     void requestShowStemSlash(bool show);</span>
 <span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">         723 :     void setShowStemSlash(bool show) { m_showStemSlash = show; }</span></span>
@@ -286,8 +286,8 @@
 <span id="L228"><span class="lineNum">     228</span>              :     void setSlash(bool flag, bool stemless);</span>
 <span id="L229"><span class="lineNum">     229</span>              :     void removeMarkings(bool keepTremolo = false) override;</span>
 <span id="L230"><span class="lineNum">     230</span>              : </span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">       87397 :     const std::vector&lt;Chord*&gt;&amp; graceNotes() const { return m_graceNotes; }</span></span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">     1272114 :     std::vector&lt;Chord*&gt;&amp; graceNotes() { return m_graceNotes; }</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">       88462 :     const std::vector&lt;Chord*&gt;&amp; graceNotes() const { return m_graceNotes; }</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">     1297778 :     std::vector&lt;Chord*&gt;&amp; graceNotes() { return m_graceNotes; }</span></span>
 <span id="L233"><span class="lineNum">     233</span>              :     std::vector&lt;Chord*&gt; allGraceChordsOfMainChord();</span>
 <span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">           3 :     void removeAllGraceNotes() { m_graceNotes.clear(); }</span></span>
 <span id="L235"><span class="lineNum">     235</span>              : </span>
@@ -300,13 +300,13 @@
 <span id="L242"><span class="lineNum">     242</span>              :     Chord* graceNoteAt(size_t idx) const;</span>
 <span id="L243"><span class="lineNum">     243</span>              : </span>
 <span id="L244"><span class="lineNum">     244</span>              :     int line(bool up) const { return up ? upLine() : downLine(); }</span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">       81628 :     int line() const { return ldata()-&gt;up ? upLine() : downLine(); }</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">       86634 :     int line() const { return ldata()-&gt;up ? upLine() : downLine(); }</span></span>
 <span id="L246"><span class="lineNum">     246</span>              :     int upLine() const;</span>
 <span id="L247"><span class="lineNum">     247</span>              :     int downLine() const;</span>
 <span id="L248"><span class="lineNum">     248</span>              :     double rightEdge() const override;</span>
 <span id="L249"><span class="lineNum">     249</span>              : </span>
 <span id="L250"><span class="lineNum">     250</span>              :     bool underBeam() const;</span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">     1538938 :     Hook* hook() const { return m_hook; }</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">     1582532 :     Hook* hook() const { return m_hook; }</span></span>
 <span id="L252"><span class="lineNum">     252</span> <span class="tlaUNC tlaBgUNC">           0 :     void setHook(Hook* h) { m_hook = h; }</span></span>
 <span id="L253"><span class="lineNum">     253</span>              : </span>
 <span id="L254"><span class="lineNum">     254</span>              :     void add(EngravingItem*) override;</span>
@@ -317,44 +317,44 @@
 <span id="L259"><span class="lineNum">     259</span>              :     PointF pagePos() const override;        ///&lt; position in page coordinates</span>
 <span id="L260"><span class="lineNum">     260</span>              :     void cmdUpdateNotes(AccidentalState*, staff_idx_t staffIdx);</span>
 <span id="L261"><span class="lineNum">     261</span>              : </span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC tlaBgGNC">     1648474 :     NoteType noteType() const { return m_noteType; }</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC tlaBgGNC">     1670032 :     NoteType noteType() const { return m_noteType; }</span></span>
 <span id="L263"><span class="lineNum">     263</span>              :     void setNoteType(NoteType t);</span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">      705908 :     bool isGrace() const { return m_noteType != NoteType::NORMAL; }</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">      733069 :     bool isGrace() const { return m_noteType != NoteType::NORMAL; }</span></span>
 <span id="L265"><span class="lineNum">     265</span>              :     void toGraceAfter();</span>
 <span id="L266"><span class="lineNum">     266</span>              : </span>
 <span id="L267"><span class="lineNum">     267</span>              :     bool isPreBendOrGraceBendStart() const;</span>
 <span id="L268"><span class="lineNum">     268</span>              :     bool isGraceBendEnd() const;</span>
 <span id="L269"><span class="lineNum">     269</span>              : </span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">       18888 :     bool isTrillCueNote() const { return m_isTrillCueNote; }</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">       18999 :     bool isTrillCueNote() const { return m_isTrillCueNote; }</span></span>
 <span id="L271"><span class="lineNum">     271</span>              :     void setIsTrillCueNote(bool v);</span>
 <span id="L272"><span class="lineNum">     272</span>              : </span>
 <span id="L273"><span class="lineNum">     273</span>              :     void setTrack(track_idx_t val) override;</span>
 <span id="L274"><span class="lineNum">     274</span>              : </span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        1917 :     double dotPosX() const { return m_dotPosX; }</span></span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">       49744 :     void setDotPosX(double x) { m_dotPosX = x; }</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        1943 :     double dotPosX() const { return m_dotPosX; }</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">       50836 :     void setDotPosX(double x) { m_dotPosX = x; }</span></span>
 <span id="L277"><span class="lineNum">     277</span>              : </span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">       24453 :     bool noStem() const { return m_noStem; }</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">       24416 :     bool noStem() const { return m_noStem; }</span></span>
 <span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        7085 :     void setNoStem(bool val) { m_noStem = val; }</span></span>
 <span id="L280"><span class="lineNum">     280</span>              : </span>
 <span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">         358 :     double spaceLw() { return m_spaceLw; }</span></span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       49670 :     void setSpaceLw(double lw) { m_spaceLw = lw; }</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       50762 :     void setSpaceLw(double lw) { m_spaceLw = lw; }</span></span>
 <span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">         204 :     double spaceRw() { return m_spaceRw; }</span></span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">       49659 :     void setSpaceRw(double rw) { m_spaceRw = rw; }</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">       50751 :     void setSpaceRw(double rw) { m_spaceRw = rw; }</span></span>
 <span id="L285"><span class="lineNum">     285</span>              : </span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">      218064 :     AutoOnOff combineVoice() const { return m_combineVoice; }</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">      222395 :     AutoOnOff combineVoice() const { return m_combineVoice; }</span></span>
 <span id="L287"><span class="lineNum">     287</span> <span class="tlaUNC tlaBgUNC">           0 :     void setCombineVoice(AutoOnOff v) { m_combineVoice = v; }</span></span>
 <span id="L288"><span class="lineNum">     288</span>              :     bool shouldCombineVoice() const;</span>
 <span id="L289"><span class="lineNum">     289</span>              :     static bool combineVoice(const Chord* chord1, const Chord* chord2);</span>
 <span id="L290"><span class="lineNum">     290</span>              : </span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC tlaBgGNC">       23958 :     PlayEventType playEventType() const { return m_playEventType; }</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC tlaBgGNC">       23921 :     PlayEventType playEventType() const { return m_playEventType; }</span></span>
 <span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">          92 :     void setPlayEventType(PlayEventType v) { m_playEventType = v; }</span></span>
 <span id="L293"><span class="lineNum">     293</span>              :     std::vector&lt;NoteEventList&gt; getNoteEventLists();</span>
 <span id="L294"><span class="lineNum">     294</span>              :     void setNoteEventLists(std::vector&lt;NoteEventList&gt;&amp; nel);</span>
 <span id="L295"><span class="lineNum">     295</span>              : </span>
 <span id="L296"><span class="lineNum">     296</span>              :     TremoloChordType tremoloChordType() const;</span>
 <span id="L297"><span class="lineNum">     297</span>              : </span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">      325430 :     std::vector&lt;Articulation*&gt;&amp; articulations() { return m_articulations; }</span></span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">      432629 :     const std::vector&lt;Articulation*&gt;&amp; articulations() const { return m_articulations; }</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">      330604 :     std::vector&lt;Articulation*&gt;&amp; articulations() { return m_articulations; }</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">      440979 :     const std::vector&lt;Articulation*&gt;&amp; articulations() const { return m_articulations; }</span></span>
 <span id="L300"><span class="lineNum">     300</span>              :     std::set&lt;SymId&gt; articulationSymbolIds() const;</span>
 <span id="L301"><span class="lineNum">     301</span>              :     Articulation* hasArticulation(const Articulation*);</span>
 <span id="L302"><span class="lineNum">     302</span>              :     Tapping* tapping() const;</span>
@@ -399,14 +399,14 @@
 <span id="L341"><span class="lineNum">     341</span>              : </span>
 <span id="L342"><span class="lineNum">     342</span>              :     void styleChanged() override;</span>
 <span id="L343"><span class="lineNum">     343</span>              : </span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">      349334 :     bool allowKerningAbove() const { return m_allowKerningAbove; }</span></span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">      345613 :     bool allowKerningBelow() const { return m_allowKerningBelow; }</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">      349954 :     bool allowKerningAbove() const { return m_allowKerningAbove; }</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">      346233 :     bool allowKerningBelow() const { return m_allowKerningBelow; }</span></span>
 <span id="L346"><span class="lineNum">     346</span>              :     void computeKerningExceptions();</span>
 <span id="L347"><span class="lineNum">     347</span>              : </span>
 <span id="L348"><span class="lineNum">     348</span>              :     Ornament* findOrnament(bool forPlayback = false) const;</span>
 <span id="L349"><span class="lineNum">     349</span>              : </span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">       96299 :     const std::set&lt;Spanner*&gt;&amp; startingSpanners() const { return m_startingSpanners; }</span></span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">       50659 :     const std::set&lt;Spanner*&gt;&amp; endingSpanners() const { return m_endingSpanners; }</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">       98329 :     const std::set&lt;Spanner*&gt;&amp; startingSpanners() const { return m_startingSpanners; }</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">       51665 :     const std::set&lt;Spanner*&gt;&amp; endingSpanners() const { return m_endingSpanners; }</span></span>
 <span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">        3870 :     void addStartingSpanner(Spanner* spanner) { m_startingSpanners.insert(spanner); }</span></span>
 <span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">        3203 :     void removeStartingSpanner(Spanner* spanner) { m_startingSpanners.erase(spanner); }</span></span>
 <span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">        4201 :     void addEndingSpanner(Spanner* spanner) { m_endingSpanners.insert(spanner); }</span></span>
@@ -426,16 +426,16 @@
 <span id="L368"><span class="lineNum">     368</span>              :         bool startDown = false;</span>
 <span id="L369"><span class="lineNum">     369</span>              :         bool endUp = false;</span>
 <span id="L370"><span class="lineNum">     370</span>              :         bool endDown = false;</span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">       50659 :         void reset()</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">       51665 :         void reset()</span></span>
 <span id="L372"><span class="lineNum">     372</span>              :         {</span>
-<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">       50659 :             startUp = false;</span></span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">       50659 :             startDown = false;</span></span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">       50659 :             endUp = false;</span></span>
-<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">       50659 :             endDown = false;</span></span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">       50659 :         }</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">       51665 :             startUp = false;</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">       51665 :             startDown = false;</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">       51665 :             endUp = false;</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">       51665 :             endDown = false;</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">       51665 :         }</span></span>
 <span id="L378"><span class="lineNum">     378</span>              :     };</span>
 <span id="L379"><span class="lineNum">     379</span>              : </span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">       52531 :     StartEndSlurs&amp; startEndSlurs() { return m_startEndSlurs; }</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">       53537 :     StartEndSlurs&amp; startEndSlurs() { return m_startEndSlurs; }</span></span>
 <span id="L381"><span class="lineNum">     381</span>              : </span>
 <span id="L382"><span class="lineNum">     382</span>              :     bool allNotesTiedToNext() const;</span>
 <span id="L383"><span class="lineNum">     383</span>              :     bool allElementsInvisible() const;</span>

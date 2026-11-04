@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -130,15 +130,15 @@
 <span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">        3056 :     m_alignOffsetOctaves = style.styleB(Sid::alignOffsetOctaveAccidentals);</span></span>
 <span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        3056 : }</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       87097 : void AccidentalsLayout::layoutAccidentals(const std::vector&lt;Chord*&gt;&amp; chords, LayoutContext&amp; ctx)</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       88463 : void AccidentalsLayout::layoutAccidentals(const std::vector&lt;Chord*&gt;&amp; chords, LayoutContext&amp; ctx)</span></span>
 <span id="L76"><span class="lineNum">      76</span>              : {</span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       87097 :     std::vector&lt;Accidental*&gt; allAccidentals;</span></span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">       87097 :     std::vector&lt;Accidental*&gt; redundantAccidentals;</span></span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">       87097 :     std::vector&lt;Accidental*&gt; invisibleAccidentals;</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       88463 :     std::vector&lt;Accidental*&gt; allAccidentals;</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">       88463 :     std::vector&lt;Accidental*&gt; redundantAccidentals;</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">       88463 :     std::vector&lt;Accidental*&gt; invisibleAccidentals;</span></span>
 <span id="L80"><span class="lineNum">      80</span>              : </span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">       87097 :     collectAccidentals(chords, allAccidentals, redundantAccidentals, invisibleAccidentals);</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">       88463 :     collectAccidentals(chords, allAccidentals, redundantAccidentals, invisibleAccidentals);</span></span>
 <span id="L82"><span class="lineNum">      82</span>              : </span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">       87105 :     for (Accidental* acc : invisibleAccidentals) {</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">       88471 :     for (Accidental* acc : invisibleAccidentals) {</span></span>
 <span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">           8 :         acc-&gt;computeMag();</span></span>
 <span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">           8 :         TLayout::layoutAccidental(acc, acc-&gt;mutldata(), ctx.conf());</span></span>
 <span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">           8 :         double x = -acc-&gt;ldata()-&gt;bbox().width();</span></span>
@@ -146,8 +146,8 @@
 <span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">           8 :         acc-&gt;setPos(x, 0.0);</span></span>
 <span id="L89"><span class="lineNum">      89</span>              :     }</span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">       87097 :     if (allAccidentals.empty()) {</span></span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">       84041 :         return;</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">       88463 :     if (allAccidentals.empty()) {</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">       85407 :         return;</span></span>
 <span id="L93"><span class="lineNum">      93</span>              :     }</span>
 <span id="L94"><span class="lineNum">      94</span>              : </span>
 <span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">        3056 :     for (Accidental* acc : redundantAccidentals) {</span></span>
@@ -163,16 +163,16 @@
 <span id="L105"><span class="lineNum">     105</span>              : </span>
 <span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">        3056 :     AccidentalsLayoutContext accidentalsLayoutContext(std::move(allAccidentals), chords);</span></span>
 <span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">        3056 :     doAccidentalPlacement(accidentalsLayoutContext);</span></span>
-<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">      255179 : }</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">      259277 : }</span></span>
 <span id="L109"><span class="lineNum">     109</span>              : </span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">       87097 : void AccidentalsLayout::collectAccidentals(const std::vector&lt;Chord*&gt; chords, std::vector&lt;Accidental*&gt;&amp; allAccidentals,</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">       88463 : void AccidentalsLayout::collectAccidentals(const std::vector&lt;Chord*&gt; chords, std::vector&lt;Accidental*&gt;&amp; allAccidentals,</span></span>
 <span id="L111"><span class="lineNum">     111</span>              :                                            std::vector&lt;Accidental*&gt;&amp; redundantAccidentals, std::vector&lt;Accidental*&gt;&amp; invisibleAccidentals)</span>
 <span id="L112"><span class="lineNum">     112</span>              : {</span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">      135763 :     for (const Chord* chord : chords) {</span></span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">      106170 :         for (const Note* note : chord-&gt;notes()) {</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       57504 :             Accidental* acc = note-&gt;accidental();</span></span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">       57504 :             if (!acc) {</span></span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">       53476 :                 continue;</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">      138221 :     for (const Chord* chord : chords) {</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">      108354 :         for (const Note* note : chord-&gt;notes()) {</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       58596 :             Accidental* acc = note-&gt;accidental();</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">       58596 :             if (!acc) {</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">       54568 :                 continue;</span></span>
 <span id="L118"><span class="lineNum">     118</span>              :             }</span>
 <span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">        4028 :             if (accidentalIsRedundant(acc, allAccidentals)) {</span></span>
 <span id="L120"><span class="lineNum">     120</span> <span class="tlaUNC tlaBgUNC">           0 :                 redundantAccidentals.push_back(acc);</span></span>
@@ -183,7 +183,7 @@
 <span id="L125"><span class="lineNum">     125</span>              :             }</span>
 <span id="L126"><span class="lineNum">     126</span>              :         }</span>
 <span id="L127"><span class="lineNum">     127</span>              :     }</span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       87097 : }</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       88463 : }</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : </span>
 <span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">        4028 : bool AccidentalsLayout::accidentalIsRedundant(const Accidental* acc, const std::vector&lt;Accidental*&gt;&amp; allAccidentals)</span></span>
 <span id="L131"><span class="lineNum">     131</span>              : {</span>
@@ -1032,7 +1032,7 @@
 <span id="L974"><span class="lineNum">     974</span>              : </span>
 <span id="L975"><span class="lineNum">     975</span>              :     // Sort vertical sets by column</span>
 <span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">         286 :     std::sort(vertSets.begin(), vertSets.end(), [&amp;](auto&amp; set1, auto&amp; set2) {</span></span>
-<span id="L977"><span class="lineNum">     977</span> <span class="tlaGNC">          41 :         return set1.front()-&gt;ldata()-&gt;column &lt; set2.front()-&gt;ldata()-&gt;column;</span></span>
+<span id="L977"><span class="lineNum">     977</span> <span class="tlaGNC">          42 :         return set1.front()-&gt;ldata()-&gt;column &lt; set2.front()-&gt;ldata()-&gt;column;</span></span>
 <span id="L978"><span class="lineNum">     978</span>              :     });</span>
 <span id="L979"><span class="lineNum">     979</span>              : </span>
 <span id="L980"><span class="lineNum">     980</span> <span class="tlaGNC">         286 :     alignVerticalSets(vertSets, ctx);</span></span>

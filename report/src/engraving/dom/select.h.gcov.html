@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -168,26 +168,26 @@
 <span id="L110"><span class="lineNum">     110</span> <span class="tlaUNC tlaBgUNC">           0 :     Selection() { m_score = 0; m_state = SelState::NONE; }</span></span>
 <span id="L111"><span class="lineNum">     111</span>              :     Selection(Score*);</span>
 <span id="L112"><span class="lineNum">     112</span> <span class="tlaUNC">           0 :     Score* score() const { return m_score; }</span></span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC tlaBgGNC">        8997 :     SelState state() const { return m_state; }</span></span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">         280 :     bool isNone() const { return m_state == SelState::NONE; }</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        9539 :     bool isRange() const { return m_state == SelState::RANGE; }</span></span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">        1578 :     bool isList() const { return m_state == SelState::LIST; }</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC tlaBgGNC">        9116 :     SelState state() const { return m_state; }</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">         284 :     bool isNone() const { return m_state == SelState::NONE; }</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        9733 :     bool isRange() const { return m_state == SelState::RANGE; }</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">        1605 :     bool isList() const { return m_state == SelState::LIST; }</span></span>
 <span id="L117"><span class="lineNum">     117</span>              :     void setState(SelState s);</span>
 <span id="L118"><span class="lineNum">     118</span>              : </span>
 <span id="L119"><span class="lineNum">     119</span>              :     //! NOTE If locked, the selected items should not be changed.</span>
 <span id="L120"><span class="lineNum">     120</span>              :     void lock(const String&amp; reason) { m_lockReason = reason; }</span>
 <span id="L121"><span class="lineNum">     121</span>              :     void unlock(const String&amp; /*reason*/) { m_lockReason.clear(); }    // reason for clarity</span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">       48747 :     bool isLocked() const { return !m_lockReason.isEmpty(); }</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">       49276 :     bool isLocked() const { return !m_lockReason.isEmpty(); }</span></span>
 <span id="L123"><span class="lineNum">     123</span> <span class="tlaUNC tlaBgUNC">           0 :     const String&amp; lockReason() const { return m_lockReason; }</span></span>
 <span id="L124"><span class="lineNum">     124</span>              : </span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC tlaBgGNC">        5247 :     const std::vector&lt;EngravingItem*&gt;&amp; elements() const { return m_el; }</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC tlaBgGNC">        5382 :     const std::vector&lt;EngravingItem*&gt;&amp; elements() const { return m_el; }</span></span>
 <span id="L126"><span class="lineNum">     126</span>              :     std::vector&lt;EngravingItem*&gt; elements(ElementType type) const;</span>
 <span id="L127"><span class="lineNum">     127</span>              :     std::vector&lt;Note*&gt; noteList(track_idx_t track = muse::nidx) const;</span>
 <span id="L128"><span class="lineNum">     128</span>              : </span>
 <span id="L129"><span class="lineNum">     129</span>              :     const std::list&lt;EngravingItem*&gt; uniqueElements() const;</span>
 <span id="L130"><span class="lineNum">     130</span>              :     std::vector&lt;Note*&gt; uniqueNotes(track_idx_t track = muse::nidx, bool tied = true) const;</span>
 <span id="L131"><span class="lineNum">     131</span>              : </span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">         616 :     bool isSingle() const { return (m_state == SelState::LIST) &amp;&amp; (m_el.size() == 1); }</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">         634 :     bool isSingle() const { return (m_state == SelState::LIST) &amp;&amp; (m_el.size() == 1); }</span></span>
 <span id="L133"><span class="lineNum">     133</span>              :     bool elementsSelected(const ElementTypeSet&amp; types) const;</span>
 <span id="L134"><span class="lineNum">     134</span>              : </span>
 <span id="L135"><span class="lineNum">     135</span>              :     void add(EngravingItem*);</span>
@@ -211,12 +211,12 @@
 <span id="L153"><span class="lineNum">     153</span>              :     muse::ByteArray mimeData() const;</span>
 <span id="L154"><span class="lineNum">     154</span>              : </span>
 <span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">         118 :     Segment* startSegment() const { return m_startSegment; }</span></span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         373 :     Segment* endSegment() const { return m_endSegment; }</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         381 :     Segment* endSegment() const { return m_endSegment; }</span></span>
 <span id="L157"><span class="lineNum">     157</span>              :     void setStartSegment(Segment* s);</span>
 <span id="L158"><span class="lineNum">     158</span>              :     void setEndSegment(Segment* s);</span>
 <span id="L159"><span class="lineNum">     159</span>              : </span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">         144 :     Box* startBox() const { return m_startBox; }</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">         144 :     Box* endBox() const { return m_endBox; }</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">         166 :     Box* startBox() const { return m_startBox; }</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">         166 :     Box* endBox() const { return m_endBox; }</span></span>
 <span id="L162"><span class="lineNum">     162</span>              : </span>
 <span id="L163"><span class="lineNum">     163</span>              :     void setRange(Segment* startSegment, Segment* endSegment, staff_idx_t staffStart, staff_idx_t staffEnd, Box* startBox = nullptr,</span>
 <span id="L164"><span class="lineNum">     164</span>              :                   Box* endBox = nullptr);</span>
@@ -224,19 +224,19 @@
 <span id="L166"><span class="lineNum">     166</span>              :                        Box* endBox = nullptr);</span>
 <span id="L167"><span class="lineNum">     167</span>              : </span>
 <span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC tlaBgUNC">           0 :     Segment* activeSegment() const { return m_activeSegment; }</span></span>
-<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC tlaBgGNC">        1449 :     void setActiveSegment(Segment* s) { m_activeSegment = s; }</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC tlaBgGNC">        1464 :     void setActiveSegment(Segment* s) { m_activeSegment = s; }</span></span>
 <span id="L170"><span class="lineNum">     170</span>              :     ChordRest* activeCR() const;</span>
 <span id="L171"><span class="lineNum">     171</span>              :     bool isStartActive() const;</span>
 <span id="L172"><span class="lineNum">     172</span>              :     bool isEndActive() const;</span>
 <span id="L173"><span class="lineNum">     173</span>              :     ChordRest* currentCR() const;</span>
 <span id="L174"><span class="lineNum">     174</span>              :     Fraction tickStart() const;</span>
 <span id="L175"><span class="lineNum">     175</span>              :     Fraction tickEnd() const;</span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">         547 :     staff_idx_t staffStart() const { return m_staffStart; }</span></span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">         592 :     staff_idx_t staffEnd() const { return m_staffEnd; }</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">         569 :     staff_idx_t staffStart() const { return m_staffStart; }</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">         614 :     staff_idx_t staffEnd() const { return m_staffEnd; }</span></span>
 <span id="L178"><span class="lineNum">     178</span> <span class="tlaUNC tlaBgUNC">           0 :     track_idx_t activeTrack() const { return m_activeTrack; }</span></span>
 <span id="L179"><span class="lineNum">     179</span> <span class="tlaUNC">           0 :     void setStaffStart(int v) { m_staffStart = v; }</span></span>
 <span id="L180"><span class="lineNum">     180</span> <span class="tlaUNC">           0 :     void setStaffEnd(int v) { m_staffEnd = v; }</span></span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC tlaBgGNC">        1837 :     void setActiveTrack(track_idx_t v) { m_activeTrack = v; }</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC tlaBgGNC">        1864 :     void setActiveTrack(track_idx_t v) { m_activeTrack = v; }</span></span>
 <span id="L182"><span class="lineNum">     182</span>              :     bool canCopy() const;</span>
 <span id="L183"><span class="lineNum">     183</span>              :     void updateSelectedElements();</span>
 <span id="L184"><span class="lineNum">     184</span>              :     bool measureBaseRange(MeasureBase** mb1, MeasureBase** mb2) const;</span>
@@ -249,9 +249,9 @@
 <span id="L191"><span class="lineNum">     191</span>              :     muse::ByteArray staffMimeData() const;</span>
 <span id="L192"><span class="lineNum">     192</span>              :     muse::ByteArray symbolListMimeData() const;</span>
 <span id="L193"><span class="lineNum">     193</span>              :     SelectionFilter selectionFilter() const;</span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">        7947 :     bool canSelect(const EngravingItem* e) const { return selectionFilter().canSelect(e); }</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">        8021 :     bool canSelect(const EngravingItem* e) const { return selectionFilter().canSelect(e); }</span></span>
 <span id="L195"><span class="lineNum">     195</span>              :     bool canSelectNoteIdx(size_t noteIdx, size_t totalNotesInChord, bool rangeContainsMultiNoteChords) const;</span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">       23618 :     bool canSelectVoice(track_idx_t track) const { return selectionFilter().canSelectVoice(track); }</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">       23867 :     bool canSelectVoice(track_idx_t track) const { return selectionFilter().canSelectVoice(track); }</span></span>
 <span id="L197"><span class="lineNum">     197</span>              :     void appendFiltered(EngravingItem* e);</span>
 <span id="L198"><span class="lineNum">     198</span>              :     void appendFiltered(const std::unordered_set&lt;EngravingItem*&gt;&amp; elems);</span>
 <span id="L199"><span class="lineNum">     199</span>              :     void appendChordRest(ChordRest* cr);</span>

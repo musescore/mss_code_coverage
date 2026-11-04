@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -116,13 +116,13 @@
 <span id="L58"><span class="lineNum">      58</span>              :         ElementType type = ElementType::MoveToElement;</span>
 <span id="L59"><span class="lineNum">      59</span>              : </span>
 <span id="L60"><span class="lineNum">      60</span>              :         Element() {}</span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC tlaBgGNC">      105040 :         Element(double x, double y, ElementType type)</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">      105040 :             : x(x), y(y), type(type) {}</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC tlaBgGNC">      105222 :         Element(double x, double y, ElementType type)</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">      105222 :             : x(x), y(y), type(type) {}</span></span>
 <span id="L63"><span class="lineNum">      63</span>              :         bool isMoveTo() const { return type == ElementType::MoveToElement; }</span>
 <span id="L64"><span class="lineNum">      64</span>              :         bool isLineTo() const { return type == ElementType::LineToElement; }</span>
 <span id="L65"><span class="lineNum">      65</span>              :         bool isCurveTo() const { return type == ElementType::CurveToElement; }</span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       85902 :         operator PointF() const {</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">       85902 :             return PointF(x, y);</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       85954 :         operator PointF() const {</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">       85954 :             return PointF(x, y);</span></span>
 <span id="L68"><span class="lineNum">      68</span>              :         }</span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaUNC tlaBgUNC">           0 :         bool operator==(const Element&amp; e) const</span></span>
 <span id="L70"><span class="lineNum">      70</span>              :         {</span>
@@ -132,7 +132,7 @@
 <span id="L74"><span class="lineNum">      74</span>              :         inline bool operator!=(const Element&amp; e) const { return !operator==(e); }</span>
 <span id="L75"><span class="lineNum">      75</span>              :     };</span>
 <span id="L76"><span class="lineNum">      76</span>              : </span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC tlaBgGNC">        6253 :     PainterPath() = default;</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC tlaBgGNC">        6254 :     PainterPath() = default;</span></span>
 <span id="L78"><span class="lineNum">      78</span>              : </span>
 <span id="L79"><span class="lineNum">      79</span> <span class="tlaUNC tlaBgUNC">           0 :     bool operator ==(const PainterPath&amp; other) const { return other.m_elements == m_elements; }</span></span>
 <span id="L80"><span class="lineNum">      80</span>              :     bool operator !=(const PainterPath&amp; other) const { return !operator ==(other); }</span>
@@ -197,15 +197,15 @@
 <span id="L139"><span class="lineNum">     139</span>              : </span>
 <span id="L140"><span class="lineNum">     140</span>              :     void computeBoundingRect() const;</span>
 <span id="L141"><span class="lineNum">     141</span>              : </span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC tlaBgGNC">       31326 :     inline void maybeMoveTo()</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC tlaBgGNC">       31378 :     inline void maybeMoveTo()</span></span>
 <span id="L143"><span class="lineNum">     143</span>              :     {</span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">       31326 :         if (m_requireMoveTo) {</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">       31378 :         if (m_requireMoveTo) {</span></span>
 <span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC tlaBgUNC">           0 :             Element e = m_elements.back();</span></span>
 <span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC">           0 :             e.type = ElementType::MoveToElement;</span></span>
 <span id="L147"><span class="lineNum">     147</span> <span class="tlaUNC">           0 :             m_elements.push_back(e);</span></span>
 <span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC">           0 :             m_requireMoveTo = false;</span></span>
 <span id="L149"><span class="lineNum">     149</span>              :         }</span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC tlaBgGNC">       31326 :     }</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC tlaBgGNC">       31378 :     }</span></span>
 <span id="L151"><span class="lineNum">     151</span>              : </span>
 <span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">           2 :     inline bool isClosed() const</span></span>
 <span id="L153"><span class="lineNum">     153</span>              :     {</span>
@@ -214,9 +214,9 @@
 <span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">           2 :         return first.x == last.x &amp;&amp; first.y == last.y;</span></span>
 <span id="L157"><span class="lineNum">     157</span>              :     }</span>
 <span id="L158"><span class="lineNum">     158</span>              : </span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">      199886 :     static inline bool isValidCoord(double c)</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">      200250 :     static inline bool isValidCoord(double c)</span></span>
 <span id="L160"><span class="lineNum">     160</span>              :     {</span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">      199886 :         return std::isfinite(c) &amp;&amp; std::fabs(c) &lt; 1e128;</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">      200250 :         return std::isfinite(c) &amp;&amp; std::fabs(c) &lt; 1e128;</span></span>
 <span id="L162"><span class="lineNum">     162</span>              :     }</span>
 <span id="L163"><span class="lineNum">     163</span>              : </span>
 <span id="L164"><span class="lineNum">     164</span>              :     static bool hasValidCoords(const PointF&amp; p);</span>

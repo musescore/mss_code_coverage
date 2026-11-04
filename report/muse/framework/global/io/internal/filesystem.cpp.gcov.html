@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -104,26 +104,26 @@
 <span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">          46 :     m_openStreams.clear();</span></span>
 <span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">          92 : }</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : </span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">       15419 : Ret FileSystem::exists(const io::path_t&amp; path) const</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">       15540 : Ret FileSystem::exists(const io::path_t&amp; path) const</span></span>
 <span id="L50"><span class="lineNum">      50</span>              : {</span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">       15419 :     QFileInfo fileInfo(path.toQString());</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">       15419 :     if (!fileInfo.exists()) {</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        2533 :         return make_ret(Err::FSNotExist);</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">       15540 :     QFileInfo fileInfo(path.toQString());</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">       15540 :     if (!fileInfo.exists()) {</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        2574 :         return make_ret(Err::FSNotExist);</span></span>
 <span id="L54"><span class="lineNum">      54</span>              :     }</span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       12886 :     return make_ret(Err::NoError);</span></span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       15419 : }</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       12966 :     return make_ret(Err::NoError);</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       15540 : }</span></span>
 <span id="L58"><span class="lineNum">      58</span>              : </span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">        1159 : Ret FileSystem::remove(const io::path_t&amp; path_, bool onlyIfEmpty)</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">        1157 : Ret FileSystem::remove(const io::path_t&amp; path_, bool onlyIfEmpty)</span></span>
 <span id="L60"><span class="lineNum">      60</span>              : {</span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        1159 :     QString path = path_.toQString();</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">        1159 :     QFileInfo fileInfo(path);</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">        1159 :     if (fileInfo.exists()) {</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        1157 :     QString path = path_.toQString();</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">        1157 :     QFileInfo fileInfo(path);</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">        1157 :     if (fileInfo.exists()) {</span></span>
 <span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          43 :         return fileInfo.isDir() ? removeDir(path, onlyIfEmpty) : removeFile(path);</span></span>
 <span id="L65"><span class="lineNum">      65</span>              :     }</span>
 <span id="L66"><span class="lineNum">      66</span>              : </span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">        1116 :     return make_ret(Err::NoError);</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        1159 : }</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">        1114 :     return make_ret(Err::NoError);</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        1157 : }</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
 <span id="L70"><span class="lineNum">      70</span> <span class="tlaUNC tlaBgUNC">           0 : Ret FileSystem::clear(const io::path_t&amp; path)</span></span>
 <span id="L71"><span class="lineNum">      71</span>              : {</span>
@@ -207,84 +207,84 @@
 <span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 :     return make_ret(Ret::Code::Ok);</span></span>
 <span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L151"><span class="lineNum">     151</span>              : </span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC tlaBgGNC">        3098 : RetVal&lt;ByteArray&gt; FileSystem::readFile(const io::path_t&amp; filePath) const</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC tlaBgGNC">        3094 : RetVal&lt;ByteArray&gt; FileSystem::readFile(const io::path_t&amp; filePath) const</span></span>
 <span id="L153"><span class="lineNum">     153</span>              : {</span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">        3098 :     RetVal&lt;ByteArray&gt; result;</span></span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">        3098 :     Ret ret = exists(filePath);</span></span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">        3098 :     if (!ret) {</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">        3094 :     RetVal&lt;ByteArray&gt; result;</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">        3094 :     Ret ret = exists(filePath);</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">        3094 :     if (!ret) {</span></span>
 <span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">           1 :         result.ret = ret;</span></span>
 <span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">           1 :         return result;</span></span>
 <span id="L159"><span class="lineNum">     159</span>              :     }</span>
 <span id="L160"><span class="lineNum">     160</span>              : </span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        3097 :     QFile file(filePath.toQString());</span></span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        3097 :     if (!file.open(QIODevice::ReadOnly)) {</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        3093 :     QFile file(filePath.toQString());</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        3093 :     if (!file.open(QIODevice::ReadOnly)) {</span></span>
 <span id="L163"><span class="lineNum">     163</span> <span class="tlaUNC tlaBgUNC">           0 :         result.ret = make_ret(Err::FSReadError);</span></span>
 <span id="L164"><span class="lineNum">     164</span> <span class="tlaUNC">           0 :         return result;</span></span>
 <span id="L165"><span class="lineNum">     165</span>              :     }</span>
 <span id="L166"><span class="lineNum">     166</span>              : </span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC tlaBgGNC">        3097 :     qint64 size = file.size();</span></span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">        3097 :     result.val.resize(static_cast&lt;size_t&gt;(size));</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC tlaBgGNC">        3093 :     qint64 size = file.size();</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">        3093 :     result.val.resize(static_cast&lt;size_t&gt;(size));</span></span>
 <span id="L169"><span class="lineNum">     169</span>              : </span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">        3097 :     file.read(reinterpret_cast&lt;char*&gt;(result.val.data()), size);</span></span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">        3097 :     file.close();</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">        3093 :     file.read(reinterpret_cast&lt;char*&gt;(result.val.data()), size);</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">        3093 :     file.close();</span></span>
 <span id="L172"><span class="lineNum">     172</span>              : </span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">        3097 :     result.ret = make_ret(Err::NoError);</span></span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">        3097 :     return result;</span></span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">        3098 : }</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">        3093 :     result.ret = make_ret(Err::NoError);</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">        3093 :     return result;</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">        3094 : }</span></span>
 <span id="L176"><span class="lineNum">     176</span>              : </span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">        4741 : Ret FileSystem::readFile(const io::path_t&amp; filePath, ByteArray&amp; data) const</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">        4783 : Ret FileSystem::readFile(const io::path_t&amp; filePath, ByteArray&amp; data) const</span></span>
 <span id="L178"><span class="lineNum">     178</span>              : {</span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">        4741 :     Ret ret = muse::make_ok();</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">        4783 :     Ret ret = muse::make_ok();</span></span>
 <span id="L180"><span class="lineNum">     180</span>              : </span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">        4741 :     QFile file(filePath.toQString());</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        4741 :     if (!file.open(QIODevice::ReadOnly)) {</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">        4783 :     QFile file(filePath.toQString());</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        4783 :     if (!file.open(QIODevice::ReadOnly)) {</span></span>
 <span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">           1 :         ret = make_ret(Err::FSReadError);</span></span>
 <span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">           1 :         ret.setText(file.errorString().toStdString());</span></span>
 <span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">           1 :         return ret;</span></span>
 <span id="L186"><span class="lineNum">     186</span>              :     }</span>
 <span id="L187"><span class="lineNum">     187</span>              : </span>
-<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">        4740 :     qint64 size = file.size();</span></span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">        4740 :     data.resize(static_cast&lt;size_t&gt;(size));</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">        4782 :     qint64 size = file.size();</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">        4782 :     data.resize(static_cast&lt;size_t&gt;(size));</span></span>
 <span id="L190"><span class="lineNum">     190</span>              : </span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">        4740 :     if (file.read(reinterpret_cast&lt;char*&gt;(data.data()), size) == -1) {</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">        4782 :     if (file.read(reinterpret_cast&lt;char*&gt;(data.data()), size) == -1) {</span></span>
 <span id="L192"><span class="lineNum">     192</span> <span class="tlaUNC tlaBgUNC">           0 :         ret = make_ret(Err::FSReadError);</span></span>
 <span id="L193"><span class="lineNum">     193</span> <span class="tlaUNC">           0 :         ret.setText(file.errorString().toStdString());</span></span>
 <span id="L194"><span class="lineNum">     194</span>              :     }</span>
 <span id="L195"><span class="lineNum">     195</span>              : </span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC tlaBgGNC">        4740 :     file.close();</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC tlaBgGNC">        4782 :     file.close();</span></span>
 <span id="L197"><span class="lineNum">     197</span>              : </span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        4740 :     return ret;</span></span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">        4741 : }</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        4782 :     return ret;</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">        4783 : }</span></span>
 <span id="L200"><span class="lineNum">     200</span>              : </span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">        3507 : Ret FileSystem::writeFile(const io::path_t&amp; filePath, const ByteArray&amp; data)</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">        3505 : Ret FileSystem::writeFile(const io::path_t&amp; filePath, const ByteArray&amp; data)</span></span>
 <span id="L202"><span class="lineNum">     202</span>              : {</span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">        3507 :     Ret ret = muse::make_ok();</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">        3505 :     Ret ret = muse::make_ok();</span></span>
 <span id="L204"><span class="lineNum">     204</span>              : </span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        3507 :     QFile file(filePath.toQString());</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        3507 :     if (!file.open(QIODevice::WriteOnly)) {</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        3505 :     QFile file(filePath.toQString());</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        3505 :     if (!file.open(QIODevice::WriteOnly)) {</span></span>
 <span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC tlaBgUNC">           0 :         ret = make_ret(Err::FSWriteError);</span></span>
 <span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :         ret.setText(file.errorString().toStdString());</span></span>
 <span id="L209"><span class="lineNum">     209</span> <span class="tlaUNC">           0 :         return ret;</span></span>
 <span id="L210"><span class="lineNum">     210</span>              :     }</span>
 <span id="L211"><span class="lineNum">     211</span>              : </span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC tlaBgGNC">        3507 :     const auto numBytesToWrite = static_cast&lt;qint64&gt;(data.size());</span></span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        3507 :     const qint64 numBytesWritten = file.write(data.constChar(), numBytesToWrite);</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        3507 :     if (numBytesWritten == -1) {</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC tlaBgGNC">        3505 :     const auto numBytesToWrite = static_cast&lt;qint64&gt;(data.size());</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        3505 :     const qint64 numBytesWritten = file.write(data.constChar(), numBytesToWrite);</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        3505 :     if (numBytesWritten == -1) {</span></span>
 <span id="L215"><span class="lineNum">     215</span> <span class="tlaUNC tlaBgUNC">           0 :         ret = make_ret(Err::FSWriteError);</span></span>
 <span id="L216"><span class="lineNum">     216</span> <span class="tlaUNC">           0 :         ret.setText(file.errorString().toStdString());</span></span>
 <span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 :         return ret;</span></span>
 <span id="L218"><span class="lineNum">     218</span>              :     }</span>
 <span id="L219"><span class="lineNum">     219</span>              : </span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC tlaBgGNC">        3507 :     if (numBytesWritten != numBytesToWrite) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC tlaBgGNC">        3505 :     if (numBytesWritten != numBytesToWrite) {</span></span>
 <span id="L221"><span class="lineNum">     221</span> <span class="tlaUNC tlaBgUNC">           0 :         ret = make_ret(Err::FSWriteError);</span></span>
 <span id="L222"><span class="lineNum">     222</span> <span class="tlaUNC">           0 :         ret.setText(&quot;Failed to write entire file&quot;);</span></span>
 <span id="L223"><span class="lineNum">     223</span> <span class="tlaUNC">           0 :         return ret;</span></span>
 <span id="L224"><span class="lineNum">     224</span>              :     }</span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC tlaBgGNC">        3507 :     file.close();</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC tlaBgGNC">        3505 :     file.close();</span></span>
 <span id="L227"><span class="lineNum">     227</span>              : </span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">        3507 :     return ret;</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        3507 : }</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">        3505 :     return ret;</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        3505 : }</span></span>
 <span id="L230"><span class="lineNum">     230</span>              : </span>
 <span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">          49 : Ret FileSystem::makePath(const io::path_t&amp; path) const</span></span>
 <span id="L232"><span class="lineNum">     232</span>              : {</span>
@@ -522,9 +522,9 @@
 <span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC">           0 :     return QFileInfo(filePath.toQString()).absolutePath();</span></span>
 <span id="L465"><span class="lineNum">     465</span>              : }</span>
 <span id="L466"><span class="lineNum">     466</span>              : </span>
-<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC tlaBgGNC">        1005 : path_t FileSystem::absoluteFilePath(const path_t&amp; filePath) const</span></span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC tlaBgGNC">        1019 : path_t FileSystem::absoluteFilePath(const path_t&amp; filePath) const</span></span>
 <span id="L468"><span class="lineNum">     468</span>              : {</span>
-<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">        1005 :     return QFileInfo(filePath.toQString()).absoluteFilePath();</span></span>
+<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">        1019 :     return QFileInfo(filePath.toQString()).absoluteFilePath();</span></span>
 <span id="L470"><span class="lineNum">     470</span>              : }</span>
 <span id="L471"><span class="lineNum">     471</span>              : </span>
 <span id="L472"><span class="lineNum">     472</span> <span class="tlaUNC tlaBgUNC">           0 : io::path_t FileSystem::cleanPath(const io::path_t&amp; filePath) const</span></span>

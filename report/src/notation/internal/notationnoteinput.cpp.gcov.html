@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">591</td>
+            <td class="headerCovTableEntry">605</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -804,300 +804,320 @@
 <span id="L746"><span class="lineNum">     746</span>              : </span>
 <span id="L747"><span class="lineNum">     747</span> <span class="tlaUNC">           0 :     const InputState&amp; inputState = score()-&gt;inputState();</span></span>
 <span id="L748"><span class="lineNum">     748</span>              : </span>
-<span id="L749"><span class="lineNum">     749</span> <span class="tlaUNC">           0 :     startEdit(TranslatableString(&quot;undoableAction&quot;, &quot;Add tuplet&quot;));</span></span>
-<span id="L750"><span class="lineNum">     750</span> <span class="tlaUNC">           0 :     score()-&gt;expandVoice();</span></span>
-<span id="L751"><span class="lineNum">     751</span> <span class="tlaUNC">           0 :     ChordRest* chordRest = inputState.cr();</span></span>
-<span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC">           0 :     if (chordRest) {</span></span>
-<span id="L753"><span class="lineNum">     753</span> <span class="tlaUNC">           0 :         Fraction ratio = options.ratio;</span></span>
-<span id="L754"><span class="lineNum">     754</span> <span class="tlaUNC">           0 :         if (options.autoBaseLen) {</span></span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaUNC">           0 :             ratio.setDenominator(Tuplet::computeTupletDenominator(ratio.numerator(), inputState.ticks()));</span></span>
-<span id="L756"><span class="lineNum">     756</span>              :         }</span>
-<span id="L757"><span class="lineNum">     757</span> <span class="tlaUNC">           0 :         score()-&gt;changeCRlen(chordRest, inputState.duration());</span></span>
-<span id="L758"><span class="lineNum">     758</span> <span class="tlaUNC">           0 :         if (Tuplet* tuplet = score()-&gt;addTuplet(chordRest, ratio, options.numberType, options.bracketType)) {</span></span>
-<span id="L759"><span class="lineNum">     759</span> <span class="tlaUNC">           0 :             score()-&gt;selectNewTuplet(tuplet);</span></span>
-<span id="L760"><span class="lineNum">     760</span>              :         }</span>
+<span id="L749"><span class="lineNum">     749</span> <span class="tlaUNC">           0 :     const bool durationAsSubdivision = options.selectedDurationAs == TupletSelectedDuration::SUBDIVISION;</span></span>
+<span id="L750"><span class="lineNum">     750</span> <span class="tlaUNC">           0 :     if (durationAsSubdivision</span></span>
+<span id="L751"><span class="lineNum">     751</span> <span class="tlaUNC">           0 :         &amp;&amp; !score()-&gt;canAddTuplet(inputState.segment(), inputState.track(), options.ratio, inputState.duration())) {</span></span>
+<span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC">           0 :         MScore::setError(MsError::NO_SPACE_FOR_TUPLET);</span></span>
+<span id="L753"><span class="lineNum">     753</span> <span class="tlaUNC">           0 :         m_interaction-&gt;checkAndShowError();</span></span>
+<span id="L754"><span class="lineNum">     754</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L755"><span class="lineNum">     755</span>              :     }</span>
+<span id="L756"><span class="lineNum">     756</span>              : </span>
+<span id="L757"><span class="lineNum">     757</span> <span class="tlaUNC">           0 :     if (!durationAsSubdivision &amp;&amp; !m_interaction-&gt;canAddTupletToSelectedChordRests()) {</span></span>
+<span id="L758"><span class="lineNum">     758</span> <span class="tlaUNC">           0 :         MScore::setError(MsError::TUPLET_NOTE_VALUE_TOO_SHORT);</span></span>
+<span id="L759"><span class="lineNum">     759</span> <span class="tlaUNC">           0 :         m_interaction-&gt;checkAndShowError();</span></span>
+<span id="L760"><span class="lineNum">     760</span> <span class="tlaUNC">           0 :         return;</span></span>
 <span id="L761"><span class="lineNum">     761</span>              :     }</span>
-<span id="L762"><span class="lineNum">     762</span> <span class="tlaUNC">           0 :     apply();</span></span>
-<span id="L763"><span class="lineNum">     763</span>              : </span>
-<span id="L764"><span class="lineNum">     764</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
-<span id="L765"><span class="lineNum">     765</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L766"><span class="lineNum">     766</span>              : </span>
-<span id="L767"><span class="lineNum">     767</span> <span class="tlaUNC">           0 : static muse::RectF segmentContentRect(const Segment* segment, track_idx_t track)</span></span>
-<span id="L768"><span class="lineNum">     768</span>              : {</span>
-<span id="L769"><span class="lineNum">     769</span> <span class="tlaUNC">           0 :     RectF result;</span></span>
-<span id="L770"><span class="lineNum">     770</span>              : </span>
-<span id="L771"><span class="lineNum">     771</span> <span class="tlaUNC">           0 :     const EngravingItem* el = segment-&gt;element(track);</span></span>
-<span id="L772"><span class="lineNum">     772</span> <span class="tlaUNC">           0 :     if (!el) {</span></span>
-<span id="L773"><span class="lineNum">     773</span> <span class="tlaUNC">           0 :         return result;</span></span>
-<span id="L774"><span class="lineNum">     774</span>              :     }</span>
-<span id="L775"><span class="lineNum">     775</span>              : </span>
-<span id="L776"><span class="lineNum">     776</span> <span class="tlaUNC">           0 :     if (el-&gt;isChord()) {</span></span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaUNC">           0 :         const Chord* chord = toChord(el);</span></span>
-<span id="L778"><span class="lineNum">     778</span> <span class="tlaUNC">           0 :         for (const Note* note: chord-&gt;notes()) {</span></span>
-<span id="L779"><span class="lineNum">     779</span> <span class="tlaUNC">           0 :             result.unite(note-&gt;ldata()-&gt;bbox().translated(note-&gt;pos()));</span></span>
+<span id="L762"><span class="lineNum">     762</span>              : </span>
+<span id="L763"><span class="lineNum">     763</span> <span class="tlaUNC">           0 :     startEdit(TranslatableString(&quot;undoableAction&quot;, &quot;Add tuplet&quot;));</span></span>
+<span id="L764"><span class="lineNum">     764</span> <span class="tlaUNC">           0 :     score()-&gt;expandVoice();</span></span>
+<span id="L765"><span class="lineNum">     765</span> <span class="tlaUNC">           0 :     ChordRest* chordRest = inputState.cr();</span></span>
+<span id="L766"><span class="lineNum">     766</span> <span class="tlaUNC">           0 :     if (chordRest) {</span></span>
+<span id="L767"><span class="lineNum">     767</span> <span class="tlaUNC">           0 :         Tuplet* tuplet = nullptr;</span></span>
+<span id="L768"><span class="lineNum">     768</span> <span class="tlaUNC">           0 :         if (durationAsSubdivision) {</span></span>
+<span id="L769"><span class="lineNum">     769</span> <span class="tlaUNC">           0 :             tuplet = score()-&gt;addTuplet(chordRest, options.ratio, inputState.duration(), options.numberType, options.bracketType);</span></span>
+<span id="L770"><span class="lineNum">     770</span>              :         } else {</span>
+<span id="L771"><span class="lineNum">     771</span> <span class="tlaUNC">           0 :             Fraction ratio = options.ratio;</span></span>
+<span id="L772"><span class="lineNum">     772</span> <span class="tlaUNC">           0 :             if (options.autoBaseLen) {</span></span>
+<span id="L773"><span class="lineNum">     773</span> <span class="tlaUNC">           0 :                 ratio.setDenominator(Tuplet::computeTupletDenominator(ratio.numerator(), inputState.ticks()));</span></span>
+<span id="L774"><span class="lineNum">     774</span>              :             }</span>
+<span id="L775"><span class="lineNum">     775</span> <span class="tlaUNC">           0 :             score()-&gt;changeCRlen(chordRest, inputState.duration());</span></span>
+<span id="L776"><span class="lineNum">     776</span> <span class="tlaUNC">           0 :             tuplet = score()-&gt;addTuplet(chordRest, ratio, options.numberType, options.bracketType);</span></span>
+<span id="L777"><span class="lineNum">     777</span>              :         }</span>
+<span id="L778"><span class="lineNum">     778</span> <span class="tlaUNC">           0 :         if (tuplet) {</span></span>
+<span id="L779"><span class="lineNum">     779</span> <span class="tlaUNC">           0 :             score()-&gt;selectNewTuplet(tuplet);</span></span>
 <span id="L780"><span class="lineNum">     780</span>              :         }</span>
-<span id="L781"><span class="lineNum">     781</span>              : </span>
-<span id="L782"><span class="lineNum">     782</span> <span class="tlaUNC">           0 :         if (Hook* hook = chord-&gt;hook()) {</span></span>
-<span id="L783"><span class="lineNum">     783</span> <span class="tlaUNC">           0 :             result.unite(hook-&gt;ldata()-&gt;bbox().translated(hook-&gt;pos()));</span></span>
-<span id="L784"><span class="lineNum">     784</span>              :         }</span>
-<span id="L785"><span class="lineNum">     785</span> <span class="tlaUNC">           0 :     } else if (el-&gt;isRest() &amp;&amp; !toRest(el)-&gt;isFullMeasureRest()) {</span></span>
-<span id="L786"><span class="lineNum">     786</span> <span class="tlaUNC">           0 :         result.unite(el-&gt;ldata()-&gt;bbox());</span></span>
-<span id="L787"><span class="lineNum">     787</span>              :     }</span>
-<span id="L788"><span class="lineNum">     788</span>              : </span>
-<span id="L789"><span class="lineNum">     789</span> <span class="tlaUNC">           0 :     return result;</span></span>
-<span id="L790"><span class="lineNum">     790</span>              : }</span>
-<span id="L791"><span class="lineNum">     791</span>              : </span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaUNC">           0 : muse::RectF NotationNoteInput::cursorRect() const</span></span>
-<span id="L793"><span class="lineNum">     793</span>              : {</span>
-<span id="L794"><span class="lineNum">     794</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L781"><span class="lineNum">     781</span>              :     }</span>
+<span id="L782"><span class="lineNum">     782</span> <span class="tlaUNC">           0 :     apply();</span></span>
+<span id="L783"><span class="lineNum">     783</span>              : </span>
+<span id="L784"><span class="lineNum">     784</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
+<span id="L785"><span class="lineNum">     785</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L786"><span class="lineNum">     786</span>              : </span>
+<span id="L787"><span class="lineNum">     787</span> <span class="tlaUNC">           0 : static muse::RectF segmentContentRect(const Segment* segment, track_idx_t track)</span></span>
+<span id="L788"><span class="lineNum">     788</span>              : {</span>
+<span id="L789"><span class="lineNum">     789</span> <span class="tlaUNC">           0 :     RectF result;</span></span>
+<span id="L790"><span class="lineNum">     790</span>              : </span>
+<span id="L791"><span class="lineNum">     791</span> <span class="tlaUNC">           0 :     const EngravingItem* el = segment-&gt;element(track);</span></span>
+<span id="L792"><span class="lineNum">     792</span> <span class="tlaUNC">           0 :     if (!el) {</span></span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaUNC">           0 :         return result;</span></span>
+<span id="L794"><span class="lineNum">     794</span>              :     }</span>
 <span id="L795"><span class="lineNum">     795</span>              : </span>
-<span id="L796"><span class="lineNum">     796</span> <span class="tlaUNC">           0 :     if (!isNoteInputMode()) {</span></span>
-<span id="L797"><span class="lineNum">     797</span> <span class="tlaUNC">           0 :         return {};</span></span>
-<span id="L798"><span class="lineNum">     798</span>              :     }</span>
-<span id="L799"><span class="lineNum">     799</span>              : </span>
-<span id="L800"><span class="lineNum">     800</span> <span class="tlaUNC">           0 :     const InputState&amp; inputState = score()-&gt;inputState();</span></span>
-<span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 :     const Segment* segment = inputState.segment();</span></span>
-<span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC">           0 :     if (!segment) {</span></span>
-<span id="L803"><span class="lineNum">     803</span> <span class="tlaUNC">           0 :         return {};</span></span>
-<span id="L804"><span class="lineNum">     804</span>              :     }</span>
-<span id="L805"><span class="lineNum">     805</span>              : </span>
-<span id="L806"><span class="lineNum">     806</span> <span class="tlaUNC">           0 :     const System* system = segment-&gt;measure()-&gt;system();</span></span>
-<span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :     if (!system) {</span></span>
-<span id="L808"><span class="lineNum">     808</span> <span class="tlaUNC">           0 :         return {};</span></span>
-<span id="L809"><span class="lineNum">     809</span>              :     }</span>
-<span id="L810"><span class="lineNum">     810</span>              : </span>
-<span id="L811"><span class="lineNum">     811</span> <span class="tlaUNC">           0 :     const track_idx_t track = inputState.track() == muse::nidx ? 0 : inputState.track();</span></span>
-<span id="L812"><span class="lineNum">     812</span> <span class="tlaUNC">           0 :     const staff_idx_t staffIdx = track2staff(track);</span></span>
-<span id="L813"><span class="lineNum">     813</span>              : </span>
-<span id="L814"><span class="lineNum">     814</span> <span class="tlaUNC">           0 :     const Staff* staff = score()-&gt;staff(staffIdx);</span></span>
-<span id="L815"><span class="lineNum">     815</span> <span class="tlaUNC">           0 :     if (!staff) {</span></span>
-<span id="L816"><span class="lineNum">     816</span> <span class="tlaUNC">           0 :         return {};</span></span>
-<span id="L817"><span class="lineNum">     817</span>              :     }</span>
-<span id="L818"><span class="lineNum">     818</span>              : </span>
-<span id="L819"><span class="lineNum">     819</span> <span class="tlaUNC">           0 :     const double globalSpatium = score()-&gt;style().spatium();</span></span>
-<span id="L820"><span class="lineNum">     820</span>              : </span>
-<span id="L821"><span class="lineNum">     821</span> <span class="tlaUNC">           0 :     const StaffType* staffType = staff-&gt;staffType(inputState.tick());</span></span>
-<span id="L822"><span class="lineNum">     822</span> <span class="tlaUNC">           0 :     const bool isTabStaff = staffType-&gt;isTabStaff();</span></span>
-<span id="L823"><span class="lineNum">     823</span> <span class="tlaUNC">           0 :     const double localSpatium = staffType-&gt;spatium();</span></span>
-<span id="L824"><span class="lineNum">     824</span>              : </span>
-<span id="L825"><span class="lineNum">     825</span> <span class="tlaUNC">           0 :     const double defaultWidth = score()-&gt;noteHeadWidth() * localSpatium / globalSpatium;</span></span>
-<span id="L826"><span class="lineNum">     826</span>              : </span>
-<span id="L827"><span class="lineNum">     827</span> <span class="tlaUNC">           0 :     const RectF segmentContentRect = ::segmentContentRect(segment, track);</span></span>
-<span id="L828"><span class="lineNum">     828</span> <span class="tlaUNC">           0 :     double x = segmentContentRect.x() + segment-&gt;pagePos().x();</span></span>
-<span id="L829"><span class="lineNum">     829</span>              : </span>
-<span id="L830"><span class="lineNum">     830</span> <span class="tlaUNC">           0 :     const double barNoteDist = score()-&gt;style().styleAbsolute(Sid::barNoteDistance);</span></span>
-<span id="L831"><span class="lineNum">     831</span> <span class="tlaUNC">           0 :     if (segment-&gt;x() &lt; barNoteDist) {</span></span>
-<span id="L832"><span class="lineNum">     832</span> <span class="tlaUNC">           0 :         x += barNoteDist - segment-&gt;x();</span></span>
-<span id="L833"><span class="lineNum">     833</span>              :     }</span>
-<span id="L834"><span class="lineNum">     834</span>              : </span>
-<span id="L835"><span class="lineNum">     835</span> <span class="tlaUNC">           0 :     double y = system-&gt;staffCanvasYpage(staffIdx);</span></span>
-<span id="L836"><span class="lineNum">     836</span> <span class="tlaUNC">           0 :     double w = segmentContentRect.width() &gt; 0 ? segmentContentRect.width() : defaultWidth;</span></span>
-<span id="L837"><span class="lineNum">     837</span> <span class="tlaUNC">           0 :     double h = 0.0;</span></span>
+<span id="L796"><span class="lineNum">     796</span> <span class="tlaUNC">           0 :     if (el-&gt;isChord()) {</span></span>
+<span id="L797"><span class="lineNum">     797</span> <span class="tlaUNC">           0 :         const Chord* chord = toChord(el);</span></span>
+<span id="L798"><span class="lineNum">     798</span> <span class="tlaUNC">           0 :         for (const Note* note: chord-&gt;notes()) {</span></span>
+<span id="L799"><span class="lineNum">     799</span> <span class="tlaUNC">           0 :             result.unite(note-&gt;ldata()-&gt;bbox().translated(note-&gt;pos()));</span></span>
+<span id="L800"><span class="lineNum">     800</span>              :         }</span>
+<span id="L801"><span class="lineNum">     801</span>              : </span>
+<span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC">           0 :         if (Hook* hook = chord-&gt;hook()) {</span></span>
+<span id="L803"><span class="lineNum">     803</span> <span class="tlaUNC">           0 :             result.unite(hook-&gt;ldata()-&gt;bbox().translated(hook-&gt;pos()));</span></span>
+<span id="L804"><span class="lineNum">     804</span>              :         }</span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaUNC">           0 :     } else if (el-&gt;isRest() &amp;&amp; !toRest(el)-&gt;isFullMeasureRest()) {</span></span>
+<span id="L806"><span class="lineNum">     806</span> <span class="tlaUNC">           0 :         result.unite(el-&gt;ldata()-&gt;bbox());</span></span>
+<span id="L807"><span class="lineNum">     807</span>              :     }</span>
+<span id="L808"><span class="lineNum">     808</span>              : </span>
+<span id="L809"><span class="lineNum">     809</span> <span class="tlaUNC">           0 :     return result;</span></span>
+<span id="L810"><span class="lineNum">     810</span>              : }</span>
+<span id="L811"><span class="lineNum">     811</span>              : </span>
+<span id="L812"><span class="lineNum">     812</span> <span class="tlaUNC">           0 : muse::RectF NotationNoteInput::cursorRect() const</span></span>
+<span id="L813"><span class="lineNum">     813</span>              : {</span>
+<span id="L814"><span class="lineNum">     814</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L815"><span class="lineNum">     815</span>              : </span>
+<span id="L816"><span class="lineNum">     816</span> <span class="tlaUNC">           0 :     if (!isNoteInputMode()) {</span></span>
+<span id="L817"><span class="lineNum">     817</span> <span class="tlaUNC">           0 :         return {};</span></span>
+<span id="L818"><span class="lineNum">     818</span>              :     }</span>
+<span id="L819"><span class="lineNum">     819</span>              : </span>
+<span id="L820"><span class="lineNum">     820</span> <span class="tlaUNC">           0 :     const InputState&amp; inputState = score()-&gt;inputState();</span></span>
+<span id="L821"><span class="lineNum">     821</span> <span class="tlaUNC">           0 :     const Segment* segment = inputState.segment();</span></span>
+<span id="L822"><span class="lineNum">     822</span> <span class="tlaUNC">           0 :     if (!segment) {</span></span>
+<span id="L823"><span class="lineNum">     823</span> <span class="tlaUNC">           0 :         return {};</span></span>
+<span id="L824"><span class="lineNum">     824</span>              :     }</span>
+<span id="L825"><span class="lineNum">     825</span>              : </span>
+<span id="L826"><span class="lineNum">     826</span> <span class="tlaUNC">           0 :     const System* system = segment-&gt;measure()-&gt;system();</span></span>
+<span id="L827"><span class="lineNum">     827</span> <span class="tlaUNC">           0 :     if (!system) {</span></span>
+<span id="L828"><span class="lineNum">     828</span> <span class="tlaUNC">           0 :         return {};</span></span>
+<span id="L829"><span class="lineNum">     829</span>              :     }</span>
+<span id="L830"><span class="lineNum">     830</span>              : </span>
+<span id="L831"><span class="lineNum">     831</span> <span class="tlaUNC">           0 :     const track_idx_t track = inputState.track() == muse::nidx ? 0 : inputState.track();</span></span>
+<span id="L832"><span class="lineNum">     832</span> <span class="tlaUNC">           0 :     const staff_idx_t staffIdx = track2staff(track);</span></span>
+<span id="L833"><span class="lineNum">     833</span>              : </span>
+<span id="L834"><span class="lineNum">     834</span> <span class="tlaUNC">           0 :     const Staff* staff = score()-&gt;staff(staffIdx);</span></span>
+<span id="L835"><span class="lineNum">     835</span> <span class="tlaUNC">           0 :     if (!staff) {</span></span>
+<span id="L836"><span class="lineNum">     836</span> <span class="tlaUNC">           0 :         return {};</span></span>
+<span id="L837"><span class="lineNum">     837</span>              :     }</span>
 <span id="L838"><span class="lineNum">     838</span>              : </span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaUNC">           0 :     if (inputState.beyondScore()) {</span></span>
-<span id="L840"><span class="lineNum">     840</span> <span class="tlaUNC">           0 :         const Measure* lastMeasure = score()-&gt;lastMeasure();</span></span>
-<span id="L841"><span class="lineNum">     841</span> <span class="tlaUNC">           0 :         x = lastMeasure-&gt;pageBoundingRect().right() + globalSpatium;</span></span>
-<span id="L842"><span class="lineNum">     842</span> <span class="tlaUNC">           0 :         w = defaultWidth;</span></span>
-<span id="L843"><span class="lineNum">     843</span>              :     }</span>
+<span id="L839"><span class="lineNum">     839</span> <span class="tlaUNC">           0 :     const double globalSpatium = score()-&gt;style().spatium();</span></span>
+<span id="L840"><span class="lineNum">     840</span>              : </span>
+<span id="L841"><span class="lineNum">     841</span> <span class="tlaUNC">           0 :     const StaffType* staffType = staff-&gt;staffType(inputState.tick());</span></span>
+<span id="L842"><span class="lineNum">     842</span> <span class="tlaUNC">           0 :     const bool isTabStaff = staffType-&gt;isTabStaff();</span></span>
+<span id="L843"><span class="lineNum">     843</span> <span class="tlaUNC">           0 :     const double localSpatium = staffType-&gt;spatium();</span></span>
 <span id="L844"><span class="lineNum">     844</span>              : </span>
-<span id="L845"><span class="lineNum">     845</span> <span class="tlaUNC">           0 :     double sideMargin = 0.0;</span></span>
+<span id="L845"><span class="lineNum">     845</span> <span class="tlaUNC">           0 :     const double defaultWidth = score()-&gt;noteHeadWidth() * localSpatium / globalSpatium;</span></span>
 <span id="L846"><span class="lineNum">     846</span>              : </span>
-<span id="L847"><span class="lineNum">     847</span> <span class="tlaUNC">           0 :     if (isTabStaff) {</span></span>
-<span id="L848"><span class="lineNum">     848</span> <span class="tlaUNC">           0 :         const double minWidth = 2.0 * globalSpatium;</span></span>
-<span id="L849"><span class="lineNum">     849</span> <span class="tlaUNC">           0 :         sideMargin = std::max(0.3 * globalSpatium, 0.5 * (minWidth - w));</span></span>
-<span id="L850"><span class="lineNum">     850</span>              :     } else {</span>
-<span id="L851"><span class="lineNum">     851</span> <span class="tlaUNC">           0 :         sideMargin = 0.5 * globalSpatium;</span></span>
-<span id="L852"><span class="lineNum">     852</span>              :     }</span>
-<span id="L853"><span class="lineNum">     853</span>              : </span>
-<span id="L854"><span class="lineNum">     854</span>              :     // Don't extend further to the left than the center between the current and previous segment</span>
-<span id="L855"><span class="lineNum">     855</span> <span class="tlaUNC">           0 :     const engraving::Segment* prevSeg = segment-&gt;prev1WithElemsOnTrack(track, engraving::SegmentType::ChordRest);</span></span>
-<span id="L856"><span class="lineNum">     856</span> <span class="tlaUNC">           0 :     if (prevSeg &amp;&amp; prevSeg-&gt;measure() == segment-&gt;measure()) {</span></span>
-<span id="L857"><span class="lineNum">     857</span> <span class="tlaUNC">           0 :         const RectF prevSegContentRect = ::segmentContentRect(prevSeg, track);</span></span>
-<span id="L858"><span class="lineNum">     858</span> <span class="tlaUNC">           0 :         if (prevSegContentRect.width() &gt; 0) {</span></span>
-<span id="L859"><span class="lineNum">     859</span> <span class="tlaUNC">           0 :             const double centerBetweenPrevSegRightAndCurrSegLeft = (prevSeg-&gt;pagePos().x() + prevSegContentRect.right() + x) * 0.5;</span></span>
-<span id="L860"><span class="lineNum">     860</span> <span class="tlaUNC">           0 :             sideMargin = std::min(sideMargin, x - centerBetweenPrevSegRightAndCurrSegLeft);</span></span>
-<span id="L861"><span class="lineNum">     861</span>              :         }</span>
-<span id="L862"><span class="lineNum">     862</span>              :     }</span>
-<span id="L863"><span class="lineNum">     863</span>              : </span>
-<span id="L864"><span class="lineNum">     864</span> <span class="tlaUNC">           0 :     x -= sideMargin;</span></span>
-<span id="L865"><span class="lineNum">     865</span> <span class="tlaUNC">           0 :     w += 2 * sideMargin;</span></span>
+<span id="L847"><span class="lineNum">     847</span> <span class="tlaUNC">           0 :     const RectF segmentContentRect = ::segmentContentRect(segment, track);</span></span>
+<span id="L848"><span class="lineNum">     848</span> <span class="tlaUNC">           0 :     double x = segmentContentRect.x() + segment-&gt;pagePos().x();</span></span>
+<span id="L849"><span class="lineNum">     849</span>              : </span>
+<span id="L850"><span class="lineNum">     850</span> <span class="tlaUNC">           0 :     const double barNoteDist = score()-&gt;style().styleAbsolute(Sid::barNoteDistance);</span></span>
+<span id="L851"><span class="lineNum">     851</span> <span class="tlaUNC">           0 :     if (segment-&gt;x() &lt; barNoteDist) {</span></span>
+<span id="L852"><span class="lineNum">     852</span> <span class="tlaUNC">           0 :         x += barNoteDist - segment-&gt;x();</span></span>
+<span id="L853"><span class="lineNum">     853</span>              :     }</span>
+<span id="L854"><span class="lineNum">     854</span>              : </span>
+<span id="L855"><span class="lineNum">     855</span> <span class="tlaUNC">           0 :     double y = system-&gt;staffCanvasYpage(staffIdx);</span></span>
+<span id="L856"><span class="lineNum">     856</span> <span class="tlaUNC">           0 :     double w = segmentContentRect.width() &gt; 0 ? segmentContentRect.width() : defaultWidth;</span></span>
+<span id="L857"><span class="lineNum">     857</span> <span class="tlaUNC">           0 :     double h = 0.0;</span></span>
+<span id="L858"><span class="lineNum">     858</span>              : </span>
+<span id="L859"><span class="lineNum">     859</span> <span class="tlaUNC">           0 :     if (inputState.beyondScore()) {</span></span>
+<span id="L860"><span class="lineNum">     860</span> <span class="tlaUNC">           0 :         const Measure* lastMeasure = score()-&gt;lastMeasure();</span></span>
+<span id="L861"><span class="lineNum">     861</span> <span class="tlaUNC">           0 :         x = lastMeasure-&gt;pageBoundingRect().right() + globalSpatium;</span></span>
+<span id="L862"><span class="lineNum">     862</span> <span class="tlaUNC">           0 :         w = defaultWidth;</span></span>
+<span id="L863"><span class="lineNum">     863</span>              :     }</span>
+<span id="L864"><span class="lineNum">     864</span>              : </span>
+<span id="L865"><span class="lineNum">     865</span> <span class="tlaUNC">           0 :     double sideMargin = 0.0;</span></span>
 <span id="L866"><span class="lineNum">     866</span>              : </span>
-<span id="L867"><span class="lineNum">     867</span> <span class="tlaUNC">           0 :     const double yOffset = staffType-&gt;yoffset().val() * localSpatium;</span></span>
-<span id="L868"><span class="lineNum">     868</span> <span class="tlaUNC">           0 :     y += yOffset;</span></span>
-<span id="L869"><span class="lineNum">     869</span>              : </span>
-<span id="L870"><span class="lineNum">     870</span> <span class="tlaUNC">           0 :     const int inputStateStringsCount = inputState.string();</span></span>
-<span id="L871"><span class="lineNum">     871</span> <span class="tlaUNC">           0 :     const int instrumentStringsCount = static_cast&lt;int&gt;(staff-&gt;part()-&gt;instrument()-&gt;stringData()-&gt;strings());</span></span>
-<span id="L872"><span class="lineNum">     872</span>              : </span>
-<span id="L873"><span class="lineNum">     873</span> <span class="tlaUNC">           0 :     const double lineDist = staffType-&gt;lineDistance().val() * localSpatium;</span></span>
-<span id="L874"><span class="lineNum">     874</span>              : </span>
-<span id="L875"><span class="lineNum">     875</span> <span class="tlaUNC">           0 :     if (isTabStaff &amp;&amp; inputStateStringsCount &gt;= 0 &amp;&amp; inputStateStringsCount &lt;= instrumentStringsCount) {</span></span>
-<span id="L876"><span class="lineNum">     876</span> <span class="tlaUNC">           0 :         h = lineDist;</span></span>
-<span id="L877"><span class="lineNum">     877</span> <span class="tlaUNC">           0 :         y += staffType-&gt;physStringToYOffset(inputStateStringsCount).toAbsolute(localSpatium);</span></span>
-<span id="L878"><span class="lineNum">     878</span> <span class="tlaUNC">           0 :         y -= (staffType-&gt;onLines() ? lineDist * 0.5 : lineDist);</span></span>
-<span id="L879"><span class="lineNum">     879</span>              :     } else {</span>
-<span id="L880"><span class="lineNum">     880</span> <span class="tlaUNC">           0 :         const double skylineMargin = 0.75 * localSpatium;</span></span>
-<span id="L881"><span class="lineNum">     881</span> <span class="tlaUNC">           0 :         const int lines = staffType-&gt;lines();</span></span>
-<span id="L882"><span class="lineNum">     882</span>              : </span>
-<span id="L883"><span class="lineNum">     883</span> <span class="tlaUNC">           0 :         h = (lines - 1) * lineDist + 2 * skylineMargin;</span></span>
-<span id="L884"><span class="lineNum">     884</span> <span class="tlaUNC">           0 :         y -= skylineMargin;</span></span>
-<span id="L885"><span class="lineNum">     885</span>              :     }</span>
+<span id="L867"><span class="lineNum">     867</span> <span class="tlaUNC">           0 :     if (isTabStaff) {</span></span>
+<span id="L868"><span class="lineNum">     868</span> <span class="tlaUNC">           0 :         const double minWidth = 2.0 * globalSpatium;</span></span>
+<span id="L869"><span class="lineNum">     869</span> <span class="tlaUNC">           0 :         sideMargin = std::max(0.3 * globalSpatium, 0.5 * (minWidth - w));</span></span>
+<span id="L870"><span class="lineNum">     870</span>              :     } else {</span>
+<span id="L871"><span class="lineNum">     871</span> <span class="tlaUNC">           0 :         sideMargin = 0.5 * globalSpatium;</span></span>
+<span id="L872"><span class="lineNum">     872</span>              :     }</span>
+<span id="L873"><span class="lineNum">     873</span>              : </span>
+<span id="L874"><span class="lineNum">     874</span>              :     // Don't extend further to the left than the center between the current and previous segment</span>
+<span id="L875"><span class="lineNum">     875</span> <span class="tlaUNC">           0 :     const engraving::Segment* prevSeg = segment-&gt;prev1WithElemsOnTrack(track, engraving::SegmentType::ChordRest);</span></span>
+<span id="L876"><span class="lineNum">     876</span> <span class="tlaUNC">           0 :     if (prevSeg &amp;&amp; prevSeg-&gt;measure() == segment-&gt;measure()) {</span></span>
+<span id="L877"><span class="lineNum">     877</span> <span class="tlaUNC">           0 :         const RectF prevSegContentRect = ::segmentContentRect(prevSeg, track);</span></span>
+<span id="L878"><span class="lineNum">     878</span> <span class="tlaUNC">           0 :         if (prevSegContentRect.width() &gt; 0) {</span></span>
+<span id="L879"><span class="lineNum">     879</span> <span class="tlaUNC">           0 :             const double centerBetweenPrevSegRightAndCurrSegLeft = (prevSeg-&gt;pagePos().x() + prevSegContentRect.right() + x) * 0.5;</span></span>
+<span id="L880"><span class="lineNum">     880</span> <span class="tlaUNC">           0 :             sideMargin = std::min(sideMargin, x - centerBetweenPrevSegRightAndCurrSegLeft);</span></span>
+<span id="L881"><span class="lineNum">     881</span>              :         }</span>
+<span id="L882"><span class="lineNum">     882</span>              :     }</span>
+<span id="L883"><span class="lineNum">     883</span>              : </span>
+<span id="L884"><span class="lineNum">     884</span> <span class="tlaUNC">           0 :     x -= sideMargin;</span></span>
+<span id="L885"><span class="lineNum">     885</span> <span class="tlaUNC">           0 :     w += 2 * sideMargin;</span></span>
 <span id="L886"><span class="lineNum">     886</span>              : </span>
-<span id="L887"><span class="lineNum">     887</span> <span class="tlaUNC">           0 :     RectF result { x, y, w, h };</span></span>
-<span id="L888"><span class="lineNum">     888</span>              : </span>
-<span id="L889"><span class="lineNum">     889</span> <span class="tlaUNC">           0 :     if (configuration()-&gt;canvasOrientation().val == muse::Orientation::Horizontal) {</span></span>
-<span id="L890"><span class="lineNum">     890</span> <span class="tlaUNC">           0 :         result.translate(system-&gt;page()-&gt;pos());</span></span>
-<span id="L891"><span class="lineNum">     891</span>              :     }</span>
+<span id="L887"><span class="lineNum">     887</span> <span class="tlaUNC">           0 :     const double yOffset = staffType-&gt;yoffset().val() * localSpatium;</span></span>
+<span id="L888"><span class="lineNum">     888</span> <span class="tlaUNC">           0 :     y += yOffset;</span></span>
+<span id="L889"><span class="lineNum">     889</span>              : </span>
+<span id="L890"><span class="lineNum">     890</span> <span class="tlaUNC">           0 :     const int inputStateStringsCount = inputState.string();</span></span>
+<span id="L891"><span class="lineNum">     891</span> <span class="tlaUNC">           0 :     const int instrumentStringsCount = static_cast&lt;int&gt;(staff-&gt;part()-&gt;instrument()-&gt;stringData()-&gt;strings());</span></span>
 <span id="L892"><span class="lineNum">     892</span>              : </span>
-<span id="L893"><span class="lineNum">     893</span> <span class="tlaUNC">           0 :     return result;</span></span>
-<span id="L894"><span class="lineNum">     894</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L895"><span class="lineNum">     895</span>              : </span>
-<span id="L896"><span class="lineNum">     896</span> <span class="tlaUNC">           0 : void NotationNoteInput::addSlur(Slur* slur)</span></span>
-<span id="L897"><span class="lineNum">     897</span>              : {</span>
-<span id="L898"><span class="lineNum">     898</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
-<span id="L899"><span class="lineNum">     899</span>              : </span>
-<span id="L900"><span class="lineNum">     900</span> <span class="tlaUNC">           0 :     InputState&amp; inputState = score()-&gt;inputState();</span></span>
-<span id="L901"><span class="lineNum">     901</span> <span class="tlaUNC">           0 :     inputState.setSlur(slur);</span></span>
+<span id="L893"><span class="lineNum">     893</span> <span class="tlaUNC">           0 :     const double lineDist = staffType-&gt;lineDistance().val() * localSpatium;</span></span>
+<span id="L894"><span class="lineNum">     894</span>              : </span>
+<span id="L895"><span class="lineNum">     895</span> <span class="tlaUNC">           0 :     if (isTabStaff &amp;&amp; inputStateStringsCount &gt;= 0 &amp;&amp; inputStateStringsCount &lt;= instrumentStringsCount) {</span></span>
+<span id="L896"><span class="lineNum">     896</span> <span class="tlaUNC">           0 :         h = lineDist;</span></span>
+<span id="L897"><span class="lineNum">     897</span> <span class="tlaUNC">           0 :         y += staffType-&gt;physStringToYOffset(inputStateStringsCount).toAbsolute(localSpatium);</span></span>
+<span id="L898"><span class="lineNum">     898</span> <span class="tlaUNC">           0 :         y -= (staffType-&gt;onLines() ? lineDist * 0.5 : lineDist);</span></span>
+<span id="L899"><span class="lineNum">     899</span>              :     } else {</span>
+<span id="L900"><span class="lineNum">     900</span> <span class="tlaUNC">           0 :         const double skylineMargin = 0.75 * localSpatium;</span></span>
+<span id="L901"><span class="lineNum">     901</span> <span class="tlaUNC">           0 :         const int lines = staffType-&gt;lines();</span></span>
 <span id="L902"><span class="lineNum">     902</span>              : </span>
-<span id="L903"><span class="lineNum">     903</span> <span class="tlaUNC">           0 :     if (slur) {</span></span>
-<span id="L904"><span class="lineNum">     904</span> <span class="tlaUNC">           0 :         std::vector&lt;SpannerSegment*&gt; slurSpannerSegments = slur-&gt;spannerSegments();</span></span>
-<span id="L905"><span class="lineNum">     905</span> <span class="tlaUNC">           0 :         if (!slurSpannerSegments.empty()) {</span></span>
-<span id="L906"><span class="lineNum">     906</span> <span class="tlaUNC">           0 :             slurSpannerSegments.front()-&gt;setSelected(true);</span></span>
-<span id="L907"><span class="lineNum">     907</span>              :         }</span>
-<span id="L908"><span class="lineNum">     908</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L909"><span class="lineNum">     909</span>              : </span>
-<span id="L910"><span class="lineNum">     910</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
-<span id="L911"><span class="lineNum">     911</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L903"><span class="lineNum">     903</span> <span class="tlaUNC">           0 :         h = (lines - 1) * lineDist + 2 * skylineMargin;</span></span>
+<span id="L904"><span class="lineNum">     904</span> <span class="tlaUNC">           0 :         y -= skylineMargin;</span></span>
+<span id="L905"><span class="lineNum">     905</span>              :     }</span>
+<span id="L906"><span class="lineNum">     906</span>              : </span>
+<span id="L907"><span class="lineNum">     907</span> <span class="tlaUNC">           0 :     RectF result { x, y, w, h };</span></span>
+<span id="L908"><span class="lineNum">     908</span>              : </span>
+<span id="L909"><span class="lineNum">     909</span> <span class="tlaUNC">           0 :     if (configuration()-&gt;canvasOrientation().val == muse::Orientation::Horizontal) {</span></span>
+<span id="L910"><span class="lineNum">     910</span> <span class="tlaUNC">           0 :         result.translate(system-&gt;page()-&gt;pos());</span></span>
+<span id="L911"><span class="lineNum">     911</span>              :     }</span>
 <span id="L912"><span class="lineNum">     912</span>              : </span>
-<span id="L913"><span class="lineNum">     913</span> <span class="tlaUNC">           0 : void NotationNoteInput::resetSlur()</span></span>
-<span id="L914"><span class="lineNum">     914</span>              : {</span>
-<span id="L915"><span class="lineNum">     915</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
-<span id="L916"><span class="lineNum">     916</span>              : </span>
-<span id="L917"><span class="lineNum">     917</span> <span class="tlaUNC">           0 :     InputState&amp; inputState = score()-&gt;inputState();</span></span>
-<span id="L918"><span class="lineNum">     918</span> <span class="tlaUNC">           0 :     Slur* slur = inputState.slur();</span></span>
-<span id="L919"><span class="lineNum">     919</span> <span class="tlaUNC">           0 :     if (!slur) {</span></span>
-<span id="L920"><span class="lineNum">     920</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L921"><span class="lineNum">     921</span>              :     }</span>
+<span id="L913"><span class="lineNum">     913</span> <span class="tlaUNC">           0 :     return result;</span></span>
+<span id="L914"><span class="lineNum">     914</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L915"><span class="lineNum">     915</span>              : </span>
+<span id="L916"><span class="lineNum">     916</span> <span class="tlaUNC">           0 : void NotationNoteInput::addSlur(Slur* slur)</span></span>
+<span id="L917"><span class="lineNum">     917</span>              : {</span>
+<span id="L918"><span class="lineNum">     918</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L919"><span class="lineNum">     919</span>              : </span>
+<span id="L920"><span class="lineNum">     920</span> <span class="tlaUNC">           0 :     InputState&amp; inputState = score()-&gt;inputState();</span></span>
+<span id="L921"><span class="lineNum">     921</span> <span class="tlaUNC">           0 :     inputState.setSlur(slur);</span></span>
 <span id="L922"><span class="lineNum">     922</span>              : </span>
-<span id="L923"><span class="lineNum">     923</span> <span class="tlaUNC">           0 :     score()-&gt;deselect(slur);</span></span>
-<span id="L924"><span class="lineNum">     924</span>              : </span>
-<span id="L925"><span class="lineNum">     925</span> <span class="tlaUNC">           0 :     addSlur(nullptr);</span></span>
-<span id="L926"><span class="lineNum">     926</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L927"><span class="lineNum">     927</span>              : </span>
-<span id="L928"><span class="lineNum">     928</span> <span class="tlaUNC">           0 : void NotationNoteInput::addTie()</span></span>
-<span id="L929"><span class="lineNum">     929</span>              : {</span>
-<span id="L930"><span class="lineNum">     930</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
-<span id="L931"><span class="lineNum">     931</span>              : </span>
-<span id="L932"><span class="lineNum">     932</span>              :     // Calls `startEdit` internally</span>
-<span id="L933"><span class="lineNum">     933</span> <span class="tlaUNC">           0 :     EditTie::cmdAddTie(score());</span></span>
-<span id="L934"><span class="lineNum">     934</span>              : </span>
-<span id="L935"><span class="lineNum">     935</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
-<span id="L936"><span class="lineNum">     936</span> <span class="tlaUNC">           0 :     m_interaction-&gt;checkAndShowError();</span></span>
-<span id="L937"><span class="lineNum">     937</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L938"><span class="lineNum">     938</span>              : </span>
-<span id="L939"><span class="lineNum">     939</span> <span class="tlaUNC">           0 : void NotationNoteInput::addLaissezVib()</span></span>
-<span id="L940"><span class="lineNum">     940</span>              : {</span>
-<span id="L941"><span class="lineNum">     941</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L923"><span class="lineNum">     923</span> <span class="tlaUNC">           0 :     if (slur) {</span></span>
+<span id="L924"><span class="lineNum">     924</span> <span class="tlaUNC">           0 :         std::vector&lt;SpannerSegment*&gt; slurSpannerSegments = slur-&gt;spannerSegments();</span></span>
+<span id="L925"><span class="lineNum">     925</span> <span class="tlaUNC">           0 :         if (!slurSpannerSegments.empty()) {</span></span>
+<span id="L926"><span class="lineNum">     926</span> <span class="tlaUNC">           0 :             slurSpannerSegments.front()-&gt;setSelected(true);</span></span>
+<span id="L927"><span class="lineNum">     927</span>              :         }</span>
+<span id="L928"><span class="lineNum">     928</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L929"><span class="lineNum">     929</span>              : </span>
+<span id="L930"><span class="lineNum">     930</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
+<span id="L931"><span class="lineNum">     931</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L932"><span class="lineNum">     932</span>              : </span>
+<span id="L933"><span class="lineNum">     933</span> <span class="tlaUNC">           0 : void NotationNoteInput::resetSlur()</span></span>
+<span id="L934"><span class="lineNum">     934</span>              : {</span>
+<span id="L935"><span class="lineNum">     935</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L936"><span class="lineNum">     936</span>              : </span>
+<span id="L937"><span class="lineNum">     937</span> <span class="tlaUNC">           0 :     InputState&amp; inputState = score()-&gt;inputState();</span></span>
+<span id="L938"><span class="lineNum">     938</span> <span class="tlaUNC">           0 :     Slur* slur = inputState.slur();</span></span>
+<span id="L939"><span class="lineNum">     939</span> <span class="tlaUNC">           0 :     if (!slur) {</span></span>
+<span id="L940"><span class="lineNum">     940</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L941"><span class="lineNum">     941</span>              :     }</span>
 <span id="L942"><span class="lineNum">     942</span>              : </span>
-<span id="L943"><span class="lineNum">     943</span>              :     // Calls `startEdit` internally</span>
-<span id="L944"><span class="lineNum">     944</span> <span class="tlaUNC">           0 :     EditTie::cmdToggleLaissezVib(score());</span></span>
-<span id="L945"><span class="lineNum">     945</span>              : </span>
-<span id="L946"><span class="lineNum">     946</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
-<span id="L947"><span class="lineNum">     947</span> <span class="tlaUNC">           0 :     m_interaction-&gt;checkAndShowError();</span></span>
-<span id="L948"><span class="lineNum">     948</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L949"><span class="lineNum">     949</span>              : </span>
-<span id="L950"><span class="lineNum">     950</span> <span class="tlaUNC">           0 : Notification NotationNoteInput::noteAdded() const</span></span>
-<span id="L951"><span class="lineNum">     951</span>              : {</span>
-<span id="L952"><span class="lineNum">     952</span> <span class="tlaUNC">           0 :     return m_noteAdded;</span></span>
-<span id="L953"><span class="lineNum">     953</span>              : }</span>
+<span id="L943"><span class="lineNum">     943</span> <span class="tlaUNC">           0 :     score()-&gt;deselect(slur);</span></span>
+<span id="L944"><span class="lineNum">     944</span>              : </span>
+<span id="L945"><span class="lineNum">     945</span> <span class="tlaUNC">           0 :     addSlur(nullptr);</span></span>
+<span id="L946"><span class="lineNum">     946</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L947"><span class="lineNum">     947</span>              : </span>
+<span id="L948"><span class="lineNum">     948</span> <span class="tlaUNC">           0 : void NotationNoteInput::addTie()</span></span>
+<span id="L949"><span class="lineNum">     949</span>              : {</span>
+<span id="L950"><span class="lineNum">     950</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L951"><span class="lineNum">     951</span>              : </span>
+<span id="L952"><span class="lineNum">     952</span>              :     // Calls `startEdit` internally</span>
+<span id="L953"><span class="lineNum">     953</span> <span class="tlaUNC">           0 :     EditTie::cmdAddTie(score());</span></span>
 <span id="L954"><span class="lineNum">     954</span>              : </span>
-<span id="L955"><span class="lineNum">     955</span> <span class="tlaUNC">           0 : Notification NotationNoteInput::stateChanged() const</span></span>
-<span id="L956"><span class="lineNum">     956</span>              : {</span>
-<span id="L957"><span class="lineNum">     957</span> <span class="tlaUNC">           0 :     return m_stateChanged;</span></span>
-<span id="L958"><span class="lineNum">     958</span>              : }</span>
-<span id="L959"><span class="lineNum">     959</span>              : </span>
-<span id="L960"><span class="lineNum">     960</span> <span class="tlaUNC">           0 : void NotationNoteInput::setGetViewRectFunc(const std::function&lt;RectF()&gt;&amp; func)</span></span>
-<span id="L961"><span class="lineNum">     961</span>              : {</span>
-<span id="L962"><span class="lineNum">     962</span> <span class="tlaUNC">           0 :     m_getViewRectFunc = func;</span></span>
-<span id="L963"><span class="lineNum">     963</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L964"><span class="lineNum">     964</span>              : </span>
-<span id="L965"><span class="lineNum">     965</span> <span class="tlaUNC">           0 : Score* NotationNoteInput::score() const</span></span>
-<span id="L966"><span class="lineNum">     966</span>              : {</span>
-<span id="L967"><span class="lineNum">     967</span> <span class="tlaUNC">           0 :     return m_getScore-&gt;score();</span></span>
-<span id="L968"><span class="lineNum">     968</span>              : }</span>
+<span id="L955"><span class="lineNum">     955</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
+<span id="L956"><span class="lineNum">     956</span> <span class="tlaUNC">           0 :     m_interaction-&gt;checkAndShowError();</span></span>
+<span id="L957"><span class="lineNum">     957</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L958"><span class="lineNum">     958</span>              : </span>
+<span id="L959"><span class="lineNum">     959</span> <span class="tlaUNC">           0 : void NotationNoteInput::addLaissezVib()</span></span>
+<span id="L960"><span class="lineNum">     960</span>              : {</span>
+<span id="L961"><span class="lineNum">     961</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L962"><span class="lineNum">     962</span>              : </span>
+<span id="L963"><span class="lineNum">     963</span>              :     // Calls `startEdit` internally</span>
+<span id="L964"><span class="lineNum">     964</span> <span class="tlaUNC">           0 :     EditTie::cmdToggleLaissezVib(score());</span></span>
+<span id="L965"><span class="lineNum">     965</span>              : </span>
+<span id="L966"><span class="lineNum">     966</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
+<span id="L967"><span class="lineNum">     967</span> <span class="tlaUNC">           0 :     m_interaction-&gt;checkAndShowError();</span></span>
+<span id="L968"><span class="lineNum">     968</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L969"><span class="lineNum">     969</span>              : </span>
-<span id="L970"><span class="lineNum">     970</span> <span class="tlaUNC">           0 : void NotationNoteInput::startEdit(const muse::TranslatableString&amp; actionName)</span></span>
+<span id="L970"><span class="lineNum">     970</span> <span class="tlaUNC">           0 : Notification NotationNoteInput::noteAdded() const</span></span>
 <span id="L971"><span class="lineNum">     971</span>              : {</span>
-<span id="L972"><span class="lineNum">     972</span> <span class="tlaUNC">           0 :     m_undoStack-&gt;prepareChanges(actionName);</span></span>
-<span id="L973"><span class="lineNum">     973</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L972"><span class="lineNum">     972</span> <span class="tlaUNC">           0 :     return m_noteAdded;</span></span>
+<span id="L973"><span class="lineNum">     973</span>              : }</span>
 <span id="L974"><span class="lineNum">     974</span>              : </span>
-<span id="L975"><span class="lineNum">     975</span> <span class="tlaUNC">           0 : void NotationNoteInput::apply()</span></span>
+<span id="L975"><span class="lineNum">     975</span> <span class="tlaUNC">           0 : Notification NotationNoteInput::stateChanged() const</span></span>
 <span id="L976"><span class="lineNum">     976</span>              : {</span>
-<span id="L977"><span class="lineNum">     977</span> <span class="tlaUNC">           0 :     m_undoStack-&gt;commitChanges();</span></span>
-<span id="L978"><span class="lineNum">     978</span>              : </span>
-<span id="L979"><span class="lineNum">     979</span> <span class="tlaUNC">           0 :     if (ChordRest* chordRest = score()-&gt;inputState().cr()) {</span></span>
-<span id="L980"><span class="lineNum">     980</span> <span class="tlaUNC">           0 :         m_interaction-&gt;showItem(chordRest);</span></span>
-<span id="L981"><span class="lineNum">     981</span>              :     }</span>
-<span id="L982"><span class="lineNum">     982</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L983"><span class="lineNum">     983</span>              : </span>
-<span id="L984"><span class="lineNum">     984</span> <span class="tlaUNC">           0 : void NotationNoteInput::updateInputState()</span></span>
-<span id="L985"><span class="lineNum">     985</span>              : {</span>
-<span id="L986"><span class="lineNum">     986</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
-<span id="L987"><span class="lineNum">     987</span>              : </span>
-<span id="L988"><span class="lineNum">     988</span> <span class="tlaUNC">           0 :     NoteInputState&amp; is = score()-&gt;inputState();</span></span>
-<span id="L989"><span class="lineNum">     989</span> <span class="tlaUNC">           0 :     is.update(score()-&gt;selection());</span></span>
-<span id="L990"><span class="lineNum">     990</span>              : </span>
-<span id="L991"><span class="lineNum">     991</span> <span class="tlaUNC">           0 :     if (!configuration()-&gt;addAccidentalDotsArticulationsToNextNoteEntered()) {</span></span>
-<span id="L992"><span class="lineNum">     992</span> <span class="tlaUNC">           0 :         is.setAccidentalType(AccidentalType::NONE);</span></span>
-<span id="L993"><span class="lineNum">     993</span> <span class="tlaUNC">           0 :         is.setDots(0);</span></span>
-<span id="L994"><span class="lineNum">     994</span> <span class="tlaUNC">           0 :         is.setArticulationIds({});</span></span>
-<span id="L995"><span class="lineNum">     995</span>              :     }</span>
-<span id="L996"><span class="lineNum">     996</span>              : </span>
-<span id="L997"><span class="lineNum">     997</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
-<span id="L998"><span class="lineNum">     998</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L999"><span class="lineNum">     999</span>              : </span>
-<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaUNC">           0 : void NotationNoteInput::notifyAboutStateChanged()</span></span>
-<span id="L1001"><span class="lineNum">    1001</span>              : {</span>
-<span id="L1002"><span class="lineNum">    1002</span> <span class="tlaUNC">           0 :     m_stateChanged.notify();</span></span>
-<span id="L1003"><span class="lineNum">    1003</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1004"><span class="lineNum">    1004</span>              : </span>
-<span id="L1005"><span class="lineNum">    1005</span> <span class="tlaUNC">           0 : void NotationNoteInput::notifyNoteAddedChanged()</span></span>
-<span id="L1006"><span class="lineNum">    1006</span>              : {</span>
-<span id="L1007"><span class="lineNum">    1007</span> <span class="tlaUNC">           0 :     m_noteAdded.notify();</span></span>
-<span id="L1008"><span class="lineNum">    1008</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1009"><span class="lineNum">    1009</span>              : </span>
-<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaUNC">           0 : void NotationNoteInput::notifyAboutNoteInputStarted(bool focusNotation)</span></span>
-<span id="L1011"><span class="lineNum">    1011</span>              : {</span>
-<span id="L1012"><span class="lineNum">    1012</span> <span class="tlaUNC">           0 :     m_noteInputStarted.send(focusNotation);</span></span>
-<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1014"><span class="lineNum">    1014</span>              : </span>
-<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaUNC">           0 : void NotationNoteInput::notifyAboutNoteInputEnded()</span></span>
-<span id="L1016"><span class="lineNum">    1016</span>              : {</span>
-<span id="L1017"><span class="lineNum">    1017</span> <span class="tlaUNC">           0 :     m_noteInputEnded.notify();</span></span>
+<span id="L977"><span class="lineNum">     977</span> <span class="tlaUNC">           0 :     return m_stateChanged;</span></span>
+<span id="L978"><span class="lineNum">     978</span>              : }</span>
+<span id="L979"><span class="lineNum">     979</span>              : </span>
+<span id="L980"><span class="lineNum">     980</span> <span class="tlaUNC">           0 : void NotationNoteInput::setGetViewRectFunc(const std::function&lt;RectF()&gt;&amp; func)</span></span>
+<span id="L981"><span class="lineNum">     981</span>              : {</span>
+<span id="L982"><span class="lineNum">     982</span> <span class="tlaUNC">           0 :     m_getViewRectFunc = func;</span></span>
+<span id="L983"><span class="lineNum">     983</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L984"><span class="lineNum">     984</span>              : </span>
+<span id="L985"><span class="lineNum">     985</span> <span class="tlaUNC">           0 : Score* NotationNoteInput::score() const</span></span>
+<span id="L986"><span class="lineNum">     986</span>              : {</span>
+<span id="L987"><span class="lineNum">     987</span> <span class="tlaUNC">           0 :     return m_getScore-&gt;score();</span></span>
+<span id="L988"><span class="lineNum">     988</span>              : }</span>
+<span id="L989"><span class="lineNum">     989</span>              : </span>
+<span id="L990"><span class="lineNum">     990</span> <span class="tlaUNC">           0 : void NotationNoteInput::startEdit(const muse::TranslatableString&amp; actionName)</span></span>
+<span id="L991"><span class="lineNum">     991</span>              : {</span>
+<span id="L992"><span class="lineNum">     992</span> <span class="tlaUNC">           0 :     m_undoStack-&gt;prepareChanges(actionName);</span></span>
+<span id="L993"><span class="lineNum">     993</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L994"><span class="lineNum">     994</span>              : </span>
+<span id="L995"><span class="lineNum">     995</span> <span class="tlaUNC">           0 : void NotationNoteInput::apply()</span></span>
+<span id="L996"><span class="lineNum">     996</span>              : {</span>
+<span id="L997"><span class="lineNum">     997</span> <span class="tlaUNC">           0 :     m_undoStack-&gt;commitChanges();</span></span>
+<span id="L998"><span class="lineNum">     998</span>              : </span>
+<span id="L999"><span class="lineNum">     999</span> <span class="tlaUNC">           0 :     if (ChordRest* chordRest = score()-&gt;inputState().cr()) {</span></span>
+<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaUNC">           0 :         m_interaction-&gt;showItem(chordRest);</span></span>
+<span id="L1001"><span class="lineNum">    1001</span>              :     }</span>
+<span id="L1002"><span class="lineNum">    1002</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1003"><span class="lineNum">    1003</span>              : </span>
+<span id="L1004"><span class="lineNum">    1004</span> <span class="tlaUNC">           0 : void NotationNoteInput::updateInputState()</span></span>
+<span id="L1005"><span class="lineNum">    1005</span>              : {</span>
+<span id="L1006"><span class="lineNum">    1006</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L1007"><span class="lineNum">    1007</span>              : </span>
+<span id="L1008"><span class="lineNum">    1008</span> <span class="tlaUNC">           0 :     NoteInputState&amp; is = score()-&gt;inputState();</span></span>
+<span id="L1009"><span class="lineNum">    1009</span> <span class="tlaUNC">           0 :     is.update(score()-&gt;selection());</span></span>
+<span id="L1010"><span class="lineNum">    1010</span>              : </span>
+<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaUNC">           0 :     if (!configuration()-&gt;addAccidentalDotsArticulationsToNextNoteEntered()) {</span></span>
+<span id="L1012"><span class="lineNum">    1012</span> <span class="tlaUNC">           0 :         is.setAccidentalType(AccidentalType::NONE);</span></span>
+<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaUNC">           0 :         is.setDots(0);</span></span>
+<span id="L1014"><span class="lineNum">    1014</span> <span class="tlaUNC">           0 :         is.setArticulationIds({});</span></span>
+<span id="L1015"><span class="lineNum">    1015</span>              :     }</span>
+<span id="L1016"><span class="lineNum">    1016</span>              : </span>
+<span id="L1017"><span class="lineNum">    1017</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
 <span id="L1018"><span class="lineNum">    1018</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L1019"><span class="lineNum">    1019</span>              : </span>
-<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaUNC">           0 : void NotationNoteInput::doubleNoteInputDuration()</span></span>
+<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaUNC">           0 : void NotationNoteInput::notifyAboutStateChanged()</span></span>
 <span id="L1021"><span class="lineNum">    1021</span>              : {</span>
-<span id="L1022"><span class="lineNum">    1022</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
-<span id="L1023"><span class="lineNum">    1023</span>              : </span>
-<span id="L1024"><span class="lineNum">    1024</span> <span class="tlaUNC">           0 :     startEdit(TranslatableString(&quot;undoableAction&quot;, &quot;Double note input duration&quot;));</span></span>
-<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaUNC">           0 :     NoteInput::increaseDuration(score()-&gt;transactionManager()-&gt;currentOrDummyTransaction(), score());</span></span>
-<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaUNC">           0 :     apply();</span></span>
-<span id="L1027"><span class="lineNum">    1027</span>              : </span>
-<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
-<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaUNC">           0 :     m_interaction-&gt;checkAndShowError();</span></span>
-<span id="L1030"><span class="lineNum">    1030</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1031"><span class="lineNum">    1031</span>              : </span>
-<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaUNC">           0 : void NotationNoteInput::halveNoteInputDuration()</span></span>
-<span id="L1033"><span class="lineNum">    1033</span>              : {</span>
-<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
-<span id="L1035"><span class="lineNum">    1035</span>              : </span>
-<span id="L1036"><span class="lineNum">    1036</span> <span class="tlaUNC">           0 :     startEdit(TranslatableString(&quot;undoableAction&quot;, &quot;Halve note input duration&quot;));</span></span>
-<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaUNC">           0 :     NoteInput::decreaseDuration(score()-&gt;transactionManager()-&gt;currentOrDummyTransaction(), score());</span></span>
-<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaUNC">           0 :     apply();</span></span>
+<span id="L1022"><span class="lineNum">    1022</span> <span class="tlaUNC">           0 :     m_stateChanged.notify();</span></span>
+<span id="L1023"><span class="lineNum">    1023</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1024"><span class="lineNum">    1024</span>              : </span>
+<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaUNC">           0 : void NotationNoteInput::notifyNoteAddedChanged()</span></span>
+<span id="L1026"><span class="lineNum">    1026</span>              : {</span>
+<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaUNC">           0 :     m_noteAdded.notify();</span></span>
+<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1029"><span class="lineNum">    1029</span>              : </span>
+<span id="L1030"><span class="lineNum">    1030</span> <span class="tlaUNC">           0 : void NotationNoteInput::notifyAboutNoteInputStarted(bool focusNotation)</span></span>
+<span id="L1031"><span class="lineNum">    1031</span>              : {</span>
+<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaUNC">           0 :     m_noteInputStarted.send(focusNotation);</span></span>
+<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1034"><span class="lineNum">    1034</span>              : </span>
+<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaUNC">           0 : void NotationNoteInput::notifyAboutNoteInputEnded()</span></span>
+<span id="L1036"><span class="lineNum">    1036</span>              : {</span>
+<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaUNC">           0 :     m_noteInputEnded.notify();</span></span>
+<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L1039"><span class="lineNum">    1039</span>              : </span>
-<span id="L1040"><span class="lineNum">    1040</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
-<span id="L1041"><span class="lineNum">    1041</span> <span class="tlaUNC">           0 :     m_interaction-&gt;checkAndShowError();</span></span>
-<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1040"><span class="lineNum">    1040</span> <span class="tlaUNC">           0 : void NotationNoteInput::doubleNoteInputDuration()</span></span>
+<span id="L1041"><span class="lineNum">    1041</span>              : {</span>
+<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L1043"><span class="lineNum">    1043</span>              : </span>
+<span id="L1044"><span class="lineNum">    1044</span> <span class="tlaUNC">           0 :     startEdit(TranslatableString(&quot;undoableAction&quot;, &quot;Double note input duration&quot;));</span></span>
+<span id="L1045"><span class="lineNum">    1045</span> <span class="tlaUNC">           0 :     NoteInput::increaseDuration(score()-&gt;transactionManager()-&gt;currentOrDummyTransaction(), score());</span></span>
+<span id="L1046"><span class="lineNum">    1046</span> <span class="tlaUNC">           0 :     apply();</span></span>
+<span id="L1047"><span class="lineNum">    1047</span>              : </span>
+<span id="L1048"><span class="lineNum">    1048</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
+<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaUNC">           0 :     m_interaction-&gt;checkAndShowError();</span></span>
+<span id="L1050"><span class="lineNum">    1050</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1051"><span class="lineNum">    1051</span>              : </span>
+<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaUNC">           0 : void NotationNoteInput::halveNoteInputDuration()</span></span>
+<span id="L1053"><span class="lineNum">    1053</span>              : {</span>
+<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L1055"><span class="lineNum">    1055</span>              : </span>
+<span id="L1056"><span class="lineNum">    1056</span> <span class="tlaUNC">           0 :     startEdit(TranslatableString(&quot;undoableAction&quot;, &quot;Halve note input duration&quot;));</span></span>
+<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaUNC">           0 :     NoteInput::decreaseDuration(score()-&gt;transactionManager()-&gt;currentOrDummyTransaction(), score());</span></span>
+<span id="L1058"><span class="lineNum">    1058</span> <span class="tlaUNC">           0 :     apply();</span></span>
+<span id="L1059"><span class="lineNum">    1059</span>              : </span>
+<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaUNC">           0 :     notifyAboutStateChanged();</span></span>
+<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaUNC">           0 :     m_interaction-&gt;checkAndShowError();</span></span>
+<span id="L1062"><span class="lineNum">    1062</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>
             </tr>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -125,12 +125,12 @@
 <span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">           6 :     return concurrency &gt; 0 ? static_cast&lt;int64_t&gt;(concurrency) : 1;</span></span>
 <span id="L68"><span class="lineNum">      68</span>              : }</span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">          27 : void processProgressEvents()</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">          26 : void processProgressEvents()</span></span>
 <span id="L71"><span class="lineNum">      71</span>              : {</span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">          27 :     if (QCoreApplication::instance()) {</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          27 :         QCoreApplication::processEvents();</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">          26 :     if (QCoreApplication::instance()) {</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          26 :         QCoreApplication::processEvents();</span></span>
 <span id="L74"><span class="lineNum">      74</span>              :     }</span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">          27 : }</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">          26 : }</span></span>
 <span id="L76"><span class="lineNum">      76</span>              : </span>
 <span id="L77"><span class="lineNum">      77</span>              : constexpr int AUDIO_PLUGIN_REGISTRATION_TIMEOUT_MS = 15000;</span>
 <span id="L78"><span class="lineNum">      78</span>              : }</span>
@@ -464,9 +464,9 @@
 <span id="L406"><span class="lineNum">     406</span> <span class="tlaUNC">           0 :                 args.insert(args.end(), { &quot;--crash-server-url&quot;, serverUrl });</span></span>
 <span id="L407"><span class="lineNum">     407</span> <span class="tlaUNC">           0 :             }</span></span>
 <span id="L408"><span class="lineNum">     408</span>              : </span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC tlaBgGNC">          19 :             const int code = process()-&gt;execute(appPath, args,</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC tlaBgGNC">          20 :             const int code = process()-&gt;execute(appPath, args,</span></span>
 <span id="L410"><span class="lineNum">     410</span>              :                                                 AUDIO_PLUGIN_REGISTRATION_TIMEOUT_MS,</span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          10 :                                                 [this]() { return m_aborted.load() || m_progress.isCanceled(); });</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          11 :                                                 [this]() { return m_aborted.load() || m_progress.isCanceled(); });</span></span>
 <span id="L412"><span class="lineNum">     412</span>              : </span>
 <span id="L413"><span class="lineNum">     413</span>              :             SCAN_TRACE() &lt;&lt; &quot;Audio plugin scan worker &quot; &lt;&lt; workerId</span>
 <span id="L414"><span class="lineNum">     414</span>              :                          &lt;&lt; &quot; validation finished: index=&quot; &lt;&lt; index</span>
@@ -499,11 +499,11 @@
 <span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC">          10 :         CompletedScan scan;</span></span>
 <span id="L442"><span class="lineNum">     442</span>              :         {</span>
 <span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">          10 :             std::unique_lock lock(completedMutex);</span></span>
-<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">          22 :             while (completedScans.empty() &amp;&amp; activeWorkers.load() &gt; 0) {</span></span>
-<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">           6 :                 completedChanged.wait_for(lock, std::chrono::milliseconds(50));</span></span>
-<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">           6 :                 lock.unlock();</span></span>
-<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">           6 :                 processProgressEvents();</span></span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">           6 :                 lock.lock();</span></span>
+<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">          20 :             while (completedScans.empty() &amp;&amp; activeWorkers.load() &gt; 0) {</span></span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">           5 :                 completedChanged.wait_for(lock, std::chrono::milliseconds(50));</span></span>
+<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">           5 :                 lock.unlock();</span></span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">           5 :                 processProgressEvents();</span></span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">           5 :                 lock.lock();</span></span>
 <span id="L449"><span class="lineNum">     449</span>              :             }</span>
 <span id="L450"><span class="lineNum">     450</span>              : </span>
 <span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">          10 :             if (completedScans.empty()) {</span></span>

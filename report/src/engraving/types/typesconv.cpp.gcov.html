@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -116,18 +116,18 @@
 <span id="L58"><span class="lineNum">      58</span>              : };</span>
 <span id="L59"><span class="lineNum">      59</span>              : </span>
 <span id="L60"><span class="lineNum">      60</span>              : template&lt;typename T, typename C&gt;</span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">      179842 : static const Item&lt;T&gt;&amp; findItemByType(const C&amp; cont, const T&amp; type)</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">      179511 : static const Item&lt;T&gt;&amp; findItemByType(const C&amp; cont, const T&amp; type)</span></span>
 <span id="L62"><span class="lineNum">      62</span>              : {</span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">     6755084 :     const auto it = std::find_if(cont.cbegin(), cont.cend(), [&amp;](const Item&lt;T&gt;&amp; item) {</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">     6575242 :         return item.type == type;</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">     6742712 :     const auto it = std::find_if(cont.cbegin(), cont.cend(), [&amp;](const Item&lt;T&gt;&amp; item) {</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">     6563201 :         return item.type == type;</span></span>
 <span id="L65"><span class="lineNum">      65</span>              :     });</span>
 <span id="L66"><span class="lineNum">      66</span>              : </span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">      179842 :     IF_ASSERT_FAILED(it != cont.cend()) {</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">      179511 :     IF_ASSERT_FAILED(it != cont.cend()) {</span></span>
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaUNC tlaBgUNC">           0 :         static Item&lt;T&gt; dummy;</span></span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaUNC">           0 :         return dummy;</span></span>
 <span id="L70"><span class="lineNum">      70</span>              :     }</span>
 <span id="L71"><span class="lineNum">      71</span>              : </span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC tlaBgGNC">      179842 :     return *it;</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC tlaBgGNC">      179511 :     return *it;</span></span>
 <span id="L73"><span class="lineNum">      73</span>              : }</span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
 <span id="L75"><span class="lineNum">      75</span>              : template&lt;typename T, typename C&gt;</span>
@@ -147,11 +147,11 @@
 <span id="L89"><span class="lineNum">      89</span>              : }</span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
 <span id="L91"><span class="lineNum">      91</span>              : template&lt;typename T, typename C&gt;</span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">      179794 : static AsciiStringView findXmlTagByType(const C&amp; cont, const T&amp; v)</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">      179463 : static AsciiStringView findXmlTagByType(const C&amp; cont, const T&amp; v)</span></span>
 <span id="L93"><span class="lineNum">      93</span>              : {</span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">      179794 :     const Item&lt;T&gt;&amp; item = findItemByType(cont, v);</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">      179463 :     const Item&lt;T&gt;&amp; item = findItemByType(cont, v);</span></span>
 <span id="L95"><span class="lineNum">      95</span>              : </span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">      179794 :     return item.xml;</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">      179463 :     return item.xml;</span></span>
 <span id="L97"><span class="lineNum">      97</span>              : }</span>
 <span id="L98"><span class="lineNum">      98</span>              : </span>
 <span id="L99"><span class="lineNum">      99</span>              : template&lt;typename T, typename C&gt;</span>
@@ -169,13 +169,13 @@
 <span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        9638 : }</span></span>
 <span id="L112"><span class="lineNum">     112</span>              : </span>
 <span id="L113"><span class="lineNum">     113</span>              : template&lt;typename T, typename C&gt;</span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">       57419 : static T findTypeByXmlTag(const C&amp; cont, const AsciiStringView&amp; tag, T def, bool silent = false)</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">       57864 : static T findTypeByXmlTag(const C&amp; cont, const AsciiStringView&amp; tag, T def, bool silent = false)</span></span>
 <span id="L115"><span class="lineNum">     115</span>              : {</span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">     1448865 :     auto it = std::find_if(cont.cbegin(), cont.cend(), [tag](const Item&lt;T&gt;&amp; i) {</span></span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">     1391446 :         return i.xml == tag;</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">     1450819 :     auto it = std::find_if(cont.cbegin(), cont.cend(), [tag](const Item&lt;T&gt;&amp; i) {</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">     1392955 :         return i.xml == tag;</span></span>
 <span id="L118"><span class="lineNum">     118</span>              :     });</span>
 <span id="L119"><span class="lineNum">     119</span>              : </span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">       57419 :     if (it == cont.cend()) {</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">       57864 :     if (it == cont.cend()) {</span></span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">        2993 :         if (!silent) {</span></span>
 <span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">        2993 :             LOGE() &lt;&lt; &quot;not found type for tag: &quot; &lt;&lt; tag;</span></span>
 <span id="L123"><span class="lineNum">     123</span>              :             //assert(it != cont.cend());</span>
@@ -183,7 +183,7 @@
 <span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">        2993 :         return def;</span></span>
 <span id="L126"><span class="lineNum">     126</span>              :     }</span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       54426 :     return it-&gt;type;</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       54871 :     return it-&gt;type;</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : }</span>
 <span id="L130"><span class="lineNum">     130</span>              : </span>
 <span id="L131"><span class="lineNum">     131</span>              : // ==========================================================</span>
@@ -718,14 +718,14 @@
 <span id="L660"><span class="lineNum">     660</span> <span class="tlaUNC">           0 :     return findCapitalizedUserNameByType(ELEMENT_TYPES, v);</span></span>
 <span id="L661"><span class="lineNum">     661</span>              : }</span>
 <span id="L662"><span class="lineNum">     662</span>              : </span>
-<span id="L663"><span class="lineNum">     663</span> <span class="tlaGNC tlaBgGNC">      103485 : AsciiStringView TConv::toXml(ElementType v)</span></span>
+<span id="L663"><span class="lineNum">     663</span> <span class="tlaGNC tlaBgGNC">      103293 : AsciiStringView TConv::toXml(ElementType v)</span></span>
 <span id="L664"><span class="lineNum">     664</span>              : {</span>
-<span id="L665"><span class="lineNum">     665</span> <span class="tlaGNC">      103485 :     return findXmlTagByType&lt;ElementType&gt;(ELEMENT_TYPES, v);</span></span>
+<span id="L665"><span class="lineNum">     665</span> <span class="tlaGNC">      103293 :     return findXmlTagByType&lt;ElementType&gt;(ELEMENT_TYPES, v);</span></span>
 <span id="L666"><span class="lineNum">     666</span>              : }</span>
 <span id="L667"><span class="lineNum">     667</span>              : </span>
-<span id="L668"><span class="lineNum">     668</span> <span class="tlaGNC">       11397 : ElementType TConv::fromXml(const AsciiStringView&amp; tag, ElementType def, bool silent)</span></span>
+<span id="L668"><span class="lineNum">     668</span> <span class="tlaGNC">       11398 : ElementType TConv::fromXml(const AsciiStringView&amp; tag, ElementType def, bool silent)</span></span>
 <span id="L669"><span class="lineNum">     669</span>              : {</span>
-<span id="L670"><span class="lineNum">     670</span> <span class="tlaGNC">       11397 :     return findTypeByXmlTag&lt;ElementType&gt;(ELEMENT_TYPES, tag, def, silent);</span></span>
+<span id="L670"><span class="lineNum">     670</span> <span class="tlaGNC">       11398 :     return findTypeByXmlTag&lt;ElementType&gt;(ELEMENT_TYPES, tag, def, silent);</span></span>
 <span id="L671"><span class="lineNum">     671</span>              : }</span>
 <span id="L672"><span class="lineNum">     672</span>              : </span>
 <span id="L673"><span class="lineNum">     673</span>              : static const std::vector&lt;Item&lt;AlignH&gt; &gt; ALIGN_H = {</span>
@@ -1225,9 +1225,9 @@
 <span id="L1167"><span class="lineNum">    1167</span> <span class="tlaUNC">           0 :     return findCapitalizedUserNameByType(NOTEHEAD_SCHEMES, v).translated();</span></span>
 <span id="L1168"><span class="lineNum">    1168</span>              : }</span>
 <span id="L1169"><span class="lineNum">    1169</span>              : </span>
-<span id="L1170"><span class="lineNum">    1170</span> <span class="tlaGNC tlaBgGNC">        3769 : AsciiStringView TConv::toXml(NoteHeadScheme v)</span></span>
+<span id="L1170"><span class="lineNum">    1170</span> <span class="tlaGNC tlaBgGNC">        3765 : AsciiStringView TConv::toXml(NoteHeadScheme v)</span></span>
 <span id="L1171"><span class="lineNum">    1171</span>              : {</span>
-<span id="L1172"><span class="lineNum">    1172</span> <span class="tlaGNC">        3769 :     return findXmlTagByType&lt;NoteHeadScheme&gt;(NOTEHEAD_SCHEMES, v);</span></span>
+<span id="L1172"><span class="lineNum">    1172</span> <span class="tlaGNC">        3765 :     return findXmlTagByType&lt;NoteHeadScheme&gt;(NOTEHEAD_SCHEMES, v);</span></span>
 <span id="L1173"><span class="lineNum">    1173</span>              : }</span>
 <span id="L1174"><span class="lineNum">    1174</span>              : </span>
 <span id="L1175"><span class="lineNum">    1175</span> <span class="tlaGNC">           6 : NoteHeadScheme TConv::fromXml(const AsciiStringView&amp; tag, NoteHeadScheme def)</span></span>
@@ -1247,9 +1247,9 @@
 <span id="L1189"><span class="lineNum">    1189</span> <span class="tlaUNC">           0 :     return findCapitalizedUserNameByType(INSTRUMENT_LABEL_VISIBILITIES, v).translated();</span></span>
 <span id="L1190"><span class="lineNum">    1190</span>              : }</span>
 <span id="L1191"><span class="lineNum">    1191</span>              : </span>
-<span id="L1192"><span class="lineNum">    1192</span> <span class="tlaGNC tlaBgGNC">        3942 : AsciiStringView TConv::toXml(InstrumentLabelVisibility v)</span></span>
+<span id="L1192"><span class="lineNum">    1192</span> <span class="tlaGNC tlaBgGNC">        3938 : AsciiStringView TConv::toXml(InstrumentLabelVisibility v)</span></span>
 <span id="L1193"><span class="lineNum">    1193</span>              : {</span>
-<span id="L1194"><span class="lineNum">    1194</span> <span class="tlaGNC">        3942 :     return findXmlTagByType&lt;InstrumentLabelVisibility&gt;(INSTRUMENT_LABEL_VISIBILITIES, v);</span></span>
+<span id="L1194"><span class="lineNum">    1194</span> <span class="tlaGNC">        3938 :     return findXmlTagByType&lt;InstrumentLabelVisibility&gt;(INSTRUMENT_LABEL_VISIBILITIES, v);</span></span>
 <span id="L1195"><span class="lineNum">    1195</span>              : }</span>
 <span id="L1196"><span class="lineNum">    1196</span>              : </span>
 <span id="L1197"><span class="lineNum">    1197</span> <span class="tlaUNC tlaBgUNC">           0 : InstrumentLabelVisibility TConv::fromXml(const AsciiStringView&amp; tag, InstrumentLabelVisibility def)</span></span>
@@ -1443,14 +1443,14 @@
 <span id="L1385"><span class="lineNum">    1385</span> <span class="tlaGNC">        2949 :     return findXmlTagByType&lt;ClefType&gt;(CLEF_TYPES, v);</span></span>
 <span id="L1386"><span class="lineNum">    1386</span>              : }</span>
 <span id="L1387"><span class="lineNum">    1387</span>              : </span>
-<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaGNC">       14266 : ClefType TConv::fromXml(const AsciiStringView&amp; tag, ClefType def)</span></span>
+<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaGNC">       14267 : ClefType TConv::fromXml(const AsciiStringView&amp; tag, ClefType def)</span></span>
 <span id="L1389"><span class="lineNum">    1389</span>              : {</span>
-<span id="L1390"><span class="lineNum">    1390</span> <span class="tlaGNC">       14266 :     auto it = std::find_if(CLEF_TYPES.cbegin(), CLEF_TYPES.cend(), [tag](const Item&lt;ClefType&gt;&amp; i) {</span></span>
-<span id="L1391"><span class="lineNum">    1391</span> <span class="tlaGNC">      162244 :         return i.xml == tag;</span></span>
+<span id="L1390"><span class="lineNum">    1390</span> <span class="tlaGNC">       14267 :     auto it = std::find_if(CLEF_TYPES.cbegin(), CLEF_TYPES.cend(), [tag](const Item&lt;ClefType&gt;&amp; i) {</span></span>
+<span id="L1391"><span class="lineNum">    1391</span> <span class="tlaGNC">      162265 :         return i.xml == tag;</span></span>
 <span id="L1392"><span class="lineNum">    1392</span>              :     });</span>
 <span id="L1393"><span class="lineNum">    1393</span>              : </span>
-<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaGNC">       14266 :     if (it != CLEF_TYPES.cend()) {</span></span>
-<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaGNC">       14266 :         return it-&gt;type;</span></span>
+<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaGNC">       14267 :     if (it != CLEF_TYPES.cend()) {</span></span>
+<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaGNC">       14267 :         return it-&gt;type;</span></span>
 <span id="L1396"><span class="lineNum">    1396</span>              :     }</span>
 <span id="L1397"><span class="lineNum">    1397</span>              : </span>
 <span id="L1398"><span class="lineNum">    1398</span>              :     // compatibility</span>
@@ -1907,19 +1907,19 @@
 <span id="L1849"><span class="lineNum">    1849</span> <span class="tlaUNC">           0 :     return findCapitalizedUserNameByType(TEXTSTYLE_TYPES, v).translated();</span></span>
 <span id="L1850"><span class="lineNum">    1850</span>              : }</span>
 <span id="L1851"><span class="lineNum">    1851</span>              : </span>
-<span id="L1852"><span class="lineNum">    1852</span> <span class="tlaGNC tlaBgGNC">        2169 : AsciiStringView TConv::toXml(TextStyleType v)</span></span>
+<span id="L1852"><span class="lineNum">    1852</span> <span class="tlaGNC tlaBgGNC">        2147 : AsciiStringView TConv::toXml(TextStyleType v)</span></span>
 <span id="L1853"><span class="lineNum">    1853</span>              : {</span>
-<span id="L1854"><span class="lineNum">    1854</span> <span class="tlaGNC">        2169 :     return findXmlTagByType&lt;TextStyleType&gt;(TEXTSTYLE_TYPES, v);</span></span>
+<span id="L1854"><span class="lineNum">    1854</span> <span class="tlaGNC">        2147 :     return findXmlTagByType&lt;TextStyleType&gt;(TEXTSTYLE_TYPES, v);</span></span>
 <span id="L1855"><span class="lineNum">    1855</span>              : }</span>
 <span id="L1856"><span class="lineNum">    1856</span>              : </span>
-<span id="L1857"><span class="lineNum">    1857</span> <span class="tlaGNC">        2289 : TextStyleType TConv::fromXml(const AsciiStringView&amp; tag, TextStyleType def)</span></span>
+<span id="L1857"><span class="lineNum">    1857</span> <span class="tlaGNC">        2307 : TextStyleType TConv::fromXml(const AsciiStringView&amp; tag, TextStyleType def)</span></span>
 <span id="L1858"><span class="lineNum">    1858</span>              : {</span>
-<span id="L1859"><span class="lineNum">    1859</span> <span class="tlaGNC">        2289 :     auto it = std::find_if(TEXTSTYLE_TYPES.cbegin(), TEXTSTYLE_TYPES.cend(), [tag](const Item&lt;TextStyleType&gt;&amp; i) {</span></span>
-<span id="L1860"><span class="lineNum">    1860</span> <span class="tlaGNC">       48006 :         return i.xml == tag;</span></span>
+<span id="L1859"><span class="lineNum">    1859</span> <span class="tlaGNC">        2307 :     auto it = std::find_if(TEXTSTYLE_TYPES.cbegin(), TEXTSTYLE_TYPES.cend(), [tag](const Item&lt;TextStyleType&gt;&amp; i) {</span></span>
+<span id="L1860"><span class="lineNum">    1860</span> <span class="tlaGNC">       48636 :         return i.xml == tag;</span></span>
 <span id="L1861"><span class="lineNum">    1861</span>              :     });</span>
 <span id="L1862"><span class="lineNum">    1862</span>              : </span>
-<span id="L1863"><span class="lineNum">    1863</span> <span class="tlaGNC">        2289 :     if (it != TEXTSTYLE_TYPES.cend()) {</span></span>
-<span id="L1864"><span class="lineNum">    1864</span> <span class="tlaGNC">        1948 :         return it-&gt;type;</span></span>
+<span id="L1863"><span class="lineNum">    1863</span> <span class="tlaGNC">        2307 :     if (it != TEXTSTYLE_TYPES.cend()) {</span></span>
+<span id="L1864"><span class="lineNum">    1864</span> <span class="tlaGNC">        1966 :         return it-&gt;type;</span></span>
 <span id="L1865"><span class="lineNum">    1865</span>              :     }</span>
 <span id="L1866"><span class="lineNum">    1866</span>              : </span>
 <span id="L1867"><span class="lineNum">    1867</span>              :     // compatibility</span>
@@ -2231,14 +2231,14 @@
 <span id="L2173"><span class="lineNum">    2173</span> <span class="tlaGNC">          20 :     return findCapitalizedUserNameByType(DURATION_TYPES, v).translated();</span></span>
 <span id="L2174"><span class="lineNum">    2174</span>              : }</span>
 <span id="L2175"><span class="lineNum">    2175</span>              : </span>
-<span id="L2176"><span class="lineNum">    2176</span> <span class="tlaGNC">       38223 : AsciiStringView TConv::toXml(DurationType v)</span></span>
+<span id="L2176"><span class="lineNum">    2176</span> <span class="tlaGNC">       38120 : AsciiStringView TConv::toXml(DurationType v)</span></span>
 <span id="L2177"><span class="lineNum">    2177</span>              : {</span>
-<span id="L2178"><span class="lineNum">    2178</span> <span class="tlaGNC">       38223 :     return findXmlTagByType&lt;DurationType&gt;(DURATION_TYPES, v);</span></span>
+<span id="L2178"><span class="lineNum">    2178</span> <span class="tlaGNC">       38120 :     return findXmlTagByType&lt;DurationType&gt;(DURATION_TYPES, v);</span></span>
 <span id="L2179"><span class="lineNum">    2179</span>              : }</span>
 <span id="L2180"><span class="lineNum">    2180</span>              : </span>
-<span id="L2181"><span class="lineNum">    2181</span> <span class="tlaGNC">       38739 : DurationType TConv::fromXml(const AsciiStringView&amp; tag, DurationType def)</span></span>
+<span id="L2181"><span class="lineNum">    2181</span> <span class="tlaGNC">       39148 : DurationType TConv::fromXml(const AsciiStringView&amp; tag, DurationType def)</span></span>
 <span id="L2182"><span class="lineNum">    2182</span>              : {</span>
-<span id="L2183"><span class="lineNum">    2183</span> <span class="tlaGNC">       38739 :     return findTypeByXmlTag&lt;DurationType&gt;(DURATION_TYPES, tag, def);</span></span>
+<span id="L2183"><span class="lineNum">    2183</span> <span class="tlaGNC">       39148 :     return findTypeByXmlTag&lt;DurationType&gt;(DURATION_TYPES, tag, def);</span></span>
 <span id="L2184"><span class="lineNum">    2184</span>              : }</span>
 <span id="L2185"><span class="lineNum">    2185</span>              : </span>
 <span id="L2186"><span class="lineNum">    2186</span>              : static const std::vector&lt;Item&lt;PlayingTechniqueType&gt; &gt; PLAY_TECH_TYPES = {</span>
@@ -2494,9 +2494,9 @@
 <span id="L2436"><span class="lineNum">    2436</span> <span class="tlaGNC">         531 :     return findXmlTagByType&lt;LayoutBreakType&gt;(LAYOUTBREAK_TYPES, v);</span></span>
 <span id="L2437"><span class="lineNum">    2437</span>              : }</span>
 <span id="L2438"><span class="lineNum">    2438</span>              : </span>
-<span id="L2439"><span class="lineNum">    2439</span> <span class="tlaGNC">         706 : LayoutBreakType TConv::fromXml(const AsciiStringView&amp; tag, LayoutBreakType def)</span></span>
+<span id="L2439"><span class="lineNum">    2439</span> <span class="tlaGNC">         713 : LayoutBreakType TConv::fromXml(const AsciiStringView&amp; tag, LayoutBreakType def)</span></span>
 <span id="L2440"><span class="lineNum">    2440</span>              : {</span>
-<span id="L2441"><span class="lineNum">    2441</span> <span class="tlaGNC">         706 :     return findTypeByXmlTag&lt;LayoutBreakType&gt;(LAYOUTBREAK_TYPES, tag, def);</span></span>
+<span id="L2441"><span class="lineNum">    2441</span> <span class="tlaGNC">         713 :     return findTypeByXmlTag&lt;LayoutBreakType&gt;(LAYOUTBREAK_TYPES, tag, def);</span></span>
 <span id="L2442"><span class="lineNum">    2442</span>              : }</span>
 <span id="L2443"><span class="lineNum">    2443</span>              : </span>
 <span id="L2444"><span class="lineNum">    2444</span>              : static const std::vector&lt;Item&lt;VeloType&gt; &gt; VELO_TYPES = {</span>
@@ -2600,14 +2600,14 @@
 <span id="L2542"><span class="lineNum">    2542</span> <span class="tlaGNC">         606 :     return findXmlTagByType&lt;BarLineType&gt;(BARLINE_TYPES, v);</span></span>
 <span id="L2543"><span class="lineNum">    2543</span>              : }</span>
 <span id="L2544"><span class="lineNum">    2544</span>              : </span>
-<span id="L2545"><span class="lineNum">    2545</span> <span class="tlaGNC">         584 : BarLineType TConv::fromXml(const AsciiStringView&amp; tag, BarLineType def)</span></span>
+<span id="L2545"><span class="lineNum">    2545</span> <span class="tlaGNC">         585 : BarLineType TConv::fromXml(const AsciiStringView&amp; tag, BarLineType def)</span></span>
 <span id="L2546"><span class="lineNum">    2546</span>              : {</span>
-<span id="L2547"><span class="lineNum">    2547</span> <span class="tlaGNC">         584 :     auto it = std::find_if(BARLINE_TYPES.cbegin(), BARLINE_TYPES.cend(), [tag](const Item&lt;BarLineType&gt;&amp; i) {</span></span>
-<span id="L2548"><span class="lineNum">    2548</span> <span class="tlaGNC">        3093 :         return i.xml == tag;</span></span>
+<span id="L2547"><span class="lineNum">    2547</span> <span class="tlaGNC">         585 :     auto it = std::find_if(BARLINE_TYPES.cbegin(), BARLINE_TYPES.cend(), [tag](const Item&lt;BarLineType&gt;&amp; i) {</span></span>
+<span id="L2548"><span class="lineNum">    2548</span> <span class="tlaGNC">        3099 :         return i.xml == tag;</span></span>
 <span id="L2549"><span class="lineNum">    2549</span>              :     });</span>
 <span id="L2550"><span class="lineNum">    2550</span>              : </span>
-<span id="L2551"><span class="lineNum">    2551</span> <span class="tlaGNC">         584 :     if (it != BARLINE_TYPES.cend()) {</span></span>
-<span id="L2552"><span class="lineNum">    2552</span> <span class="tlaGNC">         584 :         return it-&gt;type;</span></span>
+<span id="L2551"><span class="lineNum">    2551</span> <span class="tlaGNC">         585 :     if (it != BARLINE_TYPES.cend()) {</span></span>
+<span id="L2552"><span class="lineNum">    2552</span> <span class="tlaGNC">         585 :         return it-&gt;type;</span></span>
 <span id="L2553"><span class="lineNum">    2553</span>              :     }</span>
 <span id="L2554"><span class="lineNum">    2554</span>              : </span>
 <span id="L2555"><span class="lineNum">    2555</span>              :     // compatibility</span>
@@ -3313,14 +3313,14 @@
 <span id="L3255"><span class="lineNum">    3255</span> <span class="tlaUNC">           0 :     return findCapitalizedUserNameByType(STAFFGROUP_TYPES, v).translated();</span></span>
 <span id="L3256"><span class="lineNum">    3256</span>              : }</span>
 <span id="L3257"><span class="lineNum">    3257</span>              : </span>
-<span id="L3258"><span class="lineNum">    3258</span> <span class="tlaGNC tlaBgGNC">        1971 : AsciiStringView TConv::toXml(StaffGroup v)</span></span>
+<span id="L3258"><span class="lineNum">    3258</span> <span class="tlaGNC tlaBgGNC">        1969 : AsciiStringView TConv::toXml(StaffGroup v)</span></span>
 <span id="L3259"><span class="lineNum">    3259</span>              : {</span>
-<span id="L3260"><span class="lineNum">    3260</span> <span class="tlaGNC">        1971 :     return findXmlTagByType&lt;StaffGroup&gt;(STAFFGROUP_TYPES, v);</span></span>
+<span id="L3260"><span class="lineNum">    3260</span> <span class="tlaGNC">        1969 :     return findXmlTagByType&lt;StaffGroup&gt;(STAFFGROUP_TYPES, v);</span></span>
 <span id="L3261"><span class="lineNum">    3261</span>              : }</span>
 <span id="L3262"><span class="lineNum">    3262</span>              : </span>
-<span id="L3263"><span class="lineNum">    3263</span> <span class="tlaGNC">        1800 : StaffGroup TConv::fromXml(const AsciiStringView&amp; tag, StaffGroup def)</span></span>
+<span id="L3263"><span class="lineNum">    3263</span> <span class="tlaGNC">        1814 : StaffGroup TConv::fromXml(const AsciiStringView&amp; tag, StaffGroup def)</span></span>
 <span id="L3264"><span class="lineNum">    3264</span>              : {</span>
-<span id="L3265"><span class="lineNum">    3265</span> <span class="tlaGNC">        1800 :     return findTypeByXmlTag&lt;StaffGroup&gt;(STAFFGROUP_TYPES, tag, def);</span></span>
+<span id="L3265"><span class="lineNum">    3265</span> <span class="tlaGNC">        1814 :     return findTypeByXmlTag&lt;StaffGroup&gt;(STAFFGROUP_TYPES, tag, def);</span></span>
 <span id="L3266"><span class="lineNum">    3266</span>              : }</span>
 <span id="L3267"><span class="lineNum">    3267</span>              : </span>
 <span id="L3268"><span class="lineNum">    3268</span>              : static const std::array&lt;Item&lt;StaffTypes&gt;, 27&gt; STAFFTYPES_ITEMS = { {</span>
@@ -3363,14 +3363,14 @@
 <span id="L3305"><span class="lineNum">    3305</span> <span class="tlaUNC">           0 :     return findCapitalizedUserNameByType(STAFFTYPES_ITEMS, v).translated();</span></span>
 <span id="L3306"><span class="lineNum">    3306</span>              : }</span>
 <span id="L3307"><span class="lineNum">    3307</span>              : </span>
-<span id="L3308"><span class="lineNum">    3308</span> <span class="tlaGNC tlaBgGNC">       12134 : AsciiStringView TConv::toXml(StaffTypes v)</span></span>
+<span id="L3308"><span class="lineNum">    3308</span> <span class="tlaGNC tlaBgGNC">       12130 : AsciiStringView TConv::toXml(StaffTypes v)</span></span>
 <span id="L3309"><span class="lineNum">    3309</span>              : {</span>
-<span id="L3310"><span class="lineNum">    3310</span> <span class="tlaGNC">       12134 :     return findXmlTagByType&lt;StaffTypes&gt;(STAFFTYPES_ITEMS, v);</span></span>
+<span id="L3310"><span class="lineNum">    3310</span> <span class="tlaGNC">       12130 :     return findXmlTagByType&lt;StaffTypes&gt;(STAFFTYPES_ITEMS, v);</span></span>
 <span id="L3311"><span class="lineNum">    3311</span>              : }</span>
 <span id="L3312"><span class="lineNum">    3312</span>              : </span>
-<span id="L3313"><span class="lineNum">    3313</span> <span class="tlaGNC">        1725 : StaffTypes TConv::fromXml(const AsciiStringView&amp; tag, StaffTypes def)</span></span>
+<span id="L3313"><span class="lineNum">    3313</span> <span class="tlaGNC">        1739 : StaffTypes TConv::fromXml(const AsciiStringView&amp; tag, StaffTypes def)</span></span>
 <span id="L3314"><span class="lineNum">    3314</span>              : {</span>
-<span id="L3315"><span class="lineNum">    3315</span> <span class="tlaGNC">        1725 :     return findTypeByXmlTag&lt;StaffTypes&gt;(STAFFTYPES_ITEMS, tag, def);</span></span>
+<span id="L3315"><span class="lineNum">    3315</span> <span class="tlaGNC">        1739 :     return findTypeByXmlTag&lt;StaffTypes&gt;(STAFFTYPES_ITEMS, tag, def);</span></span>
 <span id="L3316"><span class="lineNum">    3316</span>              : }</span>
 <span id="L3317"><span class="lineNum">    3317</span>              : </span>
 <span id="L3318"><span class="lineNum">    3318</span>              : const std::array&lt;Item&lt;TrillType&gt;, 4&gt; TRILL_TYPES = { {</span>

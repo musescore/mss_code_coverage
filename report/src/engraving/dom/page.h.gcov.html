@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 12:40:40</td>
+            <td class="headerValue">2026-11-04 14:29:14</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -105,7 +105,7 @@
 <span id="L47"><span class="lineNum">      47</span>              : </span>
 <span id="L48"><span class="lineNum">      48</span>              : class Page final : public EngravingItem</span>
 <span id="L49"><span class="lineNum">      49</span>              : {</span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC tlaBgGNC">        6806 :     OBJECT_ALLOCATOR(engraving, Page)</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC tlaBgGNC">        6856 :     OBJECT_ALLOCATOR(engraving, Page)</span></span>
 <span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">        1422 :     DECLARE_CLASSOF(ElementType::PAGE)</span></span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span>              : public:</span>
@@ -121,7 +121,7 @@
 <span id="L63"><span class="lineNum">      63</span>              :     EngravingItem* accessibleParentItem() const override;</span>
 <span id="L64"><span class="lineNum">      64</span>              : </span>
 <span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC tlaBgGNC">       14020 :     const std::vector&lt;System*&gt;&amp; systems() const { return m_systems; }</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       81385 :     std::vector&lt;System*&gt;&amp; systems() { return m_systems; }</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       82055 :     std::vector&lt;System*&gt;&amp; systems() { return m_systems; }</span></span>
 <span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">         514 :     System* system(size_t idx) { return m_systems[idx]; }</span></span>
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        1186 :     const System* system(size_t idx) const { return m_systems.at(idx); }</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
@@ -130,8 +130,8 @@
 <span id="L72"><span class="lineNum">      72</span>              : </span>
 <span id="L73"><span class="lineNum">      73</span>              :     void appendSystem(System* s);</span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       20494 :     page_idx_t pageNumber() const { return m_pageNumber; }</span></span>
-<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        4119 :     void setPageNumber(page_idx_t n) { m_pageNumber = n; }</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       20695 :     page_idx_t pageNumber() const { return m_pageNumber; }</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        4160 :     void setPageNumber(page_idx_t n) { m_pageNumber = n; }</span></span>
 <span id="L77"><span class="lineNum">      77</span>              :     int getDisplayPageNumber() const;</span>
 <span id="L78"><span class="lineNum">      78</span>              :     bool isOdd() const;</span>
 <span id="L79"><span class="lineNum">      79</span>              :     double tm() const;              // margins in pixel</span>
@@ -144,17 +144,17 @@
 <span id="L86"><span class="lineNum">      86</span>              : </span>
 <span id="L87"><span class="lineNum">      87</span>              :     std::vector&lt;EngravingItem*&gt; items(const RectF&amp; r);</span>
 <span id="L88"><span class="lineNum">      88</span>              :     std::vector&lt;EngravingItem*&gt; items(const PointF&amp; p);</span>
-<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">        4093 :     void invalidateBspTree() { m_bspTreeValid = false; }</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">        4134 :     void invalidateBspTree() { m_bspTreeValid = false; }</span></span>
 <span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">          33 :     PointF pagePos() const override { return PointF(); }       ///&lt; position in page coordinates</span></span>
 <span id="L91"><span class="lineNum">      91</span>              :     std::vector&lt;EngravingItem*&gt; elements() const;              ///&lt; list of visible elements</span>
 <span id="L92"><span class="lineNum">      92</span>              :     RectF tbbox() const;                             // tight bounding box, excluding white space</span>
 <span id="L93"><span class="lineNum">      93</span>              :     Fraction endTick() const;</span>
 <span id="L94"><span class="lineNum">      94</span>              :     Measure* firstMeasure() const;</span>
 <span id="L95"><span class="lineNum">      95</span>              : </span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">       12751 :     Text* headerText(int index) const { return m_headerTexts.at(index); }</span></span>
-<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">       29528 :     Text* footerText(int index) const { return m_footerTexts.at(index); }</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">       12874 :     Text* headerText(int index) const { return m_headerTexts.at(index); }</span></span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">       29817 :     Text* footerText(int index) const { return m_footerTexts.at(index); }</span></span>
 <span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">         164 :     void setHeaderText(int index, Text* t) { m_headerTexts.at(index) = t; }</span></span>
-<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">       10058 :     void setFooterText(int index, Text* t) { m_footerTexts.at(index) = t; }</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">       10144 :     void setFooterText(int index, Text* t) { m_footerTexts.at(index) = t; }</span></span>
 <span id="L100"><span class="lineNum">     100</span>              : </span>
 <span id="L101"><span class="lineNum">     101</span>              :     bool isLocked() const;</span>
 <span id="L102"><span class="lineNum">     102</span>              :     const RangeLock* pageLock() const;</span>
