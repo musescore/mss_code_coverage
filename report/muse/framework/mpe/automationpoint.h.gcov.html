@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - muse/framework/mpe/automationpoint.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">muse/framework/mpe</a> - automationpoint.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">69.1&nbsp;%</td>
+            <td class="headerCovTableEntry">68</td>
+            <td class="headerCovTableEntry">47</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2026 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : #pragma once</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span>              : #include &lt;algorithm&gt;</span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &lt;variant&gt;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &lt;optional&gt;</span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &lt;type_traits&gt;</span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;types/sharedmap.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;types/number.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;containers.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : #include &quot;realfn.h&quot;</span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span>              : namespace muse::mpe {</span>
+<span id="L36"><span class="lineNum">      36</span>              : struct AutomationPoint {</span>
+<span id="L37"><span class="lineNum">      37</span>              :     //! NOTE: eases the segment through point (t, value)</span>
+<span id="L38"><span class="lineNum">      38</span>              :     struct Ease {</span>
+<span id="L39"><span class="lineNum">      39</span>              :         real_t t = real_t::make(0.5); // [0; 1]</span>
+<span id="L40"><span class="lineNum">      40</span>              :         real_t value = real_t::make(0.5); // [0; 1]</span>
+<span id="L41"><span class="lineNum">      41</span>              : </span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC tlaBgGNC">         961 :         static constexpr Ease none() { return {}; }</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">         346 :         bool isNone() const { return *this == none(); }</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">         610 :         bool operator==(const Ease&amp; e) const { return t == e.t &amp;&amp; value == e.value; }</span></span>
+<span id="L45"><span class="lineNum">      45</span>              :     };</span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span>              :     //! NOTE: arrival value equals whatever precedes this point in the curve</span>
+<span id="L48"><span class="lineNum">      48</span>              :     struct ArrivalFromPrevious {</span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">          88 :         bool operator==(const ArrivalFromPrevious&amp;) const { return true; }</span></span>
+<span id="L50"><span class="lineNum">      50</span>              :     };</span>
+<span id="L51"><span class="lineNum">      51</span>              : </span>
+<span id="L52"><span class="lineNum">      52</span>              :     //! NOTE: arrival value is an explicit number</span>
+<span id="L53"><span class="lineNum">      53</span>              :     struct ExplicitArrival {</span>
+<span id="L54"><span class="lineNum">      54</span>              :         real_t value = 0.;</span>
+<span id="L55"><span class="lineNum">      55</span>              :         Ease ease;</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">          59 :         bool operator==(const ExplicitArrival&amp; o) const { return value == o.value &amp;&amp; ease == o.ease; }</span></span>
+<span id="L58"><span class="lineNum">      58</span>              :     };</span>
+<span id="L59"><span class="lineNum">      59</span>              : </span>
+<span id="L60"><span class="lineNum">      60</span>              :     using InValue = std::variant&lt;ArrivalFromPrevious, ExplicitArrival&gt;;</span>
+<span id="L61"><span class="lineNum">      61</span>              : </span>
+<span id="L62"><span class="lineNum">      62</span>              :     InValue inValue = ArrivalFromPrevious {};</span>
+<span id="L63"><span class="lineNum">      63</span>              :     real_t outValue = 0.;</span>
+<span id="L64"><span class="lineNum">      64</span>              : </span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">         148 :     bool operator==(const AutomationPoint&amp; p) const</span></span>
+<span id="L66"><span class="lineNum">      66</span>              :     {</span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">         148 :         return inValue == p.inValue &amp;&amp; outValue == p.outValue;</span></span>
+<span id="L68"><span class="lineNum">      68</span>              :     }</span>
+<span id="L69"><span class="lineNum">      69</span>              : };</span>
+<span id="L70"><span class="lineNum">      70</span>              : </span>
+<span id="L71"><span class="lineNum">      71</span>              : template&lt;typename KeyT&gt;</span>
+<span id="L72"><span class="lineNum">      72</span>              : using AutomationCurve = SharedMap&lt;KeyT, AutomationPoint&gt;;</span>
+<span id="L73"><span class="lineNum">      73</span>              : </span>
+<span id="L74"><span class="lineNum">      74</span>              : //! NOTE: this point's ease, if it can have one; nullopt for ArrivalFromPrevious</span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">         911 : inline std::optional&lt;AutomationPoint::Ease&gt; ease(const AutomationPoint&amp; point) noexcept</span></span>
+<span id="L76"><span class="lineNum">      76</span>              : {</span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        1822 :     return std::visit([](const auto&amp; v) -&gt; std::optional&lt;AutomationPoint::Ease&gt; {</span></span>
+<span id="L78"><span class="lineNum">      78</span>              :         using T = std::decay_t&lt;decltype(v)&gt;;</span>
+<span id="L79"><span class="lineNum">      79</span>              :         if constexpr (std::is_same_v&lt;T, AutomationPoint::ArrivalFromPrevious&gt;) {</span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">         340 :             return std::nullopt;</span></span>
+<span id="L81"><span class="lineNum">      81</span>              :         } else {</span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">         571 :             return v.ease;</span></span>
+<span id="L83"><span class="lineNum">      83</span>              :         }</span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">         911 :     }, point.inValue);</span></span>
+<span id="L85"><span class="lineNum">      85</span>              : }</span>
+<span id="L86"><span class="lineNum">      86</span>              : </span>
+<span id="L87"><span class="lineNum">      87</span>              : //! NOTE: resolves what this point's arrival value actually is, given prevOutValue</span>
+<span id="L88"><span class="lineNum">      88</span>              : //! (the outValue of whatever precedes it in its curve, if any)</span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">        1084 : inline real_t resolveInValue(const AutomationPoint&amp; point, std::optional&lt;real_t&gt; prevOutValue) noexcept</span></span>
+<span id="L90"><span class="lineNum">      90</span>              : {</span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">        2168 :     return std::visit([&amp;](const auto&amp; v) -&gt; real_t {</span></span>
+<span id="L92"><span class="lineNum">      92</span>              :         using T = std::decay_t&lt;decltype(v)&gt;;</span>
+<span id="L93"><span class="lineNum">      93</span>              :         if constexpr (std::is_same_v&lt;T, AutomationPoint::ArrivalFromPrevious&gt;) {</span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">         423 :             return prevOutValue ? *prevOutValue : real_t(0.0);</span></span>
+<span id="L95"><span class="lineNum">      95</span>              :         } else {</span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">         661 :             return v.value;</span></span>
+<span id="L97"><span class="lineNum">      97</span>              :         }</span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">        1084 :     }, point.inValue);</span></span>
+<span id="L99"><span class="lineNum">      99</span>              : }</span>
+<span id="L100"><span class="lineNum">     100</span>              : </span>
+<span id="L101"><span class="lineNum">     101</span>              : //! NOTE: value at normalized position t ([0, 1]) across the segment arriving at point</span>
+<span id="L102"><span class="lineNum">     102</span>              : //! The segment is split into two quadratic Bezier arcs meeting at the bend point. The arcs</span>
+<span id="L103"><span class="lineNum">     103</span>              : //! share a tangent there, producing a smooth bend whose position follows bend.t. When there's</span>
+<span id="L104"><span class="lineNum">     104</span>              : //! no bend, this reduces to a straight line</span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">         382 : inline real_t evaluateAt(const AutomationPoint&amp; point, std::optional&lt;real_t&gt; prevOutValue, real_t t) noexcept</span></span>
+<span id="L106"><span class="lineNum">     106</span>              : {</span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">         382 :     const real_t prevOut = prevOutValue ? *prevOutValue : real_t(0.0);</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">         382 :     const real_t thisIn = resolveInValue(point, prevOutValue);</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">         382 :     const real_t range = thisIn - prevOut;</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">         382 :     const std::optional&lt;AutomationPoint::Ease&gt; pointEase = ease(point);</span></span>
+<span id="L111"><span class="lineNum">     111</span>              : </span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">         382 :     if (!pointEase || pointEase-&gt;isNone() || pointEase-&gt;t &lt;= 0.0 || pointEase-&gt;t &gt;= 1.0) {</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">         378 :         return std::clamp(prevOut + range * t, real_t(0.0), real_t(1.0));</span></span>
+<span id="L114"><span class="lineNum">     114</span>              :     }</span>
+<span id="L115"><span class="lineNum">     115</span>              : </span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">           4 :     auto quadraticBezier = [](real_t s, real_t p0, real_t p1, real_t p2) {</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">           4 :         const real_t u = 1.0 - s;</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">           4 :         return std::clamp(u * u * p0 + 2.0 * u * s * p1 + s * s * p2, real_t(0.0), real_t(1.0));</span></span>
+<span id="L119"><span class="lineNum">     119</span>              :     };</span>
+<span id="L120"><span class="lineNum">     120</span>              : </span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">           4 :     const real_t fraction = std::clamp(pointEase-&gt;value, real_t(0.0), real_t(1.0));</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">           4 :     const real_t bendValue = prevOut + fraction * range;</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">           4 :     const real_t lo = std::min(prevOut, thisIn);</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">           4 :     const real_t hi = std::max(prevOut, thisIn);</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">           4 :     const real_t halfSlope = 0.5 * range;</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">           4 :     const real_t remainder = 1.0 - pointEase-&gt;t;</span></span>
+<span id="L127"><span class="lineNum">     127</span>              : </span>
+<span id="L128"><span class="lineNum">     128</span>              :     // Clamped control points (q1, q2) for each arc</span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">           4 :     const real_t q1 = std::clamp(bendValue - pointEase-&gt;t * halfSlope, lo, hi);</span></span>
+<span id="L130"><span class="lineNum">     130</span>              : </span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">           4 :     if (t &lt;= pointEase-&gt;t) {</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">           4 :         return quadraticBezier(t / pointEase-&gt;t, prevOut, q1, bendValue);</span></span>
+<span id="L133"><span class="lineNum">     133</span>              :     }</span>
+<span id="L134"><span class="lineNum">     134</span>              : </span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaUNC tlaBgUNC">           0 :     const real_t q2 = std::clamp(bendValue + remainder * halfSlope, lo, hi);</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaUNC">           0 :     return quadraticBezier((t - pointEase-&gt;t) / remainder, bendValue, q2, thisIn);</span></span>
+<span id="L137"><span class="lineNum">     137</span>              : }</span>
+<span id="L138"><span class="lineNum">     138</span>              : </span>
+<span id="L139"><span class="lineNum">     139</span>              : template&lt;typename Key&gt;</span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC tlaBgGNC">         214 : inline real_t evaluateCurveAt(const AutomationCurve&lt;Key&gt;&amp; curve, const typename AutomationCurve&lt;Key&gt;::key_type&amp; pos)</span></span>
+<span id="L141"><span class="lineNum">     141</span>              : {</span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         214 :     if (curve.empty()) {</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC tlaBgUNC">           0 :         return real_t {};</span></span>
+<span id="L144"><span class="lineNum">     144</span>              :     }</span>
+<span id="L145"><span class="lineNum">     145</span>              : </span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC tlaBgGNC">         214 :     auto it = findLessOrEqual(curve, pos);</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">         214 :     if (it == curve.end()) {</span></span>
+<span id="L148"><span class="lineNum">     148</span>              :         //! NOTE: hold the first point's value backwards in time, matching standard envelope semantics</span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">           1 :         return curve.begin()-&gt;second.outValue;</span></span>
+<span id="L150"><span class="lineNum">     150</span>              :     }</span>
+<span id="L151"><span class="lineNum">     151</span>              : </span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">         213 :     real_t normalized = it-&gt;second.outValue;</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">         213 :     const auto next = std::next(it);</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">         213 :     if (next != curve.end()) {</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">         180 :         const real_t t = static_cast&lt;real_t&gt;(pos - it-&gt;first) / static_cast&lt;real_t&gt;(next-&gt;first - it-&gt;first);</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         180 :         normalized = evaluateAt(next-&gt;second, it-&gt;second.outValue, t);</span></span>
+<span id="L157"><span class="lineNum">     157</span>              :     }</span>
+<span id="L158"><span class="lineNum">     158</span>              : </span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">         213 :     return normalized;</span></span>
+<span id="L160"><span class="lineNum">     160</span>              : }</span>
+<span id="L161"><span class="lineNum">     161</span>              : </span>
+<span id="L162"><span class="lineNum">     162</span>              : //! NOTE: resamples a curve into discrete samples for consumers that can't evaluate on read</span>
+<span id="L163"><span class="lineNum">     163</span>              : template&lt;typename Key, typename Callback&gt;</span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaUNC tlaBgUNC">           0 : void resampleCurve(const AutomationCurve&lt;Key&gt;&amp; curve, Key stepInterval, Callback&amp;&amp; onSample)</span></span>
+<span id="L165"><span class="lineNum">     165</span>              : {</span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaUNC">           0 :     for (auto it = curve.cbegin(); it != curve.cend(); ++it) {</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaUNC">           0 :         onSample(it-&gt;first, it-&gt;second.outValue);</span></span>
+<span id="L168"><span class="lineNum">     168</span>              : </span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaUNC">           0 :         const auto next = std::next(it);</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaUNC">           0 :         if (next == curve.cend()) {</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L172"><span class="lineNum">     172</span>              :         }</span>
+<span id="L173"><span class="lineNum">     173</span>              : </span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaUNC">           0 :         const real_t nextArrival = resolveInValue(next-&gt;second, it-&gt;second.outValue);</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaUNC">           0 :         const std::optional&lt;AutomationPoint::Ease&gt; nextEase = ease(next-&gt;second);</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaUNC">           0 :         const bool isFlat = (!nextEase || nextEase-&gt;isNone()) &amp;&amp; muse::RealIsEqual(nextArrival, it-&gt;second.outValue);</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaUNC">           0 :         if (isFlat) {</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L179"><span class="lineNum">     179</span>              :         }</span>
+<span id="L180"><span class="lineNum">     180</span>              : </span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaUNC">           0 :         const Key intervalDuration = next-&gt;first - it-&gt;first;</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaUNC">           0 :         const size_t steps = std::max(size_t((intervalDuration + stepInterval - 1) / stepInterval), size_t(1));</span></span>
+<span id="L183"><span class="lineNum">     183</span>              : </span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaUNC">           0 :         for (size_t j = 1; j &lt; steps; ++j) {</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC">           0 :             const Key t = it-&gt;first + intervalDuration * j / steps;</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC">           0 :             const real_t normalized = evaluateAt(next-&gt;second, it-&gt;second.outValue, real_t(j) / real_t(steps));</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC">           0 :             onSample(t, normalized);</span></span>
+<span id="L188"><span class="lineNum">     188</span>              :         }</span>
+<span id="L189"><span class="lineNum">     189</span>              :     }</span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L191"><span class="lineNum">     191</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

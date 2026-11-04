@@ -1,0 +1,364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/editing/regroup.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/engraving/editing</a> - regroup.cpp</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryMed">83.2&nbsp;%</td>
+            <td class="headerCovTableEntry">179</td>
+            <td class="headerCovTableEntry">149</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2026 MuseScore Limited</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program. If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #include &quot;regroup.h&quot;</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;editspanner.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;transaction/transaction.h&quot;</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &quot;../dom/chord.h&quot;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;../dom/factory.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;../dom/input.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;../dom/measure.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;../dom/note.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : #include &quot;../dom/rest.h&quot;</span>
+<span id="L34"><span class="lineNum">      34</span>              : #include &quot;../dom/score.h&quot;</span>
+<span id="L35"><span class="lineNum">      35</span>              : #include &quot;../dom/segment.h&quot;</span>
+<span id="L36"><span class="lineNum">      36</span>              : #include &quot;../dom/select.h&quot;</span>
+<span id="L37"><span class="lineNum">      37</span>              : #include &quot;../dom/sig.h&quot;</span>
+<span id="L38"><span class="lineNum">      38</span>              : #include &quot;../dom/slur.h&quot;</span>
+<span id="L39"><span class="lineNum">      39</span>              : #include &quot;../dom/staff.h&quot;</span>
+<span id="L40"><span class="lineNum">      40</span>              : #include &quot;../dom/tie.h&quot;</span>
+<span id="L41"><span class="lineNum">      41</span>              : #include &quot;../dom/utils.h&quot;</span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span>              : #include &quot;log.h&quot;</span>
+<span id="L44"><span class="lineNum">      44</span>              : </span>
+<span id="L45"><span class="lineNum">      45</span>              : using namespace mu::engraving;</span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span>              : //---------------------------------------------------------</span>
+<span id="L48"><span class="lineNum">      48</span>              : //   regroupNotesAndRests</span>
+<span id="L49"><span class="lineNum">      49</span>              : //    * combine consecutive rests into fewer rests of longer duration.</span>
+<span id="L50"><span class="lineNum">      50</span>              : //    * combine tied notes/chords into fewer notes of longer duration.</span>
+<span id="L51"><span class="lineNum">      51</span>              : //    Only operates on one voice - protects manual layout adjustment, etc.</span>
+<span id="L52"><span class="lineNum">      52</span>              : //---------------------------------------------------------</span>
+<span id="L53"><span class="lineNum">      53</span>              : </span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC tlaBgGNC">          56 : void Regroup::regroupNotesAndRests(Transaction&amp; tx, Score* score, const Fraction&amp; startTick, const Fraction&amp; endTick,</span></span>
+<span id="L55"><span class="lineNum">      55</span>              :                                    track_idx_t track)</span>
+<span id="L56"><span class="lineNum">      56</span>              : {</span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">          56 :     InputState&amp; is = score-&gt;inputState();</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">          56 :     Segment* inputSegment = is.segment();   // store this so we can get back to it later.</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">          56 :     Segment* seg = score-&gt;tick2segment(startTick, true, SegmentType::ChordRest);</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">        1104 :     for (Measure* msr = seg-&gt;measure(); msr &amp;&amp; msr-&gt;tick() &lt; endTick; msr = msr-&gt;nextMeasure()) {</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        1048 :         Fraction maxTick = endTick &gt; msr-&gt;endTick() ? msr-&gt;endTick() : endTick;</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">        1048 :         if (!seg || seg-&gt;measure() != msr) {</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">         992 :             seg = msr-&gt;first(SegmentType::ChordRest);</span></span>
+<span id="L64"><span class="lineNum">      64</span>              :         }</span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">        7502 :         for (; seg; seg = seg-&gt;next(SegmentType::ChordRest)) {</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        6454 :             ChordRest* curr = seg-&gt;cr(track);</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">        6454 :             if (!curr) {</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        5488 :                 continue;         // this voice is empty here (CR overlaps with CR in other track)</span></span>
+<span id="L69"><span class="lineNum">      69</span>              :             }</span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">         966 :             if (curr-&gt;endTick() &gt; maxTick) {</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaUNC tlaBgUNC">           0 :                 break;         // outside range</span></span>
+<span id="L72"><span class="lineNum">      72</span>              :             }</span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC tlaBgGNC">         966 :             if (curr-&gt;isRest() &amp;&amp; !(curr-&gt;tuplet()) &amp;&amp; !(toRest(curr)-&gt;isGap())) {</span></span>
+<span id="L74"><span class="lineNum">      74</span>              :                 // combine consecutive rests</span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">         382 :                 ChordRest* lastRest = curr;</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        1033 :                 for (Segment* s = seg-&gt;next(SegmentType::ChordRest); s; s = s-&gt;next(SegmentType::ChordRest)) {</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">         903 :                     ChordRest* cr = s-&gt;cr(track);</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">         903 :                     if (!cr) {</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaUNC tlaBgUNC">           0 :                         continue;             // this voice is empty here</span></span>
+<span id="L80"><span class="lineNum">      80</span>              :                     }</span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">         903 :                     if (!cr-&gt;isRest() || cr-&gt;tuplet() || cr-&gt;endTick() &gt; maxTick || toRest(cr)-&gt;isGap()) {</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">         252 :                         break;             // next element in the same voice is not a rest, or it exceeds the selection, or it is a gap</span></span>
+<span id="L83"><span class="lineNum">      83</span>              :                     }</span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">         651 :                     lastRest = cr;</span></span>
+<span id="L85"><span class="lineNum">      85</span>              :                 }</span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">         382 :                 Fraction restTicks = (lastRest-&gt;endTick() - curr-&gt;tick()) * curr-&gt;staff()-&gt;timeStretch(curr-&gt;tick());</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">         382 :                 seg = score-&gt;setNoteRest(seg, curr-&gt;track(), NoteVal(), restTicks, DirectionV::AUTO, false, {}, true);</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">         584 :             } else if (curr-&gt;isChord()) {</span></span>
+<span id="L89"><span class="lineNum">      89</span>              :                 // combine tied chords</span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">         582 :                 Chord* chord = toChord(curr);</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">         582 :                 Chord* lastTiedChord = chord;</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">        1349 :                 for (Chord* next = chord-&gt;nextTiedChord(); next &amp;&amp; next-&gt;endTick() &lt;= maxTick; next = next-&gt;nextTiedChord()) {</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">         767 :                     lastTiedChord = next;</span></span>
+<span id="L94"><span class="lineNum">      94</span>              :                 }</span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">         582 :                 if (!lastTiedChord) {</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaUNC tlaBgUNC">           0 :                     lastTiedChord = chord;</span></span>
+<span id="L97"><span class="lineNum">      97</span>              :                 }</span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC tlaBgGNC">         582 :                 Fraction noteTicks = (lastTiedChord-&gt;endTick() - chord-&gt;tick()) * chord-&gt;staff()-&gt;timeStretch(chord-&gt;tick());</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">         582 :                 if (!(curr-&gt;tuplet())) {</span></span>
+<span id="L100"><span class="lineNum">     100</span>              :                     // store start/end note for backward/forward ties ending/starting on the group of notes being rewritten</span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">         576 :                     size_t numNotes = chord-&gt;notes().size();</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">        1152 :                     std::vector&lt;Note*&gt; tieBack(numNotes);</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">         576 :                     std::vector&lt;Note*&gt; tieFor(numNotes);</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">        1166 :                     for (size_t i = 0; i &lt; numNotes; i++) {</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">         590 :                         Note* n = chord-&gt;notes()[i];</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">         590 :                         Note* nn = lastTiedChord-&gt;notes()[i];</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">         590 :                         if (n-&gt;tieBack()) {</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">          82 :                             tieBack[i] = n-&gt;tieBack()-&gt;startNote();</span></span>
+<span id="L109"><span class="lineNum">     109</span>              :                         } else {</span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">         508 :                             tieBack[i] = 0;</span></span>
+<span id="L111"><span class="lineNum">     111</span>              :                         }</span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">         590 :                         if (nn-&gt;tieFor()) {</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">          15 :                             tieFor[i] = nn-&gt;tieFor()-&gt;endNote();</span></span>
+<span id="L114"><span class="lineNum">     114</span>              :                         } else {</span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">         575 :                             tieFor[i] = 0;</span></span>
+<span id="L116"><span class="lineNum">     116</span>              :                         }</span>
+<span id="L117"><span class="lineNum">     117</span>              :                     }</span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">         576 :                     Fraction tick = seg-&gt;tick();</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">         576 :                     track_idx_t tr = chord-&gt;track();</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">         576 :                     Fraction sd   = noteTicks;</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">         576 :                     std::vector&lt;Tie*&gt; ties;</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">         576 :                     Segment* segment = seg;</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">         576 :                     ChordRest* cr = toChordRest(segment-&gt;element(tr));</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">         576 :                     Chord* nchord = toChord(chord-&gt;clone());</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">        1166 :                     for (size_t i = 0; i &lt; numNotes; i++) {           // strip ties from cloned chord</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">         590 :                         Note* n = nchord-&gt;notes()[i];</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">         590 :                         if (Tie* tieFor2 = n-&gt;tieFor()) {</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">         349 :                             n-&gt;setTieFor(nullptr);</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">         349 :                             delete tieFor2;</span></span>
+<span id="L130"><span class="lineNum">     130</span>              :                         }</span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">         590 :                         if (Tie* tieBack2 = n-&gt;tieBack()) {</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaUNC tlaBgUNC">           0 :                             n-&gt;setTieBack(nullptr);</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaUNC">           0 :                             delete tieBack2;</span></span>
+<span id="L134"><span class="lineNum">     134</span>              :                         }</span>
+<span id="L135"><span class="lineNum">     135</span>              :                     }</span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC tlaBgGNC">         576 :                     Chord* startChord = nchord;</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">         576 :                     Measure* measure = nullptr;</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         576 :                     bool firstpart = true;</span></span>
+<span id="L139"><span class="lineNum">     139</span>              :                     for (;;) {</span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">         576 :                         if (tr % VOICES) {</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">           8 :                             score-&gt;expandVoice(segment, tr);</span></span>
+<span id="L142"><span class="lineNum">     142</span>              :                         }</span>
+<span id="L143"><span class="lineNum">     143</span>              :                         // the returned gap ends at the measure boundary or at tuplet end</span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         576 :                         Fraction dd = score-&gt;makeGap(segment, tr, sd, cr-&gt;tuplet());</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">         576 :                         if (dd.isZero()) {</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC tlaBgUNC">           0 :                             break;</span></span>
+<span id="L147"><span class="lineNum">     147</span>              :                         }</span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC tlaBgGNC">         576 :                         measure = segment-&gt;measure();</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">         576 :                         std::vector&lt;TDuration&gt; dl;</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">        1728 :                         dl = toRhythmicDurationList(dd, false, segment-&gt;rtick(), score-&gt;sigmap()-&gt;timesig(</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">         576 :                                                         tick.ticks()).nominal(), measure, 1,</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        1152 :                                                     score-&gt;staff(track2staff(track))-&gt;timeStretch(tick));</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">         576 :                         size_t n = dl.size();</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">        1259 :                         for (size_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">         683 :                             const TDuration&amp; d = dl[i];</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         683 :                             Chord* nchord2 = toChord(nchord-&gt;clone());</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">         683 :                             if (!firstpart) {</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">         107 :                                 nchord2-&gt;removeMarkings(true);</span></span>
+<span id="L159"><span class="lineNum">     159</span>              :                             }</span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">         683 :                             nchord2-&gt;setDurationType(d);</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">         683 :                             nchord2-&gt;setTicks(d.fraction());</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">         683 :                             std::vector&lt;Note*&gt; nl1 = nchord-&gt;notes();</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">         683 :                             std::vector&lt;Note*&gt; nl2 = nchord2-&gt;notes();</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">         683 :                             if (!firstpart) {</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">         214 :                                 for (size_t j = 0; j &lt; nl1.size(); ++j) {</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">         107 :                                     Tie* tie = Factory::createTie(nl1[j]);</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">         107 :                                     tie-&gt;setStartNote(nl1[j]);</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">         107 :                                     tie-&gt;setEndNote(nl2[j]);</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">         107 :                                     tie-&gt;setTick(tie-&gt;startNote()-&gt;tick());</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">         107 :                                     tie-&gt;setTick2(tie-&gt;endNote()-&gt;tick());</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">         107 :                                     tie-&gt;setTrack(tr);</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">         107 :                                     nl1[j]-&gt;setTieFor(tie);</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">         107 :                                     nl2[j]-&gt;setTieBack(tie);</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">         107 :                                     ties.push_back(tie);</span></span>
+<span id="L175"><span class="lineNum">     175</span>              :                                 }</span>
+<span id="L176"><span class="lineNum">     176</span>              :                             }</span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">         683 :                             score-&gt;undoAddCR(nchord2, measure, tick);</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">         683 :                             segment = nchord2-&gt;segment();</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">         683 :                             tick += nchord2-&gt;actualTicks();</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">         683 :                             nchord = nchord2;</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">         683 :                             firstpart = false;</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">         683 :                         }</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">         576 :                         sd -= dd;</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">         576 :                         if (sd.isZero()) {</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">         576 :                             break;</span></span>
+<span id="L186"><span class="lineNum">     186</span>              :                         }</span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC tlaBgUNC">           0 :                         Segment* nseg = score-&gt;tick2segment(tick, false, SegmentType::ChordRest);</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC">           0 :                         if (nseg == 0) {</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaUNC">           0 :                             break;</span></span>
+<span id="L190"><span class="lineNum">     190</span>              :                         }</span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaUNC">           0 :                         segment = nseg;</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaUNC">           0 :                         cr = toChordRest(segment-&gt;element(tr));</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaUNC">           0 :                         if (cr == 0) {</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaUNC">           0 :                             if (tr % VOICES) {</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaUNC">           0 :                                 cr = score-&gt;addRest(segment, tr, TDuration(DurationType::V_MEASURE), 0);</span></span>
+<span id="L196"><span class="lineNum">     196</span>              :                             } else {</span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 :                                 break;</span></span>
+<span id="L198"><span class="lineNum">     198</span>              :                             }</span>
+<span id="L199"><span class="lineNum">     199</span>              :                         }</span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC tlaBgGNC">         576 :                     }</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">         576 :                     if (is.slur()) {</span></span>
+<span id="L202"><span class="lineNum">     202</span>              :                         // extend slur</span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaUNC tlaBgUNC">           0 :                         is.slur()-&gt;undoChangeProperty(Pid::SPANNER_TICKS, nchord-&gt;tick() - is.slur()-&gt;tick());</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC">           0 :                         for (EngravingObject* e : is.slur()-&gt;linkList()) {</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaUNC">           0 :                             Slur* slur = toSlur(e);</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaUNC">           0 :                             for (EngravingObject* ee : nchord-&gt;linkList()) {</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC">           0 :                                 EngravingItem* e1 = static_cast&lt;EngravingItem*&gt;(ee);</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :                                 if (e1-&gt;score() == slur-&gt;score() &amp;&amp; e1-&gt;track() == slur-&gt;track2()) {</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaUNC">           0 :                                     tx.push(new ChangeSpannerElements(slur, slur-&gt;startElement(), e1));</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :                                     break;</span></span>
+<span id="L211"><span class="lineNum">     211</span>              :                                 }</span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaUNC">           0 :                             }</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L214"><span class="lineNum">     214</span>              :                     }</span>
+<span id="L215"><span class="lineNum">     215</span>              :                     // recreate previously stored pending ties</span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC tlaBgGNC">        1166 :                     for (size_t i = 0; i &lt; numNotes; i++) {</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">         590 :                         Note* n = startChord-&gt;notes()[i];</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">         590 :                         Note* nn = nchord-&gt;notes()[i];</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">         590 :                         if (tieBack[i]) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">          82 :                             Tie* tie = Factory::createTie(tieBack[i]);</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">          82 :                             tie-&gt;setStartNote(tieBack[i]);</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">          82 :                             tie-&gt;setEndNote(n);</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">          82 :                             tie-&gt;setTick(tie-&gt;startNote()-&gt;tick());</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">          82 :                             tie-&gt;setTick2(tie-&gt;endNote()-&gt;tick());</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">          82 :                             tie-&gt;setTrack(track);</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">          82 :                             n-&gt;setTieBack(tie);</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">          82 :                             tieBack[i]-&gt;setTieFor(tie);</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">          82 :                             ties.push_back(tie);</span></span>
+<span id="L229"><span class="lineNum">     229</span>              :                         }</span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">         590 :                         if (tieFor[i]) {</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">          15 :                             Tie* tie = Factory::createTie(nn);</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">          15 :                             tie-&gt;setStartNote(nn);</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">          15 :                             tie-&gt;setEndNote(tieFor[i]);</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">          15 :                             tie-&gt;setTick(tie-&gt;startNote()-&gt;tick());</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">          15 :                             tie-&gt;setTick2(tie-&gt;endNote()-&gt;tick());</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">          15 :                             tie-&gt;setTrack(track);</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">          15 :                             nn-&gt;setTieFor(tie);</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">          15 :                             tieFor[i]-&gt;setTieBack(tie);</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">          15 :                             ties.push_back(tie);</span></span>
+<span id="L240"><span class="lineNum">     240</span>              :                         }</span>
+<span id="L241"><span class="lineNum">     241</span>              :                     }</span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">         576 :                     if (!ties.empty()) {         // at least one tie was created</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">         377 :                         for (Tie* tie : ties) {</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">         204 :                             score-&gt;undoAddElement(tie);</span></span>
+<span id="L245"><span class="lineNum">     245</span>              :                         }</span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">         173 :                         score-&gt;connectTies();</span></span>
+<span id="L247"><span class="lineNum">     247</span>              :                     }</span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">         576 :                 }</span></span>
+<span id="L249"><span class="lineNum">     249</span>              :             }</span>
+<span id="L250"><span class="lineNum">     250</span>              :         }</span>
+<span id="L251"><span class="lineNum">     251</span>              :     }</span>
+<span id="L252"><span class="lineNum">     252</span>              :     // now put the input state back where it was before</span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">          56 :     is.setSegment(inputSegment);</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">          56 : }</span></span>
+<span id="L255"><span class="lineNum">     255</span>              : </span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">           9 : void Regroup::regroupNotesAndRestsInSelection(Transaction&amp; tx, Score* score)</span></span>
+<span id="L257"><span class="lineNum">     257</span>              : {</span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">           9 :     bool noSelection = score-&gt;selection().isNone();</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">           9 :     if (noSelection) {</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaUNC tlaBgUNC">           0 :         score-&gt;cmdSelectAll();</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC tlaBgGNC">           9 :     } else if (!score-&gt;selection().isRange()) {</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGD(&quot;no system or staff selected&quot;);</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L264"><span class="lineNum">     264</span>              :     }</span>
+<span id="L265"><span class="lineNum">     265</span>              : </span>
+<span id="L266"><span class="lineNum">     266</span>              :     // save selection values because selection changes during grouping</span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC tlaBgGNC">           9 :     Fraction sTick = score-&gt;selection().tickStart();</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">           9 :     Fraction eTick = score-&gt;selection().tickEnd();</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">           9 :     staff_idx_t sStaff = score-&gt;selection().staffStart();</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">           9 :     staff_idx_t eStaff = score-&gt;selection().staffEnd();</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">           9 :     Box* sBox = score-&gt;selection().startBox();</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">           9 :     Box* eBox = score-&gt;selection().endBox();</span></span>
+<span id="L273"><span class="lineNum">     273</span>              : </span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">          22 :     for (staff_idx_t staff = sStaff; staff &lt; eStaff; staff++) {</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">          13 :         track_idx_t sTrack = staff * VOICES;</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">          13 :         track_idx_t eTrack = sTrack + VOICES;</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">          65 :         for (track_idx_t track = sTrack; track &lt; eTrack; track++) {</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">          52 :             if (score-&gt;selectionFilter().canSelectVoice(track)) {</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">          52 :                 regroupNotesAndRests(tx, score, sTick, eTick, track);</span></span>
+<span id="L280"><span class="lineNum">     280</span>              :             }</span>
+<span id="L281"><span class="lineNum">     281</span>              :         }</span>
+<span id="L282"><span class="lineNum">     282</span>              :     }</span>
+<span id="L283"><span class="lineNum">     283</span>              : </span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">           9 :     if (noSelection) {</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaUNC tlaBgUNC">           0 :         score-&gt;deselectAll();</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L287"><span class="lineNum">     287</span>              :     }</span>
+<span id="L288"><span class="lineNum">     288</span>              : </span>
+<span id="L289"><span class="lineNum">     289</span>              :     // Reset selection to original selection</span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC tlaBgGNC">           9 :     score-&gt;selection().setRangeTicks(sTick, eTick, sStaff, eStaff, sBox, eBox);</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">           9 :     score-&gt;selection().updateSelectedElements();</span></span>
+<span id="L292"><span class="lineNum">     292</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

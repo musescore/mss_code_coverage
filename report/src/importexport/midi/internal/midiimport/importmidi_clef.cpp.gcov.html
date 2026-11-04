@@ -1,0 +1,588 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/importexport/midi/internal/midiimport/importmidi_clef.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../../index.html">top level</a> - <a href="index.html">src/importexport/midi/internal/midiimport</a> - importmidi_clef.cpp</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">96.0&nbsp;%</td>
+            <td class="headerCovTableEntry">278</td>
+            <td class="headerCovTableEntry">267</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2021 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #include &lt;set&gt;</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;importmidi_clef.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;engraving/dom/chord.h&quot;</span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &quot;engraving/dom/chordrest.h&quot;</span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &quot;engraving/dom/clef.h&quot;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;engraving/dom/engravingitem.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;engraving/dom/factory.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;engraving/dom/instrtemplate.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;engraving/dom/measure.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : #include &quot;engraving/dom/note.h&quot;</span>
+<span id="L34"><span class="lineNum">      34</span>              : #include &quot;engraving/dom/score.h&quot;</span>
+<span id="L35"><span class="lineNum">      35</span>              : #include &quot;engraving/dom/segment.h&quot;</span>
+<span id="L36"><span class="lineNum">      36</span>              : #include &quot;engraving/dom/sig.h&quot;</span>
+<span id="L37"><span class="lineNum">      37</span>              : #include &quot;engraving/dom/staff.h&quot;</span>
+<span id="L38"><span class="lineNum">      38</span>              : #include &quot;importmidi_fraction.h&quot;</span>
+<span id="L39"><span class="lineNum">      39</span>              : #include &quot;importmidi_meter.h&quot;</span>
+<span id="L40"><span class="lineNum">      40</span>              : #include &quot;importmidi_operations.h&quot;</span>
+<span id="L41"><span class="lineNum">      41</span>              : #include &quot;importmidi_tie.h&quot;</span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span>              : #include &quot;log.h&quot;</span>
+<span id="L44"><span class="lineNum">      44</span>              : </span>
+<span id="L45"><span class="lineNum">      45</span>              : using namespace mu::engraving;</span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span>              : namespace mu::iex::midi {</span>
+<span id="L48"><span class="lineNum">      48</span>              : namespace MidiClef {</span>
+<span id="L49"><span class="lineNum">      49</span>              : class AveragePitch</span>
+<span id="L50"><span class="lineNum">      50</span>              : {</span>
+<span id="L51"><span class="lineNum">      51</span>              : public:</span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC tlaBgGNC">        1024 :     AveragePitch()</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        1024 :         : sumPitch_(0), count_(0) {}</span></span>
+<span id="L54"><span class="lineNum">      54</span>              :     AveragePitch(int sumPitch, int count)</span>
+<span id="L55"><span class="lineNum">      55</span>              :         : sumPitch_(sumPitch), count_(count) {}</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">         108 :     int pitch() const { return qRound(sumPitch_ * 1.0 / count_); }</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">         688 :     void addPitch(int pitch)</span></span>
+<span id="L59"><span class="lineNum">      59</span>              :     {</span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">         688 :         sumPitch_ += pitch;</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">         688 :         ++count_;</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">         688 :     }</span></span>
+<span id="L63"><span class="lineNum">      63</span>              : </span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">         916 :     AveragePitch&amp; operator+=(const AveragePitch&amp; other)</span></span>
+<span id="L65"><span class="lineNum">      65</span>              :     {</span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">         916 :         sumPitch_ += other.sumPitch_;</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">         916 :         count_ += other.count_;</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">         916 :         return *this;</span></span>
+<span id="L69"><span class="lineNum">      69</span>              :     }</span>
+<span id="L70"><span class="lineNum">      70</span>              : </span>
+<span id="L71"><span class="lineNum">      71</span>              : private:</span>
+<span id="L72"><span class="lineNum">      72</span>              :     int sumPitch_;</span>
+<span id="L73"><span class="lineNum">      73</span>              :     int count_;</span>
+<span id="L74"><span class="lineNum">      74</span>              : };</span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span>              : class MinMaxPitch</span>
+<span id="L77"><span class="lineNum">      77</span>              : {</span>
+<span id="L78"><span class="lineNum">      78</span>              : public:</span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">         925 :     MinMaxPitch()</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">         925 :         : minPitch_(std::numeric_limits&lt;int&gt;::max()), maxPitch_(-1) {}</span></span>
+<span id="L81"><span class="lineNum">      81</span>              :     MinMaxPitch(int minPitch, int maxPitch)</span>
+<span id="L82"><span class="lineNum">      82</span>              :         : minPitch_(minPitch), maxPitch_(maxPitch) {}</span>
+<span id="L83"><span class="lineNum">      83</span>              : </span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">         573 :     int minPitch() const { return minPitch_; }</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">         573 :     int maxPitch() const { return maxPitch_; }</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">         925 :     int empty() const { return minPitch_ == std::numeric_limits&lt;int&gt;::max() || maxPitch_ == -1; }</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">         689 :     void addPitch(int pitch)</span></span>
+<span id="L88"><span class="lineNum">      88</span>              :     {</span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">         689 :         if (pitch &lt; minPitch_) {</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">         579 :             minPitch_ = pitch;</span></span>
+<span id="L91"><span class="lineNum">      91</span>              :         }</span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">         689 :         if (pitch &gt; maxPitch_) {</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">         682 :             maxPitch_ = pitch;</span></span>
+<span id="L94"><span class="lineNum">      94</span>              :         }</span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">         689 :     }</span></span>
+<span id="L96"><span class="lineNum">      96</span>              : </span>
+<span id="L97"><span class="lineNum">      97</span>              : private:</span>
+<span id="L98"><span class="lineNum">      98</span>              :     int minPitch_;</span>
+<span id="L99"><span class="lineNum">      99</span>              :     int maxPitch_;</span>
+<span id="L100"><span class="lineNum">     100</span>              : };</span>
+<span id="L101"><span class="lineNum">     101</span>              : </span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">        1254 : int clefMidPitch()</span></span>
+<span id="L103"><span class="lineNum">     103</span>              : {</span>
+<span id="L104"><span class="lineNum">     104</span>              :     static const int midPitch = 60;</span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">        1254 :     return midPitch;</span></span>
+<span id="L106"><span class="lineNum">     106</span>              : }</span>
+<span id="L107"><span class="lineNum">     107</span>              : </span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">         108 : ClefType clefTypeFromAveragePitch(int averagePitch)</span></span>
+<span id="L109"><span class="lineNum">     109</span>              : {</span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">         108 :     return averagePitch &lt; clefMidPitch() ? ClefType::F : ClefType::G;</span></span>
+<span id="L111"><span class="lineNum">     111</span>              : }</span>
+<span id="L112"><span class="lineNum">     112</span>              : </span>
+<span id="L113"><span class="lineNum">     113</span>              : //---------------------------------------------------------</span>
+<span id="L114"><span class="lineNum">     114</span>              : //   createClef</span>
+<span id="L115"><span class="lineNum">     115</span>              : //---------------------------------------------------------</span>
+<span id="L116"><span class="lineNum">     116</span>              : </span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">         112 : static void createClef(ClefType clefType, Staff* staff, int tick, bool isSmall = false)</span></span>
+<span id="L118"><span class="lineNum">     118</span>              : {</span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">         112 :     if (tick == 0) {</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">         110 :         staff-&gt;setDefaultClefType(ClefTypeList(clefType, clefType));</span></span>
+<span id="L121"><span class="lineNum">     121</span>              :     } else {</span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">           2 :         Measure* m = staff-&gt;score()-&gt;tick2measure(Fraction::fromTicks(tick));</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">           2 :         Segment* seg = m-&gt;getSegment(SegmentType::Clef, Fraction::fromTicks(tick));</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">           2 :         Clef* clef = Factory::createClef(seg);</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">           2 :         clef-&gt;setClefType(clefType);</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">           2 :         const track_idx_t track = staff-&gt;idx() * VOICES;</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">           2 :         clef-&gt;setTrack(track);</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">           2 :         clef-&gt;setGenerated(false);</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">           2 :         clef-&gt;mutldata()-&gt;setMag(staff-&gt;staffMag(Fraction::fromTicks(tick)));</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">           2 :         clef-&gt;setSmall(isSmall);</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">           2 :         seg-&gt;add(clef);</span></span>
+<span id="L132"><span class="lineNum">     132</span>              :     }</span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">         112 : }</span></span>
+<span id="L134"><span class="lineNum">     134</span>              : </span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">         916 : static AveragePitch findAverageSegPitch(const Segment* seg, track_idx_t strack)</span></span>
+<span id="L136"><span class="lineNum">     136</span>              : {</span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">         916 :     AveragePitch averagePitch;</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">        4580 :     for (size_t voice = 0; voice &lt; VOICES; ++voice) {</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">        3664 :         ChordRest* cr = toChordRest(seg-&gt;element(strack + voice));</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">        3664 :         if (cr &amp;&amp; cr-&gt;isChord()) {</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">         578 :             Chord* chord = toChord(cr);</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         578 :             const auto&amp; notes = chord-&gt;notes();</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">        1266 :             for (const Note* note: notes) {</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         688 :                 averagePitch.addPitch(note-&gt;pitch());</span></span>
+<span id="L145"><span class="lineNum">     145</span>              :             }</span>
+<span id="L146"><span class="lineNum">     146</span>              :         }</span>
+<span id="L147"><span class="lineNum">     147</span>              :     }</span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         916 :     return averagePitch;</span></span>
+<span id="L149"><span class="lineNum">     149</span>              : }</span>
+<span id="L150"><span class="lineNum">     150</span>              : </span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">         925 : static MinMaxPitch findMinMaxSegPitch(const Segment* seg, track_idx_t strack)</span></span>
+<span id="L152"><span class="lineNum">     152</span>              : {</span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">         925 :     MinMaxPitch minMaxPitch;</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">        4625 :     for (size_t voice = 0; voice &lt; VOICES; ++voice) {</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">        3700 :         ChordRest* cr = toChordRest(seg-&gt;element(strack + voice));</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">        3700 :         if (cr &amp;&amp; cr-&gt;isChord()) {</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">         579 :             Chord* chord = toChord(cr);</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">         579 :             const auto&amp; notes = chord-&gt;notes();</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">        1268 :             for (const Note* note: notes) {</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">         689 :                 minMaxPitch.addPitch(note-&gt;pitch());</span></span>
+<span id="L161"><span class="lineNum">     161</span>              :             }</span>
+<span id="L162"><span class="lineNum">     162</span>              :         }</span>
+<span id="L163"><span class="lineNum">     163</span>              :     }</span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">         925 :     return minMaxPitch;</span></span>
+<span id="L165"><span class="lineNum">     165</span>              : }</span>
+<span id="L166"><span class="lineNum">     166</span>              : </span>
+<span id="L167"><span class="lineNum">     167</span>              : #ifdef QT_DEBUG</span>
+<span id="L168"><span class="lineNum">     168</span>              : </span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">         129 : static bool doesClefBreakTie(const Staff* staff)</span></span>
+<span id="L170"><span class="lineNum">     170</span>              : {</span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">         129 :     const track_idx_t strack = staff-&gt;idx() * VOICES;</span></span>
+<span id="L172"><span class="lineNum">     172</span>              : </span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">         645 :     for (size_t voice = 0; voice &lt; VOICES; ++voice) {</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">         516 :         bool currentTie = false;</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">        5224 :         for (Segment* seg = staff-&gt;score()-&gt;firstSegment(SegmentType::All); seg; seg = seg-&gt;next1()) {</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">        4708 :             if (seg-&gt;segmentType() == SegmentType::ChordRest) {</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">        4664 :                 if (MidiTie::isTiedBack(seg, strack, voice)) {</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">          41 :                     currentTie = false;</span></span>
+<span id="L179"><span class="lineNum">     179</span>              :                 }</span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">        4664 :                 if (MidiTie::isTiedFor(seg, strack, voice)) {</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">          41 :                     currentTie = true;</span></span>
+<span id="L182"><span class="lineNum">     182</span>              :                 }</span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">          44 :             } else if (seg-&gt;segmentType() == SegmentType::Clef &amp;&amp; seg-&gt;element(strack)) {</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">           8 :                 if (currentTie) {</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC tlaBgUNC">           0 :                     LOGD() &lt;&lt; &quot;Clef breaks tie; measure number (from 1):&quot;</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC">           0 :                            &lt;&lt; seg-&gt;measure()-&gt;measureNumber() + 1</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC">           0 :                            &lt;&lt; &quot;, staff index (from 0):&quot; &lt;&lt; staff-&gt;idx();</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC">           0 :                     return true;</span></span>
+<span id="L189"><span class="lineNum">     189</span>              :                 }</span>
+<span id="L190"><span class="lineNum">     190</span>              :             }</span>
+<span id="L191"><span class="lineNum">     191</span>              :         }</span>
+<span id="L192"><span class="lineNum">     192</span>              :     }</span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC tlaBgGNC">         129 :     return false;</span></span>
+<span id="L194"><span class="lineNum">     194</span>              : }</span>
+<span id="L195"><span class="lineNum">     195</span>              : </span>
+<span id="L196"><span class="lineNum">     196</span>              : #endif</span>
+<span id="L197"><span class="lineNum">     197</span>              : </span>
+<span id="L198"><span class="lineNum">     198</span>              : // clef index: 0 - treble, 1 - bass</span>
+<span id="L199"><span class="lineNum">     199</span>              : </span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">        1146 : int findPitchPenaltyForClef(int pitch, int clefIndex)</span></span>
+<span id="L201"><span class="lineNum">     201</span>              : {</span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">        1146 :     const int farPitchPenalty = 10000;</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">        1146 :     const int veryFarPitchPenalty = 20000;</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">        1146 :     const int approxPitchPenalty = 1;</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        1146 :     const int dx = 5;</span></span>
+<span id="L206"><span class="lineNum">     206</span>              : </span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">        1146 :     const int midPitch = clefMidPitch();        // all notes equal or upper - better in G clef</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        1146 :     const int highPitch = midPitch + dx;        // almost all notes equal or upper - in G clef</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">        1146 :     const int lowPitch = midPitch - dx;         // almost all notes lower - in F clef</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">        1146 :     const int highestPitch = highPitch + dx;    // all notes equal or upper - in G clef</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">        1146 :     const int lowestPitch = lowPitch - dx;      // all notes lower - in F clef</span></span>
+<span id="L212"><span class="lineNum">     212</span>              : </span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        1146 :     switch (clefIndex) {</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">         573 :     case 0:</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">         573 :         if (pitch &lt; lowestPitch) {</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">          25 :             return veryFarPitchPenalty;</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">         548 :         } else if (pitch &lt; lowPitch) {</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">          15 :             return farPitchPenalty;</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">         533 :         } else if (pitch &lt; midPitch) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">          68 :             return approxPitchPenalty;</span></span>
+<span id="L221"><span class="lineNum">     221</span>              :         }</span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">         465 :         break;</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">         573 :     case 1:</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">         573 :         if (pitch &gt;= highestPitch) {</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">         229 :             return veryFarPitchPenalty;</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">         344 :         } else if (pitch &gt;= highPitch) {</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">         147 :             return farPitchPenalty;</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">         197 :         } else if (pitch &gt;= midPitch) {</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">         130 :             return approxPitchPenalty;</span></span>
+<span id="L230"><span class="lineNum">     230</span>              :         }</span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">          67 :         break;</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC tlaBgUNC">           0 :     default:</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaUNC">           0 :         Q_ASSERT_X(false, &quot;MidiClef::pitchPenalty&quot;, &quot;Unknown clef type&quot;);</span></span>
+<span id="L234"><span class="lineNum">     234</span>              :         break;</span>
+<span id="L235"><span class="lineNum">     235</span>              :     }</span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC tlaBgGNC">         532 :     return 0;</span></span>
+<span id="L237"><span class="lineNum">     237</span>              : }</span>
+<span id="L238"><span class="lineNum">     238</span>              : </span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">        5843 : static std::pair&lt;ElementType, ReducedFraction&gt; findChordRest(const Segment* seg, track_idx_t strack)</span></span>
+<span id="L240"><span class="lineNum">     240</span>              : {</span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">        5843 :     ElementType elType = ElementType::INVALID;</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        5843 :     ReducedFraction newRestLen(0, 1);</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       10374 :     for (size_t voice = 0; voice &lt; VOICES; ++voice) {</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        9430 :         ChordRest* cr = toChordRest(seg-&gt;element(strack + voice));</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">        9430 :         if (!cr) {</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        3808 :             continue;</span></span>
+<span id="L247"><span class="lineNum">     247</span>              :         }</span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        5622 :         if (cr-&gt;isChord()) {</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        4899 :             elType = ElementType::CHORD;</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">        4899 :             break;</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">         723 :         } else if (cr-&gt;isRest()) {</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">         723 :             elType = ElementType::REST;</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">         723 :             newRestLen = qMax(newRestLen, ReducedFraction(cr-&gt;globalTicks()));</span></span>
+<span id="L254"><span class="lineNum">     254</span>              :         }</span>
+<span id="L255"><span class="lineNum">     255</span>              :     }</span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">        5843 :     return { elType, newRestLen };</span></span>
+<span id="L257"><span class="lineNum">     257</span>              : }</span>
+<span id="L258"><span class="lineNum">     258</span>              : </span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">        1064 : int findClefChangePenalty(</span></span>
+<span id="L260"><span class="lineNum">     260</span>              :     int pos,</span>
+<span id="L261"><span class="lineNum">     261</span>              :     int clefIndex,</span>
+<span id="L262"><span class="lineNum">     262</span>              :     const std::vector&lt;std::vector&lt;int&gt; &gt;&amp; trebleBassPath,</span>
+<span id="L263"><span class="lineNum">     263</span>              :     const Segment* segment,</span>
+<span id="L264"><span class="lineNum">     264</span>              :     const Staff* staff)</span>
+<span id="L265"><span class="lineNum">     265</span>              : {</span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">        1064 :     if (pos == 0) {</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">         218 :         return 0;</span></span>
+<span id="L268"><span class="lineNum">     268</span>              :     }</span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">         846 :     const int clefChangePenalty = 1000;</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">         846 :     const int prevClefChangePenalty = 10001;</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">         846 :     const int orphanChordPenalty = 2;</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">         846 :     const int notesBetweenClefs = 5;         // should be &gt;= 2</span></span>
+<span id="L274"><span class="lineNum">     274</span>              : </span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">         846 :     int j = pos;</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">         846 :     ReducedFraction totalRestLen(0, 1);</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">         846 :     int penalty = 0;</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">         846 :     const track_idx_t strack = staff-&gt;idx() * VOICES;</span></span>
+<span id="L279"><span class="lineNum">     279</span>              :     const auto barFraction = ReducedFraction(</span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">         846 :         staff-&gt;score()-&gt;sigmap()-&gt;timesig(segment-&gt;tick()).timesig());</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">         846 :     const ReducedFraction beatLen = Meter::beatLength(barFraction);</span></span>
+<span id="L282"><span class="lineNum">     282</span>              : </span>
+<span id="L283"><span class="lineNum">     283</span>              :     // find backward penalty</span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">         846 :     for (const Segment* segPrev = segment-&gt;prev1(SegmentType::ChordRest);;</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">        1531 :          segPrev = segPrev-&gt;prev1(SegmentType::ChordRest)) {</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">        2377 :         if (!segPrev) {</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaUNC tlaBgUNC">           0 :             penalty += clefChangePenalty;</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L289"><span class="lineNum">     289</span>              :         }</span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC tlaBgGNC">        2377 :         const auto el = findChordRest(segPrev, strack);</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">        2377 :         if (el.first == ElementType::CHORD) {</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">        2047 :             --j;</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">        2047 :             if (j == pos - notesBetweenClefs) {</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">         206 :                 break;</span></span>
+<span id="L295"><span class="lineNum">     295</span>              :             }</span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">        1841 :             if (j == 0 || trebleBassPath[clefIndex][j] != clefIndex) {</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">         592 :                 if (j == pos - 1) {</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">         360 :                     penalty += prevClefChangePenalty;</span></span>
+<span id="L299"><span class="lineNum">     299</span>              :                 } else {</span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">         232 :                     penalty += clefChangePenalty;</span></span>
+<span id="L301"><span class="lineNum">     301</span>              :                 }</span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">         592 :                 break;</span></span>
+<span id="L303"><span class="lineNum">     303</span>              :             }</span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">        1249 :             totalRestLen = { 0, 1 };</span></span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">         330 :         } else if (el.first == ElementType::REST) {</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">         138 :             totalRestLen += el.second;</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">         138 :             if (totalRestLen &gt;= beatLen) {</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">          48 :                 if (j != pos) {</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">          12 :                     penalty += orphanChordPenalty;</span></span>
+<span id="L310"><span class="lineNum">     310</span>              :                 }</span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">          48 :                 break;</span></span>
+<span id="L312"><span class="lineNum">     312</span>              :             }</span>
+<span id="L313"><span class="lineNum">     313</span>              :         }</span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">        1531 :     }</span></span>
+<span id="L315"><span class="lineNum">     315</span>              :     // find forward penalty</span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">         846 :     int chordCounter = 0;</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">        3716 :     for (const Segment* seg = segment;; seg = seg-&gt;next1(SegmentType::ChordRest)) {</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">        3716 :         if (!seg) {</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">         250 :             penalty += clefChangePenalty;</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">         250 :             break;</span></span>
+<span id="L321"><span class="lineNum">     321</span>              :         }</span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">        3466 :         const auto el = findChordRest(seg, strack);</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">        3466 :         if (el.first == ElementType::CHORD) {</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">        2852 :             ++chordCounter;</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">        2852 :             if (chordCounter == notesBetweenClefs) {</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         352 :                 break;</span></span>
+<span id="L327"><span class="lineNum">     327</span>              :             }</span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">        2500 :             totalRestLen = { 0, 1 };</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">         614 :         } else if (el.first == ElementType::REST) {</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">         424 :             totalRestLen += el.second;</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">         424 :             if (totalRestLen &gt;= beatLen) {</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">         244 :                 penalty += orphanChordPenalty;</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">         244 :                 break;</span></span>
+<span id="L334"><span class="lineNum">     334</span>              :             }</span>
+<span id="L335"><span class="lineNum">     335</span>              :         }</span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">        2870 :     }</span></span>
+<span id="L337"><span class="lineNum">     337</span>              : </span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">         846 :     return penalty;</span></span>
+<span id="L339"><span class="lineNum">     339</span>              : }</span>
+<span id="L340"><span class="lineNum">     340</span>              : </span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">           4 : ClefType clefFromIndex(int index)</span></span>
+<span id="L342"><span class="lineNum">     342</span>              : {</span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">           4 :     return (index == 0) ? ClefType::G : ClefType::F;</span></span>
+<span id="L344"><span class="lineNum">     344</span>              : }</span>
+<span id="L345"><span class="lineNum">     345</span>              : </span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">         573 : void makeDynamicProgrammingStep(std::vector&lt;std::vector&lt;int&gt; &gt;&amp; penalties,</span></span>
+<span id="L347"><span class="lineNum">     347</span>              :                                 std::vector&lt;std::vector&lt;int&gt; &gt;&amp; optimalPaths,</span>
+<span id="L348"><span class="lineNum">     348</span>              :                                 int pos,</span>
+<span id="L349"><span class="lineNum">     349</span>              :                                 MidiTie::TieStateMachine::State tieState,</span>
+<span id="L350"><span class="lineNum">     350</span>              :                                 const MinMaxPitch&amp; minMaxPitch,</span>
+<span id="L351"><span class="lineNum">     351</span>              :                                 const Segment* seg,</span>
+<span id="L352"><span class="lineNum">     352</span>              :                                 const Staff* staff)</span>
+<span id="L353"><span class="lineNum">     353</span>              : {</span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">        1719 :     for (int clefIndex = 0; clefIndex != 2; ++clefIndex) {</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">        1146 :         optimalPaths[clefIndex].resize(pos + 1);</span></span>
+<span id="L356"><span class="lineNum">     356</span>              :     }</span>
+<span id="L357"><span class="lineNum">     357</span>              : </span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">        1719 :     for (int curClef = 0; curClef != 2; ++curClef) {</span></span>
+<span id="L359"><span class="lineNum">     359</span>              :         const int significantPitch = (curClef == 0)</span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">        1146 :                                      ? minMaxPitch.minPitch() : minMaxPitch.maxPitch();</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        1146 :         const int pitchPenalty = findPitchPenaltyForClef(significantPitch, curClef);</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">        1146 :         int minPenalty = std::numeric_limits&lt;int&gt;::max();</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">        1146 :         int minIndex = 0;</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">        3438 :         for (int prevClef = 0; prevClef != 2; ++prevClef) {</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">        2292 :             int penalty = pitchPenalty;</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">        2292 :             if (prevClef != curClef) {</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">        1146 :                 if (tieState == MidiTie::TieStateMachine::State::TIED_BACK</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">        1088 :                     || tieState == MidiTie::TieStateMachine::State::TIED_BOTH) {</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">          82 :                     continue;             // there is a tie breakage that is incorrect</span></span>
+<span id="L370"><span class="lineNum">     370</span>              :                 }</span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">        1064 :                 penalty += findClefChangePenalty(pos, prevClef, optimalPaths, seg, staff);</span></span>
+<span id="L372"><span class="lineNum">     372</span>              :             }</span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">        2210 :             penalty += (pos &gt; 0) ? penalties[prevClef][(pos + 1) % 2] : 0;</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">        2210 :             if ((prevClef != curClef &amp;&amp; penalty &lt; minPenalty)</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">        1654 :                 || (prevClef == curClef &amp;&amp; penalty &lt;= minPenalty)) {</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">        1413 :                 minPenalty = penalty;</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">        1413 :                 minIndex = prevClef;</span></span>
+<span id="L378"><span class="lineNum">     378</span>              :             }</span>
+<span id="L379"><span class="lineNum">     379</span>              :         }</span>
+<span id="L380"><span class="lineNum">     380</span>              : </span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">        1146 :         penalties[curClef][pos % 2] = minPenalty;</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">        1146 :         if (pos &gt; 0) {</span></span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">         928 :             optimalPaths[curClef][pos] = minIndex;</span></span>
+<span id="L384"><span class="lineNum">     384</span>              :         }</span>
+<span id="L385"><span class="lineNum">     385</span>              :     }</span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">         573 : }</span></span>
+<span id="L387"><span class="lineNum">     387</span>              : </span>
+<span id="L388"><span class="lineNum">     388</span>              : // clefs should be created from the beginning to the end of the score</span>
+<span id="L389"><span class="lineNum">     389</span>              : // (otherwise clefs that are equal the default staff clef at the beginning</span>
+<span id="L390"><span class="lineNum">     390</span>              : //  will be ignored),</span>
+<span id="L391"><span class="lineNum">     391</span>              : // results of dynamic programming are collected from the end to the beginning</span>
+<span id="L392"><span class="lineNum">     392</span>              : // so we need to store temporary results</span>
+<span id="L393"><span class="lineNum">     393</span>              : </span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">         109 : bool createClefs(</span></span>
+<span id="L395"><span class="lineNum">     395</span>              :     Staff* staff,</span>
+<span id="L396"><span class="lineNum">     396</span>              :     const std::vector&lt;std::vector&lt;int&gt; &gt;&amp; optimalPaths,</span>
+<span id="L397"><span class="lineNum">     397</span>              :     int lastClef,</span>
+<span id="L398"><span class="lineNum">     398</span>              :     const std::vector&lt;Segment*&gt;&amp; segments)</span>
+<span id="L399"><span class="lineNum">     399</span>              : {</span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">         109 :     std::vector&lt;std::pair&lt;ClefType, int&gt; &gt; clefsAndTicks;</span></span>
+<span id="L401"><span class="lineNum">     401</span>              : </span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">         109 :     int currentClef = lastClef;</span></span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">         573 :     for (size_t i = optimalPaths[0].size() - 1; i; --i) {</span></span>
+<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">         464 :         const int prevClef = optimalPaths[currentClef][i];</span></span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">         464 :         if (prevClef != currentClef) {</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">           2 :             clefsAndTicks.push_back({ clefFromIndex(currentClef), segments[i]-&gt;tick().ticks() });</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">           2 :             currentClef = prevClef;</span></span>
+<span id="L408"><span class="lineNum">     408</span>              :         }</span>
+<span id="L409"><span class="lineNum">     409</span>              :     }</span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">         109 :     if (clefsAndTicks.empty()) {</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">         107 :         return false;</span></span>
+<span id="L412"><span class="lineNum">     412</span>              :     }</span>
+<span id="L413"><span class="lineNum">     413</span>              : </span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">           2 :     createClef(clefFromIndex(currentClef), staff, 0);       // main staff clef</span></span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">           4 :     for (size_t i = clefsAndTicks.size(); i; --i) {         // clef changes</span></span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">           2 :         createClef(clefsAndTicks[i - 1].first, staff, clefsAndTicks[i - 1].second, true);</span></span>
+<span id="L417"><span class="lineNum">     417</span>              :     }</span>
+<span id="L418"><span class="lineNum">     418</span>              : </span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">           2 :     return true;</span></span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">         109 : }</span></span>
+<span id="L421"><span class="lineNum">     421</span>              : </span>
+<span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">         108 : static void createMainClefFromAveragePitch(Staff* staff, track_idx_t strack)</span></span>
+<span id="L423"><span class="lineNum">     423</span>              : {</span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">         108 :     AveragePitch allAveragePitch;</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">        1024 :     for (Segment* seg = staff-&gt;score()-&gt;firstSegment(SegmentType::ChordRest); seg;</span></span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">         916 :          seg = seg-&gt;next1(SegmentType::ChordRest)) {</span></span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">         916 :         allAveragePitch += findAverageSegPitch(seg, strack);</span></span>
+<span id="L428"><span class="lineNum">     428</span>              :     }</span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">         108 :     ClefType mainClef = clefTypeFromAveragePitch(allAveragePitch.pitch());</span></span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">         108 :     createClef(mainClef, staff, 0);</span></span>
+<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">         108 : }</span></span>
+<span id="L432"><span class="lineNum">     432</span>              : </span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">         129 : bool hasGFclefs(const InstrumentTemplate* templ)</span></span>
+<span id="L434"><span class="lineNum">     434</span>              : {</span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">         129 :     if (!templ) {</span></span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
+<span id="L437"><span class="lineNum">     437</span>              :     }</span>
+<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC tlaBgGNC">         129 :     const size_t staveCount = templ-&gt;staffCount;</span></span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">         129 :     bool hasG = false;</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">         129 :     bool hasF = false;</span></span>
+<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC">         371 :     for (staff_idx_t i = 0; i != staveCount; ++i) {</span></span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">         242 :         switch (templ-&gt;clefTypes[i].concertClef) {</span></span>
+<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">         114 :         case ClefType::G:</span></span>
+<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">         114 :             hasG = true;</span></span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">         114 :             break;</span></span>
+<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">         114 :         case ClefType::F:</span></span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">         114 :             hasF = true;</span></span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">         114 :             break;</span></span>
+<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">          14 :         default:</span></span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">          14 :             break;</span></span>
+<span id="L451"><span class="lineNum">     451</span>              :         }</span>
+<span id="L452"><span class="lineNum">     452</span>              :     }</span>
+<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">         129 :     return hasG &amp;&amp; hasF;</span></span>
+<span id="L454"><span class="lineNum">     454</span>              : }</span>
+<span id="L455"><span class="lineNum">     455</span>              : </span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">         129 : void createClefs(Staff* staff, int indexOfOperation, bool isDrumTrack)</span></span>
+<span id="L457"><span class="lineNum">     457</span>              : {</span>
+<span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC">         129 :     const auto&amp; opers = midiImportOperations.data()-&gt;trackOpers;</span></span>
+<span id="L459"><span class="lineNum">     459</span> <span class="tlaGNC">         129 :     const auto&amp; trackInstrList = opers.msInstrList.value(indexOfOperation);</span></span>
+<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC">         129 :     const int msInstrIndex = opers.msInstrIndex.value(indexOfOperation);</span></span>
+<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">         129 :     const bool hasInstrument = !trackInstrList.empty() &amp;&amp; trackInstrList[msInstrIndex];</span></span>
+<span id="L462"><span class="lineNum">     462</span>              : </span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">         129 :     if (isDrumTrack &amp;&amp; !hasInstrument) {</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC tlaBgUNC">           0 :         createClef(ClefType::PERC, staff, 0);</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L466"><span class="lineNum">     466</span>              :     }</span>
+<span id="L467"><span class="lineNum">     467</span>              : </span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC tlaBgGNC">         129 :     const track_idx_t strack = staff-&gt;idx() * VOICES;</span></span>
+<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">         129 :     bool mainClefWasSet = false;</span></span>
+<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">         129 :     const bool canChangeClef = !hasInstrument || hasGFclefs(trackInstrList[msInstrIndex]);</span></span>
+<span id="L471"><span class="lineNum">     471</span>              : </span>
+<span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC">         129 :     if (opers.changeClef.value(indexOfOperation) &amp;&amp; canChangeClef) {</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">         109 :         MidiTie::TieStateMachine tieTracker;</span></span>
+<span id="L474"><span class="lineNum">     474</span>              : </span>
+<span id="L475"><span class="lineNum">     475</span>              :         // find optimal clef changes via dynamic programming</span>
+<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">         109 :         std::vector&lt;std::vector&lt;int&gt; &gt; penalties(2);            // 0 - treble, 1 - bass</span></span>
+<span id="L477"><span class="lineNum">     477</span>              :         // remember only 2 last positions to save memory</span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">         327 :         for (size_t i = 0; i != penalties.size(); ++i) {</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">         218 :             penalties[i].resize(2);                             // 2 = current + prev</span></span>
+<span id="L480"><span class="lineNum">     480</span>              :         }</span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">         109 :         std::vector&lt;std::vector&lt;int&gt; &gt; optimalPaths(2);         // first col is unused</span></span>
+<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">         109 :         std::vector&lt;Segment*&gt; segments;</span></span>
+<span id="L483"><span class="lineNum">     483</span>              : </span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">         109 :         int pos = 0;</span></span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">        1034 :         for (Segment* seg = staff-&gt;score()-&gt;firstSegment(SegmentType::ChordRest); seg;</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">         925 :              seg = seg-&gt;next1(SegmentType::ChordRest)) {</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">         925 :             const auto minMaxPitch = findMinMaxSegPitch(seg, strack);</span></span>
+<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">         925 :             if (minMaxPitch.empty()) {                          // no chords</span></span>
+<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">         352 :                 continue;</span></span>
+<span id="L490"><span class="lineNum">     490</span>              :             }</span>
+<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">         573 :             tieTracker.addSeg(seg, strack);</span></span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">         573 :             segments.push_back(seg);</span></span>
+<span id="L493"><span class="lineNum">     493</span>              : </span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">         573 :             makeDynamicProgrammingStep(penalties, optimalPaths, pos,</span></span>
+<span id="L495"><span class="lineNum">     495</span>              :                                        tieTracker.state(), minMaxPitch, seg, staff);</span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">         573 :             ++pos;</span></span>
+<span id="L497"><span class="lineNum">     497</span>              :         }</span>
+<span id="L498"><span class="lineNum">     498</span>              : </span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">         109 :         if (!optimalPaths[0].empty()) {</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">         109 :             const int lastClef = (penalties[1][(pos - 1) % 2] &lt; penalties[0][(pos - 1) % 2])</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">         109 :                                  ? 1 : 0;</span></span>
+<span id="L502"><span class="lineNum">     502</span>              :             // get the optimal clef changes found via dynamic programming</span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">         109 :             if (createClefs(staff, optimalPaths, lastClef, segments)) {</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">           2 :                 mainClefWasSet = true;</span></span>
+<span id="L505"><span class="lineNum">     505</span>              :             }</span>
+<span id="L506"><span class="lineNum">     506</span>              :         }</span>
+<span id="L507"><span class="lineNum">     507</span> <span class="tlaGNC">         109 :     }</span></span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">         129 :     if (!mainClefWasSet &amp;&amp; canChangeClef) {</span></span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">         108 :         createMainClefFromAveragePitch(staff, strack);</span></span>
+<span id="L510"><span class="lineNum">     510</span>              :     }</span>
+<span id="L511"><span class="lineNum">     511</span>              : #ifdef QT_DEBUG</span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">         129 :     Q_ASSERT_X(!doesClefBreakTie(staff), &quot;MidiClef::createClefs&quot;, &quot;Clef breaks the tie&quot;);</span></span>
+<span id="L513"><span class="lineNum">     513</span>              : #endif</span>
+<span id="L514"><span class="lineNum">     514</span>              : }</span>
+<span id="L515"><span class="lineNum">     515</span>              : } // namespace MidiClef</span>
+<span id="L516"><span class="lineNum">     516</span>              : } // namespace mu::iex::midi</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

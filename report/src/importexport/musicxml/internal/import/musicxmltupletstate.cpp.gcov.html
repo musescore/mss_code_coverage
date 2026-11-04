@@ -1,0 +1,440 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/importexport/musicxml/internal/import/musicxmltupletstate.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../../index.html">top level</a> - <a href="index.html">src/importexport/musicxml/internal/import</a> - musicxmltupletstate.cpp</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">93.8&nbsp;%</td>
+            <td class="headerCovTableEntry">112</td>
+            <td class="headerCovTableEntry">105</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2024 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : #include &quot;musicxmltupletstate.h&quot;</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span>              : #include &quot;engraving/dom/tuplet.h&quot;</span>
+<span id="L25"><span class="lineNum">      25</span>              : </span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;internal/shared/musicxmltypes.h&quot;</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : using namespace mu::engraving;</span>
+<span id="L29"><span class="lineNum">      29</span>              : using namespace mu::iex::musicxml;</span>
+<span id="L30"><span class="lineNum">      30</span>              : </span>
+<span id="L31"><span class="lineNum">      31</span>              : //---------------------------------------------------------</span>
+<span id="L32"><span class="lineNum">      32</span>              : //   determineTupletFractionAndFullDuration</span>
+<span id="L33"><span class="lineNum">      33</span>              : //---------------------------------------------------------</span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span>              : /**</span>
+<span id="L36"><span class="lineNum">      36</span>              :  Split duration into two factors where fullDuration is note sized</span>
+<span id="L37"><span class="lineNum">      37</span>              :  (i.e. the denominator is a power of 2), 1/2 &lt; fraction &lt;= 1/1</span>
+<span id="L38"><span class="lineNum">      38</span>              :  and fraction * fullDuration equals duration.</span>
+<span id="L39"><span class="lineNum">      39</span>              :  */</span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC tlaBgGNC">         124 : void MusicXmlTupletState::determineTupletFractionAndFullDuration(const Fraction duration, Fraction&amp; fraction, Fraction&amp; fullDuration)</span></span>
+<span id="L42"><span class="lineNum">      42</span>              : {</span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">         124 :     fraction = duration;</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">         124 :     fullDuration = Fraction(1, 1);</span></span>
+<span id="L45"><span class="lineNum">      45</span>              :     // move denominator's powers of 2 from fraction to fullDuration</span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">         407 :     while (fraction.denominator() % 2 == 0) {</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">         283 :         fraction *= 2;</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">         283 :         fraction.reduce();</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">         283 :         fullDuration *= Fraction(1, 2);</span></span>
+<span id="L50"><span class="lineNum">      50</span>              :     }</span>
+<span id="L51"><span class="lineNum">      51</span>              :     // move numerator's powers of 2 from fraction to fullDuration</span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">         131 :     while (fraction.numerator() % 2 == 0) {</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           7 :         fraction *= Fraction(1, 2);</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           7 :         fraction.reduce();</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           7 :         fullDuration *= 2;</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           7 :         fullDuration.reduce();</span></span>
+<span id="L57"><span class="lineNum">      57</span>              :     }</span>
+<span id="L58"><span class="lineNum">      58</span>              :     // make sure 1/2 &lt; fraction &lt;= 1/1</span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">         131 :     while (fraction &lt;= Fraction(1, 2)) {</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           7 :         fullDuration *= Fraction(1, 2);</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           7 :         fraction *= 2;</span></span>
+<span id="L62"><span class="lineNum">      62</span>              :     }</span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">         124 :     fullDuration.reduce();</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">         124 :     fraction.reduce();</span></span>
+<span id="L65"><span class="lineNum">      65</span>              : </span>
+<span id="L66"><span class="lineNum">      66</span>              :     /*</span>
+<span id="L67"><span class="lineNum">      67</span>              :     Examples (note result when denominator is not a power of two):</span>
+<span id="L68"><span class="lineNum">      68</span>              :     3:2 tuplet of 1/4 results in fraction 1/1 and fullDuration 1/2</span>
+<span id="L69"><span class="lineNum">      69</span>              :     2:3 tuplet of 1/4 results in fraction 3/1 and fullDuration 1/4</span>
+<span id="L70"><span class="lineNum">      70</span>              :     4:3 tuplet of 1/4 results in fraction 3/1 and fullDuration 1/4</span>
+<span id="L71"><span class="lineNum">      71</span>              :     3:4 tuplet of 1/4 results in fraction 1/1 and fullDuration 1/1</span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span>              :      Bring back fraction in 1/2 .. 1/1 range.</span>
+<span id="L74"><span class="lineNum">      74</span>              :      */</span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">         124 :     if (fraction &gt; Fraction(1, 1) &amp;&amp; fraction.denominator() == 1) {</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">           3 :         fullDuration *= fraction;</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">           3 :         fullDuration.reduce();</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">           3 :         fraction = Fraction(1, 1);</span></span>
+<span id="L80"><span class="lineNum">      80</span>              :     }</span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span>              :     /*</span>
+<span id="L83"><span class="lineNum">      83</span>              :     LOGD(&quot;duration %s fraction %s fullDuration %s&quot;,</span>
+<span id="L84"><span class="lineNum">      84</span>              :            muPrintable(duration.toString()),</span>
+<span id="L85"><span class="lineNum">      85</span>              :            muPrintable(fraction.toString()),</span>
+<span id="L86"><span class="lineNum">      86</span>              :            muPrintable(fullDuration.toString())</span>
+<span id="L87"><span class="lineNum">      87</span>              :            );</span>
+<span id="L88"><span class="lineNum">      88</span>              :     */</span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">         124 : }</span></span>
+<span id="L90"><span class="lineNum">      90</span>              : </span>
+<span id="L91"><span class="lineNum">      91</span>              : //---------------------------------------------------------</span>
+<span id="L92"><span class="lineNum">      92</span>              : //   missingTupletDuration</span>
+<span id="L93"><span class="lineNum">      93</span>              : //---------------------------------------------------------</span>
+<span id="L94"><span class="lineNum">      94</span>              : </span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">           9 : Fraction MusicXmlTupletState::missingTupletDuration(const Fraction duration)</span></span>
+<span id="L96"><span class="lineNum">      96</span>              : {</span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">           9 :     Fraction tupletFraction;</span></span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">           9 :     Fraction tupletFullDuration;</span></span>
+<span id="L99"><span class="lineNum">      99</span>              : </span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">           9 :     determineTupletFractionAndFullDuration(duration, tupletFraction, tupletFullDuration);</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">           9 :     Fraction missing = (Fraction(1, 1) - tupletFraction) * tupletFullDuration;</span></span>
+<span id="L102"><span class="lineNum">     102</span>              : </span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">           9 :     return missing;</span></span>
+<span id="L104"><span class="lineNum">     104</span>              : }</span>
+<span id="L105"><span class="lineNum">     105</span>              : </span>
+<span id="L106"><span class="lineNum">     106</span>              : //---------------------------------------------------------</span>
+<span id="L107"><span class="lineNum">     107</span>              : //   isTupletFilled</span>
+<span id="L108"><span class="lineNum">     108</span>              : //---------------------------------------------------------</span>
+<span id="L109"><span class="lineNum">     109</span>              : </span>
+<span id="L110"><span class="lineNum">     110</span>              : /**</span>
+<span id="L111"><span class="lineNum">     111</span>              :  Determine if the tuplet is completely filled,</span>
+<span id="L112"><span class="lineNum">     112</span>              :  because either (1) it is at least the same duration</span>
+<span id="L113"><span class="lineNum">     113</span>              :  as the specified number of the specified normal type notes</span>
+<span id="L114"><span class="lineNum">     114</span>              :  or (2) the duration adds up to a normal note duration.</span>
+<span id="L115"><span class="lineNum">     115</span>              : </span>
+<span id="L116"><span class="lineNum">     116</span>              :  Example (1): a 3:2 tuplet with a 1/4 and a 1/8 note</span>
+<span id="L117"><span class="lineNum">     117</span>              :  is filled if normal type is 1/8,</span>
+<span id="L118"><span class="lineNum">     118</span>              :  it is not filled if normal type is 1/4.</span>
+<span id="L119"><span class="lineNum">     119</span>              : </span>
+<span id="L120"><span class="lineNum">     120</span>              :  Example (2): a 3:2 tuplet with a 1/4 and a 1/8 note is filled.</span>
+<span id="L121"><span class="lineNum">     121</span>              :  */</span>
+<span id="L122"><span class="lineNum">     122</span>              : </span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">         278 : bool MusicXmlTupletState::isTupletFilled(const TDuration normalType, const Fraction timeMod)</span></span>
+<span id="L124"><span class="lineNum">     124</span>              : {</span>
+<span id="L125"><span class="lineNum">     125</span>              :     UNUSED(timeMod);</span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">         278 :     bool res = false;</span></span>
+<span id="L127"><span class="lineNum">     127</span>              :     /*</span>
+<span id="L128"><span class="lineNum">     128</span>              :     const auto normalNotes = state.m_normalNotes;</span>
+<span id="L129"><span class="lineNum">     129</span>              :     LOGD(&quot;duration %s normalType %s timeMod %s normalNotes %d actualNotes %d&quot;,</span>
+<span id="L130"><span class="lineNum">     130</span>              :            muPrintable(state.m_duration.toString()),</span>
+<span id="L131"><span class="lineNum">     131</span>              :            muPrintable(normalType.fraction().toString()),</span>
+<span id="L132"><span class="lineNum">     132</span>              :            muPrintable(timeMod.toString()),</span>
+<span id="L133"><span class="lineNum">     133</span>              :            normalNotes,</span>
+<span id="L134"><span class="lineNum">     134</span>              :            actualNotes</span>
+<span id="L135"><span class="lineNum">     135</span>              :            );</span>
+<span id="L136"><span class="lineNum">     136</span>              :     */</span>
+<span id="L137"><span class="lineNum">     137</span>              : </span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         278 :     if (normalType.isValid()) {</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">          18 :         int matchedNormalType  = int(normalType.type());</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">          18 :         int matchedNormalCount = actualNotes;</span></span>
+<span id="L141"><span class="lineNum">     141</span>              :         // match the types</span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">          18 :         matchTypeAndCount(matchedNormalType, matchedNormalCount);</span></span>
+<span id="L143"><span class="lineNum">     143</span>              :         // ... result scenario (1)</span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">          18 :         res = smallestNoteCount &gt;= matchedNormalCount;</span></span>
+<span id="L145"><span class="lineNum">     145</span>              :         /*</span>
+<span id="L146"><span class="lineNum">     146</span>              :         LOGD(&quot;normalType valid tupletType %d tupletCount %d matchedNormalType %d matchedNormalCount %d res %d&quot;,</span>
+<span id="L147"><span class="lineNum">     147</span>              :                tupletType,</span>
+<span id="L148"><span class="lineNum">     148</span>              :                tupletCount,</span>
+<span id="L149"><span class="lineNum">     149</span>              :                matchedNormalType,</span>
+<span id="L150"><span class="lineNum">     150</span>              :                matchedNormalCount,</span>
+<span id="L151"><span class="lineNum">     151</span>              :                res</span>
+<span id="L152"><span class="lineNum">     152</span>              :                );</span>
+<span id="L153"><span class="lineNum">     153</span>              :          */</span>
+<span id="L154"><span class="lineNum">     154</span>              :     } else {</span>
+<span id="L155"><span class="lineNum">     155</span>              :         // ... result scenario (2)</span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         260 :         res = smallestNoteCount &gt;= actualNotes;</span></span>
+<span id="L157"><span class="lineNum">     157</span>              :         /*</span>
+<span id="L158"><span class="lineNum">     158</span>              :         LOGD(&quot;normalType not valid tupletCount %d actualNotes %d res %d&quot;,</span>
+<span id="L159"><span class="lineNum">     159</span>              :                tupletCount,</span>
+<span id="L160"><span class="lineNum">     160</span>              :                actualNotes,</span>
+<span id="L161"><span class="lineNum">     161</span>              :                res</span>
+<span id="L162"><span class="lineNum">     162</span>              :                );</span>
+<span id="L163"><span class="lineNum">     163</span>              :          */</span>
+<span id="L164"><span class="lineNum">     164</span>              :     }</span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">         278 :     return res;</span></span>
+<span id="L166"><span class="lineNum">     166</span>              : }</span>
+<span id="L167"><span class="lineNum">     167</span>              : </span>
+<span id="L168"><span class="lineNum">     168</span>              : //---------------------------------------------------------</span>
+<span id="L169"><span class="lineNum">     169</span>              : //   smallestTypeAndCount</span>
+<span id="L170"><span class="lineNum">     170</span>              : //---------------------------------------------------------</span>
+<span id="L171"><span class="lineNum">     171</span>              : </span>
+<span id="L172"><span class="lineNum">     172</span>              : /**</span>
+<span id="L173"><span class="lineNum">     173</span>              :  Determine the smallest note type and the number of those</span>
+<span id="L174"><span class="lineNum">     174</span>              :  present in a ChordRest.</span>
+<span id="L175"><span class="lineNum">     175</span>              :  For a note without dots the type equals the note type</span>
+<span id="L176"><span class="lineNum">     176</span>              :  and count is one.</span>
+<span id="L177"><span class="lineNum">     177</span>              :  For a single dotted note the type equals half the note type</span>
+<span id="L178"><span class="lineNum">     178</span>              :  and count is three.</span>
+<span id="L179"><span class="lineNum">     179</span>              :  A double dotted note is similar.</span>
+<span id="L180"><span class="lineNum">     180</span>              :  Note: code assumes when duration().type() is incremented,</span>
+<span id="L181"><span class="lineNum">     181</span>              :  the note length is divided by two, checked by tupletAssert().</span>
+<span id="L182"><span class="lineNum">     182</span>              :  */</span>
+<span id="L183"><span class="lineNum">     183</span>              : </span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">         692 : void MusicXmlTupletState::smallestTypeAndCount(const TDuration durType, int&amp; type, int&amp; count)</span></span>
+<span id="L185"><span class="lineNum">     185</span>              : {</span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">         692 :     type = int(durType.type());</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">         692 :     count = 1;</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">         692 :     switch (durType.dots()) {</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">         670 :     case 0:</span></span>
+<span id="L190"><span class="lineNum">     190</span>              :         // nothing to do</span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">         670 :         break;</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">          22 :     case 1:</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">          22 :         type += 1;                 // next-smaller type</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">          22 :         count = 3;</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">          22 :         break;</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaUNC tlaBgUNC">           0 :     case 2:</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 :         type += 2;                 // next-next-smaller type</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaUNC">           0 :         count = 7;</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaUNC">           0 :     default:</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC">           0 :         LOGD(&quot;smallestTypeAndCount() does not support more than 2 dots&quot;);</span></span>
+<span id="L202"><span class="lineNum">     202</span>              :     }</span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC tlaBgGNC">         692 : }</span></span>
+<span id="L204"><span class="lineNum">     204</span>              : </span>
+<span id="L205"><span class="lineNum">     205</span>              : //---------------------------------------------------------</span>
+<span id="L206"><span class="lineNum">     206</span>              : //   matchTypeAndCount</span>
+<span id="L207"><span class="lineNum">     207</span>              : //---------------------------------------------------------</span>
+<span id="L208"><span class="lineNum">     208</span>              : </span>
+<span id="L209"><span class="lineNum">     209</span>              : /**</span>
+<span id="L210"><span class="lineNum">     210</span>              :  Given two note types and counts, if the types are not equal,</span>
+<span id="L211"><span class="lineNum">     211</span>              :  make them equal by successively doubling the count of the</span>
+<span id="L212"><span class="lineNum">     212</span>              :  largest type.</span>
+<span id="L213"><span class="lineNum">     213</span>              :  */</span>
+<span id="L214"><span class="lineNum">     214</span>              : </span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">         474 : void MusicXmlTupletState::matchTypeAndCount(int&amp; noteType, int&amp; noteCount)</span></span>
+<span id="L216"><span class="lineNum">     216</span>              : {</span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">         494 :     while (smallestNoteType &lt; noteType) {</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">          20 :         smallestNoteType++;</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">          20 :         smallestNoteCount *= 2;</span></span>
+<span id="L220"><span class="lineNum">     220</span>              :     }</span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">         498 :     while (noteType &lt; smallestNoteType) {</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">          24 :         noteType++;</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">          24 :         noteCount *= 2;</span></span>
+<span id="L224"><span class="lineNum">     224</span>              :     }</span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">         474 : }</span></span>
+<span id="L226"><span class="lineNum">     226</span>              : </span>
+<span id="L227"><span class="lineNum">     227</span>              : //---------------------------------------------------------</span>
+<span id="L228"><span class="lineNum">     228</span>              : //   addDurationToTuplet</span>
+<span id="L229"><span class="lineNum">     229</span>              : //---------------------------------------------------------</span>
+<span id="L230"><span class="lineNum">     230</span>              : </span>
+<span id="L231"><span class="lineNum">     231</span>              : /**</span>
+<span id="L232"><span class="lineNum">     232</span>              :  Add duration to tuplet duration</span>
+<span id="L233"><span class="lineNum">     233</span>              :  Determine type and number of smallest notes in the tuplet</span>
+<span id="L234"><span class="lineNum">     234</span>              :  */</span>
+<span id="L235"><span class="lineNum">     235</span>              : </span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">         692 : void MusicXmlTupletState::addDurationToTuplet(const Fraction dur, const Fraction timeMod)</span></span>
+<span id="L237"><span class="lineNum">     237</span>              : {</span>
+<span id="L238"><span class="lineNum">     238</span>              :     /*</span>
+<span id="L239"><span class="lineNum">     239</span>              :     LOGD(&quot;1 duration %s timeMod %s -&gt; state.tupletType %d state.tupletCount %d state.actualNotes %d state.normalNotes %d&quot;,</span>
+<span id="L240"><span class="lineNum">     240</span>              :            muPrintable(duration.print()),</span>
+<span id="L241"><span class="lineNum">     241</span>              :            muPrintable(timeMod.print()),</span>
+<span id="L242"><span class="lineNum">     242</span>              :            m_tupletType,</span>
+<span id="L243"><span class="lineNum">     243</span>              :            m_tupletCount,</span>
+<span id="L244"><span class="lineNum">     244</span>              :            m_actualNotes,</span>
+<span id="L245"><span class="lineNum">     245</span>              :            m_normalNotes</span>
+<span id="L246"><span class="lineNum">     246</span>              :            );</span>
+<span id="L247"><span class="lineNum">     247</span>              :     */</span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">         692 :     if (duration &lt;= Fraction(0, 1)) {</span></span>
+<span id="L249"><span class="lineNum">     249</span>              :         // first note: init variables</span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">         236 :         actualNotes = timeMod.denominator();</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">         236 :         normalNotes = timeMod.numerator();</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">         236 :         smallestTypeAndCount(dur / timeMod, smallestNoteType, smallestNoteCount);</span></span>
+<span id="L253"><span class="lineNum">     253</span>              :     } else {</span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">         456 :         int noteType = 0;</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">         456 :         int noteCount = 0;</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">         456 :         smallestTypeAndCount(dur / timeMod, noteType, noteCount);</span></span>
+<span id="L257"><span class="lineNum">     257</span>              :         // match the types</span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">         456 :         matchTypeAndCount(noteType, noteCount);</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">         456 :         smallestNoteCount += noteCount;</span></span>
+<span id="L260"><span class="lineNum">     260</span>              :     }</span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">         692 :     duration += dur;</span></span>
+<span id="L262"><span class="lineNum">     262</span>              :     /*</span>
+<span id="L263"><span class="lineNum">     263</span>              :     LOGD(&quot;2 duration %s -&gt; state.tupletType %d state.tupletCount %d state.actualNotes %d state.normalNotes %d&quot;,</span>
+<span id="L264"><span class="lineNum">     264</span>              :            muPrintable(duration.print()),</span>
+<span id="L265"><span class="lineNum">     265</span>              :            m_tupletType,</span>
+<span id="L266"><span class="lineNum">     266</span>              :            m_tupletCount,</span>
+<span id="L267"><span class="lineNum">     267</span>              :            m_actualNotes,</span>
+<span id="L268"><span class="lineNum">     268</span>              :            m_normalNotes</span>
+<span id="L269"><span class="lineNum">     269</span>              :            );</span>
+<span id="L270"><span class="lineNum">     270</span>              :     */</span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">         692 : }</span></span>
+<span id="L272"><span class="lineNum">     272</span>              : </span>
+<span id="L273"><span class="lineNum">     273</span>              : //---------------------------------------------------------</span>
+<span id="L274"><span class="lineNum">     274</span>              : //   determineTupletAction</span>
+<span id="L275"><span class="lineNum">     275</span>              : //---------------------------------------------------------</span>
+<span id="L276"><span class="lineNum">     276</span>              : </span>
+<span id="L277"><span class="lineNum">     277</span>              : /**</span>
+<span id="L278"><span class="lineNum">     278</span>              :  Update tuplet state using parse result tupletDesc.</span>
+<span id="L279"><span class="lineNum">     279</span>              :  Tuplets with &lt;actual-notes&gt; and &lt;normal-notes&gt; but without &lt;tuplet&gt;</span>
+<span id="L280"><span class="lineNum">     280</span>              :  are handled correctly.</span>
+<span id="L281"><span class="lineNum">     281</span>              :  TODO Nested tuplets are not (yet) supported.</span>
+<span id="L282"><span class="lineNum">     282</span>              :  */</span>
+<span id="L283"><span class="lineNum">     283</span>              : </span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">       13959 : MusicXmlTupletFlags MusicXmlTupletState::determineTupletAction(const Fraction noteDuration,</span></span>
+<span id="L285"><span class="lineNum">     285</span>              :                                                                const Fraction timeMod,</span>
+<span id="L286"><span class="lineNum">     286</span>              :                                                                const MusicXmlStartStop tupletStartStop,</span>
+<span id="L287"><span class="lineNum">     287</span>              :                                                                const TDuration normalType,</span>
+<span id="L288"><span class="lineNum">     288</span>              :                                                                Fraction&amp; missingPreviousDuration,</span>
+<span id="L289"><span class="lineNum">     289</span>              :                                                                Fraction&amp; missingCurrentDuration)</span>
+<span id="L290"><span class="lineNum">     290</span>              : {</span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">       13959 :     const int actNotes = timeMod.denominator();</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       13959 :     const int norNotes = timeMod.numerator();</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">       13959 :     MusicXmlTupletFlags res = MusicXmlTupletFlag::NONE;</span></span>
+<span id="L294"><span class="lineNum">     294</span>              : </span>
+<span id="L295"><span class="lineNum">     295</span>              :     // check for unexpected termination of previous tuplet</span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">       13959 :     if (inTuplet &amp;&amp; timeMod == Fraction(1, 1)) {</span></span>
+<span id="L297"><span class="lineNum">     297</span>              :         // recover by simply stopping the current tuplet first</span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">           8 :         if (!isTupletFilled(normalType, timeMod)) {</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">           2 :             missingPreviousDuration = missingTupletDuration(duration);</span></span>
+<span id="L300"><span class="lineNum">     300</span>              :             //LOGD(&quot;tuplet incomplete, missing %s&quot;, muPrintable(missingPreviousDuration.print()));</span>
+<span id="L301"><span class="lineNum">     301</span>              :         }</span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">           8 :         *this = {};</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           8 :         res |= MusicXmlTupletFlag::STOP_PREVIOUS;</span></span>
+<span id="L304"><span class="lineNum">     304</span>              :     }</span>
+<span id="L305"><span class="lineNum">     305</span>              : </span>
+<span id="L306"><span class="lineNum">     306</span>              :     // check for obvious errors</span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">       13959 :     if (inTuplet &amp;&amp; tupletStartStop == MusicXmlStartStop::START) {</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           2 :         LOGD(&quot;tuplet already started&quot;);</span></span>
+<span id="L309"><span class="lineNum">     309</span>              :         // recover by simply stopping the current tuplet first</span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">           2 :         if (!isTupletFilled(normalType, timeMod)) {</span></span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaUNC tlaBgUNC">           0 :             missingPreviousDuration = missingTupletDuration(duration);</span></span>
+<span id="L312"><span class="lineNum">     312</span>              :             //LOGD(&quot;tuplet incomplete, missing %s&quot;, muPrintable(missingPreviousDuration.print()));</span>
+<span id="L313"><span class="lineNum">     313</span>              :         }</span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC tlaBgGNC">           2 :         *this = {};</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">           2 :         res |= MusicXmlTupletFlag::STOP_PREVIOUS;</span></span>
+<span id="L316"><span class="lineNum">     316</span>              :     }</span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">       13959 :     if (tupletStartStop == MusicXmlStartStop::STOP &amp;&amp; !inTuplet) {</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">           8 :         LOGD(&quot;tuplet stop but no tuplet started&quot;);           // TODO</span></span>
+<span id="L319"><span class="lineNum">     319</span>              :         // recovery handled later (automatically, no special case needed)</span>
+<span id="L320"><span class="lineNum">     320</span>              :     }</span>
+<span id="L321"><span class="lineNum">     321</span>              : </span>
+<span id="L322"><span class="lineNum">     322</span>              :     // Tuplet are either started by the tuplet start</span>
+<span id="L323"><span class="lineNum">     323</span>              :     // or when the time modification is first found.</span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">       13959 :     if (!inTuplet) {</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">       13503 :         if (tupletStartStop == MusicXmlStartStop::START</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">       13301 :             || (!inTuplet &amp;&amp; (actNotes != 1 || norNotes != 1))) {</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">         236 :             if (tupletStartStop != MusicXmlStartStop::START) {</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">          34 :                 implicit = true;</span></span>
+<span id="L329"><span class="lineNum">     329</span>              :             } else {</span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">         202 :                 implicit = false;</span></span>
+<span id="L331"><span class="lineNum">     331</span>              :             }</span>
+<span id="L332"><span class="lineNum">     332</span>              :             // create a new tuplet</span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">         236 :             inTuplet = true;</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">         236 :             res |= MusicXmlTupletFlag::START_NEW;</span></span>
+<span id="L335"><span class="lineNum">     335</span>              :         }</span>
+<span id="L336"><span class="lineNum">     336</span>              :     }</span>
+<span id="L337"><span class="lineNum">     337</span>              : </span>
+<span id="L338"><span class="lineNum">     338</span>              :     // Add chord to the current tuplet.</span>
+<span id="L339"><span class="lineNum">     339</span>              :     // Must also check for actual/normal notes to prevent</span>
+<span id="L340"><span class="lineNum">     340</span>              :     // adding one chord too much if tuplet stop is missing.</span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">       13959 :     if (inTuplet &amp;&amp; !(actNotes == 1 &amp;&amp; norNotes == 1)) {</span></span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">         692 :         addDurationToTuplet(noteDuration, timeMod);</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">         692 :         res |= MusicXmlTupletFlag::ADD_CHORD;</span></span>
+<span id="L344"><span class="lineNum">     344</span>              :     }</span>
+<span id="L345"><span class="lineNum">     345</span>              : </span>
+<span id="L346"><span class="lineNum">     346</span>              :     // Tuplets are stopped by the tuplet stop</span>
+<span id="L347"><span class="lineNum">     347</span>              :     // or when the tuplet is filled completely</span>
+<span id="L348"><span class="lineNum">     348</span>              :     // (either with knowledge of the normal type</span>
+<span id="L349"><span class="lineNum">     349</span>              :     // or as a last resort calculated based on</span>
+<span id="L350"><span class="lineNum">     350</span>              :     // actual and normal notes plus total duration)</span>
+<span id="L351"><span class="lineNum">     351</span>              :     // or when the time-modification is not found.</span>
+<span id="L352"><span class="lineNum">     352</span>              : </span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">       13959 :     if (inTuplet) {</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">         692 :         if (tupletStartStop == MusicXmlStartStop::STOP</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">         498 :             || (implicit &amp;&amp; isTupletFilled(normalType, timeMod))</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">        1190 :             || (actNotes == 1 &amp;&amp; norNotes == 1)) {           // incorrect ??? check scenario incomplete tuplet w/o start</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">         220 :             if (actNotes &gt; norNotes &amp;&amp; !isTupletFilled(normalType, timeMod)) {</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">           4 :                 missingCurrentDuration = missingTupletDuration(duration);</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">           4 :                 LOGD(&quot;current tuplet incomplete, missing %s&quot;, muPrintable(missingCurrentDuration.toString()));</span></span>
+<span id="L360"><span class="lineNum">     360</span>              :             }</span>
+<span id="L361"><span class="lineNum">     361</span>              : </span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">         220 :             *this = {};</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">         220 :             res |= MusicXmlTupletFlag::STOP_CURRENT;</span></span>
+<span id="L364"><span class="lineNum">     364</span>              :         }</span>
+<span id="L365"><span class="lineNum">     365</span>              :     }</span>
+<span id="L366"><span class="lineNum">     366</span>              : </span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">       13959 :     return res;</span></span>
+<span id="L368"><span class="lineNum">     368</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

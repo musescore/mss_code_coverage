@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/importexport/mei/internal/meiimporter.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">src/importexport/mei/internal</a> - meiimporter.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2021 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #pragma once</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;engraving/types/types.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &quot;modularity/ioc.h&quot;</span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &quot;imeiconfiguration.h&quot;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;io/ifilesystem.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;io/path.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;meiconverter.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : </span>
+<span id="L34"><span class="lineNum">      34</span>              : #include &quot;thirdparty/libmei/cmn.h&quot;</span>
+<span id="L35"><span class="lineNum">      35</span>              : #include &quot;thirdparty/libmei/element.h&quot;</span>
+<span id="L36"><span class="lineNum">      36</span>              : #include &quot;thirdparty/libmei/shared.h&quot;</span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span>              : #include &quot;pugixml.hpp&quot;</span>
+<span id="L39"><span class="lineNum">      39</span>              : </span>
+<span id="L40"><span class="lineNum">      40</span>              : namespace mu::engraving {</span>
+<span id="L41"><span class="lineNum">      41</span>              : class Chord;</span>
+<span id="L42"><span class="lineNum">      42</span>              : class ChordRest;</span>
+<span id="L43"><span class="lineNum">      43</span>              : class EngravingItem;</span>
+<span id="L44"><span class="lineNum">      44</span>              : class Lyrics;</span>
+<span id="L45"><span class="lineNum">      45</span>              : class Measure;</span>
+<span id="L46"><span class="lineNum">      46</span>              : class Note;</span>
+<span id="L47"><span class="lineNum">      47</span>              : class Part;</span>
+<span id="L48"><span class="lineNum">      48</span>              : class Score;</span>
+<span id="L49"><span class="lineNum">      49</span>              : class Spanner;</span>
+<span id="L50"><span class="lineNum">      50</span>              : class Tuplet;</span>
+<span id="L51"><span class="lineNum">      51</span>              : class VBox;</span>
+<span id="L52"><span class="lineNum">      52</span>              : enum class NoteType : unsigned char;</span>
+<span id="L53"><span class="lineNum">      53</span>              : enum class TimeSigType : unsigned char;</span>
+<span id="L54"><span class="lineNum">      54</span>              : struct ClefTypeList;</span>
+<span id="L55"><span class="lineNum">      55</span>              : }</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span>              : namespace mu::iex::mei {</span>
+<span id="L58"><span class="lineNum">      58</span>              : class UIDRegister;</span>
+<span id="L59"><span class="lineNum">      59</span>              : </span>
+<span id="L60"><span class="lineNum">      60</span>              : struct ControlElementPosition {</span>
+<span id="L61"><span class="lineNum">      61</span>              :     engraving::Measure* measure = nullptr;</span>
+<span id="L62"><span class="lineNum">      62</span>              :     engraving::Fraction tick;</span>
+<span id="L63"><span class="lineNum">      63</span>              :     engraving::track_idx_t track = 0;</span>
+<span id="L64"><span class="lineNum">      64</span>              :     engraving::ChordRest* chordRest = nullptr;</span>
+<span id="L65"><span class="lineNum">      65</span>              : };</span>
+<span id="L66"><span class="lineNum">      66</span>              : </span>
+<span id="L67"><span class="lineNum">      67</span>              : enum GraceReading {</span>
+<span id="L68"><span class="lineNum">      68</span>              :     GraceNone = 0,</span>
+<span id="L69"><span class="lineNum">      69</span>              :     GraceAsGrp,</span>
+<span id="L70"><span class="lineNum">      70</span>              :     GraceAsNote</span>
+<span id="L71"><span class="lineNum">      71</span>              : };</span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span>              : /**</span>
+<span id="L74"><span class="lineNum">      74</span>              :  * Class of importing Music Encoding Initiative (MEI) files</span>
+<span id="L75"><span class="lineNum">      75</span>              :  */</span>
+<span id="L76"><span class="lineNum">      76</span>              : </span>
+<span id="L77"><span class="lineNum">      77</span>              : class MeiImporter</span>
+<span id="L78"><span class="lineNum">      78</span>              : {</span>
+<span id="L79"><span class="lineNum">      79</span>              :     muse::GlobalInject&lt;mu::iex::mei::IMeiConfiguration&gt; configuration;</span>
+<span id="L80"><span class="lineNum">      80</span>              :     muse::GlobalInject&lt;muse::io::IFileSystem&gt; fileSystem;</span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span>              : public:</span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC tlaBgGNC">          64 :     MeiImporter(engraving::Score* s) { m_score = s; }</span></span>
+<span id="L84"><span class="lineNum">      84</span>              :     bool read(const muse::io::path_t&amp; path);</span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span>              : private:</span>
+<span id="L87"><span class="lineNum">      87</span>              :     /**</span>
+<span id="L88"><span class="lineNum">      88</span>              :      * Methods for parsing the MEI tree and converting data</span>
+<span id="L89"><span class="lineNum">      89</span>              :      */</span>
+<span id="L90"><span class="lineNum">      90</span>              :     bool readMeiHead(pugi::xml_node root);</span>
+<span id="L91"><span class="lineNum">      91</span>              :     bool readScore(pugi::xml_node root);</span>
+<span id="L92"><span class="lineNum">      92</span>              :     bool readScoreDef(pugi::xml_node scoreDefNode, bool isInitial);</span>
+<span id="L93"><span class="lineNum">      93</span>              :     bool readPgHead(pugi::xml_node pgHeadNode);</span>
+<span id="L94"><span class="lineNum">      94</span>              :     bool readLines(pugi::xml_node parentNode, muse::StringList&amp; lines, size_t&amp; line);</span>
+<span id="L95"><span class="lineNum">      95</span>              :     bool readLinesWithSmufl(pugi::xml_node parentNode, muse::StringList&amp; lines);</span>
+<span id="L96"><span class="lineNum">      96</span>              :     bool readStaffDefs(pugi::xml_node parentNode);</span>
+<span id="L97"><span class="lineNum">      97</span>              :     bool readStaffGrps(pugi::xml_node parentNode, int&amp; staffSpan, int column, size_t&amp; idx);</span>
+<span id="L98"><span class="lineNum">      98</span>              :     bool readInstrDef(pugi::xml_node instrDefNode, engraving::Part* part);</span>
+<span id="L99"><span class="lineNum">      99</span>              :     bool readSectionElements(pugi::xml_node parentNode);</span>
+<span id="L100"><span class="lineNum">     100</span>              :     bool readEnding(pugi::xml_node endingNode);</span>
+<span id="L101"><span class="lineNum">     101</span>              :     bool readMeasure(pugi::xml_node measureNode);</span>
+<span id="L102"><span class="lineNum">     102</span>              :     bool readPb(pugi::xml_node pbNode);</span>
+<span id="L103"><span class="lineNum">     103</span>              :     bool readSb(pugi::xml_node sbNode);</span>
+<span id="L104"><span class="lineNum">     104</span>              :     bool readStaves(pugi::xml_node parentNode, engraving::Measure* measure, engraving::Fraction&amp; measureTicks);</span>
+<span id="L105"><span class="lineNum">     105</span>              :     bool readLayers(pugi::xml_node parentNode, engraving::Measure* measure, int staffIdx, engraving::Fraction&amp; measureTicks);</span>
+<span id="L106"><span class="lineNum">     106</span>              : </span>
+<span id="L107"><span class="lineNum">     107</span>              :     /**</span>
+<span id="L108"><span class="lineNum">     108</span>              :      * Methods for parsing MEI elements within a &lt;layer&gt;</span>
+<span id="L109"><span class="lineNum">     109</span>              :      */</span>
+<span id="L110"><span class="lineNum">     110</span>              :     bool readElements(pugi::xml_node parentNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L111"><span class="lineNum">     111</span>              :     bool readArtics(pugi::xml_node parentNode, engraving::Chord* chord);</span>
+<span id="L112"><span class="lineNum">     112</span>              :     bool readArtic(pugi::xml_node articNode, engraving::Chord* chord);</span>
+<span id="L113"><span class="lineNum">     113</span>              :     bool readArtic(pugi::xml_node articNode, engraving::Note* note);</span>
+<span id="L114"><span class="lineNum">     114</span>              :     bool readBeam(pugi::xml_node beamNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L115"><span class="lineNum">     115</span>              :     bool readBTrem(pugi::xml_node bTremNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L116"><span class="lineNum">     116</span>              :     bool readClef(pugi::xml_node clefNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L117"><span class="lineNum">     117</span>              :     bool readChord(pugi::xml_node chordNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L118"><span class="lineNum">     118</span>              :     bool readFTrem(pugi::xml_node fTremNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L119"><span class="lineNum">     119</span>              :     bool readGraceGrp(pugi::xml_node graceGrpNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L120"><span class="lineNum">     120</span>              :     bool readMRest(pugi::xml_node mRestNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L121"><span class="lineNum">     121</span>              :     bool readMRpt(pugi::xml_node mRptNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L122"><span class="lineNum">     122</span>              :     bool readNote(pugi::xml_node noteNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks,</span>
+<span id="L123"><span class="lineNum">     123</span>              :                   engraving::Chord* chord = nullptr);</span>
+<span id="L124"><span class="lineNum">     124</span>              :     bool readRest(pugi::xml_node restNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L125"><span class="lineNum">     125</span>              :     bool readSpace(pugi::xml_node spaceNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L126"><span class="lineNum">     126</span>              :     bool readSyl(pugi::xml_node sylNode, engraving::Lyrics* lyrics, Convert::textWithSmufl&amp; textBlocks, ElisionType elision);</span>
+<span id="L127"><span class="lineNum">     127</span>              :     bool readTuplet(pugi::xml_node tupletNode, engraving::Measure* measure, int track, engraving::Fraction&amp; ticks);</span>
+<span id="L128"><span class="lineNum">     128</span>              :     bool readVerses(pugi::xml_node parentNode, engraving::Chord* chord);</span>
+<span id="L129"><span class="lineNum">     129</span>              :     bool readVerse(pugi::xml_node verseNode, engraving::Chord* chord);</span>
+<span id="L130"><span class="lineNum">     130</span>              : </span>
+<span id="L131"><span class="lineNum">     131</span>              :     /**</span>
+<span id="L132"><span class="lineNum">     132</span>              :      * Methods for parsing MEI control events (within &lt;measure&gt;)</span>
+<span id="L133"><span class="lineNum">     133</span>              :      */</span>
+<span id="L134"><span class="lineNum">     134</span>              :     bool readControlEvents(pugi::xml_node parentNode, engraving::Measure* measure);</span>
+<span id="L135"><span class="lineNum">     135</span>              :     bool readArpeg(pugi::xml_node arpegNode, engraving::Measure* measure);</span>
+<span id="L136"><span class="lineNum">     136</span>              :     bool readBreath(pugi::xml_node breathNode, engraving::Measure* measure);</span>
+<span id="L137"><span class="lineNum">     137</span>              :     bool readCaesura(pugi::xml_node caesuraNode, engraving::Measure* measure);</span>
+<span id="L138"><span class="lineNum">     138</span>              :     bool readDir(pugi::xml_node dirNote, engraving::Measure* measure);</span>
+<span id="L139"><span class="lineNum">     139</span>              :     bool readDynam(pugi::xml_node dynamNode, engraving::Measure* measure);</span>
+<span id="L140"><span class="lineNum">     140</span>              :     bool readF(pugi::xml_node fNode, engraving::FiguredBass* figuredBass);</span>
+<span id="L141"><span class="lineNum">     141</span>              :     bool readFb(pugi::xml_node harmNode, engraving::Measure* measure);</span>
+<span id="L142"><span class="lineNum">     142</span>              :     bool readFermata(pugi::xml_node fermataNode, engraving::Measure* measure);</span>
+<span id="L143"><span class="lineNum">     143</span>              :     bool readFing(pugi::xml_node fingNode, engraving::Measure* measure);</span>
+<span id="L144"><span class="lineNum">     144</span>              :     bool readGliss(pugi::xml_node glissNode, engraving::Measure* measure);</span>
+<span id="L145"><span class="lineNum">     145</span>              :     bool readHairpin(pugi::xml_node hairpinNode, engraving::Measure* measure);</span>
+<span id="L146"><span class="lineNum">     146</span>              :     bool readHarm(pugi::xml_node harmNode, engraving::Measure* measure);</span>
+<span id="L147"><span class="lineNum">     147</span>              :     bool readHarpPedal(pugi::xml_node harpPedalNode, engraving::Measure* measure);</span>
+<span id="L148"><span class="lineNum">     148</span>              :     bool readLv(pugi::xml_node lvNode, engraving::Measure* measure);</span>
+<span id="L149"><span class="lineNum">     149</span>              :     bool readMordent(pugi::xml_node mordentNode, engraving::Measure* measure);</span>
+<span id="L150"><span class="lineNum">     150</span>              :     bool readOctave(pugi::xml_node octaveNode, engraving::Measure* measure);</span>
+<span id="L151"><span class="lineNum">     151</span>              :     bool readOrnam(pugi::xml_node ornamNode, engraving::Measure* measure);</span>
+<span id="L152"><span class="lineNum">     152</span>              :     bool readPedal(pugi::xml_node pedalNode, engraving::Measure* measure);</span>
+<span id="L153"><span class="lineNum">     153</span>              :     bool readReh(pugi::xml_node rehNode, engraving::Measure* measure);</span>
+<span id="L154"><span class="lineNum">     154</span>              :     bool readRepeatMark(pugi::xml_node repeatMarkNode, engraving::Measure* measure);</span>
+<span id="L155"><span class="lineNum">     155</span>              :     bool readSlur(pugi::xml_node slurNode, engraving::Measure* measure);</span>
+<span id="L156"><span class="lineNum">     156</span>              :     bool readTempo(pugi::xml_node tempoNode, engraving::Measure* measure);</span>
+<span id="L157"><span class="lineNum">     157</span>              :     bool readTie(pugi::xml_node tieNode, engraving::Measure* measure);</span>
+<span id="L158"><span class="lineNum">     158</span>              :     bool readTrill(pugi::xml_node trillNode, engraving::Measure* measure);</span>
+<span id="L159"><span class="lineNum">     159</span>              :     bool readTurn(pugi::xml_node turnNode, engraving::Measure* measure);</span>
+<span id="L160"><span class="lineNum">     160</span>              : </span>
+<span id="L161"><span class="lineNum">     161</span>              :     /**</span>
+<span id="L162"><span class="lineNum">     162</span>              :      * Methods for parsing specific MEI attribute classes within elements</span>
+<span id="L163"><span class="lineNum">     163</span>              :      */</span>
+<span id="L164"><span class="lineNum">     164</span>              :     bool readGracedAtt(libmei::AttGraced&amp; gracedAtt);</span>
+<span id="L165"><span class="lineNum">     165</span>              :     bool readStemsAtt(engraving::Chord* chord, libmei::AttStems&amp; stemsAtt);</span>
+<span id="L166"><span class="lineNum">     166</span>              : </span>
+<span id="L167"><span class="lineNum">     167</span>              :     /**</span>
+<span id="L168"><span class="lineNum">     168</span>              :      * Methods for extracting content from the MEI</span>
+<span id="L169"><span class="lineNum">     169</span>              :      */</span>
+<span id="L170"><span class="lineNum">     170</span>              :     bool buildIdMap(pugi::xml_node scoreNode);</span>
+<span id="L171"><span class="lineNum">     171</span>              :     bool buildStaffLayerMap(pugi::xml_node root);</span>
+<span id="L172"><span class="lineNum">     172</span>              :     bool buildTextFrame();</span>
+<span id="L173"><span class="lineNum">     173</span>              :     bool buildScoreParts(pugi::xml_node scoreDefNode);</span>
+<span id="L174"><span class="lineNum">     174</span>              : </span>
+<span id="L175"><span class="lineNum">     175</span>              :     /**</span>
+<span id="L176"><span class="lineNum">     176</span>              :      * Helper methods for content creation</span>
+<span id="L177"><span class="lineNum">     177</span>              :      */</span>
+<span id="L178"><span class="lineNum">     178</span>              :     void addEndBarLineToMeasure(engraving::Measure* measure, engraving::BarLineType barLineType);</span>
+<span id="L179"><span class="lineNum">     179</span>              :     void addLayoutBreakToMeasure(engraving::Measure* measure, engraving::LayoutBreakType layoutBreakType);</span>
+<span id="L180"><span class="lineNum">     180</span>              :     void addTextToTitleFrame(engraving::VBox*&amp; vBox, const muse::String&amp; str, engraving::TextStyleType textStyleType);</span>
+<span id="L181"><span class="lineNum">     181</span>              :     void addSpannerEnds();</span>
+<span id="L182"><span class="lineNum">     182</span>              : </span>
+<span id="L183"><span class="lineNum">     183</span>              :     /**</span>
+<span id="L184"><span class="lineNum">     184</span>              :      * Helper methods</span>
+<span id="L185"><span class="lineNum">     185</span>              :      */</span>
+<span id="L186"><span class="lineNum">     186</span>              :     int getStaffIndex(int staffN);</span>
+<span id="L187"><span class="lineNum">     187</span>              :     int getVoiceIndex(int staffIdx, int layerN);</span>
+<span id="L188"><span class="lineNum">     188</span>              :     void addLog(const std::string&amp; msg, pugi::xml_node node);</span>
+<span id="L189"><span class="lineNum">     189</span>              :     bool isNode(pugi::xml_node node, const muse::String&amp; name);</span>
+<span id="L190"><span class="lineNum">     190</span>              :     engraving::ChordRest* addChordRest(pugi::xml_node node, engraving::Measure* measure, int track, const libmei::Element&amp; meiElement,</span>
+<span id="L191"><span class="lineNum">     191</span>              :                                        engraving::Fraction&amp; ticks, bool isRest);</span>
+<span id="L192"><span class="lineNum">     192</span>              :     bool addGraceNotesToChord(engraving::ChordRest* chordRest, bool isAfter = false);</span>
+<span id="L193"><span class="lineNum">     193</span>              :     engraving::EngravingItem* addAnnotation(const libmei::Element&amp; meiElement, engraving::Measure* measure);</span>
+<span id="L194"><span class="lineNum">     194</span>              :     engraving::Spanner* addSpanner(const libmei::Element&amp; meiElement, engraving::Measure* measure, pugi::xml_node node);</span>
+<span id="L195"><span class="lineNum">     195</span>              :     engraving::EngravingItem* addToChordRest(const libmei::Element&amp; meiElement, engraving::Measure* measure,</span>
+<span id="L196"><span class="lineNum">     196</span>              :                                              engraving::Chord* chord = nullptr);</span>
+<span id="L197"><span class="lineNum">     197</span>              :     std::string xmlIdFrom(std::string dataURI);</span>
+<span id="L198"><span class="lineNum">     198</span>              :     ControlElementPosition findStart(const libmei::Element&amp; meiElement, engraving::Measure* measure);</span>
+<span id="L199"><span class="lineNum">     199</span>              :     ControlElementPosition findEnd(pugi::xml_node controlNode, engraving::Spanner* spanner);</span>
+<span id="L200"><span class="lineNum">     200</span>              :     engraving::Note* findStartNote(const libmei::Element&amp; meiElement);</span>
+<span id="L201"><span class="lineNum">     201</span>              :     engraving::Note* findEndNote(pugi::xml_node controlNode);</span>
+<span id="L202"><span class="lineNum">     202</span>              :     const std::vector&lt;engraving::ChordRest*&gt; findPlistChordRests(pugi::xml_node controlNode);</span>
+<span id="L203"><span class="lineNum">     203</span>              :     void clearGraceNotes();</span>
+<span id="L204"><span class="lineNum">     204</span>              :     bool hasLyricsToExtend(engraving::track_idx_t track, int no);</span>
+<span id="L205"><span class="lineNum">     205</span>              :     const std::pair&lt;engraving::Lyrics*, engraving::ChordRest*&gt;&amp; getLyricsToExtend(engraving::track_idx_t track, int no);</span>
+<span id="L206"><span class="lineNum">     206</span>              :     void addChordtoLyricsToExtend(engraving::ChordRest* chordRest);</span>
+<span id="L207"><span class="lineNum">     207</span>              :     void extendLyrics(const std::pair&lt;engraving::Lyrics*, engraving::ChordRest*&gt;&amp; lyricsToExtend);</span>
+<span id="L208"><span class="lineNum">     208</span>              :     void extendLyrics();</span>
+<span id="L209"><span class="lineNum">     209</span>              :     void setOrnamentAccid(engraving::Ornament* ornament, const Convert::OrnamStruct&amp; ornamSt);</span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span>              :     /** Read the xmlId and process it appropriately */</span>
+<span id="L212"><span class="lineNum">     212</span>              :     void readXmlId(engraving::EngravingItem* item, const std::string&amp; meiUID);</span>
+<span id="L213"><span class="lineNum">     213</span>              : </span>
+<span id="L214"><span class="lineNum">     214</span>              :     /** The Score pointer */</span>
+<span id="L215"><span class="lineNum">     215</span>              :     engraving::Score* m_score = nullptr;</span>
+<span id="L216"><span class="lineNum">     216</span>              : </span>
+<span id="L217"><span class="lineNum">     217</span>              :     /** The uid register */</span>
+<span id="L218"><span class="lineNum">     218</span>              :     UIDRegister* m_uids;</span>
+<span id="L219"><span class="lineNum">     219</span>              : </span>
+<span id="L220"><span class="lineNum">     220</span>              :     /** A flag indicating the file has MuseScore EIDs as xml:ids */</span>
+<span id="L221"><span class="lineNum">     221</span>              :     bool m_hasMuseScoreIds;</span>
+<span id="L222"><span class="lineNum">     222</span>              : </span>
+<span id="L223"><span class="lineNum">     223</span>              :     engraving::Fraction m_ticks;</span>
+<span id="L224"><span class="lineNum">     224</span>              :     int m_lastMeasureN;</span>
+<span id="L225"><span class="lineNum">     225</span>              :     engraving::Measure* m_lastMeasure;</span>
+<span id="L226"><span class="lineNum">     226</span>              : </span>
+<span id="L227"><span class="lineNum">     227</span>              :     /** map of MuseScore indexes and clef, timesig and keysig */</span>
+<span id="L228"><span class="lineNum">     228</span>              :     std::map&lt;int, engraving::ClefTypeList&gt; m_clefs;</span>
+<span id="L229"><span class="lineNum">     229</span>              :     std::map&lt;int, std::pair&lt;engraving::Fraction, engraving::TimeSigType&gt; &gt; m_timeSigs;</span>
+<span id="L230"><span class="lineNum">     230</span>              :     std::map&lt;int, engraving::Key&gt; m_keySigs;</span>
+<span id="L231"><span class="lineNum">     231</span>              :     /** the current time signature */</span>
+<span id="L232"><span class="lineNum">     232</span>              :     engraving::Fraction m_currentTimeSig = engraving::Fraction(4, 4);</span>
+<span id="L233"><span class="lineNum">     233</span>              : </span>
+<span id="L234"><span class="lineNum">     234</span>              :     /* Set for mapping between MEI staff@n and MuseScore staff indexes */</span>
+<span id="L235"><span class="lineNum">     235</span>              :     std::set&lt;int&gt; m_staffNs;</span>
+<span id="L236"><span class="lineNum">     236</span>              :     /* A map of sets for mapping between MEI layer@ in MuseScore voice indexes */</span>
+<span id="L237"><span class="lineNum">     237</span>              :     std::map&lt;int, std::set&lt;int&gt; &gt; m_staffLayerNs;</span>
+<span id="L238"><span class="lineNum">     238</span>              :     /* A map for original staffN and MuseScore parts */</span>
+<span id="L239"><span class="lineNum">     239</span>              :     std::map&lt;int, engraving::Part*&gt; m_staffParts;</span>
+<span id="L240"><span class="lineNum">     240</span>              : </span>
+<span id="L241"><span class="lineNum">     241</span>              :     /* A map for startId and corresponding engraving::ChordRest */</span>
+<span id="L242"><span class="lineNum">     242</span>              :     std::map&lt;std::string, engraving::ChordRest*&gt; m_startIdChordRests;</span>
+<span id="L243"><span class="lineNum">     243</span>              :     /* A map for endId and corresponding engraving::ChordRest */</span>
+<span id="L244"><span class="lineNum">     244</span>              :     std::map&lt;std::string, engraving::ChordRest*&gt; m_endIdChordRests;</span>
+<span id="L245"><span class="lineNum">     245</span>              :     /* A map for startId and corresponding engraving::Note */</span>
+<span id="L246"><span class="lineNum">     246</span>              :     std::map&lt;std::string, engraving::Note*&gt; m_startIdNotes;</span>
+<span id="L247"><span class="lineNum">     247</span>              :     /* A map for endId and corresponding engraving::Note */</span>
+<span id="L248"><span class="lineNum">     248</span>              :     std::map&lt;std::string, engraving::Note*&gt; m_endIdNotes;</span>
+<span id="L249"><span class="lineNum">     249</span>              :     /* A map for plist values and corresponding engraving::ChordRest */</span>
+<span id="L250"><span class="lineNum">     250</span>              :     std::map&lt;std::string, engraving::ChordRest*&gt; m_plistValueChordRests;</span>
+<span id="L251"><span class="lineNum">     251</span>              :     /* A map for open spanners that needs to be ended */</span>
+<span id="L252"><span class="lineNum">     252</span>              :     std::map&lt;engraving::Spanner*, pugi::xml_node&gt; m_openSpannerMap;</span>
+<span id="L253"><span class="lineNum">     253</span>              :     /* A map for open arpeg that needs to be spanned */</span>
+<span id="L254"><span class="lineNum">     254</span>              :     std::map&lt;engraving::Arpeggio*, pugi::xml_node&gt; m_openArpegMap;</span>
+<span id="L255"><span class="lineNum">     255</span>              : </span>
+<span id="L256"><span class="lineNum">     256</span>              :     /** A map of a map for lyrics with extender that needs to be extended */</span>
+<span id="L257"><span class="lineNum">     257</span>              :     std::map&lt;engraving::track_idx_t, std::map&lt;int, std::pair&lt;engraving::Lyrics*, engraving::ChordRest*&gt; &gt; &gt; m_lyricExtenders;</span>
+<span id="L258"><span class="lineNum">     258</span>              : </span>
+<span id="L259"><span class="lineNum">     259</span>              :     engraving::Tuplet* m_tuplet;</span>
+<span id="L260"><span class="lineNum">     260</span>              :     engraving::BeamMode m_beamBeginMode;</span>
+<span id="L261"><span class="lineNum">     261</span>              :     engraving::BeamMode m_graceBeamBeginMode;</span>
+<span id="L262"><span class="lineNum">     262</span>              :     engraving::Chord* m_lastChord;</span>
+<span id="L263"><span class="lineNum">     263</span>              :     std::string m_tremoloId;</span>
+<span id="L264"><span class="lineNum">     264</span>              :     engraving::TremoloType m_tremoloType;</span>
+<span id="L265"><span class="lineNum">     265</span>              : </span>
+<span id="L266"><span class="lineNum">     266</span>              :     std::list&lt;engraving::Chord*&gt; m_graceNotes;</span>
+<span id="L267"><span class="lineNum">     267</span>              :     GraceReading m_readingGraceNotes;</span>
+<span id="L268"><span class="lineNum">     268</span>              :     engraving::NoteType m_graceNoteType;</span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span>              :     bool m_readingEnding;</span>
+<span id="L271"><span class="lineNum">     271</span>              :     engraving::Measure* m_endingStart;</span>
+<span id="L272"><span class="lineNum">     272</span>              :     engraving::Measure* m_endingEnd;</span>
+<span id="L273"><span class="lineNum">     273</span>              : };</span>
+<span id="L274"><span class="lineNum">     274</span>              : } // namespace</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

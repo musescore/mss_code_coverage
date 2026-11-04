@@ -1,0 +1,534 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - muse/framework/musesampler/internal/apitypes.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">muse/framework/musesampler/internal</a> - apitypes.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2025 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #pragma once</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &lt;stdint.h&gt;</span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span>              : typedef void* MuseSamplerLib;</span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span>              : typedef enum ms_Result</span>
+<span id="L30"><span class="lineNum">      30</span>              : {</span>
+<span id="L31"><span class="lineNum">      31</span>              :     ms_Result_OK = 0,</span>
+<span id="L32"><span class="lineNum">      32</span>              :     ms_Result_Error = -1,</span>
+<span id="L33"><span class="lineNum">      33</span>              :     ms_Result_TimeoutErr = -2</span>
+<span id="L34"><span class="lineNum">      34</span>              : } ms_Result;</span>
+<span id="L35"><span class="lineNum">      35</span>              : </span>
+<span id="L36"><span class="lineNum">      36</span>              : typedef enum ms_InitResult</span>
+<span id="L37"><span class="lineNum">      37</span>              : {</span>
+<span id="L38"><span class="lineNum">      38</span>              :     ms_InitResult_OK = 0,</span>
+<span id="L39"><span class="lineNum">      39</span>              :     ms_InitResult_ProtectionRejected = -1,</span>
+<span id="L40"><span class="lineNum">      40</span>              :     ms_InitResult_ConfigurationMissing = -2,</span>
+<span id="L41"><span class="lineNum">      41</span>              :     ms_InitResult_ConfigurationUnreadable = -3,</span>
+<span id="L42"><span class="lineNum">      42</span>              :     ms_InitResult_ConfigurationInvalid = -4,</span>
+<span id="L43"><span class="lineNum">      43</span>              :     ms_InitResult_InstrumentMapMissing = -5,</span>
+<span id="L44"><span class="lineNum">      44</span>              :     ms_InitResult_ReceiptMissing = -6,</span>
+<span id="L45"><span class="lineNum">      45</span>              :     ms_InitResult_ReceiptRejected = -7,</span>
+<span id="L46"><span class="lineNum">      46</span>              :     ms_InitResult_DatabaseOpenFailed = -8,</span>
+<span id="L47"><span class="lineNum">      47</span>              :     ms_InitResult_InstrumentMapReadFailed = -9,</span>
+<span id="L48"><span class="lineNum">      48</span>              :     ms_InitResult_NoInstalledInstruments = -10,</span>
+<span id="L49"><span class="lineNum">      49</span>              :     ms_InitResult_NoUsableInstruments = -11,</span>
+<span id="L50"><span class="lineNum">      50</span>              : } ms_InitResult;</span>
+<span id="L51"><span class="lineNum">      51</span>              : </span>
+<span id="L52"><span class="lineNum">      52</span>              : // Functions to return the major + minor version of the core code. Note that this is independent of the UI version.</span>
+<span id="L53"><span class="lineNum">      53</span>              : typedef int (* ms_get_version_major)();</span>
+<span id="L54"><span class="lineNum">      54</span>              : typedef int (* ms_get_version_minor)();</span>
+<span id="L55"><span class="lineNum">      55</span>              : typedef int (* ms_get_version_revision)();</span>
+<span id="L56"><span class="lineNum">      56</span>              : typedef int (* ms_get_version_build_number)();</span>
+<span id="L57"><span class="lineNum">      57</span>              : </span>
+<span id="L58"><span class="lineNum">      58</span>              : /*\\\ TYPES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/</span>
+<span id="L59"><span class="lineNum">      59</span>              : </span>
+<span id="L60"><span class="lineNum">      60</span>              : typedef void* ms_MuseSampler;</span>
+<span id="L61"><span class="lineNum">      61</span>              : typedef void* ms_PresetList;</span>
+<span id="L62"><span class="lineNum">      62</span>              : typedef int ms_PresetChange; // added in v0.6</span>
+<span id="L63"><span class="lineNum">      63</span>              : typedef void* ms_InstrumentList;</span>
+<span id="L64"><span class="lineNum">      64</span>              : typedef void* ms_InstrumentInfo;</span>
+<span id="L65"><span class="lineNum">      65</span>              : typedef void* ms_Track;</span>
+<span id="L66"><span class="lineNum">      66</span>              : </span>
+<span id="L67"><span class="lineNum">      67</span>              : typedef struct ms_OutputBuffer</span>
+<span id="L68"><span class="lineNum">      68</span>              : {</span>
+<span id="L69"><span class="lineNum">      69</span>              :     float** _channels;</span>
+<span id="L70"><span class="lineNum">      70</span>              :     int _num_data_pts;</span>
+<span id="L71"><span class="lineNum">      71</span>              :     int _num_channels; // For sanity checking! Shouldn't change from init!</span>
+<span id="L72"><span class="lineNum">      72</span>              : } ms_OutputBuffer;</span>
+<span id="L73"><span class="lineNum">      73</span>              : </span>
+<span id="L74"><span class="lineNum">      74</span>              : // Added in v0.4</span>
+<span id="L75"><span class="lineNum">      75</span>              : typedef struct ms_DynamicsEvent_2</span>
+<span id="L76"><span class="lineNum">      76</span>              : {</span>
+<span id="L77"><span class="lineNum">      77</span>              :     long long _location_us;</span>
+<span id="L78"><span class="lineNum">      78</span>              :     double _value; // 0.0 - 1.0</span>
+<span id="L79"><span class="lineNum">      79</span>              : } ms_DynamicsEvent_2;</span>
+<span id="L80"><span class="lineNum">      80</span>              : </span>
+<span id="L81"><span class="lineNum">      81</span>              : // Added in v0.4</span>
+<span id="L82"><span class="lineNum">      82</span>              : typedef struct ms_PedalEvent_2</span>
+<span id="L83"><span class="lineNum">      83</span>              : {</span>
+<span id="L84"><span class="lineNum">      84</span>              :     long long _location_us;</span>
+<span id="L85"><span class="lineNum">      85</span>              :     double _value; // 0.0 - 1.0</span>
+<span id="L86"><span class="lineNum">      86</span>              : } ms_PedalEvent_2;</span>
+<span id="L87"><span class="lineNum">      87</span>              : </span>
+<span id="L88"><span class="lineNum">      88</span>              : enum ms_NoteArticulation : uint64_t</span>
+<span id="L89"><span class="lineNum">      89</span>              : {</span>
+<span id="L90"><span class="lineNum">      90</span>              :     ms_NoteArticulation_None = 0,</span>
+<span id="L91"><span class="lineNum">      91</span>              :     ms_NoteArticulation_Staccato = 1LL &lt;&lt; 0,</span>
+<span id="L92"><span class="lineNum">      92</span>              :     ms_NoteArticulation_Staccatissimo = 1LL &lt;&lt; 1,</span>
+<span id="L93"><span class="lineNum">      93</span>              :     ms_NoteArticulation_Accent = 1LL &lt;&lt; 2,</span>
+<span id="L94"><span class="lineNum">      94</span>              :     ms_NoteArticulation_Tenuto = 1LL &lt;&lt; 3,</span>
+<span id="L95"><span class="lineNum">      95</span>              :     ms_NoteArticulation_Marcato = 1LL &lt;&lt; 4,</span>
+<span id="L96"><span class="lineNum">      96</span>              :     ms_NoteArticulation_Harmonics = 1LL &lt;&lt; 5,</span>
+<span id="L97"><span class="lineNum">      97</span>              :     ms_NoteArticulation_Mute = 1LL &lt;&lt; 6,</span>
+<span id="L98"><span class="lineNum">      98</span>              :     ms_NoteArticulation_Trill = 1LL &lt;&lt; 7,</span>
+<span id="L99"><span class="lineNum">      99</span>              :     ms_NoteArticulation_MordentSemi = 1LL &lt;&lt; 8,</span>
+<span id="L100"><span class="lineNum">     100</span>              :     ms_NoteArticulation_MordentWhole = 1LL &lt;&lt; 9,</span>
+<span id="L101"><span class="lineNum">     101</span>              :     ms_NoteArticulation_MordentInvertedSemi = 1LL &lt;&lt; 10,</span>
+<span id="L102"><span class="lineNum">     102</span>              :     ms_NoteArticulation_MordentInvertedWhole = 1LL &lt;&lt; 11,</span>
+<span id="L103"><span class="lineNum">     103</span>              :     ms_NoteArticulation_TurnSemiWhole = 1LL &lt;&lt; 12,</span>
+<span id="L104"><span class="lineNum">     104</span>              :     ms_NoteArticulation_TurnSemiSemi = 1LL &lt;&lt; 13,</span>
+<span id="L105"><span class="lineNum">     105</span>              :     ms_NoteArticulation_TurnWholeWhole = 1LL &lt;&lt; 14,</span>
+<span id="L106"><span class="lineNum">     106</span>              :     ms_NoteArticulation_TurnWholeSemi = 1LL &lt;&lt; 15,</span>
+<span id="L107"><span class="lineNum">     107</span>              :     ms_NoteArticulation_TurnInvertedSemiWhole = 1LL &lt;&lt; 16,</span>
+<span id="L108"><span class="lineNum">     108</span>              :     ms_NoteArticulation_TurnInvertedSemiSemi = 1LL &lt;&lt; 17,</span>
+<span id="L109"><span class="lineNum">     109</span>              :     ms_NoteArticulation_TurnInvertedWholeWhole = 1LL &lt;&lt; 18,</span>
+<span id="L110"><span class="lineNum">     110</span>              :     ms_NoteArticulation_TurnInvertedWholeSemi = 1LL &lt;&lt; 19,</span>
+<span id="L111"><span class="lineNum">     111</span>              :     ms_NoteArticulation_ArpeggioUp = 1LL &lt;&lt; 20,</span>
+<span id="L112"><span class="lineNum">     112</span>              :     ms_NoteArticulation_ArpeggioDown = 1LL &lt;&lt; 21,</span>
+<span id="L113"><span class="lineNum">     113</span>              :     ms_NoteArticulation_Tremolo1 = 1LL &lt;&lt; 22, // One or two note, depending on fallback notes</span>
+<span id="L114"><span class="lineNum">     114</span>              :     ms_NoteArticulation_Tremolo2 = 1LL &lt;&lt; 23, // One or two note, depending on fallback notes</span>
+<span id="L115"><span class="lineNum">     115</span>              :     ms_NoteArticulation_Tremolo3 = 1LL &lt;&lt; 24, // One or two note, depending on fallback notes</span>
+<span id="L116"><span class="lineNum">     116</span>              :     ms_NoteArticulation_Scoop = 1LL &lt;&lt; 25,</span>
+<span id="L117"><span class="lineNum">     117</span>              :     ms_NoteArticulation_Plop = 1LL &lt;&lt; 26,</span>
+<span id="L118"><span class="lineNum">     118</span>              :     ms_NoteArticulation_Doit = 1LL &lt;&lt; 27,</span>
+<span id="L119"><span class="lineNum">     119</span>              :     ms_NoteArticulation_Fall = 1LL &lt;&lt; 28,</span>
+<span id="L120"><span class="lineNum">     120</span>              :     ms_NoteArticulation_Appoggiatura = 1LL &lt;&lt; 29, // Duration is ignored</span>
+<span id="L121"><span class="lineNum">     121</span>              :     ms_NoteArticulation_Acciaccatura = 1LL &lt;&lt; 30, // Duration is ignored</span>
+<span id="L122"><span class="lineNum">     122</span>              :     ms_NoteArticulation_Open = 1LL &lt;&lt; 31,</span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span>              :     ms_NoteArticulation_Portamento = 1LL &lt;&lt; 36,</span>
+<span id="L125"><span class="lineNum">     125</span>              :     ms_NoteArticulation_Pizzicato = 1LL &lt;&lt; 37,</span>
+<span id="L126"><span class="lineNum">     126</span>              :     ms_NoteArticulation_Glissando = 1LL &lt;&lt; 39,</span>
+<span id="L127"><span class="lineNum">     127</span>              :     ms_NoteArticulation_Pedal = 1LL &lt;&lt; 40,</span>
+<span id="L128"><span class="lineNum">     128</span>              :     ms_NoteArticulation_Slur = 1LL &lt;&lt; 41,</span>
+<span id="L129"><span class="lineNum">     129</span>              :     ms_NoteArticulation_SnapPizzicato = 1LL &lt;&lt; 42,</span>
+<span id="L130"><span class="lineNum">     130</span>              :     ms_NoteArticulation_ColLegno = 1LL &lt;&lt; 43,</span>
+<span id="L131"><span class="lineNum">     131</span>              :     ms_NoteArticulation_SulTasto = 1LL &lt;&lt; 44,</span>
+<span id="L132"><span class="lineNum">     132</span>              :     ms_NoteArticulation_SulPonticello = 1LL &lt;&lt; 45,</span>
+<span id="L133"><span class="lineNum">     133</span>              :     ms_NoteArticulation_LeftHandTapping = 1LL &lt;&lt; 46,</span>
+<span id="L134"><span class="lineNum">     134</span>              :     ms_NoteArticulation_RightHandTapping = 1LL &lt;&lt; 47,</span>
+<span id="L135"><span class="lineNum">     135</span>              :     ms_NoteArticulation_PalmMute = 1LL &lt;&lt; 48,</span>
+<span id="L136"><span class="lineNum">     136</span>              :     ms_NoteArticulation_PinchHarmonic = 1LL &lt;&lt; 49,</span>
+<span id="L137"><span class="lineNum">     137</span>              :     ms_NoteArticulation_BuzzTremolo = 1LL &lt;&lt; 50,</span>
+<span id="L138"><span class="lineNum">     138</span>              :     // TO BE REPLACED = 1LL &lt;&lt; 51,</span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span>              :     ms_NoteArticulation_Martellato = 1LL &lt;&lt; 32,</span>
+<span id="L141"><span class="lineNum">     141</span>              :     ms_NoteArticulation_MartellatoLift = 1LL &lt;&lt; 33,</span>
+<span id="L142"><span class="lineNum">     142</span>              :     ms_NoteArticulation_HandMartellato = 1LL &lt;&lt; 34,</span>
+<span id="L143"><span class="lineNum">     143</span>              :     ms_NoteArticulation_MutedMartellato = 1LL &lt;&lt; 35,</span>
+<span id="L144"><span class="lineNum">     144</span>              :     ms_NoteArticulation_MalletBellSuspended = 1LL &lt;&lt; 38,</span>
+<span id="L145"><span class="lineNum">     145</span>              :     ms_NoteArticulation_MalletBellOnTable = 1LL &lt;&lt; 52,</span>
+<span id="L146"><span class="lineNum">     146</span>              :     ms_NoteArticulation_MalletLift = 1LL &lt;&lt; 53,</span>
+<span id="L147"><span class="lineNum">     147</span>              :     ms_NoteArticulation_PluckLift = 1LL &lt;&lt; 54,</span>
+<span id="L148"><span class="lineNum">     148</span>              :     ms_NoteArticulation_Gyro = 1LL &lt;&lt; 55,</span>
+<span id="L149"><span class="lineNum">     149</span>              :     // More noteheads:</span>
+<span id="L150"><span class="lineNum">     150</span>              :     ms_NoteArticulation_LaissezVibrer = 1LL &lt;&lt; 59,</span>
+<span id="L151"><span class="lineNum">     151</span>              : };</span>
+<span id="L152"><span class="lineNum">     152</span>              : </span>
+<span id="L153"><span class="lineNum">     153</span>              : enum ms_NoteArticulation2 : uint64_t</span>
+<span id="L154"><span class="lineNum">     154</span>              : {</span>
+<span id="L155"><span class="lineNum">     155</span>              :     ms_NoteArticulation2_None = 0,</span>
+<span id="L156"><span class="lineNum">     156</span>              :     ms_NoteArticulation2_Ring = 1LL &lt;&lt; 0,</span>
+<span id="L157"><span class="lineNum">     157</span>              :     ms_NoteArticulation2_ThumbDamp = 1LL &lt;&lt; 1,</span>
+<span id="L158"><span class="lineNum">     158</span>              :     ms_NoteArticulation2_BrushDamp = 1LL &lt;&lt; 2,</span>
+<span id="L159"><span class="lineNum">     159</span>              :     ms_NoteArticulation2_RingTouch = 1LL &lt;&lt; 3,</span>
+<span id="L160"><span class="lineNum">     160</span>              :     ms_NoteArticulation2_Pluck = 1LL &lt;&lt; 4,</span>
+<span id="L161"><span class="lineNum">     161</span>              :     ms_NoteArticulation2_SingingBell = 1LL &lt;&lt; 5,</span>
+<span id="L162"><span class="lineNum">     162</span>              :     ms_NoteArticulation2_SingingVibrate = 1LL &lt;&lt; 6,</span>
+<span id="L163"><span class="lineNum">     163</span>              :     ms_NoteArticulation2_HandbellSwing = 1LL &lt;&lt; 7,</span>
+<span id="L164"><span class="lineNum">     164</span>              :     ms_NoteArticulation2_Echo = 1LL &lt;&lt; 8,</span>
+<span id="L165"><span class="lineNum">     165</span>              : </span>
+<span id="L166"><span class="lineNum">     166</span>              :     ms_NoteArticulation2_FallRough = 1LL &lt;&lt; 9,</span>
+<span id="L167"><span class="lineNum">     167</span>              :     ms_NoteArticulation2_PlopRough = 1LL &lt;&lt; 10,</span>
+<span id="L168"><span class="lineNum">     168</span>              :     ms_NoteArticulation2_DoitRough = 1LL &lt;&lt; 11,</span>
+<span id="L169"><span class="lineNum">     169</span>              :     ms_NoteArticulation2_ScoopRough = 1LL &lt;&lt; 12,</span>
+<span id="L170"><span class="lineNum">     170</span>              :     ms_NoteArticulation2_BreathMark = 1LL &lt;&lt; 13,</span>
+<span id="L171"><span class="lineNum">     171</span>              : };</span>
+<span id="L172"><span class="lineNum">     172</span>              : </span>
+<span id="L173"><span class="lineNum">     173</span>              : // added in v0.6</span>
+<span id="L174"><span class="lineNum">     174</span>              : enum ms_NoteHead : int16_t</span>
+<span id="L175"><span class="lineNum">     175</span>              : {</span>
+<span id="L176"><span class="lineNum">     176</span>              :     ms_NoteHead_Normal,</span>
+<span id="L177"><span class="lineNum">     177</span>              :     ms_NoteHead_XNote,</span>
+<span id="L178"><span class="lineNum">     178</span>              :     ms_NoteHead_LargeX,</span>
+<span id="L179"><span class="lineNum">     179</span>              :     ms_NoteHead_OrnateXNote,</span>
+<span id="L180"><span class="lineNum">     180</span>              :     ms_NoteHead_CircleXNote,</span>
+<span id="L181"><span class="lineNum">     181</span>              :     ms_NoteHead_CircleDot,</span>
+<span id="L182"><span class="lineNum">     182</span>              :     ms_NoteHead_Ghost,</span>
+<span id="L183"><span class="lineNum">     183</span>              :     ms_NoteHead_Circle,</span>
+<span id="L184"><span class="lineNum">     184</span>              :     ms_NoteHead_Diamond,</span>
+<span id="L185"><span class="lineNum">     185</span>              :     ms_NoteHead_Triangle,</span>
+<span id="L186"><span class="lineNum">     186</span>              :     ms_NoteHead_TriangleUp,</span>
+<span id="L187"><span class="lineNum">     187</span>              :     ms_NoteHead_TriangleDown,</span>
+<span id="L188"><span class="lineNum">     188</span>              :     ms_NoteHead_TriangleRight,</span>
+<span id="L189"><span class="lineNum">     189</span>              :     ms_NoteHead_TriangleRoundDown,</span>
+<span id="L190"><span class="lineNum">     190</span>              :     ms_NoteHead_FlatTop,</span>
+<span id="L191"><span class="lineNum">     191</span>              :     ms_NoteHead_Square,</span>
+<span id="L192"><span class="lineNum">     192</span>              :     ms_NoteHead_Slash,</span>
+<span id="L193"><span class="lineNum">     193</span>              :     ms_NoteHead_SlashRightFilled,</span>
+<span id="L194"><span class="lineNum">     194</span>              :     ms_NoteHead_SlashLeftFilled,</span>
+<span id="L195"><span class="lineNum">     195</span>              :     ms_NoteHead_Plus,</span>
+<span id="L196"><span class="lineNum">     196</span>              : };</span>
+<span id="L197"><span class="lineNum">     197</span>              : </span>
+<span id="L198"><span class="lineNum">     198</span>              : // Added in version 0.102 // Adds a new ms_NoteArticulation2 enum so we have more bits available</span>
+<span id="L199"><span class="lineNum">     199</span>              : typedef struct ms_NoteEvent_5</span>
+<span id="L200"><span class="lineNum">     200</span>              : {</span>
+<span id="L201"><span class="lineNum">     201</span>              :     int _voice; // 0-3</span>
+<span id="L202"><span class="lineNum">     202</span>              :     long long _location_us;</span>
+<span id="L203"><span class="lineNum">     203</span>              :     long long _duration_us;</span>
+<span id="L204"><span class="lineNum">     204</span>              :     int _pitch;      // MIDI pitch</span>
+<span id="L205"><span class="lineNum">     205</span>              :     double _tempo;   // BPM</span>
+<span id="L206"><span class="lineNum">     206</span>              :     int _offset_cents; // pitch offset in cents: -50 would be a quarter tone flat</span>
+<span id="L207"><span class="lineNum">     207</span>              :     ms_NoteArticulation _articulation;</span>
+<span id="L208"><span class="lineNum">     208</span>              :     ms_NoteArticulation2 _articulation_2;</span>
+<span id="L209"><span class="lineNum">     209</span>              :     ms_NoteHead _notehead;</span>
+<span id="L210"><span class="lineNum">     210</span>              : } ms_NoteEvent_5;</span>
+<span id="L211"><span class="lineNum">     211</span>              : </span>
+<span id="L212"><span class="lineNum">     212</span>              : // Added in version 0.102 // Adds a new ms_NoteArticulation2 enum so we have more bits available</span>
+<span id="L213"><span class="lineNum">     213</span>              : typedef struct ms_AuditionStartNoteEvent_5</span>
+<span id="L214"><span class="lineNum">     214</span>              : {</span>
+<span id="L215"><span class="lineNum">     215</span>              :     int _pitch;      // MIDI pitch</span>
+<span id="L216"><span class="lineNum">     216</span>              :     int _offset_cents; // pitch offsets in cents ()</span>
+<span id="L217"><span class="lineNum">     217</span>              :     ms_NoteArticulation _articulation;</span>
+<span id="L218"><span class="lineNum">     218</span>              :     ms_NoteArticulation2 _articulation_2;</span>
+<span id="L219"><span class="lineNum">     219</span>              :     ms_NoteHead _notehead;</span>
+<span id="L220"><span class="lineNum">     220</span>              :     double _dynamics;</span>
+<span id="L221"><span class="lineNum">     221</span>              :     const char* _active_presets; // presets that are selected for this note. list is separated by &quot;|&quot;. If &quot;&quot; then the</span>
+<span id="L222"><span class="lineNum">     222</span>              :                                  // first available preset is used.</span>
+<span id="L223"><span class="lineNum">     223</span>              :     const char* _active_text_articulation; // text articulation that is active for this note. Can be empty</span>
+<span id="L224"><span class="lineNum">     224</span>              :     const char* _active_syllable;        // currently active lyrics syllable. Can be empty</span>
+<span id="L225"><span class="lineNum">     225</span>              :     bool _articulation_text_starts_at_note;</span>
+<span id="L226"><span class="lineNum">     226</span>              :     bool _syllable_starts_at_note;</span>
+<span id="L227"><span class="lineNum">     227</span>              : } ms_AuditionStartNoteEvent_5;</span>
+<span id="L228"><span class="lineNum">     228</span>              : </span>
+<span id="L229"><span class="lineNum">     229</span>              : typedef struct ms_AuditionStopNoteEvent</span>
+<span id="L230"><span class="lineNum">     230</span>              : {</span>
+<span id="L231"><span class="lineNum">     231</span>              :     int _pitch; // MIDI pitch</span>
+<span id="L232"><span class="lineNum">     232</span>              : } ms_AuditionStopNoteEvent;</span>
+<span id="L233"><span class="lineNum">     233</span>              : </span>
+<span id="L234"><span class="lineNum">     234</span>              : // Added in v0.5</span>
+<span id="L235"><span class="lineNum">     235</span>              : enum ms_PitchBendType</span>
+<span id="L236"><span class="lineNum">     236</span>              : {</span>
+<span id="L237"><span class="lineNum">     237</span>              :     PitchBend_Linear,</span>
+<span id="L238"><span class="lineNum">     238</span>              :     PitchBend_Bezier,</span>
+<span id="L239"><span class="lineNum">     239</span>              : };</span>
+<span id="L240"><span class="lineNum">     240</span>              : </span>
+<span id="L241"><span class="lineNum">     241</span>              : typedef struct ms_PitchBendInfo</span>
+<span id="L242"><span class="lineNum">     242</span>              : {</span>
+<span id="L243"><span class="lineNum">     243</span>              :     int64_t event_id;</span>
+<span id="L244"><span class="lineNum">     244</span>              :     long long _start_us; // offset from the start of the note, not absolute time</span>
+<span id="L245"><span class="lineNum">     245</span>              :     long long _duration_us;</span>
+<span id="L246"><span class="lineNum">     246</span>              :     int _offset_cents;</span>
+<span id="L247"><span class="lineNum">     247</span>              :     ms_PitchBendType _type;</span>
+<span id="L248"><span class="lineNum">     248</span>              : } ms_PitchBendInfo;</span>
+<span id="L249"><span class="lineNum">     249</span>              : </span>
+<span id="L250"><span class="lineNum">     250</span>              : static constexpr int MAX_PITCH_BEND_RANGE_CENTS = 1200;</span>
+<span id="L251"><span class="lineNum">     251</span>              : </span>
+<span id="L252"><span class="lineNum">     252</span>              : typedef struct ms_VibratoInfo</span>
+<span id="L253"><span class="lineNum">     253</span>              : {</span>
+<span id="L254"><span class="lineNum">     254</span>              :     int64_t event_id;</span>
+<span id="L255"><span class="lineNum">     255</span>              :     long long _start_us;</span>
+<span id="L256"><span class="lineNum">     256</span>              :     long long _duration_us;</span>
+<span id="L257"><span class="lineNum">     257</span>              :     int _depth_cents;</span>
+<span id="L258"><span class="lineNum">     258</span>              : } ms_VibratoInfo;</span>
+<span id="L259"><span class="lineNum">     259</span>              : </span>
+<span id="L260"><span class="lineNum">     260</span>              : // Added in v0.6</span>
+<span id="L261"><span class="lineNum">     261</span>              : typedef struct ms_TextArticulationEvent</span>
+<span id="L262"><span class="lineNum">     262</span>              : {</span>
+<span id="L263"><span class="lineNum">     263</span>              :     long long _start_us;</span>
+<span id="L264"><span class="lineNum">     264</span>              :     const char* _articulation; // articulation name</span>
+<span id="L265"><span class="lineNum">     265</span>              : } ms_TextArticulationEvent;</span>
+<span id="L266"><span class="lineNum">     266</span>              : </span>
+<span id="L267"><span class="lineNum">     267</span>              : // Added in v0.100</span>
+<span id="L268"><span class="lineNum">     268</span>              : typedef struct ms_SyllableEvent</span>
+<span id="L269"><span class="lineNum">     269</span>              : {</span>
+<span id="L270"><span class="lineNum">     270</span>              :     const char* _text;</span>
+<span id="L271"><span class="lineNum">     271</span>              :     long long _position_us;</span>
+<span id="L272"><span class="lineNum">     272</span>              : } ms_SyllableEvent;</span>
+<span id="L273"><span class="lineNum">     273</span>              : </span>
+<span id="L274"><span class="lineNum">     274</span>              : typedef ms_Result (* ms_init_2)(); // added in v0.105</span>
+<span id="L275"><span class="lineNum">     275</span>              : typedef ms_Result (* ms_deinit)(); // added in v0.105</span>
+<span id="L276"><span class="lineNum">     276</span>              : typedef ms_Result (* ms_disable_reverb)();</span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span>              : typedef ms_InstrumentList (* ms_get_instrument_list)();</span>
+<span id="L279"><span class="lineNum">     279</span>              : typedef ms_InstrumentList (* ms_get_matching_instrument_list)(const char* mpe_id, const char* musicxml_id);</span>
+<span id="L280"><span class="lineNum">     280</span>              : typedef ms_InstrumentInfo (* ms_InstrumentList_get_next)(ms_InstrumentList instrument_list);</span>
+<span id="L281"><span class="lineNum">     281</span>              : </span>
+<span id="L282"><span class="lineNum">     282</span>              : typedef int (* ms_Instrument_get_id)(ms_InstrumentInfo instrument);</span>
+<span id="L283"><span class="lineNum">     283</span>              : typedef const char*(* ms_Instrument_get_name)(ms_InstrumentInfo);</span>
+<span id="L284"><span class="lineNum">     284</span>              : typedef const char*(* ms_Instrument_get_category)(ms_InstrumentInfo);</span>
+<span id="L285"><span class="lineNum">     285</span>              : typedef const char*(* ms_Instrument_get_musicxml_sound)(ms_InstrumentInfo);</span>
+<span id="L286"><span class="lineNum">     286</span>              : typedef const char*(* ms_Instrument_get_mpe_sound)(ms_InstrumentInfo);</span>
+<span id="L287"><span class="lineNum">     287</span>              : typedef float (* ms_Instrument_get_reverb_level)(ms_InstrumentInfo);</span>
+<span id="L288"><span class="lineNum">     288</span>              : </span>
+<span id="L289"><span class="lineNum">     289</span>              : typedef ms_PresetList (* ms_Instrument_get_preset_list)(ms_InstrumentInfo);</span>
+<span id="L290"><span class="lineNum">     290</span>              : typedef const char*(* ms_PresetList_get_next)(ms_PresetList);</span>
+<span id="L291"><span class="lineNum">     291</span>              : </span>
+<span id="L292"><span class="lineNum">     292</span>              : typedef ms_MuseSampler (* ms_MuseSampler_create)();</span>
+<span id="L293"><span class="lineNum">     293</span>              : typedef void (* ms_MuseSampler_destroy)(ms_MuseSampler);</span>
+<span id="L294"><span class="lineNum">     294</span>              : typedef ms_Result (* ms_MuseSampler_init)(ms_MuseSampler ms, double sample_rate, int block_size, int channel_count);</span>
+<span id="L295"><span class="lineNum">     295</span>              : </span>
+<span id="L296"><span class="lineNum">     296</span>              : // Added in 0.100</span>
+<span id="L297"><span class="lineNum">     297</span>              : typedef ms_Result (* ms_MuseSampler_init_2)(ms_MuseSampler ms, double sample_rate, int block_size, int channel_count);</span>
+<span id="L298"><span class="lineNum">     298</span>              : </span>
+<span id="L299"><span class="lineNum">     299</span>              : typedef ms_Result (* ms_MuseSampler_finalize_score)(ms_MuseSampler ms);</span>
+<span id="L300"><span class="lineNum">     300</span>              : typedef ms_Track (* ms_MuseSampler_add_track)(ms_MuseSampler ms, int instrument_id);</span>
+<span id="L301"><span class="lineNum">     301</span>              : typedef ms_Result (* ms_MuseSampler_finalize_track)(ms_MuseSampler ms, ms_Track track);</span>
+<span id="L302"><span class="lineNum">     302</span>              : typedef ms_Result (* ms_MuseSampler_clear_track)(ms_MuseSampler ms, ms_Track track);</span>
+<span id="L303"><span class="lineNum">     303</span>              : </span>
+<span id="L304"><span class="lineNum">     304</span>              : // Added in 0.4</span>
+<span id="L305"><span class="lineNum">     305</span>              : typedef ms_Result (* ms_MuseSampler_add_track_dynamics_event_2)(ms_MuseSampler ms, ms_Track track, ms_DynamicsEvent_2 evt);</span>
+<span id="L306"><span class="lineNum">     306</span>              : typedef ms_Result (* ms_MuseSampler_add_track_pedal_event_2)(ms_MuseSampler ms, ms_Track track, ms_PedalEvent_2 evt);</span>
+<span id="L307"><span class="lineNum">     307</span>              : </span>
+<span id="L308"><span class="lineNum">     308</span>              : typedef int (* ms_MuseSampler_is_ranged_articulation)(ms_NoteArticulation);</span>
+<span id="L309"><span class="lineNum">     309</span>              : typedef ms_Result (* ms_MuseSampler_add_track_event_range_start)(ms_MuseSampler, ms_Track, int voice, ms_NoteArticulation);</span>
+<span id="L310"><span class="lineNum">     310</span>              : typedef ms_Result (* ms_MuseSampler_add_track_event_range_end)(ms_MuseSampler, ms_Track, int voice, ms_NoteArticulation);</span>
+<span id="L311"><span class="lineNum">     311</span>              : </span>
+<span id="L312"><span class="lineNum">     312</span>              : // Added in 0.5</span>
+<span id="L313"><span class="lineNum">     313</span>              : typedef ms_Result (* ms_MuseSampler_add_pitch_bend)(ms_MuseSampler ms, ms_Track track, ms_PitchBendInfo info);</span>
+<span id="L314"><span class="lineNum">     314</span>              : typedef ms_Result (* ms_MuseSampler_add_vibrato)(ms_MuseSampler ms, ms_Track track, ms_VibratoInfo info);</span>
+<span id="L315"><span class="lineNum">     315</span>              : </span>
+<span id="L316"><span class="lineNum">     316</span>              : // Added in 0.3</span>
+<span id="L317"><span class="lineNum">     317</span>              : typedef ms_Result (* ms_MuseSampler_stop_audition_note)(ms_MuseSampler ms, ms_Track track, ms_AuditionStopNoteEvent evt);</span>
+<span id="L318"><span class="lineNum">     318</span>              : </span>
+<span id="L319"><span class="lineNum">     319</span>              : // Added in 0.3</span>
+<span id="L320"><span class="lineNum">     320</span>              : typedef ms_Result (* ms_MuseSampler_start_offline_mode)(ms_MuseSampler ms, double sample_rate);</span>
+<span id="L321"><span class="lineNum">     321</span>              : typedef ms_Result (* ms_MuseSampler_stop_offline_mode)(ms_MuseSampler ms);</span>
+<span id="L322"><span class="lineNum">     322</span>              : typedef ms_Result (* ms_MuseSampler_process_offline)(ms_MuseSampler ms, ms_OutputBuffer buffer);</span>
+<span id="L323"><span class="lineNum">     323</span>              : </span>
+<span id="L324"><span class="lineNum">     324</span>              : typedef ms_Result (* ms_MuseSampler_process)(ms_MuseSampler, ms_OutputBuffer, long long samples);</span>
+<span id="L325"><span class="lineNum">     325</span>              : typedef void (* ms_MuseSampler_set_position)(ms_MuseSampler, long long samples);</span>
+<span id="L326"><span class="lineNum">     326</span>              : typedef void (* ms_MuseSampler_set_playing)(ms_MuseSampler, int playing);</span>
+<span id="L327"><span class="lineNum">     327</span>              : </span>
+<span id="L328"><span class="lineNum">     328</span>              : typedef ms_Result (* ms_MuseSampler_all_notes_off)(ms_MuseSampler);</span>
+<span id="L329"><span class="lineNum">     329</span>              : </span>
+<span id="L330"><span class="lineNum">     330</span>              : // Added in 0.6</span>
+<span id="L331"><span class="lineNum">     331</span>              : typedef const char*(* ms_Instrument_get_pack_name)(ms_InstrumentInfo);</span>
+<span id="L332"><span class="lineNum">     332</span>              : typedef const char*(* ms_Instrument_get_vendor_name)(ms_InstrumentInfo);</span>
+<span id="L333"><span class="lineNum">     333</span>              : typedef const char*(* ms_Instrument_get_info_json)(ms_InstrumentInfo);</span>
+<span id="L334"><span class="lineNum">     334</span>              : </span>
+<span id="L335"><span class="lineNum">     335</span>              : typedef ms_PresetChange (* ms_MuseSampler_create_preset_change)(ms_MuseSampler ms, ms_Track track, long long location_us);</span>
+<span id="L336"><span class="lineNum">     336</span>              : typedef ms_Result (* ms_MuseSampler_add_preset)(ms_MuseSampler ms, ms_Track track, ms_PresetChange preset_change, const char* preset_name);</span>
+<span id="L337"><span class="lineNum">     337</span>              : </span>
+<span id="L338"><span class="lineNum">     338</span>              : typedef const char*(* ms_get_text_articulations)(int instrument_id, const char* preset_name);</span>
+<span id="L339"><span class="lineNum">     339</span>              : typedef ms_Result (* ms_MuseSampler_add_track_text_articulation_event)(ms_MuseSampler ms, ms_Track track, ms_TextArticulationEvent evt);</span>
+<span id="L340"><span class="lineNum">     340</span>              : </span>
+<span id="L341"><span class="lineNum">     341</span>              : typedef const char*(* ms_get_drum_mapping)(int instrument_id);</span>
+<span id="L342"><span class="lineNum">     342</span>              : </span>
+<span id="L343"><span class="lineNum">     343</span>              : // Added in 0.100</span>
+<span id="L344"><span class="lineNum">     344</span>              : typedef ms_Result (* ms_reload_all_instruments)(); // Useful for sound developers</span>
+<span id="L345"><span class="lineNum">     345</span>              : </span>
+<span id="L346"><span class="lineNum">     346</span>              : // Added in 0.101</span>
+<span id="L347"><span class="lineNum">     347</span>              : typedef bool (* ms_MuseSampler_ready_to_play)(ms_MuseSampler ms);</span>
+<span id="L348"><span class="lineNum">     348</span>              : </span>
+<span id="L349"><span class="lineNum">     349</span>              : // Added in 0.102</span>
+<span id="L350"><span class="lineNum">     350</span>              : enum ms_ErrorLevel : int16_t</span>
+<span id="L351"><span class="lineNum">     351</span>              : {</span>
+<span id="L352"><span class="lineNum">     352</span>              :     ms_ErrorLevel_Debug = 0,</span>
+<span id="L353"><span class="lineNum">     353</span>              :     ms_ErrorLevel_Info = 1,</span>
+<span id="L354"><span class="lineNum">     354</span>              :     ms_ErrorLevel_Warning = 2,</span>
+<span id="L355"><span class="lineNum">     355</span>              :     ms_ErrorLevel_Error = 3,</span>
+<span id="L356"><span class="lineNum">     356</span>              : };</span>
+<span id="L357"><span class="lineNum">     357</span>              : </span>
+<span id="L358"><span class="lineNum">     358</span>              : typedef void (* ms_logging_callback)(ms_ErrorLevel level, const char* msg);</span>
+<span id="L359"><span class="lineNum">     359</span>              : typedef void (* ms_set_logging_callback)(ms_logging_callback callback);</span>
+<span id="L360"><span class="lineNum">     360</span>              : </span>
+<span id="L361"><span class="lineNum">     361</span>              : typedef bool (* ms_Instrument_is_online)(ms_InstrumentInfo);</span>
+<span id="L362"><span class="lineNum">     362</span>              : </span>
+<span id="L363"><span class="lineNum">     363</span>              : typedef void (* ms_MuseSampler_set_score_id)(ms_MuseSampler ms, const char* score_id);</span>
+<span id="L364"><span class="lineNum">     364</span>              : </span>
+<span id="L365"><span class="lineNum">     365</span>              : typedef struct ms_SyllableEvent2</span>
+<span id="L366"><span class="lineNum">     366</span>              : {</span>
+<span id="L367"><span class="lineNum">     367</span>              :     const char* _text;</span>
+<span id="L368"><span class="lineNum">     368</span>              :     long long _position_us;</span>
+<span id="L369"><span class="lineNum">     369</span>              :     bool _hyphened_to_next;</span>
+<span id="L370"><span class="lineNum">     370</span>              : } ms_SyllableEvent2;</span>
+<span id="L371"><span class="lineNum">     371</span>              : </span>
+<span id="L372"><span class="lineNum">     372</span>              : typedef ms_Result (* ms_MuseSampler_add_track_syllable_event_2)(ms_MuseSampler ms, ms_Track track, ms_SyllableEvent2 evt);</span>
+<span id="L373"><span class="lineNum">     373</span>              : </span>
+<span id="L374"><span class="lineNum">     374</span>              : typedef enum ms_RenderingState</span>
+<span id="L375"><span class="lineNum">     375</span>              : {</span>
+<span id="L376"><span class="lineNum">     376</span>              :     ms_RenderingState_Rendering,</span>
+<span id="L377"><span class="lineNum">     377</span>              :     ms_RenderingState_ErrorRendering,</span>
+<span id="L378"><span class="lineNum">     378</span>              :     ms_RenderingState_ErrorNetwork,</span>
+<span id="L379"><span class="lineNum">     379</span>              :     ms_RenderingState_ErrorFileIO,</span>
+<span id="L380"><span class="lineNum">     380</span>              :     ms_RenderingState_ErrorTimeOut,</span>
+<span id="L381"><span class="lineNum">     381</span>              :     ms_RenderingState_ErrorLimitReached,</span>
+<span id="L382"><span class="lineNum">     382</span>              :     ms_RenderingState_OutOfRange,</span>
+<span id="L383"><span class="lineNum">     383</span>              : } ms_RenderingState;</span>
+<span id="L384"><span class="lineNum">     384</span>              : </span>
+<span id="L385"><span class="lineNum">     385</span>              : typedef struct ms_RenderRangeInfo</span>
+<span id="L386"><span class="lineNum">     386</span>              : {</span>
+<span id="L387"><span class="lineNum">     387</span>              :     long long _start_us;</span>
+<span id="L388"><span class="lineNum">     388</span>              :     long long _end_us;</span>
+<span id="L389"><span class="lineNum">     389</span>              :     ms_RenderingState _state;</span>
+<span id="L390"><span class="lineNum">     390</span>              : } ms_RenderRangeInfo;</span>
+<span id="L391"><span class="lineNum">     391</span>              : </span>
+<span id="L392"><span class="lineNum">     392</span>              : typedef struct ms_RenderRangeInfo2</span>
+<span id="L393"><span class="lineNum">     393</span>              : {</span>
+<span id="L394"><span class="lineNum">     394</span>              :     long long _start_us;</span>
+<span id="L395"><span class="lineNum">     395</span>              :     long long _end_us;</span>
+<span id="L396"><span class="lineNum">     396</span>              :     ms_RenderingState _state;</span>
+<span id="L397"><span class="lineNum">     397</span>              :     const char* _error_message; // possibly null</span>
+<span id="L398"><span class="lineNum">     398</span>              : } ms_RenderRangeInfo2;</span>
+<span id="L399"><span class="lineNum">     399</span>              : </span>
+<span id="L400"><span class="lineNum">     400</span>              : typedef void* ms_RenderingRangeList;</span>
+<span id="L401"><span class="lineNum">     401</span>              : </span>
+<span id="L402"><span class="lineNum">     402</span>              : typedef void (* ms_MuseSampler_set_auto_render_interval)(ms_MuseSampler ms, double interval_seconds);</span>
+<span id="L403"><span class="lineNum">     403</span>              : typedef void (* ms_MuseSampler_trigger_render)(ms_MuseSampler ms);</span>
+<span id="L404"><span class="lineNum">     404</span>              : typedef void (* ms_MuseSampler_clear_online_cache)(ms_MuseSampler ms);</span>
+<span id="L405"><span class="lineNum">     405</span>              : </span>
+<span id="L406"><span class="lineNum">     406</span>              : typedef ms_Result (* ms_MuseSampler_add_audition_cc_event)(ms_MuseSampler ms, ms_Track track, int cc, float value);</span>
+<span id="L407"><span class="lineNum">     407</span>              : </span>
+<span id="L408"><span class="lineNum">     408</span>              : typedef ms_Result (* ms_MuseSampler_add_track_note_event_6)(ms_MuseSampler ms, ms_Track track, ms_NoteEvent_5 evt, long long&amp; event_id);</span>
+<span id="L409"><span class="lineNum">     409</span>              : typedef ms_Result (* ms_MuseSampler_start_audition_note_5)(ms_MuseSampler ms, ms_Track track, ms_AuditionStartNoteEvent_5 evt);</span>
+<span id="L410"><span class="lineNum">     410</span>              : // ------------------------------------------------------------</span>
+<span id="L411"><span class="lineNum">     411</span>              : </span>
+<span id="L412"><span class="lineNum">     412</span>              : // Added in 0.103</span>
+<span id="L413"><span class="lineNum">     413</span>              : typedef void (* ms_rendering_state_changed_callback)(void* user_data, ms_RenderingRangeList list, int num_ranges);</span>
+<span id="L414"><span class="lineNum">     414</span>              : </span>
+<span id="L415"><span class="lineNum">     415</span>              : // added in v0.104</span>
+<span id="L416"><span class="lineNum">     416</span>              : typedef ms_RenderRangeInfo2 (* ms_RenderProgressInfo2_get_next)(ms_RenderingRangeList range_list);</span>
+<span id="L417"><span class="lineNum">     417</span>              : </span>
+<span id="L418"><span class="lineNum">     418</span>              : typedef void (* ms_MuseSampler_set_lazy_render)(ms_MuseSampler ms, bool enabled);</span>
+<span id="L419"><span class="lineNum">     419</span>              : typedef void (* ms_MuseSampler_set_rendering_state_changed_callback_2)(ms_MuseSampler ms, ms_rendering_state_changed_callback callback,</span>
+<span id="L420"><span class="lineNum">     420</span>              :                                                                        void* user_data);</span>
+<span id="L421"><span class="lineNum">     421</span>              : </span>
+<span id="L422"><span class="lineNum">     422</span>              : // added in v0.106</span>
+<span id="L423"><span class="lineNum">     423</span>              : typedef ms_InitResult (* ms_init_3)();</span>
+<span id="L424"><span class="lineNum">     424</span>              : // ------------------------------------------------------------</span>
+<span id="L425"><span class="lineNum">     425</span>              : </span>
+<span id="L426"><span class="lineNum">     426</span>              : namespace muse::musesampler {</span>
+<span id="L427"><span class="lineNum">     427</span>              : using track_idx_t = size_t;</span>
+<span id="L428"><span class="lineNum">     428</span>              : using TrackList = std::vector&lt;ms_Track&gt;;</span>
+<span id="L429"><span class="lineNum">     429</span>              : </span>
+<span id="L430"><span class="lineNum">     430</span>              : struct InstrumentInfo {</span>
+<span id="L431"><span class="lineNum">     431</span>              :     int instrumentId = -1;</span>
+<span id="L432"><span class="lineNum">     432</span>              :     ms_InstrumentInfo msInstrument = nullptr;</span>
+<span id="L433"><span class="lineNum">     433</span>              :     bool isOnline = false;</span>
+<span id="L434"><span class="lineNum">     434</span>              : </span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaUNC tlaBgUNC">           0 :     bool isValid() const</span></span>
+<span id="L436"><span class="lineNum">     436</span>              :     {</span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaUNC">           0 :         return instrumentId != -1 &amp;&amp; msInstrument != nullptr;</span></span>
+<span id="L438"><span class="lineNum">     438</span>              :     }</span>
+<span id="L439"><span class="lineNum">     439</span>              : };</span>
+<span id="L440"><span class="lineNum">     440</span>              : </span>
+<span id="L441"><span class="lineNum">     441</span>              : struct AuditionStartNoteEvent {</span>
+<span id="L442"><span class="lineNum">     442</span>              :     ms_AuditionStartNoteEvent_5 msEvent;</span>
+<span id="L443"><span class="lineNum">     443</span>              :     ms_Track msTrack = nullptr;</span>
+<span id="L444"><span class="lineNum">     444</span>              : };</span>
+<span id="L445"><span class="lineNum">     445</span>              : </span>
+<span id="L446"><span class="lineNum">     446</span>              : struct AuditionStopNoteEvent {</span>
+<span id="L447"><span class="lineNum">     447</span>              :     ms_AuditionStopNoteEvent msEvent;</span>
+<span id="L448"><span class="lineNum">     448</span>              :     ms_Track msTrack = nullptr;</span>
+<span id="L449"><span class="lineNum">     449</span>              : };</span>
+<span id="L450"><span class="lineNum">     450</span>              : </span>
+<span id="L451"><span class="lineNum">     451</span>              : struct AuditionCCEvent {</span>
+<span id="L452"><span class="lineNum">     452</span>              :     int cc = 0;</span>
+<span id="L453"><span class="lineNum">     453</span>              :     float value = 0.f;</span>
+<span id="L454"><span class="lineNum">     454</span>              :     ms_Track msTrack = nullptr;</span>
+<span id="L455"><span class="lineNum">     455</span>              : };</span>
+<span id="L456"><span class="lineNum">     456</span>              : </span>
+<span id="L457"><span class="lineNum">     457</span>              : using DynamicEvent = ms_DynamicsEvent_2;</span>
+<span id="L458"><span class="lineNum">     458</span>              : using PedalEvent = ms_PedalEvent_2;</span>
+<span id="L459"><span class="lineNum">     459</span>              : using NoteEvent = ms_NoteEvent_5;</span>
+<span id="L460"><span class="lineNum">     460</span>              : using SyllableEvent = ms_SyllableEvent2;</span>
+<span id="L461"><span class="lineNum">     461</span>              : using RenderRangeInfo = ms_RenderRangeInfo2;</span>
+<span id="L462"><span class="lineNum">     462</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/dom/figuredbass.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/engraving/dom</a> - figuredbass.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">93.2&nbsp;%</td>
+            <td class="headerCovTableEntry">44</td>
+            <td class="headerCovTableEntry">41</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2021 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #ifndef MU_ENGRAVING_FIGUREDBASS_H</span>
+<span id="L24"><span class="lineNum">      24</span>              : #define MU_ENGRAVING_FIGUREDBASS_H</span>
+<span id="L25"><span class="lineNum">      25</span>              : </span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;textbase.h&quot;</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : namespace mu::engraving {</span>
+<span id="L29"><span class="lineNum">      29</span>              : class Factory;</span>
+<span id="L30"><span class="lineNum">      30</span>              : class Segment;</span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              : /*---------------------------------------------------------</span>
+<span id="L33"><span class="lineNum">      33</span>              : NOTE ON ARCHITECTURE</span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span>              : FiguredBass elements are stored in the annotations of a Segment (like for instance Harmony)</span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span>              : FiguredBass is rather simple: it contains only _ticks, telling the duration of the element,</span>
+<span id="L38"><span class="lineNum">      38</span>              : and a list of FiguredBassItem elements which do most of the job. It also maintains a text with the</span>
+<span id="L39"><span class="lineNum">      39</span>              : normalized (made uniform) version of the text, which is used during editing.</span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span>              : Normally, a FiguredBass element is assumed to be styled with an internally maintained text style</span>
+<span id="L42"><span class="lineNum">      42</span>              : (based on the parameters of the general style &quot;Figured Bass&quot;) FIGURED_BASS style and it is set</span>
+<span id="L43"><span class="lineNum">      43</span>              : in this way upon creation and upon layout().</span>
+<span id="L44"><span class="lineNum">      44</span>              : - - - -</span>
+<span id="L45"><span class="lineNum">      45</span>              : FiguredBassItem contains the actually f.b. info; it is made of 4 parts (in this order):</span>
+<span id="L46"><span class="lineNum">      46</span>              : 1) prefix: one of [nothing, doubleflat, flat, natural, sharp, doublesharp, cross]</span>
+<span id="L47"><span class="lineNum">      47</span>              : 2) digit: one digit from 1 to 9</span>
+<span id="L48"><span class="lineNum">      48</span>              : 3) suffix: one of [nothing, doubleflat, flat, natural, sharp, doublesharp, cross, backslash, slash]</span>
+<span id="L49"><span class="lineNum">      49</span>              : 4) contLine: true if the item has a continuation line (whose length is determined by parent's _ticks)</span>
+<span id="L50"><span class="lineNum">      50</span>              : and 5 parenthesis flags, one for each position before, between and after the four parts above:</span>
+<span id="L51"><span class="lineNum">      51</span>              : each of them may contain one of [nothing, roundOpen, roundClosed, squaredOpen, squaredClosed].</span>
+<span id="L52"><span class="lineNum">      52</span>              : </span>
+<span id="L53"><span class="lineNum">      53</span>              : There is a number of restrictions, implemented at the end of FiguredBassItem::parse().</span>
+<span id="L54"><span class="lineNum">      54</span>              : Currently, no attempt is made to ensure that, if multiple parentheses are present, they are consistent</span>
+<span id="L55"><span class="lineNum">      55</span>              : (matching open and closed parentheses is left to the user).</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span>              : If an item cannot be parsed, the whole FiguredBass element is kept as entered, possibly un-styled.</span>
+<span id="L58"><span class="lineNum">      58</span>              : If all items can be parsed, each item generates a display text from its properties,</span>
+<span id="L59"><span class="lineNum">      59</span>              : lays it out so that it properly aligns under the chord, draws it at its proper location</span>
+<span id="L60"><span class="lineNum">      60</span>              : and provides its FiguredBass parent with a normalized text for future editing.</span>
+<span id="L61"><span class="lineNum">      61</span>              : </span>
+<span id="L62"><span class="lineNum">      62</span>              : FiguredBassItem has not use for formats (italics, bold, ...) and it is never edited directly;</span>
+<span id="L63"><span class="lineNum">      63</span>              : more generally, it is never accessed directly, only via its FiguredBass parent;</span>
+<span id="L64"><span class="lineNum">      64</span>              : so it is directly derived from EngravingItem and returns INVALID as type.</span>
+<span id="L65"><span class="lineNum">      65</span>              : </span>
+<span id="L66"><span class="lineNum">      66</span>              : FiguredBass might require formatting (discouraged, but might be necessary for very uncommon cases)</span>
+<span id="L67"><span class="lineNum">      67</span>              : and it is edited (via the normalized text); so it is derived from Text.</span>
+<span id="L68"><span class="lineNum">      68</span>              : ---------------------------------------------------------*/</span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span>              : constexpr int FBIDigitNone = -1;</span>
+<span id="L71"><span class="lineNum">      71</span>              : </span>
+<span id="L72"><span class="lineNum">      72</span>              : //---------------------------------------------------------</span>
+<span id="L73"><span class="lineNum">      73</span>              : //   @@ FiguredBassItem</span>
+<span id="L74"><span class="lineNum">      74</span>              : ///   One line of a figured bass indication</span>
+<span id="L75"><span class="lineNum">      75</span>              : //</span>
+<span id="L76"><span class="lineNum">      76</span>              : //   @P continuationLine   enum (FiguredBassItem.NONE, .SIMPLE, .EXTENDED)  whether item has continuation line or not, and of which type</span>
+<span id="L77"><span class="lineNum">      77</span>              : //   @P digit              int                              main digit(s) (0 - 9)</span>
+<span id="L78"><span class="lineNum">      78</span>              : //   @P displayText        string                           text displayed (depends on configured fonts) (read only)</span>
+<span id="L79"><span class="lineNum">      79</span>              : //   @P normalizedText     string                           conventional textual representation of item properties (= text used during input) (read only)</span>
+<span id="L80"><span class="lineNum">      80</span>              : //   @P parenthesis1       enum (FiguredBassItem.NONE, .ROUNDOPEN, .ROUNDCLOSED, .SQUAREDOPEN, .SQUAREDCLOSED)  parenthesis before the prefix</span>
+<span id="L81"><span class="lineNum">      81</span>              : //   @P parenthesis2       enum (FiguredBassItem.NONE, .ROUNDOPEN, .ROUNDCLOSED, .SQUAREDOPEN, .SQUAREDCLOSED)  parenthesis after the prefix / before the digit</span>
+<span id="L82"><span class="lineNum">      82</span>              : //   @P parenthesis3       enum (FiguredBassItem.NONE, .ROUNDOPEN, .ROUNDCLOSED, .SQUAREDOPEN, .SQUAREDCLOSED)  parenthesis after the digit / before the suffix</span>
+<span id="L83"><span class="lineNum">      83</span>              : //   @P parenthesis4       enum (FiguredBassItem.NONE, .ROUNDOPEN, .ROUNDCLOSED, .SQUAREDOPEN, .SQUAREDCLOSED)  parenthesis after the suffix / before the cont. line</span>
+<span id="L84"><span class="lineNum">      84</span>              : //   @P parenthesis5       enum (FiguredBassItem.NONE, .ROUNDOPEN, .ROUNDCLOSED, .SQUAREDOPEN, .SQUAREDCLOSED)  parenthesis after the cont. line</span>
+<span id="L85"><span class="lineNum">      85</span>              : //   @P prefix             enum (FiguredBassItem.NONE, .DOUBLEFLAT, .FLAT, .NATURAL, .SHARP, .DOUBLESHARP, .PLUS, .BACKSLASH, .SLASH)  accidental before the digit</span>
+<span id="L86"><span class="lineNum">      86</span>              : //   @P suffix             enum (FiguredBassItem.NONE, .DOUBLEFLAT, .FLAT, .NATURAL, .SHARP, .DOUBLESHARP, .PLUS, .BACKSLASH, .SLASH)  accidental/diacritic after the digit</span>
+<span id="L87"><span class="lineNum">      87</span>              : //---------------------------------------------------------</span>
+<span id="L88"><span class="lineNum">      88</span>              : </span>
+<span id="L89"><span class="lineNum">      89</span>              : class FiguredBass;</span>
+<span id="L90"><span class="lineNum">      90</span>              : </span>
+<span id="L91"><span class="lineNum">      91</span>              : class FiguredBassItem final : public EngravingItem</span>
+<span id="L92"><span class="lineNum">      92</span>              : {</span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">         248 :     OBJECT_ALLOCATOR(engraving, FiguredBassItem)</span></span>
+<span id="L94"><span class="lineNum">      94</span>              :     DECLARE_CLASSOF(ElementType::FIGURED_BASS_ITEM)</span>
+<span id="L95"><span class="lineNum">      95</span>              : </span>
+<span id="L96"><span class="lineNum">      96</span>              : public:</span>
+<span id="L97"><span class="lineNum">      97</span>              :     enum class Modifier : char {</span>
+<span id="L98"><span class="lineNum">      98</span>              :         NONE = 0,</span>
+<span id="L99"><span class="lineNum">      99</span>              :         DOUBLEFLAT,</span>
+<span id="L100"><span class="lineNum">     100</span>              :         FLAT,</span>
+<span id="L101"><span class="lineNum">     101</span>              :         NATURAL,</span>
+<span id="L102"><span class="lineNum">     102</span>              :         SHARP,</span>
+<span id="L103"><span class="lineNum">     103</span>              :         DOUBLESHARP,</span>
+<span id="L104"><span class="lineNum">     104</span>              :         CROSS,</span>
+<span id="L105"><span class="lineNum">     105</span>              :         BACKSLASH,</span>
+<span id="L106"><span class="lineNum">     106</span>              :         SLASH,</span>
+<span id="L107"><span class="lineNum">     107</span>              :         NUMOF</span>
+<span id="L108"><span class="lineNum">     108</span>              :     };</span>
+<span id="L109"><span class="lineNum">     109</span>              :     enum class Parenthesis : char {</span>
+<span id="L110"><span class="lineNum">     110</span>              :         NONE = 0,</span>
+<span id="L111"><span class="lineNum">     111</span>              :         ROUNDOPEN,</span>
+<span id="L112"><span class="lineNum">     112</span>              :         ROUNDCLOSED,</span>
+<span id="L113"><span class="lineNum">     113</span>              :         SQUAREDOPEN,</span>
+<span id="L114"><span class="lineNum">     114</span>              :         SQUAREDCLOSED,</span>
+<span id="L115"><span class="lineNum">     115</span>              :         NUMOF</span>
+<span id="L116"><span class="lineNum">     116</span>              :     };</span>
+<span id="L117"><span class="lineNum">     117</span>              :     enum class ContLine : char {</span>
+<span id="L118"><span class="lineNum">     118</span>              :         NONE = 0,</span>
+<span id="L119"><span class="lineNum">     119</span>              :         SIMPLE,                         // cont. line stops at f.b. element end</span>
+<span id="L120"><span class="lineNum">     120</span>              :         EXTENDED                        // cont. line joins with next element, if possible</span>
+<span id="L121"><span class="lineNum">     121</span>              :     };</span>
+<span id="L122"><span class="lineNum">     122</span>              : </span>
+<span id="L123"><span class="lineNum">     123</span>              :     enum class Style : char {</span>
+<span id="L124"><span class="lineNum">     124</span>              :         MODERN = 0,</span>
+<span id="L125"><span class="lineNum">     125</span>              :         HISTORIC,</span>
+<span id="L126"><span class="lineNum">     126</span>              :         NUMOF</span>
+<span id="L127"><span class="lineNum">     127</span>              :     };</span>
+<span id="L128"><span class="lineNum">     128</span>              :     enum class Combination : char {</span>
+<span id="L129"><span class="lineNum">     129</span>              :         SIMPLE = 0,</span>
+<span id="L130"><span class="lineNum">     130</span>              :         CROSSED,</span>
+<span id="L131"><span class="lineNum">     131</span>              :         BACKSLASHED,</span>
+<span id="L132"><span class="lineNum">     132</span>              :         SLASHED,</span>
+<span id="L133"><span class="lineNum">     133</span>              :         NUMOF</span>
+<span id="L134"><span class="lineNum">     134</span>              :     };</span>
+<span id="L135"><span class="lineNum">     135</span>              : </span>
+<span id="L136"><span class="lineNum">     136</span>              :     ~FiguredBassItem();</span>
+<span id="L137"><span class="lineNum">     137</span>              : </span>
+<span id="L138"><span class="lineNum">     138</span>              :     FiguredBassItem&amp; operator=(const FiguredBassItem&amp;) = delete;</span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span>              :     // standard re-implemented virtual functions</span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaUNC tlaBgUNC">           0 :     FiguredBassItem* clone() const override { return new FiguredBassItem(*this); }</span></span>
+<span id="L142"><span class="lineNum">     142</span>              : </span>
+<span id="L143"><span class="lineNum">     143</span>              :     bool startsWithParenthesis() const;</span>
+<span id="L144"><span class="lineNum">     144</span>              : </span>
+<span id="L145"><span class="lineNum">     145</span>              :     // specific API</span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC tlaBgGNC">          33 :     const FiguredBass* figuredBass() const { return (FiguredBass*)(ownershipParent()); }</span></span>
+<span id="L147"><span class="lineNum">     147</span>              :     bool parse(String&amp; text);</span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span>              :     // getters / setters</span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">         209 :     int ord() const { return m_ord; }</span></span>
+<span id="L151"><span class="lineNum">     151</span>              : </span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">         320 :     Modifier prefix() const { return m_prefix; }</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">           9 :     void setPrefix(const Modifier&amp; v) { m_prefix = v; }</span></span>
+<span id="L154"><span class="lineNum">     154</span>              :     void undoSetPrefix(Modifier pref);</span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         797 :     int digit() const { return m_digit; }</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">         104 :     void setDigit(int val) { m_digit = val; }</span></span>
+<span id="L158"><span class="lineNum">     158</span>              :     void undoSetDigit(int digit);</span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">         955 :     Modifier suffix() const { return m_suffix; }</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          13 :     void setSuffix(const Modifier&amp; v) { m_suffix = v; }</span></span>
+<span id="L162"><span class="lineNum">     162</span>              :     void undoSetSuffix(Modifier suff);</span>
+<span id="L163"><span class="lineNum">     163</span>              : </span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">         370 :     ContLine contLine() const { return m_contLine; }</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">          16 :     void setContLine(const ContLine&amp; v) { m_contLine = v; }</span></span>
+<span id="L166"><span class="lineNum">     166</span>              :     void undoSetContLine(ContLine val);</span>
+<span id="L167"><span class="lineNum">     167</span>              : </span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">         223 :     Parenthesis parenth1() const { return m_parenth[0]; }</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">         227 :     Parenthesis parenth2() const { return m_parenth[1]; }</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">         249 :     Parenthesis parenth3() const { return m_parenth[2]; }</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">         223 :     Parenthesis parenth4() const { return m_parenth[3]; }</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">          14 :     Parenthesis parenth5() const { return m_parenth[4]; }</span></span>
+<span id="L173"><span class="lineNum">     173</span>              : </span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">          47 :     void setParenth1(Parenthesis v) { m_parenth[0] = v; }</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">          49 :     void setParenth2(Parenthesis v) { m_parenth[1] = v; }</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">          49 :     void setParenth3(Parenthesis v) { m_parenth[2] = v; }</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">          47 :     void setParenth4(Parenthesis v) { m_parenth[3] = v; }</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">          47 :     void setParenth5(Parenthesis v) { m_parenth[4] = v; }</span></span>
+<span id="L179"><span class="lineNum">     179</span>              : </span>
+<span id="L180"><span class="lineNum">     180</span>              :     void undoSetParenth1(Parenthesis par);</span>
+<span id="L181"><span class="lineNum">     181</span>              :     void undoSetParenth2(Parenthesis par);</span>
+<span id="L182"><span class="lineNum">     182</span>              :     void undoSetParenth3(Parenthesis par);</span>
+<span id="L183"><span class="lineNum">     183</span>              :     void undoSetParenth4(Parenthesis par);</span>
+<span id="L184"><span class="lineNum">     184</span>              :     void undoSetParenth5(Parenthesis par);</span>
+<span id="L185"><span class="lineNum">     185</span>              :     String normalizedText() const;</span>
+<span id="L186"><span class="lineNum">     186</span>              : </span>
+<span id="L187"><span class="lineNum">     187</span>              :     PropertyValue getProperty(Pid propertyId) const override;</span>
+<span id="L188"><span class="lineNum">     188</span>              :     bool setProperty(Pid propertyId, const PropertyValue&amp;) override;</span>
+<span id="L189"><span class="lineNum">     189</span>              :     PropertyValue propertyDefault(Pid) const override;</span>
+<span id="L190"><span class="lineNum">     190</span>              : </span>
+<span id="L191"><span class="lineNum">     191</span>              :     struct LayoutData : public EngravingItem::LayoutData {</span>
+<span id="L192"><span class="lineNum">     192</span>              :         String displayText;                       // the constructed display text (read-only)</span>
+<span id="L193"><span class="lineNum">     193</span>              :         double textWidth = 0.0;                   // the text width (in raster units)</span>
+<span id="L194"><span class="lineNum">     194</span>              :     };</span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">         335 :     DECLARE_LAYOUTDATA_METHODS(FiguredBassItem)</span></span>
+<span id="L196"><span class="lineNum">     196</span>              : </span>
+<span id="L197"><span class="lineNum">     197</span>              : private:</span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span>              :     friend class FiguredBass;</span>
+<span id="L200"><span class="lineNum">     200</span>              : </span>
+<span id="L201"><span class="lineNum">     201</span>              :     FiguredBassItem(FiguredBass* parent, int line = 0);</span>
+<span id="L202"><span class="lineNum">     202</span>              :     FiguredBassItem(const FiguredBassItem&amp;);</span>
+<span id="L203"><span class="lineNum">     203</span>              : </span>
+<span id="L204"><span class="lineNum">     204</span>              :     // part parsing</span>
+<span id="L205"><span class="lineNum">     205</span>              :     int parseDigit(String&amp; str);</span>
+<span id="L206"><span class="lineNum">     206</span>              :     int parseParenthesis(String&amp; str, int parenthIdx);</span>
+<span id="L207"><span class="lineNum">     207</span>              :     int parsePrefixSuffix(String&amp; str, bool bPrefix);</span>
+<span id="L208"><span class="lineNum">     208</span>              : </span>
+<span id="L209"><span class="lineNum">     209</span>              :     void regenerateDisplayText();</span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span>              :     static const Char NORM_PARENTH_TO_CHAR[int(Parenthesis::NUMOF)];</span>
+<span id="L212"><span class="lineNum">     212</span>              : </span>
+<span id="L213"><span class="lineNum">     213</span>              :     int m_ord = 0;                              // the line ordinal of this element in the FB stack</span>
+<span id="L214"><span class="lineNum">     214</span>              :                                                 // the parts making a FiguredBassItem up</span>
+<span id="L215"><span class="lineNum">     215</span>              :     Modifier m_prefix = Modifier::NONE;         // the accidental coming before the body</span>
+<span id="L216"><span class="lineNum">     216</span>              :     int m_digit = 0;                            // the main digit (if present)</span>
+<span id="L217"><span class="lineNum">     217</span>              :     Modifier m_suffix = Modifier::NONE;         // the accidental coming after the body</span>
+<span id="L218"><span class="lineNum">     218</span>              :     ContLine m_contLine = ContLine::NONE;       // whether the item has continuation line or not</span>
+<span id="L219"><span class="lineNum">     219</span>              :     Parenthesis m_parenth[5];                   // each of the parenthesis: before, between and after parts</span>
+<span id="L220"><span class="lineNum">     220</span>              : };</span>
+<span id="L221"><span class="lineNum">     221</span>              : </span>
+<span id="L222"><span class="lineNum">     222</span>              : //---------------------------------------------------------</span>
+<span id="L223"><span class="lineNum">     223</span>              : //   FiguredBassFont</span>
+<span id="L224"><span class="lineNum">     224</span>              : //---------------------------------------------------------</span>
+<span id="L225"><span class="lineNum">     225</span>              : </span>
+<span id="L226"><span class="lineNum">     226</span>              : struct FiguredBassFont {</span>
+<span id="L227"><span class="lineNum">     227</span>              :     String family;</span>
+<span id="L228"><span class="lineNum">     228</span>              :     String displayName;</span>
+<span id="L229"><span class="lineNum">     229</span>              :     double defPitch = 0.0;</span>
+<span id="L230"><span class="lineNum">     230</span>              :     double defLineHeight = 0.0;</span>
+<span id="L231"><span class="lineNum">     231</span>              :     Char displayAccidental[int(FiguredBassItem::Modifier::NUMOF)];</span>
+<span id="L232"><span class="lineNum">     232</span>              :     Char displayParenthesis[int(FiguredBassItem::Parenthesis::NUMOF)];</span>
+<span id="L233"><span class="lineNum">     233</span>              :     Char displayDigit[int(FiguredBassItem::Style::NUMOF)][10][int(FiguredBassItem::Combination::NUMOF)];</span>
+<span id="L234"><span class="lineNum">     234</span>              : </span>
+<span id="L235"><span class="lineNum">     235</span>              :     bool read(XmlReader&amp;);</span>
+<span id="L236"><span class="lineNum">     236</span>              : };</span>
+<span id="L237"><span class="lineNum">     237</span>              : </span>
+<span id="L238"><span class="lineNum">     238</span>              : //---------------------------------------------------------</span>
+<span id="L239"><span class="lineNum">     239</span>              : //   @@ FiguredBass</span>
+<span id="L240"><span class="lineNum">     240</span>              : ///    A complete figured bass indication</span>
+<span id="L241"><span class="lineNum">     241</span>              : //</span>
+<span id="L242"><span class="lineNum">     242</span>              : //   @P onNote  bool  whether it is placed on a note beginning or between notes (read only)</span>
+<span id="L243"><span class="lineNum">     243</span>              : //   @P ticks   int   duration in ticks</span>
+<span id="L244"><span class="lineNum">     244</span>              : //---------------------------------------------------------</span>
+<span id="L245"><span class="lineNum">     245</span>              : </span>
+<span id="L246"><span class="lineNum">     246</span>              : class FiguredBass final : public TextBase</span>
+<span id="L247"><span class="lineNum">     247</span>              : {</span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">         192 :     OBJECT_ALLOCATOR(engraving, FiguredBass)</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        1852 :     DECLARE_CLASSOF(ElementType::FIGURED_BASS)</span></span>
+<span id="L250"><span class="lineNum">     250</span>              : </span>
+<span id="L251"><span class="lineNum">     251</span>              : public:</span>
+<span id="L252"><span class="lineNum">     252</span>              : </span>
+<span id="L253"><span class="lineNum">     253</span>              :     static constexpr double FB_CONTLINE_HEIGHT            = 0.875;         // the % of font EM to raise the cont. line at</span>
+<span id="L254"><span class="lineNum">     254</span>              :                                                                            // (0 = top of font; 1 = bottom of font)</span>
+<span id="L255"><span class="lineNum">     255</span>              :     static constexpr Spatium FB_CONTLINE_LEFT_PADDING      = 0.1875_sp;        // (3/16sp) the blank space at the left of a cont. line (in sp)</span>
+<span id="L256"><span class="lineNum">     256</span>              :     static constexpr Spatium FB_CONTLINE_OVERLAP           = 0.125_sp;         // (1/8sp)  the overlap of an extended cont. line (in sp)</span>
+<span id="L257"><span class="lineNum">     257</span>              :     static constexpr Spatium FB_CONTLINE_THICKNESS         = 0.09375_sp;       // (3/32sp) the thickness of a cont. line (in sp)</span>
+<span id="L258"><span class="lineNum">     258</span>              : </span>
+<span id="L259"><span class="lineNum">     259</span>              :     ~FiguredBass();</span>
+<span id="L260"><span class="lineNum">     260</span>              : </span>
+<span id="L261"><span class="lineNum">     261</span>              :     // a convenience static function to create/retrieve a new FiguredBass into/from its intended parent</span>
+<span id="L262"><span class="lineNum">     262</span>              :     static FiguredBass* addFiguredBassToSegment(Segment* seg, track_idx_t track, const Fraction&amp; extTicks, bool* pNew);</span>
+<span id="L263"><span class="lineNum">     263</span>              : </span>
+<span id="L264"><span class="lineNum">     264</span>              :     // static functions for font config files</span>
+<span id="L265"><span class="lineNum">     265</span>              :     static bool readConfigFile(const String&amp; fileName);</span>
+<span id="L266"><span class="lineNum">     266</span>              :     static std::vector&lt;String&gt; fontNames();</span>
+<span id="L267"><span class="lineNum">     267</span>              :     static bool fontData(int nIdx, String* pFamily, String* pDisplayName, double* pSize, double* pLineHeight);</span>
+<span id="L268"><span class="lineNum">     268</span>              : </span>
+<span id="L269"><span class="lineNum">     269</span>              :     // standard re-implemented virtual functions</span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC tlaBgUNC">           0 :     FiguredBass* clone() const override { return new FiguredBass(*this); }</span></span>
+<span id="L271"><span class="lineNum">     271</span>              : </span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC tlaBgGNC">         126 :     FiguredBassItem* createItem(int line) { return new FiguredBassItem(this, line); }</span></span>
+<span id="L273"><span class="lineNum">     273</span>              : </span>
+<span id="L274"><span class="lineNum">     274</span>              :     void setSelected(bool f) override;</span>
+<span id="L275"><span class="lineNum">     275</span>              :     void setVisible(bool f) override;</span>
+<span id="L276"><span class="lineNum">     276</span>              :     void startEdit(EditData&amp; ed) override;</span>
+<span id="L277"><span class="lineNum">     277</span>              :     bool isEditAllowed(EditData&amp;) const override;</span>
+<span id="L278"><span class="lineNum">     278</span>              :     void endEdit(EditData&amp;) override;</span>
+<span id="L279"><span class="lineNum">     279</span>              :     void regenerateText();</span>
+<span id="L280"><span class="lineNum">     280</span>              : </span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">          12 :     bool onNote() const { return m_onNote; }</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">         116 :     void setOnNote(bool val) { m_onNote = val; }</span></span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">         430 :     Segment* segment() const { return (Segment*)(ownershipParent()); }</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">         566 :     const Fraction&amp; ticks() const { return m_ticks; }</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">         189 :     void setTicks(const Fraction&amp; v) { m_ticks = v; }</span></span>
+<span id="L286"><span class="lineNum">     286</span>              : </span>
+<span id="L287"><span class="lineNum">     287</span>              :     double additionalContLineX(double pagePosY) const;  // returns the X coord (in page coord) of cont. line at pagePosY, if any</span>
+<span id="L288"><span class="lineNum">     288</span>              :     FiguredBass* nextFiguredBass() const;                         // returns next *adjacent* f.b. item, if any</span>
+<span id="L289"><span class="lineNum">     289</span>              : </span>
+<span id="L290"><span class="lineNum">     290</span>              :     PropertyValue getProperty(Pid propertyId) const override;</span>
+<span id="L291"><span class="lineNum">     291</span>              :     bool setProperty(Pid propertyId, const PropertyValue&amp;) override;</span>
+<span id="L292"><span class="lineNum">     292</span>              :     PropertyValue propertyDefault(Pid) const override;</span>
+<span id="L293"><span class="lineNum">     293</span>              : </span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">         160 :     bool positionRelativeToNoteheadRest() const override { return true; }</span></span>
+<span id="L295"><span class="lineNum">     295</span>              : </span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">           8 :     size_t itemsCount() const { return m_items.size(); }</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">         126 :     void appendItem(FiguredBassItem* item) { m_items.push_back(item); }</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">         462 :     const std::vector&lt;FiguredBassItem*&gt;&amp; items() const { return m_items; }</span></span>
+<span id="L299"><span class="lineNum">     299</span>              :     void clearItems();</span>
+<span id="L300"><span class="lineNum">     300</span>              :     void addItemToLinked(FiguredBassItem* item);</span>
+<span id="L301"><span class="lineNum">     301</span>              : </span>
+<span id="L302"><span class="lineNum">     302</span>              :     // the array of configured fonts</span>
+<span id="L303"><span class="lineNum">     303</span>              :     static const std::vector&lt;FiguredBassFont&gt;&amp; FBFonts();</span>
+<span id="L304"><span class="lineNum">     304</span>              : </span>
+<span id="L305"><span class="lineNum">     305</span>              :     bool parenthesesMode() const;       // read / write MusicXML support</span>
+<span id="L306"><span class="lineNum">     306</span>              : </span>
+<span id="L307"><span class="lineNum">     307</span>              :     struct LayoutData : public TextBase::LayoutData {</span>
+<span id="L308"><span class="lineNum">     308</span>              :         std::vector&lt;double&gt; lineLengths;               // lengths of duration indicator lines (in raster units)</span>
+<span id="L309"><span class="lineNum">     309</span>              :         double printedLineLength = 0.0;                // the length of lines actually printed (i.e. continuation lines)</span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">          33 :         double lineLength(size_t idx) const</span></span>
+<span id="L312"><span class="lineNum">     312</span>              :         {</span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">          33 :             if (idx &lt; lineLengths.size()) {</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">          33 :                 return lineLengths.at(idx);</span></span>
+<span id="L315"><span class="lineNum">     315</span>              :             }</span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaUNC tlaBgUNC">           0 :             return 0.0;</span></span>
+<span id="L317"><span class="lineNum">     317</span>              :         }</span>
+<span id="L318"><span class="lineNum">     318</span>              :     };</span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC tlaBgGNC">         285 :     DECLARE_LAYOUTDATA_METHODS(FiguredBass)</span></span>
+<span id="L320"><span class="lineNum">     320</span>              : </span>
+<span id="L321"><span class="lineNum">     321</span>              : private:</span>
+<span id="L322"><span class="lineNum">     322</span>              : </span>
+<span id="L323"><span class="lineNum">     323</span>              :     friend class Factory;</span>
+<span id="L324"><span class="lineNum">     324</span>              :     FiguredBass(DummyParentOr&lt;Segment&gt; parent);</span>
+<span id="L325"><span class="lineNum">     325</span>              :     FiguredBass(const FiguredBass&amp;);</span>
+<span id="L326"><span class="lineNum">     326</span>              : </span>
+<span id="L327"><span class="lineNum">     327</span>              :     Sid getPropertyStyle(Pid) const override;</span>
+<span id="L328"><span class="lineNum">     328</span>              : </span>
+<span id="L329"><span class="lineNum">     329</span>              :     std::vector&lt;FiguredBassItem*&gt; m_items;       // the individual lines of the F.B.</span>
+<span id="L330"><span class="lineNum">     330</span>              : </span>
+<span id="L331"><span class="lineNum">     331</span>              :     bool m_onNote = true;                        // true if this element is on a staff note | false if it is between notes</span>
+<span id="L332"><span class="lineNum">     332</span>              :     Fraction m_ticks;                            // the duration (used for cont. lines and for multiple F.B.</span>
+<span id="L333"><span class="lineNum">     333</span>              :                                                  // under the same note)</span>
+<span id="L334"><span class="lineNum">     334</span>              : };</span>
+<span id="L335"><span class="lineNum">     335</span>              : } // namespace mu::engraving</span>
+<span id="L336"><span class="lineNum">     336</span>              : </span>
+<span id="L337"><span class="lineNum">     337</span>              : #ifndef NO_QT_SUPPORT</span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">          16 : Q_DECLARE_METATYPE(mu::engraving::FiguredBassItem::Modifier)</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">          16 : Q_DECLARE_METATYPE(mu::engraving::FiguredBassItem::Parenthesis)</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">          16 : Q_DECLARE_METATYPE(mu::engraving::FiguredBassItem::ContLine)</span></span>
+<span id="L341"><span class="lineNum">     341</span>              : #endif</span>
+<span id="L342"><span class="lineNum">     342</span>              : </span>
+<span id="L343"><span class="lineNum">     343</span>              : #endif</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

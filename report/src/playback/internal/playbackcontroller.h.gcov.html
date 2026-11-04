@@ -1,0 +1,358 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/playback/internal/playbackcontroller.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/playback/internal</a> - playbackcontroller.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2025 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #pragma once</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &lt;optional&gt;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &lt;unordered_map&gt;</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &quot;modularity/ioc.h&quot;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;async/asyncable.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;project/iprojectsession.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;engraving/types/types.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;notation/inotationautomation.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : #include &quot;notation/inotationconfiguration.h&quot;</span>
+<span id="L34"><span class="lineNum">      34</span>              : #include &quot;notation/inotationplayback.h&quot;</span>
+<span id="L35"><span class="lineNum">      35</span>              : #include &quot;project/iprojectaudiosettings.h&quot;</span>
+<span id="L36"><span class="lineNum">      36</span>              : #include &quot;audio/main/iplayer.h&quot;</span>
+<span id="L37"><span class="lineNum">      37</span>              : #include &quot;audio/main/iplayback.h&quot;</span>
+<span id="L38"><span class="lineNum">      38</span>              : #include &quot;audio/common/audiotypes.h&quot;</span>
+<span id="L39"><span class="lineNum">      39</span>              : #include &quot;tours/itoursservice.h&quot;</span>
+<span id="L40"><span class="lineNum">      40</span>              : #include &quot;interactive/iinteractive.h&quot;</span>
+<span id="L41"><span class="lineNum">      41</span>              : </span>
+<span id="L42"><span class="lineNum">      42</span>              : #include &quot;drumsetloader.h&quot;</span>
+<span id="L43"><span class="lineNum">      43</span>              : </span>
+<span id="L44"><span class="lineNum">      44</span>              : #include &quot;../iplaybackcontroller.h&quot;</span>
+<span id="L45"><span class="lineNum">      45</span>              : #include &quot;../iplaybackconfiguration.h&quot;</span>
+<span id="L46"><span class="lineNum">      46</span>              : #include &quot;../isoundprofilesrepository.h&quot;</span>
+<span id="L47"><span class="lineNum">      47</span>              : </span>
+<span id="L48"><span class="lineNum">      48</span>              : namespace mu::playback {</span>
+<span id="L49"><span class="lineNum">      49</span>              : class OnlineSoundsController;</span>
+<span id="L50"><span class="lineNum">      50</span>              : class PlaybackController : public IPlaybackController, public muse::async::Asyncable, public muse::Contextable</span>
+<span id="L51"><span class="lineNum">      51</span>              : {</span>
+<span id="L52"><span class="lineNum">      52</span>              :     muse::GlobalInject&lt;IPlaybackConfiguration&gt; configuration;</span>
+<span id="L53"><span class="lineNum">      53</span>              :     muse::GlobalInject&lt;notation::INotationConfiguration&gt; notationConfiguration;</span>
+<span id="L54"><span class="lineNum">      54</span>              :     muse::ContextInject&lt;ISoundProfilesRepository&gt; profilesRepo = { this };</span>
+<span id="L55"><span class="lineNum">      55</span>              :     muse::ContextInject&lt;muse::audio::IPlayback&gt; playback = { this };</span>
+<span id="L56"><span class="lineNum">      56</span>              :     muse::ContextInject&lt;project::IProjectSession&gt; projectSession = { this };</span>
+<span id="L57"><span class="lineNum">      57</span>              :     muse::ContextInject&lt;muse::tours::IToursService&gt; tours = { this };</span>
+<span id="L58"><span class="lineNum">      58</span>              :     muse::ContextInject&lt;muse::IInteractive&gt; interactive = { this };</span>
+<span id="L59"><span class="lineNum">      59</span>              : </span>
+<span id="L60"><span class="lineNum">      60</span>              : public:</span>
+<span id="L61"><span class="lineNum">      61</span>              :     PlaybackController(const muse::modularity::ContextPtr&amp; iocCtx);</span>
+<span id="L62"><span class="lineNum">      62</span>              :     ~PlaybackController() override;</span>
+<span id="L63"><span class="lineNum">      63</span>              : </span>
+<span id="L64"><span class="lineNum">      64</span>              :     void init();</span>
+<span id="L65"><span class="lineNum">      65</span>              :     void deinit();</span>
+<span id="L66"><span class="lineNum">      66</span>              : </span>
+<span id="L67"><span class="lineNum">      67</span>              :     // IPlaybackState</span>
+<span id="L68"><span class="lineNum">      68</span>              :     bool isPlaying() const override;</span>
+<span id="L69"><span class="lineNum">      69</span>              :     muse::async::Channel&lt;bool&gt; isPlayingChanged() const override;</span>
+<span id="L70"><span class="lineNum">      70</span>              : </span>
+<span id="L71"><span class="lineNum">      71</span>              :     muse::audio::secs_t playbackPosition() const override;</span>
+<span id="L72"><span class="lineNum">      72</span>              :     muse::async::Channel&lt;muse::audio::secs_t&gt; playbackPositionChanged() const override;</span>
+<span id="L73"><span class="lineNum">      73</span>              :     // --------------</span>
+<span id="L74"><span class="lineNum">      74</span>              : </span>
+<span id="L75"><span class="lineNum">      75</span>              :     // IPlaybackController</span>
+<span id="L76"><span class="lineNum">      76</span>              :     bool isPlaybackInited() const override;</span>
+<span id="L77"><span class="lineNum">      77</span>              :     muse::async::Channel&lt;bool&gt; playbackInitedChanged() const override;</span>
+<span id="L78"><span class="lineNum">      78</span>              : </span>
+<span id="L79"><span class="lineNum">      79</span>              :     bool isPlayAllowed() const override;</span>
+<span id="L80"><span class="lineNum">      80</span>              :     muse::async::Channel&lt;bool&gt; isPlayAllowedChanged() const override;</span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span>              :     muse::Ret togglePlay() override;</span>
+<span id="L83"><span class="lineNum">      83</span>              :     muse::Ret play(bool showErrors = true) override;</span>
+<span id="L84"><span class="lineNum">      84</span>              :     muse::Ret playFromSelection(bool showErrors = true) override;</span>
+<span id="L85"><span class="lineNum">      85</span>              :     muse::Ret pause(bool select = false) override;</span>
+<span id="L86"><span class="lineNum">      86</span>              :     muse::Ret stop() override;</span>
+<span id="L87"><span class="lineNum">      87</span>              :     muse::Ret rewind(muse::secs_t secs) override;</span>
+<span id="L88"><span class="lineNum">      88</span>              : </span>
+<span id="L89"><span class="lineNum">      89</span>              :     bool isLoopEnabled() const override;</span>
+<span id="L90"><span class="lineNum">      90</span>              :     muse::async::Channel&lt;bool&gt; loopEnabledChanged() const override;</span>
+<span id="L91"><span class="lineNum">      91</span>              :     muse::Ret toggleLoopPlayback() override;</span>
+<span id="L92"><span class="lineNum">      92</span>              :     muse::Ret addLoopBoundary(LoopBoundaryType type) override;</span>
+<span id="L93"><span class="lineNum">      93</span>              : </span>
+<span id="L94"><span class="lineNum">      94</span>              :     muse::Ret toggleMetronome() override;</span>
+<span id="L95"><span class="lineNum">      95</span>              : </span>
+<span id="L96"><span class="lineNum">      96</span>              :     muse::Ret toggleMidiInput() override;</span>
+<span id="L97"><span class="lineNum">      97</span>              :     muse::Ret setMidiUseWrittenPitch(bool useWrittenPitch) override;</span>
+<span id="L98"><span class="lineNum">      98</span>              : </span>
+<span id="L99"><span class="lineNum">      99</span>              :     muse::Ret togglePlayRepeats() override;</span>
+<span id="L100"><span class="lineNum">     100</span>              :     muse::Ret togglePlayChordSymbols() override;</span>
+<span id="L101"><span class="lineNum">     101</span>              :     muse::Ret toggleAutomaticallyPan() override;</span>
+<span id="L102"><span class="lineNum">     102</span>              :     muse::Ret toggleCountIn() override;</span>
+<span id="L103"><span class="lineNum">     103</span>              :     muse::Ret toggleHearPlaybackWhenEditing() override;</span>
+<span id="L104"><span class="lineNum">     104</span>              : </span>
+<span id="L105"><span class="lineNum">     105</span>              :     muse::Ret reloadPlaybackCache() override;</span>
+<span id="L106"><span class="lineNum">     106</span>              : </span>
+<span id="L107"><span class="lineNum">     107</span>              :     const InstrumentTrackIdMap&amp; instrumentTrackIdMap() const override;</span>
+<span id="L108"><span class="lineNum">     108</span>              :     const AuxTrackIdMap&amp; auxTrackIdMap() const override;</span>
+<span id="L109"><span class="lineNum">     109</span>              : </span>
+<span id="L110"><span class="lineNum">     110</span>              :     muse::async::Channel&lt;muse::audio::TrackId&gt; trackAdded() const override;</span>
+<span id="L111"><span class="lineNum">     111</span>              :     muse::async::Channel&lt;muse::audio::TrackId&gt; trackRemoved() const override;</span>
+<span id="L112"><span class="lineNum">     112</span>              : </span>
+<span id="L113"><span class="lineNum">     113</span>              :     std::string auxChannelName(muse::audio::aux_channel_idx_t index) const override;</span>
+<span id="L114"><span class="lineNum">     114</span>              :     muse::async::Channel&lt;muse::audio::aux_channel_idx_t, std::string&gt; auxChannelNameChanged() const override;</span>
+<span id="L115"><span class="lineNum">     115</span>              : </span>
+<span id="L116"><span class="lineNum">     116</span>              :     muse::async::Promise&lt;muse::audio::SoundPresetList&gt; availableSoundPresets(</span>
+<span id="L117"><span class="lineNum">     117</span>              :         const engraving::InstrumentTrackId&amp; instrumentTrackId) const override;</span>
+<span id="L118"><span class="lineNum">     118</span>              : </span>
+<span id="L119"><span class="lineNum">     119</span>              :     const SoloMuteState&amp; trackSoloMuteState(const engraving::InstrumentTrackId&amp; trackId) const override;</span>
+<span id="L120"><span class="lineNum">     120</span>              :     void setTrackSoloMuteState(const engraving::InstrumentTrackId&amp; trackId, const SoloMuteState&amp; state) override;</span>
+<span id="L121"><span class="lineNum">     121</span>              : </span>
+<span id="L122"><span class="lineNum">     122</span>              :     void playElements(const std::vector&lt;const engraving::EngravingItem*&gt;&amp; elements,</span>
+<span id="L123"><span class="lineNum">     123</span>              :                       const PlayParams&amp; params = PlayParams(), bool isMidi = false) override;</span>
+<span id="L124"><span class="lineNum">     124</span>              :     void playNotes(const engraving::NoteValList&amp; notes, engraving::staff_idx_t staffIdx, const engraving::Segment* segment,</span>
+<span id="L125"><span class="lineNum">     125</span>              :                    const PlayParams&amp; params = PlayParams()) override;</span>
+<span id="L126"><span class="lineNum">     126</span>              :     void playMetronome(int tick) override;</span>
+<span id="L127"><span class="lineNum">     127</span>              : </span>
+<span id="L128"><span class="lineNum">     128</span>              :     void triggerControllers(const muse::mpe::ControllerChangeEventList&amp; list, engraving::staff_idx_t staffIdx, int tick) override;</span>
+<span id="L129"><span class="lineNum">     129</span>              : </span>
+<span id="L130"><span class="lineNum">     130</span>              :     void seekElement(const engraving::EngravingItem* element, bool flushSound = true) override;</span>
+<span id="L131"><span class="lineNum">     131</span>              :     void seekBeat(int measureIndex, int beatIndex, bool flushSound = true) override;</span>
+<span id="L132"><span class="lineNum">     132</span>              : </span>
+<span id="L133"><span class="lineNum">     133</span>              :     muse::secs_t totalPlayTime() const override;</span>
+<span id="L134"><span class="lineNum">     134</span>              :     muse::async::Notification totalPlayTimeChanged() const override;</span>
+<span id="L135"><span class="lineNum">     135</span>              : </span>
+<span id="L136"><span class="lineNum">     136</span>              :     const notation::Tempo&amp; currentTempo() const override;</span>
+<span id="L137"><span class="lineNum">     137</span>              :     muse::async::Notification currentTempoChanged() const override;</span>
+<span id="L138"><span class="lineNum">     138</span>              : </span>
+<span id="L139"><span class="lineNum">     139</span>              :     engraving::MeasureBeat currentBeat() const override;</span>
+<span id="L140"><span class="lineNum">     140</span>              :     muse::audio::secs_t beatToSecs(int measureIndex, int beatIndex) const override;</span>
+<span id="L141"><span class="lineNum">     141</span>              : </span>
+<span id="L142"><span class="lineNum">     142</span>              :     double tempoMultiplier() const override;</span>
+<span id="L143"><span class="lineNum">     143</span>              :     void setTempoMultiplier(double multiplier) override;</span>
+<span id="L144"><span class="lineNum">     144</span>              : </span>
+<span id="L145"><span class="lineNum">     145</span>              :     muse::Progress loadingProgress() const override;</span>
+<span id="L146"><span class="lineNum">     146</span>              : </span>
+<span id="L147"><span class="lineNum">     147</span>              :     void applyProfile(const SoundProfileName&amp; profileName) override;</span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span>              :     void setNotation(notation::INotationPtr notation) override;</span>
+<span id="L150"><span class="lineNum">     150</span>              :     void setMasterNotation(notation::IMasterNotationPtr masterNotation);</span>
+<span id="L151"><span class="lineNum">     151</span>              : </span>
+<span id="L152"><span class="lineNum">     152</span>              :     void setIsExportingAudio(bool exporting) override;</span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span>              :     const std::map&lt;muse::audio::TrackId, muse::audio::AudioResourceMeta&gt;&amp; onlineSounds() const override;</span>
+<span id="L155"><span class="lineNum">     155</span>              :     muse::async::Notification onlineSoundsChanged() const override;</span>
+<span id="L156"><span class="lineNum">     156</span>              :     muse::Progress onlineSoundsProcessingProgress() const override;</span>
+<span id="L157"><span class="lineNum">     157</span>              : </span>
+<span id="L158"><span class="lineNum">     158</span>              : private:</span>
+<span id="L159"><span class="lineNum">     159</span>              :     muse::audio::IPlayerPtr currentPlayer() const;</span>
+<span id="L160"><span class="lineNum">     160</span>              : </span>
+<span id="L161"><span class="lineNum">     161</span>              :     notation::INotationPlaybackPtr notationPlayback() const;</span>
+<span id="L162"><span class="lineNum">     162</span>              :     notation::INotationPartsPtr masterNotationParts() const;</span>
+<span id="L163"><span class="lineNum">     163</span>              :     notation::INotationSelectionPtr selection() const;</span>
+<span id="L164"><span class="lineNum">     164</span>              :     notation::INotationSelectionRangePtr selectionRange() const;</span>
+<span id="L165"><span class="lineNum">     165</span>              :     notation::INotationInteractionPtr interaction() const;</span>
+<span id="L166"><span class="lineNum">     166</span>              : </span>
+<span id="L167"><span class="lineNum">     167</span>              :     uint64_t notationPlaybackKey() const;</span>
+<span id="L168"><span class="lineNum">     168</span>              : </span>
+<span id="L169"><span class="lineNum">     169</span>              :     void updateCurrentTempo();</span>
+<span id="L170"><span class="lineNum">     170</span>              : </span>
+<span id="L171"><span class="lineNum">     171</span>              :     void seekRawTick(const muse::midi::tick_t tick, const bool flushSound = true);</span>
+<span id="L172"><span class="lineNum">     172</span>              :     void seek(const muse::audio::secs_t secs, const bool flushSound = true);</span>
+<span id="L173"><span class="lineNum">     173</span>              : </span>
+<span id="L174"><span class="lineNum">     174</span>              :     bool isPaused() const;</span>
+<span id="L175"><span class="lineNum">     175</span>              :     bool isLoaded() const;</span>
+<span id="L176"><span class="lineNum">     176</span>              : </span>
+<span id="L177"><span class="lineNum">     177</span>              :     bool loopBoundariesSet() const;</span>
+<span id="L178"><span class="lineNum">     178</span>              : </span>
+<span id="L179"><span class="lineNum">     179</span>              :     void onNotationChanged();</span>
+<span id="L180"><span class="lineNum">     180</span>              :     void onPartChanged(const engraving::Part* part);</span>
+<span id="L181"><span class="lineNum">     181</span>              :     void onPlaybackStatusChanged();</span>
+<span id="L182"><span class="lineNum">     182</span>              : </span>
+<span id="L183"><span class="lineNum">     183</span>              :     void onSelectionChanged();</span>
+<span id="L184"><span class="lineNum">     184</span>              :     void seekRangeSelection();</span>
+<span id="L185"><span class="lineNum">     185</span>              : </span>
+<span id="L186"><span class="lineNum">     186</span>              :     void onAudioResourceChanged(const muse::audio::TrackId trackId, const mu::engraving::InstrumentTrackId&amp; instrumentTrackId,</span>
+<span id="L187"><span class="lineNum">     187</span>              :                                 const muse::audio::AudioResourceMeta&amp; oldMeta, const muse::audio::AudioResourceMeta&amp; newMeta);</span>
+<span id="L188"><span class="lineNum">     188</span>              : </span>
+<span id="L189"><span class="lineNum">     189</span>              :     bool shouldLoadDrumset(const engraving::InstrumentTrackId&amp; instrumentTrackId, const muse::audio::AudioResourceMeta&amp; oldMeta,</span>
+<span id="L190"><span class="lineNum">     190</span>              :                            const muse::audio::AudioResourceMeta&amp; newMeta) const;</span>
+<span id="L191"><span class="lineNum">     191</span>              : </span>
+<span id="L192"><span class="lineNum">     192</span>              :     void addSoundFlagsIfNeed(const std::vector&lt;engraving::EngravingItem*&gt;&amp; selection);</span>
+<span id="L193"><span class="lineNum">     193</span>              : </span>
+<span id="L194"><span class="lineNum">     194</span>              :     void doRewind(muse::secs_t newPosition);</span>
+<span id="L195"><span class="lineNum">     195</span>              :     void doPlay();</span>
+<span id="L196"><span class="lineNum">     196</span>              :     void doPause(bool select = false);</span>
+<span id="L197"><span class="lineNum">     197</span>              :     void doStop();</span>
+<span id="L198"><span class="lineNum">     198</span>              :     void doResume();</span>
+<span id="L199"><span class="lineNum">     199</span>              : </span>
+<span id="L200"><span class="lineNum">     200</span>              :     muse::audio::secs_t playbackStartSecs() const;</span>
+<span id="L201"><span class="lineNum">     201</span>              : </span>
+<span id="L202"><span class="lineNum">     202</span>              :     engraving::InstrumentTrackIdSet instrumentTrackIdSetForRangePlayback() const;</span>
+<span id="L203"><span class="lineNum">     203</span>              : </span>
+<span id="L204"><span class="lineNum">     204</span>              :     void addLoopBoundaryToTick(LoopBoundaryType type, int tick);</span>
+<span id="L205"><span class="lineNum">     205</span>              :     void updateLoop();</span>
+<span id="L206"><span class="lineNum">     206</span>              : </span>
+<span id="L207"><span class="lineNum">     207</span>              :     void enableLoop();</span>
+<span id="L208"><span class="lineNum">     208</span>              :     void disableLoop();</span>
+<span id="L209"><span class="lineNum">     209</span>              : </span>
+<span id="L210"><span class="lineNum">     210</span>              :     project::IProjectAudioSettingsPtr audioSettings() const;</span>
+<span id="L211"><span class="lineNum">     211</span>              : </span>
+<span id="L212"><span class="lineNum">     212</span>              :     void resetPlayback();</span>
+<span id="L213"><span class="lineNum">     213</span>              :     void setupPlaybackIfNeed();</span>
+<span id="L214"><span class="lineNum">     214</span>              :     void setupPlayback();</span>
+<span id="L215"><span class="lineNum">     215</span>              :     void subscribeOnAudioParamsChanges();</span>
+<span id="L216"><span class="lineNum">     216</span>              :     void setupTracks();</span>
+<span id="L217"><span class="lineNum">     217</span>              :     void setupPlayer();</span>
+<span id="L218"><span class="lineNum">     218</span>              : </span>
+<span id="L219"><span class="lineNum">     219</span>              :     void updateSoloMuteStates();</span>
+<span id="L220"><span class="lineNum">     220</span>              :     void updateAuxMuteStates();</span>
+<span id="L221"><span class="lineNum">     221</span>              : </span>
+<span id="L222"><span class="lineNum">     222</span>              :     using TrackAddFinished = std::function&lt;void ()&gt;;</span>
+<span id="L223"><span class="lineNum">     223</span>              : </span>
+<span id="L224"><span class="lineNum">     224</span>              :     void addTrack(const engraving::InstrumentTrackId&amp; instrumentTrackId, bool projectHadNoAudioSettings,</span>
+<span id="L225"><span class="lineNum">     225</span>              :                   const TrackAddFinished&amp; onFinished);</span>
+<span id="L226"><span class="lineNum">     226</span>              :     void doAddTrack(const engraving::InstrumentTrackId&amp; instrumentTrackId, const std::string&amp; title, bool projectHadNoAudioSettings,</span>
+<span id="L227"><span class="lineNum">     227</span>              :                     const TrackAddFinished&amp; onFinished);</span>
+<span id="L228"><span class="lineNum">     228</span>              :     void addAuxTrack(muse::audio::aux_channel_idx_t index, bool projectHadNoAudioSettings, const TrackAddFinished&amp; onFinished);</span>
+<span id="L229"><span class="lineNum">     229</span>              : </span>
+<span id="L230"><span class="lineNum">     230</span>              :     void setTrackActivity(const engraving::InstrumentTrackId&amp; instrumentTrackId, const bool isActive);</span>
+<span id="L231"><span class="lineNum">     231</span>              :     project::AudioOutputParams trackOutputParams(const engraving::InstrumentTrackId&amp; instrumentTrackId) const;</span>
+<span id="L232"><span class="lineNum">     232</span>              : </span>
+<span id="L233"><span class="lineNum">     233</span>              :     muse::audio::ControlParams trackControlParams(const engraving::InstrumentTrackId&amp; instrumentTrackId,</span>
+<span id="L234"><span class="lineNum">     234</span>              :                                                   const project::AudioOutputParams&amp; outParams, bool rebuildVolume = true,</span>
+<span id="L235"><span class="lineNum">     235</span>              :                                                   bool rebuildPan = true);</span>
+<span id="L236"><span class="lineNum">     236</span>              :     void removeTrack(const engraving::InstrumentTrackId&amp; instrumentTrackId);</span>
+<span id="L237"><span class="lineNum">     237</span>              : </span>
+<span id="L238"><span class="lineNum">     238</span>              :     void onAutomationDataChanged(const notation::AutomationChanges&amp; changes);</span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC tlaBgUNC">           0 :     void resendAutomatedControlParams(std::optional&lt;engraving::InstrumentTrackIdSet&gt; volumeTrackIds = std::nullopt,</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :                                       std::optional&lt;engraving::InstrumentTrackIdSet&gt; panTrackIds = std::nullopt);</span></span>
+<span id="L241"><span class="lineNum">     241</span>              : </span>
+<span id="L242"><span class="lineNum">     242</span>              :     void onTrackNewlyAdded(const engraving::InstrumentTrackId&amp; instrumentTrackId);</span>
+<span id="L243"><span class="lineNum">     243</span>              : </span>
+<span id="L244"><span class="lineNum">     244</span>              :     muse::audio::secs_t playedTickToSecs(int tick) const;</span>
+<span id="L245"><span class="lineNum">     245</span>              : </span>
+<span id="L246"><span class="lineNum">     246</span>              :     notation::INotationPtr m_notation;</span>
+<span id="L247"><span class="lineNum">     247</span>              :     notation::IMasterNotationPtr m_masterNotation;</span>
+<span id="L248"><span class="lineNum">     248</span>              :     muse::audio::IPlayerPtr m_player;</span>
+<span id="L249"><span class="lineNum">     249</span>              :     bool m_needSetupPlayback = false;</span>
+<span id="L250"><span class="lineNum">     250</span>              :     bool m_isPlaybackInited = false;</span>
+<span id="L251"><span class="lineNum">     251</span>              :     muse::async::Channel&lt;bool&gt; m_playbackInited;</span>
+<span id="L252"><span class="lineNum">     252</span>              : </span>
+<span id="L253"><span class="lineNum">     253</span>              :     muse::async::Channel&lt;bool&gt; m_isPlayAllowedChanged;</span>
+<span id="L254"><span class="lineNum">     254</span>              :     muse::async::Channel&lt;bool&gt; m_isPlayingChanged;</span>
+<span id="L255"><span class="lineNum">     255</span>              :     muse::async::Channel&lt;muse::audio::secs_t&gt; m_playbackPositionChanged;</span>
+<span id="L256"><span class="lineNum">     256</span>              :     muse::async::Channel&lt;bool&gt; m_loopEnabledChanged;</span>
+<span id="L257"><span class="lineNum">     257</span>              :     muse::async::Notification m_totalPlayTimeChanged;</span>
+<span id="L258"><span class="lineNum">     258</span>              :     muse::async::Notification m_currentTempoChanged;</span>
+<span id="L259"><span class="lineNum">     259</span>              : </span>
+<span id="L260"><span class="lineNum">     260</span>              :     muse::midi::tick_t m_currentTick = 0;</span>
+<span id="L261"><span class="lineNum">     261</span>              :     notation::Tempo m_currentTempo;</span>
+<span id="L262"><span class="lineNum">     262</span>              : </span>
+<span id="L263"><span class="lineNum">     263</span>              :     muse::async::Channel&lt;muse::audio::TrackId&gt; m_trackAdded;</span>
+<span id="L264"><span class="lineNum">     264</span>              :     muse::async::Channel&lt;muse::audio::TrackId&gt; m_trackRemoved;</span>
+<span id="L265"><span class="lineNum">     265</span>              : </span>
+<span id="L266"><span class="lineNum">     266</span>              :     muse::async::Channel&lt;muse::audio::aux_channel_idx_t, std::string&gt; m_auxChannelNameChanged;</span>
+<span id="L267"><span class="lineNum">     267</span>              : </span>
+<span id="L268"><span class="lineNum">     268</span>              :     muse::async::Asyncable m_seqAsyncReceiver; //! HACK - see PlaybackController::setupTracks</span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span>              :     InstrumentTrackIdMap m_instrumentTrackIdMap;</span>
+<span id="L271"><span class="lineNum">     271</span>              :     AuxTrackIdMap m_auxTrackIdMap;</span>
+<span id="L272"><span class="lineNum">     272</span>              : </span>
+<span id="L273"><span class="lineNum">     273</span>              :     std::unordered_map&lt;engraving::InstrumentTrackId, muse::audio::ControlParams&gt; m_automatedControlParamsCache;</span>
+<span id="L274"><span class="lineNum">     274</span>              : </span>
+<span id="L275"><span class="lineNum">     275</span>              :     muse::Progress m_loadingProgress;</span>
+<span id="L276"><span class="lineNum">     276</span>              :     size_t m_loadingTrackCount = 0;</span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span>              :     bool m_isExportingAudio = false;</span>
+<span id="L279"><span class="lineNum">     279</span>              :     bool m_isRangeSelection = false;</span>
+<span id="L280"><span class="lineNum">     280</span>              : </span>
+<span id="L281"><span class="lineNum">     281</span>              :     DrumsetLoader m_drumsetLoader;</span>
+<span id="L282"><span class="lineNum">     282</span>              :     std::unique_ptr&lt;OnlineSoundsController&gt; m_onlineSoundsController;</span>
+<span id="L283"><span class="lineNum">     283</span>              : </span>
+<span id="L284"><span class="lineNum">     284</span>              :     bool m_measureInputLag = false;</span>
+<span id="L285"><span class="lineNum">     285</span>              : };</span>
+<span id="L286"><span class="lineNum">     286</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

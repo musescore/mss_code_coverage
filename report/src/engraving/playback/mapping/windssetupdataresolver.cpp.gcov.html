@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/playback/mapping/windssetupdataresolver.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">src/engraving/playback/mapping</a> - windssetupdataresolver.cpp</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">15</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2021 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #include &quot;windssetupdataresolver.h&quot;</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : using namespace mu::engraving;</span>
+<span id="L26"><span class="lineNum">      26</span>              : using namespace muse::mpe;</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC tlaBgGNC">          21 : PlaybackSetupData WindsSetupDataResolver::doResolve(const Instrument* instrument)</span></span>
+<span id="L29"><span class="lineNum">      29</span>              : {</span>
+<span id="L30"><span class="lineNum">      30</span>              :     static const std::unordered_map&lt;std::string, PlaybackSetupData&gt; SETUP_DATA_MAP = {</span>
+<span id="L31"><span class="lineNum">      31</span>              :         { &quot;winds&quot;, { SoundId::WindsGroup, SoundCategory::Winds } },</span>
+<span id="L32"><span class="lineNum">      32</span>              :         { &quot;eb-piccolo&quot;, { SoundId::Piccolo, SoundCategory::Winds } },</span>
+<span id="L33"><span class="lineNum">      33</span>              :         { &quot;db-piccolo&quot;, { SoundId::Piccolo, SoundCategory::Winds } },</span>
+<span id="L34"><span class="lineNum">      34</span>              :         { &quot;piccolo&quot;, { SoundId::Piccolo, SoundCategory::Winds } },</span>
+<span id="L35"><span class="lineNum">      35</span>              :         { &quot;treble-flute&quot;, { SoundId::Flute, SoundCategory::Winds, { SoundSubCategory::Treble } } },</span>
+<span id="L36"><span class="lineNum">      36</span>              :         { &quot;soprano-flute&quot;, { SoundId::Flute, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L37"><span class="lineNum">      37</span>              :         { &quot;alto-flute&quot;, { SoundId::Flute, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L38"><span class="lineNum">      38</span>              :         { &quot;bass-flute&quot;, { SoundId::Flute, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L39"><span class="lineNum">      39</span>              :         { &quot;contra-alto-flute&quot;, { SoundId::Flute, SoundCategory::Winds, { SoundSubCategory::Contra_Alto } } },</span>
+<span id="L40"><span class="lineNum">      40</span>              :         { &quot;contrabass-flute&quot;, { SoundId::Flute, SoundCategory::Winds, { SoundSubCategory::Contra_Bass } } },</span>
+<span id="L41"><span class="lineNum">      41</span>              :         { &quot;subcontra-alto-flute&quot;, { SoundId::Flute, SoundCategory::Winds, { SoundSubCategory::Sub_Contra_Alto } } },</span>
+<span id="L42"><span class="lineNum">      42</span>              :         { &quot;double-contrabass-flute&quot;, { SoundId::Flute, SoundCategory::Winds, { SoundSubCategory::Double_Contra_Bass } } },</span>
+<span id="L43"><span class="lineNum">      43</span>              :         { &quot;hyperbass-flute&quot;, { SoundId::Flute, SoundCategory::Winds, { SoundSubCategory::Hyper_Bass } } },</span>
+<span id="L44"><span class="lineNum">      44</span>              :         { &quot;irish-flute&quot;, { SoundId::Flute, SoundCategory::Winds, { SoundSubCategory::Irish } } },</span>
+<span id="L45"><span class="lineNum">      45</span>              :         { &quot;flute&quot;, { SoundId::Flute, SoundCategory::Winds } },</span>
+<span id="L46"><span class="lineNum">      46</span>              :         { &quot;traverso&quot;, { SoundId::Traverso, SoundCategory::Winds, { SoundSubCategory::Baroque } } },</span>
+<span id="L47"><span class="lineNum">      47</span>              :         { &quot;danso&quot;, { SoundId::Danso, SoundCategory::Winds } },</span>
+<span id="L48"><span class="lineNum">      48</span>              :         { &quot;daegeum&quot;, { SoundId::Daegeum, SoundCategory::Winds, { SoundSubCategory::Korean } } },</span>
+<span id="L49"><span class="lineNum">      49</span>              : </span>
+<span id="L50"><span class="lineNum">      50</span>              :         { &quot;a-dizi&quot;, { SoundId::Dizi, SoundCategory::Winds, { SoundSubCategory::Chinese } } },</span>
+<span id="L51"><span class="lineNum">      51</span>              :         { &quot;g-dizi&quot;, { SoundId::Dizi, SoundCategory::Winds, { SoundSubCategory::Chinese } } },</span>
+<span id="L52"><span class="lineNum">      52</span>              :         { &quot;f-dizi&quot;, { SoundId::Dizi, SoundCategory::Winds, { SoundSubCategory::Chinese } } },</span>
+<span id="L53"><span class="lineNum">      53</span>              :         { &quot;e-dizi&quot;, { SoundId::Dizi, SoundCategory::Winds, { SoundSubCategory::Chinese } } },</span>
+<span id="L54"><span class="lineNum">      54</span>              :         { &quot;d-dizi&quot;, { SoundId::Dizi, SoundCategory::Winds, { SoundSubCategory::Chinese } } },</span>
+<span id="L55"><span class="lineNum">      55</span>              :         { &quot;c-dizi&quot;, { SoundId::Dizi, SoundCategory::Winds, { SoundSubCategory::Chinese } } },</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span>              :         { &quot;shakuhachi&quot;, { SoundId::Shakuhachi, SoundCategory::Winds, { SoundSubCategory::Japanese } } },</span>
+<span id="L58"><span class="lineNum">      58</span>              :         { &quot;hichiriki&quot;, { SoundId::Hichiriki, SoundCategory::Winds, { SoundSubCategory::Japanese } } },</span>
+<span id="L59"><span class="lineNum">      59</span>              :         { &quot;fife&quot;, { SoundId::Fife, SoundCategory::Winds } },</span>
+<span id="L60"><span class="lineNum">      60</span>              : </span>
+<span id="L61"><span class="lineNum">      61</span>              :         { &quot;d-tin-whistle&quot;, { SoundId::Whistle, SoundCategory::Winds, { SoundSubCategory::Tin } } },</span>
+<span id="L62"><span class="lineNum">      62</span>              :         { &quot;c-tin-whistle&quot;, { SoundId::Whistle, SoundCategory::Winds, { SoundSubCategory::Tin } } },</span>
+<span id="L63"><span class="lineNum">      63</span>              :         { &quot;bflat-tin-whistle&quot;, { SoundId::Whistle, SoundCategory::Winds, { SoundSubCategory::Tin } } },</span>
+<span id="L64"><span class="lineNum">      64</span>              :         { &quot;slide-whistle&quot;, { SoundId::Whistle, SoundCategory::Winds, { SoundSubCategory::Slide } } },</span>
+<span id="L65"><span class="lineNum">      65</span>              : </span>
+<span id="L66"><span class="lineNum">      66</span>              :         { &quot;french-flageolet&quot;, { SoundId::Flageolet, SoundCategory::Winds } },</span>
+<span id="L67"><span class="lineNum">      67</span>              :         { &quot;english-flageolet&quot;, { SoundId::Flageolet, SoundCategory::Winds } },</span>
+<span id="L68"><span class="lineNum">      68</span>              :         { &quot;flageolet&quot;, { SoundId::Flageolet, SoundCategory::Winds } },</span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span>              :         { &quot;garklein-recorder&quot;, { SoundId::Recorder, SoundCategory::Winds, { SoundSubCategory::Garklein } } },</span>
+<span id="L71"><span class="lineNum">      71</span>              :         { &quot;sopranino-recorder&quot;, { SoundId::Recorder, SoundCategory::Winds, { SoundSubCategory::Sopranino } } },</span>
+<span id="L72"><span class="lineNum">      72</span>              :         { &quot;soprano-recorder&quot;, { SoundId::Recorder, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L73"><span class="lineNum">      73</span>              :         { &quot;recorder&quot;, { SoundId::Recorder, SoundCategory::Winds } },</span>
+<span id="L74"><span class="lineNum">      74</span>              :         { &quot;alto-recorder&quot;, { SoundId::Recorder, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L75"><span class="lineNum">      75</span>              :         { &quot;bass-recorder&quot;, { SoundId::Recorder, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L76"><span class="lineNum">      76</span>              :         { &quot;tenor-recorder&quot;, { SoundId::Recorder, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L77"><span class="lineNum">      77</span>              :         { &quot;greatbass-recorder&quot;, { SoundId::Recorder, SoundCategory::Winds, { SoundSubCategory::Great_Bass } } },</span>
+<span id="L78"><span class="lineNum">      78</span>              :         { &quot;contrabass-recorder&quot;, { SoundId::Recorder, SoundCategory::Winds, { SoundSubCategory::Contra_Bass } } },</span>
+<span id="L79"><span class="lineNum">      79</span>              : </span>
+<span id="L80"><span class="lineNum">      80</span>              :         { &quot;g-soprano-ocarina&quot;, { SoundId::Ocarina, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L81"><span class="lineNum">      81</span>              :         { &quot;f-soprano-ocarina&quot;, { SoundId::Ocarina, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L82"><span class="lineNum">      82</span>              :         { &quot;ocarina&quot;, { SoundId::Ocarina, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L83"><span class="lineNum">      83</span>              :         { &quot;c-soprano-ocarina&quot;, { SoundId::Ocarina, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L84"><span class="lineNum">      84</span>              :         { &quot;bb-soprano-ocarina&quot;, { SoundId::Ocarina, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L85"><span class="lineNum">      85</span>              :         { &quot;g-alto-ocarina&quot;, { SoundId::Ocarina, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L86"><span class="lineNum">      86</span>              :         { &quot;f-alto-ocarina&quot;, { SoundId::Ocarina, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L87"><span class="lineNum">      87</span>              :         { &quot;c-alto-ocarina&quot;, { SoundId::Ocarina, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L88"><span class="lineNum">      88</span>              :         { &quot;bb-alto-ocarina&quot;, { SoundId::Ocarina, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L89"><span class="lineNum">      89</span>              :         { &quot;c-bass-ocarina&quot;, { SoundId::Ocarina, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L90"><span class="lineNum">      90</span>              : </span>
+<span id="L91"><span class="lineNum">      91</span>              :         { &quot;gemshorn&quot;, { SoundId::Gemshorn, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L92"><span class="lineNum">      92</span>              :         { &quot;soprano-gemshorn&quot;, { SoundId::Gemshorn, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L93"><span class="lineNum">      93</span>              :         { &quot;alto-gemshorn&quot;, { SoundId::Gemshorn, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L94"><span class="lineNum">      94</span>              :         { &quot;tenor-gemshorn&quot;, { SoundId::Gemshorn, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L95"><span class="lineNum">      95</span>              :         { &quot;bass-gemshorn&quot;, { SoundId::Gemshorn, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L96"><span class="lineNum">      96</span>              : </span>
+<span id="L97"><span class="lineNum">      97</span>              :         { &quot;theremin&quot;, { SoundId::Theremin, SoundCategory::Winds, { SoundSubCategory::Electric } } },</span>
+<span id="L98"><span class="lineNum">      98</span>              : </span>
+<span id="L99"><span class="lineNum">      99</span>              :         { &quot;pan-flute&quot;, { SoundId::PanFlute, SoundCategory::Winds } },</span>
+<span id="L100"><span class="lineNum">     100</span>              : </span>
+<span id="L101"><span class="lineNum">     101</span>              :         { &quot;quena&quot;, { SoundId::Quena, SoundCategory::Winds } },</span>
+<span id="L102"><span class="lineNum">     102</span>              :         { &quot;c-quena&quot;, { SoundId::Quena, SoundCategory::Winds } },</span>
+<span id="L103"><span class="lineNum">     103</span>              :         { &quot;g-quena&quot;, { SoundId::Quena, SoundCategory::Winds } },</span>
+<span id="L104"><span class="lineNum">     104</span>              :         { &quot;f-quena&quot;, { SoundId::Quena, SoundCategory::Winds } },</span>
+<span id="L105"><span class="lineNum">     105</span>              :         { &quot;d-quena&quot;, { SoundId::Quena, SoundCategory::Winds } },</span>
+<span id="L106"><span class="lineNum">     106</span>              : </span>
+<span id="L107"><span class="lineNum">     107</span>              :         { &quot;fs-castilian-dulzaina&quot;, { SoundId::Dulzaina, SoundCategory::Winds, { SoundSubCategory::Castilian } } },</span>
+<span id="L108"><span class="lineNum">     108</span>              : </span>
+<span id="L109"><span class="lineNum">     109</span>              :         { &quot;piccolo-heckelphone&quot;, { SoundId::Heckelphone, SoundCategory::Winds } },</span>
+<span id="L110"><span class="lineNum">     110</span>              :         { &quot;heckelphone&quot;, { SoundId::Heckelphone, SoundCategory::Winds } },</span>
+<span id="L111"><span class="lineNum">     111</span>              :         { &quot;piccolo-oboe&quot;, { SoundId::Oboe, SoundCategory::Winds } },</span>
+<span id="L112"><span class="lineNum">     112</span>              :         { &quot;baroque-oboe&quot;, { SoundId::Oboe, SoundCategory::Winds, { SoundSubCategory::Baroque } } },</span>
+<span id="L113"><span class="lineNum">     113</span>              :         { &quot;oboe&quot;, { SoundId::Oboe, SoundCategory::Winds } },</span>
+<span id="L114"><span class="lineNum">     114</span>              :         { &quot;oboe-d'amore&quot;, { SoundId::Oboe, SoundCategory::Winds } },</span>
+<span id="L115"><span class="lineNum">     115</span>              :         { &quot;oboe-da-caccia&quot;, { SoundId::Oboe, SoundCategory::Winds } },</span>
+<span id="L116"><span class="lineNum">     116</span>              :         { &quot;english-horn&quot;, { SoundId::Oboe, SoundCategory::Winds, { SoundSubCategory::English } } },</span>
+<span id="L117"><span class="lineNum">     117</span>              :         { &quot;bass-oboe&quot;, { SoundId::Oboe, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L118"><span class="lineNum">     118</span>              :         { &quot;lupophone&quot;, { SoundId::Lupophone, SoundCategory::Winds } },</span>
+<span id="L119"><span class="lineNum">     119</span>              : </span>
+<span id="L120"><span class="lineNum">     120</span>              :         { &quot;sopranino-shawm&quot;, { SoundId::Shawm, SoundCategory::Winds, { SoundSubCategory::Sopranino } } },</span>
+<span id="L121"><span class="lineNum">     121</span>              :         { &quot;soprano-shawm&quot;, { SoundId::Shawm, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L122"><span class="lineNum">     122</span>              :         { &quot;alto-shawm&quot;, { SoundId::Shawm, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L123"><span class="lineNum">     123</span>              :         { &quot;tenor-shawm&quot;, { SoundId::Shawm, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L124"><span class="lineNum">     124</span>              :         { &quot;bass-shawm&quot;, { SoundId::Shawm, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L125"><span class="lineNum">     125</span>              :         { &quot;great-bass-shawm&quot;, { SoundId::Shawm, SoundCategory::Winds, { SoundSubCategory::Great_Bass } } },</span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span>              :         { &quot;cromorne&quot;, { SoundId::Cromorne, SoundCategory::Winds, { SoundSubCategory::French,</span>
+<span id="L128"><span class="lineNum">     128</span>              :                                                                    SoundSubCategory::Baroque,</span>
+<span id="L129"><span class="lineNum">     129</span>              :                                                                    SoundSubCategory::Reed } } },</span>
+<span id="L130"><span class="lineNum">     130</span>              : </span>
+<span id="L131"><span class="lineNum">     131</span>              :         { &quot;crumhorn&quot;, { SoundId::Crumhorn, SoundCategory::Winds } },</span>
+<span id="L132"><span class="lineNum">     132</span>              :         { &quot;soprano-crumhorn&quot;, { SoundId::Crumhorn, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L133"><span class="lineNum">     133</span>              :         { &quot;alto-crumhorn&quot;, { SoundId::Crumhorn, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L134"><span class="lineNum">     134</span>              :         { &quot;tenor-crumhorn&quot;, { SoundId::Crumhorn, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L135"><span class="lineNum">     135</span>              :         { &quot;bass-crumhorn&quot;, { SoundId::Crumhorn, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L136"><span class="lineNum">     136</span>              :         { &quot;greatbass-crumhorn&quot;, { SoundId::Crumhorn, SoundCategory::Winds, { SoundSubCategory::Great_Bass } } },</span>
+<span id="L137"><span class="lineNum">     137</span>              : </span>
+<span id="L138"><span class="lineNum">     138</span>              :         { &quot;cornamuse&quot;, { SoundId::Cornamuse, SoundCategory::Winds } },</span>
+<span id="L139"><span class="lineNum">     139</span>              :         { &quot;soprano-cornamuse&quot;, { SoundId::Cornamuse, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L140"><span class="lineNum">     140</span>              :         { &quot;alto-cornamuse&quot;, { SoundId::Cornamuse, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L141"><span class="lineNum">     141</span>              :         { &quot;tenor-cornamuse&quot;, { SoundId::Cornamuse, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L142"><span class="lineNum">     142</span>              :         { &quot;bass-cornamuse&quot;, { SoundId::Cornamuse, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L143"><span class="lineNum">     143</span>              : </span>
+<span id="L144"><span class="lineNum">     144</span>              :         { &quot;soprano-kelhorn&quot;, { SoundId::Kelhorn, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L145"><span class="lineNum">     145</span>              :         { &quot;alto-kelhorn&quot;, { SoundId::Kelhorn, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L146"><span class="lineNum">     146</span>              :         { &quot;tenor-kelhorn&quot;, { SoundId::Kelhorn, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L147"><span class="lineNum">     147</span>              :         { &quot;bass-kelhorn&quot;, { SoundId::Kelhorn, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L148"><span class="lineNum">     148</span>              :         { &quot;greatbass-kelhorn&quot;, { SoundId::Kelhorn, SoundCategory::Winds, { SoundSubCategory::Great_Bass } } },</span>
+<span id="L149"><span class="lineNum">     149</span>              : </span>
+<span id="L150"><span class="lineNum">     150</span>              :         { &quot;sopranino-rauschpfeife&quot;, { SoundId::Rauschpfeife, SoundCategory::Winds, { SoundSubCategory::Sopranino } } },</span>
+<span id="L151"><span class="lineNum">     151</span>              :         { &quot;rauschpfeife&quot;, { SoundId::Rauschpfeife, SoundCategory::Winds } },</span>
+<span id="L152"><span class="lineNum">     152</span>              :         { &quot;soprano-rauschpfeife&quot;, { SoundId::Rauschpfeife, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span>              :         { &quot;f-duduk&quot;, { SoundId::Duduk, SoundCategory::Winds, { SoundSubCategory::Armenian } } },</span>
+<span id="L155"><span class="lineNum">     155</span>              :         { &quot;e-duduk&quot;, { SoundId::Duduk, SoundCategory::Winds, { SoundSubCategory::Armenian } } },</span>
+<span id="L156"><span class="lineNum">     156</span>              :         { &quot;d-duduk&quot;, { SoundId::Duduk, SoundCategory::Winds, { SoundSubCategory::Armenian } } },</span>
+<span id="L157"><span class="lineNum">     157</span>              :         { &quot;c-duduk&quot;, { SoundId::Duduk, SoundCategory::Winds, { SoundSubCategory::Armenian } } },</span>
+<span id="L158"><span class="lineNum">     158</span>              :         { &quot;b-duduk&quot;, { SoundId::Duduk, SoundCategory::Winds, { SoundSubCategory::Armenian } } },</span>
+<span id="L159"><span class="lineNum">     159</span>              :         { &quot;bb-duduk&quot;, { SoundId::Duduk, SoundCategory::Winds, { SoundSubCategory::Armenian } } },</span>
+<span id="L160"><span class="lineNum">     160</span>              :         { &quot;duduk&quot;, { SoundId::Duduk, SoundCategory::Winds, { SoundSubCategory::Armenian } } },</span>
+<span id="L161"><span class="lineNum">     161</span>              :         { &quot;a-duduk&quot;, { SoundId::Duduk, SoundCategory::Winds, { SoundSubCategory::Armenian } } },</span>
+<span id="L162"><span class="lineNum">     162</span>              :         { &quot;g-duduk&quot;, { SoundId::Duduk, SoundCategory::Winds, { SoundSubCategory::Armenian } } },</span>
+<span id="L163"><span class="lineNum">     163</span>              :         { &quot;a-bass-duduk&quot;, { SoundId::Duduk, SoundCategory::Winds, { SoundSubCategory::Bass,</span>
+<span id="L164"><span class="lineNum">     164</span>              :                                                                     SoundSubCategory::Armenian } } },</span>
+<span id="L165"><span class="lineNum">     165</span>              : </span>
+<span id="L166"><span class="lineNum">     166</span>              :         { &quot;shenai&quot;, { SoundId::Shenai, SoundCategory::Winds, { SoundSubCategory::Indian } } },</span>
+<span id="L167"><span class="lineNum">     167</span>              : </span>
+<span id="L168"><span class="lineNum">     168</span>              :         { &quot;piccolo-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds } },</span>
+<span id="L169"><span class="lineNum">     169</span>              :         { &quot;soprano-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Sopranino } } },</span>
+<span id="L170"><span class="lineNum">     170</span>              :         { &quot;eb-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Sopranino,</span>
+<span id="L171"><span class="lineNum">     171</span>              :                                                                       SoundSubCategory::In_E_flat } } },</span>
+<span id="L172"><span class="lineNum">     172</span>              :         { &quot;d-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Sopranino } } },</span>
+<span id="L173"><span class="lineNum">     173</span>              :         { &quot;c-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Sopranino } } },</span>
+<span id="L174"><span class="lineNum">     174</span>              :         { &quot;bb-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Soprano,</span>
+<span id="L175"><span class="lineNum">     175</span>              :                                                                       SoundSubCategory::In_B_flat } } },</span>
+<span id="L176"><span class="lineNum">     176</span>              :         { &quot;clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Soprano,</span>
+<span id="L177"><span class="lineNum">     177</span>              :                                                                    SoundSubCategory::In_B_flat } } },</span>
+<span id="L178"><span class="lineNum">     178</span>              :         { &quot;a-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L179"><span class="lineNum">     179</span>              :         { &quot;g-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L180"><span class="lineNum">     180</span>              :         { &quot;basset-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L181"><span class="lineNum">     181</span>              :         { &quot;basset-horn&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L182"><span class="lineNum">     182</span>              :         { &quot;alto-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L183"><span class="lineNum">     183</span>              :         { &quot;bass-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Bass,</span>
+<span id="L184"><span class="lineNum">     184</span>              :                                                                         SoundSubCategory::In_B_flat } } },</span>
+<span id="L185"><span class="lineNum">     185</span>              :         { &quot;bb-bass-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Bass,</span>
+<span id="L186"><span class="lineNum">     186</span>              :                                                                            SoundSubCategory::In_B_flat } } },</span>
+<span id="L187"><span class="lineNum">     187</span>              :         { &quot;bb-bass-clarinet-bass-clef&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Bass,</span>
+<span id="L188"><span class="lineNum">     188</span>              :                                                                                      SoundSubCategory::In_B_flat } } },</span>
+<span id="L189"><span class="lineNum">     189</span>              :         { &quot;a-bass-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L190"><span class="lineNum">     190</span>              :         { &quot;a-bass-clarinet-bass-clef&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L191"><span class="lineNum">     191</span>              :         { &quot;contra-alto-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Contra_Alto } } },</span>
+<span id="L192"><span class="lineNum">     192</span>              :         { &quot;contrabass-clarinet&quot;, { SoundId::Clarinet, SoundCategory::Winds, { SoundSubCategory::Contra_Bass } } },</span>
+<span id="L193"><span class="lineNum">     193</span>              : </span>
+<span id="L194"><span class="lineNum">     194</span>              :         { &quot;sopranino-chalumeau&quot;, { SoundId::Chalumeau, SoundCategory::Winds, { SoundSubCategory::Sopranino } } },</span>
+<span id="L195"><span class="lineNum">     195</span>              :         { &quot;soprano-chalumeau&quot;, { SoundId::Chalumeau, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L196"><span class="lineNum">     196</span>              :         { &quot;alto-chalumeau&quot;, { SoundId::Chalumeau, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L197"><span class="lineNum">     197</span>              :         { &quot;chalumeau&quot;, { SoundId::Chalumeau, SoundCategory::Winds } },</span>
+<span id="L198"><span class="lineNum">     198</span>              :         { &quot;tenor-chalumeau&quot;, { SoundId::Chalumeau, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L199"><span class="lineNum">     199</span>              :         { &quot;bass-chalumeau&quot;, { SoundId::Chalumeau, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L200"><span class="lineNum">     200</span>              : </span>
+<span id="L201"><span class="lineNum">     201</span>              :         { &quot;d-xaphoon&quot;, { SoundId::Xaphoon, SoundCategory::Winds } },</span>
+<span id="L202"><span class="lineNum">     202</span>              :         { &quot;xaphoon&quot;, { SoundId::Xaphoon, SoundCategory::Winds } },</span>
+<span id="L203"><span class="lineNum">     203</span>              :         { &quot;bb-xaphoon&quot;, { SoundId::Xaphoon, SoundCategory::Winds } },</span>
+<span id="L204"><span class="lineNum">     204</span>              :         { &quot;g-xaphoon&quot;, { SoundId::Xaphoon, SoundCategory::Winds } },</span>
+<span id="L205"><span class="lineNum">     205</span>              : </span>
+<span id="L206"><span class="lineNum">     206</span>              :         { &quot;tarogato&quot;, { SoundId::Tarogato, SoundCategory::Winds, { SoundSubCategory::Hungarian,</span>
+<span id="L207"><span class="lineNum">     207</span>              :                                                                    SoundSubCategory::Romanian } } },</span>
+<span id="L208"><span class="lineNum">     208</span>              : </span>
+<span id="L209"><span class="lineNum">     209</span>              :         { &quot;octavin&quot;, { SoundId::Octavin, SoundCategory::Winds } },</span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span>              :         { &quot;sopranissimo-saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Sopranissimo } } },</span>
+<span id="L212"><span class="lineNum">     212</span>              :         { &quot;sopranino-saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Sopranino } } },</span>
+<span id="L213"><span class="lineNum">     213</span>              :         { &quot;aulochrome&quot;, { SoundId::Saxophone, SoundCategory::Winds } },</span>
+<span id="L214"><span class="lineNum">     214</span>              :         { &quot;soprano-saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L215"><span class="lineNum">     215</span>              :         { &quot;mezzo-soprano-saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Mezzo_Soprano } } },</span>
+<span id="L216"><span class="lineNum">     216</span>              :         { &quot;heckelphone-clarinet&quot;, { SoundId::HeckelphoneClarinet, SoundCategory::Winds } },</span>
+<span id="L217"><span class="lineNum">     217</span>              :         { &quot;alto-saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L218"><span class="lineNum">     218</span>              :         { &quot;melody-saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Melody } } },</span>
+<span id="L219"><span class="lineNum">     219</span>              :         { &quot;saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L220"><span class="lineNum">     220</span>              :         { &quot;tenor-saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L221"><span class="lineNum">     221</span>              :         { &quot;baritone-saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Baritone } } },</span>
+<span id="L222"><span class="lineNum">     222</span>              :         { &quot;bass-saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L223"><span class="lineNum">     223</span>              :         { &quot;contrabass-saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Contra_Bass } } },</span>
+<span id="L224"><span class="lineNum">     224</span>              :         { &quot;subcontrabass-saxophone&quot;, { SoundId::Saxophone, SoundCategory::Winds, { SoundSubCategory::Sub_Contra_Bass } } },</span>
+<span id="L225"><span class="lineNum">     225</span>              : </span>
+<span id="L226"><span class="lineNum">     226</span>              :         { &quot;bassoon&quot;, { SoundId::Bassoon, SoundCategory::Winds } },</span>
+<span id="L227"><span class="lineNum">     227</span>              :         { &quot;contrabassoon&quot;, { SoundId::Contrabassoon, SoundCategory::Winds } },</span>
+<span id="L228"><span class="lineNum">     228</span>              :         { &quot;reed-contrabass&quot;, { SoundId::Contrabassoon, SoundCategory::Winds, { SoundSubCategory::Reed } } },</span>
+<span id="L229"><span class="lineNum">     229</span>              :         { &quot;dulcian&quot;, { SoundId::Dulcian, SoundCategory::Winds } },</span>
+<span id="L230"><span class="lineNum">     230</span>              :         { &quot;rackett&quot;, { SoundId::Rackett, SoundCategory::Winds } },</span>
+<span id="L231"><span class="lineNum">     231</span>              : </span>
+<span id="L232"><span class="lineNum">     232</span>              :         { &quot;sopranino-sarrusophone&quot;, { SoundId::Sarrusophone, SoundCategory::Winds, { SoundSubCategory::Sopranino } } },</span>
+<span id="L233"><span class="lineNum">     233</span>              :         { &quot;sarrusophone&quot;, { SoundId::Sarrusophone, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L234"><span class="lineNum">     234</span>              :         { &quot;soprano-sarrusophone&quot;, { SoundId::Sarrusophone, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L235"><span class="lineNum">     235</span>              :         { &quot;alto-sarrusophone&quot;, { SoundId::Sarrusophone, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L236"><span class="lineNum">     236</span>              :         { &quot;tenor-sarrusophone&quot;, { SoundId::Sarrusophone, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L237"><span class="lineNum">     237</span>              :         { &quot;baritone-sarrusophone&quot;, { SoundId::Sarrusophone, SoundCategory::Winds, { SoundSubCategory::Baritone } } },</span>
+<span id="L238"><span class="lineNum">     238</span>              :         { &quot;bass-sarrusophone&quot;, { SoundId::Sarrusophone, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L239"><span class="lineNum">     239</span>              :         { &quot;contrabass-sarrusophone&quot;, { SoundId::Sarrusophone, SoundCategory::Winds, { SoundSubCategory::Contra_Bass } } },</span>
+<span id="L240"><span class="lineNum">     240</span>              : </span>
+<span id="L241"><span class="lineNum">     241</span>              :         { &quot;bagpipe&quot;, { SoundId::Bagpipe, SoundCategory::Winds } },</span>
+<span id="L242"><span class="lineNum">     242</span>              :         { &quot;accordion&quot;, { SoundId::Accordion, SoundCategory::Winds } },</span>
+<span id="L243"><span class="lineNum">     243</span>              :         { &quot;bandoneon&quot;, { SoundId::Bandoneon, SoundCategory::Winds } },</span>
+<span id="L244"><span class="lineNum">     244</span>              :         { &quot;concertina&quot;, { SoundId::Concertina, SoundCategory::Winds } },</span>
+<span id="L245"><span class="lineNum">     245</span>              : </span>
+<span id="L246"><span class="lineNum">     246</span>              :         { &quot;harmonica&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Diatonic } } },</span>
+<span id="L247"><span class="lineNum">     247</span>              :         { &quot;harmonica-d10high-g&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Diatonic } } },</span>
+<span id="L248"><span class="lineNum">     248</span>              :         { &quot;harmonica-d10f&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Diatonic } } },</span>
+<span id="L249"><span class="lineNum">     249</span>              :         { &quot;harmonica-d10d&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Diatonic } } },</span>
+<span id="L250"><span class="lineNum">     250</span>              :         { &quot;harmonica-d10c&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Diatonic } } },</span>
+<span id="L251"><span class="lineNum">     251</span>              :         { &quot;harmonica-d10a&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Diatonic } } },</span>
+<span id="L252"><span class="lineNum">     252</span>              :         { &quot;harmonica-d10g&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Diatonic } } },</span>
+<span id="L253"><span class="lineNum">     253</span>              :         { &quot;harmonica-d10low-d&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Diatonic } } },</span>
+<span id="L254"><span class="lineNum">     254</span>              :         { &quot;harmonica-c12c&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Chromatic } } },</span>
+<span id="L255"><span class="lineNum">     255</span>              :         { &quot;harmonica-c12g&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Chromatic } } },</span>
+<span id="L256"><span class="lineNum">     256</span>              :         { &quot;harmonica-c12tenor-c&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Chromatic,</span>
+<span id="L257"><span class="lineNum">     257</span>              :                                                                                 SoundSubCategory::Tenor } } },</span>
+<span id="L258"><span class="lineNum">     258</span>              :         { &quot;harmonica-c14c&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Chromatic } } },</span>
+<span id="L259"><span class="lineNum">     259</span>              :         { &quot;harmonica-c16c&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Chromatic } } },</span>
+<span id="L260"><span class="lineNum">     260</span>              :         { &quot;harmonica-chordet&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Huang } } },</span>
+<span id="L261"><span class="lineNum">     261</span>              :         { &quot;bass-harmonica-hohner&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Bass,</span>
+<span id="L262"><span class="lineNum">     262</span>              :                                                                                  SoundSubCategory::Hohner } } },</span>
+<span id="L263"><span class="lineNum">     263</span>              :         { &quot;bass-harmonica-huang&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Bass,</span>
+<span id="L264"><span class="lineNum">     264</span>              :                                                                                 SoundSubCategory::Huang } } },</span>
+<span id="L265"><span class="lineNum">     265</span>              :         { &quot;bass-harmonica&quot;, { SoundId::Harmonica, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L266"><span class="lineNum">     266</span>              : </span>
+<span id="L267"><span class="lineNum">     267</span>              :         { &quot;melodica&quot;, { SoundId::Melodica, SoundCategory::Winds } },</span>
+<span id="L268"><span class="lineNum">     268</span>              : </span>
+<span id="L269"><span class="lineNum">     269</span>              :         { &quot;sho&quot;, { SoundId::Sho, SoundCategory::Winds, { SoundSubCategory::Japanese } } },</span>
+<span id="L270"><span class="lineNum">     270</span>              :         { &quot;alto-sheng&quot;, { SoundId::Sheng, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L271"><span class="lineNum">     271</span>              :         { &quot;tenor-sheng&quot;, { SoundId::Sheng, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L272"><span class="lineNum">     272</span>              :         { &quot;bass-sheng&quot;, { SoundId::Sheng, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L273"><span class="lineNum">     273</span>              :         { &quot;sheng&quot;, { SoundId::Sheng, SoundCategory::Winds } },</span>
+<span id="L274"><span class="lineNum">     274</span>              :         { &quot;soprano-sheng&quot;, { SoundId::Sheng, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L275"><span class="lineNum">     275</span>              : </span>
+<span id="L276"><span class="lineNum">     276</span>              :         { &quot;brass&quot;, { SoundId::BrassGroup, SoundCategory::Winds } },</span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span>              :         { &quot;c-horn-alto&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::Alto,</span>
+<span id="L279"><span class="lineNum">     279</span>              :                                                                   SoundSubCategory::In_C } } },</span>
+<span id="L280"><span class="lineNum">     280</span>              :         { &quot;bb-horn-alto&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::Alto,</span>
+<span id="L281"><span class="lineNum">     281</span>              :                                                                    SoundSubCategory::In_B_flat } } },</span>
+<span id="L282"><span class="lineNum">     282</span>              :         { &quot;a-horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::In_A } } },</span>
+<span id="L283"><span class="lineNum">     283</span>              :         { &quot;ab-horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::In_A_flat } } },</span>
+<span id="L284"><span class="lineNum">     284</span>              :         { &quot;g-horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::In_G } } },</span>
+<span id="L285"><span class="lineNum">     285</span>              :         { &quot;e-horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::In_E } } },</span>
+<span id="L286"><span class="lineNum">     286</span>              :         { &quot;eb-horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::In_E_flat } } },</span>
+<span id="L287"><span class="lineNum">     287</span>              :         { &quot;d-horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::In_D } } },</span>
+<span id="L288"><span class="lineNum">     288</span>              :         { &quot;horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::French,</span>
+<span id="L289"><span class="lineNum">     289</span>              :                                                            SoundSubCategory::In_F } } },</span>
+<span id="L290"><span class="lineNum">     290</span>              :         { &quot;c-horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::In_C } } },</span>
+<span id="L291"><span class="lineNum">     291</span>              :         { &quot;c-horn-bass&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::Bass,</span>
+<span id="L292"><span class="lineNum">     292</span>              :                                                                   SoundSubCategory::In_C } } },</span>
+<span id="L293"><span class="lineNum">     293</span>              :         { &quot;bb-horn-basso&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::Bass,</span>
+<span id="L294"><span class="lineNum">     294</span>              :                                                                     SoundSubCategory::In_B_flat } } },</span>
+<span id="L295"><span class="lineNum">     295</span>              :         { &quot;vienna-horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::Vienna } } },</span>
+<span id="L296"><span class="lineNum">     296</span>              : </span>
+<span id="L297"><span class="lineNum">     297</span>              :         { &quot;bb-wagner-tuba&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Wagner } } },</span>
+<span id="L298"><span class="lineNum">     298</span>              :         { &quot;f-wagner-tuba&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Wagner } } },</span>
+<span id="L299"><span class="lineNum">     299</span>              :         { &quot;wagner-tuba&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Wagner } } },</span>
+<span id="L300"><span class="lineNum">     300</span>              : </span>
+<span id="L301"><span class="lineNum">     301</span>              :         { &quot;eb-cornet&quot;, { SoundId::Cornet, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L302"><span class="lineNum">     302</span>              :         { &quot;c-cornet&quot;, { SoundId::Cornet, SoundCategory::Winds } },</span>
+<span id="L303"><span class="lineNum">     303</span>              :         { &quot;bb-cornet&quot;, { SoundId::Cornet, SoundCategory::Winds } },</span>
+<span id="L304"><span class="lineNum">     304</span>              :         { &quot;a-cornet&quot;, { SoundId::Cornet, SoundCategory::Winds } },</span>
+<span id="L305"><span class="lineNum">     305</span>              : </span>
+<span id="L306"><span class="lineNum">     306</span>              :         { &quot;saxhorn&quot;, { SoundId::Saxhorn, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L307"><span class="lineNum">     307</span>              :         { &quot;f-alto-horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L308"><span class="lineNum">     308</span>              :         { &quot;eb-alto-horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L309"><span class="lineNum">     309</span>              :         { &quot;baritone-horn&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::Baritone } } },</span>
+<span id="L310"><span class="lineNum">     310</span>              :         { &quot;baritone-horn-treble&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::Baritone,</span>
+<span id="L311"><span class="lineNum">     311</span>              :                                                                            SoundSubCategory::Treble } } },</span>
+<span id="L312"><span class="lineNum">     312</span>              :         { &quot;baritone-horn-central-europe-treble&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::CentralEuropean,</span>
+<span id="L313"><span class="lineNum">     313</span>              :                                                                                           SoundSubCategory::Baritone,</span>
+<span id="L314"><span class="lineNum">     314</span>              :                                                                                           SoundSubCategory::Treble } } },</span>
+<span id="L315"><span class="lineNum">     315</span>              :         { &quot;baritone-horn-central-europe&quot;, { SoundId::Horn, SoundCategory::Winds, { SoundSubCategory::Baritone,</span>
+<span id="L316"><span class="lineNum">     316</span>              :                                                                                    SoundSubCategory::CentralEuropean } } },</span>
+<span id="L317"><span class="lineNum">     317</span>              :         { &quot;posthorn&quot;, { SoundId::Posthorn, SoundCategory::Winds } },</span>
+<span id="L318"><span class="lineNum">     318</span>              : </span>
+<span id="L319"><span class="lineNum">     319</span>              :         { &quot;bb-piccolo-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Piccolo } } },</span>
+<span id="L320"><span class="lineNum">     320</span>              :         { &quot;piccolo-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Piccolo } } },</span>
+<span id="L321"><span class="lineNum">     321</span>              :         { &quot;a-piccolo-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Piccolo } } },</span>
+<span id="L322"><span class="lineNum">     322</span>              :         { &quot;f-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds } },</span>
+<span id="L323"><span class="lineNum">     323</span>              :         { &quot;e-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds } },</span>
+<span id="L324"><span class="lineNum">     324</span>              :         { &quot;eb-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds } },</span>
+<span id="L325"><span class="lineNum">     325</span>              :         { &quot;d-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds } },</span>
+<span id="L326"><span class="lineNum">     326</span>              :         { &quot;c-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds } },</span>
+<span id="L327"><span class="lineNum">     327</span>              :         { &quot;trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds } },</span>
+<span id="L328"><span class="lineNum">     328</span>              :         { &quot;bb-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds } },</span>
+<span id="L329"><span class="lineNum">     329</span>              :         { &quot;a-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds } },</span>
+<span id="L330"><span class="lineNum">     330</span>              :         { &quot;pocket-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Pocket } } },</span>
+<span id="L331"><span class="lineNum">     331</span>              :         { &quot;slide-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Slide } } },</span>
+<span id="L332"><span class="lineNum">     332</span>              :         { &quot;tenor-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L333"><span class="lineNum">     333</span>              :         { &quot;eb-bass-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L334"><span class="lineNum">     334</span>              :         { &quot;c-bass-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L335"><span class="lineNum">     335</span>              :         { &quot;bass-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L336"><span class="lineNum">     336</span>              :         { &quot;bb-bass-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L337"><span class="lineNum">     337</span>              :         { &quot;f-baroque-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Baroque } } },</span>
+<span id="L338"><span class="lineNum">     338</span>              :         { &quot;eb-baroque-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Baroque } } },</span>
+<span id="L339"><span class="lineNum">     339</span>              :         { &quot;d-baroque-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Baroque } } },</span>
+<span id="L340"><span class="lineNum">     340</span>              :         { &quot;c-baroque-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Baroque } } },</span>
+<span id="L341"><span class="lineNum">     341</span>              :         { &quot;bb-baroque-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Baroque } } },</span>
+<span id="L342"><span class="lineNum">     342</span>              :         { &quot;baroque-trumpet&quot;, { SoundId::Trumpet, SoundCategory::Winds, { SoundSubCategory::Baroque } } },</span>
+<span id="L343"><span class="lineNum">     343</span>              : </span>
+<span id="L344"><span class="lineNum">     344</span>              :         { &quot;bugle&quot;, { SoundId::Bugle, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L345"><span class="lineNum">     345</span>              :         { &quot;soprano-bugle&quot;, { SoundId::Bugle, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L346"><span class="lineNum">     346</span>              :         { &quot;alto-bugle&quot;, { SoundId::Bugle, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L347"><span class="lineNum">     347</span>              :         { &quot;mellophone&quot;, { SoundId::MellophoneBugle, SoundCategory::Winds } },</span>
+<span id="L348"><span class="lineNum">     348</span>              :         { &quot;baritone-bugle&quot;, { SoundId::Bugle, SoundCategory::Winds, { SoundSubCategory::Baritone } } },</span>
+<span id="L349"><span class="lineNum">     349</span>              :         { &quot;euphonium-bugle&quot;, { SoundId::EuphoniumBugle, SoundCategory::Winds } },</span>
+<span id="L350"><span class="lineNum">     350</span>              :         { &quot;mellophon-bugle&quot;, { SoundId::MellophoneBugle, SoundCategory::Winds } },</span>
+<span id="L351"><span class="lineNum">     351</span>              :         { &quot;contrabass-bugle&quot;, { SoundId::Bugle, SoundCategory::Winds, { SoundSubCategory::Contra_Bass } } },</span>
+<span id="L352"><span class="lineNum">     352</span>              : </span>
+<span id="L353"><span class="lineNum">     353</span>              :         { &quot;fiscorn&quot;, { SoundId::Fiscorn, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L354"><span class="lineNum">     354</span>              :         { &quot;flugelhorn&quot;, { SoundId::Flugelhorn, SoundCategory::Winds } },</span>
+<span id="L355"><span class="lineNum">     355</span>              :         { &quot;kuhlohorn&quot;, { SoundId::Kuhlohorn, SoundCategory::Winds } },</span>
+<span id="L356"><span class="lineNum">     356</span>              : </span>
+<span id="L357"><span class="lineNum">     357</span>              :         { &quot;f-alto-ophicleide&quot;, { SoundId::Ophicleide, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L358"><span class="lineNum">     358</span>              :         { &quot;eb-alto-ophicleide&quot;, { SoundId::Ophicleide, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L359"><span class="lineNum">     359</span>              :         { &quot;ophicleide&quot;, { SoundId::Ophicleide, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L360"><span class="lineNum">     360</span>              :         { &quot;c-bass-ophicleide&quot;, { SoundId::Ophicleide, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L361"><span class="lineNum">     361</span>              :         { &quot;bb-bass-ophicleide&quot;, { SoundId::Ophicleide, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L362"><span class="lineNum">     362</span>              :         { &quot;eb-contrabass-ophicleide&quot;, { SoundId::Ophicleide, SoundCategory::Winds, { SoundSubCategory::Contra_Bass } } },</span>
+<span id="L363"><span class="lineNum">     363</span>              : </span>
+<span id="L364"><span class="lineNum">     364</span>              :         { &quot;cornettino&quot;, { SoundId::Cornettino, SoundCategory::Winds } },</span>
+<span id="L365"><span class="lineNum">     365</span>              :         { &quot;cornett&quot;, { SoundId::Cornett, SoundCategory::Winds } },</span>
+<span id="L366"><span class="lineNum">     366</span>              :         { &quot;soprano-cornett&quot;, { SoundId::Cornett, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L367"><span class="lineNum">     367</span>              :         { &quot;alto-cornett&quot;, { SoundId::Cornett, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L368"><span class="lineNum">     368</span>              :         { &quot;tenor-cornett&quot;, { SoundId::Cornett, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L369"><span class="lineNum">     369</span>              : </span>
+<span id="L370"><span class="lineNum">     370</span>              :         { &quot;serpent&quot;, { SoundId::Serpent, SoundCategory::Winds } },</span>
+<span id="L371"><span class="lineNum">     371</span>              : </span>
+<span id="L372"><span class="lineNum">     372</span>              :         { &quot;soprano-trombone&quot;, { SoundId::Trombone, SoundCategory::Winds, { SoundSubCategory::Soprano } } },</span>
+<span id="L373"><span class="lineNum">     373</span>              :         { &quot;alto-trombone&quot;, { SoundId::Trombone, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L374"><span class="lineNum">     374</span>              :         { &quot;tenor-trombone&quot;, { SoundId::Trombone, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L375"><span class="lineNum">     375</span>              :         { &quot;trombone&quot;, { SoundId::Trombone, SoundCategory::Winds } },</span>
+<span id="L376"><span class="lineNum">     376</span>              :         { &quot;trombone-treble&quot;, { SoundId::Trombone, SoundCategory::Winds, { SoundSubCategory::Treble } } },</span>
+<span id="L377"><span class="lineNum">     377</span>              :         { &quot;contrabass-trombone&quot;, { SoundId::Trombone, SoundCategory::Winds, { SoundSubCategory::Contra_Bass } } },</span>
+<span id="L378"><span class="lineNum">     378</span>              :         { &quot;bass-trombone&quot;, { SoundId::Trombone, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L379"><span class="lineNum">     379</span>              :         { &quot;cimbasso&quot;, { SoundId::Cimbasso, SoundCategory::Winds } },</span>
+<span id="L380"><span class="lineNum">     380</span>              : </span>
+<span id="L381"><span class="lineNum">     381</span>              :         { &quot;alto-sackbut&quot;, { SoundId::Sackbut, SoundCategory::Winds, { SoundSubCategory::Alto } } },</span>
+<span id="L382"><span class="lineNum">     382</span>              :         { &quot;tenor-sackbut&quot;, { SoundId::Sackbut, SoundCategory::Winds, { SoundSubCategory::Tenor } } },</span>
+<span id="L383"><span class="lineNum">     383</span>              :         { &quot;bass-sackbut&quot;, { SoundId::Sackbut, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L384"><span class="lineNum">     384</span>              : </span>
+<span id="L385"><span class="lineNum">     385</span>              :         { &quot;euphonium&quot;, { SoundId::Euphonium, SoundCategory::Winds } },</span>
+<span id="L386"><span class="lineNum">     386</span>              :         { &quot;euphonium-treble&quot;, { SoundId::Euphonium, SoundCategory::Winds, { SoundSubCategory::Treble } } },</span>
+<span id="L387"><span class="lineNum">     387</span>              : </span>
+<span id="L388"><span class="lineNum">     388</span>              :         { &quot;tuba&quot;, { SoundId::Tuba, SoundCategory::Winds } },</span>
+<span id="L389"><span class="lineNum">     389</span>              :         { &quot;f-tuba&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L390"><span class="lineNum">     390</span>              :         { &quot;eb-tuba&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L391"><span class="lineNum">     391</span>              :         { &quot;bass-eb-tuba&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L392"><span class="lineNum">     392</span>              :         { &quot;bass-f-tuba&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Bass } } },</span>
+<span id="L393"><span class="lineNum">     393</span>              :         { &quot;eb-tuba-treble&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Treble,</span>
+<span id="L394"><span class="lineNum">     394</span>              :                                                                      SoundSubCategory::Bass } } },</span>
+<span id="L395"><span class="lineNum">     395</span>              :         { &quot;c-tuba&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Contra_Bass } } },</span>
+<span id="L396"><span class="lineNum">     396</span>              :         { &quot;bb-tuba&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Contra_Bass } } },</span>
+<span id="L397"><span class="lineNum">     397</span>              :         { &quot;bb-tuba-treble&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Treble } } },</span>
+<span id="L398"><span class="lineNum">     398</span>              :         { &quot;subcontrabass-tuba&quot;, { SoundId::Tuba, SoundCategory::Winds, { SoundSubCategory::Sub_Contra_Bass } } },</span>
+<span id="L399"><span class="lineNum">     399</span>              : </span>
+<span id="L400"><span class="lineNum">     400</span>              :         { &quot;bb-sousaphone&quot;, { SoundId::Sousaphone, SoundCategory::Winds } },</span>
+<span id="L401"><span class="lineNum">     401</span>              :         { &quot;bb-sousaphone-treble&quot;, { SoundId::Sousaphone, SoundCategory::Winds, { SoundSubCategory::Treble } } },</span>
+<span id="L402"><span class="lineNum">     402</span>              :         { &quot;sousaphone&quot;, { SoundId::Sousaphone, SoundCategory::Winds } },</span>
+<span id="L403"><span class="lineNum">     403</span>              :         { &quot;helicon&quot;, { SoundId::Helicon, SoundCategory::Winds } },</span>
+<span id="L404"><span class="lineNum">     404</span>              : </span>
+<span id="L405"><span class="lineNum">     405</span>              :         { &quot;conch&quot;, { SoundId::Conch, SoundCategory::Winds } },</span>
+<span id="L406"><span class="lineNum">     406</span>              :         { &quot;horagai&quot;, { SoundId::Horagai, SoundCategory::Winds, { SoundSubCategory::Japanese } } },</span>
+<span id="L407"><span class="lineNum">     407</span>              : </span>
+<span id="L408"><span class="lineNum">     408</span>              :         { &quot;alphorn&quot;, { SoundId::Alphorn, SoundCategory::Winds, { SoundSubCategory::Alpine } } },</span>
+<span id="L409"><span class="lineNum">     409</span>              :         { &quot;rag-dung&quot;, { SoundId::RagDung, SoundCategory::Winds, { SoundSubCategory::Tibetan } } },</span>
+<span id="L410"><span class="lineNum">     410</span>              :         { &quot;didgeridoo&quot;, { SoundId::Didgeridoo, SoundCategory::Winds, { SoundSubCategory::Australian } } },</span>
+<span id="L411"><span class="lineNum">     411</span>              :         { &quot;shofar&quot;, { SoundId::Shofar, SoundCategory::Winds } },</span>
+<span id="L412"><span class="lineNum">     412</span>              :         { &quot;vuvuzela&quot;, { SoundId::Vuvuzela, SoundCategory::Winds } },</span>
+<span id="L413"><span class="lineNum">     413</span>              :         { &quot;tuned-klaxon-horns&quot;, { SoundId::KlaxonHorns, SoundCategory::Winds } },</span>
+<span id="L414"><span class="lineNum">     414</span>              :         { &quot;kazoo&quot;, { SoundId::Kazoo, SoundCategory::Winds } },</span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">         646 :     };</span></span>
+<span id="L416"><span class="lineNum">     416</span>              : </span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">          21 :     auto search = SETUP_DATA_MAP.find(instrument-&gt;id().toStdString());</span></span>
+<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">          21 :     if (search == SETUP_DATA_MAP.cend()) {</span></span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">          11 :         static PlaybackSetupData empty;</span></span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">          11 :         return empty;</span></span>
+<span id="L421"><span class="lineNum">     421</span>              :     }</span>
+<span id="L422"><span class="lineNum">     422</span>              : </span>
+<span id="L423"><span class="lineNum">     423</span>              :     static const std::unordered_set&lt;SoundId&gt; supportPrimaryAndSecondaryCategories {</span>
+<span id="L424"><span class="lineNum">     424</span>              :         SoundId::Flute,</span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">          12 :     };</span></span>
+<span id="L426"><span class="lineNum">     426</span>              : </span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">          10 :     if (muse::contains(supportPrimaryAndSecondaryCategories, search-&gt;second.soundId())) {</span></span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">           3 :         SoundSubCategory category = instrument-&gt;isPrimary() ? SoundSubCategory::Primary : SoundSubCategory::Secondary;</span></span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">           3 :         PlaybackSetupData setupData = search-&gt;second;</span></span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">           3 :         setupData.add(category);</span></span>
+<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">           3 :         return setupData;</span></span>
+<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">           3 :     }</span></span>
+<span id="L433"><span class="lineNum">     433</span>              : </span>
+<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">           7 :     return search-&gt;second;</span></span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">         312 : }</span></span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

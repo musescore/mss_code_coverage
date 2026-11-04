@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/importexport/guitarpro/internal/gtp/gpbar.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../../index.html">top level</a> - <a href="index.html">src/importexport/guitarpro/internal/gtp</a> - gpbar.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">10</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #ifndef MU_IMPORTEXPORT_GPBAR_H</span>
+<span id="L2"><span class="lineNum">       2</span>              : #define MU_IMPORTEXPORT_GPBAR_H</span>
+<span id="L3"><span class="lineNum">       3</span>              : </span>
+<span id="L4"><span class="lineNum">       4</span>              : #include &quot;gpvoice.h&quot;</span>
+<span id="L5"><span class="lineNum">       5</span>              : </span>
+<span id="L6"><span class="lineNum">       6</span>              : namespace mu::iex::guitarpro {</span>
+<span id="L7"><span class="lineNum">       7</span>              : class GPBar</span>
+<span id="L8"><span class="lineNum">       8</span>              : {</span>
+<span id="L9"><span class="lineNum">       9</span>              : public:</span>
+<span id="L10"><span class="lineNum">      10</span>              :     enum class ClefType {</span>
+<span id="L11"><span class="lineNum">      11</span>              :         G2, F4, C3, C4, Neutral</span>
+<span id="L12"><span class="lineNum">      12</span>              :     };</span>
+<span id="L13"><span class="lineNum">      13</span>              :     enum class OttaviaType {</span>
+<span id="L14"><span class="lineNum">      14</span>              :         ma15, va8, Regular, vb8, mb15</span>
+<span id="L15"><span class="lineNum">      15</span>              :     };</span>
+<span id="L16"><span class="lineNum">      16</span>              :     enum class SimileMark {</span>
+<span id="L17"><span class="lineNum">      17</span>              :         None, Simple, FirstOfDouble, SecondOfDouble</span>
+<span id="L18"><span class="lineNum">      18</span>              :     };</span>
+<span id="L19"><span class="lineNum">      19</span>              : </span>
+<span id="L20"><span class="lineNum">      20</span>              :     struct Clef {</span>
+<span id="L21"><span class="lineNum">      21</span>              :         ClefType type{ ClefType::G2 };</span>
+<span id="L22"><span class="lineNum">      22</span>              :         OttaviaType ottavia{ OttaviaType::Regular };</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC tlaBgGNC">         536 :         bool operator==(const GPBar::Clef&amp; c) const { return type == c.type &amp;&amp; ottavia == c.ottavia; }</span></span>
+<span id="L25"><span class="lineNum">      25</span>              :     };</span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">         778 :     ~GPBar() = default;</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">         724 :     void addGPVoice(std::unique_ptr&lt;GPVoice&gt;&amp;&amp; v) { _voices.push_back(std::move(v)); }</span></span>
+<span id="L29"><span class="lineNum">      29</span>              : </span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">         778 :     void setClefType(GPBar::ClefType clef) { _clef.type = clef; }</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           6 :     void setOttaviaType(GPBar::OttaviaType ottavia) { _clef.ottavia = ottavia; }</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">        1568 :     GPBar::Clef clef() const { return _clef; }</span></span>
+<span id="L33"><span class="lineNum">      33</span>              : </span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           3 :     void setSimileMark(SimileMark s) { _simileMark = s; }</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">         781 :     SimileMark simileMark() const { return _simileMark; }</span></span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">         778 :     void setId(int id) { _id = id; }</span></span>
+<span id="L38"><span class="lineNum">      38</span>              : </span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">         775 :     const std::vector&lt;std::unique_ptr&lt;GPVoice&gt; &gt;&amp; voices() const { return _voices; }</span></span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span>              : private:</span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span>              :     int _id{ -1 };</span>
+<span id="L44"><span class="lineNum">      44</span>              :     std::vector&lt;std::unique_ptr&lt;GPVoice&gt; &gt; _voices;</span>
+<span id="L45"><span class="lineNum">      45</span>              :     Clef _clef;</span>
+<span id="L46"><span class="lineNum">      46</span>              :     SimileMark _simileMark;</span>
+<span id="L47"><span class="lineNum">      47</span>              : };</span>
+<span id="L48"><span class="lineNum">      48</span>              : } // namespace mu::iex::guitarpro</span>
+<span id="L49"><span class="lineNum">      49</span>              : </span>
+<span id="L50"><span class="lineNum">      50</span>              : #endif // MU_IMPORTEXPORT_GPBAR_H</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

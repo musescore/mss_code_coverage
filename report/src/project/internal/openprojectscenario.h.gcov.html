@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/project/internal/openprojectscenario.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/project/internal</a> - openprojectscenario.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2022 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #pragma once</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;iopenprojectscenario.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &lt;QString&gt;</span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &lt;QUrl&gt;</span>
+<span id="L29"><span class="lineNum">      29</span>              : </span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;modularity/ioc.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;async/asyncable.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;project/iprojectsession.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : #include &quot;cloud/musescorecom/imusescorecomservice.h&quot;</span>
+<span id="L34"><span class="lineNum">      34</span>              : #include &quot;interactive/iinteractive.h&quot;</span>
+<span id="L35"><span class="lineNum">      35</span>              : #include &quot;interactive/iplatforminteractive.h&quot;</span>
+<span id="L36"><span class="lineNum">      36</span>              : #include &quot;io/ifilesystem.h&quot;</span>
+<span id="L37"><span class="lineNum">      37</span>              : #include &quot;multiwindows/imultiwindowsprovider.h&quot;</span>
+<span id="L38"><span class="lineNum">      38</span>              : #include &quot;musesounds/imusesamplercheckstatusscenario.h&quot;</span>
+<span id="L39"><span class="lineNum">      39</span>              : #include &quot;musesounds/imusesoundscheckupdatescenario.h&quot;</span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span>              : #include &quot;imscmetareader.h&quot;</span>
+<span id="L42"><span class="lineNum">      42</span>              : #include &quot;iprojectautosaver.h&quot;</span>
+<span id="L43"><span class="lineNum">      43</span>              : #include &quot;iprojectconfiguration.h&quot;</span>
+<span id="L44"><span class="lineNum">      44</span>              : #include &quot;inotationreadersregister.h&quot;</span>
+<span id="L45"><span class="lineNum">      45</span>              : #include &quot;iprojectcreator.h&quot;</span>
+<span id="L46"><span class="lineNum">      46</span>              : #include &quot;irecentfilescontroller.h&quot;</span>
+<span id="L47"><span class="lineNum">      47</span>              : #include &quot;iconvertfiletoscorescenario.h&quot;</span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span>              : namespace mu::project {</span>
+<span id="L50"><span class="lineNum">      50</span>              : class OpenProjectScenario : public IOpenProjectScenario, public muse::Contextable, public muse::async::Asyncable</span>
+<span id="L51"><span class="lineNum">      51</span>              : {</span>
+<span id="L52"><span class="lineNum">      52</span>              :     friend class OpenProjectScenarioTests;</span>
+<span id="L53"><span class="lineNum">      53</span>              : </span>
+<span id="L54"><span class="lineNum">      54</span>              : public:</span>
+<span id="L55"><span class="lineNum">      55</span>              :     muse::GlobalInject&lt;IProjectConfiguration&gt; configuration;</span>
+<span id="L56"><span class="lineNum">      56</span>              :     muse::GlobalInject&lt;muse::io::IFileSystem&gt; fileSystem;</span>
+<span id="L57"><span class="lineNum">      57</span>              :     muse::GlobalInject&lt;muse::mi::IMultiWindowsProvider&gt; multiwindowsProvider;</span>
+<span id="L58"><span class="lineNum">      58</span>              :     muse::GlobalInject&lt;muse::cloud::IMuseScoreComService&gt; museScoreComService;</span>
+<span id="L59"><span class="lineNum">      59</span>              :     muse::GlobalInject&lt;IProjectCreator&gt; projectCreator;</span>
+<span id="L60"><span class="lineNum">      60</span>              :     muse::GlobalInject&lt;INotationReadersRegister&gt; readers;</span>
+<span id="L61"><span class="lineNum">      61</span>              :     muse::GlobalInject&lt;IMscMetaReader&gt; mscMetaReader;</span>
+<span id="L62"><span class="lineNum">      62</span>              :     muse::GlobalInject&lt;muse::IPlatformInteractive&gt; platformInteractive;</span>
+<span id="L63"><span class="lineNum">      63</span>              :     muse::ContextInject&lt;IProjectAutoSaver&gt; projectAutoSaver = { this };</span>
+<span id="L64"><span class="lineNum">      64</span>              :     muse::ContextInject&lt;IRecentFilesController&gt; recentFilesController = { this };</span>
+<span id="L65"><span class="lineNum">      65</span>              :     muse::ContextInject&lt;muse::IInteractive&gt; interactive = { this };</span>
+<span id="L66"><span class="lineNum">      66</span>              :     muse::ContextInject&lt;project::IProjectSession&gt; projectSession = { this };</span>
+<span id="L67"><span class="lineNum">      67</span>              :     muse::ContextInject&lt;musesounds::IMuseSoundsCheckUpdateScenario&gt; museSoundsCheckUpdateScenario = { this };</span>
+<span id="L68"><span class="lineNum">      68</span>              :     muse::ContextInject&lt;musesounds::IMuseSamplerCheckStatusScenario&gt; museSamplerCheckStatusScenario = { this };</span>
+<span id="L69"><span class="lineNum">      69</span>              :     muse::ContextInject&lt;IConvertFileToScoreScenario&gt; convertFileToScoreScenario = { this };</span>
+<span id="L70"><span class="lineNum">      70</span>              : </span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC tlaBgGNC">          51 :     OpenProjectScenario(const muse::modularity::ContextPtr&amp; iocCtx)</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">          51 :         : muse::Contextable(iocCtx) {}</span></span>
+<span id="L73"><span class="lineNum">      73</span>              : </span>
+<span id="L74"><span class="lineNum">      74</span>              :     bool isUrlSupported(const QUrl&amp; url) const override;</span>
+<span id="L75"><span class="lineNum">      75</span>              :     bool isFileSupported(const muse::io::path_t&amp; path) const override;</span>
+<span id="L76"><span class="lineNum">      76</span>              : </span>
+<span id="L77"><span class="lineNum">      77</span>              :     muse::async::Promise&lt;muse::Ret&gt; openProject(const ProjectFile&amp; file) override;</span>
+<span id="L78"><span class="lineNum">      78</span>              :     muse::async::Promise&lt;muse::Ret&gt; openProject(const muse::io::path_t&amp; path, const QString&amp; displayNameOverride = QString()) override;</span>
+<span id="L79"><span class="lineNum">      79</span>              :     muse::async::Promise&lt;muse::Ret&gt; openProject(const muse::rcommand::Params&amp; params) override;</span>
+<span id="L80"><span class="lineNum">      80</span>              : </span>
+<span id="L81"><span class="lineNum">      81</span>              :     muse::async::Promise&lt;muse::Ret&gt; revertToLastSaved() override;</span>
+<span id="L82"><span class="lineNum">      82</span>              :     muse::Ret finishOpening() override;</span>
+<span id="L83"><span class="lineNum">      83</span>              : </span>
+<span id="L84"><span class="lineNum">      84</span>              :     muse::Uri resolveNotationPageUri() const override;</span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span>              :     const ProjectBeingDownloaded&amp; projectBeingDownloaded() const override;</span>
+<span id="L87"><span class="lineNum">      87</span>              :     muse::async::Notification projectBeingDownloadedChanged() const override;</span>
+<span id="L88"><span class="lineNum">      88</span>              : </span>
+<span id="L89"><span class="lineNum">      89</span>              :     bool isBusy(BusyStatus status) const override;</span>
+<span id="L90"><span class="lineNum">      90</span>              :     muse::async::Notification busyChanged() const override;</span>
+<span id="L91"><span class="lineNum">      91</span>              : </span>
+<span id="L92"><span class="lineNum">      92</span>              : private:</span>
+<span id="L93"><span class="lineNum">      93</span>              :     template&lt;typename T&gt;</span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">          38 :     static muse::async::Promise&lt;T&gt; resolvedPromise(const T&amp; value)</span></span>
+<span id="L95"><span class="lineNum">      95</span>              :     {</span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">         114 :         return muse::async::make_promise&lt;T&gt;([value](auto resolve) {</span></span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">          38 :             return resolve(value);</span></span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">          76 :         });</span></span>
+<span id="L99"><span class="lineNum">      99</span>              :     }</span>
+<span id="L100"><span class="lineNum">     100</span>              : </span>
+<span id="L101"><span class="lineNum">     101</span>              :     bool isProjectOpened(const muse::io::path_t&amp; scorePath) const;</span>
+<span id="L102"><span class="lineNum">     102</span>              : </span>
+<span id="L103"><span class="lineNum">     103</span>              :     void setBusy(BusyStatus status, bool isBusy);</span>
+<span id="L104"><span class="lineNum">     104</span>              :     muse::async::Promise&lt;muse::Ret&gt; runIfNotBusy(BusyStatus status, const std::function&lt;muse::async::Promise&lt;muse::Ret&gt;()&gt;&amp; flow);</span>
+<span id="L105"><span class="lineNum">     105</span>              : </span>
+<span id="L106"><span class="lineNum">     106</span>              :     muse::async::Promise&lt;muse::RetVal&lt;INotationProjectPtr&gt; &gt; loadProject(const muse::io::path_t&amp; filePath);</span>
+<span id="L107"><span class="lineNum">     107</span>              :     muse::async::Promise&lt;muse::Ret&gt; loadWithFallback(const std::shared_ptr&lt;INotationProject&gt;&amp; project, const muse::io::path_t&amp; loadPath,</span>
+<span id="L108"><span class="lineNum">     108</span>              :                                                      const std::string&amp; format);</span>
+<span id="L109"><span class="lineNum">     109</span>              : </span>
+<span id="L110"><span class="lineNum">     110</span>              :     muse::async::Promise&lt;muse::Ret&gt; doOpenProject(const muse::io::path_t&amp; filePath);</span>
+<span id="L111"><span class="lineNum">     111</span>              :     muse::async::Promise&lt;muse::Ret&gt; doOpenCloudProject(const muse::io::path_t&amp; filePath, const CloudProjectInfo&amp; info, bool isOwner = true);</span>
+<span id="L112"><span class="lineNum">     112</span>              :     muse::async::Promise&lt;muse::Ret&gt; doOpenCloudProjectOffline(const muse::io::path_t&amp; filePath, const QString&amp; displayNameOverride);</span>
+<span id="L113"><span class="lineNum">     113</span>              : </span>
+<span id="L114"><span class="lineNum">     114</span>              :     muse::async::Promise&lt;muse::Ret&gt; downloadAndOpenCloudProject(int scoreId,</span>
+<span id="L115"><span class="lineNum">     115</span>              :                                                                 const QString&amp; hash = QString(),</span>
+<span id="L116"><span class="lineNum">     116</span>              :                                                                 const QString&amp; secret = QString(), bool isOwner = true);</span>
+<span id="L117"><span class="lineNum">     117</span>              :     muse::async::Promise&lt;muse::Ret&gt; doDownloadAndOpenCloudProject(int scoreId, const QString&amp; hash, const QString&amp; secret, bool isOwner);</span>
+<span id="L118"><span class="lineNum">     118</span>              :     muse::async::Promise&lt;muse::Ret&gt; downloadCloudProject(int scoreId, const muse::io::path_t&amp; localPath, const QString&amp; hash,</span>
+<span id="L119"><span class="lineNum">     119</span>              :                                                          const QString&amp; secret, const CloudProjectInfo&amp; info, bool isOwner);</span>
+<span id="L120"><span class="lineNum">     120</span>              :     muse::async::Promise&lt;muse::Ret&gt; openMuseScoreUrl(const QUrl&amp; url);</span>
+<span id="L121"><span class="lineNum">     121</span>              :     muse::async::Promise&lt;muse::Ret&gt; openScoreFromMuseScoreCom(const QUrl&amp; url);</span>
+<span id="L122"><span class="lineNum">     122</span>              :     muse::async::Promise&lt;muse::Ret&gt; openScoreFromMuseScoreCom(const QUrl&amp; url, int scoreId, const muse::cloud::ScoreInfo&amp; scoreInfo);</span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span>              :     muse::Ret openPageIfNeed(muse::Uri pageUri);</span>
+<span id="L125"><span class="lineNum">     125</span>              : </span>
+<span id="L126"><span class="lineNum">     126</span>              :     muse::async::Promise&lt;muse::RetVal&lt;muse::Val&gt; &gt; openDialog(const muse::UriQuery&amp; query) const;</span>
+<span id="L127"><span class="lineNum">     127</span>              :     muse::async::Promise&lt;muse::RetVal&lt;muse::Val&gt; &gt; ensureAuthorization() const;</span>
+<span id="L128"><span class="lineNum">     128</span>              : </span>
+<span id="L129"><span class="lineNum">     129</span>              :     muse::async::Promise&lt;bool&gt; shouldRetryLoadAfterError(const muse::Ret&amp; ret, const muse::io::path_t&amp; filepath);</span>
+<span id="L130"><span class="lineNum">     130</span>              :     muse::async::Promise&lt;bool&gt; askIfUserAgreesToOpenProjectWithIncompatibleVersion(const std::string&amp; errorText);</span>
+<span id="L131"><span class="lineNum">     131</span>              :     void warnFileTooNew(const muse::io::path_t&amp; filepath);</span>
+<span id="L132"><span class="lineNum">     132</span>              :     muse::async::Promise&lt;bool&gt; askIfUserAgreesToOpenCorruptedProject(const muse::String&amp; projectName, const std::string&amp; errorText);</span>
+<span id="L133"><span class="lineNum">     133</span>              :     void warnProjectCriticallyCorrupted(const muse::String&amp; projectName, const std::string&amp; errorText);</span>
+<span id="L134"><span class="lineNum">     134</span>              :     void warnProjectCannotBeOpened(const muse::Ret&amp; ret, const muse::io::path_t&amp; filepath);</span>
+<span id="L135"><span class="lineNum">     135</span>              : </span>
+<span id="L136"><span class="lineNum">     136</span>              :     void showCloudOpenError(const muse::Ret&amp; ret) const;</span>
+<span id="L137"><span class="lineNum">     137</span>              : </span>
+<span id="L138"><span class="lineNum">     138</span>              :     muse::async::Promise&lt;muse::io::path_t&gt; selectScoreOpeningFile() const;</span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span>              :     RecentFile makeRecentFile(INotationProjectPtr project);</span>
+<span id="L141"><span class="lineNum">     141</span>              : </span>
+<span id="L142"><span class="lineNum">     142</span>              :     std::set&lt;BusyStatus&gt; m_busyStatuses;</span>
+<span id="L143"><span class="lineNum">     143</span>              :     muse::async::Notification m_busyChanged;</span>
+<span id="L144"><span class="lineNum">     144</span>              : </span>
+<span id="L145"><span class="lineNum">     145</span>              :     ProjectBeingDownloaded m_projectBeingDownloaded;</span>
+<span id="L146"><span class="lineNum">     146</span>              :     muse::async::Notification m_projectBeingDownloadedChanged;</span>
+<span id="L147"><span class="lineNum">     147</span>              : };</span>
+<span id="L148"><span class="lineNum">     148</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

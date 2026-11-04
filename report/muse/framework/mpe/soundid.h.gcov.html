@@ -1,0 +1,1034 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - muse/framework/mpe/soundid.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">muse/framework/mpe</a> - soundid.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">65.8&nbsp;%</td>
+            <td class="headerCovTableEntry">38</td>
+            <td class="headerCovTableEntry">25</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2021 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #ifndef MUSE_MPE_SOUNDID_H</span>
+<span id="L24"><span class="lineNum">      24</span>              : #define MUSE_MPE_SOUNDID_H</span>
+<span id="L25"><span class="lineNum">      25</span>              : </span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &lt;set&gt;</span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &lt;unordered_map&gt;</span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;types/string.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : </span>
+<span id="L31"><span class="lineNum">      31</span>              : namespace muse::mpe {</span>
+<span id="L32"><span class="lineNum">      32</span>              : enum class SoundId</span>
+<span id="L33"><span class="lineNum">      33</span>              : {</span>
+<span id="L34"><span class="lineNum">      34</span>              :     Undefined = -1,</span>
+<span id="L35"><span class="lineNum">      35</span>              :     Unknown,</span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span>              :     Accordion,</span>
+<span id="L38"><span class="lineNum">      38</span>              :     Bandoneon,</span>
+<span id="L39"><span class="lineNum">      39</span>              :     Concertina,</span>
+<span id="L40"><span class="lineNum">      40</span>              :     Harmonica,</span>
+<span id="L41"><span class="lineNum">      41</span>              :     Melodica,</span>
+<span id="L42"><span class="lineNum">      42</span>              :     Sheng,</span>
+<span id="L43"><span class="lineNum">      43</span>              :     Celesta,</span>
+<span id="L44"><span class="lineNum">      44</span>              :     Clavichord,</span>
+<span id="L45"><span class="lineNum">      45</span>              :     Harpsichord,</span>
+<span id="L46"><span class="lineNum">      46</span>              :     Virginal,</span>
+<span id="L47"><span class="lineNum">      47</span>              :     Piano,</span>
+<span id="L48"><span class="lineNum">      48</span>              :     Organ,</span>
+<span id="L49"><span class="lineNum">      49</span>              :     Harmonium,</span>
+<span id="L50"><span class="lineNum">      50</span>              :     Synthesizer,</span>
+<span id="L51"><span class="lineNum">      51</span>              :     Theremin,</span>
+<span id="L52"><span class="lineNum">      52</span>              :     OndesMartenot,</span>
+<span id="L53"><span class="lineNum">      53</span>              : </span>
+<span id="L54"><span class="lineNum">      54</span>              :     Harp,</span>
+<span id="L55"><span class="lineNum">      55</span>              :     Cavaquinho,</span>
+<span id="L56"><span class="lineNum">      56</span>              :     Guitar,</span>
+<span id="L57"><span class="lineNum">      57</span>              :     BassGuitar,</span>
+<span id="L58"><span class="lineNum">      58</span>              :     Banjo,</span>
+<span id="L59"><span class="lineNum">      59</span>              :     Ukulele,</span>
+<span id="L60"><span class="lineNum">      60</span>              :     Mandolin,</span>
+<span id="L61"><span class="lineNum">      61</span>              :     MtnDulcimer,</span>
+<span id="L62"><span class="lineNum">      62</span>              :     Lute,</span>
+<span id="L63"><span class="lineNum">      63</span>              :     Theorbo,</span>
+<span id="L64"><span class="lineNum">      64</span>              :     Archlute,</span>
+<span id="L65"><span class="lineNum">      65</span>              :     Balalaika,</span>
+<span id="L66"><span class="lineNum">      66</span>              :     Guzheng,</span>
+<span id="L67"><span class="lineNum">      67</span>              :     Guqin,</span>
+<span id="L68"><span class="lineNum">      68</span>              :     Pipa,</span>
+<span id="L69"><span class="lineNum">      69</span>              :     Yangqin,</span>
+<span id="L70"><span class="lineNum">      70</span>              :     Koto,</span>
+<span id="L71"><span class="lineNum">      71</span>              :     Oud,</span>
+<span id="L72"><span class="lineNum">      72</span>              :     Shamisen,</span>
+<span id="L73"><span class="lineNum">      73</span>              :     Sitar,</span>
+<span id="L74"><span class="lineNum">      74</span>              :     Prim,</span>
+<span id="L75"><span class="lineNum">      75</span>              :     Brac,</span>
+<span id="L76"><span class="lineNum">      76</span>              :     Bugarija,</span>
+<span id="L77"><span class="lineNum">      77</span>              :     Berda,</span>
+<span id="L78"><span class="lineNum">      78</span>              :     Celo,</span>
+<span id="L79"><span class="lineNum">      79</span>              :     Bandurria,</span>
+<span id="L80"><span class="lineNum">      80</span>              :     Laud,</span>
+<span id="L81"><span class="lineNum">      81</span>              :     StringsGroup,</span>
+<span id="L82"><span class="lineNum">      82</span>              :     Violin,</span>
+<span id="L83"><span class="lineNum">      83</span>              :     Viola,</span>
+<span id="L84"><span class="lineNum">      84</span>              :     ViolaDaGamba,</span>
+<span id="L85"><span class="lineNum">      85</span>              :     Violoncello,</span>
+<span id="L86"><span class="lineNum">      86</span>              :     Viol,</span>
+<span id="L87"><span class="lineNum">      87</span>              :     PardessusViol,</span>
+<span id="L88"><span class="lineNum">      88</span>              :     Baryton,</span>
+<span id="L89"><span class="lineNum">      89</span>              :     Violone,</span>
+<span id="L90"><span class="lineNum">      90</span>              :     Nyckelharpa,</span>
+<span id="L91"><span class="lineNum">      91</span>              :     Erhu,</span>
+<span id="L92"><span class="lineNum">      92</span>              :     Ajaeng,</span>
+<span id="L93"><span class="lineNum">      93</span>              :     Gayageum,</span>
+<span id="L94"><span class="lineNum">      94</span>              :     Contrabass,</span>
+<span id="L95"><span class="lineNum">      95</span>              :     Octobass,</span>
+<span id="L96"><span class="lineNum">      96</span>              :     TimpleCanario,</span>
+<span id="L97"><span class="lineNum">      97</span>              : </span>
+<span id="L98"><span class="lineNum">      98</span>              :     WindsGroup,</span>
+<span id="L99"><span class="lineNum">      99</span>              :     Piccolo,</span>
+<span id="L100"><span class="lineNum">     100</span>              :     Dulzaina,</span>
+<span id="L101"><span class="lineNum">     101</span>              :     Heckelphone,</span>
+<span id="L102"><span class="lineNum">     102</span>              :     HeckelphoneClarinet,</span>
+<span id="L103"><span class="lineNum">     103</span>              :     Oboe,</span>
+<span id="L104"><span class="lineNum">     104</span>              :     Lupophone,</span>
+<span id="L105"><span class="lineNum">     105</span>              :     Flute,</span>
+<span id="L106"><span class="lineNum">     106</span>              :     PanFlute,</span>
+<span id="L107"><span class="lineNum">     107</span>              :     Danso,</span>
+<span id="L108"><span class="lineNum">     108</span>              :     Daegeum,</span>
+<span id="L109"><span class="lineNum">     109</span>              :     Traverso,</span>
+<span id="L110"><span class="lineNum">     110</span>              :     Dizi,</span>
+<span id="L111"><span class="lineNum">     111</span>              :     Shakuhachi,</span>
+<span id="L112"><span class="lineNum">     112</span>              :     Hichiriki,</span>
+<span id="L113"><span class="lineNum">     113</span>              :     Sho,</span>
+<span id="L114"><span class="lineNum">     114</span>              :     Fife,</span>
+<span id="L115"><span class="lineNum">     115</span>              :     Whistle,</span>
+<span id="L116"><span class="lineNum">     116</span>              :     Flageolet,</span>
+<span id="L117"><span class="lineNum">     117</span>              :     Recorder,</span>
+<span id="L118"><span class="lineNum">     118</span>              :     Ocarina,</span>
+<span id="L119"><span class="lineNum">     119</span>              :     Gemshorn,</span>
+<span id="L120"><span class="lineNum">     120</span>              :     Quena,</span>
+<span id="L121"><span class="lineNum">     121</span>              :     Horn,</span>
+<span id="L122"><span class="lineNum">     122</span>              :     Bassethorn,</span>
+<span id="L123"><span class="lineNum">     123</span>              :     Shawm,</span>
+<span id="L124"><span class="lineNum">     124</span>              :     Cromorne,</span>
+<span id="L125"><span class="lineNum">     125</span>              :     Crumhorn,</span>
+<span id="L126"><span class="lineNum">     126</span>              :     Cornamuse,</span>
+<span id="L127"><span class="lineNum">     127</span>              :     Kelhorn,</span>
+<span id="L128"><span class="lineNum">     128</span>              :     Rauschpfeife,</span>
+<span id="L129"><span class="lineNum">     129</span>              :     Duduk,</span>
+<span id="L130"><span class="lineNum">     130</span>              :     Shenai,</span>
+<span id="L131"><span class="lineNum">     131</span>              :     Clarinet,</span>
+<span id="L132"><span class="lineNum">     132</span>              :     Chalumeau,</span>
+<span id="L133"><span class="lineNum">     133</span>              :     Xaphoon,</span>
+<span id="L134"><span class="lineNum">     134</span>              :     Tarogato,</span>
+<span id="L135"><span class="lineNum">     135</span>              :     Octavin,</span>
+<span id="L136"><span class="lineNum">     136</span>              :     Saxophone,</span>
+<span id="L137"><span class="lineNum">     137</span>              :     Aulochrome,</span>
+<span id="L138"><span class="lineNum">     138</span>              :     Bassoon,</span>
+<span id="L139"><span class="lineNum">     139</span>              :     Contrabassoon,</span>
+<span id="L140"><span class="lineNum">     140</span>              :     Dulcian,</span>
+<span id="L141"><span class="lineNum">     141</span>              :     Rackett,</span>
+<span id="L142"><span class="lineNum">     142</span>              :     Sarrusophone,</span>
+<span id="L143"><span class="lineNum">     143</span>              :     Bagpipe,</span>
+<span id="L144"><span class="lineNum">     144</span>              :     Tuba,</span>
+<span id="L145"><span class="lineNum">     145</span>              :     Cornet,</span>
+<span id="L146"><span class="lineNum">     146</span>              :     Posthorn,</span>
+<span id="L147"><span class="lineNum">     147</span>              :     BrassGroup,</span>
+<span id="L148"><span class="lineNum">     148</span>              :     Trumpet,</span>
+<span id="L149"><span class="lineNum">     149</span>              :     Bugle,</span>
+<span id="L150"><span class="lineNum">     150</span>              :     MellophoneBugle,</span>
+<span id="L151"><span class="lineNum">     151</span>              :     EuphoniumBugle,</span>
+<span id="L152"><span class="lineNum">     152</span>              :     Euphonium,</span>
+<span id="L153"><span class="lineNum">     153</span>              :     Fiscorn,</span>
+<span id="L154"><span class="lineNum">     154</span>              :     Flugelhorn,</span>
+<span id="L155"><span class="lineNum">     155</span>              :     Kuhlohorn,</span>
+<span id="L156"><span class="lineNum">     156</span>              :     Ophicleide,</span>
+<span id="L157"><span class="lineNum">     157</span>              :     Cornettino,</span>
+<span id="L158"><span class="lineNum">     158</span>              :     Cornett,</span>
+<span id="L159"><span class="lineNum">     159</span>              :     Serpent,</span>
+<span id="L160"><span class="lineNum">     160</span>              :     Trombone,</span>
+<span id="L161"><span class="lineNum">     161</span>              :     Cimbasso,</span>
+<span id="L162"><span class="lineNum">     162</span>              :     Sackbut,</span>
+<span id="L163"><span class="lineNum">     163</span>              :     Sousaphone,</span>
+<span id="L164"><span class="lineNum">     164</span>              :     Helicon,</span>
+<span id="L165"><span class="lineNum">     165</span>              :     Conch,</span>
+<span id="L166"><span class="lineNum">     166</span>              :     Saxhorn,</span>
+<span id="L167"><span class="lineNum">     167</span>              :     Horagai,</span>
+<span id="L168"><span class="lineNum">     168</span>              :     Alphorn,</span>
+<span id="L169"><span class="lineNum">     169</span>              :     RagDung,</span>
+<span id="L170"><span class="lineNum">     170</span>              :     Didgeridoo,</span>
+<span id="L171"><span class="lineNum">     171</span>              :     Shofar,</span>
+<span id="L172"><span class="lineNum">     172</span>              :     Vuvuzela,</span>
+<span id="L173"><span class="lineNum">     173</span>              : </span>
+<span id="L174"><span class="lineNum">     174</span>              :     Timpani,</span>
+<span id="L175"><span class="lineNum">     175</span>              :     RotoToms,</span>
+<span id="L176"><span class="lineNum">     176</span>              :     Tubaphone,</span>
+<span id="L177"><span class="lineNum">     177</span>              :     SteelDrums,</span>
+<span id="L178"><span class="lineNum">     178</span>              :     Glockenspiel,</span>
+<span id="L179"><span class="lineNum">     179</span>              :     Xylophone,</span>
+<span id="L180"><span class="lineNum">     180</span>              :     Xylomarimba,</span>
+<span id="L181"><span class="lineNum">     181</span>              :     Vibraphone,</span>
+<span id="L182"><span class="lineNum">     182</span>              :     Dulcimer,</span>
+<span id="L183"><span class="lineNum">     183</span>              :     Cimbalom,</span>
+<span id="L184"><span class="lineNum">     184</span>              :     Marimba,</span>
+<span id="L185"><span class="lineNum">     185</span>              :     Crotales,</span>
+<span id="L186"><span class="lineNum">     186</span>              :     Chimes,</span>
+<span id="L187"><span class="lineNum">     187</span>              :     Carillon,</span>
+<span id="L188"><span class="lineNum">     188</span>              :     Gong,</span>
+<span id="L189"><span class="lineNum">     189</span>              :     Metallophone,</span>
+<span id="L190"><span class="lineNum">     190</span>              :     Flexatone,</span>
+<span id="L191"><span class="lineNum">     191</span>              :     MusicalSaw,</span>
+<span id="L192"><span class="lineNum">     192</span>              :     MusicalGlasses,</span>
+<span id="L193"><span class="lineNum">     193</span>              :     KlaxonHorns,</span>
+<span id="L194"><span class="lineNum">     194</span>              :     Kalimba,</span>
+<span id="L195"><span class="lineNum">     195</span>              :     Bongos,</span>
+<span id="L196"><span class="lineNum">     196</span>              :     Xiaogu,</span>
+<span id="L197"><span class="lineNum">     197</span>              :     Bangu,</span>
+<span id="L198"><span class="lineNum">     198</span>              :     Dagu,</span>
+<span id="L199"><span class="lineNum">     199</span>              :     Daluo,</span>
+<span id="L200"><span class="lineNum">     200</span>              :     Xiaoluo,</span>
+<span id="L201"><span class="lineNum">     201</span>              :     Ban,</span>
+<span id="L202"><span class="lineNum">     202</span>              :     Dabo,</span>
+<span id="L203"><span class="lineNum">     203</span>              :     Naobo,</span>
+<span id="L204"><span class="lineNum">     204</span>              :     Bangzi,</span>
+<span id="L205"><span class="lineNum">     205</span>              :     Janggu,</span>
+<span id="L206"><span class="lineNum">     206</span>              :     Buk,</span>
+<span id="L207"><span class="lineNum">     207</span>              :     SamulBuk,</span>
+<span id="L208"><span class="lineNum">     208</span>              :     SamulJanggu,</span>
+<span id="L209"><span class="lineNum">     209</span>              :     SanjoJanggu,</span>
+<span id="L210"><span class="lineNum">     210</span>              :     SoriBuk,</span>
+<span id="L211"><span class="lineNum">     211</span>              :     Sogo,</span>
+<span id="L212"><span class="lineNum">     212</span>              :     Kkwaenggwari,</span>
+<span id="L213"><span class="lineNum">     213</span>              :     Jing,</span>
+<span id="L214"><span class="lineNum">     214</span>              :     TomToms,</span>
+<span id="L215"><span class="lineNum">     215</span>              :     KoTsuzumi,</span>
+<span id="L216"><span class="lineNum">     216</span>              :     OTsuzumi,</span>
+<span id="L217"><span class="lineNum">     217</span>              :     Kakko,</span>
+<span id="L218"><span class="lineNum">     218</span>              :     ShimeDaiko,</span>
+<span id="L219"><span class="lineNum">     219</span>              :     MiyaDaiko,</span>
+<span id="L220"><span class="lineNum">     220</span>              :     TsuriDaiko,</span>
+<span id="L221"><span class="lineNum">     221</span>              :     OkedoDaiko,</span>
+<span id="L222"><span class="lineNum">     222</span>              :     Kane,</span>
+<span id="L223"><span class="lineNum">     223</span>              :     Shoko,</span>
+<span id="L224"><span class="lineNum">     224</span>              :     Conga,</span>
+<span id="L225"><span class="lineNum">     225</span>              :     Djembe,</span>
+<span id="L226"><span class="lineNum">     226</span>              :     Doumbek,</span>
+<span id="L227"><span class="lineNum">     227</span>              :     Cajon,</span>
+<span id="L228"><span class="lineNum">     228</span>              :     Cuica,</span>
+<span id="L229"><span class="lineNum">     229</span>              :     Drumset,</span>
+<span id="L230"><span class="lineNum">     230</span>              :     Drum,</span>
+<span id="L231"><span class="lineNum">     231</span>              :     Tablas,</span>
+<span id="L232"><span class="lineNum">     232</span>              :     Timbales,</span>
+<span id="L233"><span class="lineNum">     233</span>              :     Anvil,</span>
+<span id="L234"><span class="lineNum">     234</span>              :     BellTree,</span>
+<span id="L235"><span class="lineNum">     235</span>              :     Bell,</span>
+<span id="L236"><span class="lineNum">     236</span>              :     Chain,</span>
+<span id="L237"><span class="lineNum">     237</span>              :     Cymbal,</span>
+<span id="L238"><span class="lineNum">     238</span>              :     HiHat,</span>
+<span id="L239"><span class="lineNum">     239</span>              :     Pipe,</span>
+<span id="L240"><span class="lineNum">     240</span>              :     MarkTree,</span>
+<span id="L241"><span class="lineNum">     241</span>              :     Castanet,</span>
+<span id="L242"><span class="lineNum">     242</span>              :     TamTam,</span>
+<span id="L243"><span class="lineNum">     243</span>              :     Thundersheet,</span>
+<span id="L244"><span class="lineNum">     244</span>              :     Triangle,</span>
+<span id="L245"><span class="lineNum">     245</span>              :     Claves,</span>
+<span id="L246"><span class="lineNum">     246</span>              :     Guiro,</span>
+<span id="L247"><span class="lineNum">     247</span>              :     Block,</span>
+<span id="L248"><span class="lineNum">     248</span>              :     Cabasa,</span>
+<span id="L249"><span class="lineNum">     249</span>              :     Maraca,</span>
+<span id="L250"><span class="lineNum">     250</span>              :     Quijada,</span>
+<span id="L251"><span class="lineNum">     251</span>              :     Ratchet,</span>
+<span id="L252"><span class="lineNum">     252</span>              :     Shaker,</span>
+<span id="L253"><span class="lineNum">     253</span>              :     Shekere,</span>
+<span id="L254"><span class="lineNum">     254</span>              :     Stones,</span>
+<span id="L255"><span class="lineNum">     255</span>              :     Tambourine,</span>
+<span id="L256"><span class="lineNum">     256</span>              :     Tubo,</span>
+<span id="L257"><span class="lineNum">     257</span>              :     Vibraslap,</span>
+<span id="L258"><span class="lineNum">     258</span>              :     Whip,</span>
+<span id="L259"><span class="lineNum">     259</span>              :     Cannon,</span>
+<span id="L260"><span class="lineNum">     260</span>              :     BirdCall,</span>
+<span id="L261"><span class="lineNum">     261</span>              :     Snap,</span>
+<span id="L262"><span class="lineNum">     262</span>              :     Clap,</span>
+<span id="L263"><span class="lineNum">     263</span>              :     Slap,</span>
+<span id="L264"><span class="lineNum">     264</span>              :     Stamp,</span>
+<span id="L265"><span class="lineNum">     265</span>              :     Choir,</span>
+<span id="L266"><span class="lineNum">     266</span>              :     Kazoo,</span>
+<span id="L267"><span class="lineNum">     267</span>              :     Taiko,</span>
+<span id="L268"><span class="lineNum">     268</span>              :     Metronome,</span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span>              :     Last</span>
+<span id="L271"><span class="lineNum">     271</span>              : };</span>
+<span id="L272"><span class="lineNum">     272</span>              : </span>
+<span id="L273"><span class="lineNum">     273</span>              : enum class SoundCategory</span>
+<span id="L274"><span class="lineNum">     274</span>              : {</span>
+<span id="L275"><span class="lineNum">     275</span>              :     Undefined = -1,</span>
+<span id="L276"><span class="lineNum">     276</span>              :     Keyboards,</span>
+<span id="L277"><span class="lineNum">     277</span>              :     Strings,</span>
+<span id="L278"><span class="lineNum">     278</span>              :     Winds,</span>
+<span id="L279"><span class="lineNum">     279</span>              :     Percussions,</span>
+<span id="L280"><span class="lineNum">     280</span>              :     Voices,</span>
+<span id="L281"><span class="lineNum">     281</span>              : </span>
+<span id="L282"><span class="lineNum">     282</span>              :     Last</span>
+<span id="L283"><span class="lineNum">     283</span>              : };</span>
+<span id="L284"><span class="lineNum">     284</span>              : </span>
+<span id="L285"><span class="lineNum">     285</span>              : enum class SoundSubCategory</span>
+<span id="L286"><span class="lineNum">     286</span>              : {</span>
+<span id="L287"><span class="lineNum">     287</span>              :     Undefined = -1,</span>
+<span id="L288"><span class="lineNum">     288</span>              :     Unknown,</span>
+<span id="L289"><span class="lineNum">     289</span>              : </span>
+<span id="L290"><span class="lineNum">     290</span>              :     English,</span>
+<span id="L291"><span class="lineNum">     291</span>              :     Armenian,</span>
+<span id="L292"><span class="lineNum">     292</span>              :     Alpine,</span>
+<span id="L293"><span class="lineNum">     293</span>              :     Australian,</span>
+<span id="L294"><span class="lineNum">     294</span>              :     Irish,</span>
+<span id="L295"><span class="lineNum">     295</span>              :     French,</span>
+<span id="L296"><span class="lineNum">     296</span>              :     Chinese,</span>
+<span id="L297"><span class="lineNum">     297</span>              :     Vienna,</span>
+<span id="L298"><span class="lineNum">     298</span>              :     Greek,</span>
+<span id="L299"><span class="lineNum">     299</span>              :     Japanese,</span>
+<span id="L300"><span class="lineNum">     300</span>              :     Korean,</span>
+<span id="L301"><span class="lineNum">     301</span>              :     Tibetan,</span>
+<span id="L302"><span class="lineNum">     302</span>              :     African,</span>
+<span id="L303"><span class="lineNum">     303</span>              :     Indian,</span>
+<span id="L304"><span class="lineNum">     304</span>              :     Spanish,</span>
+<span id="L305"><span class="lineNum">     305</span>              :     Castilian,</span>
+<span id="L306"><span class="lineNum">     306</span>              :     Swedish,</span>
+<span id="L307"><span class="lineNum">     307</span>              :     Hungarian,</span>
+<span id="L308"><span class="lineNum">     308</span>              :     Romanian,</span>
+<span id="L309"><span class="lineNum">     309</span>              :     CentralEuropean,</span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span>              :     Baroque,</span>
+<span id="L312"><span class="lineNum">     312</span>              :     Classical,</span>
+<span id="L313"><span class="lineNum">     313</span>              :     Modern,</span>
+<span id="L314"><span class="lineNum">     314</span>              :     Orchestral,</span>
+<span id="L315"><span class="lineNum">     315</span>              : </span>
+<span id="L316"><span class="lineNum">     316</span>              :     Hammond,</span>
+<span id="L317"><span class="lineNum">     317</span>              :     Wagner,</span>
+<span id="L318"><span class="lineNum">     318</span>              :     Orff,</span>
+<span id="L319"><span class="lineNum">     319</span>              :     Huang,</span>
+<span id="L320"><span class="lineNum">     320</span>              :     Hohner,</span>
+<span id="L321"><span class="lineNum">     321</span>              : </span>
+<span id="L322"><span class="lineNum">     322</span>              :     Percussive,</span>
+<span id="L323"><span class="lineNum">     323</span>              :     Piped,</span>
+<span id="L324"><span class="lineNum">     324</span>              :     Rotary,</span>
+<span id="L325"><span class="lineNum">     325</span>              :     Reed,</span>
+<span id="L326"><span class="lineNum">     326</span>              :     Foot,</span>
+<span id="L327"><span class="lineNum">     327</span>              :     Hand,</span>
+<span id="L328"><span class="lineNum">     328</span>              :     Finger,</span>
+<span id="L329"><span class="lineNum">     329</span>              :     Boy,</span>
+<span id="L330"><span class="lineNum">     330</span>              :     Girl,</span>
+<span id="L331"><span class="lineNum">     331</span>              :     Male,</span>
+<span id="L332"><span class="lineNum">     332</span>              :     Female,</span>
+<span id="L333"><span class="lineNum">     333</span>              :     Pad,</span>
+<span id="L334"><span class="lineNum">     334</span>              :     Plucked,</span>
+<span id="L335"><span class="lineNum">     335</span>              : </span>
+<span id="L336"><span class="lineNum">     336</span>              :     FourPiece,</span>
+<span id="L337"><span class="lineNum">     337</span>              :     FivePiece,</span>
+<span id="L338"><span class="lineNum">     338</span>              : </span>
+<span id="L339"><span class="lineNum">     339</span>              :     Temple,</span>
+<span id="L340"><span class="lineNum">     340</span>              :     Military,</span>
+<span id="L341"><span class="lineNum">     341</span>              :     Ride,</span>
+<span id="L342"><span class="lineNum">     342</span>              :     Sleigh,</span>
+<span id="L343"><span class="lineNum">     343</span>              :     Cow,</span>
+<span id="L344"><span class="lineNum">     344</span>              :     Agogo,</span>
+<span id="L345"><span class="lineNum">     345</span>              :     Marching,</span>
+<span id="L346"><span class="lineNum">     346</span>              :     Show_Style,</span>
+<span id="L347"><span class="lineNum">     347</span>              :     Opera,</span>
+<span id="L348"><span class="lineNum">     348</span>              :     China,</span>
+<span id="L349"><span class="lineNum">     349</span>              : </span>
+<span id="L350"><span class="lineNum">     350</span>              :     Splash,</span>
+<span id="L351"><span class="lineNum">     351</span>              :     Crash,</span>
+<span id="L352"><span class="lineNum">     352</span>              :     Plate,</span>
+<span id="L353"><span class="lineNum">     353</span>              :     Bowl,</span>
+<span id="L354"><span class="lineNum">     354</span>              :     Frame,</span>
+<span id="L355"><span class="lineNum">     355</span>              :     Slit,</span>
+<span id="L356"><span class="lineNum">     356</span>              :     Log,</span>
+<span id="L357"><span class="lineNum">     357</span>              :     Ocean,</span>
+<span id="L358"><span class="lineNum">     358</span>              :     Field,</span>
+<span id="L359"><span class="lineNum">     359</span>              :     Snare,</span>
+<span id="L360"><span class="lineNum">     360</span>              :     Brake,</span>
+<span id="L361"><span class="lineNum">     361</span>              :     Slide,</span>
+<span id="L362"><span class="lineNum">     362</span>              :     Pocket,</span>
+<span id="L363"><span class="lineNum">     363</span>              :     Garklein,</span>
+<span id="L364"><span class="lineNum">     364</span>              :     Toy,</span>
+<span id="L365"><span class="lineNum">     365</span>              :     String,</span>
+<span id="L366"><span class="lineNum">     366</span>              :     TwelveString,</span>
+<span id="L367"><span class="lineNum">     367</span>              : </span>
+<span id="L368"><span class="lineNum">     368</span>              :     Grand,</span>
+<span id="L369"><span class="lineNum">     369</span>              :     HonkyTonk,</span>
+<span id="L370"><span class="lineNum">     370</span>              :     Upright,</span>
+<span id="L371"><span class="lineNum">     371</span>              :     Prima,</span>
+<span id="L372"><span class="lineNum">     372</span>              :     Secunda,</span>
+<span id="L373"><span class="lineNum">     373</span>              : </span>
+<span id="L374"><span class="lineNum">     374</span>              :     Electric,</span>
+<span id="L375"><span class="lineNum">     375</span>              :     Electronic,</span>
+<span id="L376"><span class="lineNum">     376</span>              :     Acoustic,</span>
+<span id="L377"><span class="lineNum">     377</span>              :     Fretless,</span>
+<span id="L378"><span class="lineNum">     378</span>              :     Pedal,</span>
+<span id="L379"><span class="lineNum">     379</span>              :     Steel,</span>
+<span id="L380"><span class="lineNum">     380</span>              :     Metal,</span>
+<span id="L381"><span class="lineNum">     381</span>              :     Iron,</span>
+<span id="L382"><span class="lineNum">     382</span>              :     Brass,</span>
+<span id="L383"><span class="lineNum">     383</span>              :     Tin,</span>
+<span id="L384"><span class="lineNum">     384</span>              :     Nylon,</span>
+<span id="L385"><span class="lineNum">     385</span>              :     Wooden,</span>
+<span id="L386"><span class="lineNum">     386</span>              :     Sandpaper,</span>
+<span id="L387"><span class="lineNum">     387</span>              :     Glass,</span>
+<span id="L388"><span class="lineNum">     388</span>              :     Shell,</span>
+<span id="L389"><span class="lineNum">     389</span>              :     Wind,</span>
+<span id="L390"><span class="lineNum">     390</span>              :     Soft,</span>
+<span id="L391"><span class="lineNum">     391</span>              : </span>
+<span id="L392"><span class="lineNum">     392</span>              :     Treble,</span>
+<span id="L393"><span class="lineNum">     393</span>              :     Diatonic,</span>
+<span id="L394"><span class="lineNum">     394</span>              :     Chromatic,</span>
+<span id="L395"><span class="lineNum">     395</span>              :     Octave,</span>
+<span id="L396"><span class="lineNum">     396</span>              : </span>
+<span id="L397"><span class="lineNum">     397</span>              :     Piccolo,</span>
+<span id="L398"><span class="lineNum">     398</span>              :     Alto,</span>
+<span id="L399"><span class="lineNum">     399</span>              :     Tenor,</span>
+<span id="L400"><span class="lineNum">     400</span>              :     Baritone,</span>
+<span id="L401"><span class="lineNum">     401</span>              :     Soprano,</span>
+<span id="L402"><span class="lineNum">     402</span>              :     Mezzo_Soprano,</span>
+<span id="L403"><span class="lineNum">     403</span>              :     Sopranino,</span>
+<span id="L404"><span class="lineNum">     404</span>              :     Sopranissimo,</span>
+<span id="L405"><span class="lineNum">     405</span>              :     Counter_Tenor,</span>
+<span id="L406"><span class="lineNum">     406</span>              :     Contra,</span>
+<span id="L407"><span class="lineNum">     407</span>              :     Contra_Alto,</span>
+<span id="L408"><span class="lineNum">     408</span>              :     Sub_Contra_Alto,</span>
+<span id="L409"><span class="lineNum">     409</span>              :     Contra_Bass,</span>
+<span id="L410"><span class="lineNum">     410</span>              :     Sub_Contra_Bass,</span>
+<span id="L411"><span class="lineNum">     411</span>              :     Double_Contra_Bass,</span>
+<span id="L412"><span class="lineNum">     412</span>              :     Bass,</span>
+<span id="L413"><span class="lineNum">     413</span>              :     Bowed,</span>
+<span id="L414"><span class="lineNum">     414</span>              :     Great_Bass,</span>
+<span id="L415"><span class="lineNum">     415</span>              :     Hyper_Bass,</span>
+<span id="L416"><span class="lineNum">     416</span>              :     Melody,</span>
+<span id="L417"><span class="lineNum">     417</span>              : </span>
+<span id="L418"><span class="lineNum">     418</span>              :     FX_Goblins,</span>
+<span id="L419"><span class="lineNum">     419</span>              :     FX_Atmosphere,</span>
+<span id="L420"><span class="lineNum">     420</span>              :     FX_Brightness,</span>
+<span id="L421"><span class="lineNum">     421</span>              :     FX_Crystal,</span>
+<span id="L422"><span class="lineNum">     422</span>              :     FX_Echoes,</span>
+<span id="L423"><span class="lineNum">     423</span>              :     FX_Rain,</span>
+<span id="L424"><span class="lineNum">     424</span>              :     FX_SciFi,</span>
+<span id="L425"><span class="lineNum">     425</span>              :     FX_SoundTrack,</span>
+<span id="L426"><span class="lineNum">     426</span>              : </span>
+<span id="L427"><span class="lineNum">     427</span>              :     Sweep,</span>
+<span id="L428"><span class="lineNum">     428</span>              :     Warm,</span>
+<span id="L429"><span class="lineNum">     429</span>              :     NewAge,</span>
+<span id="L430"><span class="lineNum">     430</span>              :     Polysynth,</span>
+<span id="L431"><span class="lineNum">     431</span>              :     Halo,</span>
+<span id="L432"><span class="lineNum">     432</span>              :     Metallic,</span>
+<span id="L433"><span class="lineNum">     433</span>              :     Choir,</span>
+<span id="L434"><span class="lineNum">     434</span>              : </span>
+<span id="L435"><span class="lineNum">     435</span>              :     Sine_Wave,</span>
+<span id="L436"><span class="lineNum">     436</span>              :     Square_Wave,</span>
+<span id="L437"><span class="lineNum">     437</span>              :     Sawtooth_Wave,</span>
+<span id="L438"><span class="lineNum">     438</span>              : </span>
+<span id="L439"><span class="lineNum">     439</span>              :     Primary,</span>
+<span id="L440"><span class="lineNum">     440</span>              :     Secondary,</span>
+<span id="L441"><span class="lineNum">     441</span>              :     Section,</span>
+<span id="L442"><span class="lineNum">     442</span>              : </span>
+<span id="L443"><span class="lineNum">     443</span>              :     In_C,</span>
+<span id="L444"><span class="lineNum">     444</span>              :     In_D,</span>
+<span id="L445"><span class="lineNum">     445</span>              :     In_D_flat,</span>
+<span id="L446"><span class="lineNum">     446</span>              :     In_E,</span>
+<span id="L447"><span class="lineNum">     447</span>              :     In_E_flat,</span>
+<span id="L448"><span class="lineNum">     448</span>              :     In_F,</span>
+<span id="L449"><span class="lineNum">     449</span>              :     In_G,</span>
+<span id="L450"><span class="lineNum">     450</span>              :     In_G_flat,</span>
+<span id="L451"><span class="lineNum">     451</span>              :     In_A,</span>
+<span id="L452"><span class="lineNum">     452</span>              :     In_A_flat,</span>
+<span id="L453"><span class="lineNum">     453</span>              :     In_B,</span>
+<span id="L454"><span class="lineNum">     454</span>              :     In_B_flat,</span>
+<span id="L455"><span class="lineNum">     455</span>              : </span>
+<span id="L456"><span class="lineNum">     456</span>              :     Last</span>
+<span id="L457"><span class="lineNum">     457</span>              : };</span>
+<span id="L458"><span class="lineNum">     458</span>              : </span>
+<span id="L459"><span class="lineNum">     459</span>              : inline const std::unordered_map&lt;SoundId, String&gt; ID_STRINGS</span>
+<span id="L460"><span class="lineNum">     460</span>              : {</span>
+<span id="L461"><span class="lineNum">     461</span>              :     { SoundId::Undefined, String(u&quot;undefined&quot;) },</span>
+<span id="L462"><span class="lineNum">     462</span>              :     { SoundId::Unknown, String(u&quot;unknown&quot;) },</span>
+<span id="L463"><span class="lineNum">     463</span>              :     { SoundId::Accordion, String(u&quot;accordion&quot;) },</span>
+<span id="L464"><span class="lineNum">     464</span>              :     { SoundId::Bandoneon, String(u&quot;bandoneon&quot;) },</span>
+<span id="L465"><span class="lineNum">     465</span>              :     { SoundId::Concertina, String(u&quot;concertina&quot;) },</span>
+<span id="L466"><span class="lineNum">     466</span>              :     { SoundId::Harmonica, String(u&quot;harmonica&quot;) },</span>
+<span id="L467"><span class="lineNum">     467</span>              :     { SoundId::Melodica, String(u&quot;melodica&quot;) },</span>
+<span id="L468"><span class="lineNum">     468</span>              :     { SoundId::Sheng, String(u&quot;sheng&quot;) },</span>
+<span id="L469"><span class="lineNum">     469</span>              :     { SoundId::Celesta, String(u&quot;celesta&quot;) },</span>
+<span id="L470"><span class="lineNum">     470</span>              :     { SoundId::Clavichord, String(u&quot;clavichord&quot;) },</span>
+<span id="L471"><span class="lineNum">     471</span>              :     { SoundId::Harpsichord, String(u&quot;harpsichord&quot;) },</span>
+<span id="L472"><span class="lineNum">     472</span>              :     { SoundId::Virginal, String(u&quot;virginal&quot;) },</span>
+<span id="L473"><span class="lineNum">     473</span>              :     { SoundId::Piano, String(u&quot;piano&quot;) },</span>
+<span id="L474"><span class="lineNum">     474</span>              :     { SoundId::Organ, String(u&quot;organ&quot;) },</span>
+<span id="L475"><span class="lineNum">     475</span>              :     { SoundId::Harmonium, String(u&quot;harmonium&quot;) },</span>
+<span id="L476"><span class="lineNum">     476</span>              :     { SoundId::Synthesizer, String(u&quot;synthesizer&quot;) },</span>
+<span id="L477"><span class="lineNum">     477</span>              :     { SoundId::Theremin, String(u&quot;theremin&quot;) },</span>
+<span id="L478"><span class="lineNum">     478</span>              :     { SoundId::OndesMartenot, String(u&quot;ondes_martenot&quot;) },</span>
+<span id="L479"><span class="lineNum">     479</span>              : </span>
+<span id="L480"><span class="lineNum">     480</span>              :     { SoundId::Harp, String(u&quot;harp&quot;) },</span>
+<span id="L481"><span class="lineNum">     481</span>              :     { SoundId::Cavaquinho, String(u&quot;cavaquinho&quot;) },</span>
+<span id="L482"><span class="lineNum">     482</span>              :     { SoundId::Guitar, String(u&quot;guitar&quot;) },</span>
+<span id="L483"><span class="lineNum">     483</span>              :     { SoundId::BassGuitar, String(u&quot;bass_guitar&quot;) },</span>
+<span id="L484"><span class="lineNum">     484</span>              :     { SoundId::Banjo, String(u&quot;banjo&quot;) },</span>
+<span id="L485"><span class="lineNum">     485</span>              :     { SoundId::Ukulele, String(u&quot;ukulele&quot;) },</span>
+<span id="L486"><span class="lineNum">     486</span>              :     { SoundId::Mandolin, String(u&quot;mandolin&quot;) },</span>
+<span id="L487"><span class="lineNum">     487</span>              :     { SoundId::MtnDulcimer, String(u&quot;mtn_dulcimer&quot;) },</span>
+<span id="L488"><span class="lineNum">     488</span>              :     { SoundId::Lute, String(u&quot;lute&quot;) },</span>
+<span id="L489"><span class="lineNum">     489</span>              :     { SoundId::Theorbo, String(u&quot;theorbo&quot;) },</span>
+<span id="L490"><span class="lineNum">     490</span>              :     { SoundId::Archlute, String(u&quot;archlute&quot;) },</span>
+<span id="L491"><span class="lineNum">     491</span>              :     { SoundId::Balalaika, String(u&quot;balalaika&quot;) },</span>
+<span id="L492"><span class="lineNum">     492</span>              :     { SoundId::Guzheng, String(u&quot;guzheng&quot;) },</span>
+<span id="L493"><span class="lineNum">     493</span>              :     { SoundId::Guqin, String(u&quot;guqin&quot;) },</span>
+<span id="L494"><span class="lineNum">     494</span>              :     { SoundId::Pipa, String(u&quot;pipa&quot;) },</span>
+<span id="L495"><span class="lineNum">     495</span>              :     { SoundId::Yangqin, String(u&quot;yangqin&quot;) },</span>
+<span id="L496"><span class="lineNum">     496</span>              :     { SoundId::Koto, String(u&quot;koto&quot;) },</span>
+<span id="L497"><span class="lineNum">     497</span>              :     { SoundId::Oud, String(u&quot;oud&quot;) },</span>
+<span id="L498"><span class="lineNum">     498</span>              :     { SoundId::Shamisen, String(u&quot;shamisen&quot;) },</span>
+<span id="L499"><span class="lineNum">     499</span>              :     { SoundId::Sitar, String(u&quot;sitar&quot;) },</span>
+<span id="L500"><span class="lineNum">     500</span>              :     { SoundId::Prim, String(u&quot;prim&quot;) },</span>
+<span id="L501"><span class="lineNum">     501</span>              :     { SoundId::Brac, String(u&quot;brac&quot;) },</span>
+<span id="L502"><span class="lineNum">     502</span>              :     { SoundId::Bugarija, String(u&quot;bugarija&quot;) },</span>
+<span id="L503"><span class="lineNum">     503</span>              :     { SoundId::Berda, String(u&quot;berda&quot;) },</span>
+<span id="L504"><span class="lineNum">     504</span>              :     { SoundId::Celo, String(u&quot;celo&quot;) },</span>
+<span id="L505"><span class="lineNum">     505</span>              :     { SoundId::Bandurria, String(u&quot;bandurria&quot;) },</span>
+<span id="L506"><span class="lineNum">     506</span>              :     { SoundId::Laud, String(u&quot;laud&quot;) },</span>
+<span id="L507"><span class="lineNum">     507</span>              :     { SoundId::StringsGroup, String(u&quot;strings_group&quot;) },</span>
+<span id="L508"><span class="lineNum">     508</span>              :     { SoundId::Violin, String(u&quot;violin&quot;) },</span>
+<span id="L509"><span class="lineNum">     509</span>              :     { SoundId::Viola, String(u&quot;viola&quot;) },</span>
+<span id="L510"><span class="lineNum">     510</span>              :     { SoundId::ViolaDaGamba, String(u&quot;viola_dagamba&quot;) },</span>
+<span id="L511"><span class="lineNum">     511</span>              :     { SoundId::Violoncello, String(u&quot;violoncello&quot;) },</span>
+<span id="L512"><span class="lineNum">     512</span>              :     { SoundId::Viol, String(u&quot;viol&quot;) },</span>
+<span id="L513"><span class="lineNum">     513</span>              :     { SoundId::PardessusViol, String(u&quot;pardessus_viol&quot;) },</span>
+<span id="L514"><span class="lineNum">     514</span>              :     { SoundId::Baryton, String(u&quot;baryton&quot;) },</span>
+<span id="L515"><span class="lineNum">     515</span>              :     { SoundId::Violone, String(u&quot;violone&quot;) },</span>
+<span id="L516"><span class="lineNum">     516</span>              :     { SoundId::Nyckelharpa, String(u&quot;nyckelharpa&quot;) },</span>
+<span id="L517"><span class="lineNum">     517</span>              :     { SoundId::Erhu, String(u&quot;erhu&quot;) },</span>
+<span id="L518"><span class="lineNum">     518</span>              :     { SoundId::Ajaeng, String(u&quot;ajaeng&quot;) },</span>
+<span id="L519"><span class="lineNum">     519</span>              :     { SoundId::Gayageum, String(u&quot;gayageum&quot;) },</span>
+<span id="L520"><span class="lineNum">     520</span>              :     { SoundId::Contrabass, String(u&quot;contrabass&quot;) },</span>
+<span id="L521"><span class="lineNum">     521</span>              :     { SoundId::Octobass, String(u&quot;octobass&quot;) },</span>
+<span id="L522"><span class="lineNum">     522</span>              :     { SoundId::TimpleCanario, String(u&quot;timple_canario&quot;) },</span>
+<span id="L523"><span class="lineNum">     523</span>              : </span>
+<span id="L524"><span class="lineNum">     524</span>              :     { SoundId::WindsGroup, String(u&quot;winds_group&quot;) },</span>
+<span id="L525"><span class="lineNum">     525</span>              :     { SoundId::Piccolo, String(u&quot;piccolo&quot;) },</span>
+<span id="L526"><span class="lineNum">     526</span>              :     { SoundId::Dulzaina, String(u&quot;dulzaina&quot;) },</span>
+<span id="L527"><span class="lineNum">     527</span>              :     { SoundId::Heckelphone, String(u&quot;heckelphone&quot;) },</span>
+<span id="L528"><span class="lineNum">     528</span>              :     { SoundId::HeckelphoneClarinet, String(u&quot;heckelphone_clarinet&quot;) },</span>
+<span id="L529"><span class="lineNum">     529</span>              :     { SoundId::Oboe, String(u&quot;oboe&quot;) },</span>
+<span id="L530"><span class="lineNum">     530</span>              :     { SoundId::Lupophone, String(u&quot;lupophone&quot;) },</span>
+<span id="L531"><span class="lineNum">     531</span>              :     { SoundId::Flute, String(u&quot;flute&quot;) },</span>
+<span id="L532"><span class="lineNum">     532</span>              :     { SoundId::PanFlute, String(u&quot;pan_flute&quot;) },</span>
+<span id="L533"><span class="lineNum">     533</span>              :     { SoundId::Danso, String(u&quot;danso&quot;) },</span>
+<span id="L534"><span class="lineNum">     534</span>              :     { SoundId::Daegeum, String(u&quot;daegeum&quot;) },</span>
+<span id="L535"><span class="lineNum">     535</span>              :     { SoundId::Traverso, String(u&quot;traverso&quot;) },</span>
+<span id="L536"><span class="lineNum">     536</span>              :     { SoundId::Dizi, String(u&quot;dizi&quot;) },</span>
+<span id="L537"><span class="lineNum">     537</span>              :     { SoundId::Shakuhachi, String(u&quot;shakuhachi&quot;) },</span>
+<span id="L538"><span class="lineNum">     538</span>              :     { SoundId::Hichiriki, String(u&quot;hichiriki&quot;) },</span>
+<span id="L539"><span class="lineNum">     539</span>              :     { SoundId::Sho, String(u&quot;sho&quot;) },</span>
+<span id="L540"><span class="lineNum">     540</span>              :     { SoundId::Fife, String(u&quot;fife&quot;) },</span>
+<span id="L541"><span class="lineNum">     541</span>              :     { SoundId::Whistle, String(u&quot;whistle&quot;) },</span>
+<span id="L542"><span class="lineNum">     542</span>              :     { SoundId::Flageolet, String(u&quot;flageolet&quot;) },</span>
+<span id="L543"><span class="lineNum">     543</span>              :     { SoundId::Recorder, String(u&quot;recorder&quot;) },</span>
+<span id="L544"><span class="lineNum">     544</span>              :     { SoundId::Ocarina, String(u&quot;ocarina&quot;) },</span>
+<span id="L545"><span class="lineNum">     545</span>              :     { SoundId::Gemshorn, String(u&quot;gemshorn&quot;) },</span>
+<span id="L546"><span class="lineNum">     546</span>              :     { SoundId::Quena, String(u&quot;quena&quot;) },</span>
+<span id="L547"><span class="lineNum">     547</span>              :     { SoundId::Horn, String(u&quot;horn&quot;) },</span>
+<span id="L548"><span class="lineNum">     548</span>              :     { SoundId::Bassethorn, String(u&quot;bassethorn&quot;) },</span>
+<span id="L549"><span class="lineNum">     549</span>              :     { SoundId::Shawm, String(u&quot;shawm&quot;) },</span>
+<span id="L550"><span class="lineNum">     550</span>              :     { SoundId::Cromorne, String(u&quot;cromorne&quot;) },</span>
+<span id="L551"><span class="lineNum">     551</span>              :     { SoundId::Crumhorn, String(u&quot;crumhorn&quot;) },</span>
+<span id="L552"><span class="lineNum">     552</span>              :     { SoundId::Cornamuse, String(u&quot;cornamuse&quot;) },</span>
+<span id="L553"><span class="lineNum">     553</span>              :     { SoundId::Kelhorn, String(u&quot;kelhorn&quot;) },</span>
+<span id="L554"><span class="lineNum">     554</span>              :     { SoundId::Rauschpfeife, String(u&quot;rauschpfeife&quot;) },</span>
+<span id="L555"><span class="lineNum">     555</span>              :     { SoundId::Duduk, String(u&quot;duduk&quot;) },</span>
+<span id="L556"><span class="lineNum">     556</span>              :     { SoundId::Shenai, String(u&quot;shenai&quot;) },</span>
+<span id="L557"><span class="lineNum">     557</span>              :     { SoundId::Clarinet, String(u&quot;clarinet&quot;) },</span>
+<span id="L558"><span class="lineNum">     558</span>              :     { SoundId::Chalumeau, String(u&quot;chalumeau&quot;) },</span>
+<span id="L559"><span class="lineNum">     559</span>              :     { SoundId::Xaphoon, String(u&quot;xaphoon&quot;) },</span>
+<span id="L560"><span class="lineNum">     560</span>              :     { SoundId::Tarogato, String(u&quot;tarogato&quot;) },</span>
+<span id="L561"><span class="lineNum">     561</span>              :     { SoundId::Octavin, String(u&quot;octavin&quot;) },</span>
+<span id="L562"><span class="lineNum">     562</span>              :     { SoundId::Saxophone, String(u&quot;saxophone&quot;) },</span>
+<span id="L563"><span class="lineNum">     563</span>              :     { SoundId::Aulochrome, String(u&quot;aulochrome&quot;) },</span>
+<span id="L564"><span class="lineNum">     564</span>              :     { SoundId::Bassoon, String(u&quot;bassoon&quot;) },</span>
+<span id="L565"><span class="lineNum">     565</span>              :     { SoundId::Contrabassoon, String(u&quot;contrabassoon&quot;) },</span>
+<span id="L566"><span class="lineNum">     566</span>              :     { SoundId::Dulcian, String(u&quot;dulcian&quot;) },</span>
+<span id="L567"><span class="lineNum">     567</span>              :     { SoundId::Rackett, String(u&quot;rackett&quot;) },</span>
+<span id="L568"><span class="lineNum">     568</span>              :     { SoundId::Sarrusophone, String(u&quot;sarrusophone&quot;) },</span>
+<span id="L569"><span class="lineNum">     569</span>              :     { SoundId::Bagpipe, String(u&quot;bagpipe&quot;) },</span>
+<span id="L570"><span class="lineNum">     570</span>              :     { SoundId::Tuba, String(u&quot;tuba&quot;) },</span>
+<span id="L571"><span class="lineNum">     571</span>              :     { SoundId::Cornet, String(u&quot;cornet&quot;) },</span>
+<span id="L572"><span class="lineNum">     572</span>              :     { SoundId::Posthorn, String(u&quot;posthorn&quot;) },</span>
+<span id="L573"><span class="lineNum">     573</span>              :     { SoundId::BrassGroup, String(u&quot;brass_group&quot;) },</span>
+<span id="L574"><span class="lineNum">     574</span>              :     { SoundId::Trumpet, String(u&quot;trumpet&quot;) },</span>
+<span id="L575"><span class="lineNum">     575</span>              :     { SoundId::Bugle, String(u&quot;bugle&quot;) },</span>
+<span id="L576"><span class="lineNum">     576</span>              :     { SoundId::MellophoneBugle, String(u&quot;mellophone_bugle&quot;) },</span>
+<span id="L577"><span class="lineNum">     577</span>              :     { SoundId::EuphoniumBugle, String(u&quot;euphonium_bugle&quot;) },</span>
+<span id="L578"><span class="lineNum">     578</span>              :     { SoundId::Euphonium, String(u&quot;euphonium&quot;) },</span>
+<span id="L579"><span class="lineNum">     579</span>              :     { SoundId::Fiscorn, String(u&quot;fiscorn&quot;) },</span>
+<span id="L580"><span class="lineNum">     580</span>              :     { SoundId::Flugelhorn, String(u&quot;flugelhorn&quot;) },</span>
+<span id="L581"><span class="lineNum">     581</span>              :     { SoundId::Kuhlohorn, String(u&quot;kuhlohorn&quot;) },</span>
+<span id="L582"><span class="lineNum">     582</span>              :     { SoundId::Ophicleide, String(u&quot;ophicleide&quot;) },</span>
+<span id="L583"><span class="lineNum">     583</span>              :     { SoundId::Cornettino, String(u&quot;cornettino&quot;) },</span>
+<span id="L584"><span class="lineNum">     584</span>              :     { SoundId::Cornett, String(u&quot;cornett&quot;) },</span>
+<span id="L585"><span class="lineNum">     585</span>              :     { SoundId::Serpent, String(u&quot;serpent&quot;) },</span>
+<span id="L586"><span class="lineNum">     586</span>              :     { SoundId::Trombone, String(u&quot;trombone&quot;) },</span>
+<span id="L587"><span class="lineNum">     587</span>              :     { SoundId::Cimbasso, String(u&quot;cimbasso&quot;) },</span>
+<span id="L588"><span class="lineNum">     588</span>              :     { SoundId::Sackbut, String(u&quot;sackbut&quot;) },</span>
+<span id="L589"><span class="lineNum">     589</span>              :     { SoundId::Sousaphone, String(u&quot;sousaphone&quot;) },</span>
+<span id="L590"><span class="lineNum">     590</span>              :     { SoundId::Helicon, String(u&quot;helicon&quot;) },</span>
+<span id="L591"><span class="lineNum">     591</span>              :     { SoundId::Conch, String(u&quot;conch&quot;) },</span>
+<span id="L592"><span class="lineNum">     592</span>              :     { SoundId::Saxhorn, String(u&quot;saxhorn&quot;) },</span>
+<span id="L593"><span class="lineNum">     593</span>              :     { SoundId::Horagai, String(u&quot;horagai&quot;) },</span>
+<span id="L594"><span class="lineNum">     594</span>              :     { SoundId::Alphorn, String(u&quot;alphorn&quot;) },</span>
+<span id="L595"><span class="lineNum">     595</span>              :     { SoundId::RagDung, String(u&quot;rag_dung&quot;) },</span>
+<span id="L596"><span class="lineNum">     596</span>              :     { SoundId::Didgeridoo, String(u&quot;didgeridoo&quot;) },</span>
+<span id="L597"><span class="lineNum">     597</span>              :     { SoundId::Shofar, String(u&quot;shofar&quot;) },</span>
+<span id="L598"><span class="lineNum">     598</span>              :     { SoundId::Vuvuzela, String(u&quot;vuvuzela&quot;) },</span>
+<span id="L599"><span class="lineNum">     599</span>              : </span>
+<span id="L600"><span class="lineNum">     600</span>              :     { SoundId::Timpani, String(u&quot;timpani&quot;) },</span>
+<span id="L601"><span class="lineNum">     601</span>              :     { SoundId::RotoToms, String(u&quot;roto_toms&quot;) },</span>
+<span id="L602"><span class="lineNum">     602</span>              :     { SoundId::Tubaphone, String(u&quot;tubaphone&quot;) },</span>
+<span id="L603"><span class="lineNum">     603</span>              :     { SoundId::SteelDrums, String(u&quot;steel_drums&quot;) },</span>
+<span id="L604"><span class="lineNum">     604</span>              :     { SoundId::Glockenspiel, String(u&quot;glockenspiel&quot;) },</span>
+<span id="L605"><span class="lineNum">     605</span>              :     { SoundId::Xylophone, String(u&quot;xylophone&quot;) },</span>
+<span id="L606"><span class="lineNum">     606</span>              :     { SoundId::Xylomarimba, String(u&quot;xylomarimba&quot;) },</span>
+<span id="L607"><span class="lineNum">     607</span>              :     { SoundId::Vibraphone, String(u&quot;vibraphone&quot;) },</span>
+<span id="L608"><span class="lineNum">     608</span>              :     { SoundId::Dulcimer, String(u&quot;dulcimer&quot;) },</span>
+<span id="L609"><span class="lineNum">     609</span>              :     { SoundId::Cimbalom, String(u&quot;cimbalom&quot;) },</span>
+<span id="L610"><span class="lineNum">     610</span>              :     { SoundId::Marimba, String(u&quot;marimba&quot;) },</span>
+<span id="L611"><span class="lineNum">     611</span>              :     { SoundId::Crotales, String(u&quot;crotales&quot;) },</span>
+<span id="L612"><span class="lineNum">     612</span>              :     { SoundId::Chimes, String(u&quot;chimes&quot;) },</span>
+<span id="L613"><span class="lineNum">     613</span>              :     { SoundId::Carillon, String(u&quot;carillon&quot;) },</span>
+<span id="L614"><span class="lineNum">     614</span>              :     { SoundId::Gong, String(u&quot;gong&quot;) },</span>
+<span id="L615"><span class="lineNum">     615</span>              :     { SoundId::Metallophone, String(u&quot;metallophone&quot;) },</span>
+<span id="L616"><span class="lineNum">     616</span>              :     { SoundId::Flexatone, String(u&quot;flexatone&quot;) },</span>
+<span id="L617"><span class="lineNum">     617</span>              :     { SoundId::MusicalSaw, String(u&quot;musical_saw&quot;) },</span>
+<span id="L618"><span class="lineNum">     618</span>              :     { SoundId::MusicalGlasses, String(u&quot;musical_glasses&quot;) },</span>
+<span id="L619"><span class="lineNum">     619</span>              :     { SoundId::KlaxonHorns, String(u&quot;klaxon_horns&quot;) },</span>
+<span id="L620"><span class="lineNum">     620</span>              :     { SoundId::Kalimba, String(u&quot;kalimba&quot;) },</span>
+<span id="L621"><span class="lineNum">     621</span>              :     { SoundId::Bongos, String(u&quot;bongos&quot;) },</span>
+<span id="L622"><span class="lineNum">     622</span>              :     { SoundId::Xiaogu, String(u&quot;xiaogu&quot;) },</span>
+<span id="L623"><span class="lineNum">     623</span>              :     { SoundId::Bangu, String(u&quot;bangu&quot;) },</span>
+<span id="L624"><span class="lineNum">     624</span>              :     { SoundId::Dagu, String(u&quot;dagu&quot;) },</span>
+<span id="L625"><span class="lineNum">     625</span>              :     { SoundId::Daluo, String(u&quot;daluo&quot;) },</span>
+<span id="L626"><span class="lineNum">     626</span>              :     { SoundId::Xiaoluo, String(u&quot;xiaoluo&quot;) },</span>
+<span id="L627"><span class="lineNum">     627</span>              :     { SoundId::Ban, String(u&quot;ban&quot;) },</span>
+<span id="L628"><span class="lineNum">     628</span>              :     { SoundId::Dabo, String(u&quot;dabo&quot;) },</span>
+<span id="L629"><span class="lineNum">     629</span>              :     { SoundId::Naobo, String(u&quot;naobo&quot;) },</span>
+<span id="L630"><span class="lineNum">     630</span>              :     { SoundId::Bangzi, String(u&quot;bangzi&quot;) },</span>
+<span id="L631"><span class="lineNum">     631</span>              :     { SoundId::Janggu, String(u&quot;janggu&quot;) },</span>
+<span id="L632"><span class="lineNum">     632</span>              :     { SoundId::Buk, String(u&quot;buk&quot;) },</span>
+<span id="L633"><span class="lineNum">     633</span>              :     { SoundId::SamulBuk, String(u&quot;samul_buk&quot;) },</span>
+<span id="L634"><span class="lineNum">     634</span>              :     { SoundId::SamulJanggu, String(u&quot;samul_janggu&quot;) },</span>
+<span id="L635"><span class="lineNum">     635</span>              :     { SoundId::SanjoJanggu, String(u&quot;sanjo_janggu&quot;) },</span>
+<span id="L636"><span class="lineNum">     636</span>              :     { SoundId::SoriBuk, String(u&quot;sori_buk&quot;) },</span>
+<span id="L637"><span class="lineNum">     637</span>              :     { SoundId::Sogo, String(u&quot;sogo&quot;) },</span>
+<span id="L638"><span class="lineNum">     638</span>              :     { SoundId::Kkwaenggwari, String(u&quot;kkwaenggwari&quot;) },</span>
+<span id="L639"><span class="lineNum">     639</span>              :     { SoundId::Jing, String(u&quot;jing&quot;) },</span>
+<span id="L640"><span class="lineNum">     640</span>              :     { SoundId::TomToms, String(u&quot;tom_toms&quot;) },</span>
+<span id="L641"><span class="lineNum">     641</span>              :     { SoundId::KoTsuzumi, String(u&quot;ko_tsuzumi&quot;) },</span>
+<span id="L642"><span class="lineNum">     642</span>              :     { SoundId::OTsuzumi, String(u&quot;o_tsuzumi&quot;) },</span>
+<span id="L643"><span class="lineNum">     643</span>              :     { SoundId::Kakko, String(u&quot;kakko&quot;) },</span>
+<span id="L644"><span class="lineNum">     644</span>              :     { SoundId::ShimeDaiko, String(u&quot;shime_daiko&quot;) },</span>
+<span id="L645"><span class="lineNum">     645</span>              :     { SoundId::MiyaDaiko, String(u&quot;miya_daiko&quot;) },</span>
+<span id="L646"><span class="lineNum">     646</span>              :     { SoundId::TsuriDaiko, String(u&quot;tsuri_daiko&quot;) },</span>
+<span id="L647"><span class="lineNum">     647</span>              :     { SoundId::OkedoDaiko, String(u&quot;okedo_daiko&quot;) },</span>
+<span id="L648"><span class="lineNum">     648</span>              :     { SoundId::Kane, String(u&quot;kane&quot;) },</span>
+<span id="L649"><span class="lineNum">     649</span>              :     { SoundId::Shoko, String(u&quot;shoko&quot;) },</span>
+<span id="L650"><span class="lineNum">     650</span>              :     { SoundId::Conga, String(u&quot;conga&quot;) },</span>
+<span id="L651"><span class="lineNum">     651</span>              :     { SoundId::Djembe, String(u&quot;djembe&quot;) },</span>
+<span id="L652"><span class="lineNum">     652</span>              :     { SoundId::Doumbek, String(u&quot;doumbek&quot;) },</span>
+<span id="L653"><span class="lineNum">     653</span>              :     { SoundId::Cajon, String(u&quot;cajon&quot;) },</span>
+<span id="L654"><span class="lineNum">     654</span>              :     { SoundId::Cuica, String(u&quot;cuica&quot;) },</span>
+<span id="L655"><span class="lineNum">     655</span>              :     { SoundId::Drumset, String(u&quot;drumset&quot;) },</span>
+<span id="L656"><span class="lineNum">     656</span>              :     { SoundId::Drum, String(u&quot;drum&quot;) },</span>
+<span id="L657"><span class="lineNum">     657</span>              :     { SoundId::Tablas, String(u&quot;tablas&quot;) },</span>
+<span id="L658"><span class="lineNum">     658</span>              :     { SoundId::Timbales, String(u&quot;timbales&quot;) },</span>
+<span id="L659"><span class="lineNum">     659</span>              :     { SoundId::Anvil, String(u&quot;anvil&quot;) },</span>
+<span id="L660"><span class="lineNum">     660</span>              :     { SoundId::BellTree, String(u&quot;bell_tree&quot;) },</span>
+<span id="L661"><span class="lineNum">     661</span>              :     { SoundId::Bell, String(u&quot;bell&quot;) },</span>
+<span id="L662"><span class="lineNum">     662</span>              :     { SoundId::Chain, String(u&quot;chain&quot;) },</span>
+<span id="L663"><span class="lineNum">     663</span>              :     { SoundId::Cymbal, String(u&quot;cymbal&quot;) },</span>
+<span id="L664"><span class="lineNum">     664</span>              :     { SoundId::HiHat, String(u&quot;hi_hat&quot;) },</span>
+<span id="L665"><span class="lineNum">     665</span>              :     { SoundId::Pipe, String(u&quot;pipe&quot;) },</span>
+<span id="L666"><span class="lineNum">     666</span>              :     { SoundId::MarkTree, String(u&quot;mark_tree&quot;) },</span>
+<span id="L667"><span class="lineNum">     667</span>              :     { SoundId::Castanet, String(u&quot;castanet&quot;) },</span>
+<span id="L668"><span class="lineNum">     668</span>              :     { SoundId::TamTam, String(u&quot;tam_tam&quot;) },</span>
+<span id="L669"><span class="lineNum">     669</span>              :     { SoundId::Thundersheet, String(u&quot;thunder_sheet&quot;) },</span>
+<span id="L670"><span class="lineNum">     670</span>              :     { SoundId::Triangle, String(u&quot;triangle&quot;) },</span>
+<span id="L671"><span class="lineNum">     671</span>              :     { SoundId::Claves, String(u&quot;claves&quot;) },</span>
+<span id="L672"><span class="lineNum">     672</span>              :     { SoundId::Guiro, String(u&quot;guiro&quot;) },</span>
+<span id="L673"><span class="lineNum">     673</span>              :     { SoundId::Block, String(u&quot;block&quot;) },</span>
+<span id="L674"><span class="lineNum">     674</span>              :     { SoundId::Cabasa, String(u&quot;cabasa&quot;) },</span>
+<span id="L675"><span class="lineNum">     675</span>              :     { SoundId::Maraca, String(u&quot;maraca&quot;) },</span>
+<span id="L676"><span class="lineNum">     676</span>              :     { SoundId::Quijada, String(u&quot;quijada&quot;) },</span>
+<span id="L677"><span class="lineNum">     677</span>              :     { SoundId::Ratchet, String(u&quot;ratchet&quot;) },</span>
+<span id="L678"><span class="lineNum">     678</span>              :     { SoundId::Shaker, String(u&quot;shaker&quot;) },</span>
+<span id="L679"><span class="lineNum">     679</span>              :     { SoundId::Shekere, String(u&quot;shekere&quot;) },</span>
+<span id="L680"><span class="lineNum">     680</span>              :     { SoundId::Stones, String(u&quot;stones&quot;) },</span>
+<span id="L681"><span class="lineNum">     681</span>              :     { SoundId::Tambourine, String(u&quot;tambourine&quot;) },</span>
+<span id="L682"><span class="lineNum">     682</span>              :     { SoundId::Tubo, String(u&quot;tubo&quot;) },</span>
+<span id="L683"><span class="lineNum">     683</span>              :     { SoundId::Vibraslap, String(u&quot;vibraslap&quot;) },</span>
+<span id="L684"><span class="lineNum">     684</span>              :     { SoundId::Whip, String(u&quot;whip&quot;) },</span>
+<span id="L685"><span class="lineNum">     685</span>              :     { SoundId::Cannon, String(u&quot;cannon&quot;) },</span>
+<span id="L686"><span class="lineNum">     686</span>              :     { SoundId::BirdCall, String(u&quot;bird_call&quot;) },</span>
+<span id="L687"><span class="lineNum">     687</span>              :     { SoundId::Snap, String(u&quot;snap&quot;) },</span>
+<span id="L688"><span class="lineNum">     688</span>              :     { SoundId::Clap, String(u&quot;clap&quot;) },</span>
+<span id="L689"><span class="lineNum">     689</span>              :     { SoundId::Slap, String(u&quot;slap&quot;) },</span>
+<span id="L690"><span class="lineNum">     690</span>              :     { SoundId::Stamp, String(u&quot;stamp&quot;) },</span>
+<span id="L691"><span class="lineNum">     691</span>              :     { SoundId::Choir, String(u&quot;choir&quot;) },</span>
+<span id="L692"><span class="lineNum">     692</span>              :     { SoundId::Kazoo, String(u&quot;kazoo&quot;) },</span>
+<span id="L693"><span class="lineNum">     693</span>              :     { SoundId::Taiko, String(u&quot;taiko&quot;) },</span>
+<span id="L694"><span class="lineNum">     694</span>              :     { SoundId::Metronome, String(u&quot;metronome&quot;) },</span>
+<span id="L695"><span class="lineNum">     695</span>              :     { SoundId::Last, String(u&quot;last&quot;) }</span>
+<span id="L696"><span class="lineNum">     696</span>              : };</span>
+<span id="L697"><span class="lineNum">     697</span>              : </span>
+<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC tlaBgGNC">         861 : inline const String&amp; soundIdToString(const SoundId id)</span></span>
+<span id="L699"><span class="lineNum">     699</span>              : {</span>
+<span id="L700"><span class="lineNum">     700</span> <span class="tlaGNC">         861 :     auto search = ID_STRINGS.find(id);</span></span>
+<span id="L701"><span class="lineNum">     701</span> <span class="tlaGNC">         861 :     if (search == ID_STRINGS.cend()) {</span></span>
+<span id="L702"><span class="lineNum">     702</span> <span class="tlaUNC tlaBgUNC">           0 :         return ID_STRINGS.at(SoundId::Unknown);</span></span>
+<span id="L703"><span class="lineNum">     703</span>              :     }</span>
+<span id="L704"><span class="lineNum">     704</span>              : </span>
+<span id="L705"><span class="lineNum">     705</span> <span class="tlaGNC tlaBgGNC">         861 :     return search-&gt;second;</span></span>
+<span id="L706"><span class="lineNum">     706</span>              : }</span>
+<span id="L707"><span class="lineNum">     707</span>              : </span>
+<span id="L708"><span class="lineNum">     708</span> <span class="tlaGNC">          30 : inline SoundId soundIdFromString(const String&amp; str)</span></span>
+<span id="L709"><span class="lineNum">     709</span>              : {</span>
+<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">          30 :     if (str.empty()) {</span></span>
+<span id="L711"><span class="lineNum">     711</span> <span class="tlaUNC tlaBgUNC">           0 :         return SoundId::Undefined;</span></span>
+<span id="L712"><span class="lineNum">     712</span>              :     }</span>
+<span id="L713"><span class="lineNum">     713</span>              : </span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC tlaBgGNC">          30 :     auto search = std::find_if(ID_STRINGS.cbegin(),</span></span>
+<span id="L715"><span class="lineNum">     715</span>              :                                ID_STRINGS.cend(),</span>
+<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">        4311 :                                [str](const auto&amp; pair) { return pair.second == str; });</span></span>
+<span id="L717"><span class="lineNum">     717</span>              : </span>
+<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">          30 :     if (search == ID_STRINGS.cend()) {</span></span>
+<span id="L719"><span class="lineNum">     719</span> <span class="tlaUNC tlaBgUNC">           0 :         return SoundId::Unknown;</span></span>
+<span id="L720"><span class="lineNum">     720</span>              :     }</span>
+<span id="L721"><span class="lineNum">     721</span>              : </span>
+<span id="L722"><span class="lineNum">     722</span> <span class="tlaGNC tlaBgGNC">          30 :     return search-&gt;first;</span></span>
+<span id="L723"><span class="lineNum">     723</span>              : }</span>
+<span id="L724"><span class="lineNum">     724</span>              : </span>
+<span id="L725"><span class="lineNum">     725</span>              : inline const std::unordered_map&lt;SoundCategory, String&gt; CATEGORY_STRINGS</span>
+<span id="L726"><span class="lineNum">     726</span>              : {</span>
+<span id="L727"><span class="lineNum">     727</span>              :     { SoundCategory::Keyboards, String(u&quot;keyboards&quot;) },</span>
+<span id="L728"><span class="lineNum">     728</span>              :     { SoundCategory::Strings, String(u&quot;strings&quot;) },</span>
+<span id="L729"><span class="lineNum">     729</span>              :     { SoundCategory::Winds, String(u&quot;winds&quot;) },</span>
+<span id="L730"><span class="lineNum">     730</span>              :     { SoundCategory::Percussions, String(u&quot;percussions&quot;) },</span>
+<span id="L731"><span class="lineNum">     731</span>              :     { SoundCategory::Voices, String(u&quot;voices&quot;) },</span>
+<span id="L732"><span class="lineNum">     732</span>              :     { SoundCategory::Last, String(u&quot;last&quot;) }</span>
+<span id="L733"><span class="lineNum">     733</span>              : };</span>
+<span id="L734"><span class="lineNum">     734</span>              : </span>
+<span id="L735"><span class="lineNum">     735</span> <span class="tlaGNC">         184 : inline const String&amp; soundCategoryToString(const SoundCategory category)</span></span>
+<span id="L736"><span class="lineNum">     736</span>              : {</span>
+<span id="L737"><span class="lineNum">     737</span> <span class="tlaGNC">         184 :     auto search = CATEGORY_STRINGS.find(category);</span></span>
+<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">         184 :     if (search == CATEGORY_STRINGS.cend()) {</span></span>
+<span id="L739"><span class="lineNum">     739</span> <span class="tlaGNC">          31 :         static const String UNDEFINED_SUBCATEGORY_STR(u&quot;undefined&quot;);</span></span>
+<span id="L740"><span class="lineNum">     740</span> <span class="tlaUNC tlaBgUNC">           0 :         return UNDEFINED_SUBCATEGORY_STR;</span></span>
+<span id="L741"><span class="lineNum">     741</span>              :     }</span>
+<span id="L742"><span class="lineNum">     742</span>              : </span>
+<span id="L743"><span class="lineNum">     743</span> <span class="tlaGNC tlaBgGNC">         184 :     return search-&gt;second;</span></span>
+<span id="L744"><span class="lineNum">     744</span>              : }</span>
+<span id="L745"><span class="lineNum">     745</span>              : </span>
+<span id="L746"><span class="lineNum">     746</span> <span class="tlaUNC tlaBgUNC">           0 : inline SoundCategory soundCategoryFromString(const String&amp; str)</span></span>
+<span id="L747"><span class="lineNum">     747</span>              : {</span>
+<span id="L748"><span class="lineNum">     748</span> <span class="tlaUNC">           0 :     auto search = std::find_if(CATEGORY_STRINGS.cbegin(),</span></span>
+<span id="L749"><span class="lineNum">     749</span>              :                                CATEGORY_STRINGS.cend(),</span>
+<span id="L750"><span class="lineNum">     750</span> <span class="tlaUNC">           0 :                                [str](const auto&amp; pair) { return pair.second == str; });</span></span>
+<span id="L751"><span class="lineNum">     751</span>              : </span>
+<span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC">           0 :     if (search == CATEGORY_STRINGS.cend()) {</span></span>
+<span id="L753"><span class="lineNum">     753</span> <span class="tlaUNC">           0 :         return SoundCategory::Undefined;</span></span>
+<span id="L754"><span class="lineNum">     754</span>              :     }</span>
+<span id="L755"><span class="lineNum">     755</span>              : </span>
+<span id="L756"><span class="lineNum">     756</span> <span class="tlaUNC">           0 :     return search-&gt;first;</span></span>
+<span id="L757"><span class="lineNum">     757</span>              : }</span>
+<span id="L758"><span class="lineNum">     758</span>              : </span>
+<span id="L759"><span class="lineNum">     759</span>              : inline const std::unordered_map&lt;SoundSubCategory, String&gt; SUBCATEGORY_STRINGS</span>
+<span id="L760"><span class="lineNum">     760</span>              : {</span>
+<span id="L761"><span class="lineNum">     761</span>              :     { SoundSubCategory::Undefined, String(u&quot;undefined&quot;) },</span>
+<span id="L762"><span class="lineNum">     762</span>              :     { SoundSubCategory::Unknown, String(u&quot;unknown&quot;) },</span>
+<span id="L763"><span class="lineNum">     763</span>              :     { SoundSubCategory::English, String(u&quot;english&quot;) },</span>
+<span id="L764"><span class="lineNum">     764</span>              :     { SoundSubCategory::Armenian, String(u&quot;armenian&quot;) },</span>
+<span id="L765"><span class="lineNum">     765</span>              :     { SoundSubCategory::Alpine, String(u&quot;alpine&quot;) },</span>
+<span id="L766"><span class="lineNum">     766</span>              :     { SoundSubCategory::Australian, String(u&quot;australian&quot;) },</span>
+<span id="L767"><span class="lineNum">     767</span>              :     { SoundSubCategory::Irish, String(u&quot;irish&quot;) },</span>
+<span id="L768"><span class="lineNum">     768</span>              :     { SoundSubCategory::French, String(u&quot;french&quot;) },</span>
+<span id="L769"><span class="lineNum">     769</span>              :     { SoundSubCategory::Chinese, String(u&quot;chinese&quot;) },</span>
+<span id="L770"><span class="lineNum">     770</span>              :     { SoundSubCategory::Vienna, String(u&quot;vienna&quot;) },</span>
+<span id="L771"><span class="lineNum">     771</span>              :     { SoundSubCategory::Greek, String(u&quot;greek&quot;) },</span>
+<span id="L772"><span class="lineNum">     772</span>              :     { SoundSubCategory::Japanese, String(u&quot;japanese&quot;) },</span>
+<span id="L773"><span class="lineNum">     773</span>              :     { SoundSubCategory::Korean, String(u&quot;korean&quot;) },</span>
+<span id="L774"><span class="lineNum">     774</span>              :     { SoundSubCategory::Tibetan, String(u&quot;tibetan&quot;) },</span>
+<span id="L775"><span class="lineNum">     775</span>              :     { SoundSubCategory::African, String(u&quot;african&quot;) },</span>
+<span id="L776"><span class="lineNum">     776</span>              :     { SoundSubCategory::Indian, String(u&quot;indian&quot;) },</span>
+<span id="L777"><span class="lineNum">     777</span>              :     { SoundSubCategory::Spanish, String(u&quot;spanish&quot;) },</span>
+<span id="L778"><span class="lineNum">     778</span>              :     { SoundSubCategory::Castilian, String(u&quot;castilian&quot;) },</span>
+<span id="L779"><span class="lineNum">     779</span>              :     { SoundSubCategory::Swedish, String(u&quot;swedish&quot;) },</span>
+<span id="L780"><span class="lineNum">     780</span>              :     { SoundSubCategory::Hungarian, String(u&quot;hungarian&quot;) },</span>
+<span id="L781"><span class="lineNum">     781</span>              :     { SoundSubCategory::Romanian, String(u&quot;romanian&quot;) },</span>
+<span id="L782"><span class="lineNum">     782</span>              :     { SoundSubCategory::CentralEuropean, String(u&quot;central_european&quot;) },</span>
+<span id="L783"><span class="lineNum">     783</span>              : </span>
+<span id="L784"><span class="lineNum">     784</span>              :     { SoundSubCategory::Baroque, String(u&quot;baroque&quot;) },</span>
+<span id="L785"><span class="lineNum">     785</span>              :     { SoundSubCategory::Classical, String(u&quot;classical&quot;) },</span>
+<span id="L786"><span class="lineNum">     786</span>              :     { SoundSubCategory::Modern, String(u&quot;modern&quot;) },</span>
+<span id="L787"><span class="lineNum">     787</span>              :     { SoundSubCategory::Orchestral, String(u&quot;orchestral&quot;) },</span>
+<span id="L788"><span class="lineNum">     788</span>              : </span>
+<span id="L789"><span class="lineNum">     789</span>              :     { SoundSubCategory::Hammond, String(u&quot;hammond&quot;) },</span>
+<span id="L790"><span class="lineNum">     790</span>              :     { SoundSubCategory::Wagner, String(u&quot;wagner&quot;) },</span>
+<span id="L791"><span class="lineNum">     791</span>              :     { SoundSubCategory::Orff, String(u&quot;orff&quot;) },</span>
+<span id="L792"><span class="lineNum">     792</span>              :     { SoundSubCategory::Huang, String(u&quot;huang&quot;) },</span>
+<span id="L793"><span class="lineNum">     793</span>              :     { SoundSubCategory::Hohner, String(u&quot;hohner&quot;) },</span>
+<span id="L794"><span class="lineNum">     794</span>              : </span>
+<span id="L795"><span class="lineNum">     795</span>              :     { SoundSubCategory::Percussive, String(u&quot;percussive&quot;) },</span>
+<span id="L796"><span class="lineNum">     796</span>              :     { SoundSubCategory::Piped, String(u&quot;piped&quot;) },</span>
+<span id="L797"><span class="lineNum">     797</span>              :     { SoundSubCategory::Rotary, String(u&quot;rotary&quot;) },</span>
+<span id="L798"><span class="lineNum">     798</span>              :     { SoundSubCategory::Reed, String(u&quot;reed&quot;) },</span>
+<span id="L799"><span class="lineNum">     799</span>              :     { SoundSubCategory::Foot, String(u&quot;foot&quot;) },</span>
+<span id="L800"><span class="lineNum">     800</span>              :     { SoundSubCategory::Hand, String(u&quot;hand&quot;) },</span>
+<span id="L801"><span class="lineNum">     801</span>              :     { SoundSubCategory::Finger, String(u&quot;finger&quot;) },</span>
+<span id="L802"><span class="lineNum">     802</span>              :     { SoundSubCategory::Boy, String(u&quot;boy&quot;) },</span>
+<span id="L803"><span class="lineNum">     803</span>              :     { SoundSubCategory::Girl, String(u&quot;girl&quot;) },</span>
+<span id="L804"><span class="lineNum">     804</span>              :     { SoundSubCategory::Male, String(u&quot;male&quot;) },</span>
+<span id="L805"><span class="lineNum">     805</span>              :     { SoundSubCategory::Female, String(u&quot;female&quot;) },</span>
+<span id="L806"><span class="lineNum">     806</span>              :     { SoundSubCategory::Pad, String(u&quot;pad&quot;) },</span>
+<span id="L807"><span class="lineNum">     807</span>              :     { SoundSubCategory::Plucked, String(u&quot;plucked&quot;) },</span>
+<span id="L808"><span class="lineNum">     808</span>              : </span>
+<span id="L809"><span class="lineNum">     809</span>              :     { SoundSubCategory::FourPiece, String(u&quot;4_piece&quot;) },</span>
+<span id="L810"><span class="lineNum">     810</span>              :     { SoundSubCategory::FivePiece, String(u&quot;5_piece&quot;) },</span>
+<span id="L811"><span class="lineNum">     811</span>              : </span>
+<span id="L812"><span class="lineNum">     812</span>              :     { SoundSubCategory::Temple, String(u&quot;temple&quot;) },</span>
+<span id="L813"><span class="lineNum">     813</span>              :     { SoundSubCategory::Military, String(u&quot;military&quot;) },</span>
+<span id="L814"><span class="lineNum">     814</span>              :     { SoundSubCategory::Ride, String(u&quot;ride&quot;) },</span>
+<span id="L815"><span class="lineNum">     815</span>              :     { SoundSubCategory::Sleigh, String(u&quot;sleigh&quot;) },</span>
+<span id="L816"><span class="lineNum">     816</span>              :     { SoundSubCategory::Cow, String(u&quot;cow&quot;) },</span>
+<span id="L817"><span class="lineNum">     817</span>              :     { SoundSubCategory::Agogo, String(u&quot;agogo&quot;) },</span>
+<span id="L818"><span class="lineNum">     818</span>              :     { SoundSubCategory::Marching, String(u&quot;marching&quot;) },</span>
+<span id="L819"><span class="lineNum">     819</span>              :     { SoundSubCategory::Show_Style, String(u&quot;show_style&quot;) },</span>
+<span id="L820"><span class="lineNum">     820</span>              :     { SoundSubCategory::Opera, String(u&quot;opera&quot;) },</span>
+<span id="L821"><span class="lineNum">     821</span>              :     { SoundSubCategory::China, String(u&quot;china&quot;) },</span>
+<span id="L822"><span class="lineNum">     822</span>              : </span>
+<span id="L823"><span class="lineNum">     823</span>              :     { SoundSubCategory::Splash, String(u&quot;splash&quot;) },</span>
+<span id="L824"><span class="lineNum">     824</span>              :     { SoundSubCategory::Crash, String(u&quot;crash&quot;) },</span>
+<span id="L825"><span class="lineNum">     825</span>              :     { SoundSubCategory::Plate, String(u&quot;plate&quot;) },</span>
+<span id="L826"><span class="lineNum">     826</span>              :     { SoundSubCategory::Bowl, String(u&quot;bowl&quot;) },</span>
+<span id="L827"><span class="lineNum">     827</span>              :     { SoundSubCategory::Frame, String(u&quot;frame&quot;) },</span>
+<span id="L828"><span class="lineNum">     828</span>              :     { SoundSubCategory::Slit, String(u&quot;slit&quot;) },</span>
+<span id="L829"><span class="lineNum">     829</span>              :     { SoundSubCategory::Log, String(u&quot;log&quot;) },</span>
+<span id="L830"><span class="lineNum">     830</span>              :     { SoundSubCategory::Ocean, String(u&quot;ocean&quot;) },</span>
+<span id="L831"><span class="lineNum">     831</span>              :     { SoundSubCategory::Field, String(u&quot;field&quot;) },</span>
+<span id="L832"><span class="lineNum">     832</span>              :     { SoundSubCategory::Snare, String(u&quot;snare&quot;) },</span>
+<span id="L833"><span class="lineNum">     833</span>              :     { SoundSubCategory::Brake, String(u&quot;brake&quot;) },</span>
+<span id="L834"><span class="lineNum">     834</span>              :     { SoundSubCategory::Slide, String(u&quot;slide&quot;) },</span>
+<span id="L835"><span class="lineNum">     835</span>              :     { SoundSubCategory::Pocket, String(u&quot;pocket&quot;) },</span>
+<span id="L836"><span class="lineNum">     836</span>              :     { SoundSubCategory::Garklein, String(u&quot;garklein&quot;) },</span>
+<span id="L837"><span class="lineNum">     837</span>              :     { SoundSubCategory::Toy, String(u&quot;toy&quot;) },</span>
+<span id="L838"><span class="lineNum">     838</span>              :     { SoundSubCategory::String, String(u&quot;string&quot;) },</span>
+<span id="L839"><span class="lineNum">     839</span>              :     { SoundSubCategory::TwelveString, String(u&quot;twelve_string&quot;) },</span>
+<span id="L840"><span class="lineNum">     840</span>              : </span>
+<span id="L841"><span class="lineNum">     841</span>              :     { SoundSubCategory::Grand, String(u&quot;grand&quot;) },</span>
+<span id="L842"><span class="lineNum">     842</span>              :     { SoundSubCategory::HonkyTonk, String(u&quot;honky_tonk&quot;) },</span>
+<span id="L843"><span class="lineNum">     843</span>              :     { SoundSubCategory::Upright, String(u&quot;upright&quot;) },</span>
+<span id="L844"><span class="lineNum">     844</span>              :     { SoundSubCategory::Prima, String(u&quot;prima&quot;) },</span>
+<span id="L845"><span class="lineNum">     845</span>              :     { SoundSubCategory::Secunda, String(u&quot;secunda&quot;) },</span>
+<span id="L846"><span class="lineNum">     846</span>              : </span>
+<span id="L847"><span class="lineNum">     847</span>              :     { SoundSubCategory::Electric, String(u&quot;electric&quot;) },</span>
+<span id="L848"><span class="lineNum">     848</span>              :     { SoundSubCategory::Electronic, String(u&quot;electronic&quot;) },</span>
+<span id="L849"><span class="lineNum">     849</span>              :     { SoundSubCategory::Acoustic, String(u&quot;acoustic&quot;) },</span>
+<span id="L850"><span class="lineNum">     850</span>              :     { SoundSubCategory::Fretless, String(u&quot;fretless&quot;) },</span>
+<span id="L851"><span class="lineNum">     851</span>              :     { SoundSubCategory::Pedal, String(u&quot;pedal&quot;) },</span>
+<span id="L852"><span class="lineNum">     852</span>              :     { SoundSubCategory::Steel, String(u&quot;steel&quot;) },</span>
+<span id="L853"><span class="lineNum">     853</span>              :     { SoundSubCategory::Metal, String(u&quot;metal&quot;) },</span>
+<span id="L854"><span class="lineNum">     854</span>              :     { SoundSubCategory::Iron, String(u&quot;iron&quot;) },</span>
+<span id="L855"><span class="lineNum">     855</span>              :     { SoundSubCategory::Brass, String(u&quot;brass&quot;) },</span>
+<span id="L856"><span class="lineNum">     856</span>              :     { SoundSubCategory::Tin, String(u&quot;tin&quot;) },</span>
+<span id="L857"><span class="lineNum">     857</span>              :     { SoundSubCategory::Nylon, String(u&quot;nylon&quot;) },</span>
+<span id="L858"><span class="lineNum">     858</span>              :     { SoundSubCategory::Wooden, String(u&quot;wooden&quot;) },</span>
+<span id="L859"><span class="lineNum">     859</span>              :     { SoundSubCategory::Sandpaper, String(u&quot;sandpaper&quot;) },</span>
+<span id="L860"><span class="lineNum">     860</span>              :     { SoundSubCategory::Glass, String(u&quot;glass&quot;) },</span>
+<span id="L861"><span class="lineNum">     861</span>              :     { SoundSubCategory::Shell, String(u&quot;shell&quot;) },</span>
+<span id="L862"><span class="lineNum">     862</span>              :     { SoundSubCategory::Wind, String(u&quot;wind&quot;) },</span>
+<span id="L863"><span class="lineNum">     863</span>              :     { SoundSubCategory::Soft, String(u&quot;soft&quot;) },</span>
+<span id="L864"><span class="lineNum">     864</span>              : </span>
+<span id="L865"><span class="lineNum">     865</span>              :     { SoundSubCategory::Treble, String(u&quot;treble&quot;) },</span>
+<span id="L866"><span class="lineNum">     866</span>              :     { SoundSubCategory::Diatonic, String(u&quot;diatonic&quot;) },</span>
+<span id="L867"><span class="lineNum">     867</span>              :     { SoundSubCategory::Chromatic, String(u&quot;chromatic&quot;) },</span>
+<span id="L868"><span class="lineNum">     868</span>              :     { SoundSubCategory::Octave, String(u&quot;octave&quot;) },</span>
+<span id="L869"><span class="lineNum">     869</span>              : </span>
+<span id="L870"><span class="lineNum">     870</span>              :     { SoundSubCategory::Piccolo, String(u&quot;piccolo&quot;) },</span>
+<span id="L871"><span class="lineNum">     871</span>              :     { SoundSubCategory::Alto, String(u&quot;alto&quot;) },</span>
+<span id="L872"><span class="lineNum">     872</span>              :     { SoundSubCategory::Tenor, String(u&quot;tenor&quot;) },</span>
+<span id="L873"><span class="lineNum">     873</span>              :     { SoundSubCategory::Baritone, String(u&quot;baritone&quot;) },</span>
+<span id="L874"><span class="lineNum">     874</span>              :     { SoundSubCategory::Soprano, String(u&quot;soprano&quot;) },</span>
+<span id="L875"><span class="lineNum">     875</span>              :     { SoundSubCategory::Mezzo_Soprano, String(u&quot;mezzo_soprano&quot;) },</span>
+<span id="L876"><span class="lineNum">     876</span>              :     { SoundSubCategory::Sopranino, String(u&quot;sopranino&quot;) },</span>
+<span id="L877"><span class="lineNum">     877</span>              :     { SoundSubCategory::Sopranissimo, String(u&quot;sopranissimo&quot;) },</span>
+<span id="L878"><span class="lineNum">     878</span>              :     { SoundSubCategory::Counter_Tenor, String(u&quot;counter_tenor&quot;) },</span>
+<span id="L879"><span class="lineNum">     879</span>              :     { SoundSubCategory::Contra, String(u&quot;contra&quot;) },</span>
+<span id="L880"><span class="lineNum">     880</span>              :     { SoundSubCategory::Contra_Alto, String(u&quot;contra_alto&quot;) },</span>
+<span id="L881"><span class="lineNum">     881</span>              :     { SoundSubCategory::Sub_Contra_Alto, String(u&quot;sub_contra_alto&quot;) },</span>
+<span id="L882"><span class="lineNum">     882</span>              :     { SoundSubCategory::Contra_Bass, String(u&quot;contra_bass&quot;) },</span>
+<span id="L883"><span class="lineNum">     883</span>              :     { SoundSubCategory::Sub_Contra_Bass, String(u&quot;sub_contra_bass&quot;) },</span>
+<span id="L884"><span class="lineNum">     884</span>              :     { SoundSubCategory::Double_Contra_Bass, String(u&quot;double_contra_bass&quot;) },</span>
+<span id="L885"><span class="lineNum">     885</span>              :     { SoundSubCategory::Bass, String(u&quot;bass&quot;) },</span>
+<span id="L886"><span class="lineNum">     886</span>              :     { SoundSubCategory::Bowed, String(u&quot;bowed&quot;) },</span>
+<span id="L887"><span class="lineNum">     887</span>              :     { SoundSubCategory::Great_Bass, String(u&quot;great_bass&quot;) },</span>
+<span id="L888"><span class="lineNum">     888</span>              :     { SoundSubCategory::Hyper_Bass, String(u&quot;hyper_bass&quot;) },</span>
+<span id="L889"><span class="lineNum">     889</span>              :     { SoundSubCategory::Melody, String(u&quot;melody&quot;) },</span>
+<span id="L890"><span class="lineNum">     890</span>              : </span>
+<span id="L891"><span class="lineNum">     891</span>              :     { SoundSubCategory::FX_Goblins, String(u&quot;fx_goblins&quot;) },</span>
+<span id="L892"><span class="lineNum">     892</span>              :     { SoundSubCategory::FX_Atmosphere, String(u&quot;fx_atmosphere&quot;) },</span>
+<span id="L893"><span class="lineNum">     893</span>              :     { SoundSubCategory::FX_Brightness, String(u&quot;fx_brightness&quot;) },</span>
+<span id="L894"><span class="lineNum">     894</span>              :     { SoundSubCategory::FX_Crystal, String(u&quot;fx_crystal&quot;) },</span>
+<span id="L895"><span class="lineNum">     895</span>              :     { SoundSubCategory::FX_Echoes, String(u&quot;fx_echoes&quot;) },</span>
+<span id="L896"><span class="lineNum">     896</span>              :     { SoundSubCategory::FX_Rain, String(u&quot;fx_rain&quot;) },</span>
+<span id="L897"><span class="lineNum">     897</span>              :     { SoundSubCategory::FX_SciFi, String(u&quot;fx_scifi&quot;) },</span>
+<span id="L898"><span class="lineNum">     898</span>              :     { SoundSubCategory::FX_SoundTrack, String(u&quot;fx_soundtrack&quot;) },</span>
+<span id="L899"><span class="lineNum">     899</span>              : </span>
+<span id="L900"><span class="lineNum">     900</span>              :     { SoundSubCategory::Sweep, String(u&quot;sweep&quot;) },</span>
+<span id="L901"><span class="lineNum">     901</span>              :     { SoundSubCategory::Warm, String(u&quot;warm&quot;) },</span>
+<span id="L902"><span class="lineNum">     902</span>              :     { SoundSubCategory::NewAge, String(u&quot;new_age&quot;) },</span>
+<span id="L903"><span class="lineNum">     903</span>              :     { SoundSubCategory::Polysynth, String(u&quot;polysynth&quot;) },</span>
+<span id="L904"><span class="lineNum">     904</span>              :     { SoundSubCategory::Halo, String(u&quot;halo&quot;) },</span>
+<span id="L905"><span class="lineNum">     905</span>              :     { SoundSubCategory::Metallic, String(u&quot;metallic&quot;) },</span>
+<span id="L906"><span class="lineNum">     906</span>              :     { SoundSubCategory::Choir, String(u&quot;choir&quot;) },</span>
+<span id="L907"><span class="lineNum">     907</span>              : </span>
+<span id="L908"><span class="lineNum">     908</span>              :     { SoundSubCategory::Sine_Wave, String(u&quot;sine_wave&quot;) },</span>
+<span id="L909"><span class="lineNum">     909</span>              :     { SoundSubCategory::Square_Wave, String(u&quot;square_wave&quot;) },</span>
+<span id="L910"><span class="lineNum">     910</span>              :     { SoundSubCategory::Sawtooth_Wave, String(u&quot;sawtooth_wave&quot;) },</span>
+<span id="L911"><span class="lineNum">     911</span>              : </span>
+<span id="L912"><span class="lineNum">     912</span>              :     { SoundSubCategory::Primary, String(u&quot;primary&quot;) },</span>
+<span id="L913"><span class="lineNum">     913</span>              :     { SoundSubCategory::Secondary, String(u&quot;secondary&quot;) },</span>
+<span id="L914"><span class="lineNum">     914</span>              :     { SoundSubCategory::Section, String(u&quot;section&quot;) },</span>
+<span id="L915"><span class="lineNum">     915</span>              : </span>
+<span id="L916"><span class="lineNum">     916</span>              :     { SoundSubCategory::In_C, String(u&quot;in_c&quot;) },</span>
+<span id="L917"><span class="lineNum">     917</span>              :     { SoundSubCategory::In_D, String(u&quot;in_d&quot;) },</span>
+<span id="L918"><span class="lineNum">     918</span>              :     { SoundSubCategory::In_D_flat, String(u&quot;in_d_flat&quot;) },</span>
+<span id="L919"><span class="lineNum">     919</span>              :     { SoundSubCategory::In_E, String(u&quot;in_e&quot;) },</span>
+<span id="L920"><span class="lineNum">     920</span>              :     { SoundSubCategory::In_E_flat, String(u&quot;in_e_flat&quot;) },</span>
+<span id="L921"><span class="lineNum">     921</span>              :     { SoundSubCategory::In_F, String(u&quot;in_f&quot;) },</span>
+<span id="L922"><span class="lineNum">     922</span>              :     { SoundSubCategory::In_G, String(u&quot;in_g&quot;) },</span>
+<span id="L923"><span class="lineNum">     923</span>              :     { SoundSubCategory::In_G_flat, String(u&quot;in_g_flat&quot;) },</span>
+<span id="L924"><span class="lineNum">     924</span>              :     { SoundSubCategory::In_A, String(u&quot;in_a&quot;) },</span>
+<span id="L925"><span class="lineNum">     925</span>              :     { SoundSubCategory::In_A_flat, String(u&quot;in_a_flat&quot;) },</span>
+<span id="L926"><span class="lineNum">     926</span>              :     { SoundSubCategory::In_B, String(u&quot;in_b&quot;) },</span>
+<span id="L927"><span class="lineNum">     927</span>              :     { SoundSubCategory::In_B_flat, String(u&quot;in_b_flat&quot;) },</span>
+<span id="L928"><span class="lineNum">     928</span>              : </span>
+<span id="L929"><span class="lineNum">     929</span>              :     { SoundSubCategory::Last, String(u&quot;last&quot;) }</span>
+<span id="L930"><span class="lineNum">     930</span>              : };</span>
+<span id="L931"><span class="lineNum">     931</span>              : </span>
+<span id="L932"><span class="lineNum">     932</span>              : using SoundSubCategories = std::set&lt;SoundSubCategory&gt;;</span>
+<span id="L933"><span class="lineNum">     933</span>              : </span>
+<span id="L934"><span class="lineNum">     934</span> <span class="tlaGNC tlaBgGNC">         946 : inline const String&amp; soundSubCategoryToString(const SoundSubCategory&amp; subCategory)</span></span>
+<span id="L935"><span class="lineNum">     935</span>              : {</span>
+<span id="L936"><span class="lineNum">     936</span> <span class="tlaGNC">         946 :     auto search = SUBCATEGORY_STRINGS.find(subCategory);</span></span>
+<span id="L937"><span class="lineNum">     937</span> <span class="tlaGNC">         946 :     if (search == SUBCATEGORY_STRINGS.cend()) {</span></span>
+<span id="L938"><span class="lineNum">     938</span> <span class="tlaUNC tlaBgUNC">           0 :         return SUBCATEGORY_STRINGS.at(SoundSubCategory::Unknown);</span></span>
+<span id="L939"><span class="lineNum">     939</span>              :     }</span>
+<span id="L940"><span class="lineNum">     940</span>              : </span>
+<span id="L941"><span class="lineNum">     941</span> <span class="tlaGNC tlaBgGNC">         946 :     return search-&gt;second;</span></span>
+<span id="L942"><span class="lineNum">     942</span>              : }</span>
+<span id="L943"><span class="lineNum">     943</span>              : </span>
+<span id="L944"><span class="lineNum">     944</span> <span class="tlaGNC">          16 : inline SoundSubCategory soundSubCategoryFromString(const String&amp; str)</span></span>
+<span id="L945"><span class="lineNum">     945</span>              : {</span>
+<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC">          16 :     if (str.empty()) {</span></span>
+<span id="L947"><span class="lineNum">     947</span> <span class="tlaUNC tlaBgUNC">           0 :         return SoundSubCategory::Undefined;</span></span>
+<span id="L948"><span class="lineNum">     948</span>              :     }</span>
+<span id="L949"><span class="lineNum">     949</span>              : </span>
+<span id="L950"><span class="lineNum">     950</span> <span class="tlaGNC tlaBgGNC">          16 :     auto search = std::find_if(SUBCATEGORY_STRINGS.cbegin(),</span></span>
+<span id="L951"><span class="lineNum">     951</span>              :                                SUBCATEGORY_STRINGS.cend(),</span>
+<span id="L952"><span class="lineNum">     952</span> <span class="tlaGNC">        1344 :                                [str](const auto&amp; pair) { return pair.second == str; });</span></span>
+<span id="L953"><span class="lineNum">     953</span>              : </span>
+<span id="L954"><span class="lineNum">     954</span> <span class="tlaGNC">          16 :     if (search == SUBCATEGORY_STRINGS.cend()) {</span></span>
+<span id="L955"><span class="lineNum">     955</span> <span class="tlaUNC tlaBgUNC">           0 :         return SoundSubCategory::Unknown;</span></span>
+<span id="L956"><span class="lineNum">     956</span>              :     }</span>
+<span id="L957"><span class="lineNum">     957</span>              : </span>
+<span id="L958"><span class="lineNum">     958</span> <span class="tlaGNC tlaBgGNC">          16 :     return search-&gt;first;</span></span>
+<span id="L959"><span class="lineNum">     959</span>              : }</span>
+<span id="L960"><span class="lineNum">     960</span>              : }</span>
+<span id="L961"><span class="lineNum">     961</span>              : </span>
+<span id="L962"><span class="lineNum">     962</span>              : #endif // MUSE_MPE_SOUNDID_H</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

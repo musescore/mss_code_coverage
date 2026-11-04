@@ -1,0 +1,447 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/rendering/score/arpeggiolayout.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">src/engraving/rendering/score</a> - arpeggiolayout.cpp</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryMed">89.1&nbsp;%</td>
+            <td class="headerCovTableEntry">184</td>
+            <td class="headerCovTableEntry">164</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2023 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : #include &quot;arpeggiolayout.h&quot;</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span>              : #include &quot;dom/arpeggio.h&quot;</span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;dom/chord.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;dom/ledgerline.h&quot;</span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &quot;dom/part.h&quot;</span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &quot;dom/score.h&quot;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;dom/segment.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;dom/staff.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;tlayout.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : </span>
+<span id="L34"><span class="lineNum">      34</span>              : using namespace mu::engraving;</span>
+<span id="L35"><span class="lineNum">      35</span>              : using namespace mu::engraving::rendering::score;</span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span>              : //   layoutArpeggio2</span>
+<span id="L38"><span class="lineNum">      38</span>              : //    called after layout of page</span>
+<span id="L39"><span class="lineNum">      39</span>              : </span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC tlaBgGNC">       47492 : void ArpeggioLayout::layoutArpeggio2(Arpeggio* item, LayoutContext&amp; ctx)</span></span>
+<span id="L41"><span class="lineNum">      41</span>              : {</span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">       47492 :     if (!item) {</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">       47259 :         return;</span></span>
+<span id="L44"><span class="lineNum">      44</span>              :     }</span>
+<span id="L45"><span class="lineNum">      45</span>              : </span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">         233 :     TLayout::layoutItem(item, ctx);</span></span>
+<span id="L47"><span class="lineNum">      47</span>              : }</span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span>              : //</span>
+<span id="L50"><span class="lineNum">      50</span>              : // INSET:</span>
+<span id="L51"><span class="lineNum">      51</span>              : // Arpeggios have inset white space. For instance, the bracket</span>
+<span id="L52"><span class="lineNum">      52</span>              : // &quot;[&quot; shape has whitespace inside of the &quot;C&quot;. Symbols like</span>
+<span id="L53"><span class="lineNum">      53</span>              : // accidentals can fit inside this whitespace. These inset</span>
+<span id="L54"><span class="lineNum">      54</span>              : // functions are used to get the size of the inner dimensions</span>
+<span id="L55"><span class="lineNum">      55</span>              : // for this area on all arpeggios.</span>
+<span id="L56"><span class="lineNum">      56</span>              : //</span>
+<span id="L57"><span class="lineNum">      57</span>              : </span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">          21 : double ArpeggioLayout::insetTop(const Arpeggio* item, const Chord* c)</span></span>
+<span id="L59"><span class="lineNum">      59</span>              : {</span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">          21 :     double top = c-&gt;upNote()-&gt;y() - c-&gt;upNote()-&gt;height() / 2;</span></span>
+<span id="L61"><span class="lineNum">      61</span>              : </span>
+<span id="L62"><span class="lineNum">      62</span>              :     // use wiggle width, not height, since it's rotated 90 degrees</span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          21 :     if (item-&gt;arpeggioType() == ArpeggioType::UP) {</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">           4 :         top += item-&gt;symBbox(SymId::wiggleArpeggiatoUpArrow).width();</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          17 :     } else if (item-&gt;arpeggioType() == ArpeggioType::UP_STRAIGHT) {</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC tlaBgUNC">           0 :         top += item-&gt;symBbox(SymId::arrowheadBlackUp).width();</span></span>
+<span id="L67"><span class="lineNum">      67</span>              :     }</span>
+<span id="L68"><span class="lineNum">      68</span>              : </span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC tlaBgGNC">          21 :     return top;</span></span>
+<span id="L70"><span class="lineNum">      70</span>              : }</span>
+<span id="L71"><span class="lineNum">      71</span>              : </span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">          18 : double ArpeggioLayout::insetBottom(const Arpeggio* item, const Chord* c)</span></span>
+<span id="L73"><span class="lineNum">      73</span>              : {</span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">          18 :     double bottom = c-&gt;downNote()-&gt;y() + c-&gt;downNote()-&gt;height() / 2;</span></span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span>              :     // use wiggle width, not height, since it's rotated 90 degrees</span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">          18 :     if (item-&gt;arpeggioType() == ArpeggioType::DOWN) {</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaUNC tlaBgUNC">           0 :         bottom -= item-&gt;symBbox(SymId::wiggleArpeggiatoUpArrow).width();</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC tlaBgGNC">          18 :     } else if (item-&gt;arpeggioType() == ArpeggioType::DOWN_STRAIGHT) {</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaUNC tlaBgUNC">           0 :         bottom -= item-&gt;symBbox(SymId::arrowheadBlackDown).width();</span></span>
+<span id="L81"><span class="lineNum">      81</span>              :     }</span>
+<span id="L82"><span class="lineNum">      82</span>              : </span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC tlaBgGNC">          18 :     return bottom;</span></span>
+<span id="L84"><span class="lineNum">      84</span>              : }</span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">          13 : double ArpeggioLayout::insetWidth(const Arpeggio* item)</span></span>
+<span id="L87"><span class="lineNum">      87</span>              : {</span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          13 :     double lineWidth = item-&gt;style().styleAbsolute(item-&gt;isChordBracket() ? Sid::chordBracketLineWidth : Sid::arpeggioLineWidth);</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">          13 :     switch (item-&gt;arpeggioType()) {</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">          13 :     case ArpeggioType::NORMAL:</span></span>
+<span id="L91"><span class="lineNum">      91</span>              :     {</span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">          13 :         return 0.0;</span></span>
+<span id="L93"><span class="lineNum">      93</span>              :     }</span>
+<span id="L94"><span class="lineNum">      94</span>              : </span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaUNC tlaBgUNC">           0 :     case ArpeggioType::UP:</span></span>
+<span id="L96"><span class="lineNum">      96</span>              :     case ArpeggioType::DOWN:</span>
+<span id="L97"><span class="lineNum">      97</span>              :     {</span>
+<span id="L98"><span class="lineNum">      98</span>              :         // use wiggle height, not width, since it's rotated 90 degrees</span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaUNC">           0 :         return (item-&gt;width() - item-&gt;symBbox(SymId::wiggleArpeggiatoUp).height()) / 2;</span></span>
+<span id="L100"><span class="lineNum">     100</span>              :     }</span>
+<span id="L101"><span class="lineNum">     101</span>              : </span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaUNC">           0 :     case ArpeggioType::UP_STRAIGHT:</span></span>
+<span id="L103"><span class="lineNum">     103</span>              :     case ArpeggioType::DOWN_STRAIGHT:</span>
+<span id="L104"><span class="lineNum">     104</span>              :     {</span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaUNC">           0 :         return (item-&gt;width() - lineWidth) / 2;</span></span>
+<span id="L106"><span class="lineNum">     106</span>              :     }</span>
+<span id="L107"><span class="lineNum">     107</span>              : </span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaUNC">           0 :     case ArpeggioType::BRACKET:</span></span>
+<span id="L109"><span class="lineNum">     109</span>              :     {</span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaUNC">           0 :         return item-&gt;width() - lineWidth / 2;</span></span>
+<span id="L111"><span class="lineNum">     111</span>              :     }</span>
+<span id="L112"><span class="lineNum">     112</span>              :     }</span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaUNC">           0 :     return 0.0;</span></span>
+<span id="L114"><span class="lineNum">     114</span>              : }</span>
+<span id="L115"><span class="lineNum">     115</span>              : </span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC tlaBgGNC">         252 : void ArpeggioLayout::clearAccidentals(Arpeggio* item, LayoutContext&amp; ctx)</span></span>
+<span id="L117"><span class="lineNum">     117</span>              : {</span>
+<span id="L118"><span class="lineNum">     118</span>              :     //   This function finds collisions with accidentals outside of an arpeggio's span</span>
+<span id="L119"><span class="lineNum">     119</span>              :     //   Assumptions are made to deal with cross staff height, as we don't know this yet.</span>
+<span id="L120"><span class="lineNum">     120</span>              :     //   Once a chord is found, its shape is stripped down to only accidentals which collide</span>
+<span id="L121"><span class="lineNum">     121</span>              :     //   with the arpeggio.  The arpeggio's offset is calculated from the remaining shape</span>
+<span id="L122"><span class="lineNum">     122</span>              : </span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">         252 :     if (!item || !item-&gt;chord()) {</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L125"><span class="lineNum">     125</span>              :     }</span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC tlaBgGNC">         252 :     const Segment* seg = item-&gt;chord()-&gt;segment();</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">         252 :     const EngravingItem* endEl = seg-&gt;element(item-&gt;endTrack());</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">         252 :     const Chord* endChord = endEl &amp;&amp; endEl-&gt;isChord() ? toChord(endEl) : item-&gt;chord();</span></span>
+<span id="L130"><span class="lineNum">     130</span>              : </span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">         252 :     const Part* part = item-&gt;part();</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">         252 :     const TrackRange trackRange = part-&gt;trackRange();</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">         252 :     const PaddingTable&amp; paddingTable = item-&gt;score()-&gt;paddingTables().horizontalPaddingTable();</span></span>
+<span id="L134"><span class="lineNum">     134</span>              : </span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">         252 :     double arpeggioAccidentalDistance = paddingTable.at(ElementType::ARPEGGIO).at(ElementType::ACCIDENTAL) * item-&gt;mag();</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">         252 :     double arpeggioLedgerDistance = paddingTable.at(ElementType::ARPEGGIO).at(ElementType::LEDGER_LINE) * item-&gt;mag();</span></span>
+<span id="L137"><span class="lineNum">     137</span>              : </span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         252 :     Shape arpShape = item-&gt;shape().translate(item-&gt;pagePos());</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">         252 :     double arpX = arpShape.right();</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">         252 :     double largestOverlap = 0.0;</span></span>
+<span id="L141"><span class="lineNum">     141</span>              : </span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">        1960 :     for (track_idx_t track = trackRange.startTrack; track &lt; trackRange.endTrack; ++track) {</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">        1708 :         EngravingItem* e = seg-&gt;element(track);</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">        1708 :         if (!e || !e-&gt;isChord()) {</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">        1704 :             continue;</span></span>
+<span id="L146"><span class="lineNum">     146</span>              :         }</span>
+<span id="L147"><span class="lineNum">     147</span>              : </span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         567 :         Chord* chord = toChord(e);</span></span>
+<span id="L149"><span class="lineNum">     149</span>              :         // Only check chords the arpeggio doesn't span on staves the arpeggios span</span>
+<span id="L150"><span class="lineNum">     150</span>              :         // We already calculated the gap between chords it does span in ChordLayout::layoutPitched</span>
+<span id="L151"><span class="lineNum">     151</span>              :         bool aboveStart</span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">         567 :             = std::make_pair(chord-&gt;vStaffIdx(), chord-&gt;downLine()) &lt; std::make_pair(item-&gt;vStaffIdx(), item-&gt;chord()-&gt;upLine());</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">         567 :         bool belowEnd = std::make_pair(chord-&gt;vStaffIdx(), chord-&gt;upLine()) &gt; std::make_pair(endChord-&gt;vStaffIdx(), endChord-&gt;downLine());</span></span>
+<span id="L154"><span class="lineNum">     154</span>              : </span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">        1134 :         if ((chord-&gt;spanArpeggio() == item &amp;&amp; !(aboveStart || belowEnd)) || chord-&gt;vStaffIdx() &lt; item-&gt;vStaffIdx()</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">        1134 :             || chord-&gt;vStaffIdx() &gt; endChord-&gt;vStaffIdx()) {</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">         507 :             continue;</span></span>
+<span id="L158"><span class="lineNum">     158</span>              :         }</span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span>              :         // We don't know the distance between staves, so our arpeggio's height is currently unknown if it spans staves</span>
+<span id="L161"><span class="lineNum">     161</span>              :         // To make sure we spot collisions with non-arpeggio accidentals, extend arpeggio upwards/downwards a large amount</span>
+<span id="L162"><span class="lineNum">     162</span>              :         // depending on if they are the end/start of the arpeggio respectively.</span>
+<span id="L163"><span class="lineNum">     163</span>              :         // This is to find collisions between chords outside the arpeggios track span, but within its &quot;visual span&quot;</span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">          60 :         Shape curArpShape = arpShape;</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">          60 :         staff_idx_t staffIdx = chord-&gt;vStaffIdx();</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">          60 :         if (staffIdx == item-&gt;chord()-&gt;vStaffIdx() &amp;&amp; item-&gt;crossStaff()) {</span></span>
+<span id="L167"><span class="lineNum">     167</span>              :             // Arpeggio doesn't end on this staff, so extend downwards</span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC tlaBgUNC">           0 :             curArpShape.addBBox(RectF(curArpShape.bbox().bottomLeft().x(), curArpShape.bbox().bottomLeft().y(),</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaUNC">           0 :                                       curArpShape.bbox().width(), ARBITRARY_ARPEGGIO_LENGTH));</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC tlaBgGNC">          60 :         } else if (staffIdx == endChord-&gt;vStaffIdx() &amp;&amp; item-&gt;crossStaff()) {</span></span>
+<span id="L171"><span class="lineNum">     171</span>              :             // Arpeggio doesn't start on this staff so move to last note and extend upwards</span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaUNC tlaBgUNC">           0 :             curArpShape.translate(PointF(0.0, endChord-&gt;downNote()-&gt;pagePos().y() - item-&gt;pagePos().y()));</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 :             curArpShape.addBBox(RectF(curArpShape.bbox().topLeft().x(), curArpShape.bbox().topLeft().y() - ARBITRARY_ARPEGGIO_LENGTH,</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaUNC">           0 :                                       curArpShape.bbox().width(), ARBITRARY_ARPEGGIO_LENGTH));</span></span>
+<span id="L175"><span class="lineNum">     175</span>              :         }</span>
+<span id="L176"><span class="lineNum">     176</span>              : </span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC tlaBgGNC">          60 :         Shape chordShape = chord-&gt;shape();</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">          60 :         chordShape.translate(chord-&gt;pagePos());</span></span>
+<span id="L179"><span class="lineNum">     179</span>              :         // Remove any element which isn't an accidental the arpeggio intersects</span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">          60 :         chordShape.remove_if([curArpShape, arpeggioAccidentalDistance, arpeggioLedgerDistance](ShapeElement&amp; shapeElement) {</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">         246 :             if (!shapeElement.item()</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">         246 :                 || !(shapeElement.item()-&gt;isAccidental() || shapeElement.item()-&gt;isLedgerLine())) {</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">         178 :                 return true;</span></span>
+<span id="L184"><span class="lineNum">     184</span>              :             }</span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">          68 :             if (shapeElement.item()-&gt;isAccidental()) {</span></span>
+<span id="L186"><span class="lineNum">     186</span>              :                 // Pad accidentals with Sid::arpeggioAccidentalDistance either side</span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">           6 :                 shapeElement.setTopLeft(PointF(shapeElement.topLeft().x() - arpeggioAccidentalDistance, shapeElement.topLeft().y()));</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">           6 :                 shapeElement.setWidth(shapeElement.width() + 2 * arpeggioAccidentalDistance);</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">          62 :             } else if (shapeElement.item()-&gt;isLedgerLine()) {</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">          62 :                 shapeElement.setTopLeft(PointF(shapeElement.topLeft().x() - arpeggioLedgerDistance, shapeElement.topLeft().y()));</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">          62 :                 shapeElement.setWidth(shapeElement.width() + 2 * arpeggioLedgerDistance);</span></span>
+<span id="L192"><span class="lineNum">     192</span>              :             }</span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">          68 :             return !curArpShape.intersects(shapeElement);</span></span>
+<span id="L194"><span class="lineNum">     194</span>              :         });</span>
+<span id="L195"><span class="lineNum">     195</span>              : </span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          60 :         if (chordShape.empty()) {</span></span>
+<span id="L197"><span class="lineNum">     197</span>              :             // No collisions with accidentals</span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">          56 :             continue;</span></span>
+<span id="L199"><span class="lineNum">     199</span>              :         }</span>
+<span id="L200"><span class="lineNum">     200</span>              : </span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">           4 :         double chordX = chordShape.left();</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">           4 :         double diff = chordX - arpX;</span></span>
+<span id="L203"><span class="lineNum">     203</span>              : </span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">           4 :         if (!muse::RealIsNull(diff)) {</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">           4 :             double inset = insetDistance(item, ctx, item-&gt;mag(), chord);</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">           4 :             largestOverlap = std::min(largestOverlap, diff + inset);</span></span>
+<span id="L207"><span class="lineNum">     207</span>              :         }</span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">         116 :     }</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">         252 :     if (!muse::RealIsNull(largestOverlap)) {</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">           4 :         item-&gt;mutldata()-&gt;moveX(largestOverlap);</span></span>
+<span id="L211"><span class="lineNum">     211</span>              :     }</span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">         252 : }</span></span>
+<span id="L213"><span class="lineNum">     213</span>              : </span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">           4 : double ArpeggioLayout::insetDistance(const Arpeggio* item, const LayoutContext&amp; ctx, double mag_, const Chord* chord)</span></span>
+<span id="L215"><span class="lineNum">     215</span>              : {</span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">           4 :     if (!item || !chord) {</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC tlaBgUNC">           0 :         return 0.0;</span></span>
+<span id="L218"><span class="lineNum">     218</span>              :     }</span>
+<span id="L219"><span class="lineNum">     219</span>              : </span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC tlaBgGNC">           4 :     std::vector&lt;Accidental*&gt; _accidentals;</span></span>
+<span id="L221"><span class="lineNum">     221</span>              : </span>
+<span id="L222"><span class="lineNum">     222</span>              :     // generate list of accidentals if none provided</span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">          10 :     for (Note* note : chord-&gt;notes()) {</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">           6 :         Accidental* accidental = note-&gt;accidental();</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">           6 :         if (accidental &amp;&amp; accidental-&gt;visible()) {</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">           2 :             _accidentals.push_back(accidental);</span></span>
+<span id="L227"><span class="lineNum">     227</span>              :         }</span>
+<span id="L228"><span class="lineNum">     228</span>              :     }</span>
+<span id="L229"><span class="lineNum">     229</span>              : </span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">           4 :     if (_accidentals.empty()) {</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">           2 :         return 0.0;</span></span>
+<span id="L232"><span class="lineNum">     232</span>              :     }</span>
+<span id="L233"><span class="lineNum">     233</span>              : </span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">           2 :     return insetDistance(item, ctx, mag_, chord, _accidentals);</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">           4 : }</span></span>
+<span id="L236"><span class="lineNum">     236</span>              : </span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">          21 : double ArpeggioLayout::insetDistance(const Arpeggio* item, const LayoutContext&amp; ctx, double mag_, const Chord* chord,</span></span>
+<span id="L238"><span class="lineNum">     238</span>              :                                      const std::vector&lt;Accidental*&gt;&amp; accidentals)</span>
+<span id="L239"><span class="lineNum">     239</span>              : {</span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">          21 :     if (!item || !chord) {</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC tlaBgUNC">           0 :         return 0.0;</span></span>
+<span id="L242"><span class="lineNum">     242</span>              :     }</span>
+<span id="L243"><span class="lineNum">     243</span>              : </span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC tlaBgGNC">          21 :     if (accidentals.empty()) {</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC tlaBgUNC">           0 :         return 0.0;</span></span>
+<span id="L246"><span class="lineNum">     246</span>              :     }</span>
+<span id="L247"><span class="lineNum">     247</span>              : </span>
+<span id="L248"><span class="lineNum">     248</span>              :     // Only be concerned about the top/bottom of an arpeggio line if this is the start/end chord</span>
+<span id="L249"><span class="lineNum">     249</span>              : </span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC tlaBgGNC">          21 :     const Segment* seg = item-&gt;chord()-&gt;segment();</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">          21 :     Chord* endChord = item-&gt;chord();</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">          21 :     const PaddingTable&amp; paddingTable = item-&gt;score()-&gt;paddingTables().horizontalPaddingTable();</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">          21 :     if (EngravingItem* e = seg-&gt;element(item-&gt;endTrack())) {</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">          21 :         endChord = e-&gt;isChord() ? toChord(e) : endChord;</span></span>
+<span id="L255"><span class="lineNum">     255</span>              :     }</span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">          21 :     bool arpStartStave = chord-&gt;vStaffIdx() == item-&gt;vStaffIdx();</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">          21 :     bool arpEndStave = chord-&gt;vStaffIdx() == endChord-&gt;vStaffIdx();</span></span>
+<span id="L258"><span class="lineNum">     258</span>              : </span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">          21 :     double arpeggioTop = arpStartStave ? insetTop(item, item-&gt;chord()) * mag_ : -ARBITRARY_ARPEGGIO_LENGTH;</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">          21 :     double arpeggioBottom = arpEndStave ? insetBottom(item, endChord) * mag_ : ARBITRARY_ARPEGGIO_LENGTH;</span></span>
+<span id="L261"><span class="lineNum">     261</span>              : </span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">          21 :     ArpeggioType type = item-&gt;arpeggioType();</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">          21 :     bool hasTopArrow = type == ArpeggioType::UP</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">          17 :                        || type == ArpeggioType::UP_STRAIGHT</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">          38 :                        || type == ArpeggioType::BRACKET;</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">          21 :     bool hasBottomArrow = type == ArpeggioType::DOWN</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">          21 :                           || type == ArpeggioType::DOWN_STRAIGHT</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">          42 :                           || type == ArpeggioType::BRACKET;</span></span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">          21 :     const Accidental* furthestAccidental = nullptr;</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">          56 :     for (const Accidental* accidental : accidentals) {</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">          35 :         if (furthestAccidental) {</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">          14 :             bool currentIsFurtherX = accidental-&gt;x() &lt; furthestAccidental-&gt;x();</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">          14 :             bool currentIsSameX = accidental-&gt;x() == furthestAccidental-&gt;x();</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">          14 :             auto accidentalBbox = item-&gt;symBbox(accidental-&gt;symId());</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">          14 :             double currentTop = accidental-&gt;note()-&gt;pos().y() + accidentalBbox.top() * mag_;</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">          14 :             double currentBottom = accidental-&gt;note()-&gt;pos().y() + accidentalBbox.bottom() * mag_;</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">          14 :             bool collidesWithTop = currentTop &lt;= arpeggioTop &amp;&amp; hasTopArrow;</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">          14 :             bool collidesWithBottom = currentBottom &gt;= arpeggioBottom &amp;&amp; hasBottomArrow;</span></span>
+<span id="L280"><span class="lineNum">     280</span>              : </span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">          14 :             if (currentIsFurtherX || (currentIsSameX &amp;&amp; (collidesWithTop || collidesWithBottom))) {</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">           5 :                 furthestAccidental = accidental;</span></span>
+<span id="L283"><span class="lineNum">     283</span>              :             }</span>
+<span id="L284"><span class="lineNum">     284</span>              :         } else {</span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">          21 :             furthestAccidental = accidental;</span></span>
+<span id="L286"><span class="lineNum">     286</span>              :         }</span>
+<span id="L287"><span class="lineNum">     287</span>              :     }</span>
+<span id="L288"><span class="lineNum">     288</span>              : </span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">          21 :     IF_ASSERT_FAILED(furthestAccidental) {</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaUNC tlaBgUNC">           0 :         return 0.0;</span></span>
+<span id="L291"><span class="lineNum">     291</span>              :     }</span>
+<span id="L292"><span class="lineNum">     292</span>              : </span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC tlaBgGNC">          21 :     double maximumInset = (paddingTable.at(ElementType::ARPEGGIO).at(ElementType::ACCIDENTAL)</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">          21 :                            - ctx.conf().styleAbsolute(Sid::arpeggioAccidentalDistanceMin)) * mag_;</span></span>
+<span id="L295"><span class="lineNum">     295</span>              : </span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">          21 :     RectF bbox = item-&gt;symBbox(furthestAccidental-&gt;symId());</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">          21 :     double center = furthestAccidental-&gt;note()-&gt;pos().y() * mag_;</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">          21 :     double top = center + bbox.top() * mag_;</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">          21 :     double bottom = center + bbox.bottom() * mag_;</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">          21 :     bool collidesWithTop = hasTopArrow &amp;&amp; top &lt;= arpeggioTop;</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">          21 :     bool collidesWithBottom = hasBottomArrow &amp;&amp; bottom &gt;= arpeggioBottom;</span></span>
+<span id="L302"><span class="lineNum">     302</span>              : </span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">          21 :     if (collidesWithTop || collidesWithBottom) {</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">           8 :         return maximumInset;</span></span>
+<span id="L305"><span class="lineNum">     305</span>              :     }</span>
+<span id="L306"><span class="lineNum">     306</span>              : </span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">          13 :     return insetWidth(item);</span></span>
+<span id="L308"><span class="lineNum">     308</span>              : }</span>
+<span id="L309"><span class="lineNum">     309</span>              : </span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">         466 : double ArpeggioLayout::computeHeight(const Arpeggio* item)</span></span>
+<span id="L311"><span class="lineNum">     311</span>              : {</span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">         466 :     Chord* chord = item-&gt;chord();</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">         466 :     double y = chord-&gt;upNote()-&gt;pagePos().y() - chord-&gt;upNote()-&gt;headHeight() * .5;</span></span>
+<span id="L314"><span class="lineNum">     314</span>              : </span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">         466 :     Note* downNote = chord-&gt;downNote();</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">         466 :     EngravingItem* e = chord-&gt;segment()-&gt;element(item-&gt;track() + item-&gt;span() - 1);</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">         466 :     if (e &amp;&amp; e-&gt;isChord()) {</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">         466 :         downNote = toChord(e)-&gt;downNote();</span></span>
+<span id="L319"><span class="lineNum">     319</span>              :     }</span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">         466 :     double h = downNote-&gt;pagePos().y() + downNote-&gt;headHeight() * .5 - y;</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">         466 :     return h;</span></span>
+<span id="L322"><span class="lineNum">     322</span>              : }</span>
+<span id="L323"><span class="lineNum">     323</span>              : </span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">         466 : double ArpeggioLayout::calcTop(const Arpeggio* item, const LayoutConfiguration&amp; conf)</span></span>
+<span id="L325"><span class="lineNum">     325</span>              : {</span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         466 :     double top = -item-&gt;userLen1();</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">         466 :     switch (item-&gt;arpeggioType()) {</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">          52 :     case ArpeggioType::BRACKET: {</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">          52 :         double lineWidth = conf.styleAbsolute(item-&gt;isChordBracket() ? Sid::chordBracketLineWidth : Sid::arpeggioLineWidth);</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">          52 :         return top - lineWidth / 2.0;</span></span>
+<span id="L331"><span class="lineNum">     331</span>              :     }</span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">         394 :     case ArpeggioType::NORMAL:</span></span>
+<span id="L333"><span class="lineNum">     333</span>              :     case ArpeggioType::UP:</span>
+<span id="L334"><span class="lineNum">     334</span>              :     case ArpeggioType::DOWN: {</span>
+<span id="L335"><span class="lineNum">     335</span>              :         // if the top is in the staff on a space, move it up</span>
+<span id="L336"><span class="lineNum">     336</span>              :         // if the bottom note is on a line, the distance is 0.25 spaces</span>
+<span id="L337"><span class="lineNum">     337</span>              :         // if the bottom note is on a space, the distance is 0.5 spaces</span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">         394 :         int topNoteLine = item-&gt;chord()-&gt;upNote()-&gt;line();</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">         394 :         int lines = item-&gt;staff()-&gt;lines(item-&gt;tick());</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">         394 :         int bottomLine = (lines - 1) * 2;</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">         394 :         if (topNoteLine &lt;= 0 || topNoteLine % 2 == 0 || topNoteLine &gt;= bottomLine) {</span></span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">         278 :             return top;</span></span>
+<span id="L343"><span class="lineNum">     343</span>              :         }</span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">         116 :         int downNoteLine = item-&gt;chord()-&gt;downNote()-&gt;line();</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">         116 :         if (downNoteLine % 2 == 1 &amp;&amp; downNoteLine &lt; bottomLine) {</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">          74 :             return top - 0.4 * item-&gt;spatium();</span></span>
+<span id="L347"><span class="lineNum">     347</span>              :         }</span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">          42 :         return top - 0.25 * item-&gt;spatium();</span></span>
+<span id="L349"><span class="lineNum">     349</span>              :     }</span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">          20 :     default: {</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">          20 :         return top - item-&gt;spatium() / 4;</span></span>
+<span id="L352"><span class="lineNum">     352</span>              :     }</span>
+<span id="L353"><span class="lineNum">     353</span>              :     }</span>
+<span id="L354"><span class="lineNum">     354</span>              : }</span>
+<span id="L355"><span class="lineNum">     355</span>              : </span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">         466 : double ArpeggioLayout::calcBottom(const Arpeggio* item, double arpeggioHeight, const LayoutConfiguration&amp; conf)</span></span>
+<span id="L357"><span class="lineNum">     357</span>              : {</span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">         466 :     double top = -item-&gt;userLen1();</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">         466 :     double bottom = arpeggioHeight + item-&gt;userLen2();</span></span>
+<span id="L360"><span class="lineNum">     360</span>              : </span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">         466 :     switch (item-&gt;arpeggioType()) {</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">          52 :     case ArpeggioType::BRACKET: {</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">          52 :         double lineWidth = conf.styleAbsolute(item-&gt;isChordBracket() ? Sid::chordBracketLineWidth : Sid::arpeggioLineWidth);</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">          52 :         return bottom - top + lineWidth;</span></span>
+<span id="L365"><span class="lineNum">     365</span>              :     }</span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">         394 :     case ArpeggioType::NORMAL:</span></span>
+<span id="L367"><span class="lineNum">     367</span>              :     case ArpeggioType::UP:</span>
+<span id="L368"><span class="lineNum">     368</span>              :     case ArpeggioType::DOWN: {</span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">         394 :         return bottom;</span></span>
+<span id="L370"><span class="lineNum">     370</span>              :     }</span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">          20 :     default: {</span></span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">          20 :         return bottom - top + item-&gt;spatium() / 2;</span></span>
+<span id="L373"><span class="lineNum">     373</span>              :     }</span>
+<span id="L374"><span class="lineNum">     374</span>              :     }</span>
+<span id="L375"><span class="lineNum">     375</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/dom/measure.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/engraving/dom</a> - measure.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryMed">87.1&nbsp;%</td>
+            <td class="headerCovTableEntry">85</td>
+            <td class="headerCovTableEntry">74</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2021 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #pragma once</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : /**</span>
+<span id="L26"><span class="lineNum">      26</span>              :  \file</span>
+<span id="L27"><span class="lineNum">      27</span>              :  Definition of class Measure.</span>
+<span id="L28"><span class="lineNum">      28</span>              : */</span>
+<span id="L29"><span class="lineNum">      29</span>              : </span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;measurebase.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;segmentlist.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : </span>
+<span id="L34"><span class="lineNum">      34</span>              : namespace mu::engraving::read400 {</span>
+<span id="L35"><span class="lineNum">      35</span>              : class MeasureRead;</span>
+<span id="L36"><span class="lineNum">      36</span>              : }</span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span>              : namespace mu::engraving::read410 {</span>
+<span id="L39"><span class="lineNum">      39</span>              : class MeasureRead;</span>
+<span id="L40"><span class="lineNum">      40</span>              : }</span>
+<span id="L41"><span class="lineNum">      41</span>              : </span>
+<span id="L42"><span class="lineNum">      42</span>              : namespace mu::engraving::read460 {</span>
+<span id="L43"><span class="lineNum">      43</span>              : class MeasureRead;</span>
+<span id="L44"><span class="lineNum">      44</span>              : }</span>
+<span id="L45"><span class="lineNum">      45</span>              : </span>
+<span id="L46"><span class="lineNum">      46</span>              : namespace mu::engraving::read500 {</span>
+<span id="L47"><span class="lineNum">      47</span>              : class MeasureRead;</span>
+<span id="L48"><span class="lineNum">      48</span>              : }</span>
+<span id="L49"><span class="lineNum">      49</span>              : </span>
+<span id="L50"><span class="lineNum">      50</span>              : namespace mu::engraving::write {</span>
+<span id="L51"><span class="lineNum">      51</span>              : class MeasureWrite;</span>
+<span id="L52"><span class="lineNum">      52</span>              : }</span>
+<span id="L53"><span class="lineNum">      53</span>              : </span>
+<span id="L54"><span class="lineNum">      54</span>              : namespace mu::engraving {</span>
+<span id="L55"><span class="lineNum">      55</span>              : class AccidentalState;</span>
+<span id="L56"><span class="lineNum">      56</span>              : class Chord;</span>
+<span id="L57"><span class="lineNum">      57</span>              : class ChordRest;</span>
+<span id="L58"><span class="lineNum">      58</span>              : class MMRestRange;</span>
+<span id="L59"><span class="lineNum">      59</span>              : class MeasureNumber;</span>
+<span id="L60"><span class="lineNum">      60</span>              : class MeasureRepeat;</span>
+<span id="L61"><span class="lineNum">      61</span>              : class Note;</span>
+<span id="L62"><span class="lineNum">      62</span>              : class Part;</span>
+<span id="L63"><span class="lineNum">      63</span>              : class Score;</span>
+<span id="L64"><span class="lineNum">      64</span>              : class Spacer;</span>
+<span id="L65"><span class="lineNum">      65</span>              : class Staff;</span>
+<span id="L66"><span class="lineNum">      66</span>              : class System;</span>
+<span id="L67"><span class="lineNum">      67</span>              : class TieMap;</span>
+<span id="L68"><span class="lineNum">      68</span>              : class Transaction;</span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span>              : //---------------------------------------------------------</span>
+<span id="L71"><span class="lineNum">      71</span>              : //   MeasureNumberMode</span>
+<span id="L72"><span class="lineNum">      72</span>              : //---------------------------------------------------------</span>
+<span id="L73"><span class="lineNum">      73</span>              : </span>
+<span id="L74"><span class="lineNum">      74</span>              : enum class MeasureNumberMode : char {</span>
+<span id="L75"><span class="lineNum">      75</span>              :     AUTO,         // show measure number depending on style</span>
+<span id="L76"><span class="lineNum">      76</span>              :     SHOW,         // always show measure number</span>
+<span id="L77"><span class="lineNum">      77</span>              :     HIDE          // don’t show measure number</span>
+<span id="L78"><span class="lineNum">      78</span>              : };</span>
+<span id="L79"><span class="lineNum">      79</span>              : </span>
+<span id="L80"><span class="lineNum">      80</span>              : //---------------------------------------------------------</span>
+<span id="L81"><span class="lineNum">      81</span>              : //   MStaff</span>
+<span id="L82"><span class="lineNum">      82</span>              : ///   Per staff values of measure.</span>
+<span id="L83"><span class="lineNum">      83</span>              : //---------------------------------------------------------</span>
+<span id="L84"><span class="lineNum">      84</span>              : </span>
+<span id="L85"><span class="lineNum">      85</span>              : class MStaff</span>
+<span id="L86"><span class="lineNum">      86</span>              : {</span>
+<span id="L87"><span class="lineNum">      87</span>              : public:</span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC tlaBgGNC">       24475 :     MStaff() {}</span></span>
+<span id="L89"><span class="lineNum">      89</span>              :     ~MStaff();</span>
+<span id="L90"><span class="lineNum">      90</span>              :     MStaff(const MStaff&amp;);</span>
+<span id="L91"><span class="lineNum">      91</span>              : </span>
+<span id="L92"><span class="lineNum">      92</span>              :     void setScore(Score*);</span>
+<span id="L93"><span class="lineNum">      93</span>              :     void setTrack(track_idx_t);</span>
+<span id="L94"><span class="lineNum">      94</span>              : </span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">       33471 :     MeasureNumber* measureNumber() const { return m_measureNumber; }</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">        2327 :     void setMeasureNumber(MeasureNumber* t) { m_measureNumber = t; }</span></span>
+<span id="L97"><span class="lineNum">      97</span>              : </span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">      112324 :     MMRestRange* mmRangeText() const { return m_mmRangeText; }</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaUNC tlaBgUNC">           0 :     void setMMRangeText(MMRestRange* r) { m_mmRangeText = r; }</span></span>
+<span id="L100"><span class="lineNum">     100</span>              : </span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC tlaBgGNC">      588561 :     StaffLines* lines() const { return m_lines; }</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">       24475 :     void setLines(StaffLines* l) { m_lines = l; }</span></span>
+<span id="L103"><span class="lineNum">     103</span>              : </span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">      155661 :     Spacer* vspacerUp() const { return m_vspacerUp; }</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaUNC tlaBgUNC">           0 :     void setVspacerUp(Spacer* s) { m_vspacerUp = s; }</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC tlaBgGNC">      163481 :     Spacer* vspacerDown() const { return m_vspacerDown; }</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">           1 :     void setVspacerDown(Spacer* s) { m_vspacerDown = s; }</span></span>
+<span id="L108"><span class="lineNum">     108</span>              : </span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">      221960 :     bool hasVoices() const { return m_hasVoices; }</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">        9340 :     void setHasVoices(bool val) { m_hasVoices = val; }</span></span>
+<span id="L111"><span class="lineNum">     111</span>              : </span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">      156877 :     bool visible() const { return m_visible; }</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">          21 :     void setVisible(bool val) { m_visible = val; }</span></span>
+<span id="L114"><span class="lineNum">     114</span>              : </span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">     2609371 :     bool stemless() const { return m_stemless; }</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">         847 :     void setStemless(bool val) { m_stemless = val; }</span></span>
+<span id="L117"><span class="lineNum">     117</span>              : </span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">       39048 :     AutoOnOff hideIfEmpty() const { return m_hideIfEmpty; }</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaUNC tlaBgUNC">           0 :     void setHideIfEmpty(AutoOnOff val) { m_hideIfEmpty = val; }</span></span>
+<span id="L120"><span class="lineNum">     120</span>              : </span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaUNC">           0 :     bool corrupted() const { return m_corrupted; }</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC tlaBgGNC">        1128 :     void setCorrupted(bool val) { m_corrupted = val; }</span></span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">      400380 :     int measureRepeatCount() const { return m_measureRepeatCount; }</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">        4558 :     void setMeasureRepeatCount(int n) { m_measureRepeatCount = n; }</span></span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span>              : private:</span>
+<span id="L128"><span class="lineNum">     128</span>              :     MeasureNumber* m_measureNumber = nullptr;      // Measure number text object</span>
+<span id="L129"><span class="lineNum">     129</span>              :     MMRestRange* m_mmRangeText = nullptr;   // Multi measure rest range text object</span>
+<span id="L130"><span class="lineNum">     130</span>              :     StaffLines* m_lines = nullptr;</span>
+<span id="L131"><span class="lineNum">     131</span>              :     Spacer* m_vspacerUp = nullptr;</span>
+<span id="L132"><span class="lineNum">     132</span>              :     Spacer* m_vspacerDown = nullptr;</span>
+<span id="L133"><span class="lineNum">     133</span>              :     bool m_hasVoices = false;               // indicates that MStaff contains more than one voice,</span>
+<span id="L134"><span class="lineNum">     134</span>              :                                             // this changes some layout rules</span>
+<span id="L135"><span class="lineNum">     135</span>              : </span>
+<span id="L136"><span class="lineNum">     136</span>              :     bool m_visible = true;</span>
+<span id="L137"><span class="lineNum">     137</span>              :     bool m_stemless = false;</span>
+<span id="L138"><span class="lineNum">     138</span>              :     AutoOnOff m_hideIfEmpty = AutoOnOff::AUTO; // whether this MStaff wants its staff to be hidden on its system</span>
+<span id="L139"><span class="lineNum">     139</span>              :                                                // when the staff is empty on that system</span>
+<span id="L140"><span class="lineNum">     140</span>              : </span>
+<span id="L141"><span class="lineNum">     141</span>              :     bool m_corrupted = false;</span>
+<span id="L142"><span class="lineNum">     142</span>              :     int m_measureRepeatCount = 0;</span>
+<span id="L143"><span class="lineNum">     143</span>              : };</span>
+<span id="L144"><span class="lineNum">     144</span>              : </span>
+<span id="L145"><span class="lineNum">     145</span>              : //---------------------------------------------------------</span>
+<span id="L146"><span class="lineNum">     146</span>              : //   @@ Measure</span>
+<span id="L147"><span class="lineNum">     147</span>              : ///    one measure in a system</span>
+<span id="L148"><span class="lineNum">     148</span>              : //</span>
+<span id="L149"><span class="lineNum">     149</span>              : //   @P firstSegment    Segment       the first segment of the measure (read-only)</span>
+<span id="L150"><span class="lineNum">     150</span>              : //   @P lastSegment     Segment       the last segment of the measure (read-only)</span>
+<span id="L151"><span class="lineNum">     151</span>              : //---------------------------------------------------------</span>
+<span id="L152"><span class="lineNum">     152</span>              : </span>
+<span id="L153"><span class="lineNum">     153</span>              : class Measure final : public MeasureBase</span>
+<span id="L154"><span class="lineNum">     154</span>              : {</span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">       32981 :     OBJECT_ALLOCATOR(engraving, Measure)</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">       20360 :     DECLARE_CLASSOF(ElementType::MEASURE)</span></span>
+<span id="L157"><span class="lineNum">     157</span>              : </span>
+<span id="L158"><span class="lineNum">     158</span>              : public:</span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span>              :     ~Measure();</span>
+<span id="L161"><span class="lineNum">     161</span>              : </span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaUNC tlaBgUNC">           0 :     Measure* clone() const override { return new Measure(*this); }</span></span>
+<span id="L163"><span class="lineNum">     163</span>              :     void setScore(Score* s) override;</span>
+<span id="L164"><span class="lineNum">     164</span>              :     Measure* cloneMeasure(Score*, const Fraction&amp; tick, TieMap*);</span>
+<span id="L165"><span class="lineNum">     165</span>              : </span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaUNC">           0 :     bool isEditable() const override { return false; }</span></span>
+<span id="L167"><span class="lineNum">     167</span>              :     void checkMeasure(staff_idx_t idx, bool useGapRests = true);</span>
+<span id="L168"><span class="lineNum">     168</span>              : </span>
+<span id="L169"><span class="lineNum">     169</span>              :     void add(EngravingItem*) override;</span>
+<span id="L170"><span class="lineNum">     170</span>              :     void remove(EngravingItem*) override;</span>
+<span id="L171"><span class="lineNum">     171</span>              :     void change(EngravingItem* o, EngravingItem* n) override;</span>
+<span id="L172"><span class="lineNum">     172</span>              :     void spatiumChanged(double oldValue, double newValue) override;</span>
+<span id="L173"><span class="lineNum">     173</span>              : </span>
+<span id="L174"><span class="lineNum">     174</span>              :     bool hasVoices(staff_idx_t staffIdx, Fraction stick, Fraction len, bool considerInvisible = false) const;</span>
+<span id="L175"><span class="lineNum">     175</span>              :     bool hasVoices(staff_idx_t staffIdx) const;</span>
+<span id="L176"><span class="lineNum">     176</span>              :     void setHasVoices(staff_idx_t staffIdx, bool v);</span>
+<span id="L177"><span class="lineNum">     177</span>              : </span>
+<span id="L178"><span class="lineNum">     178</span>              :     StaffLines* staffLines(staff_idx_t staffIdx) const;</span>
+<span id="L179"><span class="lineNum">     179</span>              :     Spacer* vspacerDown(staff_idx_t staffIdx) const;</span>
+<span id="L180"><span class="lineNum">     180</span>              :     Spacer* vspacerUp(staff_idx_t staffIdx) const;</span>
+<span id="L181"><span class="lineNum">     181</span>              :     void setStaffVisible(staff_idx_t staffIdx, bool visible);</span>
+<span id="L182"><span class="lineNum">     182</span>              :     void setStaffStemless(staff_idx_t staffIdx, bool stemless);</span>
+<span id="L183"><span class="lineNum">     183</span>              :     AutoOnOff hideStaffIfEmpty(staff_idx_t staffIdx) const;</span>
+<span id="L184"><span class="lineNum">     184</span>              :     void setHideStaffIfEmpty(staff_idx_t staffIdx, AutoOnOff hideIfEmpty);</span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC">           0 :     bool corrupted(staff_idx_t staffIdx) const { return m_mstaves[staffIdx]-&gt;corrupted(); }</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC tlaBgGNC">        1128 :     void setCorrupted(staff_idx_t staffIdx, bool val) { m_mstaves[staffIdx]-&gt;setCorrupted(val); }</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">        8068 :     MeasureNumber* measureNumber(staff_idx_t staffIdx) const { return m_mstaves[staffIdx]-&gt;measureNumber(); }</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC tlaBgUNC">           0 :     void setMeasureNumber(staff_idx_t staffIdx, MeasureNumber* t) { m_mstaves[staffIdx]-&gt;setMeasureNumber(t); }</span></span>
+<span id="L189"><span class="lineNum">     189</span>              : </span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">      413442 :     const std::vector&lt;MStaff*&gt;&amp; mstaves() const { return m_mstaves; }</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">      234760 :     std::vector&lt;MStaff*&gt;&amp; mstaves() { return m_mstaves; }</span></span>
+<span id="L192"><span class="lineNum">     192</span>              : </span>
+<span id="L193"><span class="lineNum">     193</span>              :     void setMMRangeText(staff_idx_t staffIdx, MMRestRange*);</span>
+<span id="L194"><span class="lineNum">     194</span>              :     MMRestRange* mmRangeText(staff_idx_t staffIdx) const;</span>
+<span id="L195"><span class="lineNum">     195</span>              : </span>
+<span id="L196"><span class="lineNum">     196</span>              :     void createStaves(staff_idx_t);</span>
+<span id="L197"><span class="lineNum">     197</span>              : </span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">      228870 :     Fraction timesig() const { return m_timesig; }</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">       19718 :     void setTimesig(const Fraction&amp; f) { m_timesig = f; }</span></span>
+<span id="L200"><span class="lineNum">     200</span>              : </span>
+<span id="L201"><span class="lineNum">     201</span>              :     Fraction stretchedLen(const Staff*) const;</span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">        1792 :     bool isIrregular() const { return m_timesig != m_len; }</span></span>
+<span id="L203"><span class="lineNum">     203</span>              : </span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">       34691 :     int measureNumber() const { return m_measureNumber; }</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">       33979 :     void setMeasureNumber(int n) { m_measureNumber = n; }</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">       46761 :     int measureNumberOffset() const { return m_measureNumberOffset; }</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">        3604 :     void setMeasureNumberOffset(int n) { m_measureNumberOffset = n; }</span></span>
+<span id="L208"><span class="lineNum">     208</span>              : </span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">      490305 :     bool excludeFromNumbering() const { return flag(ElementFlag::EXCLUDE_FROM_NUMBERING); }</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">       18353 :     void setExcludeFromNumbering(bool v) { setFlag(ElementFlag::EXCLUDE_FROM_NUMBERING, v); }</span></span>
+<span id="L211"><span class="lineNum">     211</span>              : </span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">       11968 :     MeasureNumberMode measureNumberMode() const { return m_measureNumberMode; }</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC tlaBgUNC">           0 :     void setMeasureNumberMode(MeasureNumberMode v) { m_measureNumberMode = v; }</span></span>
+<span id="L214"><span class="lineNum">     214</span>              : </span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC tlaBgGNC">      294198 :     bool repeatEnd() const { return flag(ElementFlag::REPEAT_END); }</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        4378 :     void setRepeatEnd(bool v) { setFlag(ElementFlag::REPEAT_END, v); }</span></span>
+<span id="L217"><span class="lineNum">     217</span>              : </span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">      161915 :     bool repeatStart() const { return flag(ElementFlag::REPEAT_START); }</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        4686 :     void setRepeatStart(bool v) { setFlag(ElementFlag::REPEAT_START, v); }</span></span>
+<span id="L220"><span class="lineNum">     220</span>              : </span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">      176737 :     bool repeatJump() const { return flag(ElementFlag::REPEAT_JUMP); }</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        1344 :     void setRepeatJump(bool v) { setFlag(ElementFlag::REPEAT_JUMP, v); }</span></span>
+<span id="L223"><span class="lineNum">     223</span>              : </span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">       98339 :     bool hasCourtesyKeySig() const { return flag(ElementFlag::COURTESY_KEYSIG); }</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">      117343 :     void setHasCourtesyKeySig(bool v) { setFlag(ElementFlag::COURTESY_KEYSIG, v); }</span></span>
+<span id="L226"><span class="lineNum">     226</span>              : </span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">       29122 :     bool hasCourtesyTimeSig() const { return flag(ElementFlag::COURTESY_TIMESIG); }</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">       54828 :     void setHasCourtesyTimeSig(bool v) const { setFlag(ElementFlag::COURTESY_TIMESIG, v); }</span></span>
+<span id="L229"><span class="lineNum">     229</span>              : </span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        1197 :     bool hasCourtesyClef() const { return flag(ElementFlag::COURTESY_CLEF); }</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">       54342 :     void setHasCourtesyClef(bool v) const { setFlag(ElementFlag::COURTESY_CLEF, v); }</span></span>
+<span id="L232"><span class="lineNum">     232</span>              : </span>
+<span id="L233"><span class="lineNum">     233</span>              :     bool endOfMeasureChange() const { return flag(ElementFlag::END_OF_MEASURE_CHANGE); }</span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">       26416 :     void setEndOfMeasureChange(bool val) const { setFlag(ElementFlag::END_OF_MEASURE_CHANGE, val); }</span></span>
+<span id="L235"><span class="lineNum">     235</span>              : </span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">     2552033 :     Segment* first() const { return m_segments.first(); }</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">      817519 :     Segment* first(SegmentType t) const { return m_segments.first(t); }</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">      130273 :     Segment* firstEnabled() const { return m_segments.first(ElementFlag::ENABLED); }</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">       30269 :     Segment* firstActive() const { return m_segments.firstActive(); }</span></span>
+<span id="L240"><span class="lineNum">     240</span>              : </span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">     1591742 :     Segment* last() const { return m_segments.last(); }</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        1132 :     Segment* last(SegmentType t) const { return m_segments.last(t); }</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">        4885 :     Segment* lastEnabled() const { return m_segments.last(ElementFlag::ENABLED); }</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">     1174286 :     SegmentList&amp; segments() { return m_segments; }</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">      237658 :     const SegmentList&amp; segments() const { return m_segments; }</span></span>
+<span id="L246"><span class="lineNum">     246</span>              : </span>
+<span id="L247"><span class="lineNum">     247</span>              :     double userStretch() const;</span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">           2 :     void setUserStretch(double v) { m_userStretch = v; }</span></span>
+<span id="L249"><span class="lineNum">     249</span>              : </span>
+<span id="L250"><span class="lineNum">     250</span>              :     void computeTicks();</span>
+<span id="L251"><span class="lineNum">     251</span>              :     Fraction anacrusisOffset() const;</span>
+<span id="L252"><span class="lineNum">     252</span>              :     Fraction maxTicks() const;</span>
+<span id="L253"><span class="lineNum">     253</span>              : </span>
+<span id="L254"><span class="lineNum">     254</span>              :     bool showMeasureNumber() const;</span>
+<span id="L255"><span class="lineNum">     255</span>              :     bool showMeasureNumberInAutoMode() const;</span>
+<span id="L256"><span class="lineNum">     256</span>              :     bool showMeasureNumberOnStaff(staff_idx_t staffIdx) const;</span>
+<span id="L257"><span class="lineNum">     257</span>              : </span>
+<span id="L258"><span class="lineNum">     258</span>              :     Chord* findChord(Fraction tick, track_idx_t track) const;</span>
+<span id="L259"><span class="lineNum">     259</span>              :     ChordRest* findChordRest(Fraction tick, track_idx_t track) const;</span>
+<span id="L260"><span class="lineNum">     260</span>              :     Fraction snap(const Fraction&amp; tick, const PointF p) const;</span>
+<span id="L261"><span class="lineNum">     261</span>              :     Fraction snapNote(const Fraction&amp; tick, const PointF p, int staff) const;</span>
+<span id="L262"><span class="lineNum">     262</span>              : </span>
+<span id="L263"><span class="lineNum">     263</span>              :     Segment* searchSegment(double x, SegmentType st, track_idx_t strack, track_idx_t etrack, const Segment* preferredSegment = nullptr,</span>
+<span id="L264"><span class="lineNum">     264</span>              :                            double spacingFactor = 0.5) const;</span>
+<span id="L265"><span class="lineNum">     265</span>              : </span>
+<span id="L266"><span class="lineNum">     266</span>              :     void insertStaff(Staff*, staff_idx_t staff);</span>
+<span id="L267"><span class="lineNum">     267</span>              :     void insertMStaff(MStaff* staff, staff_idx_t idx);</span>
+<span id="L268"><span class="lineNum">     268</span>              :     void removeMStaff(MStaff* staff, staff_idx_t idx);</span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span>              :     void moveTicks(const Fraction&amp; diff) override;</span>
+<span id="L271"><span class="lineNum">     271</span>              : </span>
+<span id="L272"><span class="lineNum">     272</span>              :     void cmdRemoveStaves(staff_idx_t s, staff_idx_t e);</span>
+<span id="L273"><span class="lineNum">     273</span>              :     void cmdAddStaves(staff_idx_t s, staff_idx_t e, bool createRest);</span>
+<span id="L274"><span class="lineNum">     274</span>              :     void removeStaves(staff_idx_t s, staff_idx_t e);</span>
+<span id="L275"><span class="lineNum">     275</span>              :     void insertStaves(staff_idx_t s, staff_idx_t e);</span>
+<span id="L276"><span class="lineNum">     276</span>              : </span>
+<span id="L277"><span class="lineNum">     277</span>              :     double tick2pos(Fraction) const;</span>
+<span id="L278"><span class="lineNum">     278</span>              :     Segment* tick2segment(const Fraction&amp; tick, SegmentType st = SegmentType::ChordRest);</span>
+<span id="L279"><span class="lineNum">     279</span>              : </span>
+<span id="L280"><span class="lineNum">     280</span>              :     void sortStaves(std::vector&lt;staff_idx_t&gt;&amp; dst);</span>
+<span id="L281"><span class="lineNum">     281</span>              : </span>
+<span id="L282"><span class="lineNum">     282</span>              :     bool acceptDrop(EditData&amp;) const override;</span>
+<span id="L283"><span class="lineNum">     283</span>              :     EngravingItem* drop(Transaction&amp; tx, EditData&amp;) override;</span>
+<span id="L284"><span class="lineNum">     284</span>              : </span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">        2171 :     int repeatCount() const { return m_repeatCount; }</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">        1494 :     void setRepeatCount(int val) { m_repeatCount = val; }</span></span>
+<span id="L287"><span class="lineNum">     287</span>              : </span>
+<span id="L288"><span class="lineNum">     288</span>              :     Segment* findSegmentR(SegmentType st,    const Fraction&amp;) const;</span>
+<span id="L289"><span class="lineNum">     289</span>              :     Segment* undoGetSegmentR(SegmentType st, const Fraction&amp; f);</span>
+<span id="L290"><span class="lineNum">     290</span>              :     Segment* getSegmentR(SegmentType st,     const Fraction&amp; f);</span>
+<span id="L291"><span class="lineNum">     291</span>              :     Segment* findFirstR(SegmentType st, const Fraction&amp; rtick) const;</span>
+<span id="L292"><span class="lineNum">     292</span>              : </span>
+<span id="L293"><span class="lineNum">     293</span>              :     // segment routines with absolute tick values</span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">       65143 :     Segment* findSegment(SegmentType st,    const Fraction&amp; f) const { return findSegmentR(st, f - tick()); }</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">        7037 :     Segment* undoGetSegment(SegmentType st, const Fraction&amp; f) { return undoGetSegmentR(st, f - tick()); }</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">       56624 :     Segment* getSegment(SegmentType st,     const Fraction&amp; f) { return getSegmentR(st, f - tick()); }</span></span>
+<span id="L297"><span class="lineNum">     297</span>              :     Segment* undoGetChordRestOrTimeTickSegment(const Fraction&amp; f);</span>
+<span id="L298"><span class="lineNum">     298</span>              :     Segment* getChordRestOrTimeTickSegment(const Fraction&amp; f);</span>
+<span id="L299"><span class="lineNum">     299</span>              : </span>
+<span id="L300"><span class="lineNum">     300</span>              :     void connectTremolo();</span>
+<span id="L301"><span class="lineNum">     301</span>              : </span>
+<span id="L302"><span class="lineNum">     302</span>              :     void setEndBarLineType(BarLineType val, track_idx_t track, bool visible = true, Color color = Color());</span>
+<span id="L303"><span class="lineNum">     303</span>              : </span>
+<span id="L304"><span class="lineNum">     304</span>              :     void scanElements(std::function&lt;void(EngravingItem*)&gt; func) override;</span>
+<span id="L305"><span class="lineNum">     305</span>              :     void createVoice(int track);</span>
+<span id="L306"><span class="lineNum">     306</span>              :     void adjustToLen(Fraction, bool appendRestsIfNecessary = true);</span>
+<span id="L307"><span class="lineNum">     307</span>              : </span>
+<span id="L308"><span class="lineNum">     308</span>              :     AccidentalVal findAccidental(const Note*) const;</span>
+<span id="L309"><span class="lineNum">     309</span>              :     AccidentalVal findAccidental(const Segment* s, staff_idx_t staffIdx, int line, bool&amp; error) const;</span>
+<span id="L310"><span class="lineNum">     310</span>              :     void checkMultiVoices(staff_idx_t staffIdx);</span>
+<span id="L311"><span class="lineNum">     311</span>              :     bool hasVoice(track_idx_t track) const;</span>
+<span id="L312"><span class="lineNum">     312</span>              :     bool isEmpty(staff_idx_t staffIdx) const;</span>
+<span id="L313"><span class="lineNum">     313</span>              :     bool isCutawayClef(staff_idx_t staffIdx) const;</span>
+<span id="L314"><span class="lineNum">     314</span>              :     bool isFullMeasureRest() const;</span>
+<span id="L315"><span class="lineNum">     315</span>              :     bool visible(staff_idx_t staffIdx) const;</span>
+<span id="L316"><span class="lineNum">     316</span>              :     bool stemless(staff_idx_t staffIdx) const;</span>
+<span id="L317"><span class="lineNum">     317</span>              :     bool isFinalMeasureOfSection() const;</span>
+<span id="L318"><span class="lineNum">     318</span>              :     LayoutBreak* sectionBreakElement(bool includeNextFrames = true) const;</span>
+<span id="L319"><span class="lineNum">     319</span>              :     bool isAnacrusis() const;</span>
+<span id="L320"><span class="lineNum">     320</span>              :     bool isFirstInSystem() const;</span>
+<span id="L321"><span class="lineNum">     321</span>              :     bool isLastInSystem() const;</span>
+<span id="L322"><span class="lineNum">     322</span>              :     bool isFirstInSection() const;</span>
+<span id="L323"><span class="lineNum">     323</span>              : </span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">       13354 :     bool breakMultiMeasureRest() const { return m_breakMultiMeasureRest; }</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">         910 :     void setBreakMultiMeasureRest(bool val) { m_breakMultiMeasureRest = val; }</span></span>
+<span id="L326"><span class="lineNum">     326</span>              : </span>
+<span id="L327"><span class="lineNum">     327</span>              :     bool empty() const;</span>
+<span id="L328"><span class="lineNum">     328</span>              :     bool isOnlyRests(track_idx_t track) const;</span>
+<span id="L329"><span class="lineNum">     329</span>              :     bool isOnlyGapRests(track_idx_t track) const;</span>
+<span id="L330"><span class="lineNum">     330</span>              : </span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaUNC tlaBgUNC">           0 :     int playbackCount() const { return m_playbackCount; }</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaUNC">           0 :     void setPlaybackCount(int val) { m_playbackCount = val; }</span></span>
+<span id="L333"><span class="lineNum">     333</span>              :     RectF staffPageBoundingRect(staff_idx_t staffIdx) const;</span>
+<span id="L334"><span class="lineNum">     334</span>              : </span>
+<span id="L335"><span class="lineNum">     335</span>              :     PropertyValue getProperty(Pid propertyId) const override;</span>
+<span id="L336"><span class="lineNum">     336</span>              :     bool setProperty(Pid propertyId, const PropertyValue&amp;) override;</span>
+<span id="L337"><span class="lineNum">     337</span>              :     PropertyValue propertyDefault(Pid) const override;</span>
+<span id="L338"><span class="lineNum">     338</span>              : </span>
+<span id="L339"><span class="lineNum">     339</span>              :     void undoChangeProperty(Pid id, const PropertyValue&amp; newValue);</span>
+<span id="L340"><span class="lineNum">     340</span>              :     void undoChangeProperty(Pid id, const PropertyValue&amp; newValue, PropertyFlags ps) override;</span>
+<span id="L341"><span class="lineNum">     341</span>              : </span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC tlaBgGNC">       18383 :     bool hasMMRest() const { return m_mmRest != nullptr; }</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">     1023782 :     bool isMMRest() const { return m_mmRestCount &gt; 0; }</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">      135355 :     Measure* mmRest() const { return m_mmRest; }</span></span>
+<span id="L345"><span class="lineNum">     345</span>              :     Measure* coveringMMRestOrThis();</span>
+<span id="L346"><span class="lineNum">     346</span>              :     const Measure* coveringMMRestOrThis() const;</span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">         101 :     void setMMRest(Measure* m) { m_mmRest = m; }</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">       17239 :     int mmRestCount() const { return m_mmRestCount; }            // number of measures m_mmRest spans</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">         681 :     void setMMRestCount(int n) { m_mmRestCount = n; }</span></span>
+<span id="L350"><span class="lineNum">     350</span>              :     Measure* mmRestFirst() const;</span>
+<span id="L351"><span class="lineNum">     351</span>              :     Measure* mmRestLast() const;</span>
+<span id="L352"><span class="lineNum">     352</span>              : </span>
+<span id="L353"><span class="lineNum">     353</span>              :     int measureRepeatCount(staff_idx_t staffIdx) const;</span>
+<span id="L354"><span class="lineNum">     354</span>              :     bool containsMeasureRepeat(const staff_idx_t staffIdxFrom, const staff_idx_t staffIdxTo) const;</span>
+<span id="L355"><span class="lineNum">     355</span>              :     void setMeasureRepeatCount(int n, staff_idx_t staffIdx);</span>
+<span id="L356"><span class="lineNum">     356</span>              :     bool isMeasureRepeatGroup(staff_idx_t staffIdx) const;</span>
+<span id="L357"><span class="lineNum">     357</span>              :     bool isMeasureRepeatGroupWithNextM(staff_idx_t staffIdx) const;</span>
+<span id="L358"><span class="lineNum">     358</span>              :     bool isMeasureRepeatGroupWithPrevM(staff_idx_t staffIdx) const;</span>
+<span id="L359"><span class="lineNum">     359</span>              :     Measure* firstOfMeasureRepeatGroup(staff_idx_t staffIdx) const;     // used to find beginning of group</span>
+<span id="L360"><span class="lineNum">     360</span>              :     MeasureRepeat* measureRepeatElement(staff_idx_t staffIdx) const;    // get measure repeat element from anywhere within group</span>
+<span id="L361"><span class="lineNum">     361</span>              :     int measureRepeatNumMeasures(staff_idx_t staffIdx) const;</span>
+<span id="L362"><span class="lineNum">     362</span>              :     bool isOneMeasureRepeat(staff_idx_t staffIdx) const;</span>
+<span id="L363"><span class="lineNum">     363</span>              :     bool nextIsOneMeasureRepeat(staff_idx_t staffidx) const;</span>
+<span id="L364"><span class="lineNum">     364</span>              :     bool prevIsOneMeasureRepeat(staff_idx_t staffIdx) const;</span>
+<span id="L365"><span class="lineNum">     365</span>              : </span>
+<span id="L366"><span class="lineNum">     366</span>              :     ChordRest* lastChordRest(track_idx_t track) const;</span>
+<span id="L367"><span class="lineNum">     367</span>              :     ChordRest* firstChordRest(track_idx_t track) const;</span>
+<span id="L368"><span class="lineNum">     368</span>              : </span>
+<span id="L369"><span class="lineNum">     369</span>              :     EngravingItem* nextElementStaff(staff_idx_t staff, EngravingItem* fromItem = nullptr);</span>
+<span id="L370"><span class="lineNum">     370</span>              :     EngravingItem* prevElementStaff(staff_idx_t staff, EngravingItem* fromItem = nullptr);</span>
+<span id="L371"><span class="lineNum">     371</span>              : </span>
+<span id="L372"><span class="lineNum">     372</span>              :     double firstNoteRestSegmentX(bool leading = false) const;</span>
+<span id="L373"><span class="lineNum">     373</span>              :     double endingXForOpenEndedLines() const;</span>
+<span id="L374"><span class="lineNum">     374</span>              : </span>
+<span id="L375"><span class="lineNum">     375</span>              :     String accessibleInfo() const override;</span>
+<span id="L376"><span class="lineNum">     376</span>              : </span>
+<span id="L377"><span class="lineNum">     377</span>              :     void styleChanged() override;</span>
+<span id="L378"><span class="lineNum">     378</span>              : </span>
+<span id="L379"><span class="lineNum">     379</span>              : #ifndef ENGRAVING_NO_ACCESSIBILITY</span>
+<span id="L380"><span class="lineNum">     380</span>              :     AccessibleItemPtr createAccessible() override;</span>
+<span id="L381"><span class="lineNum">     381</span>              : #endif</span>
+<span id="L382"><span class="lineNum">     382</span>              : </span>
+<span id="L383"><span class="lineNum">     383</span>              :     const BarLine* endBarLine() const;</span>
+<span id="L384"><span class="lineNum">     384</span>              :     const BarLine* endBarLine(staff_idx_t staffIdx, bool first = false) const;</span>
+<span id="L385"><span class="lineNum">     385</span>              :     BarLineType endBarLineType() const;</span>
+<span id="L386"><span class="lineNum">     386</span>              :     bool endBarLineVisible() const;</span>
+<span id="L387"><span class="lineNum">     387</span>              :     const BarLine* startBarLine() const;</span>
+<span id="L388"><span class="lineNum">     388</span>              :     const BarLine* startBarLine(staff_idx_t staffIdx, bool first = false) const;</span>
+<span id="L389"><span class="lineNum">     389</span>              :     void triggerLayout() const override;</span>
+<span id="L390"><span class="lineNum">     390</span>              :     void triggerLayout(staff_idx_t staffIdx) const;</span>
+<span id="L391"><span class="lineNum">     391</span>              : </span>
+<span id="L392"><span class="lineNum">     392</span>              :     void checkHeader();</span>
+<span id="L393"><span class="lineNum">     393</span>              :     void checkTrailer();</span>
+<span id="L394"><span class="lineNum">     394</span>              :     void checkEndOfMeasureChange();</span>
+<span id="L395"><span class="lineNum">     395</span>              : </span>
+<span id="L396"><span class="lineNum">     396</span>              :     void respaceSegments();</span>
+<span id="L397"><span class="lineNum">     397</span>              : </span>
+<span id="L398"><span class="lineNum">     398</span>              :     bool canAddStringTunings(staff_idx_t staffIdx) const;</span>
+<span id="L399"><span class="lineNum">     399</span>              :     bool canAddStaffTypeChange(staff_idx_t staffIdx) const;</span>
+<span id="L400"><span class="lineNum">     400</span>              : </span>
+<span id="L401"><span class="lineNum">     401</span>              :     struct LayoutData : public MeasureBase::LayoutData {</span>
+<span id="L402"><span class="lineNum">     402</span>              :     private:</span>
+<span id="L403"><span class="lineNum">     403</span>              :         bool m_needLayout = true;</span>
+<span id="L404"><span class="lineNum">     404</span>              :     public:</span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">       31788 :         bool needLayout() const { return m_needLayout; }</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">       60386 :         void setNeedLayout(bool v) { m_needLayout = v; }</span></span>
+<span id="L407"><span class="lineNum">     407</span>              :     };</span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">      298571 :     DECLARE_LAYOUTDATA_METHODS(Measure)</span></span>
+<span id="L409"><span class="lineNum">     409</span>              : </span>
+<span id="L410"><span class="lineNum">     410</span>              : private:</span>
+<span id="L411"><span class="lineNum">     411</span>              : </span>
+<span id="L412"><span class="lineNum">     412</span>              :     friend class Factory;</span>
+<span id="L413"><span class="lineNum">     413</span>              : </span>
+<span id="L414"><span class="lineNum">     414</span>              :     Measure(Score* parent);</span>
+<span id="L415"><span class="lineNum">     415</span>              :     Measure(const Measure&amp;);</span>
+<span id="L416"><span class="lineNum">     416</span>              : </span>
+<span id="L417"><span class="lineNum">     417</span>              :     void push_back(Segment* e);</span>
+<span id="L418"><span class="lineNum">     418</span>              :     void push_front(Segment* e);</span>
+<span id="L419"><span class="lineNum">     419</span>              : </span>
+<span id="L420"><span class="lineNum">     420</span>              :     void fillGap(const Fraction&amp; pos, const Fraction&amp; len, track_idx_t track, const Fraction&amp; stretch, bool useGapRests = true);</span>
+<span id="L421"><span class="lineNum">     421</span>              : </span>
+<span id="L422"><span class="lineNum">     422</span>              :     MStaff* mstaff(staff_idx_t staffIndex) const;</span>
+<span id="L423"><span class="lineNum">     423</span>              : </span>
+<span id="L424"><span class="lineNum">     424</span>              :     std::vector&lt;MStaff*&gt; m_mstaves;</span>
+<span id="L425"><span class="lineNum">     425</span>              :     SegmentList m_segments;</span>
+<span id="L426"><span class="lineNum">     426</span>              :     Measure* m_mmRest = nullptr; // multi measure rest which replaces a measure range</span>
+<span id="L427"><span class="lineNum">     427</span>              : </span>
+<span id="L428"><span class="lineNum">     428</span>              :     double m_userStretch = 0.0;</span>
+<span id="L429"><span class="lineNum">     429</span>              : </span>
+<span id="L430"><span class="lineNum">     430</span>              :     Fraction m_timesig;</span>
+<span id="L431"><span class="lineNum">     431</span>              : </span>
+<span id="L432"><span class="lineNum">     432</span>              :     int m_mmRestCount = 0;      // number of measures an mmrest spans</span>
+<span id="L433"><span class="lineNum">     433</span>              : </span>
+<span id="L434"><span class="lineNum">     434</span>              :     int m_playbackCount = 0;    // temp. value used in RepeatList</span>
+<span id="L435"><span class="lineNum">     435</span>              :                                 // counts how many times this measure was already played</span>
+<span id="L436"><span class="lineNum">     436</span>              : </span>
+<span id="L437"><span class="lineNum">     437</span>              :     int m_repeatCount = 0;      // end repeat marker and repeat count</span>
+<span id="L438"><span class="lineNum">     438</span>              : </span>
+<span id="L439"><span class="lineNum">     439</span>              :     int m_measureNumber = 0;    // counting from zero</span>
+<span id="L440"><span class="lineNum">     440</span>              :     int m_measureNumberOffset = 0;</span>
+<span id="L441"><span class="lineNum">     441</span>              :     MeasureNumberMode m_measureNumberMode = MeasureNumberMode::AUTO;</span>
+<span id="L442"><span class="lineNum">     442</span>              :     bool m_breakMultiMeasureRest = false;</span>
+<span id="L443"><span class="lineNum">     443</span>              : };</span>
+<span id="L444"><span class="lineNum">     444</span>              : } // namespace mu::engraving</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - muse/framework/vst/internal/synth/vstsequencer.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../../index.html">top level</a> - <a href="index.html">muse/framework/vst/internal/synth</a> - vstsequencer.cpp</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntry">226</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2022 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #include &quot;vstsequencer.h&quot;</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;global/interpolation.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &lt;map&gt;</span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span>              : using namespace muse;</span>
+<span id="L30"><span class="lineNum">      30</span>              : using namespace muse::vst;</span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              : static constexpr ControlIdx MODWHEEL_IDX = static_cast&lt;ControlIdx&gt;(Steinberg::Vst::kCtrlModWheel);</span>
+<span id="L33"><span class="lineNum">      33</span>              : static constexpr ControlIdx SUSTAIN_IDX = static_cast&lt;ControlIdx&gt;(Steinberg::Vst::kCtrlSustainOnOff);</span>
+<span id="L34"><span class="lineNum">      34</span>              : static constexpr ControlIdx SOSTENUTO_IDX = static_cast&lt;ControlIdx&gt;(Steinberg::Vst::kCtrlSustenutoOnOff);</span>
+<span id="L35"><span class="lineNum">      35</span>              : static constexpr ControlIdx PITCH_BEND_IDX = static_cast&lt;ControlIdx&gt;(Steinberg::Vst::kPitchBend);</span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span>              : static const mpe::ArticulationTypeSet SUSTAIN_PEDAL_CC_SUPPORTED_TYPES {</span>
+<span id="L38"><span class="lineNum">      38</span>              :     mpe::ArticulationType::Pedal,</span>
+<span id="L39"><span class="lineNum">      39</span>              : };</span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span>              : static const mpe::ArticulationTypeSet SOSTENUTO_PEDAL_CC_SUPPORTED_TYPES {</span>
+<span id="L42"><span class="lineNum">      42</span>              :     mpe::ArticulationType::LaissezVibrer,</span>
+<span id="L43"><span class="lineNum">      43</span>              : };</span>
+<span id="L44"><span class="lineNum">      44</span>              : </span>
+<span id="L45"><span class="lineNum">      45</span>              : static const mpe::ArticulationTypeSet BEND_SUPPORTED_TYPES {</span>
+<span id="L46"><span class="lineNum">      46</span>              :     mpe::ArticulationType::Multibend, mpe::ArticulationType::ContinuousGlissando,</span>
+<span id="L47"><span class="lineNum">      47</span>              : };</span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC tlaBgUNC">           0 : void VstSequencer::init(ParamsMapping&amp;&amp; mapping, bool useDynamicEvents)</span></span>
+<span id="L50"><span class="lineNum">      50</span>              : {</span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaUNC">           0 :     m_mapping = std::move(mapping);</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaUNC">           0 :     m_useDynamicEvents = useDynamicEvents;</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaUNC">           0 :     m_inited = true;</span></span>
+<span id="L54"><span class="lineNum">      54</span>              : </span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC">           0 :     updateMainStreamEvents(m_playbackData.originEvents, m_playbackData.dynamics);</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L57"><span class="lineNum">      57</span>              : </span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC">           0 : void VstSequencer::updateMainStreamEvents(const mpe::PlaybackEventsMap&amp; events, const mpe::DynamicAutomationLayers&amp; dynamics)</span></span>
+<span id="L59"><span class="lineNum">      59</span>              : {</span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC">           0 :     if (!m_inited) {</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L62"><span class="lineNum">      62</span>              :     }</span>
+<span id="L63"><span class="lineNum">      63</span>              : </span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaUNC">           0 :     m_mainStreamEvents.clear();</span></span>
+<span id="L65"><span class="lineNum">      65</span>              : </span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC">           0 :     if (m_onMainStreamFlushed) {</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaUNC">           0 :         m_onMainStreamFlushed();</span></span>
+<span id="L68"><span class="lineNum">      68</span>              :     }</span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaUNC">           0 :     addPlaybackEvents(m_mainStreamEvents, events);</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaUNC">           0 :     sortNoteOnEventsByPitch(m_mainStreamEvents);</span></span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaUNC">           0 :     if (m_useDynamicEvents) {</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaUNC">           0 :         addDynamicEvents(m_mainStreamEvents, dynamics);</span></span>
+<span id="L75"><span class="lineNum">      75</span>              :     }</span>
+<span id="L76"><span class="lineNum">      76</span>              : </span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaUNC">           0 :     updateMainSequenceIterator();</span></span>
+<span id="L78"><span class="lineNum">      78</span>              : }</span>
+<span id="L79"><span class="lineNum">      79</span>              : </span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaUNC">           0 : void VstSequencer::updateOffStreamEvents(const mpe::PlaybackEventsMap&amp; events)</span></span>
+<span id="L81"><span class="lineNum">      81</span>              : {</span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaUNC">           0 :     addPlaybackEvents(m_offStreamEvents, events);</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaUNC">           0 :     updateOffSequenceIterator();</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaUNC">           0 : muse::audio::gain_t VstSequencer::currentGain() const</span></span>
+<span id="L87"><span class="lineNum">      87</span>              : {</span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaUNC">           0 :     if (!m_useDynamicEvents) {</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaUNC">           0 :         return 0.5f;</span></span>
+<span id="L90"><span class="lineNum">      90</span>              :     }</span>
+<span id="L91"><span class="lineNum">      91</span>              : </span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaUNC">           0 :     mpe::dynamic_level_t maxDynamicLevel = mpe::MIN_DYNAMIC_LEVEL;</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaUNC">           0 :     bool foundAnyLevel = false;</span></span>
+<span id="L94"><span class="lineNum">      94</span>              : </span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaUNC">           0 :     for (const auto&amp; [_, curve] : m_playbackData.dynamics) {</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaUNC">           0 :         if (curve.empty()) {</span></span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L98"><span class="lineNum">      98</span>              :         }</span>
+<span id="L99"><span class="lineNum">      99</span>              : </span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaUNC">           0 :         foundAnyLevel = true;</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaUNC">           0 :         maxDynamicLevel = std::max(maxDynamicLevel, mpe::dynamicLevelFromNormalized(mpe::evaluateCurveAt(curve, m_playbackPosition)));</span></span>
+<span id="L102"><span class="lineNum">     102</span>              :     }</span>
+<span id="L103"><span class="lineNum">     103</span>              : </span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaUNC">           0 :     if (!foundAnyLevel) {</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaUNC">           0 :         maxDynamicLevel = mpe::dynamicLevelFromType(mpe::DynamicType::Natural);</span></span>
+<span id="L106"><span class="lineNum">     106</span>              :     }</span>
+<span id="L107"><span class="lineNum">     107</span>              : </span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaUNC">           0 :     return expressionLevel(maxDynamicLevel);</span></span>
+<span id="L109"><span class="lineNum">     109</span>              : }</span>
+<span id="L110"><span class="lineNum">     110</span>              : </span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaUNC">           0 : void VstSequencer::addPlaybackEvents(EventSequenceMap&amp; destination, const mpe::PlaybackEventsMap&amp; events)</span></span>
+<span id="L112"><span class="lineNum">     112</span>              : {</span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaUNC">           0 :     SostenutoTimeAndDurations sostenutoTimeAndDurations;</span></span>
+<span id="L114"><span class="lineNum">     114</span>              : </span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaUNC">           0 :     for (const auto&amp; evPair : events) {</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaUNC">           0 :         for (const mpe::PlaybackEvent&amp; event : evPair.second) {</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaUNC">           0 :             if (std::holds_alternative&lt;mpe::NoteEvent&gt;(event)) {</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaUNC">           0 :                 addNoteEvent(destination, std::get&lt;mpe::NoteEvent&gt;(event), sostenutoTimeAndDurations);</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaUNC">           0 :             } else if (std::holds_alternative&lt;mpe::ControllerChangeEvent&gt;(event)) {</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaUNC">           0 :                 addControlChangeEvent(destination, evPair.first, std::get&lt;mpe::ControllerChangeEvent&gt;(event));</span></span>
+<span id="L121"><span class="lineNum">     121</span>              :             }</span>
+<span id="L122"><span class="lineNum">     122</span>              :         }</span>
+<span id="L123"><span class="lineNum">     123</span>              :     }</span>
+<span id="L124"><span class="lineNum">     124</span>              : </span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaUNC">           0 :     addSostenutoEvents(destination, sostenutoTimeAndDurations);</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L127"><span class="lineNum">     127</span>              : </span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaUNC">           0 : void VstSequencer::addDynamicEvents(EventSequenceMap&amp; destination, const mpe::DynamicAutomationLayers&amp; layers)</span></span>
+<span id="L129"><span class="lineNum">     129</span>              : {</span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaUNC">           0 :     constexpr mpe::timestamp_t STEP_INTERVAL_US = 30000;</span></span>
+<span id="L131"><span class="lineNum">     131</span>              : </span>
+<span id="L132"><span class="lineNum">     132</span>              :     //! NOTE: VST instance has a single gain parameter, so merge layers by tracking each one's last-known level</span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaUNC">           0 :     std::map&lt;mpe::timestamp_t, std::vector&lt;std::pair&lt;mpe::layer_idx_t, mpe::dynamic_level_t&gt; &gt; &gt; updatesAt;</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaUNC">           0 :     for (const auto&amp; [layerIdx, curve] : layers) {</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaUNC">           0 :         mpe::resampleCurve(curve, STEP_INTERVAL_US, [&amp;](mpe::timestamp_t t, muse::real_t normalized) {</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaUNC">           0 :             updatesAt[t].emplace_back(layerIdx, mpe::dynamicLevelFromNormalized(normalized));</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaUNC">           0 :         });</span></span>
+<span id="L138"><span class="lineNum">     138</span>              :     }</span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaUNC">           0 :     std::map&lt;mpe::layer_idx_t, mpe::dynamic_level_t&gt; currentLevel;</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaUNC">           0 :     std::optional&lt;float&gt; lastGain;</span></span>
+<span id="L142"><span class="lineNum">     142</span>              : </span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC">           0 :     for (const auto&amp; [t, updates] : updatesAt) {</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :         for (const auto&amp; [layerIdx, level] : updates) {</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC">           0 :             currentLevel[layerIdx] = level;</span></span>
+<span id="L146"><span class="lineNum">     146</span>              :         }</span>
+<span id="L147"><span class="lineNum">     147</span>              : </span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC">           0 :         mpe::dynamic_level_t maxDynamicLevel = mpe::MIN_DYNAMIC_LEVEL;</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 :         for (const auto&amp; [_, level] : currentLevel) {</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 :             maxDynamicLevel = std::max(maxDynamicLevel, level);</span></span>
+<span id="L151"><span class="lineNum">     151</span>              :         }</span>
+<span id="L152"><span class="lineNum">     152</span>              : </span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaUNC">           0 :         const float gain = expressionLevel(maxDynamicLevel);</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaUNC">           0 :         if (lastGain.has_value() &amp;&amp; muse::RealIsEqual(*lastGain, gain)) {</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L156"><span class="lineNum">     156</span>              :         }</span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaUNC">           0 :         lastGain = gain;</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaUNC">           0 :         destination[t].emplace_back(gain);</span></span>
+<span id="L159"><span class="lineNum">     159</span>              :     }</span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L161"><span class="lineNum">     161</span>              : </span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaUNC">           0 : void VstSequencer::addNoteEvent(EventSequenceMap&amp; destination, const mpe::NoteEvent&amp; noteEvent,</span></span>
+<span id="L163"><span class="lineNum">     163</span>              :                                 SostenutoTimeAndDurations&amp; sostenutoTimeAndDurations)</span>
+<span id="L164"><span class="lineNum">     164</span>              : {</span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaUNC">           0 :     const mpe::ArrangementContext&amp; arrangementCtx = noteEvent.arrangementCtx();</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaUNC">           0 :     const int32_t noteId = noteIndex(noteEvent.pitchCtx().nominalPitchLevel);</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaUNC">           0 :     const float velocityFraction = noteVelocityFraction(noteEvent);</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC">           0 :     const float tuning = noteTuning(noteEvent, noteId);</span></span>
+<span id="L169"><span class="lineNum">     169</span>              : </span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaUNC">           0 :     if (arrangementCtx.hasStart()) {</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaUNC">           0 :         if (m_useDynamicEvents) {</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaUNC">           0 :             destination[arrangementCtx.actualTimestamp].emplace_back(expressionLevel(noteEvent.expressionCtx().nominalDynamicLevel));</span></span>
+<span id="L173"><span class="lineNum">     173</span>              :         }</span>
+<span id="L174"><span class="lineNum">     174</span>              : </span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaUNC">           0 :         destination[arrangementCtx.actualTimestamp].emplace_back(buildEvent(VstEvent::kNoteOnEvent, noteId, velocityFraction, tuning));</span></span>
+<span id="L176"><span class="lineNum">     176</span>              :     }</span>
+<span id="L177"><span class="lineNum">     177</span>              : </span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaUNC">           0 :     if (arrangementCtx.hasEnd()) {</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaUNC">           0 :         const mpe::timestamp_t timestampTo = arrangementCtx.actualTimestamp + noteEvent.arrangementCtx().actualDuration;</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaUNC">           0 :         destination[timestampTo].emplace_back(buildEvent(VstEvent::kNoteOffEvent, noteId, velocityFraction, tuning));</span></span>
+<span id="L181"><span class="lineNum">     181</span>              :     }</span>
+<span id="L182"><span class="lineNum">     182</span>              : </span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaUNC">           0 :     for (const auto&amp; artPair : noteEvent.expressionCtx().articulations) {</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaUNC">           0 :         if (artPair.first == mpe::ArticulationType::Standard) {</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L186"><span class="lineNum">     186</span>              :         }</span>
+<span id="L187"><span class="lineNum">     187</span>              : </span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC">           0 :         const mpe::ArticulationMeta&amp; meta = artPair.second.meta;</span></span>
+<span id="L189"><span class="lineNum">     189</span>              : </span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :         if (!noteEvent.pitchCtx().pitchCurve.empty() &amp;&amp; muse::contains(BEND_SUPPORTED_TYPES, meta.type)) {</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaUNC">           0 :             addPitchCurve(destination, noteEvent, meta);</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L193"><span class="lineNum">     193</span>              :         }</span>
+<span id="L194"><span class="lineNum">     194</span>              : </span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaUNC">           0 :         if (muse::contains(SUSTAIN_PEDAL_CC_SUPPORTED_TYPES, meta.type)) {</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaUNC">           0 :             addPedalEvent(destination, meta);</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L198"><span class="lineNum">     198</span>              :         }</span>
+<span id="L199"><span class="lineNum">     199</span>              : </span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaUNC">           0 :         if (muse::contains(SOSTENUTO_PEDAL_CC_SUPPORTED_TYPES, meta.type)) {</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC">           0 :             const mpe::timestamp_t timestamp = arrangementCtx.actualTimestamp + noteEvent.arrangementCtx().actualDuration * 0.1; // add offset for Sostenuto to take effect</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaUNC">           0 :             sostenutoTimeAndDurations.push_back(mpe::TimestampAndDuration { timestamp, meta.overallDuration });</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L205"><span class="lineNum">     205</span>              :     }</span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L207"><span class="lineNum">     207</span>              : </span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 : void VstSequencer::addPedalEvent(EventSequenceMap&amp; destination, const mpe::ArticulationMeta&amp; meta)</span></span>
+<span id="L209"><span class="lineNum">     209</span>              : {</span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :     if (meta.hasStart()) {</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :         addParamChange(destination, meta.timestamp, SUSTAIN_IDX, 1);</span></span>
+<span id="L212"><span class="lineNum">     212</span>              :     }</span>
+<span id="L213"><span class="lineNum">     213</span>              : </span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaUNC">           0 :     if (meta.hasEnd()) {</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaUNC">           0 :         addParamChange(destination, meta.timestamp + meta.overallDuration, SUSTAIN_IDX, 0);</span></span>
+<span id="L216"><span class="lineNum">     216</span>              :     }</span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L218"><span class="lineNum">     218</span>              : </span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaUNC">           0 : void VstSequencer::addControlChangeEvent(EventSequenceMap&amp; destination, const mpe::timestamp_t timestamp,</span></span>
+<span id="L220"><span class="lineNum">     220</span>              :                                          const mpe::ControllerChangeEvent&amp; event)</span>
+<span id="L221"><span class="lineNum">     221</span>              : {</span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaUNC">           0 :     switch (event.type) {</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaUNC">           0 :     case mpe::ControllerChangeEvent::Modulation:</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaUNC">           0 :         addParamChange(destination, timestamp, MODWHEEL_IDX, event.val);</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaUNC">           0 :     case mpe::ControllerChangeEvent::SustainPedalOnOff:</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaUNC">           0 :         addParamChange(destination, timestamp, SUSTAIN_IDX, event.val);</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaUNC">           0 :     case mpe::ControllerChangeEvent::PitchBend:</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 :         addParamChange(destination, timestamp, PITCH_BEND_IDX, event.val);</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 :     case mpe::ControllerChangeEvent::Undefined:</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L234"><span class="lineNum">     234</span>              :     }</span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L236"><span class="lineNum">     236</span>              : </span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC">           0 : void VstSequencer::addParamChange(EventSequenceMap&amp; destination, const mpe::timestamp_t timestamp,</span></span>
+<span id="L238"><span class="lineNum">     238</span>              :                                   const ControlIdx controlIdx, const PluginParamValue value)</span>
+<span id="L239"><span class="lineNum">     239</span>              : {</span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :     auto controlIt = m_mapping.find(controlIdx);</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC">           0 :     if (controlIt == m_mapping.cend()) {</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L243"><span class="lineNum">     243</span>              :     }</span>
+<span id="L244"><span class="lineNum">     244</span>              : </span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC">           0 :     const PluginParamId paramId = controlIt-&gt;second;</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaUNC">           0 :     EventSequence&amp; events = destination[timestamp];</span></span>
+<span id="L247"><span class="lineNum">     247</span>              : </span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaUNC">           0 :     for (const EventType&amp; e : events) {</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaUNC">           0 :         if (!std::holds_alternative&lt;ParamChangeEvent&gt;(e)) {</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L251"><span class="lineNum">     251</span>              :         }</span>
+<span id="L252"><span class="lineNum">     252</span>              : </span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC">           0 :         const ParamChangeEvent&amp; pce = std::get&lt;ParamChangeEvent&gt;(e);</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC">           0 :         if (pce.paramId == paramId &amp;&amp; RealIsEqual(pce.value, value)) {</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaUNC">           0 :             return;</span></span>
+<span id="L256"><span class="lineNum">     256</span>              :         }</span>
+<span id="L257"><span class="lineNum">     257</span>              :     }</span>
+<span id="L258"><span class="lineNum">     258</span>              : </span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaUNC">           0 :     events.emplace_back(ParamChangeEvent { paramId, value });</span></span>
+<span id="L260"><span class="lineNum">     260</span>              : }</span>
+<span id="L261"><span class="lineNum">     261</span>              : </span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 : void VstSequencer::addPitchCurve(EventSequenceMap&amp; destination, const mpe::NoteEvent&amp; noteEvent,</span></span>
+<span id="L263"><span class="lineNum">     263</span>              :                                  const mpe::ArticulationMeta&amp; artMeta)</span>
+<span id="L264"><span class="lineNum">     264</span>              : {</span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaUNC">           0 :     auto pitchBendIt = m_mapping.find(PITCH_BEND_IDX);</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaUNC">           0 :     if (pitchBendIt == m_mapping.cend()) {</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L268"><span class="lineNum">     268</span>              :     }</span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 :     const mpe::timestamp_t noteTimestampTo = noteEvent.arrangementCtx().actualTimestamp + noteEvent.arrangementCtx().actualDuration;</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaUNC">           0 :     const mpe::timestamp_t pitchBendTimestampTo = std::min(artMeta.timestamp + artMeta.overallDuration, noteTimestampTo);</span></span>
+<span id="L272"><span class="lineNum">     272</span>              : </span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaUNC">           0 :     ParamChangeEvent event;</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaUNC">           0 :     event.paramId = pitchBendIt-&gt;second;</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaUNC">           0 :     event.value = 0.5f;</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaUNC">           0 :     destination[pitchBendTimestampTo].push_back(event);</span></span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaUNC">           0 :     auto currIt = noteEvent.pitchCtx().pitchCurve.cbegin();</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaUNC">           0 :     auto nextIt = std::next(currIt);</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaUNC">           0 :     auto endIt = noteEvent.pitchCtx().pitchCurve.cend();</span></span>
+<span id="L281"><span class="lineNum">     281</span>              : </span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaUNC">           0 :     float prevBendValue = -1.f;</span></span>
+<span id="L283"><span class="lineNum">     283</span>              : </span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaUNC">           0 :     for (; nextIt != endIt; currIt = nextIt, nextIt = std::next(currIt)) {</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaUNC">           0 :         const float currValue = pitchBendLevel(currIt-&gt;second);</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaUNC">           0 :         const float nextValue = pitchBendLevel(nextIt-&gt;second);</span></span>
+<span id="L287"><span class="lineNum">     287</span>              : </span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaUNC">           0 :         const mpe::timestamp_t currTime = artMeta.timestamp + artMeta.overallDuration * mpe::percentageToFactor(currIt-&gt;first);</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaUNC">           0 :         const mpe::timestamp_t nextTime = artMeta.timestamp + artMeta.overallDuration * mpe::percentageToFactor(nextIt-&gt;first);</span></span>
+<span id="L290"><span class="lineNum">     290</span>              : </span>
+<span id="L291"><span class="lineNum">     291</span>              :         using namespace muse::interpolation;</span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaUNC">           0 :         const Point currPoint { static_cast&lt;double&gt;(currTime), currValue };</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC">           0 :         const Point nextPoint { static_cast&lt;double&gt;(nextTime), nextValue };</span></span>
+<span id="L294"><span class="lineNum">     294</span>              : </span>
+<span id="L295"><span class="lineNum">     295</span>              :         //! NOTE: Increasing this number results in fewer points being interpolated</span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaUNC">           0 :         constexpr mpe::pitch_level_t POINT_WEIGHT = mpe::PITCH_LEVEL_STEP / 25;</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaUNC">           0 :         size_t pointCount = std::abs(nextIt-&gt;second - currIt-&gt;second) / POINT_WEIGHT;</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaUNC">           0 :         pointCount = std::max(pointCount, size_t(1));</span></span>
+<span id="L299"><span class="lineNum">     299</span>              : </span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaUNC">           0 :         const std::vector&lt;Point&gt; points = lerp(currPoint, nextPoint, pointCount);</span></span>
+<span id="L301"><span class="lineNum">     301</span>              : </span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaUNC">           0 :         for (const Point&amp; point : points) {</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaUNC">           0 :             const mpe::timestamp_t time = static_cast&lt;mpe::timestamp_t&gt;(std::round(point.x));</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaUNC">           0 :             const float bendValue = static_cast&lt;float&gt;(point.y);</span></span>
+<span id="L305"><span class="lineNum">     305</span>              : </span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaUNC">           0 :             if (time &lt; pitchBendTimestampTo &amp;&amp; !RealIsEqual(prevBendValue, bendValue)) {</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaUNC">           0 :                 event.value = bendValue;</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaUNC">           0 :                 destination[time].push_back(event);</span></span>
+<span id="L309"><span class="lineNum">     309</span>              :             }</span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaUNC">           0 :             prevBendValue = bendValue;</span></span>
+<span id="L312"><span class="lineNum">     312</span>              :         }</span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L314"><span class="lineNum">     314</span>              : }</span>
+<span id="L315"><span class="lineNum">     315</span>              : </span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaUNC">           0 : void VstSequencer::addSostenutoEvents(EventSequenceMap&amp; destination, const SostenutoTimeAndDurations&amp; sostenutoTimeAndDurations)</span></span>
+<span id="L317"><span class="lineNum">     317</span>              : {</span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaUNC">           0 :     for (size_t i = 0; i &lt; sostenutoTimeAndDurations.size(); ++i) {</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaUNC">           0 :         const mpe::TimestampAndDuration&amp; currentTnD = sostenutoTimeAndDurations.at(i);</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaUNC">           0 :         const mpe::timestamp_t timestampTo = currentTnD.timestamp + currentTnD.duration;</span></span>
+<span id="L321"><span class="lineNum">     321</span>              : </span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaUNC">           0 :         addParamChange(destination, currentTnD.timestamp, SOSTENUTO_IDX, 1);</span></span>
+<span id="L323"><span class="lineNum">     323</span>              : </span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaUNC">           0 :         if (i == sostenutoTimeAndDurations.size() - 1) {</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaUNC">           0 :             addParamChange(destination, timestampTo, SOSTENUTO_IDX, 0);</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L327"><span class="lineNum">     327</span>              :         }</span>
+<span id="L328"><span class="lineNum">     328</span>              : </span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaUNC">           0 :         const mpe::TimestampAndDuration&amp; nextTnD = sostenutoTimeAndDurations.at(i + 1);</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaUNC">           0 :         if (timestampTo &lt;= nextTnD.timestamp) { // handle potential overlap</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaUNC">           0 :             addParamChange(destination, timestampTo, SOSTENUTO_IDX, 0);</span></span>
+<span id="L332"><span class="lineNum">     332</span>              :         }</span>
+<span id="L333"><span class="lineNum">     333</span>              :     }</span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L335"><span class="lineNum">     335</span>              : </span>
+<span id="L336"><span class="lineNum">     336</span>              : //! Hack to make keyswitches work until we have proper UI support</span>
+<span id="L337"><span class="lineNum">     337</span>              : //! see: https://github.com/musescore/MuseScore/issues/32150</span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaUNC">           0 : void VstSequencer::sortNoteOnEventsByPitch(EventSequenceMap&amp; destination)</span></span>
+<span id="L339"><span class="lineNum">     339</span>              : {</span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaUNC">           0 :     for (auto&amp; [_, seq] : destination) {</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaUNC">           0 :         if (seq.size() &lt;= 1) {</span></span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L343"><span class="lineNum">     343</span>              :         }</span>
+<span id="L344"><span class="lineNum">     344</span>              : </span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaUNC">           0 :         std::stable_sort(seq.begin(), seq.end(), [](const EventType&amp; e1, const EventType&amp; e2) {</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaUNC">           0 :             if (!std::holds_alternative&lt;VstEvent&gt;(e1) || !std::holds_alternative&lt;VstEvent&gt;(e2)) {</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L348"><span class="lineNum">     348</span>              :             }</span>
+<span id="L349"><span class="lineNum">     349</span>              : </span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaUNC">           0 :             const VstEvent&amp; ve1 = std::get&lt;VstEvent&gt;(e1);</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaUNC">           0 :             const VstEvent&amp; ve2 = std::get&lt;VstEvent&gt;(e2);</span></span>
+<span id="L352"><span class="lineNum">     352</span>              : </span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaUNC">           0 :             if (ve1.type == VstEvent::kNoteOnEvent &amp;&amp; ve2.type == VstEvent::kNoteOnEvent) {</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaUNC">           0 :                 return ve1.noteOn.pitch &lt; ve2.noteOn.pitch;</span></span>
+<span id="L355"><span class="lineNum">     355</span>              :             }</span>
+<span id="L356"><span class="lineNum">     356</span>              : </span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaUNC">           0 :             return false;</span></span>
+<span id="L358"><span class="lineNum">     358</span>              :         });</span>
+<span id="L359"><span class="lineNum">     359</span>              :     }</span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L361"><span class="lineNum">     361</span>              : </span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaUNC">           0 : VstEvent VstSequencer::buildEvent(const VstEvent::EventTypes type, const int32_t noteIdx, const float velocityFraction,</span></span>
+<span id="L363"><span class="lineNum">     363</span>              :                                   const float tuning) const</span>
+<span id="L364"><span class="lineNum">     364</span>              : {</span>
+<span id="L365"><span class="lineNum">     365</span>              :     VstEvent result;</span>
+<span id="L366"><span class="lineNum">     366</span>              : </span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaUNC">           0 :     result.busIndex = 0;</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaUNC">           0 :     result.sampleOffset = 0;</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaUNC">           0 :     result.ppqPosition = 0;</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaUNC">           0 :     result.flags = VstEvent::kIsLive;</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaUNC">           0 :     result.type = type;</span></span>
+<span id="L372"><span class="lineNum">     372</span>              : </span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC">           0 :     if (type == VstEvent::kNoteOnEvent) {</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaUNC">           0 :         result.noteOn.noteId = -1;</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaUNC">           0 :         result.noteOn.channel = 0;</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaUNC">           0 :         result.noteOn.pitch = noteIdx;</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaUNC">           0 :         result.noteOn.tuning = tuning;</span></span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaUNC">           0 :         result.noteOn.velocity = velocityFraction;</span></span>
+<span id="L379"><span class="lineNum">     379</span>              :     } else {</span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaUNC">           0 :         result.noteOff.noteId = -1;</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaUNC">           0 :         result.noteOff.channel = 0;</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaUNC">           0 :         result.noteOff.pitch = noteIdx;</span></span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaUNC">           0 :         result.noteOff.tuning = tuning;</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaUNC">           0 :         result.noteOff.velocity = velocityFraction;</span></span>
+<span id="L385"><span class="lineNum">     385</span>              :     }</span>
+<span id="L386"><span class="lineNum">     386</span>              : </span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaUNC">           0 :     return result;</span></span>
+<span id="L388"><span class="lineNum">     388</span>              : }</span>
+<span id="L389"><span class="lineNum">     389</span>              : </span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaUNC">           0 : int32_t VstSequencer::noteIndex(const mpe::pitch_level_t pitchLevel) const</span></span>
+<span id="L391"><span class="lineNum">     391</span>              : {</span>
+<span id="L392"><span class="lineNum">     392</span> <span class="tlaUNC">           0 :     float stepCount = mpe::ZERO_PITCH_LEVEL_MIDI_EQUIVALENT + pitchLevel / static_cast&lt;float&gt;(mpe::PITCH_LEVEL_STEP);</span></span>
+<span id="L393"><span class="lineNum">     393</span>              : </span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaUNC">           0 :     return std::clamp(stepCount, 0.f, 127.f);</span></span>
+<span id="L395"><span class="lineNum">     395</span>              : }</span>
+<span id="L396"><span class="lineNum">     396</span>              : </span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaUNC">           0 : float VstSequencer::noteTuning(const mpe::NoteEvent&amp; noteEvent, const int noteIdx) const</span></span>
+<span id="L398"><span class="lineNum">     398</span>              : {</span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaUNC">           0 :     int semitonesCount = noteIdx - mpe::ZERO_PITCH_LEVEL_MIDI_EQUIVALENT;</span></span>
+<span id="L400"><span class="lineNum">     400</span>              : </span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaUNC">           0 :     mpe::pitch_level_t tuningPitchLevel = noteEvent.pitchCtx().nominalPitchLevel - semitonesCount * mpe::PITCH_LEVEL_STEP;</span></span>
+<span id="L402"><span class="lineNum">     402</span>              : </span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaUNC">           0 :     return (tuningPitchLevel / static_cast&lt;float&gt;(mpe::PITCH_LEVEL_STEP)) * 100.f;</span></span>
+<span id="L404"><span class="lineNum">     404</span>              : }</span>
+<span id="L405"><span class="lineNum">     405</span>              : </span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaUNC">           0 : float VstSequencer::noteVelocityFraction(const mpe::NoteEvent&amp; noteEvent) const</span></span>
+<span id="L407"><span class="lineNum">     407</span>              : {</span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaUNC">           0 :     const mpe::ExpressionContext&amp; expressionCtx = noteEvent.expressionCtx();</span></span>
+<span id="L409"><span class="lineNum">     409</span>              : </span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaUNC">           0 :     if (expressionCtx.velocityOverride.has_value()) {</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaUNC">           0 :         return std::clamp(expressionCtx.velocityOverride.value(), 0.f, 1.f);</span></span>
+<span id="L412"><span class="lineNum">     412</span>              :     }</span>
+<span id="L413"><span class="lineNum">     413</span>              : </span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaUNC">           0 :     mpe::dynamic_level_t dynamicLevel = expressionCtx.expressionCurve.empty()</span></span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaUNC">           0 :                                         ? expressionCtx.nominalDynamicLevel : expressionCtx.expressionCurve.maxAmplitudeLevel();</span></span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaUNC">           0 :     return expressionLevel(dynamicLevel);</span></span>
+<span id="L417"><span class="lineNum">     417</span>              : }</span>
+<span id="L418"><span class="lineNum">     418</span>              : </span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaUNC">           0 : float VstSequencer::expressionLevel(const mpe::dynamic_level_t dynamicLevel) const</span></span>
+<span id="L420"><span class="lineNum">     420</span>              : {</span>
+<span id="L421"><span class="lineNum">     421</span>              :     static constexpr mpe::dynamic_level_t MIN_SUPPORTED_DYNAMIC_LEVEL = mpe::dynamicLevelFromType(mpe::DynamicType::ppp);</span>
+<span id="L422"><span class="lineNum">     422</span>              :     static constexpr mpe::dynamic_level_t MAX_SUPPORTED_DYNAMIC_LEVEL = mpe::dynamicLevelFromType(mpe::DynamicType::fff);</span>
+<span id="L423"><span class="lineNum">     423</span>              :     static constexpr mpe::dynamic_level_t AVAILABLE_RANGE = MAX_SUPPORTED_DYNAMIC_LEVEL - MIN_SUPPORTED_DYNAMIC_LEVEL;</span>
+<span id="L424"><span class="lineNum">     424</span>              : </span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaUNC">           0 :     if (dynamicLevel &lt;= MIN_SUPPORTED_DYNAMIC_LEVEL) {</span></span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaUNC">           0 :         return (0.5f * mpe::ONE_PERCENT) / AVAILABLE_RANGE;</span></span>
+<span id="L427"><span class="lineNum">     427</span>              :     }</span>
+<span id="L428"><span class="lineNum">     428</span>              : </span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaUNC">           0 :     if (dynamicLevel &gt;= MAX_SUPPORTED_DYNAMIC_LEVEL) {</span></span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaUNC">           0 :         return 1.f;</span></span>
+<span id="L431"><span class="lineNum">     431</span>              :     }</span>
+<span id="L432"><span class="lineNum">     432</span>              : </span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaUNC">           0 :     return RealRound((dynamicLevel - MIN_SUPPORTED_DYNAMIC_LEVEL) / static_cast&lt;float&gt;(AVAILABLE_RANGE), 2);</span></span>
+<span id="L434"><span class="lineNum">     434</span>              : }</span>
+<span id="L435"><span class="lineNum">     435</span>              : </span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaUNC">           0 : float VstSequencer::pitchBendLevel(const mpe::pitch_level_t pitchLevel) const</span></span>
+<span id="L437"><span class="lineNum">     437</span>              : {</span>
+<span id="L438"><span class="lineNum">     438</span>              :     static constexpr float SEMITONE_RANGE = 2.f;</span>
+<span id="L439"><span class="lineNum">     439</span>              :     static constexpr float PITCH_BEND_SEMITONE_STEP = 0.5f / SEMITONE_RANGE;</span>
+<span id="L440"><span class="lineNum">     440</span>              : </span>
+<span id="L441"><span class="lineNum">     441</span> <span class="tlaUNC">           0 :     float pitchLevelSteps = pitchLevel / static_cast&lt;float&gt;(mpe::PITCH_LEVEL_STEP);</span></span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaUNC">           0 :     float offset = pitchLevelSteps * PITCH_BEND_SEMITONE_STEP;</span></span>
+<span id="L443"><span class="lineNum">     443</span>              : </span>
+<span id="L444"><span class="lineNum">     444</span> <span class="tlaUNC">           0 :     return std::clamp(0.5f + offset, 0.f, 1.f);</span></span>
+<span id="L445"><span class="lineNum">     445</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

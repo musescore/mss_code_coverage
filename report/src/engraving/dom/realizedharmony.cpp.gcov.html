@@ -1,0 +1,669 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/dom/realizedharmony.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/engraving/dom</a> - realizedharmony.cpp</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryMed">75.9&nbsp;%</td>
+            <td class="headerCovTableEntry">278</td>
+            <td class="headerCovTableEntry">211</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2021 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #include &quot;realizedharmony.h&quot;</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;chordlist.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;harmony.h&quot;</span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &quot;pitchspelling.h&quot;</span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &quot;segment.h&quot;</span>
+<span id="L29"><span class="lineNum">      29</span>              : </span>
+<span id="L30"><span class="lineNum">      30</span>              : using namespace mu;</span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              : namespace mu::engraving {</span>
+<span id="L33"><span class="lineNum">      33</span>              : //---------------------------------------------------</span>
+<span id="L34"><span class="lineNum">      34</span>              : //   setVoicing</span>
+<span id="L35"><span class="lineNum">      35</span>              : ///   sets the voicing and dirty flag if the passed</span>
+<span id="L36"><span class="lineNum">      36</span>              : ///   voicing is different than current</span>
+<span id="L37"><span class="lineNum">      37</span>              : //---------------------------------------------------</span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">        1577 : void RealizedHarmony::setVoicing(Voicing v)</span></span>
+<span id="L39"><span class="lineNum">      39</span>              : {</span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">        1577 :     if (m_voicing == v) {</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">        1132 :         return;</span></span>
+<span id="L42"><span class="lineNum">      42</span>              :     }</span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">         445 :     m_voicing = v;</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">         445 :     cascadeDirty(true);</span></span>
+<span id="L45"><span class="lineNum">      45</span>              : }</span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span>              : //---------------------------------------------------</span>
+<span id="L48"><span class="lineNum">      48</span>              : //   setDuration</span>
+<span id="L49"><span class="lineNum">      49</span>              : ///   sets the duration and dirty flag if the passed</span>
+<span id="L50"><span class="lineNum">      50</span>              : ///   HDuration is different than current</span>
+<span id="L51"><span class="lineNum">      51</span>              : //---------------------------------------------------</span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">        1138 : void RealizedHarmony::setDuration(HDuration d)</span></span>
+<span id="L53"><span class="lineNum">      53</span>              : {</span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">        1138 :     if (m_duration == d) {</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">          63 :         return;</span></span>
+<span id="L56"><span class="lineNum">      56</span>              :     }</span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">        1075 :     m_duration = d;</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">        1075 :     cascadeDirty(true);</span></span>
+<span id="L59"><span class="lineNum">      59</span>              : }</span>
+<span id="L60"><span class="lineNum">      60</span>              : </span>
+<span id="L61"><span class="lineNum">      61</span>              : //---------------------------------------------------</span>
+<span id="L62"><span class="lineNum">      62</span>              : //   setLiteral</span>
+<span id="L63"><span class="lineNum">      63</span>              : ///   sets literal/jazz and dirty flag if the passed</span>
+<span id="L64"><span class="lineNum">      64</span>              : ///   bool is different than current</span>
+<span id="L65"><span class="lineNum">      65</span>              : //---------------------------------------------------</span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        1157 : void RealizedHarmony::setLiteral(bool literal)</span></span>
+<span id="L67"><span class="lineNum">      67</span>              : {</span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        1157 :     if (m_literal == literal) {</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">          63 :         return;</span></span>
+<span id="L70"><span class="lineNum">      70</span>              :     }</span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">        1094 :     m_literal = literal;</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">        1094 :     cascadeDirty(true);</span></span>
+<span id="L73"><span class="lineNum">      73</span>              : }</span>
+<span id="L74"><span class="lineNum">      74</span>              : </span>
+<span id="L75"><span class="lineNum">      75</span>              : //---------------------------------------------------</span>
+<span id="L76"><span class="lineNum">      76</span>              : //   notes</span>
+<span id="L77"><span class="lineNum">      77</span>              : ///   returns the list of notes</span>
+<span id="L78"><span class="lineNum">      78</span>              : //---------------------------------------------------</span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">         485 : const RealizedHarmony::PitchMap&amp; RealizedHarmony::notes() const</span></span>
+<span id="L80"><span class="lineNum">      80</span>              : {</span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">         485 :     assert(!m_dirty);</span></span>
+<span id="L82"><span class="lineNum">      82</span>              :     //with the way that the code is currently structured, there should be no way to</span>
+<span id="L83"><span class="lineNum">      83</span>              :     //get to this function with dirty flag set although in the future it may be</span>
+<span id="L84"><span class="lineNum">      84</span>              :     //better to just update if dirty here</span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">         485 :     return m_notes;</span></span>
+<span id="L86"><span class="lineNum">      86</span>              : }</span>
+<span id="L87"><span class="lineNum">      87</span>              : </span>
+<span id="L88"><span class="lineNum">      88</span>              : //---------------------------------------------------</span>
+<span id="L89"><span class="lineNum">      89</span>              : //   generateNotes</span>
+<span id="L90"><span class="lineNum">      90</span>              : ///   generates a note list based on the passed parameters</span>
+<span id="L91"><span class="lineNum">      91</span>              : //---------------------------------------------------</span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">         499 : const RealizedHarmony::PitchMap RealizedHarmony::generateNotes(int rootTpc, int bassTpc,</span></span>
+<span id="L93"><span class="lineNum">      93</span>              :                                                                bool literal, Voicing voicing, int transposeOffset) const</span>
+<span id="L94"><span class="lineNum">      94</span>              : {</span>
+<span id="L95"><span class="lineNum">      95</span>              :     //cut octaves from offset</span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">         499 :     transposeOffset %= PITCH_DELTA_OCTAVE;</span></span>
+<span id="L97"><span class="lineNum">      97</span>              : </span>
+<span id="L98"><span class="lineNum">      98</span>              :     //The octave which to generate the body of the harmony, this is static const for now</span>
+<span id="L99"><span class="lineNum">      99</span>              :     //but may be user controlled in the future</span>
+<span id="L100"><span class="lineNum">     100</span>              :     static const int DEFAULT_OCTAVE = 5;   //octave above middle C</span>
+<span id="L101"><span class="lineNum">     101</span>              : </span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">         499 :     PitchMap notes;</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">         499 :     int rootPitch = tpc2pitch(rootTpc) + transposeOffset;</span></span>
+<span id="L104"><span class="lineNum">     104</span>              :     //we need to treat this new pitch as a pitch between 0 and 11,</span>
+<span id="L105"><span class="lineNum">     105</span>              :     //so that voicing remains consistent across transposition</span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">         499 :     if (rootPitch &lt; 0) {</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">           3 :         rootPitch = (rootPitch % PITCH_DELTA_OCTAVE) + PITCH_DELTA_OCTAVE;</span></span>
+<span id="L108"><span class="lineNum">     108</span>              :     } else {</span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">         496 :         rootPitch %= PITCH_DELTA_OCTAVE;</span></span>
+<span id="L110"><span class="lineNum">     110</span>              :     }</span>
+<span id="L111"><span class="lineNum">     111</span>              : </span>
+<span id="L112"><span class="lineNum">     112</span>              :     //create root note or bass note in second octave below middle C</span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">         499 :     if (bassTpc != Tpc::TPC_INVALID &amp;&amp; voicing != Voicing::ROOT_ONLY) {</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaUNC tlaBgUNC">           0 :         notes.insert({ tpc2pitch(bassTpc) + transposeOffset + (DEFAULT_OCTAVE - 2) * PITCH_DELTA_OCTAVE, bassTpc });</span></span>
+<span id="L115"><span class="lineNum">     115</span>              :     } else {</span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC tlaBgGNC">         499 :         notes.insert({ rootPitch + (DEFAULT_OCTAVE - 2) * PITCH_DELTA_OCTAVE, rootTpc });</span></span>
+<span id="L117"><span class="lineNum">     117</span>              :     }</span>
+<span id="L118"><span class="lineNum">     118</span>              : </span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">         499 :     switch (voicing) {</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">           7 :     case Voicing::ROOT_ONLY:         //already added root/bass so we are good</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">           7 :         break;</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">          47 :     case Voicing::AUTO:         //auto is close voicing for now since it is the most robust</span></span>
+<span id="L123"><span class="lineNum">     123</span>              :         //but just render the root if the harmony isn't understandable</span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">          47 :         if (!m_harmony-&gt;parsedForm()-&gt;understandable()) {</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaUNC tlaBgUNC">           0 :             break;</span></span>
+<span id="L126"><span class="lineNum">     126</span>              :         }</span>
+<span id="L127"><span class="lineNum">     127</span>              :         [[fallthrough]];</span>
+<span id="L128"><span class="lineNum">     128</span>              :     case Voicing::CLOSE:        //Voices notes in close position in the first octave above middle C</span>
+<span id="L129"><span class="lineNum">     129</span>              :     {</span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC tlaBgGNC">         131 :         notes.insert({ rootPitch + DEFAULT_OCTAVE * PITCH_DELTA_OCTAVE, rootTpc });</span></span>
+<span id="L131"><span class="lineNum">     131</span>              :         //ensure that notes fall under a specific range</span>
+<span id="L132"><span class="lineNum">     132</span>              :         //for now this range is between 5*12 and 6*12</span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">         131 :         PitchMap intervals = getIntervals(rootTpc, literal);</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">         575 :         for (const auto&amp; p : intervals) {</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">         444 :             notes.insert({ (rootPitch + (p.first % 128)) % PITCH_DELTA_OCTAVE + DEFAULT_OCTAVE * PITCH_DELTA_OCTAVE, p.second });</span></span>
+<span id="L136"><span class="lineNum">     136</span>              :         }</span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">         131 :     }</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         131 :     break;</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">         109 :     case Voicing::DROP_2:</span></span>
+<span id="L140"><span class="lineNum">     140</span>              :     {</span>
+<span id="L141"><span class="lineNum">     141</span>              :         //select 4 notes from list</span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         109 :         PitchMap intervals = normalizeNoteMap(getIntervals(rootTpc, literal), rootTpc, rootPitch, 4);</span></span>
+<span id="L143"><span class="lineNum">     143</span>              : </span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         109 :         int counter = 0;           //counter to drop the second note</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">         533 :         for (auto it = intervals.rbegin(); it != intervals.rend(); ++it) {</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">         424 :             if (++counter == 2) {</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">         109 :                 notes.insert({ it-&gt;first + (DEFAULT_OCTAVE - 1) * PITCH_DELTA_OCTAVE, it-&gt;second });</span></span>
+<span id="L148"><span class="lineNum">     148</span>              :             } else {</span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">         315 :                 notes.insert({ it-&gt;first + DEFAULT_OCTAVE * PITCH_DELTA_OCTAVE, it-&gt;second });</span></span>
+<span id="L150"><span class="lineNum">     150</span>              :             }</span>
+<span id="L151"><span class="lineNum">     151</span>              :         }</span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">         109 :     }</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">         109 :     break;</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">          84 :     case Voicing::THREE_NOTE:</span></span>
+<span id="L155"><span class="lineNum">     155</span>              :     {</span>
+<span id="L156"><span class="lineNum">     156</span>              :         //Insert 2 notes in the octave above middle C</span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">          84 :         PitchMap intervals = normalizeNoteMap(getIntervals(rootTpc, literal), rootTpc, rootPitch, 2, true);</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">          84 :         auto it = intervals.begin();</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">          84 :         notes.insert({ it-&gt;first + DEFAULT_OCTAVE * PITCH_DELTA_OCTAVE, it-&gt;second });</span></span>
+<span id="L160"><span class="lineNum">     160</span>              : </span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          84 :         ++it;</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">          84 :         notes.insert({ it-&gt;first + DEFAULT_OCTAVE * PITCH_DELTA_OCTAVE, it-&gt;second });</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">          84 :     }</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">          84 :     break;</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">         168 :     case Voicing::FOUR_NOTE:</span></span>
+<span id="L166"><span class="lineNum">     166</span>              :     case Voicing::SIX_NOTE:</span>
+<span id="L167"><span class="lineNum">     167</span>              :         //FALLTHROUGH</span>
+<span id="L168"><span class="lineNum">     168</span>              :     {</span>
+<span id="L169"><span class="lineNum">     169</span>              :         //four/six note voicing, drop every other note</span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">         168 :         PitchMap relIntervals = getIntervals(rootTpc, literal);</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">         168 :         PitchMap intervals;</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">         168 :         if (voicing == Voicing::FOUR_NOTE) {</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">          84 :             intervals = normalizeNoteMap(relIntervals, rootTpc, rootPitch, 3, true);</span></span>
+<span id="L174"><span class="lineNum">     174</span>              :         } else {       //voicing == Voicing::SIX_NOTE</span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">          84 :             intervals = normalizeNoteMap(relIntervals, rootTpc, rootPitch, 5, true);</span></span>
+<span id="L176"><span class="lineNum">     176</span>              :         }</span>
+<span id="L177"><span class="lineNum">     177</span>              : </span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">         168 :         int counter = 0;           //how many notes have been added</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">         840 :         for (auto it = intervals.rbegin(); it != intervals.rend(); ++it) {</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">         672 :             if (counter % 2) {</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">         252 :                 notes.insert({ it-&gt;first + (DEFAULT_OCTAVE - 1) * PITCH_DELTA_OCTAVE, it-&gt;second });</span></span>
+<span id="L182"><span class="lineNum">     182</span>              :             } else {</span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">         420 :                 notes.insert({ it-&gt;first + DEFAULT_OCTAVE * PITCH_DELTA_OCTAVE, it-&gt;second });</span></span>
+<span id="L184"><span class="lineNum">     184</span>              :             }</span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">         672 :             ++counter;</span></span>
+<span id="L186"><span class="lineNum">     186</span>              :         }</span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">         168 :     }</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">         168 :     break;</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaUNC tlaBgUNC">           0 :     default:</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L191"><span class="lineNum">     191</span>              :     }</span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC tlaBgGNC">         499 :     return notes;</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
+<span id="L194"><span class="lineNum">     194</span>              : </span>
+<span id="L195"><span class="lineNum">     195</span>              : //---------------------------------------------------</span>
+<span id="L196"><span class="lineNum">     196</span>              : //   update</span>
+<span id="L197"><span class="lineNum">     197</span>              : ///   updates the current note map, this is where all</span>
+<span id="L198"><span class="lineNum">     198</span>              : ///   of the rhythm and voicing choices matter since</span>
+<span id="L199"><span class="lineNum">     199</span>              : ///   the voicing algorithms depend on this.</span>
+<span id="L200"><span class="lineNum">     200</span>              : ///</span>
+<span id="L201"><span class="lineNum">     201</span>              : ///   transposeOffset -- is the necessary adjustment</span>
+<span id="L202"><span class="lineNum">     202</span>              : ///   that is added to the root and bass</span>
+<span id="L203"><span class="lineNum">     203</span>              : ///   to get the correct sounding pitch</span>
+<span id="L204"><span class="lineNum">     204</span>              : ///</span>
+<span id="L205"><span class="lineNum">     205</span>              : ///   TODO -: Don't worry about realized harmony for</span>
+<span id="L206"><span class="lineNum">     206</span>              : ///         RNA harmony?</span>
+<span id="L207"><span class="lineNum">     207</span>              : //---------------------------------------------------</span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC tlaBgGNC">         492 : void RealizedHarmony::update(int rootTpc, int bassTpc, int transposeOffset /*= 0*/)</span></span>
+<span id="L209"><span class="lineNum">     209</span>              : {</span>
+<span id="L210"><span class="lineNum">     210</span>              :     //on transposition the dirty flag is set by the harmony, but it's a little</span>
+<span id="L211"><span class="lineNum">     211</span>              :     //bit risky design since these 3 parameters rely on the dirty bit and are not</span>
+<span id="L212"><span class="lineNum">     212</span>              :     //otherwise checked by RealizedHarmony. This saves us 3 ints of space, but</span>
+<span id="L213"><span class="lineNum">     213</span>              :     //has the added risk</span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">         492 :     if (!m_dirty) {</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L216"><span class="lineNum">     216</span>              :     }</span>
+<span id="L217"><span class="lineNum">     217</span>              : </span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC tlaBgGNC">         492 :     if (tpcIsValid(rootTpc)) {</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">         492 :         m_notes = generateNotes(rootTpc, bassTpc, m_literal, m_voicing, transposeOffset);</span></span>
+<span id="L220"><span class="lineNum">     220</span>              :     }</span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">         492 :     m_dirty = false;</span></span>
+<span id="L222"><span class="lineNum">     222</span>              : }</span>
+<span id="L223"><span class="lineNum">     223</span>              : </span>
+<span id="L224"><span class="lineNum">     224</span>              : //--------------------------------------------------</span>
+<span id="L225"><span class="lineNum">     225</span>              : //    getActualDuration</span>
+<span id="L226"><span class="lineNum">     226</span>              : ///    gets the fraction duration for how long</span>
+<span id="L227"><span class="lineNum">     227</span>              : ///    the harmony should be realized based</span>
+<span id="L228"><span class="lineNum">     228</span>              : ///    on the HDuration set.</span>
+<span id="L229"><span class="lineNum">     229</span>              : ///</span>
+<span id="L230"><span class="lineNum">     230</span>              : ///    This is opposed to RealizedHarmony::duration()</span>
+<span id="L231"><span class="lineNum">     231</span>              : ///    which returns the HDuration, which is the duration</span>
+<span id="L232"><span class="lineNum">     232</span>              : ///    setting.</span>
+<span id="L233"><span class="lineNum">     233</span>              : ///</span>
+<span id="L234"><span class="lineNum">     234</span>              : ///    As the duration may depend on playback order the</span>
+<span id="L235"><span class="lineNum">     235</span>              : ///    utick is required as a reference point</span>
+<span id="L236"><span class="lineNum">     236</span>              : ///</span>
+<span id="L237"><span class="lineNum">     237</span>              : ///    Specifying the durationType will overwrite the</span>
+<span id="L238"><span class="lineNum">     238</span>              : ///    setting set by the user for the specific harmony object.</span>
+<span id="L239"><span class="lineNum">     239</span>              : ///    Don't specify it (or as HDuration::INVALID) to honor</span>
+<span id="L240"><span class="lineNum">     240</span>              : ///    the user setting.</span>
+<span id="L241"><span class="lineNum">     241</span>              : //--------------------------------------------------</span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">         492 : Fraction RealizedHarmony::getActualDuration(int utick, HDuration durationType) const</span></span>
+<span id="L243"><span class="lineNum">     243</span>              : {</span>
+<span id="L244"><span class="lineNum">     244</span>              :     HDuration dur;</span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">         492 :     if (durationType != HDuration::INVALID) {</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">           7 :         dur = durationType;</span></span>
+<span id="L247"><span class="lineNum">     247</span>              :     } else {</span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">         485 :         dur = m_duration;</span></span>
+<span id="L249"><span class="lineNum">     249</span>              :     }</span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">         492 :     switch (dur) {</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">         479 :     case HDuration::UNTIL_NEXT_CHORD_SYMBOL:</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">         479 :         return m_harmony-&gt;ticksTillNext(utick, false);</span></span>
+<span id="L253"><span class="lineNum">     253</span>              :         break;</span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">           3 :     case HDuration::STOP_AT_MEASURE_END:</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">           3 :         return m_harmony-&gt;ticksTillNext(utick, true);</span></span>
+<span id="L256"><span class="lineNum">     256</span>              :         break;</span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">          10 :     case HDuration::SEGMENT_DURATION: {</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">          10 :         Segment* s = m_harmony-&gt;getParentSeg();</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">          10 :         if (s) {</span></span>
+<span id="L260"><span class="lineNum">     260</span>              :             // TODO - use duration of chordrest on this segment / track</span>
+<span id="L261"><span class="lineNum">     261</span>              :             // currently, this will result in too short of a duration</span>
+<span id="L262"><span class="lineNum">     262</span>              :             // if there are shorter notes on other staves</span>
+<span id="L263"><span class="lineNum">     263</span>              :             // but, we can only do this up to the next harmony that is being realized,</span>
+<span id="L264"><span class="lineNum">     264</span>              :             // or elese we would get overlap</span>
+<span id="L265"><span class="lineNum">     265</span>              :             // (e.g., if the notes are dotted half / quarter, but chords are half / half,</span>
+<span id="L266"><span class="lineNum">     266</span>              :             // then we can't actually make the first chord a dotted half)</span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">          10 :             return s-&gt;ticks();</span></span>
+<span id="L268"><span class="lineNum">     268</span>              :         } else {</span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC tlaBgUNC">           0 :             return Fraction(0, 1);</span></span>
+<span id="L270"><span class="lineNum">     270</span>              :         }</span>
+<span id="L271"><span class="lineNum">     271</span>              :     }</span>
+<span id="L272"><span class="lineNum">     272</span>              :     break;</span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaUNC">           0 :     default:</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaUNC">           0 :         return Fraction(0, 1);</span></span>
+<span id="L275"><span class="lineNum">     275</span>              :     }</span>
+<span id="L276"><span class="lineNum">     276</span>              : }</span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span>              : //---------------------------------------------------</span>
+<span id="L279"><span class="lineNum">     279</span>              : //   getIntervals</span>
+<span id="L280"><span class="lineNum">     280</span>              : ///   gets a weighted map from intervals to TPCs based on</span>
+<span id="L281"><span class="lineNum">     281</span>              : ///   a passed root tpc (this allows for us to</span>
+<span id="L282"><span class="lineNum">     282</span>              : ///   keep pitches, but transpose notes on the score)</span>
+<span id="L283"><span class="lineNum">     283</span>              : ///</span>
+<span id="L284"><span class="lineNum">     284</span>              : ///   Weighting System:</span>
+<span id="L285"><span class="lineNum">     285</span>              : ///   - Rank 0: 3rd, altered 5th, suspensions (characteristic notes)</span>
+<span id="L286"><span class="lineNum">     286</span>              : ///   - Rank 1: 7th</span>
+<span id="L287"><span class="lineNum">     287</span>              : ///   - Rank 2: 9ths</span>
+<span id="L288"><span class="lineNum">     288</span>              : ///   - Rank 3: 13ths where applicable and (in minor chords) 11ths</span>
+<span id="L289"><span class="lineNum">     289</span>              : ///   - Rank 3: Other alterations and additions</span>
+<span id="L290"><span class="lineNum">     290</span>              : ///   - Rank 4: 5th and (in major/dominant chords) 11th</span>
+<span id="L291"><span class="lineNum">     291</span>              : //---------------------------------------------------</span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC tlaBgGNC">         492 : RealizedHarmony::PitchMap RealizedHarmony::getIntervals(int rootTpc, bool literal) const</span></span>
+<span id="L293"><span class="lineNum">     293</span>              : {</span>
+<span id="L294"><span class="lineNum">     294</span>              :     //RANKING SYSTEM</span>
+<span id="L295"><span class="lineNum">     295</span>              :     static const int RANK_MULT = 128;   //used as multiplier and mod since MIDI pitch goes from 0-127</span>
+<span id="L296"><span class="lineNum">     296</span>              :     static const int RANK_3RD = 0;</span>
+<span id="L297"><span class="lineNum">     297</span>              :     static const int RANK_7TH = 1;</span>
+<span id="L298"><span class="lineNum">     298</span>              :     static const int RANK_9TH = 2;</span>
+<span id="L299"><span class="lineNum">     299</span>              :     static const int RANK_ADD = 3;</span>
+<span id="L300"><span class="lineNum">     300</span>              :     static const int RANK_OMIT = 4;</span>
+<span id="L301"><span class="lineNum">     301</span>              : </span>
+<span id="L302"><span class="lineNum">     302</span>              :     static const int FIFTH = 7 + RANK_MULT * RANK_OMIT;</span>
+<span id="L303"><span class="lineNum">     303</span>              : </span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">         492 :     PitchMap ret;</span></span>
+<span id="L305"><span class="lineNum">     305</span>              : </span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">         492 :     const ParsedChord* p = m_harmony-&gt;parsedForm();</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">         492 :     String quality = p-&gt;quality();</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">         492 :     int ext = p-&gt;extension().toInt();</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">         492 :     const StringList&amp; modList = p-&gt;modifierList();</span></span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">         492 :     int omit = 0;   //omit flags for which notes to omit (for notes that are altered</span></span>
+<span id="L312"><span class="lineNum">     312</span>              :                     //or specified to be omitted as a modification) so that they</span>
+<span id="L313"><span class="lineNum">     313</span>              :                     //are not later added</span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">         492 :     bool alt5 = false;   //altered 5</span></span>
+<span id="L315"><span class="lineNum">     315</span>              : </span>
+<span id="L316"><span class="lineNum">     316</span>              :     //handle modifiers</span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">         740 :     for (const String&amp; s : modList) {</span></span>
+<span id="L318"><span class="lineNum">     318</span>              :         //find number, split up mods</span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">         248 :         bool modded = false;</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">         496 :         for (size_t c = 0; c &lt; s.size(); ++c) {</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">         496 :             if (s.at(c).isDigit()) {</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">         248 :                 int alter = 0;</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">         248 :                 size_t cutoff = c;</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">         248 :                 String degreeString = s;</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">         248 :                 static const std::wregex NOT_DIGITS = std::wregex(L&quot;[^0-9]+&quot;);</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         248 :                 degreeString.remove(NOT_DIGITS);</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">         248 :                 int deg = degreeString.toInt();</span></span>
+<span id="L328"><span class="lineNum">     328</span>              :                 //account for if the flat/sharp is stuck to the end of add</span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">         248 :                 if (c) {</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">         248 :                     if (s.at(c - 1) == u'#') {</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">          64 :                         cutoff -= 1;</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">          64 :                         if (deg == 7) {</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaUNC tlaBgUNC">           0 :                             alter = 0;</span></span>
+<span id="L334"><span class="lineNum">     334</span>              :                         } else {</span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC tlaBgGNC">          64 :                             alter = +1;</span></span>
+<span id="L336"><span class="lineNum">     336</span>              :                         }</span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">         184 :                     } else if (s.at(c - 1) == u'b') {</span></span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">         184 :                         cutoff -= 1;</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">         184 :                         alter = -1;</span></span>
+<span id="L340"><span class="lineNum">     340</span>              :                     }</span>
+<span id="L341"><span class="lineNum">     341</span>              :                 }</span>
+<span id="L342"><span class="lineNum">     342</span>              : </span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">         248 :                 String extType = s.left(cutoff);</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">         248 :                 if (extType == &quot;&quot; || extType == &quot;major&quot;) {         //alteration</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">         248 :                     if (deg == 9) {</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">          62 :                         ret.insert({ step2pitchInterval(deg, alter) + RANK_MULT * RANK_9TH, tpcInterval(rootTpc, deg, alter) });</span></span>
+<span id="L347"><span class="lineNum">     347</span>              :                     } else {</span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">         186 :                         ret.insert({ step2pitchInterval(deg, alter) + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, deg, alter) });</span></span>
+<span id="L349"><span class="lineNum">     349</span>              :                     }</span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">         248 :                     if (deg == 5) {</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">          66 :                         alt5 = true;</span></span>
+<span id="L352"><span class="lineNum">     352</span>              :                     }</span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">         248 :                     omit |= 1 &lt;&lt; deg;</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">         248 :                     modded = true;</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaUNC tlaBgUNC">           0 :                 } else if (extType == &quot;sus&quot;) {</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaUNC">           0 :                     ret.insert({ step2pitchInterval(deg, alter) + RANK_MULT * RANK_3RD, tpcInterval(rootTpc, deg, alter) });</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaUNC">           0 :                     omit |= 1 &lt;&lt; 3;</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaUNC">           0 :                     modded = true;</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaUNC">           0 :                 } else if (extType == &quot;no&quot;) {</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaUNC">           0 :                     omit |= 1 &lt;&lt; deg;</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaUNC">           0 :                     modded = true;</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaUNC">           0 :                 } else if (extType == &quot;add&quot;) {</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaUNC">           0 :                     ret.insert({ step2pitchInterval(deg, alter) + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, deg, alter) });</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaUNC">           0 :                     omit |= 1 &lt;&lt; deg;</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaUNC">           0 :                     modded = true;</span></span>
+<span id="L366"><span class="lineNum">     366</span>              :                 }</span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC tlaBgGNC">         248 :                 break;</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">         248 :             }</span></span>
+<span id="L369"><span class="lineNum">     369</span>              :         }</span>
+<span id="L370"><span class="lineNum">     370</span>              : </span>
+<span id="L371"><span class="lineNum">     371</span>              :         //check for special chords, if we haven't modded anything yet there is a special or incomprehensible modifier</span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">         248 :         if (!modded) {</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC tlaBgUNC">           0 :             if (s == &quot;phryg&quot;) {</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaUNC">           0 :                 ret.insert({ step2pitchInterval(9, -1) + RANK_MULT * RANK_9TH, tpcInterval(rootTpc, 9, -1) });</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaUNC">           0 :                 omit |= 1 &lt;&lt; 9;</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaUNC">           0 :             } else if (s == &quot;lyd&quot;) {</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaUNC">           0 :                 ret.insert({ step2pitchInterval(11, +1) + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 11, +1) });</span></span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaUNC">           0 :                 omit |= 1 &lt;&lt; 11;</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaUNC">           0 :             } else if (s == &quot;blues&quot;) {</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaUNC">           0 :                 ret.insert({ step2pitchInterval(9, +1) + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 9, +1) });</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaUNC">           0 :                 omit |= 1 &lt;&lt; 9;</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaUNC">           0 :             } else if (s == &quot;alt&quot;) {</span></span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaUNC">           0 :                 ret.insert({ step2pitchInterval(5, -1) + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 5, -1) });</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaUNC">           0 :                 ret.insert({ step2pitchInterval(5, +1) + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 5, +1) });</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaUNC">           0 :                 omit |= 1 &lt;&lt; 5;</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaUNC">           0 :                 ret.insert({ step2pitchInterval(9, -1) + RANK_MULT * RANK_9TH, tpcInterval(rootTpc, 9, -1) });</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaUNC">           0 :                 ret.insert({ step2pitchInterval(9, +1) + RANK_MULT * RANK_9TH, tpcInterval(rootTpc, 9, +1) });</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaUNC">           0 :                 omit |= 1 &lt;&lt; 9;</span></span>
+<span id="L389"><span class="lineNum">     389</span>              :             } else {    //no easy way to realize tristan chords since they are more analytical tools</span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaUNC">           0 :                 omit = ~0;</span></span>
+<span id="L391"><span class="lineNum">     391</span>              :             }</span>
+<span id="L392"><span class="lineNum">     392</span>              :         }</span>
+<span id="L393"><span class="lineNum">     393</span>              :     }</span>
+<span id="L394"><span class="lineNum">     394</span>              : </span>
+<span id="L395"><span class="lineNum">     395</span>              :     //handle ext = 5: power chord so omit the 3rd</span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC tlaBgGNC">         492 :     if (ext == 5) {</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaUNC tlaBgUNC">           0 :         omit |= 1 &lt;&lt; 3;</span></span>
+<span id="L398"><span class="lineNum">     398</span>              :     }</span>
+<span id="L399"><span class="lineNum">     399</span>              : </span>
+<span id="L400"><span class="lineNum">     400</span>              :     //handle chord quality</span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC tlaBgGNC">         492 :     if (quality == &quot;minor&quot;) {</span></span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          76 :         if (!(omit &amp; (1 &lt;&lt; 3))) {</span></span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">          76 :             ret.insert({ step2pitchInterval(3, -1) + RANK_MULT * RANK_3RD, tpcInterval(rootTpc, 3, -1) });         //min3</span></span>
+<span id="L404"><span class="lineNum">     404</span>              :         }</span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">          76 :         if (!(omit &amp; (1 &lt;&lt; 5))) {</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">          12 :             ret.insert({ step2pitchInterval(5, 0) + RANK_MULT * RANK_OMIT, tpcInterval(rootTpc, 5, 0) });           //p5</span></span>
+<span id="L407"><span class="lineNum">     407</span>              :         }</span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">         416 :     } else if (quality == &quot;augmented&quot;) {</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">           2 :         if (!(omit &amp; (1 &lt;&lt; 3))) {</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">           2 :             ret.insert({ step2pitchInterval(3, 0) + RANK_MULT * RANK_3RD, tpcInterval(rootTpc, 3, 0) });          //maj3</span></span>
+<span id="L411"><span class="lineNum">     411</span>              :         }</span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">           2 :         if (!(omit &amp; (1 &lt;&lt; 5))) {</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">           2 :             ret.insert({ step2pitchInterval(5, +1) + RANK_MULT * RANK_3RD, tpcInterval(rootTpc, 5, +1) });        //p5</span></span>
+<span id="L414"><span class="lineNum">     414</span>              :         }</span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">         414 :     } else if (quality == &quot;diminished&quot; || quality == &quot;half-diminished&quot;) {</span></span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">          60 :         if (!(omit &amp; (1 &lt;&lt; 3))) {</span></span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">          60 :             ret.insert({ step2pitchInterval(3, -1) + RANK_MULT * RANK_3RD, tpcInterval(rootTpc, 3, -1) });         //min3</span></span>
+<span id="L418"><span class="lineNum">     418</span>              :         }</span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">          60 :         if (!(omit &amp; (1 &lt;&lt; 5))) {</span></span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">          60 :             ret.insert({ step2pitchInterval(5, -1) + RANK_MULT * RANK_3RD, tpcInterval(rootTpc, 5, -1) });         //dim5</span></span>
+<span id="L421"><span class="lineNum">     421</span>              :         }</span>
+<span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">          60 :         if (!(omit &amp; (1 &lt;&lt; 7)) &amp;&amp; quality == &quot;half-diminished&quot;) {</span></span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaUNC tlaBgUNC">           0 :             ret.insert({ step2pitchInterval(7, -1) + RANK_MULT * RANK_7TH, tpcInterval(rootTpc, 7, -1) });           //min7</span></span>
+<span id="L424"><span class="lineNum">     424</span>              :         }</span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC tlaBgGNC">          60 :         alt5 = true;</span></span>
+<span id="L426"><span class="lineNum">     426</span>              :     } else { //major or dominant</span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">         354 :         if (!(omit &amp; (1 &lt;&lt; 3))) {</span></span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">         354 :             ret.insert({ step2pitchInterval(3, 0) + RANK_MULT * RANK_3RD, tpcInterval(rootTpc, 3, 0) });          //maj3</span></span>
+<span id="L429"><span class="lineNum">     429</span>              :         }</span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">         354 :         if (!(omit &amp; (1 &lt;&lt; 5))) {</span></span>
+<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">         352 :             ret.insert({ step2pitchInterval(5, 0) + RANK_MULT * RANK_OMIT, tpcInterval(rootTpc, 5, 0) });          //p5</span></span>
+<span id="L432"><span class="lineNum">     432</span>              :         }</span>
+<span id="L433"><span class="lineNum">     433</span>              :     }</span>
+<span id="L434"><span class="lineNum">     434</span>              : </span>
+<span id="L435"><span class="lineNum">     435</span>              :     //handle extension</span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">         492 :     switch (ext) {</span></span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">          60 :     case 13:</span></span>
+<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">          60 :         if (!(omit &amp; (1 &lt;&lt; 13))) {</span></span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">          60 :             ret.insert({ 9 + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 13, 0) });               //maj13</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">          60 :             omit |= 1 &lt;&lt; 13;</span></span>
+<span id="L441"><span class="lineNum">     441</span>              :         }</span>
+<span id="L442"><span class="lineNum">     442</span>              :         [[fallthrough]];</span>
+<span id="L443"><span class="lineNum">     443</span>              :     case 11:</span>
+<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">          60 :         if (!(omit &amp; (1 &lt;&lt; 11))) {</span></span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">          60 :             if (quality == &quot;minor&quot;) {</span></span>
+<span id="L446"><span class="lineNum">     446</span> <span class="tlaUNC tlaBgUNC">           0 :                 ret.insert({ 5 + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 11, 0) });                 //maj11</span></span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC tlaBgGNC">          60 :             } else if (literal) {</span></span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">          60 :                 ret.insert({ 5 + RANK_MULT * RANK_OMIT, tpcInterval(rootTpc, 11, 0) });                 //maj11</span></span>
+<span id="L449"><span class="lineNum">     449</span>              :             }</span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">          60 :             omit |= 1 &lt;&lt; 11;</span></span>
+<span id="L451"><span class="lineNum">     451</span>              :         }</span>
+<span id="L452"><span class="lineNum">     452</span>              :         [[fallthrough]];</span>
+<span id="L453"><span class="lineNum">     453</span>              :     case 9:</span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">         120 :         if (!(omit &amp; (1 &lt;&lt; 9))) {</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">         120 :             ret.insert({ 2 + RANK_MULT * RANK_9TH, tpcInterval(rootTpc, 9, 0) });               //maj9</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">         120 :             omit |= 1 &lt;&lt; 9;</span></span>
+<span id="L457"><span class="lineNum">     457</span>              :         }</span>
+<span id="L458"><span class="lineNum">     458</span>              :         [[fallthrough]];</span>
+<span id="L459"><span class="lineNum">     459</span>              :     case 7:</span>
+<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC">         409 :         if (!(omit &amp; (1 &lt;&lt; 7))) {</span></span>
+<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">         409 :             if (quality == &quot;major&quot;) {</span></span>
+<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">          76 :                 ret.insert({ 11 + RANK_MULT * RANK_7TH, tpcInterval(rootTpc, 7, 0) });</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">         333 :             } else if (quality == &quot;diminished&quot;) {</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">          60 :                 ret.insert({ 9 + RANK_MULT * RANK_7TH, tpcInterval(rootTpc, 7, -2) });</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">         273 :             } else if (quality == &quot;half-diminished&quot;) {</span></span>
+<span id="L466"><span class="lineNum">     466</span>              :                 // 7th note already added when handling chord quality</span>
+<span id="L467"><span class="lineNum">     467</span>              :             } else {         //dominant or augmented or minor</span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">         273 :                 ret.insert({ 10 + RANK_MULT * RANK_7TH, tpcInterval(rootTpc, 7, -1) });</span></span>
+<span id="L469"><span class="lineNum">     469</span>              :             }</span>
+<span id="L470"><span class="lineNum">     470</span>              :         }</span>
+<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">         409 :         break;</span></span>
+<span id="L472"><span class="lineNum">     472</span> <span class="tlaUNC tlaBgUNC">           0 :     case 6:</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaUNC">           0 :         if (!(omit &amp; (1 &lt;&lt; 6))) {</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC">           0 :             ret.insert({ 9 + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 6, 0) });               //maj6</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaUNC">           0 :             omit |= 1 &lt;&lt; 13;             //no need to add/alter 6 chords</span></span>
+<span id="L476"><span class="lineNum">     476</span>              :         }</span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaUNC">           0 :     case 5:</span></span>
+<span id="L479"><span class="lineNum">     479</span>              :         //omitted third already</span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaUNC">           0 :     case 4:</span></span>
+<span id="L482"><span class="lineNum">     482</span> <span class="tlaUNC">           0 :         if (!(omit &amp; (1 &lt;&lt; 4))) {</span></span>
+<span id="L483"><span class="lineNum">     483</span> <span class="tlaUNC">           0 :             ret.insert({ 5 + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 4, 0) });               //p4</span></span>
+<span id="L484"><span class="lineNum">     484</span>              :         }</span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaUNC">           0 :     case 2:</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaUNC">           0 :         if (!(omit &amp; (1 &lt;&lt; 2))) {</span></span>
+<span id="L488"><span class="lineNum">     488</span> <span class="tlaUNC">           0 :             ret.insert({ 2 + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 2, 0) });               //maj2</span></span>
+<span id="L489"><span class="lineNum">     489</span>              :         }</span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaUNC">           0 :         omit |= 1 &lt;&lt; 9;           //make sure we don't add altered 9 when theres a 2</span></span>
+<span id="L491"><span class="lineNum">     491</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaUNC">           0 :     case 69:</span></span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaUNC">           0 :         ret.insert({ 9 + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 6, 0) });             //maj6</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaUNC">           0 :         ret.insert({ 2 + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 9, 0) });             //maj6</span></span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaUNC">           0 :         omit = ~0;           //no additions/alterations for a 69 chord</span></span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC tlaBgGNC">          83 :     default:</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">          83 :         break;</span></span>
+<span id="L499"><span class="lineNum">     499</span>              :     }</span>
+<span id="L500"><span class="lineNum">     500</span>              : </span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">         492 :     Harmony* next = m_harmony-&gt;findNext();</span></span>
+<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">         492 :     if (!literal &amp;&amp; next &amp;&amp; tpcIsValid(next-&gt;rootTpc())) {</span></span>
+<span id="L503"><span class="lineNum">     503</span>              :         //jazz interpretation</span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">          24 :         String qNext = next-&gt;parsedForm()-&gt;quality();</span></span>
+<span id="L505"><span class="lineNum">     505</span>              :         //pitch from current to next harmony normalized to a range between 0 and 12</span>
+<span id="L506"><span class="lineNum">     506</span>              :         //add PITCH_DELTA_OCTAVE before modulo so that we can ensure arithmetic mod rather than computer mod</span>
+<span id="L507"><span class="lineNum">     507</span>              :         //int keyTpc = int(next-&gt;staff()-&gt;key(next-&gt;tick())) + 14; //tpc of key (ex. F# major would be Tpc::F_S)</span>
+<span id="L508"><span class="lineNum">     508</span>              :         //int keyTpcMinor = keyTpc + 3;</span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">          24 :         int pitchBetween = (tpc2pitch(next-&gt;rootTpc()) + PITCH_DELTA_OCTAVE - tpc2pitch(rootTpc)) % PITCH_DELTA_OCTAVE;</span></span>
+<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">          24 :         bool maj7 = qNext == &quot;major&quot; &amp;&amp; next-&gt;parsedForm()-&gt;extension().toInt() &gt;= 7;     //whether or not the next chord has major 7</span></span>
+<span id="L511"><span class="lineNum">     511</span>              : </span>
+<span id="L512"><span class="lineNum">     512</span>              :         //commented code: dont add 9 for diminished chords</span>
+<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC">          24 :         if (!(omit &amp; (1 &lt;&lt; 9))) {    // &amp;&amp; !(alt5 &amp;&amp; (quality == &quot;minor&quot; || quality == &quot;diminished&quot; || quality == &quot;half-diminished&quot;))) {</span></span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">          23 :             if (quality == &quot;dominant&quot; &amp;&amp; pitchBetween == 5 &amp;&amp; (qNext == &quot;minor&quot; || maj7)) {</span></span>
+<span id="L515"><span class="lineNum">     515</span>              :                 //flat 9 when resolving a fourth up to a minor chord or major 7th</span>
+<span id="L516"><span class="lineNum">     516</span> <span class="tlaGNC">           7 :                 ret.insert({ 1 + RANK_MULT * RANK_9TH, tpcInterval(rootTpc, 9, -1) });</span></span>
+<span id="L517"><span class="lineNum">     517</span>              :             } else {   //add major 9</span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">          16 :                 ret.insert({ 2 + RANK_MULT * RANK_9TH, tpcInterval(rootTpc, 9, 0) });</span></span>
+<span id="L519"><span class="lineNum">     519</span>              :             }</span>
+<span id="L520"><span class="lineNum">     520</span>              :         }</span>
+<span id="L521"><span class="lineNum">     521</span>              : </span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">          24 :         if (!(omit &amp; (1 &lt;&lt; 13)) &amp;&amp; !alt5) {</span></span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">          21 :             if (quality == &quot;dominant&quot; &amp;&amp; pitchBetween == 5 &amp;&amp; (qNext == &quot;minor&quot; || false)) {</span></span>
+<span id="L524"><span class="lineNum">     524</span>              :                 //flat 13 for dominant to chord a P4 up</span>
+<span id="L525"><span class="lineNum">     525</span>              :                 //only for minor chords for now</span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">           1 :                 muse::remove(ret, FIFTH);</span></span>
+<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">           1 :                 ret.insert({ 8 + RANK_MULT * RANK_ADD, tpcInterval(rootTpc, 13, -1) });</span></span>
+<span id="L528"><span class="lineNum">     528</span>              :             }</span>
+<span id="L529"><span class="lineNum">     529</span>              :             //major 13 considered, but too dependent on melody and voicing of other chord</span>
+<span id="L530"><span class="lineNum">     530</span>              :             //no implementation for now</span>
+<span id="L531"><span class="lineNum">     531</span>              :         }</span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">          24 :     }</span></span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">         492 :     return ret;</span></span>
+<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">         492 : }</span></span>
+<span id="L535"><span class="lineNum">     535</span>              : </span>
+<span id="L536"><span class="lineNum">     536</span>              : //---------------------------------------------------</span>
+<span id="L537"><span class="lineNum">     537</span>              : //   normalizeNoteMap</span>
+<span id="L538"><span class="lineNum">     538</span>              : ///   normalize the pitch map from intervals to create pitches between 0 and 12</span>
+<span id="L539"><span class="lineNum">     539</span>              : ///   and resolve any weighting system.</span>
+<span id="L540"><span class="lineNum">     540</span>              : ///</span>
+<span id="L541"><span class="lineNum">     541</span>              : ///   enforceMaxEquals - enforce the max as a goal so that the max is how many notes is inserted</span>
+<span id="L542"><span class="lineNum">     542</span>              : //---------------------------------------------------</span>
+<span id="L543"><span class="lineNum">     543</span> <span class="tlaGNC">         361 : RealizedHarmony::PitchMap RealizedHarmony::normalizeNoteMap(const PitchMap&amp; intervals, int rootTpc, int rootPitch, size_t max,</span></span>
+<span id="L544"><span class="lineNum">     544</span>              :                                                             bool enforceMaxAsGoal) const</span>
+<span id="L545"><span class="lineNum">     545</span>              : {</span>
+<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">         361 :     PitchMap ret;</span></span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">         361 :     auto it = intervals.begin();</span></span>
+<span id="L548"><span class="lineNum">     548</span>              : </span>
+<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">        1467 :     for (size_t i = 0; i &lt; max; ++i) {</span></span>
+<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">        1216 :         if (it == intervals.end()) {</span></span>
+<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">         110 :             break;</span></span>
+<span id="L552"><span class="lineNum">     552</span>              :         }</span>
+<span id="L553"><span class="lineNum">     553</span> <span class="tlaGNC">        1106 :         ret.insert({ (it-&gt;first % 128 + rootPitch) % PITCH_DELTA_OCTAVE, it-&gt;second });     //128 is RANK_MULT</span></span>
+<span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC">        1106 :         ++it;</span></span>
+<span id="L555"><span class="lineNum">     555</span>              :     }</span>
+<span id="L556"><span class="lineNum">     556</span>              : </span>
+<span id="L557"><span class="lineNum">     557</span>              :     //redo insertions if we must have a specific number of notes with insertMulti</span>
+<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">         361 :     if (enforceMaxAsGoal) {</span></span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">         576 :         while (ret.size() &lt; max) {</span></span>
+<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">          72 :             ret.insert({ rootPitch, rootTpc });       //duplicate root</span></span>
+<span id="L561"><span class="lineNum">     561</span>              : </span>
+<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC">          72 :             size_t size = max - ret.size();</span></span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">          72 :             it = intervals.begin();       //reset iterator</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">         120 :             for (size_t i = 0; i &lt; size; ++i) {</span></span>
+<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">          48 :                 if (it == intervals.end()) {</span></span>
+<span id="L566"><span class="lineNum">     566</span> <span class="tlaUNC tlaBgUNC">           0 :                     break;</span></span>
+<span id="L567"><span class="lineNum">     567</span>              :                 }</span>
+<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC tlaBgGNC">          48 :                 ret.insert({ (it-&gt;first % 128 + rootPitch) % PITCH_DELTA_OCTAVE, it-&gt;second });</span></span>
+<span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC">          48 :                 ++it;</span></span>
+<span id="L570"><span class="lineNum">     570</span>              :             }</span>
+<span id="L571"><span class="lineNum">     571</span>              :         }</span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">         109 :     } else if (ret.size() &lt; max) { //insert another root if we have room in general</span></span>
+<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">          38 :         ret.insert({ rootPitch, rootTpc });</span></span>
+<span id="L574"><span class="lineNum">     574</span>              :     }</span>
+<span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">         361 :     return ret;</span></span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
+<span id="L577"><span class="lineNum">     577</span>              : </span>
+<span id="L578"><span class="lineNum">     578</span>              : //---------------------------------------------------</span>
+<span id="L579"><span class="lineNum">     579</span>              : //   cascadeDirty</span>
+<span id="L580"><span class="lineNum">     580</span>              : ///   cascades the dirty flag backwards so that everything is properly set</span>
+<span id="L581"><span class="lineNum">     581</span>              : ///   this is required since voicing algorithms may look ahead</span>
+<span id="L582"><span class="lineNum">     582</span>              : ///</span>
+<span id="L583"><span class="lineNum">     583</span>              : ///   NOTE: FOR NOW ALGORITHMS DO NOT LOOK BACKWARDS AND SO THERE IS NO</span>
+<span id="L584"><span class="lineNum">     584</span>              : ///   REQUIREMENT TO CASCADE FORWARD, IN THE FUTURE IT MAY BECOME IMPORTANT</span>
+<span id="L585"><span class="lineNum">     585</span>              : ///   TO CASCADE FORWARD AS WELL</span>
+<span id="L586"><span class="lineNum">     586</span>              : //---------------------------------------------------</span>
+<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC tlaBgGNC">        2782 : void RealizedHarmony::cascadeDirty(bool dirty)</span></span>
+<span id="L588"><span class="lineNum">     588</span>              : {</span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">        2782 :     if (dirty &amp;&amp; !m_dirty) {   //only cascade when we want to set our clean realized harmony to dirty</span></span>
+<span id="L590"><span class="lineNum">     590</span> <span class="tlaUNC tlaBgUNC">           0 :         Harmony* prev = m_harmony-&gt;findPrev();</span></span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaUNC">           0 :         if (prev) {</span></span>
+<span id="L592"><span class="lineNum">     592</span> <span class="tlaUNC">           0 :             prev-&gt;realizedHarmony().cascadeDirty(dirty);</span></span>
+<span id="L593"><span class="lineNum">     593</span>              :         }</span>
+<span id="L594"><span class="lineNum">     594</span>              :     }</span>
+<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC tlaBgGNC">        2782 :     m_dirty = dirty;</span></span>
+<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">        2782 : }</span></span>
+<span id="L597"><span class="lineNum">     597</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

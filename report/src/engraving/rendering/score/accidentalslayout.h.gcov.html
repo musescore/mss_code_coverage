@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/rendering/score/accidentalslayout.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">src/engraving/rendering/score</a> - accidentalslayout.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">18</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2023 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : #pragma once</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span>              : #include &quot;vectorview.h&quot;</span>
+<span id="L25"><span class="lineNum">      25</span>              : </span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;shape.h&quot;</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : namespace mu::engraving {</span>
+<span id="L29"><span class="lineNum">      29</span>              : class Accidental;</span>
+<span id="L30"><span class="lineNum">      30</span>              : class Chord;</span>
+<span id="L31"><span class="lineNum">      31</span>              : class EngravingItem;</span>
+<span id="L32"><span class="lineNum">      32</span>              : class LedgerLine;</span>
+<span id="L33"><span class="lineNum">      33</span>              : class Shape;</span>
+<span id="L34"><span class="lineNum">      34</span>              : struct ShapeElement;</span>
+<span id="L35"><span class="lineNum">      35</span>              : }</span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span>              : namespace mu::engraving::rendering::score {</span>
+<span id="L38"><span class="lineNum">      38</span>              : class LayoutContext;</span>
+<span id="L39"><span class="lineNum">      39</span>              : </span>
+<span id="L40"><span class="lineNum">      40</span>              : using AccidentalGroups = std::vector&lt;std::vector&lt;Accidental*&gt; &gt;;</span>
+<span id="L41"><span class="lineNum">      41</span>              : </span>
+<span id="L42"><span class="lineNum">      42</span>              : class AccidentalsLayout</span>
+<span id="L43"><span class="lineNum">      43</span>              : {</span>
+<span id="L44"><span class="lineNum">      44</span>              : public:</span>
+<span id="L45"><span class="lineNum">      45</span>              :     static void layoutAccidentals(const std::vector&lt;Chord*&gt;&amp; chords, LayoutContext&amp; ctx);</span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span>              : private:</span>
+<span id="L48"><span class="lineNum">      48</span>              :     struct AccidentalsLayoutContext {</span>
+<span id="L49"><span class="lineNum">      49</span>              :         AccidentalsLayoutContext (std::vector&lt;Accidental*&gt; acc, std::vector&lt;Chord*&gt; ch);</span>
+<span id="L50"><span class="lineNum">      50</span>              : </span>
+<span id="L51"><span class="lineNum">      51</span>              :         std::vector&lt;Accidental*&gt; allAccidentals;</span>
+<span id="L52"><span class="lineNum">      52</span>              :         std::vector&lt;Chord*&gt; chords;</span>
+<span id="L53"><span class="lineNum">      53</span>              :         AccidentalGroups accidentalSubChords;</span>
+<span id="L54"><span class="lineNum">      54</span>              :         std::vector&lt;Accidental*&gt; stackedAccidentals;</span>
+<span id="L55"><span class="lineNum">      55</span>              :         Shape stackedAccidentalsShape;</span>
+<span id="L56"><span class="lineNum">      56</span>              :         Shape chordsShape;</span>
+<span id="L57"><span class="lineNum">      57</span>              :         size_t subChordsCountBeforeOctaveMerge = 1;</span>
+<span id="L58"><span class="lineNum">      58</span>              : </span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC tlaBgGNC">       81090 :         double spatium() const { return m_spatium; }</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">        5202 :         double verticalAccidentalToAccidentalClearance() const { return m_verticalAccidentalToAccidentalClearance; }</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">       13436 :         double verticalSharpToSharpClearance() const { return m_verticalSharpToSharpClearance; }</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">      136264 :         double verticalAccidentalToChordClearance() const { return m_verticalAccidentalToChordClearance; }</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">       17647 :         double accidentalAccidentalDistance() const { return m_accidentalAccidentalDistance; }</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        2887 :         double additionalPaddingForVerticals() const { return m_additionalPaddingForVerticals; }</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">        3594 :         double xPosSplitThreshold() const { return m_xPosSplitThreshold; }</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">         352 :         double xVerticalAlignmentThreshold() const { return m_xVerticalAlignmentThreshold; }</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">        8572 :         double sharpAndNaturalLedgerLinePadding() const { return m_sharpAndNaturalLedgerLinePadding; }</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">         560 :         double reducedFlatToNotePadding() const { return m_reducedFlatToNotePadding; }</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">         129 :         double flatKerningOfFourth() const { return m_flatKerningOfFourth; }</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           6 :         double naturalKerningOfFourth() const { return m_naturalKerningOfFourth; }</span></span>
+<span id="L71"><span class="lineNum">      71</span>              : </span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">        3141 :         bool orderFollowNoteDisplacement() const { return m_orderFollowNoteDisplacement; }</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        6267 :         bool alignOctavesAcrossSubChords() const { return m_alignOctavesAcrossSubChords; }</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">        4289 :         bool keepSecondsTogether() const { return m_keepSecondsTogether; }</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">        3056 :         bool alignOffsetOctaves() const { return m_alignOffsetOctaves; }</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">         120 :         size_t largeGroupLimit() const { return m_largeGroupLimit; }</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        3471 :         size_t smallGroupLimit() const { return m_smallGroupLimit; }</span></span>
+<span id="L78"><span class="lineNum">      78</span>              : </span>
+<span id="L79"><span class="lineNum">      79</span>              :     private:</span>
+<span id="L80"><span class="lineNum">      80</span>              :         void initConstants();</span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span>              :         double m_spatium = 0.0;</span>
+<span id="L83"><span class="lineNum">      83</span>              :         double m_verticalAccidentalToAccidentalClearance = 0.0;</span>
+<span id="L84"><span class="lineNum">      84</span>              :         double m_verticalSharpToSharpClearance = 0.0;</span>
+<span id="L85"><span class="lineNum">      85</span>              :         double m_verticalAccidentalToChordClearance = 0.0;</span>
+<span id="L86"><span class="lineNum">      86</span>              :         double m_accidentalAccidentalDistance = 0.0;</span>
+<span id="L87"><span class="lineNum">      87</span>              :         double m_additionalPaddingForVerticals = 0.0;</span>
+<span id="L88"><span class="lineNum">      88</span>              :         double m_xPosSplitThreshold = 0.0;</span>
+<span id="L89"><span class="lineNum">      89</span>              :         double m_xVerticalAlignmentThreshold = 0.0;</span>
+<span id="L90"><span class="lineNum">      90</span>              :         double m_sharpAndNaturalLedgerLinePadding = 0.0;</span>
+<span id="L91"><span class="lineNum">      91</span>              :         double m_reducedFlatToNotePadding = 0.0;</span>
+<span id="L92"><span class="lineNum">      92</span>              :         double m_flatKerningOfFourth = 0.0;</span>
+<span id="L93"><span class="lineNum">      93</span>              :         double m_naturalKerningOfFourth = 0.0;</span>
+<span id="L94"><span class="lineNum">      94</span>              :         bool m_orderFollowNoteDisplacement = false;</span>
+<span id="L95"><span class="lineNum">      95</span>              :         bool m_alignOctavesAcrossSubChords = false;</span>
+<span id="L96"><span class="lineNum">      96</span>              :         bool m_keepSecondsTogether = false;</span>
+<span id="L97"><span class="lineNum">      97</span>              :         bool m_alignOffsetOctaves = false;</span>
+<span id="L98"><span class="lineNum">      98</span>              : </span>
+<span id="L99"><span class="lineNum">      99</span>              :         static constexpr size_t m_smallGroupLimit = 3;</span>
+<span id="L100"><span class="lineNum">     100</span>              :         static constexpr size_t m_largeGroupLimit = 6;</span>
+<span id="L101"><span class="lineNum">     101</span>              :     };</span>
+<span id="L102"><span class="lineNum">     102</span>              : </span>
+<span id="L103"><span class="lineNum">     103</span>              :     using AccidentalsVectorView = muse::VectorView&lt;Accidental*&gt;;</span>
+<span id="L104"><span class="lineNum">     104</span>              : </span>
+<span id="L105"><span class="lineNum">     105</span>              :     static void collectAccidentals(const std::vector&lt;Chord*&gt; chords, std::vector&lt;Accidental*&gt;&amp; allAccidentals,</span>
+<span id="L106"><span class="lineNum">     106</span>              :                                    std::vector&lt;Accidental*&gt;&amp; redundantAccidentals, std::vector&lt;Accidental*&gt;&amp; invisibleAccidentals);</span>
+<span id="L107"><span class="lineNum">     107</span>              :     static bool accidentalIsRedundant(const Accidental* acc, const std::vector&lt;Accidental*&gt;&amp; allAccidentals);</span>
+<span id="L108"><span class="lineNum">     108</span>              : </span>
+<span id="L109"><span class="lineNum">     109</span>              :     static void doAccidentalPlacement(AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L110"><span class="lineNum">     110</span>              : </span>
+<span id="L111"><span class="lineNum">     111</span>              :     static void findOctavesAndSeconds(const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L112"><span class="lineNum">     112</span>              : </span>
+<span id="L113"><span class="lineNum">     113</span>              :     static void splitIntoSubChords(AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L114"><span class="lineNum">     114</span>              :     static void mergeAdjacentSubGroupsIfTooSmall(AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L115"><span class="lineNum">     115</span>              :     static void mergeSubGroupsWithOctavesAcross(AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L116"><span class="lineNum">     116</span>              : </span>
+<span id="L117"><span class="lineNum">     117</span>              :     static void createChordsShape(AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L118"><span class="lineNum">     118</span>              : </span>
+<span id="L119"><span class="lineNum">     119</span>              :     static void layoutSubChord(std::vector&lt;Accidental*&gt;&amp; accidentals, AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L120"><span class="lineNum">     120</span>              :     static void stackAccidental(Accidental* acc, AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L121"><span class="lineNum">     121</span>              : </span>
+<span id="L122"><span class="lineNum">     122</span>              :     static void computeOrdering(std::vector&lt;Accidental*&gt;&amp; accidentals, AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L123"><span class="lineNum">     123</span>              :     static AccidentalGroups splitIntoPriorityGroups(std::vector&lt;Accidental*&gt;&amp; accidentals, AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L124"><span class="lineNum">     124</span>              : </span>
+<span id="L125"><span class="lineNum">     125</span>              :     static AccidentalGroups splitAccordingToAccidDisplacement(std::vector&lt;Accidental*&gt;&amp; accidentals, const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L126"><span class="lineNum">     126</span>              :     static AccidentalGroups groupAccidentalsByXPos(std::vector&lt;Accidental*&gt;&amp; accidentals, const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L127"><span class="lineNum">     127</span>              :     static void moveOctavesToSecondGroup(AccidentalGroups&amp; subGroups);</span>
+<span id="L128"><span class="lineNum">     128</span>              : </span>
+<span id="L129"><span class="lineNum">     129</span>              :     static AccidentalGroups splitAccordingToNoteDisplacement(std::vector&lt;Accidental*&gt;&amp; accidentals, const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L130"><span class="lineNum">     130</span>              :     static AccidentalGroups groupAccidentalsByNoteXPos(const std::vector&lt;Accidental*&gt;&amp; accidentals);</span>
+<span id="L131"><span class="lineNum">     131</span>              :     static void moveSecondsInSameGroup(AccidentalGroups&amp; subGroups);</span>
+<span id="L132"><span class="lineNum">     132</span>              : </span>
+<span id="L133"><span class="lineNum">     133</span>              :     static void determineStackingOrder(std::vector&lt;Accidental*&gt;&amp; accidentals, AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L134"><span class="lineNum">     134</span>              :     static void computeStandardOrdering(std::vector&lt;Accidental*&gt;&amp; accidentals, AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L135"><span class="lineNum">     135</span>              :     static void computeCompactOrdering(std::vector&lt;Accidental*&gt;&amp; accidentals, AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L136"><span class="lineNum">     136</span>              :     static void computeOrderingWithLeastColumns(std::vector&lt;Accidental*&gt;&amp; accidentals, AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L137"><span class="lineNum">     137</span>              :     static void findAndInsertSecond(Accidental* acc, std::vector&lt;Accidental*&gt;&amp; accidentalsPlaced, AccidentalsVectorView&amp; accidentalsToPlace,</span>
+<span id="L138"><span class="lineNum">     138</span>              :                                     AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L139"><span class="lineNum">     139</span>              :     static bool findAndInsertOctave(Accidental* acc, std::vector&lt;Accidental*&gt;&amp; accidentalsPlaced, AccidentalsVectorView&amp; accidentalsToPlace,</span>
+<span id="L140"><span class="lineNum">     140</span>              :                                     AccidentalsLayoutContext&amp; ctx, bool acceptAbove = true, bool acceptBelow = true);</span>
+<span id="L141"><span class="lineNum">     141</span>              : </span>
+<span id="L142"><span class="lineNum">     142</span>              :     static void applyOrderingOffsets(std::vector&lt;Accidental*&gt;&amp; accidentals);</span>
+<span id="L143"><span class="lineNum">     143</span>              : </span>
+<span id="L144"><span class="lineNum">     144</span>              :     static double minAccidentalToChordDistance(Accidental* acc, const Shape&amp; accShape, const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L145"><span class="lineNum">     145</span>              :     static double kerningLimitationsIntoChord(Accidental* acc, const Shape&amp; accShape, const ShapeElement&amp; chordElement,</span>
+<span id="L146"><span class="lineNum">     146</span>              :                                               const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L147"><span class="lineNum">     147</span>              :     static double computePadding(Accidental* acc, const EngravingItem* chordElement, const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span>              :     static double minAccidentalToAccidentalGroupDistance(Accidental* acc, Shape accShape, const Shape&amp; accidentalsShape,</span>
+<span id="L150"><span class="lineNum">     150</span>              :                                                          const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L151"><span class="lineNum">     151</span>              :     static double kerningOfFourth(const Shape&amp; accShape, const ShapeElement&amp; accGroupShapeElement, const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L152"><span class="lineNum">     152</span>              :     static void checkZeroColumn(Accidental* acc, const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span>              :     static double additionalPaddingForVerticals(const Accidental* acc, const EngravingItem* item, const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span>              :     static void verticallyAlignAccidentals(AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L157"><span class="lineNum">     157</span>              :     static void collectVerticalSetsOfOffsetOctaves(std::set&lt;Accidental*&gt;&amp; accidentalsAlreadyGrouped, std::map&lt;Accidental*,</span>
+<span id="L158"><span class="lineNum">     158</span>              :                                                                                                               std::vector&lt;Accidental*&gt; &gt;&amp; verticalSets, AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L159"><span class="lineNum">     159</span>              :     static void collectVerticalSets(std::set&lt;Accidental*&gt;&amp; accidentalsAlreadyGrouped, std::map&lt;Accidental*,</span>
+<span id="L160"><span class="lineNum">     160</span>              :                                                                                                std::vector&lt;Accidental*&gt; &gt;&amp; verticalSets,</span>
+<span id="L161"><span class="lineNum">     161</span>              :                                     AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L162"><span class="lineNum">     162</span>              :     static void alignVerticalSets(AccidentalGroups&amp; vertSets, AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L163"><span class="lineNum">     163</span>              : </span>
+<span id="L164"><span class="lineNum">     164</span>              :     static double verticalPadding(const Accidental* acc1, const Accidental* acc2, const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L165"><span class="lineNum">     165</span>              :     static bool canFitInSameColumn(const Accidental* acc1, const Accidental* acc2, AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L166"><span class="lineNum">     166</span>              : </span>
+<span id="L167"><span class="lineNum">     167</span>              :     static double horizontalPadding(const Accidental* acc1, const Accidental* acc2, const AccidentalsLayoutContext&amp; ctx);</span>
+<span id="L168"><span class="lineNum">     168</span>              : </span>
+<span id="L169"><span class="lineNum">     169</span>              :     static bool isExceptionOfFourth(const Accidental* acc1, const Accidental* acc2);</span>
+<span id="L170"><span class="lineNum">     170</span>              :     static bool isExceptionOfNaturalsSixth(const Accidental* acc1, const Accidental* acc2);</span>
+<span id="L171"><span class="lineNum">     171</span>              :     static bool isOctave(const Accidental* acc1, const Accidental* acc2);</span>
+<span id="L172"><span class="lineNum">     172</span>              : </span>
+<span id="L173"><span class="lineNum">     173</span>              :     static void setXposRelativeToSegment(Accidental* accidental, double x);</span>
+<span id="L174"><span class="lineNum">     174</span>              :     static double xPosRelativeToSegment(const Accidental* accidental);</span>
+<span id="L175"><span class="lineNum">     175</span>              : </span>
+<span id="L176"><span class="lineNum">     176</span>              :     static void sortTopDown(std::vector&lt;Accidental*&gt;&amp; accidentals);</span>
+<span id="L177"><span class="lineNum">     177</span>              : </span>
+<span id="L178"><span class="lineNum">     178</span>              :     static bool keepAccidentalsCloseToChord(const Chord* chord);</span>
+<span id="L179"><span class="lineNum">     179</span>              : };</span>
+<span id="L180"><span class="lineNum">     180</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

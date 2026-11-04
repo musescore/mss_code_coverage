@@ -1,0 +1,456 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/dom/segment.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/engraving/dom</a> - segment.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">94.1&nbsp;%</td>
+            <td class="headerCovTableEntry">68</td>
+            <td class="headerCovTableEntry">64</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2021 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #pragma once</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;engravingitem.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span>              : namespace mu::engraving {</span>
+<span id="L28"><span class="lineNum">      28</span>              : class Factory;</span>
+<span id="L29"><span class="lineNum">      29</span>              : class Measure;</span>
+<span id="L30"><span class="lineNum">      30</span>              : class Segment;</span>
+<span id="L31"><span class="lineNum">      31</span>              : class ChordRest;</span>
+<span id="L32"><span class="lineNum">      32</span>              : class Spanner;</span>
+<span id="L33"><span class="lineNum">      33</span>              : class System;</span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span>              : //-------------------------------------------------------------------</span>
+<span id="L36"><span class="lineNum">      36</span>              : //   SegmentType</span>
+<span id="L37"><span class="lineNum">      37</span>              : //</span>
+<span id="L38"><span class="lineNum">      38</span>              : //    Type values determine the order of segments for a given tick</span>
+<span id="L39"><span class="lineNum">      39</span>              : //-------------------------------------------------------------------</span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span>              : enum class SegmentType {</span>
+<span id="L42"><span class="lineNum">      42</span>              :     ///.\{</span>
+<span id="L43"><span class="lineNum">      43</span>              :     Invalid               = 0x0,</span>
+<span id="L44"><span class="lineNum">      44</span>              :     BeginBarLine          = 0x1,</span>
+<span id="L45"><span class="lineNum">      45</span>              :     HeaderClef            = 0x2,</span>
+<span id="L46"><span class="lineNum">      46</span>              :     KeySig                = 0x4,</span>
+<span id="L47"><span class="lineNum">      47</span>              :     Ambitus               = 0x8,</span>
+<span id="L48"><span class="lineNum">      48</span>              :     Breath                = 0x10,</span>
+<span id="L49"><span class="lineNum">      49</span>              :     TimeSig               = 0x20,</span>
+<span id="L50"><span class="lineNum">      50</span>              :     StartRepeatBarLine    = 0x40,</span>
+<span id="L51"><span class="lineNum">      51</span>              :     ClefStartRepeatAnnounce    = 0x80,</span>
+<span id="L52"><span class="lineNum">      52</span>              :     KeySigStartRepeatAnnounce  = 0x100,</span>
+<span id="L53"><span class="lineNum">      53</span>              :     TimeSigStartRepeatAnnounce = 0x200,</span>
+<span id="L54"><span class="lineNum">      54</span>              :     Clef                  = 0x400,</span>
+<span id="L55"><span class="lineNum">      55</span>              :     BarLine               = 0x800,</span>
+<span id="L56"><span class="lineNum">      56</span>              :     //--</span>
+<span id="L57"><span class="lineNum">      57</span>              :     TimeTick              = 0x1000,</span>
+<span id="L58"><span class="lineNum">      58</span>              :     ChordRest             = 0x2000,</span>
+<span id="L59"><span class="lineNum">      59</span>              :     //--</span>
+<span id="L60"><span class="lineNum">      60</span>              :     ClefRepeatAnnounce    = 0x4000,</span>
+<span id="L61"><span class="lineNum">      61</span>              :     KeySigRepeatAnnounce  = 0x8000,</span>
+<span id="L62"><span class="lineNum">      62</span>              :     TimeSigRepeatAnnounce = 0x10000,</span>
+<span id="L63"><span class="lineNum">      63</span>              :     //--</span>
+<span id="L64"><span class="lineNum">      64</span>              :     EndBarLine            = 0x20000,</span>
+<span id="L65"><span class="lineNum">      65</span>              :     KeySigAnnounce        = 0x40000,</span>
+<span id="L66"><span class="lineNum">      66</span>              :     TimeSigAnnounce       = 0x80000,</span>
+<span id="L67"><span class="lineNum">      67</span>              :     //--</span>
+<span id="L68"><span class="lineNum">      68</span>              :     All                   = -1,   ///&lt; Includes all barline types</span>
+<span id="L69"><span class="lineNum">      69</span>              :     /// Alias for `BeginBarLine | StartRepeatBarLine | BarLine | EndBarLine`</span>
+<span id="L70"><span class="lineNum">      70</span>              :     BarLineTypes           = BeginBarLine | StartRepeatBarLine | BarLine | EndBarLine,</span>
+<span id="L71"><span class="lineNum">      71</span>              :     CourtesyTimeSigTypes   = TimeSigAnnounce | TimeSigRepeatAnnounce | TimeSigStartRepeatAnnounce,</span>
+<span id="L72"><span class="lineNum">      72</span>              :     CourtesyKeySigTypes    = KeySigAnnounce | KeySigRepeatAnnounce | KeySigStartRepeatAnnounce,</span>
+<span id="L73"><span class="lineNum">      73</span>              :     CourtesyClefTypes      = ClefRepeatAnnounce | ClefStartRepeatAnnounce,</span>
+<span id="L74"><span class="lineNum">      74</span>              :     TimeSigTypes           = TimeSig | CourtesyTimeSigTypes,</span>
+<span id="L75"><span class="lineNum">      75</span>              :     KeySigTypes            = KeySig | CourtesyKeySigTypes,</span>
+<span id="L76"><span class="lineNum">      76</span>              :     ClefTypes              = Clef | HeaderClef | CourtesyClefTypes,</span>
+<span id="L77"><span class="lineNum">      77</span>              :     // Only types with non-null duration</span>
+<span id="L78"><span class="lineNum">      78</span>              :     Duration              = TimeTick | ChordRest,</span>
+<span id="L79"><span class="lineNum">      79</span>              :     ///\}</span>
+<span id="L80"><span class="lineNum">      80</span>              : };</span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC tlaBgGNC">     1256283 : constexpr SegmentType operator|(const SegmentType t1, const SegmentType t2)</span></span>
+<span id="L83"><span class="lineNum">      83</span>              : {</span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">     1256283 :     return static_cast&lt;SegmentType&gt;(static_cast&lt;int&gt;(t1) | static_cast&lt;int&gt;(t2));</span></span>
+<span id="L85"><span class="lineNum">      85</span>              : }</span>
+<span id="L86"><span class="lineNum">      86</span>              : </span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">     5680351 : constexpr bool operator&amp;(const SegmentType t1, const SegmentType t2)</span></span>
+<span id="L88"><span class="lineNum">      88</span>              : {</span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">     5680351 :     return static_cast&lt;int&gt;(t1) &amp; static_cast&lt;int&gt;(t2);</span></span>
+<span id="L90"><span class="lineNum">      90</span>              : }</span>
+<span id="L91"><span class="lineNum">      91</span>              : </span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaUNC tlaBgUNC">           0 : constexpr SegmentType operator ~(const SegmentType&amp; t)</span></span>
+<span id="L93"><span class="lineNum">      93</span>              : {</span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaUNC">           0 :     return static_cast&lt;SegmentType&gt;(~static_cast&lt;int&gt;(t));</span></span>
+<span id="L95"><span class="lineNum">      95</span>              : }</span>
+<span id="L96"><span class="lineNum">      96</span>              : </span>
+<span id="L97"><span class="lineNum">      97</span>              : //------------------------------------------------------------------------</span>
+<span id="L98"><span class="lineNum">      98</span>              : //   @@ Segment</span>
+<span id="L99"><span class="lineNum">      99</span>              : //    A segment holds all vertical aligned staff elements.</span>
+<span id="L100"><span class="lineNum">     100</span>              : //    Segments are typed and contain only Elements of the same type.</span>
+<span id="L101"><span class="lineNum">     101</span>              : //</span>
+<span id="L102"><span class="lineNum">     102</span>              : //    All Elements in a segment start at the same tick. The Segment can store one EngravingItem for</span>
+<span id="L103"><span class="lineNum">     103</span>              : //    each voice in each staff in the score.</span>
+<span id="L104"><span class="lineNum">     104</span>              : //    Some elements (Clef, KeySig, TimeSig etc.) are assumed to always have voice zero</span>
+<span id="L105"><span class="lineNum">     105</span>              : //    and can be found in _elist[staffIdx * VOICES];</span>
+<span id="L106"><span class="lineNum">     106</span>              : </span>
+<span id="L107"><span class="lineNum">     107</span>              : //    Segments are children of Measures and store Clefs, KeySigs, TimeSigs,</span>
+<span id="L108"><span class="lineNum">     108</span>              : //    BarLines and ChordRests.</span>
+<span id="L109"><span class="lineNum">     109</span>              : //</span>
+<span id="L110"><span class="lineNum">     110</span>              : //   @P annotations     array[EngravingItem]    the list of annotations (read only)</span>
+<span id="L111"><span class="lineNum">     111</span>              : //   @P next            Segment           the next segment in the whole score; null at last score segment (read-only)</span>
+<span id="L112"><span class="lineNum">     112</span>              : //   @P nextInMeasure   Segment           the next segment in measure; null at last measure segment (read-only)</span>
+<span id="L113"><span class="lineNum">     113</span>              : //   @P prev            Segment           the previous segment in the whole score; null at first score segment (read-only)</span>
+<span id="L114"><span class="lineNum">     114</span>              : //   @P prevInMeasure   Segment           the previous segment in measure; null at first measure segment (read-only)</span>
+<span id="L115"><span class="lineNum">     115</span>              : //   @P segmentType     enum (Segment.All, .Ambitus, .BarLine, .Breath, .ChordRest, .Clef, .EndBarLine, .Invalid, .KeySig, .KeySigAnnounce, .StartRepeatBarLine, .TimeSig, .TimeSigAnnounce)</span>
+<span id="L116"><span class="lineNum">     116</span>              : //   @P tick            int               midi tick position (read only)</span>
+<span id="L117"><span class="lineNum">     117</span>              : //------------------------------------------------------------------------</span>
+<span id="L118"><span class="lineNum">     118</span>              : </span>
+<span id="L119"><span class="lineNum">     119</span>              : class Segment final : public EngravingItem</span>
+<span id="L120"><span class="lineNum">     120</span>              : {</span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC tlaBgGNC">      130525 :     OBJECT_ALLOCATOR(engraving, Segment)</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">        1313 :     DECLARE_CLASSOF(ElementType::SEGMENT)</span></span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span>              : protected:</span>
+<span id="L125"><span class="lineNum">     125</span>              :     EngravingItem* getElement(staff_idx_t staff) const;       //??</span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span>              : public:</span>
+<span id="L128"><span class="lineNum">     128</span>              : </span>
+<span id="L129"><span class="lineNum">     129</span>              :     ~Segment();</span>
+<span id="L130"><span class="lineNum">     130</span>              : </span>
+<span id="L131"><span class="lineNum">     131</span>              :     void setOwnershipParent(DummyParentOr&lt;Measure&gt; parent);</span>
+<span id="L132"><span class="lineNum">     132</span>              : </span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaUNC tlaBgUNC">           0 :     Segment* clone() const override { return new Segment(*this); }</span></span>
+<span id="L134"><span class="lineNum">     134</span>              : </span>
+<span id="L135"><span class="lineNum">     135</span>              :     void setScore(Score*) override;</span>
+<span id="L136"><span class="lineNum">     136</span>              : </span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC tlaBgGNC">      677120 :     inline bool isActive() const { return !isTimeTickType() &amp;&amp; enabled() &amp;&amp; visible(); }</span></span>
+<span id="L138"><span class="lineNum">     138</span>              : </span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">    18443994 :     Segment* next() const { return m_next; }</span></span>
+<span id="L140"><span class="lineNum">     140</span>              :     Segment* next(SegmentType) const;</span>
+<span id="L141"><span class="lineNum">     141</span>              :     Segment* nextActive() const;</span>
+<span id="L142"><span class="lineNum">     142</span>              :     Segment* nextEnabled() const;</span>
+<span id="L143"><span class="lineNum">     143</span>              :     Segment* nextInStaff(staff_idx_t staffIdx, SegmentType t = SegmentType::ChordRest) const;</span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">      135360 :     void setNext(Segment* e) { m_next = e; }</span></span>
+<span id="L145"><span class="lineNum">     145</span>              : </span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">     4486871 :     Segment* prev() const { return m_prev; }</span></span>
+<span id="L147"><span class="lineNum">     147</span>              :     Segment* prev(SegmentType) const;</span>
+<span id="L148"><span class="lineNum">     148</span>              :     Segment* prevWithElementsOnTrack(track_idx_t trackIdx, SegmentType segType = SegmentType::ChordRest) const;</span>
+<span id="L149"><span class="lineNum">     149</span>              :     Segment* prevActive() const;</span>
+<span id="L150"><span class="lineNum">     150</span>              :     Segment* prevEnabled() const;</span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">      119050 :     void setPrev(Segment* e) { m_prev = e; }</span></span>
+<span id="L152"><span class="lineNum">     152</span>              : </span>
+<span id="L153"><span class="lineNum">     153</span>              :     // don’t stop at measure boundary:</span>
+<span id="L154"><span class="lineNum">     154</span>              :     Segment* next1() const;</span>
+<span id="L155"><span class="lineNum">     155</span>              :     Segment* next1enabled() const;</span>
+<span id="L156"><span class="lineNum">     156</span>              :     Segment* next1MM() const;</span>
+<span id="L157"><span class="lineNum">     157</span>              :     Segment* next1MMenabled() const;</span>
+<span id="L158"><span class="lineNum">     158</span>              :     Segment* next1(SegmentType) const;</span>
+<span id="L159"><span class="lineNum">     159</span>              :     Segment* next1WithElemsOnStaff(staff_idx_t staffIdx, SegmentType segType = SegmentType::ChordRest) const;</span>
+<span id="L160"><span class="lineNum">     160</span>              :     Segment* next1WithElemsOnTrack(track_idx_t trackIdx, SegmentType segType = SegmentType::ChordRest) const;</span>
+<span id="L161"><span class="lineNum">     161</span>              :     Segment* next1MM(SegmentType) const;</span>
+<span id="L162"><span class="lineNum">     162</span>              : </span>
+<span id="L163"><span class="lineNum">     163</span>              :     Segment* prev1() const;</span>
+<span id="L164"><span class="lineNum">     164</span>              :     Segment* prev1WithElemsOnStaff(staff_idx_t staffIdx, SegmentType segType = SegmentType::ChordRest) const;</span>
+<span id="L165"><span class="lineNum">     165</span>              :     Segment* prev1WithElemsOnTrack(track_idx_t trackIdx, SegmentType segType = SegmentType::ChordRest) const;</span>
+<span id="L166"><span class="lineNum">     166</span>              :     Segment* prev1enabled() const;</span>
+<span id="L167"><span class="lineNum">     167</span>              :     Segment* prev1MM() const;</span>
+<span id="L168"><span class="lineNum">     168</span>              :     Segment* prev1MMenabled() const;</span>
+<span id="L169"><span class="lineNum">     169</span>              :     Segment* prev1(SegmentType) const;</span>
+<span id="L170"><span class="lineNum">     170</span>              :     Segment* prev1MM(SegmentType) const;</span>
+<span id="L171"><span class="lineNum">     171</span>              : </span>
+<span id="L172"><span class="lineNum">     172</span>              :     Segment* nextCR(track_idx_t track = muse::nidx, bool sameStaff = false) const;</span>
+<span id="L173"><span class="lineNum">     173</span>              : </span>
+<span id="L174"><span class="lineNum">     174</span>              :     ChordRest* nextChordRest(track_idx_t track, bool backwards = false, bool stopAtMeasureBoundary = false) const;</span>
+<span id="L175"><span class="lineNum">     175</span>              : </span>
+<span id="L176"><span class="lineNum">     176</span>              :     EngravingItem* element(track_idx_t track) const;</span>
+<span id="L177"><span class="lineNum">     177</span>              : </span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">     2796259 :     const std::vector&lt;EngravingItem*&gt;&amp; elist() const { return m_elist; }</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">      814647 :     std::vector&lt;EngravingItem*&gt;&amp; elist() { return m_elist; }</span></span>
+<span id="L180"><span class="lineNum">     180</span>              : </span>
+<span id="L181"><span class="lineNum">     181</span>              :     void removeElement(track_idx_t track);</span>
+<span id="L182"><span class="lineNum">     182</span>              :     void setElement(track_idx_t track, EngravingItem* el);</span>
+<span id="L183"><span class="lineNum">     183</span>              :     void scanElements(std::function&lt;void(EngravingItem*)&gt; func) override;</span>
+<span id="L184"><span class="lineNum">     184</span>              : </span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">    15433832 :     Measure* measure() const { return toMeasure(ownershipParent()); }</span></span>
+<span id="L186"><span class="lineNum">     186</span>              :     System* system() const;</span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">      458801 :     double x() const override { return ldata()-&gt;pos().x(); }</span></span>
+<span id="L188"><span class="lineNum">     188</span>              : </span>
+<span id="L189"><span class="lineNum">     189</span>              :     void insertStaff(staff_idx_t staff);</span>
+<span id="L190"><span class="lineNum">     190</span>              :     void removeStaff(staff_idx_t staff);</span>
+<span id="L191"><span class="lineNum">     191</span>              : </span>
+<span id="L192"><span class="lineNum">     192</span>              :     void add(EngravingItem*) override;</span>
+<span id="L193"><span class="lineNum">     193</span>              :     void remove(EngravingItem*) override;</span>
+<span id="L194"><span class="lineNum">     194</span>              :     void swapElements(track_idx_t i1, track_idx_t i2);</span>
+<span id="L195"><span class="lineNum">     195</span>              : </span>
+<span id="L196"><span class="lineNum">     196</span>              :     void sortStaves(std::vector&lt;staff_idx_t&gt;&amp; dst);</span>
+<span id="L197"><span class="lineNum">     197</span>              :     const char* subTypeName() const;</span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span>              :     static const char* subTypeName(SegmentType);</span>
+<span id="L200"><span class="lineNum">     200</span>              :     static SegmentType segmentType(ElementType type);</span>
+<span id="L201"><span class="lineNum">     201</span>              : </span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">     7196666 :     SegmentType segmentType() const { return m_segmentType; }</span></span>
+<span id="L203"><span class="lineNum">     203</span>              :     void setSegmentType(SegmentType t);</span>
+<span id="L204"><span class="lineNum">     204</span>              : </span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        6246 :     bool empty() const { return flag(ElementFlag::EMPTY); }</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">       38872 :     bool written() const { return flag(ElementFlag::WRITTEN); }</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">       73931 :     void setWritten(bool val) const { setFlag(ElementFlag::WRITTEN, val); }</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">       95644 :     bool endOfMeasureChange() const { return flag(ElementFlag::END_OF_MEASURE_CHANGE); }         // Key/time sigs which should be placed at the end of the measure</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">          16 :     void setEndOfMeasureChange(bool val) const { setFlag(ElementFlag::END_OF_MEASURE_CHANGE, val); }</span></span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span>              :     void fixStaffIdx();</span>
+<span id="L212"><span class="lineNum">     212</span>              : </span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">       62842 :     double stretch() const { return m_stretch; }</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">      167949 :     void setStretch(double v) { m_stretch = v; }</span></span>
+<span id="L215"><span class="lineNum">     215</span>              : </span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">     6374909 :     Fraction rtick() const override { return m_tick; }</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">       21226 :     void setRtick(const Fraction&amp; v) { assert(v &gt;= Fraction(0, 1)); m_tick = v; }</span></span>
+<span id="L218"><span class="lineNum">     218</span>              :     Fraction tick() const override;</span>
+<span id="L219"><span class="lineNum">     219</span>              : </span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">     1083111 :     Fraction ticks() const { return m_ticks; }</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">       95696 :     void setTicks(const Fraction&amp; v) { m_ticks = v; }</span></span>
+<span id="L222"><span class="lineNum">     222</span>              : </span>
+<span id="L223"><span class="lineNum">     223</span>              :     double widthInStaff(staff_idx_t staffIdx, SegmentType nextSegType = SegmentType::ChordRest) const;</span>
+<span id="L224"><span class="lineNum">     224</span>              :     Fraction ticksInStaff(staff_idx_t staffIdx) const;</span>
+<span id="L225"><span class="lineNum">     225</span>              : </span>
+<span id="L226"><span class="lineNum">     226</span>              :     bool splitsTuplet() const;</span>
+<span id="L227"><span class="lineNum">     227</span>              : </span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">     1037352 :     const std::vector&lt;EngravingItem*&gt;&amp; annotations() const { return m_annotations; }</span></span>
+<span id="L229"><span class="lineNum">     229</span>              :     void clearAnnotations();</span>
+<span id="L230"><span class="lineNum">     230</span>              :     void removeAnnotation(EngravingItem* e);</span>
+<span id="L231"><span class="lineNum">     231</span>              :     bool hasAnnotationOrElement(ElementType type, track_idx_t minTrack, track_idx_t maxTrack) const;</span>
+<span id="L232"><span class="lineNum">     232</span>              :     bool hasAnnotationOrElement(staff_idx_t staffIdx) const;</span>
+<span id="L233"><span class="lineNum">     233</span>              :     EngravingItem* findAnnotation(ElementType type, track_idx_t minTrack, track_idx_t maxTrack) const;</span>
+<span id="L234"><span class="lineNum">     234</span>              :     std::vector&lt;EngravingItem*&gt; findAnnotations(ElementType type, track_idx_t minTrack, track_idx_t maxTrack) const;</span>
+<span id="L235"><span class="lineNum">     235</span>              :     bool hasElements() const;</span>
+<span id="L236"><span class="lineNum">     236</span>              :     bool hasElements(track_idx_t minTrack, track_idx_t maxTrack) const;</span>
+<span id="L237"><span class="lineNum">     237</span>              :     bool hasElements(staff_idx_t staffIdx) const;</span>
+<span id="L238"><span class="lineNum">     238</span>              :     bool allElementsInvisible() const;</span>
+<span id="L239"><span class="lineNum">     239</span>              : </span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">      480948 :     Spatium extraLeadingSpace() const { return m_extraLeadingSpace; }</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC tlaBgUNC">           0 :     void setExtraLeadingSpace(Spatium v) { m_extraLeadingSpace = v; }</span></span>
+<span id="L242"><span class="lineNum">     242</span>              : </span>
+<span id="L243"><span class="lineNum">     243</span>              :     PropertyValue getProperty(Pid propertyId) const override;</span>
+<span id="L244"><span class="lineNum">     244</span>              :     bool setProperty(Pid propertyId, const PropertyValue&amp;) override;</span>
+<span id="L245"><span class="lineNum">     245</span>              :     PropertyValue propertyDefault(Pid) const override;</span>
+<span id="L246"><span class="lineNum">     246</span>              : </span>
+<span id="L247"><span class="lineNum">     247</span>              :     bool operator&lt;(const Segment&amp;) const;</span>
+<span id="L248"><span class="lineNum">     248</span>              :     bool operator&gt;(const Segment&amp;) const;</span>
+<span id="L249"><span class="lineNum">     249</span>              : </span>
+<span id="L250"><span class="lineNum">     250</span>              :     String accessibleExtraInfo() const override;</span>
+<span id="L251"><span class="lineNum">     251</span>              : </span>
+<span id="L252"><span class="lineNum">     252</span>              : #ifndef ENGRAVING_NO_ACCESSIBILITY</span>
+<span id="L253"><span class="lineNum">     253</span>              :     AccessibleItemPtr createAccessible() override;</span>
+<span id="L254"><span class="lineNum">     254</span>              : #endif</span>
+<span id="L255"><span class="lineNum">     255</span>              : </span>
+<span id="L256"><span class="lineNum">     256</span>              :     EngravingItem* firstInNextSegments(staff_idx_t activeStaff) const;   //&lt;</span>
+<span id="L257"><span class="lineNum">     257</span>              :     EngravingItem* lastInPrevSegments(staff_idx_t activeStaff) const;     //&lt;</span>
+<span id="L258"><span class="lineNum">     258</span>              :     EngravingItem* firstElementForNavigation(staff_idx_t staff) const;          //&lt;  These methods are used for navigation</span>
+<span id="L259"><span class="lineNum">     259</span>              :     EngravingItem* lastElementForNavigation(staff_idx_t staff) const;           //&lt;  for next-element and prev-element</span>
+<span id="L260"><span class="lineNum">     260</span>              :     EngravingItem* firstElementOfSegment(staff_idx_t activeStaff) const;</span>
+<span id="L261"><span class="lineNum">     261</span>              :     EngravingItem* nextElementOfSegment(EngravingItem* e, staff_idx_t activeStaff) const;</span>
+<span id="L262"><span class="lineNum">     262</span>              :     EngravingItem* prevElementOfSegment(EngravingItem* e, staff_idx_t activeStaff) const;</span>
+<span id="L263"><span class="lineNum">     263</span>              :     EngravingItem* lastElementOfSegment(staff_idx_t activeStaff) const;</span>
+<span id="L264"><span class="lineNum">     264</span>              :     EngravingItem* nextAnnotation(EngravingItem* e) const;</span>
+<span id="L265"><span class="lineNum">     265</span>              :     EngravingItem* prevAnnotation(EngravingItem* e) const;</span>
+<span id="L266"><span class="lineNum">     266</span>              :     EngravingItem* firstAnnotation(staff_idx_t activeStaff) const;</span>
+<span id="L267"><span class="lineNum">     267</span>              :     EngravingItem* lastAnnotation(staff_idx_t activeStaff) const;</span>
+<span id="L268"><span class="lineNum">     268</span>              :     Spanner* firstSpanner(staff_idx_t activeStaff) const;</span>
+<span id="L269"><span class="lineNum">     269</span>              :     Spanner* lastSpanner(staff_idx_t activeStaff) const;</span>
+<span id="L270"><span class="lineNum">     270</span>              :     bool notChordRestType() const;</span>
+<span id="L271"><span class="lineNum">     271</span>              :     using EngravingItem::nextElement;</span>
+<span id="L272"><span class="lineNum">     272</span>              :     EngravingItem* nextElement(staff_idx_t activeStaff);</span>
+<span id="L273"><span class="lineNum">     273</span>              :     using EngravingItem::prevElement;</span>
+<span id="L274"><span class="lineNum">     274</span>              :     EngravingItem* prevElement(staff_idx_t activeStaff);</span>
+<span id="L275"><span class="lineNum">     275</span>              : </span>
+<span id="L276"><span class="lineNum">     276</span>              :     EngravingItem* firstElement(staff_idx_t staffIdx) const;</span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC tlaBgGNC">      352433 :     std::vector&lt;Shape&gt; shapes() { return m_shapes; }</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">     1755056 :     const std::vector&lt;Shape&gt;&amp; shapes() const { return m_shapes; }</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">     3172222 :     const Shape&amp; staffShape(staff_idx_t staffIdx) const { return m_shapes[staffIdx]; }</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">       38275 :     Shape&amp; staffShape(staff_idx_t staffIdx) { return m_shapes[staffIdx]; }</span></span>
+<span id="L282"><span class="lineNum">     282</span>              :     void createShapes();</span>
+<span id="L283"><span class="lineNum">     283</span>              :     void createShape(staff_idx_t staffIdx);</span>
+<span id="L284"><span class="lineNum">     284</span>              :     double minRight() const;</span>
+<span id="L285"><span class="lineNum">     285</span>              :     double minLeft() const;</span>
+<span id="L286"><span class="lineNum">     286</span>              : </span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">      123016 :     double widthOffset() const { return m_widthOffset; }</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">      283683 :     void clearWidthOffset() { m_widthOffset = 0.0; }</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">        1749 :     void addWidthOffset(double w) { m_widthOffset += w; }</span></span>
+<span id="L290"><span class="lineNum">     290</span>              :     void setWidthOffset(double w) { m_widthOffset = w; }</span>
+<span id="L291"><span class="lineNum">     291</span>              : </span>
+<span id="L292"><span class="lineNum">     292</span>              :     double elementsTopOffsetFromSkyline(staff_idx_t staffIndex) const;</span>
+<span id="L293"><span class="lineNum">     293</span>              :     double elementsBottomOffsetFromSkyline(staff_idx_t staffIndex) const;</span>
+<span id="L294"><span class="lineNum">     294</span>              : </span>
+<span id="L295"><span class="lineNum">     295</span>              :     //! spacing is additional width of segment, for example accidental needs this spacing to avoid overlapping</span>
+<span id="L296"><span class="lineNum">     296</span>              :     void setSpacing(double);</span>
+<span id="L297"><span class="lineNum">     297</span>              :     double spacing() const;</span>
+<span id="L298"><span class="lineNum">     298</span>              : </span>
+<span id="L299"><span class="lineNum">     299</span>              :     // some helper function</span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">     6009189 :     ChordRest* cr(track_idx_t track) const { return toChordRest(m_elist[track]); }</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">     5946610 :     bool isType(const SegmentType t) const { return int(m_segmentType) &amp; int(t); }</span></span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">     1488548 :     bool isJustType(const SegmentType t) const { return m_segmentType == t; }</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">         883 :     bool isBeginBarLineType() const { return m_segmentType == SegmentType::BeginBarLine; }</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">     1312320 :     bool isClefType() const { return m_segmentType == SegmentType::Clef; }</span></span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">      727101 :     bool isHeaderClefType() const { return m_segmentType == SegmentType::HeaderClef; }</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">      563474 :     bool isKeySigType() const { return m_segmentType == SegmentType::KeySig; }</span></span>
+<span id="L307"><span class="lineNum">     307</span>              :     bool isAmbitusType() const { return m_segmentType == SegmentType::Ambitus; }</span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">      634226 :     bool isTimeSigType() const { return m_segmentType == SegmentType::TimeSig; }</span></span>
+<span id="L309"><span class="lineNum">     309</span>              :     bool hasTimeSigAboveStaves() const;</span>
+<span id="L310"><span class="lineNum">     310</span>              :     bool makeSpaceForTimeSigAboveStaves() const;</span>
+<span id="L311"><span class="lineNum">     311</span>              :     bool hasTimeSigAcrossStaves() const;</span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">     1061143 :     bool isStartRepeatBarLineType() const { return m_segmentType == SegmentType::StartRepeatBarLine; }</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">           9 :     bool isBarLineType() const { return m_segmentType == SegmentType::BarLine; }</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">      853486 :     bool isBreathType() const { return m_segmentType == SegmentType::Breath; }</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">    16158260 :     bool isChordRestType() const { return m_segmentType == SegmentType::ChordRest; }</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">       33411 :     bool isClefRepeatAnnounceType() const { return m_segmentType == SegmentType::ClefRepeatAnnounce; }</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">       31499 :     bool isKeySigRepeatAnnounceType() const { return m_segmentType == SegmentType::KeySigRepeatAnnounce; }</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">       31474 :     bool isTimeSigRepeatAnnounceType() const { return m_segmentType == SegmentType::TimeSigRepeatAnnounce; }</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">      458077 :     bool isEndBarLineType() const { return m_segmentType == SegmentType::EndBarLine; }</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">       10257 :     bool isKeySigAnnounceType() const { return m_segmentType == SegmentType::KeySigAnnounce; }</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">       10465 :     bool isTimeSigAnnounceType() const { return m_segmentType == SegmentType::TimeSigAnnounce; }</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">       10479 :     bool isCourtesySegment() const</span></span>
+<span id="L323"><span class="lineNum">     323</span>              :     {</span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">       10479 :         return m_segmentType &amp; (SegmentType::CourtesyTimeSigTypes | SegmentType::CourtesyKeySigTypes | SegmentType::CourtesyClefTypes);</span></span>
+<span id="L325"><span class="lineNum">     325</span>              :     }</span>
+<span id="L326"><span class="lineNum">     326</span>              : </span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">      966752 :     bool isTimeTickType() const { return m_segmentType == SegmentType::TimeTick; }</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">      746662 :     bool isRightAligned() const { return isClefType() || isBreathType(); }</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">      336572 :     bool isMMRestSegment() const { return isChordRestType() &amp;&amp; m_elist.front() &amp;&amp; m_elist.front()-&gt;isMMRest(); }</span></span>
+<span id="L330"><span class="lineNum">     330</span>              : </span>
+<span id="L331"><span class="lineNum">     331</span>              :     bool canWriteSpannerStartEnd(track_idx_t track, const Spanner* spanner) const;</span>
+<span id="L332"><span class="lineNum">     332</span>              : </span>
+<span id="L333"><span class="lineNum">     333</span>              :     Fraction shortestChordRest() const;</span>
+<span id="L334"><span class="lineNum">     334</span>              : </span>
+<span id="L335"><span class="lineNum">     335</span>              :     bool hasAccidentals() const;</span>
+<span id="L336"><span class="lineNum">     336</span>              : </span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">     3084080 :     EngravingItem* preAppendedItem(track_idx_t track) { return m_preAppendedItems[track]; }</span></span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">        1024 :     void preAppend(EngravingItem* item, track_idx_t track) { m_preAppendedItems[track] = item; }</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">         529 :     void clearPreAppended(track_idx_t track) { m_preAppendedItems[track] = nullptr; }</span></span>
+<span id="L340"><span class="lineNum">     340</span>              : </span>
+<span id="L341"><span class="lineNum">     341</span>              :     bool goesBefore(const Segment* nextSegment) const;</span>
+<span id="L342"><span class="lineNum">     342</span>              : </span>
+<span id="L343"><span class="lineNum">     343</span>              :     void checkEmpty() const;</span>
+<span id="L344"><span class="lineNum">     344</span>              : </span>
+<span id="L345"><span class="lineNum">     345</span>              :     double xPosInSystemCoords() const;</span>
+<span id="L346"><span class="lineNum">     346</span>              :     void setXPosInSystemCoords(double x);</span>
+<span id="L347"><span class="lineNum">     347</span>              : </span>
+<span id="L348"><span class="lineNum">     348</span>              :     bool isTupletSubdivisionOnStaff(staff_idx_t staffIdx) const;</span>
+<span id="L349"><span class="lineNum">     349</span>              :     bool isInsideTupletOnStaff(staff_idx_t staffIdx) const;</span>
+<span id="L350"><span class="lineNum">     350</span>              : </span>
+<span id="L351"><span class="lineNum">     351</span>              : private:</span>
+<span id="L352"><span class="lineNum">     352</span>              : </span>
+<span id="L353"><span class="lineNum">     353</span>              :     void addArticulationsToShape(const Chord* chord, Shape&amp; shape);</span>
+<span id="L354"><span class="lineNum">     354</span>              : </span>
+<span id="L355"><span class="lineNum">     355</span>              :     friend class Factory;</span>
+<span id="L356"><span class="lineNum">     356</span>              :     Segment(DummyParentOr&lt;Measure&gt; m);</span>
+<span id="L357"><span class="lineNum">     357</span>              :     Segment(DummyParentOr&lt;Measure&gt;, SegmentType, const Fraction&amp;);</span>
+<span id="L358"><span class="lineNum">     358</span>              :     Segment(const Segment&amp;);</span>
+<span id="L359"><span class="lineNum">     359</span>              : </span>
+<span id="L360"><span class="lineNum">     360</span>              :     void init();</span>
+<span id="L361"><span class="lineNum">     361</span>              :     void checkElement(EngravingItem*, track_idx_t track);</span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">      109886 :     void setEmpty(bool val) const { setFlag(ElementFlag::EMPTY, val); }</span></span>
+<span id="L363"><span class="lineNum">     363</span>              : </span>
+<span id="L364"><span class="lineNum">     364</span>              :     SegmentType m_segmentType = SegmentType::Invalid;</span>
+<span id="L365"><span class="lineNum">     365</span>              :     Fraction m_tick;    // { Fraction(0, 1) };</span>
+<span id="L366"><span class="lineNum">     366</span>              :     Fraction m_ticks;   // { Fraction(0, 1) };</span>
+<span id="L367"><span class="lineNum">     367</span>              :     Spatium m_extraLeadingSpace;</span>
+<span id="L368"><span class="lineNum">     368</span>              :     double m_stretch = 1.0;</span>
+<span id="L369"><span class="lineNum">     369</span>              :     double m_widthOffset = 0.0; // part of the segment width that will not be stretched during system justification</span>
+<span id="L370"><span class="lineNum">     370</span>              : </span>
+<span id="L371"><span class="lineNum">     371</span>              :     Segment* m_next = nullptr;                       // linked list of segments inside a measure</span>
+<span id="L372"><span class="lineNum">     372</span>              :     Segment* m_prev = nullptr;</span>
+<span id="L373"><span class="lineNum">     373</span>              : </span>
+<span id="L374"><span class="lineNum">     374</span>              :     std::vector&lt;EngravingItem*&gt; m_annotations;</span>
+<span id="L375"><span class="lineNum">     375</span>              :     std::vector&lt;EngravingItem*&gt; m_elist;         // EngravingItem storage, size = staves * VOICES.</span>
+<span id="L376"><span class="lineNum">     376</span>              :     std::vector&lt;EngravingItem*&gt; m_preAppendedItems; // Container for items appended to the left of this segment (example: grace notes), size = staves * VOICES.</span>
+<span id="L377"><span class="lineNum">     377</span>              :     std::vector&lt;Shape&gt; m_shapes;           // size = staves</span>
+<span id="L378"><span class="lineNum">     378</span>              :     double m_spacing = 0;</span>
+<span id="L379"><span class="lineNum">     379</span>              : };</span>
+<span id="L380"><span class="lineNum">     380</span>              : } // namespace mu::engraving</span>
+<span id="L381"><span class="lineNum">     381</span>              : </span>
+<span id="L382"><span class="lineNum">     382</span>              : #ifndef NO_QT_SUPPORT</span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">          16 : Q_DECLARE_METATYPE(mu::engraving::SegmentType)</span></span>
+<span id="L384"><span class="lineNum">     384</span>              : #endif</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

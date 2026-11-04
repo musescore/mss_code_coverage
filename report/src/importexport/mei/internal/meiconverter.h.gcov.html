@@ -1,0 +1,485 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/importexport/mei/internal/meiconverter.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">src/importexport/mei/internal</a> - meiconverter.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2021 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #pragma once</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;engraving/dom/articulation.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;engraving/dom/accidental.h&quot;</span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &quot;engraving/dom/chordline.h&quot;</span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &quot;engraving/dom/harppedaldiagram.h&quot;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;engraving/dom/interval.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;engraving/dom/timesig.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;engraving/dom/tremolotwochord.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;engraving/dom/tremolosinglechord.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : #include &quot;engraving/dom/volta.h&quot;</span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span>              : #include &quot;thirdparty/libmei/cmn.h&quot;</span>
+<span id="L36"><span class="lineNum">      36</span>              : #include &quot;thirdparty/libmei/cmnornaments.h&quot;</span>
+<span id="L37"><span class="lineNum">      37</span>              : #include &quot;thirdparty/libmei/fingering.h&quot;</span>
+<span id="L38"><span class="lineNum">      38</span>              : #include &quot;thirdparty/libmei/harmony.h&quot;</span>
+<span id="L39"><span class="lineNum">      39</span>              : #include &quot;thirdparty/libmei/shared.h&quot;</span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span>              : namespace mu::iex::mei {</span>
+<span id="L42"><span class="lineNum">      42</span>              : enum TextCell {</span>
+<span id="L43"><span class="lineNum">      43</span>              :     TopLeft = 0,</span>
+<span id="L44"><span class="lineNum">      44</span>              :     TopCenter,</span>
+<span id="L45"><span class="lineNum">      45</span>              :     TopRight,</span>
+<span id="L46"><span class="lineNum">      46</span>              :     MiddleLeft,</span>
+<span id="L47"><span class="lineNum">      47</span>              :     MiddleCenter,</span>
+<span id="L48"><span class="lineNum">      48</span>              :     MiddleRight,</span>
+<span id="L49"><span class="lineNum">      49</span>              :     BottomLeft,</span>
+<span id="L50"><span class="lineNum">      50</span>              :     BottomCenter,</span>
+<span id="L51"><span class="lineNum">      51</span>              :     BottomRight,</span>
+<span id="L52"><span class="lineNum">      52</span>              :     CellCount</span>
+<span id="L53"><span class="lineNum">      53</span>              : };</span>
+<span id="L54"><span class="lineNum">      54</span>              : </span>
+<span id="L55"><span class="lineNum">      55</span>              : enum ElisionType {</span>
+<span id="L56"><span class="lineNum">      56</span>              :     ElisionNone = 0,</span>
+<span id="L57"><span class="lineNum">      57</span>              :     ElisionFirst,</span>
+<span id="L58"><span class="lineNum">      58</span>              :     ElisionMiddle,</span>
+<span id="L59"><span class="lineNum">      59</span>              :     ElisionLast</span>
+<span id="L60"><span class="lineNum">      60</span>              : };</span>
+<span id="L61"><span class="lineNum">      61</span>              : </span>
+<span id="L62"><span class="lineNum">      62</span>              : // SMuFL in @glyph.auth</span>
+<span id="L63"><span class="lineNum">      63</span>              : #define SMUFL_AUTH &quot;smufl&quot;</span>
+<span id="L64"><span class="lineNum">      64</span>              : </span>
+<span id="L65"><span class="lineNum">      65</span>              : // The @type attribute for &lt;pb&gt; and &lt;sb&gt;</span>
+<span id="L66"><span class="lineNum">      66</span>              : #define BREAK_TYPE &quot;mscore-manual&quot;</span>
+<span id="L67"><span class="lineNum">      67</span>              : // The @type attribute prefix for indicating beam in &lt;chord&gt;, &lt;note&gt; or &lt;rest&gt;</span>
+<span id="L68"><span class="lineNum">      68</span>              : #define BEAM_ELEMENT_TYPE &quot;mscore-beam&quot;</span>
+<span id="L69"><span class="lineNum">      69</span>              : // The @type attribute prefix for expression and playtechannotation type in &lt;dir&gt;</span>
+<span id="L70"><span class="lineNum">      70</span>              : #define DIR_TYPE &quot;mscore-&quot;</span>
+<span id="L71"><span class="lineNum">      71</span>              : // The @type attribute prefix for volta repeat ending in &lt;ending&gt;</span>
+<span id="L72"><span class="lineNum">      72</span>              : #define ENDING_REPEAT_TYPE &quot;mscore-ending-&quot;</span>
+<span id="L73"><span class="lineNum">      73</span>              : // The @type attribute prefix for harmony type in &lt;harm&gt;</span>
+<span id="L74"><span class="lineNum">      74</span>              : #define HARMONY_TYPE &quot;mscore-&quot;</span>
+<span id="L75"><span class="lineNum">      75</span>              : // The @type attribute prefix for jump type in &lt;repeatMark&gt;</span>
+<span id="L76"><span class="lineNum">      76</span>              : #define JUMP_TYPE &quot;mscore-jump-&quot;</span>
+<span id="L77"><span class="lineNum">      77</span>              : // The @type attribute prefix for measure repeat count in &lt;measure&gt;</span>
+<span id="L78"><span class="lineNum">      78</span>              : #define MEASURE_REPEAT_TYPE &quot;mscore-repeat-&quot;</span>
+<span id="L79"><span class="lineNum">      79</span>              : // The @type attribute prefix for marker type in &lt;repeatMark&gt;</span>
+<span id="L80"><span class="lineNum">      80</span>              : #define MARKER_TYPE &quot;mscore-marker-&quot;</span>
+<span id="L81"><span class="lineNum">      81</span>              : // The @type attribute prefix for tempo inferring type in &lt;tempo&gt;</span>
+<span id="L82"><span class="lineNum">      82</span>              : #define TEMPO_INFER_FROM_TEXT &quot;mscore-infer-from-text&quot;</span>
+<span id="L83"><span class="lineNum">      83</span>              : // The @type attribute prefix for chordline type in &lt;artic&gt;</span>
+<span id="L84"><span class="lineNum">      84</span>              : #define CHORDLINE_TYPE &quot;mscore-&quot;</span>
+<span id="L85"><span class="lineNum">      85</span>              : // The @type attribute prefixes for ornament interval (above/below)</span>
+<span id="L86"><span class="lineNum">      86</span>              : #define INTERVAL_ABOVE &quot;mscore-above-&quot;</span>
+<span id="L87"><span class="lineNum">      87</span>              : #define INTERVAL_BELOW &quot;mscore-below-&quot;</span>
+<span id="L88"><span class="lineNum">      88</span>              : </span>
+<span id="L89"><span class="lineNum">      89</span>              : class Convert</span>
+<span id="L90"><span class="lineNum">      90</span>              : {</span>
+<span id="L91"><span class="lineNum">      91</span>              :     // The fallback font is used to convert smufl codes (char32_t) to engraving::SymId</span>
+<span id="L92"><span class="lineNum">      92</span>              :     static muse::GlobalInject&lt;engraving::IEngravingFontsProvider&gt; engravingFonts;</span>
+<span id="L93"><span class="lineNum">      93</span>              :     static muse::GlobalInject&lt;engraving::IEngravingConfiguration&gt; engravingConfiguration;</span>
+<span id="L94"><span class="lineNum">      94</span>              : public:</span>
+<span id="L95"><span class="lineNum">      95</span>              : </span>
+<span id="L96"><span class="lineNum">      96</span>              :     /**</span>
+<span id="L97"><span class="lineNum">      97</span>              :      * Structures for methods needing to return a group of variables</span>
+<span id="L98"><span class="lineNum">      98</span>              :      */</span>
+<span id="L99"><span class="lineNum">      99</span>              : </span>
+<span id="L100"><span class="lineNum">     100</span>              :     struct BracketStruct {</span>
+<span id="L101"><span class="lineNum">     101</span>              :         engraving::BracketType bracketType = engraving::BracketType::NO_BRACKET;</span>
+<span id="L102"><span class="lineNum">     102</span>              :         int barLineSpan = 0;</span>
+<span id="L103"><span class="lineNum">     103</span>              :     };</span>
+<span id="L104"><span class="lineNum">     104</span>              : </span>
+<span id="L105"><span class="lineNum">     105</span>              :     struct MeasureStruct {</span>
+<span id="L106"><span class="lineNum">     106</span>              :         bool irregular = false;</span>
+<span id="L107"><span class="lineNum">     107</span>              :         int n = 0;</span>
+<span id="L108"><span class="lineNum">     108</span>              :         bool repeatStart = false;</span>
+<span id="L109"><span class="lineNum">     109</span>              :         engraving::BarLineType endBarLineType = engraving::BarLineType::NORMAL;</span>
+<span id="L110"><span class="lineNum">     110</span>              :         bool repeatEnd = false;</span>
+<span id="L111"><span class="lineNum">     111</span>              :         int repeatCount = 0;</span>
+<span id="L112"><span class="lineNum">     112</span>              :     };</span>
+<span id="L113"><span class="lineNum">     113</span>              : </span>
+<span id="L114"><span class="lineNum">     114</span>              :     struct OrnamStruct {</span>
+<span id="L115"><span class="lineNum">     115</span>              :         engraving::AccidentalType accidTypeAbove = engraving::AccidentalType::NONE;</span>
+<span id="L116"><span class="lineNum">     116</span>              :         engraving::AccidentalType accidTypeBelow = engraving::AccidentalType::NONE;</span>
+<span id="L117"><span class="lineNum">     117</span>              :     };</span>
+<span id="L118"><span class="lineNum">     118</span>              : </span>
+<span id="L119"><span class="lineNum">     119</span>              :     struct StaffStruct {</span>
+<span id="L120"><span class="lineNum">     120</span>              :         int lines;</span>
+<span id="L121"><span class="lineNum">     121</span>              :         bool invisible;</span>
+<span id="L122"><span class="lineNum">     122</span>              :         double scale;</span>
+<span id="L123"><span class="lineNum">     123</span>              :         engraving::Color color;</span>
+<span id="L124"><span class="lineNum">     124</span>              :         engraving::Interval interval;</span>
+<span id="L125"><span class="lineNum">     125</span>              :     };</span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span>              :     struct PitchStruct {</span>
+<span id="L128"><span class="lineNum">     128</span>              :         int pitch = 0;</span>
+<span id="L129"><span class="lineNum">     129</span>              :         int tpc2 = 0;</span>
+<span id="L130"><span class="lineNum">     130</span>              :         engraving::AccidentalType accidType = engraving::AccidentalType::NONE;</span>
+<span id="L131"><span class="lineNum">     131</span>              :         engraving::AccidentalBracket accidBracket = engraving::AccidentalBracket::NONE;</span>
+<span id="L132"><span class="lineNum">     132</span>              :         engraving::AccidentalRole accidRole = engraving::AccidentalRole::AUTO;</span>
+<span id="L133"><span class="lineNum">     133</span>              :     };</span>
+<span id="L134"><span class="lineNum">     134</span>              : </span>
+<span id="L135"><span class="lineNum">     135</span>              :     /**</span>
+<span id="L136"><span class="lineNum">     136</span>              :      * Methods for checking which element to create depending on some attribute values of the MuseScore or MEI element</span>
+<span id="L137"><span class="lineNum">     137</span>              :      */</span>
+<span id="L138"><span class="lineNum">     138</span>              :     static engraving::ElementType elementTypeForDir(const libmei::Element&amp; meiElement);</span>
+<span id="L139"><span class="lineNum">     139</span>              :     static engraving::ElementType elementTypeForDirWithExt(const libmei::Element&amp; meiElement);</span>
+<span id="L140"><span class="lineNum">     140</span>              :     static engraving::ElementType elementTypeFor(const libmei::RepeatMark&amp; meiRepeatMark);</span>
+<span id="L141"><span class="lineNum">     141</span>              :     static bool isDirWithExt(const libmei::Dir&amp; meiDir);</span>
+<span id="L142"><span class="lineNum">     142</span>              :     static bool isMordent(const engraving::Ornament* ornament);</span>
+<span id="L143"><span class="lineNum">     143</span>              :     static bool isTrill(const engraving::Ornament* ornament);</span>
+<span id="L144"><span class="lineNum">     144</span>              :     static bool isTurn(const engraving::Ornament* ornament);</span>
+<span id="L145"><span class="lineNum">     145</span>              : </span>
+<span id="L146"><span class="lineNum">     146</span>              :     /**</span>
+<span id="L147"><span class="lineNum">     147</span>              :      * Methods for converting from and to MEI</span>
+<span id="L148"><span class="lineNum">     148</span>              :      */</span>
+<span id="L149"><span class="lineNum">     149</span>              : </span>
+<span id="L150"><span class="lineNum">     150</span>              :     static engraving::AccidentalType accidFromMEI(const libmei::data_ACCIDENTAL_WRITTEN meiAccid, bool&amp; warning);</span>
+<span id="L151"><span class="lineNum">     151</span>              :     static libmei::data_ACCIDENTAL_WRITTEN accidToMEI(const engraving::AccidentalType accid);</span>
+<span id="L152"><span class="lineNum">     152</span>              : </span>
+<span id="L153"><span class="lineNum">     153</span>              :     static engraving::AccidentalVal accidGesFromMEI(const libmei::data_ACCIDENTAL_GESTURAL meiAccid, bool&amp; warning);</span>
+<span id="L154"><span class="lineNum">     154</span>              :     static libmei::data_ACCIDENTAL_GESTURAL accidGesToMEI(const engraving::AccidentalVal accid);</span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span>              :     static engraving::ArticulationAnchor anchorFromMEI(const libmei::data_STAFFREL meiPlace, bool&amp; warning);</span>
+<span id="L157"><span class="lineNum">     157</span>              :     static libmei::data_STAFFREL anchorToMEI(engraving::ArticulationAnchor anchor);</span>
+<span id="L158"><span class="lineNum">     158</span>              : </span>
+<span id="L159"><span class="lineNum">     159</span>              :     static void arpegFromMEI(engraving::Arpeggio* arpeggio, const libmei::Arpeg&amp; meiArpeg, bool&amp; warning);</span>
+<span id="L160"><span class="lineNum">     160</span>              :     static libmei::Arpeg arpegToMEI(const engraving::Arpeggio* arpeggio);</span>
+<span id="L161"><span class="lineNum">     161</span>              : </span>
+<span id="L162"><span class="lineNum">     162</span>              :     static void articFromMEI(engraving::Articulation* articulation, const libmei::Artic&amp; meiArtic, bool&amp; warning);</span>
+<span id="L163"><span class="lineNum">     163</span>              :     static void articFromMEI(engraving::ChordLine* chordline, const libmei::Artic&amp; meiArtic, bool&amp; warning);</span>
+<span id="L164"><span class="lineNum">     164</span>              :     static libmei::Artic articToMEI(const engraving::Articulation* articulation);</span>
+<span id="L165"><span class="lineNum">     165</span>              :     static libmei::Artic articToMEI(const engraving::ChordLine* chordline);</span>
+<span id="L166"><span class="lineNum">     166</span>              : </span>
+<span id="L167"><span class="lineNum">     167</span>              :     static engraving::BarLineType barlineFromMEI(const libmei::data_BARRENDITION meiBarline, bool&amp; warning);</span>
+<span id="L168"><span class="lineNum">     168</span>              :     static libmei::data_BARRENDITION barlineToMEI(engraving::BarLineType barline);</span>
+<span id="L169"><span class="lineNum">     169</span>              : </span>
+<span id="L170"><span class="lineNum">     170</span>              :     static engraving::BeamMode beamFromMEI(const std::string&amp; typeAtt, const std::string&amp; prefix, bool&amp; warning);</span>
+<span id="L171"><span class="lineNum">     171</span>              :     static std::string beamToMEI(engraving::BeamMode beamMode, const std::string&amp; prefix);</span>
+<span id="L172"><span class="lineNum">     172</span>              : </span>
+<span id="L173"><span class="lineNum">     173</span>              :     static engraving::BeamMode breaksecFromMEI(int breaksec, bool&amp; warning);</span>
+<span id="L174"><span class="lineNum">     174</span>              :     static int breaksecToMEI(engraving::BeamMode beamMode);</span>
+<span id="L175"><span class="lineNum">     175</span>              : </span>
+<span id="L176"><span class="lineNum">     176</span>              :     static void breathFromMEI(engraving::Breath* breath, const libmei::Breath&amp; meiBreath, bool&amp; warning);</span>
+<span id="L177"><span class="lineNum">     177</span>              :     static libmei::Breath breathToMEI(const engraving::Breath* breath);</span>
+<span id="L178"><span class="lineNum">     178</span>              : </span>
+<span id="L179"><span class="lineNum">     179</span>              :     static void caesuraFromMEI(engraving::Breath* breath, const libmei::Caesura&amp; meiCeasura, bool&amp; warning);</span>
+<span id="L180"><span class="lineNum">     180</span>              :     static libmei::Caesura caesuraToMEI(const engraving::Breath* breath);</span>
+<span id="L181"><span class="lineNum">     181</span>              : </span>
+<span id="L182"><span class="lineNum">     182</span>              :     static engraving::ClefType clefFromMEI(const libmei::Clef&amp; meiClef, bool&amp; warning);</span>
+<span id="L183"><span class="lineNum">     183</span>              :     static libmei::Clef clefToMEI(engraving::ClefType clef);</span>
+<span id="L184"><span class="lineNum">     184</span>              : </span>
+<span id="L185"><span class="lineNum">     185</span>              :     static engraving::ClefType clefFromMEI(const libmei::StaffDef&amp; meiStaffDef, bool&amp; warning);</span>
+<span id="L186"><span class="lineNum">     186</span>              : </span>
+<span id="L187"><span class="lineNum">     187</span>              :     static void colorFromMEI(engraving::EngravingItem* item, const libmei::Element&amp; meiElement);</span>
+<span id="L188"><span class="lineNum">     188</span>              :     static void colorToMEI(const engraving::EngravingItem* item, libmei::Element&amp; meiElement);</span>
+<span id="L189"><span class="lineNum">     189</span>              : </span>
+<span id="L190"><span class="lineNum">     190</span>              :     static void colorlineFromMEI(engraving::SLine* line, const libmei::Element&amp; meiElement);</span>
+<span id="L191"><span class="lineNum">     191</span>              :     static void colorlineToMEI(const engraving::SLine* line, libmei::Element&amp; meiElement);</span>
+<span id="L192"><span class="lineNum">     192</span>              : </span>
+<span id="L193"><span class="lineNum">     193</span>              :     static void dirFromMEI(engraving::TextBase* textBase, const muse::StringList&amp; meiLines, const libmei::Dir&amp; meiDir, bool&amp; warning);</span>
+<span id="L194"><span class="lineNum">     194</span>              :     static void dirFromMEI(engraving::TextLineBase* textLineBase, const muse::StringList&amp; meiLines, const libmei::Dir&amp; meiDir,</span>
+<span id="L195"><span class="lineNum">     195</span>              :                            bool&amp; warning);</span>
+<span id="L196"><span class="lineNum">     196</span>              :     static libmei::Dir dirToMEI(const engraving::TextBase* textBase, muse::StringList&amp; meiLines);</span>
+<span id="L197"><span class="lineNum">     197</span>              :     static libmei::Dir dirToMEI(const engraving::TextLineBase* textLineBase, muse::StringList&amp; meiLines);</span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span>              :     static engraving::DirectionV curvedirFromMEI(const libmei::curvature_CURVEDIR meiCurvedir, bool&amp; warning);</span>
+<span id="L200"><span class="lineNum">     200</span>              :     static libmei::curvature_CURVEDIR curvedirToMEI(engraving::DirectionV curvedir);</span>
+<span id="L201"><span class="lineNum">     201</span>              : </span>
+<span id="L202"><span class="lineNum">     202</span>              :     static engraving::DurationType durFromMEI(const libmei::data_DURATION meiDuration, bool&amp; warning);</span>
+<span id="L203"><span class="lineNum">     203</span>              :     static libmei::data_DURATION durToMEI(const engraving::DurationType duration);</span>
+<span id="L204"><span class="lineNum">     204</span>              : </span>
+<span id="L205"><span class="lineNum">     205</span>              :     static engraving::TremoloType unitdurFromMEI(const libmei::FTrem&amp; meiFTrem, bool&amp; warning);</span>
+<span id="L206"><span class="lineNum">     206</span>              :     static libmei::data_DURATION unitdurToMEI(const engraving::TremoloTwoChord* tremolo);</span>
+<span id="L207"><span class="lineNum">     207</span>              : </span>
+<span id="L208"><span class="lineNum">     208</span>              :     static void dynamFromMEI(engraving::Dynamic* dynamic, const muse::StringList&amp; meiLines, const libmei::Dynam&amp; meiDynam, bool&amp; warning);</span>
+<span id="L209"><span class="lineNum">     209</span>              :     static libmei::Dynam dynamToMEI(const engraving::Dynamic* dynamic, muse::StringList&amp; meiLines);</span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span>              :     static void endingFromMEI(engraving::Volta* volta, const libmei::Ending&amp; meiEnding, bool&amp; warning);</span>
+<span id="L212"><span class="lineNum">     212</span>              :     static libmei::Ending endingToMEI(const engraving::Volta* volta);</span>
+<span id="L213"><span class="lineNum">     213</span>              : </span>
+<span id="L214"><span class="lineNum">     214</span>              :     static void fFromMEI(engraving::FiguredBassItem* figuredBassItem, const muse::StringList&amp; meiLines, const libmei::F&amp; meiF,</span>
+<span id="L215"><span class="lineNum">     215</span>              :                          bool&amp; warning);</span>
+<span id="L216"><span class="lineNum">     216</span>              :     static libmei::F fToMEI(const engraving::FiguredBassItem* figuredBassItem, muse::StringList&amp; meiLines);</span>
+<span id="L217"><span class="lineNum">     217</span>              : </span>
+<span id="L218"><span class="lineNum">     218</span>              :     static void fbFromMEI(engraving::FiguredBass* figuredBass, const libmei::Harm&amp; meiHarm, const libmei::Fb&amp; meiFb, bool&amp; warning);</span>
+<span id="L219"><span class="lineNum">     219</span>              :     static std::pair&lt;libmei::Harm, libmei::Fb&gt; fbToMEI(const engraving::FiguredBass* figuredBass);</span>
+<span id="L220"><span class="lineNum">     220</span>              : </span>
+<span id="L221"><span class="lineNum">     221</span>              :     static void fermataFromMEI(engraving::Fermata* fermata, const libmei::Fermata&amp; meiFermata, bool&amp; warning);</span>
+<span id="L222"><span class="lineNum">     222</span>              :     static libmei::Fermata fermataToMEI(const engraving::Fermata* fermata);</span>
+<span id="L223"><span class="lineNum">     223</span>              : </span>
+<span id="L224"><span class="lineNum">     224</span>              :     static void fingFromMEI(engraving::Fingering* fing, const muse::StringList&amp; meiLines, const libmei::Fing&amp; meiFing, bool&amp; warning);</span>
+<span id="L225"><span class="lineNum">     225</span>              :     static libmei::Fing fingToMEI(const engraving::Fingering* fing, muse::StringList&amp; meiLines);</span>
+<span id="L226"><span class="lineNum">     226</span>              : </span>
+<span id="L227"><span class="lineNum">     227</span>              :     static void glissFromMEI(engraving::Glissando* gliss, const libmei::Gliss&amp; meiGliss, bool&amp; warning);</span>
+<span id="L228"><span class="lineNum">     228</span>              :     static libmei::Gliss glissToMEI(const engraving::Glissando* gliss);</span>
+<span id="L229"><span class="lineNum">     229</span>              : </span>
+<span id="L230"><span class="lineNum">     230</span>              :     static std::pair&lt;bool, engraving::NoteType&gt; gracegrpFromMEI(const libmei::graceGrpLog_ATTACH meiAttach,</span>
+<span id="L231"><span class="lineNum">     231</span>              :                                                                 const libmei::data_GRACE meiGrace, bool&amp; warning);</span>
+<span id="L232"><span class="lineNum">     232</span>              :     static std::pair&lt;libmei::graceGrpLog_ATTACH, libmei::data_GRACE&gt; gracegrpToMEI(bool isAfter, engraving::NoteType noteType);</span>
+<span id="L233"><span class="lineNum">     233</span>              : </span>
+<span id="L234"><span class="lineNum">     234</span>              :     static void hairpinFromMEI(engraving::Hairpin* haipin, const libmei::Hairpin&amp; meiHairpin, bool&amp; warning);</span>
+<span id="L235"><span class="lineNum">     235</span>              :     static libmei::Hairpin hairpinToMEI(const engraving::Hairpin* hairpin);</span>
+<span id="L236"><span class="lineNum">     236</span>              : </span>
+<span id="L237"><span class="lineNum">     237</span>              :     static void harmFromMEI(engraving::Harmony* harmony, const muse::StringList&amp; meiLines, const libmei::Harm&amp; meiHarm, bool&amp; warning);</span>
+<span id="L238"><span class="lineNum">     238</span>              :     static libmei::Harm harmToMEI(const engraving::Harmony* harmony, muse::StringList&amp; meiLines);</span>
+<span id="L239"><span class="lineNum">     239</span>              : </span>
+<span id="L240"><span class="lineNum">     240</span>              :     static void harpPedalFromMEI(engraving::HarpPedalDiagram* harpPedalDiagram, const libmei::HarpPedal&amp; meiHarpPedal, bool&amp; warning);</span>
+<span id="L241"><span class="lineNum">     241</span>              :     static libmei::HarpPedal harpPedalToMEI(const engraving::HarpPedalDiagram* harpPedalDiagram);</span>
+<span id="L242"><span class="lineNum">     242</span>              : </span>
+<span id="L243"><span class="lineNum">     243</span>              :     static engraving::PedalPosition harpPedalPositionFromMEI(const libmei::data_HARPPEDALPOSITION&amp; pedalPosition);</span>
+<span id="L244"><span class="lineNum">     244</span>              :     static libmei::data_HARPPEDALPOSITION harpPedalPositionToMEI(const engraving::PedalPosition&amp; pedalPosition);</span>
+<span id="L245"><span class="lineNum">     245</span>              : </span>
+<span id="L246"><span class="lineNum">     246</span>              :     static void layerIdentFromMEI(engraving::EngravingItem* item, const libmei::Element&amp; meiElement);</span>
+<span id="L247"><span class="lineNum">     247</span>              :     static void layerIdentToMEI(const engraving::EngravingItem* item, libmei::Element&amp; meiElement);</span>
+<span id="L248"><span class="lineNum">     248</span>              : </span>
+<span id="L249"><span class="lineNum">     249</span>              :     static void lvFromMEI(engraving::LaissezVib* lv, const libmei::Lv&amp; meiLv, bool&amp; warning);</span>
+<span id="L250"><span class="lineNum">     250</span>              : </span>
+<span id="L251"><span class="lineNum">     251</span>              :     static void jumpFromMEI(engraving::Jump* jump, const libmei::RepeatMark&amp; meiRepeatMark, bool&amp; warning);</span>
+<span id="L252"><span class="lineNum">     252</span>              :     static libmei::RepeatMark jumpToMEI(const engraving::Jump* jump, muse::String&amp; text);</span>
+<span id="L253"><span class="lineNum">     253</span>              : </span>
+<span id="L254"><span class="lineNum">     254</span>              :     static engraving::Key keyFromMEI(const libmei::data_KEYSIGNATURE&amp; meiKeysig, bool&amp; warning);</span>
+<span id="L255"><span class="lineNum">     255</span>              :     static libmei::data_KEYSIGNATURE keyToMEI(const engraving::Key key);</span>
+<span id="L256"><span class="lineNum">     256</span>              : </span>
+<span id="L257"><span class="lineNum">     257</span>              :     static engraving::LineType lineFromMEI(const libmei::data_LINEFORM meiLine, bool&amp; warning);</span>
+<span id="L258"><span class="lineNum">     258</span>              :     static libmei::data_LINEFORM lineToMEI(engraving::LineType line);</span>
+<span id="L259"><span class="lineNum">     259</span>              : </span>
+<span id="L260"><span class="lineNum">     260</span>              :     static void markerFromMEI(engraving::Marker* marker, const libmei::RepeatMark&amp; meiRepeatMark, bool&amp; warning);</span>
+<span id="L261"><span class="lineNum">     261</span>              :     static libmei::RepeatMark markerToMEI(const engraving::Marker* marker, muse::String&amp; text);</span>
+<span id="L262"><span class="lineNum">     262</span>              : </span>
+<span id="L263"><span class="lineNum">     263</span>              :     static MeasureStruct measureFromMEI(const libmei::Measure&amp; meiMeasure, bool&amp; warning);</span>
+<span id="L264"><span class="lineNum">     264</span>              :     static libmei::Measure measureToMEI(const engraving::Measure* measure, int&amp; measureN, bool&amp; isLastExcludedFromNumbering);</span>
+<span id="L265"><span class="lineNum">     265</span>              : </span>
+<span id="L266"><span class="lineNum">     266</span>              :     static std::pair&lt;engraving::Fraction, engraving::TimeSigType&gt; meterFromMEI(const libmei::ScoreDef&amp; meiScoreDef, bool&amp; warning);</span>
+<span id="L267"><span class="lineNum">     267</span>              :     static std::pair&lt;engraving::Fraction, engraving::TimeSigType&gt; meterFromMEI(const libmei::StaffDef&amp; meiStaffDef, bool&amp; warning);</span>
+<span id="L268"><span class="lineNum">     268</span>              :     static libmei::StaffDef meterToMEI(const engraving::Fraction&amp; fraction, engraving::TimeSigType tsType);</span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span>              :     static OrnamStruct mordentFromMEI(engraving::Ornament* ornament, const libmei::Mordent&amp; meiMordent, bool&amp; warning);</span>
+<span id="L271"><span class="lineNum">     271</span>              :     static libmei::Mordent mordentToMEI(const engraving::Ornament* ornament);</span>
+<span id="L272"><span class="lineNum">     272</span>              : </span>
+<span id="L273"><span class="lineNum">     273</span>              :     static void octaveFromMEI(engraving::Ottava* ottava, const libmei::Octave&amp; meiOctave, bool&amp; warning);</span>
+<span id="L274"><span class="lineNum">     274</span>              :     static libmei::Octave octaveToMEI(const engraving::Ottava* ottava);</span>
+<span id="L275"><span class="lineNum">     275</span>              : </span>
+<span id="L276"><span class="lineNum">     276</span>              :     static OrnamStruct ornamFromMEI(engraving::Ornament* ornament, const libmei::Element&amp; meiElement, bool&amp; warning);</span>
+<span id="L277"><span class="lineNum">     277</span>              :     static libmei::Ornam ornamToMEI(const engraving::Ornament* ornament);</span>
+<span id="L278"><span class="lineNum">     278</span>              :     static void ornamToMEI(const engraving::Ornament* ornament, libmei::Element&amp; meiElement);</span>
+<span id="L279"><span class="lineNum">     279</span>              : </span>
+<span id="L280"><span class="lineNum">     280</span>              :     static void ornamintervaleFromMEI(engraving::Ornament* ornament, const std::string&amp; meiType);</span>
+<span id="L281"><span class="lineNum">     281</span>              :     static muse::String ornamintervalToMEI(const engraving::Ornament* ornament);</span>
+<span id="L282"><span class="lineNum">     282</span>              : </span>
+<span id="L283"><span class="lineNum">     283</span>              :     static void pedalFromMEI(engraving::Pedal* pedal, const libmei::Pedal&amp; meiPedal, bool&amp; warning);</span>
+<span id="L284"><span class="lineNum">     284</span>              :     static libmei::Pedal pedalToMEI(const engraving::Pedal* pedal);</span>
+<span id="L285"><span class="lineNum">     285</span>              : </span>
+<span id="L286"><span class="lineNum">     286</span>              :     static PitchStruct pitchFromMEI(const libmei::Note&amp; meiNote, const libmei::Accid&amp; meiAccid, const engraving::Interval&amp; interval,</span>
+<span id="L287"><span class="lineNum">     287</span>              :                                     bool&amp; warning);</span>
+<span id="L288"><span class="lineNum">     288</span>              :     static std::pair&lt;libmei::Note, libmei::Accid&gt; pitchToMEI(const engraving::Note* note, const engraving::Accidental* accid,</span>
+<span id="L289"><span class="lineNum">     289</span>              :                                                              const engraving::Interval&amp; interval);</span>
+<span id="L290"><span class="lineNum">     290</span>              : </span>
+<span id="L291"><span class="lineNum">     291</span>              :     static engraving::PlacementV placeFromMEI(const libmei::data_STAFFREL meiPlace, bool&amp; warning);</span>
+<span id="L292"><span class="lineNum">     292</span>              :     static libmei::data_STAFFREL placeToMEI(engraving::PlacementV place);</span>
+<span id="L293"><span class="lineNum">     293</span>              : </span>
+<span id="L294"><span class="lineNum">     294</span>              :     static engraving::DirectionV directionFromMEI(const libmei::data_STAFFREL meiPlace);</span>
+<span id="L295"><span class="lineNum">     295</span>              :     static libmei::data_STAFFREL directionToMEI(engraving::DirectionV direction);</span>
+<span id="L296"><span class="lineNum">     296</span>              : </span>
+<span id="L297"><span class="lineNum">     297</span>              :     static void slurFromMEI(engraving::SlurTie* slur, const libmei::Slur&amp; meiSlur, bool&amp; warning);</span>
+<span id="L298"><span class="lineNum">     298</span>              :     static libmei::Slur slurToMEI(const engraving::SlurTie* slur);</span>
+<span id="L299"><span class="lineNum">     299</span>              : </span>
+<span id="L300"><span class="lineNum">     300</span>              :     static engraving::SlurStyleType slurstyleFromMEI(const libmei::data_LINEFORM meiLine, bool&amp; warning);</span>
+<span id="L301"><span class="lineNum">     301</span>              :     static libmei::data_LINEFORM slurstyleToMEI(engraving::SlurStyleType slurstyle);</span>
+<span id="L302"><span class="lineNum">     302</span>              : </span>
+<span id="L303"><span class="lineNum">     303</span>              :     static StaffStruct staffFromMEI(const libmei::StaffDef&amp; meiStaffDef, bool&amp; warning);</span>
+<span id="L304"><span class="lineNum">     304</span>              :     static libmei::StaffDef staffToMEI(const engraving::Staff* staff);</span>
+<span id="L305"><span class="lineNum">     305</span>              : </span>
+<span id="L306"><span class="lineNum">     306</span>              :     static BracketStruct staffGrpFromMEI(const libmei::StaffGrp&amp; meiStaffGrp);</span>
+<span id="L307"><span class="lineNum">     307</span>              :     static libmei::StaffGrp staffGrpToMEI(const engraving::BracketType, bool barLineSpan);</span>
+<span id="L308"><span class="lineNum">     308</span>              : </span>
+<span id="L309"><span class="lineNum">     309</span>              :     static void staffIdentToMEI(const engraving::EngravingItem* item, libmei::Element&amp; meiElement);</span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span>              :     static std::pair&lt;engraving::DirectionV, bool&gt; stemFromMEI(const libmei::AttStems&amp; meiStemsAtt, bool&amp; warning);</span>
+<span id="L312"><span class="lineNum">     312</span>              :     static std::pair&lt;libmei::data_STEMDIRECTION, double&gt; stemToMEI(const engraving::DirectionV direction, bool noStem);</span>
+<span id="L313"><span class="lineNum">     313</span>              : </span>
+<span id="L314"><span class="lineNum">     314</span>              :     static engraving::TremoloType stemModFromMEI(const libmei::data_STEMMODIFIER meiStemMod);</span>
+<span id="L315"><span class="lineNum">     315</span>              :     static libmei::data_STEMMODIFIER stemModToMEI(const engraving::TremoloSingleChord* tremolo);</span>
+<span id="L316"><span class="lineNum">     316</span>              : </span>
+<span id="L317"><span class="lineNum">     317</span>              :     static void sylFromMEI(engraving::Lyrics* lyrics, const libmei::Syl&amp; meiSyl, ElisionType elision, bool&amp; warning);</span>
+<span id="L318"><span class="lineNum">     318</span>              :     static libmei::Syl sylToMEI(const engraving::Lyrics* lyrics, ElisionType elision);</span>
+<span id="L319"><span class="lineNum">     319</span>              : </span>
+<span id="L320"><span class="lineNum">     320</span>              :     static engraving::BracketType symbolFromMEI(const libmei::staffGroupingSym_SYMBOL meiGrpSym);</span>
+<span id="L321"><span class="lineNum">     321</span>              :     static libmei::staffGroupingSym_SYMBOL symbolToMEI(const engraving::BracketType bracket);</span>
+<span id="L322"><span class="lineNum">     322</span>              : </span>
+<span id="L323"><span class="lineNum">     323</span>              :     static void tempoFromMEI(engraving::TempoText* tempo, const muse::StringList&amp; meiLines, const libmei::Tempo&amp; meiTempo, bool&amp; warning);</span>
+<span id="L324"><span class="lineNum">     324</span>              :     static libmei::Tempo tempoToMEI(const engraving::TempoText* tempoText, muse::StringList&amp; meiLines);</span>
+<span id="L325"><span class="lineNum">     325</span>              : </span>
+<span id="L326"><span class="lineNum">     326</span>              :     static engraving::TextStyleType textFromMEI(const libmei::Rend&amp; meiRend, bool&amp; warning);</span>
+<span id="L327"><span class="lineNum">     327</span>              :     static std::tuple&lt;libmei::Rend, TextCell, muse::String&gt; textToMEI(const engraving::Text* text);</span>
+<span id="L328"><span class="lineNum">     328</span>              : </span>
+<span id="L329"><span class="lineNum">     329</span>              :     using textWithSmufl = std::vector&lt;std::pair&lt;bool, muse::String&gt; &gt;;</span>
+<span id="L330"><span class="lineNum">     330</span>              : </span>
+<span id="L331"><span class="lineNum">     331</span>              :     static void textFromMEI(muse::String&amp; text, const textWithSmufl&amp; textBlocks);</span>
+<span id="L332"><span class="lineNum">     332</span>              :     static void textToMEI(textWithSmufl&amp; textBlocks, const muse::String&amp; text);</span>
+<span id="L333"><span class="lineNum">     333</span>              : </span>
+<span id="L334"><span class="lineNum">     334</span>              :     static void tieFromMEI(engraving::SlurTie* tie, const libmei::Tie&amp; meiTie, bool&amp; warning);</span>
+<span id="L335"><span class="lineNum">     335</span>              :     static libmei::Tie tieToMEI(const engraving::SlurTie* tie);</span>
+<span id="L336"><span class="lineNum">     336</span>              : </span>
+<span id="L337"><span class="lineNum">     337</span>              :     static OrnamStruct trillFromMEI(engraving::Ornament* ornament, const libmei::Trill&amp; meiTrill, bool&amp; warning);</span>
+<span id="L338"><span class="lineNum">     338</span>              :     static libmei::Trill trillToMEI(const engraving::Ornament* ornament);</span>
+<span id="L339"><span class="lineNum">     339</span>              : </span>
+<span id="L340"><span class="lineNum">     340</span>              :     static void tupletFromMEI(engraving::Tuplet* tuplet, const libmei::Tuplet&amp; meiTuplet, bool&amp; warning);</span>
+<span id="L341"><span class="lineNum">     341</span>              :     static libmei::Tuplet tupletToMEI(const engraving::Tuplet* tuplet);</span>
+<span id="L342"><span class="lineNum">     342</span>              : </span>
+<span id="L343"><span class="lineNum">     343</span>              :     static OrnamStruct turnFromMEI(engraving::Ornament* ornament, const libmei::Turn&amp; meiTurn, bool&amp; warning);</span>
+<span id="L344"><span class="lineNum">     344</span>              :     static libmei::Turn turnToMEI(const engraving::Ornament* ornament);</span>
+<span id="L345"><span class="lineNum">     345</span>              : </span>
+<span id="L346"><span class="lineNum">     346</span>              :     /**</span>
+<span id="L347"><span class="lineNum">     347</span>              :      * Helper methods</span>
+<span id="L348"><span class="lineNum">     348</span>              :      */</span>
+<span id="L349"><span class="lineNum">     349</span>              :     static bool hasTypeValue(const std::string&amp; typeStr, const std::string&amp; value);</span>
+<span id="L350"><span class="lineNum">     350</span>              :     static bool getTypeValueWithPrefix(const std::string&amp; typeStr, const std::string&amp; prefix, std::string&amp; value);</span>
+<span id="L351"><span class="lineNum">     351</span>              :     static std::list&lt;std::string&gt; getTypeValuesWithPrefix(const std::string&amp; typeStr, const std::string&amp; prefix);</span>
+<span id="L352"><span class="lineNum">     352</span>              :     static double tstampFromFraction(const engraving::Fraction&amp; fraction, const engraving::Fraction&amp; timesig);</span>
+<span id="L353"><span class="lineNum">     353</span>              :     static engraving::Fraction tstampToFraction(double tstamp, const engraving::Fraction&amp; timesig);</span>
+<span id="L354"><span class="lineNum">     354</span>              : </span>
+<span id="L355"><span class="lineNum">     355</span>              :     static muse::StringList logs;</span>
+<span id="L356"><span class="lineNum">     356</span>              : </span>
+<span id="L357"><span class="lineNum">     357</span>              : private:</span>
+<span id="L358"><span class="lineNum">     358</span>              :     static inline std::map&lt;engraving::MarkerType, std::string&gt; s_markerTypes = {</span>
+<span id="L359"><span class="lineNum">     359</span>              :         { engraving::MarkerType::VARSEGNO, &quot;segno-variation&quot; },</span>
+<span id="L360"><span class="lineNum">     360</span>              :         { engraving::MarkerType::VARCODA, &quot;varied-coda&quot; },</span>
+<span id="L361"><span class="lineNum">     361</span>              :         { engraving::MarkerType::TOCODA, &quot;to-coda&quot; },</span>
+<span id="L362"><span class="lineNum">     362</span>              :         { engraving::MarkerType::TOCODASYM, &quot;to-coda-symbol&quot; },</span>
+<span id="L363"><span class="lineNum">     363</span>              :         { engraving::MarkerType::DA_CODA, &quot;da-coda&quot; },</span>
+<span id="L364"><span class="lineNum">     364</span>              :         { engraving::MarkerType::DA_DBLCODA, &quot;da-double-coda&quot; }</span>
+<span id="L365"><span class="lineNum">     365</span>              :     };</span>
+<span id="L366"><span class="lineNum">     366</span>              : </span>
+<span id="L367"><span class="lineNum">     367</span>              :     static inline std::map&lt;engraving::JumpType, std::string&gt; s_jumpTypes = {</span>
+<span id="L368"><span class="lineNum">     368</span>              :         { engraving::JumpType::DC_AL_FINE, &quot;dc-al-fine&quot; },</span>
+<span id="L369"><span class="lineNum">     369</span>              :         { engraving::JumpType::DC_AL_CODA, &quot;dc-al-coda&quot; },</span>
+<span id="L370"><span class="lineNum">     370</span>              :         { engraving::JumpType::DS_AL_CODA, &quot;ds-al-coda&quot; },</span>
+<span id="L371"><span class="lineNum">     371</span>              :         { engraving::JumpType::DS_AL_FINE, &quot;ds-al-fine&quot; },</span>
+<span id="L372"><span class="lineNum">     372</span>              :         { engraving::JumpType::DC_AL_DBLCODA, &quot;dc-al-double-coda&quot; },</span>
+<span id="L373"><span class="lineNum">     373</span>              :         { engraving::JumpType::DS_AL_DBLCODA, &quot;ds-al-double-coda&quot; },</span>
+<span id="L374"><span class="lineNum">     374</span>              :         { engraving::JumpType::DSS, &quot;dal-segno-segno&quot; },</span>
+<span id="L375"><span class="lineNum">     375</span>              :         { engraving::JumpType::DSS_AL_CODA, &quot;dss-al-coda&quot; },</span>
+<span id="L376"><span class="lineNum">     376</span>              :         { engraving::JumpType::DSS_AL_DBLCODA, &quot;dss-al-double-coda&quot; },</span>
+<span id="L377"><span class="lineNum">     377</span>              :         { engraving::JumpType::DSS_AL_FINE, &quot;dss-al-fine&quot; }</span>
+<span id="L378"><span class="lineNum">     378</span>              :     };</span>
+<span id="L379"><span class="lineNum">     379</span>              : </span>
+<span id="L380"><span class="lineNum">     380</span>              :     /** Since MuseScore uses composed glyph - see EngravingFont::loadComposedGlyphs */</span>
+<span id="L381"><span class="lineNum">     381</span>              :     static inline std::map&lt;engraving::SymId, std::string&gt; s_mordentGlyphs = {</span>
+<span id="L382"><span class="lineNum">     382</span>              :         { engraving::SymId::ornamentPrallMordent, &quot;ornamentPrecompTrillWithMordent&quot; },</span>
+<span id="L383"><span class="lineNum">     383</span>              :         { engraving::SymId::ornamentUpPrall, &quot;ornamentPrecompSlideTrillDAnglebert&quot; },</span>
+<span id="L384"><span class="lineNum">     384</span>              :         { engraving::SymId::ornamentUpMordent, &quot;ornamentPrecompSlideTrillBach&quot; },</span>
+<span id="L385"><span class="lineNum">     385</span>              :         { engraving::SymId::ornamentPrallDown, &quot;ornamentPrecompTrillLowerSuffix&quot; },</span>
+<span id="L386"><span class="lineNum">     386</span>              :         { engraving::SymId::ornamentDownMordent, &quot;ornamentPrecompTurnTrillBach&quot; },</span>
+<span id="L387"><span class="lineNum">     387</span>              :         { engraving::SymId::ornamentPrallUp, &quot;ornamentPrecompTrillSuffixDandrieu&quot; },</span>
+<span id="L388"><span class="lineNum">     388</span>              :         { engraving::SymId::ornamentLinePrall, &quot;ornamentPrecompAppoggTrill&quot; },</span>
+<span id="L389"><span class="lineNum">     389</span>              :         { engraving::SymId::ornamentPrecompSlide, &quot;ornamentSchleifer&quot; }</span>
+<span id="L390"><span class="lineNum">     390</span>              :     };</span>
+<span id="L391"><span class="lineNum">     391</span>              : };</span>
+<span id="L392"><span class="lineNum">     392</span>              : </span>
+<span id="L393"><span class="lineNum">     393</span>              : /**</span>
+<span id="L394"><span class="lineNum">     394</span>              :  * A class with a static instance for registering MEI xml:ids.</span>
+<span id="L395"><span class="lineNum">     395</span>              :  * When objects are created from the MeiImporter the mapping is registered there.</span>
+<span id="L396"><span class="lineNum">     396</span>              :  * It is re-used in the MeiExporter to preserved xml:ids for imported objects.</span>
+<span id="L397"><span class="lineNum">     397</span>              :  */</span>
+<span id="L398"><span class="lineNum">     398</span>              : </span>
+<span id="L399"><span class="lineNum">     399</span>              : class UIDRegister</span>
+<span id="L400"><span class="lineNum">     400</span>              : {</span>
+<span id="L401"><span class="lineNum">     401</span>              : public:</span>
+<span id="L402"><span class="lineNum">     402</span>              : </span>
+<span id="L403"><span class="lineNum">     403</span>              :     static UIDRegister* instance();</span>
+<span id="L404"><span class="lineNum">     404</span>              : </span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC tlaBgGNC">        5197 :     void reg(const engraving::EngravingItem* item, const std::string&amp; meiUID) { m_uids[reinterpret_cast&lt;uintptr_t&gt;(item)] = meiUID; }</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">        3545 :     bool hasUid(const engraving::EngravingItem* item) const { return m_uids.count(reinterpret_cast&lt;uintptr_t&gt;(item)) &gt; 0; }</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">        3545 :     std::string uid(const engraving::EngravingItem* item) const { return m_uids.at(reinterpret_cast&lt;uintptr_t&gt;(item)); }</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">          64 :     void clear() { m_uids.clear(); }</span></span>
+<span id="L409"><span class="lineNum">     409</span>              : </span>
+<span id="L410"><span class="lineNum">     410</span>              : private:</span>
+<span id="L411"><span class="lineNum">     411</span>              :     std::unordered_map&lt;uintptr_t, std::string&gt; m_uids;</span>
+<span id="L412"><span class="lineNum">     412</span>              : };</span>
+<span id="L413"><span class="lineNum">     413</span>              : } // namespace</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

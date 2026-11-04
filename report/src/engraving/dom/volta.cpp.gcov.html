@@ -1,0 +1,493 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/dom/volta.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/engraving/dom</a> - volta.cpp</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryMed">84.4&nbsp;%</td>
+            <td class="headerCovTableEntry">167</td>
+            <td class="headerCovTableEntry">141</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2021 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #include &quot;volta.h&quot;</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &lt;algorithm&gt;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &lt;vector&gt;</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &quot;barline.h&quot;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;keysig.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;measure.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;score.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;staff.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : #include &quot;system.h&quot;</span>
+<span id="L34"><span class="lineNum">      34</span>              : #include &quot;text.h&quot;</span>
+<span id="L35"><span class="lineNum">      35</span>              : </span>
+<span id="L36"><span class="lineNum">      36</span>              : #include &quot;log.h&quot;</span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span>              : using namespace mu;</span>
+<span id="L39"><span class="lineNum">      39</span>              : using namespace mu::engraving;</span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span>              : namespace mu::engraving {</span>
+<span id="L42"><span class="lineNum">      42</span>              : static const ElementStyle voltaStyle {</span>
+<span id="L43"><span class="lineNum">      43</span>              :     { Sid::voltaFontFace,                      Pid::BEGIN_FONT_FACE },</span>
+<span id="L44"><span class="lineNum">      44</span>              :     { Sid::voltaFontFace,                      Pid::CONTINUE_FONT_FACE },</span>
+<span id="L45"><span class="lineNum">      45</span>              :     { Sid::voltaFontFace,                      Pid::END_FONT_FACE },</span>
+<span id="L46"><span class="lineNum">      46</span>              :     { Sid::voltaFontSize,                      Pid::BEGIN_FONT_SIZE },</span>
+<span id="L47"><span class="lineNum">      47</span>              :     { Sid::voltaFontSize,                      Pid::CONTINUE_FONT_SIZE },</span>
+<span id="L48"><span class="lineNum">      48</span>              :     { Sid::voltaFontSize,                      Pid::END_FONT_SIZE },</span>
+<span id="L49"><span class="lineNum">      49</span>              :     { Sid::voltaFontStyle,                     Pid::BEGIN_FONT_STYLE },</span>
+<span id="L50"><span class="lineNum">      50</span>              :     { Sid::voltaFontStyle,                     Pid::CONTINUE_FONT_STYLE },</span>
+<span id="L51"><span class="lineNum">      51</span>              :     { Sid::voltaFontStyle,                     Pid::END_FONT_STYLE },</span>
+<span id="L52"><span class="lineNum">      52</span>              :     { Sid::voltaAlign,                         Pid::BEGIN_TEXT_ALIGN },</span>
+<span id="L53"><span class="lineNum">      53</span>              :     { Sid::voltaAlign,                         Pid::CONTINUE_TEXT_ALIGN },</span>
+<span id="L54"><span class="lineNum">      54</span>              :     { Sid::voltaAlign,                         Pid::END_TEXT_ALIGN },</span>
+<span id="L55"><span class="lineNum">      55</span>              :     { Sid::voltaPosition,                      Pid::BEGIN_TEXT_POSITION },</span>
+<span id="L56"><span class="lineNum">      56</span>              :     { Sid::voltaPosition,                      Pid::CONTINUE_TEXT_POSITION },</span>
+<span id="L57"><span class="lineNum">      57</span>              :     { Sid::voltaPosition,                      Pid::END_TEXT_POSITION },</span>
+<span id="L58"><span class="lineNum">      58</span>              :     { Sid::voltaOffset,                        Pid::BEGIN_TEXT_OFFSET },</span>
+<span id="L59"><span class="lineNum">      59</span>              :     { Sid::voltaOffset,                        Pid::CONTINUE_TEXT_OFFSET },</span>
+<span id="L60"><span class="lineNum">      60</span>              :     { Sid::voltaOffset,                        Pid::END_TEXT_OFFSET },</span>
+<span id="L61"><span class="lineNum">      61</span>              :     { Sid::voltaMusicalSymbolSize,             Pid::BEGIN_TEXT_MUSIC_SYMBOLS_SIZE },</span>
+<span id="L62"><span class="lineNum">      62</span>              :     { Sid::voltaMusicalSymbolSize,             Pid::CONTINUE_TEXT_MUSIC_SYMBOLS_SIZE },</span>
+<span id="L63"><span class="lineNum">      63</span>              :     { Sid::voltaMusicalSymbolSize,             Pid::END_TEXT_MUSIC_SYMBOLS_SIZE },</span>
+<span id="L64"><span class="lineNum">      64</span>              :     { Sid::dummyMusicalSymbolsScale,           Pid::BEGIN_TEXT_MUSICAL_SYMBOLS_SCALE },</span>
+<span id="L65"><span class="lineNum">      65</span>              :     { Sid::dummyMusicalSymbolsScale,           Pid::CONTINUE_TEXT_MUSICAL_SYMBOLS_SCALE },</span>
+<span id="L66"><span class="lineNum">      66</span>              :     { Sid::dummyMusicalSymbolsScale,           Pid::END_TEXT_MUSICAL_SYMBOLS_SCALE },</span>
+<span id="L67"><span class="lineNum">      67</span>              :     { Sid::voltaLineWidth,                     Pid::LINE_WIDTH },</span>
+<span id="L68"><span class="lineNum">      68</span>              :     { Sid::voltaLineStyle,                     Pid::LINE_STYLE },</span>
+<span id="L69"><span class="lineNum">      69</span>              :     { Sid::voltaDashLineLen,                   Pid::DASH_LINE_LEN },</span>
+<span id="L70"><span class="lineNum">      70</span>              :     { Sid::voltaDashGapLen,                    Pid::DASH_GAP_LEN },</span>
+<span id="L71"><span class="lineNum">      71</span>              :     { Sid::voltaHook,                          Pid::BEGIN_HOOK_HEIGHT },</span>
+<span id="L72"><span class="lineNum">      72</span>              :     { Sid::voltaHook,                          Pid::END_HOOK_HEIGHT },</span>
+<span id="L73"><span class="lineNum">      73</span>              :     { Sid::voltaFontSpatiumDependent,          Pid::TEXT_SIZE_SPATIUM_DEPENDENT },</span>
+<span id="L74"><span class="lineNum">      74</span>              : };</span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span>              : //---------------------------------------------------------</span>
+<span id="L77"><span class="lineNum">      77</span>              : //   VoltaSegment</span>
+<span id="L78"><span class="lineNum">      78</span>              : //---------------------------------------------------------</span>
+<span id="L79"><span class="lineNum">      79</span>              : </span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC tlaBgGNC">         180 : VoltaSegment::VoltaSegment(Volta* sp)</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">         180 :     : TextLineBaseSegment(ElementType::VOLTA_SEGMENT, sp, ElementFlag::MOVABLE | ElementFlag::ON_STAFF | ElementFlag::SYSTEM)</span></span>
+<span id="L82"><span class="lineNum">      82</span>              : {</span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">         180 :     m_text-&gt;setTextStyleType(propertyDefault(Pid::TEXT_STYLE).value&lt;TextStyleType&gt;());</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">         180 :     m_endText-&gt;setTextStyleType(propertyDefault(Pid::TEXT_STYLE).value&lt;TextStyleType&gt;());</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">         180 : }</span></span>
+<span id="L86"><span class="lineNum">      86</span>              : </span>
+<span id="L87"><span class="lineNum">      87</span>              : //---------------------------------------------------------</span>
+<span id="L88"><span class="lineNum">      88</span>              : //   propertyDelegate</span>
+<span id="L89"><span class="lineNum">      89</span>              : //---------------------------------------------------------</span>
+<span id="L90"><span class="lineNum">      90</span>              : </span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">        1292 : EngravingObject* VoltaSegment::propertyDelegate(Pid pid) const</span></span>
+<span id="L92"><span class="lineNum">      92</span>              : {</span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">        1292 :     if (pid == Pid::BEGIN_HOOK_TYPE || pid == Pid::END_HOOK_TYPE || pid == Pid::VOLTA_ENDING) {</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaUNC tlaBgUNC">           0 :         return spanner();</span></span>
+<span id="L95"><span class="lineNum">      95</span>              :     }</span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC tlaBgGNC">        1292 :     return TextLineBaseSegment::propertyDelegate(pid);</span></span>
+<span id="L97"><span class="lineNum">      97</span>              : }</span>
+<span id="L98"><span class="lineNum">      98</span>              : </span>
+<span id="L99"><span class="lineNum">      99</span>              : //---------------------------------------------------------</span>
+<span id="L100"><span class="lineNum">     100</span>              : //   Volta</span>
+<span id="L101"><span class="lineNum">     101</span>              : //---------------------------------------------------------</span>
+<span id="L102"><span class="lineNum">     102</span>              : </span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">         176 : Volta::Volta(DummyParentOr&lt;EngravingItem&gt; parent)</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">         176 :     : TextLineBase(ElementType::VOLTA, parent, ElementFlag::SYSTEM)</span></span>
+<span id="L105"><span class="lineNum">     105</span>              : {</span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">         176 :     setPlacement(PlacementV::ABOVE);</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">         176 :     initElementStyle(&amp;voltaStyle);</span></span>
+<span id="L108"><span class="lineNum">     108</span>              : </span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">         176 :     setBeginTextPlace(TextPlace::BELOW);</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">         176 :     setContinueTextPlace(TextPlace::BELOW);</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">         176 :     setLineVisible(true);</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">         176 :     resetProperty(Pid::BEGIN_TEXT);</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">         176 :     resetProperty(Pid::CONTINUE_TEXT);</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">         176 :     resetProperty(Pid::END_TEXT);</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">         176 :     resetProperty(Pid::BEGIN_TEXT_PLACE);</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">         176 :     resetProperty(Pid::CONTINUE_TEXT_PLACE);</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">         176 :     resetProperty(Pid::END_TEXT_PLACE);</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">         176 :     resetProperty(Pid::BEGIN_HOOK_TYPE);</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">         176 :     resetProperty(Pid::END_HOOK_TYPE);</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">         176 : }</span></span>
+<span id="L121"><span class="lineNum">     121</span>              : </span>
+<span id="L122"><span class="lineNum">     122</span>              : ///</span>
+<span id="L123"><span class="lineNum">     123</span>              : /// \brief sorts the provided list in ascending order</span>
+<span id="L124"><span class="lineNum">     124</span>              : ///</span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">         148 : void Volta::setEndings(const std::vector&lt;int&gt;&amp; l)</span></span>
+<span id="L126"><span class="lineNum">     126</span>              : {</span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">         148 :     m_endings = l;</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">         148 :     std::sort(m_endings.begin(), m_endings.end());</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">         148 : }</span></span>
+<span id="L130"><span class="lineNum">     130</span>              : </span>
+<span id="L131"><span class="lineNum">     131</span>              : //---------------------------------------------------------</span>
+<span id="L132"><span class="lineNum">     132</span>              : //   setText</span>
+<span id="L133"><span class="lineNum">     133</span>              : //---------------------------------------------------------</span>
+<span id="L134"><span class="lineNum">     134</span>              : </span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">          57 : void Volta::setText(const String&amp; s)</span></span>
+<span id="L136"><span class="lineNum">     136</span>              : {</span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">          57 :     setBeginText(s);</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">          57 : }</span></span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span>              : //---------------------------------------------------------</span>
+<span id="L141"><span class="lineNum">     141</span>              : //   text</span>
+<span id="L142"><span class="lineNum">     142</span>              : //---------------------------------------------------------</span>
+<span id="L143"><span class="lineNum">     143</span>              : </span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">          29 : String Volta::text() const</span></span>
+<span id="L145"><span class="lineNum">     145</span>              : {</span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">          29 :     return beginText();</span></span>
+<span id="L147"><span class="lineNum">     147</span>              : }</span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span>              : //---------------------------------------------------------</span>
+<span id="L150"><span class="lineNum">     150</span>              : //   createLineSegment</span>
+<span id="L151"><span class="lineNum">     151</span>              : //---------------------------------------------------------</span>
+<span id="L152"><span class="lineNum">     152</span>              : </span>
+<span id="L153"><span class="lineNum">     153</span>              : static const ElementStyle voltaSegmentStyle {</span>
+<span id="L154"><span class="lineNum">     154</span>              :     { Sid::voltaMinDistance,                   Pid::MIN_DISTANCE },</span>
+<span id="L155"><span class="lineNum">     155</span>              : };</span>
+<span id="L156"><span class="lineNum">     156</span>              : </span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">         180 : LineSegment* Volta::createLineSegment()</span></span>
+<span id="L158"><span class="lineNum">     158</span>              : {</span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">         180 :     VoltaSegment* vs = new VoltaSegment(this);</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">         180 :     vs-&gt;setTrack(track());</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">         180 :     vs-&gt;initElementStyle(&amp;voltaSegmentStyle);</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">         180 :     return vs;</span></span>
+<span id="L163"><span class="lineNum">     163</span>              : }</span>
+<span id="L164"><span class="lineNum">     164</span>              : </span>
+<span id="L165"><span class="lineNum">     165</span>              : //---------------------------------------------------------</span>
+<span id="L166"><span class="lineNum">     166</span>              : //   hasEnding</span>
+<span id="L167"><span class="lineNum">     167</span>              : //---------------------------------------------------------</span>
+<span id="L168"><span class="lineNum">     168</span>              : </span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">         478 : bool Volta::hasEnding(int repeat) const</span></span>
+<span id="L170"><span class="lineNum">     170</span>              : {</span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">         825 :     for (int ending : endings()) {</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">         617 :         if (ending == repeat) {</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">         270 :             return true;</span></span>
+<span id="L174"><span class="lineNum">     174</span>              :         }</span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">         478 :     }</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">         208 :     return false;</span></span>
+<span id="L177"><span class="lineNum">     177</span>              : }</span>
+<span id="L178"><span class="lineNum">     178</span>              : </span>
+<span id="L179"><span class="lineNum">     179</span>              : //---------------------------------------------------------</span>
+<span id="L180"><span class="lineNum">     180</span>              : //   firstEnding</span>
+<span id="L181"><span class="lineNum">     181</span>              : //---------------------------------------------------------</span>
+<span id="L182"><span class="lineNum">     182</span>              : </span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">           1 : int Volta::firstEnding() const</span></span>
+<span id="L184"><span class="lineNum">     184</span>              : {</span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">           1 :     if (m_endings.empty()) {</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC tlaBgUNC">           0 :         return 0;</span></span>
+<span id="L187"><span class="lineNum">     187</span>              :     }</span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC tlaBgGNC">           1 :     return m_endings.front();</span></span>
+<span id="L189"><span class="lineNum">     189</span>              : }</span>
+<span id="L190"><span class="lineNum">     190</span>              : </span>
+<span id="L191"><span class="lineNum">     191</span>              : //---------------------------------------------------------</span>
+<span id="L192"><span class="lineNum">     192</span>              : //   lastEnding</span>
+<span id="L193"><span class="lineNum">     193</span>              : //---------------------------------------------------------</span>
+<span id="L194"><span class="lineNum">     194</span>              : </span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">          15 : int Volta::lastEnding() const</span></span>
+<span id="L196"><span class="lineNum">     196</span>              : {</span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          15 :     if (m_endings.empty()) {</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaUNC tlaBgUNC">           0 :         return 0;</span></span>
+<span id="L199"><span class="lineNum">     199</span>              :     }</span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC tlaBgGNC">          15 :     return m_endings.back();</span></span>
+<span id="L201"><span class="lineNum">     201</span>              : }</span>
+<span id="L202"><span class="lineNum">     202</span>              : </span>
+<span id="L203"><span class="lineNum">     203</span>              : //---------------------------------------------------------</span>
+<span id="L204"><span class="lineNum">     204</span>              : //   getProperty</span>
+<span id="L205"><span class="lineNum">     205</span>              : //---------------------------------------------------------</span>
+<span id="L206"><span class="lineNum">     206</span>              : </span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">        1931 : PropertyValue Volta::getProperty(Pid propertyId) const</span></span>
+<span id="L208"><span class="lineNum">     208</span>              : {</span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">        1931 :     switch (propertyId) {</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::VOLTA_ENDING:</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :         return PropertyValue::fromValue(endings());</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC tlaBgGNC">        1931 :     default:</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        1931 :         break;</span></span>
+<span id="L214"><span class="lineNum">     214</span>              :     }</span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        1931 :     return TextLineBase::getProperty(propertyId);</span></span>
+<span id="L216"><span class="lineNum">     216</span>              : }</span>
+<span id="L217"><span class="lineNum">     217</span>              : </span>
+<span id="L218"><span class="lineNum">     218</span>              : //---------------------------------------------------------</span>
+<span id="L219"><span class="lineNum">     219</span>              : //   setProperty</span>
+<span id="L220"><span class="lineNum">     220</span>              : //---------------------------------------------------------</span>
+<span id="L221"><span class="lineNum">     221</span>              : </span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        7093 : bool Volta::setProperty(Pid propertyId, const PropertyValue&amp; val)</span></span>
+<span id="L223"><span class="lineNum">     223</span>              : {</span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">        7093 :     switch (propertyId) {</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::VOLTA_ENDING: {</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaUNC">           0 :         setEndings(val.value&lt;std::vector&lt;int&gt; &gt;());</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaUNC">           0 :     } break;</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC tlaBgGNC">        7093 :     default:</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        7093 :         if (!TextLineBase::setProperty(propertyId, val)) {</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC tlaBgUNC">           0 :             return false;</span></span>
+<span id="L231"><span class="lineNum">     231</span>              :         }</span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC tlaBgGNC">        7093 :         break;</span></span>
+<span id="L233"><span class="lineNum">     233</span>              :     }</span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        7093 :     triggerLayout();</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        7093 :     return true;</span></span>
+<span id="L236"><span class="lineNum">     236</span>              : }</span>
+<span id="L237"><span class="lineNum">     237</span>              : </span>
+<span id="L238"><span class="lineNum">     238</span>              : //---------------------------------------------------------</span>
+<span id="L239"><span class="lineNum">     239</span>              : //   propertyDefault</span>
+<span id="L240"><span class="lineNum">     240</span>              : //---------------------------------------------------------</span>
+<span id="L241"><span class="lineNum">     241</span>              : </span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        3643 : PropertyValue Volta::propertyDefault(Pid propertyId) const</span></span>
+<span id="L243"><span class="lineNum">     243</span>              : {</span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        3643 :     switch (propertyId) {</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::VOLTA_ENDING:</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaUNC">           0 :         return PropertyValue::fromValue(std::vector&lt;int&gt;());</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC tlaBgGNC">         231 :     case Pid::BEGIN_HOOK_TYPE:</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">         231 :         return HookType::HOOK_90;</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">         231 :     case Pid::END_HOOK_TYPE:</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">         231 :         return HookType::NONE;</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">         693 :     case Pid::BEGIN_TEXT:</span></span>
+<span id="L252"><span class="lineNum">     252</span>              :     case Pid::CONTINUE_TEXT:</span>
+<span id="L253"><span class="lineNum">     253</span>              :     case Pid::END_TEXT:</span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">         693 :         return &quot;&quot;;</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">          55 :     case Pid::LINE_VISIBLE:</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">          55 :         return true;</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">         693 :     case Pid::BEGIN_TEXT_PLACE:</span></span>
+<span id="L258"><span class="lineNum">     258</span>              :     case Pid::CONTINUE_TEXT_PLACE:</span>
+<span id="L259"><span class="lineNum">     259</span>              :     case Pid::END_TEXT_PLACE:</span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">         693 :         return TextPlace::ABOVE;</span></span>
+<span id="L261"><span class="lineNum">     261</span>              : </span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">          55 :     case Pid::PLACEMENT:</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">          55 :         return PlacementV::ABOVE;</span></span>
+<span id="L264"><span class="lineNum">     264</span>              : </span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">         360 :     case Pid::TEXT_STYLE:</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">         360 :         return TextStyleType::VOLTA;</span></span>
+<span id="L267"><span class="lineNum">     267</span>              : </span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">         440 :     case Pid::BEGIN_FILLED_ARROW_HEIGHT:   // No arrow endings for voltas</span></span>
+<span id="L269"><span class="lineNum">     269</span>              :     case Pid::BEGIN_FILLED_ARROW_WIDTH:</span>
+<span id="L270"><span class="lineNum">     270</span>              :     case Pid::END_FILLED_ARROW_HEIGHT:</span>
+<span id="L271"><span class="lineNum">     271</span>              :     case Pid::END_FILLED_ARROW_WIDTH:</span>
+<span id="L272"><span class="lineNum">     272</span>              :     case Pid::BEGIN_LINE_ARROW_HEIGHT:</span>
+<span id="L273"><span class="lineNum">     273</span>              :     case Pid::BEGIN_LINE_ARROW_WIDTH:</span>
+<span id="L274"><span class="lineNum">     274</span>              :     case Pid::END_LINE_ARROW_HEIGHT:</span>
+<span id="L275"><span class="lineNum">     275</span>              :     case Pid::END_LINE_ARROW_WIDTH:</span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">         440 :         return 0.0;</span></span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">         885 :     default:</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">         885 :         return TextLineBase::propertyDefault(propertyId);</span></span>
+<span id="L280"><span class="lineNum">     280</span>              :     }</span>
+<span id="L281"><span class="lineNum">     281</span>              : }</span>
+<span id="L282"><span class="lineNum">     282</span>              : </span>
+<span id="L283"><span class="lineNum">     283</span>              : //---------------------------------------------------------</span>
+<span id="L284"><span class="lineNum">     284</span>              : //   setChannel</span>
+<span id="L285"><span class="lineNum">     285</span>              : //---------------------------------------------------------</span>
+<span id="L286"><span class="lineNum">     286</span>              : </span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">         125 : void Volta::setChannel() const</span></span>
+<span id="L288"><span class="lineNum">     288</span>              : {</span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">         125 :     Measure* startMeasure = Spanner::startMeasure();</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">         125 :     Measure* endMeasure = Spanner::endMeasure();</span></span>
+<span id="L291"><span class="lineNum">     291</span>              : </span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">         125 :     if (startMeasure &amp;&amp; endMeasure) {</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">         125 :         if (!endMeasure-&gt;repeatEnd()) {</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">          61 :             return;</span></span>
+<span id="L295"><span class="lineNum">     295</span>              :         }</span>
+<span id="L296"><span class="lineNum">     296</span>              : </span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">          64 :         Fraction startTick = startMeasure-&gt;tick() - Fraction::eps();</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">          64 :         Fraction endTick  = endMeasure-&gt;endTick() - Fraction::eps();</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">          64 :         Staff* st = staff();</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">         320 :         for (voice_idx_t voice = 0; voice &lt; VOICES; ++voice) {</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">         256 :             int channel = st-&gt;channel(startTick, voice);</span></span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">         256 :             st-&gt;insertIntoChannelList(voice, endTick, channel);</span></span>
+<span id="L303"><span class="lineNum">     303</span>              :         }</span>
+<span id="L304"><span class="lineNum">     304</span>              :     }</span>
+<span id="L305"><span class="lineNum">     305</span>              : }</span>
+<span id="L306"><span class="lineNum">     306</span>              : </span>
+<span id="L307"><span class="lineNum">     307</span>              : //---------------------------------------------------------</span>
+<span id="L308"><span class="lineNum">     308</span>              : //   accessibleInfo</span>
+<span id="L309"><span class="lineNum">     309</span>              : //---------------------------------------------------------</span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaUNC tlaBgUNC">           0 : String Volta::accessibleInfo() const</span></span>
+<span id="L312"><span class="lineNum">     312</span>              : {</span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaUNC">           0 :     return String(u&quot;%1: %2&quot;).arg(EngravingItem::accessibleInfo(), text());</span></span>
+<span id="L314"><span class="lineNum">     314</span>              : }</span>
+<span id="L315"><span class="lineNum">     315</span>              : </span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC tlaBgGNC">         546 : PointF Volta::linePos(Grip grip, System** system) const</span></span>
+<span id="L317"><span class="lineNum">     317</span>              : {</span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">         546 :     bool start = grip == Grip::START;</span></span>
+<span id="L319"><span class="lineNum">     319</span>              : </span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">         546 :     Segment* segment = score()-&gt;tick2leftSegment(start ? tick() : tick2(), true,</span></span>
+<span id="L321"><span class="lineNum">     321</span>              :                                                  SegmentType::ChordRest | SegmentType::StartRepeatBarLine | SegmentType::EndBarLine);</span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">         546 :     if (!segment) {</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaUNC tlaBgUNC">           0 :         return PointF();</span></span>
+<span id="L324"><span class="lineNum">     324</span>              :     }</span>
+<span id="L325"><span class="lineNum">     325</span>              : </span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC tlaBgGNC">         546 :     const Measure* measure = segment-&gt;measure();</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">         546 :     bool isAtSystemStart = segment-&gt;rtick().isZero() &amp;&amp; measure &amp;&amp; measure-&gt;system() &amp;&amp; measure-&gt;isFirstInSystem();</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">         546 :     bool searchForPrevBarline = start ? segment-&gt;rtick().isZero() &amp;&amp; (measure-&gt;repeatStart() || !isAtSystemStart) : true;</span></span>
+<span id="L329"><span class="lineNum">     329</span>              : </span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">         546 :     SegmentType barlineType = start ? (SegmentType::StartRepeatBarLine | SegmentType::EndBarLine) : SegmentType::EndBarLine;</span></span>
+<span id="L331"><span class="lineNum">     331</span>              : </span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">         546 :     if (searchForPrevBarline) {</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">         522 :         Segment* prev = segment;</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">        1048 :         while (prev &amp;&amp; !prev-&gt;isType(barlineType) &amp;&amp; prev-&gt;tick() == segment-&gt;tick()) {</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">         526 :             prev = prev-&gt;prev1MMenabled();</span></span>
+<span id="L336"><span class="lineNum">     336</span>              :         }</span>
+<span id="L337"><span class="lineNum">     337</span>              : </span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">         522 :         if (prev &amp;&amp; prev-&gt;isType(barlineType)) {</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">         515 :             segment = prev;</span></span>
+<span id="L340"><span class="lineNum">     340</span>              :         }</span>
+<span id="L341"><span class="lineNum">     341</span>              :     }</span>
+<span id="L342"><span class="lineNum">     342</span>              : </span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">         546 :     if (start &amp;&amp; !segment-&gt;isType(SegmentType::BarLineTypes) &amp;&amp; style().styleB(Sid::voltaAlignStartBeforeKeySig)) {</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaUNC tlaBgUNC">           0 :         Segment* prev = segment;</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaUNC">           0 :         while (prev &amp;&amp; !prev-&gt;isType(SegmentType::KeySig) &amp;&amp; prev-&gt;tick() == segment-&gt;tick()) {</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaUNC">           0 :             prev = prev-&gt;prev1MMenabled();</span></span>
+<span id="L347"><span class="lineNum">     347</span>              :         }</span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaUNC">           0 :         if (prev &amp;&amp; prev-&gt;isType(SegmentType::KeySig)) {</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaUNC">           0 :             segment = prev;</span></span>
+<span id="L350"><span class="lineNum">     350</span>              :         }</span>
+<span id="L351"><span class="lineNum">     351</span>              :     }</span>
+<span id="L352"><span class="lineNum">     352</span>              : </span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC tlaBgGNC">         546 :     *system = segment-&gt;measure()-&gt;system();</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">         546 :     double x = segment-&gt;x() + segment-&gt;measure()-&gt;x();</span></span>
+<span id="L355"><span class="lineNum">     355</span>              : </span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">         546 :     if (start) {</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">         273 :         bool alignLeftOfRepeatBarLine = false;</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">         273 :         if (segment-&gt;isChordRestType()) {</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">          24 :             x -= style().styleAbsolute(Sid::barNoteDistance);</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">         249 :         } else if (segment-&gt;isKeySigType()) {</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaUNC tlaBgUNC">           0 :             KeySig* sig = toKeySig(segment-&gt;element(track()));</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaUNC">           0 :             if (sig &amp;&amp; !sig-&gt;ldata()-&gt;keySymbols.empty()) {</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaUNC">           0 :                 KeySym keySym = sig-&gt;ldata()-&gt;keySymbols.front();</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaUNC">           0 :                 PointF cutoutNW = score()-&gt;engravingFont()-&gt;smuflAnchor(keySym.sym, SmuflAnchorId::cutOutNW, 1.0);</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaUNC">           0 :                 x += cutoutNW.x();</span></span>
+<span id="L366"><span class="lineNum">     366</span>              :             }</span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC tlaBgGNC">         249 :         } else if (segment-&gt;segmentType() &amp; SegmentType::BarLineTypes &amp;&amp; !isAtSystemStart) {</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">         249 :             x += segment-&gt;width();</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">         249 :             const BarLine* barline = toBarLine(segment-&gt;element(track()));</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">         249 :             alignLeftOfRepeatBarLine = barline &amp;&amp; barline-&gt;barLineType() == BarLineType::END_REPEAT</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">         498 :                                        &amp;&amp; style().styleB(Sid::voltaAlignEndLeftOfBarline);</span></span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">         249 :             if (alignLeftOfRepeatBarLine) {</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC tlaBgUNC">           0 :                 x -= style().styleAbsolute(Sid::endBarWidth);</span></span>
+<span id="L374"><span class="lineNum">     374</span>              :             }</span>
+<span id="L375"><span class="lineNum">     375</span>              :         }</span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC tlaBgGNC">         273 :         x += (isAtSystemStart || alignLeftOfRepeatBarLine ? 0.5 : -0.5) * absoluteFromSpatium(lineWidth());</span></span>
+<span id="L377"><span class="lineNum">     377</span>              :     } else {</span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">         273 :         if ((*system) &amp;&amp; segment-&gt;tick() == (*system)-&gt;endTick()) {</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">          50 :             staff_idx_t si = backSegment()-&gt;effectiveStaffIdx();</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">          50 :             if (si == muse::nidx) {</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaUNC tlaBgUNC">           0 :                 return PointF(x, 0.0);</span></span>
+<span id="L382"><span class="lineNum">     382</span>              :             }</span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC tlaBgGNC">          50 :             x += segment-&gt;staffShape(si).right();</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">          50 :             x -= 0.5 * absoluteFromSpatium(lineWidth());</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">         223 :         } else if (segment-&gt;segmentType() &amp; SegmentType::BarLineTypes) {</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">         223 :             BarLine* barLine = toBarLine(segment-&gt;element(track()));</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">         223 :             if (barLine-&gt;barLineType() == BarLineType::END_REPEAT || barLine-&gt;barLineType() == BarLineType::END_START_REPEAT) {</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">         140 :                 x += symWidth(SymId::repeatDot) + style().styleAbsolute(Sid::repeatBarlineDotSeparation);</span></span>
+<span id="L389"><span class="lineNum">     389</span>              :             }</span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">         223 :             x += 0.5 * absoluteFromSpatium(lineWidth());</span></span>
+<span id="L391"><span class="lineNum">     391</span>              :         }</span>
+<span id="L392"><span class="lineNum">     392</span>              :     }</span>
+<span id="L393"><span class="lineNum">     393</span>              : </span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">         546 :     return PointF(x, 0.0);</span></span>
+<span id="L395"><span class="lineNum">     395</span>              : }</span>
+<span id="L396"><span class="lineNum">     396</span>              : </span>
+<span id="L397"><span class="lineNum">     397</span>              : //---------------------------------------------------------</span>
+<span id="L398"><span class="lineNum">     398</span>              : //   setVoltaType</span>
+<span id="L399"><span class="lineNum">     399</span>              : //    deprecated</span>
+<span id="L400"><span class="lineNum">     400</span>              : //---------------------------------------------------------</span>
+<span id="L401"><span class="lineNum">     401</span>              : </span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          33 : void Volta::setVoltaType(Type val)</span></span>
+<span id="L403"><span class="lineNum">     403</span>              : {</span>
+<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">          33 :     setEndHookType(Type::CLOSED == val ? HookType::HOOK_90 : HookType::NONE);</span></span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">          33 : }</span></span>
+<span id="L406"><span class="lineNum">     406</span>              : </span>
+<span id="L407"><span class="lineNum">     407</span>              : //---------------------------------------------------------</span>
+<span id="L408"><span class="lineNum">     408</span>              : //   voltaType</span>
+<span id="L409"><span class="lineNum">     409</span>              : //    deprecated</span>
+<span id="L410"><span class="lineNum">     410</span>              : //---------------------------------------------------------</span>
+<span id="L411"><span class="lineNum">     411</span>              : </span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          22 : Volta::Type Volta::voltaType() const</span></span>
+<span id="L413"><span class="lineNum">     413</span>              : {</span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">          22 :     return endHookType() != HookType::NONE ? Type::CLOSED : Type::OPEN;</span></span>
+<span id="L415"><span class="lineNum">     415</span>              : }</span>
+<span id="L416"><span class="lineNum">     416</span>              : </span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">         369 : Sid Volta::defaultPosSid() const</span></span>
+<span id="L418"><span class="lineNum">     418</span>              : {</span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">         369 :     return Sid::voltaPosAbove;</span></span>
+<span id="L420"><span class="lineNum">     420</span>              : }</span>
+<span id="L421"><span class="lineNum">     421</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

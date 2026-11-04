@@ -1,0 +1,1304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/playback/playbackmodel.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/engraving/playback</a> - playbackmodel.cpp</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">71.1&nbsp;%</td>
+            <td class="headerCovTableEntry">651</td>
+            <td class="headerCovTableEntry">463</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2025 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #include &quot;playbackmodel.h&quot;</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;dom/fret.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;dom/harmony.h&quot;</span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &quot;dom/instrument.h&quot;</span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &quot;dom/masterscore.h&quot;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;dom/measure.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;dom/measurerepeat.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;dom/part.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;dom/staff.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : #include &quot;dom/repeatlist.h&quot;</span>
+<span id="L34"><span class="lineNum">      34</span>              : #include &quot;dom/segment.h&quot;</span>
+<span id="L35"><span class="lineNum">      35</span>              : #include &quot;dom/tie.h&quot;</span>
+<span id="L36"><span class="lineNum">      36</span>              : #include &quot;dom/tremolotwochord.h&quot;</span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span>              : #include &quot;editing/transaction/undoablecommand.h&quot;</span>
+<span id="L39"><span class="lineNum">      39</span>              : </span>
+<span id="L40"><span class="lineNum">      40</span>              : #include &quot;defer.h&quot;</span>
+<span id="L41"><span class="lineNum">      41</span>              : #include &quot;log.h&quot;</span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span>              : using namespace mu;</span>
+<span id="L44"><span class="lineNum">      44</span>              : using namespace mu::engraving;</span>
+<span id="L45"><span class="lineNum">      45</span>              : using namespace muse::mpe;</span>
+<span id="L46"><span class="lineNum">      46</span>              : using namespace muse::async;</span>
+<span id="L47"><span class="lineNum">      47</span>              : </span>
+<span id="L48"><span class="lineNum">      48</span>              : static const String METRONOME_INSTRUMENT_ID(u&quot;metronome&quot;);</span>
+<span id="L49"><span class="lineNum">      49</span>              : static const String CHORD_SYMBOLS_INSTRUMENT_ID(u&quot;chord_symbols&quot;);</span>
+<span id="L50"><span class="lineNum">      50</span>              : </span>
+<span id="L51"><span class="lineNum">      51</span>              : const InstrumentTrackId PlaybackModel::METRONOME_TRACK_ID = { 999, METRONOME_INSTRUMENT_ID };</span>
+<span id="L52"><span class="lineNum">      52</span>              : </span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC tlaBgGNC">          21 : static const Harmony* findChordSymbol(const EngravingItem* item)</span></span>
+<span id="L54"><span class="lineNum">      54</span>              : {</span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">          21 :     if (item-&gt;isHarmony()) {</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaUNC tlaBgUNC">           0 :         return toHarmony(item);</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC tlaBgGNC">          21 :     } else if (item-&gt;isFretDiagram()) {</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC tlaBgUNC">           0 :         return toFretDiagram(item)-&gt;harmony();</span></span>
+<span id="L59"><span class="lineNum">      59</span>              :     }</span>
+<span id="L60"><span class="lineNum">      60</span>              : </span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC tlaBgGNC">          21 :     return nullptr;</span></span>
+<span id="L62"><span class="lineNum">      62</span>              : }</span>
+<span id="L63"><span class="lineNum">      63</span>              : </span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">           6 : static bool isScopedAutomationChange(const ScoreChanges&amp; changes)</span></span>
+<span id="L65"><span class="lineNum">      65</span>              : {</span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">           6 :     if (!changes.isValidBoundary()) {</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
+<span id="L68"><span class="lineNum">      68</span>              :     }</span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC tlaBgGNC">           6 :     bool hasAutomationChange = false;</span></span>
+<span id="L71"><span class="lineNum">      71</span>              : </span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           8 :     for (const auto&amp; pair : changes.changedObjects) {</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">           6 :         if (pair.first-&gt;type() != ElementType::SCORE) {</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
+<span id="L75"><span class="lineNum">      75</span>              :         }</span>
+<span id="L76"><span class="lineNum">      76</span>              : </span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC tlaBgGNC">           6 :         if (pair.second.size() != 1 || !muse::contains(pair.second, CommandType::EditAutomationPoints)) {</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">           4 :             return false;</span></span>
+<span id="L79"><span class="lineNum">      79</span>              :         }</span>
+<span id="L80"><span class="lineNum">      80</span>              : </span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">           2 :         hasAutomationChange = true;</span></span>
+<span id="L82"><span class="lineNum">      82</span>              :     }</span>
+<span id="L83"><span class="lineNum">      83</span>              : </span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">           2 :     return hasAutomationChange;</span></span>
+<span id="L85"><span class="lineNum">      85</span>              : }</span>
+<span id="L86"><span class="lineNum">      86</span>              : </span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">          23 : void PlaybackModel::load(Score* score)</span></span>
+<span id="L88"><span class="lineNum">      88</span>              : {</span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">          24 :     TRACEFUNC;</span></span>
+<span id="L90"><span class="lineNum">      90</span>              : </span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">          23 :     if (!score || score-&gt;measures()-&gt;empty() || !score-&gt;lastMeasure()) {</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L93"><span class="lineNum">      93</span>              :     }</span>
+<span id="L94"><span class="lineNum">      94</span>              : </span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC tlaBgGNC">          23 :     m_score = score;</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">          23 :     m_playbackCtx = std::make_shared&lt;PlaybackContext&gt;(score);</span></span>
+<span id="L97"><span class="lineNum">      97</span>              : </span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">          23 :     auto changesChannel = score-&gt;changesChannel();</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">          23 :     changesChannel.disconnect(this);</span></span>
+<span id="L100"><span class="lineNum">     100</span>              : </span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">          23 :     changesChannel.onReceive(this, [this](const ScoreChanges&amp; changes) {</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">           7 :         if (shouldSkipChanges(changes)) {</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaUNC tlaBgUNC">           0 :             return;</span></span>
+<span id="L104"><span class="lineNum">     104</span>              :         }</span>
+<span id="L105"><span class="lineNum">     105</span>              : </span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC tlaBgGNC">           7 :         const TickBoundaries tickRange = tickBoundaries(changes);</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">           7 :         const TrackBoundaries trackRange = trackBoundaries(changes);</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">           7 :         ChangedTrackIdSet trackChanges;</span></span>
+<span id="L109"><span class="lineNum">     109</span>              : </span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">           7 :         clearExpiredTracks();</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">           7 :         m_playbackCtx-&gt;clear(trackRange.trackFrom, trackRange.trackTo, tickRange.tickFrom, tickRange.tickTo);</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">           7 :         clearExpiredEvents(tickRange.tickFrom, tickRange.tickTo, trackRange.trackFrom, trackRange.trackTo, &amp;trackChanges);</span></span>
+<span id="L113"><span class="lineNum">     113</span>              : </span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">           7 :         const InstrumentTrackIdSet oldTracks = existingTrackIdSet();</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">           7 :         update(tickRange.tickFrom, tickRange.tickTo, trackRange.trackFrom, trackRange.trackTo, &amp;trackChanges);</span></span>
+<span id="L116"><span class="lineNum">     116</span>              : </span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">           7 :         notifyAboutChanges(oldTracks, trackChanges);</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">           7 :     });</span></span>
+<span id="L119"><span class="lineNum">     119</span>              : </span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">          23 :     update(0, m_score-&gt;lastMeasure()-&gt;endTick().ticks(), 0, m_score-&gt;ntracks());</span></span>
+<span id="L121"><span class="lineNum">     121</span>              : </span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">          23 :     InstrumentTrackIdSet trackIdSet;</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">          23 :     trackIdSet.reserve(m_playbackDataMap.size());</span></span>
+<span id="L124"><span class="lineNum">     124</span>              : </span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">          92 :     for (const auto&amp; pair : m_playbackDataMap) {</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">          69 :         m_trackAdded.send(pair.first);</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">          69 :         trackIdSet.insert(pair.first);</span></span>
+<span id="L128"><span class="lineNum">     128</span>              :     }</span>
+<span id="L129"><span class="lineNum">     129</span>              : </span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">          23 :     m_tracksDataChanged.send(trackIdSet);</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          23 :     m_changedTrackIdSet.clear();</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">          23 : }</span></span>
+<span id="L133"><span class="lineNum">     133</span>              : </span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">           1 : void PlaybackModel::reload()</span></span>
+<span id="L135"><span class="lineNum">     135</span>              : {</span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">           1 :     if (!m_score) {</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L138"><span class="lineNum">     138</span>              :     }</span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC tlaBgGNC">           2 :     TRACEFUNC;</span></span>
+<span id="L141"><span class="lineNum">     141</span>              : </span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">           1 :     const int trackFrom = 0;</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">           1 :     const size_t trackTo = m_score-&gt;ntracks();</span></span>
+<span id="L144"><span class="lineNum">     144</span>              : </span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">           1 :     const Measure* lastMeasure = m_score-&gt;lastMeasure();</span></span>
+<span id="L146"><span class="lineNum">     146</span>              : </span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">           1 :     const int tickFrom = 0;</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">           1 :     const int tickTo = lastMeasure ? lastMeasure-&gt;endTick().ticks() : 0;</span></span>
+<span id="L149"><span class="lineNum">     149</span>              : </span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">           1 :     clearExpiredTracks();</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">           1 :     m_playbackCtx-&gt;clear(trackFrom, trackTo, tickFrom, tickTo);</span></span>
+<span id="L152"><span class="lineNum">     152</span>              : </span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">           3 :     for (auto&amp; pair : m_playbackDataMap) {</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">           2 :         pair.second.originEvents.clear();</span></span>
+<span id="L155"><span class="lineNum">     155</span>              :     }</span>
+<span id="L156"><span class="lineNum">     156</span>              : </span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">           1 :     update(tickFrom, tickTo, trackFrom, trackTo);</span></span>
+<span id="L158"><span class="lineNum">     158</span>              : </span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">           1 :     InstrumentTrackIdSet trackIdSet;</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">           1 :     trackIdSet.reserve(m_playbackDataMap.size());</span></span>
+<span id="L161"><span class="lineNum">     161</span>              : </span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">           3 :     for (auto&amp; pair : m_playbackDataMap) {</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">           2 :         pair.second.mainStream.send(pair.second.originEvents, pair.second.dynamics);</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">           2 :         trackIdSet.insert(pair.first);</span></span>
+<span id="L165"><span class="lineNum">     165</span>              :     }</span>
+<span id="L166"><span class="lineNum">     166</span>              : </span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">           1 :     m_tracksDataChanged.send(trackIdSet);</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">           1 :     m_changedTrackIdSet.clear();</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L170"><span class="lineNum">     170</span>              : </span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">           3 : void PlaybackModel::setSendEventsOnScoreChange(const InstrumentTrackId&amp; trackId, bool send)</span></span>
+<span id="L172"><span class="lineNum">     172</span>              : {</span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">           3 :     m_sendEventsOnScoreChangeMap[trackId] = send;</span></span>
+<span id="L174"><span class="lineNum">     174</span>              : </span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">           3 :     if (send) {</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">           2 :         auto it = m_changedTrackIdSet.find(trackId);</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">           2 :         if (it != m_changedTrackIdSet.end()) {</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">           1 :             sendEvents(trackId);</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">           1 :             m_changedTrackIdSet.erase(it);</span></span>
+<span id="L180"><span class="lineNum">     180</span>              :         }</span>
+<span id="L181"><span class="lineNum">     181</span>              :     }</span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">           3 : }</span></span>
+<span id="L183"><span class="lineNum">     183</span>              : </span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">           1 : void PlaybackModel::sendEventsForChangedTracks()</span></span>
+<span id="L185"><span class="lineNum">     185</span>              : {</span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">           1 :     if (m_changedTrackIdSet.empty()) {</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L188"><span class="lineNum">     188</span>              :     }</span>
+<span id="L189"><span class="lineNum">     189</span>              : </span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">           2 :     TRACEFUNC;</span></span>
+<span id="L191"><span class="lineNum">     191</span>              : </span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">           3 :     for (const InstrumentTrackId&amp; trackId : m_changedTrackIdSet) {</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">           2 :         sendEvents(trackId);</span></span>
+<span id="L194"><span class="lineNum">     194</span>              :     }</span>
+<span id="L195"><span class="lineNum">     195</span>              : </span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">           1 :     m_changedTrackIdSet.clear();</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">           1 : muse::async::Channel&lt;InstrumentTrackIdSet&gt; PlaybackModel::tracksDataChanged() const</span></span>
+<span id="L200"><span class="lineNum">     200</span>              : {</span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">           1 :     return m_tracksDataChanged;</span></span>
+<span id="L202"><span class="lineNum">     202</span>              : }</span>
+<span id="L203"><span class="lineNum">     203</span>              : </span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC tlaBgUNC">           0 : bool PlaybackModel::isPlayRepeatsEnabled() const</span></span>
+<span id="L205"><span class="lineNum">     205</span>              : {</span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaUNC">           0 :     return m_expandRepeats;</span></span>
+<span id="L207"><span class="lineNum">     207</span>              : }</span>
+<span id="L208"><span class="lineNum">     208</span>              : </span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC tlaBgGNC">           1 : void PlaybackModel::setPlayRepeats(const bool isEnabled)</span></span>
+<span id="L210"><span class="lineNum">     210</span>              : {</span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">           1 :     m_expandRepeats = isEnabled;</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L213"><span class="lineNum">     213</span>              : </span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaUNC tlaBgUNC">           0 : bool PlaybackModel::isPlayChordSymbolsEnabled() const</span></span>
+<span id="L215"><span class="lineNum">     215</span>              : {</span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaUNC">           0 :     return m_playChordSymbols;</span></span>
+<span id="L217"><span class="lineNum">     217</span>              : }</span>
+<span id="L218"><span class="lineNum">     218</span>              : </span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaUNC">           0 : void PlaybackModel::setPlayChordSymbols(const bool isEnabled)</span></span>
+<span id="L220"><span class="lineNum">     220</span>              : {</span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaUNC">           0 :     m_playChordSymbols = isEnabled;</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L223"><span class="lineNum">     223</span>              : </span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaUNC">           0 : bool PlaybackModel::useScoreDynamicsForOffstreamPlayback() const</span></span>
+<span id="L225"><span class="lineNum">     225</span>              : {</span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaUNC">           0 :     return m_useScoreDynamicsForOffstreamPlayback;</span></span>
+<span id="L227"><span class="lineNum">     227</span>              : }</span>
+<span id="L228"><span class="lineNum">     228</span>              : </span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC tlaBgGNC">           1 : void PlaybackModel::setUseScoreDynamicsForOffstreamPlayback(bool use)</span></span>
+<span id="L230"><span class="lineNum">     230</span>              : {</span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">           1 :     m_useScoreDynamicsForOffstreamPlayback = use;</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L233"><span class="lineNum">     233</span>              : </span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaUNC tlaBgUNC">           0 : bool PlaybackModel::isMetronomeEnabled() const</span></span>
+<span id="L235"><span class="lineNum">     235</span>              : {</span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaUNC">           0 :     return m_metronomeEnabled;</span></span>
+<span id="L237"><span class="lineNum">     237</span>              : }</span>
+<span id="L238"><span class="lineNum">     238</span>              : </span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC tlaBgGNC">           3 : void PlaybackModel::setIsMetronomeEnabled(const bool isEnabled)</span></span>
+<span id="L240"><span class="lineNum">     240</span>              : {</span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">           3 :     if (m_metronomeEnabled == isEnabled) {</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">           2 :         return;</span></span>
+<span id="L243"><span class="lineNum">     243</span>              :     }</span>
+<span id="L244"><span class="lineNum">     244</span>              : </span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">           1 :     m_metronomeEnabled = isEnabled;</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">           1 :     reloadMetronomeEvents();</span></span>
+<span id="L247"><span class="lineNum">     247</span>              : }</span>
+<span id="L248"><span class="lineNum">     248</span>              : </span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">           4 : const InstrumentTrackId&amp; PlaybackModel::metronomeTrackId() const</span></span>
+<span id="L250"><span class="lineNum">     250</span>              : {</span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">           4 :     return METRONOME_TRACK_ID;</span></span>
+<span id="L252"><span class="lineNum">     252</span>              : }</span>
+<span id="L253"><span class="lineNum">     253</span>              : </span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">          33 : InstrumentTrackId PlaybackModel::chordSymbolsTrackId(const ID&amp; partId) const</span></span>
+<span id="L255"><span class="lineNum">     255</span>              : {</span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">          33 :     return { partId, CHORD_SYMBOLS_INSTRUMENT_ID };</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">          33 : }</span></span>
+<span id="L258"><span class="lineNum">     258</span>              : </span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaUNC tlaBgUNC">           0 : bool PlaybackModel::isChordSymbolsTrack(const InstrumentTrackId&amp; trackId) const</span></span>
+<span id="L260"><span class="lineNum">     260</span>              : {</span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :     return trackId == chordSymbolsTrackId(trackId.partId);</span></span>
+<span id="L262"><span class="lineNum">     262</span>              : }</span>
+<span id="L263"><span class="lineNum">     263</span>              : </span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 : bool PlaybackModel::hasSoundFlags(const InstrumentTrackId&amp; trackId) const</span></span>
+<span id="L265"><span class="lineNum">     265</span>              : {</span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaUNC">           0 :     const Part* part = m_score ? m_score-&gt;partById(trackId.partId) : nullptr;</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaUNC">           0 :     if (!part) {</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L269"><span class="lineNum">     269</span>              :     }</span>
+<span id="L270"><span class="lineNum">     270</span>              : </span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaUNC">           0 :     const TrackRange trackRange = part-&gt;trackRange();</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaUNC">           0 :     return m_playbackCtx-&gt;hasSoundFlags(trackRange.startTrack, trackRange.endTrack);</span></span>
+<span id="L273"><span class="lineNum">     273</span>              : }</span>
+<span id="L274"><span class="lineNum">     274</span>              : </span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC tlaBgGNC">          36 : PlaybackData&amp; PlaybackModel::resolveTrackPlaybackData(const InstrumentTrackId&amp; trackId)</span></span>
+<span id="L276"><span class="lineNum">     276</span>              : {</span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">          36 :     auto search = m_playbackDataMap.find(trackId);</span></span>
+<span id="L278"><span class="lineNum">     278</span>              : </span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">          36 :     if (search != m_playbackDataMap.cend()) {</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">          36 :         return search-&gt;second;</span></span>
+<span id="L281"><span class="lineNum">     281</span>              :     }</span>
+<span id="L282"><span class="lineNum">     282</span>              : </span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaUNC tlaBgUNC">           0 :     const Part* part = m_score ? m_score-&gt;partById(trackId.partId.toUint64()) : nullptr;</span></span>
+<span id="L284"><span class="lineNum">     284</span>              : </span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaUNC">           0 :     if (!part) {</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaUNC">           0 :         static PlaybackData empty;</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaUNC">           0 :         return empty;</span></span>
+<span id="L288"><span class="lineNum">     288</span>              :     }</span>
+<span id="L289"><span class="lineNum">     289</span>              : </span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaUNC">           0 :     const TrackRange trackRange = part-&gt;trackRange();</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaUNC">           0 :     update(0, m_score-&gt;lastMeasure()-&gt;tick().ticks(), trackRange.startTrack, trackRange.endTrack);</span></span>
+<span id="L292"><span class="lineNum">     292</span>              : </span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC">           0 :     return m_playbackDataMap[trackId];</span></span>
+<span id="L294"><span class="lineNum">     294</span>              : }</span>
+<span id="L295"><span class="lineNum">     295</span>              : </span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC tlaBgGNC">          31 : PlaybackData&amp; PlaybackModel::resolveTrackPlaybackData(const ID&amp; partId, const String&amp; instrumentId)</span></span>
+<span id="L297"><span class="lineNum">     297</span>              : {</span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">          31 :     return resolveTrackPlaybackData(idKey(partId, instrumentId));</span></span>
+<span id="L299"><span class="lineNum">     299</span>              : }</span>
+<span id="L300"><span class="lineNum">     300</span>              : </span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">           2 : void PlaybackModel::triggerEventsForItems(const std::vector&lt;const EngravingItem*&gt;&amp; items, muse::mpe::duration_t duration, bool flushSound)</span></span>
+<span id="L302"><span class="lineNum">     302</span>              : {</span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           2 :     if (items.empty()) {</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L305"><span class="lineNum">     305</span>              :     }</span>
+<span id="L306"><span class="lineNum">     306</span>              : </span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC tlaBgGNC">           2 :     InstrumentTrackId trackId = idKey(items);</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           2 :     if (!trackId.isValid()) {</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L310"><span class="lineNum">     310</span>              :     }</span>
+<span id="L311"><span class="lineNum">     311</span>              : </span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC tlaBgGNC">           2 :     auto trackPlaybackDataIt = m_playbackDataMap.find(trackId);</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">           2 :     if (trackPlaybackDataIt == m_playbackDataMap.cend()) {</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L315"><span class="lineNum">     315</span>              :     }</span>
+<span id="L316"><span class="lineNum">     316</span>              : </span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC tlaBgGNC">           2 :     PlaybackData&amp; trackPlaybackData = trackPlaybackDataIt-&gt;second;</span></span>
+<span id="L318"><span class="lineNum">     318</span>              :     ArticulationsProfilePtr profile</span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">           2 :         = profilesRepository() ? profilesRepository()-&gt;defaultProfile(trackPlaybackData.setupData.category) : nullptr;</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           2 :     if (!profile) {</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGE() &lt;&lt; &quot;unsupported instrument family: &quot; &lt;&lt; trackId.partId.toUint64();</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L323"><span class="lineNum">     323</span>              :     }</span>
+<span id="L324"><span class="lineNum">     324</span>              : </span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC tlaBgGNC">           2 :     const RepeatList&amp; repeats = repeatList();</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">           2 :     const int firstItemUtick = repeats.tick2utick(items.front()-&gt;tick().ticks());</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">           2 :     const track_idx_t firstItemTrackIdx = items.front()-&gt;track();</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">           2 :     constexpr timestamp_t timestamp = 0;</span></span>
+<span id="L329"><span class="lineNum">     329</span>              : </span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">           2 :     PlaybackEventsMap result;</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">           2 :     PlaybackEventList&amp; events = result[timestamp];</span></span>
+<span id="L332"><span class="lineNum">     332</span>              : </span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">           2 :     SoundPresetChangeEventList soundPresets = m_playbackCtx-&gt;soundPresets(firstItemTrackIdx, firstItemUtick);</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">           2 :     if (!soundPresets.empty()) {</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaUNC tlaBgUNC">           0 :         events.insert(events.end(), std::make_move_iterator(soundPresets.begin()),</span></span>
+<span id="L336"><span class="lineNum">     336</span>              :                       std::make_move_iterator(soundPresets.end()));</span>
+<span id="L337"><span class="lineNum">     337</span>              :     }</span>
+<span id="L338"><span class="lineNum">     338</span>              : </span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC tlaBgGNC">           2 :     const TextArticulationEvent textArticulation = m_playbackCtx-&gt;textArticulation(firstItemTrackIdx, firstItemUtick);</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">           2 :     if (!textArticulation.text.empty()) {</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaUNC tlaBgUNC">           0 :         events.push_back(textArticulation);</span></span>
+<span id="L342"><span class="lineNum">     342</span>              :     }</span>
+<span id="L343"><span class="lineNum">     343</span>              : </span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC tlaBgGNC">           2 :     const SyllableEvent syllable = m_playbackCtx-&gt;syllable(firstItemTrackIdx, firstItemUtick);</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">           2 :     if (!syllable.text.empty()) {</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaUNC tlaBgUNC">           0 :         events.push_back(syllable);</span></span>
+<span id="L347"><span class="lineNum">     347</span>              :     }</span>
+<span id="L348"><span class="lineNum">     348</span>              : </span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC tlaBgGNC">           2 :     dynamic_level_t dynamicLevel = dynamicLevelFromType(muse::mpe::DynamicType::Natural);</span></span>
+<span id="L350"><span class="lineNum">     350</span>              : </span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">           4 :     for (const EngravingItem* item : items) {</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">           2 :         if (m_useScoreDynamicsForOffstreamPlayback) {</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">           1 :             if (!item-&gt;isNote() || toNote(item)-&gt;userVelocity() == 0) {</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">           1 :                 const int utick = repeats.tick2utick(item-&gt;tick().ticks());</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">           1 :                 dynamicLevel = m_playbackCtx-&gt;appliableDynamicLevel(item-&gt;track(), utick);</span></span>
+<span id="L356"><span class="lineNum">     356</span>              :             }</span>
+<span id="L357"><span class="lineNum">     357</span>              :         }</span>
+<span id="L358"><span class="lineNum">     358</span>              : </span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">           2 :         if (item-&gt;isHarmony()) {</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaUNC tlaBgUNC">           0 :             m_renderer.renderChordSymbol(toHarmony(item), timestamp, duration, dynamicLevel, profile, result);</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L362"><span class="lineNum">     362</span>              :         }</span>
+<span id="L363"><span class="lineNum">     363</span>              : </span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC tlaBgGNC">           2 :         m_renderer.render(item, timestamp, duration, dynamicLevel, m_playbackCtx, profile, result);</span></span>
+<span id="L365"><span class="lineNum">     365</span>              :     }</span>
+<span id="L366"><span class="lineNum">     366</span>              : </span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">           2 :     trackPlaybackData.offStream.send(result, flushSound);</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">           2 : }</span></span>
+<span id="L369"><span class="lineNum">     369</span>              : </span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaUNC tlaBgUNC">           0 : void PlaybackModel::triggerMetronome(int tick)</span></span>
+<span id="L371"><span class="lineNum">     371</span>              : {</span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC">           0 :     auto trackPlaybackData = m_playbackDataMap.find(METRONOME_TRACK_ID);</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC">           0 :     if (trackPlaybackData == m_playbackDataMap.cend()) {</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L375"><span class="lineNum">     375</span>              :     }</span>
+<span id="L376"><span class="lineNum">     376</span>              : </span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaUNC">           0 :     const ArticulationsProfilePtr profile = defaultActiculationProfile(METRONOME_TRACK_ID);</span></span>
+<span id="L378"><span class="lineNum">     378</span>              : </span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaUNC">           0 :     PlaybackEventsMap result;</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaUNC">           0 :     m_renderer.renderMetronome(m_score, tick, 0, profile, result);</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaUNC">           0 :     trackPlaybackData-&gt;second.offStream.send(result, true /*flushOffstream*/);</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L383"><span class="lineNum">     383</span>              : </span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaUNC">           0 : void PlaybackModel::triggerCountIn(int tick, muse::mpe::duration_t&amp; countInDuration)</span></span>
+<span id="L385"><span class="lineNum">     385</span>              : {</span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaUNC">           0 :     auto trackPlaybackData = m_playbackDataMap.find(METRONOME_TRACK_ID);</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaUNC">           0 :     if (trackPlaybackData == m_playbackDataMap.cend()) {</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L389"><span class="lineNum">     389</span>              :     }</span>
+<span id="L390"><span class="lineNum">     390</span>              : </span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaUNC">           0 :     const ArticulationsProfilePtr profile = defaultActiculationProfile(METRONOME_TRACK_ID);</span></span>
+<span id="L392"><span class="lineNum">     392</span>              : </span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaUNC">           0 :     PlaybackEventsMap result;</span></span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaUNC">           0 :     m_renderer.renderCountIn(m_score, tick, 0, profile, result, countInDuration);</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaUNC">           0 :     trackPlaybackData-&gt;second.offStream.send(result, true /*flushOffstream*/);</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L397"><span class="lineNum">     397</span>              : </span>
+<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC tlaBgGNC">           7 : InstrumentTrackIdSet PlaybackModel::existingTrackIdSet() const</span></span>
+<span id="L399"><span class="lineNum">     399</span>              : {</span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">           7 :     InstrumentTrackIdSet result;</span></span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">           7 :     result.reserve(m_playbackDataMap.size());</span></span>
+<span id="L402"><span class="lineNum">     402</span>              : </span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">          54 :     for (const auto&amp; pair : m_playbackDataMap) {</span></span>
+<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">          47 :         result.insert(pair.first);</span></span>
+<span id="L405"><span class="lineNum">     405</span>              :     }</span>
+<span id="L406"><span class="lineNum">     406</span>              : </span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">           7 :     return result;</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
+<span id="L409"><span class="lineNum">     409</span>              : </span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaUNC">           0 : muse::async::Channel&lt;InstrumentTrackId&gt; PlaybackModel::trackAdded() const</span></span>
+<span id="L411"><span class="lineNum">     411</span>              : {</span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaUNC">           0 :     return m_trackAdded;</span></span>
+<span id="L413"><span class="lineNum">     413</span>              : }</span>
+<span id="L414"><span class="lineNum">     414</span>              : </span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaUNC">           0 : muse::async::Channel&lt;InstrumentTrackId&gt; PlaybackModel::trackRemoved() const</span></span>
+<span id="L416"><span class="lineNum">     416</span>              : {</span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaUNC">           0 :     return m_trackRemoved;</span></span>
+<span id="L418"><span class="lineNum">     418</span>              : }</span>
+<span id="L419"><span class="lineNum">     419</span>              : </span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC tlaBgGNC">          31 : void PlaybackModel::update(const int tickFrom, const int tickTo, const track_idx_t trackFrom, const track_idx_t trackTo,</span></span>
+<span id="L421"><span class="lineNum">     421</span>              :                            ChangedTrackIdSet* trackChanges)</span>
+<span id="L422"><span class="lineNum">     422</span>              : {</span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">          31 :     m_score-&gt;masterScore()-&gt;setExpandRepeats(m_expandRepeats);</span></span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">          31 :     updateSetupData();</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">          31 :     updateContext(trackFrom, trackTo, tickFrom, tickTo);</span></span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">          31 :     updateEvents(tickFrom, tickTo, trackFrom, trackTo, trackChanges);</span></span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">          31 : }</span></span>
+<span id="L428"><span class="lineNum">     428</span>              : </span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">          31 : void PlaybackModel::updateSetupData()</span></span>
+<span id="L430"><span class="lineNum">     430</span>              : {</span>
+<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">          31 :     EID scoreEID = m_score-&gt;eid();</span></span>
+<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">          31 :     if (!scoreEID.isValid()) {</span></span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">          20 :         scoreEID = m_score-&gt;assignNewEID();</span></span>
+<span id="L434"><span class="lineNum">     434</span>              :     }</span>
+<span id="L435"><span class="lineNum">     435</span>              : </span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">          31 :     std::string scoreId = scoreEID.toStdString();</span></span>
+<span id="L437"><span class="lineNum">     437</span>              : </span>
+<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">         118 :     for (const Part* part : m_score-&gt;parts()) {</span></span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">         174 :         for (const auto&amp; pair : part-&gt;instruments()) {</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">          87 :             InstrumentTrackId trackId = idKey(part-&gt;id(), pair.second-&gt;id());</span></span>
+<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC">          87 :             if (!trackId.isValid() || muse::contains(m_playbackDataMap, trackId)) {</span></span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">          41 :                 continue;</span></span>
+<span id="L443"><span class="lineNum">     443</span>              :             }</span>
+<span id="L444"><span class="lineNum">     444</span>              : </span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">          46 :             PlaybackSetupData&amp; setupData = m_playbackDataMap[trackId].setupData;</span></span>
+<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">          46 :             m_setupResolver.resolveSetupData(pair.second, setupData);</span></span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">          46 :             setupData.scoreId = scoreId;</span></span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">          87 :         }</span></span>
+<span id="L449"><span class="lineNum">     449</span>              : </span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">          87 :         if (part-&gt;hasChordSymbol()) {</span></span>
+<span id="L451"><span class="lineNum">     451</span> <span class="tlaUNC tlaBgUNC">           0 :             InstrumentTrackId trackId = chordSymbolsTrackId(part-&gt;id());</span></span>
+<span id="L452"><span class="lineNum">     452</span> <span class="tlaUNC">           0 :             PlaybackSetupData&amp; setupData = m_playbackDataMap[trackId].setupData;</span></span>
+<span id="L453"><span class="lineNum">     453</span> <span class="tlaUNC">           0 :             m_setupResolver.resolveChordSymbolsSetupData(part-&gt;instrument(), setupData);</span></span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaUNC">           0 :             setupData.scoreId = scoreId;</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L456"><span class="lineNum">     456</span>              :     }</span>
+<span id="L457"><span class="lineNum">     457</span>              : </span>
+<span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC tlaBgGNC">          31 :     PlaybackSetupData&amp; metronomeSetupData = m_playbackDataMap[METRONOME_TRACK_ID].setupData;</span></span>
+<span id="L459"><span class="lineNum">     459</span> <span class="tlaGNC">          31 :     m_setupResolver.resolveMetronomeSetupData(metronomeSetupData);</span></span>
+<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC">          31 :     metronomeSetupData.scoreId = scoreId;</span></span>
+<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">          31 : }</span></span>
+<span id="L462"><span class="lineNum">     462</span>              : </span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">          31 : void PlaybackModel::updateContext(const track_idx_t trackFrom, const track_idx_t trackTo, const int tickFrom, const int tickTo)</span></span>
+<span id="L464"><span class="lineNum">     464</span>              : {</span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">          31 :     m_playbackCtx-&gt;update(trackFrom, trackTo, tickFrom, tickTo, m_expandRepeats);</span></span>
+<span id="L466"><span class="lineNum">     466</span>              : </span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">         118 :     for (const Part* part : m_score-&gt;parts()) {</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">          87 :         const TrackRange trackRange = part-&gt;trackRange();</span></span>
+<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">          87 :         if (trackTo &lt;= trackRange.startTrack || trackFrom &gt;= trackRange.endTrack) {</span></span>
+<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">          11 :             continue;</span></span>
+<span id="L471"><span class="lineNum">     471</span>              :         }</span>
+<span id="L472"><span class="lineNum">     472</span>              : </span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">          76 :         InstrumentTrackIdSet trackIds = part-&gt;instrumentTrackIdSet();</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">          76 :         if (part-&gt;hasChordSymbol()) {</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaUNC tlaBgUNC">           0 :             trackIds.insert(chordSymbolsTrackId(part-&gt;id()));</span></span>
+<span id="L476"><span class="lineNum">     476</span>              :         }</span>
+<span id="L477"><span class="lineNum">     477</span>              : </span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC tlaBgGNC">          76 :         if (trackIds.empty()) {</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
+<span id="L480"><span class="lineNum">     480</span>              :         }</span>
+<span id="L481"><span class="lineNum">     481</span>              : </span>
+<span id="L482"><span class="lineNum">     482</span>              :         const PartData data {</span>
+<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC tlaBgGNC">         152 :             m_playbackCtx-&gt;dynamicLevelLayers(trackRange.startTrack, trackRange.endTrack),</span></span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">         152 :             m_playbackCtx-&gt;soundPresets(trackRange.startTrack, trackRange.endTrack),</span></span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">         152 :             m_playbackCtx-&gt;textArticulations(trackRange.startTrack, trackRange.endTrack),</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">         152 :             m_playbackCtx-&gt;syllables(trackRange.startTrack, trackRange.endTrack)</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">          76 :         };</span></span>
+<span id="L488"><span class="lineNum">     488</span>              : </span>
+<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">         152 :         for (const InstrumentTrackId&amp; trackId : trackIds) {</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">          76 :             applyContextToTrackData(trackId, data);</span></span>
+<span id="L491"><span class="lineNum">     491</span>              :         }</span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">          76 :     }</span></span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">          31 : }</span></span>
+<span id="L494"><span class="lineNum">     494</span>              : </span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">          76 : void PlaybackModel::applyContextToTrackData(const InstrumentTrackId&amp; trackId, const PartData&amp; data)</span></span>
+<span id="L496"><span class="lineNum">     496</span>              : {</span>
+<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">          76 :     PlaybackData&amp; trackData = m_playbackDataMap[trackId];</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">          76 :     trackData.dynamics = data.dynamics;</span></span>
+<span id="L499"><span class="lineNum">     499</span>              : </span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">          76 :     std::set&lt;timestamp_t&gt; newEventTimestamps;</span></span>
+<span id="L501"><span class="lineNum">     501</span>              : </span>
+<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">         228 :     const auto appendEvents = [&amp;trackData, &amp;newEventTimestamps](const auto&amp; events) {</span></span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">         228 :         for (const auto&amp; pair : events) {</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaUNC tlaBgUNC">           0 :             PlaybackEventList&amp; list = trackData.originEvents[pair.first];</span></span>
+<span id="L505"><span class="lineNum">     505</span>              : </span>
+<span id="L506"><span class="lineNum">     506</span>              :             //! NOTE: this assumes that the list has already been cleared in clearExpiredEvents</span>
+<span id="L507"><span class="lineNum">     507</span>              :             //! Necessary to prevent event duplication (unchanged lists should not be modified)</span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaUNC">           0 :             if (list.empty() || muse::contains(newEventTimestamps, pair.first)) {</span></span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaUNC">           0 :                 list.insert(list.end(), pair.second.begin(), pair.second.end());</span></span>
+<span id="L510"><span class="lineNum">     510</span> <span class="tlaUNC">           0 :                 newEventTimestamps.insert(pair.first);</span></span>
+<span id="L511"><span class="lineNum">     511</span>              :             }</span>
+<span id="L512"><span class="lineNum">     512</span>              :         }</span>
+<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC tlaBgGNC">         304 :     };</span></span>
+<span id="L514"><span class="lineNum">     514</span>              : </span>
+<span id="L515"><span class="lineNum">     515</span> <span class="tlaGNC">          76 :     appendEvents(data.soundPresets);</span></span>
+<span id="L516"><span class="lineNum">     516</span> <span class="tlaGNC">          76 :     appendEvents(data.textArticulations);</span></span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">          76 :     appendEvents(data.syllables);</span></span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">          76 : }</span></span>
+<span id="L519"><span class="lineNum">     519</span>              : </span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">         581 : void PlaybackModel::processSegment(const int tickPositionOffset, const Segment* segment, const std::set&lt;staff_idx_t&gt;&amp; staffIdxSet,</span></span>
+<span id="L521"><span class="lineNum">     521</span>              :                                    bool isFirstChordRestSegmentOfMeasure, ChangedTrackIdSet* trackChanges)</span>
+<span id="L522"><span class="lineNum">     522</span>              : {</span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">         602 :     for (const EngravingItem* item : segment-&gt;annotations()) {</span></span>
+<span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">          21 :         if (!item || !item-&gt;part()) {</span></span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">          21 :             continue;</span></span>
+<span id="L526"><span class="lineNum">     526</span>              :         }</span>
+<span id="L527"><span class="lineNum">     527</span>              : </span>
+<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">          21 :         const Harmony* chordSymbol = findChordSymbol(item);</span></span>
+<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">          21 :         if (!chordSymbol) {</span></span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">          21 :             continue;</span></span>
+<span id="L531"><span class="lineNum">     531</span>              :         }</span>
+<span id="L532"><span class="lineNum">     532</span>              : </span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaUNC tlaBgUNC">           0 :         staff_idx_t staffIdx = item-&gt;staffIdx();</span></span>
+<span id="L534"><span class="lineNum">     534</span> <span class="tlaUNC">           0 :         if (staffIdxSet.find(staffIdx) == staffIdxSet.cend()) {</span></span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L536"><span class="lineNum">     536</span>              :         }</span>
+<span id="L537"><span class="lineNum">     537</span>              : </span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaUNC">           0 :         InstrumentTrackId trackId = chordSymbolsTrackId(item-&gt;part()-&gt;id());</span></span>
+<span id="L539"><span class="lineNum">     539</span>              : </span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaUNC">           0 :         ArticulationsProfilePtr profile = defaultActiculationProfile(trackId);</span></span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaUNC">           0 :         if (!profile) {</span></span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaUNC">           0 :             LOGE() &lt;&lt; &quot;unsupported instrument family: &quot; &lt;&lt; item-&gt;part()-&gt;id();</span></span>
+<span id="L543"><span class="lineNum">     543</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L544"><span class="lineNum">     544</span>              :         }</span>
+<span id="L545"><span class="lineNum">     545</span>              : </span>
+<span id="L546"><span class="lineNum">     546</span> <span class="tlaUNC">           0 :         if (chordSymbol-&gt;play()) {</span></span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaUNC">           0 :             m_renderer.renderChordSymbol(chordSymbol, tickPositionOffset, profile, m_playbackCtx,</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaUNC">           0 :                                          m_playbackDataMap[trackId].originEvents);</span></span>
+<span id="L549"><span class="lineNum">     549</span>              :         }</span>
+<span id="L550"><span class="lineNum">     550</span>              : </span>
+<span id="L551"><span class="lineNum">     551</span> <span class="tlaUNC">           0 :         collectChangesTracks(trackId, trackChanges);</span></span>
+<span id="L552"><span class="lineNum">     552</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L553"><span class="lineNum">     553</span>              : </span>
+<span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC tlaBgGNC">         581 :     if (segment-&gt;isTimeTickType()) {</span></span>
+<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">           6 :         return; // optimization: search only for annotations</span></span>
+<span id="L556"><span class="lineNum">     556</span>              :     }</span>
+<span id="L557"><span class="lineNum">     557</span>              : </span>
+<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">        4987 :     for (const EngravingItem* item : segment-&gt;elist()) {</span></span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">        4412 :         if (!item || !item-&gt;isChordRest() || !item-&gt;part()) {</span></span>
+<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">        3446 :             continue;</span></span>
+<span id="L561"><span class="lineNum">     561</span>              :         }</span>
+<span id="L562"><span class="lineNum">     562</span>              : </span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">        1103 :         staff_idx_t staffIdx = item-&gt;staffIdx();</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">        1103 :         if (staffIdxSet.find(staffIdx) == staffIdxSet.cend()) {</span></span>
+<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">          96 :             continue;</span></span>
+<span id="L566"><span class="lineNum">     566</span>              :         }</span>
+<span id="L567"><span class="lineNum">     567</span>              : </span>
+<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">        1007 :         InstrumentTrackId trackId = idKey(item);</span></span>
+<span id="L569"><span class="lineNum">     569</span>              : </span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">        1007 :         if (!trackId.isValid()) {</span></span>
+<span id="L571"><span class="lineNum">     571</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
+<span id="L572"><span class="lineNum">     572</span>              :         }</span>
+<span id="L573"><span class="lineNum">     573</span>              : </span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC tlaBgGNC">        1007 :         if (isFirstChordRestSegmentOfMeasure) {</span></span>
+<span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">         281 :             if (item-&gt;isMeasureRepeat()) {</span></span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">          16 :                 const MeasureRepeat* measureRepeat = toMeasureRepeat(item);</span></span>
+<span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC">          16 :                 const Measure* currentMeasure = measureRepeat-&gt;measure();</span></span>
+<span id="L578"><span class="lineNum">     578</span>              : </span>
+<span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">          16 :                 processMeasureRepeat(tickPositionOffset, measureRepeat, currentMeasure, staffIdx, trackChanges);</span></span>
+<span id="L580"><span class="lineNum">     580</span>              : </span>
+<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">          16 :                 continue;</span></span>
+<span id="L582"><span class="lineNum">     582</span> <span class="tlaGNC">         281 :             } else if (item-&gt;voice() == 0) {</span></span>
+<span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">         265 :                 const Measure* currentMeasure = segment-&gt;measure();</span></span>
+<span id="L584"><span class="lineNum">     584</span>              : </span>
+<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">         265 :                 if (currentMeasure-&gt;measureRepeatCount(staffIdx) &gt; 0) {</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">           5 :                     const MeasureRepeat* measureRepeat = currentMeasure-&gt;measureRepeatElement(staffIdx);</span></span>
+<span id="L587"><span class="lineNum">     587</span>              : </span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">           5 :                     processMeasureRepeat(tickPositionOffset, measureRepeat, currentMeasure, staffIdx, trackChanges);</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">           5 :                     continue;</span></span>
+<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">           5 :                 }</span></span>
+<span id="L591"><span class="lineNum">     591</span>              :             }</span>
+<span id="L592"><span class="lineNum">     592</span>              :         }</span>
+<span id="L593"><span class="lineNum">     593</span>              : </span>
+<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">         986 :         if (item-&gt;isRestFamily()) {</span></span>
+<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">          20 :             continue;</span></span>
+<span id="L596"><span class="lineNum">     596</span>              :         }</span>
+<span id="L597"><span class="lineNum">     597</span>              : </span>
+<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">         966 :         ArticulationsProfilePtr profile = defaultActiculationProfile(trackId);</span></span>
+<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">         966 :         if (!profile) {</span></span>
+<span id="L600"><span class="lineNum">     600</span> <span class="tlaUNC tlaBgUNC">           0 :             LOGE() &lt;&lt; &quot;unsupported instrument family: &quot; &lt;&lt; item-&gt;part()-&gt;id();</span></span>
+<span id="L601"><span class="lineNum">     601</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L602"><span class="lineNum">     602</span>              :         }</span>
+<span id="L603"><span class="lineNum">     603</span>              : </span>
+<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC tlaBgGNC">         966 :         m_renderer.render(item, tickPositionOffset, profile, m_playbackCtx, m_playbackDataMap[trackId].originEvents);</span></span>
+<span id="L605"><span class="lineNum">     605</span>              : </span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">         966 :         collectChangesTracks(trackId, trackChanges);</span></span>
+<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC">        1007 :     }</span></span>
+<span id="L608"><span class="lineNum">     608</span>              : }</span>
+<span id="L609"><span class="lineNum">     609</span>              : </span>
+<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC">          21 : void PlaybackModel::processMeasureRepeat(const int tickPositionOffset, const MeasureRepeat* measureRepeat, const Measure* currentMeasure,</span></span>
+<span id="L611"><span class="lineNum">     611</span>              :                                          const staff_idx_t staffIdx, ChangedTrackIdSet* trackChanges)</span>
+<span id="L612"><span class="lineNum">     612</span>              : {</span>
+<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">          21 :     if (!measureRepeat || !currentMeasure) {</span></span>
+<span id="L614"><span class="lineNum">     614</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L615"><span class="lineNum">     615</span>              :     }</span>
+<span id="L616"><span class="lineNum">     616</span>              : </span>
+<span id="L617"><span class="lineNum">     617</span> <span class="tlaGNC tlaBgGNC">          21 :     const Measure* referringMeasure = measureRepeat-&gt;referringMeasure(currentMeasure);</span></span>
+<span id="L618"><span class="lineNum">     618</span> <span class="tlaGNC">          21 :     if (!referringMeasure) {</span></span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L620"><span class="lineNum">     620</span>              :     }</span>
+<span id="L621"><span class="lineNum">     621</span>              : </span>
+<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC tlaBgGNC">          21 :     IF_ASSERT_FAILED(referringMeasure != currentMeasure) {</span></span>
+<span id="L623"><span class="lineNum">     623</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L624"><span class="lineNum">     624</span>              :     }</span>
+<span id="L625"><span class="lineNum">     625</span>              : </span>
+<span id="L626"><span class="lineNum">     626</span> <span class="tlaGNC tlaBgGNC">          21 :     int currentMeasureTick = currentMeasure-&gt;tick().ticks();</span></span>
+<span id="L627"><span class="lineNum">     627</span> <span class="tlaGNC">          21 :     int referringMeasureTick = referringMeasure-&gt;tick().ticks();</span></span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">          21 :     int repeatPositionTickOffset = currentMeasureTick - referringMeasureTick;</span></span>
+<span id="L629"><span class="lineNum">     629</span> <span class="tlaGNC">          21 :     int tickFrom = tickPositionOffset + repeatPositionTickOffset;</span></span>
+<span id="L630"><span class="lineNum">     630</span>              : </span>
+<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">          42 :     std::set&lt;staff_idx_t&gt; staffToProcessIdxSet { staffIdx };</span></span>
+<span id="L632"><span class="lineNum">     632</span> <span class="tlaGNC">          21 :     int chordRestSegmentNum = -1;</span></span>
+<span id="L633"><span class="lineNum">     633</span>              : </span>
+<span id="L634"><span class="lineNum">     634</span> <span class="tlaGNC">         134 :     for (const Segment* seg = referringMeasure-&gt;first(); seg; seg = seg-&gt;next()) {</span></span>
+<span id="L635"><span class="lineNum">     635</span> <span class="tlaGNC">         113 :         if (!seg-&gt;isChordRestType() &amp;&amp; !seg-&gt;isTimeTickType()) {</span></span>
+<span id="L636"><span class="lineNum">     636</span> <span class="tlaGNC">          45 :             continue;</span></span>
+<span id="L637"><span class="lineNum">     637</span>              :         }</span>
+<span id="L638"><span class="lineNum">     638</span>              : </span>
+<span id="L639"><span class="lineNum">     639</span> <span class="tlaGNC">          68 :         if (seg-&gt;isChordRestType()) {</span></span>
+<span id="L640"><span class="lineNum">     640</span> <span class="tlaGNC">          68 :             chordRestSegmentNum++;</span></span>
+<span id="L641"><span class="lineNum">     641</span>              :         }</span>
+<span id="L642"><span class="lineNum">     642</span>              : </span>
+<span id="L643"><span class="lineNum">     643</span> <span class="tlaGNC">          68 :         processSegment(tickFrom, seg, staffToProcessIdxSet, chordRestSegmentNum == 0, trackChanges);</span></span>
+<span id="L644"><span class="lineNum">     644</span>              :     }</span>
+<span id="L645"><span class="lineNum">     645</span> <span class="tlaGNC">          21 : }</span></span>
+<span id="L646"><span class="lineNum">     646</span>              : </span>
+<span id="L647"><span class="lineNum">     647</span> <span class="tlaGNC">          31 : void PlaybackModel::updateEvents(const int tickFrom, const int tickTo, const track_idx_t trackFrom, const track_idx_t trackTo,</span></span>
+<span id="L648"><span class="lineNum">     648</span>              :                                  ChangedTrackIdSet* trackChanges)</span>
+<span id="L649"><span class="lineNum">     649</span>              : {</span>
+<span id="L650"><span class="lineNum">     650</span> <span class="tlaGNC">          32 :     TRACEFUNC;</span></span>
+<span id="L651"><span class="lineNum">     651</span>              : </span>
+<span id="L652"><span class="lineNum">     652</span> <span class="tlaGNC">          62 :     std::set&lt;staff_idx_t&gt; staffToProcessIdxSet = m_score-&gt;staffIdxSetFromRange(trackFrom, trackTo, [](const Staff&amp; staff) {</span></span>
+<span id="L653"><span class="lineNum">     653</span> <span class="tlaGNC">          85 :         return staff.isPrimaryStaff(); // skip linked staves</span></span>
+<span id="L654"><span class="lineNum">     654</span> <span class="tlaGNC">          31 :     });</span></span>
+<span id="L655"><span class="lineNum">     655</span>              : </span>
+<span id="L656"><span class="lineNum">     656</span> <span class="tlaGNC">          31 :     const ArticulationsProfilePtr metronomeProfile = defaultActiculationProfile(METRONOME_TRACK_ID);</span></span>
+<span id="L657"><span class="lineNum">     657</span> <span class="tlaGNC">          31 :     PlaybackEventsMap&amp; metronomeEvents = m_playbackDataMap[METRONOME_TRACK_ID].originEvents;</span></span>
+<span id="L658"><span class="lineNum">     658</span>              : </span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC">          79 :     for (const RepeatSegment* repeatSegment : repeatList()) {</span></span>
+<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">          48 :         int tickPositionOffset = repeatSegment-&gt;utick - repeatSegment-&gt;tick;</span></span>
+<span id="L661"><span class="lineNum">     661</span> <span class="tlaGNC">          48 :         int repeatStartTick = repeatSegment-&gt;tick;</span></span>
+<span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">          48 :         int repeatEndTick = repeatSegment-&gt;endTick();</span></span>
+<span id="L663"><span class="lineNum">     663</span>              : </span>
+<span id="L664"><span class="lineNum">     664</span> <span class="tlaGNC">          48 :         if (repeatStartTick &gt; tickTo || repeatEndTick &lt;= tickFrom) {</span></span>
+<span id="L665"><span class="lineNum">     665</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
+<span id="L666"><span class="lineNum">     666</span>              :         }</span>
+<span id="L667"><span class="lineNum">     667</span>              : </span>
+<span id="L668"><span class="lineNum">     668</span> <span class="tlaGNC tlaBgGNC">         210 :         for (const Measure* measure : repeatSegment-&gt;measureList()) {</span></span>
+<span id="L669"><span class="lineNum">     669</span> <span class="tlaGNC">         162 :             int measureStartTick = measure-&gt;tick().ticks();</span></span>
+<span id="L670"><span class="lineNum">     670</span> <span class="tlaGNC">         162 :             int measureEndTick = measure-&gt;endTick().ticks();</span></span>
+<span id="L671"><span class="lineNum">     671</span>              : </span>
+<span id="L672"><span class="lineNum">     672</span> <span class="tlaGNC">         162 :             if (measureStartTick &gt; tickTo || measureEndTick &lt;= tickFrom) {</span></span>
+<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC">          10 :                 continue;</span></span>
+<span id="L674"><span class="lineNum">     674</span>              :             }</span>
+<span id="L675"><span class="lineNum">     675</span>              : </span>
+<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">         152 :             int chordRestSegmentNum = -1;</span></span>
+<span id="L677"><span class="lineNum">     677</span>              : </span>
+<span id="L678"><span class="lineNum">     678</span> <span class="tlaGNC">         981 :             for (const Segment* segment = measure-&gt;first(); segment; segment = segment-&gt;next()) {</span></span>
+<span id="L679"><span class="lineNum">     679</span> <span class="tlaGNC">         829 :                 if (!segment-&gt;isChordRestType() &amp;&amp; !segment-&gt;isTimeTickType()) {</span></span>
+<span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC">         293 :                     continue;</span></span>
+<span id="L681"><span class="lineNum">     681</span>              :                 }</span>
+<span id="L682"><span class="lineNum">     682</span>              : </span>
+<span id="L683"><span class="lineNum">     683</span> <span class="tlaGNC">         536 :                 int segmentStartTick = segment-&gt;tick().ticks();</span></span>
+<span id="L684"><span class="lineNum">     684</span> <span class="tlaGNC">         536 :                 int segmentEndTick = segmentStartTick + segment-&gt;ticks().ticks();</span></span>
+<span id="L685"><span class="lineNum">     685</span>              : </span>
+<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">         536 :                 if (segmentStartTick &gt; tickTo || segmentEndTick &lt;= tickFrom) {</span></span>
+<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">          23 :                     continue;</span></span>
+<span id="L688"><span class="lineNum">     688</span>              :                 }</span>
+<span id="L689"><span class="lineNum">     689</span>              : </span>
+<span id="L690"><span class="lineNum">     690</span> <span class="tlaGNC">         513 :                 if (segment-&gt;isChordRestType()) {</span></span>
+<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">         507 :                     chordRestSegmentNum++;</span></span>
+<span id="L692"><span class="lineNum">     692</span>              :                 }</span>
+<span id="L693"><span class="lineNum">     693</span>              : </span>
+<span id="L694"><span class="lineNum">     694</span> <span class="tlaGNC">         513 :                 processSegment(tickPositionOffset, segment, staffToProcessIdxSet, chordRestSegmentNum == 0, trackChanges);</span></span>
+<span id="L695"><span class="lineNum">     695</span>              :             }</span>
+<span id="L696"><span class="lineNum">     696</span>              : </span>
+<span id="L697"><span class="lineNum">     697</span> <span class="tlaGNC">         152 :             if (m_metronomeEnabled) {</span></span>
+<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC">         148 :                 m_renderer.renderMetronome(m_score, measure, tickPositionOffset, metronomeProfile, metronomeEvents);</span></span>
+<span id="L699"><span class="lineNum">     699</span> <span class="tlaGNC">         148 :                 collectChangesTracks(METRONOME_TRACK_ID, trackChanges);</span></span>
+<span id="L700"><span class="lineNum">     700</span>              :             }</span>
+<span id="L701"><span class="lineNum">     701</span>              :         }</span>
+<span id="L702"><span class="lineNum">     702</span>              :     }</span>
+<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">          31 : }</span></span>
+<span id="L704"><span class="lineNum">     704</span>              : </span>
+<span id="L705"><span class="lineNum">     705</span> <span class="tlaGNC">           1 : void PlaybackModel::reloadMetronomeEvents()</span></span>
+<span id="L706"><span class="lineNum">     706</span>              : {</span>
+<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">           2 :     TRACEFUNC;</span></span>
+<span id="L708"><span class="lineNum">     708</span>              : </span>
+<span id="L709"><span class="lineNum">     709</span> <span class="tlaGNC">           1 :     PlaybackData&amp; metronomeData = m_playbackDataMap[METRONOME_TRACK_ID];</span></span>
+<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">           1 :     metronomeData.originEvents.clear();</span></span>
+<span id="L711"><span class="lineNum">     711</span>              : </span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">           1 :     if (!m_metronomeEnabled) {</span></span>
+<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC">           1 :         metronomeData.mainStream.send(metronomeData.originEvents, metronomeData.dynamics);</span></span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">           1 :         return;</span></span>
+<span id="L715"><span class="lineNum">     715</span>              :     }</span>
+<span id="L716"><span class="lineNum">     716</span>              : </span>
+<span id="L717"><span class="lineNum">     717</span> <span class="tlaUNC tlaBgUNC">           0 :     const ArticulationsProfilePtr metronomeProfile = defaultActiculationProfile(METRONOME_TRACK_ID);</span></span>
+<span id="L718"><span class="lineNum">     718</span>              : </span>
+<span id="L719"><span class="lineNum">     719</span> <span class="tlaUNC">           0 :     for (const RepeatSegment* repeatSegment : repeatList()) {</span></span>
+<span id="L720"><span class="lineNum">     720</span> <span class="tlaUNC">           0 :         int tickPositionOffset = repeatSegment-&gt;utick - repeatSegment-&gt;tick;</span></span>
+<span id="L721"><span class="lineNum">     721</span>              : </span>
+<span id="L722"><span class="lineNum">     722</span> <span class="tlaUNC">           0 :         for (const Measure* measure : repeatSegment-&gt;measureList()) {</span></span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaUNC">           0 :             m_renderer.renderMetronome(m_score, measure, tickPositionOffset, metronomeProfile, metronomeData.originEvents);</span></span>
+<span id="L724"><span class="lineNum">     724</span>              :         }</span>
+<span id="L725"><span class="lineNum">     725</span>              :     }</span>
+<span id="L726"><span class="lineNum">     726</span>              : </span>
+<span id="L727"><span class="lineNum">     727</span> <span class="tlaUNC">           0 :     metronomeData.mainStream.send(metronomeData.originEvents, metronomeData.dynamics);</span></span>
+<span id="L728"><span class="lineNum">     728</span> <span class="tlaUNC">           0 :     muse::remove(m_changedTrackIdSet, METRONOME_TRACK_ID);</span></span>
+<span id="L729"><span class="lineNum">     729</span> <span class="tlaGNC tlaBgGNC">           1 : }</span></span>
+<span id="L730"><span class="lineNum">     730</span>              : </span>
+<span id="L731"><span class="lineNum">     731</span> <span class="tlaGNC">           7 : bool PlaybackModel::hasToReloadTracks(const ScoreChanges&amp; changes) const</span></span>
+<span id="L732"><span class="lineNum">     732</span>              : {</span>
+<span id="L733"><span class="lineNum">     733</span>              :     static const std::unordered_set&lt;ElementType&gt; REQUIRED_TYPES {</span>
+<span id="L734"><span class="lineNum">     734</span>              :         ElementType::PART,</span>
+<span id="L735"><span class="lineNum">     735</span>              :         ElementType::PLAYTECH_ANNOTATION,</span>
+<span id="L736"><span class="lineNum">     736</span>              :         ElementType::CAPO,</span>
+<span id="L737"><span class="lineNum">     737</span>              :         ElementType::DYNAMIC,</span>
+<span id="L738"><span class="lineNum">     738</span>              :         ElementType::HAIRPIN,</span>
+<span id="L739"><span class="lineNum">     739</span>              :         ElementType::HAIRPIN_SEGMENT,</span>
+<span id="L740"><span class="lineNum">     740</span>              :         ElementType::HARMONY,</span>
+<span id="L741"><span class="lineNum">     741</span>              :         ElementType::STAFF_TEXT,</span>
+<span id="L742"><span class="lineNum">     742</span>              :         ElementType::SOUND_FLAG,</span>
+<span id="L743"><span class="lineNum">     743</span>              :         ElementType::MEASURE_REPEAT,</span>
+<span id="L744"><span class="lineNum">     744</span>              :         ElementType::GUITAR_BEND,</span>
+<span id="L745"><span class="lineNum">     745</span>              :         ElementType::GUITAR_BEND_SEGMENT,</span>
+<span id="L746"><span class="lineNum">     746</span>              :         ElementType::BREATH,</span>
+<span id="L747"><span class="lineNum">     747</span> <span class="tlaGNC">           9 :     };</span></span>
+<span id="L748"><span class="lineNum">     748</span>              : </span>
+<span id="L749"><span class="lineNum">     749</span> <span class="tlaGNC">          15 :     for (const ElementType type : changes.changedTypes) {</span></span>
+<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">           8 :         if (muse::contains(REQUIRED_TYPES, type)) {</span></span>
+<span id="L751"><span class="lineNum">     751</span> <span class="tlaUNC tlaBgUNC">           0 :             return true;</span></span>
+<span id="L752"><span class="lineNum">     752</span>              :         }</span>
+<span id="L753"><span class="lineNum">     753</span>              :     }</span>
+<span id="L754"><span class="lineNum">     754</span>              : </span>
+<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC tlaBgGNC">           7 :     if (changes.isValidBoundary()) {</span></span>
+<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">           7 :         const Measure* measureTo = m_score-&gt;tick2measure(Fraction::fromTicks(changes.tickTo));</span></span>
+<span id="L757"><span class="lineNum">     757</span> <span class="tlaGNC">           7 :         if (!measureTo) {</span></span>
+<span id="L758"><span class="lineNum">     758</span> <span class="tlaUNC tlaBgUNC">           0 :             return false;</span></span>
+<span id="L759"><span class="lineNum">     759</span>              :         }</span>
+<span id="L760"><span class="lineNum">     760</span>              : </span>
+<span id="L761"><span class="lineNum">     761</span> <span class="tlaGNC tlaBgGNC">           7 :         if (measureTo-&gt;containsMeasureRepeat(changes.staffIdxFrom, changes.staffIdxTo)) {</span></span>
+<span id="L762"><span class="lineNum">     762</span> <span class="tlaUNC tlaBgUNC">           0 :             return true;</span></span>
+<span id="L763"><span class="lineNum">     763</span>              :         }</span>
+<span id="L764"><span class="lineNum">     764</span>              : </span>
+<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC tlaBgGNC">           7 :         const Measure* nextMeasure = measureTo-&gt;nextMeasure();</span></span>
+<span id="L766"><span class="lineNum">     766</span>              : </span>
+<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">          11 :         for (int i = 0; i &lt; MeasureRepeat::MAX_NUM_MEASURES &amp;&amp; nextMeasure; ++i) {</span></span>
+<span id="L768"><span class="lineNum">     768</span> <span class="tlaGNC">           4 :             if (nextMeasure-&gt;containsMeasureRepeat(changes.staffIdxFrom, changes.staffIdxTo)) {</span></span>
+<span id="L769"><span class="lineNum">     769</span> <span class="tlaUNC tlaBgUNC">           0 :                 return true;</span></span>
+<span id="L770"><span class="lineNum">     770</span>              :             }</span>
+<span id="L771"><span class="lineNum">     771</span>              : </span>
+<span id="L772"><span class="lineNum">     772</span> <span class="tlaGNC tlaBgGNC">           4 :             nextMeasure = nextMeasure-&gt;nextMeasure();</span></span>
+<span id="L773"><span class="lineNum">     773</span>              :         }</span>
+<span id="L774"><span class="lineNum">     774</span>              :     }</span>
+<span id="L775"><span class="lineNum">     775</span>              : </span>
+<span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">           7 :     return false;</span></span>
+<span id="L777"><span class="lineNum">     777</span>              : }</span>
+<span id="L778"><span class="lineNum">     778</span>              : </span>
+<span id="L779"><span class="lineNum">     779</span> <span class="tlaGNC">          14 : bool PlaybackModel::hasToReloadScore(const ScoreChanges&amp; changes) const</span></span>
+<span id="L780"><span class="lineNum">     780</span>              : {</span>
+<span id="L781"><span class="lineNum">     781</span>              :     static const std::unordered_set&lt;ElementType&gt; REQUIRED_TYPES {</span>
+<span id="L782"><span class="lineNum">     782</span>              :         ElementType::SCORE,</span>
+<span id="L783"><span class="lineNum">     783</span>              :         ElementType::GRADUAL_TEMPO_CHANGE,</span>
+<span id="L784"><span class="lineNum">     784</span>              :         ElementType::GRADUAL_TEMPO_CHANGE_SEGMENT,</span>
+<span id="L785"><span class="lineNum">     785</span>              :         ElementType::TEMPO_TEXT,</span>
+<span id="L786"><span class="lineNum">     786</span>              :         ElementType::LAYOUT_BREAK,</span>
+<span id="L787"><span class="lineNum">     787</span>              :         ElementType::FERMATA,</span>
+<span id="L788"><span class="lineNum">     788</span>              :         ElementType::VOLTA,</span>
+<span id="L789"><span class="lineNum">     789</span>              :         ElementType::VOLTA_SEGMENT,</span>
+<span id="L790"><span class="lineNum">     790</span>              :         ElementType::SYSTEM_TEXT,</span>
+<span id="L791"><span class="lineNum">     791</span>              :         ElementType::JUMP,</span>
+<span id="L792"><span class="lineNum">     792</span>              :         ElementType::MARKER,</span>
+<span id="L793"><span class="lineNum">     793</span>              :         ElementType::BREATH,</span>
+<span id="L794"><span class="lineNum">     794</span>              :         ElementType::INSTRUMENT_CHANGE,</span>
+<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">          16 :     };</span></span>
+<span id="L796"><span class="lineNum">     796</span>              : </span>
+<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">          26 :     for (const ElementType type : changes.changedTypes) {</span></span>
+<span id="L798"><span class="lineNum">     798</span>              :         // Automation edits on one staff shouldn't reload all tracks</span>
+<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">          16 :         if (type == ElementType::SCORE &amp;&amp; isScopedAutomationChange(changes)) {</span></span>
+<span id="L800"><span class="lineNum">     800</span> <span class="tlaGNC">           2 :             continue;</span></span>
+<span id="L801"><span class="lineNum">     801</span>              :         }</span>
+<span id="L802"><span class="lineNum">     802</span>              : </span>
+<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC">          14 :         if (muse::contains(REQUIRED_TYPES, type)) {</span></span>
+<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC">           4 :             return true;</span></span>
+<span id="L805"><span class="lineNum">     805</span>              :         }</span>
+<span id="L806"><span class="lineNum">     806</span>              :     }</span>
+<span id="L807"><span class="lineNum">     807</span>              : </span>
+<span id="L808"><span class="lineNum">     808</span>              :     static const std::unordered_set&lt;mu::engraving::Pid&gt; REQUIRED_PROPERTIES {</span>
+<span id="L809"><span class="lineNum">     809</span>              :         mu::engraving::Pid::REPEAT_START,</span>
+<span id="L810"><span class="lineNum">     810</span>              :         mu::engraving::Pid::REPEAT_END,</span>
+<span id="L811"><span class="lineNum">     811</span>              :         mu::engraving::Pid::REPEAT_JUMP,</span>
+<span id="L812"><span class="lineNum">     812</span>              :         mu::engraving::Pid::REPEAT_COUNT,</span>
+<span id="L813"><span class="lineNum">     813</span> <span class="tlaGNC">          12 :     };</span></span>
+<span id="L814"><span class="lineNum">     814</span>              : </span>
+<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">          10 :     for (const Pid pid: changes.changedPropertyIdSet) {</span></span>
+<span id="L816"><span class="lineNum">     816</span> <span class="tlaUNC tlaBgUNC">           0 :         if (muse::contains(REQUIRED_PROPERTIES, pid)) {</span></span>
+<span id="L817"><span class="lineNum">     817</span> <span class="tlaUNC">           0 :             return true;</span></span>
+<span id="L818"><span class="lineNum">     818</span>              :         }</span>
+<span id="L819"><span class="lineNum">     819</span>              :     }</span>
+<span id="L820"><span class="lineNum">     820</span>              : </span>
+<span id="L821"><span class="lineNum">     821</span> <span class="tlaGNC tlaBgGNC">          10 :     return false;</span></span>
+<span id="L822"><span class="lineNum">     822</span>              : }</span>
+<span id="L823"><span class="lineNum">     823</span>              : </span>
+<span id="L824"><span class="lineNum">     824</span> <span class="tlaGNC">           5 : bool PlaybackModel::hasAutomationChange(const ScoreChanges&amp; changes) const</span></span>
+<span id="L825"><span class="lineNum">     825</span>              : {</span>
+<span id="L826"><span class="lineNum">     826</span> <span class="tlaGNC">           5 :     for (const auto&amp; pair : changes.changedObjects) {</span></span>
+<span id="L827"><span class="lineNum">     827</span> <span class="tlaGNC">           1 :         if (muse::contains(pair.second, CommandType::EditAutomationPoints)) {</span></span>
+<span id="L828"><span class="lineNum">     828</span> <span class="tlaGNC">           1 :             return true;</span></span>
+<span id="L829"><span class="lineNum">     829</span>              :         }</span>
+<span id="L830"><span class="lineNum">     830</span>              :     }</span>
+<span id="L831"><span class="lineNum">     831</span>              : </span>
+<span id="L832"><span class="lineNum">     832</span> <span class="tlaGNC">           4 :     return false;</span></span>
+<span id="L833"><span class="lineNum">     833</span>              : }</span>
+<span id="L834"><span class="lineNum">     834</span>              : </span>
+<span id="L835"><span class="lineNum">     835</span> <span class="tlaGNC">           8 : void PlaybackModel::clearExpiredTracks()</span></span>
+<span id="L836"><span class="lineNum">     836</span>              : {</span>
+<span id="L837"><span class="lineNum">     837</span> <span class="tlaGNC">          41 :     auto needRemoveTrack = [this](const InstrumentTrackId&amp; trackId) {</span></span>
+<span id="L838"><span class="lineNum">     838</span> <span class="tlaGNC">          41 :         const Part* part = m_score-&gt;partById(trackId.partId.toUint64());</span></span>
+<span id="L839"><span class="lineNum">     839</span>              : </span>
+<span id="L840"><span class="lineNum">     840</span> <span class="tlaGNC">          41 :         if (!part) {</span></span>
+<span id="L841"><span class="lineNum">     841</span> <span class="tlaUNC tlaBgUNC">           0 :             return true;</span></span>
+<span id="L842"><span class="lineNum">     842</span>              :         }</span>
+<span id="L843"><span class="lineNum">     843</span>              : </span>
+<span id="L844"><span class="lineNum">     844</span> <span class="tlaGNC tlaBgGNC">          41 :         if (trackId.instrumentId == CHORD_SYMBOLS_INSTRUMENT_ID) {</span></span>
+<span id="L845"><span class="lineNum">     845</span> <span class="tlaUNC tlaBgUNC">           0 :             return !part-&gt;hasChordSymbol();</span></span>
+<span id="L846"><span class="lineNum">     846</span>              :         }</span>
+<span id="L847"><span class="lineNum">     847</span>              : </span>
+<span id="L848"><span class="lineNum">     848</span> <span class="tlaGNC tlaBgGNC">          41 :         return !part-&gt;instruments().contains(trackId.instrumentId);</span></span>
+<span id="L849"><span class="lineNum">     849</span> <span class="tlaGNC">           8 :     };</span></span>
+<span id="L850"><span class="lineNum">     850</span>              : </span>
+<span id="L851"><span class="lineNum">     851</span> <span class="tlaGNC">           8 :     auto it = m_playbackDataMap.cbegin();</span></span>
+<span id="L852"><span class="lineNum">     852</span>              : </span>
+<span id="L853"><span class="lineNum">     853</span> <span class="tlaGNC">          57 :     while (it != m_playbackDataMap.cend()) {</span></span>
+<span id="L854"><span class="lineNum">     854</span> <span class="tlaGNC">          49 :         if (it-&gt;first == METRONOME_TRACK_ID) {</span></span>
+<span id="L855"><span class="lineNum">     855</span> <span class="tlaGNC">           8 :             ++it;</span></span>
+<span id="L856"><span class="lineNum">     856</span> <span class="tlaGNC">           8 :             continue;</span></span>
+<span id="L857"><span class="lineNum">     857</span>              :         }</span>
+<span id="L858"><span class="lineNum">     858</span>              : </span>
+<span id="L859"><span class="lineNum">     859</span> <span class="tlaGNC">          41 :         if (needRemoveTrack(it-&gt;first)) {</span></span>
+<span id="L860"><span class="lineNum">     860</span> <span class="tlaUNC tlaBgUNC">           0 :             m_trackRemoved.send(it-&gt;first);</span></span>
+<span id="L861"><span class="lineNum">     861</span> <span class="tlaUNC">           0 :             it = m_playbackDataMap.erase(it);</span></span>
+<span id="L862"><span class="lineNum">     862</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L863"><span class="lineNum">     863</span>              :         }</span>
+<span id="L864"><span class="lineNum">     864</span>              : </span>
+<span id="L865"><span class="lineNum">     865</span> <span class="tlaGNC tlaBgGNC">          41 :         ++it;</span></span>
+<span id="L866"><span class="lineNum">     866</span>              :     }</span>
+<span id="L867"><span class="lineNum">     867</span> <span class="tlaGNC">           8 : }</span></span>
+<span id="L868"><span class="lineNum">     868</span>              : </span>
+<span id="L869"><span class="lineNum">     869</span> <span class="tlaGNC">          10 : void mu::engraving::PlaybackModel::removeEventsFromRange(const track_idx_t trackFrom, const track_idx_t trackTo,</span></span>
+<span id="L870"><span class="lineNum">     870</span>              :                                                          const timestamp_t timestampFrom, const timestamp_t timestampTo,</span>
+<span id="L871"><span class="lineNum">     871</span>              :                                                          ChangedTrackIdSet* trackChanges)</span>
+<span id="L872"><span class="lineNum">     872</span>              : {</span>
+<span id="L873"><span class="lineNum">     873</span> <span class="tlaGNC">          53 :     for (const Part* part : m_score-&gt;parts()) {</span></span>
+<span id="L874"><span class="lineNum">     874</span> <span class="tlaGNC">          43 :         const TrackRange trackRange = part-&gt;trackRange();</span></span>
+<span id="L875"><span class="lineNum">     875</span> <span class="tlaGNC">          43 :         if (trackRange.startTrack &gt; trackTo || trackRange.endTrack &lt;= trackFrom) {</span></span>
+<span id="L876"><span class="lineNum">     876</span> <span class="tlaGNC">          10 :             continue;</span></span>
+<span id="L877"><span class="lineNum">     877</span>              :         }</span>
+<span id="L878"><span class="lineNum">     878</span>              : </span>
+<span id="L879"><span class="lineNum">     879</span> <span class="tlaGNC">          66 :         for (const InstrumentTrackId&amp; trackId : part-&gt;instrumentTrackIdSet()) {</span></span>
+<span id="L880"><span class="lineNum">     880</span> <span class="tlaGNC">          33 :             removeTrackEvents(trackId, timestampFrom, timestampTo, trackChanges);</span></span>
+<span id="L881"><span class="lineNum">     881</span> <span class="tlaGNC">          33 :         }</span></span>
+<span id="L882"><span class="lineNum">     882</span>              : </span>
+<span id="L883"><span class="lineNum">     883</span> <span class="tlaGNC">          33 :         removeTrackEvents(chordSymbolsTrackId(part-&gt;id()), timestampFrom, timestampTo, trackChanges);</span></span>
+<span id="L884"><span class="lineNum">     884</span>              :     }</span>
+<span id="L885"><span class="lineNum">     885</span> <span class="tlaGNC">          10 : }</span></span>
+<span id="L886"><span class="lineNum">     886</span>              : </span>
+<span id="L887"><span class="lineNum">     887</span> <span class="tlaGNC">           7 : void PlaybackModel::clearExpiredEvents(const int tickFrom, const int tickTo, const track_idx_t trackFrom, const track_idx_t trackTo,</span></span>
+<span id="L888"><span class="lineNum">     888</span>              :                                        ChangedTrackIdSet* trackChanges)</span>
+<span id="L889"><span class="lineNum">     889</span>              : {</span>
+<span id="L890"><span class="lineNum">     890</span> <span class="tlaGNC">           8 :     TRACEFUNC;</span></span>
+<span id="L891"><span class="lineNum">     891</span>              : </span>
+<span id="L892"><span class="lineNum">     892</span> <span class="tlaGNC">           7 :     if (!m_score) {</span></span>
+<span id="L893"><span class="lineNum">     893</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L894"><span class="lineNum">     894</span>              :     }</span>
+<span id="L895"><span class="lineNum">     895</span>              : </span>
+<span id="L896"><span class="lineNum">     896</span> <span class="tlaGNC tlaBgGNC">           7 :     const Measure* lastMeasure = m_score-&gt;lastMeasure();</span></span>
+<span id="L897"><span class="lineNum">     897</span> <span class="tlaGNC">           7 :     if (!lastMeasure) {</span></span>
+<span id="L898"><span class="lineNum">     898</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L899"><span class="lineNum">     899</span>              :     }</span>
+<span id="L900"><span class="lineNum">     900</span>              : </span>
+<span id="L901"><span class="lineNum">     901</span> <span class="tlaGNC tlaBgGNC">           7 :     if (tickFrom == 0 &amp;&amp; lastMeasure-&gt;endTick().ticks() == tickTo) {</span></span>
+<span id="L902"><span class="lineNum">     902</span> <span class="tlaGNC">           3 :         removeEventsFromRange(trackFrom, trackTo, -1 /*timestampFrom*/, -1 /*timestampTo*/, trackChanges);</span></span>
+<span id="L903"><span class="lineNum">     903</span> <span class="tlaGNC">           3 :         removeTrackEvents(METRONOME_TRACK_ID, -1 /*timestampFrom*/, -1 /*timestampTo*/, trackChanges);</span></span>
+<span id="L904"><span class="lineNum">     904</span> <span class="tlaGNC">           3 :         return;</span></span>
+<span id="L905"><span class="lineNum">     905</span>              :     }</span>
+<span id="L906"><span class="lineNum">     906</span>              : </span>
+<span id="L907"><span class="lineNum">     907</span> <span class="tlaGNC">          11 :     for (const RepeatSegment* repeatSegment : repeatList()) {</span></span>
+<span id="L908"><span class="lineNum">     908</span> <span class="tlaGNC">           7 :         const int tickPositionOffset = repeatSegment-&gt;utick - repeatSegment-&gt;tick;</span></span>
+<span id="L909"><span class="lineNum">     909</span> <span class="tlaGNC">           7 :         const int repeatStartTick = repeatSegment-&gt;tick;</span></span>
+<span id="L910"><span class="lineNum">     910</span> <span class="tlaGNC">           7 :         const int repeatEndTick = repeatSegment-&gt;endTick();</span></span>
+<span id="L911"><span class="lineNum">     911</span>              : </span>
+<span id="L912"><span class="lineNum">     912</span> <span class="tlaGNC">           7 :         if (repeatStartTick &gt; tickTo || repeatEndTick &lt;= tickFrom) {</span></span>
+<span id="L913"><span class="lineNum">     913</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
+<span id="L914"><span class="lineNum">     914</span>              :         }</span>
+<span id="L915"><span class="lineNum">     915</span>              : </span>
+<span id="L916"><span class="lineNum">     916</span> <span class="tlaGNC tlaBgGNC">           7 :         int removeEventsFromTick = std::max(tickFrom, repeatStartTick);</span></span>
+<span id="L917"><span class="lineNum">     917</span> <span class="tlaGNC">           7 :         timestamp_t removeEventsFrom = timestampFromTicks(m_score, removeEventsFromTick + tickPositionOffset);</span></span>
+<span id="L918"><span class="lineNum">     918</span>              : </span>
+<span id="L919"><span class="lineNum">     919</span>              :         //! NOTE: the end tick of the current repeat segment == the start tick of the next repeat segment</span>
+<span id="L920"><span class="lineNum">     920</span>              :         //! so subtract 1 to avoid removing events belonging to the next segment</span>
+<span id="L921"><span class="lineNum">     921</span> <span class="tlaGNC">           7 :         int removeEventsToTick = std::min(tickTo, repeatEndTick - 1);</span></span>
+<span id="L922"><span class="lineNum">     922</span> <span class="tlaGNC">           7 :         timestamp_t removeEventsTo = timestampFromTicks(m_score, removeEventsToTick + tickPositionOffset);</span></span>
+<span id="L923"><span class="lineNum">     923</span>              : </span>
+<span id="L924"><span class="lineNum">     924</span> <span class="tlaGNC">           7 :         removeEventsFromRange(trackFrom, trackTo, removeEventsFrom, removeEventsTo, trackChanges);</span></span>
+<span id="L925"><span class="lineNum">     925</span>              : </span>
+<span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">           7 :         if (!m_metronomeEnabled) {</span></span>
+<span id="L927"><span class="lineNum">     927</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
+<span id="L928"><span class="lineNum">     928</span>              :         }</span>
+<span id="L929"><span class="lineNum">     929</span>              : </span>
+<span id="L930"><span class="lineNum">     930</span> <span class="tlaGNC tlaBgGNC">          29 :         for (const Measure* measure : repeatSegment-&gt;measureList()) {</span></span>
+<span id="L931"><span class="lineNum">     931</span> <span class="tlaGNC">          22 :             const int measureStartTick = measure-&gt;tick().ticks();</span></span>
+<span id="L932"><span class="lineNum">     932</span> <span class="tlaGNC">          22 :             const int measureEndTick = measure-&gt;endTick().ticks();</span></span>
+<span id="L933"><span class="lineNum">     933</span>              : </span>
+<span id="L934"><span class="lineNum">     934</span> <span class="tlaGNC">          22 :             if (measureStartTick &gt; tickTo || measureEndTick &lt;= tickFrom) {</span></span>
+<span id="L935"><span class="lineNum">     935</span> <span class="tlaGNC">          10 :                 continue;</span></span>
+<span id="L936"><span class="lineNum">     936</span>              :             }</span>
+<span id="L937"><span class="lineNum">     937</span>              : </span>
+<span id="L938"><span class="lineNum">     938</span> <span class="tlaGNC">          12 :             removeEventsFrom = timestampFromTicks(m_score, measureStartTick + tickPositionOffset);</span></span>
+<span id="L939"><span class="lineNum">     939</span> <span class="tlaGNC">          12 :             removeEventsTo = timestampFromTicks(m_score, measureEndTick + tickPositionOffset - 1);</span></span>
+<span id="L940"><span class="lineNum">     940</span>              : </span>
+<span id="L941"><span class="lineNum">     941</span> <span class="tlaGNC">          12 :             removeTrackEvents(METRONOME_TRACK_ID, removeEventsFrom, removeEventsTo, trackChanges);</span></span>
+<span id="L942"><span class="lineNum">     942</span>              :         }</span>
+<span id="L943"><span class="lineNum">     943</span>              :     }</span>
+<span id="L944"><span class="lineNum">     944</span> <span class="tlaGNC">           7 : }</span></span>
+<span id="L945"><span class="lineNum">     945</span>              : </span>
+<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC">        1162 : void PlaybackModel::collectChangesTracks(const InstrumentTrackId&amp; trackId, ChangedTrackIdSet* result)</span></span>
+<span id="L947"><span class="lineNum">     947</span>              : {</span>
+<span id="L948"><span class="lineNum">     948</span> <span class="tlaGNC">        1162 :     if (!result) {</span></span>
+<span id="L949"><span class="lineNum">     949</span> <span class="tlaGNC">         832 :         return;</span></span>
+<span id="L950"><span class="lineNum">     950</span>              :     }</span>
+<span id="L951"><span class="lineNum">     951</span>              : </span>
+<span id="L952"><span class="lineNum">     952</span> <span class="tlaGNC">         330 :     result-&gt;insert(trackId);</span></span>
+<span id="L953"><span class="lineNum">     953</span>              : }</span>
+<span id="L954"><span class="lineNum">     954</span>              : </span>
+<span id="L955"><span class="lineNum">     955</span> <span class="tlaGNC">           7 : void PlaybackModel::notifyAboutChanges(const InstrumentTrackIdSet&amp; oldTracks, const InstrumentTrackIdSet&amp; changedTracks)</span></span>
+<span id="L956"><span class="lineNum">     956</span>              : {</span>
+<span id="L957"><span class="lineNum">     957</span> <span class="tlaGNC">          44 :     for (const InstrumentTrackId&amp; trackId : changedTracks) {</span></span>
+<span id="L958"><span class="lineNum">     958</span> <span class="tlaGNC">          37 :         if (muse::value(m_sendEventsOnScoreChangeMap, trackId, false)) {</span></span>
+<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">           1 :             sendEvents(trackId);</span></span>
+<span id="L960"><span class="lineNum">     960</span>              :         } else {</span>
+<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">          36 :             m_changedTrackIdSet.insert(trackId);</span></span>
+<span id="L962"><span class="lineNum">     962</span>              :         }</span>
+<span id="L963"><span class="lineNum">     963</span>              :     }</span>
+<span id="L964"><span class="lineNum">     964</span>              : </span>
+<span id="L965"><span class="lineNum">     965</span> <span class="tlaGNC">          54 :     for (auto it = m_playbackDataMap.cbegin(); it != m_playbackDataMap.cend(); ++it) {</span></span>
+<span id="L966"><span class="lineNum">     966</span> <span class="tlaGNC">          47 :         if (!muse::contains(oldTracks, it-&gt;first)) {</span></span>
+<span id="L967"><span class="lineNum">     967</span> <span class="tlaUNC tlaBgUNC">           0 :             m_trackAdded.send(it-&gt;first);</span></span>
+<span id="L968"><span class="lineNum">     968</span>              :         }</span>
+<span id="L969"><span class="lineNum">     969</span>              :     }</span>
+<span id="L970"><span class="lineNum">     970</span>              : </span>
+<span id="L971"><span class="lineNum">     971</span> <span class="tlaGNC tlaBgGNC">           7 :     if (!changedTracks.empty()) {</span></span>
+<span id="L972"><span class="lineNum">     972</span> <span class="tlaGNC">           7 :         m_tracksDataChanged.send(changedTracks);</span></span>
+<span id="L973"><span class="lineNum">     973</span>              :     }</span>
+<span id="L974"><span class="lineNum">     974</span> <span class="tlaGNC">           7 : }</span></span>
+<span id="L975"><span class="lineNum">     975</span>              : </span>
+<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">           4 : void PlaybackModel::sendEvents(const InstrumentTrackId&amp; trackId)</span></span>
+<span id="L977"><span class="lineNum">     977</span>              : {</span>
+<span id="L978"><span class="lineNum">     978</span> <span class="tlaGNC">           4 :     auto it = m_playbackDataMap.find(trackId);</span></span>
+<span id="L979"><span class="lineNum">     979</span> <span class="tlaGNC">           4 :     if (it == m_playbackDataMap.cend()) {</span></span>
+<span id="L980"><span class="lineNum">     980</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L981"><span class="lineNum">     981</span>              :     }</span>
+<span id="L982"><span class="lineNum">     982</span>              : </span>
+<span id="L983"><span class="lineNum">     983</span> <span class="tlaGNC tlaBgGNC">           4 :     PlaybackData&amp; data = it-&gt;second;</span></span>
+<span id="L984"><span class="lineNum">     984</span> <span class="tlaGNC">           4 :     data.mainStream.send(data.originEvents, data.dynamics);</span></span>
+<span id="L985"><span class="lineNum">     985</span>              : }</span>
+<span id="L986"><span class="lineNum">     986</span>              : </span>
+<span id="L987"><span class="lineNum">     987</span> <span class="tlaGNC">          81 : void PlaybackModel::removeTrackEvents(const InstrumentTrackId&amp; trackId, const muse::mpe::timestamp_t timestampFrom,</span></span>
+<span id="L988"><span class="lineNum">     988</span>              :                                       const muse::mpe::timestamp_t timestampTo, ChangedTrackIdSet* trackChanges)</span>
+<span id="L989"><span class="lineNum">     989</span>              : {</span>
+<span id="L990"><span class="lineNum">     990</span> <span class="tlaGNC">          81 :     IF_ASSERT_FAILED(timestampFrom &lt;= timestampTo) {</span></span>
+<span id="L991"><span class="lineNum">     991</span> <span class="tlaGNC">          62 :         return;</span></span>
+<span id="L992"><span class="lineNum">     992</span>              :     }</span>
+<span id="L993"><span class="lineNum">     993</span>              : </span>
+<span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC">          81 :     auto search = m_playbackDataMap.find(trackId);</span></span>
+<span id="L995"><span class="lineNum">     995</span> <span class="tlaGNC">          81 :     if (search == m_playbackDataMap.cend()) {</span></span>
+<span id="L996"><span class="lineNum">     996</span> <span class="tlaGNC">          33 :         return;</span></span>
+<span id="L997"><span class="lineNum">     997</span>              :     }</span>
+<span id="L998"><span class="lineNum">     998</span>              : </span>
+<span id="L999"><span class="lineNum">     999</span> <span class="tlaGNC">          48 :     PlaybackData&amp; trackPlaybackData = search-&gt;second;</span></span>
+<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaGNC">          48 :     const size_t oldSize = trackPlaybackData.originEvents.size();</span></span>
+<span id="L1001"><span class="lineNum">    1001</span>              : </span>
+<span id="L1002"><span class="lineNum">    1002</span> <span class="tlaGNC">          48 :     DEFER {</span></span>
+<span id="L1003"><span class="lineNum">    1003</span> <span class="tlaGNC">          48 :         if (oldSize != trackPlaybackData.originEvents.size()) {</span></span>
+<span id="L1004"><span class="lineNum">    1004</span> <span class="tlaGNC">          48 :             collectChangesTracks(trackId, trackChanges);</span></span>
+<span id="L1005"><span class="lineNum">    1005</span>              :         }</span>
+<span id="L1006"><span class="lineNum">    1006</span> <span class="tlaGNC">          48 :     };</span></span>
+<span id="L1007"><span class="lineNum">    1007</span>              : </span>
+<span id="L1008"><span class="lineNum">    1008</span> <span class="tlaGNC">          48 :     if (timestampFrom == -1 &amp;&amp; timestampTo == -1) {</span></span>
+<span id="L1009"><span class="lineNum">    1009</span> <span class="tlaGNC">          29 :         search-&gt;second.originEvents.clear();</span></span>
+<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaGNC">          29 :         return;</span></span>
+<span id="L1011"><span class="lineNum">    1011</span>              :     }</span>
+<span id="L1012"><span class="lineNum">    1012</span>              : </span>
+<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaGNC">          19 :     PlaybackEventsMap::iterator lowerBound;</span></span>
+<span id="L1014"><span class="lineNum">    1014</span>              : </span>
+<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaGNC">          19 :     if (timestampFrom == 0) {</span></span>
+<span id="L1016"><span class="lineNum">    1016</span>              :         //!Note Some events might be started RIGHT before the &quot;official&quot; start of the track</span>
+<span id="L1017"><span class="lineNum">    1017</span>              :         //!     Need to make sure that we don't miss those events</span>
+<span id="L1018"><span class="lineNum">    1018</span> <span class="tlaGNC">           2 :         lowerBound = trackPlaybackData.originEvents.begin();</span></span>
+<span id="L1019"><span class="lineNum">    1019</span>              :     } else {</span>
+<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">          17 :         lowerBound = trackPlaybackData.originEvents.lower_bound(timestampFrom);</span></span>
+<span id="L1021"><span class="lineNum">    1021</span>              :     }</span>
+<span id="L1022"><span class="lineNum">    1022</span>              : </span>
+<span id="L1023"><span class="lineNum">    1023</span> <span class="tlaGNC">          19 :     if (lowerBound == trackPlaybackData.originEvents.end()) {</span></span>
+<span id="L1024"><span class="lineNum">    1024</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L1025"><span class="lineNum">    1025</span>              :     }</span>
+<span id="L1026"><span class="lineNum">    1026</span>              : </span>
+<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC tlaBgGNC">          19 :     auto upperBound = trackPlaybackData.originEvents.upper_bound(timestampTo);</span></span>
+<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">          19 :     trackPlaybackData.originEvents.erase(lowerBound, upperBound);</span></span>
+<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">          48 : }</span></span>
+<span id="L1030"><span class="lineNum">    1030</span>              : </span>
+<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">           7 : bool PlaybackModel::shouldSkipChanges(const ScoreChanges&amp; changes) const</span></span>
+<span id="L1032"><span class="lineNum">    1032</span>              : {</span>
+<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaGNC">           7 :     if (!changes.isValid() || changes.isTextEditing) {</span></span>
+<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaUNC tlaBgUNC">           0 :         return true;</span></span>
+<span id="L1035"><span class="lineNum">    1035</span>              :     }</span>
+<span id="L1036"><span class="lineNum">    1036</span>              : </span>
+<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaGNC tlaBgGNC">           7 :     if (changes.changedObjects.size() != 1) {</span></span>
+<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaGNC">           4 :         return false;</span></span>
+<span id="L1039"><span class="lineNum">    1039</span>              :     }</span>
+<span id="L1040"><span class="lineNum">    1040</span>              : </span>
+<span id="L1041"><span class="lineNum">    1041</span> <span class="tlaGNC">           3 :     const auto it = changes.changedObjects.begin();</span></span>
+<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaGNC">           3 :     if (!it-&gt;first-&gt;isTextBase()) {</span></span>
+<span id="L1043"><span class="lineNum">    1043</span> <span class="tlaGNC">           3 :         return false;</span></span>
+<span id="L1044"><span class="lineNum">    1044</span>              :     }</span>
+<span id="L1045"><span class="lineNum">    1045</span>              : </span>
+<span id="L1046"><span class="lineNum">    1046</span> <span class="tlaUNC tlaBgUNC">           0 :     const TextBase* text = toTextBase(it-&gt;first);</span></span>
+<span id="L1047"><span class="lineNum">    1047</span> <span class="tlaUNC">           0 :     const bool empty = text-&gt;empty();</span></span>
+<span id="L1048"><span class="lineNum">    1048</span> <span class="tlaUNC">           0 :     if (!empty) {</span></span>
+<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1050"><span class="lineNum">    1050</span>              :     }</span>
+<span id="L1051"><span class="lineNum">    1051</span>              : </span>
+<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaUNC">           0 :     if (text-&gt;isHarmony() &amp;&amp; m_playChordSymbols) {</span></span>
+<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaUNC">           0 :         const InstrumentTrackId trackId = chordSymbolsTrackId(text-&gt;part()-&gt;id());</span></span>
+<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaUNC">           0 :         if (!muse::contains(m_playbackDataMap, trackId)) {</span></span>
+<span id="L1055"><span class="lineNum">    1055</span> <span class="tlaUNC">           0 :             return false;</span></span>
+<span id="L1056"><span class="lineNum">    1056</span>              :         }</span>
+<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L1058"><span class="lineNum">    1058</span>              : </span>
+<span id="L1059"><span class="lineNum">    1059</span> <span class="tlaUNC">           0 :     const std::unordered_set&lt;CommandType&gt;&amp; commands = it-&gt;second;</span></span>
+<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaUNC">           0 :     if (muse::contains(commands, CommandType::RemoveElement)) {</span></span>
+<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1062"><span class="lineNum">    1062</span>              :     }</span>
+<span id="L1063"><span class="lineNum">    1063</span>              : </span>
+<span id="L1064"><span class="lineNum">    1064</span> <span class="tlaUNC">           0 :     return true;</span></span>
+<span id="L1065"><span class="lineNum">    1065</span>              : }</span>
+<span id="L1066"><span class="lineNum">    1066</span>              : </span>
+<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaGNC tlaBgGNC">           7 : PlaybackModel::TrackBoundaries PlaybackModel::trackBoundaries(const ScoreChanges&amp; changes) const</span></span>
+<span id="L1068"><span class="lineNum">    1068</span>              : {</span>
+<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaGNC">           7 :     TrackBoundaries result;</span></span>
+<span id="L1070"><span class="lineNum">    1070</span>              : </span>
+<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaGNC">           7 :     result.trackFrom = staff2track(changes.staffIdxFrom, 0);</span></span>
+<span id="L1072"><span class="lineNum">    1072</span> <span class="tlaGNC">           7 :     result.trackTo = staff2track(changes.staffIdxTo, VOICES);</span></span>
+<span id="L1073"><span class="lineNum">    1073</span>              : </span>
+<span id="L1074"><span class="lineNum">    1074</span> <span class="tlaGNC">           7 :     if (hasToReloadScore(changes) || !changes.isValidBoundary()) {</span></span>
+<span id="L1075"><span class="lineNum">    1075</span> <span class="tlaGNC">           2 :         result.trackFrom = 0;</span></span>
+<span id="L1076"><span class="lineNum">    1076</span> <span class="tlaGNC">           2 :         result.trackTo = m_score-&gt;ntracks();</span></span>
+<span id="L1077"><span class="lineNum">    1077</span>              :     }</span>
+<span id="L1078"><span class="lineNum">    1078</span>              : </span>
+<span id="L1079"><span class="lineNum">    1079</span> <span class="tlaGNC">           7 :     return result;</span></span>
+<span id="L1080"><span class="lineNum">    1080</span>              : }</span>
+<span id="L1081"><span class="lineNum">    1081</span>              : </span>
+<span id="L1082"><span class="lineNum">    1082</span> <span class="tlaGNC">           7 : PlaybackModel::TickBoundaries PlaybackModel::tickBoundaries(const ScoreChanges&amp; changes) const</span></span>
+<span id="L1083"><span class="lineNum">    1083</span>              : {</span>
+<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaGNC">           7 :     TickBoundaries result;</span></span>
+<span id="L1085"><span class="lineNum">    1085</span>              : </span>
+<span id="L1086"><span class="lineNum">    1086</span> <span class="tlaGNC">           7 :     result.tickFrom = changes.tickFrom;</span></span>
+<span id="L1087"><span class="lineNum">    1087</span> <span class="tlaGNC">           7 :     result.tickTo = changes.tickTo;</span></span>
+<span id="L1088"><span class="lineNum">    1088</span>              : </span>
+<span id="L1089"><span class="lineNum">    1089</span> <span class="tlaGNC">           7 :     if (hasToReloadTracks(changes)</span></span>
+<span id="L1090"><span class="lineNum">    1090</span> <span class="tlaGNC">           7 :         || hasToReloadScore(changes)</span></span>
+<span id="L1091"><span class="lineNum">    1091</span> <span class="tlaGNC">           5 :         || hasAutomationChange(changes)</span></span>
+<span id="L1092"><span class="lineNum">    1092</span> <span class="tlaGNC">          14 :         || !changes.isValidBoundary()) {</span></span>
+<span id="L1093"><span class="lineNum">    1093</span> <span class="tlaGNC">           3 :         const Measure* lastMeasure = m_score-&gt;lastMeasure();</span></span>
+<span id="L1094"><span class="lineNum">    1094</span> <span class="tlaGNC">           3 :         result.tickFrom = 0;</span></span>
+<span id="L1095"><span class="lineNum">    1095</span> <span class="tlaGNC">           3 :         result.tickTo = lastMeasure ? lastMeasure-&gt;endTick().ticks() : 0;</span></span>
+<span id="L1096"><span class="lineNum">    1096</span>              : </span>
+<span id="L1097"><span class="lineNum">    1097</span> <span class="tlaGNC">           3 :         return result;</span></span>
+<span id="L1098"><span class="lineNum">    1098</span>              :     }</span>
+<span id="L1099"><span class="lineNum">    1099</span>              : </span>
+<span id="L1100"><span class="lineNum">    1100</span> <span class="tlaGNC">           4 :     for (const auto&amp; pair : changes.changedObjects) {</span></span>
+<span id="L1101"><span class="lineNum">    1101</span> <span class="tlaUNC tlaBgUNC">           0 :         if (!pair.first-&gt;isEngravingItem()) {</span></span>
+<span id="L1102"><span class="lineNum">    1102</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L1103"><span class="lineNum">    1103</span>              :         }</span>
+<span id="L1104"><span class="lineNum">    1104</span>              : </span>
+<span id="L1105"><span class="lineNum">    1105</span> <span class="tlaUNC">           0 :         const EngravingItem* item = toEngravingItem(pair.first);</span></span>
+<span id="L1106"><span class="lineNum">    1106</span>              : </span>
+<span id="L1107"><span class="lineNum">    1107</span> <span class="tlaUNC">           0 :         if (item-&gt;isNote()) {</span></span>
+<span id="L1108"><span class="lineNum">    1108</span> <span class="tlaUNC">           0 :             const Note* note = toNote(item);</span></span>
+<span id="L1109"><span class="lineNum">    1109</span> <span class="tlaUNC">           0 :             const Chord* chord = note-&gt;chord();</span></span>
+<span id="L1110"><span class="lineNum">    1110</span> <span class="tlaUNC">           0 :             const TremoloTwoChord* tremoloTwo = chord-&gt;tremoloTwoChord();</span></span>
+<span id="L1111"><span class="lineNum">    1111</span>              : </span>
+<span id="L1112"><span class="lineNum">    1112</span> <span class="tlaUNC">           0 :             if (tremoloTwo) {</span></span>
+<span id="L1113"><span class="lineNum">    1113</span> <span class="tlaUNC">           0 :                 const Chord* startChord = tremoloTwo-&gt;chord1();</span></span>
+<span id="L1114"><span class="lineNum">    1114</span> <span class="tlaUNC">           0 :                 const Chord* endChord = tremoloTwo-&gt;chord2();</span></span>
+<span id="L1115"><span class="lineNum">    1115</span>              : </span>
+<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaUNC">           0 :                 IF_ASSERT_FAILED(startChord &amp;&amp; endChord) {</span></span>
+<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaUNC">           0 :                     continue;</span></span>
+<span id="L1118"><span class="lineNum">    1118</span>              :                 }</span>
+<span id="L1119"><span class="lineNum">    1119</span>              : </span>
+<span id="L1120"><span class="lineNum">    1120</span> <span class="tlaUNC">           0 :                 result.tickFrom = std::min(result.tickFrom, startChord-&gt;tick().ticks());</span></span>
+<span id="L1121"><span class="lineNum">    1121</span> <span class="tlaUNC">           0 :                 result.tickTo = std::max(result.tickTo, endChord-&gt;tick().ticks());</span></span>
+<span id="L1122"><span class="lineNum">    1122</span>              :             }</span>
+<span id="L1123"><span class="lineNum">    1123</span>              : </span>
+<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaUNC">           0 :             applyTiedNotesTickBoundaries(note, result);</span></span>
+<span id="L1125"><span class="lineNum">    1125</span> <span class="tlaUNC">           0 :         } else if (item-&gt;isTie()) {</span></span>
+<span id="L1126"><span class="lineNum">    1126</span> <span class="tlaUNC">           0 :             applyTieTickBoundaries(toTie(item), result);</span></span>
+<span id="L1127"><span class="lineNum">    1127</span>              :         }</span>
+<span id="L1128"><span class="lineNum">    1128</span>              : </span>
+<span id="L1129"><span class="lineNum">    1129</span> <span class="tlaUNC">           0 :         const EngravingObject* parent = item-&gt;ownershipParent();</span></span>
+<span id="L1130"><span class="lineNum">    1130</span> <span class="tlaUNC">           0 :         if (!parent) {</span></span>
+<span id="L1131"><span class="lineNum">    1131</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L1132"><span class="lineNum">    1132</span>              :         }</span>
+<span id="L1133"><span class="lineNum">    1133</span>              : </span>
+<span id="L1134"><span class="lineNum">    1134</span> <span class="tlaUNC">           0 :         if (parent-&gt;isChord()) {</span></span>
+<span id="L1135"><span class="lineNum">    1135</span> <span class="tlaUNC">           0 :             const Chord* chord = toChord(parent);</span></span>
+<span id="L1136"><span class="lineNum">    1136</span>              : </span>
+<span id="L1137"><span class="lineNum">    1137</span> <span class="tlaUNC">           0 :             for (const Note* note : chord-&gt;notes()) {</span></span>
+<span id="L1138"><span class="lineNum">    1138</span> <span class="tlaUNC">           0 :                 applyTiedNotesTickBoundaries(note, result);</span></span>
+<span id="L1139"><span class="lineNum">    1139</span>              :             }</span>
+<span id="L1140"><span class="lineNum">    1140</span>              : </span>
+<span id="L1141"><span class="lineNum">    1141</span> <span class="tlaUNC">           0 :             for (const Spanner* spanner : chord-&gt;startingSpanners()) {</span></span>
+<span id="L1142"><span class="lineNum">    1142</span> <span class="tlaUNC">           0 :                 if (spanner-&gt;isTrill() &amp;&amp; result.tickTo &lt; spanner-&gt;tick2().ticks()) {</span></span>
+<span id="L1143"><span class="lineNum">    1143</span> <span class="tlaUNC">           0 :                     result.tickTo = spanner-&gt;tick2().ticks();</span></span>
+<span id="L1144"><span class="lineNum">    1144</span>              :                 }</span>
+<span id="L1145"><span class="lineNum">    1145</span>              :             }</span>
+<span id="L1146"><span class="lineNum">    1146</span> <span class="tlaUNC">           0 :         } else if (parent-&gt;isNote()) {</span></span>
+<span id="L1147"><span class="lineNum">    1147</span> <span class="tlaUNC">           0 :             applyTiedNotesTickBoundaries(toNote(parent), result);</span></span>
+<span id="L1148"><span class="lineNum">    1148</span>              :         }</span>
+<span id="L1149"><span class="lineNum">    1149</span>              :     }</span>
+<span id="L1150"><span class="lineNum">    1150</span>              : </span>
+<span id="L1151"><span class="lineNum">    1151</span> <span class="tlaGNC tlaBgGNC">           4 :     return result;</span></span>
+<span id="L1152"><span class="lineNum">    1152</span>              : }</span>
+<span id="L1153"><span class="lineNum">    1153</span>              : </span>
+<span id="L1154"><span class="lineNum">    1154</span> <span class="tlaGNC">          37 : const RepeatList&amp; PlaybackModel::repeatList() const</span></span>
+<span id="L1155"><span class="lineNum">    1155</span>              : {</span>
+<span id="L1156"><span class="lineNum">    1156</span> <span class="tlaGNC">          37 :     m_score-&gt;masterScore()-&gt;setExpandRepeats(m_expandRepeats);</span></span>
+<span id="L1157"><span class="lineNum">    1157</span>              : </span>
+<span id="L1158"><span class="lineNum">    1158</span> <span class="tlaGNC">          37 :     return m_score-&gt;repeatList();</span></span>
+<span id="L1159"><span class="lineNum">    1159</span>              : }</span>
+<span id="L1160"><span class="lineNum">    1160</span>              : </span>
+<span id="L1161"><span class="lineNum">    1161</span> <span class="tlaGNC">        1009 : InstrumentTrackId PlaybackModel::idKey(const EngravingItem* item) const</span></span>
+<span id="L1162"><span class="lineNum">    1162</span>              : {</span>
+<span id="L1163"><span class="lineNum">    1163</span> <span class="tlaGNC">        1009 :     if (item-&gt;isHarmony()) {</span></span>
+<span id="L1164"><span class="lineNum">    1164</span> <span class="tlaUNC tlaBgUNC">           0 :         return chordSymbolsTrackId(item-&gt;part()-&gt;id());</span></span>
+<span id="L1165"><span class="lineNum">    1165</span>              :     }</span>
+<span id="L1166"><span class="lineNum">    1166</span>              : </span>
+<span id="L1167"><span class="lineNum">    1167</span> <span class="tlaGNC tlaBgGNC">        1009 :     return makeInstrumentTrackId(item);</span></span>
+<span id="L1168"><span class="lineNum">    1168</span>              : }</span>
+<span id="L1169"><span class="lineNum">    1169</span>              : </span>
+<span id="L1170"><span class="lineNum">    1170</span> <span class="tlaGNC">           2 : InstrumentTrackId PlaybackModel::idKey(const std::vector&lt;const EngravingItem*&gt;&amp; items) const</span></span>
+<span id="L1171"><span class="lineNum">    1171</span>              : {</span>
+<span id="L1172"><span class="lineNum">    1172</span> <span class="tlaGNC">           2 :     InstrumentTrackId result;</span></span>
+<span id="L1173"><span class="lineNum">    1173</span>              : </span>
+<span id="L1174"><span class="lineNum">    1174</span> <span class="tlaGNC">           4 :     for (const EngravingItem* item : items) {</span></span>
+<span id="L1175"><span class="lineNum">    1175</span> <span class="tlaGNC">           2 :         InstrumentTrackId itemTrackId = idKey(item);</span></span>
+<span id="L1176"><span class="lineNum">    1176</span> <span class="tlaGNC">           2 :         if (result.isValid() &amp;&amp; result != itemTrackId) {</span></span>
+<span id="L1177"><span class="lineNum">    1177</span> <span class="tlaUNC tlaBgUNC">           0 :             LOGE() &lt;&lt; &quot;Triggering events for elements with different tracks&quot;;</span></span>
+<span id="L1178"><span class="lineNum">    1178</span> <span class="tlaUNC">           0 :             return InstrumentTrackId();</span></span>
+<span id="L1179"><span class="lineNum">    1179</span>              :         }</span>
+<span id="L1180"><span class="lineNum">    1180</span>              : </span>
+<span id="L1181"><span class="lineNum">    1181</span> <span class="tlaGNC tlaBgGNC">           2 :         result = itemTrackId;</span></span>
+<span id="L1182"><span class="lineNum">    1182</span> <span class="tlaGNC">           2 :     }</span></span>
+<span id="L1183"><span class="lineNum">    1183</span>              : </span>
+<span id="L1184"><span class="lineNum">    1184</span> <span class="tlaGNC">           2 :     return result;</span></span>
+<span id="L1185"><span class="lineNum">    1185</span> <span class="tlaGNC">           2 : }</span></span>
+<span id="L1186"><span class="lineNum">    1186</span>              : </span>
+<span id="L1187"><span class="lineNum">    1187</span> <span class="tlaGNC">         118 : InstrumentTrackId PlaybackModel::idKey(const ID&amp; partId, const String&amp; instrumentId) const</span></span>
+<span id="L1188"><span class="lineNum">    1188</span>              : {</span>
+<span id="L1189"><span class="lineNum">    1189</span> <span class="tlaGNC">         118 :     return { partId, instrumentId };</span></span>
+<span id="L1190"><span class="lineNum">    1190</span> <span class="tlaGNC">         118 : }</span></span>
+<span id="L1191"><span class="lineNum">    1191</span>              : </span>
+<span id="L1192"><span class="lineNum">    1192</span> <span class="tlaGNC">         997 : muse::mpe::ArticulationsProfilePtr PlaybackModel::defaultActiculationProfile(const InstrumentTrackId&amp; trackId) const</span></span>
+<span id="L1193"><span class="lineNum">    1193</span>              : {</span>
+<span id="L1194"><span class="lineNum">    1194</span> <span class="tlaGNC">         997 :     auto it = m_playbackDataMap.find(trackId);</span></span>
+<span id="L1195"><span class="lineNum">    1195</span> <span class="tlaGNC">         997 :     if (it == m_playbackDataMap.cend()) {</span></span>
+<span id="L1196"><span class="lineNum">    1196</span> <span class="tlaUNC tlaBgUNC">           0 :         return nullptr;</span></span>
+<span id="L1197"><span class="lineNum">    1197</span>              :     }</span>
+<span id="L1198"><span class="lineNum">    1198</span>              : </span>
+<span id="L1199"><span class="lineNum">    1199</span> <span class="tlaGNC tlaBgGNC">         997 :     if (!profilesRepository()) {</span></span>
+<span id="L1200"><span class="lineNum">    1200</span> <span class="tlaUNC tlaBgUNC">           0 :         return nullptr;</span></span>
+<span id="L1201"><span class="lineNum">    1201</span>              :     }</span>
+<span id="L1202"><span class="lineNum">    1202</span>              : </span>
+<span id="L1203"><span class="lineNum">    1203</span> <span class="tlaGNC tlaBgGNC">         997 :     return profilesRepository()-&gt;defaultProfile(it-&gt;second.setupData.category);</span></span>
+<span id="L1204"><span class="lineNum">    1204</span>              : }</span>
+<span id="L1205"><span class="lineNum">    1205</span>              : </span>
+<span id="L1206"><span class="lineNum">    1206</span> <span class="tlaUNC tlaBgUNC">           0 : void PlaybackModel::applyTiedNotesTickBoundaries(const Note* note, TickBoundaries&amp; tickBoundaries)</span></span>
+<span id="L1207"><span class="lineNum">    1207</span>              : {</span>
+<span id="L1208"><span class="lineNum">    1208</span>              :     const Tie* tie;</span>
+<span id="L1209"><span class="lineNum">    1209</span> <span class="tlaUNC">           0 :     if ((tie = note-&gt;tieFor())) {</span></span>
+<span id="L1210"><span class="lineNum">    1210</span> <span class="tlaUNC">           0 :         applyTieTickBoundaries(tie, tickBoundaries);</span></span>
+<span id="L1211"><span class="lineNum">    1211</span> <span class="tlaUNC">           0 :     } else if ((tie = note-&gt;tieBack())) {</span></span>
+<span id="L1212"><span class="lineNum">    1212</span> <span class="tlaUNC">           0 :         applyTieTickBoundaries(tie, tickBoundaries);</span></span>
+<span id="L1213"><span class="lineNum">    1213</span>              :     }</span>
+<span id="L1214"><span class="lineNum">    1214</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1215"><span class="lineNum">    1215</span>              : </span>
+<span id="L1216"><span class="lineNum">    1216</span> <span class="tlaUNC">           0 : void PlaybackModel::applyTieTickBoundaries(const Tie* tie, TickBoundaries&amp; tickBoundaries)</span></span>
+<span id="L1217"><span class="lineNum">    1217</span>              : {</span>
+<span id="L1218"><span class="lineNum">    1218</span> <span class="tlaUNC">           0 :     const Note* startNote = tie-&gt;startNote();</span></span>
+<span id="L1219"><span class="lineNum">    1219</span> <span class="tlaUNC">           0 :     const Note* endNote = tie-&gt;endNote();</span></span>
+<span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 :     if (!startNote || !endNote) {</span></span>
+<span id="L1221"><span class="lineNum">    1221</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1222"><span class="lineNum">    1222</span>              :     }</span>
+<span id="L1223"><span class="lineNum">    1223</span>              : </span>
+<span id="L1224"><span class="lineNum">    1224</span> <span class="tlaUNC">           0 :     const Note* firstTiedNote = startNote-&gt;firstTiedNote();</span></span>
+<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaUNC">           0 :     const Note* lastTiedNote = endNote-&gt;lastTiedNote();</span></span>
+<span id="L1226"><span class="lineNum">    1226</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(firstTiedNote &amp;&amp; lastTiedNote) {</span></span>
+<span id="L1227"><span class="lineNum">    1227</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1228"><span class="lineNum">    1228</span>              :     }</span>
+<span id="L1229"><span class="lineNum">    1229</span>              : </span>
+<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaUNC">           0 :     tickBoundaries.tickFrom = std::min(tickBoundaries.tickFrom, firstTiedNote-&gt;tick().ticks());</span></span>
+<span id="L1231"><span class="lineNum">    1231</span> <span class="tlaUNC">           0 :     tickBoundaries.tickTo = std::max(tickBoundaries.tickTo, lastTiedNote-&gt;tick().ticks());</span></span>
+<span id="L1232"><span class="lineNum">    1232</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

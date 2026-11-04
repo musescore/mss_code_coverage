@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/playback/renderingcontext.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/engraving/playback</a> - renderingcontext.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">44</td>
+            <td class="headerCovTableEntry">44</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2025 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : #pragma once</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span>              : #include &quot;mpe/events.h&quot;</span>
+<span id="L25"><span class="lineNum">      25</span>              : </span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;../dom/chord.h&quot;</span>
+<span id="L27"><span class="lineNum">      27</span>              : #include &quot;../dom/note.h&quot;</span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &quot;../dom/sig.h&quot;</span>
+<span id="L29"><span class="lineNum">      29</span>              : </span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;utils/arrangementutils.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;utils/pitchutils.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : #include &quot;playbackcontext.h&quot;</span>
+<span id="L33"><span class="lineNum">      33</span>              : </span>
+<span id="L34"><span class="lineNum">      34</span>              : namespace mu::engraving {</span>
+<span id="L35"><span class="lineNum">      35</span>              : struct RenderingContext {</span>
+<span id="L36"><span class="lineNum">      36</span>              :     muse::mpe::timestamp_t nominalTimestamp = 0;</span>
+<span id="L37"><span class="lineNum">      37</span>              :     muse::mpe::duration_t nominalDuration = 0;</span>
+<span id="L38"><span class="lineNum">      38</span>              :     muse::mpe::dynamic_level_t nominalDynamicLevel = 0;</span>
+<span id="L39"><span class="lineNum">      39</span>              :     int nominalPositionStartTick = 0;</span>
+<span id="L40"><span class="lineNum">      40</span>              :     int nominalPositionEndTick = 0;</span>
+<span id="L41"><span class="lineNum">      41</span>              :     int nominalDurationTicks = 0;</span>
+<span id="L42"><span class="lineNum">      42</span>              :     int positionTickOffset = 0;</span>
+<span id="L43"><span class="lineNum">      43</span>              : </span>
+<span id="L44"><span class="lineNum">      44</span>              :     BeatsPerSecond beatsPerSecond = 0;</span>
+<span id="L45"><span class="lineNum">      45</span>              :     TimeSigFrac timeSignatureFraction;</span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span>              :     muse::mpe::ArticulationMap commonArticulations;</span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span>              :     const Score* score = nullptr;</span>
+<span id="L50"><span class="lineNum">      50</span>              :     const muse::mpe::ArticulationsProfilePtr profile;</span>
+<span id="L51"><span class="lineNum">      51</span>              :     const PlaybackContextPtr playbackCtx;</span>
+<span id="L52"><span class="lineNum">      52</span>              : </span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC tlaBgGNC">        2679 :     bool isValid() const</span></span>
+<span id="L54"><span class="lineNum">      54</span>              :     {</span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">        2679 :         return score</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">        2679 :                &amp;&amp; profile</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">        2679 :                &amp;&amp; playbackCtx</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">        5358 :                &amp;&amp; beatsPerSecond &gt; 0</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">        2679 :                &amp;&amp; nominalDuration &gt; 0</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">        5358 :                &amp;&amp; nominalDurationTicks &gt; 0;</span></span>
+<span id="L61"><span class="lineNum">      61</span>              :     }</span>
+<span id="L62"><span class="lineNum">      62</span>              : };</span>
+<span id="L63"><span class="lineNum">      63</span>              : </span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        1151 : inline RenderingContext buildRenderingCtx(const Chord* chord, const int tickPositionOffset,</span></span>
+<span id="L65"><span class="lineNum">      65</span>              :                                           const muse::mpe::ArticulationsProfilePtr profile, const PlaybackContextPtr playbackCtx,</span>
+<span id="L66"><span class="lineNum">      66</span>              :                                           const muse::mpe::ArticulationMap&amp; articulations = {})</span>
+<span id="L67"><span class="lineNum">      67</span>              : {</span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        1151 :     int chordPosTick = chord-&gt;tick().ticks();</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">        1151 :     int chordDurationTicks = chord-&gt;actualTicks().ticks();</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">        1151 :     int chordPosTickWithOffset = chordPosTick + tickPositionOffset;</span></span>
+<span id="L71"><span class="lineNum">      71</span>              : </span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">        1151 :     const Score* score = chord-&gt;score();</span></span>
+<span id="L73"><span class="lineNum">      73</span>              : </span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">        1151 :     auto chordTnD = timestampAndDurationFromStartAndDurationTicks(score, chordPosTick, chordDurationTicks, tickPositionOffset);</span></span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        1151 :     BeatsPerSecond bps = score-&gt;multipliedTempoAtUtick(chordPosTickWithOffset);</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        1151 :     TimeSigFrac timeSignatureFraction = score-&gt;sigmap()-&gt;timesig(chordPosTick).timesig();</span></span>
+<span id="L78"><span class="lineNum">      78</span>              : </span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        1151 :     RenderingContext ctx{ chordTnD.timestamp,</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">        1151 :                           chordTnD.duration,</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">        1151 :                           playbackCtx-&gt;appliableDynamicLevel(chord-&gt;track(), chordPosTickWithOffset),</span></span>
+<span id="L82"><span class="lineNum">      82</span>              :                           chordPosTick,</span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">        1151 :                           chordPosTick + chordDurationTicks,</span></span>
+<span id="L84"><span class="lineNum">      84</span>              :                           chordDurationTicks,</span>
+<span id="L85"><span class="lineNum">      85</span>              :                           tickPositionOffset,</span>
+<span id="L86"><span class="lineNum">      86</span>              :                           bps,</span>
+<span id="L87"><span class="lineNum">      87</span>              :                           timeSignatureFraction,</span>
+<span id="L88"><span class="lineNum">      88</span>              :                           articulations,</span>
+<span id="L89"><span class="lineNum">      89</span>              :                           score,</span>
+<span id="L90"><span class="lineNum">      90</span>              :                           profile,</span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">        2302 :                           playbackCtx };</span></span>
+<span id="L92"><span class="lineNum">      92</span>              : </span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">        1151 :     return ctx;</span></span>
+<span id="L94"><span class="lineNum">      94</span>              : }</span>
+<span id="L95"><span class="lineNum">      95</span>              : </span>
+<span id="L96"><span class="lineNum">      96</span>              : struct NominalNoteCtx {</span>
+<span id="L97"><span class="lineNum">      97</span>              :     voice_idx_t voiceIdx = 0;</span>
+<span id="L98"><span class="lineNum">      98</span>              :     staff_idx_t staffIdx = 0;</span>
+<span id="L99"><span class="lineNum">      99</span>              :     muse::mpe::timestamp_t timestamp = 0;</span>
+<span id="L100"><span class="lineNum">     100</span>              :     muse::mpe::duration_t duration = 0;</span>
+<span id="L101"><span class="lineNum">     101</span>              :     BeatsPerSecond tempo = 0;</span>
+<span id="L102"><span class="lineNum">     102</span>              :     muse::mpe::dynamic_level_t dynamicLevel = 0;</span>
+<span id="L103"><span class="lineNum">     103</span>              :     float userVelocityFraction = 0.f;</span>
+<span id="L104"><span class="lineNum">     104</span>              : </span>
+<span id="L105"><span class="lineNum">     105</span>              :     muse::mpe::pitch_level_t pitchLevel = 0;</span>
+<span id="L106"><span class="lineNum">     106</span>              : </span>
+<span id="L107"><span class="lineNum">     107</span>              :     RenderingContext chordCtx;</span>
+<span id="L108"><span class="lineNum">     108</span>              :     muse::mpe::ArticulationMap articulations;</span>
+<span id="L109"><span class="lineNum">     109</span>              : </span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">        1558 :     explicit NominalNoteCtx(const Note* note, const RenderingContext&amp; ctx)</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        1558 :         : voiceIdx(note-&gt;voice()),</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">        1558 :         staffIdx(note-&gt;staffIdx()),</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">        1558 :         timestamp(ctx.nominalTimestamp),</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">        1558 :         duration(ctx.nominalDuration),</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        1558 :         tempo(ctx.beatsPerSecond),</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">        1558 :         dynamicLevel(ctx.nominalDynamicLevel),</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">        1558 :         userVelocityFraction(note-&gt;userVelocityFraction()),</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">        1558 :         pitchLevel(notePitchLevel(note-&gt;playingTpc(),</span></span>
+<span id="L119"><span class="lineNum">     119</span>              :                                   note-&gt;playingOctave(),</span>
+<span id="L120"><span class="lineNum">     120</span>              :                                   note-&gt;playingTuning())),</span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">        1558 :         chordCtx(ctx),</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">        1558 :         articulations(ctx.commonArticulations)</span></span>
+<span id="L123"><span class="lineNum">     123</span>              :     {</span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">        1558 :     }</span></span>
+<span id="L125"><span class="lineNum">     125</span>              : };</span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">        1747 : inline muse::mpe::NoteEvent buildNoteEvent(const NominalNoteCtx&amp; ctx, const muse::mpe::PitchCurve&amp; pitchCurve = {})</span></span>
+<span id="L128"><span class="lineNum">     128</span>              : {</span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">        1747 :     return muse::mpe::NoteEvent(ctx.timestamp,</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">        1747 :                                 ctx.duration,</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">        1747 :                                 static_cast&lt;muse::mpe::voice_layer_idx_t&gt;(ctx.voiceIdx),</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">        1747 :                                 static_cast&lt;muse::mpe::staff_layer_idx_t&gt;(ctx.staffIdx),</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">        1747 :                                 ctx.pitchLevel,</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">        1747 :                                 ctx.dynamicLevel,</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">        1747 :                                 ctx.articulations,</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">        1747 :                                 ctx.tempo.val,</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">        1747 :                                 ctx.userVelocityFraction,</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">        1747 :                                 pitchCurve);</span></span>
+<span id="L139"><span class="lineNum">     139</span>              : }</span>
+<span id="L140"><span class="lineNum">     140</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

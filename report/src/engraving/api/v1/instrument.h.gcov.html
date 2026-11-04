@@ -1,0 +1,513 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/engraving/api/v1/instrument.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">src/engraving/api/v1</a> - instrument.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">18.6&nbsp;%</td>
+            <td class="headerCovTableEntry">59</td>
+            <td class="headerCovTableEntry">11</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) 2021 MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #pragma once</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;engraving/dom/drumset.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;engraving/dom/instrument.h&quot;</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &lt;QQmlListProperty&gt;</span>
+<span id="L29"><span class="lineNum">      29</span>              : </span>
+<span id="L30"><span class="lineNum">      30</span>              : // api</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;scoreelement.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : </span>
+<span id="L33"><span class="lineNum">      33</span>              : #include &quot;log.h&quot;</span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span>              : namespace mu::engraving {</span>
+<span id="L36"><span class="lineNum">      36</span>              : class Instrument;</span>
+<span id="L37"><span class="lineNum">      37</span>              : }</span>
+<span id="L38"><span class="lineNum">      38</span>              : </span>
+<span id="L39"><span class="lineNum">      39</span>              : namespace mu::engraving::apiv1 {</span>
+<span id="L40"><span class="lineNum">      40</span>              : class Instrument;</span>
+<span id="L41"><span class="lineNum">      41</span>              : </span>
+<span id="L42"><span class="lineNum">      42</span>              : //---------------------------------------------------------</span>
+<span id="L43"><span class="lineNum">      43</span>              : //   Channel</span>
+<span id="L44"><span class="lineNum">      44</span>              : ///   Provides an access to channel properties. Similar to</span>
+<span id="L45"><span class="lineNum">      45</span>              : ///   Mixer, changes to some of the playback-related</span>
+<span id="L46"><span class="lineNum">      46</span>              : ///   properties are not recorded to undo stack and are not</span>
+<span id="L47"><span class="lineNum">      47</span>              : ///   revertable with standard user-visible &quot;undo&quot; action.</span>
+<span id="L48"><span class="lineNum">      48</span>              : ///   Changing MIDI patch though is undoable in normal way</span>
+<span id="L49"><span class="lineNum">      49</span>              : ///   (&quot;dock&quot; type plugins may need to call</span>
+<span id="L50"><span class="lineNum">      50</span>              : ///   \ref Score.startCmd / \ref Score.endCmd for that to</span>
+<span id="L51"><span class="lineNum">      51</span>              : ///   work properly).</span>
+<span id="L52"><span class="lineNum">      52</span>              : ///</span>
+<span id="L53"><span class="lineNum">      53</span>              : ///   Iterating over all channels in the current score can</span>
+<span id="L54"><span class="lineNum">      54</span>              : ///   be done as follows:</span>
+<span id="L55"><span class="lineNum">      55</span>              : ///   \code</span>
+<span id="L56"><span class="lineNum">      56</span>              : ///   var parts = curScore.parts;</span>
+<span id="L57"><span class="lineNum">      57</span>              : ///   for (var i = 0; i &lt; parts.length; ++i) {</span>
+<span id="L58"><span class="lineNum">      58</span>              : ///       var part = parts[i];</span>
+<span id="L59"><span class="lineNum">      59</span>              : ///       var instrs = part.instruments;</span>
+<span id="L60"><span class="lineNum">      60</span>              : ///       for (var j = 0; j &lt; instrs.length; ++j) {</span>
+<span id="L61"><span class="lineNum">      61</span>              : ///           var instr = instrs[j];</span>
+<span id="L62"><span class="lineNum">      62</span>              : ///           var channels = instr.channels;</span>
+<span id="L63"><span class="lineNum">      63</span>              : ///           for (var k = 0; k &lt; channels.length; ++k) {</span>
+<span id="L64"><span class="lineNum">      64</span>              : ///               var channel = channels[k];</span>
+<span id="L65"><span class="lineNum">      65</span>              : ///               channel.volume = 64; // just for example, changing the channel's volume</span>
+<span id="L66"><span class="lineNum">      66</span>              : ///           }</span>
+<span id="L67"><span class="lineNum">      67</span>              : ///       }</span>
+<span id="L68"><span class="lineNum">      68</span>              : ///   }</span>
+<span id="L69"><span class="lineNum">      69</span>              : ///   \endcode</span>
+<span id="L70"><span class="lineNum">      70</span>              : ///   \since MuseScore 3.5</span>
+<span id="L71"><span class="lineNum">      71</span>              : //---------------------------------------------------------</span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span>              : class Channel : public QObject</span>
+<span id="L74"><span class="lineNum">      74</span>              : {</span>
+<span id="L75"><span class="lineNum">      75</span>              :     Q_OBJECT</span>
+<span id="L76"><span class="lineNum">      76</span>              : </span>
+<span id="L77"><span class="lineNum">      77</span>              :     mu::engraving::InstrChannel* m_channel;</span>
+<span id="L78"><span class="lineNum">      78</span>              :     mu::engraving::Part* m_part;</span>
+<span id="L79"><span class="lineNum">      79</span>              : </span>
+<span id="L80"><span class="lineNum">      80</span>              :     /// Name of this channel</span>
+<span id="L81"><span class="lineNum">      81</span>              :     Q_PROPERTY(QString name READ name)</span>
+<span id="L82"><span class="lineNum">      82</span>              :     /// Whether this channel controls playback of chord symbols</span>
+<span id="L83"><span class="lineNum">      83</span>              :     /// \since MuseScore 4.6</span>
+<span id="L84"><span class="lineNum">      84</span>              :     Q_PROPERTY(bool isHarmonyChannel READ isHarmonyChannel)</span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span>              :     /// Channel volume, from 0 to 127.</span>
+<span id="L87"><span class="lineNum">      87</span>              :     /// \note Changing this property is **not** revertable with a standard &quot;undo&quot;</span>
+<span id="L88"><span class="lineNum">      88</span>              :     /// action. Plugins may need to handle reverting this property change if</span>
+<span id="L89"><span class="lineNum">      89</span>              :     /// necessary.</span>
+<span id="L90"><span class="lineNum">      90</span>              :     Q_PROPERTY(int volume READ volume WRITE setVolume)</span>
+<span id="L91"><span class="lineNum">      91</span>              :     /// Channel pan, from 0 to 127.</span>
+<span id="L92"><span class="lineNum">      92</span>              :     /// \note Changing this property is **not** revertable with a standard &quot;undo&quot;</span>
+<span id="L93"><span class="lineNum">      93</span>              :     /// action. Plugins may need to handle reverting this property change if</span>
+<span id="L94"><span class="lineNum">      94</span>              :     /// necessary.</span>
+<span id="L95"><span class="lineNum">      95</span>              :     Q_PROPERTY(int pan READ pan WRITE setPan)</span>
+<span id="L96"><span class="lineNum">      96</span>              :     /// Channel chorus, from 0 to 127.</span>
+<span id="L97"><span class="lineNum">      97</span>              :     /// \note Changing this property is **not** revertable with a standard &quot;undo&quot;</span>
+<span id="L98"><span class="lineNum">      98</span>              :     /// action. Plugins may need to handle reverting this property change if</span>
+<span id="L99"><span class="lineNum">      99</span>              :     /// necessary.</span>
+<span id="L100"><span class="lineNum">     100</span>              :     Q_PROPERTY(int chorus READ chorus WRITE setChorus)</span>
+<span id="L101"><span class="lineNum">     101</span>              :     /// Channel reverb, from 0 to 127.</span>
+<span id="L102"><span class="lineNum">     102</span>              :     /// \note Changing this property is **not** revertable with a standard &quot;undo&quot;</span>
+<span id="L103"><span class="lineNum">     103</span>              :     /// action. Plugins may need to handle reverting this property change if</span>
+<span id="L104"><span class="lineNum">     104</span>              :     /// necessary.</span>
+<span id="L105"><span class="lineNum">     105</span>              :     Q_PROPERTY(int reverb READ reverb WRITE setReverb)</span>
+<span id="L106"><span class="lineNum">     106</span>              :     /// Whether this channel is muted.</span>
+<span id="L107"><span class="lineNum">     107</span>              :     /// \note Changing this property is **not** revertable with a standard &quot;undo&quot;</span>
+<span id="L108"><span class="lineNum">     108</span>              :     /// action. Plugins may need to handle reverting this property change if</span>
+<span id="L109"><span class="lineNum">     109</span>              :     /// necessary.</span>
+<span id="L110"><span class="lineNum">     110</span>              :     Q_PROPERTY(bool mute READ mute WRITE setMute)</span>
+<span id="L111"><span class="lineNum">     111</span>              : </span>
+<span id="L112"><span class="lineNum">     112</span>              :     /// MIDI program number, from 0 to 127. Changing this property is recorded</span>
+<span id="L113"><span class="lineNum">     113</span>              :     /// to the program's undo stack and can be reverted with a standard &quot;undo&quot;</span>
+<span id="L114"><span class="lineNum">     114</span>              :     /// action.</span>
+<span id="L115"><span class="lineNum">     115</span>              :     Q_PROPERTY(int midiProgram READ midiProgram WRITE setMidiProgram)</span>
+<span id="L116"><span class="lineNum">     116</span>              :     /// MIDI patch bank number. Changing this property is recorded</span>
+<span id="L117"><span class="lineNum">     117</span>              :     /// to the program's undo stack and can be reverted with a standard &quot;undo&quot;</span>
+<span id="L118"><span class="lineNum">     118</span>              :     /// action.</span>
+<span id="L119"><span class="lineNum">     119</span>              :     Q_PROPERTY(int midiBank READ midiBank WRITE setMidiBank)</span>
+<span id="L120"><span class="lineNum">     120</span>              : </span>
+<span id="L121"><span class="lineNum">     121</span>              :     mu::engraving::InstrChannel* activeChannel();</span>
+<span id="L122"><span class="lineNum">     122</span>              : </span>
+<span id="L123"><span class="lineNum">     123</span>              :     void setMidiBankAndProgram(int bank, int program, bool setUserBankController);</span>
+<span id="L124"><span class="lineNum">     124</span>              : </span>
+<span id="L125"><span class="lineNum">     125</span>              : public:</span>
+<span id="L126"><span class="lineNum">     126</span>              :     /// \cond MS_INTERNAL</span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaUNC tlaBgUNC">           0 :     Channel(mu::engraving::InstrChannel* ch, mu::engraving::Part* p, QObject* parent = nullptr)</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaUNC">           0 :         : QObject(parent), m_channel(ch), m_part(p) {}</span></span>
+<span id="L129"><span class="lineNum">     129</span>              : </span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaUNC">           0 :     QString name() const { return m_channel-&gt;name(); }</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaUNC">           0 :     bool isHarmonyChannel() const { return m_channel-&gt;isHarmonyChannel(); }</span></span>
+<span id="L132"><span class="lineNum">     132</span>              : </span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaUNC">           0 :     int volume() const { return m_channel-&gt;volume(); }</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaUNC">           0 :     void setVolume(int val) { activeChannel()-&gt;setVolume(qBound(0, val, 127)); }</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaUNC">           0 :     int pan() const { return m_channel-&gt;pan(); }</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaUNC">           0 :     void setPan(int val) { activeChannel()-&gt;setPan(qBound(0, val, 127)); }</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaUNC">           0 :     int chorus() const { return m_channel-&gt;chorus(); }</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaUNC">           0 :     void setChorus(int val) { activeChannel()-&gt;setChorus(qBound(0, val, 127)); }</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaUNC">           0 :     int reverb() const { return m_channel-&gt;reverb(); }</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaUNC">           0 :     void setReverb(int val) { activeChannel()-&gt;setReverb(qBound(0, val, 127)); }</span></span>
+<span id="L141"><span class="lineNum">     141</span>              : </span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaUNC">           0 :     bool mute() const</span></span>
+<span id="L143"><span class="lineNum">     143</span>              :     {</span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :         DEPRECATED;</span></span>
+<span id="L145"><span class="lineNum">     145</span>              :         //!@NOTE since MuseScore 4.0 mixer doen/t work via Channel</span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L147"><span class="lineNum">     147</span>              :     }</span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 :     void setMute(bool)</span></span>
+<span id="L150"><span class="lineNum">     150</span>              :     {</span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaUNC">           0 :         DEPRECATED;</span></span>
+<span id="L152"><span class="lineNum">     152</span>              :         //!@NOTE since MuseScore 4.0 mixer doen/t work via Channel</span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L154"><span class="lineNum">     154</span>              : </span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaUNC">           0 :     int midiProgram() const { return m_channel-&gt;program(); }</span></span>
+<span id="L156"><span class="lineNum">     156</span>              :     void setMidiProgram(int prog);</span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaUNC">           0 :     int midiBank() const { return m_channel-&gt;bank(); }</span></span>
+<span id="L158"><span class="lineNum">     158</span>              :     void setMidiBank(int bank);</span>
+<span id="L159"><span class="lineNum">     159</span>              :     /// \endcond</span>
+<span id="L160"><span class="lineNum">     160</span>              : };</span>
+<span id="L161"><span class="lineNum">     161</span>              : </span>
+<span id="L162"><span class="lineNum">     162</span>              : //---------------------------------------------------------</span>
+<span id="L163"><span class="lineNum">     163</span>              : //   StringData</span>
+<span id="L164"><span class="lineNum">     164</span>              : ///   \since MuseScore 3.5</span>
+<span id="L165"><span class="lineNum">     165</span>              : //---------------------------------------------------------</span>
+<span id="L166"><span class="lineNum">     166</span>              : </span>
+<span id="L167"><span class="lineNum">     167</span>              : class StringData : public QObject</span>
+<span id="L168"><span class="lineNum">     168</span>              : {</span>
+<span id="L169"><span class="lineNum">     169</span>              :     Q_OBJECT</span>
+<span id="L170"><span class="lineNum">     170</span>              : </span>
+<span id="L171"><span class="lineNum">     171</span>              :     /// List of strings in this instrument.</span>
+<span id="L172"><span class="lineNum">     172</span>              :     /// \returns A list of objects representing strings. Each</span>
+<span id="L173"><span class="lineNum">     173</span>              :     /// object has the following fields:</span>
+<span id="L174"><span class="lineNum">     174</span>              :     /// - \p pitch - pitch of this string on fret 0 (integer).</span>
+<span id="L175"><span class="lineNum">     175</span>              :     /// - \p open - if \p true, this string is not fretted and</span>
+<span id="L176"><span class="lineNum">     176</span>              :     ///             always open. If \p false, the string **is**</span>
+<span id="L177"><span class="lineNum">     177</span>              :     ///             fretted. For example, for classical guitar</span>
+<span id="L178"><span class="lineNum">     178</span>              :     ///             all strings are fretted, and for them</span>
+<span id="L179"><span class="lineNum">     179</span>              :     ///             \p open value will always be \p false.</span>
+<span id="L180"><span class="lineNum">     180</span>              :     Q_PROPERTY(QVariantList strings READ stringList)</span>
+<span id="L181"><span class="lineNum">     181</span>              : </span>
+<span id="L182"><span class="lineNum">     182</span>              :     /// Number of frets in this instrument</span>
+<span id="L183"><span class="lineNum">     183</span>              :     Q_PROPERTY(int frets READ frets)</span>
+<span id="L184"><span class="lineNum">     184</span>              : </span>
+<span id="L185"><span class="lineNum">     185</span>              :     mu::engraving::StringData m_data;</span>
+<span id="L186"><span class="lineNum">     186</span>              : </span>
+<span id="L187"><span class="lineNum">     187</span>              : public:</span>
+<span id="L188"><span class="lineNum">     188</span>              :     /// \cond MS_INTERNAL</span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaUNC">           0 :     StringData(const mu::engraving::StringData* d, QObject* parent = nullptr)</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :         : QObject(parent), m_data(*d) {}</span></span>
+<span id="L191"><span class="lineNum">     191</span>              : </span>
+<span id="L192"><span class="lineNum">     192</span>              :     QVariantList stringList() const;</span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaUNC">           0 :     int frets() const { return m_data.frets(); }</span></span>
+<span id="L194"><span class="lineNum">     194</span>              :     /// \endcond</span>
+<span id="L195"><span class="lineNum">     195</span>              : };</span>
+<span id="L196"><span class="lineNum">     196</span>              : </span>
+<span id="L197"><span class="lineNum">     197</span>              : //---------------------------------------------------------</span>
+<span id="L198"><span class="lineNum">     198</span>              : //   Drumset</span>
+<span id="L199"><span class="lineNum">     199</span>              : ///   \since MuseScore 4.6</span>
+<span id="L200"><span class="lineNum">     200</span>              : //---------------------------------------------------------</span>
+<span id="L201"><span class="lineNum">     201</span>              : </span>
+<span id="L202"><span class="lineNum">     202</span>              : class Drumset : public QObject</span>
+<span id="L203"><span class="lineNum">     203</span>              : {</span>
+<span id="L204"><span class="lineNum">     204</span>              :     Q_OBJECT</span>
+<span id="L205"><span class="lineNum">     205</span>              : </span>
+<span id="L206"><span class="lineNum">     206</span>              :     mu::engraving::Drumset* m_drumset;</span>
+<span id="L207"><span class="lineNum">     207</span>              :     bool m_owned = false;</span>
+<span id="L208"><span class="lineNum">     208</span>              : </span>
+<span id="L209"><span class="lineNum">     209</span>              : public:</span>
+<span id="L210"><span class="lineNum">     210</span>              :     /// \cond MS_INTERNAL</span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :     Drumset(mu::engraving::Drumset* d, QObject* parent = nullptr)</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaUNC">           0 :         : QObject(parent), m_drumset(d) {}</span></span>
+<span id="L213"><span class="lineNum">     213</span>              : </span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC tlaBgGNC">           1 :     Drumset(mu::engraving::Drumset* d, bool owned, QObject* parent = nullptr)</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">           1 :         : QObject(parent), m_drumset(d), m_owned(owned) {}</span></span>
+<span id="L216"><span class="lineNum">     216</span>              : </span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">           2 :     ~Drumset() override</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">           1 :     {</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">           1 :         if (m_owned) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">           1 :             delete m_drumset;</span></span>
+<span id="L221"><span class="lineNum">     221</span>              :         }</span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">           2 :     }</span></span>
+<span id="L223"><span class="lineNum">     223</span>              : </span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">           1 :     mu::engraving::Drumset* drumset() { return m_drumset; }</span></span>
+<span id="L225"><span class="lineNum">     225</span>              :     const mu::engraving::Drumset* drumset() const { return m_drumset; }</span>
+<span id="L226"><span class="lineNum">     226</span>              :     /// \endcond</span>
+<span id="L227"><span class="lineNum">     227</span>              : </span>
+<span id="L228"><span class="lineNum">     228</span>              :     /// Whether the given MIDI pitch corresponds to a note in the drumset.</span>
+<span id="L229"><span class="lineNum">     229</span>              :     /// \param pitch The pitch to test for.</span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC tlaBgUNC">           0 :     Q_INVOKABLE bool isValid(int pitch) { return drumset()-&gt;isValid(pitch); }</span></span>
+<span id="L231"><span class="lineNum">     231</span>              : </span>
+<span id="L232"><span class="lineNum">     232</span>              :     /// The notehead group for the given pitch, corresponding to one of the</span>
+<span id="L233"><span class="lineNum">     233</span>              :     /// PluginAPI::PluginAPI::NoteHeadGroup values. If the value corresponds to</span>
+<span id="L234"><span class="lineNum">     234</span>              :     /// NoteHeadGroup.HEAD_CUSTOM, the actual notehead must be found using</span>
+<span id="L235"><span class="lineNum">     235</span>              :     /// PluginAPI::Drumset::noteHeads(pitch, NoteHeadType)</span>
+<span id="L236"><span class="lineNum">     236</span>              :     /// \see PluginAPI::PluginAPI::NoteHeadGroup</span>
+<span id="L237"><span class="lineNum">     237</span>              :     /// \see PluginAPI::Drumset::noteHeads</span>
+<span id="L238"><span class="lineNum">     238</span>              :     /// \param pitch The pitch to find the notehead group for.</span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 :     Q_INVOKABLE int noteHead(int pitch) { return int(drumset()-&gt;noteHead(pitch)); }</span></span>
+<span id="L240"><span class="lineNum">     240</span>              : </span>
+<span id="L241"><span class="lineNum">     241</span>              :     /// The notehead symbol for the given pitch and NoteHeadType, corresponding to</span>
+<span id="L242"><span class="lineNum">     242</span>              :     /// one of the PluginAPI::PluginAPI::SymId values.</span>
+<span id="L243"><span class="lineNum">     243</span>              :     /// \see PluginAPI::PluginAPI::SymId</span>
+<span id="L244"><span class="lineNum">     244</span>              :     /// \see PluginAPI::PluginAPI::NoteHeadType</span>
+<span id="L245"><span class="lineNum">     245</span>              :     /// \param pitch The pitch to find the notehead symbol for.</span>
+<span id="L246"><span class="lineNum">     246</span>              :     /// \param type The NoteHeadType to find the notehead symbol for.</span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaUNC">           0 :     Q_INVOKABLE int noteHeads(int pitch, int type)</span></span>
+<span id="L248"><span class="lineNum">     248</span>              :     {</span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaUNC">           0 :         return int(drumset()-&gt;noteHeads(pitch, mu::engraving::NoteHeadType(type)));</span></span>
+<span id="L250"><span class="lineNum">     250</span>              :     }</span>
+<span id="L251"><span class="lineNum">     251</span>              : </span>
+<span id="L252"><span class="lineNum">     252</span>              :     /// The line a note with the given pitch would be displayed on.</span>
+<span id="L253"><span class="lineNum">     253</span>              :     /// \param pitch The pitch of the note to find the line for.</span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC">           0 :     Q_INVOKABLE int line(int pitch) { return drumset()-&gt;line(pitch); }</span></span>
+<span id="L255"><span class="lineNum">     255</span>              : </span>
+<span id="L256"><span class="lineNum">     256</span>              :     /// The voice a note with the given pitch would be added to.</span>
+<span id="L257"><span class="lineNum">     257</span>              :     /// \param pitch The pitch of the note to find the voice for.</span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaUNC">           0 :     Q_INVOKABLE int voice(int pitch) { return drumset()-&gt;voice(pitch); }</span></span>
+<span id="L259"><span class="lineNum">     259</span>              : </span>
+<span id="L260"><span class="lineNum">     260</span>              :     /// The default stem direction a note with the given pitch would have.</span>
+<span id="L261"><span class="lineNum">     261</span>              :     /// One of the PluginAPI::PluginAPI::Direction values</span>
+<span id="L262"><span class="lineNum">     262</span>              :     /// \see PluginAPI::PluginAPI::Direction</span>
+<span id="L263"><span class="lineNum">     263</span>              :     /// \param pitch The pitch to find the stem direction for.</span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 :     Q_INVOKABLE int stemDirection(int pitch) { return int(drumset()-&gt;stemDirection(pitch)); }</span></span>
+<span id="L265"><span class="lineNum">     265</span>              : </span>
+<span id="L266"><span class="lineNum">     266</span>              :     /// The name (untranslated) of the drumset note for a given pitch.</span>
+<span id="L267"><span class="lineNum">     267</span>              :     /// \param pitch The pitch of the note to find the name for.</span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaUNC">           0 :     Q_INVOKABLE QString name(int pitch) { return drumset()-&gt;name(pitch); }</span></span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span>              :     /// The translated name of the drumset note for a given pitch.</span>
+<span id="L271"><span class="lineNum">     271</span>              :     /// \param pitch The pitch of the note to find the name for.</span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaUNC">           0 :     Q_INVOKABLE QString translatedName(int pitch) { return drumset()-&gt;translatedName(pitch); }</span></span>
+<span id="L273"><span class="lineNum">     273</span>              : </span>
+<span id="L274"><span class="lineNum">     274</span>              :     /// The shortcut of the drumset note for a given pitch.</span>
+<span id="L275"><span class="lineNum">     275</span>              :     /// \param pitch The pitch of the note to find the shortcut for.</span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaUNC">           0 :     Q_INVOKABLE QString shortcut(int pitch) { return drumset()-&gt;shortcut(pitch); }</span></span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span>              :     /// List of variants for a given pitch in this drumset.</span>
+<span id="L279"><span class="lineNum">     279</span>              :     /// \returns A list of objects representing variants.</span>
+<span id="L280"><span class="lineNum">     280</span>              :     /// Each object has the following fields:</span>
+<span id="L281"><span class="lineNum">     281</span>              :     /// - \p pitch - pitch of this variant.</span>
+<span id="L282"><span class="lineNum">     282</span>              :     /// - \p tremolo - tremolo type of this variant, one of</span>
+<span id="L283"><span class="lineNum">     283</span>              :     ///             PluginAPI::PLUGIN_API::TremoloType values.</span>
+<span id="L284"><span class="lineNum">     284</span>              :     /// - \p articulationName - the name of the articulation</span>
+<span id="L285"><span class="lineNum">     285</span>              :     ///             for this variant.</span>
+<span id="L286"><span class="lineNum">     286</span>              :     /// \param pitch Pitch to find variants for.</span>
+<span id="L287"><span class="lineNum">     287</span>              :     Q_INVOKABLE QVariantList variants(int pitch);</span>
+<span id="L288"><span class="lineNum">     288</span>              : </span>
+<span id="L289"><span class="lineNum">     289</span>              :     /// The row the given pitch appears in the percussion panel.</span>
+<span id="L290"><span class="lineNum">     290</span>              :     /// \param pitch The pitch of the note to find the row for.</span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaUNC">           0 :     Q_INVOKABLE int panelRow(int pitch) { return drumset()-&gt;panelRow(pitch); }</span></span>
+<span id="L292"><span class="lineNum">     292</span>              : </span>
+<span id="L293"><span class="lineNum">     293</span>              :     /// The column the given pitch appears in the percussion panel.</span>
+<span id="L294"><span class="lineNum">     294</span>              :     /// \param pitch The pitch of the note to find the column for.</span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaUNC">           0 :     Q_INVOKABLE int panelColumn(int pitch) { return drumset()-&gt;panelColumn(pitch); }</span></span>
+<span id="L296"><span class="lineNum">     296</span>              : </span>
+<span id="L297"><span class="lineNum">     297</span>              :     /// Tries to find the pitch of a normal notehead at &quot;line&quot;. If a</span>
+<span id="L298"><span class="lineNum">     298</span>              :     /// normal notehead can't be found it will instead return the</span>
+<span id="L299"><span class="lineNum">     299</span>              :     /// &quot;first valid pitch&quot; (i.e. the lowest used midi note) in the drumset.</span>
+<span id="L300"><span class="lineNum">     300</span>              :     /// \param line The line to find the default pitch on.</span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaUNC">           0 :     Q_INVOKABLE int defaultPitchForLine(int line) { return drumset()-&gt;defaultPitchForLine(line); }</span></span>
+<span id="L302"><span class="lineNum">     302</span>              : </span>
+<span id="L303"><span class="lineNum">     303</span>              :     /// The next used pitch from a given starting point.</span>
+<span id="L304"><span class="lineNum">     304</span>              :     /// \param pitch The pitch from which to find the next used pitch from.</span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaUNC">           0 :     Q_INVOKABLE int nextPitch(int pitch) { return drumset()-&gt;nextPitch(pitch); }</span></span>
+<span id="L306"><span class="lineNum">     306</span>              : </span>
+<span id="L307"><span class="lineNum">     307</span>              :     /// The previous used pitch from a given starting point.</span>
+<span id="L308"><span class="lineNum">     308</span>              :     /// \param pitch The pitch from which to find the previous used pitch from.</span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaUNC">           0 :     Q_INVOKABLE int prevPitch(int pitch) { return drumset()-&gt;prevPitch(pitch); }</span></span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span>              :     /// Sets the name of the drum note at the given pitch.</span>
+<span id="L312"><span class="lineNum">     312</span>              :     /// These setters allow modifying a cloned drumset before passing it</span>
+<span id="L313"><span class="lineNum">     313</span>              :     /// to Score.replaceDrumset(). The Drumset obtained from an Instrument</span>
+<span id="L314"><span class="lineNum">     314</span>              :     /// is read-only; use Instrument.cloneDrumset() to get a writable copy.</span>
+<span id="L315"><span class="lineNum">     315</span>              :     /// \param pitch The MIDI pitch (0 to 127).</span>
+<span id="L316"><span class="lineNum">     316</span>              :     /// \param name The new name for this drum note.</span>
+<span id="L317"><span class="lineNum">     317</span>              :     /// \since MuseScore 4.7</span>
+<span id="L318"><span class="lineNum">     318</span>              :     Q_INVOKABLE void setName(int pitch, const QString&amp; name);</span>
+<span id="L319"><span class="lineNum">     319</span>              : </span>
+<span id="L320"><span class="lineNum">     320</span>              :     /// Sets the notehead group for the drum note at the given pitch.</span>
+<span id="L321"><span class="lineNum">     321</span>              :     /// \param pitch The MIDI pitch (0 to 127).</span>
+<span id="L322"><span class="lineNum">     322</span>              :     /// \param noteHead The notehead group (NoteHeadGroup value).</span>
+<span id="L323"><span class="lineNum">     323</span>              :     /// \since MuseScore 4.7</span>
+<span id="L324"><span class="lineNum">     324</span>              :     Q_INVOKABLE void setNoteHead(int pitch, int noteHead);</span>
+<span id="L325"><span class="lineNum">     325</span>              : </span>
+<span id="L326"><span class="lineNum">     326</span>              :     /// Sets the staff line for the drum note at the given pitch.</span>
+<span id="L327"><span class="lineNum">     327</span>              :     /// \param pitch The MIDI pitch (0 to 127).</span>
+<span id="L328"><span class="lineNum">     328</span>              :     /// \param line The staff line for this note.</span>
+<span id="L329"><span class="lineNum">     329</span>              :     /// \since MuseScore 4.7</span>
+<span id="L330"><span class="lineNum">     330</span>              :     Q_INVOKABLE void setLine(int pitch, int line);</span>
+<span id="L331"><span class="lineNum">     331</span>              : </span>
+<span id="L332"><span class="lineNum">     332</span>              :     /// Sets the voice for the drum note at the given pitch.</span>
+<span id="L333"><span class="lineNum">     333</span>              :     /// \param pitch The MIDI pitch (0 to 127).</span>
+<span id="L334"><span class="lineNum">     334</span>              :     /// \param voice The voice index (0 to 3).</span>
+<span id="L335"><span class="lineNum">     335</span>              :     /// \since MuseScore 4.7</span>
+<span id="L336"><span class="lineNum">     336</span>              :     Q_INVOKABLE void setVoice(int pitch, int voice);</span>
+<span id="L337"><span class="lineNum">     337</span>              : </span>
+<span id="L338"><span class="lineNum">     338</span>              :     /// Sets the stem direction for the drum note at the given pitch.</span>
+<span id="L339"><span class="lineNum">     339</span>              :     /// \param pitch The MIDI pitch (0 to 127).</span>
+<span id="L340"><span class="lineNum">     340</span>              :     /// \param stemDirection The stem direction (Direction value).</span>
+<span id="L341"><span class="lineNum">     341</span>              :     /// \since MuseScore 4.7</span>
+<span id="L342"><span class="lineNum">     342</span>              :     Q_INVOKABLE void setStemDirection(int pitch, int stemDirection);</span>
+<span id="L343"><span class="lineNum">     343</span>              : </span>
+<span id="L344"><span class="lineNum">     344</span>              :     /// Sets the keyboard shortcut for the drum note at the given pitch.</span>
+<span id="L345"><span class="lineNum">     345</span>              :     /// \param pitch The MIDI pitch (0 to 127).</span>
+<span id="L346"><span class="lineNum">     346</span>              :     /// \param shortcut The keyboard shortcut character.</span>
+<span id="L347"><span class="lineNum">     347</span>              :     /// \since MuseScore 4.7</span>
+<span id="L348"><span class="lineNum">     348</span>              :     Q_INVOKABLE void setShortcut(int pitch, const QString&amp; shortcut);</span>
+<span id="L349"><span class="lineNum">     349</span>              : </span>
+<span id="L350"><span class="lineNum">     350</span>              :     /// Checks whether two drumsets represent the same object.</span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaUNC">           0 :     Q_INVOKABLE bool is(apiv1::Drumset* other) { return other &amp;&amp; drumset() == other-&gt;drumset(); }</span></span>
+<span id="L352"><span class="lineNum">     352</span>              : };</span>
+<span id="L353"><span class="lineNum">     353</span>              : </span>
+<span id="L354"><span class="lineNum">     354</span>              : //---------------------------------------------------------</span>
+<span id="L355"><span class="lineNum">     355</span>              : //   ChannelListProperty</span>
+<span id="L356"><span class="lineNum">     356</span>              : ///   \cond PLUGIN_API \private \endcond</span>
+<span id="L357"><span class="lineNum">     357</span>              : //---------------------------------------------------------</span>
+<span id="L358"><span class="lineNum">     358</span>              : </span>
+<span id="L359"><span class="lineNum">     359</span>              : class ChannelListProperty : public QQmlListProperty&lt;Channel&gt;</span>
+<span id="L360"><span class="lineNum">     360</span>              : {</span>
+<span id="L361"><span class="lineNum">     361</span>              : public:</span>
+<span id="L362"><span class="lineNum">     362</span>              :     ChannelListProperty(Instrument* i);</span>
+<span id="L363"><span class="lineNum">     363</span>              : </span>
+<span id="L364"><span class="lineNum">     364</span>              :     static qsizetype count(QQmlListProperty&lt;Channel&gt;* l);</span>
+<span id="L365"><span class="lineNum">     365</span>              :     static Channel* at(QQmlListProperty&lt;Channel&gt;* l, qsizetype i);</span>
+<span id="L366"><span class="lineNum">     366</span>              : };</span>
+<span id="L367"><span class="lineNum">     367</span>              : </span>
+<span id="L368"><span class="lineNum">     368</span>              : //---------------------------------------------------------</span>
+<span id="L369"><span class="lineNum">     369</span>              : //   Instrument</span>
+<span id="L370"><span class="lineNum">     370</span>              : ///   \since MuseScore 3.5</span>
+<span id="L371"><span class="lineNum">     371</span>              : //---------------------------------------------------------</span>
+<span id="L372"><span class="lineNum">     372</span>              : </span>
+<span id="L373"><span class="lineNum">     373</span>              : class Instrument : public QObject</span>
+<span id="L374"><span class="lineNum">     374</span>              : {</span>
+<span id="L375"><span class="lineNum">     375</span>              :     Q_OBJECT</span>
+<span id="L376"><span class="lineNum">     376</span>              : </span>
+<span id="L377"><span class="lineNum">     377</span>              :     /// The MuseScore string identifier</span>
+<span id="L378"><span class="lineNum">     378</span>              :     /// for this instrument.</span>
+<span id="L379"><span class="lineNum">     379</span>              :     /// \see \ref apiv1::Part::instrumentId &quot;Part.instrumentId&quot;</span>
+<span id="L380"><span class="lineNum">     380</span>              :     Q_PROPERTY(QString instrumentId READ instrumentId)</span>
+<span id="L381"><span class="lineNum">     381</span>              :     /// The string identifier</span>
+<span id="L382"><span class="lineNum">     382</span>              :     /// ([MusicXML Sound ID](https://www.musicxml.com/for-developers/standard-sounds/))</span>
+<span id="L383"><span class="lineNum">     383</span>              :     /// for this instrument.</span>
+<span id="L384"><span class="lineNum">     384</span>              :     /// \see \ref apiv1::Part::musicXmlId &quot;Part.musicXmlId&quot;</span>
+<span id="L385"><span class="lineNum">     385</span>              :     Q_PROPERTY(QString musicXmlId READ musicXmlId)</span>
+<span id="L386"><span class="lineNum">     386</span>              :     // mu::engraving::Instrument supports multiple short/long names (for aeolus instruments?)</span>
+<span id="L387"><span class="lineNum">     387</span>              :     // but in practice only one is actually used. If this gets changed this API could</span>
+<span id="L388"><span class="lineNum">     388</span>              :     // be expanded.</span>
+<span id="L389"><span class="lineNum">     389</span>              :     /// The long name for this instrument.</span>
+<span id="L390"><span class="lineNum">     390</span>              :     Q_PROPERTY(QString longName READ longName)</span>
+<span id="L391"><span class="lineNum">     391</span>              :     /// The short name for this instrument.</span>
+<span id="L392"><span class="lineNum">     392</span>              :     Q_PROPERTY(QString shortName READ shortName)</span>
+<span id="L393"><span class="lineNum">     393</span>              : </span>
+<span id="L394"><span class="lineNum">     394</span>              :     /// For fretted instruments, an information about this</span>
+<span id="L395"><span class="lineNum">     395</span>              :     /// instrument's strings.</span>
+<span id="L396"><span class="lineNum">     396</span>              :     Q_PROPERTY(apiv1::StringData * stringData READ stringData)</span>
+<span id="L397"><span class="lineNum">     397</span>              : </span>
+<span id="L398"><span class="lineNum">     398</span>              :     /// For unpitched percussion instruments, information about</span>
+<span id="L399"><span class="lineNum">     399</span>              :     /// this instrument's percussion.</span>
+<span id="L400"><span class="lineNum">     400</span>              :     /// \since MuseScore 4.6</span>
+<span id="L401"><span class="lineNum">     401</span>              :     Q_PROPERTY(apiv1::Drumset * drumset READ drumset)</span>
+<span id="L402"><span class="lineNum">     402</span>              : </span>
+<span id="L403"><span class="lineNum">     403</span>              :     /// The list of channels for this instrument.</span>
+<span id="L404"><span class="lineNum">     404</span>              :     Q_PROPERTY(QQmlListProperty&lt;apiv1::Channel&gt; channels READ channels)</span>
+<span id="L405"><span class="lineNum">     405</span>              : </span>
+<span id="L406"><span class="lineNum">     406</span>              :     mu::engraving::Instrument* m_instrument;</span>
+<span id="L407"><span class="lineNum">     407</span>              :     mu::engraving::Part* m_part;</span>
+<span id="L408"><span class="lineNum">     408</span>              : </span>
+<span id="L409"><span class="lineNum">     409</span>              : public:</span>
+<span id="L410"><span class="lineNum">     410</span>              :     /// \cond MS_INTERNAL</span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC tlaBgGNC">           1 :     Instrument(mu::engraving::Instrument* i, mu::engraving::Part* p)</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">           1 :         : QObject(), m_instrument(i), m_part(p) {}</span></span>
+<span id="L413"><span class="lineNum">     413</span>              : </span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">           1 :     mu::engraving::Instrument* instrument() { return m_instrument; }</span></span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaUNC tlaBgUNC">           0 :     const mu::engraving::Instrument* instrument() const { return m_instrument; }</span></span>
+<span id="L416"><span class="lineNum">     416</span>              : </span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaUNC">           0 :     mu::engraving::Part* part() { return m_part; }</span></span>
+<span id="L418"><span class="lineNum">     418</span>              : </span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaUNC">           0 :     QString instrumentId() const { return instrument()-&gt;id(); }</span></span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaUNC">           0 :     QString musicXmlId() const { return instrument()-&gt;musicXmlId(); }</span></span>
+<span id="L421"><span class="lineNum">     421</span>              :     QString longName() const;</span>
+<span id="L422"><span class="lineNum">     422</span>              :     QString shortName() const;</span>
+<span id="L423"><span class="lineNum">     423</span>              : </span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaUNC">           0 :     apiv1::StringData* stringData() { return customWrap&lt;StringData&gt;(instrument()-&gt;stringData()); }</span></span>
+<span id="L425"><span class="lineNum">     425</span>              : </span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaUNC">           0 :     apiv1::Drumset* drumset() { return customWrap&lt;Drumset&gt;(instrument()-&gt;drumset()); }</span></span>
+<span id="L427"><span class="lineNum">     427</span>              : </span>
+<span id="L428"><span class="lineNum">     428</span>              :     ChannelListProperty channels();</span>
+<span id="L429"><span class="lineNum">     429</span>              :     /// \endcond</span>
+<span id="L430"><span class="lineNum">     430</span>              : </span>
+<span id="L431"><span class="lineNum">     431</span>              :     /// Creates and returns a copy of this instrument's drumset.</span>
+<span id="L432"><span class="lineNum">     432</span>              :     /// The returned Drumset is owned by the caller and can be modified</span>
+<span id="L433"><span class="lineNum">     433</span>              :     /// without affecting the original instrument until replaceDrumset is called.</span>
+<span id="L434"><span class="lineNum">     434</span>              :     /// Returns null if the instrument has no drumset.</span>
+<span id="L435"><span class="lineNum">     435</span>              :     /// \since MuseScore 4.7</span>
+<span id="L436"><span class="lineNum">     436</span>              :     Q_INVOKABLE apiv1::Drumset* cloneDrumset();</span>
+<span id="L437"><span class="lineNum">     437</span>              : </span>
+<span id="L438"><span class="lineNum">     438</span>              :     /// Checks whether two instruments represent the same object.</span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaUNC">           0 :     Q_INVOKABLE bool is(apiv1::Instrument* other) { return other &amp;&amp; instrument() == other-&gt;instrument(); }</span></span>
+<span id="L440"><span class="lineNum">     440</span>              : };</span>
+<span id="L441"><span class="lineNum">     441</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>
