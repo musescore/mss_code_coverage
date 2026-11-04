@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td class="headerValue">2026-11-04 12:40:40</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -102,17 +102,17 @@
 <span id="L44"><span class="lineNum">      44</span>              : }</span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
 <span id="L46"><span class="lineNum">      46</span>              : template&lt;typename T&gt;</span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">   116106498 : inline T check_valid(T v, T def = T())</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">   116106474 : inline T check_valid(T v, T def = T())</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : {</span>
 <span id="L49"><span class="lineNum">      49</span>              :     if constexpr (std::numeric_limits&lt;T&gt;::is_integer) {</span>
 <span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       17390 :         return v;</span></span>
 <span id="L51"><span class="lineNum">      51</span>              :     } else {</span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">   116089108 :         bool valid = !std::isnan(v) &amp;&amp; !std::isinf(v);</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">   116089108 :         if (!valid) {</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">   116089084 :         bool valid = !std::isnan(v) &amp;&amp; !std::isinf(v);</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">   116089084 :         if (!valid) {</span></span>
 <span id="L54"><span class="lineNum">      54</span> <span class="tlaUNC tlaBgUNC">           0 :             assert(!std::isnan(v) &amp;&amp; !std::isinf(v));</span></span>
 <span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC">           0 :             return def;</span></span>
 <span id="L56"><span class="lineNum">      56</span>              :         }</span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC tlaBgGNC">   116089108 :         return v;</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC tlaBgGNC">   116089084 :         return v;</span></span>
 <span id="L58"><span class="lineNum">      58</span>              :     }</span>
 <span id="L59"><span class="lineNum">      59</span>              : }</span>
 <span id="L60"><span class="lineNum">      60</span>              : </span>
@@ -124,8 +124,8 @@
 <span id="L66"><span class="lineNum">      66</span>              :     using value_type = T;</span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">    60279887 :     constexpr number_t() = default;</span></span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">    89141697 :     number_t(T v)</span></span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">    89141697 :         : m_val(muse::check_valid(v)) {}</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">    89141677 :     number_t(T v)</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">    89141677 :         : m_val(muse::check_valid(v)) {}</span></span>
 <span id="L71"><span class="lineNum">      71</span>              : </span>
 <span id="L72"><span class="lineNum">      72</span>              :     //! NOTE At the moment, not all compilers have std::is_nan is constexpr,</span>
 <span id="L73"><span class="lineNum">      73</span>              :     //! so we can't make check_valid is constexpr,</span>
@@ -133,14 +133,14 @@
 <span id="L75"><span class="lineNum">      75</span>              :     //! This function is a helper for creating constexpr variables.</span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        3038 :     static constexpr number_t&lt;T&gt; make(T v) { number_t&lt;T&gt; n; n.m_val = v; return n; }</span></span>
 <span id="L77"><span class="lineNum">      77</span>              : </span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">     7165703 :     number_t&lt;T&gt;&amp; operator=(T v) { m_val = muse::check_valid(v); return *this; }</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">     7165702 :     number_t&lt;T&gt;&amp; operator=(T v) { m_val = muse::check_valid(v); return *this; }</span></span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">   136676518 :     inline operator T() const {</span></span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">   136676518 :         return m_val;</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">   136676879 :     inline operator T() const {</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">   136676879 :         return m_val;</span></span>
 <span id="L82"><span class="lineNum">      82</span>              :     }</span>
 <span id="L83"><span class="lineNum">      83</span>              : </span>
 <span id="L84"><span class="lineNum">      84</span>              :     template&lt;typename V&gt;</span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">        8372 :     static T cast(V v) { return static_cast&lt;T&gt;(v); }</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">        8370 :     static T cast(V v) { return static_cast&lt;T&gt;(v); }</span></span>
 <span id="L86"><span class="lineNum">      86</span>              : </span>
 <span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">     1397231 :     inline constexpr T raw() const { return m_val; }</span></span>
 <span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          64 :     inline T&amp; raw() { return m_val; }</span></span>
@@ -166,19 +166,19 @@
 <span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">           4 :     inline bool operator&gt;=(T n) const { return m_val &gt; n || muse::is_equal(m_val, n); }</span></span>
 <span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">           4 :     inline bool operator&lt;=(T n) const { return m_val &lt; n || muse::is_equal(m_val, n); }</span></span>
 <span id="L110"><span class="lineNum">     110</span>              : </span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">    37975329 :     inline number_t&lt;T&gt; operator+(const number_t&lt;T&gt;&amp; n) const { return number_t&lt;T&gt;(m_val + n.m_val); }</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">    37975323 :     inline number_t&lt;T&gt; operator+(const number_t&lt;T&gt;&amp; n) const { return number_t&lt;T&gt;(m_val + n.m_val); }</span></span>
 <span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">      199226 :     inline number_t&lt;T&gt; operator-(const number_t&lt;T&gt;&amp; n) const { return number_t&lt;T&gt;(m_val - n.m_val); }</span></span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">     2375152 :     inline number_t&lt;T&gt; operator+(T n) const { return number_t&lt;T&gt;(m_val + n); }</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">     2375150 :     inline number_t&lt;T&gt; operator+(T n) const { return number_t&lt;T&gt;(m_val + n); }</span></span>
 <span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">      495131 :     inline number_t&lt;T&gt; operator-(T n) const { return number_t&lt;T&gt;(m_val - n); }</span></span>
 <span id="L115"><span class="lineNum">     115</span>              : </span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">     3427955 :     inline number_t&lt;T&gt;&amp; operator+=(const number_t&lt;T&gt;&amp; n) { m_val += muse::check_valid(n.m_val); return *this; }</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">     3427953 :     inline number_t&lt;T&gt;&amp; operator+=(const number_t&lt;T&gt;&amp; n) { m_val += muse::check_valid(n.m_val); return *this; }</span></span>
 <span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">       40490 :     inline number_t&lt;T&gt;&amp; operator-=(const number_t&lt;T&gt;&amp; n) { m_val -= muse::check_valid(n.m_val); return *this; }</span></span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">    10250791 :     inline number_t&lt;T&gt;&amp; operator+=(T n) { m_val += muse::check_valid(n); return *this; }</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">    10250790 :     inline number_t&lt;T&gt;&amp; operator+=(T n) { m_val += muse::check_valid(n); return *this; }</span></span>
 <span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">      500692 :     inline number_t&lt;T&gt;&amp; operator-=(T n) { m_val -= muse::check_valid(n); return *this; }</span></span>
 <span id="L120"><span class="lineNum">     120</span>              : </span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">         382 :     inline number_t&lt;T&gt; operator/(const number_t&lt;T&gt;&amp; n) const { return number_t&lt;T&gt;(m_val / n.m_val); }</span></span>
 <span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">        2842 :     inline number_t&lt;T&gt; operator*(const number_t&lt;T&gt;&amp; n) const { return number_t&lt;T&gt;(m_val * n.m_val); }</span></span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">        8384 :     inline number_t&lt;T&gt; operator/(T n) const { return number_t&lt;T&gt;(m_val / n); }</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">        8382 :     inline number_t&lt;T&gt; operator/(T n) const { return number_t&lt;T&gt;(m_val / n); }</span></span>
 <span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">     1096303 :     inline number_t&lt;T&gt; operator*(T n) const { return number_t&lt;T&gt;(m_val * n); }</span></span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
 <span id="L126"><span class="lineNum">     126</span>              :     inline number_t&lt;T&gt;&amp; operator/=(const number_t&lt;T&gt;&amp; n) { m_val /= muse::check_valid(n.m_val, T(1)); return *this; }</span>

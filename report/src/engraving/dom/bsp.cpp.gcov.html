@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td class="headerValue">2026-11-04 12:40:40</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -253,55 +253,55 @@
 <span id="L195"><span class="lineNum">     195</span>              : //   nearestNeighbor (private)</span>
 <span id="L196"><span class="lineNum">     196</span>              : //---------------------------------------------------------</span>
 <span id="L197"><span class="lineNum">     197</span>              : </span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        3729 : void BspTree::nearestNeighbor(const PointF&amp; pos, EngravingItem** bestItem, double&amp; bestDistance, int nodeIndex)</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        4064 : void BspTree::nearestNeighbor(const PointF&amp; pos, EngravingItem** bestItem, double&amp; bestDistance, int nodeIndex)</span></span>
 <span id="L199"><span class="lineNum">     199</span>              : {</span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">        3729 :     if (m_nodes.empty()) {</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">        4064 :     if (m_nodes.empty()) {</span></span>
 <span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L202"><span class="lineNum">     202</span>              :     }</span>
 <span id="L203"><span class="lineNum">     203</span>              : </span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC tlaBgGNC">        3729 :     Node* node = &amp;m_nodes[nodeIndex];</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC tlaBgGNC">        4064 :     Node* node = &amp;m_nodes[nodeIndex];</span></span>
 <span id="L205"><span class="lineNum">     205</span>              : </span>
 <span id="L206"><span class="lineNum">     206</span>              :     // Base case: go through the items in the leaf node (if any), and update bestItem/bestDistance accordingly</span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">        3729 :     if (node-&gt;type == Node::Type::LEAF) {</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        1770 :         for (auto item : m_leaves[node-&gt;leafIndex]) {</span></span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">          98 :             PointF itemPos = item-&gt;pageBoundingRect().center();</span></span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">          98 :             double currDistance = std::sqrt(std::pow(pos.x() - itemPos.x(), 2) + std::pow(pos.y() - itemPos.y(), 2));</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          98 :             if (currDistance &lt; bestDistance) {</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">        4064 :     if (node-&gt;type == Node::Type::LEAF) {</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        1910 :         for (auto item : m_leaves[node-&gt;leafIndex]) {</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">          97 :             PointF itemPos = item-&gt;pageBoundingRect().center();</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">          97 :             double currDistance = std::sqrt(std::pow(pos.x() - itemPos.x(), 2) + std::pow(pos.y() - itemPos.y(), 2));</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          97 :             if (currDistance &lt; bestDistance) {</span></span>
 <span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">          59 :                 *bestItem = item;</span></span>
 <span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">          59 :                 bestDistance = currDistance;</span></span>
 <span id="L214"><span class="lineNum">     214</span>              :             }</span>
 <span id="L215"><span class="lineNum">     215</span>              :         }</span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        1672 :         return;</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        1813 :         return;</span></span>
 <span id="L217"><span class="lineNum">     217</span>              :     }</span>
 <span id="L218"><span class="lineNum">     218</span>              : </span>
 <span id="L219"><span class="lineNum">     219</span>              :     // Find which child contains pos and which is the &quot;sibling&quot;</span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        2057 :     int containerIdx = firstChildIndex(nodeIndex);</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        2057 :     int siblingIdx =  containerIdx + 1;</span></span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        2057 :     if (node-&gt;type == Node::Type::VERTICAL) {</span></span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">        1313 :         if (pos.x() &gt;= node-&gt;offset) {</span></span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">         450 :             ++containerIdx;</span></span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">         450 :             --siblingIdx;</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        2251 :     int containerIdx = firstChildIndex(nodeIndex);</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        2251 :     int siblingIdx =  containerIdx + 1;</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        2251 :     if (node-&gt;type == Node::Type::VERTICAL) {</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">        1424 :         if (pos.x() &gt;= node-&gt;offset) {</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">         512 :             ++containerIdx;</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">         512 :             --siblingIdx;</span></span>
 <span id="L226"><span class="lineNum">     226</span>              :         }</span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">         744 :     } else if (pos.y() &gt;= node-&gt;offset) {</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">         295 :         ++containerIdx;</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">         295 :         --siblingIdx;</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">         827 :     } else if (pos.y() &gt;= node-&gt;offset) {</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">         330 :         ++containerIdx;</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">         330 :         --siblingIdx;</span></span>
 <span id="L230"><span class="lineNum">     230</span>              :     }</span>
 <span id="L231"><span class="lineNum">     231</span>              : </span>
 <span id="L232"><span class="lineNum">     232</span>              :     // Recursion on container node</span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        2057 :     nearestNeighbor(pos, bestItem, bestDistance, containerIdx);</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        2251 :     nearestNeighbor(pos, bestItem, bestDistance, containerIdx);</span></span>
 <span id="L234"><span class="lineNum">     234</span>              : </span>
 <span id="L235"><span class="lineNum">     235</span>              :     // If the distance to the &quot;offset&quot; is shorter than the best distance we've found so far, then it's possible that the nearest</span>
 <span id="L236"><span class="lineNum">     236</span>              :     // neighbour is in the sibling node (so we should search there too).</span>
 <span id="L237"><span class="lineNum">     237</span>              :     double distanceToOffset;</span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">        2057 :     if (node-&gt;type == Node::Type::HORIZONTAL) {</span></span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">         744 :         distanceToOffset = std::abs(pos.y() - node-&gt;offset);</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">        2251 :     if (node-&gt;type == Node::Type::HORIZONTAL) {</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">         827 :         distanceToOffset = std::abs(pos.y() - node-&gt;offset);</span></span>
 <span id="L240"><span class="lineNum">     240</span>              :     } else {</span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">        1313 :         distanceToOffset = std::abs(pos.x() - node-&gt;offset);</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">        1424 :         distanceToOffset = std::abs(pos.x() - node-&gt;offset);</span></span>
 <span id="L242"><span class="lineNum">     242</span>              :     }</span>
 <span id="L243"><span class="lineNum">     243</span>              : </span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        2057 :     if (distanceToOffset &lt; bestDistance) {</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        2251 :     if (distanceToOffset &lt; bestDistance) {</span></span>
 <span id="L245"><span class="lineNum">     245</span>              :         // Recursion on sibling node</span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        1628 :         nearestNeighbor(pos, bestItem, bestDistance, siblingIdx);</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        1769 :         nearestNeighbor(pos, bestItem, bestDistance, siblingIdx);</span></span>
 <span id="L247"><span class="lineNum">     247</span>              :     }</span>
 <span id="L248"><span class="lineNum">     248</span>              : }</span>
 <span id="L249"><span class="lineNum">     249</span>              : </span>
@@ -424,16 +424,16 @@
 <span id="L366"><span class="lineNum">     366</span>              : //   climbTree</span>
 <span id="L367"><span class="lineNum">     367</span>              : //---------------------------------------------------------</span>
 <span id="L368"><span class="lineNum">     368</span>              : </span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC tlaBgGNC">        7855 : void BspTree::climbTree(BspTreeVisitor* visitor, const RectF&amp; rec, int index)</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC tlaBgGNC">        7856 : void BspTree::climbTree(BspTreeVisitor* visitor, const RectF&amp; rec, int index)</span></span>
 <span id="L370"><span class="lineNum">     370</span>              : {</span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">        7855 :     if (m_nodes.empty()) {</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">        7856 :     if (m_nodes.empty()) {</span></span>
 <span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L373"><span class="lineNum">     373</span>              :     }</span>
 <span id="L374"><span class="lineNum">     374</span>              : </span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC tlaBgGNC">        7855 :     Node* node = &amp;m_nodes[index];</span></span>
-<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">        7855 :     int childIndex = firstChildIndex(index);</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC tlaBgGNC">        7856 :     Node* node = &amp;m_nodes[index];</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">        7856 :     int childIndex = firstChildIndex(index);</span></span>
 <span id="L377"><span class="lineNum">     377</span>              : </span>
-<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">        7855 :     switch (node-&gt;type) {</span></span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">        7856 :     switch (node-&gt;type) {</span></span>
 <span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">        2513 :     case Node::Type::LEAF:</span></span>
 <span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">        2513 :         visitor-&gt;visit(m_leaves[node-&gt;leafIndex]);</span></span>
 <span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">        2513 :         break;</span></span>
@@ -441,20 +441,20 @@
 <span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">        2286 :         if (rec.left() &lt; node-&gt;offset) {</span></span>
 <span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">        1573 :             climbTree(visitor, rec, childIndex);</span></span>
 <span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">        1573 :             if (rec.right() &gt;= node-&gt;offset) {</span></span>
-<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">         681 :                 climbTree(visitor, rec, childIndex + 1);</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">         682 :                 climbTree(visitor, rec, childIndex + 1);</span></span>
 <span id="L387"><span class="lineNum">     387</span>              :             }</span>
 <span id="L388"><span class="lineNum">     388</span>              :         } else {</span>
 <span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">         713 :             climbTree(visitor, rec, childIndex + 1);</span></span>
 <span id="L390"><span class="lineNum">     390</span>              :         }</span>
 <span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">        2286 :         break;</span></span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">        3056 :     case Node::Type::HORIZONTAL:</span></span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">        3056 :         if (rec.top() &lt; node-&gt;offset) {</span></span>
+<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">        3057 :     case Node::Type::HORIZONTAL:</span></span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">        3057 :         if (rec.top() &lt; node-&gt;offset) {</span></span>
 <span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">        2251 :             climbTree(visitor, rec, childIndex);</span></span>
 <span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">        2251 :             if (rec.bottom() &gt;= node-&gt;offset) {</span></span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">        1414 :                 climbTree(visitor, rec, childIndex + 1);</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">        1413 :                 climbTree(visitor, rec, childIndex + 1);</span></span>
 <span id="L397"><span class="lineNum">     397</span>              :             }</span>
 <span id="L398"><span class="lineNum">     398</span>              :         } else {</span>
-<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">         805 :             climbTree(visitor, rec, childIndex + 1);</span></span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">         806 :             climbTree(visitor, rec, childIndex + 1);</span></span>
 <span id="L400"><span class="lineNum">     400</span>              :         }</span>
 <span id="L401"><span class="lineNum">     401</span>              :     }</span>
 <span id="L402"><span class="lineNum">     402</span>              : }</span>

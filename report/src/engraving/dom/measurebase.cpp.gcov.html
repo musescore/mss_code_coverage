@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td class="headerValue">2026-11-04 12:40:40</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -118,10 +118,10 @@
 <span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           1 :     EngravingItem::setOwnershipParent(box);</span></span>
 <span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L62"><span class="lineNum">      62</span>              : </span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">      884174 : EngravingItem* MeasureBase::layoutParent() const</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">      884172 : EngravingItem* MeasureBase::layoutParent() const</span></span>
 <span id="L64"><span class="lineNum">      64</span>              : {</span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">      884174 :     if (m_system) {</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">      882661 :         return m_system;</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">      884172 :     if (m_system) {</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">      882659 :         return m_system;</span></span>
 <span id="L67"><span class="lineNum">      67</span>              :     }</span>
 <span id="L68"><span class="lineNum">      68</span>              :     // e.g. a horizontal frame nested inside a vertical frame is placed within its parent frame</span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">        1513 :     return EngravingItem::layoutParent();</span></span>
@@ -533,17 +533,17 @@
 <span id="L475"><span class="lineNum">     475</span>              : //   top</span>
 <span id="L476"><span class="lineNum">     476</span>              : //---------------------------------------------------------</span>
 <span id="L477"><span class="lineNum">     477</span>              : </span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">    16739964 : MeasureBase* MeasureBase::top() const</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">    16739958 : MeasureBase* MeasureBase::top() const</span></span>
 <span id="L479"><span class="lineNum">     479</span>              : {</span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">    16739964 :     const MeasureBase* mb = this;</span></span>
-<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">    16739964 :     while (mb-&gt;ownershipParent()) {</span></span>
-<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">    16739964 :         if (mb-&gt;ownershipParent()-&gt;isMeasureBase()) {</span></span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">    16739958 :     const MeasureBase* mb = this;</span></span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">    16739958 :     while (mb-&gt;ownershipParent()) {</span></span>
+<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">    16739958 :         if (mb-&gt;ownershipParent()-&gt;isMeasureBase()) {</span></span>
 <span id="L483"><span class="lineNum">     483</span> <span class="tlaUNC tlaBgUNC">           0 :             mb = toMeasureBase(mb-&gt;ownershipParent());</span></span>
 <span id="L484"><span class="lineNum">     484</span>              :         } else {</span>
-<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC tlaBgGNC">    16739964 :             break;</span></span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC tlaBgGNC">    16739958 :             break;</span></span>
 <span id="L486"><span class="lineNum">     486</span>              :         }</span>
 <span id="L487"><span class="lineNum">     487</span>              :     }</span>
-<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">    16739964 :     return const_cast&lt;MeasureBase*&gt;(mb);</span></span>
+<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">    16739958 :     return const_cast&lt;MeasureBase*&gt;(mb);</span></span>
 <span id="L489"><span class="lineNum">     489</span>              : }</span>
 <span id="L490"><span class="lineNum">     490</span>              : </span>
 <span id="L491"><span class="lineNum">     491</span>              : //---------------------------------------------------------</span>
@@ -574,10 +574,10 @@
 <span id="L516"><span class="lineNum">     516</span>              : //   tick</span>
 <span id="L517"><span class="lineNum">     517</span>              : //---------------------------------------------------------</span>
 <span id="L518"><span class="lineNum">     518</span>              : </span>
-<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">    16730142 : Fraction MeasureBase::tick() const</span></span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">    16730136 : Fraction MeasureBase::tick() const</span></span>
 <span id="L520"><span class="lineNum">     520</span>              : {</span>
-<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">    16730142 :     const MeasureBase* mb = top();</span></span>
-<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">    16730142 :     return mb ? mb-&gt;m_tick : Fraction(-1, 1);</span></span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">    16730136 :     const MeasureBase* mb = top();</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">    16730136 :     return mb ? mb-&gt;m_tick : Fraction(-1, 1);</span></span>
 <span id="L523"><span class="lineNum">     523</span>              : }</span>
 <span id="L524"><span class="lineNum">     524</span>              : </span>
 <span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">       22086 : void MeasureBase::setTick(const Fraction&amp; f)</span></span>

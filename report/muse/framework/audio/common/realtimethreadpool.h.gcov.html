@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td class="headerValue">2026-11-04 12:40:40</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -112,22 +112,22 @@
 <span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">          48 :                     muse::runtime::setThreadName(name + &quot;_&quot; + std::to_string(workerIndex));</span></span>
 <span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">          48 :                     AudioWorkgroupToken workgroupToken;</span></span>
 <span id="L56"><span class="lineNum">      56</span>              :                     for (;;) {</span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">          47 :                         Task task;</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">          48 :                         Task task;</span></span>
 <span id="L58"><span class="lineNum">      58</span>              : </span>
 <span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">          48 :                         m_queue.wait_dequeue(task);</span></span>
 <span id="L60"><span class="lineNum">      60</span>              :                         {</span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">          45 :                             std::lock_guard lock(workerPtr-&gt;m_workgroupMutex);</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">          48 :                             workerPtr-&gt;m_workgroup.join(workgroupToken);</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          44 :                         }</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">          47 :                             std::lock_guard lock(workerPtr-&gt;m_workgroupMutex);</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">          45 :                             workerPtr-&gt;m_workgroup.join(workgroupToken);</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          45 :                         }</span></span>
 <span id="L64"><span class="lineNum">      64</span>              : </span>
 <span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          48 :                         if (this-&gt;m_should_stop) {</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          94 :                             return;</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          89 :                             return;</span></span>
 <span id="L67"><span class="lineNum">      67</span>              :                         }</span>
 <span id="L68"><span class="lineNum">      68</span>              : </span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaUNC tlaBgUNC">           0 :                         InflightSemaphoreRelease release(m_inflightSemaphore);</span></span>
 <span id="L70"><span class="lineNum">      70</span> <span class="tlaUNC">           0 :                         task();</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC tlaBgGNC">          46 :                     }</span></span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">          95 :                 });</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC tlaBgGNC">          44 :                     }</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">          92 :                 });</span></span>
 <span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          48 :                 m_workers.push_back(std::move(worker));</span></span>
 <span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">          48 :                 muse::setThreadPriority(*m_workers.back()-&gt;m_thread, ThreadPriority::High);</span></span>
 <span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">          48 :             }</span></span>

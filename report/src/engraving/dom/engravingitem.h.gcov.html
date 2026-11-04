@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 11:08:27</td>
+            <td class="headerValue">2026-11-04 12:40:40</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -245,7 +245,7 @@
 <span id="L187"><span class="lineNum">     187</span>              :     //!     For example: notes-&gt;chord, chords-&gt;beam, etc.</span>
 <span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC tlaBgUNC">           0 :     virtual EngravingItem* elementBase() const { return const_cast&lt;EngravingItem*&gt;(this); }</span></span>
 <span id="L189"><span class="lineNum">     189</span>              : </span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">    16489353 :     virtual bool isEngravingItem() const override { return true; }</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">    16489363 :     virtual bool isEngravingItem() const override { return true; }</span></span>
 <span id="L191"><span class="lineNum">     191</span>              : </span>
 <span id="L192"><span class="lineNum">     192</span>              :     double spatium() const;</span>
 <span id="L193"><span class="lineNum">     193</span>              :     double defaultSpatium() const;</span>
@@ -268,7 +268,7 @@
 <span id="L210"><span class="lineNum">     210</span>              :         }</span>
 <span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">      352883 :     }</span></span>
 <span id="L212"><span class="lineNum">     212</span>              : </span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">    22626076 :     inline bool flag(ElementFlag f) const { return m_flags &amp; f; }</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">    22626074 :     inline bool flag(ElementFlag f) const { return m_flags &amp; f; }</span></span>
 <span id="L214"><span class="lineNum">     214</span>              : </span>
 <span id="L215"><span class="lineNum">     215</span>              :     bool selected() const;</span>
 <span id="L216"><span class="lineNum">     216</span>              :     virtual void setSelected(bool f);</span>
@@ -461,7 +461,7 @@
 <span id="L403"><span class="lineNum">     403</span>              :     virtual bool isPlayable() const;</span>
 <span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC tlaBgGNC">      782639 :     virtual double absoluteFromSpatium(const Spatium&amp; sp) const { return sp.val() * spatium(); }</span></span>
 <span id="L405"><span class="lineNum">     405</span>              : </span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">    10328429 :     bool systemFlag() const { return flag(ElementFlag::SYSTEM); }</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">    10328427 :     bool systemFlag() const { return flag(ElementFlag::SYSTEM); }</span></span>
 <span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">       26895 :     void setSystemFlag(bool v) const { setFlag(ElementFlag::SYSTEM, v); }</span></span>
 <span id="L408"><span class="lineNum">     408</span>              : </span>
 <span id="L409"><span class="lineNum">     409</span>              :     virtual bool isSystemObjectBelowBottomStaff() const;</span>
@@ -593,11 +593,11 @@
 <span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">      671981 :         void setMag(double val) { m_mag = val; }</span></span>
 <span id="L536"><span class="lineNum">     536</span>              : </span>
 <span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC">      117149 :         bool isSetPos() const { return m_pos.has_value(); }</span></span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">    11321938 :         const PointF&amp; pos(LD_ACCESS mode = LD_ACCESS::CHECK) const</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">    11321930 :         const PointF&amp; pos(LD_ACCESS mode = LD_ACCESS::CHECK) const</span></span>
 <span id="L539"><span class="lineNum">     539</span>              :         {</span>
 <span id="L540"><span class="lineNum">     540</span>              :             //! NOTE Temporarily to mute a lot of messages</span>
-<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">    11321938 :             mode = (LD_ACCESS::CHECK == mode) ? LD_ACCESS::MAYBE_NOTINITED : mode;</span></span>
-<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">    11321938 :             return m_pos.value(mode);</span></span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">    11321930 :             mode = (LD_ACCESS::CHECK == mode) ? LD_ACCESS::MAYBE_NOTINITED : mode;</span></span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">    11321930 :             return m_pos.value(mode);</span></span>
 <span id="L543"><span class="lineNum">     543</span>              :         }</span>
 <span id="L544"><span class="lineNum">     544</span>              : </span>
 <span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">      194434 :         void setPos(const PointF&amp; p) { doSetPos(p.x(), p.y()); }</span></span>
@@ -708,7 +708,7 @@
 <span id="L650"><span class="lineNum">     650</span> <span class="tlaGNC tlaBgGNC">     2836782 :     Shape shape(LD_ACCESS mode = LD_ACCESS::CHECK) const { return ldata()-&gt;shape(mode); }</span></span>
 <span id="L651"><span class="lineNum">     651</span> <span class="tlaUNC tlaBgUNC">           0 :     virtual double baseLine() const { return -height(); }</span></span>
 <span id="L652"><span class="lineNum">     652</span>              : </span>
-<span id="L653"><span class="lineNum">     653</span> <span class="tlaGNC tlaBgGNC">       20151 :     RectF pageBoundingRect(LD_ACCESS mode = LD_ACCESS::CHECK) const { return ldata()-&gt;bbox(mode).translated(pagePos()); }</span></span>
+<span id="L653"><span class="lineNum">     653</span> <span class="tlaGNC tlaBgGNC">       20150 :     RectF pageBoundingRect(LD_ACCESS mode = LD_ACCESS::CHECK) const { return ldata()-&gt;bbox(mode).translated(pagePos()); }</span></span>
 <span id="L654"><span class="lineNum">     654</span> <span class="tlaGNC">       26434 :     RectF canvasBoundingRect(LD_ACCESS mode = LD_ACCESS::CHECK) const { return ldata()-&gt;bbox(mode).translated(canvasPos()); }</span></span>
 <span id="L655"><span class="lineNum">     655</span>              : </span>
 <span id="L656"><span class="lineNum">     656</span>              :     virtual PointF staffOffset() const;</span>
@@ -746,9 +746,9 @@
 <span id="L688"><span class="lineNum">     688</span> <span class="tlaGNC">     1299209 :     double width(LD_ACCESS mode = LD_ACCESS::CHECK) const { return ldata()-&gt;bbox(mode).width(); }</span></span>
 <span id="L689"><span class="lineNum">     689</span> <span class="tlaGNC">      768913 :     void setWidth(double v) { mutldata()-&gt;setWidth(v); }</span></span>
 <span id="L690"><span class="lineNum">     690</span>              : </span>
-<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">     4423804 :     virtual const PointF pos() const { return ldata()-&gt;pos() + m_offset; }</span></span>
-<span id="L692"><span class="lineNum">     692</span> <span class="tlaGNC">     2195803 :     virtual double x() const { return ldata()-&gt;pos().x() + m_offset.x(); }</span></span>
-<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">     1033196 :     virtual double y() const { return ldata()-&gt;pos().y() + m_offset.y(); }</span></span>
+<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">     4423802 :     virtual const PointF pos() const { return ldata()-&gt;pos() + m_offset; }</span></span>
+<span id="L692"><span class="lineNum">     692</span> <span class="tlaGNC">     2195800 :     virtual double x() const { return ldata()-&gt;pos().x() + m_offset.x(); }</span></span>
+<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">     1033194 :     virtual double y() const { return ldata()-&gt;pos().y() + m_offset.y(); }</span></span>
 <span id="L694"><span class="lineNum">     694</span> <span class="tlaGNC">      246218 :     virtual void setPos(double x, double y) { mutldata()-&gt;setPos(x, y); }</span></span>
 <span id="L695"><span class="lineNum">     695</span> <span class="tlaGNC">       53096 :     virtual void setPos(const PointF&amp; p) { mutldata()-&gt;setPos(p.x(), p.y()); }</span></span>
 <span id="L696"><span class="lineNum">     696</span>              : </span>
