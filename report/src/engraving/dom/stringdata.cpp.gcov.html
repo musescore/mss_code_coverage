@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -200,11 +200,11 @@
 <span id="L142"><span class="lineNum">     142</span>              : //    Note: frets above max fret are accepted.</span>
 <span id="L143"><span class="lineNum">     143</span>              : //---------------------------------------------------------</span>
 <span id="L144"><span class="lineNum">     144</span>              : </span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">        1221 : int StringData::getPitch(int string, int fret, const Staff* staff, const Fraction&amp; tick) const</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">        1219 : int StringData::getPitch(int string, int fret, const Staff* staff, const Fraction&amp; tick) const</span></span>
 <span id="L146"><span class="lineNum">     146</span>              : {</span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">        1221 :     const CapoParams&amp; capo = staff-&gt;capo(tick);</span></span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">        1221 :     bool ignoredString = capo.active &amp;&amp; muse::contains(capo.ignoredStrings, (string_idx_t)string);</span></span>
-<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">        1221 :     return ignoredString ? getPitch(string, fret, pitchOffsetAt(staff)) : getPitch(string, fret, pitchOffsetAt(staff, tick));</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">        1219 :     const CapoParams&amp; capo = staff-&gt;capo(tick);</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">        1219 :     bool ignoredString = capo.active &amp;&amp; muse::contains(capo.ignoredStrings, (string_idx_t)string);</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">        1219 :     return ignoredString ? getPitch(string, fret, pitchOffsetAt(staff)) : getPitch(string, fret, pitchOffsetAt(staff, tick));</span></span>
 <span id="L150"><span class="lineNum">     150</span>              : }</span>
 <span id="L151"><span class="lineNum">     151</span>              : </span>
 <span id="L152"><span class="lineNum">     152</span>              : //---------------------------------------------------------</span>
@@ -235,85 +235,85 @@
 <span id="L177"><span class="lineNum">     177</span>              : //    a separate string</span>
 <span id="L178"><span class="lineNum">     178</span>              : //---------------------------------------------------------</span>
 <span id="L179"><span class="lineNum">     179</span>              : </span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">        1489 : void StringData::fretChords(Chord* chord) const</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">        1486 : void StringData::fretChords(Chord* chord) const</span></span>
 <span id="L181"><span class="lineNum">     181</span>              : {</span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        1489 :     if (bFretting) {</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        1486 :     if (bFretting) {</span></span>
 <span id="L183"><span class="lineNum">     183</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L184"><span class="lineNum">     184</span>              :     }</span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC tlaBgGNC">        1489 :     bFretting = true;</span></span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">        1489 :     DEFER {</span></span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">        1489 :         bFretting = false;</span></span>
-<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">        1489 :     };</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC tlaBgGNC">        1486 :     bFretting = true;</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">        1486 :     DEFER {</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">        1486 :         bFretting = false;</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">        1486 :     };</span></span>
 <span id="L189"><span class="lineNum">     189</span>              : </span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">        1489 :     int strings = static_cast&lt;int&gt;(this-&gt;strings());</span></span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">        1489 :     const bool skipDeadNotes = chord-&gt;configuration()-&gt;keepDeadNotesUnchangedOnTranspose();</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">        1486 :     int strings = static_cast&lt;int&gt;(this-&gt;strings());</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">        1486 :     const bool skipDeadNotes = chord-&gt;configuration()-&gt;keepDeadNotesUnchangedOnTranspose();</span></span>
 <span id="L192"><span class="lineNum">     192</span>              : </span>
 <span id="L193"><span class="lineNum">     193</span>              :     // we need the notes sorted in order of string (from highest to lowest) and then pitch</span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">        1489 :     std::map&lt;int, Note*&gt; sortedNotes;</span></span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">        1489 :     int count = 0;</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">        1486 :     std::map&lt;int, Note*&gt; sortedNotes;</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">        1486 :     int count = 0;</span></span>
 <span id="L196"><span class="lineNum">     196</span>              :     // if chord parent is not a segment, the chord is special (usually a grace chord):</span>
 <span id="L197"><span class="lineNum">     197</span>              :     // fret it by itself, ignoring the segment</span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        1489 :     if (!chord-&gt;ownershipParent()-&gt;isSegment()) {</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        1486 :     if (!chord-&gt;ownershipParent()-&gt;isSegment()) {</span></span>
 <span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">          60 :         sortChordNotes(sortedNotes, chord, &amp;count);</span></span>
 <span id="L200"><span class="lineNum">     200</span>              :     } else {</span>
 <span id="L201"><span class="lineNum">     201</span>              :         // scan each chord of seg from same staff as 'chord', inserting each of its notes in sortedNotes</span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">        1429 :         Segment* seg = chord-&gt;segment();</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">        1426 :         Segment* seg = chord-&gt;segment();</span></span>
 <span id="L203"><span class="lineNum">     203</span>              :         track_idx_t trk;</span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">        1429 :         track_idx_t trkFrom = (chord-&gt;track() / VOICES) * VOICES;</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        1429 :         track_idx_t trkTo   = trkFrom + VOICES;</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        7145 :         for (trk = trkFrom; trk &lt; trkTo; ++trk) {</span></span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">        5716 :             EngravingItem* ch = seg-&gt;elist().at(trk);</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        5716 :             if (ch &amp;&amp; ch-&gt;isChord()) {</span></span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">        1629 :                 sortChordNotes(sortedNotes, toChord(ch), &amp;count);</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">        1426 :         track_idx_t trkFrom = (chord-&gt;track() / VOICES) * VOICES;</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        1426 :         track_idx_t trkTo   = trkFrom + VOICES;</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        7130 :         for (trk = trkFrom; trk &lt; trkTo; ++trk) {</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">        5704 :             EngravingItem* ch = seg-&gt;elist().at(trk);</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        5704 :             if (ch &amp;&amp; ch-&gt;isChord()) {</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">        1626 :                 sortChordNotes(sortedNotes, toChord(ch), &amp;count);</span></span>
 <span id="L210"><span class="lineNum">     210</span>              :             }</span>
 <span id="L211"><span class="lineNum">     211</span>              :         }</span>
 <span id="L212"><span class="lineNum">     212</span>              :     }</span>
 <span id="L213"><span class="lineNum">     213</span>              : </span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        3545 :     for (const auto&amp; p : sortedNotes) {</span></span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        2056 :         Note* note = p.second;</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        2056 :         if (note-&gt;string() &gt;= strings) {</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        3530 :     for (const auto&amp; p : sortedNotes) {</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        2044 :         Note* note = p.second;</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        2044 :         if (note-&gt;string() &gt;= strings) {</span></span>
 <span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC tlaBgUNC">           0 :             note-&gt;undoChangeProperty(Pid::STRING, INVALID_STRING_INDEX);</span></span>
 <span id="L218"><span class="lineNum">     218</span> <span class="tlaUNC">           0 :             note-&gt;undoChangeProperty(Pid::FRET, INVALID_FRET_INDEX);</span></span>
 <span id="L219"><span class="lineNum">     219</span>              :         }</span>
 <span id="L220"><span class="lineNum">     220</span>              :     }</span>
 <span id="L221"><span class="lineNum">     221</span>              : </span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC tlaBgGNC">        1489 :     if (!strings) {</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC tlaBgGNC">        1486 :     if (!strings) {</span></span>
 <span id="L223"><span class="lineNum">     223</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L224"><span class="lineNum">     224</span>              :     }</span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
 <span id="L226"><span class="lineNum">     226</span>              :     // we need to keep track of string allocation</span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC tlaBgGNC">        1489 :     std::vector&lt;int&gt; bUsed(strings);</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC tlaBgGNC">        1486 :     std::vector&lt;int&gt; bUsed(strings);</span></span>
 <span id="L228"><span class="lineNum">     228</span>              : </span>
 <span id="L229"><span class="lineNum">     229</span>              :     // determine used range of frets</span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        1489 :     int minFret = INT32_MAX;</span></span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        1489 :     int maxFret = INT32_MIN;</span></span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">        3545 :     for (const auto&amp; p : sortedNotes) {</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        2056 :         Note* note = p.second;</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        2056 :         if (note-&gt;string() != INVALID_STRING_INDEX &amp;&amp; note-&gt;displayFret() == Note::DisplayFretOption::NoHarmonic) {</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        1989 :             bUsed[note-&gt;string()]++;</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        1486 :     int minFret = INT32_MAX;</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        1486 :     int maxFret = INT32_MIN;</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">        3530 :     for (const auto&amp; p : sortedNotes) {</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        2044 :         Note* note = p.second;</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        2044 :         if (note-&gt;string() != INVALID_STRING_INDEX &amp;&amp; note-&gt;displayFret() == Note::DisplayFretOption::NoHarmonic) {</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        1977 :             bUsed[note-&gt;string()]++;</span></span>
 <span id="L236"><span class="lineNum">     236</span>              :         }</span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">        2056 :         if (note-&gt;fret() != INVALID_FRET_INDEX &amp;&amp; note-&gt;fret() &lt; minFret) {</span></span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">        1476 :             minFret = note-&gt;fret();</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">        2044 :         if (note-&gt;fret() != INVALID_FRET_INDEX &amp;&amp; note-&gt;fret() &lt; minFret) {</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">        1471 :             minFret = note-&gt;fret();</span></span>
 <span id="L239"><span class="lineNum">     239</span>              :         }</span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">        2056 :         if (note-&gt;fret() != INVALID_FRET_INDEX &amp;&amp; note-&gt;fret() &gt; maxFret) {</span></span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">        1595 :             maxFret = note-&gt;fret();</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">        2044 :         if (note-&gt;fret() != INVALID_FRET_INDEX &amp;&amp; note-&gt;fret() &gt; maxFret) {</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">        1589 :             maxFret = note-&gt;fret();</span></span>
 <span id="L242"><span class="lineNum">     242</span>              :         }</span>
 <span id="L243"><span class="lineNum">     243</span>              :     }</span>
 <span id="L244"><span class="lineNum">     244</span>              : </span>
 <span id="L245"><span class="lineNum">     245</span>              :     // scan chord notes from highest, matching with strings from the highest</span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        3545 :     for (const auto&amp; p : sortedNotes) {</span></span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        2056 :         Note* note = p.second;</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        3530 :     for (const auto&amp; p : sortedNotes) {</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        2044 :         Note* note = p.second;</span></span>
 <span id="L248"><span class="lineNum">     248</span>              :         int nString, nNewString;</span>
 <span id="L249"><span class="lineNum">     249</span>              :         int nFret,   nNewFret,   nTempFret;</span>
 <span id="L250"><span class="lineNum">     250</span>              : </span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">        2056 :         nString = nNewString = note-&gt;string();</span></span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">        2056 :         nFret   = nNewFret   = note-&gt;fret();</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">        2056 :         note-&gt;setFretConflict(false);           // assume no conflicts on this note</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">        2056 :         if (skipDeadNotes &amp;&amp; note-&gt;deadNote()) {</span></span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">          29 :             continue;</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">        2044 :         nString = nNewString = note-&gt;string();</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">        2044 :         nFret   = nNewFret   = note-&gt;fret();</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">        2044 :         note-&gt;setFretConflict(false);           // assume no conflicts on this note</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">        2044 :         if (skipDeadNotes &amp;&amp; note-&gt;deadNote()) {</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">          25 :             continue;</span></span>
 <span id="L256"><span class="lineNum">     256</span>              :         }</span>
 <span id="L257"><span class="lineNum">     257</span>              :         // if no fretting (any invalid fretting has been erased by sortChordNotes() )</span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">        2040 :         if (nString == INVALID_STRING_INDEX /*|| nFret == INVALID_FRET_INDEX || getPitch(nString, nFret) != note-&gt;pitch()*/) {</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">        2032 :         if (nString == INVALID_STRING_INDEX /*|| nFret == INVALID_FRET_INDEX || getPitch(nString, nFret) != note-&gt;pitch()*/) {</span></span>
 <span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">          67 :             const CapoParams&amp; capo = note-&gt;staff()-&gt;capo(note-&gt;tick());</span></span>
 <span id="L260"><span class="lineNum">     260</span>              :             // get a new fretting</span>
 <span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">          67 :             if (convertPitch(note-&gt;pitch(), pitchOffsetAt(chord-&gt;staff(), chord-&gt;tick()), &amp;nNewString, &amp;nNewFret,</span></span>
@@ -339,7 +339,7 @@
 <span id="L281"><span class="lineNum">     281</span>              :         }</span>
 <span id="L282"><span class="lineNum">     282</span>              : </span>
 <span id="L283"><span class="lineNum">     283</span>              :         // if the note string (either original or newly assigned) is also used by another note</span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">        2027 :         if (note-&gt;displayFret() == Note::DisplayFretOption::NoHarmonic &amp;&amp; bUsed[nNewString] &gt; 1) {</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">        2019 :         if (note-&gt;displayFret() == Note::DisplayFretOption::NoHarmonic &amp;&amp; bUsed[nNewString] &gt; 1) {</span></span>
 <span id="L285"><span class="lineNum">     285</span>              :             // attempt to find a suitable string, from topmost</span>
 <span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">          44 :             for (int nTempString = 0; nTempString &lt; strings; nTempString++) {</span></span>
 <span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">          42 :                 if (bUsed[nTempString] &lt; 1</span></span>
@@ -355,34 +355,34 @@
 <span id="L297"><span class="lineNum">     297</span>              :         }</span>
 <span id="L298"><span class="lineNum">     298</span>              : </span>
 <span id="L299"><span class="lineNum">     299</span>              :         // Still two notes on one string: try a free string with fret &lt;0 or &gt;maxFrets.</span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">        2027 :         if (note-&gt;configuration()-&gt;negativeFretsAllowed()</span></span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">         105 :             &amp;&amp; note-&gt;displayFret() == Note::DisplayFretOption::NoHarmonic</span></span>
-<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">        2132 :             &amp;&amp; bUsed[nNewString] &gt; 1) {</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">        2019 :         if (note-&gt;configuration()-&gt;negativeFretsAllowed()</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">         103 :             &amp;&amp; note-&gt;displayFret() == Note::DisplayFretOption::NoHarmonic</span></span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">        2122 :             &amp;&amp; bUsed[nNewString] &gt; 1) {</span></span>
 <span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           2 :             tryResolveStringConflictWithOutOfRangeFret(note, strings, bUsed, nNewString, nNewFret);</span></span>
 <span id="L304"><span class="lineNum">     304</span>              :         }</span>
 <span id="L305"><span class="lineNum">     305</span>              : </span>
 <span id="L306"><span class="lineNum">     306</span>              :         // TODO : try to optimize used fret range, avoiding excessively open positions</span>
 <span id="L307"><span class="lineNum">     307</span>              : </span>
 <span id="L308"><span class="lineNum">     308</span>              :         // if fretting did change, store as a fret change</span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">        2027 :         if (nFret != nNewFret) {</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">        2019 :         if (nFret != nNewFret) {</span></span>
 <span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">          54 :             note-&gt;undoChangeProperty(Pid::FRET, nNewFret);</span></span>
 <span id="L311"><span class="lineNum">     311</span>              :         }</span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">        2027 :         if (nString != nNewString) {</span></span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">        2019 :         if (nString != nNewString) {</span></span>
 <span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">          55 :             note-&gt;undoChangeProperty(Pid::STRING, nNewString);</span></span>
 <span id="L314"><span class="lineNum">     314</span>              :         }</span>
 <span id="L315"><span class="lineNum">     315</span>              :     }</span>
 <span id="L316"><span class="lineNum">     316</span>              : </span>
 <span id="L317"><span class="lineNum">     317</span>              :     // check for any remaining fret conflict</span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">        3545 :     for (auto&amp; p : sortedNotes) {</span></span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">        2056 :         Note* note = p.second;</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">        2056 :         if (skipDeadNotes &amp;&amp; note-&gt;deadNote()) {</span></span>
-<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">          16 :             continue;</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">        3530 :     for (auto&amp; p : sortedNotes) {</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">        2044 :         Note* note = p.second;</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">        2044 :         if (skipDeadNotes &amp;&amp; note-&gt;deadNote()) {</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">          12 :             continue;</span></span>
 <span id="L322"><span class="lineNum">     322</span>              :         }</span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">        2040 :         if (!note-&gt;negativeFretUsed() &amp;&amp; (note-&gt;string() == -1 || bUsed[note-&gt;string()] &gt; 1)) {</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">        2032 :         if (!note-&gt;negativeFretUsed() &amp;&amp; (note-&gt;string() == -1 || bUsed[note-&gt;string()] &gt; 1)) {</span></span>
 <span id="L324"><span class="lineNum">     324</span> <span class="tlaUNC tlaBgUNC">           0 :             note-&gt;setFretConflict(true);</span></span>
 <span id="L325"><span class="lineNum">     325</span>              :         }</span>
 <span id="L326"><span class="lineNum">     326</span>              :     }</span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC tlaBgGNC">        1489 : }</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC tlaBgGNC">        1486 : }</span></span>
 <span id="L328"><span class="lineNum">     328</span>              : </span>
 <span id="L329"><span class="lineNum">     329</span>              : //---------------------------------------------------------</span>
 <span id="L330"><span class="lineNum">     330</span>              : //   frettedStrings</span>
@@ -416,15 +416,15 @@
 <span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">        1194 :     return -(staff ? staff-&gt;originPart(Part::MAIN_INSTRUMENT_TICK)-&gt;instrument()-&gt;transpose().chromatic : 0);</span></span>
 <span id="L359"><span class="lineNum">     359</span>              : }</span>
 <span id="L360"><span class="lineNum">     360</span>              : </span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        1351 : int StringData::pitchOffsetAt(const Staff* staff, const Fraction&amp; tick)</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        1349 : int StringData::pitchOffsetAt(const Staff* staff, const Fraction&amp; tick)</span></span>
 <span id="L362"><span class="lineNum">     362</span>              : {</span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">        1351 :     if (!staff) {</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">        1349 :     if (!staff) {</span></span>
 <span id="L364"><span class="lineNum">     364</span> <span class="tlaUNC tlaBgUNC">           0 :         return 0;</span></span>
 <span id="L365"><span class="lineNum">     365</span>              :     }</span>
-<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC tlaBgGNC">        1351 :     int transp = staff-&gt;originPart(tick)-&gt;instrument(tick)-&gt;transpose().chromatic;</span></span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">        1351 :     int offset = -transp + staff-&gt;pitchOffset(tick);</span></span>
-<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">        1351 :     const CapoParams&amp; capo = staff-&gt;capo(tick);</span></span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">        1351 :     if (capo.active) {</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC tlaBgGNC">        1349 :     int transp = staff-&gt;originPart(tick)-&gt;instrument(tick)-&gt;transpose().chromatic;</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">        1349 :     int offset = -transp + staff-&gt;pitchOffset(tick);</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">        1349 :     const CapoParams&amp; capo = staff-&gt;capo(tick);</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">        1349 :     if (capo.active) {</span></span>
 <span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">         228 :         switch (capo.transposeMode) {</span></span>
 <span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">           2 :         case CapoParams::TransposeMode::PLAYBACK_ONLY:</span></span>
 <span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">           2 :             break;</span></span>
@@ -434,21 +434,21 @@
 <span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">         226 :             break;</span></span>
 <span id="L377"><span class="lineNum">     377</span>              :         }</span>
 <span id="L378"><span class="lineNum">     378</span>              :     }</span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">        1351 :     return offset;</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">        1349 :     return offset;</span></span>
 <span id="L380"><span class="lineNum">     380</span>              : }</span>
 <span id="L381"><span class="lineNum">     381</span>              : </span>
-<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">        2149 : int StringData::pitchOffsetAt(const Staff* staff, const Fraction&amp; tick, int string)</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">        2137 : int StringData::pitchOffsetAt(const Staff* staff, const Fraction&amp; tick, int string)</span></span>
 <span id="L383"><span class="lineNum">     383</span>              : {</span>
-<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">        2149 :     if (!staff) {</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">        2137 :     if (!staff) {</span></span>
 <span id="L385"><span class="lineNum">     385</span> <span class="tlaUNC tlaBgUNC">           0 :         return 0;</span></span>
 <span id="L386"><span class="lineNum">     386</span>              :     }</span>
-<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC tlaBgGNC">        2149 :     int transp = staff-&gt;originPart(tick)-&gt;instrument(tick)-&gt;transpose().chromatic;</span></span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">        2149 :     int offset = -transp + staff-&gt;pitchOffset(tick);</span></span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">        2149 :     const CapoParams&amp; capo = staff-&gt;capo(tick);</span></span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">        2149 :     if (capo.active &amp;&amp; muse::contains(capo.ignoredStrings, (string_idx_t)string)) {</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC tlaBgGNC">        2137 :     int transp = staff-&gt;originPart(tick)-&gt;instrument(tick)-&gt;transpose().chromatic;</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">        2137 :     int offset = -transp + staff-&gt;pitchOffset(tick);</span></span>
+<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">        2137 :     const CapoParams&amp; capo = staff-&gt;capo(tick);</span></span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">        2137 :     if (capo.active &amp;&amp; muse::contains(capo.ignoredStrings, (string_idx_t)string)) {</span></span>
 <span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">           4 :         return offset;</span></span>
 <span id="L392"><span class="lineNum">     392</span>              :     }</span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">        2145 :     if (capo.active) {</span></span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">        2133 :     if (capo.active) {</span></span>
 <span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">         139 :         switch (capo.transposeMode) {</span></span>
 <span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">          34 :         case CapoParams::TransposeMode::PLAYBACK_ONLY:</span></span>
 <span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">          34 :             break;</span></span>
@@ -458,7 +458,7 @@
 <span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">         105 :             break;</span></span>
 <span id="L401"><span class="lineNum">     401</span>              :         }</span>
 <span id="L402"><span class="lineNum">     402</span>              :     }</span>
-<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">        2145 :     return offset;</span></span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">        2133 :     return offset;</span></span>
 <span id="L404"><span class="lineNum">     404</span>              : }</span>
 <span id="L405"><span class="lineNum">     405</span>              : </span>
 <span id="L406"><span class="lineNum">     406</span>              : //********************</span>
@@ -539,18 +539,18 @@
 <span id="L481"><span class="lineNum">     481</span>              : //    Note: frets above max fret are accepted.</span>
 <span id="L482"><span class="lineNum">     482</span>              : //---------------------------------------------------------</span>
 <span id="L483"><span class="lineNum">     483</span>              : </span>
-<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">        4177 : int StringData::getPitch(int string, int fret, int pitchOffset) const</span></span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">        4163 : int StringData::getPitch(int string, int fret, int pitchOffset) const</span></span>
 <span id="L485"><span class="lineNum">     485</span>              : {</span>
-<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">        4177 :     size_t strings = m_stringTable.size();</span></span>
-<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">        4177 :     if (string &lt; 0 || string &gt;= static_cast&lt;int&gt;(strings)) {</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">        4163 :     size_t strings = m_stringTable.size();</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">        4163 :     if (string &lt; 0 || string &gt;= static_cast&lt;int&gt;(strings)) {</span></span>
 <span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">           9 :         return INVALID_PITCH;</span></span>
 <span id="L489"><span class="lineNum">     489</span>              :     }</span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">        4168 :     instrString strg = m_stringTable.at(strings - string - 1);</span></span>
-<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">        4168 :     int pitch = strg.pitch - pitchOffset + (strg.open ? 0 : fret);</span></span>
-<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">        4168 :     if (strg.startFret &gt; 0 &amp;&amp; fret &gt;= strg.startFret) {</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">        4154 :     instrString strg = m_stringTable.at(strings - string - 1);</span></span>
+<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">        4154 :     int pitch = strg.pitch - pitchOffset + (strg.open ? 0 : fret);</span></span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">        4154 :     if (strg.startFret &gt; 0 &amp;&amp; fret &gt;= strg.startFret) {</span></span>
 <span id="L493"><span class="lineNum">     493</span> <span class="tlaUNC tlaBgUNC">           0 :         pitch -= strg.startFret; // banjo 5th string adjustment</span></span>
 <span id="L494"><span class="lineNum">     494</span>              :     }</span>
-<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC tlaBgGNC">        4168 :     return pitch;</span></span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC tlaBgGNC">        4154 :     return pitch;</span></span>
 <span id="L496"><span class="lineNum">     496</span>              : }</span>
 <span id="L497"><span class="lineNum">     497</span>              : </span>
 <span id="L498"><span class="lineNum">     498</span>              : //---------------------------------------------------------</span>
@@ -633,10 +633,10 @@
 <span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">           2 :     return true;</span></span>
 <span id="L576"><span class="lineNum">     576</span>              : }</span>
 <span id="L577"><span class="lineNum">     577</span>              : </span>
-<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">         261 : static bool skipTabNote(const Note* n, bool skipDeadNotes)</span></span>
+<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">         257 : static bool skipTabNote(const Note* n, bool skipDeadNotes)</span></span>
 <span id="L579"><span class="lineNum">     579</span>              : {</span>
-<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">         261 :     return n-&gt;displayFret() != Note::DisplayFretOption::NoHarmonic</span></span>
-<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">         261 :            || (skipDeadNotes &amp;&amp; n-&gt;deadNote());</span></span>
+<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">         257 :     return n-&gt;displayFret() != Note::DisplayFretOption::NoHarmonic</span></span>
+<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">         257 :            || (skipDeadNotes &amp;&amp; n-&gt;deadNote());</span></span>
 <span id="L582"><span class="lineNum">     582</span>              : }</span>
 <span id="L583"><span class="lineNum">     583</span>              : </span>
 <span id="L584"><span class="lineNum">     584</span>              : //---------------------------------------------------------</span>
@@ -644,21 +644,21 @@
 <span id="L586"><span class="lineNum">     586</span>              : //    True if any note's pitch doesn't match its current string/fret.</span>
 <span id="L587"><span class="lineNum">     587</span>              : //---------------------------------------------------------</span>
 <span id="L588"><span class="lineNum">     588</span>              : </span>
-<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">          51 : bool StringData::hasPendingPitchChange(const Chord* chord) const</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">          50 : bool StringData::hasPendingPitchChange(const Chord* chord) const</span></span>
 <span id="L590"><span class="lineNum">     590</span>              : {</span>
-<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">          51 :     const bool skipDead = chord-&gt;configuration()-&gt;keepDeadNotesUnchangedOnTranspose();</span></span>
-<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">         121 :     for (Note* note : chord-&gt;notes()) {</span></span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">          88 :         if (skipTabNote(note, skipDead)) {</span></span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">           4 :             continue;</span></span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">          50 :     const bool skipDead = chord-&gt;configuration()-&gt;keepDeadNotesUnchangedOnTranspose();</span></span>
+<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">         116 :     for (Note* note : chord-&gt;notes()) {</span></span>
+<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">          84 :         if (skipTabNote(note, skipDead)) {</span></span>
+<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">           2 :             continue;</span></span>
 <span id="L595"><span class="lineNum">     595</span>              :         }</span>
-<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">          84 :         if (note-&gt;string() &lt; 0) {</span></span>
+<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">          82 :         if (note-&gt;string() &lt; 0) {</span></span>
 <span id="L597"><span class="lineNum">     597</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
 <span id="L598"><span class="lineNum">     598</span>              :         }</span>
-<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC tlaBgGNC">          84 :         if (getPitch(note-&gt;string(), note-&gt;fret(), chord-&gt;staff(), chord-&gt;tick()) != note-&gt;pitch()) {</span></span>
+<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC tlaBgGNC">          82 :         if (getPitch(note-&gt;string(), note-&gt;fret(), chord-&gt;staff(), chord-&gt;tick()) != note-&gt;pitch()) {</span></span>
 <span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">          18 :             return true;</span></span>
 <span id="L601"><span class="lineNum">     601</span>              :         }</span>
 <span id="L602"><span class="lineNum">     602</span>              :     }</span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">          33 :     return false;</span></span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">          32 :     return false;</span></span>
 <span id="L604"><span class="lineNum">     604</span>              : }</span>
 <span id="L605"><span class="lineNum">     605</span>              : </span>
 <span id="L606"><span class="lineNum">     606</span>              : //---------------------------------------------------------</span>
@@ -791,10 +791,10 @@
 <span id="L733"><span class="lineNum">     733</span>              : //    chord's pitches are transposed, updating only the fret.</span>
 <span id="L734"><span class="lineNum">     734</span>              : //---------------------------------------------------------</span>
 <span id="L735"><span class="lineNum">     735</span>              : </span>
-<span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC">          51 : void StringData::sortChordNotesUseSameString(const Chord* chord) const</span></span>
+<span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC">          50 : void StringData::sortChordNotesUseSameString(const Chord* chord) const</span></span>
 <span id="L737"><span class="lineNum">     737</span>              : {</span>
-<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">          51 :     if (!hasPendingPitchChange(chord)) {</span></span>
-<span id="L739"><span class="lineNum">     739</span> <span class="tlaGNC">          33 :         return;</span></span>
+<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">          50 :     if (!hasPendingPitchChange(chord)) {</span></span>
+<span id="L739"><span class="lineNum">     739</span> <span class="tlaGNC">          32 :         return;</span></span>
 <span id="L740"><span class="lineNum">     740</span>              :     }</span>
 <span id="L741"><span class="lineNum">     741</span>              : </span>
 <span id="L742"><span class="lineNum">     742</span> <span class="tlaGNC">          18 :     updateFretsOnSameStrings(chord);</span></span>
@@ -818,46 +818,46 @@
 <span id="L760"><span class="lineNum">     760</span>              : //    Notes without a string assigned yet, are sorted according to the lowest string which can accommodate them.</span>
 <span id="L761"><span class="lineNum">     761</span>              : //---------------------------------------------------------</span>
 <span id="L762"><span class="lineNum">     762</span>              : </span>
-<span id="L763"><span class="lineNum">     763</span> <span class="tlaGNC">        1689 : void StringData::sortChordNotes(std::map&lt;int, Note*&gt;&amp; sortedNotes, const Chord* chord, int* count) const</span></span>
+<span id="L763"><span class="lineNum">     763</span> <span class="tlaGNC">        1686 : void StringData::sortChordNotes(std::map&lt;int, Note*&gt;&amp; sortedNotes, const Chord* chord, int* count) const</span></span>
 <span id="L764"><span class="lineNum">     764</span>              : {</span>
-<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC">        1689 :     bool useSameString = chord-&gt;configuration()-&gt;preferSameStringForTranspose();</span></span>
-<span id="L766"><span class="lineNum">     766</span> <span class="tlaGNC">        1689 :     const bool skipDeadNotes = chord-&gt;configuration()-&gt;keepDeadNotesUnchangedOnTranspose();</span></span>
-<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">        1689 :     int transp = chord-&gt;staff() ? chord-&gt;originPart()-&gt;instrument(chord-&gt;tick())-&gt;transpose().chromatic : 0;</span></span>
-<span id="L768"><span class="lineNum">     768</span> <span class="tlaGNC">        1689 :     int pitchOffset = -transp + chord-&gt;staff()-&gt;pitchOffset(chord-&gt;segment()-&gt;tick());</span></span>
+<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC">        1686 :     bool useSameString = chord-&gt;configuration()-&gt;preferSameStringForTranspose();</span></span>
+<span id="L766"><span class="lineNum">     766</span> <span class="tlaGNC">        1686 :     const bool skipDeadNotes = chord-&gt;configuration()-&gt;keepDeadNotesUnchangedOnTranspose();</span></span>
+<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">        1686 :     int transp = chord-&gt;staff() ? chord-&gt;originPart()-&gt;instrument(chord-&gt;tick())-&gt;transpose().chromatic : 0;</span></span>
+<span id="L768"><span class="lineNum">     768</span> <span class="tlaGNC">        1686 :     int pitchOffset = -transp + chord-&gt;staff()-&gt;pitchOffset(chord-&gt;segment()-&gt;tick());</span></span>
 <span id="L769"><span class="lineNum">     769</span>              : </span>
-<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">        1689 :     if (useSameString) {</span></span>
-<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">          51 :         sortChordNotesUseSameString(chord);</span></span>
+<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">        1686 :     if (useSameString) {</span></span>
+<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">          50 :         sortChordNotesUseSameString(chord);</span></span>
 <span id="L772"><span class="lineNum">     772</span>              :     }</span>
 <span id="L773"><span class="lineNum">     773</span>              : </span>
-<span id="L774"><span class="lineNum">     774</span> <span class="tlaGNC">        3745 :     for (Note* note : chord-&gt;notes()) {</span></span>
-<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">        2056 :         if (note-&gt;displayFret() != Note::DisplayFretOption::NoHarmonic) {</span></span>
+<span id="L774"><span class="lineNum">     774</span> <span class="tlaGNC">        3730 :     for (Note* note : chord-&gt;notes()) {</span></span>
+<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">        2044 :         if (note-&gt;displayFret() != Note::DisplayFretOption::NoHarmonic) {</span></span>
 <span id="L776"><span class="lineNum">     776</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
 <span id="L777"><span class="lineNum">     777</span>              :         }</span>
 <span id="L778"><span class="lineNum">     778</span>              : </span>
-<span id="L779"><span class="lineNum">     779</span> <span class="tlaGNC tlaBgGNC">        2056 :         int string = note-&gt;string();</span></span>
-<span id="L780"><span class="lineNum">     780</span> <span class="tlaGNC">        2056 :         int noteFret = note-&gt;fret();</span></span>
+<span id="L779"><span class="lineNum">     779</span> <span class="tlaGNC tlaBgGNC">        2044 :         int string = note-&gt;string();</span></span>
+<span id="L780"><span class="lineNum">     780</span> <span class="tlaGNC">        2044 :         int noteFret = note-&gt;fret();</span></span>
 <span id="L781"><span class="lineNum">     781</span>              : </span>
-<span id="L782"><span class="lineNum">     782</span> <span class="tlaGNC">        2056 :         int pitch = getPitch(string, noteFret, pitchOffsetAt(chord-&gt;staff(), chord-&gt;tick(), string));</span></span>
+<span id="L782"><span class="lineNum">     782</span> <span class="tlaGNC">        2044 :         int pitch = getPitch(string, noteFret, pitchOffsetAt(chord-&gt;staff(), chord-&gt;tick(), string));</span></span>
 <span id="L783"><span class="lineNum">     783</span>              :         // if note not fretted yet or current fretting no longer valid,</span>
 <span id="L784"><span class="lineNum">     784</span>              :         // use most convenient string as key</span>
-<span id="L785"><span class="lineNum">     785</span> <span class="tlaGNC">        2056 :         if (!(skipDeadNotes &amp;&amp; note-&gt;deadNote()) &amp;&amp; !note-&gt;negativeFretUsed()</span></span>
-<span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC">        6125 :             &amp;&amp; (string &lt;= INVALID_STRING_INDEX || noteFret &lt;= INVALID_FRET_INDEX</span></span>
-<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">        2013 :                 || (pitchIsValid(pitch) &amp;&amp; pitch != note-&gt;pitch()))) {</span></span>
+<span id="L785"><span class="lineNum">     785</span> <span class="tlaGNC">        2044 :         if (!(skipDeadNotes &amp;&amp; note-&gt;deadNote()) &amp;&amp; !note-&gt;negativeFretUsed()</span></span>
+<span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC">        6093 :             &amp;&amp; (string &lt;= INVALID_STRING_INDEX || noteFret &lt;= INVALID_FRET_INDEX</span></span>
+<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">        2005 :                 || (pitchIsValid(pitch) &amp;&amp; pitch != note-&gt;pitch()))) {</span></span>
 <span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">          67 :             note-&gt;setString(INVALID_STRING_INDEX);</span></span>
 <span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">          67 :             note-&gt;setFret(INVALID_FRET_INDEX);</span></span>
 <span id="L790"><span class="lineNum">     790</span>              :         }</span>
 <span id="L791"><span class="lineNum">     791</span>              : </span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">        2056 :         int key = string * 100000;</span></span>
-<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">        2056 :         if (string == INVALID_STRING_INDEX &amp;&amp; note-&gt;configuration()-&gt;negativeFretsAllowed()) {</span></span>
+<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">        2044 :         int key = string * 100000;</span></span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">        2044 :         if (string == INVALID_STRING_INDEX &amp;&amp; note-&gt;configuration()-&gt;negativeFretsAllowed()) {</span></span>
 <span id="L794"><span class="lineNum">     794</span>              :             // No string assigned yet: lower note first, then higher (transpose in one go or in steps must match).</span>
 <span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">           9 :             key += (note-&gt;pitch() + pitchOffset) * 100 + *count;</span></span>
 <span id="L796"><span class="lineNum">     796</span>              :         } else {</span>
-<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">        2047 :             key += -(note-&gt;pitch() + pitchOffset) * 100 + *count;   // disambiguate notes of equal pitch</span></span>
+<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">        2035 :             key += -(note-&gt;pitch() + pitchOffset) * 100 + *count;   // disambiguate notes of equal pitch</span></span>
 <span id="L798"><span class="lineNum">     798</span>              :         }</span>
-<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">        2056 :         sortedNotes.insert({ key, note });</span></span>
-<span id="L800"><span class="lineNum">     800</span> <span class="tlaGNC">        2056 :         (*count)++;</span></span>
+<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">        2044 :         sortedNotes.insert({ key, note });</span></span>
+<span id="L800"><span class="lineNum">     800</span> <span class="tlaGNC">        2044 :         (*count)++;</span></span>
 <span id="L801"><span class="lineNum">     801</span>              :     }</span>
-<span id="L802"><span class="lineNum">     802</span> <span class="tlaGNC">        1689 : }</span></span>
+<span id="L802"><span class="lineNum">     802</span> <span class="tlaGNC">        1686 : }</span></span>
 <span id="L803"><span class="lineNum">     803</span>              : </span>
 <span id="L804"><span class="lineNum">     804</span>              : //---------------------------------------------------------</span>
 <span id="L805"><span class="lineNum">     805</span>              : //   configBanjo5thString</span>

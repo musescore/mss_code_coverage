@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -90,9 +90,9 @@
 <span id="L32"><span class="lineNum">      32</span>              : </span>
 <span id="L33"><span class="lineNum">      33</span>              : std::map&lt;AsciiStringView, SymId&gt; SymNames::s_nameToSymIdHash = {};</span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC tlaBgGNC">       59170 : AsciiStringView SymNames::nameForSymId(SymId id)</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC tlaBgGNC">       59172 : AsciiStringView SymNames::nameForSymId(SymId id)</span></span>
 <span id="L36"><span class="lineNum">      36</span>              : {</span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">       59170 :     return s_symNames.at(size_t(id));</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">       59172 :     return s_symNames.at(size_t(id));</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : }</span>
 <span id="L39"><span class="lineNum">      39</span>              : </span>
 <span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">         211 : const muse::TranslatableString&amp; SymNames::userNameForSymId(SymId id)</span></span>
@@ -105,19 +105,19 @@
 <span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :     return userNameForSymId(id).translated();</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : }</span>
 <span id="L49"><span class="lineNum">      49</span>              : </span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC tlaBgGNC">       49387 : SymId SymNames::symIdByName(const AsciiStringView&amp; name, SymId def)</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC tlaBgGNC">       49399 : SymId SymNames::symIdByName(const AsciiStringView&amp; name, SymId def)</span></span>
 <span id="L51"><span class="lineNum">      51</span>              : {</span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">       49387 :     if (s_nameToSymIdHash.empty()) {</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">       49399 :     if (s_nameToSymIdHash.empty()) {</span></span>
 <span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">          16 :         loadNameToSymIdHash();</span></span>
 <span id="L54"><span class="lineNum">      54</span>              :     }</span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">       49387 :     return muse::value(s_nameToSymIdHash, name, def);</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">       49399 :     return muse::value(s_nameToSymIdHash, name, def);</span></span>
 <span id="L56"><span class="lineNum">      56</span>              : }</span>
 <span id="L57"><span class="lineNum">      57</span>              : </span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">        5114 : SymId SymNames::symIdByName(const String&amp; name, SymId def)</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">        5122 : SymId SymNames::symIdByName(const String&amp; name, SymId def)</span></span>
 <span id="L59"><span class="lineNum">      59</span>              : {</span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">        5114 :     ByteArray ba = name.toAscii();</span></span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">       10228 :     return symIdByName(AsciiStringView(ba.constChar()), def);</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">        5114 : }</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">        5122 :     ByteArray ba = name.toAscii();</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">       10244 :     return symIdByName(AsciiStringView(ba.constChar()), def);</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">        5122 : }</span></span>
 <span id="L63"><span class="lineNum">      63</span>              : </span>
 <span id="L64"><span class="lineNum">      64</span> <span class="tlaUNC tlaBgUNC">           0 : SymId SymNames::symIdByOldName(const AsciiStringView&amp; oldName)</span></span>
 <span id="L65"><span class="lineNum">      65</span>              : {</span>

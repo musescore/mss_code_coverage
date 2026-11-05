@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -518,19 +518,19 @@
 <span id="L460"><span class="lineNum">     460</span>              : //    create segment if necessary</span>
 <span id="L461"><span class="lineNum">     461</span>              : //---------------------------------------------------------</span>
 <span id="L462"><span class="lineNum">     462</span>              : </span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC tlaBgGNC">        1045 : Rest* Score::addRest(const Fraction&amp; tick, track_idx_t track, TDuration d, Tuplet* tuplet)</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC tlaBgGNC">        1053 : Rest* Score::addRest(const Fraction&amp; tick, track_idx_t track, TDuration d, Tuplet* tuplet)</span></span>
 <span id="L464"><span class="lineNum">     464</span>              : {</span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">        1045 :     Measure* measure = tick2measure(tick);</span></span>
-<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">        1045 :     Rest* rest = Factory::createRest(this-&gt;dummy(), d);</span></span>
-<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">        1045 :     if (d.type() == DurationType::V_MEASURE) {</span></span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">         666 :         rest-&gt;setTicks(measure-&gt;stretchedLen(staff(track2staff(track))));</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">        1053 :     Measure* measure = tick2measure(tick);</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">        1053 :     Rest* rest = Factory::createRest(this-&gt;dummy(), d);</span></span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">        1053 :     if (d.type() == DurationType::V_MEASURE) {</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">         674 :         rest-&gt;setTicks(measure-&gt;stretchedLen(staff(track2staff(track))));</span></span>
 <span id="L469"><span class="lineNum">     469</span>              :     } else {</span>
 <span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">         379 :         rest-&gt;setTicks(d.fraction());</span></span>
 <span id="L471"><span class="lineNum">     471</span>              :     }</span>
-<span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC">        1045 :     rest-&gt;setTrack(track);</span></span>
-<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">        1045 :     rest-&gt;setTuplet(tuplet);</span></span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">        1045 :     undoAddCR(rest, measure, tick);</span></span>
-<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">        1045 :     return rest;</span></span>
+<span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC">        1053 :     rest-&gt;setTrack(track);</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">        1053 :     rest-&gt;setTuplet(tuplet);</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">        1053 :     undoAddCR(rest, measure, tick);</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">        1053 :     return rest;</span></span>
 <span id="L476"><span class="lineNum">     476</span>              : }</span>
 <span id="L477"><span class="lineNum">     477</span>              : </span>
 <span id="L478"><span class="lineNum">     478</span>              : //---------------------------------------------------------</span>
@@ -639,11 +639,11 @@
 <span id="L581"><span class="lineNum">     581</span>              : //    &quot;l&quot; is in local (stretched) time</span>
 <span id="L582"><span class="lineNum">     582</span>              : //---------------------------------------------------------</span>
 <span id="L583"><span class="lineNum">     583</span>              : </span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">         713 : Rest* Score::setRest(const Fraction&amp; _tick, track_idx_t track, const Fraction&amp; _l, bool useDots, Tuplet* tuplet, bool useFullMeasureRest)</span></span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">         721 : Rest* Score::setRest(const Fraction&amp; _tick, track_idx_t track, const Fraction&amp; _l, bool useDots, Tuplet* tuplet, bool useFullMeasureRest)</span></span>
 <span id="L585"><span class="lineNum">     585</span>              : {</span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">         713 :     std::vector&lt;Rest*&gt; rests = setRests(_tick, track, _l, useDots, tuplet, useFullMeasureRest);</span></span>
-<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">        1426 :     return rests.empty() ? nullptr : rests.front();</span></span>
-<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">         713 : }</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">         721 :     std::vector&lt;Rest*&gt; rests = setRests(_tick, track, _l, useDots, tuplet, useFullMeasureRest);</span></span>
+<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">        1442 :     return rests.empty() ? nullptr : rests.front();</span></span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">         721 : }</span></span>
 <span id="L589"><span class="lineNum">     589</span>              : </span>
 <span id="L590"><span class="lineNum">     590</span>              : //---------------------------------------------------------</span>
 <span id="L591"><span class="lineNum">     591</span>              : //   setRests</span>
@@ -651,21 +651,21 @@
 <span id="L593"><span class="lineNum">     593</span>              : //    &quot;l&quot; is in local (stretched) time</span>
 <span id="L594"><span class="lineNum">     594</span>              : //---------------------------------------------------------</span>
 <span id="L595"><span class="lineNum">     595</span>              : </span>
-<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">        1105 : std::vector&lt;Rest*&gt; Score::setRests(const Fraction&amp; _tick, track_idx_t track, const Fraction&amp; _l, bool useDots, Tuplet* tuplet,</span></span>
+<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">        1113 : std::vector&lt;Rest*&gt; Score::setRests(const Fraction&amp; _tick, track_idx_t track, const Fraction&amp; _l, bool useDots, Tuplet* tuplet,</span></span>
 <span id="L597"><span class="lineNum">     597</span>              :                                    bool useFullMeasureRest)</span>
 <span id="L598"><span class="lineNum">     598</span>              : {</span>
-<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">        1105 :     Fraction l       = _l;</span></span>
-<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">        1105 :     Fraction tick    = _tick;</span></span>
-<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">        1105 :     Measure* measure = tick2measure(tick);</span></span>
-<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">        1105 :     std::vector&lt;Rest*&gt; rests;</span></span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">        1105 :     Staff* staff     = Score::staff(track / VOICES);</span></span>
+<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">        1113 :     Fraction l       = _l;</span></span>
+<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">        1113 :     Fraction tick    = _tick;</span></span>
+<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">        1113 :     Measure* measure = tick2measure(tick);</span></span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">        1113 :     std::vector&lt;Rest*&gt; rests;</span></span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">        1113 :     Staff* staff     = Score::staff(track / VOICES);</span></span>
 <span id="L604"><span class="lineNum">     604</span>              : </span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">        1721 :     while (!l.isZero()) {</span></span>
+<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">        1735 :     while (!l.isZero()) {</span></span>
 <span id="L606"><span class="lineNum">     606</span>              :         //</span>
 <span id="L607"><span class="lineNum">     607</span>              :         // divide into measures</span>
 <span id="L608"><span class="lineNum">     608</span>              :         //</span>
-<span id="L609"><span class="lineNum">     609</span> <span class="tlaGNC">         967 :         Fraction f;</span></span>
-<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC">         967 :         if (tuplet) {</span></span>
+<span id="L609"><span class="lineNum">     609</span> <span class="tlaGNC">         975 :         Fraction f;</span></span>
+<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC">         975 :         if (tuplet) {</span></span>
 <span id="L611"><span class="lineNum">     611</span> <span class="tlaGNC">          75 :             f = tuplet-&gt;baseLen().fraction() * tuplet-&gt;ratio().numerator();</span></span>
 <span id="L612"><span class="lineNum">     612</span> <span class="tlaGNC">         156 :             for (DurationElement* de : tuplet-&gt;elements()) {</span></span>
 <span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">         119 :                 if (de-&gt;tick() &gt;= tick) {</span></span>
@@ -680,38 +680,38 @@
 <span id="L622"><span class="lineNum">     622</span> <span class="tlaUNC tlaBgUNC">           0 :                 l = f;</span></span>
 <span id="L623"><span class="lineNum">     623</span>              :             }</span>
 <span id="L624"><span class="lineNum">     624</span>              :         } else {</span>
-<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC tlaBgGNC">         892 :             if (measure-&gt;tick() &lt; tick) {</span></span>
+<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC tlaBgGNC">         900 :             if (measure-&gt;tick() &lt; tick) {</span></span>
 <span id="L626"><span class="lineNum">     626</span> <span class="tlaGNC">         184 :                 f = measure-&gt;endTick() - tick;</span></span>
 <span id="L627"><span class="lineNum">     627</span>              :             } else {</span>
-<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">         708 :                 f = measure-&gt;ticks();</span></span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">         716 :                 f = measure-&gt;ticks();</span></span>
 <span id="L629"><span class="lineNum">     629</span>              :             }</span>
-<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">         892 :             f *= staff-&gt;timeStretch(tick);</span></span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">         900 :             f *= staff-&gt;timeStretch(tick);</span></span>
 <span id="L631"><span class="lineNum">     631</span>              :         }</span>
 <span id="L632"><span class="lineNum">     632</span>              : </span>
-<span id="L633"><span class="lineNum">     633</span> <span class="tlaGNC">         967 :         if (f &gt; l) {</span></span>
+<span id="L633"><span class="lineNum">     633</span> <span class="tlaGNC">         975 :         if (f &gt; l) {</span></span>
 <span id="L634"><span class="lineNum">     634</span> <span class="tlaGNC">         144 :             f = l;</span></span>
 <span id="L635"><span class="lineNum">     635</span>              :         }</span>
 <span id="L636"><span class="lineNum">     636</span>              : </span>
 <span id="L637"><span class="lineNum">     637</span>              :         // Don't fill a full measure with rests on a non-zero voice, *unless* it has links in voice zero</span>
-<span id="L638"><span class="lineNum">     638</span> <span class="tlaGNC">         967 :         bool fullMeasure = tick == measure-&gt;tick() &amp;&amp; f == measure-&gt;stretchedLen(staff);</span></span>
-<span id="L639"><span class="lineNum">     639</span> <span class="tlaGNC">         967 :         bool emptyNonZeroVoice = track2voice(track) != 0 &amp;&amp; !measure-&gt;hasVoice(track);</span></span>
-<span id="L640"><span class="lineNum">     640</span> <span class="tlaGNC">         967 :         if (emptyNonZeroVoice &amp;&amp; fullMeasure &amp;&amp; !staff-&gt;trackHasLinksInVoiceZero(track)) {</span></span>
+<span id="L638"><span class="lineNum">     638</span> <span class="tlaGNC">         975 :         bool fullMeasure = tick == measure-&gt;tick() &amp;&amp; f == measure-&gt;stretchedLen(staff);</span></span>
+<span id="L639"><span class="lineNum">     639</span> <span class="tlaGNC">         975 :         bool emptyNonZeroVoice = track2voice(track) != 0 &amp;&amp; !measure-&gt;hasVoice(track);</span></span>
+<span id="L640"><span class="lineNum">     640</span> <span class="tlaGNC">         975 :         if (emptyNonZeroVoice &amp;&amp; fullMeasure &amp;&amp; !staff-&gt;trackHasLinksInVoiceZero(track)) {</span></span>
 <span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">          17 :             l -= f;</span></span>
 <span id="L642"><span class="lineNum">     642</span> <span class="tlaGNC">          17 :             measure = measure-&gt;nextMeasure();</span></span>
 <span id="L643"><span class="lineNum">     643</span> <span class="tlaGNC">          17 :             if (!measure) {</span></span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">         351 :                 break;</span></span>
+<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">         353 :                 break;</span></span>
 <span id="L645"><span class="lineNum">     645</span>              :             }</span>
 <span id="L646"><span class="lineNum">     646</span> <span class="tlaGNC">          17 :             tick = measure-&gt;tick();</span></span>
 <span id="L647"><span class="lineNum">     647</span> <span class="tlaGNC">          17 :             continue;</span></span>
 <span id="L648"><span class="lineNum">     648</span>              :         }</span>
 <span id="L649"><span class="lineNum">     649</span>              : </span>
-<span id="L650"><span class="lineNum">     650</span> <span class="tlaGNC">         950 :         if ((measure-&gt;timesig() == measure-&gt;ticks())       // not in pickup measure</span></span>
-<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC">         937 :             &amp;&amp; fullMeasure</span></span>
-<span id="L652"><span class="lineNum">     652</span> <span class="tlaGNC">         651 :             &amp;&amp; !tuplet</span></span>
-<span id="L653"><span class="lineNum">     653</span> <span class="tlaGNC">        1887 :             &amp;&amp; useFullMeasureRest) {</span></span>
-<span id="L654"><span class="lineNum">     654</span> <span class="tlaGNC">         651 :             Rest* rest = addRest(tick, track, TDuration(DurationType::V_MEASURE), tuplet);</span></span>
-<span id="L655"><span class="lineNum">     655</span> <span class="tlaGNC">         651 :             tick += rest-&gt;actualTicks();</span></span>
-<span id="L656"><span class="lineNum">     656</span> <span class="tlaGNC">         651 :             rests.push_back(rest);</span></span>
+<span id="L650"><span class="lineNum">     650</span> <span class="tlaGNC">         958 :         if ((measure-&gt;timesig() == measure-&gt;ticks())       // not in pickup measure</span></span>
+<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC">         945 :             &amp;&amp; fullMeasure</span></span>
+<span id="L652"><span class="lineNum">     652</span> <span class="tlaGNC">         659 :             &amp;&amp; !tuplet</span></span>
+<span id="L653"><span class="lineNum">     653</span> <span class="tlaGNC">        1903 :             &amp;&amp; useFullMeasureRest) {</span></span>
+<span id="L654"><span class="lineNum">     654</span> <span class="tlaGNC">         659 :             Rest* rest = addRest(tick, track, TDuration(DurationType::V_MEASURE), tuplet);</span></span>
+<span id="L655"><span class="lineNum">     655</span> <span class="tlaGNC">         659 :             tick += rest-&gt;actualTicks();</span></span>
+<span id="L656"><span class="lineNum">     656</span> <span class="tlaGNC">         659 :             rests.push_back(rest);</span></span>
 <span id="L657"><span class="lineNum">     657</span>              :         } else {</span>
 <span id="L658"><span class="lineNum">     658</span>              :             //</span>
 <span id="L659"><span class="lineNum">     659</span>              :             // compute list of durations which will fit l</span>
@@ -738,15 +738,15 @@
 <span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC">         379 :                 tick += rest-&gt;actualTicks();</span></span>
 <span id="L681"><span class="lineNum">     681</span>              :             }</span>
 <span id="L682"><span class="lineNum">     682</span> <span class="tlaGNC">         299 :         }</span></span>
-<span id="L683"><span class="lineNum">     683</span> <span class="tlaGNC">         950 :         l -= f;</span></span>
+<span id="L683"><span class="lineNum">     683</span> <span class="tlaGNC">         958 :         l -= f;</span></span>
 <span id="L684"><span class="lineNum">     684</span>              : </span>
-<span id="L685"><span class="lineNum">     685</span> <span class="tlaGNC">         950 :         measure = measure-&gt;nextMeasure();</span></span>
-<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">         950 :         if (!measure) {</span></span>
-<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">         351 :             break;</span></span>
+<span id="L685"><span class="lineNum">     685</span> <span class="tlaGNC">         958 :         measure = measure-&gt;nextMeasure();</span></span>
+<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">         958 :         if (!measure) {</span></span>
+<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">         353 :             break;</span></span>
 <span id="L688"><span class="lineNum">     688</span>              :         }</span>
-<span id="L689"><span class="lineNum">     689</span> <span class="tlaGNC">         599 :         tick = measure-&gt;tick();</span></span>
+<span id="L689"><span class="lineNum">     689</span> <span class="tlaGNC">         605 :         tick = measure-&gt;tick();</span></span>
 <span id="L690"><span class="lineNum">     690</span>              :     }</span>
-<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">        1105 :     return rests;</span></span>
+<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">        1113 :     return rests;</span></span>
 <span id="L692"><span class="lineNum">     692</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L693"><span class="lineNum">     693</span>              : </span>
 <span id="L694"><span class="lineNum">     694</span> <span class="tlaUNC">           0 : Slur* Score::addSlur(ChordRest* firstChordRest, ChordRest* secondChordRest, const Slur* slurTemplate)</span></span>
@@ -3046,55 +3046,55 @@
 <span id="L2988"><span class="lineNum">    2988</span>              : //    start and end anchor.</span>
 <span id="L2989"><span class="lineNum">    2989</span>              : //---------------------------------------------------------</span>
 <span id="L2990"><span class="lineNum">    2990</span>              : </span>
-<span id="L2991"><span class="lineNum">    2991</span> <span class="tlaGNC">       10479 : void Score::checkSpanner(const Fraction&amp; startTick, const Fraction&amp; endTick, bool removeOrphans)</span></span>
+<span id="L2991"><span class="lineNum">    2991</span> <span class="tlaGNC">       10491 : void Score::checkSpanner(const Fraction&amp; startTick, const Fraction&amp; endTick, bool removeOrphans)</span></span>
 <span id="L2992"><span class="lineNum">    2992</span>              : {</span>
-<span id="L2993"><span class="lineNum">    2993</span> <span class="tlaGNC">       10479 :     std::vector&lt;Spanner*&gt; spannersToRemove;</span></span>
-<span id="L2994"><span class="lineNum">    2994</span> <span class="tlaGNC">       10479 :     std::vector&lt;Spanner*&gt; spannersToShorten;</span></span>
-<span id="L2995"><span class="lineNum">    2995</span> <span class="tlaGNC">       10479 :     auto spanners = m_spanner.findOverlapping(startTick.ticks(), endTick.ticks());</span></span>
+<span id="L2993"><span class="lineNum">    2993</span> <span class="tlaGNC">       10491 :     std::vector&lt;Spanner*&gt; spannersToRemove;</span></span>
+<span id="L2994"><span class="lineNum">    2994</span> <span class="tlaGNC">       10491 :     std::vector&lt;Spanner*&gt; spannersToShorten;</span></span>
+<span id="L2995"><span class="lineNum">    2995</span> <span class="tlaGNC">       10491 :     auto spanners = m_spanner.findOverlapping(startTick.ticks(), endTick.ticks());</span></span>
 <span id="L2996"><span class="lineNum">    2996</span>              : </span>
 <span id="L2997"><span class="lineNum">    2997</span>              :     // DEBUG: check all spanner</span>
 <span id="L2998"><span class="lineNum">    2998</span>              :     //        there may be spanners outside of score bc. some measures were deleted</span>
 <span id="L2999"><span class="lineNum">    2999</span>              : </span>
-<span id="L3000"><span class="lineNum">    3000</span> <span class="tlaGNC">       10479 :     Fraction lastTick = lastMeasure()-&gt;endTick();</span></span>
+<span id="L3000"><span class="lineNum">    3000</span> <span class="tlaGNC">       10491 :     Fraction lastTick = lastMeasure()-&gt;endTick();</span></span>
 <span id="L3001"><span class="lineNum">    3001</span>              : </span>
-<span id="L3002"><span class="lineNum">    3002</span> <span class="tlaGNC">       14721 :     for (const auto&amp; i : m_spanner.map()) {</span></span>
-<span id="L3003"><span class="lineNum">    3003</span> <span class="tlaGNC">        4242 :         Spanner* s = i.second;</span></span>
+<span id="L3002"><span class="lineNum">    3002</span> <span class="tlaGNC">       14752 :     for (const auto&amp; i : m_spanner.map()) {</span></span>
+<span id="L3003"><span class="lineNum">    3003</span> <span class="tlaGNC">        4261 :         Spanner* s = i.second;</span></span>
 <span id="L3004"><span class="lineNum">    3004</span>              : </span>
-<span id="L3005"><span class="lineNum">    3005</span> <span class="tlaGNC">        4242 :         if (s-&gt;isSlur()) {</span></span>
-<span id="L3006"><span class="lineNum">    3006</span> <span class="tlaGNC">        2290 :             Segment* seg = tick2segmentMM(s-&gt;tick(), false, SegmentType::ChordRest);</span></span>
-<span id="L3007"><span class="lineNum">    3007</span> <span class="tlaGNC">        2290 :             if (!seg || !seg-&gt;element(s-&gt;track())) {</span></span>
+<span id="L3005"><span class="lineNum">    3005</span> <span class="tlaGNC">        4261 :         if (s-&gt;isSlur()) {</span></span>
+<span id="L3006"><span class="lineNum">    3006</span> <span class="tlaGNC">        2297 :             Segment* seg = tick2segmentMM(s-&gt;tick(), false, SegmentType::ChordRest);</span></span>
+<span id="L3007"><span class="lineNum">    3007</span> <span class="tlaGNC">        2297 :             if (!seg || !seg-&gt;element(s-&gt;track())) {</span></span>
 <span id="L3008"><span class="lineNum">    3008</span> <span class="tlaUNC tlaBgUNC">           0 :                 spannersToRemove.push_back(s);</span></span>
 <span id="L3009"><span class="lineNum">    3009</span>              :             } else {</span>
-<span id="L3010"><span class="lineNum">    3010</span> <span class="tlaGNC tlaBgGNC">        2290 :                 seg = tick2segmentMM(s-&gt;tick2(), false, SegmentType::ChordRest);</span></span>
-<span id="L3011"><span class="lineNum">    3011</span> <span class="tlaGNC">        2290 :                 if (!seg || !seg-&gt;element(s-&gt;track2())) {</span></span>
+<span id="L3010"><span class="lineNum">    3010</span> <span class="tlaGNC tlaBgGNC">        2297 :                 seg = tick2segmentMM(s-&gt;tick2(), false, SegmentType::ChordRest);</span></span>
+<span id="L3011"><span class="lineNum">    3011</span> <span class="tlaGNC">        2297 :                 if (!seg || !seg-&gt;element(s-&gt;track2())) {</span></span>
 <span id="L3012"><span class="lineNum">    3012</span> <span class="tlaUNC tlaBgUNC">           0 :                     spannersToRemove.push_back(s);</span></span>
 <span id="L3013"><span class="lineNum">    3013</span>              :                 }</span>
 <span id="L3014"><span class="lineNum">    3014</span>              :             }</span>
 <span id="L3015"><span class="lineNum">    3015</span>              :         } else {</span>
 <span id="L3016"><span class="lineNum">    3016</span>              :             // remove spanner if there is no start element</span>
-<span id="L3017"><span class="lineNum">    3017</span> <span class="tlaGNC tlaBgGNC">        1952 :             s-&gt;computeStartElement();</span></span>
-<span id="L3018"><span class="lineNum">    3018</span> <span class="tlaGNC">        1952 :             if (!s-&gt;startElement()) {</span></span>
+<span id="L3017"><span class="lineNum">    3017</span> <span class="tlaGNC tlaBgGNC">        1964 :             s-&gt;computeStartElement();</span></span>
+<span id="L3018"><span class="lineNum">    3018</span> <span class="tlaGNC">        1964 :             if (!s-&gt;startElement()) {</span></span>
 <span id="L3019"><span class="lineNum">    3019</span> <span class="tlaUNC tlaBgUNC">           0 :                 spannersToRemove.push_back(s);</span></span>
 <span id="L3020"><span class="lineNum">    3020</span> <span class="tlaUNC">           0 :                 LOGD(&quot;checkSpanner::remove (3)&quot;);</span></span>
 <span id="L3021"><span class="lineNum">    3021</span>              :             } else {</span>
-<span id="L3022"><span class="lineNum">    3022</span> <span class="tlaGNC tlaBgGNC">        1952 :                 if (s-&gt;tick2() &gt; lastTick) {</span></span>
+<span id="L3022"><span class="lineNum">    3022</span> <span class="tlaGNC tlaBgGNC">        1964 :                 if (s-&gt;tick2() &gt; lastTick) {</span></span>
 <span id="L3023"><span class="lineNum">    3023</span> <span class="tlaUNC tlaBgUNC">           0 :                     spannersToShorten.push_back(s);              //s-&gt;undoChangeProperty(Pid::SPANNER_TICKS, lastTick - s-&gt;tick());</span></span>
 <span id="L3024"><span class="lineNum">    3024</span>              :                 } else {</span>
-<span id="L3025"><span class="lineNum">    3025</span> <span class="tlaGNC tlaBgGNC">        1952 :                     s-&gt;computeEndElement();</span></span>
+<span id="L3025"><span class="lineNum">    3025</span> <span class="tlaGNC tlaBgGNC">        1964 :                     s-&gt;computeEndElement();</span></span>
 <span id="L3026"><span class="lineNum">    3026</span>              :                 }</span>
 <span id="L3027"><span class="lineNum">    3027</span>              :             }</span>
 <span id="L3028"><span class="lineNum">    3028</span>              :         }</span>
 <span id="L3029"><span class="lineNum">    3029</span>              :     }</span>
-<span id="L3030"><span class="lineNum">    3030</span> <span class="tlaGNC">       10479 :     if (removeOrphans) {</span></span>
+<span id="L3030"><span class="lineNum">    3030</span> <span class="tlaGNC">       10491 :     if (removeOrphans) {</span></span>
 <span id="L3031"><span class="lineNum">    3031</span> <span class="tlaGNC">           2 :         for (auto s : spannersToRemove) {       // actually remove scheduled spanners</span></span>
 <span id="L3032"><span class="lineNum">    3032</span> <span class="tlaUNC tlaBgUNC">           0 :             doUndoRemoveElement(s);</span></span>
 <span id="L3033"><span class="lineNum">    3033</span>              :         }</span>
 <span id="L3034"><span class="lineNum">    3034</span>              :     }</span>
-<span id="L3035"><span class="lineNum">    3035</span> <span class="tlaGNC tlaBgGNC">       10479 :     for (Spanner* s : spannersToShorten) {      // shorten spanners that extended past end of score</span></span>
+<span id="L3035"><span class="lineNum">    3035</span> <span class="tlaGNC tlaBgGNC">       10491 :     for (Spanner* s : spannersToShorten) {      // shorten spanners that extended past end of score</span></span>
 <span id="L3036"><span class="lineNum">    3036</span> <span class="tlaUNC tlaBgUNC">           0 :         undo(new ChangeProperty(s, Pid::SPANNER_TICKS, lastTick - s-&gt;tick()));</span></span>
 <span id="L3037"><span class="lineNum">    3037</span> <span class="tlaUNC">           0 :         s-&gt;computeEndElement();</span></span>
 <span id="L3038"><span class="lineNum">    3038</span>              :     }</span>
-<span id="L3039"><span class="lineNum">    3039</span> <span class="tlaGNC tlaBgGNC">       10479 : }</span></span>
+<span id="L3039"><span class="lineNum">    3039</span> <span class="tlaGNC tlaBgGNC">       10491 : }</span></span>
 <span id="L3040"><span class="lineNum">    3040</span>              : </span>
 <span id="L3041"><span class="lineNum">    3041</span>              : //---------------------------------------------------------</span>
 <span id="L3042"><span class="lineNum">    3042</span>              : //   checkTimeDelete</span>
@@ -3492,13 +3492,13 @@
 <span id="L3434"><span class="lineNum">    3434</span>              :     }</span>
 <span id="L3435"><span class="lineNum">    3435</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L3436"><span class="lineNum">    3436</span>              : </span>
-<span id="L3437"><span class="lineNum">    3437</span> <span class="tlaGNC tlaBgGNC">         125 : void Score::undoChangeStyleVal(Sid idx, const PropertyValue&amp; v)</span></span>
+<span id="L3437"><span class="lineNum">    3437</span> <span class="tlaGNC tlaBgGNC">         126 : void Score::undoChangeStyleVal(Sid idx, const PropertyValue&amp; v)</span></span>
 <span id="L3438"><span class="lineNum">    3438</span>              : {</span>
-<span id="L3439"><span class="lineNum">    3439</span> <span class="tlaGNC">         125 :     std::unordered_map&lt;Sid, PropertyValue&gt; map;</span></span>
-<span id="L3440"><span class="lineNum">    3440</span> <span class="tlaGNC">         125 :     map.emplace(idx, v);</span></span>
+<span id="L3439"><span class="lineNum">    3439</span> <span class="tlaGNC">         126 :     std::unordered_map&lt;Sid, PropertyValue&gt; map;</span></span>
+<span id="L3440"><span class="lineNum">    3440</span> <span class="tlaGNC">         126 :     map.emplace(idx, v);</span></span>
 <span id="L3441"><span class="lineNum">    3441</span>              : </span>
-<span id="L3442"><span class="lineNum">    3442</span> <span class="tlaGNC">         125 :     undo(new ChangeStyleValues(this, std::move(map)));</span></span>
-<span id="L3443"><span class="lineNum">    3443</span> <span class="tlaGNC">         125 : }</span></span>
+<span id="L3442"><span class="lineNum">    3442</span> <span class="tlaGNC">         126 :     undo(new ChangeStyleValues(this, std::move(map)));</span></span>
+<span id="L3443"><span class="lineNum">    3443</span> <span class="tlaGNC">         126 : }</span></span>
 <span id="L3444"><span class="lineNum">    3444</span>              : </span>
 <span id="L3445"><span class="lineNum">    3445</span> <span class="tlaGNC">           1 : void Score::undoChangeStyleValues(std::unordered_map&lt;Sid, PropertyValue&gt; values)</span></span>
 <span id="L3446"><span class="lineNum">    3446</span>              : {</span>
@@ -4039,10 +4039,10 @@
 <span id="L3981"><span class="lineNum">    3981</span>              : //   undoInsertPart</span>
 <span id="L3982"><span class="lineNum">    3982</span>              : //---------------------------------------------------------</span>
 <span id="L3983"><span class="lineNum">    3983</span>              : </span>
-<span id="L3984"><span class="lineNum">    3984</span> <span class="tlaGNC">          13 : void Score::undoInsertPart(Part* part, size_t targetPartIndex)</span></span>
+<span id="L3984"><span class="lineNum">    3984</span> <span class="tlaGNC">          14 : void Score::undoInsertPart(Part* part, size_t targetPartIndex)</span></span>
 <span id="L3985"><span class="lineNum">    3985</span>              : {</span>
-<span id="L3986"><span class="lineNum">    3986</span> <span class="tlaGNC">          13 :     undo(new InsertPart(part, targetPartIndex));</span></span>
-<span id="L3987"><span class="lineNum">    3987</span> <span class="tlaGNC">          13 : }</span></span>
+<span id="L3986"><span class="lineNum">    3986</span> <span class="tlaGNC">          14 :     undo(new InsertPart(part, targetPartIndex));</span></span>
+<span id="L3987"><span class="lineNum">    3987</span> <span class="tlaGNC">          14 : }</span></span>
 <span id="L3988"><span class="lineNum">    3988</span>              : </span>
 <span id="L3989"><span class="lineNum">    3989</span>              : //---------------------------------------------------------</span>
 <span id="L3990"><span class="lineNum">    3990</span>              : //   undoRemoveStaff</span>
@@ -4095,13 +4095,13 @@
 <span id="L4037"><span class="lineNum">    4037</span>              : //    idx - index of staff in part</span>
 <span id="L4038"><span class="lineNum">    4038</span>              : //---------------------------------------------------------</span>
 <span id="L4039"><span class="lineNum">    4039</span>              : </span>
-<span id="L4040"><span class="lineNum">    4040</span> <span class="tlaGNC">          55 : void Score::undoInsertStaff(Staff* staff, staff_idx_t ridx, bool createRests)</span></span>
+<span id="L4040"><span class="lineNum">    4040</span> <span class="tlaGNC">          57 : void Score::undoInsertStaff(Staff* staff, staff_idx_t ridx, bool createRests)</span></span>
 <span id="L4041"><span class="lineNum">    4041</span>              : {</span>
-<span id="L4042"><span class="lineNum">    4042</span> <span class="tlaGNC">          55 :     undo(new InsertStaff(staff, ridx));</span></span>
-<span id="L4043"><span class="lineNum">    4043</span> <span class="tlaGNC">          55 :     staff_idx_t idx = staffIdx(staff-&gt;part()) + ridx;</span></span>
-<span id="L4044"><span class="lineNum">    4044</span> <span class="tlaGNC">         423 :     for (Measure* m = firstMeasure(); m; m = m-&gt;nextMeasure()) {</span></span>
-<span id="L4045"><span class="lineNum">    4045</span> <span class="tlaGNC">         368 :         m-&gt;cmdAddStaves(idx, idx + 1, createRests);</span></span>
-<span id="L4046"><span class="lineNum">    4046</span> <span class="tlaGNC">         368 :         if (m-&gt;hasMMRest()) {</span></span>
+<span id="L4042"><span class="lineNum">    4042</span> <span class="tlaGNC">          57 :     undo(new InsertStaff(staff, ridx));</span></span>
+<span id="L4043"><span class="lineNum">    4043</span> <span class="tlaGNC">          57 :     staff_idx_t idx = staffIdx(staff-&gt;part()) + ridx;</span></span>
+<span id="L4044"><span class="lineNum">    4044</span> <span class="tlaGNC">         433 :     for (Measure* m = firstMeasure(); m; m = m-&gt;nextMeasure()) {</span></span>
+<span id="L4045"><span class="lineNum">    4045</span> <span class="tlaGNC">         376 :         m-&gt;cmdAddStaves(idx, idx + 1, createRests);</span></span>
+<span id="L4046"><span class="lineNum">    4046</span> <span class="tlaGNC">         376 :         if (m-&gt;hasMMRest()) {</span></span>
 <span id="L4047"><span class="lineNum">    4047</span> <span class="tlaUNC tlaBgUNC">           0 :             m-&gt;mmRest()-&gt;cmdAddStaves(idx, idx + 1, false);</span></span>
 <span id="L4048"><span class="lineNum">    4048</span>              :         }</span>
 <span id="L4049"><span class="lineNum">    4049</span>              :     }</span>
@@ -4111,36 +4111,36 @@
 <span id="L4053"><span class="lineNum">    4053</span>              :     // and it doesn't work to adjust bracket &amp; barlines until all staves are added</span>
 <span id="L4054"><span class="lineNum">    4054</span>              :     // TODO: adjust brackets only when appropriate</span>
 <span id="L4055"><span class="lineNum">    4055</span>              :     //adjustBracketsIns(idx, idx+1);</span>
-<span id="L4056"><span class="lineNum">    4056</span> <span class="tlaGNC tlaBgGNC">          55 : }</span></span>
+<span id="L4056"><span class="lineNum">    4056</span> <span class="tlaGNC tlaBgGNC">          57 : }</span></span>
 <span id="L4057"><span class="lineNum">    4057</span>              : </span>
 <span id="L4058"><span class="lineNum">    4058</span>              : //---------------------------------------------------------</span>
 <span id="L4059"><span class="lineNum">    4059</span>              : //   undoAddElement</span>
 <span id="L4060"><span class="lineNum">    4060</span>              : //---------------------------------------------------------</span>
 <span id="L4061"><span class="lineNum">    4061</span>              : </span>
-<span id="L4062"><span class="lineNum">    4062</span> <span class="tlaGNC">        8666 : void Score::undoAddElement(EngravingItem* element, bool addToLinkedStaves, bool ctrlModifier, EngravingItem* elementToRelink)</span></span>
+<span id="L4062"><span class="lineNum">    4062</span> <span class="tlaGNC">        8681 : void Score::undoAddElement(EngravingItem* element, bool addToLinkedStaves, bool ctrlModifier, EngravingItem* elementToRelink)</span></span>
 <span id="L4063"><span class="lineNum">    4063</span>              : {</span>
-<span id="L4064"><span class="lineNum">    4064</span> <span class="tlaGNC">        8666 :     Transaction&amp; tx = transactionManager()-&gt;currentOrDummyTransaction();</span></span>
+<span id="L4064"><span class="lineNum">    4064</span> <span class="tlaGNC">        8681 :     Transaction&amp; tx = transactionManager()-&gt;currentOrDummyTransaction();</span></span>
 <span id="L4065"><span class="lineNum">    4065</span>              : </span>
-<span id="L4066"><span class="lineNum">    4066</span> <span class="tlaGNC">        8666 :     Staff* ostaff = element-&gt;staff();</span></span>
-<span id="L4067"><span class="lineNum">    4067</span> <span class="tlaGNC">        8666 :     track_idx_t strack = element-&gt;track();</span></span>
+<span id="L4066"><span class="lineNum">    4066</span> <span class="tlaGNC">        8681 :     Staff* ostaff = element-&gt;staff();</span></span>
+<span id="L4067"><span class="lineNum">    4067</span> <span class="tlaGNC">        8681 :     track_idx_t strack = element-&gt;track();</span></span>
 <span id="L4068"><span class="lineNum">    4068</span>              : </span>
-<span id="L4069"><span class="lineNum">    4069</span> <span class="tlaGNC">        8666 :     ElementType et = element-&gt;type();</span></span>
+<span id="L4069"><span class="lineNum">    4069</span> <span class="tlaGNC">        8681 :     ElementType et = element-&gt;type();</span></span>
 <span id="L4070"><span class="lineNum">    4070</span>              : </span>
 <span id="L4071"><span class="lineNum">    4071</span>              :     //</span>
 <span id="L4072"><span class="lineNum">    4072</span>              :     // some elements are replicated for all parts regardless of</span>
 <span id="L4073"><span class="lineNum">    4073</span>              :     // linking:</span>
 <span id="L4074"><span class="lineNum">    4074</span>              :     //</span>
 <span id="L4075"><span class="lineNum">    4075</span>              : </span>
-<span id="L4076"><span class="lineNum">    4076</span> <span class="tlaGNC">        8666 :     bool isSystemLine = isSystemTextLine(element);</span></span>
+<span id="L4076"><span class="lineNum">    4076</span> <span class="tlaGNC">        8681 :     bool isSystemLine = isSystemTextLine(element);</span></span>
 <span id="L4077"><span class="lineNum">    4077</span>              : </span>
-<span id="L4078"><span class="lineNum">    4078</span> <span class="tlaGNC">        8666 :     if ((et == ElementType::REHEARSAL_MARK)</span></span>
-<span id="L4079"><span class="lineNum">    4079</span> <span class="tlaGNC">        8655 :         || (et == ElementType::SYSTEM_TEXT)</span></span>
-<span id="L4080"><span class="lineNum">    4080</span> <span class="tlaGNC">        8646 :         || (et == ElementType::TRIPLET_FEEL)</span></span>
-<span id="L4081"><span class="lineNum">    4081</span> <span class="tlaGNC">        8646 :         || (et == ElementType::JUMP)</span></span>
-<span id="L4082"><span class="lineNum">    4082</span> <span class="tlaGNC">        8646 :         || (et == ElementType::MARKER)</span></span>
-<span id="L4083"><span class="lineNum">    4083</span> <span class="tlaGNC">        8644 :         || (et == ElementType::TEMPO_TEXT)</span></span>
-<span id="L4084"><span class="lineNum">    4084</span> <span class="tlaGNC">        8549 :         || (et == ElementType::PLAY_COUNT_TEXT)</span></span>
-<span id="L4085"><span class="lineNum">    4085</span> <span class="tlaGNC">        8549 :         || isSystemLine</span></span>
+<span id="L4078"><span class="lineNum">    4078</span> <span class="tlaGNC">        8681 :     if ((et == ElementType::REHEARSAL_MARK)</span></span>
+<span id="L4079"><span class="lineNum">    4079</span> <span class="tlaGNC">        8670 :         || (et == ElementType::SYSTEM_TEXT)</span></span>
+<span id="L4080"><span class="lineNum">    4080</span> <span class="tlaGNC">        8661 :         || (et == ElementType::TRIPLET_FEEL)</span></span>
+<span id="L4081"><span class="lineNum">    4081</span> <span class="tlaGNC">        8661 :         || (et == ElementType::JUMP)</span></span>
+<span id="L4082"><span class="lineNum">    4082</span> <span class="tlaGNC">        8661 :         || (et == ElementType::MARKER)</span></span>
+<span id="L4083"><span class="lineNum">    4083</span> <span class="tlaGNC">        8659 :         || (et == ElementType::TEMPO_TEXT)</span></span>
+<span id="L4084"><span class="lineNum">    4084</span> <span class="tlaGNC">        8564 :         || (et == ElementType::PLAY_COUNT_TEXT)</span></span>
+<span id="L4085"><span class="lineNum">    4085</span> <span class="tlaGNC">        8564 :         || isSystemLine</span></span>
 <span id="L4086"><span class="lineNum">    4086</span>              :         ) {</span>
 <span id="L4087"><span class="lineNum">    4087</span> <span class="tlaGNC">         121 :         std::vector&lt;Staff* &gt; staffList;</span></span>
 <span id="L4088"><span class="lineNum">    4088</span>              : </span>
@@ -4228,19 +4228,19 @@
 <span id="L4170"><span class="lineNum">    4170</span> <span class="tlaGNC">         121 :         return;</span></span>
 <span id="L4171"><span class="lineNum">    4171</span> <span class="tlaGNC">         121 :     }</span></span>
 <span id="L4172"><span class="lineNum">    4172</span>              : </span>
-<span id="L4173"><span class="lineNum">    4173</span> <span class="tlaGNC">       17090 :     if (et == ElementType::FINGERING</span></span>
-<span id="L4174"><span class="lineNum">    4174</span> <span class="tlaGNC">        8542 :         || (et == ElementType::IMAGE &amp;&amp; !element-&gt;ownershipParent()-&gt;isSegment())</span></span>
-<span id="L4175"><span class="lineNum">    4175</span> <span class="tlaGNC">        8539 :         || (et == ElementType::SYMBOL &amp;&amp; !element-&gt;ownershipParent()-&gt;isSegment())</span></span>
-<span id="L4176"><span class="lineNum">    4176</span> <span class="tlaGNC">        8536 :         || et == ElementType::NOTE</span></span>
-<span id="L4177"><span class="lineNum">    4177</span> <span class="tlaGNC">        8456 :         || et == ElementType::TEXT</span></span>
-<span id="L4178"><span class="lineNum">    4178</span> <span class="tlaGNC">        8456 :         || et == ElementType::GLISSANDO</span></span>
-<span id="L4179"><span class="lineNum">    4179</span> <span class="tlaGNC">        8445 :         || et == ElementType::GUITAR_BEND</span></span>
-<span id="L4180"><span class="lineNum">    4180</span> <span class="tlaGNC">        8153 :         || et == ElementType::NOTELINE</span></span>
-<span id="L4181"><span class="lineNum">    4181</span> <span class="tlaGNC">        8153 :         || et == ElementType::BEND</span></span>
-<span id="L4182"><span class="lineNum">    4182</span> <span class="tlaGNC">        8153 :         || (et == ElementType::CHORD &amp;&amp; toChord(element)-&gt;isGrace())</span></span>
-<span id="L4183"><span class="lineNum">    4183</span> <span class="tlaGNC">        8083 :         || et == ElementType::LAISSEZ_VIB</span></span>
-<span id="L4184"><span class="lineNum">    4184</span> <span class="tlaGNC">        8065 :         || et == ElementType::PARTIAL_TIE</span></span>
-<span id="L4185"><span class="lineNum">    4185</span> <span class="tlaGNC">       17087 :         || et == ElementType::PARENTHESIS</span></span>
+<span id="L4173"><span class="lineNum">    4173</span> <span class="tlaGNC">       17120 :     if (et == ElementType::FINGERING</span></span>
+<span id="L4174"><span class="lineNum">    4174</span> <span class="tlaGNC">        8557 :         || (et == ElementType::IMAGE &amp;&amp; !element-&gt;ownershipParent()-&gt;isSegment())</span></span>
+<span id="L4175"><span class="lineNum">    4175</span> <span class="tlaGNC">        8554 :         || (et == ElementType::SYMBOL &amp;&amp; !element-&gt;ownershipParent()-&gt;isSegment())</span></span>
+<span id="L4176"><span class="lineNum">    4176</span> <span class="tlaGNC">        8551 :         || et == ElementType::NOTE</span></span>
+<span id="L4177"><span class="lineNum">    4177</span> <span class="tlaGNC">        8471 :         || et == ElementType::TEXT</span></span>
+<span id="L4178"><span class="lineNum">    4178</span> <span class="tlaGNC">        8471 :         || et == ElementType::GLISSANDO</span></span>
+<span id="L4179"><span class="lineNum">    4179</span> <span class="tlaGNC">        8460 :         || et == ElementType::GUITAR_BEND</span></span>
+<span id="L4180"><span class="lineNum">    4180</span> <span class="tlaGNC">        8168 :         || et == ElementType::NOTELINE</span></span>
+<span id="L4181"><span class="lineNum">    4181</span> <span class="tlaGNC">        8168 :         || et == ElementType::BEND</span></span>
+<span id="L4182"><span class="lineNum">    4182</span> <span class="tlaGNC">        8168 :         || (et == ElementType::CHORD &amp;&amp; toChord(element)-&gt;isGrace())</span></span>
+<span id="L4183"><span class="lineNum">    4183</span> <span class="tlaGNC">        8098 :         || et == ElementType::LAISSEZ_VIB</span></span>
+<span id="L4184"><span class="lineNum">    4184</span> <span class="tlaGNC">        8080 :         || et == ElementType::PARTIAL_TIE</span></span>
+<span id="L4185"><span class="lineNum">    4185</span> <span class="tlaGNC">       17117 :         || et == ElementType::PARENTHESIS</span></span>
 <span id="L4186"><span class="lineNum">    4186</span>              :         ) {</span>
 <span id="L4187"><span class="lineNum">    4187</span> <span class="tlaGNC">         540 :         const EngravingObject* parent = element-&gt;ownershipParent();</span></span>
 <span id="L4188"><span class="lineNum">    4188</span> <span class="tlaGNC">         540 :         const LinkedObjects* links = parent ? parent-&gt;links() : nullptr;</span></span>
@@ -4291,7 +4291,7 @@
 <span id="L4233"><span class="lineNum">    4233</span> <span class="tlaGNC">          17 :         return;</span></span>
 <span id="L4234"><span class="lineNum">    4234</span>              :     }</span>
 <span id="L4235"><span class="lineNum">    4235</span>              : </span>
-<span id="L4236"><span class="lineNum">    4236</span> <span class="tlaGNC">        8005 :     if (et == ElementType::LAYOUT_BREAK) {</span></span>
+<span id="L4236"><span class="lineNum">    4236</span> <span class="tlaGNC">        8020 :     if (et == ElementType::LAYOUT_BREAK) {</span></span>
 <span id="L4237"><span class="lineNum">    4237</span> <span class="tlaGNC">          10 :         LayoutBreak* lb = toLayoutBreak(element);</span></span>
 <span id="L4238"><span class="lineNum">    4238</span> <span class="tlaGNC">          10 :         if (lb-&gt;layoutBreakType() == LayoutBreakType::SECTION) {</span></span>
 <span id="L4239"><span class="lineNum">    4239</span> <span class="tlaUNC tlaBgUNC">           0 :             doUndoAddElement(lb);</span></span>
@@ -4333,72 +4333,72 @@
 <span id="L4275"><span class="lineNum">    4275</span>              :         }</span>
 <span id="L4276"><span class="lineNum">    4276</span>              :     }</span>
 <span id="L4277"><span class="lineNum">    4277</span>              : </span>
-<span id="L4278"><span class="lineNum">    4278</span> <span class="tlaGNC tlaBgGNC">        8005 :     if (ostaff == 0 || (</span></span>
-<span id="L4279"><span class="lineNum">    4279</span> <span class="tlaGNC">        2381 :             et != ElementType::ARTICULATION</span></span>
-<span id="L4280"><span class="lineNum">    4280</span> <span class="tlaGNC">        2334 :             &amp;&amp; et != ElementType::ORNAMENT</span></span>
-<span id="L4281"><span class="lineNum">    4281</span> <span class="tlaGNC">        2331 :             &amp;&amp; et != ElementType::TAPPING</span></span>
-<span id="L4282"><span class="lineNum">    4282</span> <span class="tlaGNC">        2331 :             &amp;&amp; et != ElementType::CHORDLINE</span></span>
-<span id="L4283"><span class="lineNum">    4283</span> <span class="tlaGNC">        2328 :             &amp;&amp; et != ElementType::LYRICS</span></span>
-<span id="L4284"><span class="lineNum">    4284</span> <span class="tlaGNC">        2316 :             &amp;&amp; et != ElementType::SLUR</span></span>
-<span id="L4285"><span class="lineNum">    4285</span> <span class="tlaGNC">        2286 :             &amp;&amp; et != ElementType::HAMMER_ON_PULL_OFF</span></span>
-<span id="L4286"><span class="lineNum">    4286</span> <span class="tlaGNC">        2286 :             &amp;&amp; et != ElementType::TIE</span></span>
-<span id="L4287"><span class="lineNum">    4287</span> <span class="tlaGNC">        2027 :             &amp;&amp; et != ElementType::NOTE</span></span>
-<span id="L4288"><span class="lineNum">    4288</span> <span class="tlaGNC">        2027 :             &amp;&amp; et != ElementType::INSTRUMENT_CHANGE</span></span>
-<span id="L4289"><span class="lineNum">    4289</span> <span class="tlaGNC">        2023 :             &amp;&amp; et != ElementType::HAIRPIN</span></span>
-<span id="L4290"><span class="lineNum">    4290</span> <span class="tlaGNC">        2007 :             &amp;&amp; et != ElementType::OTTAVA</span></span>
-<span id="L4291"><span class="lineNum">    4291</span> <span class="tlaGNC">        2004 :             &amp;&amp; et != ElementType::TRILL</span></span>
-<span id="L4292"><span class="lineNum">    4292</span> <span class="tlaGNC">        2003 :             &amp;&amp; et != ElementType::VIBRATO</span></span>
-<span id="L4293"><span class="lineNum">    4293</span> <span class="tlaGNC">        2003 :             &amp;&amp; et != ElementType::TEXTLINE</span></span>
-<span id="L4294"><span class="lineNum">    4294</span> <span class="tlaGNC">        2003 :             &amp;&amp; et != ElementType::PEDAL</span></span>
-<span id="L4295"><span class="lineNum">    4295</span> <span class="tlaGNC">        2002 :             &amp;&amp; et != ElementType::LET_RING</span></span>
-<span id="L4296"><span class="lineNum">    4296</span> <span class="tlaGNC">        2002 :             &amp;&amp; et != ElementType::PALM_MUTE</span></span>
-<span id="L4297"><span class="lineNum">    4297</span> <span class="tlaGNC">        2002 :             &amp;&amp; et != ElementType::WHAMMY_BAR</span></span>
-<span id="L4298"><span class="lineNum">    4298</span> <span class="tlaGNC">        2002 :             &amp;&amp; et != ElementType::PARTIAL_LYRICSLINE</span></span>
-<span id="L4299"><span class="lineNum">    4299</span> <span class="tlaGNC">        2002 :             &amp;&amp; et != ElementType::BREATH</span></span>
-<span id="L4300"><span class="lineNum">    4300</span> <span class="tlaGNC">        1988 :             &amp;&amp; et != ElementType::DYNAMIC</span></span>
-<span id="L4301"><span class="lineNum">    4301</span> <span class="tlaGNC">        1963 :             &amp;&amp; et != ElementType::EXPRESSION</span></span>
-<span id="L4302"><span class="lineNum">    4302</span> <span class="tlaGNC">        1963 :             &amp;&amp; et != ElementType::STAFF_TEXT</span></span>
-<span id="L4303"><span class="lineNum">    4303</span> <span class="tlaGNC">        1935 :             &amp;&amp; et != ElementType::STAVE_SHARING_LABEL</span></span>
-<span id="L4304"><span class="lineNum">    4304</span> <span class="tlaGNC">        1934 :             &amp;&amp; et != ElementType::SYSTEM_TEXT</span></span>
-<span id="L4305"><span class="lineNum">    4305</span> <span class="tlaGNC">        1934 :             &amp;&amp; et != ElementType::TRIPLET_FEEL</span></span>
-<span id="L4306"><span class="lineNum">    4306</span> <span class="tlaGNC">        1934 :             &amp;&amp; et != ElementType::PLAYTECH_ANNOTATION</span></span>
-<span id="L4307"><span class="lineNum">    4307</span> <span class="tlaGNC">        1934 :             &amp;&amp; et != ElementType::CAPO</span></span>
-<span id="L4308"><span class="lineNum">    4308</span> <span class="tlaGNC">        1934 :             &amp;&amp; et != ElementType::STRING_TUNINGS</span></span>
-<span id="L4309"><span class="lineNum">    4309</span> <span class="tlaGNC">        1934 :             &amp;&amp; et != ElementType::STICKING</span></span>
-<span id="L4310"><span class="lineNum">    4310</span> <span class="tlaGNC">        1919 :             &amp;&amp; et != ElementType::TREMOLO_SINGLECHORD</span></span>
-<span id="L4311"><span class="lineNum">    4311</span> <span class="tlaGNC">        1901 :             &amp;&amp; et != ElementType::TREMOLO_TWOCHORD</span></span>
-<span id="L4312"><span class="lineNum">    4312</span> <span class="tlaGNC">        1901 :             &amp;&amp; et != ElementType::ARPEGGIO</span></span>
-<span id="L4313"><span class="lineNum">    4313</span> <span class="tlaGNC">        1901 :             &amp;&amp; et != ElementType::CHORD_BRACKET</span></span>
-<span id="L4314"><span class="lineNum">    4314</span> <span class="tlaGNC">        1901 :             &amp;&amp; et != ElementType::SYMBOL</span></span>
-<span id="L4315"><span class="lineNum">    4315</span> <span class="tlaGNC">        1901 :             &amp;&amp; et != ElementType::IMAGE</span></span>
-<span id="L4316"><span class="lineNum">    4316</span> <span class="tlaGNC">        1901 :             &amp;&amp; et != ElementType::TREMOLOBAR</span></span>
-<span id="L4317"><span class="lineNum">    4317</span> <span class="tlaGNC">        1901 :             &amp;&amp; et != ElementType::FRET_DIAGRAM</span></span>
-<span id="L4318"><span class="lineNum">    4318</span> <span class="tlaGNC">        1876 :             &amp;&amp; et != ElementType::FERMATA</span></span>
-<span id="L4319"><span class="lineNum">    4319</span> <span class="tlaGNC">        1874 :             &amp;&amp; et != ElementType::HARMONY</span></span>
-<span id="L4320"><span class="lineNum">    4320</span> <span class="tlaGNC">        1850 :             &amp;&amp; et != ElementType::HARP_DIAGRAM</span></span>
-<span id="L4321"><span class="lineNum">    4321</span> <span class="tlaGNC">        1845 :             &amp;&amp; et != ElementType::FIGURED_BASS</span></span>
-<span id="L4322"><span class="lineNum">    4322</span> <span class="tlaGNC">        1845 :             &amp;&amp; et != ElementType::CLEF</span></span>
-<span id="L4323"><span class="lineNum">    4323</span> <span class="tlaGNC">        1836 :             &amp;&amp; et != ElementType::AMBITUS</span></span>
-<span id="L4324"><span class="lineNum">    4324</span> <span class="tlaGNC">        1836 :             &amp;&amp; et != ElementType::PLAY_COUNT_TEXT)</span></span>
+<span id="L4278"><span class="lineNum">    4278</span> <span class="tlaGNC tlaBgGNC">        8020 :     if (ostaff == 0 || (</span></span>
+<span id="L4279"><span class="lineNum">    4279</span> <span class="tlaGNC">        2396 :             et != ElementType::ARTICULATION</span></span>
+<span id="L4280"><span class="lineNum">    4280</span> <span class="tlaGNC">        2349 :             &amp;&amp; et != ElementType::ORNAMENT</span></span>
+<span id="L4281"><span class="lineNum">    4281</span> <span class="tlaGNC">        2346 :             &amp;&amp; et != ElementType::TAPPING</span></span>
+<span id="L4282"><span class="lineNum">    4282</span> <span class="tlaGNC">        2346 :             &amp;&amp; et != ElementType::CHORDLINE</span></span>
+<span id="L4283"><span class="lineNum">    4283</span> <span class="tlaGNC">        2343 :             &amp;&amp; et != ElementType::LYRICS</span></span>
+<span id="L4284"><span class="lineNum">    4284</span> <span class="tlaGNC">        2331 :             &amp;&amp; et != ElementType::SLUR</span></span>
+<span id="L4285"><span class="lineNum">    4285</span> <span class="tlaGNC">        2301 :             &amp;&amp; et != ElementType::HAMMER_ON_PULL_OFF</span></span>
+<span id="L4286"><span class="lineNum">    4286</span> <span class="tlaGNC">        2301 :             &amp;&amp; et != ElementType::TIE</span></span>
+<span id="L4287"><span class="lineNum">    4287</span> <span class="tlaGNC">        2042 :             &amp;&amp; et != ElementType::NOTE</span></span>
+<span id="L4288"><span class="lineNum">    4288</span> <span class="tlaGNC">        2042 :             &amp;&amp; et != ElementType::INSTRUMENT_CHANGE</span></span>
+<span id="L4289"><span class="lineNum">    4289</span> <span class="tlaGNC">        2038 :             &amp;&amp; et != ElementType::HAIRPIN</span></span>
+<span id="L4290"><span class="lineNum">    4290</span> <span class="tlaGNC">        2022 :             &amp;&amp; et != ElementType::OTTAVA</span></span>
+<span id="L4291"><span class="lineNum">    4291</span> <span class="tlaGNC">        2019 :             &amp;&amp; et != ElementType::TRILL</span></span>
+<span id="L4292"><span class="lineNum">    4292</span> <span class="tlaGNC">        2018 :             &amp;&amp; et != ElementType::VIBRATO</span></span>
+<span id="L4293"><span class="lineNum">    4293</span> <span class="tlaGNC">        2018 :             &amp;&amp; et != ElementType::TEXTLINE</span></span>
+<span id="L4294"><span class="lineNum">    4294</span> <span class="tlaGNC">        2018 :             &amp;&amp; et != ElementType::PEDAL</span></span>
+<span id="L4295"><span class="lineNum">    4295</span> <span class="tlaGNC">        2017 :             &amp;&amp; et != ElementType::LET_RING</span></span>
+<span id="L4296"><span class="lineNum">    4296</span> <span class="tlaGNC">        2017 :             &amp;&amp; et != ElementType::PALM_MUTE</span></span>
+<span id="L4297"><span class="lineNum">    4297</span> <span class="tlaGNC">        2017 :             &amp;&amp; et != ElementType::WHAMMY_BAR</span></span>
+<span id="L4298"><span class="lineNum">    4298</span> <span class="tlaGNC">        2017 :             &amp;&amp; et != ElementType::PARTIAL_LYRICSLINE</span></span>
+<span id="L4299"><span class="lineNum">    4299</span> <span class="tlaGNC">        2017 :             &amp;&amp; et != ElementType::BREATH</span></span>
+<span id="L4300"><span class="lineNum">    4300</span> <span class="tlaGNC">        2003 :             &amp;&amp; et != ElementType::DYNAMIC</span></span>
+<span id="L4301"><span class="lineNum">    4301</span> <span class="tlaGNC">        1978 :             &amp;&amp; et != ElementType::EXPRESSION</span></span>
+<span id="L4302"><span class="lineNum">    4302</span> <span class="tlaGNC">        1978 :             &amp;&amp; et != ElementType::STAFF_TEXT</span></span>
+<span id="L4303"><span class="lineNum">    4303</span> <span class="tlaGNC">        1950 :             &amp;&amp; et != ElementType::STAVE_SHARING_LABEL</span></span>
+<span id="L4304"><span class="lineNum">    4304</span> <span class="tlaGNC">        1948 :             &amp;&amp; et != ElementType::SYSTEM_TEXT</span></span>
+<span id="L4305"><span class="lineNum">    4305</span> <span class="tlaGNC">        1948 :             &amp;&amp; et != ElementType::TRIPLET_FEEL</span></span>
+<span id="L4306"><span class="lineNum">    4306</span> <span class="tlaGNC">        1948 :             &amp;&amp; et != ElementType::PLAYTECH_ANNOTATION</span></span>
+<span id="L4307"><span class="lineNum">    4307</span> <span class="tlaGNC">        1948 :             &amp;&amp; et != ElementType::CAPO</span></span>
+<span id="L4308"><span class="lineNum">    4308</span> <span class="tlaGNC">        1948 :             &amp;&amp; et != ElementType::STRING_TUNINGS</span></span>
+<span id="L4309"><span class="lineNum">    4309</span> <span class="tlaGNC">        1948 :             &amp;&amp; et != ElementType::STICKING</span></span>
+<span id="L4310"><span class="lineNum">    4310</span> <span class="tlaGNC">        1933 :             &amp;&amp; et != ElementType::TREMOLO_SINGLECHORD</span></span>
+<span id="L4311"><span class="lineNum">    4311</span> <span class="tlaGNC">        1915 :             &amp;&amp; et != ElementType::TREMOLO_TWOCHORD</span></span>
+<span id="L4312"><span class="lineNum">    4312</span> <span class="tlaGNC">        1915 :             &amp;&amp; et != ElementType::ARPEGGIO</span></span>
+<span id="L4313"><span class="lineNum">    4313</span> <span class="tlaGNC">        1915 :             &amp;&amp; et != ElementType::CHORD_BRACKET</span></span>
+<span id="L4314"><span class="lineNum">    4314</span> <span class="tlaGNC">        1915 :             &amp;&amp; et != ElementType::SYMBOL</span></span>
+<span id="L4315"><span class="lineNum">    4315</span> <span class="tlaGNC">        1915 :             &amp;&amp; et != ElementType::IMAGE</span></span>
+<span id="L4316"><span class="lineNum">    4316</span> <span class="tlaGNC">        1915 :             &amp;&amp; et != ElementType::TREMOLOBAR</span></span>
+<span id="L4317"><span class="lineNum">    4317</span> <span class="tlaGNC">        1915 :             &amp;&amp; et != ElementType::FRET_DIAGRAM</span></span>
+<span id="L4318"><span class="lineNum">    4318</span> <span class="tlaGNC">        1890 :             &amp;&amp; et != ElementType::FERMATA</span></span>
+<span id="L4319"><span class="lineNum">    4319</span> <span class="tlaGNC">        1888 :             &amp;&amp; et != ElementType::HARMONY</span></span>
+<span id="L4320"><span class="lineNum">    4320</span> <span class="tlaGNC">        1864 :             &amp;&amp; et != ElementType::HARP_DIAGRAM</span></span>
+<span id="L4321"><span class="lineNum">    4321</span> <span class="tlaGNC">        1859 :             &amp;&amp; et != ElementType::FIGURED_BASS</span></span>
+<span id="L4322"><span class="lineNum">    4322</span> <span class="tlaGNC">        1859 :             &amp;&amp; et != ElementType::CLEF</span></span>
+<span id="L4323"><span class="lineNum">    4323</span> <span class="tlaGNC">        1850 :             &amp;&amp; et != ElementType::AMBITUS</span></span>
+<span id="L4324"><span class="lineNum">    4324</span> <span class="tlaGNC">        1850 :             &amp;&amp; et != ElementType::PLAY_COUNT_TEXT)</span></span>
 <span id="L4325"><span class="lineNum">    4325</span>              :         ) {</span>
-<span id="L4326"><span class="lineNum">    4326</span> <span class="tlaGNC">        7460 :         doUndoAddElement(element);</span></span>
-<span id="L4327"><span class="lineNum">    4327</span> <span class="tlaGNC">        7460 :         return;</span></span>
+<span id="L4326"><span class="lineNum">    4326</span> <span class="tlaGNC">        7474 :         doUndoAddElement(element);</span></span>
+<span id="L4327"><span class="lineNum">    4327</span> <span class="tlaGNC">        7474 :         return;</span></span>
 <span id="L4328"><span class="lineNum">    4328</span>              :     }</span>
 <span id="L4329"><span class="lineNum">    4329</span>              : </span>
-<span id="L4330"><span class="lineNum">    4330</span> <span class="tlaGNC">         545 :     std::vector&lt;Staff*&gt; staves;</span></span>
-<span id="L4331"><span class="lineNum">    4331</span> <span class="tlaGNC">         545 :     if (addToLinkedStaves) {</span></span>
+<span id="L4330"><span class="lineNum">    4330</span> <span class="tlaGNC">         546 :     std::vector&lt;Staff*&gt; staves;</span></span>
+<span id="L4331"><span class="lineNum">    4331</span> <span class="tlaGNC">         546 :     if (addToLinkedStaves) {</span></span>
 <span id="L4332"><span class="lineNum">    4332</span> <span class="tlaGNC">         543 :         staves = ostaff-&gt;staffList();</span></span>
 <span id="L4333"><span class="lineNum">    4333</span>              :     } else {</span>
-<span id="L4334"><span class="lineNum">    4334</span> <span class="tlaGNC">           2 :         staves.push_back(ostaff);</span></span>
+<span id="L4334"><span class="lineNum">    4334</span> <span class="tlaGNC">           3 :         staves.push_back(ostaff);</span></span>
 <span id="L4335"><span class="lineNum">    4335</span>              :     }</span>
 <span id="L4336"><span class="lineNum">    4336</span>              : </span>
-<span id="L4337"><span class="lineNum">    4337</span> <span class="tlaGNC">         545 :     if (elementToRelink) {</span></span>
+<span id="L4337"><span class="lineNum">    4337</span> <span class="tlaGNC">         546 :     if (elementToRelink) {</span></span>
 <span id="L4338"><span class="lineNum">    4338</span> <span class="tlaGNC">           2 :         muse::remove(staves, ostaff);</span></span>
 <span id="L4339"><span class="lineNum">    4339</span>              :     }</span>
 <span id="L4340"><span class="lineNum">    4340</span>              : </span>
-<span id="L4341"><span class="lineNum">    4341</span> <span class="tlaGNC">        1110 :     for (Staff* staff : staves) {</span></span>
-<span id="L4342"><span class="lineNum">    4342</span> <span class="tlaGNC">         565 :         Score* score = staff-&gt;score();</span></span>
-<span id="L4343"><span class="lineNum">    4343</span> <span class="tlaGNC">         565 :         staff_idx_t staffIdx = staff-&gt;idx();</span></span>
+<span id="L4341"><span class="lineNum">    4341</span> <span class="tlaGNC">        1112 :     for (Staff* staff : staves) {</span></span>
+<span id="L4342"><span class="lineNum">    4342</span> <span class="tlaGNC">         566 :         Score* score = staff-&gt;score();</span></span>
+<span id="L4343"><span class="lineNum">    4343</span> <span class="tlaGNC">         566 :         staff_idx_t staffIdx = staff-&gt;idx();</span></span>
 <span id="L4344"><span class="lineNum">    4344</span>              : </span>
 <span id="L4345"><span class="lineNum">    4345</span>              :         // Some elements in voice 1 of a staff should be copied to every track which has a linked voice in this staff</span>
 <span id="L4346"><span class="lineNum">    4346</span>              :         static const std::set&lt;ElementType&gt; VOICE1_COPY_TYPES = {</span>
@@ -4426,10 +4426,10 @@
 <span id="L4368"><span class="lineNum">    4368</span>              :             ElementType::PARTIAL_LYRICSLINE,</span>
 <span id="L4369"><span class="lineNum">    4369</span>              :             ElementType::CLEF,</span>
 <span id="L4370"><span class="lineNum">    4370</span>              :             ElementType::AMBITUS</span>
-<span id="L4371"><span class="lineNum">    4371</span> <span class="tlaGNC">         569 :         };</span></span>
+<span id="L4371"><span class="lineNum">    4371</span> <span class="tlaGNC">         570 :         };</span></span>
 <span id="L4372"><span class="lineNum">    4372</span>              : </span>
-<span id="L4373"><span class="lineNum">    4373</span> <span class="tlaGNC">         565 :         track_idx_t linkedTrack = ostaff-&gt;getLinkedTrackInStaff(staff, strack);</span></span>
-<span id="L4374"><span class="lineNum">    4374</span> <span class="tlaGNC">         565 :         if (linkedTrack == muse::nidx) {</span></span>
+<span id="L4373"><span class="lineNum">    4373</span> <span class="tlaGNC">         566 :         track_idx_t linkedTrack = ostaff-&gt;getLinkedTrackInStaff(staff, strack);</span></span>
+<span id="L4374"><span class="lineNum">    4374</span> <span class="tlaGNC">         566 :         if (linkedTrack == muse::nidx) {</span></span>
 <span id="L4375"><span class="lineNum">    4375</span> <span class="tlaUNC tlaBgUNC">           0 :             if (track2voice(strack) == 0 &amp;&amp; muse::contains(VOICE1_COPY_TYPES, et)) {</span></span>
 <span id="L4376"><span class="lineNum">    4376</span> <span class="tlaUNC">           0 :                 linkedTrack = staff2track(staffIdx);</span></span>
 <span id="L4377"><span class="lineNum">    4377</span>              :             } else {</span>
@@ -4438,8 +4438,8 @@
 <span id="L4380"><span class="lineNum">    4380</span>              :         }</span>
 <span id="L4381"><span class="lineNum">    4381</span>              : </span>
 <span id="L4382"><span class="lineNum">    4382</span>              :         EngravingItem* ne;</span>
-<span id="L4383"><span class="lineNum">    4383</span> <span class="tlaGNC tlaBgGNC">         565 :         if (staff == ostaff) {</span></span>
-<span id="L4384"><span class="lineNum">    4384</span> <span class="tlaGNC">         543 :             ne = element;</span></span>
+<span id="L4383"><span class="lineNum">    4383</span> <span class="tlaGNC tlaBgGNC">         566 :         if (staff == ostaff) {</span></span>
+<span id="L4384"><span class="lineNum">    4384</span> <span class="tlaGNC">         544 :             ne = element;</span></span>
 <span id="L4385"><span class="lineNum">    4385</span>              :         } else {</span>
 <span id="L4386"><span class="lineNum">    4386</span> <span class="tlaGNC">          22 :             if (staff-&gt;rstaff() != ostaff-&gt;rstaff()) {</span></span>
 <span id="L4387"><span class="lineNum">    4387</span> <span class="tlaGNC">           1 :                 switch (element-&gt;type()) {</span></span>
@@ -4482,7 +4482,7 @@
 <span id="L4424"><span class="lineNum">    4424</span>              :             }</span>
 <span id="L4425"><span class="lineNum">    4425</span>              :         }</span>
 <span id="L4426"><span class="lineNum">    4426</span>              : </span>
-<span id="L4427"><span class="lineNum">    4427</span> <span class="tlaGNC tlaBgGNC">         564 :         if (element-&gt;isArticulationFamily()) {</span></span>
+<span id="L4427"><span class="lineNum">    4427</span> <span class="tlaGNC tlaBgGNC">         565 :         if (element-&gt;isArticulationFamily()) {</span></span>
 <span id="L4428"><span class="lineNum">    4428</span> <span class="tlaGNC">          50 :             Articulation* a  = toArticulation(element);</span></span>
 <span id="L4429"><span class="lineNum">    4429</span>              :             Segment* segment;</span>
 <span id="L4430"><span class="lineNum">    4430</span>              :             SegmentType st;</span>
@@ -4524,7 +4524,7 @@
 <span id="L4466"><span class="lineNum">    4466</span> <span class="tlaUNC">           0 :                 na-&gt;setOwnershipParent(bl);</span></span>
 <span id="L4467"><span class="lineNum">    4467</span>              :             }</span>
 <span id="L4468"><span class="lineNum">    4468</span> <span class="tlaGNC tlaBgGNC">          50 :             doUndoAddElement(na);</span></span>
-<span id="L4469"><span class="lineNum">    4469</span> <span class="tlaGNC">         514 :         } else if (element-&gt;isChordLine() || element-&gt;isLyrics()) {</span></span>
+<span id="L4469"><span class="lineNum">    4469</span> <span class="tlaGNC">         515 :         } else if (element-&gt;isChordLine() || element-&gt;isLyrics()) {</span></span>
 <span id="L4470"><span class="lineNum">    4470</span> <span class="tlaGNC">          18 :             ChordRest* cr    = toChordRest(element-&gt;ownershipParent());</span></span>
 <span id="L4471"><span class="lineNum">    4471</span> <span class="tlaGNC">          18 :             Segment* segment = cr-&gt;segment();</span></span>
 <span id="L4472"><span class="lineNum">    4472</span> <span class="tlaGNC">          18 :             Fraction tick    = segment-&gt;tick();</span></span>
@@ -4549,7 +4549,7 @@
 <span id="L4491"><span class="lineNum">    4491</span> <span class="tlaGNC">           6 :                 newChordLine-&gt;setNote(newNote);</span></span>
 <span id="L4492"><span class="lineNum">    4492</span>              :             }</span>
 <span id="L4493"><span class="lineNum">    4493</span> <span class="tlaGNC">          18 :             doUndoAddElement(ne);</span></span>
-<span id="L4494"><span class="lineNum">    4494</span> <span class="tlaGNC">         496 :         } else if (element-&gt;isHarmony() &amp;&amp; element-&gt;ownershipParent()-&gt;isFretDiagram()) {</span></span>
+<span id="L4494"><span class="lineNum">    4494</span> <span class="tlaGNC">         497 :         } else if (element-&gt;isHarmony() &amp;&amp; element-&gt;ownershipParent()-&gt;isFretDiagram()) {</span></span>
 <span id="L4495"><span class="lineNum">    4495</span> <span class="tlaGNC">           1 :             EngravingItem* parentFd = element-&gt;ownershipParentItem();</span></span>
 <span id="L4496"><span class="lineNum">    4496</span> <span class="tlaGNC">           1 :             if (parentFd-&gt;score() != score) {</span></span>
 <span id="L4497"><span class="lineNum">    4497</span>              :                 // Find linked fret diagram</span>
@@ -4561,13 +4561,13 @@
 <span id="L4503"><span class="lineNum">    4503</span>              :         //</span>
 <span id="L4504"><span class="lineNum">    4504</span>              :         // elements with Segment as parent</span>
 <span id="L4505"><span class="lineNum">    4505</span>              :         //</span>
-<span id="L4506"><span class="lineNum">    4506</span> <span class="tlaGNC">         495 :         else if (element-&gt;isSymbol()</span></span>
-<span id="L4507"><span class="lineNum">    4507</span> <span class="tlaGNC">         495 :                  || element-&gt;isImage()</span></span>
-<span id="L4508"><span class="lineNum">    4508</span> <span class="tlaGNC">         495 :                  || element-&gt;isTremoloBar()</span></span>
-<span id="L4509"><span class="lineNum">    4509</span> <span class="tlaGNC">         495 :                  || element-&gt;isDynamic()</span></span>
-<span id="L4510"><span class="lineNum">    4510</span> <span class="tlaGNC">         469 :                  || element-&gt;isExpression()</span></span>
-<span id="L4511"><span class="lineNum">    4511</span> <span class="tlaGNC">         469 :                  || element-&gt;isStaffText()</span></span>
-<span id="L4512"><span class="lineNum">    4512</span> <span class="tlaGNC">         441 :                  || element-&gt;isStaveSharingLabel()</span></span>
+<span id="L4506"><span class="lineNum">    4506</span> <span class="tlaGNC">         496 :         else if (element-&gt;isSymbol()</span></span>
+<span id="L4507"><span class="lineNum">    4507</span> <span class="tlaGNC">         496 :                  || element-&gt;isImage()</span></span>
+<span id="L4508"><span class="lineNum">    4508</span> <span class="tlaGNC">         496 :                  || element-&gt;isTremoloBar()</span></span>
+<span id="L4509"><span class="lineNum">    4509</span> <span class="tlaGNC">         496 :                  || element-&gt;isDynamic()</span></span>
+<span id="L4510"><span class="lineNum">    4510</span> <span class="tlaGNC">         470 :                  || element-&gt;isExpression()</span></span>
+<span id="L4511"><span class="lineNum">    4511</span> <span class="tlaGNC">         470 :                  || element-&gt;isStaffText()</span></span>
+<span id="L4512"><span class="lineNum">    4512</span> <span class="tlaGNC">         442 :                  || element-&gt;isStaveSharingLabel()</span></span>
 <span id="L4513"><span class="lineNum">    4513</span> <span class="tlaGNC">         440 :                  || element-&gt;isPlayTechAnnotation()</span></span>
 <span id="L4514"><span class="lineNum">    4514</span> <span class="tlaGNC">         440 :                  || element-&gt;isCapo()</span></span>
 <span id="L4515"><span class="lineNum">    4515</span> <span class="tlaGNC">         440 :                  || element-&gt;isStringTunings()</span></span>
@@ -4578,20 +4578,20 @@
 <span id="L4520"><span class="lineNum">    4520</span> <span class="tlaGNC">         373 :                  || element-&gt;isHarpPedalDiagram()</span></span>
 <span id="L4521"><span class="lineNum">    4521</span> <span class="tlaGNC">         368 :                  || element-&gt;isFiguredBass()</span></span>
 <span id="L4522"><span class="lineNum">    4522</span> <span class="tlaGNC">         368 :                  || element-&gt;isClef()</span></span>
-<span id="L4523"><span class="lineNum">    4523</span> <span class="tlaGNC">         990 :                  || element-&gt;isAmbitus()) {</span></span>
-<span id="L4524"><span class="lineNum">    4524</span> <span class="tlaGNC">         138 :             Segment* segment = toSegment(element-&gt;ownershipParent());</span></span>
-<span id="L4525"><span class="lineNum">    4525</span> <span class="tlaGNC">         138 :             Fraction tick    = segment-&gt;tick();</span></span>
-<span id="L4526"><span class="lineNum">    4526</span> <span class="tlaGNC">         138 :             Measure* m       = score-&gt;tick2measure(tick);</span></span>
-<span id="L4527"><span class="lineNum">    4527</span> <span class="tlaGNC">         138 :             bool addClefToPrevMeasure = segment-&gt;isType(SegmentType::Clef) &amp;&amp; element-&gt;isClef() &amp;&amp; !toClef(element)-&gt;isHeader();</span></span>
-<span id="L4528"><span class="lineNum">    4528</span> <span class="tlaGNC">         138 :             bool addBlToPrevMeasure = segment-&gt;isType(SegmentType::EndBarLine);</span></span>
-<span id="L4529"><span class="lineNum">    4529</span> <span class="tlaGNC">         138 :             if (m-&gt;tick() == tick &amp;&amp; (addClefToPrevMeasure || addBlToPrevMeasure) &amp;&amp; m-&gt;prevMeasure()) {</span></span>
+<span id="L4523"><span class="lineNum">    4523</span> <span class="tlaGNC">         992 :                  || element-&gt;isAmbitus()) {</span></span>
+<span id="L4524"><span class="lineNum">    4524</span> <span class="tlaGNC">         139 :             Segment* segment = toSegment(element-&gt;ownershipParent());</span></span>
+<span id="L4525"><span class="lineNum">    4525</span> <span class="tlaGNC">         139 :             Fraction tick    = segment-&gt;tick();</span></span>
+<span id="L4526"><span class="lineNum">    4526</span> <span class="tlaGNC">         139 :             Measure* m       = score-&gt;tick2measure(tick);</span></span>
+<span id="L4527"><span class="lineNum">    4527</span> <span class="tlaGNC">         139 :             bool addClefToPrevMeasure = segment-&gt;isType(SegmentType::Clef) &amp;&amp; element-&gt;isClef() &amp;&amp; !toClef(element)-&gt;isHeader();</span></span>
+<span id="L4528"><span class="lineNum">    4528</span> <span class="tlaGNC">         139 :             bool addBlToPrevMeasure = segment-&gt;isType(SegmentType::EndBarLine);</span></span>
+<span id="L4529"><span class="lineNum">    4529</span> <span class="tlaGNC">         139 :             if (m-&gt;tick() == tick &amp;&amp; (addClefToPrevMeasure || addBlToPrevMeasure) &amp;&amp; m-&gt;prevMeasure()) {</span></span>
 <span id="L4530"><span class="lineNum">    4530</span> <span class="tlaGNC">           1 :                 m = m-&gt;prevMeasure();</span></span>
 <span id="L4531"><span class="lineNum">    4531</span>              :             }</span>
-<span id="L4532"><span class="lineNum">    4532</span> <span class="tlaGNC">         138 :             Segment* seg     = m-&gt;undoGetSegment(segment-&gt;segmentType(), tick);</span></span>
-<span id="L4533"><span class="lineNum">    4533</span> <span class="tlaGNC">         138 :             ne-&gt;setTrack(linkedTrack);</span></span>
-<span id="L4534"><span class="lineNum">    4534</span> <span class="tlaGNC">         138 :             ne-&gt;setOwnershipParent(seg);</span></span>
+<span id="L4532"><span class="lineNum">    4532</span> <span class="tlaGNC">         139 :             Segment* seg     = m-&gt;undoGetSegment(segment-&gt;segmentType(), tick);</span></span>
+<span id="L4533"><span class="lineNum">    4533</span> <span class="tlaGNC">         139 :             ne-&gt;setTrack(linkedTrack);</span></span>
+<span id="L4534"><span class="lineNum">    4534</span> <span class="tlaGNC">         139 :             ne-&gt;setOwnershipParent(seg);</span></span>
 <span id="L4535"><span class="lineNum">    4535</span>              : </span>
-<span id="L4536"><span class="lineNum">    4536</span> <span class="tlaGNC">         138 :             if (ne-&gt;isStringTunings()) {</span></span>
+<span id="L4536"><span class="lineNum">    4536</span> <span class="tlaGNC">         139 :             if (ne-&gt;isStringTunings()) {</span></span>
 <span id="L4537"><span class="lineNum">    4537</span> <span class="tlaUNC tlaBgUNC">           0 :                 StringTunings* stringTunings = toStringTunings(ne);</span></span>
 <span id="L4538"><span class="lineNum">    4538</span> <span class="tlaUNC">           0 :                 if (stringTunings-&gt;stringData()-&gt;isNull()) {</span></span>
 <span id="L4539"><span class="lineNum">    4539</span> <span class="tlaUNC">           0 :                     const StringData* stringData = stringTunings-&gt;originPart()-&gt;stringData(tick, staff-&gt;idx());</span></span>
@@ -4602,9 +4602,9 @@
 <span id="L4544"><span class="lineNum">    4544</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L4545"><span class="lineNum">    4545</span>              :             }</span>
 <span id="L4546"><span class="lineNum">    4546</span>              : </span>
-<span id="L4547"><span class="lineNum">    4547</span> <span class="tlaGNC tlaBgGNC">         138 :             doUndoAddElement(ne);</span></span>
+<span id="L4547"><span class="lineNum">    4547</span> <span class="tlaGNC tlaBgGNC">         139 :             doUndoAddElement(ne);</span></span>
 <span id="L4548"><span class="lineNum">    4548</span>              :             // transpose harmony if necessary</span>
-<span id="L4549"><span class="lineNum">    4549</span> <span class="tlaGNC">         138 :             if (element-&gt;isHarmony() &amp;&amp; ne != element) {</span></span>
+<span id="L4549"><span class="lineNum">    4549</span> <span class="tlaGNC">         139 :             if (element-&gt;isHarmony() &amp;&amp; ne != element) {</span></span>
 <span id="L4550"><span class="lineNum">    4550</span> <span class="tlaGNC">           1 :                 Harmony* h = toHarmony(ne);</span></span>
 <span id="L4551"><span class="lineNum">    4551</span> <span class="tlaGNC">           1 :                 if (score-&gt;style().styleB(Sid::concertPitch) != element-&gt;style().styleB(Sid::concertPitch)) {</span></span>
 <span id="L4552"><span class="lineNum">    4552</span> <span class="tlaUNC tlaBgUNC">           0 :                     Staff* staffDest = h-&gt;staff();</span></span>
@@ -4619,7 +4619,7 @@
 <span id="L4561"><span class="lineNum">    4561</span>              :             }</span>
 <span id="L4562"><span class="lineNum">    4562</span>              : </span>
 <span id="L4563"><span class="lineNum">    4563</span>              :             // Match vertical align settings of exiting items</span>
-<span id="L4564"><span class="lineNum">    4564</span> <span class="tlaGNC tlaBgGNC">         138 :             if (ne-&gt;isHarmony() || ne-&gt;isFretDiagram()) {</span></span>
+<span id="L4564"><span class="lineNum">    4564</span> <span class="tlaGNC tlaBgGNC">         139 :             if (ne-&gt;isHarmony() || ne-&gt;isFretDiagram()) {</span></span>
 <span id="L4565"><span class="lineNum">    4565</span> <span class="tlaGNC">          49 :                 bool exclude = ne-&gt;excludeVerticalAlign();</span></span>
 <span id="L4566"><span class="lineNum">    4566</span> <span class="tlaGNC">          49 :                 for (EngravingItem* item : seg-&gt;annotations()) {</span></span>
 <span id="L4567"><span class="lineNum">    4567</span> <span class="tlaGNC">          73 :                     if ((!item-&gt;isFretDiagram() &amp;&amp; !item-&gt;isHarmony())</span></span>
@@ -4802,9 +4802,9 @@
 <span id="L4744"><span class="lineNum">    4744</span>              :         } else {</span>
 <span id="L4745"><span class="lineNum">    4745</span> <span class="tlaUNC tlaBgUNC">           0 :             LOGW(&quot;undoAddElement: unhandled: &lt;%s&gt;&quot;, element-&gt;typeName());</span></span>
 <span id="L4746"><span class="lineNum">    4746</span>              :         }</span>
-<span id="L4747"><span class="lineNum">    4747</span> <span class="tlaGNC tlaBgGNC">         564 :         ne-&gt;styleChanged();</span></span>
+<span id="L4747"><span class="lineNum">    4747</span> <span class="tlaGNC tlaBgGNC">         565 :         ne-&gt;styleChanged();</span></span>
 <span id="L4748"><span class="lineNum">    4748</span>              : </span>
-<span id="L4749"><span class="lineNum">    4749</span> <span class="tlaGNC">         564 :         if (elementToRelink) {</span></span>
+<span id="L4749"><span class="lineNum">    4749</span> <span class="tlaGNC">         565 :         if (elementToRelink) {</span></span>
 <span id="L4750"><span class="lineNum">    4750</span> <span class="tlaGNC">           2 :             LinkedObjects* links = ne-&gt;links();</span></span>
 <span id="L4751"><span class="lineNum">    4751</span> <span class="tlaGNC">           2 :             if (!links) {</span></span>
 <span id="L4752"><span class="lineNum">    4752</span> <span class="tlaUNC tlaBgUNC">           0 :                 ne-&gt;linkTo(elementToRelink);</span></span>
@@ -4814,7 +4814,7 @@
 <span id="L4756"><span class="lineNum">    4756</span>              :             }</span>
 <span id="L4757"><span class="lineNum">    4757</span>              :         }</span>
 <span id="L4758"><span class="lineNum">    4758</span>              :     }</span>
-<span id="L4759"><span class="lineNum">    4759</span> <span class="tlaGNC">         545 : }</span></span>
+<span id="L4759"><span class="lineNum">    4759</span> <span class="tlaGNC">         546 : }</span></span>
 <span id="L4760"><span class="lineNum">    4760</span>              : </span>
 <span id="L4761"><span class="lineNum">    4761</span> <span class="tlaGNC">          75 : FBox* Score::findFretBox() const</span></span>
 <span id="L4762"><span class="lineNum">    4762</span>              : {</span>
@@ -4842,10 +4842,10 @@
 <span id="L4784"><span class="lineNum">    4784</span>              : //   undoAddCR</span>
 <span id="L4785"><span class="lineNum">    4785</span>              : //---------------------------------------------------------</span>
 <span id="L4786"><span class="lineNum">    4786</span>              : </span>
-<span id="L4787"><span class="lineNum">    4787</span> <span class="tlaGNC">        5296 : void Score::undoAddCR(ChordRest* cr, Measure* measure, const Fraction&amp; tick)</span></span>
+<span id="L4787"><span class="lineNum">    4787</span> <span class="tlaGNC">        5304 : void Score::undoAddCR(ChordRest* cr, Measure* measure, const Fraction&amp; tick)</span></span>
 <span id="L4788"><span class="lineNum">    4788</span>              : {</span>
-<span id="L4789"><span class="lineNum">    4789</span> <span class="tlaGNC">        5296 :     assert(!cr-&gt;isChord() || !(toChord(cr)-&gt;notes()).empty());</span></span>
-<span id="L4790"><span class="lineNum">    4790</span> <span class="tlaGNC">        5296 :     if (!cr-&gt;lyrics().empty()) {</span></span>
+<span id="L4789"><span class="lineNum">    4789</span> <span class="tlaGNC">        5304 :     assert(!cr-&gt;isChord() || !(toChord(cr)-&gt;notes()).empty());</span></span>
+<span id="L4790"><span class="lineNum">    4790</span> <span class="tlaGNC">        5304 :     if (!cr-&gt;lyrics().empty()) {</span></span>
 <span id="L4791"><span class="lineNum">    4791</span>              :         // Add chordrest and lyrics separately for correct</span>
 <span id="L4792"><span class="lineNum">    4792</span>              :         // handling of adding lyrics to linked staves.</span>
 <span id="L4793"><span class="lineNum">    4793</span> <span class="tlaGNC">           1 :         std::vector&lt;Lyrics*&gt; lyrics;</span></span>
@@ -4857,41 +4857,41 @@
 <span id="L4799"><span class="lineNum">    4799</span> <span class="tlaGNC">           1 :         return;</span></span>
 <span id="L4800"><span class="lineNum">    4800</span> <span class="tlaGNC">           1 :     }</span></span>
 <span id="L4801"><span class="lineNum">    4801</span>              : </span>
-<span id="L4802"><span class="lineNum">    4802</span> <span class="tlaGNC">        5295 :     Staff* ostaff = cr-&gt;staff();</span></span>
-<span id="L4803"><span class="lineNum">    4803</span> <span class="tlaGNC">        5295 :     track_idx_t strack = cr-&gt;track();</span></span>
+<span id="L4802"><span class="lineNum">    4802</span> <span class="tlaGNC">        5303 :     Staff* ostaff = cr-&gt;staff();</span></span>
+<span id="L4803"><span class="lineNum">    4803</span> <span class="tlaGNC">        5303 :     track_idx_t strack = cr-&gt;track();</span></span>
 <span id="L4804"><span class="lineNum">    4804</span>              : </span>
-<span id="L4805"><span class="lineNum">    4805</span> <span class="tlaGNC">        5295 :     SegmentType segmentType = SegmentType::ChordRest;</span></span>
+<span id="L4805"><span class="lineNum">    4805</span> <span class="tlaGNC">        5303 :     SegmentType segmentType = SegmentType::ChordRest;</span></span>
 <span id="L4806"><span class="lineNum">    4806</span>              : </span>
-<span id="L4807"><span class="lineNum">    4807</span> <span class="tlaGNC">       10683 :     for (const Staff* staff : ostaff-&gt;staffList()) {</span></span>
-<span id="L4808"><span class="lineNum">    4808</span> <span class="tlaGNC">        5388 :         track_idx_t linkedTrack = ostaff-&gt;getLinkedTrackInStaff(staff, strack);</span></span>
+<span id="L4807"><span class="lineNum">    4807</span> <span class="tlaGNC">       10699 :     for (const Staff* staff : ostaff-&gt;staffList()) {</span></span>
+<span id="L4808"><span class="lineNum">    4808</span> <span class="tlaGNC">        5396 :         track_idx_t linkedTrack = ostaff-&gt;getLinkedTrackInStaff(staff, strack);</span></span>
 <span id="L4809"><span class="lineNum">    4809</span>              : </span>
-<span id="L4810"><span class="lineNum">    4810</span> <span class="tlaGNC">        5388 :         if (linkedTrack == muse::nidx) {</span></span>
+<span id="L4810"><span class="lineNum">    4810</span> <span class="tlaGNC">        5396 :         if (linkedTrack == muse::nidx) {</span></span>
 <span id="L4811"><span class="lineNum">    4811</span> <span class="tlaGNC">           2 :             continue;</span></span>
 <span id="L4812"><span class="lineNum">    4812</span>              :         }</span>
 <span id="L4813"><span class="lineNum">    4813</span>              : </span>
-<span id="L4814"><span class="lineNum">    4814</span> <span class="tlaGNC">        5386 :         const TrackRange trackRange = staff-&gt;part()-&gt;trackRange();</span></span>
-<span id="L4815"><span class="lineNum">    4815</span> <span class="tlaGNC">        5386 :         if (linkedTrack &lt; trackRange.startTrack || linkedTrack &gt;= trackRange.endTrack) {</span></span>
+<span id="L4814"><span class="lineNum">    4814</span> <span class="tlaGNC">        5394 :         const TrackRange trackRange = staff-&gt;part()-&gt;trackRange();</span></span>
+<span id="L4815"><span class="lineNum">    4815</span> <span class="tlaGNC">        5394 :         if (linkedTrack &lt; trackRange.startTrack || linkedTrack &gt;= trackRange.endTrack) {</span></span>
 <span id="L4816"><span class="lineNum">    4816</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
 <span id="L4817"><span class="lineNum">    4817</span>              :         }</span>
 <span id="L4818"><span class="lineNum">    4818</span>              : </span>
-<span id="L4819"><span class="lineNum">    4819</span> <span class="tlaGNC tlaBgGNC">        5386 :         Score* score = staff-&gt;score();</span></span>
-<span id="L4820"><span class="lineNum">    4820</span> <span class="tlaGNC">        5386 :         Measure* m   = (score == this) ? measure : score-&gt;tick2measure(tick);</span></span>
-<span id="L4821"><span class="lineNum">    4821</span> <span class="tlaGNC">        5386 :         if (!m) {</span></span>
+<span id="L4819"><span class="lineNum">    4819</span> <span class="tlaGNC tlaBgGNC">        5394 :         Score* score = staff-&gt;score();</span></span>
+<span id="L4820"><span class="lineNum">    4820</span> <span class="tlaGNC">        5394 :         Measure* m   = (score == this) ? measure : score-&gt;tick2measure(tick);</span></span>
+<span id="L4821"><span class="lineNum">    4821</span> <span class="tlaGNC">        5394 :         if (!m) {</span></span>
 <span id="L4822"><span class="lineNum">    4822</span> <span class="tlaUNC tlaBgUNC">           0 :             LOGD(&quot;measure not found&quot;);</span></span>
 <span id="L4823"><span class="lineNum">    4823</span> <span class="tlaUNC">           0 :             break;</span></span>
 <span id="L4824"><span class="lineNum">    4824</span>              :         }</span>
-<span id="L4825"><span class="lineNum">    4825</span> <span class="tlaGNC tlaBgGNC">        5386 :         Segment* seg = m-&gt;undoGetSegment(segmentType, tick);</span></span>
+<span id="L4825"><span class="lineNum">    4825</span> <span class="tlaGNC tlaBgGNC">        5394 :         Segment* seg = m-&gt;undoGetSegment(segmentType, tick);</span></span>
 <span id="L4826"><span class="lineNum">    4826</span>              : </span>
-<span id="L4827"><span class="lineNum">    4827</span> <span class="tlaGNC">        5386 :         assert(seg-&gt;segmentType() == segmentType);</span></span>
+<span id="L4827"><span class="lineNum">    4827</span> <span class="tlaGNC">        5394 :         assert(seg-&gt;segmentType() == segmentType);</span></span>
 <span id="L4828"><span class="lineNum">    4828</span>              : </span>
-<span id="L4829"><span class="lineNum">    4829</span> <span class="tlaGNC">        5386 :         ChordRest* newcr = (staff == ostaff) ? cr : toChordRest(cr-&gt;linkedClone());</span></span>
-<span id="L4830"><span class="lineNum">    4830</span> <span class="tlaGNC">        5386 :         newcr-&gt;setScore(score);</span></span>
+<span id="L4829"><span class="lineNum">    4829</span> <span class="tlaGNC">        5394 :         ChordRest* newcr = (staff == ostaff) ? cr : toChordRest(cr-&gt;linkedClone());</span></span>
+<span id="L4830"><span class="lineNum">    4830</span> <span class="tlaGNC">        5394 :         newcr-&gt;setScore(score);</span></span>
 <span id="L4831"><span class="lineNum">    4831</span>              : </span>
-<span id="L4832"><span class="lineNum">    4832</span> <span class="tlaGNC">        5386 :         newcr-&gt;setTrack(linkedTrack);</span></span>
-<span id="L4833"><span class="lineNum">    4833</span> <span class="tlaGNC">        5386 :         newcr-&gt;setOwnershipParent(seg);</span></span>
+<span id="L4832"><span class="lineNum">    4832</span> <span class="tlaGNC">        5394 :         newcr-&gt;setTrack(linkedTrack);</span></span>
+<span id="L4833"><span class="lineNum">    4833</span> <span class="tlaGNC">        5394 :         newcr-&gt;setOwnershipParent(seg);</span></span>
 <span id="L4834"><span class="lineNum">    4834</span>              : </span>
 <span id="L4835"><span class="lineNum">    4835</span>              : #ifndef QT_NO_DEBUG</span>
-<span id="L4836"><span class="lineNum">    4836</span> <span class="tlaGNC">        5386 :         if (newcr-&gt;isChord()) {</span></span>
+<span id="L4836"><span class="lineNum">    4836</span> <span class="tlaGNC">        5394 :         if (newcr-&gt;isChord()) {</span></span>
 <span id="L4837"><span class="lineNum">    4837</span> <span class="tlaGNC">        1937 :             Chord* chord = toChord(newcr);</span></span>
 <span id="L4838"><span class="lineNum">    4838</span>              :             // setTpcFromPitch needs to know the note tick position</span>
 <span id="L4839"><span class="lineNum">    4839</span> <span class="tlaGNC">        6046 :             for (Note* note : chord-&gt;notes()) {</span></span>
@@ -4903,9 +4903,9 @@
 <span id="L4845"><span class="lineNum">    4845</span>              : #endif</span>
 <span id="L4846"><span class="lineNum">    4846</span>              :         // Climb up the (possibly nested) tuplets from this chordRest</span>
 <span id="L4847"><span class="lineNum">    4847</span>              :         // Make sure all tuplets are cloned and correctly nested</span>
-<span id="L4848"><span class="lineNum">    4848</span> <span class="tlaGNC">        5386 :         DurationElement* elementBelow = cr;</span></span>
-<span id="L4849"><span class="lineNum">    4849</span> <span class="tlaGNC">        5386 :         Tuplet* tupletAbove = elementBelow-&gt;tuplet();</span></span>
-<span id="L4850"><span class="lineNum">    4850</span> <span class="tlaGNC">        5395 :         while (tupletAbove) {</span></span>
+<span id="L4848"><span class="lineNum">    4848</span> <span class="tlaGNC">        5394 :         DurationElement* elementBelow = cr;</span></span>
+<span id="L4849"><span class="lineNum">    4849</span> <span class="tlaGNC">        5394 :         Tuplet* tupletAbove = elementBelow-&gt;tuplet();</span></span>
+<span id="L4850"><span class="lineNum">    4850</span> <span class="tlaGNC">        5403 :         while (tupletAbove) {</span></span>
 <span id="L4851"><span class="lineNum">    4851</span> <span class="tlaGNC">         491 :             DurationElement* linkedElementBelow = (DurationElement*)elementBelow-&gt;findLinkedInStaff(staff);</span></span>
 <span id="L4852"><span class="lineNum">    4852</span> <span class="tlaGNC">         491 :             if (!linkedElementBelow) {     // shouldn't happen</span></span>
 <span id="L4853"><span class="lineNum">    4853</span> <span class="tlaGNC">         482 :                 break;</span></span>
@@ -4923,42 +4923,42 @@
 <span id="L4865"><span class="lineNum">    4865</span> <span class="tlaGNC">           9 :             tupletAbove = tupletAbove-&gt;tuplet();</span></span>
 <span id="L4866"><span class="lineNum">    4866</span>              :         }</span>
 <span id="L4867"><span class="lineNum">    4867</span>              : </span>
-<span id="L4868"><span class="lineNum">    4868</span> <span class="tlaGNC">        5386 :         if (newcr-&gt;isRest() &amp;&amp; (toRest(newcr)-&gt;isGap()) &amp;&amp; !(toRest(newcr)-&gt;track() % VOICES)) {</span></span>
+<span id="L4868"><span class="lineNum">    4868</span> <span class="tlaGNC">        5394 :         if (newcr-&gt;isRest() &amp;&amp; (toRest(newcr)-&gt;isGap()) &amp;&amp; !(toRest(newcr)-&gt;track() % VOICES)) {</span></span>
 <span id="L4869"><span class="lineNum">    4869</span> <span class="tlaGNC">         575 :             toRest(newcr)-&gt;setGap(false);</span></span>
 <span id="L4870"><span class="lineNum">    4870</span>              :         }</span>
 <span id="L4871"><span class="lineNum">    4871</span>              : </span>
-<span id="L4872"><span class="lineNum">    4872</span> <span class="tlaGNC">        5386 :         doUndoAddElement(newcr);</span></span>
-<span id="L4873"><span class="lineNum">    4873</span> <span class="tlaGNC">        5295 :     }</span></span>
+<span id="L4872"><span class="lineNum">    4872</span> <span class="tlaGNC">        5394 :         doUndoAddElement(newcr);</span></span>
+<span id="L4873"><span class="lineNum">    4873</span> <span class="tlaGNC">        5303 :     }</span></span>
 <span id="L4874"><span class="lineNum">    4874</span>              : }</span>
 <span id="L4875"><span class="lineNum">    4875</span>              : </span>
 <span id="L4876"><span class="lineNum">    4876</span>              : //---------------------------------------------------------</span>
 <span id="L4877"><span class="lineNum">    4877</span>              : //   undoRemoveElement</span>
 <span id="L4878"><span class="lineNum">    4878</span>              : //---------------------------------------------------------</span>
 <span id="L4879"><span class="lineNum">    4879</span>              : </span>
-<span id="L4880"><span class="lineNum">    4880</span> <span class="tlaGNC">        6768 : void Score::undoRemoveElement(EngravingItem* element, bool removeLinked)</span></span>
+<span id="L4880"><span class="lineNum">    4880</span> <span class="tlaGNC">        6769 : void Score::undoRemoveElement(EngravingItem* element, bool removeLinked)</span></span>
 <span id="L4881"><span class="lineNum">    4881</span>              : {</span>
-<span id="L4882"><span class="lineNum">    4882</span> <span class="tlaGNC">        6768 :     if (!element) {</span></span>
+<span id="L4882"><span class="lineNum">    4882</span> <span class="tlaGNC">        6769 :     if (!element) {</span></span>
 <span id="L4883"><span class="lineNum">    4883</span> <span class="tlaGNC">         201 :         return;</span></span>
 <span id="L4884"><span class="lineNum">    4884</span>              :     }</span>
-<span id="L4885"><span class="lineNum">    4885</span> <span class="tlaGNC">        6567 :     std::vector&lt;Segment*&gt; segments;</span></span>
-<span id="L4886"><span class="lineNum">    4886</span> <span class="tlaGNC">       13203 :     for (EngravingObject* ee : element-&gt;linkList()) {</span></span>
-<span id="L4887"><span class="lineNum">    4887</span> <span class="tlaGNC">        6636 :         EngravingItem* e = static_cast&lt;EngravingItem*&gt;(ee);</span></span>
-<span id="L4888"><span class="lineNum">    4888</span> <span class="tlaGNC">        6636 :         if (e == element || removeLinked) {</span></span>
-<span id="L4889"><span class="lineNum">    4889</span> <span class="tlaGNC">        6630 :             doUndoRemoveElement(e);</span></span>
+<span id="L4885"><span class="lineNum">    4885</span> <span class="tlaGNC">        6568 :     std::vector&lt;Segment*&gt; segments;</span></span>
+<span id="L4886"><span class="lineNum">    4886</span> <span class="tlaGNC">       13205 :     for (EngravingObject* ee : element-&gt;linkList()) {</span></span>
+<span id="L4887"><span class="lineNum">    4887</span> <span class="tlaGNC">        6637 :         EngravingItem* e = static_cast&lt;EngravingItem*&gt;(ee);</span></span>
+<span id="L4888"><span class="lineNum">    4888</span> <span class="tlaGNC">        6637 :         if (e == element || removeLinked) {</span></span>
+<span id="L4889"><span class="lineNum">    4889</span> <span class="tlaGNC">        6631 :             doUndoRemoveElement(e);</span></span>
 <span id="L4890"><span class="lineNum">    4890</span>              : </span>
-<span id="L4891"><span class="lineNum">    4891</span> <span class="tlaGNC">        6630 :             if (e-&gt;ownershipParent() &amp;&amp; (e-&gt;ownershipParent()-&gt;isSegment())) {</span></span>
-<span id="L4892"><span class="lineNum">    4892</span> <span class="tlaGNC">        3936 :                 Segment* s = toSegment(e-&gt;ownershipParent());</span></span>
-<span id="L4893"><span class="lineNum">    4893</span> <span class="tlaGNC">        3936 :                 if (!muse::contains(segments, s)) {</span></span>
-<span id="L4894"><span class="lineNum">    4894</span> <span class="tlaGNC">        3934 :                     segments.push_back(s);</span></span>
+<span id="L4891"><span class="lineNum">    4891</span> <span class="tlaGNC">        6631 :             if (e-&gt;ownershipParent() &amp;&amp; (e-&gt;ownershipParent()-&gt;isSegment())) {</span></span>
+<span id="L4892"><span class="lineNum">    4892</span> <span class="tlaGNC">        3937 :                 Segment* s = toSegment(e-&gt;ownershipParent());</span></span>
+<span id="L4893"><span class="lineNum">    4893</span> <span class="tlaGNC">        3937 :                 if (!muse::contains(segments, s)) {</span></span>
+<span id="L4894"><span class="lineNum">    4894</span> <span class="tlaGNC">        3935 :                     segments.push_back(s);</span></span>
 <span id="L4895"><span class="lineNum">    4895</span>              :                 }</span>
 <span id="L4896"><span class="lineNum">    4896</span>              :             }</span>
-<span id="L4897"><span class="lineNum">    4897</span> <span class="tlaGNC">        6630 :             if (e-&gt;ownershipParent() &amp;&amp; e-&gt;ownershipParent()-&gt;isSystem()) {</span></span>
+<span id="L4897"><span class="lineNum">    4897</span> <span class="tlaGNC">        6631 :             if (e-&gt;ownershipParent() &amp;&amp; e-&gt;ownershipParent()-&gt;isSystem()) {</span></span>
 <span id="L4898"><span class="lineNum">    4898</span> <span class="tlaUNC tlaBgUNC">           0 :                 e-&gt;setOwnershipParent(0);   // systems will be regenerated upon redo, so detach</span></span>
 <span id="L4899"><span class="lineNum">    4899</span>              :             }</span>
 <span id="L4900"><span class="lineNum">    4900</span>              :         }</span>
-<span id="L4901"><span class="lineNum">    4901</span> <span class="tlaGNC tlaBgGNC">        6567 :     }</span></span>
+<span id="L4901"><span class="lineNum">    4901</span> <span class="tlaGNC tlaBgGNC">        6568 :     }</span></span>
 <span id="L4902"><span class="lineNum">    4902</span>              : </span>
-<span id="L4903"><span class="lineNum">    4903</span> <span class="tlaGNC">        6567 :     if (element-&gt;isMeasureRepeat()) {</span></span>
+<span id="L4903"><span class="lineNum">    4903</span> <span class="tlaGNC">        6568 :     if (element-&gt;isMeasureRepeat()) {</span></span>
 <span id="L4904"><span class="lineNum">    4904</span> <span class="tlaUNC tlaBgUNC">           0 :         const MeasureRepeat* repeat = toMeasureRepeat(element);</span></span>
 <span id="L4905"><span class="lineNum">    4905</span> <span class="tlaUNC">           0 :         Measure* measure = repeat-&gt;firstMeasureOfGroup();</span></span>
 <span id="L4906"><span class="lineNum">    4906</span> <span class="tlaUNC">           0 :         size_t staffIdx = repeat-&gt;staffIdx();</span></span>
@@ -4971,8 +4971,8 @@
 <span id="L4913"><span class="lineNum">    4913</span>              :         }</span>
 <span id="L4914"><span class="lineNum">    4914</span>              :     }</span>
 <span id="L4915"><span class="lineNum">    4915</span>              : </span>
-<span id="L4916"><span class="lineNum">    4916</span> <span class="tlaGNC tlaBgGNC">       10501 :     for (Segment* s : segments) {</span></span>
-<span id="L4917"><span class="lineNum">    4917</span> <span class="tlaGNC">        3934 :         if (s-&gt;empty()) {</span></span>
+<span id="L4916"><span class="lineNum">    4916</span> <span class="tlaGNC tlaBgGNC">       10503 :     for (Segment* s : segments) {</span></span>
+<span id="L4917"><span class="lineNum">    4917</span> <span class="tlaGNC">        3935 :         if (s-&gt;empty()) {</span></span>
 <span id="L4918"><span class="lineNum">    4918</span> <span class="tlaGNC">        1708 :             if (s-&gt;header() || s-&gt;trailer()) {        // probably more segment types (system header)</span></span>
 <span id="L4919"><span class="lineNum">    4919</span> <span class="tlaGNC">           8 :                 s-&gt;setEnabled(false);</span></span>
 <span id="L4920"><span class="lineNum">    4920</span>              :             } else {</span>
@@ -4980,7 +4980,7 @@
 <span id="L4922"><span class="lineNum">    4922</span>              :             }</span>
 <span id="L4923"><span class="lineNum">    4923</span>              :         }</span>
 <span id="L4924"><span class="lineNum">    4924</span>              :     }</span>
-<span id="L4925"><span class="lineNum">    4925</span> <span class="tlaGNC">        6567 : }</span></span>
+<span id="L4925"><span class="lineNum">    4925</span> <span class="tlaGNC">        6568 : }</span></span>
 <span id="L4926"><span class="lineNum">    4926</span>              : </span>
 <span id="L4927"><span class="lineNum">    4927</span> <span class="tlaUNC tlaBgUNC">           0 : void Score::undoRemoveHopoText(HammerOnPullOffText* hopoText)</span></span>
 <span id="L4928"><span class="lineNum">    4928</span>              : {</span>
@@ -5362,7 +5362,7 @@
 <span id="L5304"><span class="lineNum">    5304</span> <span class="tlaGNC">          18 :     }</span></span>
 <span id="L5305"><span class="lineNum">    5305</span> <span class="tlaGNC">          18 : }</span></span>
 <span id="L5306"><span class="lineNum">    5306</span>              : </span>
-<span id="L5307"><span class="lineNum">    5307</span> <span class="tlaGNC">        1117 : void Score::doUndoRemoveStaleTieJumpPoints(Tie* tie, bool undo)</span></span>
+<span id="L5307"><span class="lineNum">    5307</span> <span class="tlaGNC">        1118 : void Score::doUndoRemoveStaleTieJumpPoints(Tie* tie, bool undo)</span></span>
 <span id="L5308"><span class="lineNum">    5308</span>              : {</span>
 <span id="L5309"><span class="lineNum">    5309</span> <span class="tlaGNC">           3 :     auto removeTie = [&amp;](Tie* tie) {</span></span>
 <span id="L5310"><span class="lineNum">    5310</span> <span class="tlaGNC">           3 :         if (undo) {</span></span>
@@ -5381,11 +5381,11 @@
 <span id="L5323"><span class="lineNum">    5323</span>              :         }</span>
 <span id="L5324"><span class="lineNum">    5324</span> <span class="tlaGNC tlaBgGNC">           3 :     };</span></span>
 <span id="L5325"><span class="lineNum">    5325</span>              : </span>
-<span id="L5326"><span class="lineNum">    5326</span> <span class="tlaGNC">        1117 :     std::vector&lt;Tie*&gt; oldTies;</span></span>
-<span id="L5327"><span class="lineNum">    5327</span> <span class="tlaGNC">        1117 :     if (!tie-&gt;tieJumpPoints()) {</span></span>
+<span id="L5326"><span class="lineNum">    5326</span> <span class="tlaGNC">        1118 :     std::vector&lt;Tie*&gt; oldTies;</span></span>
+<span id="L5327"><span class="lineNum">    5327</span> <span class="tlaGNC">        1118 :     if (!tie-&gt;tieJumpPoints()) {</span></span>
 <span id="L5328"><span class="lineNum">    5328</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L5329"><span class="lineNum">    5329</span>              :     }</span>
-<span id="L5330"><span class="lineNum">    5330</span> <span class="tlaGNC tlaBgGNC">        1161 :     for (TieJumpPoint* jumpPoint : *tie-&gt;tieJumpPoints()) {</span></span>
+<span id="L5330"><span class="lineNum">    5330</span> <span class="tlaGNC tlaBgGNC">        1162 :     for (TieJumpPoint* jumpPoint : *tie-&gt;tieJumpPoints()) {</span></span>
 <span id="L5331"><span class="lineNum">    5331</span> <span class="tlaGNC">          44 :         if (jumpPoint-&gt;followingNote()) {</span></span>
 <span id="L5332"><span class="lineNum">    5332</span> <span class="tlaGNC">           9 :             continue;</span></span>
 <span id="L5333"><span class="lineNum">    5333</span>              :         }</span>
@@ -5393,14 +5393,14 @@
 <span id="L5335"><span class="lineNum">    5335</span>              :     }</span>
 <span id="L5336"><span class="lineNum">    5336</span>              : </span>
 <span id="L5337"><span class="lineNum">    5337</span>              :     // Update jump points for linked ties</span>
-<span id="L5338"><span class="lineNum">    5338</span> <span class="tlaGNC">        2268 :     for (EngravingObject* linkedTie : tie-&gt;linkList()) {</span></span>
-<span id="L5339"><span class="lineNum">    5339</span> <span class="tlaGNC">        1151 :         if (!linkedTie || !linkedTie-&gt;isTie()) {</span></span>
+<span id="L5338"><span class="lineNum">    5338</span> <span class="tlaGNC">        2270 :     for (EngravingObject* linkedTie : tie-&gt;linkList()) {</span></span>
+<span id="L5339"><span class="lineNum">    5339</span> <span class="tlaGNC">        1152 :         if (!linkedTie || !linkedTie-&gt;isTie()) {</span></span>
 <span id="L5340"><span class="lineNum">    5340</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
 <span id="L5341"><span class="lineNum">    5341</span>              :         }</span>
-<span id="L5342"><span class="lineNum">    5342</span> <span class="tlaGNC tlaBgGNC">        1151 :         toTie(linkedTie)-&gt;updatePossibleJumpPoints();</span></span>
-<span id="L5343"><span class="lineNum">    5343</span> <span class="tlaGNC">        1117 :     }</span></span>
+<span id="L5342"><span class="lineNum">    5342</span> <span class="tlaGNC tlaBgGNC">        1152 :         toTie(linkedTie)-&gt;updatePossibleJumpPoints();</span></span>
+<span id="L5343"><span class="lineNum">    5343</span> <span class="tlaGNC">        1118 :     }</span></span>
 <span id="L5344"><span class="lineNum">    5344</span>              : </span>
-<span id="L5345"><span class="lineNum">    5345</span> <span class="tlaGNC">        1152 :     for (Tie* oldTie : oldTies) {</span></span>
+<span id="L5345"><span class="lineNum">    5345</span> <span class="tlaGNC">        1153 :     for (Tie* oldTie : oldTies) {</span></span>
 <span id="L5346"><span class="lineNum">    5346</span> <span class="tlaGNC">          47 :         auto findEndTie = [&amp;oldTie](const TieJumpPoint* jumpPoint) {</span></span>
 <span id="L5347"><span class="lineNum">    5347</span> <span class="tlaGNC">          47 :             return jumpPoint-&gt;endTie() == oldTie;</span></span>
 <span id="L5348"><span class="lineNum">    5348</span> <span class="tlaGNC">          35 :         };</span></span>
@@ -5415,22 +5415,22 @@
 <span id="L5357"><span class="lineNum">    5357</span> <span class="tlaUNC tlaBgUNC">           0 :         removeTie(oldTie);</span></span>
 <span id="L5358"><span class="lineNum">    5358</span>              :     }</span>
 <span id="L5359"><span class="lineNum">    5359</span>              : </span>
-<span id="L5360"><span class="lineNum">    5360</span> <span class="tlaGNC tlaBgGNC">        1117 :     if (tie-&gt;isPartialTie() &amp;&amp; tie-&gt;allJumpPointsInactive() &amp;&amp; tie-&gt;startNote() &amp;&amp; tie-&gt;startNote()-&gt;tieFor() == tie) {</span></span>
+<span id="L5360"><span class="lineNum">    5360</span> <span class="tlaGNC tlaBgGNC">        1118 :     if (tie-&gt;isPartialTie() &amp;&amp; tie-&gt;allJumpPointsInactive() &amp;&amp; tie-&gt;startNote() &amp;&amp; tie-&gt;startNote()-&gt;tieFor() == tie) {</span></span>
 <span id="L5361"><span class="lineNum">    5361</span> <span class="tlaGNC">           3 :         removeTie(tie);</span></span>
 <span id="L5362"><span class="lineNum">    5362</span>              :     }</span>
-<span id="L5363"><span class="lineNum">    5363</span> <span class="tlaGNC">        1117 : }</span></span>
+<span id="L5363"><span class="lineNum">    5363</span> <span class="tlaGNC">        1118 : }</span></span>
 <span id="L5364"><span class="lineNum">    5364</span>              : </span>
-<span id="L5365"><span class="lineNum">    5365</span> <span class="tlaGNC">         338 : void Score::doUndoResetPartialSlur(Slur* slur, bool undo)</span></span>
+<span id="L5365"><span class="lineNum">    5365</span> <span class="tlaGNC">         339 : void Score::doUndoResetPartialSlur(Slur* slur, bool undo)</span></span>
 <span id="L5366"><span class="lineNum">    5366</span>              : {</span>
-<span id="L5367"><span class="lineNum">    5367</span> <span class="tlaGNC">         338 :     const size_t undoIdx = undoStack()-&gt;currentIndex();</span></span>
+<span id="L5367"><span class="lineNum">    5367</span> <span class="tlaGNC">         339 :     const size_t undoIdx = undoStack()-&gt;currentIndex();</span></span>
 <span id="L5368"><span class="lineNum">    5368</span>              : </span>
-<span id="L5369"><span class="lineNum">    5369</span> <span class="tlaGNC">         338 :     const ChordRest* startCR = slur ? slur-&gt;startCR() : nullptr;</span></span>
+<span id="L5369"><span class="lineNum">    5369</span> <span class="tlaGNC">         339 :     const ChordRest* startCR = slur ? slur-&gt;startCR() : nullptr;</span></span>
 <span id="L5370"><span class="lineNum">    5370</span>              :     // Slurs can only have the same start &amp; end element when they are partial.</span>
 <span id="L5371"><span class="lineNum">    5371</span>              :     // If they are no longer partial, we should remove them</span>
-<span id="L5372"><span class="lineNum">    5372</span> <span class="tlaGNC">         338 :     const bool shouldRemove = slur-&gt;startElement() == slur-&gt;endElement();</span></span>
-<span id="L5373"><span class="lineNum">    5373</span> <span class="tlaGNC">         338 :     IF_ASSERT_FAILED(startCR) {</span></span>
+<span id="L5372"><span class="lineNum">    5372</span> <span class="tlaGNC">         339 :     const bool shouldRemove = slur-&gt;startElement() == slur-&gt;endElement();</span></span>
+<span id="L5373"><span class="lineNum">    5373</span> <span class="tlaGNC">         339 :     IF_ASSERT_FAILED(startCR) {</span></span>
 <span id="L5374"><span class="lineNum">    5374</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGE() &lt;&lt; &quot;Slur is corrupted&quot;;</span></span>
-<span id="L5375"><span class="lineNum">    5375</span> <span class="tlaGNC tlaBgGNC">         338 :     } else if (!startCR-&gt;hasPrecedingJumpItem() &amp;&amp; slur-&gt;isIncoming()) {</span></span>
+<span id="L5375"><span class="lineNum">    5375</span> <span class="tlaGNC tlaBgGNC">         339 :     } else if (!startCR-&gt;hasPrecedingJumpItem() &amp;&amp; slur-&gt;isIncoming()) {</span></span>
 <span id="L5376"><span class="lineNum">    5376</span> <span class="tlaGNC">           3 :         if (shouldRemove) {</span></span>
 <span id="L5377"><span class="lineNum">    5377</span> <span class="tlaGNC">           3 :             if (undo) {</span></span>
 <span id="L5378"><span class="lineNum">    5378</span> <span class="tlaUNC tlaBgUNC">           0 :                 startCmd(TranslatableString(&quot;engraving&quot;, &quot;Remove invalid incoming partial slur&quot;));</span></span>
@@ -5450,10 +5450,10 @@
 <span id="L5392"><span class="lineNum">    5392</span>              :         }</span>
 <span id="L5393"><span class="lineNum">    5393</span>              :     }</span>
 <span id="L5394"><span class="lineNum">    5394</span>              : </span>
-<span id="L5395"><span class="lineNum">    5395</span> <span class="tlaGNC tlaBgGNC">         338 :     const ChordRest* endCR = slur ? slur-&gt;endCR() : nullptr;</span></span>
-<span id="L5396"><span class="lineNum">    5396</span> <span class="tlaGNC">         338 :     IF_ASSERT_FAILED(endCR) {</span></span>
+<span id="L5395"><span class="lineNum">    5395</span> <span class="tlaGNC tlaBgGNC">         339 :     const ChordRest* endCR = slur ? slur-&gt;endCR() : nullptr;</span></span>
+<span id="L5396"><span class="lineNum">    5396</span> <span class="tlaGNC">         339 :     IF_ASSERT_FAILED(endCR) {</span></span>
 <span id="L5397"><span class="lineNum">    5397</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGE() &lt;&lt; &quot;Slur is corrupted&quot;;</span></span>
-<span id="L5398"><span class="lineNum">    5398</span> <span class="tlaGNC tlaBgGNC">         338 :     } else if (!endCR-&gt;hasFollowingJumpItem() &amp;&amp; slur-&gt;isOutgoing()) {</span></span>
+<span id="L5398"><span class="lineNum">    5398</span> <span class="tlaGNC tlaBgGNC">         339 :     } else if (!endCR-&gt;hasFollowingJumpItem() &amp;&amp; slur-&gt;isOutgoing()) {</span></span>
 <span id="L5399"><span class="lineNum">    5399</span> <span class="tlaGNC">           1 :         if (shouldRemove) {</span></span>
 <span id="L5400"><span class="lineNum">    5400</span> <span class="tlaUNC tlaBgUNC">           0 :             if (undo) {</span></span>
 <span id="L5401"><span class="lineNum">    5401</span> <span class="tlaUNC">           0 :                 startCmd(TranslatableString(&quot;engraving&quot;, &quot;Remove invalid outgoing partial slur&quot;));</span></span>
@@ -5473,8 +5473,8 @@
 <span id="L5415"><span class="lineNum">    5415</span>              :         }</span>
 <span id="L5416"><span class="lineNum">    5416</span>              :     }</span>
 <span id="L5417"><span class="lineNum">    5417</span>              : </span>
-<span id="L5418"><span class="lineNum">    5418</span> <span class="tlaGNC">         338 :     if (!undo) {</span></span>
-<span id="L5419"><span class="lineNum">    5419</span> <span class="tlaGNC">         338 :         return;</span></span>
+<span id="L5418"><span class="lineNum">    5418</span> <span class="tlaGNC">         339 :     if (!undo) {</span></span>
+<span id="L5419"><span class="lineNum">    5419</span> <span class="tlaGNC">         339 :         return;</span></span>
 <span id="L5420"><span class="lineNum">    5420</span>              :     }</span>
 <span id="L5421"><span class="lineNum">    5421</span>              : </span>
 <span id="L5422"><span class="lineNum">    5422</span> <span class="tlaUNC tlaBgUNC">           0 :     if (undoIdx != undoStack()-&gt;currentIndex() &amp;&amp; undoStack()-&gt;currentIndex() &gt;= 2) {</span></span>
@@ -5485,63 +5485,63 @@
 <span id="L5427"><span class="lineNum">    5427</span>              :     }</span>
 <span id="L5428"><span class="lineNum">    5428</span>              : }</span>
 <span id="L5429"><span class="lineNum">    5429</span>              : </span>
-<span id="L5430"><span class="lineNum">    5430</span> <span class="tlaGNC tlaBgGNC">        1157 : void Score::undoRemoveStaleTieJumpPoints(bool undo)</span></span>
+<span id="L5430"><span class="lineNum">    5430</span> <span class="tlaGNC tlaBgGNC">        1159 : void Score::undoRemoveStaleTieJumpPoints(bool undo)</span></span>
 <span id="L5431"><span class="lineNum">    5431</span>              : {</span>
-<span id="L5432"><span class="lineNum">    5432</span> <span class="tlaGNC">        1157 :     size_t tracks = nstaves() * VOICES;</span></span>
-<span id="L5433"><span class="lineNum">    5433</span> <span class="tlaGNC">        1157 :     Measure* m = firstMeasure();</span></span>
-<span id="L5434"><span class="lineNum">    5434</span> <span class="tlaGNC">        1157 :     if (!m) {</span></span>
+<span id="L5432"><span class="lineNum">    5432</span> <span class="tlaGNC">        1159 :     size_t tracks = nstaves() * VOICES;</span></span>
+<span id="L5433"><span class="lineNum">    5433</span> <span class="tlaGNC">        1159 :     Measure* m = firstMeasure();</span></span>
+<span id="L5434"><span class="lineNum">    5434</span> <span class="tlaGNC">        1159 :     if (!m) {</span></span>
 <span id="L5435"><span class="lineNum">    5435</span> <span class="tlaGNC">           1 :         return;</span></span>
 <span id="L5436"><span class="lineNum">    5436</span>              :     }</span>
 <span id="L5437"><span class="lineNum">    5437</span>              : </span>
 <span id="L5438"><span class="lineNum">    5438</span>              :     // Copy, invalid slurs could be removed</span>
-<span id="L5439"><span class="lineNum">    5439</span> <span class="tlaGNC">        1156 :     auto spannerMap = spanner();</span></span>
-<span id="L5440"><span class="lineNum">    5440</span> <span class="tlaGNC">        2038 :     for (auto&amp; interval : spannerMap) {</span></span>
-<span id="L5441"><span class="lineNum">    5441</span> <span class="tlaGNC">         882 :         Spanner* sp = interval.second;</span></span>
-<span id="L5442"><span class="lineNum">    5442</span> <span class="tlaGNC">         882 :         if (!sp || !sp-&gt;isSlur()) {</span></span>
-<span id="L5443"><span class="lineNum">    5443</span> <span class="tlaGNC">         544 :             continue;</span></span>
+<span id="L5439"><span class="lineNum">    5439</span> <span class="tlaGNC">        1158 :     auto spannerMap = spanner();</span></span>
+<span id="L5440"><span class="lineNum">    5440</span> <span class="tlaGNC">        2045 :     for (auto&amp; interval : spannerMap) {</span></span>
+<span id="L5441"><span class="lineNum">    5441</span> <span class="tlaGNC">         887 :         Spanner* sp = interval.second;</span></span>
+<span id="L5442"><span class="lineNum">    5442</span> <span class="tlaGNC">         887 :         if (!sp || !sp-&gt;isSlur()) {</span></span>
+<span id="L5443"><span class="lineNum">    5443</span> <span class="tlaGNC">         548 :             continue;</span></span>
 <span id="L5444"><span class="lineNum">    5444</span>              :         }</span>
-<span id="L5445"><span class="lineNum">    5445</span> <span class="tlaGNC">         338 :         doUndoResetPartialSlur(toSlur(sp), undo);</span></span>
+<span id="L5445"><span class="lineNum">    5445</span> <span class="tlaGNC">         339 :         doUndoResetPartialSlur(toSlur(sp), undo);</span></span>
 <span id="L5446"><span class="lineNum">    5446</span>              :     }</span>
 <span id="L5447"><span class="lineNum">    5447</span>              : </span>
-<span id="L5448"><span class="lineNum">    5448</span> <span class="tlaGNC">        1156 :     std::set&lt;PartialTie*&gt; incomingPartialTies;</span></span>
-<span id="L5449"><span class="lineNum">    5449</span> <span class="tlaGNC">        1156 :     SegmentType st = SegmentType::ChordRest;</span></span>
-<span id="L5450"><span class="lineNum">    5450</span> <span class="tlaGNC">       24894 :     for (Segment* s = m-&gt;first(st); s; s = s-&gt;next1(st)) {</span></span>
-<span id="L5451"><span class="lineNum">    5451</span> <span class="tlaGNC">      156218 :         for (track_idx_t i = 0; i &lt; tracks; ++i) {</span></span>
-<span id="L5452"><span class="lineNum">    5452</span> <span class="tlaGNC">      132480 :             EngravingItem* e = s-&gt;element(i);</span></span>
-<span id="L5453"><span class="lineNum">    5453</span> <span class="tlaGNC">      132480 :             if (e == 0 || !e-&gt;isChordRest()) {</span></span>
-<span id="L5454"><span class="lineNum">    5454</span> <span class="tlaGNC">       98835 :                 continue;</span></span>
+<span id="L5448"><span class="lineNum">    5448</span> <span class="tlaGNC">        1158 :     std::set&lt;PartialTie*&gt; incomingPartialTies;</span></span>
+<span id="L5449"><span class="lineNum">    5449</span> <span class="tlaGNC">        1158 :     SegmentType st = SegmentType::ChordRest;</span></span>
+<span id="L5450"><span class="lineNum">    5450</span> <span class="tlaGNC">       24936 :     for (Segment* s = m-&gt;first(st); s; s = s-&gt;next1(st)) {</span></span>
+<span id="L5451"><span class="lineNum">    5451</span> <span class="tlaGNC">      156578 :         for (track_idx_t i = 0; i &lt; tracks; ++i) {</span></span>
+<span id="L5452"><span class="lineNum">    5452</span> <span class="tlaGNC">      132800 :             EngravingItem* e = s-&gt;element(i);</span></span>
+<span id="L5453"><span class="lineNum">    5453</span> <span class="tlaGNC">      132800 :             if (e == 0 || !e-&gt;isChordRest()) {</span></span>
+<span id="L5454"><span class="lineNum">    5454</span> <span class="tlaGNC">       99090 :                 continue;</span></span>
 <span id="L5455"><span class="lineNum">    5455</span>              :             }</span>
 <span id="L5456"><span class="lineNum">    5456</span>              : </span>
-<span id="L5457"><span class="lineNum">    5457</span> <span class="tlaGNC">       33645 :             if (!toChordRest(e)-&gt;hasFollowingJumpItem()) {</span></span>
+<span id="L5457"><span class="lineNum">    5457</span> <span class="tlaGNC">       33710 :             if (!toChordRest(e)-&gt;hasFollowingJumpItem()) {</span></span>
 <span id="L5458"><span class="lineNum">    5458</span>              :                 // Remove invalid lyrics dashes</span>
-<span id="L5459"><span class="lineNum">    5459</span> <span class="tlaGNC">       34302 :                 for (Lyrics* lyrics : toChordRest(e)-&gt;lyrics()) {</span></span>
-<span id="L5460"><span class="lineNum">    5460</span> <span class="tlaGNC">        1162 :                     LyricsLine* separator = lyrics-&gt;separator();</span></span>
-<span id="L5461"><span class="lineNum">    5461</span> <span class="tlaGNC">        2324 :                     if ((lyrics-&gt;syllabic() == LyricsSyllabic::BEGIN || lyrics-&gt;syllabic() == LyricsSyllabic::MIDDLE) &amp;&amp; separator</span></span>
-<span id="L5462"><span class="lineNum">    5462</span> <span class="tlaGNC">        2324 :                         &amp;&amp; !separator-&gt;nextLyrics() &amp;&amp; !separator-&gt;isEndMelisma()) {</span></span>
+<span id="L5459"><span class="lineNum">    5459</span> <span class="tlaGNC">       34372 :                 for (Lyrics* lyrics : toChordRest(e)-&gt;lyrics()) {</span></span>
+<span id="L5460"><span class="lineNum">    5460</span> <span class="tlaGNC">        1167 :                     LyricsLine* separator = lyrics-&gt;separator();</span></span>
+<span id="L5461"><span class="lineNum">    5461</span> <span class="tlaGNC">        2334 :                     if ((lyrics-&gt;syllabic() == LyricsSyllabic::BEGIN || lyrics-&gt;syllabic() == LyricsSyllabic::MIDDLE) &amp;&amp; separator</span></span>
+<span id="L5462"><span class="lineNum">    5462</span> <span class="tlaGNC">        2334 :                         &amp;&amp; !separator-&gt;nextLyrics() &amp;&amp; !separator-&gt;isEndMelisma()) {</span></span>
 <span id="L5463"><span class="lineNum">    5463</span> <span class="tlaUNC tlaBgUNC">           0 :                         lyrics-&gt;setNeedRemoveInvalidSegments();</span></span>
 <span id="L5464"><span class="lineNum">    5464</span>              :                     }</span>
 <span id="L5465"><span class="lineNum">    5465</span>              :                 }</span>
 <span id="L5466"><span class="lineNum">    5466</span>              :             }</span>
 <span id="L5467"><span class="lineNum">    5467</span>              : </span>
-<span id="L5468"><span class="lineNum">    5468</span> <span class="tlaGNC tlaBgGNC">       33645 :             if (!e-&gt;isChord()) {</span></span>
-<span id="L5469"><span class="lineNum">    5469</span> <span class="tlaGNC">       15014 :                 continue;</span></span>
+<span id="L5468"><span class="lineNum">    5468</span> <span class="tlaGNC tlaBgGNC">       33710 :             if (!e-&gt;isChord()) {</span></span>
+<span id="L5469"><span class="lineNum">    5469</span> <span class="tlaGNC">       15039 :                 continue;</span></span>
 <span id="L5470"><span class="lineNum">    5470</span>              :             }</span>
 <span id="L5471"><span class="lineNum">    5471</span>              : </span>
-<span id="L5472"><span class="lineNum">    5472</span> <span class="tlaGNC">       18631 :             Chord* c = toChord(e);</span></span>
-<span id="L5473"><span class="lineNum">    5473</span> <span class="tlaGNC">       41041 :             for (Note* n : c-&gt;notes()) {</span></span>
-<span id="L5474"><span class="lineNum">    5474</span> <span class="tlaGNC">       22410 :                 if (n-&gt;incomingPartialTie()) {</span></span>
+<span id="L5472"><span class="lineNum">    5472</span> <span class="tlaGNC">       18671 :             Chord* c = toChord(e);</span></span>
+<span id="L5473"><span class="lineNum">    5473</span> <span class="tlaGNC">       41125 :             for (Note* n : c-&gt;notes()) {</span></span>
+<span id="L5474"><span class="lineNum">    5474</span> <span class="tlaGNC">       22454 :                 if (n-&gt;incomingPartialTie()) {</span></span>
 <span id="L5475"><span class="lineNum">    5475</span> <span class="tlaGNC">          36 :                     incomingPartialTies.emplace(n-&gt;incomingPartialTie());</span></span>
 <span id="L5476"><span class="lineNum">    5476</span>              :                 }</span>
-<span id="L5477"><span class="lineNum">    5477</span> <span class="tlaGNC">       22410 :                 if (!n-&gt;tieFor()) {</span></span>
-<span id="L5478"><span class="lineNum">    5478</span> <span class="tlaGNC">       21293 :                     continue;</span></span>
+<span id="L5477"><span class="lineNum">    5477</span> <span class="tlaGNC">       22454 :                 if (!n-&gt;tieFor()) {</span></span>
+<span id="L5478"><span class="lineNum">    5478</span> <span class="tlaGNC">       21336 :                     continue;</span></span>
 <span id="L5479"><span class="lineNum">    5479</span>              :                 }</span>
 <span id="L5480"><span class="lineNum">    5480</span>              : </span>
-<span id="L5481"><span class="lineNum">    5481</span> <span class="tlaGNC">        1117 :                 doUndoRemoveStaleTieJumpPoints(n-&gt;tieFor());</span></span>
+<span id="L5481"><span class="lineNum">    5481</span> <span class="tlaGNC">        1118 :                 doUndoRemoveStaleTieJumpPoints(n-&gt;tieFor());</span></span>
 <span id="L5482"><span class="lineNum">    5482</span>              :             }</span>
 <span id="L5483"><span class="lineNum">    5483</span>              :         }</span>
 <span id="L5484"><span class="lineNum">    5484</span>              :     }</span>
 <span id="L5485"><span class="lineNum">    5485</span>              : </span>
-<span id="L5486"><span class="lineNum">    5486</span> <span class="tlaGNC">        1192 :     for (PartialTie* incomingPT : incomingPartialTies) {</span></span>
+<span id="L5486"><span class="lineNum">    5486</span> <span class="tlaGNC">        1194 :     for (PartialTie* incomingPT : incomingPartialTies) {</span></span>
 <span id="L5487"><span class="lineNum">    5487</span> <span class="tlaGNC">          36 :         if (incomingPT-&gt;jumpPoint() || incomingPT-&gt;note()-&gt;tieBack() != incomingPT) {</span></span>
 <span id="L5488"><span class="lineNum">    5488</span> <span class="tlaGNC">          32 :             continue;</span></span>
 <span id="L5489"><span class="lineNum">    5489</span>              :         }</span>
@@ -5557,7 +5557,7 @@
 <span id="L5499"><span class="lineNum">    5499</span> <span class="tlaGNC tlaBgGNC">           4 :             removeElement(incomingPT);</span></span>
 <span id="L5500"><span class="lineNum">    5500</span>              :         }</span>
 <span id="L5501"><span class="lineNum">    5501</span>              :     }</span>
-<span id="L5502"><span class="lineNum">    5502</span> <span class="tlaGNC">        1156 : }</span></span>
+<span id="L5502"><span class="lineNum">    5502</span> <span class="tlaGNC">        1158 : }</span></span>
 <span id="L5503"><span class="lineNum">    5503</span>              : }</span>
         </pre>
               </td>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -299,12 +299,12 @@
 <span id="L241"><span class="lineNum">     241</span>              :     bool tempo = false;</span>
 <span id="L242"><span class="lineNum">     242</span>              : };</span>
 <span id="L243"><span class="lineNum">     243</span>              : </span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">         967 : static ChangeRelevance classifyChanges(const ScoreChanges&amp; changes)</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">         968 : static ChangeRelevance classifyChanges(const ScoreChanges&amp; changes)</span></span>
 <span id="L245"><span class="lineNum">     245</span>              : {</span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">         967 :     ChangeRelevance result;</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">         968 :     ChangeRelevance result;</span></span>
 <span id="L247"><span class="lineNum">     247</span>              : </span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        3856 :     for (const ElementType type : changes.changedTypes) {</span></span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        2908 :         switch (type) {</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        3869 :     for (const ElementType type : changes.changedTypes) {</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        2920 :         switch (type) {</span></span>
 <span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">          64 :         case ElementType::DYNAMIC:</span></span>
 <span id="L251"><span class="lineNum">     251</span>              :         case ElementType::HAIRPIN:</span>
 <span id="L252"><span class="lineNum">     252</span>              :         case ElementType::HAIRPIN_SEGMENT:</span>
@@ -324,40 +324,40 @@
 <span id="L266"><span class="lineNum">     266</span>              :         case ElementType::MARKER:</span>
 <span id="L267"><span class="lineNum">     267</span>              :         case ElementType::JUMP:</span>
 <span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">           3 :             return { true, true };</span></span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">        2795 :         default:</span></span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">        2795 :             break;</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">        2807 :         default:</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">        2807 :             break;</span></span>
 <span id="L271"><span class="lineNum">     271</span>              :         }</span>
 <span id="L272"><span class="lineNum">     272</span>              : </span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        2905 :         if (result.dynamics &amp;&amp; result.tempo) {</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        2917 :         if (result.dynamics &amp;&amp; result.tempo) {</span></span>
 <span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">          16 :             break;</span></span>
 <span id="L275"><span class="lineNum">     275</span>              :         }</span>
 <span id="L276"><span class="lineNum">     276</span>              :     }</span>
 <span id="L277"><span class="lineNum">     277</span>              : </span>
 <span id="L278"><span class="lineNum">     278</span>              :     // VoiceAssignment change shifts which staves a dynamic/hairpin covers,</span>
 <span id="L279"><span class="lineNum">     279</span>              :     // so the old points on staves outside the new assignment must also be cleared</span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">         964 :     result.dynamics |= muse::contains(changes.changedPropertyIdSet, Pid::VOICE_ASSIGNMENT);</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">         965 :     result.dynamics |= muse::contains(changes.changedPropertyIdSet, Pid::VOICE_ASSIGNMENT);</span></span>
 <span id="L281"><span class="lineNum">     281</span>              : </span>
 <span id="L282"><span class="lineNum">     282</span>              :     static const std::unordered_set&lt;Pid&gt; REPEAT_PROPERTIES {</span>
 <span id="L283"><span class="lineNum">     283</span>              :         Pid::REPEAT_START,</span>
 <span id="L284"><span class="lineNum">     284</span>              :         Pid::REPEAT_END,</span>
 <span id="L285"><span class="lineNum">     285</span>              :         Pid::REPEAT_JUMP,</span>
 <span id="L286"><span class="lineNum">     286</span>              :         Pid::REPEAT_COUNT,</span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">         970 :     };</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">         971 :     };</span></span>
 <span id="L288"><span class="lineNum">     288</span>              : </span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">         964 :     bool repeatPropertyChanged = false;</span></span>
-<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">        4805 :     for (const Pid pid : REPEAT_PROPERTIES) {</span></span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">        3850 :         if (muse::contains(changes.changedPropertyIdSet, pid)) {</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">         965 :     bool repeatPropertyChanged = false;</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">        4810 :     for (const Pid pid : REPEAT_PROPERTIES) {</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">        3854 :         if (muse::contains(changes.changedPropertyIdSet, pid)) {</span></span>
 <span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">           9 :             repeatPropertyChanged = true;</span></span>
 <span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">           9 :             break;</span></span>
 <span id="L294"><span class="lineNum">     294</span>              :         }</span>
 <span id="L295"><span class="lineNum">     295</span>              :     }</span>
 <span id="L296"><span class="lineNum">     296</span>              : </span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">         964 :     if (repeatPropertyChanged) {</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">         965 :     if (repeatPropertyChanged) {</span></span>
 <span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">           9 :         result.dynamics = true;</span></span>
 <span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">           9 :         result.tempo = true;</span></span>
 <span id="L300"><span class="lineNum">     300</span>              :     }</span>
 <span id="L301"><span class="lineNum">     301</span>              : </span>
-<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">         964 :     return result;</span></span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">         965 :     return result;</span></span>
 <span id="L303"><span class="lineNum">     303</span>              : }</span>
 <span id="L304"><span class="lineNum">     304</span>              : </span>
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">        9559 : const TempoTimeline&amp; ScoreAutomationController::tempoTimeline(bool expandRepeats) const</span></span>
@@ -461,15 +461,15 @@
 <span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">           6 :     fullRebuild(curves);</span></span>
 <span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">         457 : }</span></span>
 <span id="L405"><span class="lineNum">     405</span>              : </span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">         971 : void ScoreAutomationController::update(const ScoreChanges&amp; changes)</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">         972 : void ScoreAutomationController::update(const ScoreChanges&amp; changes)</span></span>
 <span id="L407"><span class="lineNum">     407</span>              : {</span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">         971 :     if (changes.isTextEditing) {</span></span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">         867 :         return;</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">         972 :     if (changes.isTextEditing) {</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">         868 :         return;</span></span>
 <span id="L410"><span class="lineNum">     410</span>              :     }</span>
 <span id="L411"><span class="lineNum">     411</span>              : </span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">         967 :     const ChangeRelevance relevance = classifyChanges(changes);</span></span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">         967 :     if (!relevance.dynamics &amp;&amp; !relevance.tempo) {</span></span>
-<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">         863 :         return;</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">         968 :     const ChangeRelevance relevance = classifyChanges(changes);</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">         968 :     if (!relevance.dynamics &amp;&amp; !relevance.tempo) {</span></span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">         864 :         return;</span></span>
 <span id="L415"><span class="lineNum">     415</span>              :     }</span>
 <span id="L416"><span class="lineNum">     416</span>              : </span>
 <span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">         104 :     UpdateRequest request;</span></span>

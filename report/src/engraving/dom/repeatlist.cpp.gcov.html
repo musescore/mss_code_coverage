@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -101,60 +101,60 @@
 <span id="L43"><span class="lineNum">      43</span>              : //   RepeatSegment</span>
 <span id="L44"><span class="lineNum">      44</span>              : //---------------------------------------------------------</span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">        2613 : RepeatSegment::RepeatSegment(int playbackCount)</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        2613 :     : tick(0), utick(0), pause(0.0), playbackCount(playbackCount)</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">        2616 : RepeatSegment::RepeatSegment(int playbackCount)</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        2616 :     : tick(0), utick(0), pause(0.0), playbackCount(playbackCount)</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : {</span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        2613 : }</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        2616 : }</span></span>
 <span id="L50"><span class="lineNum">      50</span>              : </span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">        6307 : void RepeatSegment::addMeasure(Measure const* const m)</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">        6313 : void RepeatSegment::addMeasure(Measure const* const m)</span></span>
 <span id="L52"><span class="lineNum">      52</span>              : {</span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        6307 :     if (m != nullptr) {</span></span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">        6307 :         if (m_measureList.empty()) {</span></span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">        3629 :             tick = m-&gt;tick().ticks();</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        6313 :     if (m != nullptr) {</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">        6313 :         if (m_measureList.empty()) {</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">        3632 :             tick = m-&gt;tick().ticks();</span></span>
 <span id="L56"><span class="lineNum">      56</span>              :         }</span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">        6307 :         if ((m_measureList.empty()) || (m_measureList.back() != m)) {</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">        6307 :             m_measureList.push_back(m);</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">        6313 :         if ((m_measureList.empty()) || (m_measureList.back() != m)) {</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">        6313 :             m_measureList.push_back(m);</span></span>
 <span id="L59"><span class="lineNum">      59</span>              :         }</span>
 <span id="L60"><span class="lineNum">      60</span>              :     }</span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        6307 : }</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        6313 : }</span></span>
 <span id="L62"><span class="lineNum">      62</span>              : </span>
 <span id="L63"><span class="lineNum">      63</span>              : /// \brief Expands or clips my measureList up to m (including m)</span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        3694 : void RepeatSegment::addMeasures(Measure const* const m)</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        3697 : void RepeatSegment::addMeasures(Measure const* const m)</span></span>
 <span id="L65"><span class="lineNum">      65</span>              : {</span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        3694 :     if (!m_measureList.empty()) {</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        3697 :     if (!m_measureList.empty()) {</span></span>
 <span id="L67"><span class="lineNum">      67</span>              :         // Add up to the current measure, final measure is added outside of this condition</span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        3694 :         Measure const* lastMeasure = m_measureList.back()-&gt;nextMeasureMM();</span></span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">        3694 :         if (lastMeasure &amp;&amp; (lastMeasure-&gt;tick() &lt; m-&gt;tick())) {     // Ensure provided reference is later than current last</span></span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       11857 :             while (lastMeasure &amp;&amp; lastMeasure != m) {</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">       10570 :                 m_measureList.push_back(lastMeasure);</span></span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       10570 :                 lastMeasure = lastMeasure-&gt;nextMeasureMM();</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        3697 :         Measure const* lastMeasure = m_measureList.back()-&gt;nextMeasureMM();</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">        3697 :         if (lastMeasure &amp;&amp; (lastMeasure-&gt;tick() &lt; m-&gt;tick())) {     // Ensure provided reference is later than current last</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       11867 :             while (lastMeasure &amp;&amp; lastMeasure != m) {</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">       10578 :                 m_measureList.push_back(lastMeasure);</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       10578 :                 lastMeasure = lastMeasure-&gt;nextMeasureMM();</span></span>
 <span id="L73"><span class="lineNum">      73</span>              :             }</span>
 <span id="L74"><span class="lineNum">      74</span>              :         }</span>
 <span id="L75"><span class="lineNum">      75</span>              :         //else { // Possibly clip compared to current last measure }</span>
-<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        4930 :         while (!m_measureList.empty() &amp;&amp; (m_measureList.back()-&gt;tick() &gt;= m-&gt;tick())) {</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        4933 :         while (!m_measureList.empty() &amp;&amp; (m_measureList.back()-&gt;tick() &gt;= m-&gt;tick())) {</span></span>
 <span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        1236 :             m_measureList.pop_back();</span></span>
 <span id="L78"><span class="lineNum">      78</span>              :         }</span>
 <span id="L79"><span class="lineNum">      79</span>              :     }</span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">        3694 :     addMeasure(m);</span></span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">        3694 : }</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">        3697 :     addMeasure(m);</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">        3697 : }</span></span>
 <span id="L82"><span class="lineNum">      82</span>              : </span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">        3844 : bool RepeatSegment::containsMeasure(Measure const* const m) const</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">        3856 : bool RepeatSegment::containsMeasure(Measure const* const m) const</span></span>
 <span id="L84"><span class="lineNum">      84</span>              : {</span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">       24776 :     for (Measure const* const measure : m_measureList) {</span></span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">       24562 :         if (measure == m) {</span></span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">        3630 :             return true;</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">       24806 :     for (Measure const* const measure : m_measureList) {</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">       24592 :         if (measure == m) {</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">        3642 :             return true;</span></span>
 <span id="L88"><span class="lineNum">      88</span>              :         }</span>
 <span id="L89"><span class="lineNum">      89</span>              :     }</span>
 <span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">         214 :     return false;</span></span>
 <span id="L91"><span class="lineNum">      91</span>              : }</span>
 <span id="L92"><span class="lineNum">      92</span>              : </span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">       42508 : bool RepeatSegment::endsWithMeasure(Measure const* const m) const</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">       42539 : bool RepeatSegment::endsWithMeasure(Measure const* const m) const</span></span>
 <span id="L94"><span class="lineNum">      94</span>              : {</span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">       42508 :     if (m_measureList.empty()) {</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">       42539 :     if (m_measureList.empty()) {</span></span>
 <span id="L96"><span class="lineNum">      96</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
 <span id="L97"><span class="lineNum">      97</span>              :     }</span>
 <span id="L98"><span class="lineNum">      98</span>              : </span>
-<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC tlaBgGNC">       42508 :     return m_measureList.back() == m;</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC tlaBgGNC">       42539 :     return m_measureList.back() == m;</span></span>
 <span id="L100"><span class="lineNum">     100</span>              : }</span>
 <span id="L101"><span class="lineNum">     101</span>              : </span>
 <span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">          53 : bool RepeatSegment::startsWithMeasure(const Measure* const m) const</span></span>
@@ -166,14 +166,14 @@
 <span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC tlaBgGNC">          53 :     return m_measureList.front() == m;</span></span>
 <span id="L109"><span class="lineNum">     109</span>              : }</span>
 <span id="L110"><span class="lineNum">     110</span>              : </span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        2613 : bool RepeatSegment::isEmpty() const</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        2616 : bool RepeatSegment::isEmpty() const</span></span>
 <span id="L112"><span class="lineNum">     112</span>              : {</span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">        2613 :     return m_measureList.empty();</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">        2616 :     return m_measureList.empty();</span></span>
 <span id="L114"><span class="lineNum">     114</span>              : }</span>
 <span id="L115"><span class="lineNum">     115</span>              : </span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">        5254 : int RepeatSegment::len() const</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">        5257 : int RepeatSegment::len() const</span></span>
 <span id="L117"><span class="lineNum">     117</span>              : {</span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">        5254 :     return (m_measureList.empty()) ? 0 : (m_measureList.back()-&gt;endTick().ticks() - tick);</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">        5257 :     return (m_measureList.empty()) ? 0 : (m_measureList.back()-&gt;endTick().ticks() - tick);</span></span>
 <span id="L119"><span class="lineNum">     119</span>              : }</span>
 <span id="L120"><span class="lineNum">     120</span>              : </span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">        1901 : int RepeatSegment::endTick() const</span></span>
@@ -193,10 +193,10 @@
 <span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">         599 :     return m_measureList;</span></span>
 <span id="L136"><span class="lineNum">     136</span>              : }</span>
 <span id="L137"><span class="lineNum">     137</span>              : </span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         697 : bool operator==(const RepeatSegment&amp; lhs, const RepeatSegment&amp; rhs)</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         698 : bool operator==(const RepeatSegment&amp; lhs, const RepeatSegment&amp; rhs)</span></span>
 <span id="L139"><span class="lineNum">     139</span>              : {</span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">         697 :     if (lhs.m_measureList.size() != rhs.m_measureList.size()) {</span></span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">         313 :         return false;</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">         698 :     if (lhs.m_measureList.size() != rhs.m_measureList.size()) {</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">         314 :         return false;</span></span>
 <span id="L142"><span class="lineNum">     142</span>              :     }</span>
 <span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">        3974 :     for (size_t i = 0; i &lt; lhs.m_measureList.size(); i++) {</span></span>
 <span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">        3591 :         if (lhs.m_measureList.at(i) != rhs.m_measureList.at(i)) {</span></span>
@@ -213,20 +213,20 @@
 <span id="L155"><span class="lineNum">     155</span>              : //   RepeatList</span>
 <span id="L156"><span class="lineNum">     156</span>              : //---------------------------------------------------------</span>
 <span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        4334 : RepeatList::RepeatList(Score* s)</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        4338 : RepeatList::RepeatList(Score* s)</span></span>
 <span id="L159"><span class="lineNum">     159</span>              : {</span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        4334 :     m_score = s;</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        4334 :     m_utick2tickHint = 0;</span></span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        4334 : }</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        4338 :     m_score = s;</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        4338 :     m_utick2tickHint = 0;</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        4338 : }</span></span>
 <span id="L163"><span class="lineNum">     163</span>              : </span>
 <span id="L164"><span class="lineNum">     164</span>              : //---------------------------------------------------------</span>
 <span id="L165"><span class="lineNum">     165</span>              : //   ~RepeatList</span>
 <span id="L166"><span class="lineNum">     166</span>              : //---------------------------------------------------------</span>
 <span id="L167"><span class="lineNum">     167</span>              : </span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">        3884 : RepeatList::~RepeatList()</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">        3888 : RepeatList::~RepeatList()</span></span>
 <span id="L169"><span class="lineNum">     169</span>              : {</span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">        3884 :     muse::DeleteAll(*this);</span></span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">        3884 : }</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">        3888 :     muse::DeleteAll(*this);</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">        3888 : }</span></span>
 <span id="L172"><span class="lineNum">     172</span>              : </span>
 <span id="L173"><span class="lineNum">     173</span>              : //---------------------------------------------------------</span>
 <span id="L174"><span class="lineNum">     174</span>              : //   ticks</span>
@@ -245,50 +245,50 @@
 <span id="L187"><span class="lineNum">     187</span>              : //   update</span>
 <span id="L188"><span class="lineNum">     188</span>              : //---------------------------------------------------------</span>
 <span id="L189"><span class="lineNum">     189</span>              : </span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">       37848 : void RepeatList::update(bool expand, bool updateTies)</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">       37886 : void RepeatList::update(bool expand, bool updateTies)</span></span>
 <span id="L191"><span class="lineNum">     191</span>              : {</span>
-<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">       37848 :     if (!m_scoreChanged &amp;&amp; expand == m_expanded) {</span></span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">       36044 :         return;</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">       37886 :     if (!m_scoreChanged &amp;&amp; expand == m_expanded) {</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">       36079 :         return;</span></span>
 <span id="L194"><span class="lineNum">     194</span>              :     }</span>
 <span id="L195"><span class="lineNum">     195</span>              : </span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">        1804 :     std::vector&lt;RepeatSegment&gt; oldSegments;</span></span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">        1804 :     oldSegments.reserve(size());</span></span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        2530 :     for (RepeatSegment* rs : *this) {</span></span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">         726 :         oldSegments.push_back(*rs);</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">        1807 :     std::vector&lt;RepeatSegment&gt; oldSegments;</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">        1807 :     oldSegments.reserve(size());</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        2534 :     for (RepeatSegment* rs : *this) {</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">         727 :         oldSegments.push_back(*rs);</span></span>
 <span id="L200"><span class="lineNum">     200</span>              :     }</span>
 <span id="L201"><span class="lineNum">     201</span>              : </span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">        1804 :     if (expand) {</span></span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">        1804 :         unwind();</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">        1807 :     if (expand) {</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">        1807 :         unwind();</span></span>
 <span id="L204"><span class="lineNum">     204</span>              :     } else {</span>
 <span id="L205"><span class="lineNum">     205</span> <span class="tlaUNC tlaBgUNC">           0 :         flatten();</span></span>
 <span id="L206"><span class="lineNum">     206</span>              :     }</span>
 <span id="L207"><span class="lineNum">     207</span>              : </span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC tlaBgGNC">        1804 :     bool structureChanged = (oldSegments.size() != size());</span></span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">        1804 :     if (!structureChanged) {</span></span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">         966 :         for (size_t i = 0; i &lt; size(); ++i) {</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">         697 :             if (!(oldSegments[i] == *at(i))) {</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">         314 :                 structureChanged = true;</span></span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">         314 :                 break;</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC tlaBgGNC">        1807 :     bool structureChanged = (oldSegments.size() != size());</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">        1807 :     if (!structureChanged) {</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">         967 :         for (size_t i = 0; i &lt; size(); ++i) {</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">         698 :             if (!(oldSegments[i] == *at(i))) {</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">         315 :                 structureChanged = true;</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">         315 :                 break;</span></span>
 <span id="L214"><span class="lineNum">     214</span>              :             }</span>
 <span id="L215"><span class="lineNum">     215</span>              :         }</span>
 <span id="L216"><span class="lineNum">     216</span>              :     }</span>
 <span id="L217"><span class="lineNum">     217</span>              : </span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">        1804 :     m_scoreChanged = false;</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">        1807 :     m_scoreChanged = false;</span></span>
 <span id="L219"><span class="lineNum">     219</span>              : </span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        1804 :     if (updateTies &amp;&amp; structureChanged) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        1807 :     if (updateTies &amp;&amp; structureChanged) {</span></span>
 <span id="L221"><span class="lineNum">     221</span> <span class="tlaUNC tlaBgUNC">           0 :         m_score-&gt;undoRemoveStaleTieJumpPoints();</span></span>
 <span id="L222"><span class="lineNum">     222</span>              :     }</span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC tlaBgGNC">        1804 : }</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC tlaBgGNC">        1807 : }</span></span>
 <span id="L224"><span class="lineNum">     224</span>              : </span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">        1756 : void RepeatList::updateUticks()</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">        1759 : void RepeatList::updateUticks()</span></span>
 <span id="L226"><span class="lineNum">     226</span>              : {</span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        1756 :     int utick = 0;</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        1759 :     int utick = 0;</span></span>
 <span id="L228"><span class="lineNum">     228</span>              : </span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        4311 :     for (RepeatSegment* s : *this) {</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        2555 :         s-&gt;utick = utick;</span></span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        2555 :         utick += s-&gt;len();</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        4317 :     for (RepeatSegment* s : *this) {</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        2558 :         s-&gt;utick = utick;</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        2558 :         utick += s-&gt;len();</span></span>
 <span id="L232"><span class="lineNum">     232</span>              :     }</span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        1756 : }</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        1759 : }</span></span>
 <span id="L234"><span class="lineNum">     234</span>              : </span>
 <span id="L235"><span class="lineNum">     235</span>              : //---------------------------------------------------------</span>
 <span id="L236"><span class="lineNum">     236</span>              : //   utick2tick</span>
@@ -413,19 +413,19 @@
 <span id="L355"><span class="lineNum">     355</span>              :     int repeatCount;</span>
 <span id="L356"><span class="lineNum">     356</span>              : </span>
 <span id="L357"><span class="lineNum">     357</span>              : public:</span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC tlaBgGNC">        4933 :     RepeatListElement(RepeatListElementType type, EngravingItem const* const el, Measure const* const m)</span></span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">        4933 :         : repeatListElementType(type), element(el), measure(m)</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC tlaBgGNC">        4939 :     RepeatListElement(RepeatListElementType type, EngravingItem const* const el, Measure const* const m)</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">        4939 :         : repeatListElementType(type), element(el), measure(m)</span></span>
 <span id="L360"><span class="lineNum">     360</span>              :     {</span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        4933 :         repeatCount = (type == RepeatListElementType::REPEAT_START) ? 1 : 0;</span></span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">        4933 :     }</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        4939 :         repeatCount = (type == RepeatListElementType::REPEAT_START) ? 1 : 0;</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">        4939 :     }</span></span>
 <span id="L363"><span class="lineNum">     363</span>              : </span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">        1427 :     ~RepeatListElement()</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">        1429 :     ~RepeatListElement()</span></span>
 <span id="L365"><span class="lineNum">     365</span>              :     {</span>
 <span id="L366"><span class="lineNum">     366</span>              :         // Voltas are cloned elements, we need to cleanup ourselves</span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">        1427 :         if (repeatListElementType == RepeatListElementType::VOLTA_START) {</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">        1429 :         if (repeatListElementType == RepeatListElementType::VOLTA_START) {</span></span>
 <span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">          58 :             delete element;</span></span>
 <span id="L369"><span class="lineNum">     369</span>              :         }</span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">        1427 :     }</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">        1429 :     }</span></span>
 <span id="L371"><span class="lineNum">     371</span>              : </span>
 <span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">        1587 :     int getRepeatCount() const { return repeatCount; }</span></span>
 <span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">        1011 :     void addToRepeatCount(int add) { repeatCount += add; }</span></span>
@@ -435,37 +435,37 @@
 <span id="L377"><span class="lineNum">     377</span>              : /// \brief Collects all RepeatListElementType elements in the score</span>
 <span id="L378"><span class="lineNum">     378</span>              : /// \details Those are the only type of elements that actually influence playback order</span>
 <span id="L379"><span class="lineNum">     379</span>              : ///---------------------------------------------------------</span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">        1756 : void RepeatList::collectRepeatListElements()</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">        1759 : void RepeatList::collectRepeatListElements()</span></span>
 <span id="L381"><span class="lineNum">     381</span>              : {</span>
-<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">        1756 :     RepeatListElementList sectionRLElements;</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">        1759 :     RepeatListElementList sectionRLElements;</span></span>
 <span id="L383"><span class="lineNum">     383</span>              : </span>
 <span id="L384"><span class="lineNum">     384</span>              :     // Clear out previous listing</span>
-<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">        2323 :     for (const RepeatListElementList&amp; srle : m_rlElements) {</span></span>
-<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">         567 :         muse::DeleteAll(srle);</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">        2327 :     for (const RepeatListElementList&amp; srle : m_rlElements) {</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">         568 :         muse::DeleteAll(srle);</span></span>
 <span id="L387"><span class="lineNum">     387</span>              :     }</span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">        1756 :     m_rlElements.clear();</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">        1759 :     m_rlElements.clear();</span></span>
 <span id="L389"><span class="lineNum">     389</span>              : </span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">        1756 :     RepeatListElement* startFromRepeatMeasure = nullptr;</span></span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">        1759 :     RepeatListElement* startFromRepeatMeasure = nullptr;</span></span>
 <span id="L391"><span class="lineNum">     391</span>              : </span>
 <span id="L392"><span class="lineNum">     392</span>              :     // Section breaks may occur on non-Measure frames, so must search list of all MeasureBases</span>
 <span id="L393"><span class="lineNum">     393</span>              :     // unwinding itself will only use actual Measures</span>
-<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">        1756 :     MeasureBase* mb = m_score-&gt;firstMeasureMM();</span></span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">        1759 :     MeasureBase* mb = m_score-&gt;firstMeasureMM();</span></span>
 <span id="L395"><span class="lineNum">     395</span>              :     // First measure of a section/score is always used as a reference REPEAT_START point</span>
 <span id="L396"><span class="lineNum">     396</span>              :     // even if it doesn't have a start repeat</span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">        1756 :     startFromRepeatMeasure = new RepeatListElement(RepeatListElementType::REPEAT_START, mb, toMeasure(mb));</span></span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">        1756 :     sectionRLElements.push_back(startFromRepeatMeasure);</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">        1759 :     startFromRepeatMeasure = new RepeatListElement(RepeatListElementType::REPEAT_START, mb, toMeasure(mb));</span></span>
+<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">        1759 :     sectionRLElements.push_back(startFromRepeatMeasure);</span></span>
 <span id="L399"><span class="lineNum">     399</span>              :     // Also trace down the final actual measure of this section (in case a frame follows)</span>
-<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">        1756 :     MeasureBase* sectionEndMeasureBase = nullptr;</span></span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">        1759 :     MeasureBase* sectionEndMeasureBase = nullptr;</span></span>
 <span id="L401"><span class="lineNum">     401</span>              :     // Used to track voltas; overlappings and real endings</span>
 <span id="L402"><span class="lineNum">     402</span>              :     Volta* volta;</span>
-<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">        1756 :     std::list&lt;Volta*&gt; preProcessedVoltas;</span></span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">        1759 :     std::list&lt;Volta*&gt; preProcessedVoltas;</span></span>
 <span id="L404"><span class="lineNum">     404</span>              : </span>
 <span id="L405"><span class="lineNum">     405</span>              :     // Voltas might overlap (duplicate entries on multiple staves or &quot;real&quot; overlaps)</span>
 <span id="L406"><span class="lineNum">     406</span>              :     // so we will pre-process them into cloned versions that handle those overlaps.</span>
 <span id="L407"><span class="lineNum">     407</span>              :     // This assumes that spanners are ordered from first to last tick-wise</span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">        3038 :     for (const auto&amp; spannerEntry : m_score-&gt;spanner()) {</span></span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">        1282 :         if (!spannerEntry.second-&gt;isVolta() || !spannerEntry.second-&gt;playSpanner()) {</span></span>
-<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">        1048 :             continue;</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">        3048 :     for (const auto&amp; spannerEntry : m_score-&gt;spanner()) {</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">        1289 :         if (!spannerEntry.second-&gt;isVolta() || !spannerEntry.second-&gt;playSpanner()) {</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">        1055 :             continue;</span></span>
 <span id="L411"><span class="lineNum">     411</span>              :         }</span>
 <span id="L412"><span class="lineNum">     412</span>              : </span>
 <span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">         234 :         if (!spannerEntry.second-&gt;startMeasure() || !spannerEntry.second-&gt;endMeasure()) {</span></span>
@@ -533,15 +533,15 @@
 <span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">         126 :         }</span></span>
 <span id="L476"><span class="lineNum">     476</span>              :     }</span>
 <span id="L477"><span class="lineNum">     477</span>              : </span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">        1756 :     volta = nullptr;</span></span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">       14456 :     for (; mb; mb = mb-&gt;nextMM()) {</span></span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">       14456 :         if (mb-&gt;isMeasure()) {</span></span>
-<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">       14384 :             Measure* m = toMeasure(mb);</span></span>
-<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">       14384 :             sectionEndMeasureBase = mb; // ending measure of section is the most recently encountered actual Measure</span></span>
-<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">       14384 :             Measure* underlyingMeasure = m-&gt;isMMRest() ? m-&gt;mmRestFirst() : m;</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">        1759 :     volta = nullptr;</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">       14470 :     for (; mb; mb = mb-&gt;nextMM()) {</span></span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">       14470 :         if (mb-&gt;isMeasure()) {</span></span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">       14398 :             Measure* m = toMeasure(mb);</span></span>
+<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">       14398 :             sectionEndMeasureBase = mb; // ending measure of section is the most recently encountered actual Measure</span></span>
+<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">       14398 :             Measure* underlyingMeasure = m-&gt;isMMRest() ? m-&gt;mmRestFirst() : m;</span></span>
 <span id="L484"><span class="lineNum">     484</span>              : </span>
 <span id="L485"><span class="lineNum">     485</span>              :             // Volta ?</span>
-<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">       14384 :             if ((!preProcessedVoltas.empty()) &amp;&amp; (preProcessedVoltas.front()-&gt;startMeasure() == underlyingMeasure)) {</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">       14398 :             if ((!preProcessedVoltas.empty()) &amp;&amp; (preProcessedVoltas.front()-&gt;startMeasure() == underlyingMeasure)) {</span></span>
 <span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">         217 :                 if (volta != nullptr) {</span></span>
 <span id="L488"><span class="lineNum">     488</span>              :                     //if (volta-&gt;endMeasure()-&gt;tick() &lt; m-&gt;tick()) {</span>
 <span id="L489"><span class="lineNum">     489</span>              :                     // The previous volta was supposed to end before us (open volta case) -&gt; insert the end</span>
@@ -557,7 +557,7 @@
 <span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">         217 :                 preProcessedVoltas.pop_front();</span></span>
 <span id="L500"><span class="lineNum">     500</span>              :             }</span>
 <span id="L501"><span class="lineNum">     501</span>              :             // Start</span>
-<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">       14384 :             if (m-&gt;repeatStart()) {</span></span>
+<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">       14398 :             if (m-&gt;repeatStart()) {</span></span>
 <span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">         169 :                 if (volta != nullptr) {</span></span>
 <span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">           7 :                     if (volta-&gt;startMeasure() != underlyingMeasure) {</span></span>
 <span id="L505"><span class="lineNum">     505</span>              :                         // Volta and Start repeat are not on the same measure</span>
@@ -573,12 +573,12 @@
 <span id="L515"><span class="lineNum">     515</span> <span class="tlaGNC">         169 :                 sectionRLElements.push_back(startFromRepeatMeasure);</span></span>
 <span id="L516"><span class="lineNum">     516</span>              :             }</span>
 <span id="L517"><span class="lineNum">     517</span>              :             // Jumps and Markers</span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">       16151 :             for (EngravingItem* e : m-&gt;el()) {</span></span>
-<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">        1767 :                 if (e-&gt;systemFlag() &amp;&amp; !e-&gt;isTopSystemObject()) {</span></span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">       16167 :             for (EngravingItem* e : m-&gt;el()) {</span></span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">        1769 :                 if (e-&gt;systemFlag() &amp;&amp; !e-&gt;isTopSystemObject()) {</span></span>
 <span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">           2 :                     continue;</span></span>
 <span id="L521"><span class="lineNum">     521</span>              :                 }</span>
 <span id="L522"><span class="lineNum">     522</span>              : </span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">        1765 :                 if (e-&gt;isJump()) {</span></span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">        1767 :                 if (e-&gt;isJump()) {</span></span>
 <span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">         188 :                     sectionRLElements.push_back(new RepeatListElement(RepeatListElementType::JUMP, e, m));</span></span>
 <span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">         188 :                     if (volta != nullptr) {</span></span>
 <span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">          22 :                         if ((volta-&gt;endMeasure()-&gt;tick() &lt; m-&gt;tick())</span></span>
@@ -600,7 +600,7 @@
 <span id="L542"><span class="lineNum">     542</span>              :                         }</span>
 <span id="L543"><span class="lineNum">     543</span>              :                         //else { // Volta is spanning past this jump instruction }</span>
 <span id="L544"><span class="lineNum">     544</span>              :                     }</span>
-<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">        1577 :                 } else if (e-&gt;isMarker()) {</span></span>
+<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">        1579 :                 } else if (e-&gt;isMarker()) {</span></span>
 <span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">         273 :                     RepeatListElement* markerRLE = new RepeatListElement(RepeatListElementType::MARKER, e, m);</span></span>
 <span id="L547"><span class="lineNum">     547</span>              :                     // There may be multiple markers in the same measure. Make sure we place right markers before left</span>
 <span id="L548"><span class="lineNum">     548</span>              :                     // At the same time, we should ensure Markers are evaluated before Jumps</span>
@@ -631,7 +631,7 @@
 <span id="L573"><span class="lineNum">     573</span>              :                 }</span>
 <span id="L574"><span class="lineNum">     574</span>              :             }</span>
 <span id="L575"><span class="lineNum">     575</span>              :             // End</span>
-<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">       14384 :             if (m-&gt;repeatEnd()) {</span></span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">       14398 :             if (m-&gt;repeatEnd()) {</span></span>
 <span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC">         297 :                 sectionRLElements.push_back(new RepeatListElement(RepeatListElementType::REPEAT_END, m, m));</span></span>
 <span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">         297 :                 if (startFromRepeatMeasure != nullptr) {</span></span>
 <span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">         297 :                     startFromRepeatMeasure-&gt;addToRepeatCount(m-&gt;repeatCount() - 1);</span></span>
@@ -648,18 +648,18 @@
 <span id="L590"><span class="lineNum">     590</span>              :                 }</span>
 <span id="L591"><span class="lineNum">     591</span>              :             }</span>
 <span id="L592"><span class="lineNum">     592</span>              :             // Volta end</span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">       28768 :             if ((volta != nullptr)</span></span>
+<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">       28796 :             if ((volta != nullptr)</span></span>
 <span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">         218 :                 &amp;&amp; (volta-&gt;endMeasure()-&gt;tick() == m-&gt;tick())</span></span>
-<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">       14602 :                 &amp;&amp; (volta-&gt;getProperty(Pid::END_HOOK_TYPE).value&lt;HookType&gt;() != HookType::NONE)) {</span></span>
+<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">       14616 :                 &amp;&amp; (volta-&gt;getProperty(Pid::END_HOOK_TYPE).value&lt;HookType&gt;() != HookType::NONE)) {</span></span>
 <span id="L596"><span class="lineNum">     596</span>              :                 // end of closed volta</span>
 <span id="L597"><span class="lineNum">     597</span> <span class="tlaGNC">          38 :                 sectionRLElements.push_back(new RepeatListElement(RepeatListElementType::VOLTA_END, volta, m));</span></span>
 <span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">          38 :                 volta = nullptr;</span></span>
 <span id="L599"><span class="lineNum">     599</span>              :             }</span>
 <span id="L600"><span class="lineNum">     600</span>              :         }</span>
 <span id="L601"><span class="lineNum">     601</span>              :         // Section break (or end of score)</span>
-<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">       14456 :         if (mb-&gt;sectionBreak() || !mb-&gt;nextMeasureMM()) {</span></span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">        1786 :             if (sectionEndMeasureBase != nullptr) {</span></span>
-<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">        1786 :                 if (volta != nullptr) {</span></span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">       14470 :         if (mb-&gt;sectionBreak() || !mb-&gt;nextMeasureMM()) {</span></span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">        1789 :             if (sectionEndMeasureBase != nullptr) {</span></span>
+<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">        1789 :                 if (volta != nullptr) {</span></span>
 <span id="L605"><span class="lineNum">     605</span>              :                     //if (volta-&gt;endMeasure()-&gt;tick() &lt; mb-&gt;tick()) {</span>
 <span id="L606"><span class="lineNum">     606</span>              :                     // The previous volta was supposed to end before us (open volta case) -&gt; insert the end</span>
 <span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC">          42 :                     sectionRLElements.push_back(new RepeatListElement(RepeatListElementType::VOLTA_END, volta,</span></span>
@@ -670,14 +670,14 @@
 <span id="L612"><span class="lineNum">     612</span>              :                     //    // and adding it again at the start of the next section</span>
 <span id="L613"><span class="lineNum">     613</span>              :                     //}</span>
 <span id="L614"><span class="lineNum">     614</span>              :                 }</span>
-<span id="L615"><span class="lineNum">     615</span> <span class="tlaGNC">        1786 :                 sectionRLElements.push_back(new RepeatListElement(RepeatListElementType::SECTION_BREAK, mb,</span></span>
-<span id="L616"><span class="lineNum">     616</span> <span class="tlaGNC">        1786 :                                                                   toMeasure(sectionEndMeasureBase)));</span></span>
-<span id="L617"><span class="lineNum">     617</span> <span class="tlaGNC">        1786 :                 sectionEndMeasureBase = nullptr; // reset to indicate not having found the end for the next section</span></span>
+<span id="L615"><span class="lineNum">     615</span> <span class="tlaGNC">        1789 :                 sectionRLElements.push_back(new RepeatListElement(RepeatListElementType::SECTION_BREAK, mb,</span></span>
+<span id="L616"><span class="lineNum">     616</span> <span class="tlaGNC">        1789 :                                                                   toMeasure(sectionEndMeasureBase)));</span></span>
+<span id="L617"><span class="lineNum">     617</span> <span class="tlaGNC">        1789 :                 sectionEndMeasureBase = nullptr; // reset to indicate not having found the end for the next section</span></span>
 <span id="L618"><span class="lineNum">     618</span>              :                 // store section</span>
-<span id="L619"><span class="lineNum">     619</span> <span class="tlaGNC">        1786 :                 m_rlElements.push_back(sectionRLElements);</span></span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaGNC">        1789 :                 m_rlElements.push_back(sectionRLElements);</span></span>
 <span id="L620"><span class="lineNum">     620</span>              :             }</span>
 <span id="L621"><span class="lineNum">     621</span>              :             // prepare for new section</span>
-<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC">        1786 :             if (Measure* nextMeas = mb-&gt;nextMeasureMM()) {</span></span>
+<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC">        1789 :             if (Measure* nextMeas = mb-&gt;nextMeasureMM()) {</span></span>
 <span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">          30 :                 sectionRLElements = RepeatListElementList();</span></span>
 <span id="L624"><span class="lineNum">     624</span>              :                 // First measure of a section/score is always used as a reference REPEAT_START point</span>
 <span id="L625"><span class="lineNum">     625</span>              :                 // even if it doesn't have a start repeat</span>
@@ -686,11 +686,11 @@
 <span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">          30 :                 sectionRLElements.push_back(startFromRepeatMeasure);</span></span>
 <span id="L629"><span class="lineNum">     629</span>              :             } else {</span>
 <span id="L630"><span class="lineNum">     630</span>              :                 // no more measures -&gt; done</span>
-<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">        1756 :                 break;</span></span>
+<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">        1759 :                 break;</span></span>
 <span id="L632"><span class="lineNum">     632</span>              :             }</span>
 <span id="L633"><span class="lineNum">     633</span>              :         }</span>
 <span id="L634"><span class="lineNum">     634</span>              :     }</span>
-<span id="L635"><span class="lineNum">     635</span> <span class="tlaGNC">        1756 : }</span></span>
+<span id="L635"><span class="lineNum">     635</span> <span class="tlaGNC">        1759 : }</span></span>
 <span id="L636"><span class="lineNum">     636</span>              : </span>
 <span id="L637"><span class="lineNum">     637</span>              : ///</span>
 <span id="L638"><span class="lineNum">     638</span>              : /// \brief Finds a matching marker in the score (section first)</span>
@@ -842,59 +842,59 @@
 <span id="L784"><span class="lineNum">     784</span>              : ///</span>
 <span id="L785"><span class="lineNum">     785</span>              : /// \brief RepeatList::unwind</span>
 <span id="L786"><span class="lineNum">     786</span>              : ///</span>
-<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">        1804 : void RepeatList::unwind()</span></span>
+<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">        1807 : void RepeatList::unwind()</span></span>
 <span id="L788"><span class="lineNum">     788</span>              : {</span>
-<span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">        1818 :     TRACEFUNC;</span></span>
+<span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">        1821 :     TRACEFUNC;</span></span>
 <span id="L790"><span class="lineNum">     790</span>              : </span>
-<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">        1804 :     muse::DeleteAll(*this);</span></span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">        1804 :     clear();</span></span>
-<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">        1804 :     m_jumpsTaken.clear();</span></span>
+<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">        1807 :     muse::DeleteAll(*this);</span></span>
+<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">        1807 :     clear();</span></span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">        1807 :     m_jumpsTaken.clear();</span></span>
 <span id="L794"><span class="lineNum">     794</span>              : </span>
-<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">        1804 :     if (!m_score-&gt;firstMeasureMM()) {</span></span>
+<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">        1807 :     if (!m_score-&gt;firstMeasureMM()) {</span></span>
 <span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">          48 :         return;</span></span>
 <span id="L797"><span class="lineNum">     797</span>              :     }</span>
 <span id="L798"><span class="lineNum">     798</span>              : </span>
-<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">        1756 :     collectRepeatListElements();</span></span>
+<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">        1759 :     collectRepeatListElements();</span></span>
 <span id="L800"><span class="lineNum">     800</span>              : </span>
 <span id="L801"><span class="lineNum">     801</span>              :     // Following variables are used during unwinding, but may be altered when following jumps</span>
 <span id="L802"><span class="lineNum">     802</span>              :     // Therefor they are declared outside of the loop</span>
-<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC">        1756 :     RepeatSegment* rs = nullptr;</span></span>
+<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC">        1759 :     RepeatSegment* rs = nullptr;</span></span>
 <span id="L804"><span class="lineNum">     804</span>              :     int playbackCount;</span>
-<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">        1756 :     Volta const* activeVolta = nullptr;</span></span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">        1759 :     Volta const* activeVolta = nullptr;</span></span>
 <span id="L806"><span class="lineNum">     806</span>              :     std::pair&lt;std::vector&lt;RepeatListElementList&gt;::const_iterator, RepeatListElementList::const_iterator&gt; playUntil</span>
-<span id="L807"><span class="lineNum">     807</span> <span class="tlaGNC">        1756 :         = std::make_pair(m_rlElements.cend(), m_rlElements[0].cend());</span></span>
+<span id="L807"><span class="lineNum">     807</span> <span class="tlaGNC">        1759 :         = std::make_pair(m_rlElements.cend(), m_rlElements[0].cend());</span></span>
 <span id="L808"><span class="lineNum">     808</span>              :     std::pair&lt;std::vector&lt;RepeatListElementList&gt;::const_iterator, RepeatListElementList::const_iterator&gt; continueAt</span>
-<span id="L809"><span class="lineNum">     809</span> <span class="tlaGNC">        1756 :         = std::make_pair(m_rlElements.cend(), m_rlElements[0].cend());</span></span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">        1756 :     Jump const* activeJump = nullptr;</span></span>
-<span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC">        1756 :     bool forceFinalRepeat = false;   // Used during jump processing</span></span>
-<span id="L812"><span class="lineNum">     812</span> <span class="tlaGNC">        1756 :     RepeatListElementList::const_iterator repeatListElementIt;</span></span>
+<span id="L809"><span class="lineNum">     809</span> <span class="tlaGNC">        1759 :         = std::make_pair(m_rlElements.cend(), m_rlElements[0].cend());</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">        1759 :     Jump const* activeJump = nullptr;</span></span>
+<span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC">        1759 :     bool forceFinalRepeat = false;   // Used during jump processing</span></span>
+<span id="L812"><span class="lineNum">     812</span> <span class="tlaGNC">        1759 :     RepeatListElementList::const_iterator repeatListElementIt;</span></span>
 <span id="L813"><span class="lineNum">     813</span>              : </span>
-<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">        3542 :     for (std::vector&lt;RepeatListElementList&gt;::const_iterator sectionIt = m_rlElements.cbegin(); sectionIt != m_rlElements.cend();</span></span>
-<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">        1786 :          ++sectionIt) {</span></span>
+<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">        3548 :     for (std::vector&lt;RepeatListElementList&gt;::const_iterator sectionIt = m_rlElements.cbegin(); sectionIt != m_rlElements.cend();</span></span>
+<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">        1789 :          ++sectionIt) {</span></span>
 <span id="L816"><span class="lineNum">     816</span>              :         // Unwind this section</span>
 <span id="L817"><span class="lineNum">     817</span>              :         RepeatListElement const* startRepeatReference;</span>
-<span id="L818"><span class="lineNum">     818</span> <span class="tlaGNC">        1786 :         playbackCount = 1;</span></span>
-<span id="L819"><span class="lineNum">     819</span> <span class="tlaGNC">        1786 :         repeatListElementIt = sectionIt-&gt;cbegin();     // Should always be a REPEAT_START indicator</span></span>
-<span id="L820"><span class="lineNum">     820</span> <span class="tlaGNC">        1786 :         startRepeatReference = *repeatListElementIt;</span></span>
-<span id="L821"><span class="lineNum">     821</span> <span class="tlaGNC">        1786 :         activeVolta = nullptr;</span></span>
-<span id="L822"><span class="lineNum">     822</span> <span class="tlaGNC">        1786 :         playUntil.first = m_rlElements.cend();</span></span>
-<span id="L823"><span class="lineNum">     823</span> <span class="tlaGNC">        1786 :         continueAt.first = m_rlElements.cend();</span></span>
-<span id="L824"><span class="lineNum">     824</span> <span class="tlaGNC">        1786 :         forceFinalRepeat = false;</span></span>
+<span id="L818"><span class="lineNum">     818</span> <span class="tlaGNC">        1789 :         playbackCount = 1;</span></span>
+<span id="L819"><span class="lineNum">     819</span> <span class="tlaGNC">        1789 :         repeatListElementIt = sectionIt-&gt;cbegin();     // Should always be a REPEAT_START indicator</span></span>
+<span id="L820"><span class="lineNum">     820</span> <span class="tlaGNC">        1789 :         startRepeatReference = *repeatListElementIt;</span></span>
+<span id="L821"><span class="lineNum">     821</span> <span class="tlaGNC">        1789 :         activeVolta = nullptr;</span></span>
+<span id="L822"><span class="lineNum">     822</span> <span class="tlaGNC">        1789 :         playUntil.first = m_rlElements.cend();</span></span>
+<span id="L823"><span class="lineNum">     823</span> <span class="tlaGNC">        1789 :         continueAt.first = m_rlElements.cend();</span></span>
+<span id="L824"><span class="lineNum">     824</span> <span class="tlaGNC">        1789 :         forceFinalRepeat = false;</span></span>
 <span id="L825"><span class="lineNum">     825</span>              : </span>
-<span id="L826"><span class="lineNum">     826</span> <span class="tlaGNC">        1786 :         rs = new RepeatSegment(playbackCount);</span></span>
-<span id="L827"><span class="lineNum">     827</span> <span class="tlaGNC">        1786 :         rs-&gt;addMeasure((*repeatListElementIt)-&gt;measure);</span></span>
-<span id="L828"><span class="lineNum">     828</span> <span class="tlaGNC">        1786 :         ++repeatListElementIt;</span></span>
+<span id="L826"><span class="lineNum">     826</span> <span class="tlaGNC">        1789 :         rs = new RepeatSegment(playbackCount);</span></span>
+<span id="L827"><span class="lineNum">     827</span> <span class="tlaGNC">        1789 :         rs-&gt;addMeasure((*repeatListElementIt)-&gt;measure);</span></span>
+<span id="L828"><span class="lineNum">     828</span> <span class="tlaGNC">        1789 :         ++repeatListElementIt;</span></span>
 <span id="L829"><span class="lineNum">     829</span>              : </span>
-<span id="L830"><span class="lineNum">     830</span> <span class="tlaGNC">        5852 :         while (repeatListElementIt != sectionIt-&gt;cend()) {</span></span>
-<span id="L831"><span class="lineNum">     831</span> <span class="tlaGNC">        4066 :             if (rs) {</span></span>
-<span id="L832"><span class="lineNum">     832</span> <span class="tlaGNC">        3694 :                 rs-&gt;addMeasures((*repeatListElementIt)-&gt;measure);</span></span>
+<span id="L830"><span class="lineNum">     830</span> <span class="tlaGNC">        5858 :         while (repeatListElementIt != sectionIt-&gt;cend()) {</span></span>
+<span id="L831"><span class="lineNum">     831</span> <span class="tlaGNC">        4069 :             if (rs) {</span></span>
+<span id="L832"><span class="lineNum">     832</span> <span class="tlaGNC">        3697 :                 rs-&gt;addMeasures((*repeatListElementIt)-&gt;measure);</span></span>
 <span id="L833"><span class="lineNum">     833</span>              :             }</span>
-<span id="L834"><span class="lineNum">     834</span> <span class="tlaGNC">        4066 :             switch ((*repeatListElementIt)-&gt;repeatListElementType) {</span></span>
-<span id="L835"><span class="lineNum">     835</span> <span class="tlaGNC">        1761 :             case RepeatListElementType::SECTION_BREAK: {</span></span>
-<span id="L836"><span class="lineNum">     836</span> <span class="tlaGNC">        1761 :                 if ((rs != nullptr) &amp;&amp; (!rs-&gt;isEmpty())) {</span></span>
-<span id="L837"><span class="lineNum">     837</span> <span class="tlaGNC">        1752 :                     push_back(rs);</span></span>
+<span id="L834"><span class="lineNum">     834</span> <span class="tlaGNC">        4069 :             switch ((*repeatListElementIt)-&gt;repeatListElementType) {</span></span>
+<span id="L835"><span class="lineNum">     835</span> <span class="tlaGNC">        1764 :             case RepeatListElementType::SECTION_BREAK: {</span></span>
+<span id="L836"><span class="lineNum">     836</span> <span class="tlaGNC">        1764 :                 if ((rs != nullptr) &amp;&amp; (!rs-&gt;isEmpty())) {</span></span>
+<span id="L837"><span class="lineNum">     837</span> <span class="tlaGNC">        1755 :                     push_back(rs);</span></span>
 <span id="L838"><span class="lineNum">     838</span>              :                 }</span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">        1761 :             } break;</span></span>
+<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">        1764 :             } break;</span></span>
 <span id="L840"><span class="lineNum">     840</span> <span class="tlaGNC">         458 :             case RepeatListElementType::VOLTA_START: {</span></span>
 <span id="L841"><span class="lineNum">     841</span> <span class="tlaGNC">         458 :                 activeVolta = toVolta((*repeatListElementIt)-&gt;element);</span></span>
 <span id="L842"><span class="lineNum">     842</span> <span class="tlaGNC">         458 :                 if (!(activeVolta-&gt;hasEnding(playbackCount))) {</span></span>
@@ -1105,26 +1105,26 @@
 <span id="L1047"><span class="lineNum">    1047</span>              :                 }</span>
 <span id="L1048"><span class="lineNum">    1048</span> <span class="tlaGNC">         352 :             } break;</span></span>
 <span id="L1049"><span class="lineNum">    1049</span>              :             }</span>
-<span id="L1050"><span class="lineNum">    1050</span> <span class="tlaGNC">        3678 :             ++repeatListElementIt;</span></span>
+<span id="L1050"><span class="lineNum">    1050</span> <span class="tlaGNC">        3681 :             ++repeatListElementIt;</span></span>
 <span id="L1051"><span class="lineNum">    1051</span>              :         }</span>
 <span id="L1052"><span class="lineNum">    1052</span>              : </span>
 <span id="L1053"><span class="lineNum">    1053</span>              :         // Reached the end of this section</span>
-<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaGNC">        1786 :         if (!this-&gt;empty()) {</span></span>
+<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaGNC">        1789 :         if (!this-&gt;empty()) {</span></span>
 <span id="L1055"><span class="lineNum">    1055</span>              :             // Inform the last RepeatSegment that the Section Break pause property should be honored now</span>
-<span id="L1056"><span class="lineNum">    1056</span> <span class="tlaGNC">        1785 :             rs = this-&gt;back();</span></span>
-<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaGNC">        1785 :             repeatListElementIt = sectionIt-&gt;cend() - 1;</span></span>
-<span id="L1058"><span class="lineNum">    1058</span> <span class="tlaGNC">        1785 :             assert((*repeatListElementIt)-&gt;repeatListElementType == RepeatListElementType::SECTION_BREAK);</span></span>
+<span id="L1056"><span class="lineNum">    1056</span> <span class="tlaGNC">        1788 :             rs = this-&gt;back();</span></span>
+<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaGNC">        1788 :             repeatListElementIt = sectionIt-&gt;cend() - 1;</span></span>
+<span id="L1058"><span class="lineNum">    1058</span> <span class="tlaGNC">        1788 :             assert((*repeatListElementIt)-&gt;repeatListElementType == RepeatListElementType::SECTION_BREAK);</span></span>
 <span id="L1059"><span class="lineNum">    1059</span>              : </span>
-<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaGNC">        1785 :             LayoutBreak const* const layoutBreak = toMeasureBase((*repeatListElementIt)-&gt;element)-&gt;sectionBreakElement();</span></span>
-<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaGNC">        1785 :             if (layoutBreak != nullptr) {</span></span>
+<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaGNC">        1788 :             LayoutBreak const* const layoutBreak = toMeasureBase((*repeatListElementIt)-&gt;element)-&gt;sectionBreakElement();</span></span>
+<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaGNC">        1788 :             if (layoutBreak != nullptr) {</span></span>
 <span id="L1062"><span class="lineNum">    1062</span> <span class="tlaGNC">          31 :                 rs-&gt;pause = layoutBreak-&gt;pause();</span></span>
 <span id="L1063"><span class="lineNum">    1063</span>              :             }</span>
 <span id="L1064"><span class="lineNum">    1064</span>              :         }</span>
 <span id="L1065"><span class="lineNum">    1065</span>              :     }</span>
 <span id="L1066"><span class="lineNum">    1066</span>              : </span>
-<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaGNC">        1756 :     updateUticks();</span></span>
-<span id="L1068"><span class="lineNum">    1068</span> <span class="tlaGNC">        1756 :     m_expanded = true;</span></span>
-<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaGNC">        1804 : }</span></span>
+<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaGNC">        1759 :     updateUticks();</span></span>
+<span id="L1068"><span class="lineNum">    1068</span> <span class="tlaGNC">        1759 :     m_expanded = true;</span></span>
+<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaGNC">        1807 : }</span></span>
 <span id="L1070"><span class="lineNum">    1070</span>              : }</span>
         </pre>
               </td>

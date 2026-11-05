@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -123,17 +123,17 @@
 <span id="L65"><span class="lineNum">      65</span>              : using namespace mu::engraving;</span>
 <span id="L66"><span class="lineNum">      66</span>              : using namespace mu::engraving::read500;</span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">        6498 : void MeasureRead::readMeasure(Measure* measure, XmlReader&amp; e, ReadContext&amp; ctx, int staffIdx)</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">        6506 : void MeasureRead::readMeasure(Measure* measure, XmlReader&amp; e, ReadContext&amp; ctx, int staffIdx)</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : {</span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">        6498 :     IF_ASSERT_FAILED(ctx.isSameScore(measure)) {</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">        6506 :     IF_ASSERT_FAILED(ctx.isSameScore(measure)) {</span></span>
 <span id="L71"><span class="lineNum">      71</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L72"><span class="lineNum">      72</span>              :     }</span>
 <span id="L73"><span class="lineNum">      73</span>              : </span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC tlaBgGNC">        6498 :     ctx.setCurrentMeasure(measure);</span></span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">        6498 :     int nextTrack = staffIdx * VOICES;</span></span>
-<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        6498 :     ctx.setTrack(nextTrack);</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC tlaBgGNC">        6506 :     ctx.setCurrentMeasure(measure);</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">        6506 :     int nextTrack = staffIdx * VOICES;</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        6506 :     ctx.setTrack(nextTrack);</span></span>
 <span id="L77"><span class="lineNum">      77</span>              : </span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">        6498 :     for (int n = int(measure-&gt;mstaves().size()); n &lt;= staffIdx; ++n) {</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">        6506 :     for (int n = int(measure-&gt;mstaves().size()); n &lt;= staffIdx; ++n) {</span></span>
 <span id="L79"><span class="lineNum">      79</span> <span class="tlaUNC tlaBgUNC">           0 :         Staff* staff = ctx.staff(n);</span></span>
 <span id="L80"><span class="lineNum">      80</span> <span class="tlaUNC">           0 :         MStaff* s = new MStaff;</span></span>
 <span id="L81"><span class="lineNum">      81</span> <span class="tlaUNC">           0 :         s-&gt;setLines(Factory::createStaffLines(measure));</span></span>
@@ -142,8 +142,8 @@
 <span id="L84"><span class="lineNum">      84</span> <span class="tlaUNC">           0 :         measure-&gt;mstaves().push_back(s);</span></span>
 <span id="L85"><span class="lineNum">      85</span>              :     }</span>
 <span id="L86"><span class="lineNum">      86</span>              : </span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC tlaBgGNC">        6498 :     bool irregular = false;</span></span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">        6498 :     if (e.hasAttribute(&quot;len&quot;)) {</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC tlaBgGNC">        6506 :     bool irregular = false;</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">        6506 :     if (e.hasAttribute(&quot;len&quot;)) {</span></span>
 <span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">          14 :         bool ok = true;</span></span>
 <span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">          14 :         measure-&gt;setTicks(Fraction::fromString(e.attribute(&quot;len&quot;), &amp;ok));</span></span>
 <span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">          14 :         if (!ok || measure-&gt;ticks() &lt; Fraction(1, 128)) {</span></span>
@@ -154,14 +154,14 @@
 <span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC tlaBgGNC">          14 :         irregular = true;</span></span>
 <span id="L97"><span class="lineNum">      97</span>              :     }</span>
 <span id="L98"><span class="lineNum">      98</span>              : </span>
-<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">       17591 :     while (e.readNextStartElement()) {</span></span>
-<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">       11093 :         const AsciiStringView tag(e.name());</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">       17611 :     while (e.readNextStartElement()) {</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">       11105 :         const AsciiStringView tag(e.name());</span></span>
 <span id="L101"><span class="lineNum">     101</span>              : </span>
-<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">       11093 :         if (tag == &quot;voice&quot;) {</span></span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">        6511 :             ctx.setTrack(nextTrack++);</span></span>
-<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">        6511 :             ctx.setTick(measure-&gt;tick());</span></span>
-<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">        6511 :             readVoice(measure, e, ctx, staffIdx, irregular);</span></span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">        4582 :         } else if (tag == &quot;Marker&quot; || tag == &quot;Jump&quot;) {</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">       11105 :         if (tag == &quot;voice&quot;) {</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">        6519 :             ctx.setTrack(nextTrack++);</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">        6519 :             ctx.setTick(measure-&gt;tick());</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">        6519 :             readVoice(measure, e, ctx, staffIdx, irregular);</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">        4586 :         } else if (tag == &quot;Marker&quot; || tag == &quot;Jump&quot;) {</span></span>
 <span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">           6 :             EngravingItem* el = Factory::createItemByName(tag, measure);</span></span>
 <span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">           6 :             el-&gt;setTrack(ctx.track());</span></span>
 <span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">           6 :             TRead::readItem(el, e, ctx);</span></span>
@@ -169,27 +169,27 @@
 <span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">           6 :                 el-&gt;setTrack(0); // original system object always goes on top</span></span>
 <span id="L112"><span class="lineNum">     112</span>              :             }</span>
 <span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">           6 :             measure-&gt;add(el);</span></span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">        4576 :         } else if (tag == &quot;stretch&quot;) {</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">        4580 :         } else if (tag == &quot;stretch&quot;) {</span></span>
 <span id="L115"><span class="lineNum">     115</span> <span class="tlaUNC tlaBgUNC">           0 :             double val = e.readDouble();</span></span>
 <span id="L116"><span class="lineNum">     116</span> <span class="tlaUNC">           0 :             if (val &lt; 0.0) {</span></span>
 <span id="L117"><span class="lineNum">     117</span> <span class="tlaUNC">           0 :                 val = 0;</span></span>
 <span id="L118"><span class="lineNum">     118</span>              :             }</span>
 <span id="L119"><span class="lineNum">     119</span> <span class="tlaUNC">           0 :             measure-&gt;setUserStretch(val);</span></span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC tlaBgGNC">        4576 :         } else if (tag == &quot;noOffset&quot;) {</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC tlaBgGNC">        4580 :         } else if (tag == &quot;noOffset&quot;) {</span></span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaUNC tlaBgUNC">           0 :             measure-&gt;setMeasureNumberOffset(e.readInt());</span></span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC tlaBgGNC">        4576 :         } else if (tag == &quot;measureNumberMode&quot;) {</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC tlaBgGNC">        4580 :         } else if (tag == &quot;measureNumberMode&quot;) {</span></span>
 <span id="L123"><span class="lineNum">     123</span> <span class="tlaUNC tlaBgUNC">           0 :             measure-&gt;setMeasureNumberMode(MeasureNumberMode(e.readInt()));</span></span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC tlaBgGNC">        4576 :         } else if (tag == &quot;irregular&quot;) {</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC tlaBgGNC">        4580 :         } else if (tag == &quot;irregular&quot;) {</span></span>
 <span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">           1 :             measure-&gt;setExcludeFromNumbering(e.readBool());</span></span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">        4575 :         } else if (tag == &quot;breakMultiMeasureRest&quot;) {</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">        4579 :         } else if (tag == &quot;breakMultiMeasureRest&quot;) {</span></span>
 <span id="L127"><span class="lineNum">     127</span> <span class="tlaUNC tlaBgUNC">           0 :             measure-&gt;setBreakMultiMeasureRest(e.readBool());</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC tlaBgGNC">        4575 :         } else if (tag == &quot;startRepeat&quot;) {</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC tlaBgGNC">        4579 :         } else if (tag == &quot;startRepeat&quot;) {</span></span>
 <span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">           3 :             measure-&gt;setRepeatStart(true);</span></span>
 <span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">           3 :             e.readNext();</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">        4572 :         } else if (tag == &quot;endRepeat&quot;) {</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">        4576 :         } else if (tag == &quot;endRepeat&quot;) {</span></span>
 <span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">           9 :             measure-&gt;setRepeatCount(e.readInt());</span></span>
 <span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">           9 :             measure-&gt;setRepeatEnd(true);</span></span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">        4563 :         } else if (tag == &quot;vspacer&quot; || tag == &quot;vspacerDown&quot;) {</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">        4567 :         } else if (tag == &quot;vspacer&quot; || tag == &quot;vspacerDown&quot;) {</span></span>
 <span id="L135"><span class="lineNum">     135</span> <span class="tlaUNC tlaBgUNC">           0 :             if (!measure-&gt;mstaves()[staffIdx]-&gt;vspacerDown()) {</span></span>
 <span id="L136"><span class="lineNum">     136</span> <span class="tlaUNC">           0 :                 Spacer* spacer = Factory::createSpacer(measure);</span></span>
 <span id="L137"><span class="lineNum">     137</span> <span class="tlaUNC">           0 :                 spacer-&gt;setSpacerType(SpacerType::DOWN);</span></span>
@@ -197,7 +197,7 @@
 <span id="L139"><span class="lineNum">     139</span> <span class="tlaUNC">           0 :                 measure-&gt;add(spacer);</span></span>
 <span id="L140"><span class="lineNum">     140</span>              :             }</span>
 <span id="L141"><span class="lineNum">     141</span> <span class="tlaUNC">           0 :             measure-&gt;mstaves()[staffIdx]-&gt;vspacerDown()-&gt;setGap(Spatium(e.readDouble()));</span></span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC tlaBgGNC">        4563 :         } else if (tag == &quot;vspacerFixed&quot;) {</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC tlaBgGNC">        4567 :         } else if (tag == &quot;vspacerFixed&quot;) {</span></span>
 <span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC tlaBgUNC">           0 :             if (!measure-&gt;mstaves()[staffIdx]-&gt;vspacerDown()) {</span></span>
 <span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :                 Spacer* spacer = Factory::createSpacer(measure);</span></span>
 <span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC">           0 :                 spacer-&gt;setSpacerType(SpacerType::FIXED);</span></span>
@@ -205,7 +205,7 @@
 <span id="L147"><span class="lineNum">     147</span> <span class="tlaUNC">           0 :                 measure-&gt;add(spacer);</span></span>
 <span id="L148"><span class="lineNum">     148</span>              :             }</span>
 <span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 :             measure-&gt;mstaves()[staffIdx]-&gt;vspacerDown()-&gt;setGap(Spatium(e.readDouble()));</span></span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC tlaBgGNC">        4563 :         } else if (tag == &quot;vspacerUp&quot;) {</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC tlaBgGNC">        4567 :         } else if (tag == &quot;vspacerUp&quot;) {</span></span>
 <span id="L151"><span class="lineNum">     151</span> <span class="tlaUNC tlaBgUNC">           0 :             if (!measure-&gt;mstaves()[staffIdx]-&gt;vspacerUp()) {</span></span>
 <span id="L152"><span class="lineNum">     152</span> <span class="tlaUNC">           0 :                 Spacer* spacer = Factory::createSpacer(measure);</span></span>
 <span id="L153"><span class="lineNum">     153</span> <span class="tlaUNC">           0 :                 spacer-&gt;setSpacerType(SpacerType::UP);</span></span>
@@ -213,15 +213,15 @@
 <span id="L155"><span class="lineNum">     155</span> <span class="tlaUNC">           0 :                 measure-&gt;add(spacer);</span></span>
 <span id="L156"><span class="lineNum">     156</span>              :             }</span>
 <span id="L157"><span class="lineNum">     157</span> <span class="tlaUNC">           0 :             measure-&gt;mstaves()[staffIdx]-&gt;vspacerUp()-&gt;setGap(Spatium(e.readDouble()));</span></span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC tlaBgGNC">        4563 :         } else if (tag == &quot;visible&quot;) {</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC tlaBgGNC">        4567 :         } else if (tag == &quot;visible&quot;) {</span></span>
 <span id="L159"><span class="lineNum">     159</span> <span class="tlaUNC tlaBgUNC">           0 :             measure-&gt;mstaves()[staffIdx]-&gt;setVisible(e.readInt());</span></span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC tlaBgGNC">        4563 :         } else if (tag == &quot;stemless&quot;) {</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC tlaBgGNC">        4567 :         } else if (tag == &quot;stemless&quot;) {</span></span>
 <span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">           2 :             measure-&gt;mstaves()[staffIdx]-&gt;setStemless(e.readInt());</span></span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        4561 :         } else if (tag == &quot;hideIfEmpty&quot;) {</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        4565 :         } else if (tag == &quot;hideIfEmpty&quot;) {</span></span>
 <span id="L163"><span class="lineNum">     163</span> <span class="tlaUNC tlaBgUNC">           0 :             measure-&gt;mstaves()[staffIdx]-&gt;setHideIfEmpty(TConv::fromXml(e.readAsciiText(), AutoOnOff::AUTO));</span></span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC tlaBgGNC">        4561 :         } else if (tag == &quot;measureRepeatCount&quot;) {</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC tlaBgGNC">        4565 :         } else if (tag == &quot;measureRepeatCount&quot;) {</span></span>
 <span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">         106 :             measure-&gt;setMeasureRepeatCount(e.readInt(), staffIdx);</span></span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">        4455 :         } else if (tag == &quot;SystemDivider&quot;) {</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">        4459 :         } else if (tag == &quot;SystemDivider&quot;) {</span></span>
 <span id="L167"><span class="lineNum">     167</span> <span class="tlaUNC tlaBgUNC">           0 :             SystemDivider* sd = new SystemDivider(ctx.dummy());</span></span>
 <span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC">           0 :             TRead::read(sd, e, ctx);</span></span>
 <span id="L169"><span class="lineNum">     169</span>              :             //! TODO Looks like a bug.</span>
@@ -229,129 +229,129 @@
 <span id="L171"><span class="lineNum">     171</span>              :             //! there is a method: `System* system() const { return (System*)parent(); }`,</span>
 <span id="L172"><span class="lineNum">     172</span>              :             //! but when we add it to Measure, the parent will be rewritten.</span>
 <span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 :             measure-&gt;add(sd);</span></span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC tlaBgGNC">        4455 :         } else if (tag == &quot;multiMeasureRest&quot;) {</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC tlaBgGNC">        4459 :         } else if (tag == &quot;multiMeasureRest&quot;) {</span></span>
 <span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">          14 :             measure-&gt;setMMRestCount(e.readInt());</span></span>
 <span id="L176"><span class="lineNum">     176</span>              :             // set tick to previous measure</span>
 <span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">          14 :             measure-&gt;setTick(ctx.lastMeasure()-&gt;tick());</span></span>
 <span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">          14 :             ctx.setTick(ctx.lastMeasure()-&gt;tick());</span></span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">        4441 :         } else if (tag == &quot;mmRestLast&quot;) {</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">        4445 :         } else if (tag == &quot;mmRestLast&quot;) {</span></span>
 <span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">          10 :             AsciiStringView s = e.readAsciiText();</span></span>
 <span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">          10 :             EID eid = EID::fromStdString(s);</span></span>
 <span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">          10 :             DO_ASSERT(eid.isValid());</span></span>
 <span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">          10 :             ctx.addMMRestEndMeasureEID(measure, eid);</span></span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">        4431 :         } else if (tag == &quot;MeasureNumber&quot;) {</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">        4435 :         } else if (tag == &quot;MeasureNumber&quot;) {</span></span>
 <span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC tlaBgUNC">           0 :             MeasureNumber* noText = new MeasureNumber(measure);</span></span>
 <span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC">           0 :             TRead::read(noText, e, ctx);</span></span>
 <span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC">           0 :             noText-&gt;setTrack(ctx.track());</span></span>
 <span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC">           0 :             measure-&gt;add(noText);</span></span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC tlaBgGNC">        4431 :         } else if (tag == &quot;MMRestRange&quot;) {</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC tlaBgGNC">        4435 :         } else if (tag == &quot;MMRestRange&quot;) {</span></span>
 <span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC tlaBgUNC">           0 :             MMRestRange* range = new MMRestRange(measure);</span></span>
 <span id="L191"><span class="lineNum">     191</span> <span class="tlaUNC">           0 :             TRead::read(range, e, ctx);</span></span>
 <span id="L192"><span class="lineNum">     192</span> <span class="tlaUNC">           0 :             range-&gt;setTrack(ctx.track());</span></span>
 <span id="L193"><span class="lineNum">     193</span> <span class="tlaUNC">           0 :             measure-&gt;add(range);</span></span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC tlaBgGNC">        4431 :         } else if (TRead::readProperties(static_cast&lt;MeasureBase*&gt;(measure), e, ctx)) {</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC tlaBgGNC">        4435 :         } else if (TRead::readProperties(static_cast&lt;MeasureBase*&gt;(measure), e, ctx)) {</span></span>
 <span id="L195"><span class="lineNum">     195</span>              :         } else {</span>
 <span id="L196"><span class="lineNum">     196</span> <span class="tlaUNC tlaBgUNC">           0 :             e.unknown();</span></span>
 <span id="L197"><span class="lineNum">     197</span>              :         }</span>
 <span id="L198"><span class="lineNum">     198</span>              :     }</span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC tlaBgGNC">        6498 :     if (measure-&gt;isMMRest()) {</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC tlaBgGNC">        6506 :     if (measure-&gt;isMMRest()) {</span></span>
 <span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">          14 :         Measure* lm = ctx.lastMeasure();</span></span>
 <span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">          14 :         ctx.setTick(lm-&gt;endTick());</span></span>
 <span id="L202"><span class="lineNum">     202</span>              :     }</span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">        6498 :     ctx.setCurrentMeasure(nullptr);</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">        6506 :     ctx.setCurrentMeasure(nullptr);</span></span>
 <span id="L204"><span class="lineNum">     204</span>              : </span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        6498 :     measure-&gt;connectTremolo();</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        6506 :     measure-&gt;connectTremolo();</span></span>
 <span id="L206"><span class="lineNum">     206</span>              : }</span>
 <span id="L207"><span class="lineNum">     207</span>              : </span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        6511 : void MeasureRead::readVoice(Measure* measure, XmlReader&amp; e, ReadContext&amp; ctx, int staffIdx, bool irregular)</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        6519 : void MeasureRead::readVoice(Measure* measure, XmlReader&amp; e, ReadContext&amp; ctx, int staffIdx, bool irregular)</span></span>
 <span id="L209"><span class="lineNum">     209</span>              : {</span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">        6511 :     Segment* segment = nullptr;</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">        6511 :     std::vector&lt;Chord*&gt; graceNotes;</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">        6511 :     Beam* startingBeam = nullptr;</span></span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        6511 :     Tuplet* tuplet = nullptr;</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        6511 :     Fermata* fermata = nullptr;</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">        6519 :     Segment* segment = nullptr;</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">        6519 :     std::vector&lt;Chord*&gt; graceNotes;</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">        6519 :     Beam* startingBeam = nullptr;</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        6519 :     Tuplet* tuplet = nullptr;</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        6519 :     Fermata* fermata = nullptr;</span></span>
 <span id="L215"><span class="lineNum">     215</span>              : </span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        6511 :     Staff* staff = ctx.staff(staffIdx);</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        6511 :     Fraction timeStretch(staff-&gt;timeStretch(measure-&gt;tick()));</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        6519 :     Staff* staff = ctx.staff(staffIdx);</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        6519 :     Fraction timeStretch(staff-&gt;timeStretch(measure-&gt;tick()));</span></span>
 <span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">       17020 :     while (e.readNextStartElement()) {</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       10509 :         const AsciiStringView tag(e.name());</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">       17062 :     while (e.readNextStartElement()) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       10543 :         const AsciiStringView tag(e.name());</span></span>
 <span id="L221"><span class="lineNum">     221</span>              : </span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">       10509 :         if (tag == &quot;location&quot;) {</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">       10543 :         if (tag == &quot;location&quot;) {</span></span>
 <span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">           2 :             Location loc = Location::relative();</span></span>
 <span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">           2 :             TRead::read(&amp;loc, e, ctx);</span></span>
 <span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">           2 :             ctx.setLocation(loc);</span></span>
 <span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">           2 :             if (loc.isTimeTick()) {</span></span>
 <span id="L227"><span class="lineNum">     227</span> <span class="tlaUNC tlaBgUNC">           0 :                 EditTimeTickAnchors::createTimeTickAnchor(measure, ctx.tick() - measure-&gt;tick(), track2staff(ctx.track()));</span></span>
 <span id="L228"><span class="lineNum">     228</span>              :             }</span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC tlaBgGNC">       10507 :         } else if (tag == &quot;tick&quot;) {             // obsolete?</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC tlaBgGNC">       10541 :         } else if (tag == &quot;tick&quot;) {             // obsolete?</span></span>
 <span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC tlaBgUNC">           0 :             LOGD() &lt;&lt; &quot;read midi tick&quot;;</span></span>
 <span id="L231"><span class="lineNum">     231</span> <span class="tlaUNC">           0 :             ctx.setTick(Fraction::fromTicks(ctx.fileDivision(e.readInt())));</span></span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC tlaBgGNC">       10507 :         } else if (tag == &quot;BarLine&quot;) {</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">          13 :             BarLine* barLine = Factory::createBarLine(ctx.dummy());</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">          13 :             barLine-&gt;setTrack(ctx.track());</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">          13 :             TRead::read(barLine, e, ctx);</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC tlaBgGNC">       10541 :         } else if (tag == &quot;BarLine&quot;) {</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">          15 :             BarLine* barLine = Factory::createBarLine(ctx.dummy());</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">          15 :             barLine-&gt;setTrack(ctx.track());</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">          15 :             TRead::read(barLine, e, ctx);</span></span>
 <span id="L236"><span class="lineNum">     236</span>              :             //</span>
 <span id="L237"><span class="lineNum">     237</span>              :             //  StartRepeatBarLine: at rtick == 0, always BarLineType::START_REPEAT</span>
 <span id="L238"><span class="lineNum">     238</span>              :             //  BarLine:            in the middle of a measure, has no semantic</span>
 <span id="L239"><span class="lineNum">     239</span>              :             //  EndBarLine:         at the end of a measure</span>
 <span id="L240"><span class="lineNum">     240</span>              :             //  BeginBarLine:       first segment of a measure, systemic barline</span>
 <span id="L241"><span class="lineNum">     241</span>              : </span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">          13 :             SegmentType st = SegmentType::Invalid;</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">          13 :             Fraction t = ctx.tick() - measure-&gt;tick();</span></span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">          13 :             if (t.isNotZero() &amp;&amp; (t != measure-&gt;ticks())) {</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">          15 :             SegmentType st = SegmentType::Invalid;</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">          15 :             Fraction t = ctx.tick() - measure-&gt;tick();</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">          15 :             if (t.isNotZero() &amp;&amp; (t != measure-&gt;ticks())) {</span></span>
 <span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC tlaBgUNC">           0 :                 st = SegmentType::BarLine;</span></span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC tlaBgGNC">          13 :             } else if (barLine-&gt;barLineType() == BarLineType::START_REPEAT &amp;&amp; t.isZero()) {</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC tlaBgGNC">          15 :             } else if (barLine-&gt;barLineType() == BarLineType::START_REPEAT &amp;&amp; t.isZero()) {</span></span>
 <span id="L247"><span class="lineNum">     247</span> <span class="tlaUNC tlaBgUNC">           0 :                 st = SegmentType::StartRepeatBarLine;</span></span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC tlaBgGNC">          13 :             } else if (barLine-&gt;barLineType() == BarLineType::START_REPEAT &amp;&amp; t == measure-&gt;ticks()) {</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC tlaBgGNC">          15 :             } else if (barLine-&gt;barLineType() == BarLineType::START_REPEAT &amp;&amp; t == measure-&gt;ticks()) {</span></span>
 <span id="L249"><span class="lineNum">     249</span>              :                 // old version, ignore</span>
 <span id="L250"><span class="lineNum">     250</span> <span class="tlaUNC tlaBgUNC">           0 :                 delete barLine;</span></span>
 <span id="L251"><span class="lineNum">     251</span> <span class="tlaUNC">           0 :                 barLine = 0;</span></span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC tlaBgGNC">          13 :             } else if (t.isZero() &amp;&amp; segment == 0) {</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC tlaBgGNC">          15 :             } else if (t.isZero() &amp;&amp; segment == 0) {</span></span>
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC tlaBgUNC">           0 :                 st = SegmentType::BeginBarLine;</span></span>
 <span id="L254"><span class="lineNum">     254</span>              :             } else {</span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC tlaBgGNC">          13 :                 st = SegmentType::EndBarLine;</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC tlaBgGNC">          15 :                 st = SegmentType::EndBarLine;</span></span>
 <span id="L256"><span class="lineNum">     256</span>              :             }</span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">          13 :             if (barLine) {</span></span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">          13 :                 segment = measure-&gt;getSegmentR(st, t);</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">          13 :                 segment-&gt;add(barLine);</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">          15 :             if (barLine) {</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">          15 :                 segment = measure-&gt;getSegmentR(st, t);</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">          15 :                 segment-&gt;add(barLine);</span></span>
 <span id="L260"><span class="lineNum">     260</span>              :             }</span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">          13 :             if (fermata) {</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">          15 :             if (fermata) {</span></span>
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC tlaBgUNC">           0 :                 segment-&gt;add(fermata);</span></span>
 <span id="L263"><span class="lineNum">     263</span> <span class="tlaUNC">           0 :                 fermata = nullptr;</span></span>
 <span id="L264"><span class="lineNum">     264</span>              :             }</span>
-<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC tlaBgGNC">       10494 :         } else if (tag == &quot;Chord&quot;) {</span></span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">        2711 :             Chord* chord = Factory::createChord(ctx.dummy());</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">        2711 :             chord-&gt;setTrack(ctx.track());</span></span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">        2711 :             TRead::read(chord, e, ctx);</span></span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">        2711 :             if (startingBeam) {</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC tlaBgGNC">       10526 :         } else if (tag == &quot;Chord&quot;) {</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">        2717 :             Chord* chord = Factory::createChord(ctx.dummy());</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">        2717 :             chord-&gt;setTrack(ctx.track());</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">        2717 :             TRead::read(chord, e, ctx);</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">        2717 :             if (startingBeam) {</span></span>
 <span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">         453 :                 startingBeam-&gt;add(chord);         // also calls chord-&gt;setBeam(startingBeam)</span></span>
 <span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">         453 :                 startingBeam = nullptr;</span></span>
 <span id="L272"><span class="lineNum">     272</span>              :             }</span>
 <span id="L273"><span class="lineNum">     273</span>              : //                  if (tuplet &amp;&amp; !chord-&gt;isGrace())</span>
 <span id="L274"><span class="lineNum">     274</span>              : //                        chord-&gt;readAddTuplet(tuplet);</span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        2711 :             segment = measure-&gt;getSegment(SegmentType::ChordRest, ctx.tick());</span></span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">        2711 :             if (chord-&gt;noteType() != NoteType::NORMAL) {</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        2717 :             segment = measure-&gt;getSegment(SegmentType::ChordRest, ctx.tick());</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">        2717 :             if (chord-&gt;noteType() != NoteType::NORMAL) {</span></span>
 <span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">           4 :                 graceNotes.push_back(chord);</span></span>
 <span id="L278"><span class="lineNum">     278</span>              :             } else {</span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        2707 :                 segment-&gt;add(chord);</span></span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">        2711 :                 for (size_t i = 0; i &lt; graceNotes.size(); ++i) {</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        2713 :                 segment-&gt;add(chord);</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">        2717 :                 for (size_t i = 0; i &lt; graceNotes.size(); ++i) {</span></span>
 <span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">           4 :                     Chord* gc = graceNotes[i];</span></span>
 <span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">           4 :                     gc-&gt;setGraceIndex(static_cast&lt;int&gt;(i));</span></span>
 <span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">           4 :                     chord-&gt;add(gc);</span></span>
 <span id="L284"><span class="lineNum">     284</span>              :                 }</span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">        2707 :                 graceNotes.clear();</span></span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">        2707 :                 if (tuplet) {</span></span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">         297 :                     tuplet-&gt;add(chord);</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">        2713 :                 graceNotes.clear();</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">        2713 :                 if (tuplet) {</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">         299 :                     tuplet-&gt;add(chord);</span></span>
 <span id="L288"><span class="lineNum">     288</span>              :                 }</span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">        2707 :                 ctx.incTick(chord-&gt;actualTicks());</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">        2713 :                 ctx.incTick(chord-&gt;actualTicks());</span></span>
 <span id="L290"><span class="lineNum">     290</span>              :             }</span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">        2711 :             if (fermata) {</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">        2717 :             if (fermata) {</span></span>
 <span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">           1 :                 segment-&gt;add(fermata);</span></span>
 <span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">           1 :                 fermata = nullptr;</span></span>
 <span id="L294"><span class="lineNum">     294</span>              :             }</span>
-<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">        7783 :         } else if (tag == &quot;Rest&quot;) {</span></span>
-<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">        6280 :             if (measure-&gt;isMMRest()) {</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">        7809 :         } else if (tag == &quot;Rest&quot;) {</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">        6294 :             if (measure-&gt;isMMRest()) {</span></span>
 <span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">          14 :                 segment = measure-&gt;getSegment(SegmentType::ChordRest, ctx.tick());</span></span>
 <span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">          14 :                 MMRest* mmr = Factory::createMMRest(segment);</span></span>
 <span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">          14 :                 mmr-&gt;setTrack(ctx.track());</span></span>
@@ -359,40 +359,40 @@
 <span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">          14 :                 segment-&gt;add(mmr);</span></span>
 <span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">          14 :                 ctx.incTick(mmr-&gt;actualTicks());</span></span>
 <span id="L303"><span class="lineNum">     303</span>              :             } else {</span>
-<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">        6266 :                 segment = measure-&gt;getSegment(SegmentType::ChordRest, ctx.tick());</span></span>
-<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">        6266 :                 Rest* rest = Factory::createRest(segment);</span></span>
-<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">        6266 :                 rest-&gt;setDurationType(DurationType::V_MEASURE);</span></span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">        6266 :                 rest-&gt;setTicks(measure-&gt;timesig() / timeStretch);</span></span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">        6266 :                 rest-&gt;setTrack(ctx.track());</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">        6266 :                 TRead::read(rest, e, ctx);</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">        6266 :                 if (startingBeam) {</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">        6280 :                 segment = measure-&gt;getSegment(SegmentType::ChordRest, ctx.tick());</span></span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">        6280 :                 Rest* rest = Factory::createRest(segment);</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">        6280 :                 rest-&gt;setDurationType(DurationType::V_MEASURE);</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">        6280 :                 rest-&gt;setTicks(measure-&gt;timesig() / timeStretch);</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">        6280 :                 rest-&gt;setTrack(ctx.track());</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">        6280 :                 TRead::read(rest, e, ctx);</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">        6280 :                 if (startingBeam) {</span></span>
 <span id="L311"><span class="lineNum">     311</span> <span class="tlaUNC tlaBgUNC">           0 :                     startingBeam-&gt;add(rest); // also calls rest-&gt;setBeam(startingBeam)</span></span>
 <span id="L312"><span class="lineNum">     312</span> <span class="tlaUNC">           0 :                     startingBeam = nullptr;</span></span>
 <span id="L313"><span class="lineNum">     313</span>              :                 }</span>
 <span id="L314"><span class="lineNum">     314</span>              : </span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC tlaBgGNC">        6266 :                 segment-&gt;add(rest);</span></span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">        6266 :                 if (fermata) {</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC tlaBgGNC">        6280 :                 segment-&gt;add(rest);</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">        6280 :                 if (fermata) {</span></span>
 <span id="L317"><span class="lineNum">     317</span> <span class="tlaUNC tlaBgUNC">           0 :                     segment-&gt;add(fermata);</span></span>
 <span id="L318"><span class="lineNum">     318</span> <span class="tlaUNC">           0 :                     fermata = nullptr;</span></span>
 <span id="L319"><span class="lineNum">     319</span>              :                 }</span>
 <span id="L320"><span class="lineNum">     320</span>              : </span>
-<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC tlaBgGNC">        6266 :                 if (!rest-&gt;ticks().isValid()) {    // hack</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC tlaBgGNC">        6280 :                 if (!rest-&gt;ticks().isValid()) {    // hack</span></span>
 <span id="L322"><span class="lineNum">     322</span> <span class="tlaUNC tlaBgUNC">           0 :                     rest-&gt;setTicks(measure-&gt;timesig() / timeStretch);</span></span>
 <span id="L323"><span class="lineNum">     323</span>              :                 }</span>
 <span id="L324"><span class="lineNum">     324</span>              : </span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC tlaBgGNC">        6266 :                 if (tuplet) {</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         123 :                     tuplet-&gt;add(rest);</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC tlaBgGNC">        6280 :                 if (tuplet) {</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         131 :                     tuplet-&gt;add(rest);</span></span>
 <span id="L327"><span class="lineNum">     327</span>              :                 }</span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">        6266 :                 ctx.incTick(rest-&gt;actualTicks());</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">        6280 :                 ctx.incTick(rest-&gt;actualTicks());</span></span>
 <span id="L329"><span class="lineNum">     329</span>              :             }</span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">        1503 :         } else if (tag == &quot;Breath&quot;) {</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">        1515 :         } else if (tag == &quot;Breath&quot;) {</span></span>
 <span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">          10 :             segment = measure-&gt;getSegment(SegmentType::Breath, ctx.tick());</span></span>
 <span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">          10 :             Breath* breath = Factory::createBreath(segment);</span></span>
 <span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">          10 :             breath-&gt;setTrack(ctx.track());</span></span>
 <span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">          10 :             breath-&gt;setPlacement(breath-&gt;track() &amp; 1 ? PlacementV::BELOW : PlacementV::ABOVE);</span></span>
 <span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">          10 :             TRead::read(breath, e, ctx);</span></span>
 <span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">          10 :             segment-&gt;add(breath);</span></span>
-<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">        1493 :         } else if (tag == &quot;MeasureRepeat&quot; || tag == &quot;RepeatMeasure&quot;) {</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">        1505 :         } else if (tag == &quot;MeasureRepeat&quot; || tag == &quot;RepeatMeasure&quot;) {</span></span>
 <span id="L338"><span class="lineNum">     338</span>              :             //             4.x                       3.x</span>
 <span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">          50 :             segment = measure-&gt;getSegment(SegmentType::ChordRest, ctx.tick());</span></span>
 <span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">          50 :             MeasureRepeat* mr = Factory::createMeasureRepeat(segment);</span></span>
@@ -406,45 +406,45 @@
 <span id="L348"><span class="lineNum">     348</span>              :             }</span>
 <span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC tlaBgGNC">          50 :             segment-&gt;add(mr);</span></span>
 <span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">          50 :             ctx.incTick(measure-&gt;ticks());</span></span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">        1443 :         } else if (tag == &quot;Clef&quot;) {</span></span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">         168 :             Clef* clef = Factory::createClef(ctx.dummy());</span></span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">         168 :             clef-&gt;setTrack(ctx.track());</span></span>
-<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">         168 :             bool isHeader = false;</span></span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">         168 :             TRead::read(clef, e, ctx, &amp;isHeader);</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">         168 :             clef-&gt;setGenerated(false);</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">        1455 :         } else if (tag == &quot;Clef&quot;) {</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">         170 :             Clef* clef = Factory::createClef(ctx.dummy());</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">         170 :             clef-&gt;setTrack(ctx.track());</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">         170 :             bool isHeader = false;</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">         170 :             TRead::read(clef, e, ctx, &amp;isHeader);</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">         170 :             clef-&gt;setGenerated(false);</span></span>
 <span id="L357"><span class="lineNum">     357</span>              : </span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">         168 :             segment = measure-&gt;getSegment(isHeader ? SegmentType::HeaderClef : SegmentType::Clef, ctx.tick());</span></span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">         168 :             segment-&gt;add(clef);</span></span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">        1275 :         } else if (tag == &quot;TimeSig&quot;) {</span></span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">         379 :             TimeSig* ts = Factory::createTimeSig(ctx.dummy());</span></span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">         379 :             ts-&gt;setTrack(ctx.track());</span></span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">         379 :             TRead::read(ts, e, ctx);</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">         170 :             segment = measure-&gt;getSegment(isHeader ? SegmentType::HeaderClef : SegmentType::Clef, ctx.tick());</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">         170 :             segment-&gt;add(clef);</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">        1285 :         } else if (tag == &quot;TimeSig&quot;) {</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">         381 :             TimeSig* ts = Factory::createTimeSig(ctx.dummy());</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">         381 :             ts-&gt;setTrack(ctx.track());</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">         381 :             TRead::read(ts, e, ctx);</span></span>
 <span id="L364"><span class="lineNum">     364</span>              : </span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">         379 :             Fraction currTick = ctx.tick();</span></span>
-<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">         379 :             bool courtesySig = ts-&gt;isCourtesy();</span></span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">         379 :             segment = measure-&gt;getSegment(courtesySig ? SegmentType::TimeSigAnnounce : SegmentType::TimeSig, currTick);</span></span>
-<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">         379 :             segment-&gt;add(ts);</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">         381 :             Fraction currTick = ctx.tick();</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">         381 :             bool courtesySig = ts-&gt;isCourtesy();</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">         381 :             segment = measure-&gt;getSegment(courtesySig ? SegmentType::TimeSigAnnounce : SegmentType::TimeSig, currTick);</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">         381 :             segment-&gt;add(ts);</span></span>
 <span id="L369"><span class="lineNum">     369</span>              : </span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">         379 :             if (!courtesySig) {</span></span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">         379 :                 if (currTick == measure-&gt;endTick()) {</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">         381 :             if (!courtesySig) {</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">         381 :                 if (currTick == measure-&gt;endTick()) {</span></span>
 <span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC tlaBgUNC">           0 :                     segment-&gt;setEndOfMeasureChange(true);</span></span>
 <span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC">           0 :                     measure-&gt;setEndOfMeasureChange(true);</span></span>
 <span id="L374"><span class="lineNum">     374</span>              :                 }</span>
 <span id="L375"><span class="lineNum">     375</span>              : </span>
-<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC tlaBgGNC">         379 :                 if (currTick == measure-&gt;tick()) {</span></span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">         379 :                     timeStretch = ts-&gt;stretch().reduced();</span></span>
-<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">         379 :                     measure-&gt;setTimesig(ts-&gt;sig() / timeStretch);</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC tlaBgGNC">         381 :                 if (currTick == measure-&gt;tick()) {</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">         381 :                     timeStretch = ts-&gt;stretch().reduced();</span></span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">         381 :                     measure-&gt;setTimesig(ts-&gt;sig() / timeStretch);</span></span>
 <span id="L379"><span class="lineNum">     379</span>              : </span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">         379 :                     if (!irregular) {</span></span>
-<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">         377 :                         measure-&gt;setTicks(measure-&gt;timesig());</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">         381 :                     if (!irregular) {</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">         379 :                         measure-&gt;setTicks(measure-&gt;timesig());</span></span>
 <span id="L382"><span class="lineNum">     382</span>              :                     }</span>
 <span id="L383"><span class="lineNum">     383</span>              :                 }</span>
 <span id="L384"><span class="lineNum">     384</span>              : </span>
-<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">         379 :                 if (currTick &gt; measure-&gt;tick()) {</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">         381 :                 if (currTick &gt; measure-&gt;tick()) {</span></span>
 <span id="L386"><span class="lineNum">     386</span> <span class="tlaUNC tlaBgUNC">           0 :                     ctx.setTimeSigForNextMeasure(ts-&gt;sig() / ts-&gt;stretch().reduced());</span></span>
 <span id="L387"><span class="lineNum">     387</span>              :                 }</span>
 <span id="L388"><span class="lineNum">     388</span>              :             }</span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC tlaBgGNC">         896 :         } else if (tag == &quot;KeySig&quot;) {</span></span>
+<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC tlaBgGNC">         904 :         } else if (tag == &quot;KeySig&quot;) {</span></span>
 <span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">          74 :             KeySig* ks = Factory::createKeySig(ctx.dummy());</span></span>
 <span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">          74 :             ks-&gt;setTrack(ctx.track());</span></span>
 <span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">          74 :             TRead::read(ks, e, ctx);</span></span>
@@ -462,7 +462,7 @@
 <span id="L404"><span class="lineNum">     404</span>              : </span>
 <span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC tlaBgGNC">          74 :                 staff-&gt;setKey(curTick, ks-&gt;keySigEvent());</span></span>
 <span id="L406"><span class="lineNum">     406</span>              :             }</span>
-<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">         822 :         } else if (tag == &quot;Text&quot;) {</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">         830 :         } else if (tag == &quot;Text&quot;) {</span></span>
 <span id="L408"><span class="lineNum">     408</span> <span class="tlaUNC tlaBgUNC">           0 :             segment = measure-&gt;getSegment(SegmentType::ChordRest, ctx.tick());</span></span>
 <span id="L409"><span class="lineNum">     409</span> <span class="tlaUNC">           0 :             StaffText* t = Factory::createStaffText(segment);</span></span>
 <span id="L410"><span class="lineNum">     410</span> <span class="tlaUNC">           0 :             t-&gt;setTrack(ctx.track());</span></span>
@@ -476,19 +476,19 @@
 <span id="L418"><span class="lineNum">     418</span>              :         }</span>
 <span id="L419"><span class="lineNum">     419</span>              :         //----------------------------------------------------</span>
 <span id="L420"><span class="lineNum">     420</span>              :         // Annotation</span>
-<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC tlaBgGNC">         822 :         else if (tag == &quot;Dynamic&quot;) {</span></span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC tlaBgGNC">         830 :         else if (tag == &quot;Dynamic&quot;) {</span></span>
 <span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">          95 :             segment = measure-&gt;getChordRestOrTimeTickSegment(ctx.tick());</span></span>
 <span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">          95 :             Dynamic* dyn = Factory::createDynamic(segment);</span></span>
 <span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">          95 :             dyn-&gt;setTrack(ctx.track());</span></span>
 <span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">          95 :             TRead::read(dyn, e, ctx);</span></span>
 <span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">          95 :             segment-&gt;add(dyn);</span></span>
-<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">         727 :         } else if (tag == &quot;Expression&quot;) {</span></span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">         735 :         } else if (tag == &quot;Expression&quot;) {</span></span>
 <span id="L428"><span class="lineNum">     428</span> <span class="tlaUNC tlaBgUNC">           0 :             segment = measure-&gt;getChordRestOrTimeTickSegment(ctx.tick());</span></span>
 <span id="L429"><span class="lineNum">     429</span> <span class="tlaUNC">           0 :             Expression* expr = Factory::createExpression(segment);</span></span>
 <span id="L430"><span class="lineNum">     430</span> <span class="tlaUNC">           0 :             expr-&gt;setTrack(ctx.track());</span></span>
 <span id="L431"><span class="lineNum">     431</span> <span class="tlaUNC">           0 :             TRead::read(expr, e, ctx);</span></span>
 <span id="L432"><span class="lineNum">     432</span> <span class="tlaUNC">           0 :             segment-&gt;add(expr);</span></span>
-<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC tlaBgGNC">         727 :         } else if (tag == &quot;Harmony&quot;) {</span></span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC tlaBgGNC">         735 :         } else if (tag == &quot;Harmony&quot;) {</span></span>
 <span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">           3 :             segment = measure-&gt;getSegment(SegmentType::ChordRest, ctx.tick());</span></span>
 <span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">           3 :             Harmony* el = Factory::createHarmony(segment);</span></span>
 <span id="L436"><span class="lineNum">     436</span>              : </span>
@@ -503,7 +503,7 @@
 <span id="L445"><span class="lineNum">     445</span>              :             } else {</span>
 <span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC tlaBgGNC">           3 :                 segment-&gt;add(el);</span></span>
 <span id="L447"><span class="lineNum">     447</span>              :             }</span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">         724 :         } else if (tag == &quot;FretDiagram&quot;) {</span></span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">         732 :         } else if (tag == &quot;FretDiagram&quot;) {</span></span>
 <span id="L449"><span class="lineNum">     449</span> <span class="tlaUNC tlaBgUNC">           0 :             segment = measure-&gt;getSegment(SegmentType::ChordRest, ctx.tick());</span></span>
 <span id="L450"><span class="lineNum">     450</span> <span class="tlaUNC">           0 :             FretDiagram* el = Factory::createFretDiagram(segment);</span></span>
 <span id="L451"><span class="lineNum">     451</span>              : </span>
@@ -513,7 +513,7 @@
 <span id="L455"><span class="lineNum">     455</span> <span class="tlaUNC">           0 :                 el-&gt;setTrack(0); // original system object always goes on top</span></span>
 <span id="L456"><span class="lineNum">     456</span>              :             }</span>
 <span id="L457"><span class="lineNum">     457</span> <span class="tlaUNC">           0 :             segment-&gt;add(el);</span></span>
-<span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC tlaBgGNC">         724 :         } else if (tag == &quot;TremoloBar&quot;) {</span></span>
+<span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC tlaBgGNC">         732 :         } else if (tag == &quot;TremoloBar&quot;) {</span></span>
 <span id="L459"><span class="lineNum">     459</span> <span class="tlaUNC tlaBgUNC">           0 :             segment = measure-&gt;getSegment(SegmentType::ChordRest, ctx.tick());</span></span>
 <span id="L460"><span class="lineNum">     460</span> <span class="tlaUNC">           0 :             TremoloBar* el = Factory::createTremoloBar(segment);</span></span>
 <span id="L461"><span class="lineNum">     461</span> <span class="tlaUNC">           0 :             el-&gt;setTrack(ctx.track());</span></span>
@@ -522,7 +522,7 @@
 <span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC">           0 :                 el-&gt;setTrack(0); // original system object always goes on top</span></span>
 <span id="L465"><span class="lineNum">     465</span>              :             }</span>
 <span id="L466"><span class="lineNum">     466</span> <span class="tlaUNC">           0 :             segment-&gt;add(el);</span></span>
-<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC tlaBgGNC">         724 :         } else if (tag == &quot;Symbol&quot;) {</span></span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC tlaBgGNC">         732 :         } else if (tag == &quot;Symbol&quot;) {</span></span>
 <span id="L468"><span class="lineNum">     468</span> <span class="tlaUNC tlaBgUNC">           0 :             segment = measure-&gt;getSegment(SegmentType::ChordRest, ctx.tick());</span></span>
 <span id="L469"><span class="lineNum">     469</span> <span class="tlaUNC">           0 :             Symbol* el = Factory::createSymbol(segment);</span></span>
 <span id="L470"><span class="lineNum">     470</span>              : </span>
@@ -532,7 +532,7 @@
 <span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC">           0 :                 el-&gt;setTrack(0); // original system object always goes on top</span></span>
 <span id="L475"><span class="lineNum">     475</span>              :             }</span>
 <span id="L476"><span class="lineNum">     476</span> <span class="tlaUNC">           0 :             segment-&gt;add(el);</span></span>
-<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC tlaBgGNC">         724 :         } else if (tag == &quot;Tempo&quot;) {</span></span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC tlaBgGNC">         732 :         } else if (tag == &quot;Tempo&quot;) {</span></span>
 <span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">         103 :             segment = measure-&gt;getChordRestOrTimeTickSegment(ctx.tick());</span></span>
 <span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">         103 :             TempoText* el = Factory::createTempoText(segment);</span></span>
 <span id="L480"><span class="lineNum">     480</span>              : </span>
@@ -542,7 +542,7 @@
 <span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">         103 :                 el-&gt;setTrack(0); // original system object always goes on top</span></span>
 <span id="L485"><span class="lineNum">     485</span>              :             }</span>
 <span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">         103 :             segment-&gt;add(el);</span></span>
-<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">         621 :         } else if (tag == &quot;StaffText&quot;) {</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">         629 :         } else if (tag == &quot;StaffText&quot;) {</span></span>
 <span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">          15 :             segment = measure-&gt;getChordRestOrTimeTickSegment(ctx.tick());</span></span>
 <span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">          15 :             StaffText* el = Factory::createStaffText(segment);</span></span>
 <span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">          15 :             el-&gt;setTrack(ctx.track());</span></span>
@@ -551,16 +551,16 @@
 <span id="L493"><span class="lineNum">     493</span> <span class="tlaUNC tlaBgUNC">           0 :                 el-&gt;setTrack(0);     // original system object always goes on top</span></span>
 <span id="L494"><span class="lineNum">     494</span>              :             }</span>
 <span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC tlaBgGNC">          15 :             segment-&gt;add(el);</span></span>
-<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">         606 :         } else if (tag == &quot;Sticking&quot;</span></span>
-<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">         606 :                    || tag == &quot;SystemText&quot;</span></span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">         605 :                    || tag == &quot;PlayTechAnnotation&quot;</span></span>
-<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">         605 :                    || tag == &quot;Capo&quot;</span></span>
-<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">         605 :                    || tag == &quot;StringTunings&quot;</span></span>
-<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">         605 :                    || tag == &quot;RehearsalMark&quot;</span></span>
-<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">         605 :                    || tag == &quot;InstrumentChange&quot;</span></span>
-<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">         600 :                    || tag == &quot;StaffState&quot;</span></span>
-<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">         600 :                    || tag == &quot;FiguredBass&quot;</span></span>
-<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">        1212 :                    || tag == &quot;HarpPedalDiagram&quot;</span></span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">         614 :         } else if (tag == &quot;Sticking&quot;</span></span>
+<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">         614 :                    || tag == &quot;SystemText&quot;</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">         613 :                    || tag == &quot;PlayTechAnnotation&quot;</span></span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">         613 :                    || tag == &quot;Capo&quot;</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">         613 :                    || tag == &quot;StringTunings&quot;</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">         613 :                    || tag == &quot;RehearsalMark&quot;</span></span>
+<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">         613 :                    || tag == &quot;InstrumentChange&quot;</span></span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">         608 :                    || tag == &quot;StaffState&quot;</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">         608 :                    || tag == &quot;FiguredBass&quot;</span></span>
+<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">        1228 :                    || tag == &quot;HarpPedalDiagram&quot;</span></span>
 <span id="L506"><span class="lineNum">     506</span>              :                    ) {</span>
 <span id="L507"><span class="lineNum">     507</span> <span class="tlaGNC">          10 :             EngravingItem* el = Factory::createItemByName(tag, ctx.dummy());</span></span>
 <span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">          10 :             if (el-&gt;allowTimeAnchor()) {</span></span>
@@ -575,12 +575,12 @@
 <span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">           1 :                 el-&gt;setTrack(0); // original system object always goes on top</span></span>
 <span id="L518"><span class="lineNum">     518</span>              :             }</span>
 <span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">          10 :             segment-&gt;add(el);</span></span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">         596 :         } else if (tag == &quot;Fermata&quot;) {</span></span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">         604 :         } else if (tag == &quot;Fermata&quot;) {</span></span>
 <span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">           1 :             fermata = Factory::createFermata(ctx.dummy());</span></span>
 <span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">           1 :             fermata-&gt;setTrack(ctx.track());</span></span>
 <span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">           1 :             fermata-&gt;setPlacement(fermata-&gt;track() &amp; 1 ? PlacementV::BELOW : PlacementV::ABOVE);</span></span>
 <span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">           1 :             TRead::read(fermata, e, ctx);</span></span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">         595 :         } else if (tag == &quot;Image&quot;) {</span></span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">         603 :         } else if (tag == &quot;Image&quot;) {</span></span>
 <span id="L526"><span class="lineNum">     526</span> <span class="tlaUNC tlaBgUNC">           0 :             if (MScore::noImages) {</span></span>
 <span id="L527"><span class="lineNum">     527</span> <span class="tlaUNC">           0 :                 e.skipCurrentElement();</span></span>
 <span id="L528"><span class="lineNum">     528</span>              :             } else {</span>
@@ -590,7 +590,7 @@
 <span id="L532"><span class="lineNum">     532</span> <span class="tlaUNC">           0 :                 TRead::read(el, e, ctx);</span></span>
 <span id="L533"><span class="lineNum">     533</span> <span class="tlaUNC">           0 :                 segment-&gt;add(el);</span></span>
 <span id="L534"><span class="lineNum">     534</span>              :             }</span>
-<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC tlaBgGNC">         595 :         } else if (tag == &quot;PlayCountText&quot;) {</span></span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC tlaBgGNC">         603 :         } else if (tag == &quot;PlayCountText&quot;) {</span></span>
 <span id="L536"><span class="lineNum">     536</span> <span class="tlaUNC tlaBgUNC">           0 :             segment = measure-&gt;getSegment(SegmentType::EndBarLine, ctx.tick());</span></span>
 <span id="L537"><span class="lineNum">     537</span> <span class="tlaUNC">           0 :             EngravingItem* el = Factory::createItemByName(tag, segment);</span></span>
 <span id="L538"><span class="lineNum">     538</span>              : </span>
@@ -602,24 +602,24 @@
 <span id="L544"><span class="lineNum">     544</span> <span class="tlaUNC">           0 :             segment-&gt;add(el);</span></span>
 <span id="L545"><span class="lineNum">     545</span>              :         }</span>
 <span id="L546"><span class="lineNum">     546</span>              :         //----------------------------------------------------</span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC tlaBgGNC">         595 :         else if (tag == &quot;Tuplet&quot;) {</span></span>
-<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">          71 :             Tuplet* oldTuplet = tuplet;</span></span>
-<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">          71 :             tuplet = Factory::createTuplet(measure);</span></span>
-<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">          71 :             tuplet-&gt;setTrack(ctx.track());</span></span>
-<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">          71 :             tuplet-&gt;setTick(ctx.tick());</span></span>
-<span id="L552"><span class="lineNum">     552</span> <span class="tlaGNC">          71 :             TRead::read(tuplet, e, ctx);</span></span>
-<span id="L553"><span class="lineNum">     553</span> <span class="tlaGNC">          71 :             if (oldTuplet) {</span></span>
-<span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC">          11 :                 oldTuplet-&gt;add(tuplet);</span></span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC tlaBgGNC">         603 :         else if (tag == &quot;Tuplet&quot;) {</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">          75 :             Tuplet* oldTuplet = tuplet;</span></span>
+<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">          75 :             tuplet = Factory::createTuplet(measure);</span></span>
+<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">          75 :             tuplet-&gt;setTrack(ctx.track());</span></span>
+<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">          75 :             tuplet-&gt;setTick(ctx.tick());</span></span>
+<span id="L552"><span class="lineNum">     552</span> <span class="tlaGNC">          75 :             TRead::read(tuplet, e, ctx);</span></span>
+<span id="L553"><span class="lineNum">     553</span> <span class="tlaGNC">          75 :             if (oldTuplet) {</span></span>
+<span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC">          13 :                 oldTuplet-&gt;add(tuplet);</span></span>
 <span id="L555"><span class="lineNum">     555</span>              :             }</span>
-<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">         524 :         } else if (tag == &quot;endTuplet&quot;) {</span></span>
-<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">          71 :             if (!tuplet) {</span></span>
+<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">         528 :         } else if (tag == &quot;endTuplet&quot;) {</span></span>
+<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">          75 :             if (!tuplet) {</span></span>
 <span id="L558"><span class="lineNum">     558</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGD(&quot;Measure::read: encountered &lt;endTuplet/&gt; when no tuplet was started&quot;);</span></span>
 <span id="L559"><span class="lineNum">     559</span> <span class="tlaUNC">           0 :                 e.skipCurrentElement();</span></span>
 <span id="L560"><span class="lineNum">     560</span> <span class="tlaUNC">           0 :                 continue;</span></span>
 <span id="L561"><span class="lineNum">     561</span>              :             }</span>
-<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC tlaBgGNC">          71 :             Tuplet* oldTuplet = tuplet;</span></span>
-<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">          71 :             tuplet = tuplet-&gt;tuplet();</span></span>
-<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">          71 :             if (oldTuplet-&gt;elements().empty()) {</span></span>
+<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC tlaBgGNC">          75 :             Tuplet* oldTuplet = tuplet;</span></span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">          75 :             tuplet = tuplet-&gt;tuplet();</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">          75 :             if (oldTuplet-&gt;elements().empty()) {</span></span>
 <span id="L565"><span class="lineNum">     565</span>              :                 // this should not happen and is a sign of input file corruption</span>
 <span id="L566"><span class="lineNum">     566</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGD(&quot;Measure:read: empty tuplet in measure index=%d, input file corrupted?&quot;, ctx.currentMeasureIndex());</span></span>
 <span id="L567"><span class="lineNum">     567</span> <span class="tlaUNC">           0 :                 if (tuplet) {</span></span>
@@ -627,7 +627,7 @@
 <span id="L569"><span class="lineNum">     569</span>              :                 }</span>
 <span id="L570"><span class="lineNum">     570</span> <span class="tlaUNC">           0 :                 delete oldTuplet;</span></span>
 <span id="L571"><span class="lineNum">     571</span>              :             }</span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC tlaBgGNC">          71 :             e.readNext();</span></span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC tlaBgGNC">          75 :             e.readNext();</span></span>
 <span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">         453 :         } else if (tag == &quot;Beam&quot;) {</span></span>
 <span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">         453 :             Beam* beam = Factory::createBeam(ctx.score());</span></span>
 <span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">         453 :             beam-&gt;setTrack(ctx.track());</span></span>
@@ -649,11 +649,11 @@
 <span id="L591"><span class="lineNum">     591</span> <span class="tlaUNC">           0 :             e.unknown();</span></span>
 <span id="L592"><span class="lineNum">     592</span>              :         }</span>
 <span id="L593"><span class="lineNum">     593</span>              :     }</span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC tlaBgGNC">        6511 :     if (startingBeam) {</span></span>
+<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC tlaBgGNC">        6519 :     if (startingBeam) {</span></span>
 <span id="L595"><span class="lineNum">     595</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGD(&quot;The read beam was not used&quot;);</span></span>
 <span id="L596"><span class="lineNum">     596</span> <span class="tlaUNC">           0 :         delete startingBeam;</span></span>
 <span id="L597"><span class="lineNum">     597</span>              :     }</span>
-<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC tlaBgGNC">        6511 :     if (tuplet) {</span></span>
+<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC tlaBgGNC">        6519 :     if (tuplet) {</span></span>
 <span id="L599"><span class="lineNum">     599</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGD(&quot;Measure:readVoice: measure index=%d, &lt;endTuplet/&gt; not found&quot;, ctx.currentMeasureIndex());</span></span>
 <span id="L600"><span class="lineNum">     600</span> <span class="tlaUNC">           0 :         if (tuplet-&gt;elements().empty()) {</span></span>
 <span id="L601"><span class="lineNum">     601</span> <span class="tlaUNC">           0 :             if (tuplet-&gt;tuplet()) {</span></span>
@@ -662,13 +662,13 @@
 <span id="L604"><span class="lineNum">     604</span> <span class="tlaUNC">           0 :             delete tuplet;</span></span>
 <span id="L605"><span class="lineNum">     605</span>              :         }</span>
 <span id="L606"><span class="lineNum">     606</span>              :     }</span>
-<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC tlaBgGNC">        6511 :     if (fermata) {</span></span>
+<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC tlaBgGNC">        6519 :     if (fermata) {</span></span>
 <span id="L608"><span class="lineNum">     608</span> <span class="tlaUNC tlaBgUNC">           0 :         SegmentType st = (ctx.tick() == measure-&gt;endTick() ? SegmentType::EndBarLine : SegmentType::ChordRest);</span></span>
 <span id="L609"><span class="lineNum">     609</span> <span class="tlaUNC">           0 :         segment = measure-&gt;getSegment(st, ctx.tick());</span></span>
 <span id="L610"><span class="lineNum">     610</span> <span class="tlaUNC">           0 :         segment-&gt;add(fermata);</span></span>
 <span id="L611"><span class="lineNum">     611</span> <span class="tlaUNC">           0 :         fermata = nullptr;</span></span>
 <span id="L612"><span class="lineNum">     612</span>              :     }</span>
-<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC tlaBgGNC">        6511 : }</span></span>
+<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC tlaBgGNC">        6519 : }</span></span>
         </pre>
               </td>
             </tr>

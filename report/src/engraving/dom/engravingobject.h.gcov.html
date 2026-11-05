@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -284,11 +284,11 @@
 <span id="L226"><span class="lineNum">     226</span>              : public:</span>
 <span id="L227"><span class="lineNum">     227</span>              :     template&lt;typename T, std::enable_if_t&lt;std::is_same_v&lt;T, DummyParent&gt;</span>
 <span id="L228"><span class="lineNum">     228</span>              :                                           || (std::is_base_of_v&lt;ParentTypes, T&gt; || ...), int&gt; = 0&gt;</span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC tlaBgGNC">      654851 :     DummyParentOr(T* parent)</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">      654851 :         : m_parent(parent) {}</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC tlaBgGNC">      655486 :     DummyParentOr(T* parent)</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">      655486 :         : m_parent(parent) {}</span></span>
 <span id="L231"><span class="lineNum">     231</span>              : </span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">      657982 :     operator EngravingObject*() const {</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">      657982 :         return m_parent;</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">      658627 :     operator EngravingObject*() const {</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">      658627 :         return m_parent;</span></span>
 <span id="L234"><span class="lineNum">     234</span>              :     }</span>
 <span id="L235"><span class="lineNum">     235</span>              : </span>
 <span id="L236"><span class="lineNum">     236</span>              :     //! The parent as one of the accepted types, or null when it is the dummy - i.e.</span>
@@ -302,9 +302,9 @@
 <span id="L244"><span class="lineNum">     244</span>              : </span>
 <span id="L245"><span class="lineNum">     245</span>              : //! The given parent if there is one, the dummy otherwise.</span>
 <span id="L246"><span class="lineNum">     246</span>              : template&lt;typename T&gt;</span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        2938 : DummyParentOr&lt;T&gt; parentOrDummy(T* parent, DummyParent* dummy)</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        2943 : DummyParentOr&lt;T&gt; parentOrDummy(T* parent, DummyParent* dummy)</span></span>
 <span id="L248"><span class="lineNum">     248</span>              : {</span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        2938 :     return parent ? DummyParentOr&lt;T&gt;(parent) : DummyParentOr&lt;T&gt;(dummy);</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        2943 :     return parent ? DummyParentOr&lt;T&gt;(parent) : DummyParentOr&lt;T&gt;(dummy);</span></span>
 <span id="L250"><span class="lineNum">     250</span>              : }</span>
 <span id="L251"><span class="lineNum">     251</span>              : </span>
 <span id="L252"><span class="lineNum">     252</span>              : class EngravingObject</span>
@@ -315,8 +315,8 @@
 <span id="L257"><span class="lineNum">     257</span>              : </span>
 <span id="L258"><span class="lineNum">     258</span>              :     virtual ~EngravingObject();</span>
 <span id="L259"><span class="lineNum">     259</span>              : </span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">   338815748 :     inline ElementType type() const { return m_type; }</span></span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">   116892239 :     inline bool isType(ElementType t) const { return t == m_type; }</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">   340995834 :     inline ElementType type() const { return m_type; }</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">   118424977 :     inline bool isType(ElementType t) const { return t == m_type; }</span></span>
 <span id="L262"><span class="lineNum">     262</span>              :     const char* typeName() const;</span>
 <span id="L263"><span class="lineNum">     263</span>              :     virtual TranslatableString typeUserName() const;</span>
 <span id="L264"><span class="lineNum">     264</span>              :     virtual String translatedTypeUserName() const;</span>
@@ -336,7 +336,7 @@
 <span id="L278"><span class="lineNum">     278</span>              :     EngravingObject* ownershipParent() const;</span>
 <span id="L279"><span class="lineNum">     279</span>              :     void moveToDummy();</span>
 <span id="L280"><span class="lineNum">     280</span>              : </span>
-<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">      569861 :     const EngravingObjectList&amp; children() const { return m_children; }</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">      570735 :     const EngravingObjectList&amp; children() const { return m_children; }</span></span>
 <span id="L282"><span class="lineNum">     282</span>              : </span>
 <span id="L283"><span class="lineNum">     283</span>              :     EngravingItemList childrenItems(bool all = false) const;</span>
 <span id="L284"><span class="lineNum">     284</span>              :     std::vector&lt;EngravingItem*&gt; getChildren(bool includeInvisible = true) const;</span>
@@ -347,566 +347,567 @@
 <span id="L289"><span class="lineNum">     289</span>              :     Score* score() const;</span>
 <span id="L290"><span class="lineNum">     290</span>              :     MasterScore* masterScore() const;</span>
 <span id="L291"><span class="lineNum">     291</span>              :     bool onSameScore(const EngravingObject* other) const;</span>
-<span id="L292"><span class="lineNum">     292</span>              :     const MStyle&amp; style() const;</span>
-<span id="L293"><span class="lineNum">     293</span>              : </span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC tlaBgGNC">     2021899 :     virtual EngravingObject* propertyDelegate(Pid) const { return nullptr; }</span></span>
-<span id="L295"><span class="lineNum">     295</span>              :     virtual PropertyValue getProperty(Pid) const = 0;</span>
-<span id="L296"><span class="lineNum">     296</span>              :     virtual bool setProperty(Pid, const PropertyValue&amp;) = 0;</span>
-<span id="L297"><span class="lineNum">     297</span>              :     virtual PropertyValue propertyDefault(Pid) const;</span>
-<span id="L298"><span class="lineNum">     298</span>              :     virtual void resetProperty(Pid id);</span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaUNC tlaBgUNC">           0 :     virtual bool sizeIsSpatiumDependent() const { return true; }</span></span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC tlaBgGNC">           2 :     virtual bool offsetIsSpatiumDependent() const { return true; }</span></span>
-<span id="L301"><span class="lineNum">     301</span>              : </span>
-<span id="L302"><span class="lineNum">     302</span>              :     virtual void reset();                       // reset all properties &amp; position to default</span>
-<span id="L303"><span class="lineNum">     303</span>              : </span>
-<span id="L304"><span class="lineNum">     304</span>              :     virtual void initElementStyle(const ElementStyle*);</span>
-<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">       85191 :     virtual const ElementStyle* styledProperties() const { return m_elementStyle; }</span></span>
-<span id="L306"><span class="lineNum">     306</span>              : </span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaUNC tlaBgUNC">           0 :     virtual PropertyFlags* propertyFlagsList() const { return m_propertyFlagsList; }</span></span>
-<span id="L308"><span class="lineNum">     308</span>              :     virtual PropertyFlags propertyFlags(Pid) const;</span>
-<span id="L309"><span class="lineNum">     309</span>              :     bool isStyled(Pid pid) const;</span>
-<span id="L310"><span class="lineNum">     310</span>              :     PropertyValue styleValue(Pid, Sid) const;</span>
-<span id="L311"><span class="lineNum">     311</span>              : </span>
-<span id="L312"><span class="lineNum">     312</span>              :     virtual void setPropertyFlags(Pid, PropertyFlags);</span>
-<span id="L313"><span class="lineNum">     313</span>              : </span>
-<span id="L314"><span class="lineNum">     314</span>              :     virtual Sid getPropertyStyle(Pid) const;</span>
-<span id="L315"><span class="lineNum">     315</span>              : </span>
-<span id="L316"><span class="lineNum">     316</span>              :     virtual void styleChanged();</span>
-<span id="L317"><span class="lineNum">     317</span>              : </span>
-<span id="L318"><span class="lineNum">     318</span>              :     virtual void undoChangeProperty(Pid id, const PropertyValue&amp;, PropertyFlags ps);</span>
-<span id="L319"><span class="lineNum">     319</span>              :     void undoChangeProperty(Pid id, const PropertyValue&amp;);</span>
-<span id="L320"><span class="lineNum">     320</span>              :     void undoResetProperty(Pid id);</span>
-<span id="L321"><span class="lineNum">     321</span>              : </span>
-<span id="L322"><span class="lineNum">     322</span>              :     void undoPushProperty(Pid);</span>
-<span id="L323"><span class="lineNum">     323</span>              : </span>
-<span id="L324"><span class="lineNum">     324</span>              :     std::list&lt;EngravingObject*&gt; linkList() const;</span>
-<span id="L325"><span class="lineNum">     325</span>              : </span>
-<span id="L326"><span class="lineNum">     326</span>              :     void linkTo(EngravingObject*);</span>
-<span id="L327"><span class="lineNum">     327</span>              :     void unlink();</span>
-<span id="L328"><span class="lineNum">     328</span>              :     bool isLinked(EngravingObject* se = nullptr) const;</span>
-<span id="L329"><span class="lineNum">     329</span>              : </span>
-<span id="L330"><span class="lineNum">     330</span>              :     virtual void undoUnlink();</span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC tlaBgGNC">      373383 :     LinkedObjects* links() const { return m_links; }</span></span>
-<span id="L332"><span class="lineNum">     332</span>              :     void setLinks(LinkedObjects* le);</span>
-<span id="L333"><span class="lineNum">     333</span>              : </span>
-<span id="L334"><span class="lineNum">     334</span>              : protected:</span>
-<span id="L335"><span class="lineNum">     335</span>              :     virtual int getPropertyFlagsIdx(Pid id) const;</span>
-<span id="L336"><span class="lineNum">     336</span>              : </span>
-<span id="L337"><span class="lineNum">     337</span>              :     //! NOTE For compatibility reasons, hope, we will remove the need for this method.</span>
-<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">           1 :     void hack_setType(const ElementType&amp; t) { m_type = t; }</span></span>
-<span id="L339"><span class="lineNum">     339</span>              : </span>
-<span id="L340"><span class="lineNum">     340</span>              :     void addChild(EngravingObject* o);</span>
-<span id="L341"><span class="lineNum">     341</span>              :     void removeChild(EngravingObject* o);</span>
-<span id="L342"><span class="lineNum">     342</span>              : </span>
-<span id="L343"><span class="lineNum">     343</span>              :     const ElementStyle* m_elementStyle { &amp;EMPTY_STYLE };</span>
-<span id="L344"><span class="lineNum">     344</span>              :     PropertyFlags* m_propertyFlagsList = nullptr;</span>
-<span id="L345"><span class="lineNum">     345</span>              :     LinkedObjects* m_links = nullptr;</span>
-<span id="L346"><span class="lineNum">     346</span>              :     Score* m_score = nullptr;</span>
-<span id="L347"><span class="lineNum">     347</span>              : </span>
-<span id="L348"><span class="lineNum">     348</span>              : private:</span>
-<span id="L349"><span class="lineNum">     349</span>              :     static ElementStyle const EMPTY_STYLE;</span>
-<span id="L350"><span class="lineNum">     350</span>              : </span>
-<span id="L351"><span class="lineNum">     351</span>              :     void doSetParent(EngravingObject* p);</span>
-<span id="L352"><span class="lineNum">     352</span>              :     void doSetScore(Score* sc);</span>
-<span id="L353"><span class="lineNum">     353</span>              : </span>
-<span id="L354"><span class="lineNum">     354</span>              :     ElementType m_type = ElementType::INVALID;</span>
-<span id="L355"><span class="lineNum">     355</span>              : </span>
-<span id="L356"><span class="lineNum">     356</span>              :     EngravingObject* m_parent = nullptr;</span>
-<span id="L357"><span class="lineNum">     357</span>              :     EngravingObjectList m_children;</span>
-<span id="L358"><span class="lineNum">     358</span>              : </span>
-<span id="L359"><span class="lineNum">     359</span>              : public:</span>
-<span id="L360"><span class="lineNum">     360</span>              : </span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        5654 :     virtual std::list&lt;EngravingObject*&gt; linkListForPropertyPropagation() const { return linkList(); }</span></span>
-<span id="L362"><span class="lineNum">     362</span>              : </span>
-<span id="L363"><span class="lineNum">     363</span>              :     //---------------------------------------------------</span>
-<span id="L364"><span class="lineNum">     364</span>              :     // check type</span>
-<span id="L365"><span class="lineNum">     365</span>              :     //</span>
-<span id="L366"><span class="lineNum">     366</span>              :     // Example for ChordRest:</span>
-<span id="L367"><span class="lineNum">     367</span>              :     //</span>
-<span id="L368"><span class="lineNum">     368</span>              :     //    bool             isChordRest()</span>
-<span id="L369"><span class="lineNum">     369</span>              :     //---------------------------------------------------</span>
-<span id="L370"><span class="lineNum">     370</span>              : </span>
-<span id="L371"><span class="lineNum">     371</span>              : #define CONVERT(a, b) \</span>
-<span id="L372"><span class="lineNum">     372</span>              :     bool is##a() const { return type() == ElementType::b; \</span>
-<span id="L373"><span class="lineNum">     373</span>              :     }</span>
-<span id="L374"><span class="lineNum">     374</span>              : </span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">     4982547 :     CONVERT(Note,          NOTE)</span></span>
-<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">    17328731 :     CONVERT(Rest,          REST)</span></span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">     4626783 :     CONVERT(MMRest,        MMREST)</span></span>
-<span id="L378"><span class="lineNum">     378</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(DeadSlapped,   DEAD_SLAPPED)</span></span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC tlaBgGNC">    20533132 :     CONVERT(Chord,         CHORD)</span></span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">      728272 :     CONVERT(BarLine,       BAR_LINE)</span></span>
-<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">     9563673 :     CONVERT(Articulation,  ARTICULATION)</span></span>
-<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">     9450469 :     CONVERT(Ornament,      ORNAMENT)</span></span>
-<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">     9408042 :     CONVERT(Fermata,       FERMATA)</span></span>
-<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">       14133 :     CONVERT(Marker,        MARKER)</span></span>
-<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">     1115326 :     CONVERT(Clef,          CLEF)</span></span>
-<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">      119584 :     CONVERT(KeySig,        KEYSIG)</span></span>
-<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">      281341 :     CONVERT(TimeSig,       TIMESIG)</span></span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">    62452714 :     CONVERT(Measure,       MEASURE)</span></span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">       16451 :     CONVERT(TempoText,     TEMPO_TEXT)</span></span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">        1225 :     CONVERT(Breath,        BREATH)</span></span>
-<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">    19624841 :     CONVERT(HBox,          HBOX)</span></span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">    19696628 :     CONVERT(VBox,          VBOX)</span></span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">    19441588 :     CONVERT(TBox,          TBOX)</span></span>
-<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">    19417446 :     CONVERT(FBox,          FBOX)</span></span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">      145765 :     CONVERT(Glissando,     GLISSANDO)</span></span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">       73142 :     CONVERT(GlissandoSegment,     GLISSANDO_SEGMENT)</span></span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">      181854 :     CONVERT(GuitarBend,    GUITAR_BEND)</span></span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">       52400 :     CONVERT(GuitarBendSegment, GUITAR_BEND_SEGMENT)</span></span>
-<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">      119383 :     CONVERT(GuitarBendHold, GUITAR_BEND_HOLD)</span></span>
-<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">       45425 :     CONVERT(GuitarBendHoldSegment, GUITAR_BEND_HOLD_SEGMENT)</span></span>
-<span id="L401"><span class="lineNum">     401</span>              :     CONVERT(GuitarBendText, GUITAR_BEND_TEXT)</span>
-<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          28 :     CONVERT(SystemDivider, SYSTEM_DIVIDER)</span></span>
-<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">       14860 :     CONVERT(RehearsalMark, REHEARSAL_MARK)</span></span>
-<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">       11651 :     CONVERT(TripletFeel, TRIPLET_FEEL)</span></span>
-<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">      929748 :     CONVERT(Harmony,       HARMONY)</span></span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">      163527 :     CONVERT(Volta,         VOLTA)</span></span>
-<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">       12125 :     CONVERT(Jump,          JUMP)</span></span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">      169245 :     CONVERT(Ottava,        OTTAVA)</span></span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">       22992 :     CONVERT(LayoutBreak,   LAYOUT_BREAK)</span></span>
-<span id="L410"><span class="lineNum">     410</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(StaffVisibilityIndicator, STAFF_VISIBILITY_INDICATOR)</span></span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC tlaBgGNC">        4353 :     CONVERT(SystemLockIndicator, SYSTEM_LOCK_INDICATOR)</span></span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">    21634167 :     CONVERT(Segment,       SEGMENT)</span></span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">      565955 :     CONVERT(System,        SYSTEM)</span></span>
-<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">     1593014 :     CONVERT(Lyrics,        LYRICS)</span></span>
-<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">      812415 :     CONVERT(Stem,          STEM)</span></span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">       62770 :     CONVERT(Beam,          BEAM)</span></span>
-<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">        2557 :     CONVERT(Hook,          HOOK)</span></span>
-<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">        5563 :     CONVERT(StemSlash,     STEM_SLASH)</span></span>
-<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">       11468 :     CONVERT(LaissezVibSegment,    LAISSEZ_VIB_SEGMENT)</span></span>
-<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">       36495 :     CONVERT(LaissezVib,    LAISSEZ_VIB)</span></span>
-<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">         340 :     CONVERT(PartialTieSegment,    PARTIAL_TIE_SEGMENT)</span></span>
-<span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">       39481 :     CONVERT(PartialTie,    PARTIAL_TIE)</span></span>
-<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">           1 :     CONVERT(Spacer,        SPACER)</span></span>
-<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">      983372 :     CONVERT(StaffLines,    STAFF_LINES)</span></span>
-<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">         357 :     CONVERT(Ambitus,       AMBITUS)</span></span>
-<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">        2886 :     CONVERT(Bracket,       BRACKET)</span></span>
-<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">        9798 :     CONVERT(InstrumentChange, INSTRUMENT_CHANGE)</span></span>
-<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">          17 :     CONVERT(StaffTypeChange, STAFFTYPE_CHANGE)</span></span>
-<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">      191967 :     CONVERT(Hairpin,       HAIRPIN)</span></span>
-<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">      281734 :     CONVERT(HairpinSegment, HAIRPIN_SEGMENT)</span></span>
-<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">        8929 :     CONVERT(Bend,          BEND)</span></span>
-<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">        1622 :     CONVERT(TremoloBar,    TREMOLOBAR)</span></span>
-<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">     4125918 :     CONVERT(MeasureRepeat, MEASURE_REPEAT)</span></span>
-<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">       81056 :     CONVERT(Tuplet,        TUPLET)</span></span>
-<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">        8407 :     CONVERT(NoteDot,       NOTEDOT)</span></span>
-<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">      122123 :     CONVERT(Dynamic,       DYNAMIC)</span></span>
-<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">       10332 :     CONVERT(Expression,    EXPRESSION)</span></span>
-<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">      267711 :     CONVERT(InstrumentName, INSTRUMENT_NAME)</span></span>
-<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">     4183149 :     CONVERT(Accidental,    ACCIDENTAL)</span></span>
-<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">      166957 :     CONVERT(TextLine,      TEXTLINE)</span></span>
-<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC">      267032 :     CONVERT(TextLineSegment,      TEXTLINE_SEGMENT)</span></span>
-<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">      161350 :     CONVERT(Pedal,         PEDAL)</span></span>
-<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">      272147 :     CONVERT(PedalSegment,  PEDAL_SEGMENT)</span></span>
-<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">      274762 :     CONVERT(OttavaSegment, OTTAVA_SEGMENT)</span></span>
-<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">     4223816 :     CONVERT(LedgerLine,    LEDGER_LINE)</span></span>
-<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">        2343 :     CONVERT(ActionIcon,    ACTION_ICON)</span></span>
-<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">      263229 :     CONVERT(VoltaSegment,  VOLTA_SEGMENT)</span></span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">      153601 :     CONVERT(NoteLine,      NOTELINE)</span></span>
-<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">      253366 :     CONVERT(NoteLineSegment,      NOTELINE_SEGMENT)</span></span>
-<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">      157882 :     CONVERT(Trill,         TRILL)</span></span>
-<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">       57913 :     CONVERT(TrillSegment,  TRILL_SEGMENT)</span></span>
-<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">      169042 :     CONVERT(LetRing,       LET_RING)</span></span>
-<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">      267622 :     CONVERT(LetRingSegment, LET_RING_SEGMENT)</span></span>
-<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">      167649 :     CONVERT(GradualTempoChange, GRADUAL_TEMPO_CHANGE)</span></span>
-<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">      272967 :     CONVERT(GradualTempoChangeSegment, GRADUAL_TEMPO_CHANGE_SEGMENT)</span></span>
-<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">      137828 :     CONVERT(Vibrato,       VIBRATO)</span></span>
-<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">      162944 :     CONVERT(PalmMute,      PALM_MUTE)</span></span>
-<span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC">      264658 :     CONVERT(PalmMuteSegment, PALM_MUTE_SEGMENT)</span></span>
-<span id="L459"><span class="lineNum">     459</span> <span class="tlaGNC">      161043 :     CONVERT(WhammyBar,      WHAMMY_BAR)</span></span>
-<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC">      266838 :     CONVERT(WhammyBarSegment, WHAMMY_BAR_SEGMENT)</span></span>
-<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">      160516 :     CONVERT(Rasgueado,      RASGUEADO)</span></span>
-<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">      258612 :     CONVERT(RasgueadoSegment, RASGUEADO_SEGMENT)</span></span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">      160189 :     CONVERT(HarmonicMark,      HARMONIC_MARK)</span></span>
-<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">      259713 :     CONVERT(HarmonicMarkSegment, HARMONIC_MARK_SEGMENT)</span></span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">      160777 :     CONVERT(PickScrape,      PICK_SCRAPE)</span></span>
-<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">      258631 :     CONVERT(PickScrapeSegment, PICK_SCRAPE_SEGMENT)</span></span>
-<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">       58111 :     CONVERT(VibratoSegment,  VIBRATO_SEGMENT)</span></span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">       14623 :     CONVERT(Symbol,        SYMBOL)</span></span>
-<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">        6410 :     CONVERT(FSymbol,       FSYMBOL)</span></span>
-<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">      304333 :     CONVERT(Fingering,     FINGERING)</span></span>
-<span id="L471"><span class="lineNum">     471</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(NoteHead,      NOTEHEAD)</span></span>
-<span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC tlaBgGNC">        1716 :     CONVERT(PartialLyricsLine,    PARTIAL_LYRICSLINE)</span></span>
-<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">         966 :     CONVERT(PartialLyricsLineSegment, PARTIAL_LYRICSLINE_SEGMENT)</span></span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">        9977 :     CONVERT(FiguredBass,   FIGURED_BASS)</span></span>
-<span id="L475"><span class="lineNum">     475</span>              :     CONVERT(FiguredBassItem, FIGURED_BASS_ITEM)</span>
-<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">           5 :     CONVERT(StaffState,    STAFF_STATE)</span></span>
-<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">      615088 :     CONVERT(Arpeggio,      ARPEGGIO)</span></span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">      616473 :     CONVERT(ChordBracket,  CHORD_BRACKET)</span></span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">         744 :     CONVERT(Image,         IMAGE)</span></span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">     2642228 :     CONVERT(ChordLine,     CHORDLINE)</span></span>
-<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">     2794698 :     CONVERT(FretDiagram,   FRET_DIAGRAM)</span></span>
-<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">       11921 :     CONVERT(HarpPedalDiagram, HARP_DIAGRAM)</span></span>
-<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">        1135 :     CONVERT(Page,          PAGE)</span></span>
-<span id="L484"><span class="lineNum">     484</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(PageLockIndicator, PAGE_LOCK_INDICATOR)</span></span>
-<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC tlaBgGNC">      587287 :     CONVERT(Text,          TEXT)</span></span>
-<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">       22068 :     CONVERT(MeasureNumber, MEASURE_NUMBER)</span></span>
-<span id="L487"><span class="lineNum">     487</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(MMRestRange,   MMREST_RANGE)</span></span>
-<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC tlaBgGNC">       16466 :     CONVERT(StaffText,     STAFF_TEXT)</span></span>
-<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">        6225 :     CONVERT(StaveSharingLabel, STAVE_SHARING_LABEL)</span></span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">       12610 :     CONVERT(SystemText,    SYSTEM_TEXT)</span></span>
-<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">          75 :     CONVERT(SoundFlag,     SOUND_FLAG)</span></span>
-<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">        1511 :     CONVERT(PlayCountText, PLAY_COUNT_TEXT)</span></span>
-<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">       17138 :     CONVERT(PlayTechAnnotation, PLAYTECH_ANNOTATION)</span></span>
-<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">        7977 :     CONVERT(Capo,          CAPO)</span></span>
-<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">      234427 :     CONVERT(BracketItem,   BRACKET_ITEM)</span></span>
-<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">          14 :     CONVERT(Score,         SCORE)</span></span>
-<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">       28531 :     CONVERT(Staff,         STAFF)</span></span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">          10 :     CONVERT(Part,          PART)</span></span>
-<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">      419139 :     CONVERT(SharedPart,    SHARED_PART)</span></span>
-<span id="L500"><span class="lineNum">     500</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(BagpipeEmbellishment, BAGPIPE_EMBELLISHMENT)</span></span>
-<span id="L501"><span class="lineNum">     501</span>              :     CONVERT(Lasso,         LASSO)</span>
-<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC tlaBgGNC">        1673 :     CONVERT(Sticking,      STICKING)</span></span>
-<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">        6742 :     CONVERT(GraceNotesGroup, GRACE_NOTES_GROUP)</span></span>
-<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">       16258 :     CONVERT(StringTunings, STRING_TUNINGS)</span></span>
-<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">        4871 :     CONVERT(TimeTickAnchor, TIME_TICK_ANCHOR)</span></span>
-<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">    18113922 :     CONVERT(Parenthesis, PARENTHESIS)</span></span>
-<span id="L507"><span class="lineNum">     507</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(ShadowNote, SHADOW_NOTE)</span></span>
-<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC tlaBgGNC">       10776 :     CONVERT(HammerOnPullOff, HAMMER_ON_PULL_OFF)</span></span>
-<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">        3439 :     CONVERT(HammerOnPullOffSegment, HAMMER_ON_PULL_OFF_SEGMENT)</span></span>
-<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">         499 :     CONVERT(HammerOnPullOffText, HAMMER_ON_PULL_OFF_TEXT)</span></span>
-<span id="L511"><span class="lineNum">     511</span> <span class="tlaGNC">     9427299 :     CONVERT(Tapping, TAPPING)</span></span>
-<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">        1920 :     CONVERT(TappingHalfSlur, TAPPING_HALF_SLUR)</span></span>
-<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC">       13449 :     CONVERT(TappingHalfSlurSegment, TAPPING_HALF_SLUR_SEGMENT)</span></span>
-<span id="L514"><span class="lineNum">     514</span>              : #undef CONVERT</span>
-<span id="L515"><span class="lineNum">     515</span>              : </span>
-<span id="L516"><span class="lineNum">     516</span> <span class="tlaGNC">       24201 :     virtual bool isEngravingItem() const { return false; }   // overridden in element.h</span></span>
-<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">     7208384 :     bool isRestFamily() const { return isRest() || isMMRest() || isMeasureRepeat(); }</span></span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">     5596597 :     bool isChordRest() const { return isRestFamily() || isChord(); }</span></span>
-<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">        7376 :     bool isDurationElement() const { return isChordRest() || isTuplet(); }</span></span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">        1452 :     bool isSlurTie() const { return isSlur() || isTie(); }</span></span>
-<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">        9955 :     bool isSlurTieSegment() const { return isSlurSegment() || isTieSegment(); }</span></span>
-<span id="L522"><span class="lineNum">     522</span>              :     bool isSLineSegment() const;</span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">    19509006 :     bool isBox() const { return isVBox() || isHBox() || isTBox() || isFBox(); }</span></span>
-<span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">      156255 :     bool isVBoxBase() const { return isVBox() || isTBox() || isFBox(); }</span></span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">    19667073 :     bool isMeasureBase() const { return isMeasure() || isBox(); }</span></span>
-<span id="L526"><span class="lineNum">     526</span>              :     bool isTextBase() const;</span>
-<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">      266970 :     bool isTextLineBaseSegment() const</span></span>
-<span id="L528"><span class="lineNum">     528</span>              :     {</span>
-<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">      266970 :         return isHairpinSegment()</span></span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">      261749 :                || isLetRingSegment()</span></span>
-<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">      261408 :                || isGradualTempoChangeSegment()</span></span>
-<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">      261157 :                || isTextLineSegment()</span></span>
-<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">      260520 :                || isOttavaSegment()</span></span>
-<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">      258785 :                || isPalmMuteSegment()</span></span>
-<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">      258631 :                || isPickScrapeSegment()</span></span>
-<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">      258609 :                || isWhammyBarSegment()</span></span>
-<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC">      258609 :                || isRasgueadoSegment()</span></span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">      258565 :                || isHarmonicMarkSegment()</span></span>
-<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">      258391 :                || isPedalSegment()</span></span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">      257114 :                || isVoltaSegment()</span></span>
-<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">      528719 :                || isNoteLineSegment();</span></span>
-<span id="L542"><span class="lineNum">     542</span>              :     }</span>
-<span id="L543"><span class="lineNum">     543</span>              : </span>
-<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">      661227 :     bool isSlur() const</span></span>
-<span id="L545"><span class="lineNum">     545</span>              :     {</span>
-<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">      661227 :         return type() == ElementType::SLUR || type() == ElementType::HAMMER_ON_PULL_OFF || type() == ElementType::TAPPING_HALF_SLUR;</span></span>
-<span id="L547"><span class="lineNum">     547</span>              :     }</span>
-<span id="L548"><span class="lineNum">     548</span>              : </span>
-<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">       62741 :     bool isSlurSegment() const</span></span>
-<span id="L550"><span class="lineNum">     550</span>              :     {</span>
-<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">      113584 :         return type() == ElementType::SLUR_SEGMENT || type() == ElementType::HAMMER_ON_PULL_OFF_SEGMENT</span></span>
-<span id="L552"><span class="lineNum">     552</span> <span class="tlaGNC">      113584 :                || type() == ElementType::TAPPING_HALF_SLUR_SEGMENT;</span></span>
-<span id="L553"><span class="lineNum">     553</span>              :     }</span>
-<span id="L554"><span class="lineNum">     554</span>              : </span>
-<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">       67272 :     bool isLineSegment() const</span></span>
-<span id="L556"><span class="lineNum">     556</span>              :     {</span>
-<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">       67272 :         return isGlissandoSegment()</span></span>
-<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">       63070 :                || isLyricsLineSegment()</span></span>
-<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">       61769 :                || isTextLineBaseSegment()</span></span>
-<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">       51753 :                || isTrillSegment()</span></span>
-<span id="L561"><span class="lineNum">     561</span> <span class="tlaGNC">       51098 :                || isVibratoSegment()</span></span>
-<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC">       50928 :                || isGuitarBendSegment()</span></span>
-<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">      130342 :                || isGuitarBendHoldSegment()</span></span>
-<span id="L564"><span class="lineNum">     564</span>              :         ;</span>
-<span id="L565"><span class="lineNum">     565</span>              :     }</span>
-<span id="L566"><span class="lineNum">     566</span>              : </span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">       53870 :     bool isTieSegment() const</span></span>
-<span id="L568"><span class="lineNum">     568</span>              :     {</span>
-<span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC">       86373 :         return type() == ElementType::TIE_SEGMENT || type() == ElementType::LAISSEZ_VIB_SEGMENT</span></span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">       86373 :                || type() == ElementType::PARTIAL_TIE_SEGMENT;</span></span>
-<span id="L571"><span class="lineNum">     571</span>              :     }</span>
-<span id="L572"><span class="lineNum">     572</span>              : </span>
-<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">      532277 :     bool isTie() const</span></span>
-<span id="L574"><span class="lineNum">     574</span>              :     {</span>
-<span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">      532277 :         return type() == ElementType::TIE || type() == ElementType::LAISSEZ_VIB || type() == ElementType::PARTIAL_TIE;</span></span>
-<span id="L576"><span class="lineNum">     576</span>              :     }</span>
-<span id="L577"><span class="lineNum">     577</span>              : </span>
-<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">       59164 :     bool isSpannerSegment() const</span></span>
-<span id="L579"><span class="lineNum">     579</span>              :     {</span>
-<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">       59164 :         return isLineSegment() || isTextLineBaseSegment() || isSlurSegment() || isTieSegment();</span></span>
-<span id="L581"><span class="lineNum">     581</span>              :     }</span>
-<span id="L582"><span class="lineNum">     582</span>              : </span>
-<span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">           7 :     bool isBSymbol() const { return isImage() || isSymbol(); }</span></span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">      188713 :     bool isTextLineBase() const</span></span>
-<span id="L585"><span class="lineNum">     585</span>              :     {</span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">      188713 :         return isHairpin()</span></span>
-<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">      168626 :                || isLetRing()</span></span>
-<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">      167556 :                || isGradualTempoChange()</span></span>
-<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">      166432 :                || isTextLine()</span></span>
-<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">      165074 :                || isOttava()</span></span>
-<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">      161544 :                || isPalmMute()</span></span>
-<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">      160777 :                || isPickScrape()</span></span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">      160733 :                || isWhammyBar()</span></span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">      160513 :                || isRasgueado()</span></span>
-<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">      160186 :                || isHarmonicMark()</span></span>
-<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">      159500 :                || isPedal()</span></span>
-<span id="L597"><span class="lineNum">     597</span> <span class="tlaGNC">      156114 :                || isVolta()</span></span>
-<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">      357339 :                || isNoteLine();</span></span>
-<span id="L599"><span class="lineNum">     599</span>              :     }</span>
-<span id="L600"><span class="lineNum">     600</span>              : </span>
-<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">      171470 :     bool isLyricsLine() const { return type() == ElementType::LYRICSLINE || type() == ElementType::PARTIAL_LYRICSLINE; }</span></span>
-<span id="L602"><span class="lineNum">     602</span>              : </span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">      525201 :     bool isLyricsLineSegment() const</span></span>
-<span id="L604"><span class="lineNum">     604</span>              :     {</span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">      525201 :         return type() == ElementType::LYRICSLINE_SEGMENT || type() == ElementType::PARTIAL_LYRICSLINE_SEGMENT;</span></span>
-<span id="L606"><span class="lineNum">     606</span>              :     }</span>
-<span id="L607"><span class="lineNum">     607</span>              : </span>
-<span id="L608"><span class="lineNum">     608</span> <span class="tlaGNC">      177006 :     bool isSLine() const</span></span>
-<span id="L609"><span class="lineNum">     609</span>              :     {</span>
-<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC">      177006 :         return isTextLineBase() || isTrill() || isGlissando() || isVibrato() || isGuitarBend() || isGuitarBendHold();</span></span>
-<span id="L611"><span class="lineNum">     611</span>              :     }</span>
-<span id="L612"><span class="lineNum">     612</span>              : </span>
-<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">      592735 :     bool isSpanner() const</span></span>
-<span id="L614"><span class="lineNum">     614</span>              :     {</span>
-<span id="L615"><span class="lineNum">     615</span> <span class="tlaGNC">      592735 :         return isSlur() || isTie() || isLyricsLine() || isSLine();</span></span>
-<span id="L616"><span class="lineNum">     616</span>              :     }</span>
-<span id="L617"><span class="lineNum">     617</span>              : </span>
-<span id="L618"><span class="lineNum">     618</span> <span class="tlaGNC">        8304 :     bool isStaffTextBase() const</span></span>
-<span id="L619"><span class="lineNum">     619</span>              :     {</span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">       14074 :         return isStaffText() || isStaveSharingLabel() || isSystemText() || isTripletFeel() || isPlayTechAnnotation() || isCapo()</span></span>
-<span id="L621"><span class="lineNum">     621</span> <span class="tlaGNC">       14074 :                || isStringTunings();</span></span>
-<span id="L622"><span class="lineNum">     622</span>              :     }</span>
-<span id="L623"><span class="lineNum">     623</span>              : </span>
-<span id="L624"><span class="lineNum">     624</span> <span class="tlaGNC">     9563587 :     bool isArticulationFamily() const</span></span>
-<span id="L625"><span class="lineNum">     625</span>              :     {</span>
-<span id="L626"><span class="lineNum">     626</span> <span class="tlaGNC">     9563587 :         return isArticulation() || isOrnament() || isTapping();</span></span>
-<span id="L627"><span class="lineNum">     627</span>              :     }</span>
-<span id="L628"><span class="lineNum">     628</span>              : </span>
-<span id="L629"><span class="lineNum">     629</span> <span class="tlaGNC">     9508949 :     bool isArticulationOrFermata() const</span></span>
-<span id="L630"><span class="lineNum">     630</span>              :     {</span>
-<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">     9508949 :         return isArticulationFamily() || isFermata();</span></span>
-<span id="L632"><span class="lineNum">     632</span>              :     }</span>
-<span id="L633"><span class="lineNum">     633</span>              : </span>
-<span id="L634"><span class="lineNum">     634</span> <span class="tlaUNC tlaBgUNC">           0 :     bool isIndicatorIcon() const { return isSystemLockIndicator() || isPageLockIndicator() || isStaffVisibilityIndicator(); }</span></span>
-<span id="L635"><span class="lineNum">     635</span>              : };</span>
-<span id="L636"><span class="lineNum">     636</span>              : </span>
-<span id="L637"><span class="lineNum">     637</span>              : template&lt;typename ... ParentTypes&gt;</span>
-<span id="L638"><span class="lineNum">     638</span>              : template&lt;typename T&gt;</span>
-<span id="L639"><span class="lineNum">     639</span> <span class="tlaGNC tlaBgGNC">       72924 : T* DummyParentOr&lt;ParentTypes...&gt;::as() const</span></span>
-<span id="L640"><span class="lineNum">     640</span>              : {</span>
-<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">       72924 :     return m_parent &amp;&amp; !m_parent-&gt;isType(ElementType::DUMMY) ? static_cast&lt;T*&gt;(m_parent) : nullptr;</span></span>
-<span id="L642"><span class="lineNum">     642</span>              : }</span>
-<span id="L643"><span class="lineNum">     643</span>              : </span>
-<span id="L644"><span class="lineNum">     644</span>              : //---------------------------------------------------</span>
-<span id="L645"><span class="lineNum">     645</span>              : // safe casting of EngravingObject</span>
-<span id="L646"><span class="lineNum">     646</span>              : //</span>
-<span id="L647"><span class="lineNum">     647</span>              : // Example for ChordRest:</span>
-<span id="L648"><span class="lineNum">     648</span>              : //</span>
-<span id="L649"><span class="lineNum">     649</span>              : //    ChordRest* toChordRest(EngravingItem* e)</span>
-<span id="L650"><span class="lineNum">     650</span>              : //---------------------------------------------------</span>
-<span id="L651"><span class="lineNum">     651</span>              : </span>
-<span id="L652"><span class="lineNum">     652</span> <span class="tlaGNC">      432073 : static inline Rest* toRest(EngravingObject* e)</span></span>
-<span id="L653"><span class="lineNum">     653</span>              : {</span>
-<span id="L654"><span class="lineNum">     654</span> <span class="tlaGNC">      432073 :     assert(!e || e-&gt;isRestFamily());</span></span>
-<span id="L655"><span class="lineNum">     655</span> <span class="tlaGNC">      432073 :     return (Rest*)e;</span></span>
-<span id="L656"><span class="lineNum">     656</span>              : }</span>
-<span id="L657"><span class="lineNum">     657</span>              : </span>
-<span id="L658"><span class="lineNum">     658</span> <span class="tlaGNC">     1165502 : static inline const Rest* toRest(const EngravingObject* e)</span></span>
-<span id="L659"><span class="lineNum">     659</span>              : {</span>
-<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">     1165502 :     assert(!e || e-&gt;isRestFamily());</span></span>
-<span id="L661"><span class="lineNum">     661</span> <span class="tlaGNC">     1165502 :     return (const Rest*)e;</span></span>
-<span id="L662"><span class="lineNum">     662</span>              : }</span>
-<span id="L663"><span class="lineNum">     663</span>              : </span>
-<span id="L664"><span class="lineNum">     664</span> <span class="tlaGNC">        1784 : static inline Articulation* toArticulation(EngravingObject* e)</span></span>
-<span id="L665"><span class="lineNum">     665</span>              : {</span>
-<span id="L666"><span class="lineNum">     666</span> <span class="tlaGNC">        1784 :     assert(!e || e-&gt;isArticulationFamily());</span></span>
-<span id="L667"><span class="lineNum">     667</span> <span class="tlaGNC">        1784 :     return (Articulation*)e;</span></span>
-<span id="L668"><span class="lineNum">     668</span>              : }</span>
-<span id="L669"><span class="lineNum">     669</span>              : </span>
-<span id="L670"><span class="lineNum">     670</span> <span class="tlaGNC">       14288 : static inline const Articulation* toArticulation(const EngravingObject* e)</span></span>
-<span id="L671"><span class="lineNum">     671</span>              : {</span>
-<span id="L672"><span class="lineNum">     672</span> <span class="tlaGNC">       14288 :     assert(!e || e-&gt;isArticulationFamily());</span></span>
-<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC">       14288 :     return (const Articulation*)e;</span></span>
-<span id="L674"><span class="lineNum">     674</span>              : }</span>
-<span id="L675"><span class="lineNum">     675</span>              : </span>
-<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">          97 : static inline Arpeggio* toArpeggio(EngravingObject* e)</span></span>
-<span id="L677"><span class="lineNum">     677</span>              : {</span>
-<span id="L678"><span class="lineNum">     678</span> <span class="tlaGNC">          97 :     assert(!e || e-&gt;isArpeggio() || e-&gt;isChordBracket());</span></span>
-<span id="L679"><span class="lineNum">     679</span> <span class="tlaGNC">          97 :     return (Arpeggio*)e;</span></span>
-<span id="L680"><span class="lineNum">     680</span>              : }</span>
-<span id="L681"><span class="lineNum">     681</span>              : </span>
-<span id="L682"><span class="lineNum">     682</span> <span class="tlaGNC">         596 : static inline const Arpeggio* toArpeggio(const EngravingObject* e)</span></span>
-<span id="L683"><span class="lineNum">     683</span>              : {</span>
-<span id="L684"><span class="lineNum">     684</span> <span class="tlaGNC">         596 :     assert(!e || e-&gt;isArpeggio() || e-&gt;isChordBracket());</span></span>
-<span id="L685"><span class="lineNum">     685</span> <span class="tlaGNC">         596 :     return (const Arpeggio*)e;</span></span>
-<span id="L686"><span class="lineNum">     686</span>              : }</span>
-<span id="L687"><span class="lineNum">     687</span>              : </span>
-<span id="L688"><span class="lineNum">     688</span>              : #define CONVERT(a)  \</span>
-<span id="L689"><span class="lineNum">     689</span>              :     static inline a* to##a(EngravingObject * e) { assert(!e || e-&gt;is##a()); return (a*)e; } \</span>
-<span id="L690"><span class="lineNum">     690</span>              :     static inline const a* to##a(const EngravingObject * e) { assert(!e || e-&gt;is##a()); return (const a*)e; }</span>
-<span id="L691"><span class="lineNum">     691</span>              : </span>
-<span id="L692"><span class="lineNum">     692</span> <span class="tlaGNC">     8406614 : CONVERT(EngravingItem)</span></span>
-<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">     2245348 : CONVERT(Note)</span></span>
-<span id="L694"><span class="lineNum">     694</span> <span class="tlaGNC">     7552752 : CONVERT(Chord)</span></span>
-<span id="L695"><span class="lineNum">     695</span> <span class="tlaGNC">      515052 : CONVERT(BarLine)</span></span>
-<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">        1989 : CONVERT(Ornament)</span></span>
-<span id="L697"><span class="lineNum">     697</span> <span class="tlaGNC">      112606 : CONVERT(Fermata)</span></span>
-<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC">        1274 : CONVERT(Marker)</span></span>
-<span id="L699"><span class="lineNum">     699</span> <span class="tlaGNC">      195377 : CONVERT(Clef)</span></span>
-<span id="L700"><span class="lineNum">     700</span> <span class="tlaGNC">       79480 : CONVERT(KeySig)</span></span>
-<span id="L701"><span class="lineNum">     701</span> <span class="tlaGNC">      155653 : CONVERT(TimeSig)</span></span>
-<span id="L702"><span class="lineNum">     702</span> <span class="tlaGNC">    26826963 : CONVERT(Measure)</span></span>
-<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">      256673 : CONVERT(MeasureBase)</span></span>
-<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC">        6132 : CONVERT(DurationElement)</span></span>
-<span id="L705"><span class="lineNum">     705</span> <span class="tlaGNC">    11225948 : CONVERT(ChordRest)</span></span>
-<span id="L706"><span class="lineNum">     706</span> <span class="tlaGNC">        1373 : CONVERT(TempoText)</span></span>
-<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">         158 : CONVERT(Breath)</span></span>
-<span id="L708"><span class="lineNum">     708</span> <span class="tlaGNC">       41653 : CONVERT(Box)</span></span>
-<span id="L709"><span class="lineNum">     709</span> <span class="tlaGNC">         969 : CONVERT(HBox)</span></span>
-<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">         176 : CONVERT(VBox)</span></span>
-<span id="L711"><span class="lineNum">     711</span> <span class="tlaGNC">          30 : CONVERT(TBox)</span></span>
-<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">          38 : CONVERT(FBox)</span></span>
-<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC">      488554 : CONVERT(Spanner)</span></span>
-<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">       20391 : CONVERT(SpannerSegment)</span></span>
-<span id="L715"><span class="lineNum">     715</span> <span class="tlaGNC">         929 : CONVERT(Glissando)</span></span>
-<span id="L716"><span class="lineNum">     716</span>              : CONVERT(GlissandoSegment)</span>
-<span id="L717"><span class="lineNum">     717</span> <span class="tlaGNC">       27650 : CONVERT(GuitarBend)</span></span>
-<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">        1430 : CONVERT(GuitarBendSegment)</span></span>
-<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC">          18 : CONVERT(GuitarBendHold)</span></span>
-<span id="L720"><span class="lineNum">     720</span> <span class="tlaGNC">           6 : CONVERT(GuitarBendHoldSegment)</span></span>
-<span id="L721"><span class="lineNum">     721</span>              : CONVERT(GuitarBendText)</span>
-<span id="L722"><span class="lineNum">     722</span> <span class="tlaGNC">          28 : CONVERT(SystemDivider)</span></span>
-<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC">        1339 : CONVERT(RehearsalMark)</span></span>
-<span id="L724"><span class="lineNum">     724</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(Bend)</span></span>
-<span id="L725"><span class="lineNum">     725</span>              : CONVERT(TripletFeel)</span>
-<span id="L726"><span class="lineNum">     726</span> <span class="tlaGNC tlaBgGNC">        6016 : CONVERT(Harmony)</span></span>
-<span id="L727"><span class="lineNum">     727</span> <span class="tlaGNC">         486 : CONVERT(Jump)</span></span>
-<span id="L728"><span class="lineNum">     728</span> <span class="tlaGNC">         214 : CONVERT(StaffText)</span></span>
-<span id="L729"><span class="lineNum">     729</span> <span class="tlaGNC">           5 : CONVERT(StaveSharingLabel);</span></span>
-<span id="L730"><span class="lineNum">     730</span> <span class="tlaGNC">        2177 : CONVERT(StaffTextBase)</span></span>
-<span id="L731"><span class="lineNum">     731</span> <span class="tlaGNC">       27765 : CONVERT(TextBase)</span></span>
-<span id="L732"><span class="lineNum">     732</span> <span class="tlaGNC">        2219 : CONVERT(TextLineBase)</span></span>
-<span id="L733"><span class="lineNum">     733</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(TextLineBaseSegment)</span></span>
-<span id="L734"><span class="lineNum">     734</span> <span class="tlaGNC tlaBgGNC">         719 : CONVERT(PlayCountText)</span></span>
-<span id="L735"><span class="lineNum">     735</span> <span class="tlaGNC">          56 : CONVERT(PlayTechAnnotation)</span></span>
-<span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC">          24 : CONVERT(Capo)</span></span>
-<span id="L737"><span class="lineNum">     737</span> <span class="tlaGNC">         435 : CONVERT(Ottava)</span></span>
-<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">        4906 : CONVERT(LayoutBreak)</span></span>
-<span id="L739"><span class="lineNum">     739</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(IndicatorIcon)</span></span>
-<span id="L740"><span class="lineNum">     740</span> <span class="tlaUNC">           0 : CONVERT(StaffVisibilityIndicator)</span></span>
-<span id="L741"><span class="lineNum">     741</span> <span class="tlaUNC">           0 : CONVERT(SystemLockIndicator)</span></span>
-<span id="L742"><span class="lineNum">     742</span> <span class="tlaGNC tlaBgGNC">     9281168 : CONVERT(Segment)</span></span>
-<span id="L743"><span class="lineNum">     743</span> <span class="tlaGNC">      260270 : CONVERT(System)</span></span>
-<span id="L744"><span class="lineNum">     744</span> <span class="tlaGNC">       92858 : CONVERT(Lyrics)</span></span>
-<span id="L745"><span class="lineNum">     745</span> <span class="tlaGNC">       73831 : CONVERT(Stem)</span></span>
-<span id="L746"><span class="lineNum">     746</span> <span class="tlaGNC">         704 : CONVERT(Beam)</span></span>
-<span id="L747"><span class="lineNum">     747</span> <span class="tlaGNC">        1692 : CONVERT(Hook)</span></span>
-<span id="L748"><span class="lineNum">     748</span> <span class="tlaGNC">        5563 : CONVERT(StemSlash)</span></span>
-<span id="L749"><span class="lineNum">     749</span> <span class="tlaGNC">           4 : CONVERT(SLine)</span></span>
-<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">        8108 : CONVERT(LineSegment)</span></span>
-<span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC">       24541 : CONVERT(Slur)</span></span>
-<span id="L752"><span class="lineNum">     752</span> <span class="tlaGNC">        3617 : CONVERT(SlurSegment)</span></span>
-<span id="L753"><span class="lineNum">     753</span> <span class="tlaGNC">        5394 : CONVERT(Tie)</span></span>
-<span id="L754"><span class="lineNum">     754</span> <span class="tlaGNC">        5198 : CONVERT(TieSegment)</span></span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">        1452 : CONVERT(SlurTie)</span></span>
-<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">        4271 : CONVERT(SlurTieSegment)</span></span>
-<span id="L757"><span class="lineNum">     757</span> <span class="tlaGNC">         182 : CONVERT(LaissezVibSegment)</span></span>
-<span id="L758"><span class="lineNum">     758</span> <span class="tlaGNC">         340 : CONVERT(PartialTieSegment)</span></span>
-<span id="L759"><span class="lineNum">     759</span> <span class="tlaGNC">           1 : CONVERT(Spacer)</span></span>
-<span id="L760"><span class="lineNum">     760</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(StaffLines)</span></span>
-<span id="L761"><span class="lineNum">     761</span> <span class="tlaUNC">           0 : CONVERT(Ambitus)</span></span>
-<span id="L762"><span class="lineNum">     762</span> <span class="tlaGNC tlaBgGNC">        2815 : CONVERT(Bracket)</span></span>
-<span id="L763"><span class="lineNum">     763</span> <span class="tlaGNC">         179 : CONVERT(InstrumentChange)</span></span>
-<span id="L764"><span class="lineNum">     764</span> <span class="tlaGNC">          17 : CONVERT(StaffTypeChange)</span></span>
-<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC">        2647 : CONVERT(Text)</span></span>
-<span id="L766"><span class="lineNum">     766</span> <span class="tlaGNC">        2335 : CONVERT(MeasureNumber)</span></span>
-<span id="L767"><span class="lineNum">     767</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(MMRestRange)</span></span>
-<span id="L768"><span class="lineNum">     768</span> <span class="tlaGNC tlaBgGNC">         733 : CONVERT(Hairpin)</span></span>
-<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">         979 : CONVERT(HairpinSegment)</span></span>
-<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">           7 : CONVERT(TremoloBar)</span></span>
-<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">        2474 : CONVERT(MeasureRepeat)</span></span>
-<span id="L772"><span class="lineNum">     772</span> <span class="tlaGNC">         545 : CONVERT(MMRest)</span></span>
-<span id="L773"><span class="lineNum">     773</span> <span class="tlaGNC">        5727 : CONVERT(Tuplet)</span></span>
-<span id="L774"><span class="lineNum">     774</span> <span class="tlaGNC">         858 : CONVERT(NoteDot)</span></span>
-<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">        5961 : CONVERT(Dynamic)</span></span>
-<span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">          83 : CONVERT(Expression)</span></span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaGNC">      105987 : CONVERT(InstrumentName)</span></span>
-<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">       29055 : CONVERT(Accidental)</span></span>
-<span id="L779"><span class="lineNum">     779</span> <span class="tlaGNC">          29 : CONVERT(TextLine)</span></span>
-<span id="L780"><span class="lineNum">     780</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(TextLineSegment)</span></span>
-<span id="L781"><span class="lineNum">     781</span> <span class="tlaGNC tlaBgGNC">         115 : CONVERT(Pedal)</span></span>
-<span id="L782"><span class="lineNum">     782</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(PedalSegment)</span></span>
-<span id="L783"><span class="lineNum">     783</span> <span class="tlaUNC">           0 : CONVERT(OttavaSegment)</span></span>
-<span id="L784"><span class="lineNum">     784</span>              : CONVERT(LedgerLine)</span>
-<span id="L785"><span class="lineNum">     785</span> <span class="tlaUNC">           0 : CONVERT(ActionIcon)</span></span>
-<span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC tlaBgGNC">        1496 : CONVERT(Volta)</span></span>
-<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">         243 : CONVERT(VoltaSegment)</span></span>
-<span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">           4 : CONVERT(NoteLine)</span></span>
-<span id="L789"><span class="lineNum">     789</span>              : CONVERT(NoteLineSegment)</span>
-<span id="L790"><span class="lineNum">     790</span> <span class="tlaGNC">         608 : CONVERT(Trill)</span></span>
-<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">         232 : CONVERT(TrillSegment)</span></span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">          19 : CONVERT(LetRing)</span></span>
-<span id="L793"><span class="lineNum">     793</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(LetRingSegment)</span></span>
-<span id="L794"><span class="lineNum">     794</span> <span class="tlaGNC tlaBgGNC">          19 : CONVERT(GradualTempoChange)</span></span>
-<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">           4 : CONVERT(GradualTempoChangeSegment)</span></span>
-<span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">          62 : CONVERT(Vibrato)</span></span>
-<span id="L797"><span class="lineNum">     797</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(VibratoSegment)</span></span>
-<span id="L798"><span class="lineNum">     798</span> <span class="tlaGNC tlaBgGNC">          16 : CONVERT(PalmMute)</span></span>
-<span id="L799"><span class="lineNum">     799</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(PalmMuteSegment)</span></span>
-<span id="L800"><span class="lineNum">     800</span> <span class="tlaUNC">           0 : CONVERT(WhammyBar)</span></span>
-<span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 : CONVERT(WhammyBarSegment)</span></span>
-<span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC">           0 : CONVERT(Rasgueado)</span></span>
-<span id="L803"><span class="lineNum">     803</span>              : CONVERT(RasgueadoSegment)</span>
-<span id="L804"><span class="lineNum">     804</span> <span class="tlaUNC">           0 : CONVERT(HarmonicMark)</span></span>
-<span id="L805"><span class="lineNum">     805</span>              : CONVERT(HarmonicMarkSegment)</span>
-<span id="L806"><span class="lineNum">     806</span> <span class="tlaUNC">           0 : CONVERT(PickScrape)</span></span>
-<span id="L807"><span class="lineNum">     807</span>              : CONVERT(PickScrapeSegment)</span>
-<span id="L808"><span class="lineNum">     808</span> <span class="tlaUNC">           0 : CONVERT(Symbol)</span></span>
-<span id="L809"><span class="lineNum">     809</span> <span class="tlaUNC">           0 : CONVERT(FSymbol)</span></span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC tlaBgGNC">           7 : CONVERT(BSymbol)</span></span>
-<span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC">        2486 : CONVERT(Fingering)</span></span>
-<span id="L812"><span class="lineNum">     812</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(NoteHead)</span></span>
-<span id="L813"><span class="lineNum">     813</span> <span class="tlaGNC tlaBgGNC">        5344 : CONVERT(LyricsLine)</span></span>
-<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">         917 : CONVERT(LyricsLineSegment)</span></span>
-<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">         268 : CONVERT(FiguredBass)</span></span>
-<span id="L816"><span class="lineNum">     816</span>              : CONVERT(FiguredBassItem)</span>
-<span id="L817"><span class="lineNum">     817</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(StaffState)</span></span>
-<span id="L818"><span class="lineNum">     818</span> <span class="tlaUNC">           0 : CONVERT(ChordBracket)</span></span>
-<span id="L819"><span class="lineNum">     819</span> <span class="tlaUNC">           0 : CONVERT(Image)</span></span>
-<span id="L820"><span class="lineNum">     820</span> <span class="tlaGNC tlaBgGNC">         399 : CONVERT(ChordLine)</span></span>
-<span id="L821"><span class="lineNum">     821</span> <span class="tlaGNC">        4430 : CONVERT(FretDiagram)</span></span>
-<span id="L822"><span class="lineNum">     822</span> <span class="tlaGNC">         671 : CONVERT(HarpPedalDiagram)</span></span>
-<span id="L823"><span class="lineNum">     823</span> <span class="tlaGNC">         687 : CONVERT(Page)</span></span>
-<span id="L824"><span class="lineNum">     824</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(PageLockIndicator)</span></span>
-<span id="L825"><span class="lineNum">     825</span> <span class="tlaGNC tlaBgGNC">         135 : CONVERT(SystemText)</span></span>
-<span id="L826"><span class="lineNum">     826</span> <span class="tlaGNC">         198 : CONVERT(BracketItem)</span></span>
-<span id="L827"><span class="lineNum">     827</span> <span class="tlaGNC">       11294 : CONVERT(Staff)</span></span>
-<span id="L828"><span class="lineNum">     828</span> <span class="tlaGNC">          10 : CONVERT(Part)</span></span>
-<span id="L829"><span class="lineNum">     829</span> <span class="tlaGNC">        1162 : CONVERT(SharedPart)</span></span>
-<span id="L830"><span class="lineNum">     830</span>              : CONVERT(Lasso)</span>
-<span id="L831"><span class="lineNum">     831</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(BagpipeEmbellishment)</span></span>
-<span id="L832"><span class="lineNum">     832</span> <span class="tlaGNC tlaBgGNC">         155 : CONVERT(Sticking)</span></span>
-<span id="L833"><span class="lineNum">     833</span> <span class="tlaGNC">        3371 : CONVERT(GraceNotesGroup)</span></span>
-<span id="L834"><span class="lineNum">     834</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(DeadSlapped)</span></span>
-<span id="L835"><span class="lineNum">     835</span> <span class="tlaGNC tlaBgGNC">          19 : CONVERT(StringTunings)</span></span>
-<span id="L836"><span class="lineNum">     836</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(SoundFlag)</span></span>
-<span id="L837"><span class="lineNum">     837</span> <span class="tlaGNC tlaBgGNC">         496 : CONVERT(TimeTickAnchor)</span></span>
-<span id="L838"><span class="lineNum">     838</span> <span class="tlaGNC">         344 : CONVERT(LaissezVib)</span></span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">         941 : CONVERT(PartialTie)</span></span>
-<span id="L840"><span class="lineNum">     840</span> <span class="tlaGNC">          55 : CONVERT(PartialLyricsLine)</span></span>
-<span id="L841"><span class="lineNum">     841</span>              : CONVERT(PartialLyricsLineSegment)</span>
-<span id="L842"><span class="lineNum">     842</span> <span class="tlaGNC">          65 : CONVERT(Parenthesis)</span></span>
-<span id="L843"><span class="lineNum">     843</span>              : CONVERT(ShadowNote)</span>
-<span id="L844"><span class="lineNum">     844</span> <span class="tlaGNC">         183 : CONVERT(HammerOnPullOff)</span></span>
-<span id="L845"><span class="lineNum">     845</span> <span class="tlaGNC">         302 : CONVERT(HammerOnPullOffSegment)</span></span>
-<span id="L846"><span class="lineNum">     846</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(HammerOnPullOffText)</span></span>
-<span id="L847"><span class="lineNum">     847</span> <span class="tlaGNC tlaBgGNC">         568 : CONVERT(Tapping)</span></span>
-<span id="L848"><span class="lineNum">     848</span> <span class="tlaGNC">          32 : CONVERT(TappingHalfSlur)</span></span>
-<span id="L849"><span class="lineNum">     849</span> <span class="tlaGNC">          72 : CONVERT(TappingHalfSlurSegment)</span></span>
-<span id="L850"><span class="lineNum">     850</span>              : #undef CONVERT</span>
-<span id="L851"><span class="lineNum">     851</span>              : }</span>
+<span id="L292"><span class="lineNum">     292</span>              :     bool isInScoreTree() const;</span>
+<span id="L293"><span class="lineNum">     293</span>              :     const MStyle&amp; style() const;</span>
+<span id="L294"><span class="lineNum">     294</span>              : </span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC tlaBgGNC">     2022290 :     virtual EngravingObject* propertyDelegate(Pid) const { return nullptr; }</span></span>
+<span id="L296"><span class="lineNum">     296</span>              :     virtual PropertyValue getProperty(Pid) const = 0;</span>
+<span id="L297"><span class="lineNum">     297</span>              :     virtual bool setProperty(Pid, const PropertyValue&amp;) = 0;</span>
+<span id="L298"><span class="lineNum">     298</span>              :     virtual PropertyValue propertyDefault(Pid) const;</span>
+<span id="L299"><span class="lineNum">     299</span>              :     virtual void resetProperty(Pid id);</span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaUNC tlaBgUNC">           0 :     virtual bool sizeIsSpatiumDependent() const { return true; }</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC tlaBgGNC">           2 :     virtual bool offsetIsSpatiumDependent() const { return true; }</span></span>
+<span id="L302"><span class="lineNum">     302</span>              : </span>
+<span id="L303"><span class="lineNum">     303</span>              :     virtual void reset();                       // reset all properties &amp; position to default</span>
+<span id="L304"><span class="lineNum">     304</span>              : </span>
+<span id="L305"><span class="lineNum">     305</span>              :     virtual void initElementStyle(const ElementStyle*);</span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">       85283 :     virtual const ElementStyle* styledProperties() const { return m_elementStyle; }</span></span>
+<span id="L307"><span class="lineNum">     307</span>              : </span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaUNC tlaBgUNC">           0 :     virtual PropertyFlags* propertyFlagsList() const { return m_propertyFlagsList; }</span></span>
+<span id="L309"><span class="lineNum">     309</span>              :     virtual PropertyFlags propertyFlags(Pid) const;</span>
+<span id="L310"><span class="lineNum">     310</span>              :     bool isStyled(Pid pid) const;</span>
+<span id="L311"><span class="lineNum">     311</span>              :     PropertyValue styleValue(Pid, Sid) const;</span>
+<span id="L312"><span class="lineNum">     312</span>              : </span>
+<span id="L313"><span class="lineNum">     313</span>              :     virtual void setPropertyFlags(Pid, PropertyFlags);</span>
+<span id="L314"><span class="lineNum">     314</span>              : </span>
+<span id="L315"><span class="lineNum">     315</span>              :     virtual Sid getPropertyStyle(Pid) const;</span>
+<span id="L316"><span class="lineNum">     316</span>              : </span>
+<span id="L317"><span class="lineNum">     317</span>              :     virtual void styleChanged();</span>
+<span id="L318"><span class="lineNum">     318</span>              : </span>
+<span id="L319"><span class="lineNum">     319</span>              :     virtual void undoChangeProperty(Pid id, const PropertyValue&amp;, PropertyFlags ps);</span>
+<span id="L320"><span class="lineNum">     320</span>              :     void undoChangeProperty(Pid id, const PropertyValue&amp;);</span>
+<span id="L321"><span class="lineNum">     321</span>              :     void undoResetProperty(Pid id);</span>
+<span id="L322"><span class="lineNum">     322</span>              : </span>
+<span id="L323"><span class="lineNum">     323</span>              :     void undoPushProperty(Pid);</span>
+<span id="L324"><span class="lineNum">     324</span>              : </span>
+<span id="L325"><span class="lineNum">     325</span>              :     std::list&lt;EngravingObject*&gt; linkList() const;</span>
+<span id="L326"><span class="lineNum">     326</span>              : </span>
+<span id="L327"><span class="lineNum">     327</span>              :     void linkTo(EngravingObject*);</span>
+<span id="L328"><span class="lineNum">     328</span>              :     void unlink();</span>
+<span id="L329"><span class="lineNum">     329</span>              :     bool isLinked(EngravingObject* se = nullptr) const;</span>
+<span id="L330"><span class="lineNum">     330</span>              : </span>
+<span id="L331"><span class="lineNum">     331</span>              :     virtual void undoUnlink();</span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC tlaBgGNC">      373495 :     LinkedObjects* links() const { return m_links; }</span></span>
+<span id="L333"><span class="lineNum">     333</span>              :     void setLinks(LinkedObjects* le);</span>
+<span id="L334"><span class="lineNum">     334</span>              : </span>
+<span id="L335"><span class="lineNum">     335</span>              : protected:</span>
+<span id="L336"><span class="lineNum">     336</span>              :     virtual int getPropertyFlagsIdx(Pid id) const;</span>
+<span id="L337"><span class="lineNum">     337</span>              : </span>
+<span id="L338"><span class="lineNum">     338</span>              :     //! NOTE For compatibility reasons, hope, we will remove the need for this method.</span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">           1 :     void hack_setType(const ElementType&amp; t) { m_type = t; }</span></span>
+<span id="L340"><span class="lineNum">     340</span>              : </span>
+<span id="L341"><span class="lineNum">     341</span>              :     void addChild(EngravingObject* o);</span>
+<span id="L342"><span class="lineNum">     342</span>              :     void removeChild(EngravingObject* o);</span>
+<span id="L343"><span class="lineNum">     343</span>              : </span>
+<span id="L344"><span class="lineNum">     344</span>              :     const ElementStyle* m_elementStyle { &amp;EMPTY_STYLE };</span>
+<span id="L345"><span class="lineNum">     345</span>              :     PropertyFlags* m_propertyFlagsList = nullptr;</span>
+<span id="L346"><span class="lineNum">     346</span>              :     LinkedObjects* m_links = nullptr;</span>
+<span id="L347"><span class="lineNum">     347</span>              :     Score* m_score = nullptr;</span>
+<span id="L348"><span class="lineNum">     348</span>              : </span>
+<span id="L349"><span class="lineNum">     349</span>              : private:</span>
+<span id="L350"><span class="lineNum">     350</span>              :     static ElementStyle const EMPTY_STYLE;</span>
+<span id="L351"><span class="lineNum">     351</span>              : </span>
+<span id="L352"><span class="lineNum">     352</span>              :     void doSetParent(EngravingObject* p);</span>
+<span id="L353"><span class="lineNum">     353</span>              :     void doSetScore(Score* sc);</span>
+<span id="L354"><span class="lineNum">     354</span>              : </span>
+<span id="L355"><span class="lineNum">     355</span>              :     ElementType m_type = ElementType::INVALID;</span>
+<span id="L356"><span class="lineNum">     356</span>              : </span>
+<span id="L357"><span class="lineNum">     357</span>              :     EngravingObject* m_parent = nullptr;</span>
+<span id="L358"><span class="lineNum">     358</span>              :     EngravingObjectList m_children;</span>
+<span id="L359"><span class="lineNum">     359</span>              : </span>
+<span id="L360"><span class="lineNum">     360</span>              : public:</span>
+<span id="L361"><span class="lineNum">     361</span>              : </span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">        5654 :     virtual std::list&lt;EngravingObject*&gt; linkListForPropertyPropagation() const { return linkList(); }</span></span>
+<span id="L363"><span class="lineNum">     363</span>              : </span>
+<span id="L364"><span class="lineNum">     364</span>              :     //---------------------------------------------------</span>
+<span id="L365"><span class="lineNum">     365</span>              :     // check type</span>
+<span id="L366"><span class="lineNum">     366</span>              :     //</span>
+<span id="L367"><span class="lineNum">     367</span>              :     // Example for ChordRest:</span>
+<span id="L368"><span class="lineNum">     368</span>              :     //</span>
+<span id="L369"><span class="lineNum">     369</span>              :     //    bool             isChordRest()</span>
+<span id="L370"><span class="lineNum">     370</span>              :     //---------------------------------------------------</span>
+<span id="L371"><span class="lineNum">     371</span>              : </span>
+<span id="L372"><span class="lineNum">     372</span>              : #define CONVERT(a, b) \</span>
+<span id="L373"><span class="lineNum">     373</span>              :     bool is##a() const { return type() == ElementType::b; \</span>
+<span id="L374"><span class="lineNum">     374</span>              :     }</span>
+<span id="L375"><span class="lineNum">     375</span>              : </span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">     4983296 :     CONVERT(Note,          NOTE)</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">    17344936 :     CONVERT(Rest,          REST)</span></span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">     4630872 :     CONVERT(MMRest,        MMREST)</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(DeadSlapped,   DEAD_SLAPPED)</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC tlaBgGNC">    20554408 :     CONVERT(Chord,         CHORD)</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">      729324 :     CONVERT(BarLine,       BAR_LINE)</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">     9570495 :     CONVERT(Articulation,  ARTICULATION)</span></span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">     9457291 :     CONVERT(Ornament,      ORNAMENT)</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">     9414864 :     CONVERT(Fermata,       FERMATA)</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">       14146 :     CONVERT(Marker,        MARKER)</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">     1116153 :     CONVERT(Clef,          CLEF)</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">      119718 :     CONVERT(KeySig,        KEYSIG)</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">      281844 :     CONVERT(TimeSig,       TIMESIG)</span></span>
+<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">    62425657 :     CONVERT(Measure,       MEASURE)</span></span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">       16499 :     CONVERT(TempoText,     TEMPO_TEXT)</span></span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">        1226 :     CONVERT(Breath,        BREATH)</span></span>
+<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">    19531823 :     CONVERT(HBox,          HBOX)</span></span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">    19603964 :     CONVERT(VBox,          VBOX)</span></span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">    19348384 :     CONVERT(TBox,          TBOX)</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">    19324227 :     CONVERT(FBox,          FBOX)</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">      145814 :     CONVERT(Glissando,     GLISSANDO)</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">       73284 :     CONVERT(GlissandoSegment,     GLISSANDO_SEGMENT)</span></span>
+<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">      181859 :     CONVERT(GuitarBend,    GUITAR_BEND)</span></span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">       52456 :     CONVERT(GuitarBendSegment, GUITAR_BEND_SEGMENT)</span></span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">      119384 :     CONVERT(GuitarBendHold, GUITAR_BEND_HOLD)</span></span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">       45481 :     CONVERT(GuitarBendHoldSegment, GUITAR_BEND_HOLD_SEGMENT)</span></span>
+<span id="L402"><span class="lineNum">     402</span>              :     CONVERT(GuitarBendText, GUITAR_BEND_TEXT)</span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">          28 :     CONVERT(SystemDivider, SYSTEM_DIVIDER)</span></span>
+<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">       14918 :     CONVERT(RehearsalMark, REHEARSAL_MARK)</span></span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">       11728 :     CONVERT(TripletFeel, TRIPLET_FEEL)</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">      931010 :     CONVERT(Harmony,       HARMONY)</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">      163590 :     CONVERT(Volta,         VOLTA)</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">       12137 :     CONVERT(Jump,          JUMP)</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">      169338 :     CONVERT(Ottava,        OTTAVA)</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">       23015 :     CONVERT(LayoutBreak,   LAYOUT_BREAK)</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(StaffVisibilityIndicator, STAFF_VISIBILITY_INDICATOR)</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC tlaBgGNC">        4353 :     CONVERT(SystemLockIndicator, SYSTEM_LOCK_INDICATOR)</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">    21534728 :     CONVERT(Segment,       SEGMENT)</span></span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">      566228 :     CONVERT(System,        SYSTEM)</span></span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">     1594781 :     CONVERT(Lyrics,        LYRICS)</span></span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">      813083 :     CONVERT(Stem,          STEM)</span></span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">       62802 :     CONVERT(Beam,          BEAM)</span></span>
+<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">        2564 :     CONVERT(Hook,          HOOK)</span></span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">        5595 :     CONVERT(StemSlash,     STEM_SLASH)</span></span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">       11472 :     CONVERT(LaissezVibSegment,    LAISSEZ_VIB_SEGMENT)</span></span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">       36503 :     CONVERT(LaissezVib,    LAISSEZ_VIB)</span></span>
+<span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">         340 :     CONVERT(PartialTieSegment,    PARTIAL_TIE_SEGMENT)</span></span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">       39493 :     CONVERT(PartialTie,    PARTIAL_TIE)</span></span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">           1 :     CONVERT(Spacer,        SPACER)</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">      984676 :     CONVERT(StaffLines,    STAFF_LINES)</span></span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">         357 :     CONVERT(Ambitus,       AMBITUS)</span></span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">        2887 :     CONVERT(Bracket,       BRACKET)</span></span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">        9879 :     CONVERT(InstrumentChange, INSTRUMENT_CHANGE)</span></span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">          18 :     CONVERT(StaffTypeChange, STAFFTYPE_CHANGE)</span></span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">      192168 :     CONVERT(Hairpin,       HAIRPIN)</span></span>
+<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">      282240 :     CONVERT(HairpinSegment, HAIRPIN_SEGMENT)</span></span>
+<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">        8939 :     CONVERT(Bend,          BEND)</span></span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">        1627 :     CONVERT(TremoloBar,    TREMOLOBAR)</span></span>
+<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">     4129303 :     CONVERT(MeasureRepeat, MEASURE_REPEAT)</span></span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">       81382 :     CONVERT(Tuplet,        TUPLET)</span></span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">        8410 :     CONVERT(NoteDot,       NOTEDOT)</span></span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">      122452 :     CONVERT(Dynamic,       DYNAMIC)</span></span>
+<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">       10415 :     CONVERT(Expression,    EXPRESSION)</span></span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">      268548 :     CONVERT(InstrumentName, INSTRUMENT_NAME)</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">     4186107 :     CONVERT(Accidental,    ACCIDENTAL)</span></span>
+<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC">      167045 :     CONVERT(TextLine,      TEXTLINE)</span></span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">      267484 :     CONVERT(TextLineSegment,      TEXTLINE_SEGMENT)</span></span>
+<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">      161422 :     CONVERT(Pedal,         PEDAL)</span></span>
+<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">      272597 :     CONVERT(PedalSegment,  PEDAL_SEGMENT)</span></span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">      275226 :     CONVERT(OttavaSegment, OTTAVA_SEGMENT)</span></span>
+<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">     4225134 :     CONVERT(LedgerLine,    LEDGER_LINE)</span></span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">        2348 :     CONVERT(ActionIcon,    ACTION_ICON)</span></span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">      263659 :     CONVERT(VoltaSegment,  VOLTA_SEGMENT)</span></span>
+<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">      153649 :     CONVERT(NoteLine,      NOTELINE)</span></span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">      253796 :     CONVERT(NoteLineSegment,      NOTELINE_SEGMENT)</span></span>
+<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">      157955 :     CONVERT(Trill,         TRILL)</span></span>
+<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">       57969 :     CONVERT(TrillSegment,  TRILL_SEGMENT)</span></span>
+<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">      169128 :     CONVERT(LetRing,       LET_RING)</span></span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">      268074 :     CONVERT(LetRingSegment, LET_RING_SEGMENT)</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">      167735 :     CONVERT(GradualTempoChange, GRADUAL_TEMPO_CHANGE)</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">      273431 :     CONVERT(GradualTempoChangeSegment, GRADUAL_TEMPO_CHANGE_SEGMENT)</span></span>
+<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">      137833 :     CONVERT(Vibrato,       VIBRATO)</span></span>
+<span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC">      163021 :     CONVERT(PalmMute,      PALM_MUTE)</span></span>
+<span id="L459"><span class="lineNum">     459</span> <span class="tlaGNC">      265099 :     CONVERT(PalmMuteSegment, PALM_MUTE_SEGMENT)</span></span>
+<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC">      161110 :     CONVERT(WhammyBar,      WHAMMY_BAR)</span></span>
+<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">      267289 :     CONVERT(WhammyBarSegment, WHAMMY_BAR_SEGMENT)</span></span>
+<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">      160583 :     CONVERT(Rasgueado,      RASGUEADO)</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">      259053 :     CONVERT(RasgueadoSegment, RASGUEADO_SEGMENT)</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">      160256 :     CONVERT(HarmonicMark,      HARMONIC_MARK)</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">      260155 :     CONVERT(HarmonicMarkSegment, HARMONIC_MARK_SEGMENT)</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">      160844 :     CONVERT(PickScrape,      PICK_SCRAPE)</span></span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">      259072 :     CONVERT(PickScrapeSegment, PICK_SCRAPE_SEGMENT)</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">       58168 :     CONVERT(VibratoSegment,  VIBRATO_SEGMENT)</span></span>
+<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">       14679 :     CONVERT(Symbol,        SYMBOL)</span></span>
+<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">        6439 :     CONVERT(FSymbol,       FSYMBOL)</span></span>
+<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">      304617 :     CONVERT(Fingering,     FINGERING)</span></span>
+<span id="L472"><span class="lineNum">     472</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(NoteHead,      NOTEHEAD)</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC tlaBgGNC">        1732 :     CONVERT(PartialLyricsLine,    PARTIAL_LYRICSLINE)</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">         977 :     CONVERT(PartialLyricsLineSegment, PARTIAL_LYRICSLINE_SEGMENT)</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">       10017 :     CONVERT(FiguredBass,   FIGURED_BASS)</span></span>
+<span id="L476"><span class="lineNum">     476</span>              :     CONVERT(FiguredBassItem, FIGURED_BASS_ITEM)</span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">           5 :     CONVERT(StaffState,    STAFF_STATE)</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">      615597 :     CONVERT(Arpeggio,      ARPEGGIO)</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">      616985 :     CONVERT(ChordBracket,  CHORD_BRACKET)</span></span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">         745 :     CONVERT(Image,         IMAGE)</span></span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">     2645389 :     CONVERT(ChordLine,     CHORDLINE)</span></span>
+<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">     2798158 :     CONVERT(FretDiagram,   FRET_DIAGRAM)</span></span>
+<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">       11952 :     CONVERT(HarpPedalDiagram, HARP_DIAGRAM)</span></span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">        1135 :     CONVERT(Page,          PAGE)</span></span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(PageLockIndicator, PAGE_LOCK_INDICATOR)</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC tlaBgGNC">      590079 :     CONVERT(Text,          TEXT)</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">       22077 :     CONVERT(MeasureNumber, MEASURE_NUMBER)</span></span>
+<span id="L488"><span class="lineNum">     488</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(MMRestRange,   MMREST_RANGE)</span></span>
+<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC tlaBgGNC">       16586 :     CONVERT(StaffText,     STAFF_TEXT)</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">        6312 :     CONVERT(StaveSharingLabel, STAVE_SHARING_LABEL)</span></span>
+<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">       12699 :     CONVERT(SystemText,    SYSTEM_TEXT)</span></span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">          75 :     CONVERT(SoundFlag,     SOUND_FLAG)</span></span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">        1530 :     CONVERT(PlayCountText, PLAY_COUNT_TEXT)</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">       17220 :     CONVERT(PlayTechAnnotation, PLAYTECH_ANNOTATION)</span></span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">        8047 :     CONVERT(Capo,          CAPO)</span></span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">      234462 :     CONVERT(BracketItem,   BRACKET_ITEM)</span></span>
+<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">     2525568 :     CONVERT(Score,         SCORE)</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">       28533 :     CONVERT(Staff,         STAFF)</span></span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">          10 :     CONVERT(Part,          PART)</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">      419759 :     CONVERT(SharedPart,    SHARED_PART)</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(BagpipeEmbellishment, BAGPIPE_EMBELLISHMENT)</span></span>
+<span id="L502"><span class="lineNum">     502</span>              :     CONVERT(Lasso,         LASSO)</span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC tlaBgGNC">        1673 :     CONVERT(Sticking,      STICKING)</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">        6762 :     CONVERT(GraceNotesGroup, GRACE_NOTES_GROUP)</span></span>
+<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">       16341 :     CONVERT(StringTunings, STRING_TUNINGS)</span></span>
+<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">        4875 :     CONVERT(TimeTickAnchor, TIME_TICK_ANCHOR)</span></span>
+<span id="L507"><span class="lineNum">     507</span> <span class="tlaGNC">    18127536 :     CONVERT(Parenthesis, PARENTHESIS)</span></span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaUNC tlaBgUNC">           0 :     CONVERT(ShadowNote, SHADOW_NOTE)</span></span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC tlaBgGNC">       10777 :     CONVERT(HammerOnPullOff, HAMMER_ON_PULL_OFF)</span></span>
+<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">        3445 :     CONVERT(HammerOnPullOffSegment, HAMMER_ON_PULL_OFF_SEGMENT)</span></span>
+<span id="L511"><span class="lineNum">     511</span> <span class="tlaGNC">         499 :     CONVERT(HammerOnPullOffText, HAMMER_ON_PULL_OFF_TEXT)</span></span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">     9434121 :     CONVERT(Tapping, TAPPING)</span></span>
+<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC">        1922 :     CONVERT(TappingHalfSlur, TAPPING_HALF_SLUR)</span></span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">       13461 :     CONVERT(TappingHalfSlurSegment, TAPPING_HALF_SLUR_SEGMENT)</span></span>
+<span id="L515"><span class="lineNum">     515</span>              : #undef CONVERT</span>
+<span id="L516"><span class="lineNum">     516</span>              : </span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">       24273 :     virtual bool isEngravingItem() const { return false; }   // overridden in element.h</span></span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">     7218186 :     bool isRestFamily() const { return isRest() || isMMRest() || isMeasureRepeat(); }</span></span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">     5603867 :     bool isChordRest() const { return isRestFamily() || isChord(); }</span></span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">        7399 :     bool isDurationElement() const { return isChordRest() || isTuplet(); }</span></span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">        1453 :     bool isSlurTie() const { return isSlur() || isTie(); }</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">        9967 :     bool isSlurTieSegment() const { return isSlurSegment() || isTieSegment(); }</span></span>
+<span id="L523"><span class="lineNum">     523</span>              :     bool isSLineSegment() const;</span>
+<span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">    19416206 :     bool isBox() const { return isVBox() || isHBox() || isTBox() || isFBox(); }</span></span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">      156380 :     bool isVBoxBase() const { return isVBox() || isTBox() || isFBox(); }</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">    19574633 :     bool isMeasureBase() const { return isMeasure() || isBox(); }</span></span>
+<span id="L527"><span class="lineNum">     527</span>              :     bool isTextBase() const;</span>
+<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">      267444 :     bool isTextLineBaseSegment() const</span></span>
+<span id="L529"><span class="lineNum">     529</span>              :     {</span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">      267444 :         return isHairpinSegment()</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">      262201 :                || isLetRingSegment()</span></span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">      261860 :                || isGradualTempoChangeSegment()</span></span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">      261609 :                || isTextLineSegment()</span></span>
+<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">      260972 :                || isOttavaSegment()</span></span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">      259226 :                || isPalmMuteSegment()</span></span>
+<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">      259072 :                || isPickScrapeSegment()</span></span>
+<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC">      259050 :                || isWhammyBarSegment()</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">      259050 :                || isRasgueadoSegment()</span></span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">      259006 :                || isHarmonicMarkSegment()</span></span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">      258832 :                || isPedalSegment()</span></span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">      257544 :                || isVoltaSegment()</span></span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">      529645 :                || isNoteLineSegment();</span></span>
+<span id="L543"><span class="lineNum">     543</span>              :     }</span>
+<span id="L544"><span class="lineNum">     544</span>              : </span>
+<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">      661816 :     bool isSlur() const</span></span>
+<span id="L546"><span class="lineNum">     546</span>              :     {</span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">      661816 :         return type() == ElementType::SLUR || type() == ElementType::HAMMER_ON_PULL_OFF || type() == ElementType::TAPPING_HALF_SLUR;</span></span>
+<span id="L548"><span class="lineNum">     548</span>              :     }</span>
+<span id="L549"><span class="lineNum">     549</span>              : </span>
+<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">       62820 :     bool isSlurSegment() const</span></span>
+<span id="L551"><span class="lineNum">     551</span>              :     {</span>
+<span id="L552"><span class="lineNum">     552</span> <span class="tlaGNC">      113731 :         return type() == ElementType::SLUR_SEGMENT || type() == ElementType::HAMMER_ON_PULL_OFF_SEGMENT</span></span>
+<span id="L553"><span class="lineNum">     553</span> <span class="tlaGNC">      113731 :                || type() == ElementType::TAPPING_HALF_SLUR_SEGMENT;</span></span>
+<span id="L554"><span class="lineNum">     554</span>              :     }</span>
+<span id="L555"><span class="lineNum">     555</span>              : </span>
+<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">       67414 :     bool isLineSegment() const</span></span>
+<span id="L557"><span class="lineNum">     557</span>              :     {</span>
+<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">       67414 :         return isGlissandoSegment()</span></span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">       63174 :                || isLyricsLineSegment()</span></span>
+<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">       61857 :                || isTextLineBaseSegment()</span></span>
+<span id="L561"><span class="lineNum">     561</span> <span class="tlaGNC">       51809 :                || isTrillSegment()</span></span>
+<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC">       51154 :                || isVibratoSegment()</span></span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">       50984 :                || isGuitarBendSegment()</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">      130588 :                || isGuitarBendHoldSegment()</span></span>
+<span id="L565"><span class="lineNum">     565</span>              :         ;</span>
+<span id="L566"><span class="lineNum">     566</span>              :     }</span>
+<span id="L567"><span class="lineNum">     567</span>              : </span>
+<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">       53936 :     bool isTieSegment() const</span></span>
+<span id="L569"><span class="lineNum">     569</span>              :     {</span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">       86492 :         return type() == ElementType::TIE_SEGMENT || type() == ElementType::LAISSEZ_VIB_SEGMENT</span></span>
+<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">       86492 :                || type() == ElementType::PARTIAL_TIE_SEGMENT;</span></span>
+<span id="L572"><span class="lineNum">     572</span>              :     }</span>
+<span id="L573"><span class="lineNum">     573</span>              : </span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">      532730 :     bool isTie() const</span></span>
+<span id="L575"><span class="lineNum">     575</span>              :     {</span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">      532730 :         return type() == ElementType::TIE || type() == ElementType::LAISSEZ_VIB || type() == ElementType::PARTIAL_TIE;</span></span>
+<span id="L577"><span class="lineNum">     577</span>              :     }</span>
+<span id="L578"><span class="lineNum">     578</span>              : </span>
+<span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">       59280 :     bool isSpannerSegment() const</span></span>
+<span id="L580"><span class="lineNum">     580</span>              :     {</span>
+<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">       59280 :         return isLineSegment() || isTextLineBaseSegment() || isSlurSegment() || isTieSegment();</span></span>
+<span id="L582"><span class="lineNum">     582</span>              :     }</span>
+<span id="L583"><span class="lineNum">     583</span>              : </span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">           7 :     bool isBSymbol() const { return isImage() || isSymbol(); }</span></span>
+<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">      188911 :     bool isTextLineBase() const</span></span>
+<span id="L586"><span class="lineNum">     586</span>              :     {</span>
+<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">      188911 :         return isHairpin()</span></span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">      168712 :                || isLetRing()</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">      167642 :                || isGradualTempoChange()</span></span>
+<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">      166518 :                || isTextLine()</span></span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">      165160 :                || isOttava()</span></span>
+<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">      161611 :                || isPalmMute()</span></span>
+<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">      160844 :                || isPickScrape()</span></span>
+<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">      160800 :                || isWhammyBar()</span></span>
+<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">      160580 :                || isRasgueado()</span></span>
+<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">      160253 :                || isHarmonicMark()</span></span>
+<span id="L597"><span class="lineNum">     597</span> <span class="tlaGNC">      159567 :                || isPedal()</span></span>
+<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">      156160 :                || isVolta()</span></span>
+<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">      357623 :                || isNoteLine();</span></span>
+<span id="L600"><span class="lineNum">     600</span>              :     }</span>
+<span id="L601"><span class="lineNum">     601</span>              : </span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">      171820 :     bool isLyricsLine() const { return type() == ElementType::LYRICSLINE || type() == ElementType::PARTIAL_LYRICSLINE; }</span></span>
+<span id="L603"><span class="lineNum">     603</span>              : </span>
+<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">      527213 :     bool isLyricsLineSegment() const</span></span>
+<span id="L605"><span class="lineNum">     605</span>              :     {</span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">      527213 :         return type() == ElementType::LYRICSLINE_SEGMENT || type() == ElementType::PARTIAL_LYRICSLINE_SEGMENT;</span></span>
+<span id="L607"><span class="lineNum">     607</span>              :     }</span>
+<span id="L608"><span class="lineNum">     608</span>              : </span>
+<span id="L609"><span class="lineNum">     609</span> <span class="tlaGNC">      177188 :     bool isSLine() const</span></span>
+<span id="L610"><span class="lineNum">     610</span>              :     {</span>
+<span id="L611"><span class="lineNum">     611</span> <span class="tlaGNC">      177188 :         return isTextLineBase() || isTrill() || isGlissando() || isVibrato() || isGuitarBend() || isGuitarBendHold();</span></span>
+<span id="L612"><span class="lineNum">     612</span>              :     }</span>
+<span id="L613"><span class="lineNum">     613</span>              : </span>
+<span id="L614"><span class="lineNum">     614</span> <span class="tlaGNC">      593261 :     bool isSpanner() const</span></span>
+<span id="L615"><span class="lineNum">     615</span>              :     {</span>
+<span id="L616"><span class="lineNum">     616</span> <span class="tlaGNC">      593261 :         return isSlur() || isTie() || isLyricsLine() || isSLine();</span></span>
+<span id="L617"><span class="lineNum">     617</span>              :     }</span>
+<span id="L618"><span class="lineNum">     618</span>              : </span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaGNC">        8382 :     bool isStaffTextBase() const</span></span>
+<span id="L620"><span class="lineNum">     620</span>              :     {</span>
+<span id="L621"><span class="lineNum">     621</span> <span class="tlaGNC">       14215 :         return isStaffText() || isStaveSharingLabel() || isSystemText() || isTripletFeel() || isPlayTechAnnotation() || isCapo()</span></span>
+<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC">       14215 :                || isStringTunings();</span></span>
+<span id="L623"><span class="lineNum">     623</span>              :     }</span>
+<span id="L624"><span class="lineNum">     624</span>              : </span>
+<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">     9570409 :     bool isArticulationFamily() const</span></span>
+<span id="L626"><span class="lineNum">     626</span>              :     {</span>
+<span id="L627"><span class="lineNum">     627</span> <span class="tlaGNC">     9570409 :         return isArticulation() || isOrnament() || isTapping();</span></span>
+<span id="L628"><span class="lineNum">     628</span>              :     }</span>
+<span id="L629"><span class="lineNum">     629</span>              : </span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">     9515731 :     bool isArticulationOrFermata() const</span></span>
+<span id="L631"><span class="lineNum">     631</span>              :     {</span>
+<span id="L632"><span class="lineNum">     632</span> <span class="tlaGNC">     9515731 :         return isArticulationFamily() || isFermata();</span></span>
+<span id="L633"><span class="lineNum">     633</span>              :     }</span>
+<span id="L634"><span class="lineNum">     634</span>              : </span>
+<span id="L635"><span class="lineNum">     635</span> <span class="tlaUNC tlaBgUNC">           0 :     bool isIndicatorIcon() const { return isSystemLockIndicator() || isPageLockIndicator() || isStaffVisibilityIndicator(); }</span></span>
+<span id="L636"><span class="lineNum">     636</span>              : };</span>
+<span id="L637"><span class="lineNum">     637</span>              : </span>
+<span id="L638"><span class="lineNum">     638</span>              : template&lt;typename ... ParentTypes&gt;</span>
+<span id="L639"><span class="lineNum">     639</span>              : template&lt;typename T&gt;</span>
+<span id="L640"><span class="lineNum">     640</span> <span class="tlaGNC tlaBgGNC">       73033 : T* DummyParentOr&lt;ParentTypes...&gt;::as() const</span></span>
+<span id="L641"><span class="lineNum">     641</span>              : {</span>
+<span id="L642"><span class="lineNum">     642</span> <span class="tlaGNC">       73033 :     return m_parent &amp;&amp; !m_parent-&gt;isType(ElementType::DUMMY) ? static_cast&lt;T*&gt;(m_parent) : nullptr;</span></span>
+<span id="L643"><span class="lineNum">     643</span>              : }</span>
+<span id="L644"><span class="lineNum">     644</span>              : </span>
+<span id="L645"><span class="lineNum">     645</span>              : //---------------------------------------------------</span>
+<span id="L646"><span class="lineNum">     646</span>              : // safe casting of EngravingObject</span>
+<span id="L647"><span class="lineNum">     647</span>              : //</span>
+<span id="L648"><span class="lineNum">     648</span>              : // Example for ChordRest:</span>
+<span id="L649"><span class="lineNum">     649</span>              : //</span>
+<span id="L650"><span class="lineNum">     650</span>              : //    ChordRest* toChordRest(EngravingItem* e)</span>
+<span id="L651"><span class="lineNum">     651</span>              : //---------------------------------------------------</span>
+<span id="L652"><span class="lineNum">     652</span>              : </span>
+<span id="L653"><span class="lineNum">     653</span> <span class="tlaGNC">      432920 : static inline Rest* toRest(EngravingObject* e)</span></span>
+<span id="L654"><span class="lineNum">     654</span>              : {</span>
+<span id="L655"><span class="lineNum">     655</span> <span class="tlaGNC">      432920 :     assert(!e || e-&gt;isRestFamily());</span></span>
+<span id="L656"><span class="lineNum">     656</span> <span class="tlaGNC">      432920 :     return (Rest*)e;</span></span>
+<span id="L657"><span class="lineNum">     657</span>              : }</span>
+<span id="L658"><span class="lineNum">     658</span>              : </span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC">     1167187 : static inline const Rest* toRest(const EngravingObject* e)</span></span>
+<span id="L660"><span class="lineNum">     660</span>              : {</span>
+<span id="L661"><span class="lineNum">     661</span> <span class="tlaGNC">     1167187 :     assert(!e || e-&gt;isRestFamily());</span></span>
+<span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">     1167187 :     return (const Rest*)e;</span></span>
+<span id="L663"><span class="lineNum">     663</span>              : }</span>
+<span id="L664"><span class="lineNum">     664</span>              : </span>
+<span id="L665"><span class="lineNum">     665</span> <span class="tlaGNC">        1784 : static inline Articulation* toArticulation(EngravingObject* e)</span></span>
+<span id="L666"><span class="lineNum">     666</span>              : {</span>
+<span id="L667"><span class="lineNum">     667</span> <span class="tlaGNC">        1784 :     assert(!e || e-&gt;isArticulationFamily());</span></span>
+<span id="L668"><span class="lineNum">     668</span> <span class="tlaGNC">        1784 :     return (Articulation*)e;</span></span>
+<span id="L669"><span class="lineNum">     669</span>              : }</span>
+<span id="L670"><span class="lineNum">     670</span>              : </span>
+<span id="L671"><span class="lineNum">     671</span> <span class="tlaGNC">       14288 : static inline const Articulation* toArticulation(const EngravingObject* e)</span></span>
+<span id="L672"><span class="lineNum">     672</span>              : {</span>
+<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC">       14288 :     assert(!e || e-&gt;isArticulationFamily());</span></span>
+<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC">       14288 :     return (const Articulation*)e;</span></span>
+<span id="L675"><span class="lineNum">     675</span>              : }</span>
+<span id="L676"><span class="lineNum">     676</span>              : </span>
+<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC">          97 : static inline Arpeggio* toArpeggio(EngravingObject* e)</span></span>
+<span id="L678"><span class="lineNum">     678</span>              : {</span>
+<span id="L679"><span class="lineNum">     679</span> <span class="tlaGNC">          97 :     assert(!e || e-&gt;isArpeggio() || e-&gt;isChordBracket());</span></span>
+<span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC">          97 :     return (Arpeggio*)e;</span></span>
+<span id="L681"><span class="lineNum">     681</span>              : }</span>
+<span id="L682"><span class="lineNum">     682</span>              : </span>
+<span id="L683"><span class="lineNum">     683</span> <span class="tlaGNC">         594 : static inline const Arpeggio* toArpeggio(const EngravingObject* e)</span></span>
+<span id="L684"><span class="lineNum">     684</span>              : {</span>
+<span id="L685"><span class="lineNum">     685</span> <span class="tlaGNC">         594 :     assert(!e || e-&gt;isArpeggio() || e-&gt;isChordBracket());</span></span>
+<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">         594 :     return (const Arpeggio*)e;</span></span>
+<span id="L687"><span class="lineNum">     687</span>              : }</span>
+<span id="L688"><span class="lineNum">     688</span>              : </span>
+<span id="L689"><span class="lineNum">     689</span>              : #define CONVERT(a)  \</span>
+<span id="L690"><span class="lineNum">     690</span>              :     static inline a* to##a(EngravingObject * e) { assert(!e || e-&gt;is##a()); return (a*)e; } \</span>
+<span id="L691"><span class="lineNum">     691</span>              :     static inline const a* to##a(const EngravingObject * e) { assert(!e || e-&gt;is##a()); return (const a*)e; }</span>
+<span id="L692"><span class="lineNum">     692</span>              : </span>
+<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">     8433505 : CONVERT(EngravingItem)</span></span>
+<span id="L694"><span class="lineNum">     694</span> <span class="tlaGNC">     2245530 : CONVERT(Note)</span></span>
+<span id="L695"><span class="lineNum">     695</span> <span class="tlaGNC">     7557968 : CONVERT(Chord)</span></span>
+<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">      515770 : CONVERT(BarLine)</span></span>
+<span id="L697"><span class="lineNum">     697</span> <span class="tlaGNC">        1989 : CONVERT(Ornament)</span></span>
+<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC">      112794 : CONVERT(Fermata)</span></span>
+<span id="L699"><span class="lineNum">     699</span> <span class="tlaGNC">        1274 : CONVERT(Marker)</span></span>
+<span id="L700"><span class="lineNum">     700</span> <span class="tlaGNC">      195755 : CONVERT(Clef)</span></span>
+<span id="L701"><span class="lineNum">     701</span> <span class="tlaGNC">       79603 : CONVERT(KeySig)</span></span>
+<span id="L702"><span class="lineNum">     702</span> <span class="tlaGNC">      155946 : CONVERT(TimeSig)</span></span>
+<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">    26858768 : CONVERT(Measure)</span></span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC">      257245 : CONVERT(MeasureBase)</span></span>
+<span id="L705"><span class="lineNum">     705</span> <span class="tlaGNC">        6154 : CONVERT(DurationElement)</span></span>
+<span id="L706"><span class="lineNum">     706</span> <span class="tlaGNC">    11245804 : CONVERT(ChordRest)</span></span>
+<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">        1374 : CONVERT(TempoText)</span></span>
+<span id="L708"><span class="lineNum">     708</span> <span class="tlaGNC">         158 : CONVERT(Breath)</span></span>
+<span id="L709"><span class="lineNum">     709</span> <span class="tlaGNC">       41721 : CONVERT(Box)</span></span>
+<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">         974 : CONVERT(HBox)</span></span>
+<span id="L711"><span class="lineNum">     711</span> <span class="tlaGNC">         176 : CONVERT(VBox)</span></span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">          30 : CONVERT(TBox)</span></span>
+<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC">          38 : CONVERT(FBox)</span></span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">      489079 : CONVERT(Spanner)</span></span>
+<span id="L715"><span class="lineNum">     715</span> <span class="tlaGNC">       20439 : CONVERT(SpannerSegment)</span></span>
+<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">         935 : CONVERT(Glissando)</span></span>
+<span id="L717"><span class="lineNum">     717</span>              : CONVERT(GlissandoSegment)</span>
+<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">       27650 : CONVERT(GuitarBend)</span></span>
+<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC">        1430 : CONVERT(GuitarBendSegment)</span></span>
+<span id="L720"><span class="lineNum">     720</span> <span class="tlaGNC">          18 : CONVERT(GuitarBendHold)</span></span>
+<span id="L721"><span class="lineNum">     721</span> <span class="tlaGNC">           6 : CONVERT(GuitarBendHoldSegment)</span></span>
+<span id="L722"><span class="lineNum">     722</span>              : CONVERT(GuitarBendText)</span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC">          28 : CONVERT(SystemDivider)</span></span>
+<span id="L724"><span class="lineNum">     724</span> <span class="tlaGNC">        1342 : CONVERT(RehearsalMark)</span></span>
+<span id="L725"><span class="lineNum">     725</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(Bend)</span></span>
+<span id="L726"><span class="lineNum">     726</span>              : CONVERT(TripletFeel)</span>
+<span id="L727"><span class="lineNum">     727</span> <span class="tlaGNC tlaBgGNC">        6018 : CONVERT(Harmony)</span></span>
+<span id="L728"><span class="lineNum">     728</span> <span class="tlaGNC">         486 : CONVERT(Jump)</span></span>
+<span id="L729"><span class="lineNum">     729</span> <span class="tlaGNC">         217 : CONVERT(StaffText)</span></span>
+<span id="L730"><span class="lineNum">     730</span> <span class="tlaGNC">          18 : CONVERT(StaveSharingLabel);</span></span>
+<span id="L731"><span class="lineNum">     731</span> <span class="tlaGNC">        2193 : CONVERT(StaffTextBase)</span></span>
+<span id="L732"><span class="lineNum">     732</span> <span class="tlaGNC">       27835 : CONVERT(TextBase)</span></span>
+<span id="L733"><span class="lineNum">     733</span> <span class="tlaGNC">        2220 : CONVERT(TextLineBase)</span></span>
+<span id="L734"><span class="lineNum">     734</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(TextLineBaseSegment)</span></span>
+<span id="L735"><span class="lineNum">     735</span> <span class="tlaGNC tlaBgGNC">         719 : CONVERT(PlayCountText)</span></span>
+<span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC">          56 : CONVERT(PlayTechAnnotation)</span></span>
+<span id="L737"><span class="lineNum">     737</span> <span class="tlaGNC">          24 : CONVERT(Capo)</span></span>
+<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">         436 : CONVERT(Ottava)</span></span>
+<span id="L739"><span class="lineNum">     739</span> <span class="tlaGNC">        4909 : CONVERT(LayoutBreak)</span></span>
+<span id="L740"><span class="lineNum">     740</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(IndicatorIcon)</span></span>
+<span id="L741"><span class="lineNum">     741</span> <span class="tlaUNC">           0 : CONVERT(StaffVisibilityIndicator)</span></span>
+<span id="L742"><span class="lineNum">     742</span> <span class="tlaUNC">           0 : CONVERT(SystemLockIndicator)</span></span>
+<span id="L743"><span class="lineNum">     743</span> <span class="tlaGNC tlaBgGNC">     9288510 : CONVERT(Segment)</span></span>
+<span id="L744"><span class="lineNum">     744</span> <span class="tlaGNC">      260366 : CONVERT(System)</span></span>
+<span id="L745"><span class="lineNum">     745</span> <span class="tlaGNC">       93201 : CONVERT(Lyrics)</span></span>
+<span id="L746"><span class="lineNum">     746</span> <span class="tlaGNC">       73893 : CONVERT(Stem)</span></span>
+<span id="L747"><span class="lineNum">     747</span> <span class="tlaGNC">         704 : CONVERT(Beam)</span></span>
+<span id="L748"><span class="lineNum">     748</span> <span class="tlaGNC">        1697 : CONVERT(Hook)</span></span>
+<span id="L749"><span class="lineNum">     749</span> <span class="tlaGNC">        5595 : CONVERT(StemSlash)</span></span>
+<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">           4 : CONVERT(SLine)</span></span>
+<span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC">        8134 : CONVERT(LineSegment)</span></span>
+<span id="L752"><span class="lineNum">     752</span> <span class="tlaGNC">       24562 : CONVERT(Slur)</span></span>
+<span id="L753"><span class="lineNum">     753</span> <span class="tlaGNC">        3621 : CONVERT(SlurSegment)</span></span>
+<span id="L754"><span class="lineNum">     754</span> <span class="tlaGNC">        5397 : CONVERT(Tie)</span></span>
+<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">        5201 : CONVERT(TieSegment)</span></span>
+<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">        1453 : CONVERT(SlurTie)</span></span>
+<span id="L757"><span class="lineNum">     757</span> <span class="tlaGNC">        4271 : CONVERT(SlurTieSegment)</span></span>
+<span id="L758"><span class="lineNum">     758</span> <span class="tlaGNC">         182 : CONVERT(LaissezVibSegment)</span></span>
+<span id="L759"><span class="lineNum">     759</span> <span class="tlaGNC">         340 : CONVERT(PartialTieSegment)</span></span>
+<span id="L760"><span class="lineNum">     760</span> <span class="tlaGNC">           1 : CONVERT(Spacer)</span></span>
+<span id="L761"><span class="lineNum">     761</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(StaffLines)</span></span>
+<span id="L762"><span class="lineNum">     762</span> <span class="tlaUNC">           0 : CONVERT(Ambitus)</span></span>
+<span id="L763"><span class="lineNum">     763</span> <span class="tlaGNC tlaBgGNC">        2816 : CONVERT(Bracket)</span></span>
+<span id="L764"><span class="lineNum">     764</span> <span class="tlaGNC">         181 : CONVERT(InstrumentChange)</span></span>
+<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC">          18 : CONVERT(StaffTypeChange)</span></span>
+<span id="L766"><span class="lineNum">     766</span> <span class="tlaGNC">        2652 : CONVERT(Text)</span></span>
+<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">        2336 : CONVERT(MeasureNumber)</span></span>
+<span id="L768"><span class="lineNum">     768</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(MMRestRange)</span></span>
+<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC tlaBgGNC">         733 : CONVERT(Hairpin)</span></span>
+<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">         983 : CONVERT(HairpinSegment)</span></span>
+<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">           7 : CONVERT(TremoloBar)</span></span>
+<span id="L772"><span class="lineNum">     772</span> <span class="tlaGNC">        2485 : CONVERT(MeasureRepeat)</span></span>
+<span id="L773"><span class="lineNum">     773</span> <span class="tlaGNC">         545 : CONVERT(MMRest)</span></span>
+<span id="L774"><span class="lineNum">     774</span> <span class="tlaGNC">        5816 : CONVERT(Tuplet)</span></span>
+<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">         859 : CONVERT(NoteDot)</span></span>
+<span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">        5967 : CONVERT(Dynamic)</span></span>
+<span id="L777"><span class="lineNum">     777</span> <span class="tlaGNC">          86 : CONVERT(Expression)</span></span>
+<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">      106272 : CONVERT(InstrumentName)</span></span>
+<span id="L779"><span class="lineNum">     779</span> <span class="tlaGNC">       29053 : CONVERT(Accidental)</span></span>
+<span id="L780"><span class="lineNum">     780</span> <span class="tlaGNC">          29 : CONVERT(TextLine)</span></span>
+<span id="L781"><span class="lineNum">     781</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(TextLineSegment)</span></span>
+<span id="L782"><span class="lineNum">     782</span> <span class="tlaGNC tlaBgGNC">         115 : CONVERT(Pedal)</span></span>
+<span id="L783"><span class="lineNum">     783</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(PedalSegment)</span></span>
+<span id="L784"><span class="lineNum">     784</span> <span class="tlaUNC">           0 : CONVERT(OttavaSegment)</span></span>
+<span id="L785"><span class="lineNum">     785</span>              : CONVERT(LedgerLine)</span>
+<span id="L786"><span class="lineNum">     786</span> <span class="tlaUNC">           0 : CONVERT(ActionIcon)</span></span>
+<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC tlaBgGNC">        1496 : CONVERT(Volta)</span></span>
+<span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">         243 : CONVERT(VoltaSegment)</span></span>
+<span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">           4 : CONVERT(NoteLine)</span></span>
+<span id="L790"><span class="lineNum">     790</span>              : CONVERT(NoteLineSegment)</span>
+<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">         608 : CONVERT(Trill)</span></span>
+<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">         232 : CONVERT(TrillSegment)</span></span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">          19 : CONVERT(LetRing)</span></span>
+<span id="L794"><span class="lineNum">     794</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(LetRingSegment)</span></span>
+<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC tlaBgGNC">          19 : CONVERT(GradualTempoChange)</span></span>
+<span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">           4 : CONVERT(GradualTempoChangeSegment)</span></span>
+<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">          62 : CONVERT(Vibrato)</span></span>
+<span id="L798"><span class="lineNum">     798</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(VibratoSegment)</span></span>
+<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC tlaBgGNC">          16 : CONVERT(PalmMute)</span></span>
+<span id="L800"><span class="lineNum">     800</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(PalmMuteSegment)</span></span>
+<span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 : CONVERT(WhammyBar)</span></span>
+<span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC">           0 : CONVERT(WhammyBarSegment)</span></span>
+<span id="L803"><span class="lineNum">     803</span> <span class="tlaUNC">           0 : CONVERT(Rasgueado)</span></span>
+<span id="L804"><span class="lineNum">     804</span>              : CONVERT(RasgueadoSegment)</span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaUNC">           0 : CONVERT(HarmonicMark)</span></span>
+<span id="L806"><span class="lineNum">     806</span>              : CONVERT(HarmonicMarkSegment)</span>
+<span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 : CONVERT(PickScrape)</span></span>
+<span id="L808"><span class="lineNum">     808</span>              : CONVERT(PickScrapeSegment)</span>
+<span id="L809"><span class="lineNum">     809</span> <span class="tlaUNC">           0 : CONVERT(Symbol)</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaUNC">           0 : CONVERT(FSymbol)</span></span>
+<span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC tlaBgGNC">           7 : CONVERT(BSymbol)</span></span>
+<span id="L812"><span class="lineNum">     812</span> <span class="tlaGNC">        2504 : CONVERT(Fingering)</span></span>
+<span id="L813"><span class="lineNum">     813</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(NoteHead)</span></span>
+<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC tlaBgGNC">        5410 : CONVERT(LyricsLine)</span></span>
+<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">         929 : CONVERT(LyricsLineSegment)</span></span>
+<span id="L816"><span class="lineNum">     816</span> <span class="tlaGNC">         270 : CONVERT(FiguredBass)</span></span>
+<span id="L817"><span class="lineNum">     817</span>              : CONVERT(FiguredBassItem)</span>
+<span id="L818"><span class="lineNum">     818</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(StaffState)</span></span>
+<span id="L819"><span class="lineNum">     819</span> <span class="tlaUNC">           0 : CONVERT(ChordBracket)</span></span>
+<span id="L820"><span class="lineNum">     820</span> <span class="tlaUNC">           0 : CONVERT(Image)</span></span>
+<span id="L821"><span class="lineNum">     821</span> <span class="tlaGNC tlaBgGNC">         399 : CONVERT(ChordLine)</span></span>
+<span id="L822"><span class="lineNum">     822</span> <span class="tlaGNC">        4437 : CONVERT(FretDiagram)</span></span>
+<span id="L823"><span class="lineNum">     823</span> <span class="tlaGNC">         671 : CONVERT(HarpPedalDiagram)</span></span>
+<span id="L824"><span class="lineNum">     824</span> <span class="tlaGNC">         687 : CONVERT(Page)</span></span>
+<span id="L825"><span class="lineNum">     825</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(PageLockIndicator)</span></span>
+<span id="L826"><span class="lineNum">     826</span> <span class="tlaGNC tlaBgGNC">         136 : CONVERT(SystemText)</span></span>
+<span id="L827"><span class="lineNum">     827</span> <span class="tlaGNC">         198 : CONVERT(BracketItem)</span></span>
+<span id="L828"><span class="lineNum">     828</span> <span class="tlaGNC">       11296 : CONVERT(Staff)</span></span>
+<span id="L829"><span class="lineNum">     829</span> <span class="tlaGNC">          10 : CONVERT(Part)</span></span>
+<span id="L830"><span class="lineNum">     830</span> <span class="tlaGNC">        1224 : CONVERT(SharedPart)</span></span>
+<span id="L831"><span class="lineNum">     831</span>              : CONVERT(Lasso)</span>
+<span id="L832"><span class="lineNum">     832</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(BagpipeEmbellishment)</span></span>
+<span id="L833"><span class="lineNum">     833</span> <span class="tlaGNC tlaBgGNC">         155 : CONVERT(Sticking)</span></span>
+<span id="L834"><span class="lineNum">     834</span> <span class="tlaGNC">        3381 : CONVERT(GraceNotesGroup)</span></span>
+<span id="L835"><span class="lineNum">     835</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(DeadSlapped)</span></span>
+<span id="L836"><span class="lineNum">     836</span> <span class="tlaGNC tlaBgGNC">          19 : CONVERT(StringTunings)</span></span>
+<span id="L837"><span class="lineNum">     837</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(SoundFlag)</span></span>
+<span id="L838"><span class="lineNum">     838</span> <span class="tlaGNC tlaBgGNC">         500 : CONVERT(TimeTickAnchor)</span></span>
+<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">         344 : CONVERT(LaissezVib)</span></span>
+<span id="L840"><span class="lineNum">     840</span> <span class="tlaGNC">         941 : CONVERT(PartialTie)</span></span>
+<span id="L841"><span class="lineNum">     841</span> <span class="tlaGNC">          55 : CONVERT(PartialLyricsLine)</span></span>
+<span id="L842"><span class="lineNum">     842</span>              : CONVERT(PartialLyricsLineSegment)</span>
+<span id="L843"><span class="lineNum">     843</span> <span class="tlaGNC">          65 : CONVERT(Parenthesis)</span></span>
+<span id="L844"><span class="lineNum">     844</span>              : CONVERT(ShadowNote)</span>
+<span id="L845"><span class="lineNum">     845</span> <span class="tlaGNC">         183 : CONVERT(HammerOnPullOff)</span></span>
+<span id="L846"><span class="lineNum">     846</span> <span class="tlaGNC">         302 : CONVERT(HammerOnPullOffSegment)</span></span>
+<span id="L847"><span class="lineNum">     847</span> <span class="tlaUNC tlaBgUNC">           0 : CONVERT(HammerOnPullOffText)</span></span>
+<span id="L848"><span class="lineNum">     848</span> <span class="tlaGNC tlaBgGNC">         568 : CONVERT(Tapping)</span></span>
+<span id="L849"><span class="lineNum">     849</span> <span class="tlaGNC">          32 : CONVERT(TappingHalfSlur)</span></span>
+<span id="L850"><span class="lineNum">     850</span> <span class="tlaGNC">          72 : CONVERT(TappingHalfSlurSegment)</span></span>
+<span id="L851"><span class="lineNum">     851</span>              : #undef CONVERT</span>
+<span id="L852"><span class="lineNum">     852</span>              : }</span>
         </pre>
               </td>
             </tr>

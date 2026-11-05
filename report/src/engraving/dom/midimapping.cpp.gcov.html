@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -93,19 +93,19 @@
 <span id="L35"><span class="lineNum">      35</span>              : //   rebuildMidiMapping</span>
 <span id="L36"><span class="lineNum">      36</span>              : //---------------------------------------------------------</span>
 <span id="L37"><span class="lineNum">      37</span>              : </span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">        3018 : void MasterScore::rebuildMidiMapping()</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">        3022 : void MasterScore::rebuildMidiMapping()</span></span>
 <span id="L39"><span class="lineNum">      39</span>              : {</span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">        3018 :     Score* playbackScore = m_playbackScore ? m_playbackScore : this;</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">        3018 :     setPlaybackScore(nullptr);</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">        3022 :     Score* playbackScore = m_playbackScore ? m_playbackScore : this;</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">        3022 :     setPlaybackScore(nullptr);</span></span>
 <span id="L42"><span class="lineNum">      42</span>              : </span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">        3018 :     removeDeletedMidiMapping();</span></span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">        3018 :     int maxport = updateMidiMapping();</span></span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">        3018 :     reorderMidiMapping();</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">        3018 :     rebuildExcerptsMidiMapping();</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        3018 :     masterScore()-&gt;setMidiPortCount(maxport);</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">        3022 :     removeDeletedMidiMapping();</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">        3022 :     int maxport = updateMidiMapping();</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">        3022 :     reorderMidiMapping();</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">        3022 :     rebuildExcerptsMidiMapping();</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        3022 :     masterScore()-&gt;setMidiPortCount(maxport);</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : </span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        3018 :     setPlaybackScore(playbackScore);</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">        3018 : }</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        3022 :     setPlaybackScore(playbackScore);</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">        3022 : }</span></span>
 <span id="L51"><span class="lineNum">      51</span>              : </span>
 <span id="L52"><span class="lineNum">      52</span>              : //---------------------------------------------------------</span>
 <span id="L53"><span class="lineNum">      53</span>              : //   checkMidiMapping</span>
@@ -161,18 +161,18 @@
 <span id="L103"><span class="lineNum">     103</span>              : //   getNextFreeMidiMapping</span>
 <span id="L104"><span class="lineNum">     104</span>              : //---------------------------------------------------------</span>
 <span id="L105"><span class="lineNum">     105</span>              : </span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">        2724 : int MasterScore::getNextFreeMidiMapping(std::set&lt;int&gt;&amp; occupiedMidiChannels, unsigned int&amp; searchMidiMappingFrom, int p, int ch)</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">        2730 : int MasterScore::getNextFreeMidiMapping(std::set&lt;int&gt;&amp; occupiedMidiChannels, unsigned int&amp; searchMidiMappingFrom, int p, int ch)</span></span>
 <span id="L107"><span class="lineNum">     107</span>              : {</span>
-<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">        2724 :     if (ch != -1 &amp;&amp; p != -1) {</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">        2730 :     if (ch != -1 &amp;&amp; p != -1) {</span></span>
 <span id="L109"><span class="lineNum">     109</span> <span class="tlaUNC tlaBgUNC">           0 :         return p * 16 + ch;</span></span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC tlaBgGNC">        2724 :     } else if (ch != -1 &amp;&amp; p == -1) {</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC tlaBgGNC">        2730 :     } else if (ch != -1 &amp;&amp; p == -1) {</span></span>
 <span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">         448 :         for (int port = 0;; port++) {</span></span>
 <span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">         704 :             if (!muse::contains(occupiedMidiChannels, port * 16 + ch)) {</span></span>
 <span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">         448 :                 occupiedMidiChannels.insert(port * 16 + ch);</span></span>
 <span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">         448 :                 return port * 16 + ch;</span></span>
 <span id="L115"><span class="lineNum">     115</span>              :             }</span>
 <span id="L116"><span class="lineNum">     116</span>              :         }</span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">        2276 :     } else if (ch == -1 &amp;&amp; p != -1) {</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">        2282 :     } else if (ch == -1 &amp;&amp; p != -1) {</span></span>
 <span id="L118"><span class="lineNum">     118</span> <span class="tlaUNC tlaBgUNC">           0 :         for (int channel = 0; channel &lt; 16; channel++) {</span></span>
 <span id="L119"><span class="lineNum">     119</span> <span class="tlaUNC">           0 :             if (channel != 9 &amp;&amp; !muse::contains(occupiedMidiChannels, p * 16 + channel)) {</span></span>
 <span id="L120"><span class="lineNum">     120</span> <span class="tlaUNC">           0 :                 occupiedMidiChannels.insert(p * 16 + channel);</span></span>
@@ -181,10 +181,10 @@
 <span id="L123"><span class="lineNum">     123</span>              :         }</span>
 <span id="L124"><span class="lineNum">     124</span>              :     }</span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC tlaBgGNC">        1118 :     for (;; searchMidiMappingFrom++) {</span></span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">        3394 :         if (searchMidiMappingFrom % 16 != 9 &amp;&amp; !muse::contains(occupiedMidiChannels, int(searchMidiMappingFrom))) {</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">        2276 :             occupiedMidiChannels.insert(searchMidiMappingFrom);</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">        2276 :             return searchMidiMappingFrom;</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC tlaBgGNC">        1123 :     for (;; searchMidiMappingFrom++) {</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">        3405 :         if (searchMidiMappingFrom % 16 != 9 &amp;&amp; !muse::contains(occupiedMidiChannels, int(searchMidiMappingFrom))) {</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">        2282 :             occupiedMidiChannels.insert(searchMidiMappingFrom);</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">        2282 :             return searchMidiMappingFrom;</span></span>
 <span id="L130"><span class="lineNum">     130</span>              :         }</span>
 <span id="L131"><span class="lineNum">     131</span>              :     }</span>
 <span id="L132"><span class="lineNum">     132</span>              : }</span>
@@ -207,9 +207,9 @@
 <span id="L149"><span class="lineNum">     149</span>              : //   rebuildExcerptsMidiMapping</span>
 <span id="L150"><span class="lineNum">     150</span>              : //---------------------------------------------------------</span>
 <span id="L151"><span class="lineNum">     151</span>              : </span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        3018 : void MasterScore::rebuildExcerptsMidiMapping()</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        3022 : void MasterScore::rebuildExcerptsMidiMapping()</span></span>
 <span id="L153"><span class="lineNum">     153</span>              : {</span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">        3337 :     for (Excerpt* ex : excerpts()) {</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">        3341 :     for (Excerpt* ex : excerpts()) {</span></span>
 <span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">         638 :         for (Part* p : ex-&gt;excerptScore()-&gt;parts()) {</span></span>
 <span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         319 :             const Part* masterPart = p-&gt;masterPart();</span></span>
 <span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">         319 :             if (!masterPart-&gt;score()-&gt;isMaster()) {</span></span>
@@ -233,70 +233,70 @@
 <span id="L175"><span class="lineNum">     175</span>              :             }</span>
 <span id="L176"><span class="lineNum">     176</span>              :         }</span>
 <span id="L177"><span class="lineNum">     177</span>              :     }</span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">        3018 : }</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">        3022 : }</span></span>
 <span id="L179"><span class="lineNum">     179</span>              : </span>
 <span id="L180"><span class="lineNum">     180</span>              : //---------------------------------------------------------</span>
 <span id="L181"><span class="lineNum">     181</span>              : //   reorderMidiMapping</span>
 <span id="L182"><span class="lineNum">     182</span>              : //   Set mappings in order you see in Add-&gt;Instruments</span>
 <span id="L183"><span class="lineNum">     183</span>              : //---------------------------------------------------------</span>
 <span id="L184"><span class="lineNum">     184</span>              : </span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">        3018 : void MasterScore::reorderMidiMapping()</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">        3022 : void MasterScore::reorderMidiMapping()</span></span>
 <span id="L186"><span class="lineNum">     186</span>              : {</span>
 <span id="L187"><span class="lineNum">     187</span>              :     using std::swap;</span>
-<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">        3018 :     int sequenceNumber = 0;</span></span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">        7421 :     for (Part* part : parts()) {</span></span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">        8895 :         for (const auto&amp; pair : part-&gt;instruments()) {</span></span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">        4492 :             const Instrument* instr = pair.second;</span></span>
-<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">        9823 :             for (InstrChannel* channel : instr-&gt;channel()) {</span></span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">        5331 :                 if (m_midiMapping[sequenceNumber].part() == part &amp;&amp; m_midiMapping[sequenceNumber].m_masterChannel == channel) {</span></span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">        5187 :                     sequenceNumber++;</span></span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">        5187 :                     continue;</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">        3022 :     int sequenceNumber = 0;</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">        7432 :     for (Part* part : parts()) {</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">        8911 :         for (const auto&amp; pair : part-&gt;instruments()) {</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">        4501 :             const Instrument* instr = pair.second;</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">        9843 :             for (InstrChannel* channel : instr-&gt;channel()) {</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">        5342 :                 if (m_midiMapping[sequenceNumber].part() == part &amp;&amp; m_midiMapping[sequenceNumber].m_masterChannel == channel) {</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">        5196 :                     sequenceNumber++;</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">        5196 :                     continue;</span></span>
 <span id="L196"><span class="lineNum">     196</span>              :                 }</span>
 <span id="L197"><span class="lineNum">     197</span>              : </span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">         144 :                 const int shouldBe = channel-&gt;channel();</span></span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">         144 :                 swap(m_midiMapping[sequenceNumber], m_midiMapping[shouldBe]);</span></span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">         144 :                 m_midiMapping[sequenceNumber].articulation()-&gt;setChannel(sequenceNumber);</span></span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">         144 :                 channel-&gt;setChannel(sequenceNumber);</span></span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">         144 :                 m_midiMapping[shouldBe].articulation()-&gt;setChannel(shouldBe);</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">         146 :                 const int shouldBe = channel-&gt;channel();</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">         146 :                 swap(m_midiMapping[sequenceNumber], m_midiMapping[shouldBe]);</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">         146 :                 m_midiMapping[sequenceNumber].articulation()-&gt;setChannel(sequenceNumber);</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">         146 :                 channel-&gt;setChannel(sequenceNumber);</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">         146 :                 m_midiMapping[shouldBe].articulation()-&gt;setChannel(shouldBe);</span></span>
 <span id="L203"><span class="lineNum">     203</span>              : </span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">         144 :                 sequenceNumber++;</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">         146 :                 sequenceNumber++;</span></span>
 <span id="L205"><span class="lineNum">     205</span>              :             }</span>
 <span id="L206"><span class="lineNum">     206</span>              :         }</span>
 <span id="L207"><span class="lineNum">     207</span>              :     }</span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        3018 : }</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        3022 : }</span></span>
 <span id="L209"><span class="lineNum">     209</span>              : </span>
 <span id="L210"><span class="lineNum">     210</span>              : //---------------------------------------------------------</span>
 <span id="L211"><span class="lineNum">     211</span>              : //   removeDeletedMidiMapping</span>
 <span id="L212"><span class="lineNum">     212</span>              : //   Remove mappings to deleted instruments</span>
 <span id="L213"><span class="lineNum">     213</span>              : //---------------------------------------------------------</span>
 <span id="L214"><span class="lineNum">     214</span>              : </span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        3018 : void MasterScore::removeDeletedMidiMapping()</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        3022 : void MasterScore::removeDeletedMidiMapping()</span></span>
 <span id="L216"><span class="lineNum">     216</span>              : {</span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        3018 :     int removeOffset = 0;</span></span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">        3018 :     int mappingSize = int(m_midiMapping.size());</span></span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        6051 :     for (int index = 0; index &lt; mappingSize; index++) {</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        3033 :         Part* part = midiMapping(index)-&gt;part();</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        3033 :         if (!muse::contains(parts(), part)) {</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        3022 :     int removeOffset = 0;</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">        3022 :     int mappingSize = int(m_midiMapping.size());</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        6060 :     for (int index = 0; index &lt; mappingSize; index++) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        3038 :         Part* part = midiMapping(index)-&gt;part();</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        3038 :         if (!muse::contains(parts(), part)) {</span></span>
 <span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">          14 :             removeOffset++;</span></span>
 <span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">          23 :             continue;</span></span>
 <span id="L224"><span class="lineNum">     224</span>              :         }</span>
 <span id="L225"><span class="lineNum">     225</span>              :         // Not all channels could exist</span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">        3019 :         bool channelExists = false;</span></span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        3075 :         for (const auto&amp; pair : part-&gt;instruments()) {</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">        3066 :             const Instrument* instr = pair.second;</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        3066 :             channelExists = (m_midiMapping[index].articulation()-&gt;channel() != -1</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        3066 :                              &amp;&amp; muse::contains(instr-&gt;channel(), m_midiMapping[index].m_masterChannel)</span></span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        6132 :                              &amp;&amp; !(m_midiMapping[index].port() == -1 &amp;&amp; m_midiMapping[index].channel() == -1));</span></span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">        3066 :             if (channelExists) {</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        3010 :                 break;</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">        3024 :         bool channelExists = false;</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        3081 :         for (const auto&amp; pair : part-&gt;instruments()) {</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">        3072 :             const Instrument* instr = pair.second;</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        3072 :             channelExists = (m_midiMapping[index].articulation()-&gt;channel() != -1</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        3072 :                              &amp;&amp; muse::contains(instr-&gt;channel(), m_midiMapping[index].m_masterChannel)</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        6144 :                              &amp;&amp; !(m_midiMapping[index].port() == -1 &amp;&amp; m_midiMapping[index].channel() == -1));</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">        3072 :             if (channelExists) {</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        3015 :                 break;</span></span>
 <span id="L234"><span class="lineNum">     234</span>              :             }</span>
 <span id="L235"><span class="lineNum">     235</span>              :         }</span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">        3019 :         if (!channelExists) {</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">        3024 :         if (!channelExists) {</span></span>
 <span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">           9 :             removeOffset++;</span></span>
 <span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">           9 :             continue;</span></span>
 <span id="L239"><span class="lineNum">     239</span>              :         }</span>
 <span id="L240"><span class="lineNum">     240</span>              :         // Let's do a left shift by 'removeOffset' items if necessary</span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">        3010 :         if (index != 0 &amp;&amp; removeOffset != 0) {</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">        3015 :         if (index != 0 &amp;&amp; removeOffset != 0) {</span></span>
 <span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">          17 :             m_midiMapping[index - removeOffset] = std::move(m_midiMapping[index]);</span></span>
 <span id="L243"><span class="lineNum">     243</span>              : </span>
 <span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">          17 :             const int chanVal = m_midiMapping[index - removeOffset].articulation()-&gt;channel();</span></span>
@@ -304,88 +304,88 @@
 <span id="L246"><span class="lineNum">     246</span>              :         }</span>
 <span id="L247"><span class="lineNum">     247</span>              :     }</span>
 <span id="L248"><span class="lineNum">     248</span>              :     // We have 'removeOffset' deleted instruments, let's remove their mappings</span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        3041 :     for (int index = 0; index &lt; removeOffset; index++) {</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        3045 :     for (int index = 0; index &lt; removeOffset; index++) {</span></span>
 <span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">          23 :         m_midiMapping.pop_back();</span></span>
 <span id="L251"><span class="lineNum">     251</span>              :     }</span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">        3018 : }</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">        3022 : }</span></span>
 <span id="L253"><span class="lineNum">     253</span>              : </span>
 <span id="L254"><span class="lineNum">     254</span>              : //---------------------------------------------------------</span>
 <span id="L255"><span class="lineNum">     255</span>              : //   updateMidiMapping</span>
 <span id="L256"><span class="lineNum">     256</span>              : //   Add mappings to new instruments and repair existing ones</span>
 <span id="L257"><span class="lineNum">     257</span>              : //---------------------------------------------------------</span>
 <span id="L258"><span class="lineNum">     258</span>              : </span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">        3018 : int MasterScore::updateMidiMapping()</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">        3022 : int MasterScore::updateMidiMapping()</span></span>
 <span id="L260"><span class="lineNum">     260</span>              : {</span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">        3018 :     int maxport = 0;</span></span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">        3018 :     std::set&lt;int&gt; occupiedMidiChannels; // each entry is port*16+channel, port range: 0-inf, channel: 0-15</span></span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">        3018 :     unsigned int searchMidiMappingFrom = 0; // makes getting next free MIDI mapping faster</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">        3022 :     int maxport = 0;</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">        3022 :     std::set&lt;int&gt; occupiedMidiChannels; // each entry is port*16+channel, port range: 0-inf, channel: 0-15</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">        3022 :     unsigned int searchMidiMappingFrom = 0; // makes getting next free MIDI mapping faster</span></span>
 <span id="L264"><span class="lineNum">     264</span>              : </span>
-<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">        6028 :     for (const MidiMapping&amp; mm :m_midiMapping) {</span></span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">        3010 :         if (mm.port() == -1 || mm.channel() == -1) {</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">        6037 :     for (const MidiMapping&amp; mm :m_midiMapping) {</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">        3015 :         if (mm.port() == -1 || mm.channel() == -1) {</span></span>
 <span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">         448 :             continue;</span></span>
 <span id="L268"><span class="lineNum">     268</span>              :         }</span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">        2562 :         occupiedMidiChannels.insert(static_cast&lt;int&gt;(mm.port()) * 16 + (int)mm.channel());</span></span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">        2562 :         if (maxport &lt; mm.port()) {</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">        2567 :         occupiedMidiChannels.insert(static_cast&lt;int&gt;(mm.port()) * 16 + (int)mm.channel());</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">        2567 :         if (maxport &lt; mm.port()) {</span></span>
 <span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">         296 :             maxport = mm.port();</span></span>
 <span id="L272"><span class="lineNum">     272</span>              :         }</span>
 <span id="L273"><span class="lineNum">     273</span>              :     }</span>
 <span id="L274"><span class="lineNum">     274</span>              : </span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        7421 :     for (Part* part : parts()) {</span></span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">        8895 :         for (const auto&amp; pair : part-&gt;instruments()) {</span></span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">        4492 :             const Instrument* instr = pair.second;</span></span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">        4492 :             const bool useDrumset = instr-&gt;useDrumset();</span></span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        9823 :             for (InstrChannel* channel : instr-&gt;channel()) {</span></span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">        5331 :                 doUpdateMidiMapping(maxport, occupiedMidiChannels, searchMidiMappingFrom, part, channel, useDrumset);</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        7432 :     for (Part* part : parts()) {</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">        8911 :         for (const auto&amp; pair : part-&gt;instruments()) {</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">        4501 :             const Instrument* instr = pair.second;</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">        4501 :             const bool useDrumset = instr-&gt;useDrumset();</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        9843 :             for (InstrChannel* channel : instr-&gt;channel()) {</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">        5342 :                 doUpdateMidiMapping(maxport, occupiedMidiChannels, searchMidiMappingFrom, part, channel, useDrumset);</span></span>
 <span id="L281"><span class="lineNum">     281</span>              :             }</span>
 <span id="L282"><span class="lineNum">     282</span>              :         }</span>
 <span id="L283"><span class="lineNum">     283</span>              :     }</span>
 <span id="L284"><span class="lineNum">     284</span>              : </span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">        3018 :     return maxport;</span></span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">        3018 : }</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">        3022 :     return maxport;</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">        3022 : }</span></span>
 <span id="L287"><span class="lineNum">     287</span>              : </span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">        5331 : void MasterScore::doUpdateMidiMapping(int&amp; maxport, std::set&lt;int&gt;&amp; occupiedMidiChannels, unsigned int&amp; searchMidiMappingFrom,</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">        5342 : void MasterScore::doUpdateMidiMapping(int&amp; maxport, std::set&lt;int&gt;&amp; occupiedMidiChannels, unsigned int&amp; searchMidiMappingFrom,</span></span>
 <span id="L289"><span class="lineNum">     289</span>              :                                       Part* part, InstrChannel* channel, bool useDrumset)</span>
 <span id="L290"><span class="lineNum">     290</span>              : {</span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">        5331 :     bool channelExists = false;</span></span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       33926 :     for (const MidiMapping&amp; mapping : m_midiMapping) {</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">       31605 :         const bool validChannelIndex = channel-&gt;channel() &gt;= 0 &amp;&amp; channel-&gt;channel() &lt; static_cast&lt;int&gt;(m_midiMapping.size());</span></span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">       31605 :         if (channel == mapping.m_masterChannel &amp;&amp; validChannelIndex) {</span></span>
-<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">        3010 :             channelExists = true;</span></span>
-<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">        3010 :             break;</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">        5342 :     bool channelExists = false;</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       33947 :     for (const MidiMapping&amp; mapping : m_midiMapping) {</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">       31620 :         const bool validChannelIndex = channel-&gt;channel() &gt;= 0 &amp;&amp; channel-&gt;channel() &lt; static_cast&lt;int&gt;(m_midiMapping.size());</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">       31620 :         if (channel == mapping.m_masterChannel &amp;&amp; validChannelIndex) {</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">        3015 :             channelExists = true;</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">        3015 :             break;</span></span>
 <span id="L297"><span class="lineNum">     297</span>              :         }</span>
 <span id="L298"><span class="lineNum">     298</span>              :     }</span>
 <span id="L299"><span class="lineNum">     299</span>              : </span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">        5331 :     if (!channelExists) {</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">        5342 :     if (!channelExists) {</span></span>
 <span id="L301"><span class="lineNum">     301</span>              :         int midiPort;</span>
 <span id="L302"><span class="lineNum">     302</span>              :         int midiChannel;</span>
 <span id="L303"><span class="lineNum">     303</span>              : </span>
-<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">        2321 :         if (useDrumset) {</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">        2327 :         if (useDrumset) {</span></span>
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">          45 :             midiPort = getNextFreeDrumMidiMapping(occupiedMidiChannels) / 16;</span></span>
 <span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">          45 :             midiChannel = 9;</span></span>
 <span id="L307"><span class="lineNum">     307</span>              :         } else {</span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">        2276 :             const int nm = getNextFreeMidiMapping(occupiedMidiChannels, searchMidiMappingFrom);</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">        2276 :             midiPort    = nm / 16;</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">        2276 :             midiChannel = nm % 16;</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">        2282 :             const int nm = getNextFreeMidiMapping(occupiedMidiChannels, searchMidiMappingFrom);</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">        2282 :             midiPort    = nm / 16;</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">        2282 :             midiChannel = nm % 16;</span></span>
 <span id="L311"><span class="lineNum">     311</span>              :         }</span>
 <span id="L312"><span class="lineNum">     312</span>              : </span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">        2321 :         if (midiPort &gt; maxport) {</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">        2327 :         if (midiPort &gt; maxport) {</span></span>
 <span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">          26 :             maxport = midiPort;</span></span>
 <span id="L315"><span class="lineNum">     315</span>              :         }</span>
 <span id="L316"><span class="lineNum">     316</span>              : </span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">        2321 :         addMidiMapping(channel, part, midiPort, midiChannel);</span></span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">        2321 :         return;</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">        2327 :         addMidiMapping(channel, part, midiPort, midiChannel);</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">        2327 :         return;</span></span>
 <span id="L319"><span class="lineNum">     319</span>              :     }</span>
 <span id="L320"><span class="lineNum">     320</span>              : </span>
 <span id="L321"><span class="lineNum">     321</span>              :     // Channel could already exist, but have unassigned port or channel...</span>
-<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">        3010 :     MidiMapping&amp; mapping = m_midiMapping.at(channel-&gt;channel());</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">        3015 :     MidiMapping&amp; mapping = m_midiMapping.at(channel-&gt;channel());</span></span>
 <span id="L323"><span class="lineNum">     323</span>              : </span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">        3010 :     if (mapping.port() == -1) {</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">        3015 :     if (mapping.port() == -1) {</span></span>
 <span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">         448 :         const int nm = getNextFreeMidiMapping(occupiedMidiChannels, searchMidiMappingFrom, -1, mapping.channel());</span></span>
 <span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         448 :         mapping.m_port = nm / 16;</span></span>
 <span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">         448 :         return;</span></span>
 <span id="L328"><span class="lineNum">     328</span>              :     }</span>
 <span id="L329"><span class="lineNum">     329</span>              : </span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">        2562 :     if (m_midiMapping[channel-&gt;channel()].channel() == -1) {</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">        2567 :     if (m_midiMapping[channel-&gt;channel()].channel() == -1) {</span></span>
 <span id="L331"><span class="lineNum">     331</span> <span class="tlaUNC tlaBgUNC">           0 :         if (useDrumset) {</span></span>
 <span id="L332"><span class="lineNum">     332</span> <span class="tlaUNC">           0 :             mapping.m_port = getNextFreeDrumMidiMapping(occupiedMidiChannels) / 16;</span></span>
 <span id="L333"><span class="lineNum">     333</span> <span class="tlaUNC">           0 :             mapping.m_channel = 9;</span></span>
@@ -401,27 +401,27 @@
 <span id="L343"><span class="lineNum">     343</span>              : //   addMidiMapping</span>
 <span id="L344"><span class="lineNum">     344</span>              : //---------------------------------------------------------</span>
 <span id="L345"><span class="lineNum">     345</span>              : </span>
-<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC tlaBgGNC">        3479 : void MasterScore::addMidiMapping(InstrChannel* channel, Part* part, int midiPort, int midiChannel)</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC tlaBgGNC">        3485 : void MasterScore::addMidiMapping(InstrChannel* channel, Part* part, int midiPort, int midiChannel)</span></span>
 <span id="L347"><span class="lineNum">     347</span>              : {</span>
-<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">        3479 :     if (!part-&gt;score()-&gt;isMaster()) {</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">        3485 :     if (!part-&gt;score()-&gt;isMaster()) {</span></span>
 <span id="L349"><span class="lineNum">     349</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L350"><span class="lineNum">     350</span>              :     }</span>
 <span id="L351"><span class="lineNum">     351</span>              : </span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC tlaBgGNC">        3479 :     MidiMapping mm;</span></span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">        3479 :     mm.m_part = part;</span></span>
-<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">        3479 :     mm.m_masterChannel = channel;</span></span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">        3479 :     mm.m_articulation.reset(new InstrChannel(*channel));</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">        3479 :     mm.m_link = PartChannelSettingsLink(mm.articulation(), mm.m_masterChannel, /* excerpt */ false);</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC tlaBgGNC">        3485 :     MidiMapping mm;</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">        3485 :     mm.m_part = part;</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">        3485 :     mm.m_masterChannel = channel;</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">        3485 :     mm.m_articulation.reset(new InstrChannel(*channel));</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">        3485 :     mm.m_link = PartChannelSettingsLink(mm.articulation(), mm.m_masterChannel, /* excerpt */ false);</span></span>
 <span id="L357"><span class="lineNum">     357</span>              : </span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">        3479 :     mm.m_port = midiPort;</span></span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">        3479 :     mm.m_channel = midiChannel;</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">        3485 :     mm.m_port = midiPort;</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">        3485 :     mm.m_channel = midiChannel;</span></span>
 <span id="L360"><span class="lineNum">     360</span>              : </span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        3479 :     const int mscoreChannel = int(m_midiMapping.size());</span></span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">        3479 :     mm.m_articulation-&gt;setChannel(mscoreChannel);</span></span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">        3479 :     mm.m_masterChannel-&gt;setChannel(mscoreChannel);</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        3485 :     const int mscoreChannel = int(m_midiMapping.size());</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">        3485 :     mm.m_articulation-&gt;setChannel(mscoreChannel);</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">        3485 :     mm.m_masterChannel-&gt;setChannel(mscoreChannel);</span></span>
 <span id="L364"><span class="lineNum">     364</span>              : </span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">        3479 :     m_midiMapping.push_back(std::move(mm));</span></span>
-<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">        3479 : }</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">        3485 :     m_midiMapping.push_back(std::move(mm));</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">        3485 : }</span></span>
 <span id="L367"><span class="lineNum">     367</span>              : </span>
 <span id="L368"><span class="lineNum">     368</span>              : //---------------------------------------------------------</span>
 <span id="L369"><span class="lineNum">     369</span>              : //   updateMidiMapping</span>

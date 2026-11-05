@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -100,108 +100,108 @@
 <span id="L42"><span class="lineNum">      42</span>              : using namespace mu::engraving;</span>
 <span id="L43"><span class="lineNum">      43</span>              : using namespace mu::engraving::rendering::score;</span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC tlaBgGNC">        4124 : void MaskLayout::computeMasks(LayoutContext&amp; ctx, Page* page)</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC tlaBgGNC">        4125 : void MaskLayout::computeMasks(LayoutContext&amp; ctx, Page* page)</span></span>
 <span id="L46"><span class="lineNum">      46</span>              : {</span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        4139 :     TRACEFUNC;</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        4140 :     TRACEFUNC;</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : </span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        4124 :     bool maskBarlines = ctx.conf().styleB(Sid::maskBarlinesForText);</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">        4124 :     bool maskSlurs = ctx.conf().styleB(Sid::maskSlurs);</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">        4124 :     bool maskTies = ctx.conf().styleB(Sid::maskTies);</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        4125 :     bool maskBarlines = ctx.conf().styleB(Sid::maskBarlinesForText);</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">        4125 :     bool maskSlurs = ctx.conf().styleB(Sid::maskSlurs);</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">        4125 :     bool maskTies = ctx.conf().styleB(Sid::maskTies);</span></span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">       14311 :     for (const System* system : page-&gt;systems()) {</span></span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">       10187 :         std::vector&lt;TextBase*&gt; allSystemText = collectAllSystemText(system);</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">       14320 :     for (const System* system : page-&gt;systems()) {</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">       10195 :         std::vector&lt;TextBase*&gt; allSystemText = collectAllSystemText(system);</span></span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       46182 :         for (MeasureBase* mb : system-&gt;measures()) {</span></span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       35995 :             if (!mb-&gt;isMeasure()) {</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">        2512 :                 continue;</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       46217 :         for (MeasureBase* mb : system-&gt;measures()) {</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       36022 :             if (!mb-&gt;isMeasure()) {</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">        2519 :                 continue;</span></span>
 <span id="L59"><span class="lineNum">      59</span>              :             }</span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">       33483 :             Measure* measure = toMeasure(mb);</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">       33503 :             Measure* measure = toMeasure(mb);</span></span>
 <span id="L61"><span class="lineNum">      61</span>              : </span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">       33483 :             if (maskBarlines) {</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">       90572 :                 for (const Segment&amp; seg : measure-&gt;segments()) {</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">       72138 :                     if (seg.isType(SegmentType::BarLineTypes)) {</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">       20047 :                         computeBarlineMasks(&amp;seg, system, allSystemText, ctx);</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">       33503 :             if (maskBarlines) {</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">       90664 :                 for (const Segment&amp; seg : measure-&gt;segments()) {</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">       72213 :                     if (seg.isType(SegmentType::BarLineTypes)) {</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">       20069 :                         computeBarlineMasks(&amp;seg, system, allSystemText, ctx);</span></span>
 <span id="L66"><span class="lineNum">      66</span>              :                     }</span>
 <span id="L67"><span class="lineNum">      67</span>              :                 }</span>
 <span id="L68"><span class="lineNum">      68</span>              :             }</span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       33483 :             staff_idx_t nstaves = ctx.dom().nstaves();</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">       82140 :             for (staff_idx_t staffIdx = 0; staffIdx &lt; nstaves; ++staffIdx) {</span></span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       48657 :                 if (staffIdx &gt;= system-&gt;staves().size() || !system-&gt;staff(staffIdx)-&gt;show()) {</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">         933 :                     continue;</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       33503 :             staff_idx_t nstaves = ctx.dom().nstaves();</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">       82235 :             for (staff_idx_t staffIdx = 0; staffIdx &lt; nstaves; ++staffIdx) {</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       48732 :                 if (staffIdx &gt;= system-&gt;staves().size() || !system-&gt;staff(staffIdx)-&gt;show()) {</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">         981 :                     continue;</span></span>
 <span id="L74"><span class="lineNum">      74</span>              :                 }</span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       47724 :                 const Staff* staff = ctx.dom().staff(staffIdx);</span></span>
-<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">       47724 :                 const StaffType* staffType = staff-&gt;staffType(measure-&gt;tick());</span></span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       47724 :                 StaffLines* staffLines = measure-&gt;staffLines(staffIdx);</span></span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">       47724 :                 if (staffType-&gt;isTabStaff()) {</span></span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        1020 :                     maskTABStringLinesForFrets(staffLines, ctx);</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       47751 :                 const Staff* staff = ctx.dom().staff(staffIdx);</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">       47751 :                 const StaffType* staffType = staff-&gt;staffType(measure-&gt;tick());</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       47751 :                 StaffLines* staffLines = measure-&gt;staffLines(staffIdx);</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">       47751 :                 if (staffType-&gt;isTabStaff()) {</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        1017 :                     maskTABStringLinesForFrets(staffLines, ctx);</span></span>
 <span id="L80"><span class="lineNum">      80</span>              :                 }</span>
 <span id="L81"><span class="lineNum">      81</span>              :             }</span>
 <span id="L82"><span class="lineNum">      82</span>              :         }</span>
 <span id="L83"><span class="lineNum">      83</span>              : </span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">       15866 :         for (SpannerSegment* spannerSeg : system-&gt;spannerSegments()) {</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">        9039 :             if (!spannerSeg-&gt;isSlurTieSegment() || spannerSeg-&gt;isTappingHalfSlurSegment()</span></span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">        9039 :                 || !system-&gt;staff(spannerSeg-&gt;staffIdx())-&gt;show() || !spannerSeg-&gt;visible()) {</span></span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">        2350 :                 continue;</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">       15886 :         for (SpannerSegment* spannerSeg : system-&gt;spannerSegments()) {</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">        9053 :             if (!spannerSeg-&gt;isSlurTieSegment() || spannerSeg-&gt;isTappingHalfSlurSegment()</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">        9053 :                 || !system-&gt;staff(spannerSeg-&gt;staffIdx())-&gt;show() || !spannerSeg-&gt;visible()) {</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">        2360 :                 continue;</span></span>
 <span id="L88"><span class="lineNum">      88</span>              :             }</span>
 <span id="L89"><span class="lineNum">      89</span>              : </span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">        3329 :             spannerSeg-&gt;mutldata()-&gt;setMask(Shape());</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">        3331 :             spannerSeg-&gt;mutldata()-&gt;setMask(Shape());</span></span>
 <span id="L91"><span class="lineNum">      91</span>              : </span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">        3329 :             AutoOnOff slurTieMaskOverride = spannerSeg-&gt;getProperty(Pid::MASK_SLURTIE).value&lt;AutoOnOff&gt;();</span></span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">        3329 :             if (slurTieMaskOverride == AutoOnOff::ON</span></span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">        6658 :                 || (slurTieMaskOverride == AutoOnOff::AUTO</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">        3329 :                     &amp;&amp; ((maskSlurs &amp;&amp; spannerSeg-&gt;isSlurSegment())</span></span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">        2831 :                         || (maskTies &amp;&amp; spannerSeg-&gt;isTieSegment())))) {</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">        3331 :             AutoOnOff slurTieMaskOverride = spannerSeg-&gt;getProperty(Pid::MASK_SLURTIE).value&lt;AutoOnOff&gt;();</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">        3331 :             if (slurTieMaskOverride == AutoOnOff::ON</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">        6662 :                 || (slurTieMaskOverride == AutoOnOff::AUTO</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">        3331 :                     &amp;&amp; ((maskSlurs &amp;&amp; spannerSeg-&gt;isSlurSegment())</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">        2833 :                         || (maskTies &amp;&amp; spannerSeg-&gt;isTieSegment())))) {</span></span>
 <span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">        1469 :                 computeSlurTieMasks(toSlurTieSegment(spannerSeg));</span></span>
 <span id="L98"><span class="lineNum">      98</span>              :             }</span>
 <span id="L99"><span class="lineNum">      99</span>              :         }</span>
-<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">       10187 :     }</span></span>
-<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">        4124 : }</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">       10195 :     }</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">        4125 : }</span></span>
 <span id="L102"><span class="lineNum">     102</span>              : </span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">       20047 : void MaskLayout::computeBarlineMasks(const Segment* barlineSement, const System* system, const std::vector&lt;TextBase*&gt;&amp; allSystemText,</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">       20069 : void MaskLayout::computeBarlineMasks(const Segment* barlineSement, const System* system, const std::vector&lt;TextBase*&gt;&amp; allSystemText,</span></span>
 <span id="L104"><span class="lineNum">     104</span>              :                                      LayoutContext&amp; ctx)</span>
 <span id="L105"><span class="lineNum">     105</span>              : {</span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">       20047 :     if (barlineSement-&gt;measure()-&gt;isLastInSystem() &amp;&amp; barlineSement == barlineSement-&gt;measure()-&gt;lastEnabled()) {</span></span>
-<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">        4397 :         return;</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">       20069 :     if (barlineSement-&gt;measure()-&gt;isLastInSystem() &amp;&amp; barlineSement == barlineSement-&gt;measure()-&gt;lastEnabled()) {</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">        4399 :         return;</span></span>
 <span id="L108"><span class="lineNum">     108</span>              :     }</span>
 <span id="L109"><span class="lineNum">     109</span>              : </span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">       15650 :     staff_idx_t nstaves = ctx.dom().nstaves();</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">       15670 :     staff_idx_t nstaves = ctx.dom().nstaves();</span></span>
 <span id="L111"><span class="lineNum">     111</span>              : </span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">       15650 :     std::vector&lt;BarLine*&gt; barlines;</span></span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">       15650 :     barlines.reserve(nstaves);</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">       15670 :     std::vector&lt;BarLine*&gt; barlines;</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">       15670 :     barlines.reserve(nstaves);</span></span>
 <span id="L114"><span class="lineNum">     114</span>              : </span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       40224 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; ctx.dom().nstaves(); ++staffIdx) {</span></span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">       24574 :         if (!system-&gt;staff(staffIdx)-&gt;show()) {</span></span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">         953 :             continue;</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       40316 :     for (staff_idx_t staffIdx = 0; staffIdx &lt; ctx.dom().nstaves(); ++staffIdx) {</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">       24646 :         if (!system-&gt;staff(staffIdx)-&gt;show()) {</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">        1001 :             continue;</span></span>
 <span id="L118"><span class="lineNum">     118</span>              :         }</span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">       23621 :         BarLine* barline = toBarLine(barlineSement-&gt;element(staff2track(staffIdx)));</span></span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">       23621 :         if (!barline || !barline-&gt;spanStaff()) {</span></span>
-<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">       15313 :             continue;</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">       23645 :         BarLine* barline = toBarLine(barlineSement-&gt;element(staff2track(staffIdx)));</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">       23645 :         if (!barline || !barline-&gt;spanStaff()) {</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">       15331 :             continue;</span></span>
 <span id="L122"><span class="lineNum">     122</span>              :         }</span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">        8308 :         maskBarlineForText(barline, allSystemText);</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">        8314 :         maskBarlineForText(barline, allSystemText);</span></span>
 <span id="L124"><span class="lineNum">     124</span>              :     }</span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">       15650 : }</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">       15670 : }</span></span>
 <span id="L126"><span class="lineNum">     126</span>              : </span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">        8308 : void MaskLayout::maskBarlineForText(BarLine* barline, const std::vector&lt;TextBase*&gt;&amp; allSystemText)</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">        8314 : void MaskLayout::maskBarlineForText(BarLine* barline, const std::vector&lt;TextBase*&gt;&amp; allSystemText)</span></span>
 <span id="L128"><span class="lineNum">     128</span>              : {</span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">        8318 :     TRACEFUNC;</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">        8324 :     TRACEFUNC;</span></span>
 <span id="L130"><span class="lineNum">     130</span>              : </span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">        8308 :     PointF barlinePos = barline-&gt;pagePos();</span></span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">        8308 :     Shape barlineShape = barline-&gt;shape().translated(barlinePos);</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">        8314 :     PointF barlinePos = barline-&gt;pagePos();</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">        8314 :     Shape barlineShape = barline-&gt;shape().translated(barlinePos);</span></span>
 <span id="L133"><span class="lineNum">     133</span>              : </span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">        8308 :     Shape mask;</span></span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">        8308 :     const double spatium = barline-&gt;spatium();</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">        8314 :     Shape mask;</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">        8314 :     const double spatium = barline-&gt;spatium();</span></span>
 <span id="L136"><span class="lineNum">     136</span>              : </span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">       26001 :     for (TextBase* text : allSystemText) {</span></span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">       17693 :         const double fontSizeScaleFactor = text-&gt;size() / 10.0;</span></span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">       17693 :         const double collisionPadding = 0.2 * spatium * fontSizeScaleFactor;</span></span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">       17693 :         const bool hasFrame = text-&gt;frameType() != FrameType::NO_FRAME;</span></span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">       17693 :         const bool useHighResShape = !text-&gt;isDynamic() &amp;&amp; !text-&gt;hasFrame();</span></span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">       17693 :         const double maskPadding = hasFrame ? 0.0 : std::clamp(0.5 * spatium * fontSizeScaleFactor, 0.1 * spatium, spatium);</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">       26011 :     for (TextBase* text : allSystemText) {</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">       17697 :         const double fontSizeScaleFactor = text-&gt;size() / 10.0;</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">       17697 :         const double collisionPadding = 0.2 * spatium * fontSizeScaleFactor;</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">       17697 :         const bool hasFrame = text-&gt;frameType() != FrameType::NO_FRAME;</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">       17697 :         const bool useHighResShape = !text-&gt;isDynamic() &amp;&amp; !text-&gt;hasFrame();</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">       17697 :         const double maskPadding = hasFrame ? 0.0 : std::clamp(0.5 * spatium * fontSizeScaleFactor, 0.1 * spatium, spatium);</span></span>
 <span id="L143"><span class="lineNum">     143</span>              : </span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">       17693 :         PointF textPos = text-&gt;pagePos();</span></span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">       17693 :         if (!barlineShape.intersects(text-&gt;ldata()-&gt;bbox().translated(textPos).padded(collisionPadding))) {</span></span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">       17690 :             continue;</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">       17697 :         PointF textPos = text-&gt;pagePos();</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">       17697 :         if (!barlineShape.intersects(text-&gt;ldata()-&gt;bbox().translated(textPos).padded(collisionPadding))) {</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">       17694 :             continue;</span></span>
 <span id="L147"><span class="lineNum">     147</span>              :         }</span>
 <span id="L148"><span class="lineNum">     148</span>              : </span>
 <span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">           5 :         Shape textShape = (useHighResShape ? text-&gt;ldata()-&gt;highResShape() : text-&gt;ldata()-&gt;shape()).translated(textPos);</span></span>
@@ -217,9 +217,9 @@
 <span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">           3 :         mask.add(filteredTextShape.translate(-barlinePos));</span></span>
 <span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">           7 :     }</span></span>
 <span id="L161"><span class="lineNum">     161</span>              : </span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        8308 :     if (mask.empty()) {</span></span>
-<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">        8305 :         barline-&gt;mutldata()-&gt;setMask(mask);</span></span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">        8305 :         return;</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        8314 :     if (mask.empty()) {</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">        8311 :         barline-&gt;mutldata()-&gt;setMask(mask);</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">        8311 :         return;</span></span>
 <span id="L165"><span class="lineNum">     165</span>              :     }</span>
 <span id="L166"><span class="lineNum">     166</span>              : </span>
 <span id="L167"><span class="lineNum">     167</span>              :     // Ensure that we don't leave tiny barline fragments. If two masking</span>
@@ -229,7 +229,7 @@
 <span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">           3 :     cleanupMask(barlineShape, mask, minFragmentLengh);</span></span>
 <span id="L172"><span class="lineNum">     172</span>              : </span>
 <span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">           3 :     barline-&gt;mutldata()-&gt;setMask(mask);</span></span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">       24918 : }</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">       24936 : }</span></span>
 <span id="L175"><span class="lineNum">     175</span>              : </span>
 <span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">           3 : void MaskLayout::cleanupMask(const Shape&amp; itemShape, Shape&amp; mask, double minFragmentLength)</span></span>
 <span id="L177"><span class="lineNum">     177</span>              : {</span>
@@ -269,111 +269,111 @@
 <span id="L211"><span class="lineNum">     211</span>              :     }</span>
 <span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC tlaBgGNC">           3 : }</span></span>
 <span id="L213"><span class="lineNum">     213</span>              : </span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">       10187 : std::vector&lt;TextBase*&gt; MaskLayout::collectAllSystemText(const System* system)</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">       10195 : std::vector&lt;TextBase*&gt; MaskLayout::collectAllSystemText(const System* system)</span></span>
 <span id="L215"><span class="lineNum">     215</span>              : {</span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       10202 :     TRACEFUNC;</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       10210 :     TRACEFUNC;</span></span>
 <span id="L217"><span class="lineNum">     217</span>              : </span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">       10187 :     std::vector&lt;TextBase*&gt; allText;</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">       10195 :     std::vector&lt;TextBase*&gt; allText;</span></span>
 <span id="L219"><span class="lineNum">     219</span>              : </span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       46182 :     for (const MeasureBase* mb : system-&gt;measures()) {</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">       35995 :         if (!mb-&gt;isMeasure()) {</span></span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        2512 :             continue;</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       46217 :     for (const MeasureBase* mb : system-&gt;measures()) {</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">       36022 :         if (!mb-&gt;isMeasure()) {</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        2519 :             continue;</span></span>
 <span id="L223"><span class="lineNum">     223</span>              :         }</span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">       33483 :         const Measure* measure = toMeasure(mb);</span></span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">       82140 :         for (staff_idx_t i = 0; i &lt; measure-&gt;mstaves().size(); ++i) {</span></span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">       48657 :             if (measure-&gt;showMeasureNumberOnStaff(i)) {</span></span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        4258 :                 if (MeasureNumber* measureNumber = measure-&gt;measureNumber(i)) {</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">        4258 :                     allText.push_back(measureNumber);</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">       33503 :         const Measure* measure = toMeasure(mb);</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">       82235 :         for (staff_idx_t i = 0; i &lt; measure-&gt;mstaves().size(); ++i) {</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">       48732 :             if (measure-&gt;showMeasureNumberOnStaff(i)) {</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">        4259 :                 if (MeasureNumber* measureNumber = measure-&gt;measureNumber(i)) {</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">        4259 :                     allText.push_back(measureNumber);</span></span>
 <span id="L229"><span class="lineNum">     229</span>              :                 }</span>
 <span id="L230"><span class="lineNum">     230</span>              :             }</span>
 <span id="L231"><span class="lineNum">     231</span>              :         }</span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">       36117 :         for (EngravingItem* item : measure-&gt;el()) {</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        2634 :             const SysStaff* staff = system ? system-&gt;staff(item-&gt;staffIdx()) : nullptr;</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        2634 :             const bool staffVisible = staff &amp;&amp; staff-&gt;show();</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        2634 :             if ((item-&gt;isMarker() || item-&gt;isJump()) &amp;&amp; item-&gt;visible() &amp;&amp; staffVisible) {</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">       36139 :         for (EngravingItem* item : measure-&gt;el()) {</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        2636 :             const SysStaff* staff = system ? system-&gt;staff(item-&gt;staffIdx()) : nullptr;</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        2636 :             const bool staffVisible = staff &amp;&amp; staff-&gt;show();</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        2636 :             if ((item-&gt;isMarker() || item-&gt;isJump()) &amp;&amp; item-&gt;visible() &amp;&amp; staffVisible) {</span></span>
 <span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">         533 :                 allText.push_back(toTextBase(item));</span></span>
 <span id="L237"><span class="lineNum">     237</span>              :             }</span>
 <span id="L238"><span class="lineNum">     238</span>              :         }</span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">      158236 :         for (const Segment&amp; s : measure-&gt;segments()) {</span></span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">      124753 :             if (!s.isType(SegmentType::Duration) || !s.enabled()) {</span></span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">       57641 :                 continue;</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">      158352 :         for (const Segment&amp; s : measure-&gt;segments()) {</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">      124849 :             if (!s.isType(SegmentType::Duration) || !s.enabled()) {</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">       57680 :                 continue;</span></span>
 <span id="L242"><span class="lineNum">     242</span>              :             }</span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       74352 :             for (EngravingItem* annotation : s.annotations()) {</span></span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        7240 :                 const SysStaff* staff = system ? system-&gt;staff(annotation-&gt;staffIdx()) : nullptr;</span></span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">        7240 :                 const bool staffVisible = staff &amp;&amp; staff-&gt;show();</span></span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        7240 :                 if (annotation-&gt;isTextBase() &amp;&amp; annotation-&gt;visible() &amp;&amp; staffVisible) {</span></span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        6442 :                     allText.push_back(toTextBase(annotation));</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       74429 :             for (EngravingItem* annotation : s.annotations()) {</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        7260 :                 const SysStaff* staff = system ? system-&gt;staff(annotation-&gt;staffIdx()) : nullptr;</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">        7260 :                 const bool staffVisible = staff &amp;&amp; staff-&gt;show();</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        7260 :                 if (annotation-&gt;isTextBase() &amp;&amp; annotation-&gt;visible() &amp;&amp; staffVisible) {</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        6458 :                     allText.push_back(toTextBase(annotation));</span></span>
 <span id="L248"><span class="lineNum">     248</span>              :                 }</span>
 <span id="L249"><span class="lineNum">     249</span>              :             }</span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       67112 :             if (!s.isChordRestType()) {</span></span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">         344 :                 continue;</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       67169 :             if (!s.isChordRestType()) {</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">         346 :                 continue;</span></span>
 <span id="L252"><span class="lineNum">     252</span>              :             }</span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">      440092 :             for (EngravingItem* chordRest : s.elist()) {</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">      373324 :                 if (!chordRest || !system-&gt;staff(chordRest-&gt;staffIdx())-&gt;show()) {</span></span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">      281564 :                     continue;</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">      440931 :             for (EngravingItem* chordRest : s.elist()) {</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">      374108 :                 if (!chordRest || !system-&gt;staff(chordRest-&gt;staffIdx())-&gt;show()) {</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">      282286 :                     continue;</span></span>
 <span id="L256"><span class="lineNum">     256</span>              :                 }</span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">       93935 :                 for (Lyrics* lyr : toChordRest(chordRest)-&gt;lyrics()) {</span></span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">        2175 :                     if (lyr-&gt;visible()) {</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">        2160 :                         allText.push_back(lyr);</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">       94002 :                 for (Lyrics* lyr : toChordRest(chordRest)-&gt;lyrics()) {</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">        2180 :                     if (lyr-&gt;visible()) {</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">        2165 :                         allText.push_back(lyr);</span></span>
 <span id="L260"><span class="lineNum">     260</span>              :                     }</span>
 <span id="L261"><span class="lineNum">     261</span>              :                 }</span>
 <span id="L262"><span class="lineNum">     262</span>              :             }</span>
 <span id="L263"><span class="lineNum">     263</span>              :         }</span>
 <span id="L264"><span class="lineNum">     264</span>              :     }</span>
 <span id="L265"><span class="lineNum">     265</span>              : </span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">       15866 :     for (SpannerSegment* spannerSegment : system-&gt;spannerSegments()) {</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">        1187 :         if (!spannerSegment-&gt;isTextLineBaseSegment() || !system-&gt;staff(spannerSegment-&gt;staffIdx())-&gt;show()</span></span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">        6866 :             || !spannerSegment-&gt;getProperty(Pid::VISIBLE).toBool()) {</span></span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">        4498 :             continue;</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">       15886 :     for (SpannerSegment* spannerSegment : system-&gt;spannerSegments()) {</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">        1191 :         if (!spannerSegment-&gt;isTextLineBaseSegment() || !system-&gt;staff(spannerSegment-&gt;staffIdx())-&gt;show()</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">        6882 :             || !spannerSegment-&gt;getProperty(Pid::VISIBLE).toBool()) {</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">        4506 :             continue;</span></span>
 <span id="L270"><span class="lineNum">     270</span>              :         }</span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">        1181 :         TextLineBaseSegment* textLineBaseSegment = static_cast&lt;TextLineBaseSegment*&gt;(spannerSegment);</span></span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">        1181 :         Text* beginText = textLineBaseSegment-&gt;text();</span></span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        1181 :         Text* endText = textLineBaseSegment-&gt;endText();</span></span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">        1181 :         if (beginText &amp;&amp; !beginText-&gt;empty()) {</span></span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">         683 :             allText.push_back(beginText);</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">        1185 :         TextLineBaseSegment* textLineBaseSegment = static_cast&lt;TextLineBaseSegment*&gt;(spannerSegment);</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">        1185 :         Text* beginText = textLineBaseSegment-&gt;text();</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        1185 :         Text* endText = textLineBaseSegment-&gt;endText();</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">        1185 :         if (beginText &amp;&amp; !beginText-&gt;empty()) {</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">         686 :             allText.push_back(beginText);</span></span>
 <span id="L276"><span class="lineNum">     276</span>              :         }</span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">        1181 :         if (endText &amp;&amp; !endText-&gt;empty()) {</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">        1185 :         if (endText &amp;&amp; !endText-&gt;empty()) {</span></span>
 <span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">          30 :             allText.push_back(endText);</span></span>
 <span id="L279"><span class="lineNum">     279</span>              :         }</span>
 <span id="L280"><span class="lineNum">     280</span>              :     }</span>
 <span id="L281"><span class="lineNum">     281</span>              : </span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       10187 :     return allText;</span></span>
-<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">       10187 : }</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       10195 :     return allText;</span></span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">       10195 : }</span></span>
 <span id="L284"><span class="lineNum">     284</span>              : </span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">        1020 : void MaskLayout::maskTABStringLinesForFrets(StaffLines* staffLines, const LayoutContext&amp; ctx)</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">        1017 : void MaskLayout::maskTABStringLinesForFrets(StaffLines* staffLines, const LayoutContext&amp; ctx)</span></span>
 <span id="L286"><span class="lineNum">     286</span>              : {</span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">        1020 :     staff_idx_t staffIdx = staffLines-&gt;staffIdx();</span></span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">        1020 :     bool linesThrough = ctx.dom().staff(staffIdx)-&gt;staffType(Fraction())-&gt;linesThrough();</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">        1017 :     staff_idx_t staffIdx = staffLines-&gt;staffIdx();</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">        1017 :     bool linesThrough = ctx.dom().staff(staffIdx)-&gt;staffType(Fraction())-&gt;linesThrough();</span></span>
 <span id="L289"><span class="lineNum">     289</span>              : </span>
-<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">        1020 :     PointF staffLinesPos = staffLines-&gt;pagePos();</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">        1017 :     PointF staffLinesPos = staffLines-&gt;pagePos();</span></span>
 <span id="L291"><span class="lineNum">     291</span>              : </span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">        1020 :     double padding = ctx.conf().styleAbsolute(Sid::tabFretPadding);</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">        1017 :     double padding = ctx.conf().styleAbsolute(Sid::tabFretPadding);</span></span>
 <span id="L293"><span class="lineNum">     293</span>              : </span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">        1020 :     track_idx_t startTrack = staff2track(staffIdx);</span></span>
-<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">        1020 :     track_idx_t endTrack = startTrack + VOICES;</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">        1017 :     track_idx_t startTrack = staff2track(staffIdx);</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">        1017 :     track_idx_t endTrack = startTrack + VOICES;</span></span>
 <span id="L296"><span class="lineNum">     296</span>              : </span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">        1020 :     Shape mask;</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">        1017 :     Shape mask;</span></span>
 <span id="L298"><span class="lineNum">     298</span>              : </span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">         823 :     auto maskFret = [&amp;mask, linesThrough, padding, staffLinesPos] (Chord* chord) {</span></span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">        1847 :         for (Note* note : chord-&gt;notes()) {</span></span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">        1024 :             if (!note-&gt;visible()) {</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">         820 :     auto maskFret = [&amp;mask, linesThrough, padding, staffLinesPos] (Chord* chord) {</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">        1832 :         for (Note* note : chord-&gt;notes()) {</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">        1012 :             if (!note-&gt;visible()) {</span></span>
 <span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">          22 :                 continue;</span></span>
 <span id="L303"><span class="lineNum">     303</span>              :             }</span>
-<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">        1002 :             if (!note-&gt;shouldHideFret() &amp;&amp; (!linesThrough || note-&gt;fretConflict())) {</span></span>
-<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">         988 :                 Shape noteShape = note-&gt;ldata()-&gt;bbox();</span></span>
-<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">         988 :                 noteShape.translate(note-&gt;pagePos());</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">         990 :             if (!note-&gt;shouldHideFret() &amp;&amp; (!linesThrough || note-&gt;fretConflict())) {</span></span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">         976 :                 Shape noteShape = note-&gt;ldata()-&gt;bbox();</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">         976 :                 noteShape.translate(note-&gt;pagePos());</span></span>
 <span id="L307"><span class="lineNum">     307</span>              : </span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">         988 :                 noteShape.pad(padding);</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">         988 :                 mask.add(noteShape.translated(-staffLinesPos));</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">         988 :             }</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">         976 :                 noteShape.pad(padding);</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">         976 :                 mask.add(noteShape.translated(-staffLinesPos));</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">         976 :             }</span></span>
 <span id="L311"><span class="lineNum">     311</span>              :         }</span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">         823 :     };</span></span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">         820 :     };</span></span>
 <span id="L313"><span class="lineNum">     313</span>              : </span>
-<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">         823 :     auto maskParens = [&amp;mask, linesThrough, padding, staffLinesPos] (Chord* chord) {</span></span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">         823 :         if (linesThrough) {</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">         820 :     auto maskParens = [&amp;mask, linesThrough, padding, staffLinesPos] (Chord* chord) {</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">         820 :         if (linesThrough) {</span></span>
 <span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">           2 :             return;</span></span>
 <span id="L317"><span class="lineNum">     317</span>              :         }</span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">         834 :         for (const NoteParenthesisInfo* i : chord-&gt;noteParentheses()) {</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">         831 :         for (const NoteParenthesisInfo* i : chord-&gt;noteParentheses()) {</span></span>
 <span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">          13 :             const Parenthesis* leftParen = i-&gt;leftParen();</span></span>
 <span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">          13 :             const Parenthesis* rightParen = i-&gt;rightParen();</span></span>
 <span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">          13 :             bool allHidden = false;</span></span>
@@ -405,26 +405,26 @@
 <span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">          10 :                 mask.add(rightParenShape.translated(-staffLinesPos));</span></span>
 <span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">          10 :             }</span></span>
 <span id="L349"><span class="lineNum">     349</span>              :         }</span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">        1020 :     };</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">        1017 :     };</span></span>
 <span id="L351"><span class="lineNum">     351</span>              : </span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">        1020 :     const Measure* measure = staffLines-&gt;measure();</span></span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">        2639 :     for (Segment* seg = measure-&gt;first(SegmentType::ChordRest); seg; seg = seg-&gt;next(SegmentType::ChordRest)) {</span></span>
-<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">        8095 :         for (track_idx_t track = startTrack; track &lt; endTrack; ++track) {</span></span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">        6476 :             EngravingItem* el = seg-&gt;element(track);</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">        6476 :             if (!el || !el-&gt;isChord()) {</span></span>
-<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">        5685 :                 continue;</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">        1017 :     const Measure* measure = staffLines-&gt;measure();</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">        2630 :     for (Segment* seg = measure-&gt;first(SegmentType::ChordRest); seg; seg = seg-&gt;next(SegmentType::ChordRest)) {</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">        8065 :         for (track_idx_t track = startTrack; track &lt; endTrack; ++track) {</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">        6452 :             EngravingItem* el = seg-&gt;element(track);</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">        6452 :             if (!el || !el-&gt;isChord()) {</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">        5664 :                 continue;</span></span>
 <span id="L358"><span class="lineNum">     358</span>              :             }</span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">         791 :             maskFret(toChord(el));</span></span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">         791 :             maskParens(toChord(el));</span></span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">         823 :             for (Chord* grace : toChord(el)-&gt;graceNotes()) {</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">         788 :             maskFret(toChord(el));</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">         788 :             maskParens(toChord(el));</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">         820 :             for (Chord* grace : toChord(el)-&gt;graceNotes()) {</span></span>
 <span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">          32 :                 maskFret(grace);</span></span>
 <span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">          32 :                 maskParens(grace);</span></span>
 <span id="L364"><span class="lineNum">     364</span>              :             }</span>
 <span id="L365"><span class="lineNum">     365</span>              :         }</span>
 <span id="L366"><span class="lineNum">     366</span>              :     }</span>
 <span id="L367"><span class="lineNum">     367</span>              : </span>
-<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">        1020 :     staffLines-&gt;mutldata()-&gt;setMask(mask);</span></span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">        1020 : }</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">        1017 :     staffLines-&gt;mutldata()-&gt;setMask(mask);</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">        1017 : }</span></span>
 <span id="L370"><span class="lineNum">     370</span>              : </span>
 <span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">        1469 : void MaskLayout::computeSlurTieMasks(SlurTieSegment* slurTieSegment)</span></span>
 <span id="L372"><span class="lineNum">     372</span>              : {</span>

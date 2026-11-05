@@ -31,13 +31,13 @@
             <td class="headerValue">filtered_coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">35.3&nbsp;%</td>
+            <td class="headerCovTableEntryLo">47.1&nbsp;%</td>
             <td class="headerCovTableEntry">17</td>
-            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">8</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -101,22 +101,22 @@
 <span id="L43"><span class="lineNum">      43</span>              :     FSMoveErrors</span>
 <span id="L44"><span class="lineNum">      44</span>              : };</span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">       20232 : inline Ret make_ret(Err e)</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">       20361 : inline Ret make_ret(Err e)</span></span>
 <span id="L47"><span class="lineNum">      47</span>              : {</span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">       20232 :     int retCode = static_cast&lt;int&gt;(e);</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">       20361 :     int retCode = static_cast&lt;int&gt;(e);</span></span>
 <span id="L49"><span class="lineNum">      49</span>              : </span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       20232 :     switch (e) {</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       20361 :     switch (e) {</span></span>
 <span id="L51"><span class="lineNum">      51</span> <span class="tlaUNC tlaBgUNC">           0 :     case Err::Undefined: return Ret(retCode);</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC tlaBgGNC">       17646 :     case Err::NoError: return Ret(retCode);</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC tlaBgGNC">       17753 :     case Err::NoError: return Ret(retCode);</span></span>
 <span id="L53"><span class="lineNum">      53</span> <span class="tlaUNC tlaBgUNC">           0 :     case Err::UnknownError: return Ret(retCode);</span></span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC tlaBgGNC">        2582 :     case Err::FSNotExist: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;The file does not exist&quot;));</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC tlaBgGNC">        2602 :     case Err::FSNotExist: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;The file does not exist&quot;));</span></span>
 <span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC tlaBgUNC">           0 :     case Err::FSAlreadyExists: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;The file already exists&quot;));</span></span>
 <span id="L56"><span class="lineNum">      56</span> <span class="tlaUNC">           0 :     case Err::FSRemoveError: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;The file could not be removed&quot;));</span></span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaUNC">           0 :     case Err::FSDirNotEmptyError: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;The directory is not empty&quot;));</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC">           0 :     case Err::FSClearError: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;The directory could not be cleared&quot;));</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC tlaBgGNC">           1 :     case Err::FSDirNotEmptyError: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;The directory is not empty&quot;));</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC tlaBgUNC">           0 :     case Err::FSClearError: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;The directory could not be cleared&quot;));</span></span>
 <span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC tlaBgGNC">           4 :     case Err::FSReadError: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;An error occurred when reading from the file&quot;));</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC tlaBgUNC">           0 :     case Err::FSWriteError: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;An error occurred when writing to the file&quot;));</span></span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaUNC">           0 :     case Err::FSMakingError: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;An error occurred when making a path&quot;));</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           1 :     case Err::FSWriteError: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;An error occurred when writing to the file&quot;));</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaUNC tlaBgUNC">           0 :     case Err::FSMakingError: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;An error occurred when making a path&quot;));</span></span>
 <span id="L62"><span class="lineNum">      62</span> <span class="tlaUNC">           0 :     case Err::FSCopyError: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;An error occurred when copying the file&quot;));</span></span>
 <span id="L63"><span class="lineNum">      63</span> <span class="tlaUNC">           0 :     case Err::FSMoveErrors: return Ret(retCode, muse::trc(&quot;system&quot;, &quot;An error occurred when moving the file&quot;));</span></span>
 <span id="L64"><span class="lineNum">      64</span>              :     }</span>

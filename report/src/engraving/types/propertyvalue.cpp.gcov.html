@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -85,59 +85,59 @@
 <span id="L27"><span class="lineNum">      27</span>              : </span>
 <span id="L28"><span class="lineNum">      28</span>              : using namespace mu::engraving;</span>
 <span id="L29"><span class="lineNum">      29</span>              : </span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC tlaBgGNC">    27110699 : bool PropertyValue::isValid() const</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC tlaBgGNC">    27134485 : bool PropertyValue::isValid() const</span></span>
 <span id="L31"><span class="lineNum">      31</span>              : {</span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">    27110699 :     return m_type != P_TYPE::UNDEFINED;</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">    27134485 :     return m_type != P_TYPE::UNDEFINED;</span></span>
 <span id="L33"><span class="lineNum">      33</span>              : }</span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">    20737126 : P_TYPE PropertyValue::type() const</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">    20759709 : P_TYPE PropertyValue::type() const</span></span>
 <span id="L36"><span class="lineNum">      36</span>              : {</span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">    20737126 :     return m_type;</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">    20759709 :     return m_type;</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : }</span>
 <span id="L39"><span class="lineNum">      39</span>              : </span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">     3843909 : bool PropertyValue::operator ==(const PropertyValue&amp; v) const</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">     3843912 : bool PropertyValue::operator ==(const PropertyValue&amp; v) const</span></span>
 <span id="L41"><span class="lineNum">      41</span>              : {</span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">     3843909 :     if (v.m_type == P_TYPE::UNDEFINED || m_type == P_TYPE::UNDEFINED) {</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">     3843912 :     if (v.m_type == P_TYPE::UNDEFINED || m_type == P_TYPE::UNDEFINED) {</span></span>
 <span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">       62405 :         return v.m_type == m_type;</span></span>
 <span id="L44"><span class="lineNum">      44</span>              :     }</span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
 <span id="L46"><span class="lineNum">      46</span>              :     //! HACK Temporary hack for bool comparisons (maybe one type is bool and another type is int)</span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">     3781504 :     if (v.m_type == P_TYPE::BOOL || m_type == P_TYPE::BOOL) {</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">      987195 :         return v.value&lt;bool&gt;() == value&lt;bool&gt;();</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">     3781507 :     if (v.m_type == P_TYPE::BOOL || m_type == P_TYPE::BOOL) {</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">      987196 :         return v.value&lt;bool&gt;() == value&lt;bool&gt;();</span></span>
 <span id="L49"><span class="lineNum">      49</span>              :     }</span>
 <span id="L50"><span class="lineNum">      50</span>              : </span>
 <span id="L51"><span class="lineNum">      51</span>              :     //! HACK Temporary hack for int comparisons (maybe one type is int and another type is enum)</span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">     2794309 :     if (v.m_type == P_TYPE::INT || m_type == P_TYPE::INT) {</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">     2794311 :     if (v.m_type == P_TYPE::INT || m_type == P_TYPE::INT) {</span></span>
 <span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">      537634 :         return v.value&lt;int&gt;() == value&lt;int&gt;();</span></span>
 <span id="L54"><span class="lineNum">      54</span>              :     }</span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
 <span id="L56"><span class="lineNum">      56</span>              :     //! HACK Temporary hack for Spatium comparisons (maybe one type is Spatium and another type is real)</span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">     2256675 :     if (v.m_type == P_TYPE::SPATIUM || m_type == P_TYPE::SPATIUM) {</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">     2256677 :     if (v.m_type == P_TYPE::SPATIUM || m_type == P_TYPE::SPATIUM) {</span></span>
 <span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">      587573 :         return muse::RealIsEqual(v.value&lt;double&gt;(), value&lt;double&gt;());</span></span>
 <span id="L59"><span class="lineNum">      59</span>              :     }</span>
 <span id="L60"><span class="lineNum">      60</span>              : </span>
 <span id="L61"><span class="lineNum">      61</span>              :     //! HACK Temporary hack for Fraction comparisons</span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">     1669102 :     if (v.m_type == P_TYPE::FRACTION) {</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">     1669104 :     if (v.m_type == P_TYPE::FRACTION) {</span></span>
 <span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">        1123 :         assert(m_type == P_TYPE::FRACTION);</span></span>
 <span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        1123 :         return v.value&lt;Fraction&gt;().identical(value&lt;Fraction&gt;());</span></span>
 <span id="L65"><span class="lineNum">      65</span>              :     }</span>
 <span id="L66"><span class="lineNum">      66</span>              : </span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">     1667979 :     if (v.m_type == P_TYPE::REAL) {</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">     1667981 :     if (v.m_type == P_TYPE::REAL) {</span></span>
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">      402503 :         assert(m_type == P_TYPE::REAL);</span></span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">      402503 :         return muse::RealIsEqual(v.value&lt;double&gt;(), value&lt;double&gt;());</span></span>
 <span id="L70"><span class="lineNum">      70</span>              :     }</span>
 <span id="L71"><span class="lineNum">      71</span>              : </span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">     1265476 :     assert(m_data);</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">     1265476 :     if (!m_data) {</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">     1265478 :     assert(m_data);</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">     1265478 :     if (!m_data) {</span></span>
 <span id="L74"><span class="lineNum">      74</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
 <span id="L75"><span class="lineNum">      75</span>              :     }</span>
 <span id="L76"><span class="lineNum">      76</span>              : </span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC tlaBgGNC">     1265476 :     assert(v.m_data);</span></span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">     1265476 :     if (!v.m_data) {</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC tlaBgGNC">     1265478 :     assert(v.m_data);</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">     1265478 :     if (!v.m_data) {</span></span>
 <span id="L79"><span class="lineNum">      79</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
 <span id="L80"><span class="lineNum">      80</span>              :     }</span>
 <span id="L81"><span class="lineNum">      81</span>              : </span>
-<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC tlaBgGNC">     1265476 :     return v.m_type == m_type &amp;&amp; v.m_data-&gt;equal(m_data.get());</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC tlaBgGNC">     1265478 :     return v.m_type == m_type &amp;&amp; v.m_data-&gt;equal(m_data.get());</span></span>
 <span id="L83"><span class="lineNum">      83</span>              : }</span>
 <span id="L84"><span class="lineNum">      84</span>              : </span>
 <span id="L85"><span class="lineNum">      85</span>              : #ifndef NO_QT_SUPPORT</span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -362,35 +362,35 @@
 <span id="L304"><span class="lineNum">     304</span>              : //    with invisible rests</span>
 <span id="L305"><span class="lineNum">     305</span>              : //---------------------------------------------------------</span>
 <span id="L306"><span class="lineNum">     306</span>              : </span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">       17271 : void Measure::checkMeasure(staff_idx_t staffIdx, bool useGapRests)</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">       17295 : void Measure::checkMeasure(staff_idx_t staffIdx, bool useGapRests)</span></span>
 <span id="L308"><span class="lineNum">     308</span>              : {</span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">       17271 :     if (isMMRest()) {</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">       17295 :     if (isMMRest()) {</span></span>
 <span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">          62 :         return;</span></span>
 <span id="L311"><span class="lineNum">     311</span>              :     }</span>
 <span id="L312"><span class="lineNum">     312</span>              : </span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">       17209 :     track_idx_t strack = staffIdx * VOICES;</span></span>
-<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">       17209 :     track_idx_t dtrack = strack + (hasVoices(staffIdx) ? VOICES : 1);</span></span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">       17209 :     Fraction stretch = score()-&gt;staff(staffIdx)-&gt;timeStretch(tick());</span></span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">       17209 :     Fraction f       = ticks() * stretch;</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">       17233 :     track_idx_t strack = staffIdx * VOICES;</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">       17233 :     track_idx_t dtrack = strack + (hasVoices(staffIdx) ? VOICES : 1);</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">       17233 :     Fraction stretch = score()-&gt;staff(staffIdx)-&gt;timeStretch(tick());</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">       17233 :     Fraction f       = ticks() * stretch;</span></span>
 <span id="L317"><span class="lineNum">     317</span>              : </span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">       35609 :     for (track_idx_t track = strack; track &lt; dtrack; track++) {</span></span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">       18400 :         Fraction expectedPos = Fraction(0, 1);</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">       18400 :         Fraction currentPos  = Fraction(0, 1);</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">       35657 :     for (track_idx_t track = strack; track &lt; dtrack; track++) {</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">       18424 :         Fraction expectedPos = Fraction(0, 1);</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">       18424 :         Fraction currentPos  = Fraction(0, 1);</span></span>
 <span id="L321"><span class="lineNum">     321</span>              : </span>
-<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">       57007 :         for (Segment* seg = first(SegmentType::ChordRest); seg; seg = seg-&gt;next(SegmentType::ChordRest)) {</span></span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">       38609 :             EngravingItem* e = seg-&gt;element(track);</span></span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">       38609 :             if (!e) {</span></span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">        7345 :                 continue;</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">       57096 :         for (Segment* seg = first(SegmentType::ChordRest); seg; seg = seg-&gt;next(SegmentType::ChordRest)) {</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">       38674 :             EngravingItem* e = seg-&gt;element(track);</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">       38674 :             if (!e) {</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">        7355 :                 continue;</span></span>
 <span id="L326"><span class="lineNum">     326</span>              :             }</span>
 <span id="L327"><span class="lineNum">     327</span>              : </span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">       31264 :             ChordRest* cr = toChordRest(e);</span></span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">       31264 :             currentPos    = seg-&gt;rtick() * stretch;</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">       31319 :             ChordRest* cr = toChordRest(e);</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">       31319 :             currentPos    = seg-&gt;rtick() * stretch;</span></span>
 <span id="L330"><span class="lineNum">     330</span>              : </span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">       31264 :             if (currentPos &lt; expectedPos) {</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">       31319 :             if (currentPos &lt; expectedPos) {</span></span>
 <span id="L332"><span class="lineNum">     332</span>              :                 LOGN(&quot;in measure overrun %6d at %d-%d track %zu&quot;, tick().ticks(),</span>
 <span id="L333"><span class="lineNum">     333</span>              :                      (currentPos / stretch).ticks(), (expectedPos / stretch).ticks(), track);</span>
 <span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">           2 :                 break;</span></span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">       31262 :             } else if (currentPos &gt; expectedPos) {</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">       31317 :             } else if (currentPos &gt; expectedPos) {</span></span>
 <span id="L336"><span class="lineNum">     336</span>              :                 LOGN(&quot;in measure underrun %6d at %d-%d track %zu&quot;, tick().ticks(),</span>
 <span id="L337"><span class="lineNum">     337</span>              :                      (currentPos / stretch).ticks(), (expectedPos / stretch).ticks(), track);</span>
 <span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">          21 :                 fillGap(expectedPos, currentPos - expectedPos, track, stretch, useGapRests);</span></span>
@@ -399,21 +399,21 @@
 <span id="L341"><span class="lineNum">     341</span>              :                 }</span>
 <span id="L342"><span class="lineNum">     342</span>              :             }</span>
 <span id="L343"><span class="lineNum">     343</span>              : </span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC tlaBgGNC">       31262 :             DurationElement* de = cr;</span></span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">       31262 :             Tuplet* tuplet = cr-&gt;topTuplet();</span></span>
-<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">       31262 :             if (tuplet) {</span></span>
-<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">         533 :                 seg = skipTuplet(tuplet);</span></span>
-<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">         533 :                 de  = tuplet;</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC tlaBgGNC">       31317 :             DurationElement* de = cr;</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">       31317 :             Tuplet* tuplet = cr-&gt;topTuplet();</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">       31317 :             if (tuplet) {</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">         536 :                 seg = skipTuplet(tuplet);</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">         536 :                 de  = tuplet;</span></span>
 <span id="L349"><span class="lineNum">     349</span>              :             }</span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">       31262 :             expectedPos = currentPos + de-&gt;ticks();</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">       31317 :             expectedPos = currentPos + de-&gt;ticks();</span></span>
 <span id="L351"><span class="lineNum">     351</span>              :         }</span>
 <span id="L352"><span class="lineNum">     352</span>              : </span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">       18400 :         if (f &gt; expectedPos) {</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">       18424 :         if (f &gt; expectedPos) {</span></span>
 <span id="L354"><span class="lineNum">     354</span>              :             // don't fill empty voices (except for the 1st)</span>
 <span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">        1352 :             if (expectedPos.isNotZero() || track2voice(track) == 0) {</span></span>
 <span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">         585 :                 fillGap(expectedPos, f - expectedPos, track, stretch);</span></span>
 <span id="L357"><span class="lineNum">     357</span>              :             }</span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">       17048 :         } else if (f &lt; expectedPos) {</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">       17072 :         } else if (f &lt; expectedPos) {</span></span>
 <span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">           1 :             LOGD(&quot;measure overrun %6d, %d &gt; %d, track %zu&quot;, tick().ticks(), expectedPos.ticks(), f.ticks(), track);</span></span>
 <span id="L360"><span class="lineNum">     360</span>              :         }</span>
 <span id="L361"><span class="lineNum">     361</span>              :     }</span>

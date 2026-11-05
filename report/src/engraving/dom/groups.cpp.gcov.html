@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -162,43 +162,43 @@
 <span id="L104"><span class="lineNum">     104</span>              : //    based on time signature properties but respecting manual settings</span>
 <span id="L105"><span class="lineNum">     105</span>              : //---------------------------------------------------------</span>
 <span id="L106"><span class="lineNum">     106</span>              : </span>
-<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC tlaBgGNC">      135368 : BeamMode Groups::baseBeamMode(const ChordRest* cr, const ChordRest* prev)</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC tlaBgGNC">      135470 : BeamMode Groups::baseBeamMode(const ChordRest* cr, const ChordRest* prev)</span></span>
 <span id="L108"><span class="lineNum">     108</span>              : {</span>
-<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">      135368 :     if (cr-&gt;isGrace() || cr-&gt;beamMode() != BeamMode::AUTO) {</span></span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">       60882 :         return cr-&gt;beamMode();</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">      135470 :     if (cr-&gt;isGrace() || cr-&gt;beamMode() != BeamMode::AUTO) {</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">       60946 :         return cr-&gt;beamMode();</span></span>
 <span id="L111"><span class="lineNum">     111</span>              :     }</span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">       74486 :     assert(cr-&gt;staff());</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">       74524 :     assert(cr-&gt;staff());</span></span>
 <span id="L113"><span class="lineNum">     113</span>              : </span>
 <span id="L114"><span class="lineNum">     114</span>              :     // we need to figure out the longest note value beat upon which cr falls in the measure</span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       74486 :     Fraction maxTickLen = std::max(cr-&gt;ticks(), prev ? prev-&gt;ticks() : Fraction());</span></span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">       74486 :     Fraction smallestTickLen = Fraction(1, 8); // start with 8th</span></span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">       74486 :     Fraction tickLenLimit = Fraction(1, 32); // only check up to 32nds because that's all thats available</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       74524 :     Fraction maxTickLen = std::max(cr-&gt;ticks(), prev ? prev-&gt;ticks() : Fraction());</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">       74524 :     Fraction smallestTickLen = Fraction(1, 8); // start with 8th</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">       74524 :     Fraction tickLenLimit = Fraction(1, 32); // only check up to 32nds because that's all thats available</span></span>
 <span id="L118"><span class="lineNum">     118</span>              :                                              // in timesig properties</span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">      130983 :     while (smallestTickLen &gt; maxTickLen || cr-&gt;rtick().ticks() % smallestTickLen.ticks() != 0) {</span></span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">       77041 :         smallestTickLen /= 2; // proceed to 16th, 32nd, etc</span></span>
-<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">       77041 :         if (smallestTickLen &lt; tickLenLimit) {</span></span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">       20544 :             smallestTickLen = cr-&gt;ticks();</span></span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">       20544 :             break;</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">      131041 :     while (smallestTickLen &gt; maxTickLen || cr-&gt;rtick().ticks() % smallestTickLen.ticks() != 0) {</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">       77071 :         smallestTickLen /= 2; // proceed to 16th, 32nd, etc</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">       77071 :         if (smallestTickLen &lt; tickLenLimit) {</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">       20554 :             smallestTickLen = cr-&gt;ticks();</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">       20554 :             break;</span></span>
 <span id="L124"><span class="lineNum">     124</span>              :         }</span>
 <span id="L125"><span class="lineNum">     125</span>              :     }</span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">       74486 :     DurationType bigBeatDuration = TDuration(smallestTickLen).type();</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">       74524 :     DurationType bigBeatDuration = TDuration(smallestTickLen).type();</span></span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       74486 :     TDuration crDuration = cr-&gt;durationType();</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">       74486 :     const Groups&amp; g = cr-&gt;staff()-&gt;group(cr-&gt;tick());</span></span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">       74486 :     Fraction stretch = cr-&gt;staff()-&gt;timeStretch(cr-&gt;tick());</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">       74486 :     Fraction tick = cr-&gt;rtick() * stretch + cr-&gt;measure()-&gt;anacrusisOffset();</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       74524 :     TDuration crDuration = cr-&gt;durationType();</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">       74524 :     const Groups&amp; g = cr-&gt;staff()-&gt;group(cr-&gt;tick());</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">       74524 :     Fraction stretch = cr-&gt;staff()-&gt;timeStretch(cr-&gt;tick());</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">       74524 :     Fraction tick = cr-&gt;rtick() * stretch + cr-&gt;measure()-&gt;anacrusisOffset();</span></span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
 <span id="L133"><span class="lineNum">     133</span>              :     // We can choose to break beams based on its place in the measure, or by its duration. These</span>
 <span id="L134"><span class="lineNum">     134</span>              :     // can be consolidated mostly, with bias towards its duration.</span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">       74486 :     BeamMode byType = g.beamMode(tick.ticks(), crDuration.type());</span></span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">       74486 :     BeamMode byPos = g.beamMode(tick.ticks(), bigBeatDuration);</span></span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">       74486 :     BeamMode val = byType == BeamMode::AUTO ? byPos : byType;</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">       74524 :     BeamMode byType = g.beamMode(tick.ticks(), crDuration.type());</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">       74524 :     BeamMode byPos = g.beamMode(tick.ticks(), bigBeatDuration);</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">       74524 :     BeamMode val = byType == BeamMode::AUTO ? byPos : byType;</span></span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
 <span id="L139"><span class="lineNum">     139</span>              :     // context-dependent checks</span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">       74486 :     if (val == BeamMode::AUTO &amp;&amp; tick.isNotZero()) {</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">       74524 :     if (val == BeamMode::AUTO &amp;&amp; tick.isNotZero()) {</span></span>
 <span id="L141"><span class="lineNum">     141</span>              :         // if current or previous cr is in tuplet (but not both in same tuplet):</span>
 <span id="L142"><span class="lineNum">     142</span>              :         // consider it as if this were next shorter duration</span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">       60047 :         if (prev &amp;&amp; (cr-&gt;tuplet() != prev-&gt;tuplet()) &amp;&amp; (crDuration == prev-&gt;durationType())) {</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">       60080 :         if (prev &amp;&amp; (cr-&gt;tuplet() != prev-&gt;tuplet()) &amp;&amp; (crDuration == prev-&gt;durationType())) {</span></span>
 <span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         505 :             if (crDuration &gt;= DurationType::V_EIGHTH) {</span></span>
 <span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">         224 :                 val = g.beamMode(tick.ticks(), DurationType::V_16TH);</span></span>
 <span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">         281 :             } else if (crDuration == DurationType::V_16TH) {</span></span>
@@ -210,12 +210,12 @@
 <span id="L152"><span class="lineNum">     152</span>              :         // if there is a hole between previous and current cr, break beam</span>
 <span id="L153"><span class="lineNum">     153</span>              :         // exclude tuplets from this check; tick calculations can be unreliable</span>
 <span id="L154"><span class="lineNum">     154</span>              :         // and they seem to be handled well anyhow</span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">       60047 :         if (cr-&gt;voice() &amp;&amp; prev &amp;&amp; !prev-&gt;tuplet() &amp;&amp; prev-&gt;endTick() &lt; cr-&gt;tick()) {</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">       60080 :         if (cr-&gt;voice() &amp;&amp; prev &amp;&amp; !prev-&gt;tuplet() &amp;&amp; prev-&gt;endTick() &lt; cr-&gt;tick()) {</span></span>
 <span id="L156"><span class="lineNum">     156</span> <span class="tlaUNC tlaBgUNC">           0 :             val = BeamMode::BEGIN;</span></span>
 <span id="L157"><span class="lineNum">     157</span>              :         }</span>
 <span id="L158"><span class="lineNum">     158</span>              :     }</span>
 <span id="L159"><span class="lineNum">     159</span>              : </span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC tlaBgGNC">       74486 :     return val;</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC tlaBgGNC">       74524 :     return val;</span></span>
 <span id="L161"><span class="lineNum">     161</span>              : }</span>
 <span id="L162"><span class="lineNum">     162</span>              : </span>
 <span id="L163"><span class="lineNum">     163</span>              : //---------------------------------------------------------</span>
@@ -254,66 +254,66 @@
 <span id="L196"><span class="lineNum">     196</span> <span class="tlaUNC">           0 :     return actualBeamMode(cr, prev, &amp;beatSubdivision);</span></span>
 <span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L198"><span class="lineNum">     198</span>              : </span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC tlaBgGNC">       85759 : BeamMode Groups::actualBeamMode(const ChordRest* cr, const ChordRest* prev,</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC tlaBgGNC">       85837 : BeamMode Groups::actualBeamMode(const ChordRest* cr, const ChordRest* prev,</span></span>
 <span id="L200"><span class="lineNum">     200</span>              :                                 const std::unordered_map&lt;int, TDuration&gt;* beatSubdivision)</span>
 <span id="L201"><span class="lineNum">     201</span>              : {</span>
 <span id="L202"><span class="lineNum">     202</span>              :     // do not beam rests set to BeamMode::AUTO or with only other rests</span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">       85759 :     if (cr-&gt;isRest() &amp;&amp; cr-&gt;beamMode() == BeamMode::AUTO) {</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">       85837 :     if (cr-&gt;isRest() &amp;&amp; cr-&gt;beamMode() == BeamMode::AUTO) {</span></span>
 <span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">          63 :         return BeamMode::NONE;</span></span>
 <span id="L205"><span class="lineNum">     205</span>              :     }</span>
 <span id="L206"><span class="lineNum">     206</span>              : </span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">       85696 :     TDuration durationType = cr-&gt;durationType();</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">       85774 :     TDuration durationType = cr-&gt;durationType();</span></span>
 <span id="L208"><span class="lineNum">     208</span>              :     // chord with no hooks cannot be beamed</span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">       85696 :     if (cr-&gt;isChord() &amp;&amp; durationType.hooks() == 0) {</span></span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">       31238 :         return BeamMode::NONE;</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">       85774 :     if (cr-&gt;isChord() &amp;&amp; durationType.hooks() == 0) {</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">       31243 :         return BeamMode::NONE;</span></span>
 <span id="L211"><span class="lineNum">     211</span>              :     }</span>
 <span id="L212"><span class="lineNum">     212</span>              :     // if chord has hooks and is 2nd element of a cross-measure value</span>
 <span id="L213"><span class="lineNum">     213</span>              :     // set beam mode to NONE (do not combine with following chord beam/hook, if any)</span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">       54458 :     if (durationType.hooks() &gt; 0 &amp;&amp; cr-&gt;crossMeasure() == CrossMeasure::SECOND) {</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">       54531 :     if (durationType.hooks() &gt; 0 &amp;&amp; cr-&gt;crossMeasure() == CrossMeasure::SECOND) {</span></span>
 <span id="L215"><span class="lineNum">     215</span> <span class="tlaUNC tlaBgUNC">           0 :         return BeamMode::NONE;</span></span>
 <span id="L216"><span class="lineNum">     216</span>              :     }</span>
 <span id="L217"><span class="lineNum">     217</span>              : </span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC tlaBgGNC">       54458 :     BeamMode bm = Groups::baseBeamMode(cr, prev);</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC tlaBgGNC">       54531 :     BeamMode bm = Groups::baseBeamMode(cr, prev);</span></span>
 <span id="L219"><span class="lineNum">     219</span>              : </span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       54458 :     if (bm == BeamMode::AUTO) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       54531 :     if (bm == BeamMode::AUTO) {</span></span>
 <span id="L221"><span class="lineNum">     221</span>              :         // start beam at the beginning of measures</span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">       11541 :         if (cr-&gt;rtick().isZero()) {</span></span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">        1497 :             return BeamMode::BEGIN;</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">       11552 :         if (cr-&gt;rtick().isZero()) {</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">        1498 :             return BeamMode::BEGIN;</span></span>
 <span id="L224"><span class="lineNum">     224</span>              :         }</span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
 <span id="L226"><span class="lineNum">     226</span>              :         // perform additional context-dependent checks</span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">       10044 :         Measure* measure = cr-&gt;measure();</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">       10044 :         const Staff* stf = cr-&gt;staff();</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">       10044 :         TimeSig* ts = stf-&gt;timeSig(measure-&gt;tick());</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">       10044 :         bool checkBeats = ts &amp;&amp; ts-&gt;denominator() == 4;</span></span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">       10044 :         Fraction stretch = ts ? ts-&gt;stretch() : Fraction(1, 1);</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">       10054 :         Measure* measure = cr-&gt;measure();</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">       10054 :         const Staff* stf = cr-&gt;staff();</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">       10054 :         TimeSig* ts = stf-&gt;timeSig(measure-&gt;tick());</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">       10054 :         bool checkBeats = ts &amp;&amp; ts-&gt;denominator() == 4;</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">       10054 :         Fraction stretch = ts ? ts-&gt;stretch() : Fraction(1, 1);</span></span>
 <span id="L232"><span class="lineNum">     232</span>              : </span>
 <span id="L233"><span class="lineNum">     233</span>              :         // check if we need to break beams according to minimum duration in current / previous beat</span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">       10044 :         if (checkBeats) {</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        9253 :             Fraction tick = cr-&gt;rtick() * stretch;</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">       10054 :         if (checkBeats) {</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        9263 :             Fraction tick = cr-&gt;rtick() * stretch;</span></span>
 <span id="L236"><span class="lineNum">     236</span>              :             // check if on the beat</span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">        9253 :             if ((tick.ticks() % Constants::DIVISION) == 0) {</span></span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">        1677 :                 int beat = tick.ticks() / Constants::DIVISION;</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">        9263 :             if ((tick.ticks() % Constants::DIVISION) == 0) {</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">        1684 :                 int beat = tick.ticks() / Constants::DIVISION;</span></span>
 <span id="L239"><span class="lineNum">     239</span>              :                 // get minimum duration for this &amp; previous beat</span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">        1677 :                 auto it_current = beatSubdivision-&gt;find(beat);</span></span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">        1677 :                 auto it_prev = beatSubdivision-&gt;find(beat - 1);</span></span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        1677 :                 TDuration current_min = (it_current != beatSubdivision-&gt;end()) ? it_current-&gt;second : TDuration(DurationType::V_INVALID);</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">        1677 :                 TDuration prev_min = (it_prev != beatSubdivision-&gt;end()) ? it_prev-&gt;second : TDuration(DurationType::V_INVALID);</span></span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        1677 :                 TDuration minDuration = std::min(current_min, prev_min);</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">        1684 :                 auto it_current = beatSubdivision-&gt;find(beat);</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">        1684 :                 auto it_prev = beatSubdivision-&gt;find(beat - 1);</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        1684 :                 TDuration current_min = (it_current != beatSubdivision-&gt;end()) ? it_current-&gt;second : TDuration(DurationType::V_INVALID);</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">        1684 :                 TDuration prev_min = (it_prev != beatSubdivision-&gt;end()) ? it_prev-&gt;second : TDuration(DurationType::V_INVALID);</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        1684 :                 TDuration minDuration = std::min(current_min, prev_min);</span></span>
 <span id="L245"><span class="lineNum">     245</span>              :                 // re-calculate beam as if this were the duration of current chordrest</span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        1677 :                 TDuration saveDuration        = cr-&gt;actualDurationType();</span></span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        1677 :                 TDuration saveCMDuration      = cr-&gt;crossMeasureDurationType();</span></span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        1677 :                 CrossMeasure saveCrossMeasVal = cr-&gt;crossMeasure();</span></span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        1677 :                 const_cast&lt;ChordRest*&gt;(cr)-&gt;setDurationType(minDuration);</span></span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">        1677 :                 bm = Groups::baseBeamMode(cr, prev);</span></span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">        1677 :                 const_cast&lt;ChordRest*&gt;(cr)-&gt;setDurationType(saveDuration);</span></span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">        1677 :                 const_cast&lt;ChordRest*&gt;(cr)-&gt;setCrossMeasure(saveCrossMeasVal);</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">        1677 :                 const_cast&lt;ChordRest*&gt;(cr)-&gt;setCrossMeasureDurationType(saveCMDuration);</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        1684 :                 TDuration saveDuration        = cr-&gt;actualDurationType();</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        1684 :                 TDuration saveCMDuration      = cr-&gt;crossMeasureDurationType();</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        1684 :                 CrossMeasure saveCrossMeasVal = cr-&gt;crossMeasure();</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        1684 :                 const_cast&lt;ChordRest*&gt;(cr)-&gt;setDurationType(minDuration);</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">        1684 :                 bm = Groups::baseBeamMode(cr, prev);</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">        1684 :                 const_cast&lt;ChordRest*&gt;(cr)-&gt;setDurationType(saveDuration);</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">        1684 :                 const_cast&lt;ChordRest*&gt;(cr)-&gt;setCrossMeasure(saveCrossMeasVal);</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">        1684 :                 const_cast&lt;ChordRest*&gt;(cr)-&gt;setCrossMeasureDurationType(saveCMDuration);</span></span>
 <span id="L254"><span class="lineNum">     254</span>              :             }</span>
 <span id="L255"><span class="lineNum">     255</span>              :         }</span>
 <span id="L256"><span class="lineNum">     256</span>              :     }</span>
 <span id="L257"><span class="lineNum">     257</span>              : </span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">       52961 :     return bm == BeamMode::AUTO ? BeamMode::MID : bm;</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">       53033 :     return bm == BeamMode::AUTO ? BeamMode::MID : bm;</span></span>
 <span id="L259"><span class="lineNum">     259</span>              : }</span>
 <span id="L260"><span class="lineNum">     260</span>              : </span>
 <span id="L261"><span class="lineNum">     261</span>              : //---------------------------------------------------------</span>
@@ -321,12 +321,12 @@
 <span id="L263"><span class="lineNum">     263</span>              : //    tick is relative to begin of measure</span>
 <span id="L264"><span class="lineNum">     264</span>              : //---------------------------------------------------------</span>
 <span id="L265"><span class="lineNum">     265</span>              : </span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">      153275 : BeamMode Groups::beamMode(int tick, DurationType d) const</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">      153351 : BeamMode Groups::beamMode(int tick, DurationType d) const</span></span>
 <span id="L267"><span class="lineNum">     267</span>              : {</span>
 <span id="L268"><span class="lineNum">     268</span>              :     int shift;</span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">      153275 :     switch (d) {</span></span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">      104440 :     case DurationType::V_EIGHTH: shift = 0;</span></span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">      104440 :         break;</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">      153351 :     switch (d) {</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">      104515 :     case DurationType::V_EIGHTH: shift = 0;</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">      104515 :         break;</span></span>
 <span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">       33342 :     case DurationType::V_16TH:   shift = 4;</span></span>
 <span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">       33342 :         break;</span></span>
 <span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">       15444 :     case DurationType::V_32ND:</span></span>
@@ -338,21 +338,21 @@
 <span id="L280"><span class="lineNum">     280</span>              :     case DurationType::V_1024TH:</span>
 <span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">       15444 :         shift = 8;</span></span>
 <span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       15444 :         break;</span></span>
-<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">          49 :     default:</span></span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">          49 :         return BeamMode::AUTO;</span></span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">          50 :     default:</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">          50 :         return BeamMode::AUTO;</span></span>
 <span id="L285"><span class="lineNum">     285</span>              :     }</span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">      153226 :     const int dm = Constants::DIVISION / 8;</span></span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">      553486 :     for (const GroupNode&amp; e : m_nodes) {</span></span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">      546978 :         if (e.pos * dm &lt; tick) {</span></span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">      400260 :             continue;</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">      153301 :     const int dm = Constants::DIVISION / 8;</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">      553710 :     for (const GroupNode&amp; e : m_nodes) {</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">      547202 :         if (e.pos * dm &lt; tick) {</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">      400409 :             continue;</span></span>
 <span id="L290"><span class="lineNum">     290</span>              :         }</span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">      146718 :         if (e.pos * dm &gt; tick) {</span></span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       65020 :             break;</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">      146793 :         if (e.pos * dm &gt; tick) {</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       65050 :             break;</span></span>
 <span id="L293"><span class="lineNum">     293</span>              :         }</span>
 <span id="L294"><span class="lineNum">     294</span>              : </span>
-<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">       81698 :         int action = (e.action &gt;&gt; shift) &amp; 0xf;</span></span>
-<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">       81698 :         switch (action) {</span></span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">       81698 :         case 0: return BeamMode::AUTO;</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">       81743 :         int action = (e.action &gt;&gt; shift) &amp; 0xf;</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">       81743 :         switch (action) {</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">       81743 :         case 0: return BeamMode::AUTO;</span></span>
 <span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">       13721 :         case 1: return BeamMode::BEGIN;</span></span>
 <span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">        1167 :         case 2: return BeamMode::BEGIN16;</span></span>
 <span id="L300"><span class="lineNum">     300</span> <span class="tlaUNC tlaBgUNC">           0 :         case 3: return BeamMode::BEGIN32;</span></span>
@@ -361,18 +361,18 @@
 <span id="L303"><span class="lineNum">     303</span> <span class="tlaUNC">           0 :             return BeamMode::AUTO;</span></span>
 <span id="L304"><span class="lineNum">     304</span>              :         }</span>
 <span id="L305"><span class="lineNum">     305</span>              :     }</span>
-<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC tlaBgGNC">       71528 :     return BeamMode::AUTO;</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC tlaBgGNC">       71558 :     return BeamMode::AUTO;</span></span>
 <span id="L307"><span class="lineNum">     307</span>              : }</span>
 <span id="L308"><span class="lineNum">     308</span>              : </span>
 <span id="L309"><span class="lineNum">     309</span>              : //---------------------------------------------------------</span>
 <span id="L310"><span class="lineNum">     310</span>              : //   endings</span>
 <span id="L311"><span class="lineNum">     311</span>              : //---------------------------------------------------------</span>
 <span id="L312"><span class="lineNum">     312</span>              : </span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">      152307 : const Groups&amp; Groups::endings(const Fraction&amp; f)</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">      152365 : const Groups&amp; Groups::endings(const Fraction&amp; f)</span></span>
 <span id="L314"><span class="lineNum">     314</span>              : {</span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">      941799 :     for (const NoteGroup&amp; g : noteGroups) {</span></span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">      941796 :         if (g.timeSig.identical(f)) {</span></span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">      152304 :             return g.endings;</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">      942147 :     for (const NoteGroup&amp; g : noteGroups) {</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">      942144 :         if (g.timeSig.identical(f)) {</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">      152362 :             return g.endings;</span></span>
 <span id="L318"><span class="lineNum">     318</span>              :         }</span>
 <span id="L319"><span class="lineNum">     319</span>              :     }</span>
 <span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           3 :     NoteGroup g;</span></span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -86,32 +86,32 @@
 <span id="L28"><span class="lineNum">      28</span>              : using namespace mu::engraving;</span>
 <span id="L29"><span class="lineNum">      29</span>              : using namespace mu::engraving::rendering::score;</span>
 <span id="L30"><span class="lineNum">      30</span>              : </span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC tlaBgGNC">      569224 : static void resetLayoutData(EngravingObject* obj)</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC tlaBgGNC">      570098 : static void resetLayoutData(EngravingObject* obj)</span></span>
 <span id="L32"><span class="lineNum">      32</span>              : {</span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">      569224 :     if (obj-&gt;isEngravingItem()) {</span></span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">      557787 :         EngravingItem* item = toEngravingItem(obj);</span></span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">      557787 :         if (item-&gt;ldata()) {</span></span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">      557787 :             item-&gt;mutldata()-&gt;reset();</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">      570098 :     if (obj-&gt;isEngravingItem()) {</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">      558634 :         EngravingItem* item = toEngravingItem(obj);</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">      558634 :         if (item-&gt;ldata()) {</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">      558634 :             item-&gt;mutldata()-&gt;reset();</span></span>
 <span id="L37"><span class="lineNum">      37</span>              :         }</span>
 <span id="L38"><span class="lineNum">      38</span>              :     }</span>
 <span id="L39"><span class="lineNum">      39</span>              : </span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">     1132384 :     for (EngravingObject* ch : obj-&gt;children()) {</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">      563160 :         resetLayoutData(ch);</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">     1134131 :     for (EngravingObject* ch : obj-&gt;children()) {</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">      564033 :         resetLayoutData(ch);</span></span>
 <span id="L42"><span class="lineNum">      42</span>              :     }</span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">      569224 : }</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">      570098 : }</span></span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">        3963 : void PassResetLayoutData::doRun(Score* score, LayoutContext&amp; ctx)</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">        3964 : void PassResetLayoutData::doRun(Score* score, LayoutContext&amp; ctx)</span></span>
 <span id="L46"><span class="lineNum">      46</span>              : {</span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        3963 :     if (ctx.state().isLayoutAll()) {</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">        3354 :         resetLayoutData(score);</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        3964 :     if (ctx.state().isLayoutAll()) {</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">        3360 :         resetLayoutData(score);</span></span>
 <span id="L49"><span class="lineNum">      49</span>              :     } else {</span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">         609 :         MeasureBase* m = ctx.mutState().nextMeasure();</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">        3319 :         while (m &amp;&amp; m-&gt;tick() &lt;= ctx.state().endTick()) {</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">        2710 :             resetLayoutData(m);</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        2710 :             m = m-&gt;next();</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">         604 :         MeasureBase* m = ctx.mutState().nextMeasure();</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">        3309 :         while (m &amp;&amp; m-&gt;tick() &lt;= ctx.state().endTick()) {</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">        2705 :             resetLayoutData(m);</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        2705 :             m = m-&gt;next();</span></span>
 <span id="L54"><span class="lineNum">      54</span>              :         }</span>
 <span id="L55"><span class="lineNum">      55</span>              :     }</span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">        3963 : }</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">        3964 : }</span></span>
         </pre>
               </td>
             </tr>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -118,32 +118,32 @@
 <span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC">           0 :     m_externalSymbolFonts.emplace(muse::strings::toLower(name), f);</span></span>
 <span id="L61"><span class="lineNum">      61</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L62"><span class="lineNum">      62</span>              : </span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC tlaBgGNC">       10623 : std::shared_ptr&lt;EngravingFont&gt; EngravingFontsProvider::doFontByName(const std::string&amp; name) const</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC tlaBgGNC">       10636 : std::shared_ptr&lt;EngravingFont&gt; EngravingFontsProvider::doFontByName(const std::string&amp; name) const</span></span>
 <span id="L64"><span class="lineNum">      64</span>              : {</span>
 <span id="L65"><span class="lineNum">      65</span>              :     // External fonts should have higher priority than internal fonts</span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       10623 :     std::string name_lo = muse::strings::toLower(name);</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">       10623 :     auto it = m_externalSymbolFonts.find(name_lo);</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">       10623 :     if (it != m_externalSymbolFonts.end()) {</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       10636 :     std::string name_lo = muse::strings::toLower(name);</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">       10636 :     auto it = m_externalSymbolFonts.find(name_lo);</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">       10636 :     if (it != m_externalSymbolFonts.end()) {</span></span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaUNC tlaBgUNC">           0 :         return it-&gt;second;</span></span>
 <span id="L70"><span class="lineNum">      70</span>              :     }</span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC tlaBgGNC">       23065 :     for (const std::shared_ptr&lt;EngravingFont&gt;&amp; f : m_symbolFonts) {</span></span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       23065 :         if (muse::strings::toLower(f-&gt;name()) == name_lo) {</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">       10623 :             return f;</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC tlaBgGNC">       23099 :     for (const std::shared_ptr&lt;EngravingFont&gt;&amp; f : m_symbolFonts) {</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       23099 :         if (muse::strings::toLower(f-&gt;name()) == name_lo) {</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">       10636 :             return f;</span></span>
 <span id="L74"><span class="lineNum">      74</span>              :         }</span>
 <span id="L75"><span class="lineNum">      75</span>              :     }</span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaUNC tlaBgUNC">           0 :     return nullptr;</span></span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC tlaBgGNC">       10623 : }</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC tlaBgGNC">       10636 : }</span></span>
 <span id="L78"><span class="lineNum">      78</span>              : </span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">       10607 : IEngravingFontPtr EngravingFontsProvider::fontByName(const std::string&amp; name) const</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">       10620 : IEngravingFontPtr EngravingFontsProvider::fontByName(const std::string&amp; name) const</span></span>
 <span id="L80"><span class="lineNum">      80</span>              : {</span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">       10607 :     std::shared_ptr&lt;EngravingFont&gt; font = doFontByName(name);</span></span>
-<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">       10607 :     if (!font) {</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">       10620 :     std::shared_ptr&lt;EngravingFont&gt; font = doFontByName(name);</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">       10620 :     if (!font) {</span></span>
 <span id="L83"><span class="lineNum">      83</span> <span class="tlaUNC tlaBgUNC">           0 :         font = doFallbackFont();</span></span>
 <span id="L84"><span class="lineNum">      84</span>              :     }</span>
 <span id="L85"><span class="lineNum">      85</span>              : </span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC tlaBgGNC">       10607 :     font-&gt;ensureLoad();</span></span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">       21214 :     return font;</span></span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">       10607 : }</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC tlaBgGNC">       10620 :     font-&gt;ensureLoad();</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">       21240 :     return font;</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">       10620 : }</span></span>
 <span id="L89"><span class="lineNum">      89</span>              : </span>
 <span id="L90"><span class="lineNum">      90</span> <span class="tlaUNC tlaBgUNC">           0 : std::vector&lt;IEngravingFontPtr&gt; EngravingFontsProvider::fonts() const</span></span>
 <span id="L91"><span class="lineNum">      91</span>              : {</span>
@@ -166,28 +166,28 @@
 <span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">          16 :     m_fallback.font = nullptr;</span></span>
 <span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">          16 : }</span></span>
 <span id="L110"><span class="lineNum">     110</span>              : </span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">       23106 : std::shared_ptr&lt;EngravingFont&gt; EngravingFontsProvider::doFallbackFont() const</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">       23159 : std::shared_ptr&lt;EngravingFont&gt; EngravingFontsProvider::doFallbackFont() const</span></span>
 <span id="L112"><span class="lineNum">     112</span>              : {</span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">       23106 :     if (!m_fallback.font) {</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">       23159 :     if (!m_fallback.font) {</span></span>
 <span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">          16 :         m_fallback.font = doFontByName(m_fallback.name);</span></span>
 <span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">          16 :         IF_ASSERT_FAILED(m_fallback.font) {</span></span>
 <span id="L116"><span class="lineNum">     116</span> <span class="tlaUNC tlaBgUNC">           0 :             return nullptr;</span></span>
 <span id="L117"><span class="lineNum">     117</span>              :         }</span>
 <span id="L118"><span class="lineNum">     118</span>              :     }</span>
 <span id="L119"><span class="lineNum">     119</span>              : </span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC tlaBgGNC">       23106 :     return m_fallback.font;</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC tlaBgGNC">       23159 :     return m_fallback.font;</span></span>
 <span id="L121"><span class="lineNum">     121</span>              : }</span>
 <span id="L122"><span class="lineNum">     122</span>              : </span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">       11888 : IEngravingFontPtr EngravingFontsProvider::fallbackFont() const</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">       11915 : IEngravingFontPtr EngravingFontsProvider::fallbackFont() const</span></span>
 <span id="L124"><span class="lineNum">     124</span>              : {</span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">       11888 :     std::shared_ptr&lt;EngravingFont&gt; font = doFallbackFont();</span></span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">       11888 :     font-&gt;ensureLoad();</span></span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">       23776 :     return font;</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       11888 : }</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">       11915 :     std::shared_ptr&lt;EngravingFont&gt; font = doFallbackFont();</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">       11915 :     font-&gt;ensureLoad();</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">       23830 :     return font;</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       11915 : }</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : </span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">       11218 : bool EngravingFontsProvider::isFallbackFont(const IEngravingFont* f) const</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">       11244 : bool EngravingFontsProvider::isFallbackFont(const IEngravingFont* f) const</span></span>
 <span id="L131"><span class="lineNum">     131</span>              : {</span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">       11218 :     return doFallbackFont().get() == f;</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">       11244 :     return doFallbackFont().get() == f;</span></span>
 <span id="L133"><span class="lineNum">     133</span>              : }</span>
 <span id="L134"><span class="lineNum">     134</span>              : </span>
 <span id="L135"><span class="lineNum">     135</span> <span class="tlaUNC tlaBgUNC">           0 : void EngravingFontsProvider::clearExternalFonts()</span></span>

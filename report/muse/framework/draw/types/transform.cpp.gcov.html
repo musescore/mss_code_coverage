@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -271,11 +271,11 @@
 <span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">           2 :     m_dirty = TransformationType::Project;</span></span>
 <span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">           2 : }</span></span>
 <span id="L215"><span class="lineNum">     215</span>              : </span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        8206 : void Transform::reset()</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        8210 : void Transform::reset()</span></span>
 <span id="L217"><span class="lineNum">     217</span>              : {</span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">        8206 :     m_affine.m_11 = m_affine.m_22 = m_33 = 1.0;</span></span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        8206 :     m_affine.m_12 = m_13 = m_affine.m_21 = m_23 = m_affine.m_dx = m_affine.m_dy = 0.0;</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        8206 : }</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">        8210 :     m_affine.m_11 = m_affine.m_22 = m_33 = 1.0;</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        8210 :     m_affine.m_12 = m_13 = m_affine.m_21 = m_23 = m_affine.m_dx = m_affine.m_dy = 0.0;</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        8210 : }</span></span>
 <span id="L221"><span class="lineNum">     221</span>              : </span>
 <span id="L222"><span class="lineNum">     222</span> <span class="tlaUNC tlaBgUNC">           0 : Transform Transform::adjoint() const</span></span>
 <span id="L223"><span class="lineNum">     223</span>              : {</span>
@@ -296,12 +296,12 @@
 <span id="L238"><span class="lineNum">     238</span> <span class="tlaUNC">           0 :                      h31, h32, h33);</span></span>
 <span id="L239"><span class="lineNum">     239</span>              : }</span>
 <span id="L240"><span class="lineNum">     240</span>              : </span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC tlaBgGNC">       36037 : Transform::TransformationType Transform::type() const</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC tlaBgGNC">       36056 : Transform::TransformationType Transform::type() const</span></span>
 <span id="L242"><span class="lineNum">     242</span>              : {</span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       36037 :     if (m_dirty == TransformationType::None || m_dirty &lt; m_type) {</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       36056 :     if (m_dirty == TransformationType::None || m_dirty &lt; m_type) {</span></span>
 <span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">       11506 :         return m_type;</span></span>
 <span id="L245"><span class="lineNum">     245</span>              :     }</span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">       24531 :     switch (m_dirty) {</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">       24550 :     switch (m_dirty) {</span></span>
 <span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">           6 :     case TransformationType::Project:</span></span>
 <span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">           6 :         if (!RealIsNull(m_13) || !RealIsNull(m_23) || !RealIsNull(m_33 - 1)) {</span></span>
 <span id="L249"><span class="lineNum">     249</span> <span class="tlaUNC tlaBgUNC">           0 :             m_type = TransformationType::Project;</span></span>
@@ -310,51 +310,51 @@
 <span id="L252"><span class="lineNum">     252</span>              :     // fall through</span>
 <span id="L253"><span class="lineNum">     253</span>              :     case TransformationType::Shear:</span>
 <span id="L254"><span class="lineNum">     254</span>              :     case TransformationType::Rotate:</span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC tlaBgGNC">       16692 :         if (!RealIsNull(m_affine.m_12) || !RealIsNull(m_affine.m_21)) {</span></span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">        5029 :             const double dot = m_affine.m_11 * m_affine.m_12 + m_affine.m_21 * m_affine.m_22;</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">        5029 :             if (RealIsNull(dot)) {</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC tlaBgGNC">       16706 :         if (!RealIsNull(m_affine.m_12) || !RealIsNull(m_affine.m_21)) {</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">        5033 :             const double dot = m_affine.m_11 * m_affine.m_12 + m_affine.m_21 * m_affine.m_22;</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">        5033 :             if (RealIsNull(dot)) {</span></span>
 <span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">        4081 :                 m_type = TransformationType::Rotate;</span></span>
 <span id="L259"><span class="lineNum">     259</span>              :             } else {</span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">         948 :                 m_type = TransformationType::Shear;</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">         952 :                 m_type = TransformationType::Shear;</span></span>
 <span id="L261"><span class="lineNum">     261</span>              :             }</span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">        5029 :             break;</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">        5033 :             break;</span></span>
 <span id="L263"><span class="lineNum">     263</span>              :         }</span>
 <span id="L264"><span class="lineNum">     264</span>              :     // fall through</span>
 <span id="L265"><span class="lineNum">     265</span>              :     case TransformationType::Scale:</span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">       11914 :         if (!RealIsNull(m_affine.m_11 - 1) || !RealIsNull(m_affine.m_22 - 1)) {</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">       11924 :         if (!RealIsNull(m_affine.m_11 - 1) || !RealIsNull(m_affine.m_22 - 1)) {</span></span>
 <span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">         265 :             m_type = TransformationType::Scale;</span></span>
 <span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">         265 :             break;</span></span>
 <span id="L269"><span class="lineNum">     269</span>              :         }</span>
 <span id="L270"><span class="lineNum">     270</span>              :     // fall through</span>
 <span id="L271"><span class="lineNum">     271</span>              :     case TransformationType::Translate:</span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">       19237 :         if (!RealIsNull(m_affine.m_dx) || !RealIsNull(m_affine.m_dy)) {</span></span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">       12236 :             m_type = TransformationType::Translate;</span></span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">       12236 :             break;</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">       19252 :         if (!RealIsNull(m_affine.m_dx) || !RealIsNull(m_affine.m_dy)) {</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">       12244 :             m_type = TransformationType::Translate;</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">       12244 :             break;</span></span>
 <span id="L275"><span class="lineNum">     275</span>              :         }</span>
 <span id="L276"><span class="lineNum">     276</span>              :     // fall through</span>
 <span id="L277"><span class="lineNum">     277</span>              :     case TransformationType::None:</span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">        7001 :         m_type = TransformationType::None;</span></span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        7001 :         break;</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">        7008 :         m_type = TransformationType::None;</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        7008 :         break;</span></span>
 <span id="L280"><span class="lineNum">     280</span>              :     }</span>
-<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">       24531 :     m_dirty = TransformationType::None;</span></span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       24531 :     return m_type;</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">       24550 :     m_dirty = TransformationType::None;</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       24550 :     return m_type;</span></span>
 <span id="L283"><span class="lineNum">     283</span>              : }</span>
 <span id="L284"><span class="lineNum">     284</span>              : </span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">      151126 : PointF Transform::map(const PointF&amp; p) const</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">      151202 : PointF Transform::map(const PointF&amp; p) const</span></span>
 <span id="L286"><span class="lineNum">     286</span>              : {</span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">      151126 :     double fx = p.x();</span></span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">      151126 :     double fy = p.y();</span></span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">      151126 :     double x = 0.0, y = 0.0;</span></span>
-<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">      151126 :     TransformationType t = inline_type();</span></span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">      151126 :     switch (t) {</span></span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       21909 :     case TransformationType::None:</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">       21909 :         x = fx;</span></span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">       21909 :         y = fy;</span></span>
-<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">       21909 :         break;</span></span>
-<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">       38228 :     case TransformationType::Translate:</span></span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">       38228 :         x = fx + m_affine.m_dx;</span></span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">       38228 :         y = fy + m_affine.m_dy;</span></span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">       38228 :         break;</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">      151202 :     double fx = p.x();</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">      151202 :     double fy = p.y();</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">      151202 :     double x = 0.0, y = 0.0;</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">      151202 :     TransformationType t = inline_type();</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">      151202 :     switch (t) {</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       21923 :     case TransformationType::None:</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">       21923 :         x = fx;</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">       21923 :         y = fy;</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">       21923 :         break;</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">       38290 :     case TransformationType::Translate:</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">       38290 :         x = fx + m_affine.m_dx;</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">       38290 :         y = fy + m_affine.m_dy;</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">       38290 :         break;</span></span>
 <span id="L300"><span class="lineNum">     300</span> <span class="tlaUNC tlaBgUNC">           0 :     case TransformationType::Scale:</span></span>
 <span id="L301"><span class="lineNum">     301</span> <span class="tlaUNC">           0 :         x = m_affine.m_11 * fx + m_affine.m_dx;</span></span>
 <span id="L302"><span class="lineNum">     302</span> <span class="tlaUNC">           0 :         y = m_affine.m_22 * fy + m_affine.m_dy;</span></span>
@@ -370,24 +370,24 @@
 <span id="L312"><span class="lineNum">     312</span> <span class="tlaUNC">           0 :             y *= w;</span></span>
 <span id="L313"><span class="lineNum">     313</span>              :         }</span>
 <span id="L314"><span class="lineNum">     314</span>              :     }</span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC tlaBgGNC">      151126 :     return PointF(x, y);</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC tlaBgGNC">      151202 :     return PointF(x, y);</span></span>
 <span id="L316"><span class="lineNum">     316</span>              : }</span>
 <span id="L317"><span class="lineNum">     317</span>              : </span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">         888 : LineF Transform::map(const LineF&amp; l) const</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">         892 : LineF Transform::map(const LineF&amp; l) const</span></span>
 <span id="L319"><span class="lineNum">     319</span>              : {</span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">         888 :     double fx1 = l.x1();</span></span>
-<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">         888 :     double fy1 = l.y1();</span></span>
-<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">         888 :     double fx2 = l.x2();</span></span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">         888 :     double fy2 = l.y2();</span></span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">         888 :     double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;</span></span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">         888 :     TransformationType t = inline_type();</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         888 :     switch (t) {</span></span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">         888 :     case TransformationType::None:</span></span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">         888 :         x1 = fx1;</span></span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">         888 :         y1 = fy1;</span></span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">         888 :         x2 = fx2;</span></span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">         888 :         y2 = fy2;</span></span>
-<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">         888 :         break;</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">         892 :     double fx1 = l.x1();</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">         892 :     double fy1 = l.y1();</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">         892 :     double fx2 = l.x2();</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">         892 :     double fy2 = l.y2();</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">         892 :     double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">         892 :     TransformationType t = inline_type();</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         892 :     switch (t) {</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">         892 :     case TransformationType::None:</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">         892 :         x1 = fx1;</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">         892 :         y1 = fy1;</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">         892 :         x2 = fx2;</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">         892 :         y2 = fy2;</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">         892 :         break;</span></span>
 <span id="L333"><span class="lineNum">     333</span> <span class="tlaUNC tlaBgUNC">           0 :     case TransformationType::Translate:</span></span>
 <span id="L334"><span class="lineNum">     334</span> <span class="tlaUNC">           0 :         x1 = fx1 + m_affine.m_dx;</span></span>
 <span id="L335"><span class="lineNum">     335</span> <span class="tlaUNC">           0 :         y1 = fy1 + m_affine.m_dy;</span></span>
@@ -416,7 +416,7 @@
 <span id="L358"><span class="lineNum">     358</span> <span class="tlaUNC">           0 :             y2 *= w;</span></span>
 <span id="L359"><span class="lineNum">     359</span>              :         }</span>
 <span id="L360"><span class="lineNum">     360</span>              :     }</span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC tlaBgGNC">         888 :     return LineF(x1, y1, x2, y2);</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC tlaBgGNC">         892 :     return LineF(x1, y1, x2, y2);</span></span>
 <span id="L362"><span class="lineNum">     362</span>              : }</span>
 <span id="L363"><span class="lineNum">     363</span>              : </span>
 <span id="L364"><span class="lineNum">     364</span> <span class="tlaUNC tlaBgUNC">           0 : static inline bool needsPerspectiveClipping(const RectF&amp; rect, const Transform&amp; transform)</span></span>
@@ -488,30 +488,30 @@
 <span id="L430"><span class="lineNum">     430</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L431"><span class="lineNum">     431</span>              : }</span>
 <span id="L432"><span class="lineNum">     432</span>              : </span>
-<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC tlaBgGNC">        7060 : PainterPath Transform::map(const PainterPath&amp; path) const</span></span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC tlaBgGNC">        7067 : PainterPath Transform::map(const PainterPath&amp; path) const</span></span>
 <span id="L434"><span class="lineNum">     434</span>              : {</span>
-<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">        7060 :     TransformationType t = inline_type();</span></span>
-<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">        7060 :     if (t == TransformationType::None || path.elementCount() == 0) {</span></span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">        7067 :     TransformationType t = inline_type();</span></span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">        7067 :     if (t == TransformationType::None || path.elementCount() == 0) {</span></span>
 <span id="L437"><span class="lineNum">     437</span> <span class="tlaUNC tlaBgUNC">           0 :         return path;</span></span>
 <span id="L438"><span class="lineNum">     438</span>              :     }</span>
 <span id="L439"><span class="lineNum">     439</span>              : </span>
 <span id="L440"><span class="lineNum">     440</span>              :     // TransformationType::Project is not supported here, it was not used while mapping PainterPath and it needs a lot of code to handle</span>
-<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC tlaBgGNC">        7060 :     PainterPath copy = path;</span></span>
+<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC tlaBgGNC">        7067 :     PainterPath copy = path;</span></span>
 <span id="L442"><span class="lineNum">     442</span>              : </span>
-<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">        7060 :     if (t == TransformationType::Translate) {</span></span>
-<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">        5372 :         copy.translate(m_affine.m_dx, m_affine.m_dy);</span></span>
+<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">        7067 :     if (t == TransformationType::Translate) {</span></span>
+<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">        5375 :         copy.translate(m_affine.m_dx, m_affine.m_dy);</span></span>
 <span id="L445"><span class="lineNum">     445</span>              :     } else {</span>
 <span id="L446"><span class="lineNum">     446</span>              :         // Full xform</span>
-<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">       16434 :         for (size_t i = 0; i &lt; path.elementCount(); ++i) {</span></span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">       14746 :             PainterPath::Element&amp; e = copy.m_elements[i];</span></span>
-<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">       14746 :             mapElement(e.x, e.y, t);</span></span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">       16458 :         for (size_t i = 0; i &lt; path.elementCount(); ++i) {</span></span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">       14766 :             PainterPath::Element&amp; e = copy.m_elements[i];</span></span>
+<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">       14766 :             mapElement(e.x, e.y, t);</span></span>
 <span id="L450"><span class="lineNum">     450</span>              :         }</span>
 <span id="L451"><span class="lineNum">     451</span>              : </span>
-<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">        1688 :         copy.setDirty();</span></span>
+<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">        1692 :         copy.setDirty();</span></span>
 <span id="L453"><span class="lineNum">     453</span>              :     }</span>
 <span id="L454"><span class="lineNum">     454</span>              : </span>
-<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">        7060 :     return copy;</span></span>
-<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">        7060 : }</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">        7067 :     return copy;</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">        7067 : }</span></span>
 <span id="L457"><span class="lineNum">     457</span>              : </span>
 <span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC tlaBgUNC">           0 : Transform&amp; Transform::rotate(double a)</span></span>
 <span id="L459"><span class="lineNum">     459</span>              : {</span>
@@ -586,7 +586,7 @@
 <span id="L528"><span class="lineNum">     528</span> <span class="tlaUNC">           0 :     return *this;</span></span>
 <span id="L529"><span class="lineNum">     529</span>              : }</span>
 <span id="L530"><span class="lineNum">     530</span>              : </span>
-<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC tlaBgGNC">       15722 : Transform&amp; Transform::rotateRadians(double a)</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC tlaBgGNC">       15732 : Transform&amp; Transform::rotateRadians(double a)</span></span>
 <span id="L532"><span class="lineNum">     532</span>              : {</span>
 <span id="L533"><span class="lineNum">     533</span>              : #ifdef MUSE_MODULE_DRAW_TRACE</span>
 <span id="L534"><span class="lineNum">     534</span>              :     if (std::isnan(a)) {</span>
@@ -594,16 +594,16 @@
 <span id="L536"><span class="lineNum">     536</span>              :         return *this;</span>
 <span id="L537"><span class="lineNum">     537</span>              :     }</span>
 <span id="L538"><span class="lineNum">     538</span>              : #endif</span>
-<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">       15722 :     double sina = std::sin(a);</span></span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">       15722 :     double cosa = std::cos(a);</span></span>
-<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">       15722 :     switch (inline_type()) {</span></span>
-<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">       13132 :     case TransformationType::None:</span></span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">       15732 :     double sina = std::sin(a);</span></span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">       15732 :     double cosa = std::cos(a);</span></span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">       15732 :     switch (inline_type()) {</span></span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">       13142 :     case TransformationType::None:</span></span>
 <span id="L543"><span class="lineNum">     543</span>              :     case TransformationType::Translate:</span>
-<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">       13132 :         m_affine.m_11 = cosa;</span></span>
-<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">       13132 :         m_affine.m_12 = sina;</span></span>
-<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">       13132 :         m_affine.m_21 = -sina;</span></span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">       13132 :         m_affine.m_22 = cosa;</span></span>
-<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">       13132 :         break;</span></span>
+<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">       13142 :         m_affine.m_11 = cosa;</span></span>
+<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">       13142 :         m_affine.m_12 = sina;</span></span>
+<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">       13142 :         m_affine.m_21 = -sina;</span></span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">       13142 :         m_affine.m_22 = cosa;</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">       13142 :         break;</span></span>
 <span id="L549"><span class="lineNum">     549</span> <span class="tlaUNC tlaBgUNC">           0 :     case TransformationType::Scale: {</span></span>
 <span id="L550"><span class="lineNum">     550</span> <span class="tlaUNC">           0 :         double tm11 = cosa * m_affine.m_11;</span></span>
 <span id="L551"><span class="lineNum">     551</span> <span class="tlaUNC">           0 :         double tm12 = sina * m_affine.m_22;</span></span>
@@ -635,16 +635,16 @@
 <span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC">        2590 :         break;</span></span>
 <span id="L578"><span class="lineNum">     578</span>              :     }</span>
 <span id="L579"><span class="lineNum">     579</span>              :     }</span>
-<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">       15722 :     if (m_dirty &lt; TransformationType::Rotate) {</span></span>
-<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">       15722 :         m_dirty = TransformationType::Rotate;</span></span>
+<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">       15732 :     if (m_dirty &lt; TransformationType::Rotate) {</span></span>
+<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">       15732 :         m_dirty = TransformationType::Rotate;</span></span>
 <span id="L582"><span class="lineNum">     582</span>              :     }</span>
 <span id="L583"><span class="lineNum">     583</span>              : </span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">       15722 :     return *this;</span></span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">       15732 :     return *this;</span></span>
 <span id="L585"><span class="lineNum">     585</span>              : }</span>
 <span id="L586"><span class="lineNum">     586</span>              : </span>
-<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">        9932 : Transform&amp; Transform::translate(double dx, double dy)</span></span>
+<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">        9937 : Transform&amp; Transform::translate(double dx, double dy)</span></span>
 <span id="L588"><span class="lineNum">     588</span>              : {</span>
-<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">        9932 :     if (RealIsNull(dx) &amp;&amp; RealIsNull(dy)) {</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">        9937 :     if (RealIsNull(dx) &amp;&amp; RealIsNull(dy)) {</span></span>
 <span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">          18 :         return *this;</span></span>
 <span id="L591"><span class="lineNum">     591</span>              :     }</span>
 <span id="L592"><span class="lineNum">     592</span>              : #ifdef MUSE_MODULE_DRAW_TRACE</span>
@@ -653,15 +653,15 @@
 <span id="L595"><span class="lineNum">     595</span>              :         return *this;</span>
 <span id="L596"><span class="lineNum">     596</span>              :     }</span>
 <span id="L597"><span class="lineNum">     597</span>              : #endif</span>
-<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">        9914 :     switch (inline_type()) {</span></span>
-<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">        5959 :     case TransformationType::None:</span></span>
-<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">        5959 :         m_affine.m_dx = dx;</span></span>
-<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">        5959 :         m_affine.m_dy = dy;</span></span>
-<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">        5959 :         break;</span></span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">         622 :     case TransformationType::Translate:</span></span>
-<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">         622 :         m_affine.m_dx += dx;</span></span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">         622 :         m_affine.m_dy += dy;</span></span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">         622 :         break;</span></span>
+<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">        9919 :     switch (inline_type()) {</span></span>
+<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">        5963 :     case TransformationType::None:</span></span>
+<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">        5963 :         m_affine.m_dx = dx;</span></span>
+<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">        5963 :         m_affine.m_dy = dy;</span></span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">        5963 :         break;</span></span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">         623 :     case TransformationType::Translate:</span></span>
+<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">         623 :         m_affine.m_dx += dx;</span></span>
+<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">         623 :         m_affine.m_dy += dy;</span></span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">         623 :         break;</span></span>
 <span id="L607"><span class="lineNum">     607</span> <span class="tlaUNC tlaBgUNC">           0 :     case TransformationType::Scale:</span></span>
 <span id="L608"><span class="lineNum">     608</span> <span class="tlaUNC">           0 :         m_affine.m_dx += dx * m_affine.m_11;</span></span>
 <span id="L609"><span class="lineNum">     609</span> <span class="tlaUNC">           0 :         m_affine.m_dy += dy * m_affine.m_22;</span></span>
@@ -675,10 +675,10 @@
 <span id="L617"><span class="lineNum">     617</span> <span class="tlaGNC">        3333 :         m_affine.m_dy += dy * m_affine.m_22 + dx * m_affine.m_12;</span></span>
 <span id="L618"><span class="lineNum">     618</span> <span class="tlaGNC">        3333 :         break;</span></span>
 <span id="L619"><span class="lineNum">     619</span>              :     }</span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">        9914 :     if (m_dirty &lt; TransformationType::Translate) {</span></span>
-<span id="L621"><span class="lineNum">     621</span> <span class="tlaGNC">        9202 :         m_dirty = TransformationType::Translate;</span></span>
+<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">        9919 :     if (m_dirty &lt; TransformationType::Translate) {</span></span>
+<span id="L621"><span class="lineNum">     621</span> <span class="tlaGNC">        9207 :         m_dirty = TransformationType::Translate;</span></span>
 <span id="L622"><span class="lineNum">     622</span>              :     }</span>
-<span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">        9914 :     return *this;</span></span>
+<span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">        9919 :     return *this;</span></span>
 <span id="L624"><span class="lineNum">     624</span>              : }</span>
 <span id="L625"><span class="lineNum">     625</span>              : </span>
 <span id="L626"><span class="lineNum">     626</span> <span class="tlaGNC">         251 : Transform&amp; Transform::scale(double sx, double sy)</span></span>
@@ -718,9 +718,9 @@
 <span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">         251 :     return *this;</span></span>
 <span id="L661"><span class="lineNum">     661</span>              : }</span>
 <span id="L662"><span class="lineNum">     662</span>              : </span>
-<span id="L663"><span class="lineNum">     663</span> <span class="tlaGNC">         940 : Transform&amp; Transform::shear(double sh, double sv)</span></span>
+<span id="L663"><span class="lineNum">     663</span> <span class="tlaGNC">         944 : Transform&amp; Transform::shear(double sh, double sv)</span></span>
 <span id="L664"><span class="lineNum">     664</span>              : {</span>
-<span id="L665"><span class="lineNum">     665</span> <span class="tlaGNC">         940 :     if (RealIsNull(sh) &amp;&amp; RealIsNull(sv)) {</span></span>
+<span id="L665"><span class="lineNum">     665</span> <span class="tlaGNC">         944 :     if (RealIsNull(sh) &amp;&amp; RealIsNull(sv)) {</span></span>
 <span id="L666"><span class="lineNum">     666</span> <span class="tlaUNC tlaBgUNC">           0 :         return *this;</span></span>
 <span id="L667"><span class="lineNum">     667</span>              :     }</span>
 <span id="L668"><span class="lineNum">     668</span>              : #ifdef MUSE_MODULE_DRAW_TRACE</span>
@@ -729,12 +729,12 @@
 <span id="L671"><span class="lineNum">     671</span>              :         return *this;</span>
 <span id="L672"><span class="lineNum">     672</span>              :     }</span>
 <span id="L673"><span class="lineNum">     673</span>              : #endif</span>
-<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC tlaBgGNC">         940 :     switch (inline_type()) {</span></span>
-<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">         940 :     case TransformationType::None:</span></span>
+<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC tlaBgGNC">         944 :     switch (inline_type()) {</span></span>
+<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">         944 :     case TransformationType::None:</span></span>
 <span id="L676"><span class="lineNum">     676</span>              :     case TransformationType::Translate:</span>
-<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC">         940 :         m_affine.m_12 = sv;</span></span>
-<span id="L678"><span class="lineNum">     678</span> <span class="tlaGNC">         940 :         m_affine.m_21 = sh;</span></span>
-<span id="L679"><span class="lineNum">     679</span> <span class="tlaGNC">         940 :         break;</span></span>
+<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC">         944 :         m_affine.m_12 = sv;</span></span>
+<span id="L678"><span class="lineNum">     678</span> <span class="tlaGNC">         944 :         m_affine.m_21 = sh;</span></span>
+<span id="L679"><span class="lineNum">     679</span> <span class="tlaGNC">         944 :         break;</span></span>
 <span id="L680"><span class="lineNum">     680</span> <span class="tlaUNC tlaBgUNC">           0 :     case TransformationType::Scale:</span></span>
 <span id="L681"><span class="lineNum">     681</span> <span class="tlaUNC">           0 :         m_affine.m_12 = sv * m_affine.m_22;</span></span>
 <span id="L682"><span class="lineNum">     682</span> <span class="tlaUNC">           0 :         m_affine.m_21 = sh * m_affine.m_11;</span></span>
@@ -759,23 +759,23 @@
 <span id="L701"><span class="lineNum">     701</span> <span class="tlaUNC">           0 :         break;</span></span>
 <span id="L702"><span class="lineNum">     702</span>              :     }</span>
 <span id="L703"><span class="lineNum">     703</span>              :     }</span>
-<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC tlaBgGNC">         940 :     if (m_dirty &lt; TransformationType::Shear) {</span></span>
-<span id="L705"><span class="lineNum">     705</span> <span class="tlaGNC">         940 :         m_dirty = TransformationType::Shear;</span></span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC tlaBgGNC">         944 :     if (m_dirty &lt; TransformationType::Shear) {</span></span>
+<span id="L705"><span class="lineNum">     705</span> <span class="tlaGNC">         944 :         m_dirty = TransformationType::Shear;</span></span>
 <span id="L706"><span class="lineNum">     706</span>              :     }</span>
-<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">         940 :     return *this;</span></span>
+<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">         944 :     return *this;</span></span>
 <span id="L708"><span class="lineNum">     708</span>              : }</span>
 <span id="L709"><span class="lineNum">     709</span>              : </span>
-<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">        7980 : Transform Transform::inverted() const</span></span>
+<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">        7986 : Transform Transform::inverted() const</span></span>
 <span id="L711"><span class="lineNum">     711</span>              : {</span>
-<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">        7980 :     Transform invert;</span></span>
-<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC">        7980 :     bool inv = true;</span></span>
-<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">        7980 :     switch (inline_type()) {</span></span>
-<span id="L715"><span class="lineNum">     715</span> <span class="tlaGNC">         418 :     case TransformationType::None:</span></span>
-<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">         418 :         break;</span></span>
-<span id="L717"><span class="lineNum">     717</span> <span class="tlaGNC">         906 :     case TransformationType::Translate:</span></span>
-<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">         906 :         invert.m_affine.m_dx = -m_affine.m_dx;</span></span>
-<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC">         906 :         invert.m_affine.m_dy = -m_affine.m_dy;</span></span>
-<span id="L720"><span class="lineNum">     720</span> <span class="tlaGNC">         906 :         break;</span></span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">        7986 :     Transform invert;</span></span>
+<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC">        7986 :     bool inv = true;</span></span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">        7986 :     switch (inline_type()) {</span></span>
+<span id="L715"><span class="lineNum">     715</span> <span class="tlaGNC">         420 :     case TransformationType::None:</span></span>
+<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">         420 :         break;</span></span>
+<span id="L717"><span class="lineNum">     717</span> <span class="tlaGNC">         910 :     case TransformationType::Translate:</span></span>
+<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">         910 :         invert.m_affine.m_dx = -m_affine.m_dx;</span></span>
+<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC">         910 :         invert.m_affine.m_dy = -m_affine.m_dy;</span></span>
+<span id="L720"><span class="lineNum">     720</span> <span class="tlaGNC">         910 :         break;</span></span>
 <span id="L721"><span class="lineNum">     721</span> <span class="tlaUNC tlaBgUNC">           0 :     case TransformationType::Scale:</span></span>
 <span id="L722"><span class="lineNum">     722</span> <span class="tlaUNC">           0 :         inv = !RealIsNull(m_affine.m_11);</span></span>
 <span id="L723"><span class="lineNum">     723</span> <span class="tlaUNC">           0 :         inv &amp;= !RealIsNull(m_affine.m_22);</span></span>
@@ -800,19 +800,19 @@
 <span id="L742"><span class="lineNum">     742</span> <span class="tlaUNC">           0 :         break;</span></span>
 <span id="L743"><span class="lineNum">     743</span>              :     }</span>
 <span id="L744"><span class="lineNum">     744</span>              : </span>
-<span id="L745"><span class="lineNum">     745</span> <span class="tlaGNC tlaBgGNC">        7980 :     if (inv) {</span></span>
+<span id="L745"><span class="lineNum">     745</span> <span class="tlaGNC tlaBgGNC">        7986 :     if (inv) {</span></span>
 <span id="L746"><span class="lineNum">     746</span>              :         // inverting doesn't change the type</span>
-<span id="L747"><span class="lineNum">     747</span> <span class="tlaGNC">        7980 :         invert.m_type = m_type;</span></span>
-<span id="L748"><span class="lineNum">     748</span> <span class="tlaGNC">        7980 :         invert.m_dirty = m_dirty;</span></span>
+<span id="L747"><span class="lineNum">     747</span> <span class="tlaGNC">        7986 :         invert.m_type = m_type;</span></span>
+<span id="L748"><span class="lineNum">     748</span> <span class="tlaGNC">        7986 :         invert.m_dirty = m_dirty;</span></span>
 <span id="L749"><span class="lineNum">     749</span>              :     }</span>
-<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">       15960 :     return invert;</span></span>
+<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">       15972 :     return invert;</span></span>
 <span id="L751"><span class="lineNum">     751</span>              : }</span>
 <span id="L752"><span class="lineNum">     752</span>              : </span>
-<span id="L753"><span class="lineNum">     753</span> <span class="tlaGNC">       14746 : void Transform::mapElement(double&amp; nx, double&amp; ny, TransformationType t) const</span></span>
+<span id="L753"><span class="lineNum">     753</span> <span class="tlaGNC">       14766 : void Transform::mapElement(double&amp; nx, double&amp; ny, TransformationType t) const</span></span>
 <span id="L754"><span class="lineNum">     754</span>              : {</span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">       14746 :     double FX_ = nx;</span></span>
-<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">       14746 :     double FY_ = ny;</span></span>
-<span id="L757"><span class="lineNum">     757</span> <span class="tlaGNC">       14746 :     switch (t) {</span></span>
+<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">       14766 :     double FX_ = nx;</span></span>
+<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">       14766 :     double FY_ = ny;</span></span>
+<span id="L757"><span class="lineNum">     757</span> <span class="tlaGNC">       14766 :     switch (t) {</span></span>
 <span id="L758"><span class="lineNum">     758</span> <span class="tlaUNC tlaBgUNC">           0 :     case TransformationType::None:</span></span>
 <span id="L759"><span class="lineNum">     759</span> <span class="tlaUNC">           0 :         nx = FX_;</span></span>
 <span id="L760"><span class="lineNum">     760</span> <span class="tlaUNC">           0 :         ny = FY_;</span></span>
@@ -825,12 +825,12 @@
 <span id="L767"><span class="lineNum">     767</span> <span class="tlaUNC">           0 :         nx = m_affine.m_11 * FX_ + m_affine.m_dx;</span></span>
 <span id="L768"><span class="lineNum">     768</span> <span class="tlaUNC">           0 :         ny = m_affine.m_22 * FY_ + m_affine.m_dy;</span></span>
 <span id="L769"><span class="lineNum">     769</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC tlaBgGNC">       14746 :     case TransformationType::Rotate:</span></span>
+<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC tlaBgGNC">       14766 :     case TransformationType::Rotate:</span></span>
 <span id="L771"><span class="lineNum">     771</span>              :     case TransformationType::Shear:</span>
 <span id="L772"><span class="lineNum">     772</span>              :     case TransformationType::Project:</span>
-<span id="L773"><span class="lineNum">     773</span> <span class="tlaGNC">       14746 :         nx = m_affine.m_11 * FX_ + m_affine.m_21 * FY_ + m_affine.m_dx;</span></span>
-<span id="L774"><span class="lineNum">     774</span> <span class="tlaGNC">       14746 :         ny = m_affine.m_12 * FX_ + m_affine.m_22 * FY_ + m_affine.m_dy;</span></span>
-<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">       14746 :         if (t == TransformationType::Project) {</span></span>
+<span id="L773"><span class="lineNum">     773</span> <span class="tlaGNC">       14766 :         nx = m_affine.m_11 * FX_ + m_affine.m_21 * FY_ + m_affine.m_dx;</span></span>
+<span id="L774"><span class="lineNum">     774</span> <span class="tlaGNC">       14766 :         ny = m_affine.m_12 * FX_ + m_affine.m_22 * FY_ + m_affine.m_dy;</span></span>
+<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">       14766 :         if (t == TransformationType::Project) {</span></span>
 <span id="L776"><span class="lineNum">     776</span> <span class="tlaUNC tlaBgUNC">           0 :             double w = (m_13 * FX_ + m_23 * FY_ + m_33);</span></span>
 <span id="L777"><span class="lineNum">     777</span> <span class="tlaUNC">           0 :             if (w &lt; NEAR_CLIP) {</span></span>
 <span id="L778"><span class="lineNum">     778</span> <span class="tlaUNC">           0 :                 w = NEAR_CLIP;</span></span>
@@ -840,7 +840,7 @@
 <span id="L782"><span class="lineNum">     782</span> <span class="tlaUNC">           0 :             ny *= w;</span></span>
 <span id="L783"><span class="lineNum">     783</span>              :         }</span>
 <span id="L784"><span class="lineNum">     784</span>              :     }</span>
-<span id="L785"><span class="lineNum">     785</span> <span class="tlaGNC tlaBgGNC">       14746 : }</span></span>
+<span id="L785"><span class="lineNum">     785</span> <span class="tlaGNC tlaBgGNC">       14766 : }</span></span>
 <span id="L786"><span class="lineNum">     786</span>              : </span>
 <span id="L787"><span class="lineNum">     787</span>              : #ifndef NO_QT_SUPPORT</span>
 <span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">         660 : QTransform Transform::toQTransform(const Transform&amp; transform)</span></span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-04 14:29:14</td>
+            <td class="headerValue">2026-11-05 04:07:02</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -87,10 +87,10 @@
 <span id="L29"><span class="lineNum">      29</span>              : {</span>
 <span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">        1164 : }</span></span>
 <span id="L31"><span class="lineNum">      31</span>              : </span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">         358 : Interval::Interval(int chromatic)</span></span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">         358 :     : diatonic(chromatic2diatonic(chromatic)), chromatic(chromatic)</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">         359 : Interval::Interval(int chromatic)</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">         359 :     : diatonic(chromatic2diatonic(chromatic)), chromatic(chromatic)</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : {</span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">         358 : }</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">         359 : }</span></span>
 <span id="L36"><span class="lineNum">      36</span>              : </span>
 <span id="L37"><span class="lineNum">      37</span>              : //---------------------------------------------------------</span>
 <span id="L38"><span class="lineNum">      38</span>              : //   flip</span>
@@ -123,9 +123,9 @@
 <span id="L65"><span class="lineNum">      65</span>              : //   isZero</span>
 <span id="L66"><span class="lineNum">      66</span>              : //---------------------------------------------------------</span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">       26152 : bool Interval::isZero() const</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">       26158 : bool Interval::isZero() const</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : {</span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       26152 :     return diatonic == 0 &amp;&amp; chromatic == 0;</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       26158 :     return diatonic == 0 &amp;&amp; chromatic == 0;</span></span>
 <span id="L71"><span class="lineNum">      71</span>              : }</span>
 <span id="L72"><span class="lineNum">      72</span>              : </span>
 <span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          84 : Interval Interval::fromOrnamentInterval(OrnamentInterval ornInt)</span></span>
@@ -233,7 +233,7 @@
 <span id="L175"><span class="lineNum">     175</span>              :     Interval(7, 12)           // 25 Perfect Octave</span>
 <span id="L176"><span class="lineNum">     176</span>              : };</span>
 <span id="L177"><span class="lineNum">     177</span>              : </span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">         360 : int Interval::chromatic2diatonic(int semitones)</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">         361 : int Interval::chromatic2diatonic(int semitones)</span></span>
 <span id="L179"><span class="lineNum">     179</span>              : {</span>
 <span id="L180"><span class="lineNum">     180</span>              :     static constexpr int il[12] = {</span>
 <span id="L181"><span class="lineNum">     181</span>              :         0,        // Perfect Unison</span>
@@ -250,16 +250,16 @@
 <span id="L192"><span class="lineNum">     192</span>              :         22,       // Major Seventh</span>
 <span id="L193"><span class="lineNum">     193</span>              :         // 25    Perfect Octave</span>
 <span id="L194"><span class="lineNum">     194</span>              :     };</span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">         360 :     bool down = semitones &lt; 0;</span></span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">         360 :     if (down) {</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">         361 :     bool down = semitones &lt; 0;</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">         361 :     if (down) {</span></span>
 <span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">         248 :         semitones = -semitones;</span></span>
 <span id="L198"><span class="lineNum">     198</span>              :     }</span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">         360 :     int val = semitones % 12;</span></span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">         360 :     int octave = semitones / 12;</span></span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">         360 :     int intervalIndex = il[val];</span></span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">         360 :     int steps = allIntervals[intervalIndex].diatonic;</span></span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">         360 :     steps = steps + octave * 7;</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">         360 :     return down ? -steps : steps;</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">         361 :     int val = semitones % 12;</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">         361 :     int octave = semitones / 12;</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">         361 :     int intervalIndex = il[val];</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">         361 :     int steps = allIntervals[intervalIndex].diatonic;</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">         361 :     steps = steps + octave * 7;</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">         361 :     return down ? -steps : steps;</span></span>
 <span id="L205"><span class="lineNum">     205</span>              : }</span>
 <span id="L206"><span class="lineNum">     206</span>              : }</span>
         </pre>
