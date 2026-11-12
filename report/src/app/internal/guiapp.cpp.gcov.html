@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">75</td>
+            <td class="headerCovTableEntry">79</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -180,44 +180,68 @@
 <span id="L122"><span class="lineNum">     122</span> <span class="tlaUNC">           0 :         startupScenario-&gt;setStartupScoreFile(file);</span></span>
 <span id="L123"><span class="lineNum">     123</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L124"><span class="lineNum">     124</span>              : </span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaUNC">           0 :     startupScenario-&gt;runOnSplashScreen();</span></span>
-<span id="L126"><span class="lineNum">     126</span>              : </span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaUNC">           0 :     QMetaObject::invokeMethod(qApp, [this, ctxId, startupScenario]() {</span></span>
-<span id="L128"><span class="lineNum">     128</span>              : #ifdef MUE_ENABLE_SPLASHSCREEN</span>
-<span id="L129"><span class="lineNum">     129</span>              :         if (m_splashScreen) {</span>
-<span id="L130"><span class="lineNum">     130</span>              :             m_splashScreen-&gt;close();</span>
-<span id="L131"><span class="lineNum">     131</span>              :             delete m_splashScreen;</span>
-<span id="L132"><span class="lineNum">     132</span>              :             m_splashScreen = nullptr;</span>
-<span id="L133"><span class="lineNum">     133</span>              :         }</span>
-<span id="L134"><span class="lineNum">     134</span>              : #endif</span>
-<span id="L135"><span class="lineNum">     135</span>              : </span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaUNC">           0 :         startupScenario-&gt;runAfterSplashScreen();</span></span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaUNC">           0 :     }, Qt::QueuedConnection);</span></span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L139"><span class="lineNum">     139</span>              : </span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaUNC">           0 : void MuseScoreGuiApp::applyCommandLineOptions(const std::shared_ptr&lt;CmdOptions&gt;&amp; opt)</span></span>
-<span id="L141"><span class="lineNum">     141</span>              : {</span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaUNC">           0 :     GuiApplication::applyCommandLineOptions(opt);</span></span>
-<span id="L143"><span class="lineNum">     143</span>              : </span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :     std::shared_ptr&lt;MuseScoreCmdOptions&gt; options = std::dynamic_pointer_cast&lt;MuseScoreCmdOptions&gt;(opt);</span></span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(options) {</span></span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L147"><span class="lineNum">     147</span>              :     }</span>
-<span id="L148"><span class="lineNum">     148</span>              : </span>
-<span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 :     if (options-&gt;app.revertToFactorySettings) {</span></span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 :         appshellConfiguration()-&gt;revertToFactorySettings(options-&gt;app.revertToFactorySettings.value());</span></span>
-<span id="L151"><span class="lineNum">     151</span>              :     }</span>
-<span id="L152"><span class="lineNum">     152</span>              : </span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaUNC">           0 :     if (guitarProConfiguration()) {</span></span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaUNC">           0 :         if (options-&gt;guitarPro.experimental) {</span></span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaUNC">           0 :             guitarProConfiguration()-&gt;setExperimental(true);</span></span>
-<span id="L156"><span class="lineNum">     156</span>              :         }</span>
-<span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaUNC">           0 :         if (options-&gt;guitarPro.linkedTabStaffCreated) {</span></span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaUNC">           0 :             guitarProConfiguration()-&gt;setLinkedTabStaffCreated(true);</span></span>
-<span id="L160"><span class="lineNum">     160</span>              :         }</span>
-<span id="L161"><span class="lineNum">     161</span>              :     }</span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L125"><span class="lineNum">     125</span>              : #ifdef MUSE_MODULE_TESTFLOW</span>
+<span id="L126"><span class="lineNum">     126</span>              :     //! NOTE Nobody answers dialogs during a test case run, they are skipped from the startup</span>
+<span id="L127"><span class="lineNum">     127</span>              :     if (options-&gt;testflow.has_value()) {</span>
+<span id="L128"><span class="lineNum">     128</span>              :         testflowCmdRunner()-&gt;prepare(ctxId, options-&gt;testflow.value());</span>
+<span id="L129"><span class="lineNum">     129</span>              :     }</span>
+<span id="L130"><span class="lineNum">     130</span>              : #endif</span>
+<span id="L131"><span class="lineNum">     131</span>              : </span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaUNC">           0 :     startupScenario-&gt;runOnSplashScreen();</span></span>
+<span id="L133"><span class="lineNum">     133</span>              : </span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaUNC">           0 :     QMetaObject::invokeMethod(qApp, [this, ctxId, startupScenario, options]() {</span></span>
+<span id="L135"><span class="lineNum">     135</span>              : #ifdef MUE_ENABLE_SPLASHSCREEN</span>
+<span id="L136"><span class="lineNum">     136</span>              :         if (m_splashScreen) {</span>
+<span id="L137"><span class="lineNum">     137</span>              :             m_splashScreen-&gt;close();</span>
+<span id="L138"><span class="lineNum">     138</span>              :             delete m_splashScreen;</span>
+<span id="L139"><span class="lineNum">     139</span>              :             m_splashScreen = nullptr;</span>
+<span id="L140"><span class="lineNum">     140</span>              :         }</span>
+<span id="L141"><span class="lineNum">     141</span>              : #endif</span>
+<span id="L142"><span class="lineNum">     142</span>              : </span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC">           0 :         muse::async::Promise&lt;muse::Ret&gt; startup = startupScenario-&gt;runAfterSplashScreen();</span></span>
+<span id="L144"><span class="lineNum">     144</span>              : </span>
+<span id="L145"><span class="lineNum">     145</span>              : #ifdef MUSE_MODULE_TESTFLOW</span>
+<span id="L146"><span class="lineNum">     146</span>              :         //! NOTE Run the test case requested from the command line when the startup page is opened</span>
+<span id="L147"><span class="lineNum">     147</span>              :         if (options-&gt;testflow.has_value()) {</span>
+<span id="L148"><span class="lineNum">     148</span>              :             startup.onResolve(this, [this, ctxId](const muse::Ret&amp;) {</span>
+<span id="L149"><span class="lineNum">     149</span>              :                 testflowCmdRunner()-&gt;run(ctxId);</span>
+<span id="L150"><span class="lineNum">     150</span>              :             });</span>
+<span id="L151"><span class="lineNum">     151</span>              :         }</span>
+<span id="L152"><span class="lineNum">     152</span>              : #endif</span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaUNC">           0 :     }, Qt::QueuedConnection);</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaUNC">           0 : void MuseScoreGuiApp::applyCommandLineOptions(const std::shared_ptr&lt;CmdOptions&gt;&amp; opt)</span></span>
+<span id="L157"><span class="lineNum">     157</span>              : {</span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaUNC">           0 :     GuiApplication::applyCommandLineOptions(opt);</span></span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaUNC">           0 :     std::shared_ptr&lt;MuseScoreCmdOptions&gt; options = std::dynamic_pointer_cast&lt;MuseScoreCmdOptions&gt;(opt);</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(options) {</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L163"><span class="lineNum">     163</span>              :     }</span>
+<span id="L164"><span class="lineNum">     164</span>              : </span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaUNC">           0 :     if (options-&gt;network.offline) {</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaUNC">           0 :         networkConfiguration()-&gt;setOffline(options-&gt;network.offline.value());</span></span>
+<span id="L167"><span class="lineNum">     167</span>              :     }</span>
+<span id="L168"><span class="lineNum">     168</span>              : </span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaUNC">           0 :     if (options-&gt;audio.outputDisabled) {</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaUNC">           0 :         audioConfiguration()-&gt;setOutputDisabled(options-&gt;audio.outputDisabled.value());</span></span>
+<span id="L171"><span class="lineNum">     171</span>              :     }</span>
+<span id="L172"><span class="lineNum">     172</span>              : </span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 :     if (options-&gt;app.revertToFactorySettings) {</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaUNC">           0 :         appshellConfiguration()-&gt;revertToFactorySettings(options-&gt;app.revertToFactorySettings.value());</span></span>
+<span id="L175"><span class="lineNum">     175</span>              :     }</span>
+<span id="L176"><span class="lineNum">     176</span>              : </span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaUNC">           0 :     if (guitarProConfiguration()) {</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaUNC">           0 :         if (options-&gt;guitarPro.experimental) {</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaUNC">           0 :             guitarProConfiguration()-&gt;setExperimental(true);</span></span>
+<span id="L180"><span class="lineNum">     180</span>              :         }</span>
+<span id="L181"><span class="lineNum">     181</span>              : </span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaUNC">           0 :         if (options-&gt;guitarPro.linkedTabStaffCreated) {</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaUNC">           0 :             guitarProConfiguration()-&gt;setLinkedTabStaffCreated(true);</span></span>
+<span id="L184"><span class="lineNum">     184</span>              :         }</span>
+<span id="L185"><span class="lineNum">     185</span>              :     }</span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>
             </tr>

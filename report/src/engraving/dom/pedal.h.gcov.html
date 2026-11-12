@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -123,23 +123,24 @@
 <span id="L65"><span class="lineNum">      65</span>              :     static const String PEDAL_SYMBOL;</span>
 <span id="L66"><span class="lineNum">      66</span>              :     static const String STAR_SYMBOL;</span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
-<span id="L68"><span class="lineNum">      68</span>              :     Pedal(DummyParentOr&lt;EngravingItem&gt; parent);</span>
+<span id="L68"><span class="lineNum">      68</span>              :     Pedal(DummyParent* parent);</span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
 <span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           2 :     Pedal* clone() const override { return new Pedal(*this); }</span></span>
-<span id="L71"><span class="lineNum">      71</span>              : </span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">        1109 :     Anchor anchor() const override { return Anchor::SEGMENT; }</span></span>
-<span id="L73"><span class="lineNum">      73</span>              : </span>
-<span id="L74"><span class="lineNum">      74</span>              :     LineSegment* createLineSegment() override;</span>
-<span id="L75"><span class="lineNum">      75</span>              :     PropertyValue propertyDefault(Pid propertyId) const override;</span>
-<span id="L76"><span class="lineNum">      76</span>              :     bool setProperty(Pid propertyId, const PropertyValue&amp; v) override;</span>
-<span id="L77"><span class="lineNum">      77</span>              : </span>
-<span id="L78"><span class="lineNum">      78</span>              :     Pedal* findNextInStaff() const;</span>
-<span id="L79"><span class="lineNum">      79</span>              :     bool connect45HookToNext() const;</span>
-<span id="L80"><span class="lineNum">      80</span>              : </span>
-<span id="L81"><span class="lineNum">      81</span>              :     friend class PedalLine;</span>
-<span id="L82"><span class="lineNum">      82</span>              : };</span>
-<span id="L83"><span class="lineNum">      83</span>              : } // namespace mu::engraving</span>
-<span id="L84"><span class="lineNum">      84</span>              : #endif</span>
+<span id="L71"><span class="lineNum">      71</span>              :     void setOwnershipParent(EngravingObject*) = delete;</span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        1109 :     Anchor anchor() const override { return Anchor::SEGMENT; }</span></span>
+<span id="L74"><span class="lineNum">      74</span>              : </span>
+<span id="L75"><span class="lineNum">      75</span>              :     LineSegment* createLineSegment() override;</span>
+<span id="L76"><span class="lineNum">      76</span>              :     PropertyValue propertyDefault(Pid propertyId) const override;</span>
+<span id="L77"><span class="lineNum">      77</span>              :     bool setProperty(Pid propertyId, const PropertyValue&amp; v) override;</span>
+<span id="L78"><span class="lineNum">      78</span>              : </span>
+<span id="L79"><span class="lineNum">      79</span>              :     Pedal* findNextInStaff() const;</span>
+<span id="L80"><span class="lineNum">      80</span>              :     bool connect45HookToNext() const;</span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span>              :     friend class PedalLine;</span>
+<span id="L83"><span class="lineNum">      83</span>              : };</span>
+<span id="L84"><span class="lineNum">      84</span>              : } // namespace mu::engraving</span>
+<span id="L85"><span class="lineNum">      85</span>              : #endif</span>
         </pre>
               </td>
             </tr>

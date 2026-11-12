@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -95,128 +95,128 @@
 <span id="L37"><span class="lineNum">      37</span>              : #include &quot;dom/text.h&quot;</span>
 <span id="L38"><span class="lineNum">      38</span>              : </span>
 <span id="L39"><span class="lineNum">      39</span>              : namespace mu::engraving::rendering::score {</span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC tlaBgGNC">         738 : void AlignmentLayout::alignItemsGroup(const std::vector&lt;EngravingItem*&gt;&amp; elements, const System* system)</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC tlaBgGNC">         739 : void AlignmentLayout::alignItemsGroup(const std::vector&lt;EngravingItem*&gt;&amp; elements, const System* system)</span></span>
 <span id="L41"><span class="lineNum">      41</span>              : {</span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">         738 :     if (elements.empty()) {</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">         739 :     if (elements.empty()) {</span></span>
 <span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">         279 :         return;</span></span>
 <span id="L44"><span class="lineNum">      44</span>              :     }</span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">         459 :     double outermostY = yOpticalCenter(elements.front());</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        2036 :     for (const EngravingItem* element : elements) {</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">        1577 :         double curY = yOpticalCenter(element);</span></span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        1577 :         outermostY = isAbove(element) ? std::min(outermostY, curY) : std::max(outermostY, curY);</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">         460 :     double outermostY = yOpticalCenter(elements.front());</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        2038 :     for (const EngravingItem* element : elements) {</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">        1578 :         double curY = yOpticalCenter(element);</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        1578 :         outermostY = isAbove(element) ? std::min(outermostY, curY) : std::max(outermostY, curY);</span></span>
 <span id="L50"><span class="lineNum">      50</span>              :     }</span>
 <span id="L51"><span class="lineNum">      51</span>              : </span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">        2036 :     for (EngravingItem* element : elements) {</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        1577 :         moveItemToY(element, outermostY, system);</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">        2038 :     for (EngravingItem* element : elements) {</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">        1578 :         moveItemToY(element, outermostY, system);</span></span>
 <span id="L54"><span class="lineNum">      54</span>              :     }</span>
 <span id="L55"><span class="lineNum">      55</span>              : }</span>
 <span id="L56"><span class="lineNum">      56</span>              : </span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">          61 : void AlignmentLayout::alignHopoLetters(const HammerOnPullOff* hopo, const System* system)</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">          62 : void AlignmentLayout::alignHopoLetters(const HammerOnPullOff* hopo, const System* system)</span></span>
 <span id="L58"><span class="lineNum">      58</span>              : {</span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">          61 :     IF_ASSERT_FAILED(!hopo-&gt;segmentsEmpty()) {</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">          62 :     IF_ASSERT_FAILED(!hopo-&gt;segmentsEmpty()) {</span></span>
 <span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L61"><span class="lineNum">      61</span>              :     }</span>
 <span id="L62"><span class="lineNum">      62</span>              : </span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC tlaBgGNC">          61 :     std::vector&lt;EngravingItem*&gt; itemsToAlign;</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          61 :     for (SpannerSegment* seg : hopo-&gt;spannerSegments()) {</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          61 :         if (seg-&gt;system() == system) {</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          61 :             HammerOnPullOffSegment* hopoSegment = toHammerOnPullOffSegment(seg);</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">         136 :             for (HammerOnPullOffText* hopoText : hopoSegment-&gt;hopoText()) {</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">          75 :                 itemsToAlign.push_back(hopoText);</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC tlaBgGNC">          62 :     std::vector&lt;EngravingItem*&gt; itemsToAlign;</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          62 :     for (SpannerSegment* seg : hopo-&gt;spannerSegments()) {</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          62 :         if (seg-&gt;system() == system) {</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          62 :             HammerOnPullOffSegment* hopoSegment = toHammerOnPullOffSegment(seg);</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">         138 :             for (HammerOnPullOffText* hopoText : hopoSegment-&gt;hopoText()) {</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">          76 :                 itemsToAlign.push_back(hopoText);</span></span>
 <span id="L69"><span class="lineNum">      69</span>              :             }</span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">          61 :             break;</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">          62 :             break;</span></span>
 <span id="L71"><span class="lineNum">      71</span>              :         }</span>
 <span id="L72"><span class="lineNum">      72</span>              :     }</span>
 <span id="L73"><span class="lineNum">      73</span>              : </span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">          61 :     if (itemsToAlign.empty()) {</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">          62 :     if (itemsToAlign.empty()) {</span></span>
 <span id="L75"><span class="lineNum">      75</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L76"><span class="lineNum">      76</span>              :     }</span>
 <span id="L77"><span class="lineNum">      77</span>              : </span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC tlaBgGNC">          61 :     bool above = isAbove(itemsToAlign.front());</span></span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">         136 :     for (EngravingItem* item : itemsToAlign) {</span></span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">          75 :         if (isAbove(item) != above) {</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC tlaBgGNC">          62 :     bool above = isAbove(itemsToAlign.front());</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">         138 :     for (EngravingItem* item : itemsToAlign) {</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">          76 :         if (isAbove(item) != above) {</span></span>
 <span id="L81"><span class="lineNum">      81</span> <span class="tlaUNC tlaBgUNC">           0 :             return; // Don't try to align items split above/below</span></span>
 <span id="L82"><span class="lineNum">      82</span>              :         }</span>
 <span id="L83"><span class="lineNum">      83</span>              :     }</span>
 <span id="L84"><span class="lineNum">      84</span>              : </span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC tlaBgGNC">          61 :     ChordRest* scr = toChordRest(hopo-&gt;startElement());</span></span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">          61 :     if (scr &amp;&amp; scr-&gt;isChord()) {</span></span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">          61 :         for (Articulation* art : toChord(scr)-&gt;articulations()) {</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC tlaBgGNC">          62 :     ChordRest* scr = toChordRest(hopo-&gt;startElement());</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">          62 :     if (scr &amp;&amp; scr-&gt;isChord()) {</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">          62 :         for (Articulation* art : toChord(scr)-&gt;articulations()) {</span></span>
 <span id="L88"><span class="lineNum">      88</span> <span class="tlaUNC tlaBgUNC">           0 :             if (art-&gt;isTapping() &amp;&amp; toTapping(art)-&gt;text() &amp;&amp; isAbove(art) == above) {</span></span>
 <span id="L89"><span class="lineNum">      89</span> <span class="tlaUNC">           0 :                 itemsToAlign.push_back(art);</span></span>
 <span id="L90"><span class="lineNum">      90</span>              :             }</span>
 <span id="L91"><span class="lineNum">      91</span>              :         }</span>
 <span id="L92"><span class="lineNum">      92</span>              :     }</span>
 <span id="L93"><span class="lineNum">      93</span>              : </span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC tlaBgGNC">          61 :     alignItemsGroup(itemsToAlign, system);</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">          61 : }</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC tlaBgGNC">          62 :     alignItemsGroup(itemsToAlign, system);</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">          62 : }</span></span>
 <span id="L96"><span class="lineNum">      96</span>              : </span>
-<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">       14776 : void AlignmentLayout::alignItemsWithTheirSnappingChain(const std::vector&lt;EngravingItem*&gt;&amp; elements, const System* system)</span></span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">       15572 : void AlignmentLayout::alignItemsWithTheirSnappingChain(const std::vector&lt;EngravingItem*&gt;&amp; elements, const System* system)</span></span>
 <span id="L98"><span class="lineNum">      98</span>              : {</span>
-<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">       14776 :     std::set&lt;EngravingItem*&gt; alignedItems;</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">       15572 :     std::set&lt;EngravingItem*&gt; alignedItems;</span></span>
 <span id="L100"><span class="lineNum">     100</span>              : </span>
-<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">       14776 :     double outermostY = 0.0;</span></span>
-<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">       14776 :     bool firstItem = true;</span></span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">        2811 :     auto computeOutermostY = [&amp;outermostY, &amp;firstItem](EngravingItem* item) {</span></span>
-<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">        2811 :         double curY = yOpticalCenter(item);</span></span>
-<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">        2811 :         if (firstItem) {</span></span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">        2605 :             outermostY = curY;</span></span>
-<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">        2605 :             firstItem = false;</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">       15572 :     double outermostY = 0.0;</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">       15572 :     bool firstItem = true;</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">        2824 :     auto computeOutermostY = [&amp;outermostY, &amp;firstItem](EngravingItem* item) {</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">        2824 :         double curY = yOpticalCenter(item);</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">        2824 :         if (firstItem) {</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">        2618 :             outermostY = curY;</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">        2618 :             firstItem = false;</span></span>
 <span id="L108"><span class="lineNum">     108</span>              :         } else {</span>
 <span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">         206 :             outermostY = item-&gt;placeAbove() ? std::min(outermostY, curY) : std::max(outermostY, curY);</span></span>
 <span id="L110"><span class="lineNum">     110</span>              :         }</span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        2811 :     };</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        2824 :     };</span></span>
 <span id="L112"><span class="lineNum">     112</span>              : </span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">        2811 :     auto moveElementsToOutermostY = [&amp;outermostY, &amp;alignedItems, system](EngravingItem* item) {</span></span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">        2811 :         alignedItems.insert(item);</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        2811 :         moveItemToY(item, outermostY, system);</span></span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">       17587 :     };</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">        2824 :     auto moveElementsToOutermostY = [&amp;outermostY, &amp;alignedItems, system](EngravingItem* item) {</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">        2824 :         alignedItems.insert(item);</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        2824 :         moveItemToY(item, outermostY, system);</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">       18396 :     };</span></span>
 <span id="L117"><span class="lineNum">     117</span>              : </span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">       17581 :     for (EngravingItem* item : elements) {</span></span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">        2805 :         if (muse::contains(alignedItems, item)) {</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">       18390 :     for (EngravingItem* item : elements) {</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">        2818 :         if (muse::contains(alignedItems, item)) {</span></span>
 <span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">         200 :             continue;</span></span>
 <span id="L121"><span class="lineNum">     121</span>              :         }</span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">        2605 :         firstItem = true;</span></span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">        2605 :         item-&gt;ldata()-&gt;scanConnectedItemsInSnappingChain(system, computeOutermostY);</span></span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">        2605 :         item-&gt;ldata()-&gt;scanConnectedItemsInSnappingChain(system, moveElementsToOutermostY);</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">        2618 :         firstItem = true;</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">        2618 :         item-&gt;ldata()-&gt;scanConnectedItemsInSnappingChain(system, computeOutermostY);</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">        2618 :         item-&gt;ldata()-&gt;scanConnectedItemsInSnappingChain(system, moveElementsToOutermostY);</span></span>
 <span id="L125"><span class="lineNum">     125</span>              :     }</span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">       14776 : }</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">       15572 : }</span></span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">        4436 : void AlignmentLayout::alignItemsForSystem(const std::vector&lt;EngravingItem*&gt;&amp; elements, const System* system)</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">        4732 : void AlignmentLayout::alignItemsForSystem(const std::vector&lt;EngravingItem*&gt;&amp; elements, const System* system)</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : {</span>
 <span id="L130"><span class="lineNum">     130</span>              :     struct StaffItemGroups {</span>
 <span id="L131"><span class="lineNum">     131</span>              :         std::vector&lt;EngravingItem*&gt; itemsAbove;</span>
 <span id="L132"><span class="lineNum">     132</span>              :         std::vector&lt;EngravingItem*&gt; itemsBelow;</span>
 <span id="L133"><span class="lineNum">     133</span>              :     };</span>
 <span id="L134"><span class="lineNum">     134</span>              : </span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">        4436 :     std::map&lt;staff_idx_t, StaffItemGroups&gt; staffItems;</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">        4732 :     std::map&lt;staff_idx_t, StaffItemGroups&gt; staffItems;</span></span>
 <span id="L136"><span class="lineNum">     136</span>              : </span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">        5697 :     for (EngravingItem* item : elements) {</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">        5993 :     for (EngravingItem* item : elements) {</span></span>
 <span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">        1261 :         if (item-&gt;addToSkyline() &amp;&amp; !item-&gt;excludeVerticalAlign()) {</span></span>
 <span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">        1259 :             item-&gt;placeAbove() ? staffItems[item-&gt;staffIdx()].itemsAbove.push_back(item)</span></span>
 <span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">        1259 :             : staffItems[item-&gt;staffIdx()].itemsBelow.push_back(item);</span></span>
 <span id="L141"><span class="lineNum">     141</span>              :         }</span>
 <span id="L142"><span class="lineNum">     142</span>              :     }</span>
 <span id="L143"><span class="lineNum">     143</span>              : </span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">        4720 :     for (const auto&amp; staffItem : staffItems) {</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">        5016 :     for (const auto&amp; staffItem : staffItems) {</span></span>
 <span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">         284 :         AlignmentLayout::alignItemsGroup(staffItem.second.itemsAbove, system);</span></span>
 <span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">         284 :         AlignmentLayout::alignItemsGroup(staffItem.second.itemsBelow, system);</span></span>
 <span id="L147"><span class="lineNum">     147</span>              :     }</span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">        4436 : }</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">        4732 : }</span></span>
 <span id="L149"><span class="lineNum">     149</span>              : </span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">        4388 : void AlignmentLayout::moveItemToY(EngravingItem* item, double y, const System* system)</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">        4402 : void AlignmentLayout::moveItemToY(EngravingItem* item, double y, const System* system)</span></span>
 <span id="L151"><span class="lineNum">     151</span>              : {</span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        4388 :     double curY = yOpticalCenter(item);</span></span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">        4388 :     double yDiff = y - curY;</span></span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">        4388 :     item-&gt;mutldata()-&gt;moveY(yDiff);</span></span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">        4388 :     SystemLayout::updateSkylineForElement(item, system, yDiff);</span></span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">        4388 : }</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        4402 :     double curY = yOpticalCenter(item);</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">        4402 :     double yDiff = y - curY;</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">        4402 :     item-&gt;mutldata()-&gt;moveY(yDiff);</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">        4402 :     SystemLayout::updateSkylineForElement(item, system, yDiff);</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">        4402 : }</span></span>
 <span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        9235 : double AlignmentLayout::yOpticalCenter(const EngravingItem* item)</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        9264 : double AlignmentLayout::yOpticalCenter(const EngravingItem* item)</span></span>
 <span id="L159"><span class="lineNum">     159</span>              : {</span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        9235 :     double curY = item-&gt;ldata()-&gt;pos().y();</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        9235 :     switch (item-&gt;type()) {</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        9264 :     double curY = item-&gt;ldata()-&gt;pos().y();</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        9264 :     switch (item-&gt;type()) {</span></span>
 <span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">        2354 :     case ElementType::DYNAMIC:</span></span>
 <span id="L163"><span class="lineNum">     163</span>              :     case ElementType::EXPRESSION:</span>
 <span id="L164"><span class="lineNum">     164</span>              :     {</span>
@@ -243,10 +243,10 @@
 <span id="L185"><span class="lineNum">     185</span>              :         }</span>
 <span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">        2354 :         break;</span></span>
 <span id="L187"><span class="lineNum">     187</span>              :     }</span>
-<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">         952 :     case ElementType::HAIRPIN_SEGMENT:</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">         974 :     case ElementType::HAIRPIN_SEGMENT:</span></span>
 <span id="L189"><span class="lineNum">     189</span>              :     {</span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">         952 :         const HairpinSegment* hairpinSeg = toHairpinSegment(item);</span></span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">         952 :         if (hairpinSeg-&gt;hairpin()-&gt;isLineType()) {</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">         974 :         const HairpinSegment* hairpinSeg = toHairpinSegment(item);</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">         974 :         if (hairpinSeg-&gt;hairpin()-&gt;isLineType()) {</span></span>
 <span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">          52 :             Text* text = hairpinSeg-&gt;text();</span></span>
 <span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">          52 :             if (!text) {</span></span>
 <span id="L194"><span class="lineNum">     194</span> <span class="tlaUNC tlaBgUNC">           0 :                 text = hairpinSeg-&gt;endText();</span></span>
@@ -257,7 +257,7 @@
 <span id="L199"><span class="lineNum">     199</span> <span class="tlaUNC tlaBgUNC">           0 :                 curY -= 0.5 * item-&gt;spatium();</span></span>
 <span id="L200"><span class="lineNum">     200</span>              :             }</span>
 <span id="L201"><span class="lineNum">     201</span>              :         }</span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC tlaBgGNC">         952 :         break;</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC tlaBgGNC">         974 :         break;</span></span>
 <span id="L203"><span class="lineNum">     203</span>              :     }</span>
 <span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">         653 :     case ElementType::FRET_DIAGRAM:</span></span>
 <span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">         653 :         curY += toFretDiagram(item)-&gt;ldata()-&gt;gridHeight;</span></span>
@@ -269,15 +269,15 @@
 <span id="L211"><span class="lineNum">     211</span>              :         }</span>
 <span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">        1881 :         break;</span></span>
 <span id="L213"><span class="lineNum">     213</span>              :     }</span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        3395 :     default:</span></span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        3395 :         break;</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        3402 :     default:</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        3402 :         break;</span></span>
 <span id="L216"><span class="lineNum">     216</span>              :     }</span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        9235 :     return curY;</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        9264 :     return curY;</span></span>
 <span id="L218"><span class="lineNum">     218</span>              : }</span>
 <span id="L219"><span class="lineNum">     219</span>              : </span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        1713 : bool AlignmentLayout::isAbove(const EngravingItem* item)</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        1716 : bool AlignmentLayout::isAbove(const EngravingItem* item)</span></span>
 <span id="L221"><span class="lineNum">     221</span>              : {</span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        1713 :     return item-&gt;isArticulationFamily() ? toArticulation(item)-&gt;ldata()-&gt;up() : item-&gt;placeAbove();</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        1716 :     return item-&gt;isArticulationFamily() ? toArticulation(item)-&gt;ldata()-&gt;up() : item-&gt;placeAbove();</span></span>
 <span id="L223"><span class="lineNum">     223</span>              : }</span>
 <span id="L224"><span class="lineNum">     224</span>              : } // namespace mu::engraving::rendering::dev</span>
         </pre>

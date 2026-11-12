@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -129,9 +129,9 @@
 <span id="L71"><span class="lineNum">      71</span>              :     }</span>
 <span id="L72"><span class="lineNum">      72</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L73"><span class="lineNum">      73</span>              : </span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC tlaBgGNC">        1800 : bool StringData::isNull() const</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC tlaBgGNC">        1805 : bool StringData::isNull() const</span></span>
 <span id="L75"><span class="lineNum">      75</span>              : {</span>
-<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        1800 :     return *this == StringData();</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        1805 :     return *this == StringData();</span></span>
 <span id="L77"><span class="lineNum">      77</span>              : }</span>
 <span id="L78"><span class="lineNum">      78</span>              : </span>
 <span id="L79"><span class="lineNum">      79</span>              : // called from import (musicxml/guitarpro/...)</span>
@@ -174,10 +174,10 @@
 <span id="L116"><span class="lineNum">     116</span>              : //          from highest (0) to lowest (strings()-1)</span>
 <span id="L117"><span class="lineNum">     117</span>              : //---------------------------------------------------------</span>
 <span id="L118"><span class="lineNum">     118</span>              : </span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          43 : bool StringData::convertPitch(int pitch, const Staff* staff, const Fraction&amp; tick, int* string, int* fret) const</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          44 : bool StringData::convertPitch(int pitch, const Staff* staff, const Fraction&amp; tick, int* string, int* fret) const</span></span>
 <span id="L120"><span class="lineNum">     120</span>              : {</span>
-<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">          43 :     return convertPitch(pitch, pitchOffsetAt(staff, tick), string, fret);</span></span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">          43 : }</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">          44 :     return convertPitch(pitch, pitchOffsetAt(staff, tick), string, fret);</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">          44 : }</span></span>
 <span id="L123"><span class="lineNum">     123</span>              : </span>
 <span id="L124"><span class="lineNum">     124</span>              : //---------------------------------------------------------</span>
 <span id="L125"><span class="lineNum">     125</span>              : //   getPitch</span>
@@ -416,15 +416,15 @@
 <span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">        1194 :     return -(staff ? staff-&gt;originPart(Part::MAIN_INSTRUMENT_TICK)-&gt;instrument()-&gt;transpose().chromatic : 0);</span></span>
 <span id="L359"><span class="lineNum">     359</span>              : }</span>
 <span id="L360"><span class="lineNum">     360</span>              : </span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        1349 : int StringData::pitchOffsetAt(const Staff* staff, const Fraction&amp; tick)</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        1350 : int StringData::pitchOffsetAt(const Staff* staff, const Fraction&amp; tick)</span></span>
 <span id="L362"><span class="lineNum">     362</span>              : {</span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">        1349 :     if (!staff) {</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">        1350 :     if (!staff) {</span></span>
 <span id="L364"><span class="lineNum">     364</span> <span class="tlaUNC tlaBgUNC">           0 :         return 0;</span></span>
 <span id="L365"><span class="lineNum">     365</span>              :     }</span>
-<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC tlaBgGNC">        1349 :     int transp = staff-&gt;originPart(tick)-&gt;instrument(tick)-&gt;transpose().chromatic;</span></span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">        1349 :     int offset = -transp + staff-&gt;pitchOffset(tick);</span></span>
-<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">        1349 :     const CapoParams&amp; capo = staff-&gt;capo(tick);</span></span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">        1349 :     if (capo.active) {</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC tlaBgGNC">        1350 :     int transp = staff-&gt;originPart(tick)-&gt;instrument(tick)-&gt;transpose().chromatic;</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">        1350 :     int offset = -transp + staff-&gt;pitchOffset(tick);</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">        1350 :     const CapoParams&amp; capo = staff-&gt;capo(tick);</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">        1350 :     if (capo.active) {</span></span>
 <span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">         228 :         switch (capo.transposeMode) {</span></span>
 <span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">           2 :         case CapoParams::TransposeMode::PLAYBACK_ONLY:</span></span>
 <span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">           2 :             break;</span></span>
@@ -434,7 +434,7 @@
 <span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">         226 :             break;</span></span>
 <span id="L377"><span class="lineNum">     377</span>              :         }</span>
 <span id="L378"><span class="lineNum">     378</span>              :     }</span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">        1349 :     return offset;</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">        1350 :     return offset;</span></span>
 <span id="L380"><span class="lineNum">     380</span>              : }</span>
 <span id="L381"><span class="lineNum">     381</span>              : </span>
 <span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">        2137 : int StringData::pitchOffsetAt(const Staff* staff, const Fraction&amp; tick, int string)</span></span>
@@ -478,11 +478,11 @@
 <span id="L420"><span class="lineNum">     420</span>              : //          from highest (0) to lowest (strings()-1)</span>
 <span id="L421"><span class="lineNum">     421</span>              : //---------------------------------------------------------</span>
 <span id="L422"><span class="lineNum">     422</span>              : </span>
-<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">         176 : bool StringData::convertPitch(int pitch, int pitchOffset, int* string, int* fret, const CapoParams&amp; capo) const</span></span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">         177 : bool StringData::convertPitch(int pitch, int pitchOffset, int* string, int* fret, const CapoParams&amp; capo) const</span></span>
 <span id="L424"><span class="lineNum">     424</span>              : {</span>
-<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">         176 :     int strings = static_cast&lt;int&gt;(m_stringTable.size());</span></span>
-<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">         176 :     if (strings &lt; 1) {</span></span>
-<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">          43 :         return false;</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">         177 :     int strings = static_cast&lt;int&gt;(m_stringTable.size());</span></span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">         177 :     if (strings &lt; 1) {</span></span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">          44 :         return false;</span></span>
 <span id="L428"><span class="lineNum">     428</span>              :     }</span>
 <span id="L429"><span class="lineNum">     429</span>              : </span>
 <span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">         133 :     pitch += pitchOffset;</span></span>

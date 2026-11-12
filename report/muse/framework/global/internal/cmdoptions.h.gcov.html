@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -83,23 +83,33 @@
 <span id="L25"><span class="lineNum">      25</span>              : #include &lt;optional&gt;</span>
 <span id="L26"><span class="lineNum">      26</span>              : </span>
 <span id="L27"><span class="lineNum">      27</span>              : #include &quot;global/logger.h&quot;</span>
-<span id="L28"><span class="lineNum">      28</span>              : #include &quot;../iapplication.h&quot;</span>
-<span id="L29"><span class="lineNum">      29</span>              : </span>
-<span id="L30"><span class="lineNum">      30</span>              : namespace muse {</span>
-<span id="L31"><span class="lineNum">      31</span>              : struct CmdOptions {</span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaUNC tlaBgUNC">           0 :     virtual ~CmdOptions() = default;</span></span>
-<span id="L33"><span class="lineNum">      33</span>              : </span>
-<span id="L34"><span class="lineNum">      34</span>              :     IApplication::RunMode runMode = IApplication::RunMode::GuiApp;</span>
-<span id="L35"><span class="lineNum">      35</span>              : </span>
-<span id="L36"><span class="lineNum">      36</span>              :     struct {</span>
-<span id="L37"><span class="lineNum">      37</span>              :         std::optional&lt;muse::logger::Level&gt; loggerLevel;</span>
-<span id="L38"><span class="lineNum">      38</span>              :     } global;</span>
-<span id="L39"><span class="lineNum">      39</span>              : </span>
-<span id="L40"><span class="lineNum">      40</span>              :     struct {</span>
-<span id="L41"><span class="lineNum">      41</span>              :         std::optional&lt;double&gt; physicalDotsPerInch;</span>
-<span id="L42"><span class="lineNum">      42</span>              :     } ui;</span>
-<span id="L43"><span class="lineNum">      43</span>              : };</span>
-<span id="L44"><span class="lineNum">      44</span>              : }</span>
+<span id="L28"><span class="lineNum">      28</span>              : #include &quot;global/io/path.h&quot;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;../iapplication.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : </span>
+<span id="L31"><span class="lineNum">      31</span>              : namespace muse {</span>
+<span id="L32"><span class="lineNum">      32</span>              : struct CmdOptions {</span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaUNC tlaBgUNC">           0 :     virtual ~CmdOptions() = default;</span></span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span>              :     IApplication::RunMode runMode = IApplication::RunMode::GuiApp;</span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span>              :     struct {</span>
+<span id="L38"><span class="lineNum">      38</span>              :         std::optional&lt;muse::logger::Level&gt; loggerLevel;</span>
+<span id="L39"><span class="lineNum">      39</span>              :         std::optional&lt;io::path_t&gt; userDataDir;</span>
+<span id="L40"><span class="lineNum">      40</span>              :     } global;</span>
+<span id="L41"><span class="lineNum">      41</span>              : </span>
+<span id="L42"><span class="lineNum">      42</span>              :     struct {</span>
+<span id="L43"><span class="lineNum">      43</span>              :         std::optional&lt;double&gt; physicalDotsPerInch;</span>
+<span id="L44"><span class="lineNum">      44</span>              :     } ui;</span>
+<span id="L45"><span class="lineNum">      45</span>              : </span>
+<span id="L46"><span class="lineNum">      46</span>              :     struct {</span>
+<span id="L47"><span class="lineNum">      47</span>              :         std::optional&lt;bool&gt; offline;</span>
+<span id="L48"><span class="lineNum">      48</span>              :     } network;</span>
+<span id="L49"><span class="lineNum">      49</span>              : </span>
+<span id="L50"><span class="lineNum">      50</span>              :     struct {</span>
+<span id="L51"><span class="lineNum">      51</span>              :         std::optional&lt;bool&gt; outputDisabled;</span>
+<span id="L52"><span class="lineNum">      52</span>              :     } audio;</span>
+<span id="L53"><span class="lineNum">      53</span>              : };</span>
+<span id="L54"><span class="lineNum">      54</span>              : }</span>
         </pre>
               </td>
             </tr>

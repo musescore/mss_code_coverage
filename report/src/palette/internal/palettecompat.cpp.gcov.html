@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">343</td>
+            <td class="headerCovTableEntry">355</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -188,7 +188,7 @@
 <span id="L130"><span class="lineNum">     130</span>              :         }</span>
 <span id="L131"><span class="lineNum">     131</span>              : </span>
 <span id="L132"><span class="lineNum">     132</span> <span class="tlaUNC">           0 :         Articulation* oldOrnament = toArticulation(item);</span></span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaUNC">           0 :         Ornament* newOrnament = Factory::createOrnament((ChordRest*)(paletteScore-&gt;dummy()));</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaUNC">           0 :         Ornament* newOrnament = Factory::createOrnament(paletteScore-&gt;dummy());</span></span>
 <span id="L134"><span class="lineNum">     134</span> <span class="tlaUNC">           0 :         newOrnament-&gt;setSymId(oldOrnament-&gt;symId());</span></span>
 <span id="L135"><span class="lineNum">     135</span> <span class="tlaUNC">           0 :         cell-&gt;element.reset(newOrnament);</span></span>
 <span id="L136"><span class="lineNum">     136</span> <span class="tlaUNC">           0 :         return;</span></span>
@@ -572,111 +572,129 @@
 <span id="L514"><span class="lineNum">     514</span> <span class="tlaUNC">           0 :     bool containsFFrame = false;</span></span>
 <span id="L515"><span class="lineNum">     515</span> <span class="tlaUNC">           0 :     bool containsLock = false;</span></span>
 <span id="L516"><span class="lineNum">     516</span> <span class="tlaUNC">           0 :     bool containsNoBreak = false;</span></span>
-<span id="L517"><span class="lineNum">     517</span> <span class="tlaUNC">           0 :     for (const PaletteCellPtr&amp; cell : layoutPalette.cells()) {</span></span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaUNC">           0 :         const ElementPtr element = cell-&gt;element;</span></span>
-<span id="L519"><span class="lineNum">     519</span> <span class="tlaUNC">           0 :         if (!element) {</span></span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L521"><span class="lineNum">     521</span>              :         }</span>
-<span id="L522"><span class="lineNum">     522</span>              : </span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaUNC">           0 :         if (element-&gt;isActionIcon() &amp;&amp; toActionIcon(element.get())-&gt;actionType() == ActionIconType::FFRAME) {</span></span>
-<span id="L524"><span class="lineNum">     524</span> <span class="tlaUNC">           0 :             containsFFrame = true;</span></span>
-<span id="L525"><span class="lineNum">     525</span>              :         }</span>
-<span id="L526"><span class="lineNum">     526</span> <span class="tlaUNC">           0 :         if (element-&gt;isActionIcon() &amp;&amp; toActionIcon(element.get())-&gt;actionType() == ActionIconType::PAGE_LOCK) {</span></span>
-<span id="L527"><span class="lineNum">     527</span> <span class="tlaUNC">           0 :             containsLock = true;</span></span>
-<span id="L528"><span class="lineNum">     528</span>              :         }</span>
-<span id="L529"><span class="lineNum">     529</span> <span class="tlaUNC">           0 :         if (element-&gt;isLayoutBreak() &amp;&amp; toLayoutBreak(element.get())-&gt;layoutBreakType() == LayoutBreakType::NOBREAK) {</span></span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaUNC">           0 :             containsNoBreak = true;</span></span>
-<span id="L531"><span class="lineNum">     531</span>              :         }</span>
-<span id="L532"><span class="lineNum">     532</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L533"><span class="lineNum">     533</span>              : </span>
-<span id="L534"><span class="lineNum">     534</span> <span class="tlaUNC">           0 :     if (!containsFFrame) {</span></span>
-<span id="L535"><span class="lineNum">     535</span> <span class="tlaUNC">           0 :         int defaultPosition = std::min(10, layoutPalette.cellsCount());</span></span>
-<span id="L536"><span class="lineNum">     536</span> <span class="tlaUNC">           0 :         layoutPalette.insertActionIcon(defaultPosition, ActionIconType::FFRAME, COMPAT_FRAME_MAG);</span></span>
-<span id="L537"><span class="lineNum">     537</span>              :     }</span>
-<span id="L538"><span class="lineNum">     538</span>              : </span>
-<span id="L539"><span class="lineNum">     539</span> <span class="tlaUNC">           0 :     if (!containsNoBreak) {</span></span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaUNC">           0 :         int defaultPosition = std::min(3, layoutPalette.cellsCount());</span></span>
-<span id="L541"><span class="lineNum">     541</span> <span class="tlaUNC">           0 :         auto lb = Factory::makeLayoutBreak(paletteScore-&gt;dummy());</span></span>
-<span id="L542"><span class="lineNum">     542</span> <span class="tlaUNC">           0 :         lb-&gt;setLayoutBreakType(LayoutBreakType::NOBREAK);</span></span>
-<span id="L543"><span class="lineNum">     543</span> <span class="tlaUNC">           0 :         layoutPalette.insertElement(defaultPosition, lb, TConv::userName(LayoutBreakType::NOBREAK));</span></span>
-<span id="L544"><span class="lineNum">     544</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L545"><span class="lineNum">     545</span>              : </span>
-<span id="L546"><span class="lineNum">     546</span> <span class="tlaUNC">           0 :     if (!containsLock) {</span></span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaUNC">           0 :         int defaultPosition = std::min(5, layoutPalette.cellsCount());</span></span>
-<span id="L548"><span class="lineNum">     548</span> <span class="tlaUNC">           0 :         layoutPalette.insertActionIcon(defaultPosition, ActionIconType::PAGE_LOCK);</span></span>
-<span id="L549"><span class="lineNum">     549</span>              :     }</span>
-<span id="L550"><span class="lineNum">     550</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L551"><span class="lineNum">     551</span>              : </span>
-<span id="L552"><span class="lineNum">     552</span> <span class="tlaUNC">           0 : void PaletteCompat::addNewKeyboardItems(Palette&amp; keyPalette, engraving::Score* paletteScore)</span></span>
-<span id="L553"><span class="lineNum">     553</span>              : {</span>
-<span id="L554"><span class="lineNum">     554</span> <span class="tlaUNC">           0 :     bool containsChordBrackets = false;</span></span>
-<span id="L555"><span class="lineNum">     555</span> <span class="tlaUNC">           0 :     for (const PaletteCellPtr&amp; cell : keyPalette.cells()) {</span></span>
-<span id="L556"><span class="lineNum">     556</span> <span class="tlaUNC">           0 :         if (cell-&gt;element &amp;&amp; cell-&gt;element-&gt;isChordBracket()) {</span></span>
-<span id="L557"><span class="lineNum">     557</span> <span class="tlaUNC">           0 :             containsChordBrackets = true;</span></span>
-<span id="L558"><span class="lineNum">     558</span>              :         }</span>
-<span id="L559"><span class="lineNum">     559</span>              :     }</span>
-<span id="L560"><span class="lineNum">     560</span>              : </span>
-<span id="L561"><span class="lineNum">     561</span> <span class="tlaUNC">           0 :     if (!containsChordBrackets) {</span></span>
-<span id="L562"><span class="lineNum">     562</span> <span class="tlaUNC">           0 :         addChordBrackets(keyPalette, paletteScore);</span></span>
-<span id="L563"><span class="lineNum">     563</span>              :     }</span>
-<span id="L564"><span class="lineNum">     564</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L565"><span class="lineNum">     565</span>              : </span>
-<span id="L566"><span class="lineNum">     566</span> <span class="tlaUNC">           0 : void PaletteCompat::addChordBrackets(Palette&amp; palette, engraving::Score* paletteScore, size_t position)</span></span>
-<span id="L567"><span class="lineNum">     567</span>              : {</span>
-<span id="L568"><span class="lineNum">     568</span>              :     std::array&lt;QString, 3&gt; names = { QT_TRANSLATE_NOOP(&quot;palette&quot;, &quot;Chord bracket&quot;),</span>
-<span id="L569"><span class="lineNum">     569</span>              :                                      QT_TRANSLATE_NOOP(&quot;palette&quot;, &quot;Chord bracket (play with left hand)&quot;),</span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaUNC">           0 :                                      QT_TRANSLATE_NOOP(&quot;palette&quot;, &quot;Chord bracket (play with right hand)&quot;) };</span></span>
-<span id="L571"><span class="lineNum">     571</span> <span class="tlaUNC">           0 :     for (int i = 0; i &lt; 3; ++i) {</span></span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaUNC">           0 :         DirectionV hookPos = DirectionV(i);</span></span>
-<span id="L573"><span class="lineNum">     573</span> <span class="tlaUNC">           0 :         auto c = Factory::makeChordBracket(paletteScore-&gt;dummy());</span></span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaUNC">           0 :         c-&gt;setProperty(Pid::BRACKET_HOOK_POS, hookPos);</span></span>
-<span id="L575"><span class="lineNum">     575</span> <span class="tlaUNC">           0 :         if (position != muse::nidx) {</span></span>
-<span id="L576"><span class="lineNum">     576</span> <span class="tlaUNC">           0 :             palette.insertElement(position + i, c, names[i]);</span></span>
-<span id="L577"><span class="lineNum">     577</span>              :         } else {</span>
-<span id="L578"><span class="lineNum">     578</span> <span class="tlaUNC">           0 :             palette.appendElement(c, names[i]);</span></span>
-<span id="L579"><span class="lineNum">     579</span>              :         }</span>
-<span id="L580"><span class="lineNum">     580</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L581"><span class="lineNum">     581</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L582"><span class="lineNum">     582</span>              : </span>
-<span id="L583"><span class="lineNum">     583</span> <span class="tlaUNC">           0 : void PaletteCompat::removeOldItems(Palette&amp; palette)</span></span>
-<span id="L584"><span class="lineNum">     584</span>              : {</span>
-<span id="L585"><span class="lineNum">     585</span> <span class="tlaUNC">           0 :     std::vector&lt;PaletteCellPtr&gt; cellsToRemove;</span></span>
-<span id="L586"><span class="lineNum">     586</span>              : </span>
-<span id="L587"><span class="lineNum">     587</span> <span class="tlaUNC">           0 :     for (const PaletteCellPtr&amp; cell : palette.cells()) {</span></span>
-<span id="L588"><span class="lineNum">     588</span> <span class="tlaUNC">           0 :         const ElementPtr element = cell-&gt;element;</span></span>
-<span id="L589"><span class="lineNum">     589</span> <span class="tlaUNC">           0 :         if (!element) {</span></span>
-<span id="L590"><span class="lineNum">     590</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L591"><span class="lineNum">     591</span>              :         }</span>
-<span id="L592"><span class="lineNum">     592</span>              : </span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaUNC">           0 :         if (element-&gt;isBend()) {</span></span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
-<span id="L595"><span class="lineNum">     595</span>              :         }</span>
-<span id="L596"><span class="lineNum">     596</span>              : </span>
-<span id="L597"><span class="lineNum">     597</span> <span class="tlaUNC">           0 :         if (element-&gt;isTremoloBar()) {</span></span>
-<span id="L598"><span class="lineNum">     598</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
-<span id="L599"><span class="lineNum">     599</span>              :         }</span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaUNC">           0 :     bool containsStaveSharingChange = false;</span></span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaUNC">           0 :     bool containsResetStaveSharingChange = false;</span></span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaUNC">           0 :     for (const PaletteCellPtr&amp; cell : layoutPalette.cells()) {</span></span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaUNC">           0 :         const ElementPtr element = cell-&gt;element;</span></span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaUNC">           0 :         if (!element) {</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L523"><span class="lineNum">     523</span>              :         }</span>
+<span id="L524"><span class="lineNum">     524</span>              : </span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaUNC">           0 :         if (element-&gt;isActionIcon() &amp;&amp; toActionIcon(element.get())-&gt;actionType() == ActionIconType::FFRAME) {</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaUNC">           0 :             containsFFrame = true;</span></span>
+<span id="L527"><span class="lineNum">     527</span>              :         }</span>
+<span id="L528"><span class="lineNum">     528</span> <span class="tlaUNC">           0 :         if (element-&gt;isActionIcon() &amp;&amp; toActionIcon(element.get())-&gt;actionType() == ActionIconType::PAGE_LOCK) {</span></span>
+<span id="L529"><span class="lineNum">     529</span> <span class="tlaUNC">           0 :             containsLock = true;</span></span>
+<span id="L530"><span class="lineNum">     530</span>              :         }</span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaUNC">           0 :         if (element-&gt;isLayoutBreak() &amp;&amp; toLayoutBreak(element.get())-&gt;layoutBreakType() == LayoutBreakType::NOBREAK) {</span></span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaUNC">           0 :             containsNoBreak = true;</span></span>
+<span id="L533"><span class="lineNum">     533</span>              :         }</span>
+<span id="L534"><span class="lineNum">     534</span> <span class="tlaUNC">           0 :         if (element-&gt;isActionIcon() &amp;&amp; toActionIcon(element.get())-&gt;actionType() == ActionIconType::STAVE_SHARING_CHANGE) {</span></span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaUNC">           0 :             containsStaveSharingChange = true;</span></span>
+<span id="L536"><span class="lineNum">     536</span>              :         }</span>
+<span id="L537"><span class="lineNum">     537</span> <span class="tlaUNC">           0 :         if (element-&gt;isActionIcon() &amp;&amp; toActionIcon(element.get())-&gt;actionType() == ActionIconType::RESET_STAVE_SHARING_CHANGE) {</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaUNC">           0 :             containsResetStaveSharingChange = true;</span></span>
+<span id="L539"><span class="lineNum">     539</span>              :         }</span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L541"><span class="lineNum">     541</span>              : </span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaUNC">           0 :     if (!containsFFrame) {</span></span>
+<span id="L543"><span class="lineNum">     543</span> <span class="tlaUNC">           0 :         int defaultPosition = std::min(10, layoutPalette.cellsCount());</span></span>
+<span id="L544"><span class="lineNum">     544</span> <span class="tlaUNC">           0 :         layoutPalette.insertActionIcon(defaultPosition, ActionIconType::FFRAME, COMPAT_FRAME_MAG);</span></span>
+<span id="L545"><span class="lineNum">     545</span>              :     }</span>
+<span id="L546"><span class="lineNum">     546</span>              : </span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaUNC">           0 :     if (!containsNoBreak) {</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaUNC">           0 :         int defaultPosition = std::min(3, layoutPalette.cellsCount());</span></span>
+<span id="L549"><span class="lineNum">     549</span> <span class="tlaUNC">           0 :         auto lb = Factory::makeLayoutBreak(paletteScore-&gt;dummy());</span></span>
+<span id="L550"><span class="lineNum">     550</span> <span class="tlaUNC">           0 :         lb-&gt;setLayoutBreakType(LayoutBreakType::NOBREAK);</span></span>
+<span id="L551"><span class="lineNum">     551</span> <span class="tlaUNC">           0 :         layoutPalette.insertElement(defaultPosition, lb, TConv::userName(LayoutBreakType::NOBREAK));</span></span>
+<span id="L552"><span class="lineNum">     552</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L553"><span class="lineNum">     553</span>              : </span>
+<span id="L554"><span class="lineNum">     554</span> <span class="tlaUNC">           0 :     if (!containsLock) {</span></span>
+<span id="L555"><span class="lineNum">     555</span> <span class="tlaUNC">           0 :         int defaultPosition = std::min(5, layoutPalette.cellsCount());</span></span>
+<span id="L556"><span class="lineNum">     556</span> <span class="tlaUNC">           0 :         layoutPalette.insertActionIcon(defaultPosition, ActionIconType::PAGE_LOCK);</span></span>
+<span id="L557"><span class="lineNum">     557</span>              :     }</span>
+<span id="L558"><span class="lineNum">     558</span>              : </span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaUNC">           0 :     if (!containsStaveSharingChange) {</span></span>
+<span id="L560"><span class="lineNum">     560</span> <span class="tlaUNC">           0 :         int defaultPosition = std::min(15, layoutPalette.cellsCount());</span></span>
+<span id="L561"><span class="lineNum">     561</span> <span class="tlaUNC">           0 :         layoutPalette.insertActionIcon(defaultPosition, ActionIconType::STAVE_SHARING_CHANGE);</span></span>
+<span id="L562"><span class="lineNum">     562</span>              :     }</span>
+<span id="L563"><span class="lineNum">     563</span>              : </span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaUNC">           0 :     if (!containsResetStaveSharingChange) {</span></span>
+<span id="L565"><span class="lineNum">     565</span> <span class="tlaUNC">           0 :         int defaultPosition = std::min(16, layoutPalette.cellsCount());</span></span>
+<span id="L566"><span class="lineNum">     566</span> <span class="tlaUNC">           0 :         layoutPalette.insertActionIcon(defaultPosition, ActionIconType::RESET_STAVE_SHARING_CHANGE);</span></span>
+<span id="L567"><span class="lineNum">     567</span>              :     }</span>
+<span id="L568"><span class="lineNum">     568</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L569"><span class="lineNum">     569</span>              : </span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaUNC">           0 : void PaletteCompat::addNewKeyboardItems(Palette&amp; keyPalette, engraving::Score* paletteScore)</span></span>
+<span id="L571"><span class="lineNum">     571</span>              : {</span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaUNC">           0 :     bool containsChordBrackets = false;</span></span>
+<span id="L573"><span class="lineNum">     573</span> <span class="tlaUNC">           0 :     for (const PaletteCellPtr&amp; cell : keyPalette.cells()) {</span></span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaUNC">           0 :         if (cell-&gt;element &amp;&amp; cell-&gt;element-&gt;isChordBracket()) {</span></span>
+<span id="L575"><span class="lineNum">     575</span> <span class="tlaUNC">           0 :             containsChordBrackets = true;</span></span>
+<span id="L576"><span class="lineNum">     576</span>              :         }</span>
+<span id="L577"><span class="lineNum">     577</span>              :     }</span>
+<span id="L578"><span class="lineNum">     578</span>              : </span>
+<span id="L579"><span class="lineNum">     579</span> <span class="tlaUNC">           0 :     if (!containsChordBrackets) {</span></span>
+<span id="L580"><span class="lineNum">     580</span> <span class="tlaUNC">           0 :         addChordBrackets(keyPalette, paletteScore);</span></span>
+<span id="L581"><span class="lineNum">     581</span>              :     }</span>
+<span id="L582"><span class="lineNum">     582</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L583"><span class="lineNum">     583</span>              : </span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaUNC">           0 : void PaletteCompat::addChordBrackets(Palette&amp; palette, engraving::Score* paletteScore, size_t position)</span></span>
+<span id="L585"><span class="lineNum">     585</span>              : {</span>
+<span id="L586"><span class="lineNum">     586</span>              :     std::array&lt;QString, 3&gt; names = { QT_TRANSLATE_NOOP(&quot;palette&quot;, &quot;Chord bracket&quot;),</span>
+<span id="L587"><span class="lineNum">     587</span>              :                                      QT_TRANSLATE_NOOP(&quot;palette&quot;, &quot;Chord bracket (play with left hand)&quot;),</span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaUNC">           0 :                                      QT_TRANSLATE_NOOP(&quot;palette&quot;, &quot;Chord bracket (play with right hand)&quot;) };</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaUNC">           0 :     for (int i = 0; i &lt; 3; ++i) {</span></span>
+<span id="L590"><span class="lineNum">     590</span> <span class="tlaUNC">           0 :         DirectionV hookPos = DirectionV(i);</span></span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaUNC">           0 :         auto c = Factory::makeChordBracket(paletteScore-&gt;dummy());</span></span>
+<span id="L592"><span class="lineNum">     592</span> <span class="tlaUNC">           0 :         c-&gt;setProperty(Pid::BRACKET_HOOK_POS, hookPos);</span></span>
+<span id="L593"><span class="lineNum">     593</span> <span class="tlaUNC">           0 :         if (position != muse::nidx) {</span></span>
+<span id="L594"><span class="lineNum">     594</span> <span class="tlaUNC">           0 :             palette.insertElement(position + i, c, names[i]);</span></span>
+<span id="L595"><span class="lineNum">     595</span>              :         } else {</span>
+<span id="L596"><span class="lineNum">     596</span> <span class="tlaUNC">           0 :             palette.appendElement(c, names[i]);</span></span>
+<span id="L597"><span class="lineNum">     597</span>              :         }</span>
+<span id="L598"><span class="lineNum">     598</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L599"><span class="lineNum">     599</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L600"><span class="lineNum">     600</span>              : </span>
-<span id="L601"><span class="lineNum">     601</span> <span class="tlaUNC">           0 :         if (element-&gt;isArticulation() &amp;&amp; toArticulation(element.get())-&gt;isLaissezVib()) {</span></span>
-<span id="L602"><span class="lineNum">     602</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
-<span id="L603"><span class="lineNum">     603</span>              :         }</span>
+<span id="L601"><span class="lineNum">     601</span> <span class="tlaUNC">           0 : void PaletteCompat::removeOldItems(Palette&amp; palette)</span></span>
+<span id="L602"><span class="lineNum">     602</span>              : {</span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaUNC">           0 :     std::vector&lt;PaletteCellPtr&gt; cellsToRemove;</span></span>
 <span id="L604"><span class="lineNum">     604</span>              : </span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaUNC">           0 :         if (element-&gt;isArpeggio() &amp;&amp; toArpeggio(element.get())-&gt;arpeggioType() == ArpeggioType::BRACKET) {</span></span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
-<span id="L607"><span class="lineNum">     607</span>              :         }</span>
-<span id="L608"><span class="lineNum">     608</span>              : </span>
-<span id="L609"><span class="lineNum">     609</span> <span class="tlaUNC">           0 :         if (element-&gt;isHairpin() &amp;&amp; toHairpin(element.get())-&gt;beginText() == u&quot;&lt;sym&gt;dynamicMezzo&lt;/sym&gt;&lt;sym&gt;dynamicForte&lt;/sym&gt;&quot;) {</span></span>
-<span id="L610"><span class="lineNum">     610</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
-<span id="L611"><span class="lineNum">     611</span>              :         }</span>
-<span id="L612"><span class="lineNum">     612</span> <span class="tlaUNC">           0 :         if (element-&gt;isCapo()) {</span></span>
-<span id="L613"><span class="lineNum">     613</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
-<span id="L614"><span class="lineNum">     614</span>              :         }</span>
-<span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC">           0 :         if (element-&gt;isStringTunings()) {</span></span>
+<span id="L605"><span class="lineNum">     605</span> <span class="tlaUNC">           0 :     for (const PaletteCellPtr&amp; cell : palette.cells()) {</span></span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaUNC">           0 :         const ElementPtr element = cell-&gt;element;</span></span>
+<span id="L607"><span class="lineNum">     607</span> <span class="tlaUNC">           0 :         if (!element) {</span></span>
+<span id="L608"><span class="lineNum">     608</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L609"><span class="lineNum">     609</span>              :         }</span>
+<span id="L610"><span class="lineNum">     610</span>              : </span>
+<span id="L611"><span class="lineNum">     611</span> <span class="tlaUNC">           0 :         if (element-&gt;isBend()) {</span></span>
+<span id="L612"><span class="lineNum">     612</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
+<span id="L613"><span class="lineNum">     613</span>              :         }</span>
+<span id="L614"><span class="lineNum">     614</span>              : </span>
+<span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC">           0 :         if (element-&gt;isTremoloBar()) {</span></span>
 <span id="L616"><span class="lineNum">     616</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
 <span id="L617"><span class="lineNum">     617</span>              :         }</span>
-<span id="L618"><span class="lineNum">     618</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L619"><span class="lineNum">     619</span>              : </span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaUNC">           0 :     palette.removeCells(cellsToRemove);</span></span>
-<span id="L621"><span class="lineNum">     621</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L618"><span class="lineNum">     618</span>              : </span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaUNC">           0 :         if (element-&gt;isArticulation() &amp;&amp; toArticulation(element.get())-&gt;isLaissezVib()) {</span></span>
+<span id="L620"><span class="lineNum">     620</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
+<span id="L621"><span class="lineNum">     621</span>              :         }</span>
+<span id="L622"><span class="lineNum">     622</span>              : </span>
+<span id="L623"><span class="lineNum">     623</span> <span class="tlaUNC">           0 :         if (element-&gt;isArpeggio() &amp;&amp; toArpeggio(element.get())-&gt;arpeggioType() == ArpeggioType::BRACKET) {</span></span>
+<span id="L624"><span class="lineNum">     624</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
+<span id="L625"><span class="lineNum">     625</span>              :         }</span>
+<span id="L626"><span class="lineNum">     626</span>              : </span>
+<span id="L627"><span class="lineNum">     627</span> <span class="tlaUNC">           0 :         if (element-&gt;isHairpin() &amp;&amp; toHairpin(element.get())-&gt;beginText() == u&quot;&lt;sym&gt;dynamicMezzo&lt;/sym&gt;&lt;sym&gt;dynamicForte&lt;/sym&gt;&quot;) {</span></span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
+<span id="L629"><span class="lineNum">     629</span>              :         }</span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaUNC">           0 :         if (element-&gt;isCapo()) {</span></span>
+<span id="L631"><span class="lineNum">     631</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
+<span id="L632"><span class="lineNum">     632</span>              :         }</span>
+<span id="L633"><span class="lineNum">     633</span> <span class="tlaUNC">           0 :         if (element-&gt;isStringTunings()) {</span></span>
+<span id="L634"><span class="lineNum">     634</span> <span class="tlaUNC">           0 :             cellsToRemove.emplace_back(cell);</span></span>
+<span id="L635"><span class="lineNum">     635</span>              :         }</span>
+<span id="L636"><span class="lineNum">     636</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L637"><span class="lineNum">     637</span>              : </span>
+<span id="L638"><span class="lineNum">     638</span> <span class="tlaUNC">           0 :     palette.removeCells(cellsToRemove);</span></span>
+<span id="L639"><span class="lineNum">     639</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>
             </tr>

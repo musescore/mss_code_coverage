@@ -1,0 +1,1389 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - filtered_coverage.info - src/notationscene/notationcommands.h</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">src/notationscene</a> - notationcommands.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">filtered_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">11</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * SPDX-License-Identifier: GPL-3.0-only</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * MuseScore-Studio-CLA-applies</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * MuseScore Studio</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Music Composition &amp; Notation</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * Copyright (C) MuseScore Limited and others</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * it under the terms of the GNU General Public License version 3 as</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * published by the Free Software Foundation.</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *</span>
+<span id="L14"><span class="lineNum">      14</span>              :  * This program is distributed in the hope that it will be useful,</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * GNU General Public License for more details.</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  */</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : #pragma once</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : #include &quot;rcommand/typedcommand.h&quot;</span>
+<span id="L26"><span class="lineNum">      26</span>              : #include &quot;notationcommandsenums.h&quot; // IWYU pragma: export</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : namespace mu::notation {</span>
+<span id="L29"><span class="lineNum">      29</span>              : using muse::MnemonicString;</span>
+<span id="L30"><span class="lineNum">      30</span>              : using muse::TranslatableString;</span>
+<span id="L31"><span class="lineNum">      31</span>              : using muse::rcommand::Command;</span>
+<span id="L32"><span class="lineNum">      32</span>              : using muse::rcommand::DataType;</span>
+<span id="L33"><span class="lineNum">      33</span>              : using muse::rcommand::FieldsScheme;</span>
+<span id="L34"><span class="lineNum">      34</span>              : using muse::rcommand::Field;</span>
+<span id="L35"><span class="lineNum">      35</span>              : using muse::rcommand::Presence;</span>
+<span id="L36"><span class="lineNum">      36</span>              : using muse::rcommand::Availability;</span>
+<span id="L37"><span class="lineNum">      37</span>              : using muse::rcommand::Annotation;</span>
+<span id="L38"><span class="lineNum">      38</span>              : using muse::rcommand::Decoration;</span>
+<span id="L39"><span class="lineNum">      39</span>              : using muse::rcommand::Checkable;</span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span>              : // A few typed commands as an example. Eventually, all commands should be made typed.</span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span>              : #define sci_auto static const inline auto</span>
+<span id="L44"><span class="lineNum">      44</span>              : </span>
+<span id="L45"><span class="lineNum">      45</span>              : // select commands</span>
+<span id="L46"><span class="lineNum">      46</span>              : struct SelectCommand {</span>
+<span id="L47"><span class="lineNum">      47</span>              :     sci_auto id = Command(&quot;command://notation/select&quot;);</span>
+<span id="L48"><span class="lineNum">      48</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Select&quot;);</span>
+<span id="L49"><span class="lineNum">      49</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select items by target&quot;);</span>
+<span id="L50"><span class="lineNum">      50</span>              :     sci_auto availabilities = Availability::API;</span>
+<span id="L51"><span class="lineNum">      51</span>              :     sci_auto annotations = Annotation::None;</span>
+<span id="L52"><span class="lineNum">      52</span>              : </span>
+<span id="L53"><span class="lineNum">      53</span>              :     SelectionTarget target = SelectionTarget::FirstItem;</span>
+<span id="L54"><span class="lineNum">      54</span>              :     PlayMode playMode = PlayMode::NoPlay;</span>
+<span id="L55"><span class="lineNum">      55</span>              : </span>
+<span id="L56"><span class="lineNum">      56</span>              :     sci_auto input = FieldsScheme {</span>
+<span id="L57"><span class="lineNum">      57</span>              :         Field{ &quot;target&quot;, &amp;SelectCommand::target, &quot;Selection target&quot; },</span>
+<span id="L58"><span class="lineNum">      58</span>              :         Field{ &quot;play-mode&quot;, &amp;SelectCommand::playMode, &quot;Play mode&quot;, Presence::Optional },</span>
+<span id="L59"><span class="lineNum">      59</span>              :     };</span>
+<span id="L60"><span class="lineNum">      60</span>              : };</span>
+<span id="L61"><span class="lineNum">      61</span>              : </span>
+<span id="L62"><span class="lineNum">      62</span>              : // aliases for select command</span>
+<span id="L63"><span class="lineNum">      63</span>              : struct SelectFirstItemCommand {</span>
+<span id="L64"><span class="lineNum">      64</span>              :     sci_auto id = Command(&quot;command://notation/select/first-item&quot;);</span>
+<span id="L65"><span class="lineNum">      65</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;First element&quot;);</span>
+<span id="L66"><span class="lineNum">      66</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Go to first element in score&quot;);</span>
+<span id="L67"><span class="lineNum">      67</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L68"><span class="lineNum">      68</span>              : };</span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span>              : struct SelectLastItemCommand {</span>
+<span id="L71"><span class="lineNum">      71</span>              :     sci_auto id = Command(&quot;command://notation/select/last-item&quot;);</span>
+<span id="L72"><span class="lineNum">      72</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Last element&quot;);</span>
+<span id="L73"><span class="lineNum">      73</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Go to last element in score&quot;);</span>
+<span id="L74"><span class="lineNum">      74</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L75"><span class="lineNum">      75</span>              : };</span>
+<span id="L76"><span class="lineNum">      76</span>              : </span>
+<span id="L77"><span class="lineNum">      77</span>              : struct SelectNextItemCommand {</span>
+<span id="L78"><span class="lineNum">      78</span>              :     sci_auto id = Command(&quot;command://notation/select/next-item&quot;);</span>
+<span id="L79"><span class="lineNum">      79</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Next element&quot;);</span>
+<span id="L80"><span class="lineNum">      80</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select next element in score&quot;);</span>
+<span id="L81"><span class="lineNum">      81</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L82"><span class="lineNum">      82</span>              : };</span>
+<span id="L83"><span class="lineNum">      83</span>              : </span>
+<span id="L84"><span class="lineNum">      84</span>              : struct SelectPrevItemCommand {</span>
+<span id="L85"><span class="lineNum">      85</span>              :     sci_auto id = Command(&quot;command://notation/select/prev-item&quot;);</span>
+<span id="L86"><span class="lineNum">      86</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Previous element&quot;);</span>
+<span id="L87"><span class="lineNum">      87</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select previous element in score&quot;);</span>
+<span id="L88"><span class="lineNum">      88</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L89"><span class="lineNum">      89</span>              : };</span>
+<span id="L90"><span class="lineNum">      90</span>              : </span>
+<span id="L91"><span class="lineNum">      91</span>              : struct SelectNextSegmentCommand {</span>
+<span id="L92"><span class="lineNum">      92</span>              :     sci_auto id = Command(&quot;command://notation/select/next-segment&quot;);</span>
+<span id="L93"><span class="lineNum">      93</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Next segment element&quot;);</span>
+<span id="L94"><span class="lineNum">      94</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select next segment element&quot;);</span>
+<span id="L95"><span class="lineNum">      95</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L96"><span class="lineNum">      96</span>              : };</span>
+<span id="L97"><span class="lineNum">      97</span>              : </span>
+<span id="L98"><span class="lineNum">      98</span>              : struct SelectPrevSegmentCommand {</span>
+<span id="L99"><span class="lineNum">      99</span>              :     sci_auto id = Command(&quot;command://notation/select/prev-segment&quot;);</span>
+<span id="L100"><span class="lineNum">     100</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Previous segment element&quot;);</span>
+<span id="L101"><span class="lineNum">     101</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select previous segment element&quot;);</span>
+<span id="L102"><span class="lineNum">     102</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L103"><span class="lineNum">     103</span>              : };</span>
+<span id="L104"><span class="lineNum">     104</span>              : </span>
+<span id="L105"><span class="lineNum">     105</span>              : struct SelectNextTrackCommand {</span>
+<span id="L106"><span class="lineNum">     106</span>              :     sci_auto id = Command(&quot;command://notation/select/next-track&quot;);</span>
+<span id="L107"><span class="lineNum">     107</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Next staff or voice&quot;);</span>
+<span id="L108"><span class="lineNum">     108</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Go to next staff or voice&quot;);</span>
+<span id="L109"><span class="lineNum">     109</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L110"><span class="lineNum">     110</span>              : };</span>
+<span id="L111"><span class="lineNum">     111</span>              : </span>
+<span id="L112"><span class="lineNum">     112</span>              : struct SelectPrevTrackCommand {</span>
+<span id="L113"><span class="lineNum">     113</span>              :     sci_auto id = Command(&quot;command://notation/select/prev-track&quot;);</span>
+<span id="L114"><span class="lineNum">     114</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Previous staff or voice&quot;);</span>
+<span id="L115"><span class="lineNum">     115</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Go to previous staff or voice&quot;);</span>
+<span id="L116"><span class="lineNum">     116</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L117"><span class="lineNum">     117</span>              : };</span>
+<span id="L118"><span class="lineNum">     118</span>              : </span>
+<span id="L119"><span class="lineNum">     119</span>              : struct SelectNextFrameCommand {</span>
+<span id="L120"><span class="lineNum">     120</span>              :     sci_auto id = Command(&quot;command://notation/select/next-frame&quot;);</span>
+<span id="L121"><span class="lineNum">     121</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Next frame&quot;);</span>
+<span id="L122"><span class="lineNum">     122</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Go to next frame&quot;);</span>
+<span id="L123"><span class="lineNum">     123</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L124"><span class="lineNum">     124</span>              : };</span>
+<span id="L125"><span class="lineNum">     125</span>              : </span>
+<span id="L126"><span class="lineNum">     126</span>              : struct SelectPrevFrameCommand {</span>
+<span id="L127"><span class="lineNum">     127</span>              :     sci_auto id = Command(&quot;command://notation/select/prev-frame&quot;);</span>
+<span id="L128"><span class="lineNum">     128</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Previous frame&quot;);</span>
+<span id="L129"><span class="lineNum">     129</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Go to previous frame&quot;);</span>
+<span id="L130"><span class="lineNum">     130</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L131"><span class="lineNum">     131</span>              : };</span>
+<span id="L132"><span class="lineNum">     132</span>              : </span>
+<span id="L133"><span class="lineNum">     133</span>              : struct SelectNextSystemCommand {</span>
+<span id="L134"><span class="lineNum">     134</span>              :     sci_auto id = Command(&quot;command://notation/select/next-system&quot;);</span>
+<span id="L135"><span class="lineNum">     135</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Next system&quot;);</span>
+<span id="L136"><span class="lineNum">     136</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Go to next system&quot;);</span>
+<span id="L137"><span class="lineNum">     137</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L138"><span class="lineNum">     138</span>              : };</span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span>              : struct SelectPrevSystemCommand {</span>
+<span id="L141"><span class="lineNum">     141</span>              :     sci_auto id = Command(&quot;command://notation/select/prev-system&quot;);</span>
+<span id="L142"><span class="lineNum">     142</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Previous system&quot;);</span>
+<span id="L143"><span class="lineNum">     143</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Go to previous system&quot;);</span>
+<span id="L144"><span class="lineNum">     144</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L145"><span class="lineNum">     145</span>              : };</span>
+<span id="L146"><span class="lineNum">     146</span>              : </span>
+<span id="L147"><span class="lineNum">     147</span>              : struct SelectUpNoteInChordCommand {</span>
+<span id="L148"><span class="lineNum">     148</span>              :     sci_auto id = Command(&quot;command://notation/select/up-note-in-chord&quot;);</span>
+<span id="L149"><span class="lineNum">     149</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Up note in chord&quot;);</span>
+<span id="L150"><span class="lineNum">     150</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select note/rest above&quot;);</span>
+<span id="L151"><span class="lineNum">     151</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L152"><span class="lineNum">     152</span>              : };</span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span>              : struct SelectDownNoteInChordCommand {</span>
+<span id="L155"><span class="lineNum">     155</span>              :     sci_auto id = Command(&quot;command://notation/select/down-note-in-chord&quot;);</span>
+<span id="L156"><span class="lineNum">     156</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Down note in chord&quot;);</span>
+<span id="L157"><span class="lineNum">     157</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select note/rest below&quot;);</span>
+<span id="L158"><span class="lineNum">     158</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L159"><span class="lineNum">     159</span>              : };</span>
+<span id="L160"><span class="lineNum">     160</span>              : </span>
+<span id="L161"><span class="lineNum">     161</span>              : struct SelectTopNoteInChordCommand {</span>
+<span id="L162"><span class="lineNum">     162</span>              :     sci_auto id = Command(&quot;command://notation/select/top-note-in-chord&quot;);</span>
+<span id="L163"><span class="lineNum">     163</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Top note in chord&quot;);</span>
+<span id="L164"><span class="lineNum">     164</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select top note in chord&quot;);</span>
+<span id="L165"><span class="lineNum">     165</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L166"><span class="lineNum">     166</span>              : };</span>
+<span id="L167"><span class="lineNum">     167</span>              : </span>
+<span id="L168"><span class="lineNum">     168</span>              : struct SelectBottomNoteInChordCommand {</span>
+<span id="L169"><span class="lineNum">     169</span>              :     sci_auto id = Command(&quot;command://notation/select/bottom-note-in-chord&quot;);</span>
+<span id="L170"><span class="lineNum">     170</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Bottom note in chord&quot;);</span>
+<span id="L171"><span class="lineNum">     171</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select bottom note in chord&quot;);</span>
+<span id="L172"><span class="lineNum">     172</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L173"><span class="lineNum">     173</span>              : };</span>
+<span id="L174"><span class="lineNum">     174</span>              : </span>
+<span id="L175"><span class="lineNum">     175</span>              : struct SelectTopStaffCommand {</span>
+<span id="L176"><span class="lineNum">     176</span>              :     sci_auto id = Command(&quot;command://notation/select/top-staff&quot;);</span>
+<span id="L177"><span class="lineNum">     177</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Go to top staff&quot;);</span>
+<span id="L178"><span class="lineNum">     178</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Go to top staff&quot;);</span>
+<span id="L179"><span class="lineNum">     179</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L180"><span class="lineNum">     180</span>              : };</span>
+<span id="L181"><span class="lineNum">     181</span>              : </span>
+<span id="L182"><span class="lineNum">     182</span>              : struct SelectEmptyTrailingMeasureCommand {</span>
+<span id="L183"><span class="lineNum">     183</span>              :     sci_auto id = Command(&quot;command://notation/select/empty-trailing-measure&quot;);</span>
+<span id="L184"><span class="lineNum">     184</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Go to first empty trailing measure&quot;);</span>
+<span id="L185"><span class="lineNum">     185</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Go to first empty trailing measure&quot;);</span>
+<span id="L186"><span class="lineNum">     186</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L187"><span class="lineNum">     187</span>              : };</span>
+<span id="L188"><span class="lineNum">     188</span>              : </span>
+<span id="L189"><span class="lineNum">     189</span>              : struct SelectSimilarCommand {</span>
+<span id="L190"><span class="lineNum">     190</span>              :     sci_auto id = Command(&quot;command://notation/select/similar&quot;);</span>
+<span id="L191"><span class="lineNum">     191</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Similar&quot;);</span>
+<span id="L192"><span class="lineNum">     192</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select similar elements&quot;);</span>
+<span id="L193"><span class="lineNum">     193</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L194"><span class="lineNum">     194</span>              : };</span>
+<span id="L195"><span class="lineNum">     195</span>              : </span>
+<span id="L196"><span class="lineNum">     196</span>              : struct SelectSimilarInStaffCommand {</span>
+<span id="L197"><span class="lineNum">     197</span>              :     sci_auto id = Command(&quot;command://notation/select/similar-in-staff&quot;);</span>
+<span id="L198"><span class="lineNum">     198</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Similar on this staff&quot;);</span>
+<span id="L199"><span class="lineNum">     199</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select similar elements on the same staff&quot;);</span>
+<span id="L200"><span class="lineNum">     200</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L201"><span class="lineNum">     201</span>              : };</span>
+<span id="L202"><span class="lineNum">     202</span>              : </span>
+<span id="L203"><span class="lineNum">     203</span>              : struct SelectSimilarInRangeCommand {</span>
+<span id="L204"><span class="lineNum">     204</span>              :     sci_auto id = Command(&quot;command://notation/select/similar-in-range&quot;);</span>
+<span id="L205"><span class="lineNum">     205</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Similar in this range&quot;);</span>
+<span id="L206"><span class="lineNum">     206</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select similar elements in the selected range&quot;);</span>
+<span id="L207"><span class="lineNum">     207</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L208"><span class="lineNum">     208</span>              : };</span>
+<span id="L209"><span class="lineNum">     209</span>              : </span>
+<span id="L210"><span class="lineNum">     210</span>              : struct SelectNotesInChordCommand {</span>
+<span id="L211"><span class="lineNum">     211</span>              :     sci_auto id = Command(&quot;command://notation/select/notes-in-chord&quot;);</span>
+<span id="L212"><span class="lineNum">     212</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Notes in chord&quot;);</span>
+<span id="L213"><span class="lineNum">     213</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select notes in chord&quot;);</span>
+<span id="L214"><span class="lineNum">     214</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L215"><span class="lineNum">     215</span>              : };</span>
+<span id="L216"><span class="lineNum">     216</span>              : </span>
+<span id="L217"><span class="lineNum">     217</span>              : struct SelectAllCommand {</span>
+<span id="L218"><span class="lineNum">     218</span>              :     sci_auto id = Command(&quot;command://notation/select/all&quot;);</span>
+<span id="L219"><span class="lineNum">     219</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Select &amp;all&quot;);</span>
+<span id="L220"><span class="lineNum">     220</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select all&quot;);</span>
+<span id="L221"><span class="lineNum">     221</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L222"><span class="lineNum">     222</span>              : };</span>
+<span id="L223"><span class="lineNum">     223</span>              : </span>
+<span id="L224"><span class="lineNum">     224</span>              : struct SelectSectionCommand {</span>
+<span id="L225"><span class="lineNum">     225</span>              :     sci_auto id = Command(&quot;command://notation/select/section&quot;);</span>
+<span id="L226"><span class="lineNum">     226</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Select sectio&amp;n&quot;);</span>
+<span id="L227"><span class="lineNum">     227</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Select section&quot;);</span>
+<span id="L228"><span class="lineNum">     228</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L229"><span class="lineNum">     229</span>              : };</span>
+<span id="L230"><span class="lineNum">     230</span>              : </span>
+<span id="L231"><span class="lineNum">     231</span>              : struct AddToSelectionCommand {</span>
+<span id="L232"><span class="lineNum">     232</span>              :     sci_auto id = Command(&quot;command://notation/add-to-selection&quot;);</span>
+<span id="L233"><span class="lineNum">     233</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Add to selection&quot;);</span>
+<span id="L234"><span class="lineNum">     234</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add items to selection by target&quot;);</span>
+<span id="L235"><span class="lineNum">     235</span>              :     sci_auto availabilities = Availability::API;</span>
+<span id="L236"><span class="lineNum">     236</span>              :     sci_auto annotations = Annotation::None;</span>
+<span id="L237"><span class="lineNum">     237</span>              : </span>
+<span id="L238"><span class="lineNum">     238</span>              :     SelectionTarget target = SelectionTarget::BeginSystem;</span>
+<span id="L239"><span class="lineNum">     239</span>              : </span>
+<span id="L240"><span class="lineNum">     240</span>              :     sci_auto input = FieldsScheme {</span>
+<span id="L241"><span class="lineNum">     241</span>              :         Field{ &quot;target&quot;, &amp;AddToSelectionCommand::target, &quot;Selection target&quot; },</span>
+<span id="L242"><span class="lineNum">     242</span>              :     };</span>
+<span id="L243"><span class="lineNum">     243</span>              : };</span>
+<span id="L244"><span class="lineNum">     244</span>              : </span>
+<span id="L245"><span class="lineNum">     245</span>              : // aliases for add to selection command</span>
+<span id="L246"><span class="lineNum">     246</span>              : struct AddToSelectionNextChordCommand {</span>
+<span id="L247"><span class="lineNum">     247</span>              :     sci_auto id = Command(&quot;command://notation/add-to-selection/next-chord&quot;);</span>
+<span id="L248"><span class="lineNum">     248</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Add next chord to selection&quot;);</span>
+<span id="L249"><span class="lineNum">     249</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add to selection: next note/rest&quot;);</span>
+<span id="L250"><span class="lineNum">     250</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L251"><span class="lineNum">     251</span>              : };</span>
+<span id="L252"><span class="lineNum">     252</span>              : </span>
+<span id="L253"><span class="lineNum">     253</span>              : struct AddToSelectionPrevChordCommand {</span>
+<span id="L254"><span class="lineNum">     254</span>              :     sci_auto id = Command(&quot;command://notation/add-to-selection/prev-chord&quot;);</span>
+<span id="L255"><span class="lineNum">     255</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Add previous chord to selection&quot;);</span>
+<span id="L256"><span class="lineNum">     256</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add to selection: previous note/rest&quot;);</span>
+<span id="L257"><span class="lineNum">     257</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L258"><span class="lineNum">     258</span>              : };</span>
+<span id="L259"><span class="lineNum">     259</span>              : </span>
+<span id="L260"><span class="lineNum">     260</span>              : struct AddToSelectionNextMeasureCommand {</span>
+<span id="L261"><span class="lineNum">     261</span>              :     sci_auto id = Command(&quot;command://notation/add-to-selection/next-measure&quot;);</span>
+<span id="L262"><span class="lineNum">     262</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Add next measure to selection&quot;);</span>
+<span id="L263"><span class="lineNum">     263</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add to selection: next measure&quot;);</span>
+<span id="L264"><span class="lineNum">     264</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L265"><span class="lineNum">     265</span>              : };</span>
+<span id="L266"><span class="lineNum">     266</span>              : </span>
+<span id="L267"><span class="lineNum">     267</span>              : struct AddToSelectionPrevMeasureCommand {</span>
+<span id="L268"><span class="lineNum">     268</span>              :     sci_auto id = Command(&quot;command://notation/add-to-selection/prev-measure&quot;);</span>
+<span id="L269"><span class="lineNum">     269</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Add previous measure to selection&quot;);</span>
+<span id="L270"><span class="lineNum">     270</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add to selection: previous measure&quot;);</span>
+<span id="L271"><span class="lineNum">     271</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L272"><span class="lineNum">     272</span>              : };</span>
+<span id="L273"><span class="lineNum">     273</span>              : </span>
+<span id="L274"><span class="lineNum">     274</span>              : struct AddToSelectionAboveStaffCommand {</span>
+<span id="L275"><span class="lineNum">     275</span>              :     sci_auto id = Command(&quot;command://notation/add-to-selection/above-staff&quot;);</span>
+<span id="L276"><span class="lineNum">     276</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Add staff above to selection&quot;);</span>
+<span id="L277"><span class="lineNum">     277</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add to selection: staff above&quot;);</span>
+<span id="L278"><span class="lineNum">     278</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L279"><span class="lineNum">     279</span>              : };</span>
+<span id="L280"><span class="lineNum">     280</span>              : </span>
+<span id="L281"><span class="lineNum">     281</span>              : struct AddToSelectionBelowStaffCommand {</span>
+<span id="L282"><span class="lineNum">     282</span>              :     sci_auto id = Command(&quot;command://notation/add-to-selection/below-staff&quot;);</span>
+<span id="L283"><span class="lineNum">     283</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Add staff below to selection&quot;);</span>
+<span id="L284"><span class="lineNum">     284</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add to selection: staff below&quot;);</span>
+<span id="L285"><span class="lineNum">     285</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L286"><span class="lineNum">     286</span>              : };</span>
+<span id="L287"><span class="lineNum">     287</span>              : </span>
+<span id="L288"><span class="lineNum">     288</span>              : struct AddToSelectionBeginSystemCommand {</span>
+<span id="L289"><span class="lineNum">     289</span>              :     sci_auto id = Command(&quot;command://notation/add-to-selection/begin-system&quot;);</span>
+<span id="L290"><span class="lineNum">     290</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Select to beginning of system&quot;);</span>
+<span id="L291"><span class="lineNum">     291</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add to selection: beginning of system&quot;);</span>
+<span id="L292"><span class="lineNum">     292</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L293"><span class="lineNum">     293</span>              : };</span>
+<span id="L294"><span class="lineNum">     294</span>              : </span>
+<span id="L295"><span class="lineNum">     295</span>              : struct AddToSelectionEndSystemCommand {</span>
+<span id="L296"><span class="lineNum">     296</span>              :     sci_auto id = Command(&quot;command://notation/add-to-selection/end-system&quot;);</span>
+<span id="L297"><span class="lineNum">     297</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Select to end of system&quot;);</span>
+<span id="L298"><span class="lineNum">     298</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add to selection: end of system&quot;);</span>
+<span id="L299"><span class="lineNum">     299</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L300"><span class="lineNum">     300</span>              : };</span>
+<span id="L301"><span class="lineNum">     301</span>              : </span>
+<span id="L302"><span class="lineNum">     302</span>              : struct AddToSelectionBeginScoreCommand {</span>
+<span id="L303"><span class="lineNum">     303</span>              :     sci_auto id = Command(&quot;command://notation/add-to-selection/begin-score&quot;);</span>
+<span id="L304"><span class="lineNum">     304</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Select to beginning of score&quot;);</span>
+<span id="L305"><span class="lineNum">     305</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add to selection: beginning of score&quot;);</span>
+<span id="L306"><span class="lineNum">     306</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L307"><span class="lineNum">     307</span>              : };</span>
+<span id="L308"><span class="lineNum">     308</span>              : </span>
+<span id="L309"><span class="lineNum">     309</span>              : struct AddToSelectionEndScoreCommand {</span>
+<span id="L310"><span class="lineNum">     310</span>              :     sci_auto id = Command(&quot;command://notation/add-to-selection/end-score&quot;);</span>
+<span id="L311"><span class="lineNum">     311</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Select to end of score&quot;);</span>
+<span id="L312"><span class="lineNum">     312</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add to selection: end of score&quot;);</span>
+<span id="L313"><span class="lineNum">     313</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L314"><span class="lineNum">     314</span>              : };</span>
+<span id="L315"><span class="lineNum">     315</span>              : </span>
+<span id="L316"><span class="lineNum">     316</span>              : struct OpenSelectionOptionsCommand {</span>
+<span id="L317"><span class="lineNum">     317</span>              :     sci_auto id = Command(&quot;command://notation/open-selection-options&quot;);</span>
+<span id="L318"><span class="lineNum">     318</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Selection options&quot;);</span>
+<span id="L319"><span class="lineNum">     319</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Open selection options&quot;);</span>
+<span id="L320"><span class="lineNum">     320</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L321"><span class="lineNum">     321</span>              : };</span>
+<span id="L322"><span class="lineNum">     322</span>              : </span>
+<span id="L323"><span class="lineNum">     323</span>              : struct ShowLocationCommand {</span>
+<span id="L324"><span class="lineNum">     324</span>              :     sci_auto id = Command(&quot;command://notation/show-location&quot;);</span>
+<span id="L325"><span class="lineNum">     325</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Show location&quot;);</span>
+<span id="L326"><span class="lineNum">     326</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Show current location in score&quot;);</span>
+<span id="L327"><span class="lineNum">     327</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L328"><span class="lineNum">     328</span>              : };</span>
+<span id="L329"><span class="lineNum">     329</span>              : </span>
+<span id="L330"><span class="lineNum">     330</span>              : // note input commands</span>
+<span id="L331"><span class="lineNum">     331</span>              : struct ToggleNoteInputCommand {</span>
+<span id="L332"><span class="lineNum">     332</span>              :     sci_auto id = Command(&quot;command://notation/toggle-note-input&quot;);</span>
+<span id="L333"><span class="lineNum">     333</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Toggle note input&quot;);</span>
+<span id="L334"><span class="lineNum">     334</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle note input&quot;);</span>
+<span id="L335"><span class="lineNum">     335</span>              :     sci_auto availabilities = Availability::API;</span>
+<span id="L336"><span class="lineNum">     336</span>              : </span>
+<span id="L337"><span class="lineNum">     337</span>              :     NoteInputMethod method = NoteInputMethod::DEFAULT;</span>
+<span id="L338"><span class="lineNum">     338</span>              : </span>
+<span id="L339"><span class="lineNum">     339</span>              :     sci_auto input = FieldsScheme {</span>
+<span id="L340"><span class="lineNum">     340</span>              :         Field{ &quot;method&quot;, &amp;ToggleNoteInputCommand::method, &quot;Note input method&quot; },</span>
+<span id="L341"><span class="lineNum">     341</span>              :     };</span>
+<span id="L342"><span class="lineNum">     342</span>              : };</span>
+<span id="L343"><span class="lineNum">     343</span>              : </span>
+<span id="L344"><span class="lineNum">     344</span>              : // aliases for toggle note input command</span>
+<span id="L345"><span class="lineNum">     345</span>              : struct ToggleNoteInputDefaultCommand {</span>
+<span id="L346"><span class="lineNum">     346</span>              :     sci_auto id = Command(&quot;command://notation/toggle-note-input/default&quot;);</span>
+<span id="L347"><span class="lineNum">     347</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Note input&quot;);</span>
+<span id="L348"><span class="lineNum">     348</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle note input mode&quot;);</span>
+<span id="L349"><span class="lineNum">     349</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::EDIT, Checkable::Yes);</span>
+<span id="L350"><span class="lineNum">     350</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L351"><span class="lineNum">     351</span>              : };</span>
+<span id="L352"><span class="lineNum">     352</span>              : </span>
+<span id="L353"><span class="lineNum">     353</span>              : struct ToggleNoteInputByNameCommand {</span>
+<span id="L354"><span class="lineNum">     354</span>              :     sci_auto id = Command(&quot;command://notation/toggle-note-input/by-note-name&quot;);</span>
+<span id="L355"><span class="lineNum">     355</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Note input by note name&quot;);</span>
+<span id="L356"><span class="lineNum">     356</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle note input mode by note name&quot;);</span>
+<span id="L357"><span class="lineNum">     357</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::EDIT, Checkable::Yes);</span>
+<span id="L358"><span class="lineNum">     358</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L359"><span class="lineNum">     359</span>              : };</span>
+<span id="L360"><span class="lineNum">     360</span>              : </span>
+<span id="L361"><span class="lineNum">     361</span>              : struct ToggleNoteInputByDurationCommand {</span>
+<span id="L362"><span class="lineNum">     362</span>              :     sci_auto id = Command(&quot;command://notation/toggle-note-input/by-duration&quot;);</span>
+<span id="L363"><span class="lineNum">     363</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Note input by duration&quot;);</span>
+<span id="L364"><span class="lineNum">     364</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle note input mode by duration&quot;);</span>
+<span id="L365"><span class="lineNum">     365</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::DURATION_CURSOR, Checkable::Yes);</span>
+<span id="L366"><span class="lineNum">     366</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L367"><span class="lineNum">     367</span>              : };</span>
+<span id="L368"><span class="lineNum">     368</span>              : </span>
+<span id="L369"><span class="lineNum">     369</span>              : struct ToggleNoteInputRhythmCommand {</span>
+<span id="L370"><span class="lineNum">     370</span>              :     sci_auto id = Command(&quot;command://notation/toggle-note-input/rhythm&quot;);</span>
+<span id="L371"><span class="lineNum">     371</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Rhythm only (not pitch)&quot;);</span>
+<span id="L372"><span class="lineNum">     372</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle note input mode: rhythm only (not pitch)&quot;);</span>
+<span id="L373"><span class="lineNum">     373</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::RHYTHM_ONLY, Checkable::Yes);</span>
+<span id="L374"><span class="lineNum">     374</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L375"><span class="lineNum">     375</span>              : };</span>
+<span id="L376"><span class="lineNum">     376</span>              : </span>
+<span id="L377"><span class="lineNum">     377</span>              : struct ToggleNoteInputRepitchCommand {</span>
+<span id="L378"><span class="lineNum">     378</span>              :     sci_auto id = Command(&quot;command://notation/toggle-note-input/repitch&quot;);</span>
+<span id="L379"><span class="lineNum">     379</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Re-pitch existing notes&quot;);</span>
+<span id="L380"><span class="lineNum">     380</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle note input mode: re-pitch existing notes&quot;);</span>
+<span id="L381"><span class="lineNum">     381</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::RE_PITCH, Checkable::Yes);</span>
+<span id="L382"><span class="lineNum">     382</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L383"><span class="lineNum">     383</span>              : };</span>
+<span id="L384"><span class="lineNum">     384</span>              : </span>
+<span id="L385"><span class="lineNum">     385</span>              : struct ToggleNoteInputRealtimeAutoCommand {</span>
+<span id="L386"><span class="lineNum">     386</span>              :     sci_auto id = Command(&quot;command://notation/toggle-note-input/realtime-auto&quot;);</span>
+<span id="L387"><span class="lineNum">     387</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Real-time (metronome)&quot;);</span>
+<span id="L388"><span class="lineNum">     388</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle note input mode: real-time (metronome)&quot;);</span>
+<span id="L389"><span class="lineNum">     389</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::METRONOME, Checkable::Yes);</span>
+<span id="L390"><span class="lineNum">     390</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L391"><span class="lineNum">     391</span>              : };</span>
+<span id="L392"><span class="lineNum">     392</span>              : </span>
+<span id="L393"><span class="lineNum">     393</span>              : struct ToggleNoteInputRealtimeManualCommand {</span>
+<span id="L394"><span class="lineNum">     394</span>              :     sci_auto id = Command(&quot;command://notation/toggle-note-input/realtime-manual&quot;);</span>
+<span id="L395"><span class="lineNum">     395</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Real-time (foot pedal)&quot;);</span>
+<span id="L396"><span class="lineNum">     396</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle note input mode: real-time (foot pedal)&quot;);</span>
+<span id="L397"><span class="lineNum">     397</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::FOOT_PEDAL, Checkable::Yes);</span>
+<span id="L398"><span class="lineNum">     398</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L399"><span class="lineNum">     399</span>              : };</span>
+<span id="L400"><span class="lineNum">     400</span>              : </span>
+<span id="L401"><span class="lineNum">     401</span>              : struct ToggleNoteInputTimewiseCommand {</span>
+<span id="L402"><span class="lineNum">     402</span>              :     sci_auto id = Command(&quot;command://notation/toggle-note-input/timewise&quot;);</span>
+<span id="L403"><span class="lineNum">     403</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Insert&quot;);</span>
+<span id="L404"><span class="lineNum">     404</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle note input mode: insert (increases measure duration)&quot;);</span>
+<span id="L405"><span class="lineNum">     405</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_PLUS, Checkable::Yes);</span>
+<span id="L406"><span class="lineNum">     406</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L407"><span class="lineNum">     407</span>              : };</span>
+<span id="L408"><span class="lineNum">     408</span>              : </span>
+<span id="L409"><span class="lineNum">     409</span>              : struct ToggleInsertModeCommand {</span>
+<span id="L410"><span class="lineNum">     410</span>              :     sci_auto id = Command(&quot;command://notation/toggle-note-input/toggle-insert-mode&quot;);</span>
+<span id="L411"><span class="lineNum">     411</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Insert/overwrite&quot;);</span>
+<span id="L412"><span class="lineNum">     412</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle note input mode: insert/overwrite&quot;);</span>
+<span id="L413"><span class="lineNum">     413</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L414"><span class="lineNum">     414</span>              : };</span>
+<span id="L415"><span class="lineNum">     415</span>              : </span>
+<span id="L416"><span class="lineNum">     416</span>              : // note input set duration commands</span>
+<span id="L417"><span class="lineNum">     417</span>              : struct SetDurationCommand {</span>
+<span id="L418"><span class="lineNum">     418</span>              :     sci_auto id = Command(&quot;command://notation/set-duration&quot;);</span>
+<span id="L419"><span class="lineNum">     419</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Set duration&quot;);</span>
+<span id="L420"><span class="lineNum">     420</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration&quot;);</span>
+<span id="L421"><span class="lineNum">     421</span>              :     sci_auto availabilities = Availability::API;</span>
+<span id="L422"><span class="lineNum">     422</span>              : </span>
+<span id="L423"><span class="lineNum">     423</span>              :     DurationType duration = DurationType::V_QUARTER;</span>
+<span id="L424"><span class="lineNum">     424</span>              : </span>
+<span id="L425"><span class="lineNum">     425</span>              :     sci_auto input = FieldsScheme {</span>
+<span id="L426"><span class="lineNum">     426</span>              :         Field{ &quot;duration&quot;, &amp;SetDurationCommand::duration, &quot;Duration&quot; },</span>
+<span id="L427"><span class="lineNum">     427</span>              :     };</span>
+<span id="L428"><span class="lineNum">     428</span>              : };</span>
+<span id="L429"><span class="lineNum">     429</span>              : </span>
+<span id="L430"><span class="lineNum">     430</span>              : // aliases for set duration commands</span>
+<span id="L431"><span class="lineNum">     431</span>              : struct SetDurationLongaCommand {</span>
+<span id="L432"><span class="lineNum">     432</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/longa&quot;);</span>
+<span id="L433"><span class="lineNum">     433</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Longa&quot;);</span>
+<span id="L434"><span class="lineNum">     434</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: longa&quot;);</span>
+<span id="L435"><span class="lineNum">     435</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::LONGO);</span>
+<span id="L436"><span class="lineNum">     436</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L437"><span class="lineNum">     437</span>              : };</span>
+<span id="L438"><span class="lineNum">     438</span>              : </span>
+<span id="L439"><span class="lineNum">     439</span>              : struct SetDurationBreveCommand {</span>
+<span id="L440"><span class="lineNum">     440</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/breve&quot;);</span>
+<span id="L441"><span class="lineNum">     441</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Breve&quot;);</span>
+<span id="L442"><span class="lineNum">     442</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: breve&quot;);</span>
+<span id="L443"><span class="lineNum">     443</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_WHOLE_DOUBLE);</span>
+<span id="L444"><span class="lineNum">     444</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L445"><span class="lineNum">     445</span>              : };</span>
+<span id="L446"><span class="lineNum">     446</span>              : </span>
+<span id="L447"><span class="lineNum">     447</span>              : struct SetDurationWholeCommand {</span>
+<span id="L448"><span class="lineNum">     448</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/whole&quot;);</span>
+<span id="L449"><span class="lineNum">     449</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Whole note&quot;);</span>
+<span id="L450"><span class="lineNum">     450</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: whole note&quot;);</span>
+<span id="L451"><span class="lineNum">     451</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_WHOLE);</span>
+<span id="L452"><span class="lineNum">     452</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L453"><span class="lineNum">     453</span>              : };</span>
+<span id="L454"><span class="lineNum">     454</span>              : </span>
+<span id="L455"><span class="lineNum">     455</span>              : struct SetDurationHalfCommand {</span>
+<span id="L456"><span class="lineNum">     456</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/half&quot;);</span>
+<span id="L457"><span class="lineNum">     457</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Half note&quot;);</span>
+<span id="L458"><span class="lineNum">     458</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: half note&quot;);</span>
+<span id="L459"><span class="lineNum">     459</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_HALF);</span>
+<span id="L460"><span class="lineNum">     460</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L461"><span class="lineNum">     461</span>              : };</span>
+<span id="L462"><span class="lineNum">     462</span>              : </span>
+<span id="L463"><span class="lineNum">     463</span>              : struct SetDurationQuarterCommand {</span>
+<span id="L464"><span class="lineNum">     464</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/quarter&quot;);</span>
+<span id="L465"><span class="lineNum">     465</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Quarter note&quot;);</span>
+<span id="L466"><span class="lineNum">     466</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: quarter note&quot;);</span>
+<span id="L467"><span class="lineNum">     467</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_QUARTER);</span>
+<span id="L468"><span class="lineNum">     468</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L469"><span class="lineNum">     469</span>              : };</span>
+<span id="L470"><span class="lineNum">     470</span>              : </span>
+<span id="L471"><span class="lineNum">     471</span>              : struct SetDurationEighthCommand {</span>
+<span id="L472"><span class="lineNum">     472</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/eighth&quot;);</span>
+<span id="L473"><span class="lineNum">     473</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Eighth note&quot;);</span>
+<span id="L474"><span class="lineNum">     474</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: eighth note&quot;);</span>
+<span id="L475"><span class="lineNum">     475</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_8TH);</span>
+<span id="L476"><span class="lineNum">     476</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L477"><span class="lineNum">     477</span>              : };</span>
+<span id="L478"><span class="lineNum">     478</span>              : </span>
+<span id="L479"><span class="lineNum">     479</span>              : struct SetDuration16thCommand {</span>
+<span id="L480"><span class="lineNum">     480</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/16th&quot;);</span>
+<span id="L481"><span class="lineNum">     481</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;16th note&quot;);</span>
+<span id="L482"><span class="lineNum">     482</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: 16th note&quot;);</span>
+<span id="L483"><span class="lineNum">     483</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_16TH);</span>
+<span id="L484"><span class="lineNum">     484</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L485"><span class="lineNum">     485</span>              : };</span>
+<span id="L486"><span class="lineNum">     486</span>              : </span>
+<span id="L487"><span class="lineNum">     487</span>              : struct SetDuration32ndCommand {</span>
+<span id="L488"><span class="lineNum">     488</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/32nd&quot;);</span>
+<span id="L489"><span class="lineNum">     489</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;32nd note&quot;);</span>
+<span id="L490"><span class="lineNum">     490</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: 32nd note&quot;);</span>
+<span id="L491"><span class="lineNum">     491</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_32ND);</span>
+<span id="L492"><span class="lineNum">     492</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L493"><span class="lineNum">     493</span>              : };</span>
+<span id="L494"><span class="lineNum">     494</span>              : </span>
+<span id="L495"><span class="lineNum">     495</span>              : struct SetDuration64thCommand {</span>
+<span id="L496"><span class="lineNum">     496</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/64th&quot;);</span>
+<span id="L497"><span class="lineNum">     497</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;64th note&quot;);</span>
+<span id="L498"><span class="lineNum">     498</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: 64th note&quot;);</span>
+<span id="L499"><span class="lineNum">     499</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_64TH);</span>
+<span id="L500"><span class="lineNum">     500</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L501"><span class="lineNum">     501</span>              : };</span>
+<span id="L502"><span class="lineNum">     502</span>              : </span>
+<span id="L503"><span class="lineNum">     503</span>              : struct SetDuration128thCommand {</span>
+<span id="L504"><span class="lineNum">     504</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/128th&quot;);</span>
+<span id="L505"><span class="lineNum">     505</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;128th note&quot;);</span>
+<span id="L506"><span class="lineNum">     506</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: 128th note&quot;);</span>
+<span id="L507"><span class="lineNum">     507</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_128TH);</span>
+<span id="L508"><span class="lineNum">     508</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L509"><span class="lineNum">     509</span>              : };</span>
+<span id="L510"><span class="lineNum">     510</span>              : </span>
+<span id="L511"><span class="lineNum">     511</span>              : struct SetDuration256thCommand {</span>
+<span id="L512"><span class="lineNum">     512</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/256th&quot;);</span>
+<span id="L513"><span class="lineNum">     513</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;256th note&quot;);</span>
+<span id="L514"><span class="lineNum">     514</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: 256th note&quot;);</span>
+<span id="L515"><span class="lineNum">     515</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_256TH);</span>
+<span id="L516"><span class="lineNum">     516</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L517"><span class="lineNum">     517</span>              : };</span>
+<span id="L518"><span class="lineNum">     518</span>              : </span>
+<span id="L519"><span class="lineNum">     519</span>              : struct SetDuration512thCommand {</span>
+<span id="L520"><span class="lineNum">     520</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/512th&quot;);</span>
+<span id="L521"><span class="lineNum">     521</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;512th note&quot;);</span>
+<span id="L522"><span class="lineNum">     522</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: 512th note&quot;);</span>
+<span id="L523"><span class="lineNum">     523</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_512TH);</span>
+<span id="L524"><span class="lineNum">     524</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L525"><span class="lineNum">     525</span>              : };</span>
+<span id="L526"><span class="lineNum">     526</span>              : </span>
+<span id="L527"><span class="lineNum">     527</span>              : struct SetDuration1024thCommand {</span>
+<span id="L528"><span class="lineNum">     528</span>              :     sci_auto id = Command(&quot;command://notation/set-duration/1024th&quot;);</span>
+<span id="L529"><span class="lineNum">     529</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;1024th note&quot;);</span>
+<span id="L530"><span class="lineNum">     530</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Set duration: 1024th note&quot;);</span>
+<span id="L531"><span class="lineNum">     531</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_1024TH);</span>
+<span id="L532"><span class="lineNum">     532</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L533"><span class="lineNum">     533</span>              : };</span>
+<span id="L534"><span class="lineNum">     534</span>              : </span>
+<span id="L535"><span class="lineNum">     535</span>              : // increase/decrease duration commands</span>
+<span id="L536"><span class="lineNum">     536</span>              : struct ChangeDurationCommand {</span>
+<span id="L537"><span class="lineNum">     537</span>              :     sci_auto id = Command(&quot;command://notation/change-duration&quot;);</span>
+<span id="L538"><span class="lineNum">     538</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Change duration&quot;);</span>
+<span id="L539"><span class="lineNum">     539</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Change duration&quot;);</span>
+<span id="L540"><span class="lineNum">     540</span>              :     sci_auto availabilities = Availability::API;</span>
+<span id="L541"><span class="lineNum">     541</span>              : </span>
+<span id="L542"><span class="lineNum">     542</span>              :     ChangeDurationMode mode = ChangeDurationMode::Double;</span>
+<span id="L543"><span class="lineNum">     543</span>              : </span>
+<span id="L544"><span class="lineNum">     544</span>              :     sci_auto input = FieldsScheme {</span>
+<span id="L545"><span class="lineNum">     545</span>              :         Field{ &quot;mode&quot;, &amp;ChangeDurationCommand::mode, &quot;Change duration mode&quot; },</span>
+<span id="L546"><span class="lineNum">     546</span>              :     };</span>
+<span id="L547"><span class="lineNum">     547</span>              : };</span>
+<span id="L548"><span class="lineNum">     548</span>              : </span>
+<span id="L549"><span class="lineNum">     549</span>              : // aliases for change duration command</span>
+<span id="L550"><span class="lineNum">     550</span>              : struct ChangeDurationDoubleCommand {</span>
+<span id="L551"><span class="lineNum">     551</span>              :     sci_auto id = Command(&quot;command://notation/change-duration/double&quot;);</span>
+<span id="L552"><span class="lineNum">     552</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Double duration&quot;);</span>
+<span id="L553"><span class="lineNum">     553</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Double selected duration&quot;);</span>
+<span id="L554"><span class="lineNum">     554</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L555"><span class="lineNum">     555</span>              : };</span>
+<span id="L556"><span class="lineNum">     556</span>              : </span>
+<span id="L557"><span class="lineNum">     557</span>              : struct ChangeDurationHalveCommand {</span>
+<span id="L558"><span class="lineNum">     558</span>              :     sci_auto id = Command(&quot;command://notation/change-duration/halve&quot;);</span>
+<span id="L559"><span class="lineNum">     559</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Halve duration&quot;);</span>
+<span id="L560"><span class="lineNum">     560</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Halve selected duration&quot;);</span>
+<span id="L561"><span class="lineNum">     561</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L562"><span class="lineNum">     562</span>              : };</span>
+<span id="L563"><span class="lineNum">     563</span>              : </span>
+<span id="L564"><span class="lineNum">     564</span>              : struct ChangeDurationDoubleDottedCommand {</span>
+<span id="L565"><span class="lineNum">     565</span>              :     sci_auto id = Command(&quot;command://notation/change-duration/double-dotted&quot;);</span>
+<span id="L566"><span class="lineNum">     566</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Double selected duration (dotted)&quot;);</span>
+<span id="L567"><span class="lineNum">     567</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Double selected duration (includes dotted values)&quot;);</span>
+<span id="L568"><span class="lineNum">     568</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L569"><span class="lineNum">     569</span>              : };</span>
+<span id="L570"><span class="lineNum">     570</span>              : </span>
+<span id="L571"><span class="lineNum">     571</span>              : struct ChangeDurationHalveDottedCommand {</span>
+<span id="L572"><span class="lineNum">     572</span>              :     sci_auto id = Command(&quot;command://notation/change-duration/halve-dotted&quot;);</span>
+<span id="L573"><span class="lineNum">     573</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Halve selected duration (dotted)&quot;);</span>
+<span id="L574"><span class="lineNum">     574</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Halve selected duration (includes dotted values)&quot;);</span>
+<span id="L575"><span class="lineNum">     575</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L576"><span class="lineNum">     576</span>              : };</span>
+<span id="L577"><span class="lineNum">     577</span>              : </span>
+<span id="L578"><span class="lineNum">     578</span>              : struct ToggleDotsCommand {</span>
+<span id="L579"><span class="lineNum">     579</span>              :     sci_auto id = Command(&quot;command://notation/toggle-dots&quot;);</span>
+<span id="L580"><span class="lineNum">     580</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Toggle dots&quot;);</span>
+<span id="L581"><span class="lineNum">     581</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle dots&quot;);</span>
+<span id="L582"><span class="lineNum">     582</span>              :     sci_auto availabilities = Availability::API;</span>
+<span id="L583"><span class="lineNum">     583</span>              : </span>
+<span id="L584"><span class="lineNum">     584</span>              :     int dots = 1;</span>
+<span id="L585"><span class="lineNum">     585</span>              : </span>
+<span id="L586"><span class="lineNum">     586</span>              :     sci_auto input = FieldsScheme {</span>
+<span id="L587"><span class="lineNum">     587</span>              :         Field{ &quot;dots&quot;, &amp;ToggleDotsCommand::dots, &quot;Number of dots&quot;, 1, engraving::MAX_DOTS },</span>
+<span id="L588"><span class="lineNum">     588</span>              :     };</span>
+<span id="L589"><span class="lineNum">     589</span>              : };</span>
+<span id="L590"><span class="lineNum">     590</span>              : </span>
+<span id="L591"><span class="lineNum">     591</span>              : // aliases for toggle dots command</span>
+<span id="L592"><span class="lineNum">     592</span>              : struct ToggleDotCommand {</span>
+<span id="L593"><span class="lineNum">     593</span>              :     sci_auto id = Command(&quot;command://notation/toggle-dots/1&quot;);</span>
+<span id="L594"><span class="lineNum">     594</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Augmentation dot&quot;);</span>
+<span id="L595"><span class="lineNum">     595</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle duration dot&quot;);</span>
+<span id="L596"><span class="lineNum">     596</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_DOTTED);</span>
+<span id="L597"><span class="lineNum">     597</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L598"><span class="lineNum">     598</span>              : };</span>
+<span id="L599"><span class="lineNum">     599</span>              : </span>
+<span id="L600"><span class="lineNum">     600</span>              : struct ToggleDot2Command {</span>
+<span id="L601"><span class="lineNum">     601</span>              :     sci_auto id = Command(&quot;command://notation/toggle-dots/2&quot;);</span>
+<span id="L602"><span class="lineNum">     602</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Double augmentation dot&quot;);</span>
+<span id="L603"><span class="lineNum">     603</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle duration dot: double&quot;);</span>
+<span id="L604"><span class="lineNum">     604</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_DOTTED_2);</span>
+<span id="L605"><span class="lineNum">     605</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L606"><span class="lineNum">     606</span>              : };</span>
+<span id="L607"><span class="lineNum">     607</span>              : </span>
+<span id="L608"><span class="lineNum">     608</span>              : struct ToggleDot3Command {</span>
+<span id="L609"><span class="lineNum">     609</span>              :     sci_auto id = Command(&quot;command://notation/toggle-dots/3&quot;);</span>
+<span id="L610"><span class="lineNum">     610</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Triple augmentation dot&quot;);</span>
+<span id="L611"><span class="lineNum">     611</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle duration dot: triple&quot;);</span>
+<span id="L612"><span class="lineNum">     612</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_DOTTED_3);</span>
+<span id="L613"><span class="lineNum">     613</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L614"><span class="lineNum">     614</span>              : };</span>
+<span id="L615"><span class="lineNum">     615</span>              : </span>
+<span id="L616"><span class="lineNum">     616</span>              : struct ToggleDot4Command {</span>
+<span id="L617"><span class="lineNum">     617</span>              :     sci_auto id = Command(&quot;command://notation/toggle-dots/4&quot;);</span>
+<span id="L618"><span class="lineNum">     618</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Quadruple augmentation dot&quot;);</span>
+<span id="L619"><span class="lineNum">     619</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle duration dot: quadruple&quot;);</span>
+<span id="L620"><span class="lineNum">     620</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::NOTE_DOTTED_4);</span>
+<span id="L621"><span class="lineNum">     621</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L622"><span class="lineNum">     622</span>              : };</span>
+<span id="L623"><span class="lineNum">     623</span>              : </span>
+<span id="L624"><span class="lineNum">     624</span>              : struct ToggleRestCommand {</span>
+<span id="L625"><span class="lineNum">     625</span>              :     sci_auto id = Command(&quot;command://notation/toggle-rest&quot;);</span>
+<span id="L626"><span class="lineNum">     626</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Rest&quot;);</span>
+<span id="L627"><span class="lineNum">     627</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Toggle rest&quot;);</span>
+<span id="L628"><span class="lineNum">     628</span>              :     sci_auto decoration = Decoration(muse::ui::IconCode::Code::REST);</span>
+<span id="L629"><span class="lineNum">     629</span>              :     sci_auto availabilities = Availability::All;</span>
+<span id="L630"><span class="lineNum">     630</span>              : };</span>
+<span id="L631"><span class="lineNum">     631</span>              : </span>
+<span id="L632"><span class="lineNum">     632</span>              : struct RequestNoteInputStateCommand {</span>
+<span id="L633"><span class="lineNum">     633</span>              :     sci_auto id = Command(&quot;command://notation/request-noteinput-state&quot;);</span>
+<span id="L634"><span class="lineNum">     634</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Get note input state&quot;);</span>
+<span id="L635"><span class="lineNum">     635</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Get note input state&quot;);</span>
+<span id="L636"><span class="lineNum">     636</span>              :     sci_auto availabilities = muse::rcommand::Availability::API;</span>
+<span id="L637"><span class="lineNum">     637</span>              :     sci_auto annotations = muse::rcommand::Annotation::ReadOnly;</span>
+<span id="L638"><span class="lineNum">     638</span>              : </span>
+<span id="L639"><span class="lineNum">     639</span>              :     struct Output {</span>
+<span id="L640"><span class="lineNum">     640</span>              :         bool enabled = false;</span>
+<span id="L641"><span class="lineNum">     641</span>              :         NoteInputMethod method = NoteInputMethod::BY_NOTE_NAME;</span>
+<span id="L642"><span class="lineNum">     642</span>              :     };</span>
+<span id="L643"><span class="lineNum">     643</span>              : </span>
+<span id="L644"><span class="lineNum">     644</span>              :     using O = RequestNoteInputStateCommand::Output;</span>
+<span id="L645"><span class="lineNum">     645</span>              :     sci_auto output = std::tuple {</span>
+<span id="L646"><span class="lineNum">     646</span>              :         Field{ &quot;enabled&quot;, &amp;O::enabled, &quot;Flag indicating whether the note input mode is enabled&quot; },</span>
+<span id="L647"><span class="lineNum">     647</span>              :         Field{ &quot;method&quot;, &amp;O::method, &quot;The method used to input the note&quot; },</span>
+<span id="L648"><span class="lineNum">     648</span>              :     };</span>
+<span id="L649"><span class="lineNum">     649</span>              : };</span>
+<span id="L650"><span class="lineNum">     650</span>              : </span>
+<span id="L651"><span class="lineNum">     651</span>              : // add note command</span>
+<span id="L652"><span class="lineNum">     652</span>              : struct AddNoteCommand {</span>
+<span id="L653"><span class="lineNum">     653</span>              :     sci_auto id = muse::rcommand::Command(&quot;command://notation/add-note&quot;);</span>
+<span id="L654"><span class="lineNum">     654</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Add note&quot;);</span>
+<span id="L655"><span class="lineNum">     655</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Add note&quot;);</span>
+<span id="L656"><span class="lineNum">     656</span>              :     sci_auto availabilities = Availability::API;</span>
+<span id="L657"><span class="lineNum">     657</span>              : </span>
+<span id="L658"><span class="lineNum">     658</span>              :     NoteName note = NoteName::C;</span>
+<span id="L659"><span class="lineNum">     659</span>              :     NoteAddingMode mode = NoteAddingMode::NextChord;</span>
+<span id="L660"><span class="lineNum">     660</span>              : </span>
+<span id="L661"><span class="lineNum">     661</span>              :     sci_auto input = std::tuple {</span>
+<span id="L662"><span class="lineNum">     662</span>              :         Field{ &quot;note&quot;, &amp;AddNoteCommand::note, &quot;Note name&quot; },</span>
+<span id="L663"><span class="lineNum">     663</span>              :         Field{ &quot;mode&quot;, &amp;AddNoteCommand::mode, &quot;Adding mode&quot;, Presence::Optional },</span>
+<span id="L664"><span class="lineNum">     664</span>              :     };</span>
+<span id="L665"><span class="lineNum">     665</span>              : };</span>
+<span id="L666"><span class="lineNum">     666</span>              : </span>
+<span id="L667"><span class="lineNum">     667</span>              : //! NOTE Shared templates for note commands, declared once to avoid translation duplication.</span>
+<span id="L668"><span class="lineNum">     668</span>              : //! They are created on first use, so they cannot be used before initialization</span>
+<span id="L669"><span class="lineNum">     669</span>              : //! (the static initialization order across translation units is undefined).</span>
+<span id="L670"><span class="lineNum">     670</span>              : namespace prv {</span>
+<span id="L671"><span class="lineNum">     671</span>              : using TS = TranslatableString;</span>
+<span id="L672"><span class="lineNum">     672</span>              : //: Note</span>
+<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC tlaBgGNC">         120 : inline const TS&amp; noteC() { static const TS s = TranslatableString(&quot;action&quot;, &quot;C&quot;); return s; }</span></span>
+<span id="L674"><span class="lineNum">     674</span>              : //: Note</span>
+<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">         120 : inline const TS&amp; noteD() { static const TS s = TranslatableString(&quot;action&quot;, &quot;D&quot;); return s; }</span></span>
+<span id="L676"><span class="lineNum">     676</span>              : //: Note</span>
+<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC">         120 : inline const TS&amp; noteE() { static const TS s = TranslatableString(&quot;action&quot;, &quot;E&quot;); return s; }</span></span>
+<span id="L678"><span class="lineNum">     678</span>              : //: Note</span>
+<span id="L679"><span class="lineNum">     679</span> <span class="tlaGNC">         120 : inline const TS&amp; noteF() { static const TS s = TranslatableString(&quot;action&quot;, &quot;F&quot;); return s; }</span></span>
+<span id="L680"><span class="lineNum">     680</span>              : //: Note</span>
+<span id="L681"><span class="lineNum">     681</span> <span class="tlaGNC">         120 : inline const TS&amp; noteG() { static const TS s = TranslatableString(&quot;action&quot;, &quot;G&quot;); return s; }</span></span>
+<span id="L682"><span class="lineNum">     682</span>              : //: Note</span>
+<span id="L683"><span class="lineNum">     683</span> <span class="tlaGNC">         120 : inline const TS&amp; noteA() { static const TS s = TranslatableString(&quot;action&quot;, &quot;A&quot;); return s; }</span></span>
+<span id="L684"><span class="lineNum">     684</span>              : //: Note</span>
+<span id="L685"><span class="lineNum">     685</span> <span class="tlaGNC">         120 : inline const TS&amp; noteB() { static const TS s = TranslatableString(&quot;action&quot;, &quot;B&quot;); return s; }</span></span>
+<span id="L686"><span class="lineNum">     686</span>              : //: Enter note %1</span>
+<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">         140 : inline const TS&amp; Enter_note_X() { static const TS s = TranslatableString(&quot;action&quot;, &quot;Enter note %1&quot;); return s; }</span></span>
+<span id="L688"><span class="lineNum">     688</span>              : //: Add %1 to chord</span>
+<span id="L689"><span class="lineNum">     689</span> <span class="tlaGNC">         140 : inline const TS&amp; Add_X_to_chord() { static const TS s = TranslatableString(&quot;action&quot;, &quot;Add %1 to chord&quot;); return s; }</span></span>
+<span id="L690"><span class="lineNum">     690</span>              : //: Add note %1 to chord</span>
+<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">         140 : inline const TS&amp; Add_note_X_to_chord() { static const TS s = TranslatableString(&quot;action&quot;, &quot;Add note %1 to chord&quot;); return s; }</span></span>
+<span id="L692"><span class="lineNum">     692</span>              : //: Insert %1</span>
+<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">         280 : inline const TS&amp; Insert_X() { static const TS s = TranslatableString(&quot;action&quot;, &quot;Insert %1&quot;); return s; }</span></span>
+<span id="L694"><span class="lineNum">     694</span>              : } // namespace prv</span>
+<span id="L695"><span class="lineNum">     695</span>              : </span>
+<span id="L696"><span class="lineNum">     696</span>              : // aliases for add note command</span>
+<span id="L697"><span class="lineNum">     697</span>              : struct AddNoteC_ToNextChordCommand {</span>
+<span id="L698"><span class="lineNum">     698</span>              :     sci_auto id = Command(&quot;command://notation/add-note/next-chord/c&quot;);</span>
+<span id="L699"><span class="lineNum">     699</span>              :     sci_auto title = MnemonicString(prv::noteC());</span>
+<span id="L700"><span class="lineNum">     700</span>              :     sci_auto description = prv::Enter_note_X().arg(prv::noteC());</span>
+<span id="L701"><span class="lineNum">     701</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L702"><span class="lineNum">     702</span>              : };</span>
+<span id="L703"><span class="lineNum">     703</span>              : </span>
+<span id="L704"><span class="lineNum">     704</span>              : struct AddNoteD_ToNextChordCommand {</span>
+<span id="L705"><span class="lineNum">     705</span>              :     sci_auto id = Command(&quot;command://notation/add-note/next-chord/d&quot;);</span>
+<span id="L706"><span class="lineNum">     706</span>              :     sci_auto title = MnemonicString(prv::noteD());</span>
+<span id="L707"><span class="lineNum">     707</span>              :     sci_auto description = prv::Enter_note_X().arg(prv::noteD());</span>
+<span id="L708"><span class="lineNum">     708</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L709"><span class="lineNum">     709</span>              : };</span>
+<span id="L710"><span class="lineNum">     710</span>              : </span>
+<span id="L711"><span class="lineNum">     711</span>              : struct AddNoteE_ToNextChordCommand {</span>
+<span id="L712"><span class="lineNum">     712</span>              :     sci_auto id = Command(&quot;command://notation/add-note/next-chord/e&quot;);</span>
+<span id="L713"><span class="lineNum">     713</span>              :     sci_auto title = MnemonicString(prv::noteE());</span>
+<span id="L714"><span class="lineNum">     714</span>              :     sci_auto description = prv::Enter_note_X().arg(prv::noteE());</span>
+<span id="L715"><span class="lineNum">     715</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L716"><span class="lineNum">     716</span>              : };</span>
+<span id="L717"><span class="lineNum">     717</span>              : </span>
+<span id="L718"><span class="lineNum">     718</span>              : struct AddNoteF_ToNextChordCommand {</span>
+<span id="L719"><span class="lineNum">     719</span>              :     sci_auto id = Command(&quot;command://notation/add-note/next-chord/f&quot;);</span>
+<span id="L720"><span class="lineNum">     720</span>              :     sci_auto title = MnemonicString(prv::noteF());</span>
+<span id="L721"><span class="lineNum">     721</span>              :     sci_auto description = prv::Enter_note_X().arg(prv::noteF());</span>
+<span id="L722"><span class="lineNum">     722</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L723"><span class="lineNum">     723</span>              : };</span>
+<span id="L724"><span class="lineNum">     724</span>              : </span>
+<span id="L725"><span class="lineNum">     725</span>              : struct AddNoteG_ToNextChordCommand {</span>
+<span id="L726"><span class="lineNum">     726</span>              :     sci_auto id = Command(&quot;command://notation/add-note/next-chord/g&quot;);</span>
+<span id="L727"><span class="lineNum">     727</span>              :     sci_auto title = MnemonicString(prv::noteG());</span>
+<span id="L728"><span class="lineNum">     728</span>              :     sci_auto description = prv::Enter_note_X().arg(prv::noteG());</span>
+<span id="L729"><span class="lineNum">     729</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L730"><span class="lineNum">     730</span>              : };</span>
+<span id="L731"><span class="lineNum">     731</span>              : </span>
+<span id="L732"><span class="lineNum">     732</span>              : struct AddNoteA_ToNextChordCommand {</span>
+<span id="L733"><span class="lineNum">     733</span>              :     sci_auto id = Command(&quot;command://notation/add-note/next-chord/a&quot;);</span>
+<span id="L734"><span class="lineNum">     734</span>              :     sci_auto title = MnemonicString(prv::noteA());</span>
+<span id="L735"><span class="lineNum">     735</span>              :     sci_auto description = prv::Enter_note_X().arg(prv::noteA());</span>
+<span id="L736"><span class="lineNum">     736</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L737"><span class="lineNum">     737</span>              : };</span>
+<span id="L738"><span class="lineNum">     738</span>              : </span>
+<span id="L739"><span class="lineNum">     739</span>              : struct AddNoteB_ToNextChordCommand {</span>
+<span id="L740"><span class="lineNum">     740</span>              :     sci_auto id = Command(&quot;command://notation/add-note/next-chord/b&quot;);</span>
+<span id="L741"><span class="lineNum">     741</span>              :     sci_auto title = MnemonicString(prv::noteB());</span>
+<span id="L742"><span class="lineNum">     742</span>              :     sci_auto description = prv::Enter_note_X().arg(prv::noteB());</span>
+<span id="L743"><span class="lineNum">     743</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L744"><span class="lineNum">     744</span>              : };</span>
+<span id="L745"><span class="lineNum">     745</span>              : </span>
+<span id="L746"><span class="lineNum">     746</span>              : struct AddNoteC_ToCurrentChordCommand {</span>
+<span id="L747"><span class="lineNum">     747</span>              :     sci_auto id = Command(&quot;command://notation/add-note/current-chord/c&quot;);</span>
+<span id="L748"><span class="lineNum">     748</span>              :     sci_auto title = MnemonicString(prv::Add_X_to_chord().arg(prv::noteC()));</span>
+<span id="L749"><span class="lineNum">     749</span>              :     sci_auto description = prv::Add_note_X_to_chord().arg(prv::noteC());</span>
+<span id="L750"><span class="lineNum">     750</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L751"><span class="lineNum">     751</span>              : };</span>
+<span id="L752"><span class="lineNum">     752</span>              : </span>
+<span id="L753"><span class="lineNum">     753</span>              : struct AddNoteD_ToCurrentChordCommand {</span>
+<span id="L754"><span class="lineNum">     754</span>              :     sci_auto id = Command(&quot;command://notation/add-note/current-chord/d&quot;);</span>
+<span id="L755"><span class="lineNum">     755</span>              :     sci_auto title = MnemonicString(prv::Add_X_to_chord().arg(prv::noteD()));</span>
+<span id="L756"><span class="lineNum">     756</span>              :     sci_auto description = prv::Add_note_X_to_chord().arg(prv::noteD());</span>
+<span id="L757"><span class="lineNum">     757</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L758"><span class="lineNum">     758</span>              : };</span>
+<span id="L759"><span class="lineNum">     759</span>              : </span>
+<span id="L760"><span class="lineNum">     760</span>              : struct AddNoteE_ToCurrentChordCommand {</span>
+<span id="L761"><span class="lineNum">     761</span>              :     sci_auto id = Command(&quot;command://notation/add-note/current-chord/e&quot;);</span>
+<span id="L762"><span class="lineNum">     762</span>              :     sci_auto title = MnemonicString(prv::Add_X_to_chord().arg(prv::noteE()));</span>
+<span id="L763"><span class="lineNum">     763</span>              :     sci_auto description = prv::Add_note_X_to_chord().arg(prv::noteE());</span>
+<span id="L764"><span class="lineNum">     764</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L765"><span class="lineNum">     765</span>              : };</span>
+<span id="L766"><span class="lineNum">     766</span>              : </span>
+<span id="L767"><span class="lineNum">     767</span>              : struct AddNoteF_ToCurrentChordCommand {</span>
+<span id="L768"><span class="lineNum">     768</span>              :     sci_auto id = Command(&quot;command://notation/add-note/current-chord/f&quot;);</span>
+<span id="L769"><span class="lineNum">     769</span>              :     sci_auto title = MnemonicString(prv::Add_X_to_chord().arg(prv::noteF()));</span>
+<span id="L770"><span class="lineNum">     770</span>              :     sci_auto description = prv::Add_note_X_to_chord().arg(prv::noteF());</span>
+<span id="L771"><span class="lineNum">     771</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L772"><span class="lineNum">     772</span>              : };</span>
+<span id="L773"><span class="lineNum">     773</span>              : </span>
+<span id="L774"><span class="lineNum">     774</span>              : struct AddNoteG_ToCurrentChordCommand {</span>
+<span id="L775"><span class="lineNum">     775</span>              :     sci_auto id = Command(&quot;command://notation/add-note/current-chord/g&quot;);</span>
+<span id="L776"><span class="lineNum">     776</span>              :     sci_auto title = MnemonicString(prv::Add_X_to_chord().arg(prv::noteG()));</span>
+<span id="L777"><span class="lineNum">     777</span>              :     sci_auto description = prv::Add_note_X_to_chord().arg(prv::noteG());</span>
+<span id="L778"><span class="lineNum">     778</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L779"><span class="lineNum">     779</span>              : };</span>
+<span id="L780"><span class="lineNum">     780</span>              : </span>
+<span id="L781"><span class="lineNum">     781</span>              : struct AddNoteA_ToCurrentChordCommand {</span>
+<span id="L782"><span class="lineNum">     782</span>              :     sci_auto id = Command(&quot;command://notation/add-note/current-chord/a&quot;);</span>
+<span id="L783"><span class="lineNum">     783</span>              :     sci_auto title = MnemonicString(prv::Add_X_to_chord().arg(prv::noteA()));</span>
+<span id="L784"><span class="lineNum">     784</span>              :     sci_auto description = prv::Add_note_X_to_chord().arg(prv::noteA());</span>
+<span id="L785"><span class="lineNum">     785</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L786"><span class="lineNum">     786</span>              : };</span>
+<span id="L787"><span class="lineNum">     787</span>              : </span>
+<span id="L788"><span class="lineNum">     788</span>              : struct AddNoteB_ToCurrentChordCommand {</span>
+<span id="L789"><span class="lineNum">     789</span>              :     sci_auto id = Command(&quot;command://notation/add-note/current-chord/b&quot;);</span>
+<span id="L790"><span class="lineNum">     790</span>              :     sci_auto title = MnemonicString(prv::Add_X_to_chord().arg(prv::noteB()));</span>
+<span id="L791"><span class="lineNum">     791</span>              :     sci_auto description = prv::Add_note_X_to_chord().arg(prv::noteB());</span>
+<span id="L792"><span class="lineNum">     792</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L793"><span class="lineNum">     793</span>              : };</span>
+<span id="L794"><span class="lineNum">     794</span>              : </span>
+<span id="L795"><span class="lineNum">     795</span>              : struct AddNoteC_ToInsertChordCommand {</span>
+<span id="L796"><span class="lineNum">     796</span>              :     sci_auto id = Command(&quot;command://notation/add-note/insert-chord/c&quot;);</span>
+<span id="L797"><span class="lineNum">     797</span>              :     sci_auto title = MnemonicString(prv::Insert_X().arg(prv::noteC()));</span>
+<span id="L798"><span class="lineNum">     798</span>              :     sci_auto description = prv::Insert_X().arg(prv::noteC());</span>
+<span id="L799"><span class="lineNum">     799</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L800"><span class="lineNum">     800</span>              : };</span>
+<span id="L801"><span class="lineNum">     801</span>              : </span>
+<span id="L802"><span class="lineNum">     802</span>              : struct AddNoteD_ToInsertChordCommand {</span>
+<span id="L803"><span class="lineNum">     803</span>              :     sci_auto id = Command(&quot;command://notation/add-note/insert-chord/d&quot;);</span>
+<span id="L804"><span class="lineNum">     804</span>              :     sci_auto title = MnemonicString(prv::Insert_X().arg(prv::noteD()));</span>
+<span id="L805"><span class="lineNum">     805</span>              :     sci_auto description = prv::Insert_X().arg(prv::noteD());</span>
+<span id="L806"><span class="lineNum">     806</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L807"><span class="lineNum">     807</span>              : };</span>
+<span id="L808"><span class="lineNum">     808</span>              : </span>
+<span id="L809"><span class="lineNum">     809</span>              : struct AddNoteE_ToInsertChordCommand {</span>
+<span id="L810"><span class="lineNum">     810</span>              :     sci_auto id = Command(&quot;command://notation/add-note/insert-chord/e&quot;);</span>
+<span id="L811"><span class="lineNum">     811</span>              :     sci_auto title = MnemonicString(prv::Insert_X().arg(prv::noteE()));</span>
+<span id="L812"><span class="lineNum">     812</span>              :     sci_auto description = prv::Insert_X().arg(prv::noteE());</span>
+<span id="L813"><span class="lineNum">     813</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L814"><span class="lineNum">     814</span>              : };</span>
+<span id="L815"><span class="lineNum">     815</span>              : </span>
+<span id="L816"><span class="lineNum">     816</span>              : struct AddNoteF_ToInsertChordCommand {</span>
+<span id="L817"><span class="lineNum">     817</span>              :     sci_auto id = Command(&quot;command://notation/add-note/insert-chord/f&quot;);</span>
+<span id="L818"><span class="lineNum">     818</span>              :     sci_auto title = MnemonicString(prv::Insert_X().arg(prv::noteF()));</span>
+<span id="L819"><span class="lineNum">     819</span>              :     sci_auto description = prv::Insert_X().arg(prv::noteF());</span>
+<span id="L820"><span class="lineNum">     820</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L821"><span class="lineNum">     821</span>              : };</span>
+<span id="L822"><span class="lineNum">     822</span>              : </span>
+<span id="L823"><span class="lineNum">     823</span>              : struct AddNoteG_ToInsertChordCommand {</span>
+<span id="L824"><span class="lineNum">     824</span>              :     sci_auto id = Command(&quot;command://notation/add-note/insert-chord/g&quot;);</span>
+<span id="L825"><span class="lineNum">     825</span>              :     sci_auto title = MnemonicString(prv::Insert_X().arg(prv::noteG()));</span>
+<span id="L826"><span class="lineNum">     826</span>              :     sci_auto description = prv::Insert_X().arg(prv::noteG());</span>
+<span id="L827"><span class="lineNum">     827</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L828"><span class="lineNum">     828</span>              : };</span>
+<span id="L829"><span class="lineNum">     829</span>              : </span>
+<span id="L830"><span class="lineNum">     830</span>              : struct AddNoteA_ToInsertChordCommand {</span>
+<span id="L831"><span class="lineNum">     831</span>              :     sci_auto id = Command(&quot;command://notation/add-note/insert-chord/a&quot;);</span>
+<span id="L832"><span class="lineNum">     832</span>              :     sci_auto title = MnemonicString(prv::Insert_X().arg(prv::noteA()));</span>
+<span id="L833"><span class="lineNum">     833</span>              :     sci_auto description = prv::Insert_X().arg(prv::noteA());</span>
+<span id="L834"><span class="lineNum">     834</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L835"><span class="lineNum">     835</span>              : };</span>
+<span id="L836"><span class="lineNum">     836</span>              : </span>
+<span id="L837"><span class="lineNum">     837</span>              : struct AddNoteB_ToInsertChordCommand {</span>
+<span id="L838"><span class="lineNum">     838</span>              :     sci_auto id = Command(&quot;command://notation/add-note/insert-chord/b&quot;);</span>
+<span id="L839"><span class="lineNum">     839</span>              :     sci_auto title = MnemonicString(prv::Insert_X().arg(prv::noteB()));</span>
+<span id="L840"><span class="lineNum">     840</span>              :     sci_auto description = prv::Insert_X().arg(prv::noteB());</span>
+<span id="L841"><span class="lineNum">     841</span>              :     sci_auto availabilities = Availability::UI;</span>
+<span id="L842"><span class="lineNum">     842</span>              : };</span>
+<span id="L843"><span class="lineNum">     843</span>              : </span>
+<span id="L844"><span class="lineNum">     844</span>              : struct FlipCommand {</span>
+<span id="L845"><span class="lineNum">     845</span>              :     sci_auto id = Command(&quot;command://notation/flip&quot;);</span>
+<span id="L846"><span class="lineNum">     846</span>              :     sci_auto title = MnemonicString(&quot;action&quot;, &quot;Flip direction&quot;);</span>
+<span id="L847"><span class="lineNum">     847</span>              :     sci_auto description = TranslatableString(&quot;action&quot;, &quot;Flip direction&quot;);</span>
+<span id="L848"><span class="lineNum">     848</span>              :     sci_auto decoration = muse::rcommand::Decoration(muse::ui::IconCode::Code::NOTE_FLIP);</span>
+<span id="L849"><span class="lineNum">     849</span>              : };</span>
+<span id="L850"><span class="lineNum">     850</span>              : </span>
+<span id="L851"><span class="lineNum">     851</span>              : #undef sci_auto</span>
+<span id="L852"><span class="lineNum">     852</span>              : }</span>
+<span id="L853"><span class="lineNum">     853</span>              : </span>
+<span id="L854"><span class="lineNum">     854</span>              : namespace mu::notation {</span>
+<span id="L855"><span class="lineNum">     855</span>              : // global commands</span>
+<span id="L856"><span class="lineNum">     856</span>              : inline static const muse::rcommand::Command CANCEL_COMMAND(&quot;command://notation/cancel&quot;);</span>
+<span id="L857"><span class="lineNum">     857</span>              : inline static const muse::rcommand::Command UNDO_COMMAND(&quot;command://notation/undo&quot;);</span>
+<span id="L858"><span class="lineNum">     858</span>              : inline static const muse::rcommand::Command REDO_COMMAND(&quot;command://notation/redo&quot;);</span>
+<span id="L859"><span class="lineNum">     859</span>              : </span>
+<span id="L860"><span class="lineNum">     860</span>              : // ------------------------------------------------------------</span>
+<span id="L861"><span class="lineNum">     861</span>              : </span>
+<span id="L862"><span class="lineNum">     862</span>              : // text navigation commands</span>
+<span id="L863"><span class="lineNum">     863</span>              : inline static const muse::rcommand::Command EDITTEXT_NEXT_WORD_COMMAND(&quot;command://notation/edittext-next-word&quot;);</span>
+<span id="L864"><span class="lineNum">     864</span>              : inline static const muse::rcommand::Command EDITTEXT_NEXT_ELEMENT_COMMAND(&quot;command://notation/edittext-next-element&quot;);</span>
+<span id="L865"><span class="lineNum">     865</span>              : inline static const muse::rcommand::Command EDITTEXT_PREV_ELEMENT_COMMAND(&quot;command://notation/edittext-prev-element&quot;);</span>
+<span id="L866"><span class="lineNum">     866</span>              : inline static const muse::rcommand::Command EDITTEXT_NEXT_BEAT_COMMAND(&quot;command://notation/edittext-next-beat&quot;);</span>
+<span id="L867"><span class="lineNum">     867</span>              : inline static const muse::rcommand::Command EDITTEXT_PREV_BEAT_COMMAND(&quot;command://notation/edittext-prev-beat&quot;);</span>
+<span id="L868"><span class="lineNum">     868</span>              : </span>
+<span id="L869"><span class="lineNum">     869</span>              : inline static const muse::rcommand::Command EDITTEXT_ADVANCE_LONGA_COMMAND(&quot;command://notation/edittext-advance-longa&quot;);</span>
+<span id="L870"><span class="lineNum">     870</span>              : inline static const muse::rcommand::Command EDITTEXT_ADVANCE_BREVE_COMMAND(&quot;command://notation/edittext-advance-breve&quot;);</span>
+<span id="L871"><span class="lineNum">     871</span>              : inline static const muse::rcommand::Command EDITTEXT_ADVANCE_1_COMMAND(&quot;command://notation/edittext-advance-1&quot;);</span>
+<span id="L872"><span class="lineNum">     872</span>              : inline static const muse::rcommand::Command EDITTEXT_ADVANCE_2_COMMAND(&quot;command://notation/edittext-advance-2&quot;);</span>
+<span id="L873"><span class="lineNum">     873</span>              : inline static const muse::rcommand::Command EDITTEXT_ADVANCE_4_COMMAND(&quot;command://notation/edittext-advance-4&quot;);</span>
+<span id="L874"><span class="lineNum">     874</span>              : inline static const muse::rcommand::Command EDITTEXT_ADVANCE_8_COMMAND(&quot;command://notation/edittext-advance-8&quot;);</span>
+<span id="L875"><span class="lineNum">     875</span>              : inline static const muse::rcommand::Command EDITTEXT_ADVANCE_16_COMMAND(&quot;command://notation/edittext-advance-16&quot;);</span>
+<span id="L876"><span class="lineNum">     876</span>              : inline static const muse::rcommand::Command EDITTEXT_ADVANCE_32_COMMAND(&quot;command://notation/edittext-advance-32&quot;);</span>
+<span id="L877"><span class="lineNum">     877</span>              : inline static const muse::rcommand::Command EDITTEXT_ADVANCE_64_COMMAND(&quot;command://notation/edittext-advance-64&quot;);</span>
+<span id="L878"><span class="lineNum">     878</span>              : </span>
+<span id="L879"><span class="lineNum">     879</span>              : // lyrics editing commands</span>
+<span id="L880"><span class="lineNum">     880</span>              : inline static const muse::rcommand::Command EDITLYRIC_NEXT_VERSE_COMMAND(&quot;command://notation/editlyrics-next-verse&quot;);</span>
+<span id="L881"><span class="lineNum">     881</span>              : inline static const muse::rcommand::Command EDITLYRIC_PREV_VERSE_COMMAND(&quot;command://notation/editlyrics-prev-verse&quot;);</span>
+<span id="L882"><span class="lineNum">     882</span>              : inline static const muse::rcommand::Command EDITLYRIC_NEXT_SYLLABLE_COMMAND(&quot;command://notation/editlyrics-next-syllable&quot;);</span>
+<span id="L883"><span class="lineNum">     883</span>              : inline static const muse::rcommand::Command EDITLYRIC_ADD_MELISMA_COMMAND(&quot;command://notation/editlyrics-add-melisma&quot;);</span>
+<span id="L884"><span class="lineNum">     884</span>              : inline static const muse::rcommand::Command EDITLYRIC_ADD_VERSE_COMMAND(&quot;command://notation/editlyrics-add-verse&quot;);</span>
+<span id="L885"><span class="lineNum">     885</span>              : </span>
+<span id="L886"><span class="lineNum">     886</span>              : // text editing commands</span>
+<span id="L887"><span class="lineNum">     887</span>              : inline static const muse::rcommand::Command EDITTEXT_TOGGLE_BOLD_COMMAND(&quot;command://notation/edittext-toggle-bold&quot;);</span>
+<span id="L888"><span class="lineNum">     888</span>              : inline static const muse::rcommand::Command EDITTEXT_TOGGLE_ITALIC_COMMAND(&quot;command://notation/edittext-toggle-italic&quot;);</span>
+<span id="L889"><span class="lineNum">     889</span>              : inline static const muse::rcommand::Command EDITTEXT_TOGGLE_UNDERLINE_COMMAND(&quot;command://notation/edittext-toggle-underline&quot;);</span>
+<span id="L890"><span class="lineNum">     890</span>              : inline static const muse::rcommand::Command EDITTEXT_TOGGLE_STRIKE_COMMAND(&quot;command://notation/edittext-toggle-strike&quot;);</span>
+<span id="L891"><span class="lineNum">     891</span>              : inline static const muse::rcommand::Command EDITTEXT_TOGGLE_SUBSCRIPT_COMMAND(&quot;command://notation/edittext-toggle-subscript&quot;);</span>
+<span id="L892"><span class="lineNum">     892</span>              : inline static const muse::rcommand::Command EDITTEXT_TOGGLE_SUPERSCRIPT_COMMAND(&quot;command://notation/edittext-toggle-superscript&quot;);</span>
+<span id="L893"><span class="lineNum">     893</span>              : </span>
+<span id="L894"><span class="lineNum">     894</span>              : // note input commands</span>
+<span id="L895"><span class="lineNum">     895</span>              : </span>
+<span id="L896"><span class="lineNum">     896</span>              : inline static const muse::rcommand::Command REALTIME_ADVANCE_COMMAND(&quot;command://notation/realtime-advance&quot;);</span>
+<span id="L897"><span class="lineNum">     897</span>              : </span>
+<span id="L898"><span class="lineNum">     898</span>              : inline static const muse::rcommand::Command EXTEND_TO_NEXT_NOTE_COMMAND(&quot;command://notation/extend-to-next-note&quot;);</span>
+<span id="L899"><span class="lineNum">     899</span>              : </span>
+<span id="L900"><span class="lineNum">     900</span>              : inline static const muse::rcommand::Command TOGGLE_FLAT2_COMMAND(&quot;command://notation/toggle-flat2&quot;);</span>
+<span id="L901"><span class="lineNum">     901</span>              : inline static const muse::rcommand::Command TOGGLE_FLAT_COMMAND(&quot;command://notation/toggle-flat&quot;);</span>
+<span id="L902"><span class="lineNum">     902</span>              : inline static const muse::rcommand::Command TOGGLE_NAT_COMMAND(&quot;command://notation/toggle-nat&quot;);</span>
+<span id="L903"><span class="lineNum">     903</span>              : inline static const muse::rcommand::Command TOGGLE_SHARP_COMMAND(&quot;command://notation/toggle-sharp&quot;);</span>
+<span id="L904"><span class="lineNum">     904</span>              : inline static const muse::rcommand::Command TOGGLE_SHARP2_COMMAND(&quot;command://notation/toggle-sharp2&quot;);</span>
+<span id="L905"><span class="lineNum">     905</span>              : </span>
+<span id="L906"><span class="lineNum">     906</span>              : inline static const muse::rcommand::Command ADD_SHARP2_COMMAND(&quot;command://notation/add-sharp2&quot;);</span>
+<span id="L907"><span class="lineNum">     907</span>              : inline static const muse::rcommand::Command ADD_SHARP_COMMAND(&quot;command://notation/add-sharp&quot;);</span>
+<span id="L908"><span class="lineNum">     908</span>              : inline static const muse::rcommand::Command ADD_NAT_COMMAND(&quot;command://notation/add-nat&quot;);</span>
+<span id="L909"><span class="lineNum">     909</span>              : inline static const muse::rcommand::Command ADD_FLAT_COMMAND(&quot;command://notation/add-flat&quot;);</span>
+<span id="L910"><span class="lineNum">     910</span>              : inline static const muse::rcommand::Command ADD_FLAT2_COMMAND(&quot;command://notation/add-flat2&quot;);</span>
+<span id="L911"><span class="lineNum">     911</span>              : </span>
+<span id="L912"><span class="lineNum">     912</span>              : inline static const muse::rcommand::Command TOGGLE_TIE_COMMAND(&quot;command://notation/toggle-tie&quot;);</span>
+<span id="L913"><span class="lineNum">     913</span>              : inline static const muse::rcommand::Command ADD_SLUR_COMMAND(&quot;command://notation/add-slur&quot;);</span>
+<span id="L914"><span class="lineNum">     914</span>              : inline static const muse::rcommand::Command TOGGLE_LV_COMMAND(&quot;command://notation/toggle-laissez-vibrer&quot;);</span>
+<span id="L915"><span class="lineNum">     915</span>              : inline static const muse::rcommand::Command TOGGLE_MARCATO_COMMAND(&quot;command://notation/toggle-marcato&quot;);</span>
+<span id="L916"><span class="lineNum">     916</span>              : inline static const muse::rcommand::Command TOGGLE_SFORZATO_COMMAND(&quot;command://notation/toggle-sforzato&quot;);</span>
+<span id="L917"><span class="lineNum">     917</span>              : inline static const muse::rcommand::Command TOGGLE_TENUTO_COMMAND(&quot;command://notation/toggle-tenuto&quot;);</span>
+<span id="L918"><span class="lineNum">     918</span>              : inline static const muse::rcommand::Command TOGGLE_STACCATO_COMMAND(&quot;command://notation/toggle-staccato&quot;);</span>
+<span id="L919"><span class="lineNum">     919</span>              : </span>
+<span id="L920"><span class="lineNum">     920</span>              : // voice commands</span>
+<span id="L921"><span class="lineNum">     921</span>              : inline static const muse::rcommand::Command USE_VOICE_1_COMMAND(&quot;command://notation/use-voice-1&quot;);</span>
+<span id="L922"><span class="lineNum">     922</span>              : inline static const muse::rcommand::Command USE_VOICE_2_COMMAND(&quot;command://notation/use-voice-2&quot;);</span>
+<span id="L923"><span class="lineNum">     923</span>              : inline static const muse::rcommand::Command USE_VOICE_3_COMMAND(&quot;command://notation/use-voice-3&quot;);</span>
+<span id="L924"><span class="lineNum">     924</span>              : inline static const muse::rcommand::Command USE_VOICE_4_COMMAND(&quot;command://notation/use-voice-4&quot;);</span>
+<span id="L925"><span class="lineNum">     925</span>              : inline static const muse::rcommand::Command SWAP_VOICE_X12_COMMAND(&quot;command://notation/swap-voice-x12&quot;);</span>
+<span id="L926"><span class="lineNum">     926</span>              : inline static const muse::rcommand::Command SWAP_VOICE_X13_COMMAND(&quot;command://notation/swap-voice-x13&quot;);</span>
+<span id="L927"><span class="lineNum">     927</span>              : inline static const muse::rcommand::Command SWAP_VOICE_X14_COMMAND(&quot;command://notation/swap-voice-x14&quot;);</span>
+<span id="L928"><span class="lineNum">     928</span>              : inline static const muse::rcommand::Command SWAP_VOICE_X23_COMMAND(&quot;command://notation/swap-voice-x23&quot;);</span>
+<span id="L929"><span class="lineNum">     929</span>              : inline static const muse::rcommand::Command SWAP_VOICE_X24_COMMAND(&quot;command://notation/swap-voice-x24&quot;);</span>
+<span id="L930"><span class="lineNum">     930</span>              : inline static const muse::rcommand::Command SWAP_VOICE_X34_COMMAND(&quot;command://notation/swap-voice-x34&quot;);</span>
+<span id="L931"><span class="lineNum">     931</span>              : inline static const muse::rcommand::Command VOICE_ASSIGNMENT_ALL_IN_INSTR_COMMAND(&quot;command://notation/voice-assignment-all-in-instrument&quot;);</span>
+<span id="L932"><span class="lineNum">     932</span>              : inline static const muse::rcommand::Command VOICE_ASSIGNMENT_ALL_IN_STAFF_COMMAND(&quot;command://notation/voice-assignment-all-in-staff&quot;);</span>
+<span id="L933"><span class="lineNum">     933</span>              : </span>
+<span id="L934"><span class="lineNum">     934</span>              : //inline static const muse::rcommand::Command FLIP_COMMAND(&quot;command://notation/flip&quot;);</span>
+<span id="L935"><span class="lineNum">     935</span>              : inline static const muse::rcommand::Command FLIP_HORIZONTALLY_COMMAND(&quot;command://notation/flip-horizontally&quot;);</span>
+<span id="L936"><span class="lineNum">     936</span>              : </span>
+<span id="L937"><span class="lineNum">     937</span>              : //inline static const muse::rcommand::Command ADD_NOTE_COMMAND(&quot;command://notation/add-note&quot;); // with params</span>
+<span id="L938"><span class="lineNum">     938</span>              : inline static const muse::rcommand::Command ADD_DRUM_NOTE_COMMAND(&quot;command://notation/add-drum-note&quot;); // with params</span>
+<span id="L939"><span class="lineNum">     939</span>              : </span>
+<span id="L940"><span class="lineNum">     940</span>              : inline static const muse::rcommand::Command ENTER_REST_COMMAND(&quot;command://notation/enter-rest&quot;);</span>
+<span id="L941"><span class="lineNum">     941</span>              : </span>
+<span id="L942"><span class="lineNum">     942</span>              : // add commands</span>
+<span id="L943"><span class="lineNum">     943</span>              : inline static const muse::rcommand::Command OPEN_TUPLET_CONFIGURE_COMMAND(&quot;command://notation/open-tuplet-configure&quot;);</span>
+<span id="L944"><span class="lineNum">     944</span>              : inline static const muse::rcommand::Command ADD_TUPLET_COMMAND(&quot;command://notation/add-tuplet&quot;); // with params</span>
+<span id="L945"><span class="lineNum">     945</span>              : inline static const muse::rcommand::Command ADD_DUPLET_COMMAND(&quot;command://notation/add-duplet&quot;);</span>
+<span id="L946"><span class="lineNum">     946</span>              : inline static const muse::rcommand::Command ADD_TRIPLET_COMMAND(&quot;command://notation/add-triplet&quot;);</span>
+<span id="L947"><span class="lineNum">     947</span>              : inline static const muse::rcommand::Command ADD_QUADRUPLET_COMMAND(&quot;command://notation/add-quadruplet&quot;);</span>
+<span id="L948"><span class="lineNum">     948</span>              : inline static const muse::rcommand::Command ADD_QUINTUPLET_COMMAND(&quot;command://notation/add-quintuplet&quot;);</span>
+<span id="L949"><span class="lineNum">     949</span>              : inline static const muse::rcommand::Command ADD_SEXTUPLET_COMMAND(&quot;command://notation/add-sextuplet&quot;);</span>
+<span id="L950"><span class="lineNum">     950</span>              : inline static const muse::rcommand::Command ADD_SEPTUPLET_COMMAND(&quot;command://notation/add-septuplet&quot;);</span>
+<span id="L951"><span class="lineNum">     951</span>              : inline static const muse::rcommand::Command ADD_OCTUPLET_COMMAND(&quot;command://notation/add-octuplet&quot;);</span>
+<span id="L952"><span class="lineNum">     952</span>              : inline static const muse::rcommand::Command ADD_NONUPLET_COMMAND(&quot;command://notation/add-nonuplet&quot;);</span>
+<span id="L953"><span class="lineNum">     953</span>              : </span>
+<span id="L954"><span class="lineNum">     954</span>              : inline static const muse::rcommand::Command INSERT_HBOX_COMMAND(&quot;command://notation/insert-hbox&quot;);</span>
+<span id="L955"><span class="lineNum">     955</span>              : inline static const muse::rcommand::Command INSERT_VBOX_COMMAND(&quot;command://notation/insert-vbox&quot;);</span>
+<span id="L956"><span class="lineNum">     956</span>              : inline static const muse::rcommand::Command INSERT_TEXTFRAME_COMMAND(&quot;command://notation/insert-textframe&quot;);</span>
+<span id="L957"><span class="lineNum">     957</span>              : inline static const muse::rcommand::Command INSERT_FRETFRAME_COMMAND(&quot;command://notation/insert-fretframe&quot;);</span>
+<span id="L958"><span class="lineNum">     958</span>              : inline static const muse::rcommand::Command APPEND_HBOX_COMMAND(&quot;command://notation/append-hbox&quot;);</span>
+<span id="L959"><span class="lineNum">     959</span>              : inline static const muse::rcommand::Command APPEND_VBOX_COMMAND(&quot;command://notation/append-vbox&quot;);</span>
+<span id="L960"><span class="lineNum">     960</span>              : inline static const muse::rcommand::Command APPEND_TEXTFRAME_COMMAND(&quot;command://notation/append-textframe&quot;);</span>
+<span id="L961"><span class="lineNum">     961</span>              : inline static const muse::rcommand::Command APPEND_FRETFRAME_COMMAND(&quot;command://notation/append-fretframe&quot;);</span>
+<span id="L962"><span class="lineNum">     962</span>              : </span>
+<span id="L963"><span class="lineNum">     963</span>              : inline static const muse::rcommand::Command ADD_FRETBOARD_DIAGRAM_COMMAND(&quot;command://notation/add-fretboard-diagram&quot;);</span>
+<span id="L964"><span class="lineNum">     964</span>              : </span>
+<span id="L965"><span class="lineNum">     965</span>              : inline static const muse::rcommand::Command ADD_OTTAVA_8VA_COMMAND(&quot;command://notation/add-ottava-8va&quot;);</span>
+<span id="L966"><span class="lineNum">     966</span>              : inline static const muse::rcommand::Command ADD_OTTAVA_8VB_COMMAND(&quot;command://notation/add-ottava-8vb&quot;);</span>
+<span id="L967"><span class="lineNum">     967</span>              : </span>
+<span id="L968"><span class="lineNum">     968</span>              : inline static const muse::rcommand::Command ADD_DYNAMIC_COMMAND(&quot;command://notation/add-dynamic&quot;);</span>
+<span id="L969"><span class="lineNum">     969</span>              : inline static const muse::rcommand::Command ADD_HAIRPIN_COMMAND(&quot;command://notation/add-hairpin&quot;);</span>
+<span id="L970"><span class="lineNum">     970</span>              : inline static const muse::rcommand::Command ADD_HAIRPIN_REVERSE_COMMAND(&quot;command://notation/add-hairpin-reverse&quot;);</span>
+<span id="L971"><span class="lineNum">     971</span>              : inline static const muse::rcommand::Command INCREASE_DYNAMIC_COMMAND(&quot;command://notation/increase-dynamic&quot;);</span>
+<span id="L972"><span class="lineNum">     972</span>              : inline static const muse::rcommand::Command DECREASE_DYNAMIC_COMMAND(&quot;command://notation/decrease-dynamic&quot;);</span>
+<span id="L973"><span class="lineNum">     973</span>              : inline static const muse::rcommand::Command ADD_NOTELINE_COMMAND(&quot;command://notation/add-noteline&quot;);</span>
+<span id="L974"><span class="lineNum">     974</span>              : </span>
+<span id="L975"><span class="lineNum">     975</span>              : inline static const muse::rcommand::Command ADD_IMAGE_COMMAND(&quot;command://notation/add-image&quot;);</span>
+<span id="L976"><span class="lineNum">     976</span>              : </span>
+<span id="L977"><span class="lineNum">     977</span>              : inline static const muse::rcommand::Command ADD_UP_BOW_COMMAND(&quot;command://notation/add-up-bow&quot;);</span>
+<span id="L978"><span class="lineNum">     978</span>              : inline static const muse::rcommand::Command ADD_DOWN_BOW_COMMAND(&quot;command://notation/add-down-bow&quot;);</span>
+<span id="L979"><span class="lineNum">     979</span>              : </span>
+<span id="L980"><span class="lineNum">     980</span>              : // add text commands</span>
+<span id="L981"><span class="lineNum">     981</span>              : inline static const muse::rcommand::Command ADD_TITLE_TEXT_COMMAND(&quot;command://notation/add-title-text&quot;);</span>
+<span id="L982"><span class="lineNum">     982</span>              : inline static const muse::rcommand::Command ADD_SUBTITLE_TEXT_COMMAND(&quot;command://notation/add-subtitle-text&quot;);</span>
+<span id="L983"><span class="lineNum">     983</span>              : inline static const muse::rcommand::Command ADD_COMPOSER_TEXT_COMMAND(&quot;command://notation/add-composer-text&quot;);</span>
+<span id="L984"><span class="lineNum">     984</span>              : inline static const muse::rcommand::Command ADD_LYRICIST_TEXT_COMMAND(&quot;command://notation/add-lyricist-text&quot;);</span>
+<span id="L985"><span class="lineNum">     985</span>              : inline static const muse::rcommand::Command ADD_PART_TEXT_COMMAND(&quot;command://notation/add-part-text&quot;);</span>
+<span id="L986"><span class="lineNum">     986</span>              : inline static const muse::rcommand::Command ADD_FRAME_TEXT_COMMAND(&quot;command://notation/add-frame-text&quot;);</span>
+<span id="L987"><span class="lineNum">     987</span>              : inline static const muse::rcommand::Command ADD_SYSTEM_TEXT_COMMAND(&quot;command://notation/add-system-text&quot;);</span>
+<span id="L988"><span class="lineNum">     988</span>              : inline static const muse::rcommand::Command ADD_STAFF_TEXT_COMMAND(&quot;command://notation/add-staff-text&quot;);</span>
+<span id="L989"><span class="lineNum">     989</span>              : inline static const muse::rcommand::Command ADD_EXPRESSION_TEXT_COMMAND(&quot;command://notation/add-expression-text&quot;);</span>
+<span id="L990"><span class="lineNum">     990</span>              : inline static const muse::rcommand::Command ADD_REHEARSALMARK_TEXT_COMMAND(&quot;command://notation/add-rehearsalmark-text&quot;);</span>
+<span id="L991"><span class="lineNum">     991</span>              : inline static const muse::rcommand::Command ADD_INSTRUMENT_CHANGE_TEXT_COMMAND(&quot;command://notation/add-instrument-change-text&quot;);</span>
+<span id="L992"><span class="lineNum">     992</span>              : inline static const muse::rcommand::Command ADD_FINGERING_TEXT_COMMAND(&quot;command://notation/add-fingering-text&quot;);</span>
+<span id="L993"><span class="lineNum">     993</span>              : inline static const muse::rcommand::Command ADD_STICKING_TEXT_COMMAND(&quot;command://notation/add-sticking-text&quot;);</span>
+<span id="L994"><span class="lineNum">     994</span>              : inline static const muse::rcommand::Command ADD_CHORD_TEXT_COMMAND(&quot;command://notation/add-chord-text&quot;);</span>
+<span id="L995"><span class="lineNum">     995</span>              : inline static const muse::rcommand::Command ADD_ROMAN_NUMERAL_TEXT_COMMAND(&quot;command://notation/add-roman-numeral-text&quot;);</span>
+<span id="L996"><span class="lineNum">     996</span>              : inline static const muse::rcommand::Command ADD_NASHVILLE_NUMBER_TEXT_COMMAND(&quot;command://notation/add-nashville-number-text&quot;);</span>
+<span id="L997"><span class="lineNum">     997</span>              : inline static const muse::rcommand::Command ADD_LYRICS_COMMAND(&quot;command://notation/add-lyrics&quot;);</span>
+<span id="L998"><span class="lineNum">     998</span>              : inline static const muse::rcommand::Command ADD_TEMPO_COMMAND(&quot;command://notation/add-tempo&quot;);</span>
+<span id="L999"><span class="lineNum">     999</span>              : inline static const muse::rcommand::Command ADD_FIGURED_BASS_COMMAND(&quot;command://notation/add-figured-bass&quot;);</span>
+<span id="L1000"><span class="lineNum">    1000</span>              : </span>
+<span id="L1001"><span class="lineNum">    1001</span>              : // add grace notes commands</span>
+<span id="L1002"><span class="lineNum">    1002</span>              : inline static const muse::rcommand::Command ADD_ACCIACCATURA_COMMAND(&quot;command://notation/add-acciaccatura&quot;);</span>
+<span id="L1003"><span class="lineNum">    1003</span>              : inline static const muse::rcommand::Command ADD_APPOGGIATURA_COMMAND(&quot;command://notation/add-appoggiatura&quot;);</span>
+<span id="L1004"><span class="lineNum">    1004</span>              : inline static const muse::rcommand::Command ADD_GRACE4_COMMAND(&quot;command://notation/add-grace4&quot;);</span>
+<span id="L1005"><span class="lineNum">    1005</span>              : inline static const muse::rcommand::Command ADD_GRACE16_COMMAND(&quot;command://notation/add-grace16&quot;);</span>
+<span id="L1006"><span class="lineNum">    1006</span>              : inline static const muse::rcommand::Command ADD_GRACE32_COMMAND(&quot;command://notation/add-grace32&quot;);</span>
+<span id="L1007"><span class="lineNum">    1007</span>              : inline static const muse::rcommand::Command ADD_GRACE8_AFTER_COMMAND(&quot;command://notation/add-grace8-after&quot;);</span>
+<span id="L1008"><span class="lineNum">    1008</span>              : inline static const muse::rcommand::Command ADD_GRACE16_AFTER_COMMAND(&quot;command://notation/add-grace16-after&quot;);</span>
+<span id="L1009"><span class="lineNum">    1009</span>              : inline static const muse::rcommand::Command ADD_GRACE32_AFTER_COMMAND(&quot;command://notation/add-grace32-after&quot;);</span>
+<span id="L1010"><span class="lineNum">    1010</span>              : </span>
+<span id="L1011"><span class="lineNum">    1011</span>              : // add beam commands</span>
+<span id="L1012"><span class="lineNum">    1012</span>              : inline static const muse::rcommand::Command ADD_BEAM_AUTO_COMMAND(&quot;command://notation/add-beam-auto&quot;);</span>
+<span id="L1013"><span class="lineNum">    1013</span>              : inline static const muse::rcommand::Command ADD_BEAM_NONE_COMMAND(&quot;command://notation/add-beam-none&quot;);</span>
+<span id="L1014"><span class="lineNum">    1014</span>              : inline static const muse::rcommand::Command ADD_BEAM_BEGIN_COMMAND(&quot;command://notation/add-beam-begin&quot;);</span>
+<span id="L1015"><span class="lineNum">    1015</span>              : inline static const muse::rcommand::Command ADD_BEAM_BEGIN16_COMMAND(&quot;command://notation/add-beam-begin16&quot;);</span>
+<span id="L1016"><span class="lineNum">    1016</span>              : inline static const muse::rcommand::Command ADD_BEAM_BEGIN32_COMMAND(&quot;command://notation/add-beam-begin32&quot;);</span>
+<span id="L1017"><span class="lineNum">    1017</span>              : inline static const muse::rcommand::Command ADD_BEAM_MID_COMMAND(&quot;command://notation/add-beam-mid&quot;);</span>
+<span id="L1018"><span class="lineNum">    1018</span>              : inline static const muse::rcommand::Command ADD_BEAM_SELECTED_RANGE_COMMAND(&quot;command://notation/add-beam-selected-range&quot;);</span>
+<span id="L1019"><span class="lineNum">    1019</span>              : </span>
+<span id="L1020"><span class="lineNum">    1020</span>              : // add brackets commands</span>
+<span id="L1021"><span class="lineNum">    1021</span>              : inline static const muse::rcommand::Command ADD_BRACKETS_COMMAND(&quot;command://notation/add-brackets&quot;);</span>
+<span id="L1022"><span class="lineNum">    1022</span>              : inline static const muse::rcommand::Command ADD_PARENTHESES_COMMAND(&quot;command://notation/add-parentheses&quot;);</span>
+<span id="L1023"><span class="lineNum">    1023</span>              : inline static const muse::rcommand::Command ADD_BRACES_COMMAND(&quot;command://notation/add-braces&quot;);</span>
+<span id="L1024"><span class="lineNum">    1024</span>              : </span>
+<span id="L1025"><span class="lineNum">    1025</span>              : // add ornament commands</span>
+<span id="L1026"><span class="lineNum">    1026</span>              : inline static const muse::rcommand::Command ADD_TURN_COMMAND(&quot;command://notation/add-turn&quot;);</span>
+<span id="L1027"><span class="lineNum">    1027</span>              : inline static const muse::rcommand::Command ADD_TURN_INVERTED_COMMAND(&quot;command://notation/add-turn-inverted&quot;);</span>
+<span id="L1028"><span class="lineNum">    1028</span>              : inline static const muse::rcommand::Command ADD_TURN_SLASH_COMMAND(&quot;command://notation/add-turn-slash&quot;);</span>
+<span id="L1029"><span class="lineNum">    1029</span>              : inline static const muse::rcommand::Command ADD_TURN_UP_COMMAND(&quot;command://notation/add-turn-up&quot;);</span>
+<span id="L1030"><span class="lineNum">    1030</span>              : inline static const muse::rcommand::Command ADD_TURN_INVERTED_UP_COMMAND(&quot;command://notation/add-turn-inverted-up&quot;);</span>
+<span id="L1031"><span class="lineNum">    1031</span>              : inline static const muse::rcommand::Command ADD_TRILL_COMMAND(&quot;command://notation/add-trill&quot;);</span>
+<span id="L1032"><span class="lineNum">    1032</span>              : inline static const muse::rcommand::Command ADD_SHORT_TRILL_COMMAND(&quot;command://notation/add-short-trill&quot;);</span>
+<span id="L1033"><span class="lineNum">    1033</span>              : inline static const muse::rcommand::Command ADD_MORDENT_COMMAND(&quot;command://notation/add-mordent&quot;);</span>
+<span id="L1034"><span class="lineNum">    1034</span>              : inline static const muse::rcommand::Command ADD_HAYDN_COMMAND(&quot;command://notation/add-haydn&quot;);</span>
+<span id="L1035"><span class="lineNum">    1035</span>              : inline static const muse::rcommand::Command ADD_TREMBLEMENT_COMMAND(&quot;command://notation/add-tremblement&quot;);</span>
+<span id="L1036"><span class="lineNum">    1036</span>              : inline static const muse::rcommand::Command ADD_PRALL_MORDENT_COMMAND(&quot;command://notation/add-prall-mordent&quot;);</span>
+<span id="L1037"><span class="lineNum">    1037</span>              : inline static const muse::rcommand::Command ADD_SHAKE_COMMAND(&quot;command://notation/add-shake&quot;);</span>
+<span id="L1038"><span class="lineNum">    1038</span>              : inline static const muse::rcommand::Command ADD_SHAKE_MUFFAT_COMMAND(&quot;command://notation/add-shake-muffat&quot;);</span>
+<span id="L1039"><span class="lineNum">    1039</span>              : inline static const muse::rcommand::Command ADD_TREMBLEMENT_COUPERIN_COMMAND(&quot;command://notation/add-tremblement-couperin&quot;);</span>
+<span id="L1040"><span class="lineNum">    1040</span>              : </span>
+<span id="L1041"><span class="lineNum">    1041</span>              : // clef commands</span>
+<span id="L1042"><span class="lineNum">    1042</span>              : inline static const muse::rcommand::Command ADD_CLEF_VIOLIN_COMMAND(&quot;command://notation/add-clef-violin&quot;);</span>
+<span id="L1043"><span class="lineNum">    1043</span>              : inline static const muse::rcommand::Command ADD_CLEF_BASS_COMMAND(&quot;command://notation/add-clef-bass&quot;);</span>
+<span id="L1044"><span class="lineNum">    1044</span>              : </span>
+<span id="L1045"><span class="lineNum">    1045</span>              : inline static const muse::rcommand::Command ADD_FULL_MEASURE_REST_COMMAND(&quot;command://notation/add-full-measure-rest&quot;);</span>
+<span id="L1046"><span class="lineNum">    1046</span>              : </span>
+<span id="L1047"><span class="lineNum">    1047</span>              : // interval commands</span>
+<span id="L1048"><span class="lineNum">    1048</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_PLUS_1_COMMAND(&quot;command://notation/add-interval-plus1&quot;);</span>
+<span id="L1049"><span class="lineNum">    1049</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_PLUS_2_COMMAND(&quot;command://notation/add-interval-plus2&quot;);</span>
+<span id="L1050"><span class="lineNum">    1050</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_PLUS_3_COMMAND(&quot;command://notation/add-interval-plus3&quot;);</span>
+<span id="L1051"><span class="lineNum">    1051</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_PLUS_4_COMMAND(&quot;command://notation/add-interval-plus4&quot;);</span>
+<span id="L1052"><span class="lineNum">    1052</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_PLUS_5_COMMAND(&quot;command://notation/add-interval-plus5&quot;);</span>
+<span id="L1053"><span class="lineNum">    1053</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_PLUS_6_COMMAND(&quot;command://notation/add-interval-plus6&quot;);</span>
+<span id="L1054"><span class="lineNum">    1054</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_PLUS_7_COMMAND(&quot;command://notation/add-interval-plus7&quot;);</span>
+<span id="L1055"><span class="lineNum">    1055</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_PLUS_8_COMMAND(&quot;command://notation/add-interval-plus8&quot;);</span>
+<span id="L1056"><span class="lineNum">    1056</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_PLUS_9_COMMAND(&quot;command://notation/add-interval-plus9&quot;);</span>
+<span id="L1057"><span class="lineNum">    1057</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_PLUS_10_COMMAND(&quot;command://notation/add-interval-plus10&quot;);</span>
+<span id="L1058"><span class="lineNum">    1058</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_MINUS_2_COMMAND(&quot;command://notation/add-interval-minus2&quot;);</span>
+<span id="L1059"><span class="lineNum">    1059</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_MINUS_3_COMMAND(&quot;command://notation/add-interval-minus3&quot;);</span>
+<span id="L1060"><span class="lineNum">    1060</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_MINUS_4_COMMAND(&quot;command://notation/add-interval-minus4&quot;);</span>
+<span id="L1061"><span class="lineNum">    1061</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_MINUS_5_COMMAND(&quot;command://notation/add-interval-minus5&quot;);</span>
+<span id="L1062"><span class="lineNum">    1062</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_MINUS_6_COMMAND(&quot;command://notation/add-interval-minus6&quot;);</span>
+<span id="L1063"><span class="lineNum">    1063</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_MINUS_7_COMMAND(&quot;command://notation/add-interval-minus7&quot;);</span>
+<span id="L1064"><span class="lineNum">    1064</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_MINUS_8_COMMAND(&quot;command://notation/add-interval-minus8&quot;);</span>
+<span id="L1065"><span class="lineNum">    1065</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_MINUS_9_COMMAND(&quot;command://notation/add-interval-minus9&quot;);</span>
+<span id="L1066"><span class="lineNum">    1066</span>              : inline static const muse::rcommand::Command ADD_INTERVAL_MINUS_10_COMMAND(&quot;command://notation/add-interval-minus10&quot;);</span>
+<span id="L1067"><span class="lineNum">    1067</span>              : </span>
+<span id="L1068"><span class="lineNum">    1068</span>              : // editing commands</span>
+<span id="L1069"><span class="lineNum">    1069</span>              : inline static const muse::rcommand::Command COPY_COMMAND(&quot;command://notation/copy&quot;);</span>
+<span id="L1070"><span class="lineNum">    1070</span>              : inline static const muse::rcommand::Command COPY_PASTE_SWAP_COMMAND(&quot;command://notation/copy-paste-swap&quot;);</span>
+<span id="L1071"><span class="lineNum">    1071</span>              : inline static const muse::rcommand::Command COPY_LYRICS_COMMAND(&quot;command://notation/copy-lyrics&quot;);</span>
+<span id="L1072"><span class="lineNum">    1072</span>              : inline static const muse::rcommand::Command CUT_COMMAND(&quot;command://notation/cut&quot;);</span>
+<span id="L1073"><span class="lineNum">    1073</span>              : inline static const muse::rcommand::Command PASTE_COMMAND(&quot;command://notation/paste&quot;);</span>
+<span id="L1074"><span class="lineNum">    1074</span>              : inline static const muse::rcommand::Command PASTE_HALF_COMMAND(&quot;command://notation/paste-half&quot;);</span>
+<span id="L1075"><span class="lineNum">    1075</span>              : inline static const muse::rcommand::Command PASTE_DOUBLE_COMMAND(&quot;command://notation/paste-double&quot;);</span>
+<span id="L1076"><span class="lineNum">    1076</span>              : inline static const muse::rcommand::Command PASTE_SPECIAL_COMMAND(&quot;command://notation/paste-special&quot;);</span>
+<span id="L1077"><span class="lineNum">    1077</span>              : inline static const muse::rcommand::Command DELETE_COMMAND(&quot;command://notation/delete&quot;);</span>
+<span id="L1078"><span class="lineNum">    1078</span>              : </span>
+<span id="L1079"><span class="lineNum">    1079</span>              : inline static const muse::rcommand::Command EDIT_ELEMENT_COMMAND(&quot;command://notation/edit-element&quot;);</span>
+<span id="L1080"><span class="lineNum">    1080</span>              : </span>
+<span id="L1081"><span class="lineNum">    1081</span>              : // move commands</span>
+<span id="L1082"><span class="lineNum">    1082</span>              : inline static const muse::rcommand::Command MOVE_RIGHT_COMMAND(&quot;command://notation/move-right&quot;);</span>
+<span id="L1083"><span class="lineNum">    1083</span>              : inline static const muse::rcommand::Command MOVE_LEFT_COMMAND(&quot;command://notation/move-left&quot;);</span>
+<span id="L1084"><span class="lineNum">    1084</span>              : inline static const muse::rcommand::Command MOVE_RIGHT_QUICKLY_COMMAND(&quot;command://notation/move-right-quickly&quot;);</span>
+<span id="L1085"><span class="lineNum">    1085</span>              : inline static const muse::rcommand::Command MOVE_LEFT_QUICKLY_COMMAND(&quot;command://notation/move-left-quickly&quot;);</span>
+<span id="L1086"><span class="lineNum">    1086</span>              : inline static const muse::rcommand::Command MOVE_UP_COMMAND(&quot;command://notation/move-up&quot;);</span>
+<span id="L1087"><span class="lineNum">    1087</span>              : inline static const muse::rcommand::Command MOVE_DOWN_COMMAND(&quot;command://notation/move-down&quot;);</span>
+<span id="L1088"><span class="lineNum">    1088</span>              : inline static const muse::rcommand::Command SWAP_LEFT_COMMAND(&quot;command://notation/swap-left&quot;);</span>
+<span id="L1089"><span class="lineNum">    1089</span>              : inline static const muse::rcommand::Command SWAP_RIGHT_COMMAND(&quot;command://notation/swap-right&quot;);</span>
+<span id="L1090"><span class="lineNum">    1090</span>              : </span>
+<span id="L1091"><span class="lineNum">    1091</span>              : inline static const muse::rcommand::Command PITCH_UP_COMMAND(&quot;command://notation/pitch-up&quot;);</span>
+<span id="L1092"><span class="lineNum">    1092</span>              : inline static const muse::rcommand::Command PITCH_DOWN_COMMAND(&quot;command://notation/pitch-down&quot;);</span>
+<span id="L1093"><span class="lineNum">    1093</span>              : inline static const muse::rcommand::Command PITCH_UP_OCTAVE_COMMAND(&quot;command://notation/pitch-up-octave&quot;);</span>
+<span id="L1094"><span class="lineNum">    1094</span>              : inline static const muse::rcommand::Command PITCH_DOWN_OCTAVE_COMMAND(&quot;command://notation/pitch-down-octave&quot;);</span>
+<span id="L1095"><span class="lineNum">    1095</span>              : inline static const muse::rcommand::Command PITCH_UP_DIATONIC_COMMAND(&quot;command://notation/pitch-up-diatonic&quot;);</span>
+<span id="L1096"><span class="lineNum">    1096</span>              : inline static const muse::rcommand::Command PITCH_DOWN_DIATONIC_COMMAND(&quot;command://notation/pitch-down-diatonic&quot;);</span>
+<span id="L1097"><span class="lineNum">    1097</span>              : inline static const muse::rcommand::Command PITCH_UP_DIATONIC_ALTERATIONS_COMMAND(&quot;command://notation/pitch-up-diatonic-alterations&quot;);</span>
+<span id="L1098"><span class="lineNum">    1098</span>              : inline static const muse::rcommand::Command PITCH_DOWN_DIATONIC_ALTERATIONS_COMMAND(&quot;command://notation/pitch-down-diatonic-alterations&quot;);</span>
+<span id="L1099"><span class="lineNum">    1099</span>              : </span>
+<span id="L1100"><span class="lineNum">    1100</span>              : // properties commands</span>
+<span id="L1101"><span class="lineNum">    1101</span>              : inline static const muse::rcommand::Command TOGGLE_VISIBLE_COMMAND(&quot;command://notation/toggle-visible&quot;);</span>
+<span id="L1102"><span class="lineNum">    1102</span>              : </span>
+<span id="L1103"><span class="lineNum">    1103</span>              : // snap commands</span>
+<span id="L1104"><span class="lineNum">    1104</span>              : inline static const muse::rcommand::Command TOGGLE_SNAP_TO_PREV_COMMAND(&quot;command://notation/toggle-snap-to-prev&quot;);</span>
+<span id="L1105"><span class="lineNum">    1105</span>              : inline static const muse::rcommand::Command TOGGLE_SNAP_TO_NEXT_COMMAND(&quot;command://notation/toggle-snap-to-next&quot;);</span>
+<span id="L1106"><span class="lineNum">    1106</span>              : </span>
+<span id="L1107"><span class="lineNum">    1107</span>              : // layout commands</span>
+<span id="L1108"><span class="lineNum">    1108</span>              : </span>
+<span id="L1109"><span class="lineNum">    1109</span>              : // layout commands: measure</span>
+<span id="L1110"><span class="lineNum">    1110</span>              : inline static const muse::rcommand::Command MOVE_MEASURE_TO_PREV_SYSTEM_COMMAND(&quot;command://notation/move-measure-to-prev-system&quot;);</span>
+<span id="L1111"><span class="lineNum">    1111</span>              : inline static const muse::rcommand::Command MOVE_MEASURE_TO_NEXT_SYSTEM_COMMAND(&quot;command://notation/move-measure-to-next-system&quot;);</span>
+<span id="L1112"><span class="lineNum">    1112</span>              : inline static const muse::rcommand::Command SPLIT_MEASURE_COMMAND(&quot;command://notation/split-measure&quot;);</span>
+<span id="L1113"><span class="lineNum">    1113</span>              : inline static const muse::rcommand::Command JOIN_MEASURES_COMMAND(&quot;command://notation/join-measures&quot;);</span>
+<span id="L1114"><span class="lineNum">    1114</span>              : inline static const muse::rcommand::Command INSERT_MEASURE_COMMAND(&quot;command://notation/insert-measure&quot;);</span>
+<span id="L1115"><span class="lineNum">    1115</span>              : inline static const muse::rcommand::Command INSERT_MEASURES_COMMAND(&quot;command://notation/insert-measures&quot;); // with params</span>
+<span id="L1116"><span class="lineNum">    1116</span>              : inline static const muse::rcommand::Command INSERT_MEASURES_AFTER_SELECTION_COMMAND(&quot;command://notation/insert-measures-after-selection&quot;); // with params</span>
+<span id="L1117"><span class="lineNum">    1117</span>              : inline static const muse::rcommand::Command INSERT_MEASURES_AT_START_OF_SCORE_COMMAND(</span>
+<span id="L1118"><span class="lineNum">    1118</span>              :     &quot;command://notation/insert-measures-at-start-of-score&quot;); // with params</span>
+<span id="L1119"><span class="lineNum">    1119</span>              : inline static const muse::rcommand::Command APPEND_MEASURE_COMMAND(&quot;command://notation/append-measure&quot;);</span>
+<span id="L1120"><span class="lineNum">    1120</span>              : inline static const muse::rcommand::Command APPEND_MEASURES_COMMAND(&quot;command://notation/append-measures&quot;); // with params</span>
+<span id="L1121"><span class="lineNum">    1121</span>              : </span>
+<span id="L1122"><span class="lineNum">    1122</span>              : // layout commands: section</span>
+<span id="L1123"><span class="lineNum">    1123</span>              : inline static const muse::rcommand::Command TOGGLE_SECTION_BREAK_COMMAND(&quot;command://notation/toggle-section-break&quot;);</span>
+<span id="L1124"><span class="lineNum">    1124</span>              : </span>
+<span id="L1125"><span class="lineNum">    1125</span>              : // layout commands: system</span>
+<span id="L1126"><span class="lineNum">    1126</span>              : inline static const muse::rcommand::Command TOGGLE_SYSTEM_BREAK_COMMAND(&quot;command://notation/toggle-system-break&quot;);</span>
+<span id="L1127"><span class="lineNum">    1127</span>              : inline static const muse::rcommand::Command APPLY_SYSTEM_LOCK_COMMAND(&quot;command://notation/apply-system-lock&quot;);</span>
+<span id="L1128"><span class="lineNum">    1128</span>              : inline static const muse::rcommand::Command TOGGLE_SYSTEM_LOCK_COMMAND(&quot;command://notation/toggle-system-lock&quot;);</span>
+<span id="L1129"><span class="lineNum">    1129</span>              : inline static const muse::rcommand::Command MAKE_INTO_SYSTEM_COMMAND(&quot;command://notation/make-into-system&quot;);</span>
+<span id="L1130"><span class="lineNum">    1130</span>              : inline static const muse::rcommand::Command MOVE_SYSTEM_TO_PREV_PAGE_COMMAND(&quot;command://notation/move-system-to-prev-page&quot;);</span>
+<span id="L1131"><span class="lineNum">    1131</span>              : inline static const muse::rcommand::Command MOVE_SYSTEM_TO_NEXT_PAGE_COMMAND(&quot;command://notation/move-system-to-next-page&quot;);</span>
+<span id="L1132"><span class="lineNum">    1132</span>              : </span>
+<span id="L1133"><span class="lineNum">    1133</span>              : // layout commands: page</span>
+<span id="L1134"><span class="lineNum">    1134</span>              : inline static const muse::rcommand::Command TOGGLE_PAGE_BREAK_COMMAND(&quot;command://notation/toggle-page-break&quot;);</span>
+<span id="L1135"><span class="lineNum">    1135</span>              : inline static const muse::rcommand::Command APPLY_PAGE_LOCK_COMMAND(&quot;command://notation/apply-page-lock&quot;);</span>
+<span id="L1136"><span class="lineNum">    1136</span>              : inline static const muse::rcommand::Command TOGGLE_PAGE_LOCK_COMMAND(&quot;command://notation/toggle-page-lock&quot;);</span>
+<span id="L1137"><span class="lineNum">    1137</span>              : inline static const muse::rcommand::Command MAKE_INTO_PAGE_COMMAND(&quot;command://notation/make-into-page&quot;);</span>
+<span id="L1138"><span class="lineNum">    1138</span>              : </span>
+<span id="L1139"><span class="lineNum">    1139</span>              : // layout commands: score</span>
+<span id="L1140"><span class="lineNum">    1140</span>              : inline static const muse::rcommand::Command TOGGLE_SCORE_LOCK_COMMAND(&quot;command://notation/toggle-score-lock&quot;);</span>
+<span id="L1141"><span class="lineNum">    1141</span>              : </span>
+<span id="L1142"><span class="lineNum">    1142</span>              : // layout commands: stretch</span>
+<span id="L1143"><span class="lineNum">    1143</span>              : inline static const muse::rcommand::Command STRETCH_DECREASE_COMMAND(&quot;command://notation/stretch-decrease&quot;);</span>
+<span id="L1144"><span class="lineNum">    1144</span>              : inline static const muse::rcommand::Command STRETCH_INCREASE_COMMAND(&quot;command://notation/stretch-increase&quot;);</span>
+<span id="L1145"><span class="lineNum">    1145</span>              : inline static const muse::rcommand::Command STRETCH_RESET_COMMAND(&quot;command://notation/stretch-reset&quot;);</span>
+<span id="L1146"><span class="lineNum">    1146</span>              : </span>
+<span id="L1147"><span class="lineNum">    1147</span>              : // open properties</span>
+<span id="L1148"><span class="lineNum">    1148</span>              : inline static const muse::rcommand::Command OPEN_PAGE_SETTINGS_COMMAND(&quot;command://notation/open-page-settings&quot;);</span>
+<span id="L1149"><span class="lineNum">    1149</span>              : inline static const muse::rcommand::Command OPEN_EDIT_STRINGS_COMMAND(&quot;command://notation/open-edit-strings&quot;);</span>
+<span id="L1150"><span class="lineNum">    1150</span>              : inline static const muse::rcommand::Command OPEN_BREAKS_COMMAND(&quot;command://notation/open-breaks&quot;);</span>
+<span id="L1151"><span class="lineNum">    1151</span>              : inline static const muse::rcommand::Command OPEN_STAFF_PROPERTIES_COMMAND(&quot;command://notation/open-staff-properties&quot;);</span>
+<span id="L1152"><span class="lineNum">    1152</span>              : inline static const muse::rcommand::Command OPEN_STAFF_TEXT_PROPERTIES_COMMAND(&quot;command://notation/open-staff-text-properties&quot;);</span>
+<span id="L1153"><span class="lineNum">    1153</span>              : inline static const muse::rcommand::Command OPEN_SYSTEM_TEXT_PROPERTIES_COMMAND(&quot;command://notation/open-system-text-properties&quot;);</span>
+<span id="L1154"><span class="lineNum">    1154</span>              : inline static const muse::rcommand::Command OPEN_MEASURE_PROPERTIES_COMMAND(&quot;command://notation/open-measure-properties&quot;);</span>
+<span id="L1155"><span class="lineNum">    1155</span>              : inline static const muse::rcommand::Command OPEN_TRANSPOSE_COMMAND(&quot;command://notation/open-transpose&quot;);</span>
+<span id="L1156"><span class="lineNum">    1156</span>              : inline static const muse::rcommand::Command OPEN_PARTS_COMMAND(&quot;command://notation/open-parts&quot;);</span>
+<span id="L1157"><span class="lineNum">    1157</span>              : inline static const muse::rcommand::Command OPEN_EDITGRIDSIZE_COMMAND(&quot;command://notation/open-editgridsize&quot;);</span>
+<span id="L1158"><span class="lineNum">    1158</span>              : inline static const muse::rcommand::Command OPEN_REALIZECHORDSYMBOLS_COMMAND(&quot;command://notation/open-realizechordsymbols&quot;);</span>
+<span id="L1159"><span class="lineNum">    1159</span>              : </span>
+<span id="L1160"><span class="lineNum">    1160</span>              : // style commands</span>
+<span id="L1161"><span class="lineNum">    1161</span>              : inline static const muse::rcommand::Command LOAD_STYLE_COMMAND(&quot;command://notation/load-style&quot;);</span>
+<span id="L1162"><span class="lineNum">    1162</span>              : inline static const muse::rcommand::Command SAVE_STYLE_COMMAND(&quot;command://notation/save-style&quot;);</span>
+<span id="L1163"><span class="lineNum">    1163</span>              : inline static const muse::rcommand::Command OPEN_EDIT_STYLE_COMMAND(&quot;command://notation/open-edit-style&quot;);</span>
+<span id="L1164"><span class="lineNum">    1164</span>              : inline static const muse::rcommand::Command TOGGLE_CONCERT_PITCH_COMMAND(&quot;command://notation/toggle-concert-pitch&quot;);</span>
+<span id="L1165"><span class="lineNum">    1165</span>              : </span>
+<span id="L1166"><span class="lineNum">    1166</span>              : // reset commands</span>
+<span id="L1167"><span class="lineNum">    1167</span>              : inline static const muse::rcommand::Command RESET_TEXT_STYLE_OVERRIDES_COMMAND(&quot;command://notation/reset-text-style-overrides&quot;);</span>
+<span id="L1168"><span class="lineNum">    1168</span>              : inline static const muse::rcommand::Command RESET_BEAMS_COMMAND(&quot;command://notation/reset-beams&quot;);</span>
+<span id="L1169"><span class="lineNum">    1169</span>              : inline static const muse::rcommand::Command RESET_SHAPES_AND_POSITIONS_COMMAND(&quot;command://notation/reset-shapes-and-positions&quot;);</span>
+<span id="L1170"><span class="lineNum">    1170</span>              : inline static const muse::rcommand::Command RESET_TO_DEFAULT_LAYOUT_COMMAND(&quot;command://notation/reset-to-default-layout&quot;);</span>
+<span id="L1171"><span class="lineNum">    1171</span>              : </span>
+<span id="L1172"><span class="lineNum">    1172</span>              : // appearance commands</span>
+<span id="L1173"><span class="lineNum">    1173</span>              : inline static const muse::rcommand::Command FREEZE_CURRENT_PLACEMENT_COMMAND(&quot;command://notation/freeze-current-placement&quot;);</span>
+<span id="L1174"><span class="lineNum">    1174</span>              : </span>
+<span id="L1175"><span class="lineNum">    1175</span>              : // show commands</span>
+<span id="L1176"><span class="lineNum">    1176</span>              : inline static const muse::rcommand::Command SHOW_INVISIBLE_COMMAND(&quot;command://notation/show-invisible&quot;);</span>
+<span id="L1177"><span class="lineNum">    1177</span>              : inline static const muse::rcommand::Command SHOW_UNPRINTABLE_COMMAND(&quot;command://notation/show-unprintable&quot;);</span>
+<span id="L1178"><span class="lineNum">    1178</span>              : inline static const muse::rcommand::Command SHOW_FRAMES_COMMAND(&quot;command://notation/show-frames&quot;);</span>
+<span id="L1179"><span class="lineNum">    1179</span>              : inline static const muse::rcommand::Command SHOW_PAGEBORDERS_COMMAND(&quot;command://notation/show-pageborders&quot;);</span>
+<span id="L1180"><span class="lineNum">    1180</span>              : inline static const muse::rcommand::Command SHOW_SOUNDFLAGS_COMMAND(&quot;command://notation/show-soundflags&quot;);</span>
+<span id="L1181"><span class="lineNum">    1181</span>              : inline static const muse::rcommand::Command SHOW_IRREGULAR_COMMAND(&quot;command://notation/show-irregular&quot;);</span>
+<span id="L1182"><span class="lineNum">    1182</span>              : </span>
+<span id="L1183"><span class="lineNum">    1183</span>              : // staff commands</span>
+<span id="L1184"><span class="lineNum">    1184</span>              : inline static const muse::rcommand::Command STAFF_EXPLODE_COMMAND(&quot;command://notation/staff-explode&quot;);</span>
+<span id="L1185"><span class="lineNum">    1185</span>              : inline static const muse::rcommand::Command STAFF_IMPLODE_COMMAND(&quot;command://notation/staff-implode&quot;);</span>
+<span id="L1186"><span class="lineNum">    1186</span>              : </span>
+<span id="L1187"><span class="lineNum">    1187</span>              : // remove commands</span>
+<span id="L1188"><span class="lineNum">    1188</span>              : inline static const muse::rcommand::Command REMOVE_SELECTED_RANGE_COMMAND(&quot;command://notation/remove-selected-range&quot;);</span>
+<span id="L1189"><span class="lineNum">    1189</span>              : inline static const muse::rcommand::Command REMOVE_EMPTY_TRAILING_MEASURES_COMMAND(&quot;command://notation/remove-empty-trailing-measures&quot;);</span>
+<span id="L1190"><span class="lineNum">    1190</span>              : </span>
+<span id="L1191"><span class="lineNum">    1191</span>              : // slash commands</span>
+<span id="L1192"><span class="lineNum">    1192</span>              : inline static const muse::rcommand::Command SLASH_FILL_COMMAND(&quot;command://notation/slash-fill&quot;);</span>
+<span id="L1193"><span class="lineNum">    1193</span>              : inline static const muse::rcommand::Command SLASH_RHYTHM_COMMAND(&quot;command://notation/slash-rhythm&quot;);</span>
+<span id="L1194"><span class="lineNum">    1194</span>              : </span>
+<span id="L1195"><span class="lineNum">    1195</span>              : // spelling commands</span>
+<span id="L1196"><span class="lineNum">    1196</span>              : inline static const muse::rcommand::Command PITCH_SPELL_COMMAND(&quot;command://notation/pitch-spell&quot;);</span>
+<span id="L1197"><span class="lineNum">    1197</span>              : inline static const muse::rcommand::Command PITCH_SPELL_SHARPS_COMMAND(&quot;command://notation/pitch-spell-sharps&quot;);</span>
+<span id="L1198"><span class="lineNum">    1198</span>              : inline static const muse::rcommand::Command PITCH_SPELL_FLATS_COMMAND(&quot;command://notation/pitch-spell-flats&quot;);</span>
+<span id="L1199"><span class="lineNum">    1199</span>              : inline static const muse::rcommand::Command ENHARMONIC_SPELL_BOTH_COMMAND(&quot;command://notation/enharmonic-spell-both&quot;);</span>
+<span id="L1200"><span class="lineNum">    1200</span>              : inline static const muse::rcommand::Command ENHARMONIC_SPELL_CURRENT_COMMAND(&quot;command://notation/enharmonic-spell-current&quot;);</span>
+<span id="L1201"><span class="lineNum">    1201</span>              : </span>
+<span id="L1202"><span class="lineNum">    1202</span>              : // screen commands</span>
+<span id="L1203"><span class="lineNum">    1203</span>              : inline static const muse::rcommand::Command SCREEN_PUT_NOTE_COMMAND(&quot;command://notation/screen-put-note&quot;); // with params</span>
+<span id="L1204"><span class="lineNum">    1204</span>              : inline static const muse::rcommand::Command SCREEN_REMOVE_NOTE_COMMAND(&quot;command://notation/screen-remove-note&quot;); // with params</span>
+<span id="L1205"><span class="lineNum">    1205</span>              : inline static const muse::rcommand::Command SCREEN_EDIT_TEXT_COMMAND(&quot;command://notation/screen-edit-text&quot;); // with params</span>
+<span id="L1206"><span class="lineNum">    1206</span>              : inline static const muse::rcommand::Command SCREEN_EDIT_ELEMENT_COMMAND(&quot;command://notation/screen-edit-element&quot;); // with params</span>
+<span id="L1207"><span class="lineNum">    1207</span>              : </span>
+<span id="L1208"><span class="lineNum">    1208</span>              : // others commands</span>
+<span id="L1209"><span class="lineNum">    1209</span>              : inline static const muse::rcommand::Command REGROUP_RHYTHMS_COMMAND(&quot;command://notation/regroup-rhythms&quot;);</span>
+<span id="L1210"><span class="lineNum">    1210</span>              : inline static const muse::rcommand::Command RESEQUENCE_REHEARSAL_MARKS_COMMAND(&quot;command://notation/resequence-rehearsal-marks&quot;);</span>
+<span id="L1211"><span class="lineNum">    1211</span>              : inline static const muse::rcommand::Command UNROLL_REPEATS_COMMAND(&quot;command://notation/unroll-repeats&quot;);</span>
+<span id="L1212"><span class="lineNum">    1212</span>              : inline static const muse::rcommand::Command REPEAT_SELECTION_COMMAND(&quot;command://notation/repeat-selection&quot;);</span>
+<span id="L1213"><span class="lineNum">    1213</span>              : inline static const muse::rcommand::Command TRANSPOSE_UP_COMMAND(&quot;command://notation/transpose-up&quot;);</span>
+<span id="L1214"><span class="lineNum">    1214</span>              : inline static const muse::rcommand::Command TRANSPOSE_DOWN_COMMAND(&quot;command://notation/transpose-down&quot;);</span>
+<span id="L1215"><span class="lineNum">    1215</span>              : inline static const muse::rcommand::Command TOGGLE_MMREST_COMMAND(&quot;command://notation/toggle-mmrest&quot;);</span>
+<span id="L1216"><span class="lineNum">    1216</span>              : inline static const muse::rcommand::Command TOGGLE_HIDE_EMPTY_COMMAND(&quot;command://notation/toggle-hide-empty&quot;);</span>
+<span id="L1217"><span class="lineNum">    1217</span>              : inline static const muse::rcommand::Command MIRROR_NOTEHEAD_COMMAND(&quot;command://notation/mirror-notehead&quot;);</span>
+<span id="L1218"><span class="lineNum">    1218</span>              : inline static const muse::rcommand::Command SET_VISIBLE_COMMAND(&quot;command://notation/set-visible&quot;);</span>
+<span id="L1219"><span class="lineNum">    1219</span>              : inline static const muse::rcommand::Command UNSET_VISIBLE_COMMAND(&quot;command://notation/unset-visible&quot;);</span>
+<span id="L1220"><span class="lineNum">    1220</span>              : inline static const muse::rcommand::Command TOGGLE_AUTOPLACE_COMMAND(&quot;command://notation/toggle-autoplace&quot;);</span>
+<span id="L1221"><span class="lineNum">    1221</span>              : inline static const muse::rcommand::Command AUTOPLACE_ENABLED_COMMAND(&quot;command://notation/autoplace-enabled&quot;);</span>
+<span id="L1222"><span class="lineNum">    1222</span>              : inline static const muse::rcommand::Command TOGGLE_AUTOMATION_COMMAND(&quot;command://notation/toggle-automation&quot;);</span>
+<span id="L1223"><span class="lineNum">    1223</span>              : inline static const muse::rcommand::Command SELECT_AUTOMATION_TYPE_COMMAND(&quot;command://notation/select-automation-type&quot;); // with params</span>
+<span id="L1224"><span class="lineNum">    1224</span>              : </span>
+<span id="L1225"><span class="lineNum">    1225</span>              : // TAB commands</span>
+<span id="L1226"><span class="lineNum">    1226</span>              : inline static const muse::rcommand::Command SET_DURATION_WHOLE_TAB_COMMAND(&quot;command://notation/set-duration-whole-tab&quot;);</span>
+<span id="L1227"><span class="lineNum">    1227</span>              : inline static const muse::rcommand::Command SET_DURATION_HALF_TAB_COMMAND(&quot;command://notation/set-duration-half-tab&quot;);</span>
+<span id="L1228"><span class="lineNum">    1228</span>              : inline static const muse::rcommand::Command SET_DURATION_QUARTER_TAB_COMMAND(&quot;command://notation/set-duration-quarter-tab&quot;);</span>
+<span id="L1229"><span class="lineNum">    1229</span>              : inline static const muse::rcommand::Command SET_DURATION_EIGHTH_TAB_COMMAND(&quot;command://notation/set-duration-eighth-tab&quot;);</span>
+<span id="L1230"><span class="lineNum">    1230</span>              : inline static const muse::rcommand::Command SET_DURATION_16TH_TAB_COMMAND(&quot;command://notation/set-duration-16th-tab&quot;);</span>
+<span id="L1231"><span class="lineNum">    1231</span>              : inline static const muse::rcommand::Command SET_DURATION_32ND_TAB_COMMAND(&quot;command://notation/set-duration-32nd-tab&quot;);</span>
+<span id="L1232"><span class="lineNum">    1232</span>              : inline static const muse::rcommand::Command SET_DURATION_64TH_TAB_COMMAND(&quot;command://notation/set-duration-64th-tab&quot;);</span>
+<span id="L1233"><span class="lineNum">    1233</span>              : inline static const muse::rcommand::Command SET_DURATION_128TH_TAB_COMMAND(&quot;command://notation/set-duration-128th-tab&quot;);</span>
+<span id="L1234"><span class="lineNum">    1234</span>              : inline static const muse::rcommand::Command SET_DURATION_256TH_TAB_COMMAND(&quot;command://notation/set-duration-256th-tab&quot;);</span>
+<span id="L1235"><span class="lineNum">    1235</span>              : inline static const muse::rcommand::Command SET_DURATION_512TH_TAB_COMMAND(&quot;command://notation/set-duration-512th-tab&quot;);</span>
+<span id="L1236"><span class="lineNum">    1236</span>              : inline static const muse::rcommand::Command SET_DURATION_1024TH_TAB_COMMAND(&quot;command://notation/set-duration-1024th-tab&quot;);</span>
+<span id="L1237"><span class="lineNum">    1237</span>              : </span>
+<span id="L1238"><span class="lineNum">    1238</span>              : inline static const muse::rcommand::Command ENTER_FRET_0_COMMAND(&quot;command://notation/enter-fret-0&quot;);</span>
+<span id="L1239"><span class="lineNum">    1239</span>              : inline static const muse::rcommand::Command ENTER_FRET_1_COMMAND(&quot;command://notation/enter-fret-1&quot;);</span>
+<span id="L1240"><span class="lineNum">    1240</span>              : inline static const muse::rcommand::Command ENTER_FRET_2_COMMAND(&quot;command://notation/enter-fret-2&quot;);</span>
+<span id="L1241"><span class="lineNum">    1241</span>              : inline static const muse::rcommand::Command ENTER_FRET_3_COMMAND(&quot;command://notation/enter-fret-3&quot;);</span>
+<span id="L1242"><span class="lineNum">    1242</span>              : inline static const muse::rcommand::Command ENTER_FRET_4_COMMAND(&quot;command://notation/enter-fret-4&quot;);</span>
+<span id="L1243"><span class="lineNum">    1243</span>              : inline static const muse::rcommand::Command ENTER_FRET_5_COMMAND(&quot;command://notation/enter-fret-5&quot;);</span>
+<span id="L1244"><span class="lineNum">    1244</span>              : inline static const muse::rcommand::Command ENTER_FRET_6_COMMAND(&quot;command://notation/enter-fret-6&quot;);</span>
+<span id="L1245"><span class="lineNum">    1245</span>              : inline static const muse::rcommand::Command ENTER_FRET_7_COMMAND(&quot;command://notation/enter-fret-7&quot;);</span>
+<span id="L1246"><span class="lineNum">    1246</span>              : inline static const muse::rcommand::Command ENTER_FRET_8_COMMAND(&quot;command://notation/enter-fret-8&quot;);</span>
+<span id="L1247"><span class="lineNum">    1247</span>              : inline static const muse::rcommand::Command ENTER_FRET_9_COMMAND(&quot;command://notation/enter-fret-9&quot;);</span>
+<span id="L1248"><span class="lineNum">    1248</span>              : inline static const muse::rcommand::Command ENTER_FRET_10_COMMAND(&quot;command://notation/enter-fret-10&quot;);</span>
+<span id="L1249"><span class="lineNum">    1249</span>              : inline static const muse::rcommand::Command ENTER_FRET_11_COMMAND(&quot;command://notation/enter-fret-11&quot;);</span>
+<span id="L1250"><span class="lineNum">    1250</span>              : inline static const muse::rcommand::Command ENTER_FRET_12_COMMAND(&quot;command://notation/enter-fret-12&quot;);</span>
+<span id="L1251"><span class="lineNum">    1251</span>              : inline static const muse::rcommand::Command ENTER_FRET_13_COMMAND(&quot;command://notation/enter-fret-13&quot;);</span>
+<span id="L1252"><span class="lineNum">    1252</span>              : inline static const muse::rcommand::Command ENTER_FRET_14_COMMAND(&quot;command://notation/enter-fret-14&quot;);</span>
+<span id="L1253"><span class="lineNum">    1253</span>              : </span>
+<span id="L1254"><span class="lineNum">    1254</span>              : inline static const muse::rcommand::Command ENTER_REST_TAB_COMMAND(&quot;command://notation/enter-rest-tab&quot;);</span>
+<span id="L1255"><span class="lineNum">    1255</span>              : </span>
+<span id="L1256"><span class="lineNum">    1256</span>              : inline static const muse::rcommand::Command ADD_STANDARD_BEND_COMMAND(&quot;command://notation/add-standard-bend&quot;);</span>
+<span id="L1257"><span class="lineNum">    1257</span>              : inline static const muse::rcommand::Command ADD_PRE_BEND_COMMAND(&quot;command://notation/add-pre-bend&quot;);</span>
+<span id="L1258"><span class="lineNum">    1258</span>              : inline static const muse::rcommand::Command ADD_GRACE_NOTE_BEND_COMMAND(&quot;command://notation/add-grace-note-bend&quot;);</span>
+<span id="L1259"><span class="lineNum">    1259</span>              : inline static const muse::rcommand::Command ADD_SLIGHT_BEND_COMMAND(&quot;command://notation/add-slight-bend&quot;);</span>
+<span id="L1260"><span class="lineNum">    1260</span>              : inline static const muse::rcommand::Command ADD_DIVE_COMMAND(&quot;command://notation/add-dive&quot;);</span>
+<span id="L1261"><span class="lineNum">    1261</span>              : inline static const muse::rcommand::Command ADD_PRE_DIVE_COMMAND(&quot;command://notation/add-pre-dive&quot;);</span>
+<span id="L1262"><span class="lineNum">    1262</span>              : inline static const muse::rcommand::Command ADD_DIP_COMMAND(&quot;command://notation/add-dip&quot;);</span>
+<span id="L1263"><span class="lineNum">    1263</span>              : inline static const muse::rcommand::Command ADD_SCOOP_COMMAND(&quot;command://notation/add-scoop&quot;);</span>
+<span id="L1264"><span class="lineNum">    1264</span>              : </span>
+<span id="L1265"><span class="lineNum">    1265</span>              : inline static const muse::rcommand::Command ADD_HAMMER_ON_PULL_OFF_COMMAND(&quot;command://notation/add-hammer-on-pull-off&quot;);</span>
+<span id="L1266"><span class="lineNum">    1266</span>              : </span>
+<span id="L1267"><span class="lineNum">    1267</span>              : inline static const muse::rcommand::Command GOTO_STRING_ABOVE_COMMAND(&quot;command://notation/goto-string-above&quot;);</span>
+<span id="L1268"><span class="lineNum">    1268</span>              : inline static const muse::rcommand::Command GOTO_STRING_BELOW_COMMAND(&quot;command://notation/goto-string-below&quot;);</span>
+<span id="L1269"><span class="lineNum">    1269</span>              : </span>
+<span id="L1270"><span class="lineNum">    1270</span>              : // view commands</span>
+<span id="L1271"><span class="lineNum">    1271</span>              : inline static const muse::rcommand::Command ZOOM_IN_COMMAND(&quot;command://notation/view/zoom-in&quot;);</span>
+<span id="L1272"><span class="lineNum">    1272</span>              : inline static const muse::rcommand::Command ZOOM_OUT_COMMAND(&quot;command://notation/view/zoom-out&quot;);</span>
+<span id="L1273"><span class="lineNum">    1273</span>              : inline static const muse::rcommand::Command ZOOM_TO_PAGE_WIDTH_COMMAND(&quot;command://notation/view/zoom-to-page-width&quot;);</span>
+<span id="L1274"><span class="lineNum">    1274</span>              : inline static const muse::rcommand::Command ZOOM_TO_WHOLE_PAGE_COMMAND(&quot;command://notation/view/zoom-to-whole-page&quot;);</span>
+<span id="L1275"><span class="lineNum">    1275</span>              : inline static const muse::rcommand::Command ZOOM_TO_TWO_PAGES_COMMAND(&quot;command://notation/view/zoom-to-two-pages&quot;);</span>
+<span id="L1276"><span class="lineNum">    1276</span>              : inline static const muse::rcommand::Command ZOOM_TO_100_COMMAND(&quot;command://notation/view/zoom-to-100&quot;);</span>
+<span id="L1277"><span class="lineNum">    1277</span>              : inline static const muse::rcommand::Command ZOOM_TO_PERCENT_COMMAND(&quot;command://notation/view/zoom-to-percent&quot;); // with params</span>
+<span id="L1278"><span class="lineNum">    1278</span>              : </span>
+<span id="L1279"><span class="lineNum">    1279</span>              : inline static const muse::rcommand::Command VIEW_MODE_PAGE_COMMAND(&quot;command://notation/view/mode-page&quot;);</span>
+<span id="L1280"><span class="lineNum">    1280</span>              : inline static const muse::rcommand::Command VIEW_MODE_FLOAT_COMMAND(&quot;command://notation/view/mode-float&quot;);</span>
+<span id="L1281"><span class="lineNum">    1281</span>              : inline static const muse::rcommand::Command VIEW_MODE_CONTINUOUS_COMMAND(&quot;command://notation/view/mode-continuous&quot;);</span>
+<span id="L1282"><span class="lineNum">    1282</span>              : inline static const muse::rcommand::Command VIEW_MODE_SINGLE_COMMAND(&quot;command://notation/view/mode-single&quot;);</span>
+<span id="L1283"><span class="lineNum">    1283</span>              : </span>
+<span id="L1284"><span class="lineNum">    1284</span>              : inline static const muse::rcommand::Command NEXT_SCREEN_COMMAND(&quot;command://notation/view/next-screen&quot;);</span>
+<span id="L1285"><span class="lineNum">    1285</span>              : inline static const muse::rcommand::Command PREV_SCREEN_COMMAND(&quot;command://notation/view/prev-screen&quot;);</span>
+<span id="L1286"><span class="lineNum">    1286</span>              : inline static const muse::rcommand::Command NEXT_PAGE_COMMAND(&quot;command://notation/view/next-page&quot;);</span>
+<span id="L1287"><span class="lineNum">    1287</span>              : inline static const muse::rcommand::Command PREV_PAGE_COMMAND(&quot;command://notation/view/prev-page&quot;);</span>
+<span id="L1288"><span class="lineNum">    1288</span>              : inline static const muse::rcommand::Command TOP_OF_FIRST_PAGE_COMMAND(&quot;command://notation/view/top-of-first-page&quot;);</span>
+<span id="L1289"><span class="lineNum">    1289</span>              : inline static const muse::rcommand::Command BOTTOM_OF_LAST_PAGE_COMMAND(&quot;command://notation/view/bottom-of-last-page&quot;);</span>
+<span id="L1290"><span class="lineNum">    1290</span>              : </span>
+<span id="L1291"><span class="lineNum">    1291</span>              : inline static const muse::rcommand::Command CONTEXT_MENU_OF_SELECTION_COMMAND(&quot;command://notation/view/context-menu-of-selection&quot;);</span>
+<span id="L1292"><span class="lineNum">    1292</span>              : </span>
+<span id="L1293"><span class="lineNum">    1293</span>              : inline static const muse::rcommand::Command SHOW_SEARCH_COMMAND(&quot;command://notation/view/show-search&quot;);</span>
+<span id="L1294"><span class="lineNum">    1294</span>              : </span>
+<span id="L1295"><span class="lineNum">    1295</span>              : // piano keyboard commands</span>
+<span id="L1296"><span class="lineNum">    1296</span>              : inline static const muse::rcommand::Command PIANO_KEYBOARD_SET_NUMBER_OF_KEYS_COMMAND(&quot;command://notation/piano-keyboard/set-number-of-keys&quot;);</span>
+<span id="L1297"><span class="lineNum">    1297</span>              : </span>
+<span id="L1298"><span class="lineNum">    1298</span>              : // diagnostic commands</span>
+<span id="L1299"><span class="lineNum">    1299</span>              : inline static const muse::rcommand::Command DIAGNOSTIC_VIEW_REDRAW_COMMAND(&quot;command://notation/diagnostic/view-redraw&quot;);</span>
+<span id="L1300"><span class="lineNum">    1300</span>              : </span>
+<span id="L1301"><span class="lineNum">    1301</span>              : inline static const muse::rcommand::Command SHOW_ELEMENT_BOUNDING_RECTS_COMMAND(&quot;command://notation/diagnostic/show-element-bounding-rects&quot;);</span>
+<span id="L1302"><span class="lineNum">    1302</span>              : inline static const muse::rcommand::Command COLOR_ELEMENT_SHAPES_COMMAND(&quot;command://notation/diagnostic/color-element-shapes&quot;);</span>
+<span id="L1303"><span class="lineNum">    1303</span>              : inline static const muse::rcommand::Command SHOW_SEGMENT_SHAPES_COMMAND(&quot;command://notation/diagnostic/show-segment-shapes&quot;);</span>
+<span id="L1304"><span class="lineNum">    1304</span>              : inline static const muse::rcommand::Command COLOR_SEGMENT_SHAPES_COMMAND(&quot;command://notation/diagnostic/color-segment-shapes&quot;);</span>
+<span id="L1305"><span class="lineNum">    1305</span>              : inline static const muse::rcommand::Command SHOW_SKYLINES_COMMAND(&quot;command://notation/diagnostic/show-skylines&quot;);</span>
+<span id="L1306"><span class="lineNum">    1306</span>              : inline static const muse::rcommand::Command SHOW_SYSTEM_BOUNDING_RECTS_COMMAND(&quot;command://notation/diagnostic/show-system-bounding-rects&quot;);</span>
+<span id="L1307"><span class="lineNum">    1307</span>              : inline static const muse::rcommand::Command SHOW_ELEMENT_MASKS_COMMAND(&quot;command://notation/diagnostic/show-element-masks&quot;);</span>
+<span id="L1308"><span class="lineNum">    1308</span>              : inline static const muse::rcommand::Command SHOW_LINE_ATTACH_POINTS_COMMAND(&quot;command://notation/diagnostic/show-line-attach-points&quot;);</span>
+<span id="L1309"><span class="lineNum">    1309</span>              : inline static const muse::rcommand::Command MARK_EMPTY_STAFF_COMMAND(&quot;command://notation/diagnostic/mark-empty-staff&quot;);</span>
+<span id="L1310"><span class="lineNum">    1310</span>              : inline static const muse::rcommand::Command MARK_CORRUPTED_MEASURES_COMMAND(&quot;command://notation/diagnostic/mark-corrupted-measures&quot;);</span>
+<span id="L1311"><span class="lineNum">    1311</span>              : inline static const muse::rcommand::Command SHOW_GAP_RESTS_COMMAND(&quot;command://notation/diagnostic/show-gap-rests&quot;);</span>
+<span id="L1312"><span class="lineNum">    1312</span>              : inline static const muse::rcommand::Command SHOW_ORIGIN_AND_COMBINED_COMMAND(&quot;command://notation/diagnostic/show-origin-and-combined&quot;);</span>
+<span id="L1313"><span class="lineNum">    1313</span>              : inline static const muse::rcommand::Command CHECK_FOR_SCORE_CORRUPTIONS_COMMAND(&quot;command://notation/diagnostic/check-for-score-corruptions&quot;);</span>
+<span id="L1314"><span class="lineNum">    1314</span>              : </span>
+<span id="L1315"><span class="lineNum">    1315</span>              : //! NOTE &quot;Read&quot; commands for MCP and maybe API</span>
+<span id="L1316"><span class="lineNum">    1316</span>              : //inline static const muse::rcommand::Command GET_NOTEINPUT_STATE_COMMAND(&quot;command://notation/get-noteinput-state&quot;);</span>
+<span id="L1317"><span class="lineNum">    1317</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -164,171 +164,173 @@
 <span id="L106"><span class="lineNum">     106</span>              : class SoundFlag;</span>
 <span id="L107"><span class="lineNum">     107</span>              : class Spacer;</span>
 <span id="L108"><span class="lineNum">     108</span>              : class StaffText;</span>
-<span id="L109"><span class="lineNum">     109</span>              : class StaveSharingLabel;</span>
-<span id="L110"><span class="lineNum">     110</span>              : class StaffTypeChange;</span>
-<span id="L111"><span class="lineNum">     111</span>              : class Sticking;</span>
-<span id="L112"><span class="lineNum">     112</span>              : class StringTunings;</span>
-<span id="L113"><span class="lineNum">     113</span>              : class Symbol;</span>
-<span id="L114"><span class="lineNum">     114</span>              : class SystemText;</span>
-<span id="L115"><span class="lineNum">     115</span>              : </span>
-<span id="L116"><span class="lineNum">     116</span>              : class TempoText;</span>
-<span id="L117"><span class="lineNum">     117</span>              : class Text;</span>
-<span id="L118"><span class="lineNum">     118</span>              : class TextLine;</span>
-<span id="L119"><span class="lineNum">     119</span>              : class TextLineSegment;</span>
-<span id="L120"><span class="lineNum">     120</span>              : class TextLineBaseSegment;</span>
-<span id="L121"><span class="lineNum">     121</span>              : class TimeSig;</span>
-<span id="L122"><span class="lineNum">     122</span>              : class TremoloSingleChord;</span>
-<span id="L123"><span class="lineNum">     123</span>              : class TremoloTwoChord;</span>
-<span id="L124"><span class="lineNum">     124</span>              : class TremoloBar;</span>
-<span id="L125"><span class="lineNum">     125</span>              : class Trill;</span>
-<span id="L126"><span class="lineNum">     126</span>              : class TrillSegment;</span>
-<span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span>              : class Vibrato;</span>
-<span id="L129"><span class="lineNum">     129</span>              : class VibratoSegment;</span>
-<span id="L130"><span class="lineNum">     130</span>              : class Volta;</span>
-<span id="L131"><span class="lineNum">     131</span>              : class VoltaSegment;</span>
-<span id="L132"><span class="lineNum">     132</span>              : }</span>
-<span id="L133"><span class="lineNum">     133</span>              : </span>
-<span id="L134"><span class="lineNum">     134</span>              : namespace mu::engraving::rendering::single {</span>
-<span id="L135"><span class="lineNum">     135</span>              : class SingleLayout</span>
-<span id="L136"><span class="lineNum">     136</span>              : {</span>
-<span id="L137"><span class="lineNum">     137</span>              : public:</span>
-<span id="L138"><span class="lineNum">     138</span>              :     SingleLayout() = default;</span>
-<span id="L139"><span class="lineNum">     139</span>              : </span>
-<span id="L140"><span class="lineNum">     140</span>              :     static void layoutItem(engraving::EngravingItem* item);</span>
-<span id="L141"><span class="lineNum">     141</span>              : </span>
-<span id="L142"><span class="lineNum">     142</span>              :     struct Context {</span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC tlaBgUNC">           0 :         Context(engraving::Score* s)</span></span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :             : m_score(s) {}</span></span>
-<span id="L145"><span class="lineNum">     145</span>              : </span>
-<span id="L146"><span class="lineNum">     146</span>              :         const engraving::MStyle&amp; style() const;</span>
-<span id="L147"><span class="lineNum">     147</span>              :         std::shared_ptr&lt;engraving::IEngravingFont&gt; engravingFont() const;</span>
-<span id="L148"><span class="lineNum">     148</span>              :         engraving::DummyParent* dummyParent() const;</span>
-<span id="L149"><span class="lineNum">     149</span>              : </span>
-<span id="L150"><span class="lineNum">     150</span>              :         //! NOTE Temporarily, do not use</span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaUNC">           0 :         engraving::Score* dontUseScore() const { return m_score; }</span></span>
-<span id="L152"><span class="lineNum">     152</span>              : </span>
-<span id="L153"><span class="lineNum">     153</span>              :     private:</span>
-<span id="L154"><span class="lineNum">     154</span>              :         engraving::Score* m_score = nullptr;</span>
-<span id="L155"><span class="lineNum">     155</span>              :     };</span>
-<span id="L156"><span class="lineNum">     156</span>              : </span>
-<span id="L157"><span class="lineNum">     157</span>              :     static void layout(Accidental* item, const Context&amp; ctx);</span>
-<span id="L158"><span class="lineNum">     158</span>              :     static void layout(ActionIcon* item, const Context&amp; ctx);</span>
-<span id="L159"><span class="lineNum">     159</span>              :     static void layout(Ambitus* item, const Context&amp; ctx);</span>
-<span id="L160"><span class="lineNum">     160</span>              :     static void layout(Arpeggio* item, const Context&amp; ctx);</span>
-<span id="L161"><span class="lineNum">     161</span>              :     static void layout(ChordBracket* item, const Context&amp; ctx);</span>
-<span id="L162"><span class="lineNum">     162</span>              :     static void layout(Articulation* item, const Context&amp; ctx);</span>
-<span id="L163"><span class="lineNum">     163</span>              : </span>
-<span id="L164"><span class="lineNum">     164</span>              :     static void layout(BagpipeEmbellishment* item, const Context&amp; ctx);</span>
-<span id="L165"><span class="lineNum">     165</span>              :     static void layout(BarLine* item, const Context&amp; ctx);</span>
-<span id="L166"><span class="lineNum">     166</span>              :     static void layout(Bend* item, const Context&amp; ctx);</span>
-<span id="L167"><span class="lineNum">     167</span>              :     static void layout(Bracket* item, const Context&amp; ctx);</span>
-<span id="L168"><span class="lineNum">     168</span>              :     static void layout(Breath* item, const Context&amp;);</span>
-<span id="L169"><span class="lineNum">     169</span>              : </span>
-<span id="L170"><span class="lineNum">     170</span>              :     static void layout(Capo* item, const Context&amp; ctx);</span>
-<span id="L171"><span class="lineNum">     171</span>              :     static void layout(Chord* item, const Context&amp; ctx);</span>
-<span id="L172"><span class="lineNum">     172</span>              :     static void layout(ChordLine* item, const Context&amp; ctx);</span>
-<span id="L173"><span class="lineNum">     173</span>              :     static void layout(Clef* item, const Context&amp; ctx);</span>
-<span id="L174"><span class="lineNum">     174</span>              : </span>
-<span id="L175"><span class="lineNum">     175</span>              :     static void layout(Dynamic* item, const Context&amp; ctx);</span>
-<span id="L176"><span class="lineNum">     176</span>              : </span>
-<span id="L177"><span class="lineNum">     177</span>              :     static void layout(Expression* item, const Context&amp; ctx);</span>
-<span id="L178"><span class="lineNum">     178</span>              : </span>
-<span id="L179"><span class="lineNum">     179</span>              :     static void layout(Fermata* item, const Context&amp; ctx);</span>
-<span id="L180"><span class="lineNum">     180</span>              :     static void layout(Fingering* item, const Context&amp; ctx);</span>
-<span id="L181"><span class="lineNum">     181</span>              :     static void layout(FretDiagram* item, const Context&amp; ctx);</span>
-<span id="L182"><span class="lineNum">     182</span>              :     static void layout(FSymbol* item, const Context&amp; ctx);</span>
-<span id="L183"><span class="lineNum">     183</span>              : </span>
-<span id="L184"><span class="lineNum">     184</span>              :     static void layout(Glissando* item, const Context&amp; ctx);</span>
-<span id="L185"><span class="lineNum">     185</span>              :     static void layout(GradualTempoChange* item, const Context&amp; ctx);</span>
-<span id="L186"><span class="lineNum">     186</span>              :     static void layout(GuitarBend* item, const Context&amp; ctx);</span>
-<span id="L187"><span class="lineNum">     187</span>              : </span>
-<span id="L188"><span class="lineNum">     188</span>              :     static void layout(Hairpin* item, const Context&amp; ctx);</span>
-<span id="L189"><span class="lineNum">     189</span>              :     static void layout(HammerOnPullOff* item, const Context&amp; ctx);</span>
-<span id="L190"><span class="lineNum">     190</span>              :     static void layout(HammerOnPullOffSegment* item, const Context&amp; ctx);</span>
-<span id="L191"><span class="lineNum">     191</span>              :     static void layout(HarpPedalDiagram* item, const Context&amp; ctx);</span>
-<span id="L192"><span class="lineNum">     192</span>              : </span>
-<span id="L193"><span class="lineNum">     193</span>              :     static void layout(Image* item, const Context&amp; ctx);</span>
-<span id="L194"><span class="lineNum">     194</span>              :     static void layout(InstrumentChange* item, const Context&amp; ctx);</span>
-<span id="L195"><span class="lineNum">     195</span>              : </span>
-<span id="L196"><span class="lineNum">     196</span>              :     static void layout(Jump* item, const Context&amp; ctx);</span>
-<span id="L197"><span class="lineNum">     197</span>              : </span>
-<span id="L198"><span class="lineNum">     198</span>              :     static void layout(KeySig* item, const Context&amp; ctx);</span>
-<span id="L199"><span class="lineNum">     199</span>              : </span>
-<span id="L200"><span class="lineNum">     200</span>              :     static void layout(LayoutBreak* item, const Context&amp; ctx);</span>
-<span id="L201"><span class="lineNum">     201</span>              :     static void layout(LetRing* item, const Context&amp; ctx);</span>
-<span id="L202"><span class="lineNum">     202</span>              :     static void layout(Lyrics* item, const Context&amp; ctx);</span>
-<span id="L203"><span class="lineNum">     203</span>              : </span>
-<span id="L204"><span class="lineNum">     204</span>              :     static void layout(NoteHead* item, const Context&amp; ctx);</span>
-<span id="L205"><span class="lineNum">     205</span>              :     static void layout(NoteLine* item, const Context&amp; ctx);</span>
-<span id="L206"><span class="lineNum">     206</span>              : </span>
-<span id="L207"><span class="lineNum">     207</span>              :     static void layout(Marker* item, const Context&amp; ctx);</span>
-<span id="L208"><span class="lineNum">     208</span>              :     static void layout(MeasureNumber* item, const Context&amp; ctx);</span>
-<span id="L209"><span class="lineNum">     209</span>              :     static void layout(MeasureRepeat* item, const Context&amp; ctx);</span>
-<span id="L210"><span class="lineNum">     210</span>              : </span>
-<span id="L211"><span class="lineNum">     211</span>              :     static void layout(Ornament* item, const Context&amp; ctx);</span>
-<span id="L212"><span class="lineNum">     212</span>              :     static void layout(Ottava* item, const Context&amp; ctx);</span>
-<span id="L213"><span class="lineNum">     213</span>              : </span>
-<span id="L214"><span class="lineNum">     214</span>              :     static void layout(PalmMute* item, const Context&amp; ctx);</span>
-<span id="L215"><span class="lineNum">     215</span>              :     static void layout(Pedal* item, const Context&amp; ctx);</span>
-<span id="L216"><span class="lineNum">     216</span>              :     static void layout(PlayCountText* item, const Context&amp; ctx);</span>
-<span id="L217"><span class="lineNum">     217</span>              :     static void layout(PlayTechAnnotation* item, const Context&amp; ctx);</span>
-<span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span>              :     static void layout(RehearsalMark* item, const Context&amp; ctx);</span>
-<span id="L220"><span class="lineNum">     220</span>              : </span>
-<span id="L221"><span class="lineNum">     221</span>              :     static void layout(Slur* item, const Context&amp; ctx);</span>
-<span id="L222"><span class="lineNum">     222</span>              :     static void layout(SoundFlag* item, const Context&amp; ctx);</span>
-<span id="L223"><span class="lineNum">     223</span>              :     static void layout(Spacer* item, const Context&amp;);</span>
-<span id="L224"><span class="lineNum">     224</span>              :     static void layout(StaffText* item, const Context&amp; ctx);</span>
-<span id="L225"><span class="lineNum">     225</span>              :     static void layout(StaveSharingLabel* item, const Context&amp; ctx);</span>
-<span id="L226"><span class="lineNum">     226</span>              :     static void layout(StaffTypeChange* item, const Context&amp; ctx);</span>
-<span id="L227"><span class="lineNum">     227</span>              :     static void layout(Stem* item, const Context&amp; ctx);</span>
-<span id="L228"><span class="lineNum">     228</span>              :     static void layout(Sticking* item, const Context&amp; ctx);</span>
-<span id="L229"><span class="lineNum">     229</span>              :     static void layout(StringTunings* item, const Context&amp; ctx);</span>
-<span id="L230"><span class="lineNum">     230</span>              :     static void layout(Symbol* item, const Context&amp; ctx);</span>
-<span id="L231"><span class="lineNum">     231</span>              :     static void layout(SystemText* item, const Context&amp; ctx);</span>
-<span id="L232"><span class="lineNum">     232</span>              : </span>
-<span id="L233"><span class="lineNum">     233</span>              :     static void layout(Tapping* item, const Context&amp; ctx);</span>
-<span id="L234"><span class="lineNum">     234</span>              :     static void layout(TempoText* item, const Context&amp; ctx);</span>
-<span id="L235"><span class="lineNum">     235</span>              :     static void layout(TextLine* item, const Context&amp; ctx);</span>
-<span id="L236"><span class="lineNum">     236</span>              :     static void layout(TimeSig* item, const Context&amp; ctx);</span>
-<span id="L237"><span class="lineNum">     237</span>              :     static void layout(TremoloSingleChord* item, const Context&amp; ctx);</span>
-<span id="L238"><span class="lineNum">     238</span>              :     static void layout(TremoloTwoChord* item, const Context&amp; ctx);</span>
-<span id="L239"><span class="lineNum">     239</span>              :     static void layout(TremoloBar* item, const Context&amp; ctx);</span>
-<span id="L240"><span class="lineNum">     240</span>              :     static void layout(Trill* item, const Context&amp; ctx);</span>
-<span id="L241"><span class="lineNum">     241</span>              : </span>
-<span id="L242"><span class="lineNum">     242</span>              :     static void layout(Vibrato* item, const Context&amp; ctx);</span>
-<span id="L243"><span class="lineNum">     243</span>              :     static void layout(Volta* item, const Context&amp; ctx);</span>
-<span id="L244"><span class="lineNum">     244</span>              :     static void layout(WhammyBar* item, const Context&amp; ctx);</span>
-<span id="L245"><span class="lineNum">     245</span>              : </span>
-<span id="L246"><span class="lineNum">     246</span>              : private:</span>
-<span id="L247"><span class="lineNum">     247</span>              :     static void layout(GlissandoSegment* item, const Context&amp; ctx);</span>
-<span id="L248"><span class="lineNum">     248</span>              :     static void layout(GradualTempoChangeSegment* item, const Context&amp; ctx);</span>
-<span id="L249"><span class="lineNum">     249</span>              :     static void layout(GuitarBendSegment* item, const Context&amp; ctx);</span>
-<span id="L250"><span class="lineNum">     250</span>              :     static void layout(HairpinSegment* item, const Context&amp; ctx);</span>
-<span id="L251"><span class="lineNum">     251</span>              :     static void layout(LetRingSegment* item, const Context&amp; ctx);</span>
-<span id="L252"><span class="lineNum">     252</span>              :     static void layout(OttavaSegment* item, const Context&amp; ctx);</span>
-<span id="L253"><span class="lineNum">     253</span>              :     static void layout(PalmMuteSegment* item, const Context&amp; ctx);</span>
-<span id="L254"><span class="lineNum">     254</span>              :     static void layout(PedalSegment* item, const Context&amp; ctx);</span>
-<span id="L255"><span class="lineNum">     255</span>              :     static void layout(TextLineSegment* item, const Context&amp; ctx);</span>
-<span id="L256"><span class="lineNum">     256</span>              :     static void layout(TrillSegment* item, const Context&amp; ctx);</span>
-<span id="L257"><span class="lineNum">     257</span>              :     static void layout(VibratoSegment* item, const Context&amp; ctx);</span>
-<span id="L258"><span class="lineNum">     258</span>              :     static void layout(VoltaSegment* item, const Context&amp; ctx);</span>
-<span id="L259"><span class="lineNum">     259</span>              :     static void layout(WhammyBarSegment* item, const Context&amp; ctx);</span>
-<span id="L260"><span class="lineNum">     260</span>              : </span>
-<span id="L261"><span class="lineNum">     261</span>              :     static void layout(Text* item, const Context&amp; ctx);</span>
-<span id="L262"><span class="lineNum">     262</span>              :     static void layoutTextBase(const TextBase* item, const Context&amp; ctx, TextBase::LayoutData* ldata);</span>
-<span id="L263"><span class="lineNum">     263</span>              :     static void layout1TextBase(const TextBase* item, const Context&amp; ctx, TextBase::LayoutData* ldata);</span>
-<span id="L264"><span class="lineNum">     264</span>              : </span>
-<span id="L265"><span class="lineNum">     265</span>              :     static void layoutLine(SLine* item, const Context&amp; ctx);</span>
-<span id="L266"><span class="lineNum">     266</span>              :     static void layoutLineSegment(LineSegment* item, const Context&amp; ctx);</span>
-<span id="L267"><span class="lineNum">     267</span>              :     static void layoutTextLineBaseSegment(TextLineBaseSegment* item, const Context&amp; ctx);</span>
-<span id="L268"><span class="lineNum">     268</span>              : </span>
-<span id="L269"><span class="lineNum">     269</span>              :     static void layoutGroupBracket(Bracket* item, const Context&amp; ctx);</span>
-<span id="L270"><span class="lineNum">     270</span>              : };</span>
-<span id="L271"><span class="lineNum">     271</span>              : }</span>
-<span id="L272"><span class="lineNum">     272</span>              : </span>
-<span id="L273"><span class="lineNum">     273</span>              : #endif // MU_ENGRAVING_SINGLELAYOUT_H</span>
+<span id="L109"><span class="lineNum">     109</span>              : class StaveSharingChange;</span>
+<span id="L110"><span class="lineNum">     110</span>              : class StaveSharingLabel;</span>
+<span id="L111"><span class="lineNum">     111</span>              : class StaffTypeChange;</span>
+<span id="L112"><span class="lineNum">     112</span>              : class Sticking;</span>
+<span id="L113"><span class="lineNum">     113</span>              : class StringTunings;</span>
+<span id="L114"><span class="lineNum">     114</span>              : class Symbol;</span>
+<span id="L115"><span class="lineNum">     115</span>              : class SystemText;</span>
+<span id="L116"><span class="lineNum">     116</span>              : </span>
+<span id="L117"><span class="lineNum">     117</span>              : class TempoText;</span>
+<span id="L118"><span class="lineNum">     118</span>              : class Text;</span>
+<span id="L119"><span class="lineNum">     119</span>              : class TextLine;</span>
+<span id="L120"><span class="lineNum">     120</span>              : class TextLineSegment;</span>
+<span id="L121"><span class="lineNum">     121</span>              : class TextLineBaseSegment;</span>
+<span id="L122"><span class="lineNum">     122</span>              : class TimeSig;</span>
+<span id="L123"><span class="lineNum">     123</span>              : class TremoloSingleChord;</span>
+<span id="L124"><span class="lineNum">     124</span>              : class TremoloTwoChord;</span>
+<span id="L125"><span class="lineNum">     125</span>              : class TremoloBar;</span>
+<span id="L126"><span class="lineNum">     126</span>              : class Trill;</span>
+<span id="L127"><span class="lineNum">     127</span>              : class TrillSegment;</span>
+<span id="L128"><span class="lineNum">     128</span>              : </span>
+<span id="L129"><span class="lineNum">     129</span>              : class Vibrato;</span>
+<span id="L130"><span class="lineNum">     130</span>              : class VibratoSegment;</span>
+<span id="L131"><span class="lineNum">     131</span>              : class Volta;</span>
+<span id="L132"><span class="lineNum">     132</span>              : class VoltaSegment;</span>
+<span id="L133"><span class="lineNum">     133</span>              : }</span>
+<span id="L134"><span class="lineNum">     134</span>              : </span>
+<span id="L135"><span class="lineNum">     135</span>              : namespace mu::engraving::rendering::single {</span>
+<span id="L136"><span class="lineNum">     136</span>              : class SingleLayout</span>
+<span id="L137"><span class="lineNum">     137</span>              : {</span>
+<span id="L138"><span class="lineNum">     138</span>              : public:</span>
+<span id="L139"><span class="lineNum">     139</span>              :     SingleLayout() = default;</span>
+<span id="L140"><span class="lineNum">     140</span>              : </span>
+<span id="L141"><span class="lineNum">     141</span>              :     static void layoutItem(engraving::EngravingItem* item);</span>
+<span id="L142"><span class="lineNum">     142</span>              : </span>
+<span id="L143"><span class="lineNum">     143</span>              :     struct Context {</span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC tlaBgUNC">           0 :         Context(engraving::Score* s)</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC">           0 :             : m_score(s) {}</span></span>
+<span id="L146"><span class="lineNum">     146</span>              : </span>
+<span id="L147"><span class="lineNum">     147</span>              :         const engraving::MStyle&amp; style() const;</span>
+<span id="L148"><span class="lineNum">     148</span>              :         std::shared_ptr&lt;engraving::IEngravingFont&gt; engravingFont() const;</span>
+<span id="L149"><span class="lineNum">     149</span>              :         engraving::DummyParent* dummyParent() const;</span>
+<span id="L150"><span class="lineNum">     150</span>              : </span>
+<span id="L151"><span class="lineNum">     151</span>              :         //! NOTE Temporarily, do not use</span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaUNC">           0 :         engraving::Score* dontUseScore() const { return m_score; }</span></span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span>              :     private:</span>
+<span id="L155"><span class="lineNum">     155</span>              :         engraving::Score* m_score = nullptr;</span>
+<span id="L156"><span class="lineNum">     156</span>              :     };</span>
+<span id="L157"><span class="lineNum">     157</span>              : </span>
+<span id="L158"><span class="lineNum">     158</span>              :     static void layout(Accidental* item, const Context&amp; ctx);</span>
+<span id="L159"><span class="lineNum">     159</span>              :     static void layout(ActionIcon* item, const Context&amp; ctx);</span>
+<span id="L160"><span class="lineNum">     160</span>              :     static void layout(Ambitus* item, const Context&amp; ctx);</span>
+<span id="L161"><span class="lineNum">     161</span>              :     static void layout(Arpeggio* item, const Context&amp; ctx);</span>
+<span id="L162"><span class="lineNum">     162</span>              :     static void layout(ChordBracket* item, const Context&amp; ctx);</span>
+<span id="L163"><span class="lineNum">     163</span>              :     static void layout(Articulation* item, const Context&amp; ctx);</span>
+<span id="L164"><span class="lineNum">     164</span>              : </span>
+<span id="L165"><span class="lineNum">     165</span>              :     static void layout(BagpipeEmbellishment* item, const Context&amp; ctx);</span>
+<span id="L166"><span class="lineNum">     166</span>              :     static void layout(BarLine* item, const Context&amp; ctx);</span>
+<span id="L167"><span class="lineNum">     167</span>              :     static void layout(Bend* item, const Context&amp; ctx);</span>
+<span id="L168"><span class="lineNum">     168</span>              :     static void layout(Bracket* item, const Context&amp; ctx);</span>
+<span id="L169"><span class="lineNum">     169</span>              :     static void layout(Breath* item, const Context&amp;);</span>
+<span id="L170"><span class="lineNum">     170</span>              : </span>
+<span id="L171"><span class="lineNum">     171</span>              :     static void layout(Capo* item, const Context&amp; ctx);</span>
+<span id="L172"><span class="lineNum">     172</span>              :     static void layout(Chord* item, const Context&amp; ctx);</span>
+<span id="L173"><span class="lineNum">     173</span>              :     static void layout(ChordLine* item, const Context&amp; ctx);</span>
+<span id="L174"><span class="lineNum">     174</span>              :     static void layout(Clef* item, const Context&amp; ctx);</span>
+<span id="L175"><span class="lineNum">     175</span>              : </span>
+<span id="L176"><span class="lineNum">     176</span>              :     static void layout(Dynamic* item, const Context&amp; ctx);</span>
+<span id="L177"><span class="lineNum">     177</span>              : </span>
+<span id="L178"><span class="lineNum">     178</span>              :     static void layout(Expression* item, const Context&amp; ctx);</span>
+<span id="L179"><span class="lineNum">     179</span>              : </span>
+<span id="L180"><span class="lineNum">     180</span>              :     static void layout(Fermata* item, const Context&amp; ctx);</span>
+<span id="L181"><span class="lineNum">     181</span>              :     static void layout(Fingering* item, const Context&amp; ctx);</span>
+<span id="L182"><span class="lineNum">     182</span>              :     static void layout(FretDiagram* item, const Context&amp; ctx);</span>
+<span id="L183"><span class="lineNum">     183</span>              :     static void layout(FSymbol* item, const Context&amp; ctx);</span>
+<span id="L184"><span class="lineNum">     184</span>              : </span>
+<span id="L185"><span class="lineNum">     185</span>              :     static void layout(Glissando* item, const Context&amp; ctx);</span>
+<span id="L186"><span class="lineNum">     186</span>              :     static void layout(GradualTempoChange* item, const Context&amp; ctx);</span>
+<span id="L187"><span class="lineNum">     187</span>              :     static void layout(GuitarBend* item, const Context&amp; ctx);</span>
+<span id="L188"><span class="lineNum">     188</span>              : </span>
+<span id="L189"><span class="lineNum">     189</span>              :     static void layout(Hairpin* item, const Context&amp; ctx);</span>
+<span id="L190"><span class="lineNum">     190</span>              :     static void layout(HammerOnPullOff* item, const Context&amp; ctx);</span>
+<span id="L191"><span class="lineNum">     191</span>              :     static void layout(HammerOnPullOffSegment* item, const Context&amp; ctx);</span>
+<span id="L192"><span class="lineNum">     192</span>              :     static void layout(HarpPedalDiagram* item, const Context&amp; ctx);</span>
+<span id="L193"><span class="lineNum">     193</span>              : </span>
+<span id="L194"><span class="lineNum">     194</span>              :     static void layout(Image* item, const Context&amp; ctx);</span>
+<span id="L195"><span class="lineNum">     195</span>              :     static void layout(InstrumentChange* item, const Context&amp; ctx);</span>
+<span id="L196"><span class="lineNum">     196</span>              : </span>
+<span id="L197"><span class="lineNum">     197</span>              :     static void layout(Jump* item, const Context&amp; ctx);</span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span>              :     static void layout(KeySig* item, const Context&amp; ctx);</span>
+<span id="L200"><span class="lineNum">     200</span>              : </span>
+<span id="L201"><span class="lineNum">     201</span>              :     static void layout(LayoutBreak* item, const Context&amp; ctx);</span>
+<span id="L202"><span class="lineNum">     202</span>              :     static void layout(LetRing* item, const Context&amp; ctx);</span>
+<span id="L203"><span class="lineNum">     203</span>              :     static void layout(Lyrics* item, const Context&amp; ctx);</span>
+<span id="L204"><span class="lineNum">     204</span>              : </span>
+<span id="L205"><span class="lineNum">     205</span>              :     static void layout(NoteHead* item, const Context&amp; ctx);</span>
+<span id="L206"><span class="lineNum">     206</span>              :     static void layout(NoteLine* item, const Context&amp; ctx);</span>
+<span id="L207"><span class="lineNum">     207</span>              : </span>
+<span id="L208"><span class="lineNum">     208</span>              :     static void layout(Marker* item, const Context&amp; ctx);</span>
+<span id="L209"><span class="lineNum">     209</span>              :     static void layout(MeasureNumber* item, const Context&amp; ctx);</span>
+<span id="L210"><span class="lineNum">     210</span>              :     static void layout(MeasureRepeat* item, const Context&amp; ctx);</span>
+<span id="L211"><span class="lineNum">     211</span>              : </span>
+<span id="L212"><span class="lineNum">     212</span>              :     static void layout(Ornament* item, const Context&amp; ctx);</span>
+<span id="L213"><span class="lineNum">     213</span>              :     static void layout(Ottava* item, const Context&amp; ctx);</span>
+<span id="L214"><span class="lineNum">     214</span>              : </span>
+<span id="L215"><span class="lineNum">     215</span>              :     static void layout(PalmMute* item, const Context&amp; ctx);</span>
+<span id="L216"><span class="lineNum">     216</span>              :     static void layout(Pedal* item, const Context&amp; ctx);</span>
+<span id="L217"><span class="lineNum">     217</span>              :     static void layout(PlayCountText* item, const Context&amp; ctx);</span>
+<span id="L218"><span class="lineNum">     218</span>              :     static void layout(PlayTechAnnotation* item, const Context&amp; ctx);</span>
+<span id="L219"><span class="lineNum">     219</span>              : </span>
+<span id="L220"><span class="lineNum">     220</span>              :     static void layout(RehearsalMark* item, const Context&amp; ctx);</span>
+<span id="L221"><span class="lineNum">     221</span>              : </span>
+<span id="L222"><span class="lineNum">     222</span>              :     static void layout(Slur* item, const Context&amp; ctx);</span>
+<span id="L223"><span class="lineNum">     223</span>              :     static void layout(SoundFlag* item, const Context&amp; ctx);</span>
+<span id="L224"><span class="lineNum">     224</span>              :     static void layout(Spacer* item, const Context&amp;);</span>
+<span id="L225"><span class="lineNum">     225</span>              :     static void layout(StaffText* item, const Context&amp; ctx);</span>
+<span id="L226"><span class="lineNum">     226</span>              :     static void layout(StaveSharingChange* item, const Context&amp; ctx);</span>
+<span id="L227"><span class="lineNum">     227</span>              :     static void layout(StaveSharingLabel* item, const Context&amp; ctx);</span>
+<span id="L228"><span class="lineNum">     228</span>              :     static void layout(StaffTypeChange* item, const Context&amp; ctx);</span>
+<span id="L229"><span class="lineNum">     229</span>              :     static void layout(Stem* item, const Context&amp; ctx);</span>
+<span id="L230"><span class="lineNum">     230</span>              :     static void layout(Sticking* item, const Context&amp; ctx);</span>
+<span id="L231"><span class="lineNum">     231</span>              :     static void layout(StringTunings* item, const Context&amp; ctx);</span>
+<span id="L232"><span class="lineNum">     232</span>              :     static void layout(Symbol* item, const Context&amp; ctx);</span>
+<span id="L233"><span class="lineNum">     233</span>              :     static void layout(SystemText* item, const Context&amp; ctx);</span>
+<span id="L234"><span class="lineNum">     234</span>              : </span>
+<span id="L235"><span class="lineNum">     235</span>              :     static void layout(Tapping* item, const Context&amp; ctx);</span>
+<span id="L236"><span class="lineNum">     236</span>              :     static void layout(TempoText* item, const Context&amp; ctx);</span>
+<span id="L237"><span class="lineNum">     237</span>              :     static void layout(TextLine* item, const Context&amp; ctx);</span>
+<span id="L238"><span class="lineNum">     238</span>              :     static void layout(TimeSig* item, const Context&amp; ctx);</span>
+<span id="L239"><span class="lineNum">     239</span>              :     static void layout(TremoloSingleChord* item, const Context&amp; ctx);</span>
+<span id="L240"><span class="lineNum">     240</span>              :     static void layout(TremoloTwoChord* item, const Context&amp; ctx);</span>
+<span id="L241"><span class="lineNum">     241</span>              :     static void layout(TremoloBar* item, const Context&amp; ctx);</span>
+<span id="L242"><span class="lineNum">     242</span>              :     static void layout(Trill* item, const Context&amp; ctx);</span>
+<span id="L243"><span class="lineNum">     243</span>              : </span>
+<span id="L244"><span class="lineNum">     244</span>              :     static void layout(Vibrato* item, const Context&amp; ctx);</span>
+<span id="L245"><span class="lineNum">     245</span>              :     static void layout(Volta* item, const Context&amp; ctx);</span>
+<span id="L246"><span class="lineNum">     246</span>              :     static void layout(WhammyBar* item, const Context&amp; ctx);</span>
+<span id="L247"><span class="lineNum">     247</span>              : </span>
+<span id="L248"><span class="lineNum">     248</span>              : private:</span>
+<span id="L249"><span class="lineNum">     249</span>              :     static void layout(GlissandoSegment* item, const Context&amp; ctx);</span>
+<span id="L250"><span class="lineNum">     250</span>              :     static void layout(GradualTempoChangeSegment* item, const Context&amp; ctx);</span>
+<span id="L251"><span class="lineNum">     251</span>              :     static void layout(GuitarBendSegment* item, const Context&amp; ctx);</span>
+<span id="L252"><span class="lineNum">     252</span>              :     static void layout(HairpinSegment* item, const Context&amp; ctx);</span>
+<span id="L253"><span class="lineNum">     253</span>              :     static void layout(LetRingSegment* item, const Context&amp; ctx);</span>
+<span id="L254"><span class="lineNum">     254</span>              :     static void layout(OttavaSegment* item, const Context&amp; ctx);</span>
+<span id="L255"><span class="lineNum">     255</span>              :     static void layout(PalmMuteSegment* item, const Context&amp; ctx);</span>
+<span id="L256"><span class="lineNum">     256</span>              :     static void layout(PedalSegment* item, const Context&amp; ctx);</span>
+<span id="L257"><span class="lineNum">     257</span>              :     static void layout(TextLineSegment* item, const Context&amp; ctx);</span>
+<span id="L258"><span class="lineNum">     258</span>              :     static void layout(TrillSegment* item, const Context&amp; ctx);</span>
+<span id="L259"><span class="lineNum">     259</span>              :     static void layout(VibratoSegment* item, const Context&amp; ctx);</span>
+<span id="L260"><span class="lineNum">     260</span>              :     static void layout(VoltaSegment* item, const Context&amp; ctx);</span>
+<span id="L261"><span class="lineNum">     261</span>              :     static void layout(WhammyBarSegment* item, const Context&amp; ctx);</span>
+<span id="L262"><span class="lineNum">     262</span>              : </span>
+<span id="L263"><span class="lineNum">     263</span>              :     static void layout(Text* item, const Context&amp; ctx);</span>
+<span id="L264"><span class="lineNum">     264</span>              :     static void layoutTextBase(const TextBase* item, const Context&amp; ctx, TextBase::LayoutData* ldata);</span>
+<span id="L265"><span class="lineNum">     265</span>              :     static void layout1TextBase(const TextBase* item, const Context&amp; ctx, TextBase::LayoutData* ldata);</span>
+<span id="L266"><span class="lineNum">     266</span>              : </span>
+<span id="L267"><span class="lineNum">     267</span>              :     static void layoutLine(SLine* item, const Context&amp; ctx);</span>
+<span id="L268"><span class="lineNum">     268</span>              :     static void layoutLineSegment(LineSegment* item, const Context&amp; ctx);</span>
+<span id="L269"><span class="lineNum">     269</span>              :     static void layoutTextLineBaseSegment(TextLineBaseSegment* item, const Context&amp; ctx);</span>
+<span id="L270"><span class="lineNum">     270</span>              : </span>
+<span id="L271"><span class="lineNum">     271</span>              :     static void layoutGroupBracket(Bracket* item, const Context&amp; ctx);</span>
+<span id="L272"><span class="lineNum">     272</span>              : };</span>
+<span id="L273"><span class="lineNum">     273</span>              : }</span>
+<span id="L274"><span class="lineNum">     274</span>              : </span>
+<span id="L275"><span class="lineNum">     275</span>              : #endif // MU_ENGRAVING_SINGLELAYOUT_H</span>
         </pre>
               </td>
             </tr>

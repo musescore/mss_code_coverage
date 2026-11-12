@@ -31,13 +31,13 @@
             <td class="headerValue">filtered_coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">63.8&nbsp;%</td>
-            <td class="headerCovTableEntry">141</td>
-            <td class="headerCovTableEntry">90</td>
+            <td class="headerCovTableEntryLo">64.3&nbsp;%</td>
+            <td class="headerCovTableEntry">143</td>
+            <td class="headerCovTableEntry">92</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -265,75 +265,77 @@
 <span id="L207"><span class="lineNum">     207</span>              : </span>
 <span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">          14 :         StaffType* staffType = staff-&gt;staffType(e-&gt;tick());</span></span>
 <span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">          14 :         StaffGroup staffGroup = staffType-&gt;group();</span></span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">          14 :         if (ClefInfo::staffGroup(ct) != staffGroup &amp;&amp; !forInstrumentChange) {</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
-<span id="L212"><span class="lineNum">     212</span>              :         }</span>
-<span id="L213"><span class="lineNum">     213</span>              : </span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC tlaBgGNC">          14 :         if (clef) {</span></span>
-<span id="L215"><span class="lineNum">     215</span>              :             //</span>
-<span id="L216"><span class="lineNum">     216</span>              :             // for transposing instruments, differentiate</span>
-<span id="L217"><span class="lineNum">     217</span>              :             // clef type for concertPitch</span>
-<span id="L218"><span class="lineNum">     218</span>              :             //</span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">           2 :             Instrument* i = staff-&gt;part()-&gt;instrument(tick);</span></span>
-<span id="L220"><span class="lineNum">     220</span>              :             ClefType cp, tp;</span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">           2 :             if (i-&gt;transpose().isZero()) {</span></span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">           2 :                 cp = ct;</span></span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">           2 :                 tp = ct;</span></span>
-<span id="L224"><span class="lineNum">     224</span>              :             } else {</span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaUNC tlaBgUNC">           0 :                 if (concertPitch) {</span></span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaUNC">           0 :                     cp = ct;</span></span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaUNC">           0 :                     tp = clef-&gt;transposingClef();</span></span>
-<span id="L228"><span class="lineNum">     228</span>              :                 } else {</span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaUNC">           0 :                     cp = clef-&gt;concertClef();</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 :                     tp = ct;</span></span>
-<span id="L231"><span class="lineNum">     231</span>              :                 }</span>
-<span id="L232"><span class="lineNum">     232</span>              :             }</span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC tlaBgGNC">           2 :             clef-&gt;setGenerated(false);</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">           2 :             staffScore-&gt;undo(new ChangeClefType(clef, cp, tp));</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">           2 :             Clef* oClef = clef-&gt;otherClef();</span></span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">           2 :             if (oClef &amp;&amp; !(oClef-&gt;generated())) {</span></span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC tlaBgUNC">           0 :                 staffScore-&gt;undo(new ChangeClefType(oClef, cp, tp));</span></span>
-<span id="L238"><span class="lineNum">     238</span>              :             }</span>
-<span id="L239"><span class="lineNum">     239</span>              :             // change the clef in the mmRest if any</span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC tlaBgGNC">           2 :             if (measure-&gt;hasMMRest()) {</span></span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC tlaBgUNC">           0 :                 Measure* mmMeasure = measure-&gt;mmRest();</span></span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaUNC">           0 :                 Segment* mmDestSeg = mmMeasure-&gt;findSegment(SegmentType::Clef, tick);</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaUNC">           0 :                 if (mmDestSeg) {</span></span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaUNC">           0 :                     Clef* mmClef = toClef(mmDestSeg-&gt;element(clef-&gt;track()));</span></span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC">           0 :                     if (mmClef) {</span></span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaUNC">           0 :                         staffScore-&gt;undo(new ChangeClefType(mmClef, cp, tp));</span></span>
-<span id="L247"><span class="lineNum">     247</span>              :                     }</span>
-<span id="L248"><span class="lineNum">     248</span>              :                 }</span>
-<span id="L249"><span class="lineNum">     249</span>              :             }</span>
-<span id="L250"><span class="lineNum">     250</span>              :         } else {</span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC tlaBgGNC">          12 :             if (gclef) {</span></span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaUNC tlaBgUNC">           0 :                 clef = toClef(gclef-&gt;linkedClone());</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC">           0 :                 clef-&gt;setScore(staffScore);</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC">           0 :                 clef-&gt;setOwnershipParent(destSeg);</span></span>
-<span id="L255"><span class="lineNum">     255</span>              :             } else {</span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC tlaBgGNC">          12 :                 clef = Factory::createClef(destSeg);</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">          12 :                 clef-&gt;setClefType(ct);</span></span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">          12 :                 gclef = clef;</span></span>
-<span id="L259"><span class="lineNum">     259</span>              :             }</span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">          12 :             clef-&gt;setTrack(track);</span></span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">          12 :             staffScore-&gt;doUndoAddElement(clef);</span></span>
-<span id="L262"><span class="lineNum">     262</span>              :         }</span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">          14 :         if (forInstrumentChange) {</span></span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC tlaBgUNC">           0 :             clef-&gt;setForInstrumentChange(true);</span></span>
-<span id="L265"><span class="lineNum">     265</span>              :         }</span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC tlaBgGNC">          14 :         clef-&gt;setSmall(isSmall);</span></span>
-<span id="L267"><span class="lineNum">     267</span>              : </span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">          14 :         if (clefToRelink) {</span></span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">           1 :             LinkedObjects* links = clef-&gt;links();</span></span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">           1 :             if (!links) {</span></span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">           1 :                 clef-&gt;linkTo(clefToRelink);</span></span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaUNC tlaBgUNC">           0 :             } else if (!clef-&gt;isLinked(clefToRelink)) {</span></span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaUNC">           0 :                 clefToRelink-&gt;setLinks(links);</span></span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaUNC">           0 :                 links-&gt;push_back(clefToRelink);</span></span>
-<span id="L275"><span class="lineNum">     275</span>              :             }</span>
-<span id="L276"><span class="lineNum">     276</span>              :         }</span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC tlaBgGNC">          14 :     }</span></span>
-<span id="L278"><span class="lineNum">     278</span>              : }</span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">          14 :         const StaffGroup clefStaffGroup = ClefInfo::staffGroup(ct);</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          14 :         const bool compatibleJianpuClef = staffGroup == StaffGroup::JIANPU &amp;&amp; clefStaffGroup == StaffGroup::STANDARD;</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">          14 :         if (clefStaffGroup != staffGroup &amp;&amp; !compatibleJianpuClef &amp;&amp; !forInstrumentChange) {</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC tlaBgUNC">           0 :             continue;</span></span>
+<span id="L214"><span class="lineNum">     214</span>              :         }</span>
+<span id="L215"><span class="lineNum">     215</span>              : </span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC tlaBgGNC">          14 :         if (clef) {</span></span>
+<span id="L217"><span class="lineNum">     217</span>              :             //</span>
+<span id="L218"><span class="lineNum">     218</span>              :             // for transposing instruments, differentiate</span>
+<span id="L219"><span class="lineNum">     219</span>              :             // clef type for concertPitch</span>
+<span id="L220"><span class="lineNum">     220</span>              :             //</span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">           2 :             Instrument* i = staff-&gt;part()-&gt;instrument(tick);</span></span>
+<span id="L222"><span class="lineNum">     222</span>              :             ClefType cp, tp;</span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">           2 :             if (i-&gt;transpose().isZero()) {</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">           2 :                 cp = ct;</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">           2 :                 tp = ct;</span></span>
+<span id="L226"><span class="lineNum">     226</span>              :             } else {</span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaUNC tlaBgUNC">           0 :                 if (concertPitch) {</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaUNC">           0 :                     cp = ct;</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaUNC">           0 :                     tp = clef-&gt;transposingClef();</span></span>
+<span id="L230"><span class="lineNum">     230</span>              :                 } else {</span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaUNC">           0 :                     cp = clef-&gt;concertClef();</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 :                     tp = ct;</span></span>
+<span id="L233"><span class="lineNum">     233</span>              :                 }</span>
+<span id="L234"><span class="lineNum">     234</span>              :             }</span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC tlaBgGNC">           2 :             clef-&gt;setGenerated(false);</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">           2 :             staffScore-&gt;undo(new ChangeClefType(clef, cp, tp));</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">           2 :             Clef* oClef = clef-&gt;otherClef();</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">           2 :             if (oClef &amp;&amp; !(oClef-&gt;generated())) {</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC tlaBgUNC">           0 :                 staffScore-&gt;undo(new ChangeClefType(oClef, cp, tp));</span></span>
+<span id="L240"><span class="lineNum">     240</span>              :             }</span>
+<span id="L241"><span class="lineNum">     241</span>              :             // change the clef in the mmRest if any</span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC tlaBgGNC">           2 :             if (measure-&gt;hasMMRest()) {</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaUNC tlaBgUNC">           0 :                 Measure* mmMeasure = measure-&gt;mmRest();</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaUNC">           0 :                 Segment* mmDestSeg = mmMeasure-&gt;findSegment(SegmentType::Clef, tick);</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC">           0 :                 if (mmDestSeg) {</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaUNC">           0 :                     Clef* mmClef = toClef(mmDestSeg-&gt;element(clef-&gt;track()));</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaUNC">           0 :                     if (mmClef) {</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaUNC">           0 :                         staffScore-&gt;undo(new ChangeClefType(mmClef, cp, tp));</span></span>
+<span id="L249"><span class="lineNum">     249</span>              :                     }</span>
+<span id="L250"><span class="lineNum">     250</span>              :                 }</span>
+<span id="L251"><span class="lineNum">     251</span>              :             }</span>
+<span id="L252"><span class="lineNum">     252</span>              :         } else {</span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC tlaBgGNC">          12 :             if (gclef) {</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC tlaBgUNC">           0 :                 clef = toClef(gclef-&gt;linkedClone());</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaUNC">           0 :                 clef-&gt;setScore(staffScore);</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaUNC">           0 :                 clef-&gt;setOwnershipParent(destSeg);</span></span>
+<span id="L257"><span class="lineNum">     257</span>              :             } else {</span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC tlaBgGNC">          12 :                 clef = Factory::createClef(destSeg);</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">          12 :                 clef-&gt;setClefType(ct);</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">          12 :                 gclef = clef;</span></span>
+<span id="L261"><span class="lineNum">     261</span>              :             }</span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">          12 :             clef-&gt;setTrack(track);</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">          12 :             staffScore-&gt;doUndoAddElement(clef);</span></span>
+<span id="L264"><span class="lineNum">     264</span>              :         }</span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">          14 :         if (forInstrumentChange) {</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaUNC tlaBgUNC">           0 :             clef-&gt;setForInstrumentChange(true);</span></span>
+<span id="L267"><span class="lineNum">     267</span>              :         }</span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC tlaBgGNC">          14 :         clef-&gt;setSmall(isSmall);</span></span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">          14 :         if (clefToRelink) {</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">           1 :             LinkedObjects* links = clef-&gt;links();</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">           1 :             if (!links) {</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">           1 :                 clef-&gt;linkTo(clefToRelink);</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaUNC tlaBgUNC">           0 :             } else if (!clef-&gt;isLinked(clefToRelink)) {</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaUNC">           0 :                 clefToRelink-&gt;setLinks(links);</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaUNC">           0 :                 links-&gt;push_back(clefToRelink);</span></span>
+<span id="L277"><span class="lineNum">     277</span>              :             }</span>
+<span id="L278"><span class="lineNum">     278</span>              :         }</span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC tlaBgGNC">          14 :     }</span></span>
+<span id="L280"><span class="lineNum">     280</span>              : }</span>
         </pre>
               </td>
             </tr>

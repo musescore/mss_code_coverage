@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -91,52 +91,57 @@
 <span id="L33"><span class="lineNum">      33</span>              :     GlobalInject&lt;IApplication&gt; application;</span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span>              : public:</span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC tlaBgGNC">          46 :     GlobalConfiguration() {}</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC tlaBgGNC">          47 :     GlobalConfiguration() {}</span></span>
 <span id="L37"><span class="lineNum">      37</span>              : </span>
 <span id="L38"><span class="lineNum">      38</span>              :     void init();</span>
 <span id="L39"><span class="lineNum">      39</span>              : </span>
-<span id="L40"><span class="lineNum">      40</span>              :     io::path_t appBinPath() const override;</span>
-<span id="L41"><span class="lineNum">      41</span>              :     io::path_t appBinDirPath() const override;</span>
-<span id="L42"><span class="lineNum">      42</span>              :     io::path_t appDataPath() const override;</span>
-<span id="L43"><span class="lineNum">      43</span>              :     io::path_t appConfigPath() const override;</span>
-<span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span>              :     bool isBundledWithApp(const io::path_t&amp; path) const override;</span>
-<span id="L46"><span class="lineNum">      46</span>              :     io::path_t toBundledPath(const io::path_t&amp; path) const override;</span>
-<span id="L47"><span class="lineNum">      47</span>              :     bool isBundledPath(const io::path_t&amp; path) const override;</span>
-<span id="L48"><span class="lineNum">      48</span>              :     io::path_t fromBundledPath(const io::path_t&amp; path) const override;</span>
-<span id="L49"><span class="lineNum">      49</span>              : </span>
-<span id="L50"><span class="lineNum">      50</span>              :     io::path_t userAppDataPath() const override;</span>
-<span id="L51"><span class="lineNum">      51</span>              :     io::path_t userBackupPath() const override;</span>
-<span id="L52"><span class="lineNum">      52</span>              :     io::path_t userDataPath() const override;</span>
-<span id="L53"><span class="lineNum">      53</span>              : </span>
-<span id="L54"><span class="lineNum">      54</span>              :     io::path_t homePath() const override;</span>
-<span id="L55"><span class="lineNum">      55</span>              :     io::path_t downloadsPath() const override;</span>
-<span id="L56"><span class="lineNum">      56</span>              :     io::path_t documentsPath() const override;</span>
-<span id="L57"><span class="lineNum">      57</span>              : </span>
-<span id="L58"><span class="lineNum">      58</span>              :     bool useFactorySettings() const override;</span>
-<span id="L59"><span class="lineNum">      59</span>              :     bool enableExperimental() const override;</span>
-<span id="L60"><span class="lineNum">      60</span>              :     io::path_t genericDataPath() const override;</span>
-<span id="L61"><span class="lineNum">      61</span>              : </span>
-<span id="L62"><span class="lineNum">      62</span>              :     bool devModeEnabled() const override;</span>
-<span id="L63"><span class="lineNum">      63</span>              :     void setDevModeEnabled(bool enabled) override;</span>
+<span id="L40"><span class="lineNum">      40</span>              :     //! NOTE Use the given directory for all user data instead of the default locations</span>
+<span id="L41"><span class="lineNum">      41</span>              :     void setUserDataDir(const io::path_t&amp; dir);</span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span>              :     io::path_t appBinPath() const override;</span>
+<span id="L44"><span class="lineNum">      44</span>              :     io::path_t appBinDirPath() const override;</span>
+<span id="L45"><span class="lineNum">      45</span>              :     io::path_t appDataPath() const override;</span>
+<span id="L46"><span class="lineNum">      46</span>              :     io::path_t appConfigPath() const override;</span>
+<span id="L47"><span class="lineNum">      47</span>              : </span>
+<span id="L48"><span class="lineNum">      48</span>              :     bool isBundledWithApp(const io::path_t&amp; path) const override;</span>
+<span id="L49"><span class="lineNum">      49</span>              :     io::path_t toBundledPath(const io::path_t&amp; path) const override;</span>
+<span id="L50"><span class="lineNum">      50</span>              :     bool isBundledPath(const io::path_t&amp; path) const override;</span>
+<span id="L51"><span class="lineNum">      51</span>              :     io::path_t fromBundledPath(const io::path_t&amp; path) const override;</span>
+<span id="L52"><span class="lineNum">      52</span>              : </span>
+<span id="L53"><span class="lineNum">      53</span>              :     io::path_t userAppDataPath() const override;</span>
+<span id="L54"><span class="lineNum">      54</span>              :     io::path_t userBackupPath() const override;</span>
+<span id="L55"><span class="lineNum">      55</span>              :     io::path_t userDataPath() const override;</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span>              :     io::path_t homePath() const override;</span>
+<span id="L58"><span class="lineNum">      58</span>              :     io::path_t downloadsPath() const override;</span>
+<span id="L59"><span class="lineNum">      59</span>              :     io::path_t documentsPath() const override;</span>
+<span id="L60"><span class="lineNum">      60</span>              : </span>
+<span id="L61"><span class="lineNum">      61</span>              :     bool useFactorySettings() const override;</span>
+<span id="L62"><span class="lineNum">      62</span>              :     bool enableExperimental() const override;</span>
+<span id="L63"><span class="lineNum">      63</span>              :     io::path_t genericDataPath() const override;</span>
 <span id="L64"><span class="lineNum">      64</span>              : </span>
-<span id="L65"><span class="lineNum">      65</span>              :     bool metricUnit() const override;</span>
-<span id="L66"><span class="lineNum">      66</span>              :     void setMetricUnit(bool metricUnit) override;</span>
+<span id="L65"><span class="lineNum">      65</span>              :     bool devModeEnabled() const override;</span>
+<span id="L66"><span class="lineNum">      66</span>              :     void setDevModeEnabled(bool enabled) override;</span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
-<span id="L68"><span class="lineNum">      68</span>              :     std::string museHubWebUrl() const override;</span>
-<span id="L69"><span class="lineNum">      69</span>              : </span>
-<span id="L70"><span class="lineNum">      70</span>              :     bool highResolutionTimers() const override;</span>
-<span id="L71"><span class="lineNum">      71</span>              : </span>
-<span id="L72"><span class="lineNum">      72</span>              : private:</span>
-<span id="L73"><span class="lineNum">      73</span>              :     QString resolveAppDataPath() const;</span>
-<span id="L74"><span class="lineNum">      74</span>              :     QString resolveUserAppDataPath() const;</span>
-<span id="L75"><span class="lineNum">      75</span>              : </span>
-<span id="L76"><span class="lineNum">      76</span>              :     mutable io::path_t m_appDataPath;</span>
-<span id="L77"><span class="lineNum">      77</span>              :     mutable io::path_t m_userAppDataPath;</span>
-<span id="L78"><span class="lineNum">      78</span>              : };</span>
-<span id="L79"><span class="lineNum">      79</span>              : }</span>
-<span id="L80"><span class="lineNum">      80</span>              : </span>
-<span id="L81"><span class="lineNum">      81</span>              : #endif // MUSE_GLOBAL_GLOBALCONFIGURATION_H</span>
+<span id="L68"><span class="lineNum">      68</span>              :     bool metricUnit() const override;</span>
+<span id="L69"><span class="lineNum">      69</span>              :     void setMetricUnit(bool metricUnit) override;</span>
+<span id="L70"><span class="lineNum">      70</span>              : </span>
+<span id="L71"><span class="lineNum">      71</span>              :     std::string museHubWebUrl() const override;</span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span>              :     bool highResolutionTimers() const override;</span>
+<span id="L74"><span class="lineNum">      74</span>              : </span>
+<span id="L75"><span class="lineNum">      75</span>              : private:</span>
+<span id="L76"><span class="lineNum">      76</span>              :     QString resolveAppDataPath() const;</span>
+<span id="L77"><span class="lineNum">      77</span>              :     QString resolveUserAppDataPath() const;</span>
+<span id="L78"><span class="lineNum">      78</span>              : </span>
+<span id="L79"><span class="lineNum">      79</span>              :     mutable io::path_t m_appDataPath;</span>
+<span id="L80"><span class="lineNum">      80</span>              :     mutable io::path_t m_userAppDataPath;</span>
+<span id="L81"><span class="lineNum">      81</span>              :     mutable io::path_t m_userDataPath;</span>
+<span id="L82"><span class="lineNum">      82</span>              :     io::path_t m_userDataDir;</span>
+<span id="L83"><span class="lineNum">      83</span>              : };</span>
+<span id="L84"><span class="lineNum">      84</span>              : }</span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span>              : #endif // MUSE_GLOBAL_GLOBALCONFIGURATION_H</span>
         </pre>
               </td>
             </tr>

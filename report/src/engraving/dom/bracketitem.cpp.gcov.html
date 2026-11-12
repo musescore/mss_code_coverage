@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -89,12 +89,12 @@
 <span id="L31"><span class="lineNum">      31</span>              : using namespace mu;</span>
 <span id="L32"><span class="lineNum">      32</span>              : </span>
 <span id="L33"><span class="lineNum">      33</span>              : namespace mu::engraving {</span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC tlaBgGNC">         943 : BracketItem::BracketItem(DummyParentOr&lt;EngravingItem&gt; parent)</span></span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">         943 :     : EngravingItem(ElementType::BRACKET_ITEM, parent)</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC tlaBgGNC">        1053 : BracketItem::BracketItem(DummyParentOr&lt;Staff&gt; parent)</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">        1053 :     : EngravingItem(ElementType::BRACKET_ITEM, parent)</span></span>
 <span id="L36"><span class="lineNum">      36</span>              : {</span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">         943 : }</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">        1053 : }</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : </span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           3 : BracketItem::BracketItem(DummyParentOr&lt;EngravingItem&gt; parent, BracketType bracketType, size_t span)</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           3 : BracketItem::BracketItem(DummyParentOr&lt;Staff&gt; parent, BracketType bracketType, size_t span)</span></span>
 <span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           3 :     : EngravingItem(ElementType::BRACKET_ITEM, parent), m_bracketType(bracketType), m_bracketSpan(span)</span></span>
 <span id="L41"><span class="lineNum">      41</span>              : {</span>
 <span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           3 : }</span></span>
@@ -109,15 +109,15 @@
 <span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           3 :     return score() ? score()-&gt;staff(m_startStaffIdx) : nullptr;</span></span>
 <span id="L52"><span class="lineNum">      52</span>              : }</span>
 <span id="L53"><span class="lineNum">      53</span>              : </span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">         624 : PropertyValue BracketItem::getProperty(Pid id) const</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">         633 : PropertyValue BracketItem::getProperty(Pid id) const</span></span>
 <span id="L55"><span class="lineNum">      55</span>              : {</span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">         624 :     switch (id) {</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">         633 :     switch (id) {</span></span>
 <span id="L57"><span class="lineNum">      57</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::SYSTEM_BRACKET:</span></span>
 <span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC">           0 :         return int(m_bracketType);</span></span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC tlaBgGNC">         204 :     case Pid::BRACKET_COLUMN:</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">         204 :         return m_column;</span></span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">         213 :     case Pid::BRACKET_SPAN:</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">         213 :         return static_cast&lt;int&gt;(m_bracketSpan);</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC tlaBgGNC">         207 :     case Pid::BRACKET_COLUMN:</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">         207 :         return m_column;</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">         216 :     case Pid::BRACKET_SPAN:</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">         216 :         return static_cast&lt;int&gt;(m_bracketSpan);</span></span>
 <span id="L63"><span class="lineNum">      63</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::STAFF_LONG_NAME:</span></span>
 <span id="L64"><span class="lineNum">      64</span> <span class="tlaUNC">           0 :         return longName();</span></span>
 <span id="L65"><span class="lineNum">      65</span> <span class="tlaUNC">           0 :     case Pid::STAFF_SHORT_NAME:</span></span>
@@ -126,23 +126,23 @@
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaUNC">           0 :         return m_showText;</span></span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaUNC">           0 :     case Pid::GROUP_BRACKET_SHOW_BRACKET:</span></span>
 <span id="L70"><span class="lineNum">      70</span> <span class="tlaUNC">           0 :         return m_showBracket;</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC tlaBgGNC">         207 :     default:</span></span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">         207 :         return EngravingItem::getProperty(id);</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC tlaBgGNC">         210 :     default:</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">         210 :         return EngravingItem::getProperty(id);</span></span>
 <span id="L73"><span class="lineNum">      73</span>              :     }</span>
 <span id="L74"><span class="lineNum">      74</span>              : }</span>
 <span id="L75"><span class="lineNum">      75</span>              : </span>
-<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">          41 : bool BracketItem::setProperty(Pid id, const PropertyValue&amp; v)</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">          82 : bool BracketItem::setProperty(Pid id, const PropertyValue&amp; v)</span></span>
 <span id="L77"><span class="lineNum">      77</span>              : {</span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">          41 :     switch (id) {</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">          82 :     switch (id) {</span></span>
 <span id="L79"><span class="lineNum">      79</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::SYSTEM_BRACKET:</span></span>
 <span id="L80"><span class="lineNum">      80</span> <span class="tlaUNC">           0 :         EditStaffBrackets::setBracketType(score(), startStaffIdx(), column(), BracketType(v.toInt())); // change bracket type global</span></span>
 <span id="L81"><span class="lineNum">      81</span> <span class="tlaUNC">           0 :         break;</span></span>
 <span id="L82"><span class="lineNum">      82</span> <span class="tlaUNC">           0 :     case Pid::BRACKET_COLUMN:</span></span>
 <span id="L83"><span class="lineNum">      83</span> <span class="tlaUNC">           0 :         EditStaffBrackets::changeBracketColumn(score(), startStaffIdx(), column(), static_cast&lt;size_t&gt;(v.toInt()));</span></span>
 <span id="L84"><span class="lineNum">      84</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC tlaBgGNC">          41 :     case Pid::BRACKET_SPAN:</span></span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">          41 :         m_bracketSpan = static_cast&lt;size_t&gt;(v.toInt());</span></span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">          41 :         break;</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC tlaBgGNC">          82 :     case Pid::BRACKET_SPAN:</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">          82 :         m_bracketSpan = static_cast&lt;size_t&gt;(v.toInt());</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">          82 :         break;</span></span>
 <span id="L88"><span class="lineNum">      88</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::VISIBLE:</span></span>
 <span id="L89"><span class="lineNum">      89</span> <span class="tlaUNC">           0 :         setVisible(v.toBool());</span></span>
 <span id="L90"><span class="lineNum">      90</span> <span class="tlaUNC">           0 :         break;</span></span>
@@ -161,13 +161,13 @@
 <span id="L103"><span class="lineNum">     103</span> <span class="tlaUNC">           0 :     default:</span></span>
 <span id="L104"><span class="lineNum">     104</span> <span class="tlaUNC">           0 :         return EngravingItem::setProperty(id, v);</span></span>
 <span id="L105"><span class="lineNum">     105</span>              :     }</span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC tlaBgGNC">          41 :     score()-&gt;setLayoutAll();</span></span>
-<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">          41 :     return true;</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC tlaBgGNC">          82 :     score()-&gt;setLayoutAll();</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">          82 :     return true;</span></span>
 <span id="L108"><span class="lineNum">     108</span>              : }</span>
 <span id="L109"><span class="lineNum">     109</span>              : </span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">         204 : PropertyValue BracketItem::propertyDefault(Pid id) const</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">         207 : PropertyValue BracketItem::propertyDefault(Pid id) const</span></span>
 <span id="L111"><span class="lineNum">     111</span>              : {</span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">         204 :     switch (id) {</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">         207 :     switch (id) {</span></span>
 <span id="L113"><span class="lineNum">     113</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::SYSTEM_BRACKET:</span></span>
 <span id="L114"><span class="lineNum">     114</span> <span class="tlaUNC">           0 :         return int(BracketType::NORMAL);</span></span>
 <span id="L115"><span class="lineNum">     115</span> <span class="tlaUNC">           0 :     case Pid::BRACKET_COLUMN:</span></span>
@@ -179,8 +179,8 @@
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaUNC">           0 :     case Pid::GROUP_BRACKET_SHOW_TEXT:</span></span>
 <span id="L122"><span class="lineNum">     122</span>              :     case Pid::GROUP_BRACKET_SHOW_BRACKET:</span>
 <span id="L123"><span class="lineNum">     123</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC tlaBgGNC">         204 :     default:</span></span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">         204 :         return EngravingItem::propertyDefault(id);</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC tlaBgGNC">         207 :     default:</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">         207 :         return EngravingItem::propertyDefault(id);</span></span>
 <span id="L126"><span class="lineNum">     126</span>              :     }</span>
 <span id="L127"><span class="lineNum">     127</span>              : }</span>
 <span id="L128"><span class="lineNum">     128</span>              : </span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -86,66 +86,68 @@
 <span id="L28"><span class="lineNum">      28</span>              : #include &quot;interactive/iinteractive.h&quot;</span>
 <span id="L29"><span class="lineNum">      29</span>              : </span>
 <span id="L30"><span class="lineNum">      30</span>              : #include &quot;engraving/dom/stafftype.h&quot;</span>
-<span id="L31"><span class="lineNum">      31</span>              : </span>
-<span id="L32"><span class="lineNum">      32</span>              : namespace mu::engraving {</span>
-<span id="L33"><span class="lineNum">      33</span>              : class Instrument;</span>
-<span id="L34"><span class="lineNum">      34</span>              : }</span>
-<span id="L35"><span class="lineNum">      35</span>              : </span>
-<span id="L36"><span class="lineNum">      36</span>              : namespace mu::notation {</span>
-<span id="L37"><span class="lineNum">      37</span>              : class EditStaffType : public QDialog, private Ui::EditStaffType, public muse::Contextable</span>
-<span id="L38"><span class="lineNum">      38</span>              : {</span>
-<span id="L39"><span class="lineNum">      39</span>              :     Q_OBJECT</span>
-<span id="L40"><span class="lineNum">      40</span>              : </span>
-<span id="L41"><span class="lineNum">      41</span>              :     muse::ContextInject&lt;muse::IInteractive&gt; interactive = { this };</span>
-<span id="L42"><span class="lineNum">      42</span>              : </span>
-<span id="L43"><span class="lineNum">      43</span>              :     mu::engraving::StaffType staffType;</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;notation/inotationconfiguration.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : </span>
+<span id="L33"><span class="lineNum">      33</span>              : namespace mu::engraving {</span>
+<span id="L34"><span class="lineNum">      34</span>              : class Instrument;</span>
+<span id="L35"><span class="lineNum">      35</span>              : }</span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span>              : namespace mu::notation {</span>
+<span id="L38"><span class="lineNum">      38</span>              : class EditStaffType : public QDialog, private Ui::EditStaffType, public muse::Contextable</span>
+<span id="L39"><span class="lineNum">      39</span>              : {</span>
+<span id="L40"><span class="lineNum">      40</span>              :     Q_OBJECT</span>
+<span id="L41"><span class="lineNum">      41</span>              : </span>
+<span id="L42"><span class="lineNum">      42</span>              :     muse::ContextInject&lt;muse::IInteractive&gt; interactive = { this };</span>
+<span id="L43"><span class="lineNum">      43</span>              :     muse::GlobalInject&lt;INotationConfiguration&gt; notationConfiguration;</span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span>              :     virtual void showEvent(QShowEvent*);</span>
-<span id="L46"><span class="lineNum">      46</span>              :     virtual void hideEvent(QHideEvent*);</span>
-<span id="L47"><span class="lineNum">      47</span>              :     void blockSignals(bool block);</span>
-<span id="L48"><span class="lineNum">      48</span>              : </span>
-<span id="L49"><span class="lineNum">      49</span>              :     void setFromDlg();</span>
+<span id="L45"><span class="lineNum">      45</span>              :     mu::engraving::StaffType staffType;</span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span>              :     virtual void showEvent(QShowEvent*);</span>
+<span id="L48"><span class="lineNum">      48</span>              :     virtual void hideEvent(QHideEvent*);</span>
+<span id="L49"><span class="lineNum">      49</span>              :     void blockSignals(bool block);</span>
 <span id="L50"><span class="lineNum">      50</span>              : </span>
-<span id="L51"><span class="lineNum">      51</span>              :     void tabStemsCompatibility(bool checked);</span>
-<span id="L52"><span class="lineNum">      52</span>              :     void tabMinimShortCompatibility(bool checked);</span>
-<span id="L53"><span class="lineNum">      53</span>              :     void tabStemThroughCompatibility(bool checked);</span>
-<span id="L54"><span class="lineNum">      54</span>              :     QString createUniqueStaffTypeName(mu::engraving::StaffGroup group);</span>
-<span id="L55"><span class="lineNum">      55</span>              :     void setValues();</span>
-<span id="L56"><span class="lineNum">      56</span>              : </span>
-<span id="L57"><span class="lineNum">      57</span>              : private slots:</span>
-<span id="L58"><span class="lineNum">      58</span>              :     void nameEdited(const QString&amp;);</span>
-<span id="L59"><span class="lineNum">      59</span>              :     void durFontNameChanged(int idx);</span>
-<span id="L60"><span class="lineNum">      60</span>              :     void fretFontNameChanged(int idx);</span>
-<span id="L61"><span class="lineNum">      61</span>              :     void textStylesToggled(bool checked);</span>
-<span id="L62"><span class="lineNum">      62</span>              :     void presetsToggled(bool checked);</span>
-<span id="L63"><span class="lineNum">      63</span>              :     void tabStemThroughToggled(bool checked);</span>
-<span id="L64"><span class="lineNum">      64</span>              :     void tabMinimShortToggled(bool checked);</span>
-<span id="L65"><span class="lineNum">      65</span>              :     void tabStemsToggled(bool checked);</span>
-<span id="L66"><span class="lineNum">      66</span>              :     void updatePreview();</span>
-<span id="L67"><span class="lineNum">      67</span>              : </span>
-<span id="L68"><span class="lineNum">      68</span>              :     void savePresets();</span>
-<span id="L69"><span class="lineNum">      69</span>              :     void loadPresets();</span>
-<span id="L70"><span class="lineNum">      70</span>              :     void resetToTemplateClicked();</span>
-<span id="L71"><span class="lineNum">      71</span>              :     void addToTemplatesClicked();</span>
-<span id="L72"><span class="lineNum">      72</span>              : </span>
-<span id="L73"><span class="lineNum">      73</span>              : public:</span>
-<span id="L74"><span class="lineNum">      74</span>              :     EditStaffType(const muse::modularity::ContextPtr&amp; ctx, QWidget* parent = nullptr);</span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaUNC tlaBgUNC">           0 :     ~EditStaffType() {}</span></span>
-<span id="L76"><span class="lineNum">      76</span>              :     void setStaffType(const mu::engraving::StaffType* staffType);</span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaUNC">           0 :     mu::engraving::StaffType getStaffType() const { return staffType; }</span></span>
-<span id="L78"><span class="lineNum">      78</span>              : </span>
-<span id="L79"><span class="lineNum">      79</span>              :     void setInstrument(const engraving::Instrument&amp; instrument);</span>
+<span id="L51"><span class="lineNum">      51</span>              :     void setFromDlg();</span>
+<span id="L52"><span class="lineNum">      52</span>              : </span>
+<span id="L53"><span class="lineNum">      53</span>              :     void tabStemsCompatibility(bool checked);</span>
+<span id="L54"><span class="lineNum">      54</span>              :     void tabMinimShortCompatibility(bool checked);</span>
+<span id="L55"><span class="lineNum">      55</span>              :     void tabStemThroughCompatibility(bool checked);</span>
+<span id="L56"><span class="lineNum">      56</span>              :     QString createUniqueStaffTypeName(mu::engraving::StaffGroup group);</span>
+<span id="L57"><span class="lineNum">      57</span>              :     void setValues();</span>
+<span id="L58"><span class="lineNum">      58</span>              : </span>
+<span id="L59"><span class="lineNum">      59</span>              : private slots:</span>
+<span id="L60"><span class="lineNum">      60</span>              :     void nameEdited(const QString&amp;);</span>
+<span id="L61"><span class="lineNum">      61</span>              :     void durFontNameChanged(int idx);</span>
+<span id="L62"><span class="lineNum">      62</span>              :     void fretFontNameChanged(int idx);</span>
+<span id="L63"><span class="lineNum">      63</span>              :     void textStylesToggled(bool checked);</span>
+<span id="L64"><span class="lineNum">      64</span>              :     void presetsToggled(bool checked);</span>
+<span id="L65"><span class="lineNum">      65</span>              :     void tabStemThroughToggled(bool checked);</span>
+<span id="L66"><span class="lineNum">      66</span>              :     void tabMinimShortToggled(bool checked);</span>
+<span id="L67"><span class="lineNum">      67</span>              :     void tabStemsToggled(bool checked);</span>
+<span id="L68"><span class="lineNum">      68</span>              :     void updatePreview();</span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span>              :     void savePresets();</span>
+<span id="L71"><span class="lineNum">      71</span>              :     void loadPresets();</span>
+<span id="L72"><span class="lineNum">      72</span>              :     void resetToTemplateClicked();</span>
+<span id="L73"><span class="lineNum">      73</span>              :     void addToTemplatesClicked();</span>
+<span id="L74"><span class="lineNum">      74</span>              : </span>
+<span id="L75"><span class="lineNum">      75</span>              : public:</span>
+<span id="L76"><span class="lineNum">      76</span>              :     EditStaffType(const muse::modularity::ContextPtr&amp; ctx, QWidget* parent = nullptr);</span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaUNC tlaBgUNC">           0 :     ~EditStaffType() {}</span></span>
+<span id="L78"><span class="lineNum">      78</span>              :     void setStaffType(const mu::engraving::StaffType* staffType);</span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaUNC">           0 :     mu::engraving::StaffType getStaffType() const { return staffType; }</span></span>
 <span id="L80"><span class="lineNum">      80</span>              : </span>
-<span id="L81"><span class="lineNum">      81</span>              : private:</span>
-<span id="L82"><span class="lineNum">      82</span>              :     muse::Ret loadScore(mu::engraving::MasterScore* score, const muse::io::path_t&amp; path);</span>
-<span id="L83"><span class="lineNum">      83</span>              : </span>
-<span id="L84"><span class="lineNum">      84</span>              :     void enablePresets();</span>
-<span id="L85"><span class="lineNum">      85</span>              :     void enableTextStyles();</span>
-<span id="L86"><span class="lineNum">      86</span>              : </span>
-<span id="L87"><span class="lineNum">      87</span>              :     std::vector&lt;QString&gt; textStyleNames() const;</span>
-<span id="L88"><span class="lineNum">      88</span>              :     engraving::TextStyleType getTextStyle(const QString&amp; name) const;</span>
-<span id="L89"><span class="lineNum">      89</span>              : };</span>
-<span id="L90"><span class="lineNum">      90</span>              : }</span>
+<span id="L81"><span class="lineNum">      81</span>              :     void setInstrument(const engraving::Instrument&amp; instrument);</span>
+<span id="L82"><span class="lineNum">      82</span>              : </span>
+<span id="L83"><span class="lineNum">      83</span>              : private:</span>
+<span id="L84"><span class="lineNum">      84</span>              :     muse::Ret loadScore(mu::engraving::MasterScore* score, const muse::io::path_t&amp; path);</span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span>              :     void enablePresets();</span>
+<span id="L87"><span class="lineNum">      87</span>              :     void enableTextStyles();</span>
+<span id="L88"><span class="lineNum">      88</span>              : </span>
+<span id="L89"><span class="lineNum">      89</span>              :     std::vector&lt;QString&gt; textStyleNames() const;</span>
+<span id="L90"><span class="lineNum">      90</span>              :     engraving::TextStyleType getTextStyle(const QString&amp; name) const;</span>
+<span id="L91"><span class="lineNum">      91</span>              : };</span>
+<span id="L92"><span class="lineNum">      92</span>              : }</span>
         </pre>
               </td>
             </tr>

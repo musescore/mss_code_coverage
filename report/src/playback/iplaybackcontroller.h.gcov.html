@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -109,7 +109,7 @@
 <span id="L51"><span class="lineNum">      51</span> <span class="tlaUNC tlaBgUNC">           0 :     INTERFACE_ID(IPlaybackState)</span></span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span>              : public:</span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC tlaBgGNC">          34 :     virtual ~IPlaybackState() = default;</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC tlaBgGNC">          44 :     virtual ~IPlaybackState() = default;</span></span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
 <span id="L56"><span class="lineNum">      56</span>              :     virtual bool isPlaying() const = 0;</span>
 <span id="L57"><span class="lineNum">      57</span>              :     virtual muse::async::Channel&lt;bool&gt; isPlayingChanged() const = 0;</span>
@@ -123,7 +123,7 @@
 <span id="L65"><span class="lineNum">      65</span> <span class="tlaUNC tlaBgUNC">           0 :     INTERFACE_ID(IPlaybackController)</span></span>
 <span id="L66"><span class="lineNum">      66</span>              : </span>
 <span id="L67"><span class="lineNum">      67</span>              : public:</span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">          21 :     virtual ~IPlaybackController() = default;</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">          31 :     virtual ~IPlaybackController() = default;</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
 <span id="L70"><span class="lineNum">      70</span>              :     virtual bool isPlaybackInited() const = 0;</span>
 <span id="L71"><span class="lineNum">      71</span>              :     virtual muse::async::Channel&lt;bool&gt; playbackInitedChanged() const = 0;</span>
@@ -176,48 +176,51 @@
 <span id="L118"><span class="lineNum">     118</span>              :     virtual const SoloMuteState&amp; trackSoloMuteState(const engraving::InstrumentTrackId&amp; trackId) const = 0;</span>
 <span id="L119"><span class="lineNum">     119</span>              :     virtual void setTrackSoloMuteState(const engraving::InstrumentTrackId&amp; trackId, const SoloMuteState&amp; state) = 0;</span>
 <span id="L120"><span class="lineNum">     120</span>              : </span>
-<span id="L121"><span class="lineNum">     121</span>              :     struct PlayParams {</span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">          15 :         PlayParams() {}</span></span>
+<span id="L121"><span class="lineNum">     121</span>              :     virtual muse::audio::ControlParams currentTrackControlParams(const engraving::InstrumentTrackId&amp; trackId) const = 0;</span>
+<span id="L122"><span class="lineNum">     122</span>              :     virtual muse::audio::ControlParams currentMasterControlParams() const = 0;</span>
 <span id="L123"><span class="lineNum">     123</span>              : </span>
-<span id="L124"><span class="lineNum">     124</span>              :         std::optional&lt;muse::mpe::duration_t&gt; duration; // no duration -&gt; use default</span>
-<span id="L125"><span class="lineNum">     125</span>              :         bool flushSound = true;</span>
-<span id="L126"><span class="lineNum">     126</span>              :     };</span>
-<span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span>              :     virtual void playElements(const std::vector&lt;const engraving::EngravingItem*&gt;&amp; elements,</span>
-<span id="L129"><span class="lineNum">     129</span>              :                               const PlayParams&amp; params = PlayParams(), bool isMidi = false) = 0;</span>
-<span id="L130"><span class="lineNum">     130</span>              :     virtual void playNotes(const engraving::NoteValList&amp; notes, engraving::staff_idx_t staffIdx, const engraving::Segment* segment,</span>
-<span id="L131"><span class="lineNum">     131</span>              :                            const PlayParams&amp; params = PlayParams()) = 0;</span>
-<span id="L132"><span class="lineNum">     132</span>              :     virtual void playMetronome(int tick) = 0;</span>
-<span id="L133"><span class="lineNum">     133</span>              : </span>
-<span id="L134"><span class="lineNum">     134</span>              :     virtual void triggerControllers(const muse::mpe::ControllerChangeEventList&amp; list, engraving::staff_idx_t staffIdx, int tick) = 0;</span>
-<span id="L135"><span class="lineNum">     135</span>              : </span>
-<span id="L136"><span class="lineNum">     136</span>              :     virtual void seekElement(const engraving::EngravingItem* element, bool flushSound = true) = 0;</span>
-<span id="L137"><span class="lineNum">     137</span>              :     virtual void seekBeat(int measureIndex, int beatIndex, bool flushSound = true) = 0;</span>
+<span id="L124"><span class="lineNum">     124</span>              :     struct PlayParams {</span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">          15 :         PlayParams() {}</span></span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span>              :         std::optional&lt;muse::mpe::duration_t&gt; duration; // no duration -&gt; use default</span>
+<span id="L128"><span class="lineNum">     128</span>              :         bool flushSound = true;</span>
+<span id="L129"><span class="lineNum">     129</span>              :     };</span>
+<span id="L130"><span class="lineNum">     130</span>              : </span>
+<span id="L131"><span class="lineNum">     131</span>              :     virtual void playElements(const std::vector&lt;const engraving::EngravingItem*&gt;&amp; elements,</span>
+<span id="L132"><span class="lineNum">     132</span>              :                               const PlayParams&amp; params = PlayParams(), bool isMidi = false) = 0;</span>
+<span id="L133"><span class="lineNum">     133</span>              :     virtual void playNotes(const engraving::NoteValList&amp; notes, engraving::staff_idx_t staffIdx, const engraving::Segment* segment,</span>
+<span id="L134"><span class="lineNum">     134</span>              :                            const PlayParams&amp; params = PlayParams()) = 0;</span>
+<span id="L135"><span class="lineNum">     135</span>              :     virtual void playMetronome(int tick) = 0;</span>
+<span id="L136"><span class="lineNum">     136</span>              : </span>
+<span id="L137"><span class="lineNum">     137</span>              :     virtual void triggerControllers(const muse::mpe::ControllerChangeEventList&amp; list, engraving::staff_idx_t staffIdx, int tick) = 0;</span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
-<span id="L139"><span class="lineNum">     139</span>              :     virtual muse::secs_t totalPlayTime() const = 0;</span>
-<span id="L140"><span class="lineNum">     140</span>              :     virtual muse::async::Notification totalPlayTimeChanged() const = 0;</span>
+<span id="L139"><span class="lineNum">     139</span>              :     virtual void seekElement(const engraving::EngravingItem* element, bool flushSound = true) = 0;</span>
+<span id="L140"><span class="lineNum">     140</span>              :     virtual void seekBeat(int measureIndex, int beatIndex, bool flushSound = true) = 0;</span>
 <span id="L141"><span class="lineNum">     141</span>              : </span>
-<span id="L142"><span class="lineNum">     142</span>              :     virtual const notation::Tempo&amp; currentTempo() const = 0;</span>
-<span id="L143"><span class="lineNum">     143</span>              :     virtual muse::async::Notification currentTempoChanged() const = 0;</span>
+<span id="L142"><span class="lineNum">     142</span>              :     virtual muse::secs_t totalPlayTime() const = 0;</span>
+<span id="L143"><span class="lineNum">     143</span>              :     virtual muse::async::Notification totalPlayTimeChanged() const = 0;</span>
 <span id="L144"><span class="lineNum">     144</span>              : </span>
-<span id="L145"><span class="lineNum">     145</span>              :     virtual engraving::MeasureBeat currentBeat() const = 0;</span>
-<span id="L146"><span class="lineNum">     146</span>              :     virtual muse::audio::secs_t beatToSecs(int measureIndex, int beatIndex) const = 0;</span>
+<span id="L145"><span class="lineNum">     145</span>              :     virtual const notation::Tempo&amp; currentTempo() const = 0;</span>
+<span id="L146"><span class="lineNum">     146</span>              :     virtual muse::async::Notification currentTempoChanged() const = 0;</span>
 <span id="L147"><span class="lineNum">     147</span>              : </span>
-<span id="L148"><span class="lineNum">     148</span>              :     virtual double tempoMultiplier() const = 0;</span>
-<span id="L149"><span class="lineNum">     149</span>              :     virtual void setTempoMultiplier(double multiplier) = 0;</span>
+<span id="L148"><span class="lineNum">     148</span>              :     virtual engraving::MeasureBeat currentBeat() const = 0;</span>
+<span id="L149"><span class="lineNum">     149</span>              :     virtual muse::audio::secs_t beatToSecs(int measureIndex, int beatIndex) const = 0;</span>
 <span id="L150"><span class="lineNum">     150</span>              : </span>
-<span id="L151"><span class="lineNum">     151</span>              :     virtual muse::Progress loadingProgress() const = 0;</span>
-<span id="L152"><span class="lineNum">     152</span>              : </span>
-<span id="L153"><span class="lineNum">     153</span>              :     virtual void applyProfile(const SoundProfileName&amp; profileName) = 0;</span>
-<span id="L154"><span class="lineNum">     154</span>              : </span>
-<span id="L155"><span class="lineNum">     155</span>              :     virtual void setNotation(notation::INotationPtr notation) = 0;</span>
-<span id="L156"><span class="lineNum">     156</span>              :     virtual void setIsExportingAudio(bool exporting) = 0;</span>
+<span id="L151"><span class="lineNum">     151</span>              :     virtual double tempoMultiplier() const = 0;</span>
+<span id="L152"><span class="lineNum">     152</span>              :     virtual void setTempoMultiplier(double multiplier) = 0;</span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span>              :     virtual muse::Progress loadingProgress() const = 0;</span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span>              :     virtual void applyProfile(const SoundProfileName&amp; profileName) = 0;</span>
 <span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span>              :     virtual const std::map&lt;muse::audio::TrackId, muse::audio::AudioResourceMeta&gt;&amp; onlineSounds() const = 0;</span>
-<span id="L159"><span class="lineNum">     159</span>              :     virtual muse::async::Notification onlineSoundsChanged() const = 0;</span>
-<span id="L160"><span class="lineNum">     160</span>              :     virtual muse::Progress onlineSoundsProcessingProgress() const = 0;</span>
-<span id="L161"><span class="lineNum">     161</span>              : };</span>
-<span id="L162"><span class="lineNum">     162</span>              : }</span>
+<span id="L158"><span class="lineNum">     158</span>              :     virtual void setNotation(notation::INotationPtr notation) = 0;</span>
+<span id="L159"><span class="lineNum">     159</span>              :     virtual void setIsExportingAudio(bool exporting) = 0;</span>
+<span id="L160"><span class="lineNum">     160</span>              : </span>
+<span id="L161"><span class="lineNum">     161</span>              :     virtual const std::map&lt;muse::audio::TrackId, muse::audio::AudioResourceMeta&gt;&amp; onlineSounds() const = 0;</span>
+<span id="L162"><span class="lineNum">     162</span>              :     virtual muse::async::Notification onlineSoundsChanged() const = 0;</span>
+<span id="L163"><span class="lineNum">     163</span>              :     virtual muse::Progress onlineSoundsProcessingProgress() const = 0;</span>
+<span id="L164"><span class="lineNum">     164</span>              : };</span>
+<span id="L165"><span class="lineNum">     165</span>              : }</span>
         </pre>
               </td>
             </tr>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -95,54 +95,55 @@
 <span id="L37"><span class="lineNum">      37</span>              : </span>
 <span id="L38"><span class="lineNum">      38</span>              : class BracketItem final : public EngravingItem</span>
 <span id="L39"><span class="lineNum">      39</span>              : {</span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC tlaBgGNC">        1766 :     OBJECT_ALLOCATOR(engraving, BracketItem)</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC tlaBgGNC">        1986 :     OBJECT_ALLOCATOR(engraving, BracketItem)</span></span>
 <span id="L41"><span class="lineNum">      41</span>              : </span>
 <span id="L42"><span class="lineNum">      42</span>              : public:</span>
 <span id="L43"><span class="lineNum">      43</span>              :     EngravingItem* clone() const override;</span>
-<span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span>              :     PropertyValue getProperty(Pid) const override;</span>
-<span id="L46"><span class="lineNum">      46</span>              :     bool setProperty(Pid, const PropertyValue&amp;) override;</span>
-<span id="L47"><span class="lineNum">      47</span>              :     PropertyValue propertyDefault(Pid id) const override;</span>
-<span id="L48"><span class="lineNum">      48</span>              : </span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        6986 :     size_t bracketSpan() const { return m_bracketSpan; }</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       45463 :     BracketType bracketType() const { return m_bracketType; }</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">         580 :     void setBracketSpan(size_t v) { m_bracketSpan = v; }</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">         700 :     void setBracketType(BracketType v) { m_bracketType = v; }</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           1 :     staff_idx_t startStaffIdx() const { return m_startStaffIdx; }</span></span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">        1058 :     void setStartStaffIdx(staff_idx_t staffIdx) { m_startStaffIdx = staffIdx; }</span></span>
-<span id="L55"><span class="lineNum">      55</span>              :     Staff* startStaff() const;</span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       31388 :     size_t column() const { return m_column; }</span></span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">         885 :     void setColumn(size_t v) { m_column = v; }</span></span>
-<span id="L58"><span class="lineNum">      58</span>              : </span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaUNC tlaBgUNC">           0 :     StaffLabel&amp; label() { return m_name; }</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC">           0 :     const StaffLabel&amp; label() const { return m_name; }</span></span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaUNC">           0 :     const String&amp; longName() const { return m_name.longName(); }</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaUNC">           0 :     const String&amp; shortName() const { return m_name.shortName(); }</span></span>
-<span id="L63"><span class="lineNum">      63</span>              : </span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaUNC">           0 :     bool showText() const { return m_showText; }</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaUNC">           0 :     bool showBracket() const { return m_showBracket; }</span></span>
-<span id="L66"><span class="lineNum">      66</span>              : </span>
-<span id="L67"><span class="lineNum">      67</span>              :     bool intersects(const BracketItem* other) const;</span>
-<span id="L68"><span class="lineNum">      68</span>              :     bool intersects(staff_idx_t first, staff_idx_t last) const;</span>
-<span id="L69"><span class="lineNum">      69</span>              : </span>
-<span id="L70"><span class="lineNum">      70</span>              : private:</span>
-<span id="L71"><span class="lineNum">      71</span>              : </span>
-<span id="L72"><span class="lineNum">      72</span>              :     friend class Factory;</span>
-<span id="L73"><span class="lineNum">      73</span>              : </span>
-<span id="L74"><span class="lineNum">      74</span>              :     BracketItem(DummyParentOr&lt;EngravingItem&gt; parent);</span>
-<span id="L75"><span class="lineNum">      75</span>              :     BracketItem(DummyParentOr&lt;EngravingItem&gt; parent, BracketType bracketType, size_t span);</span>
-<span id="L76"><span class="lineNum">      76</span>              : </span>
-<span id="L77"><span class="lineNum">      77</span>              :     BracketType m_bracketType = BracketType::NO_BRACKET;</span>
-<span id="L78"><span class="lineNum">      78</span>              :     size_t m_column = 0;</span>
-<span id="L79"><span class="lineNum">      79</span>              :     size_t m_bracketSpan = 0;</span>
-<span id="L80"><span class="lineNum">      80</span>              :     staff_idx_t m_startStaffIdx = muse::nidx;</span>
-<span id="L81"><span class="lineNum">      81</span>              : </span>
-<span id="L82"><span class="lineNum">      82</span>              :     StaffLabel m_name = StaffLabel(muse::mtrc(&quot;systemBrackets&quot;, &quot;GROUP&quot;), muse::mtrc(&quot;systemBrackets&quot;, &quot;GR.&quot;, &quot;Short for GROUP&quot;));</span>
-<span id="L83"><span class="lineNum">      83</span>              :     bool m_showText = true;</span>
-<span id="L84"><span class="lineNum">      84</span>              :     bool m_showBracket = true;</span>
-<span id="L85"><span class="lineNum">      85</span>              : };</span>
-<span id="L86"><span class="lineNum">      86</span>              : }</span>
-<span id="L87"><span class="lineNum">      87</span>              : #endif</span>
+<span id="L44"><span class="lineNum">      44</span>              :     void setOwnershipParent(DummyParentOr&lt;Staff&gt; parent) { EngravingItem::setOwnershipParent(parent); }</span>
+<span id="L45"><span class="lineNum">      45</span>              : </span>
+<span id="L46"><span class="lineNum">      46</span>              :     PropertyValue getProperty(Pid) const override;</span>
+<span id="L47"><span class="lineNum">      47</span>              :     bool setProperty(Pid, const PropertyValue&amp;) override;</span>
+<span id="L48"><span class="lineNum">      48</span>              :     PropertyValue propertyDefault(Pid id) const override;</span>
+<span id="L49"><span class="lineNum">      49</span>              : </span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       10233 :     size_t bracketSpan() const { return m_bracketSpan; }</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">       56923 :     BracketType bracketType() const { return m_bracketType; }</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">         627 :     void setBracketSpan(size_t v) { m_bracketSpan = v; }</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">         808 :     void setBracketType(BracketType v) { m_bracketType = v; }</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           1 :     staff_idx_t startStaffIdx() const { return m_startStaffIdx; }</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">        1237 :     void setStartStaffIdx(staff_idx_t staffIdx) { m_startStaffIdx = staffIdx; }</span></span>
+<span id="L56"><span class="lineNum">      56</span>              :     Staff* startStaff() const;</span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       41561 :     size_t column() const { return m_column; }</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">         995 :     void setColumn(size_t v) { m_column = v; }</span></span>
+<span id="L59"><span class="lineNum">      59</span>              : </span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC tlaBgUNC">           0 :     StaffLabel&amp; label() { return m_name; }</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaUNC">           0 :     const StaffLabel&amp; label() const { return m_name; }</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaUNC">           0 :     const String&amp; longName() const { return m_name.longName(); }</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaUNC">           0 :     const String&amp; shortName() const { return m_name.shortName(); }</span></span>
+<span id="L64"><span class="lineNum">      64</span>              : </span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaUNC">           0 :     bool showText() const { return m_showText; }</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC">           0 :     bool showBracket() const { return m_showBracket; }</span></span>
+<span id="L67"><span class="lineNum">      67</span>              : </span>
+<span id="L68"><span class="lineNum">      68</span>              :     bool intersects(const BracketItem* other) const;</span>
+<span id="L69"><span class="lineNum">      69</span>              :     bool intersects(staff_idx_t first, staff_idx_t last) const;</span>
+<span id="L70"><span class="lineNum">      70</span>              : </span>
+<span id="L71"><span class="lineNum">      71</span>              : private:</span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span>              :     friend class Factory;</span>
+<span id="L74"><span class="lineNum">      74</span>              : </span>
+<span id="L75"><span class="lineNum">      75</span>              :     BracketItem(DummyParentOr&lt;Staff&gt; parent);</span>
+<span id="L76"><span class="lineNum">      76</span>              :     BracketItem(DummyParentOr&lt;Staff&gt; parent, BracketType bracketType, size_t span);</span>
+<span id="L77"><span class="lineNum">      77</span>              : </span>
+<span id="L78"><span class="lineNum">      78</span>              :     BracketType m_bracketType = BracketType::NO_BRACKET;</span>
+<span id="L79"><span class="lineNum">      79</span>              :     size_t m_column = 0;</span>
+<span id="L80"><span class="lineNum">      80</span>              :     size_t m_bracketSpan = 0;</span>
+<span id="L81"><span class="lineNum">      81</span>              :     staff_idx_t m_startStaffIdx = muse::nidx;</span>
+<span id="L82"><span class="lineNum">      82</span>              : </span>
+<span id="L83"><span class="lineNum">      83</span>              :     StaffLabel m_name = StaffLabel(muse::mtrc(&quot;systemBrackets&quot;, &quot;GROUP&quot;), muse::mtrc(&quot;systemBrackets&quot;, &quot;GR.&quot;, &quot;Short for GROUP&quot;));</span>
+<span id="L84"><span class="lineNum">      84</span>              :     bool m_showText = true;</span>
+<span id="L85"><span class="lineNum">      85</span>              :     bool m_showBracket = true;</span>
+<span id="L86"><span class="lineNum">      86</span>              : };</span>
+<span id="L87"><span class="lineNum">      87</span>              : }</span>
+<span id="L88"><span class="lineNum">      88</span>              : #endif</span>
         </pre>
               </td>
             </tr>

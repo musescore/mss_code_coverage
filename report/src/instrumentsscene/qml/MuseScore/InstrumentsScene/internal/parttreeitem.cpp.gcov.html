@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">144</td>
+            <td class="headerCovTableEntry">148</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -184,161 +184,172 @@
 <span id="L126"><span class="lineNum">     126</span>              : </span>
 <span id="L127"><span class="lineNum">     127</span> <span class="tlaUNC">           0 :     size_t index = resolveNewPartIndex(masterPartId);</span></span>
 <span id="L128"><span class="lineNum">     128</span>              : </span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaUNC">           0 :     notation()-&gt;parts()-&gt;insertPart(masterPart-&gt;clone(), index);</span></span>
-<span id="L130"><span class="lineNum">     130</span>              : }</span>
-<span id="L131"><span class="lineNum">     131</span>              : </span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaUNC">           0 : size_t PartTreeItem::resolveNewPartIndex(const ID&amp; partId) const</span></span>
-<span id="L133"><span class="lineNum">     133</span>              : {</span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(parentItem()) {</span></span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaUNC">           0 :         return 0;</span></span>
-<span id="L136"><span class="lineNum">     136</span>              :     }</span>
-<span id="L137"><span class="lineNum">     137</span>              : </span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaUNC">           0 :     bool partFound = false;</span></span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaUNC">           0 :     ID firstVisiblePartId;</span></span>
-<span id="L140"><span class="lineNum">     140</span>              : </span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaUNC">           0 :     for (const AbstractLayoutPanelTreeItem* item : parentItem()-&gt;childItems()) {</span></span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaUNC">           0 :         if (item-&gt;id() == partId) {</span></span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC">           0 :             partFound = true;</span></span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L145"><span class="lineNum">     145</span>              :         }</span>
-<span id="L146"><span class="lineNum">     146</span>              : </span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaUNC">           0 :         if (!partFound) {</span></span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L149"><span class="lineNum">     149</span>              :         }</span>
-<span id="L150"><span class="lineNum">     150</span>              : </span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaUNC">           0 :         if (item-&gt;isVisible()) {</span></span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaUNC">           0 :             firstVisiblePartId = item-&gt;id();</span></span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L129"><span class="lineNum">     129</span>              :     // The clone would keep the main score's shared part, which doesn't exist in parts. While it's enabled</span>
+<span id="L130"><span class="lineNum">     130</span>              :     // (instruments combined), the instrument would stay hidden in the part (see Part::show())</span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaUNC">           0 :     Part* part = masterPart-&gt;clone();</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaUNC">           0 :     part-&gt;setSharedPart(nullptr);</span></span>
+<span id="L133"><span class="lineNum">     133</span>              : </span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaUNC">           0 :     notation()-&gt;parts()-&gt;insertPart(part, index);</span></span>
+<span id="L135"><span class="lineNum">     135</span>              : }</span>
+<span id="L136"><span class="lineNum">     136</span>              : </span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaUNC">           0 : size_t PartTreeItem::resolveNewPartIndex(const ID&amp; partId) const</span></span>
+<span id="L138"><span class="lineNum">     138</span>              : {</span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(parentItem()) {</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaUNC">           0 :         return 0;</span></span>
+<span id="L141"><span class="lineNum">     141</span>              :     }</span>
+<span id="L142"><span class="lineNum">     142</span>              : </span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC">           0 :     bool partFound = false;</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :     ID firstVisiblePartId;</span></span>
+<span id="L145"><span class="lineNum">     145</span>              : </span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC">           0 :     for (const AbstractLayoutPanelTreeItem* item : parentItem()-&gt;childItems()) {</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaUNC">           0 :         if (item-&gt;id() == partId) {</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC">           0 :             partFound = true;</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L150"><span class="lineNum">     150</span>              :         }</span>
+<span id="L151"><span class="lineNum">     151</span>              : </span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaUNC">           0 :         if (!partFound) {</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaUNC">           0 :             continue;</span></span>
 <span id="L154"><span class="lineNum">     154</span>              :         }</span>
-<span id="L155"><span class="lineNum">     155</span>              :     }</span>
-<span id="L156"><span class="lineNum">     156</span>              : </span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaUNC">           0 :     auto parts = notation()-&gt;parts()-&gt;partList();</span></span>
-<span id="L158"><span class="lineNum">     158</span>              : </span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaUNC">           0 :     for (size_t i = 0; i &lt; parts.size(); ++i) {</span></span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaUNC">           0 :         if (ID(parts[i]-&gt;id()) == firstVisiblePartId) {</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaUNC">           0 :             return i;</span></span>
-<span id="L162"><span class="lineNum">     162</span>              :         }</span>
-<span id="L163"><span class="lineNum">     163</span>              :     }</span>
-<span id="L164"><span class="lineNum">     164</span>              : </span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaUNC">           0 :     return parts.size();</span></span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L167"><span class="lineNum">     167</span>              : </span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC">           0 : MoveParams PartTreeItem::buildMoveParams(int sourceRow, int count, AbstractLayoutPanelTreeItem* destinationParent,</span></span>
-<span id="L169"><span class="lineNum">     169</span>              :                                          int destinationRow) const</span>
-<span id="L170"><span class="lineNum">     170</span>              : {</span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaUNC">           0 :     MoveParams moveParams;</span></span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaUNC">           0 :         if (item-&gt;isVisible()) {</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaUNC">           0 :             firstVisiblePartId = item-&gt;id();</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L159"><span class="lineNum">     159</span>              :         }</span>
+<span id="L160"><span class="lineNum">     160</span>              :     }</span>
+<span id="L161"><span class="lineNum">     161</span>              : </span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaUNC">           0 :     auto parts = notation()-&gt;parts()-&gt;partList();</span></span>
+<span id="L163"><span class="lineNum">     163</span>              : </span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaUNC">           0 :     for (size_t i = 0; i &lt; parts.size(); ++i) {</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaUNC">           0 :         if (ID(parts[i]-&gt;id()) == firstVisiblePartId) {</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaUNC">           0 :             return i;</span></span>
+<span id="L167"><span class="lineNum">     167</span>              :         }</span>
+<span id="L168"><span class="lineNum">     168</span>              :     }</span>
+<span id="L169"><span class="lineNum">     169</span>              : </span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaUNC">           0 :     return parts.size();</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L172"><span class="lineNum">     172</span>              : </span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 :     IDList stavesIds;</span></span>
-<span id="L174"><span class="lineNum">     174</span>              : </span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaUNC">           0 :     for (int i = sourceRow; i &lt; sourceRow + count; ++i) {</span></span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaUNC">           0 :         stavesIds.push_back(childAtRow(i)-&gt;id());</span></span>
-<span id="L177"><span class="lineNum">     177</span>              :     }</span>
-<span id="L178"><span class="lineNum">     178</span>              : </span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaUNC">           0 :     moveParams.objectIdListToMove = stavesIds;</span></span>
-<span id="L180"><span class="lineNum">     180</span>              : </span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaUNC">           0 :     int destinationRowLast = destinationRow;</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaUNC">           0 :     INotationParts::InsertMode moveMode = INotationParts::InsertMode::Before;</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 : MoveParams PartTreeItem::buildMoveParams(int sourceRow, int count, AbstractLayoutPanelTreeItem* destinationParent,</span></span>
+<span id="L174"><span class="lineNum">     174</span>              :                                          int destinationRow) const</span>
+<span id="L175"><span class="lineNum">     175</span>              : {</span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaUNC">           0 :     MoveParams moveParams;</span></span>
+<span id="L177"><span class="lineNum">     177</span>              : </span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaUNC">           0 :     IDList stavesIds;</span></span>
+<span id="L179"><span class="lineNum">     179</span>              : </span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaUNC">           0 :     for (int i = sourceRow; i &lt; sourceRow + count; ++i) {</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaUNC">           0 :         stavesIds.push_back(childAtRow(i)-&gt;id());</span></span>
+<span id="L182"><span class="lineNum">     182</span>              :     }</span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
-<span id="L184"><span class="lineNum">     184</span>              :     // exclude the control item</span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC">           0 :     if (destinationRow == destinationParent-&gt;childCount() - 1) {</span></span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC">           0 :         destinationRowLast = destinationRow - 1;</span></span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC">           0 :         moveMode = INotationParts::InsertMode::After;</span></span>
-<span id="L188"><span class="lineNum">     188</span>              :     }</span>
-<span id="L189"><span class="lineNum">     189</span>              : </span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :     AbstractLayoutPanelTreeItem* destinationStaffItem = destinationParent-&gt;childAtRow(destinationRowLast);</span></span>
-<span id="L191"><span class="lineNum">     191</span>              : </span>
-<span id="L192"><span class="lineNum">     192</span> <span class="tlaUNC">           0 :     moveParams.destinationObjectId = destinationStaffItem-&gt;id();</span></span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaUNC">           0 :     moveParams.insertMode = moveMode;</span></span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaUNC">           0 :     moveParams.objectsType = LayoutPanelItemType::STAFF;</span></span>
-<span id="L195"><span class="lineNum">     195</span>              : </span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaUNC">           0 :     return moveParams;</span></span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L198"><span class="lineNum">     198</span>              : </span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaUNC">           0 : void PartTreeItem::moveChildren(int sourceRow, int count, AbstractLayoutPanelTreeItem* destinationParent,</span></span>
-<span id="L200"><span class="lineNum">     200</span>              :                                 int destinationRow, bool updateNotation)</span>
-<span id="L201"><span class="lineNum">     201</span>              : {</span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaUNC">           0 :     if (updateNotation) {</span></span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaUNC">           0 :         MoveParams moveParams = buildMoveParams(sourceRow, count, destinationParent, destinationRow);</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC">           0 :         moveChildrenOnScore(moveParams);</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L206"><span class="lineNum">     206</span>              : </span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC">           0 :     AbstractLayoutPanelTreeItem::moveChildren(sourceRow, count, destinationParent, destinationRow, updateNotation);</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L209"><span class="lineNum">     209</span>              : </span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 : void PartTreeItem::moveChildrenOnScore(const MoveParams&amp; params)</span></span>
-<span id="L211"><span class="lineNum">     211</span>              : {</span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaUNC">           0 :     notation()-&gt;parts()-&gt;moveStaves(params.objectIdListToMove, params.destinationObjectId, params.insertMode);</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaUNC">           0 :     moveParams.objectIdListToMove = stavesIds;</span></span>
+<span id="L185"><span class="lineNum">     185</span>              : </span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC">           0 :     int destinationRowLast = destinationRow;</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC">           0 :     INotationParts::InsertMode moveMode = INotationParts::InsertMode::Before;</span></span>
+<span id="L188"><span class="lineNum">     188</span>              : </span>
+<span id="L189"><span class="lineNum">     189</span>              :     // exclude the control item</span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :     if (destinationRow == destinationParent-&gt;childCount() - 1) {</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaUNC">           0 :         destinationRowLast = destinationRow - 1;</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaUNC">           0 :         moveMode = INotationParts::InsertMode::After;</span></span>
+<span id="L193"><span class="lineNum">     193</span>              :     }</span>
+<span id="L194"><span class="lineNum">     194</span>              : </span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaUNC">           0 :     AbstractLayoutPanelTreeItem* destinationStaffItem = destinationParent-&gt;childAtRow(destinationRowLast);</span></span>
+<span id="L196"><span class="lineNum">     196</span>              : </span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 :     moveParams.destinationObjectId = destinationStaffItem-&gt;id();</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaUNC">           0 :     moveParams.insertMode = moveMode;</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaUNC">           0 :     moveParams.objectsType = LayoutPanelItemType::STAFF;</span></span>
+<span id="L200"><span class="lineNum">     200</span>              : </span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC">           0 :     return moveParams;</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L203"><span class="lineNum">     203</span>              : </span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC">           0 : void PartTreeItem::moveChildren(int sourceRow, int count, AbstractLayoutPanelTreeItem* destinationParent,</span></span>
+<span id="L205"><span class="lineNum">     205</span>              :                                 int destinationRow, bool updateNotation)</span>
+<span id="L206"><span class="lineNum">     206</span>              : {</span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC">           0 :     if (updateNotation) {</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :         MoveParams moveParams = buildMoveParams(sourceRow, count, destinationParent, destinationRow);</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaUNC">           0 :         moveChildrenOnScore(moveParams);</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L211"><span class="lineNum">     211</span>              : </span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaUNC">           0 :     AbstractLayoutPanelTreeItem::moveChildren(sourceRow, count, destinationParent, destinationRow, updateNotation);</span></span>
 <span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L214"><span class="lineNum">     214</span>              : </span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaUNC">           0 : void PartTreeItem::removeChildren(int row, int count, bool deleteChild)</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaUNC">           0 : void PartTreeItem::moveChildrenOnScore(const MoveParams&amp; params)</span></span>
 <span id="L216"><span class="lineNum">     216</span>              : {</span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 :     IDList stavesIds;</span></span>
-<span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaUNC">           0 :     for (int i = row; i &lt; row + count; ++i) {</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaUNC">           0 :         stavesIds.push_back(childAtRow(i)-&gt;id());</span></span>
-<span id="L221"><span class="lineNum">     221</span>              :     }</span>
-<span id="L222"><span class="lineNum">     222</span>              : </span>
-<span id="L223"><span class="lineNum">     223</span>              :     // Remove the children first, then remove the staves</span>
-<span id="L224"><span class="lineNum">     224</span>              :     // so we don't try to remove them twice when notified by removeStaves()</span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaUNC">           0 :     AbstractLayoutPanelTreeItem::removeChildren(row, count, deleteChild);</span></span>
-<span id="L226"><span class="lineNum">     226</span>              : </span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaUNC">           0 :     if (deleteChild) {</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaUNC">           0 :         masterNotation()-&gt;parts()-&gt;removeStaves(stavesIds);</span></span>
-<span id="L229"><span class="lineNum">     229</span>              :     }</span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 :     notation()-&gt;parts()-&gt;moveStaves(params.objectIdListToMove, params.destinationObjectId, params.insertMode);</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L219"><span class="lineNum">     219</span>              : </span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaUNC">           0 : void PartTreeItem::removeChildren(int row, int count, bool deleteChild)</span></span>
+<span id="L221"><span class="lineNum">     221</span>              : {</span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaUNC">           0 :     IDList stavesIds;</span></span>
+<span id="L223"><span class="lineNum">     223</span>              : </span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaUNC">           0 :     for (int i = row; i &lt; row + count; ++i) {</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaUNC">           0 :         stavesIds.push_back(childAtRow(i)-&gt;id());</span></span>
+<span id="L226"><span class="lineNum">     226</span>              :     }</span>
+<span id="L227"><span class="lineNum">     227</span>              : </span>
+<span id="L228"><span class="lineNum">     228</span>              :     // Remove the children first, then remove the staves</span>
+<span id="L229"><span class="lineNum">     229</span>              :     // so we don't try to remove them twice when notified by removeStaves()</span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 :     AbstractLayoutPanelTreeItem::removeChildren(row, count, deleteChild);</span></span>
 <span id="L231"><span class="lineNum">     231</span>              : </span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 : bool PartTreeItem::canAcceptDrop(const QVariant&amp; obj) const</span></span>
-<span id="L233"><span class="lineNum">     233</span>              : {</span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaUNC">           0 :     if (auto item = dynamic_cast&lt;const AbstractLayoutPanelTreeItem*&gt;(obj.value&lt;QObject*&gt;())) {</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaUNC">           0 :         if (item-&gt;type() == LayoutPanelItemType::SYSTEM_OBJECTS_LAYER) {</span></span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaUNC">           0 :             return true;</span></span>
-<span id="L237"><span class="lineNum">     237</span>              :         }</span>
-<span id="L238"><span class="lineNum">     238</span>              :     }</span>
-<span id="L239"><span class="lineNum">     239</span>              : </span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :     return AbstractLayoutPanelTreeItem::canAcceptDrop(obj);</span></span>
-<span id="L241"><span class="lineNum">     241</span>              : }</span>
-<span id="L242"><span class="lineNum">     242</span>              : </span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaUNC">           0 : QString PartTreeItem::instrumentId() const</span></span>
-<span id="L244"><span class="lineNum">     244</span>              : {</span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC">           0 :     return m_part ? m_part-&gt;instrumentId().toQString() : QString();</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 :     if (deleteChild) {</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaUNC">           0 :         masterNotation()-&gt;parts()-&gt;removeStaves(stavesIds);</span></span>
+<span id="L234"><span class="lineNum">     234</span>              :     }</span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L236"><span class="lineNum">     236</span>              : </span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC">           0 : bool PartTreeItem::canAcceptDrop(const QVariant&amp; obj) const</span></span>
+<span id="L238"><span class="lineNum">     238</span>              : {</span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 :     if (auto item = dynamic_cast&lt;const AbstractLayoutPanelTreeItem*&gt;(obj.value&lt;QObject*&gt;())) {</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :         if (item-&gt;type() == LayoutPanelItemType::SYSTEM_OBJECTS_LAYER) {</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC">           0 :             return true;</span></span>
+<span id="L242"><span class="lineNum">     242</span>              :         }</span>
+<span id="L243"><span class="lineNum">     243</span>              :     }</span>
+<span id="L244"><span class="lineNum">     244</span>              : </span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC">           0 :     return AbstractLayoutPanelTreeItem::canAcceptDrop(obj);</span></span>
 <span id="L246"><span class="lineNum">     246</span>              : }</span>
 <span id="L247"><span class="lineNum">     247</span>              : </span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaUNC">           0 : void PartTreeItem::replaceInstrument()</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaUNC">           0 : QString PartTreeItem::instrumentId() const</span></span>
 <span id="L249"><span class="lineNum">     249</span>              : {</span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaUNC">           0 :     InstrumentKey instrumentKey;</span></span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaUNC">           0 :     instrumentKey.partId = id();</span></span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaUNC">           0 :     instrumentKey.instrumentId = instrumentId();</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC">           0 :     instrumentKey.tick = Part::MAIN_INSTRUMENT_TICK;</span></span>
-<span id="L254"><span class="lineNum">     254</span>              : </span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaUNC">           0 :     async::Promise&lt;InstrumentTemplate&gt; templ = selectInstrumentsScenario()-&gt;selectInstrument(instrumentKey);</span></span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaUNC">           0 :     templ.onResolve(this, [this, instrumentKey](const InstrumentTemplate&amp; val) {</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaUNC">           0 :         Instrument instrument = Instrument::fromTemplate(&amp;val);</span></span>
-<span id="L258"><span class="lineNum">     258</span>              : </span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaUNC">           0 :         const StaffType* staffType = val.staffTypePreset;</span></span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaUNC">           0 :         if (!staffType) {</span></span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :             staffType = StaffType::getDefaultPreset(val.staffGroup);</span></span>
-<span id="L262"><span class="lineNum">     262</span>              :         }</span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaUNC">           0 :     return m_part ? m_part-&gt;instrumentId().toQString() : QString();</span></span>
+<span id="L251"><span class="lineNum">     251</span>              : }</span>
+<span id="L252"><span class="lineNum">     252</span>              : </span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC">           0 : void PartTreeItem::replaceInstrument()</span></span>
+<span id="L254"><span class="lineNum">     254</span>              : {</span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaUNC">           0 :     InstrumentKey instrumentKey;</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaUNC">           0 :     instrumentKey.partId = id();</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaUNC">           0 :     instrumentKey.instrumentId = instrumentId();</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaUNC">           0 :     instrumentKey.tick = Part::MAIN_INSTRUMENT_TICK;</span></span>
+<span id="L259"><span class="lineNum">     259</span>              : </span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaUNC">           0 :     async::Promise&lt;InstrumentTemplate&gt; templ = selectInstrumentsScenario()-&gt;selectInstrument(instrumentKey);</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :     templ.onResolve(this, [this, instrumentKey](const InstrumentTemplate&amp; val) {</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :         Instrument instrument = Instrument::fromTemplate(&amp;val);</span></span>
 <span id="L263"><span class="lineNum">     263</span>              : </span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 :         masterNotation()-&gt;parts()-&gt;replaceInstrument(instrumentKey, instrument, staffType);</span></span>
-<span id="L265"><span class="lineNum">     265</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L267"><span class="lineNum">     267</span>              : </span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaUNC">           0 : void PartTreeItem::resetAllFormatting()</span></span>
-<span id="L269"><span class="lineNum">     269</span>              : {</span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 :     std::string title = muse::trc(&quot;layoutpanel&quot;, &quot;Are you sure you want to reset all formatting?&quot;);</span></span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaUNC">           0 :     std::string body = muse::trc(&quot;layoutpanel&quot;, &quot;This action can not be undone&quot;);</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 :         const StaffType* staffType = val.staffTypePreset;</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaUNC">           0 :         if (!staffType) {</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaUNC">           0 :             staffType = StaffType::getDefaultPreset(val.staffGroup);</span></span>
+<span id="L267"><span class="lineNum">     267</span>              :         }</span>
+<span id="L268"><span class="lineNum">     268</span>              : </span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC">           0 :         masterNotation()-&gt;parts()-&gt;replaceInstrument(instrumentKey, instrument, staffType);</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L272"><span class="lineNum">     272</span>              : </span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaUNC">           0 :     interactive()-&gt;question(title, body, {</span></span>
-<span id="L274"><span class="lineNum">     274</span>              :         IInteractive::Button::No,</span>
-<span id="L275"><span class="lineNum">     275</span>              :         IInteractive::Button::Yes</span>
-<span id="L276"><span class="lineNum">     276</span>              :     })</span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaUNC">           0 :     .onResolve(this, [this](const IInteractive::Result&amp; res) {</span></span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaUNC">           0 :         if (res.isButton(IInteractive::Button::Yes)) {</span></span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaUNC">           0 :             const Part* masterPart = masterNotation()-&gt;parts()-&gt;part(id());</span></span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaUNC">           0 :             notation()-&gt;parts()-&gt;replacePart(id(), masterPart-&gt;clone());</span></span>
-<span id="L281"><span class="lineNum">     281</span>              :         }</span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L283"><span class="lineNum">     283</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaUNC">           0 : void PartTreeItem::resetAllFormatting()</span></span>
+<span id="L274"><span class="lineNum">     274</span>              : {</span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaUNC">           0 :     std::string title = muse::trc(&quot;layoutpanel&quot;, &quot;Are you sure you want to reset all formatting?&quot;);</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaUNC">           0 :     std::string body = muse::trc(&quot;layoutpanel&quot;, &quot;This action can not be undone&quot;);</span></span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaUNC">           0 :     interactive()-&gt;question(title, body, {</span></span>
+<span id="L279"><span class="lineNum">     279</span>              :         IInteractive::Button::No,</span>
+<span id="L280"><span class="lineNum">     280</span>              :         IInteractive::Button::Yes</span>
+<span id="L281"><span class="lineNum">     281</span>              :     })</span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaUNC">           0 :     .onResolve(this, [this](const IInteractive::Result&amp; res) {</span></span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaUNC">           0 :         if (res.isButton(IInteractive::Button::Yes)) {</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaUNC">           0 :             const Part* masterPart = masterNotation()-&gt;parts()-&gt;part(id());</span></span>
+<span id="L285"><span class="lineNum">     285</span>              : </span>
+<span id="L286"><span class="lineNum">     286</span>              :             // The clone would keep the main score's shared part, which doesn't exist in parts. While it's enabled</span>
+<span id="L287"><span class="lineNum">     287</span>              :             // (instruments combined), the instrument would stay hidden in the part (see Part::show())</span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaUNC">           0 :             Part* part = masterPart-&gt;clone();</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaUNC">           0 :             part-&gt;setSharedPart(nullptr);</span></span>
+<span id="L290"><span class="lineNum">     290</span>              : </span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaUNC">           0 :             notation()-&gt;parts()-&gt;replacePart(id(), part);</span></span>
+<span id="L292"><span class="lineNum">     292</span>              :         }</span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>
             </tr>

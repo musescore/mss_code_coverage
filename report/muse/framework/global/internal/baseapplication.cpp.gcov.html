@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">1.0&nbsp;%</td>
-            <td class="headerCovTableEntry">205</td>
+            <td class="headerCovTableEntry">207</td>
             <td class="headerCovTableEntry">2</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -101,10 +101,10 @@
 <span id="L43"><span class="lineNum">      43</span>              : </span>
 <span id="L44"><span class="lineNum">      44</span>              : using namespace muse;</span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">          92 : String BaseApplication::appName()</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">          94 : String BaseApplication::appName()</span></span>
 <span id="L47"><span class="lineNum">      47</span>              : {</span>
 <span id="L48"><span class="lineNum">      48</span>              : #ifdef MUSE_APP_NAME_MACHINE_READABLE</span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">          92 :     return String::fromAscii(MUSE_APP_NAME_MACHINE_READABLE);</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">          94 :     return String::fromAscii(MUSE_APP_NAME_MACHINE_READABLE);</span></span>
 <span id="L50"><span class="lineNum">      50</span>              : #else</span>
 <span id="L51"><span class="lineNum">      51</span>              :     return String();</span>
 <span id="L52"><span class="lineNum">      52</span>              : #endif</span>
@@ -292,260 +292,264 @@
 <span id="L234"><span class="lineNum">     234</span> <span class="tlaUNC">           0 :     if (options-&gt;global.loggerLevel) {</span></span>
 <span id="L235"><span class="lineNum">     235</span> <span class="tlaUNC">           0 :         m_globalModule-&gt;setLoggerLevel(options-&gt;global.loggerLevel.value());</span></span>
 <span id="L236"><span class="lineNum">     236</span>              :     }</span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L238"><span class="lineNum">     238</span>              : </span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 : BaseApplication::ContextData&amp; BaseApplication::contextData(const muse::modularity::ContextPtr&amp; ctx)</span></span>
-<span id="L240"><span class="lineNum">     240</span>              : {</span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC">           0 :     for (ContextData&amp; c : m_contexts) {</span></span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaUNC">           0 :         if (c.ctxId-&gt;id == ctx-&gt;id) {</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaUNC">           0 :             return c;</span></span>
-<span id="L244"><span class="lineNum">     244</span>              :         }</span>
-<span id="L245"><span class="lineNum">     245</span>              :     }</span>
-<span id="L246"><span class="lineNum">     246</span>              : </span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaUNC">           0 :     m_contexts.emplace_back();</span></span>
-<span id="L248"><span class="lineNum">     248</span>              : </span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaUNC">           0 :     ContextData&amp; ref = m_contexts.back();</span></span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaUNC">           0 :     ref.ctxId = ctx;</span></span>
-<span id="L251"><span class="lineNum">     251</span>              : </span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaUNC">           0 :     modularity::IContextSetup* global = m_globalModule-&gt;newContext(ctx);</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC">           0 :     if (global) {</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC">           0 :         ref.setups.push_back(global);</span></span>
-<span id="L255"><span class="lineNum">     255</span>              :     }</span>
-<span id="L256"><span class="lineNum">     256</span>              : </span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaUNC">           0 :     for (modularity::IModuleSetup* m : m_modules) {</span></span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaUNC">           0 :         modularity::IContextSetup* s = m-&gt;newContext(ctx);</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaUNC">           0 :         if (s) {</span></span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaUNC">           0 :             ref.setups.push_back(s);</span></span>
-<span id="L261"><span class="lineNum">     261</span>              :         }</span>
-<span id="L262"><span class="lineNum">     262</span>              :     }</span>
-<span id="L263"><span class="lineNum">     263</span>              : </span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 :     return ref;</span></span>
-<span id="L265"><span class="lineNum">     265</span>              : }</span>
-<span id="L266"><span class="lineNum">     266</span>              : </span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaUNC">           0 : std::vector&lt;muse::modularity::ContextPtr&gt; BaseApplication::contexts() const</span></span>
-<span id="L268"><span class="lineNum">     268</span>              : {</span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC">           0 :     std::vector&lt;muse::modularity::ContextPtr&gt; ctxs;</span></span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 :     ctxs.reserve(m_contexts.size());</span></span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaUNC">           0 :     for (const ContextData&amp; c : m_contexts) {</span></span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaUNC">           0 :         ctxs.push_back(c.ctxId);</span></span>
-<span id="L273"><span class="lineNum">     273</span>              :     }</span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaUNC">           0 :     return ctxs;</span></span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L276"><span class="lineNum">     276</span>              : </span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaUNC">           0 : size_t BaseApplication::contextCount() const</span></span>
-<span id="L278"><span class="lineNum">     278</span>              : {</span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaUNC">           0 :     return m_contexts.size();</span></span>
-<span id="L280"><span class="lineNum">     280</span>              : }</span>
-<span id="L281"><span class="lineNum">     281</span>              : </span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaUNC">           0 : std::shared_ptr&lt;CmdOptions&gt; BaseApplication::makeContextOptions(const muse::StringList&amp;) const</span></span>
-<span id="L283"><span class="lineNum">     283</span>              : {</span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaUNC">           0 :     return m_appOptions;</span></span>
-<span id="L285"><span class="lineNum">     285</span>              : }</span>
-<span id="L286"><span class="lineNum">     286</span>              : </span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaUNC">           0 : void BaseApplication::showContextSplash(const muse::modularity::ContextPtr&amp;)</span></span>
-<span id="L288"><span class="lineNum">     288</span>              : {</span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L237"><span class="lineNum">     237</span>              : </span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaUNC">           0 :     if (options-&gt;global.userDataDir) {</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 :         m_globalModule-&gt;setUserDataDir(options-&gt;global.userDataDir.value());</span></span>
+<span id="L240"><span class="lineNum">     240</span>              :     }</span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L242"><span class="lineNum">     242</span>              : </span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaUNC">           0 : BaseApplication::ContextData&amp; BaseApplication::contextData(const muse::modularity::ContextPtr&amp; ctx)</span></span>
+<span id="L244"><span class="lineNum">     244</span>              : {</span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC">           0 :     for (ContextData&amp; c : m_contexts) {</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaUNC">           0 :         if (c.ctxId-&gt;id == ctx-&gt;id) {</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaUNC">           0 :             return c;</span></span>
+<span id="L248"><span class="lineNum">     248</span>              :         }</span>
+<span id="L249"><span class="lineNum">     249</span>              :     }</span>
+<span id="L250"><span class="lineNum">     250</span>              : </span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaUNC">           0 :     m_contexts.emplace_back();</span></span>
+<span id="L252"><span class="lineNum">     252</span>              : </span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC">           0 :     ContextData&amp; ref = m_contexts.back();</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC">           0 :     ref.ctxId = ctx;</span></span>
+<span id="L255"><span class="lineNum">     255</span>              : </span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaUNC">           0 :     modularity::IContextSetup* global = m_globalModule-&gt;newContext(ctx);</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaUNC">           0 :     if (global) {</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaUNC">           0 :         ref.setups.push_back(global);</span></span>
+<span id="L259"><span class="lineNum">     259</span>              :     }</span>
+<span id="L260"><span class="lineNum">     260</span>              : </span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :     for (modularity::IModuleSetup* m : m_modules) {</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :         modularity::IContextSetup* s = m-&gt;newContext(ctx);</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaUNC">           0 :         if (s) {</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 :             ref.setups.push_back(s);</span></span>
+<span id="L265"><span class="lineNum">     265</span>              :         }</span>
+<span id="L266"><span class="lineNum">     266</span>              :     }</span>
+<span id="L267"><span class="lineNum">     267</span>              : </span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaUNC">           0 :     return ref;</span></span>
+<span id="L269"><span class="lineNum">     269</span>              : }</span>
+<span id="L270"><span class="lineNum">     270</span>              : </span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaUNC">           0 : std::vector&lt;muse::modularity::ContextPtr&gt; BaseApplication::contexts() const</span></span>
+<span id="L272"><span class="lineNum">     272</span>              : {</span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaUNC">           0 :     std::vector&lt;muse::modularity::ContextPtr&gt; ctxs;</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaUNC">           0 :     ctxs.reserve(m_contexts.size());</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaUNC">           0 :     for (const ContextData&amp; c : m_contexts) {</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaUNC">           0 :         ctxs.push_back(c.ctxId);</span></span>
+<span id="L277"><span class="lineNum">     277</span>              :     }</span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaUNC">           0 :     return ctxs;</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L280"><span class="lineNum">     280</span>              : </span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaUNC">           0 : size_t BaseApplication::contextCount() const</span></span>
+<span id="L282"><span class="lineNum">     282</span>              : {</span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaUNC">           0 :     return m_contexts.size();</span></span>
+<span id="L284"><span class="lineNum">     284</span>              : }</span>
+<span id="L285"><span class="lineNum">     285</span>              : </span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaUNC">           0 : std::shared_ptr&lt;CmdOptions&gt; BaseApplication::makeContextOptions(const muse::StringList&amp;) const</span></span>
+<span id="L287"><span class="lineNum">     287</span>              : {</span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaUNC">           0 :     return m_appOptions;</span></span>
+<span id="L289"><span class="lineNum">     289</span>              : }</span>
 <span id="L290"><span class="lineNum">     290</span>              : </span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaUNC">           0 : muse::modularity::ContextPtr BaseApplication::setupNewContext(const StringList&amp; args)</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaUNC">           0 : void BaseApplication::showContextSplash(const muse::modularity::ContextPtr&amp;)</span></span>
 <span id="L292"><span class="lineNum">     292</span>              : {</span>
-<span id="L293"><span class="lineNum">     293</span>              : #ifndef MUSE_MODULE_MULTIWINDOWS_SINGLEPROC_MODE</span>
-<span id="L294"><span class="lineNum">     294</span>              :     static bool once = false;</span>
-<span id="L295"><span class="lineNum">     295</span>              :     IF_ASSERT_FAILED(!once) {</span>
-<span id="L296"><span class="lineNum">     296</span>              :         return nullptr;</span>
-<span id="L297"><span class="lineNum">     297</span>              :     }</span>
-<span id="L298"><span class="lineNum">     298</span>              :     once = true;</span>
-<span id="L299"><span class="lineNum">     299</span>              : #endif</span>
-<span id="L300"><span class="lineNum">     300</span>              : </span>
-<span id="L301"><span class="lineNum">     301</span>              :     static int lastId = 0;</span>
-<span id="L302"><span class="lineNum">     302</span>              : </span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaUNC">           0 :     modularity::ContextPtr ctxId = std::make_shared&lt;modularity::Context&gt;();</span></span>
-<span id="L304"><span class="lineNum">     304</span> <span class="tlaUNC">           0 :     ++lastId;</span></span>
-<span id="L305"><span class="lineNum">     305</span> <span class="tlaUNC">           0 :     ctxId-&gt;id = lastId;</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L294"><span class="lineNum">     294</span>              : </span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaUNC">           0 : muse::modularity::ContextPtr BaseApplication::setupNewContext(const StringList&amp; args)</span></span>
+<span id="L296"><span class="lineNum">     296</span>              : {</span>
+<span id="L297"><span class="lineNum">     297</span>              : #ifndef MUSE_MODULE_MULTIWINDOWS_SINGLEPROC_MODE</span>
+<span id="L298"><span class="lineNum">     298</span>              :     static bool once = false;</span>
+<span id="L299"><span class="lineNum">     299</span>              :     IF_ASSERT_FAILED(!once) {</span>
+<span id="L300"><span class="lineNum">     300</span>              :         return nullptr;</span>
+<span id="L301"><span class="lineNum">     301</span>              :     }</span>
+<span id="L302"><span class="lineNum">     302</span>              :     once = true;</span>
+<span id="L303"><span class="lineNum">     303</span>              : #endif</span>
+<span id="L304"><span class="lineNum">     304</span>              : </span>
+<span id="L305"><span class="lineNum">     305</span>              :     static int lastId = 0;</span>
 <span id="L306"><span class="lineNum">     306</span>              : </span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaUNC">           0 :     ContextData&amp; ctx = contextData(ctxId);</span></span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaUNC">           0 :     ctx.initializing = true;</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaUNC">           0 :     ctx.options = makeContextOptions(args);</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaUNC">           0 :     modularity::ContextPtr ctxId = std::make_shared&lt;modularity::Context&gt;();</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaUNC">           0 :     ++lastId;</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaUNC">           0 :     ctxId-&gt;id = lastId;</span></span>
 <span id="L310"><span class="lineNum">     310</span>              : </span>
-<span id="L311"><span class="lineNum">     311</span> <span class="tlaUNC">           0 :     LOGI() &lt;&lt; &quot;Creating new context with id: &quot; &lt;&lt; ctxId-&gt;id;</span></span>
-<span id="L312"><span class="lineNum">     312</span>              : </span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaUNC">           0 :     QMetaObject::invokeMethod(qApp, [this, ctxId]() {</span></span>
-<span id="L314"><span class="lineNum">     314</span> <span class="tlaUNC">           0 :         showContextSplash(ctxId);</span></span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaUNC">           0 :         QMetaObject::invokeMethod(qApp, [this, ctxId]() {</span></span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaUNC">           0 :             setupContext(ctxId);</span></span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaUNC">           0 :             QMetaObject::invokeMethod(qApp, [this, ctxId]() {</span></span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaUNC">           0 :                 ContextData&amp; ctx = contextData(ctxId);</span></span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaUNC">           0 :                 ctx.initializing = false;</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaUNC">           0 :                 startupScenario(ctxId);</span></span>
-<span id="L321"><span class="lineNum">     321</span> <span class="tlaUNC">           0 :             }, Qt::QueuedConnection);</span></span>
-<span id="L322"><span class="lineNum">     322</span> <span class="tlaUNC">           0 :         }, Qt::QueuedConnection);</span></span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaUNC">           0 :     }, Qt::QueuedConnection);</span></span>
-<span id="L324"><span class="lineNum">     324</span>              : </span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaUNC">           0 :     return ctxId;</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L327"><span class="lineNum">     327</span>              : </span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaUNC">           0 : void BaseApplication::setupContext(const muse::modularity::ContextPtr&amp; ctxId)</span></span>
-<span id="L329"><span class="lineNum">     329</span>              : {</span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaUNC">           0 :     const IApplication::RunMode runMode = m_appOptions-&gt;runMode;</span></span>
-<span id="L331"><span class="lineNum">     331</span>              :     // Setup</span>
-<span id="L332"><span class="lineNum">     332</span> <span class="tlaUNC">           0 :     std::vector&lt;muse::modularity::IContextSetup*&gt;&amp; csetups = contextData(ctxId).setups;</span></span>
-<span id="L333"><span class="lineNum">     333</span>              : </span>
-<span id="L334"><span class="lineNum">     334</span> <span class="tlaUNC">           0 :     for (modularity::IContextSetup* s : csetups) {</span></span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaUNC">           0 :         s-&gt;registerExports();</span></span>
-<span id="L336"><span class="lineNum">     336</span>              :     }</span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaUNC">           0 :     ContextData&amp; ctx = contextData(ctxId);</span></span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaUNC">           0 :     ctx.initializing = true;</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaUNC">           0 :     ctx.options = makeContextOptions(args);</span></span>
+<span id="L314"><span class="lineNum">     314</span>              : </span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaUNC">           0 :     LOGI() &lt;&lt; &quot;Creating new context with id: &quot; &lt;&lt; ctxId-&gt;id;</span></span>
+<span id="L316"><span class="lineNum">     316</span>              : </span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaUNC">           0 :     QMetaObject::invokeMethod(qApp, [this, ctxId]() {</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaUNC">           0 :         showContextSplash(ctxId);</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaUNC">           0 :         QMetaObject::invokeMethod(qApp, [this, ctxId]() {</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaUNC">           0 :             setupContext(ctxId);</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaUNC">           0 :             QMetaObject::invokeMethod(qApp, [this, ctxId]() {</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaUNC">           0 :                 ContextData&amp; ctx = contextData(ctxId);</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaUNC">           0 :                 ctx.initializing = false;</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaUNC">           0 :                 startupScenario(ctxId);</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaUNC">           0 :             }, Qt::QueuedConnection);</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaUNC">           0 :         }, Qt::QueuedConnection);</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaUNC">           0 :     }, Qt::QueuedConnection);</span></span>
+<span id="L328"><span class="lineNum">     328</span>              : </span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaUNC">           0 :     return ctxId;</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L331"><span class="lineNum">     331</span>              : </span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaUNC">           0 : void BaseApplication::setupContext(const muse::modularity::ContextPtr&amp; ctxId)</span></span>
+<span id="L333"><span class="lineNum">     333</span>              : {</span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaUNC">           0 :     const IApplication::RunMode runMode = m_appOptions-&gt;runMode;</span></span>
+<span id="L335"><span class="lineNum">     335</span>              :     // Setup</span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaUNC">           0 :     std::vector&lt;muse::modularity::IContextSetup*&gt;&amp; csetups = contextData(ctxId).setups;</span></span>
 <span id="L337"><span class="lineNum">     337</span>              : </span>
 <span id="L338"><span class="lineNum">     338</span> <span class="tlaUNC">           0 :     for (modularity::IContextSetup* s : csetups) {</span></span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaUNC">           0 :         s-&gt;resolveImports();</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaUNC">           0 :         s-&gt;registerExports();</span></span>
 <span id="L340"><span class="lineNum">     340</span>              :     }</span>
 <span id="L341"><span class="lineNum">     341</span>              : </span>
 <span id="L342"><span class="lineNum">     342</span> <span class="tlaUNC">           0 :     for (modularity::IContextSetup* s : csetups) {</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaUNC">           0 :         s-&gt;onPreInit(runMode);</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaUNC">           0 :         s-&gt;resolveImports();</span></span>
 <span id="L344"><span class="lineNum">     344</span>              :     }</span>
 <span id="L345"><span class="lineNum">     345</span>              : </span>
 <span id="L346"><span class="lineNum">     346</span> <span class="tlaUNC">           0 :     for (modularity::IContextSetup* s : csetups) {</span></span>
-<span id="L347"><span class="lineNum">     347</span> <span class="tlaUNC">           0 :         s-&gt;onInit(runMode);</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaUNC">           0 :         s-&gt;onPreInit(runMode);</span></span>
 <span id="L348"><span class="lineNum">     348</span>              :     }</span>
 <span id="L349"><span class="lineNum">     349</span>              : </span>
 <span id="L350"><span class="lineNum">     350</span> <span class="tlaUNC">           0 :     for (modularity::IContextSetup* s : csetups) {</span></span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaUNC">           0 :         s-&gt;onAllInited(runMode);</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaUNC">           0 :         s-&gt;onInit(runMode);</span></span>
 <span id="L352"><span class="lineNum">     352</span>              :     }</span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L354"><span class="lineNum">     354</span>              : </span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaUNC">           0 : void BaseApplication::destroyContext(const modularity::ContextPtr&amp; ctx)</span></span>
-<span id="L356"><span class="lineNum">     356</span>              : {</span>
-<span id="L357"><span class="lineNum">     357</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L353"><span class="lineNum">     353</span>              : </span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaUNC">           0 :     for (modularity::IContextSetup* s : csetups) {</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaUNC">           0 :         s-&gt;onAllInited(runMode);</span></span>
+<span id="L356"><span class="lineNum">     356</span>              :     }</span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L358"><span class="lineNum">     358</span>              : </span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(ctx) {</span></span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L361"><span class="lineNum">     361</span>              :     }</span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaUNC">           0 : void BaseApplication::destroyContext(const modularity::ContextPtr&amp; ctx)</span></span>
+<span id="L360"><span class="lineNum">     360</span>              : {</span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
 <span id="L362"><span class="lineNum">     362</span>              : </span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaUNC">           0 :     LOGI() &lt;&lt; &quot;Destroying context with id: &quot; &lt;&lt; ctx-&gt;id;</span></span>
-<span id="L364"><span class="lineNum">     364</span>              : </span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaUNC">           0 :     auto it = std::find_if(m_contexts.begin(), m_contexts.end(),</span></span>
-<span id="L366"><span class="lineNum">     366</span> <span class="tlaUNC">           0 :                            [&amp;ctx](const ContextData&amp; c) { return c.ctxId-&gt;id == ctx-&gt;id; });</span></span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaUNC">           0 :     if (it == m_contexts.end()) {</span></span>
-<span id="L368"><span class="lineNum">     368</span> <span class="tlaUNC">           0 :         LOGW() &lt;&lt; &quot;Context not found: &quot; &lt;&lt; ctx-&gt;id;</span></span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L370"><span class="lineNum">     370</span>              :     }</span>
-<span id="L371"><span class="lineNum">     371</span>              : </span>
-<span id="L372"><span class="lineNum">     372</span>              :     //! The context is in the process of initializing.</span>
-<span id="L373"><span class="lineNum">     373</span>              :     //! It is not possible to delete the context until initialization is complete.</span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(!it-&gt;initializing) {</span></span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L376"><span class="lineNum">     376</span>              :     }</span>
-<span id="L377"><span class="lineNum">     377</span>              : </span>
-<span id="L378"><span class="lineNum">     378</span> <span class="tlaUNC">           0 :     doDestroyContext(*it);</span></span>
-<span id="L379"><span class="lineNum">     379</span>              : </span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaUNC">           0 :     m_contexts.erase(it);</span></span>
-<span id="L381"><span class="lineNum">     381</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L382"><span class="lineNum">     382</span>              : </span>
-<span id="L383"><span class="lineNum">     383</span> <span class="tlaUNC">           0 : void BaseApplication::doDestroyContext(const ContextData&amp; data)</span></span>
-<span id="L384"><span class="lineNum">     384</span>              : {</span>
-<span id="L385"><span class="lineNum">     385</span> <span class="tlaUNC">           0 :     for (modularity::IContextSetup* s : data.setups) {</span></span>
-<span id="L386"><span class="lineNum">     386</span> <span class="tlaUNC">           0 :         s-&gt;onDeinit();</span></span>
-<span id="L387"><span class="lineNum">     387</span>              :     }</span>
-<span id="L388"><span class="lineNum">     388</span>              : </span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(ctx) {</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L365"><span class="lineNum">     365</span>              :     }</span>
+<span id="L366"><span class="lineNum">     366</span>              : </span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaUNC">           0 :     LOGI() &lt;&lt; &quot;Destroying context with id: &quot; &lt;&lt; ctx-&gt;id;</span></span>
+<span id="L368"><span class="lineNum">     368</span>              : </span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaUNC">           0 :     auto it = std::find_if(m_contexts.begin(), m_contexts.end(),</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaUNC">           0 :                            [&amp;ctx](const ContextData&amp; c) { return c.ctxId-&gt;id == ctx-&gt;id; });</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaUNC">           0 :     if (it == m_contexts.end()) {</span></span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC">           0 :         LOGW() &lt;&lt; &quot;Context not found: &quot; &lt;&lt; ctx-&gt;id;</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L374"><span class="lineNum">     374</span>              :     }</span>
+<span id="L375"><span class="lineNum">     375</span>              : </span>
+<span id="L376"><span class="lineNum">     376</span>              :     //! The context is in the process of initializing.</span>
+<span id="L377"><span class="lineNum">     377</span>              :     //! It is not possible to delete the context until initialization is complete.</span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(!it-&gt;initializing) {</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L380"><span class="lineNum">     380</span>              :     }</span>
+<span id="L381"><span class="lineNum">     381</span>              : </span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaUNC">           0 :     doDestroyContext(*it);</span></span>
+<span id="L383"><span class="lineNum">     383</span>              : </span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaUNC">           0 :     m_contexts.erase(it);</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L386"><span class="lineNum">     386</span>              : </span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaUNC">           0 : void BaseApplication::doDestroyContext(const ContextData&amp; data)</span></span>
+<span id="L388"><span class="lineNum">     388</span>              : {</span>
 <span id="L389"><span class="lineNum">     389</span> <span class="tlaUNC">           0 :     for (modularity::IContextSetup* s : data.setups) {</span></span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaUNC">           0 :         s-&gt;onDestroy();</span></span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaUNC">           0 :         s-&gt;onDeinit();</span></span>
 <span id="L391"><span class="lineNum">     391</span>              :     }</span>
 <span id="L392"><span class="lineNum">     392</span>              : </span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaUNC">           0 :     qDeleteAll(data.setups);</span></span>
-<span id="L394"><span class="lineNum">     394</span>              : </span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaUNC">           0 :     modularity::removeIoC(data.ctxId);</span></span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L397"><span class="lineNum">     397</span>              : </span>
-<span id="L398"><span class="lineNum">     398</span>              : #ifndef NO_QT_SUPPORT</span>
-<span id="L399"><span class="lineNum">     399</span> <span class="tlaUNC">           0 : QWindow* BaseApplication::focusWindow() const</span></span>
-<span id="L400"><span class="lineNum">     400</span>              : {</span>
-<span id="L401"><span class="lineNum">     401</span> <span class="tlaUNC">           0 :     return qApp-&gt;focusWindow();</span></span>
-<span id="L402"><span class="lineNum">     402</span>              : }</span>
-<span id="L403"><span class="lineNum">     403</span>              : </span>
-<span id="L404"><span class="lineNum">     404</span> <span class="tlaUNC">           0 : bool BaseApplication::notify(QObject* object, QEvent* event)</span></span>
-<span id="L405"><span class="lineNum">     405</span>              : {</span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaUNC">           0 :     return qApp-&gt;notify(object, event);</span></span>
-<span id="L407"><span class="lineNum">     407</span>              : }</span>
-<span id="L408"><span class="lineNum">     408</span>              : </span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaUNC">           0 : Qt::KeyboardModifiers BaseApplication::keyboardModifiers() const</span></span>
-<span id="L410"><span class="lineNum">     410</span>              : {</span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaUNC">           0 :     return QApplication::keyboardModifiers();</span></span>
-<span id="L412"><span class="lineNum">     412</span>              : }</span>
-<span id="L413"><span class="lineNum">     413</span>              : </span>
-<span id="L414"><span class="lineNum">     414</span>              : #endif</span>
-<span id="L415"><span class="lineNum">     415</span>              : </span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaUNC">           0 : void BaseApplication::restart()</span></span>
-<span id="L417"><span class="lineNum">     417</span>              : {</span>
-<span id="L418"><span class="lineNum">     418</span> <span class="tlaUNC">           0 :     m_finishMode = FinishMode::Restart;</span></span>
-<span id="L419"><span class="lineNum">     419</span> <span class="tlaUNC">           0 :     QCoreApplication::exit();</span></span>
-<span id="L420"><span class="lineNum">     420</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L421"><span class="lineNum">     421</span>              : </span>
-<span id="L422"><span class="lineNum">     422</span> <span class="tlaUNC">           0 : void BaseApplication::finish()</span></span>
-<span id="L423"><span class="lineNum">     423</span>              : {</span>
-<span id="L424"><span class="lineNum">     424</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaUNC">           0 :     for (modularity::IContextSetup* s : data.setups) {</span></span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaUNC">           0 :         s-&gt;onDestroy();</span></span>
+<span id="L395"><span class="lineNum">     395</span>              :     }</span>
+<span id="L396"><span class="lineNum">     396</span>              : </span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaUNC">           0 :     qDeleteAll(data.setups);</span></span>
+<span id="L398"><span class="lineNum">     398</span>              : </span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaUNC">           0 :     modularity::removeIoC(data.ctxId);</span></span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L401"><span class="lineNum">     401</span>              : </span>
+<span id="L402"><span class="lineNum">     402</span>              : #ifndef NO_QT_SUPPORT</span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaUNC">           0 : QWindow* BaseApplication::focusWindow() const</span></span>
+<span id="L404"><span class="lineNum">     404</span>              : {</span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaUNC">           0 :     return qApp-&gt;focusWindow();</span></span>
+<span id="L406"><span class="lineNum">     406</span>              : }</span>
+<span id="L407"><span class="lineNum">     407</span>              : </span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaUNC">           0 : bool BaseApplication::notify(QObject* object, QEvent* event)</span></span>
+<span id="L409"><span class="lineNum">     409</span>              : {</span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaUNC">           0 :     return qApp-&gt;notify(object, event);</span></span>
+<span id="L411"><span class="lineNum">     411</span>              : }</span>
+<span id="L412"><span class="lineNum">     412</span>              : </span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaUNC">           0 : Qt::KeyboardModifiers BaseApplication::keyboardModifiers() const</span></span>
+<span id="L414"><span class="lineNum">     414</span>              : {</span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaUNC">           0 :     return QApplication::keyboardModifiers();</span></span>
+<span id="L416"><span class="lineNum">     416</span>              : }</span>
+<span id="L417"><span class="lineNum">     417</span>              : </span>
+<span id="L418"><span class="lineNum">     418</span>              : #endif</span>
+<span id="L419"><span class="lineNum">     419</span>              : </span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaUNC">           0 : void BaseApplication::restart()</span></span>
+<span id="L421"><span class="lineNum">     421</span>              : {</span>
+<span id="L422"><span class="lineNum">     422</span> <span class="tlaUNC">           0 :     m_finishMode = FinishMode::Restart;</span></span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaUNC">           0 :     QCoreApplication::exit();</span></span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L425"><span class="lineNum">     425</span>              : </span>
-<span id="L426"><span class="lineNum">     426</span> <span class="tlaUNC">           0 :     doFinish();</span></span>
-<span id="L427"><span class="lineNum">     427</span>              : </span>
-<span id="L428"><span class="lineNum">     428</span> <span class="tlaUNC">           0 :     PROFILER_PRINT;</span></span>
-<span id="L429"><span class="lineNum">     429</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L430"><span class="lineNum">     430</span>              : </span>
-<span id="L431"><span class="lineNum">     431</span> <span class="tlaUNC">           0 : void BaseApplication::doFinish()</span></span>
-<span id="L432"><span class="lineNum">     432</span>              : {</span>
-<span id="L433"><span class="lineNum">     433</span>              :     // Wait Thread Poll</span>
-<span id="L434"><span class="lineNum">     434</span>              : #ifdef QT_CONCURRENT_SUPPORTED</span>
-<span id="L435"><span class="lineNum">     435</span> <span class="tlaUNC">           0 :     QThreadPool* globalThreadPool = QThreadPool::globalInstance();</span></span>
-<span id="L436"><span class="lineNum">     436</span> <span class="tlaUNC">           0 :     if (globalThreadPool) {</span></span>
-<span id="L437"><span class="lineNum">     437</span> <span class="tlaUNC">           0 :         LOGI() &lt;&lt; &quot;activeThreadCount: &quot; &lt;&lt; globalThreadPool-&gt;activeThreadCount();</span></span>
-<span id="L438"><span class="lineNum">     438</span> <span class="tlaUNC">           0 :         globalThreadPool-&gt;waitForDone();</span></span>
-<span id="L439"><span class="lineNum">     439</span>              :     }</span>
-<span id="L440"><span class="lineNum">     440</span>              : #endif</span>
-<span id="L441"><span class="lineNum">     441</span>              : </span>
-<span id="L442"><span class="lineNum">     442</span>              : // Deinit</span>
-<span id="L443"><span class="lineNum">     443</span> <span class="tlaUNC">           0 :     async::processMessages();</span></span>
-<span id="L444"><span class="lineNum">     444</span>              : </span>
-<span id="L445"><span class="lineNum">     445</span>              : // Deinit and delete contexts</span>
-<span id="L446"><span class="lineNum">     446</span> <span class="tlaUNC">           0 :     std::vector&lt;muse::modularity::ContextPtr&gt; ctxs = contexts();</span></span>
-<span id="L447"><span class="lineNum">     447</span> <span class="tlaUNC">           0 :     for (auto&amp; c : ctxs) {</span></span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaUNC">           0 :         destroyContext(c);</span></span>
-<span id="L449"><span class="lineNum">     449</span>              :     }</span>
-<span id="L450"><span class="lineNum">     450</span>              : </span>
-<span id="L451"><span class="lineNum">     451</span> <span class="tlaUNC">           0 :     for (modularity::IModuleSetup* m : m_modules) {</span></span>
-<span id="L452"><span class="lineNum">     452</span> <span class="tlaUNC">           0 :         m-&gt;onDeinit();</span></span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaUNC">           0 : void BaseApplication::finish()</span></span>
+<span id="L427"><span class="lineNum">     427</span>              : {</span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaUNC">           0 :     TRACEFUNC;</span></span>
+<span id="L429"><span class="lineNum">     429</span>              : </span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaUNC">           0 :     doFinish();</span></span>
+<span id="L431"><span class="lineNum">     431</span>              : </span>
+<span id="L432"><span class="lineNum">     432</span> <span class="tlaUNC">           0 :     PROFILER_PRINT;</span></span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L434"><span class="lineNum">     434</span>              : </span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaUNC">           0 : void BaseApplication::doFinish()</span></span>
+<span id="L436"><span class="lineNum">     436</span>              : {</span>
+<span id="L437"><span class="lineNum">     437</span>              :     // Wait Thread Poll</span>
+<span id="L438"><span class="lineNum">     438</span>              : #ifdef QT_CONCURRENT_SUPPORTED</span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaUNC">           0 :     QThreadPool* globalThreadPool = QThreadPool::globalInstance();</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaUNC">           0 :     if (globalThreadPool) {</span></span>
+<span id="L441"><span class="lineNum">     441</span> <span class="tlaUNC">           0 :         LOGI() &lt;&lt; &quot;activeThreadCount: &quot; &lt;&lt; globalThreadPool-&gt;activeThreadCount();</span></span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaUNC">           0 :         globalThreadPool-&gt;waitForDone();</span></span>
+<span id="L443"><span class="lineNum">     443</span>              :     }</span>
+<span id="L444"><span class="lineNum">     444</span>              : #endif</span>
+<span id="L445"><span class="lineNum">     445</span>              : </span>
+<span id="L446"><span class="lineNum">     446</span>              : // Deinit</span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaUNC">           0 :     async::processMessages();</span></span>
+<span id="L448"><span class="lineNum">     448</span>              : </span>
+<span id="L449"><span class="lineNum">     449</span>              : // Deinit and delete contexts</span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaUNC">           0 :     std::vector&lt;muse::modularity::ContextPtr&gt; ctxs = contexts();</span></span>
+<span id="L451"><span class="lineNum">     451</span> <span class="tlaUNC">           0 :     for (auto&amp; c : ctxs) {</span></span>
+<span id="L452"><span class="lineNum">     452</span> <span class="tlaUNC">           0 :         destroyContext(c);</span></span>
 <span id="L453"><span class="lineNum">     453</span>              :     }</span>
 <span id="L454"><span class="lineNum">     454</span>              : </span>
-<span id="L455"><span class="lineNum">     455</span> <span class="tlaUNC">           0 :     m_globalModule-&gt;onDeinit();</span></span>
-<span id="L456"><span class="lineNum">     456</span>              : </span>
-<span id="L457"><span class="lineNum">     457</span> <span class="tlaUNC">           0 :     for (modularity::IModuleSetup* m : m_modules) {</span></span>
-<span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC">           0 :         m-&gt;onDestroy();</span></span>
-<span id="L459"><span class="lineNum">     459</span>              :     }</span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaUNC">           0 :     for (modularity::IModuleSetup* m : m_modules) {</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaUNC">           0 :         m-&gt;onDeinit();</span></span>
+<span id="L457"><span class="lineNum">     457</span>              :     }</span>
+<span id="L458"><span class="lineNum">     458</span>              : </span>
+<span id="L459"><span class="lineNum">     459</span> <span class="tlaUNC">           0 :     m_globalModule-&gt;onDeinit();</span></span>
 <span id="L460"><span class="lineNum">     460</span>              : </span>
-<span id="L461"><span class="lineNum">     461</span> <span class="tlaUNC">           0 :     m_globalModule-&gt;onDestroy();</span></span>
-<span id="L462"><span class="lineNum">     462</span>              : </span>
-<span id="L463"><span class="lineNum">     463</span>              : // Delete modules</span>
-<span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC">           0 :     qDeleteAll(m_modules);</span></span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaUNC">           0 :     m_modules.clear();</span></span>
+<span id="L461"><span class="lineNum">     461</span> <span class="tlaUNC">           0 :     for (modularity::IModuleSetup* m : m_modules) {</span></span>
+<span id="L462"><span class="lineNum">     462</span> <span class="tlaUNC">           0 :         m-&gt;onDestroy();</span></span>
+<span id="L463"><span class="lineNum">     463</span>              :     }</span>
+<span id="L464"><span class="lineNum">     464</span>              : </span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaUNC">           0 :     m_globalModule-&gt;onDestroy();</span></span>
 <span id="L466"><span class="lineNum">     466</span>              : </span>
-<span id="L467"><span class="lineNum">     467</span> <span class="tlaUNC">           0 :     delete m_globalModule;</span></span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaUNC">           0 :     m_globalModule = nullptr;</span></span>
-<span id="L469"><span class="lineNum">     469</span>              : </span>
-<span id="L470"><span class="lineNum">     470</span> <span class="tlaUNC">           0 :     muse::modularity::resetAll();</span></span>
-<span id="L471"><span class="lineNum">     471</span>              : </span>
-<span id="L472"><span class="lineNum">     472</span> <span class="tlaUNC">           0 :     if (m_finishMode == IApplication::FinishMode::Restart) {</span></span>
-<span id="L473"><span class="lineNum">     473</span>              : #ifdef QT_QPROCESS_SUPPORTED</span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC">           0 :         QString program = qApp-&gt;arguments()[0];</span></span>
+<span id="L467"><span class="lineNum">     467</span>              : // Delete modules</span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaUNC">           0 :     qDeleteAll(m_modules);</span></span>
+<span id="L469"><span class="lineNum">     469</span> <span class="tlaUNC">           0 :     m_modules.clear();</span></span>
+<span id="L470"><span class="lineNum">     470</span>              : </span>
+<span id="L471"><span class="lineNum">     471</span> <span class="tlaUNC">           0 :     delete m_globalModule;</span></span>
+<span id="L472"><span class="lineNum">     472</span> <span class="tlaUNC">           0 :     m_globalModule = nullptr;</span></span>
+<span id="L473"><span class="lineNum">     473</span>              : </span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC">           0 :     muse::modularity::resetAll();</span></span>
 <span id="L475"><span class="lineNum">     475</span>              : </span>
-<span id="L476"><span class="lineNum">     476</span>              :         // NOTE: remove the first argument - the program name</span>
-<span id="L477"><span class="lineNum">     477</span> <span class="tlaUNC">           0 :         QStringList arguments = qApp-&gt;arguments().mid(1);</span></span>
-<span id="L478"><span class="lineNum">     478</span>              : </span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaUNC">           0 :         QProcess::startDetached(program, arguments);</span></span>
-<span id="L480"><span class="lineNum">     480</span>              : #else</span>
-<span id="L481"><span class="lineNum">     481</span>              :         NOT_SUPPORTED;</span>
-<span id="L482"><span class="lineNum">     482</span>              : #endif</span>
-<span id="L483"><span class="lineNum">     483</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L484"><span class="lineNum">     484</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L485"><span class="lineNum">     485</span>              : </span>
-<span id="L486"><span class="lineNum">     486</span> <span class="tlaUNC">           0 : void BaseApplication::processEvents()</span></span>
-<span id="L487"><span class="lineNum">     487</span>              : {</span>
-<span id="L488"><span class="lineNum">     488</span> <span class="tlaUNC">           0 :     qApp-&gt;processEvents();</span></span>
-<span id="L489"><span class="lineNum">     489</span> <span class="tlaUNC">           0 :     tickerProvider()-&gt;forceSchedule();</span></span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L476"><span class="lineNum">     476</span> <span class="tlaUNC">           0 :     if (m_finishMode == IApplication::FinishMode::Restart) {</span></span>
+<span id="L477"><span class="lineNum">     477</span>              : #ifdef QT_QPROCESS_SUPPORTED</span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaUNC">           0 :         QString program = qApp-&gt;arguments()[0];</span></span>
+<span id="L479"><span class="lineNum">     479</span>              : </span>
+<span id="L480"><span class="lineNum">     480</span>              :         // NOTE: remove the first argument - the program name</span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaUNC">           0 :         QStringList arguments = qApp-&gt;arguments().mid(1);</span></span>
+<span id="L482"><span class="lineNum">     482</span>              : </span>
+<span id="L483"><span class="lineNum">     483</span> <span class="tlaUNC">           0 :         QProcess::startDetached(program, arguments);</span></span>
+<span id="L484"><span class="lineNum">     484</span>              : #else</span>
+<span id="L485"><span class="lineNum">     485</span>              :         NOT_SUPPORTED;</span>
+<span id="L486"><span class="lineNum">     486</span>              : #endif</span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L488"><span class="lineNum">     488</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L489"><span class="lineNum">     489</span>              : </span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaUNC">           0 : void BaseApplication::processEvents()</span></span>
+<span id="L491"><span class="lineNum">     491</span>              : {</span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaUNC">           0 :     qApp-&gt;processEvents();</span></span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaUNC">           0 :     tickerProvider()-&gt;forceSchedule();</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>
             </tr>

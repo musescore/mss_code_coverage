@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">71.7&nbsp;%</td>
-            <td class="headerCovTableEntry">1135</td>
-            <td class="headerCovTableEntry">814</td>
+            <td class="headerCovTableEntry">1134</td>
+            <td class="headerCovTableEntry">813</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -1255,576 +1255,575 @@
 <span id="L1197"><span class="lineNum">    1197</span> <span class="tlaGNC">           1 :             Slur* slur1 = Factory::createSlur(score-&gt;dummy());</span></span>
 <span id="L1198"><span class="lineNum">    1198</span> <span class="tlaGNC">           1 :             slur1-&gt;setStartElement(gnote-&gt;chord());</span></span>
 <span id="L1199"><span class="lineNum">    1199</span> <span class="tlaGNC">           1 :             slur1-&gt;setEndElement(note-&gt;chord());</span></span>
-<span id="L1200"><span class="lineNum">    1200</span> <span class="tlaGNC">           1 :             slur1-&gt;setOwnershipParent(0);</span></span>
-<span id="L1201"><span class="lineNum">    1201</span> <span class="tlaGNC">           1 :             slur1-&gt;setTrack(note-&gt;staffIdx());</span></span>
-<span id="L1202"><span class="lineNum">    1202</span> <span class="tlaGNC">           1 :             slur1-&gt;setTrack2(note-&gt;staffIdx());</span></span>
-<span id="L1203"><span class="lineNum">    1203</span> <span class="tlaGNC">           1 :             slur1-&gt;setTick(gnote-&gt;chord()-&gt;tick());</span></span>
-<span id="L1204"><span class="lineNum">    1204</span> <span class="tlaGNC">           1 :             slur1-&gt;setTick2(note-&gt;chord()-&gt;tick());</span></span>
-<span id="L1205"><span class="lineNum">    1205</span> <span class="tlaGNC">           1 :             score-&gt;addElement(slur1);</span></span>
-<span id="L1206"><span class="lineNum">    1206</span>              :             //TODO: Add a 'slide' guitar effect when implemented</span>
-<span id="L1207"><span class="lineNum">    1207</span>              :             //note-&gt;setSlideNote(gn);</span>
-<span id="L1208"><span class="lineNum">    1208</span>              :         }</span>
-<span id="L1209"><span class="lineNum">    1209</span>              :     }</span>
-<span id="L1210"><span class="lineNum">    1210</span> <span class="tlaGNC">          89 :     if (modMask2 &amp; EFFECT_STACCATO) {</span></span>
-<span id="L1211"><span class="lineNum">    1211</span> <span class="tlaUNC tlaBgUNC">           0 :         Chord* chord = note-&gt;chord();</span></span>
-<span id="L1212"><span class="lineNum">    1212</span> <span class="tlaUNC">           0 :         Articulation* a = Factory::createArticulation(chord);</span></span>
-<span id="L1213"><span class="lineNum">    1213</span> <span class="tlaUNC">           0 :         a-&gt;setSymId(SymId::articStaccatoAbove);</span></span>
-<span id="L1214"><span class="lineNum">    1214</span> <span class="tlaUNC">           0 :         bool add = true;</span></span>
-<span id="L1215"><span class="lineNum">    1215</span> <span class="tlaUNC">           0 :         for (auto a1 : chord-&gt;articulations()) {</span></span>
-<span id="L1216"><span class="lineNum">    1216</span> <span class="tlaUNC">           0 :             if (a1-&gt;symId() == SymId::articStaccatoAbove) {</span></span>
-<span id="L1217"><span class="lineNum">    1217</span> <span class="tlaUNC">           0 :                 add = false;</span></span>
-<span id="L1218"><span class="lineNum">    1218</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L1219"><span class="lineNum">    1219</span>              :             }</span>
-<span id="L1220"><span class="lineNum">    1220</span>              :         }</span>
-<span id="L1221"><span class="lineNum">    1221</span> <span class="tlaUNC">           0 :         if (add) {</span></span>
-<span id="L1222"><span class="lineNum">    1222</span> <span class="tlaUNC">           0 :             chord-&gt;add(a);</span></span>
-<span id="L1223"><span class="lineNum">    1223</span>              :         }</span>
-<span id="L1224"><span class="lineNum">    1224</span>              :     }</span>
-<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaGNC tlaBgGNC">          89 :     if (modMask2 &amp; EFFECT_PALM_MUTE) {</span></span>
-<span id="L1226"><span class="lineNum">    1226</span> <span class="tlaGNC">           3 :         result.palmMute = true;</span></span>
-<span id="L1227"><span class="lineNum">    1227</span>              :     }</span>
-<span id="L1228"><span class="lineNum">    1228</span>              : </span>
-<span id="L1229"><span class="lineNum">    1229</span> <span class="tlaGNC">          89 :     if (modMask2 &amp; EFFECT_TREMOLO) {      // tremolo picking length</span></span>
-<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaGNC">           2 :         int tremoloDivision = readUInt8();</span></span>
-<span id="L1231"><span class="lineNum">    1231</span> <span class="tlaGNC">           2 :         if (tremoloDivision &gt;= 1 &amp;&amp; tremoloDivision &lt;= 3) {</span></span>
-<span id="L1232"><span class="lineNum">    1232</span> <span class="tlaGNC">           2 :             TremoloType type = tremoloType(tremoloDivision);</span></span>
-<span id="L1233"><span class="lineNum">    1233</span> <span class="tlaGNC">           2 :             DO_ASSERT(!isTremoloTwoChord(type));</span></span>
-<span id="L1234"><span class="lineNum">    1234</span> <span class="tlaGNC">           2 :             Chord* chord = note-&gt;chord();</span></span>
-<span id="L1235"><span class="lineNum">    1235</span> <span class="tlaGNC">           2 :             TremoloSingleChord* t = Factory::createTremoloSingleChord(chord);</span></span>
-<span id="L1236"><span class="lineNum">    1236</span> <span class="tlaGNC">           2 :             t-&gt;setTremoloType(type);</span></span>
-<span id="L1237"><span class="lineNum">    1237</span> <span class="tlaGNC">           2 :             chord-&gt;add(t);</span></span>
-<span id="L1238"><span class="lineNum">    1238</span> <span class="tlaGNC">           2 :             m_tremolosInChords[chord] = type;</span></span>
-<span id="L1239"><span class="lineNum">    1239</span> <span class="tlaGNC">           2 :         } else {</span></span>
-<span id="L1240"><span class="lineNum">    1240</span> <span class="tlaUNC tlaBgUNC">           0 :             LOGD(&quot;Unknown tremolo value&quot;);</span></span>
-<span id="L1241"><span class="lineNum">    1241</span>              :         }</span>
-<span id="L1242"><span class="lineNum">    1242</span>              :     }</span>
-<span id="L1243"><span class="lineNum">    1243</span> <span class="tlaGNC tlaBgGNC">          89 :     if (modMask2 &amp; EFFECT_SLIDE) {</span></span>
-<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaGNC">          22 :         int slideKind = readUInt8();</span></span>
-<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaGNC">          22 :         ChordLine* sld = nullptr;</span></span>
-<span id="L1246"><span class="lineNum">    1246</span> <span class="tlaGNC">          22 :         ChordLineType slideType = ChordLineType::NOTYPE;</span></span>
-<span id="L1247"><span class="lineNum">    1247</span>              : </span>
-<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaGNC">          22 :         if (slideKind &amp; SLIDE_OUT_DOWN) {</span></span>
-<span id="L1249"><span class="lineNum">    1249</span> <span class="tlaGNC">           4 :             slideKind &amp;= ~SLIDE_OUT_DOWN;</span></span>
-<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaGNC">           4 :             sld = Factory::createChordLine(score-&gt;dummy());</span></span>
-<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaGNC">           4 :             slideType = ChordLineType::FALL;</span></span>
-<span id="L1252"><span class="lineNum">    1252</span>              :         }</span>
-<span id="L1253"><span class="lineNum">    1253</span>              :         // slide out upwards (doit)</span>
-<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaGNC">          22 :         if (slideKind &amp; SLIDE_OUT_UP) {</span></span>
-<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaGNC">           4 :             slideKind &amp;= ~SLIDE_OUT_UP;</span></span>
-<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaGNC">           4 :             sld = Factory::createChordLine(score-&gt;dummy());</span></span>
-<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaGNC">           4 :             slideType = ChordLineType::DOIT;</span></span>
-<span id="L1258"><span class="lineNum">    1258</span>              :         }</span>
-<span id="L1259"><span class="lineNum">    1259</span>              :         // slide in from below (plop)</span>
-<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaGNC">          22 :         if (slideKind &amp; SLIDE_IN_BELOW) {</span></span>
-<span id="L1261"><span class="lineNum">    1261</span> <span class="tlaGNC">           4 :             slideKind &amp;= ~SLIDE_IN_BELOW;</span></span>
-<span id="L1262"><span class="lineNum">    1262</span> <span class="tlaGNC">           4 :             sld = Factory::createChordLine(score-&gt;dummy());</span></span>
-<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaGNC">           4 :             slideType = ChordLineType::PLOP;</span></span>
-<span id="L1264"><span class="lineNum">    1264</span>              :         }</span>
-<span id="L1265"><span class="lineNum">    1265</span>              :         // slide in from above (scoop)</span>
-<span id="L1266"><span class="lineNum">    1266</span> <span class="tlaGNC">          22 :         if (slideKind &amp; SLIDE_IN_ABOVE) {</span></span>
-<span id="L1267"><span class="lineNum">    1267</span> <span class="tlaGNC">           4 :             slideKind &amp;= ~SLIDE_IN_ABOVE;</span></span>
-<span id="L1268"><span class="lineNum">    1268</span> <span class="tlaGNC">           4 :             sld = Factory::createChordLine(score-&gt;dummy());</span></span>
-<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaGNC">           4 :             slideType = ChordLineType::SCOOP;</span></span>
-<span id="L1270"><span class="lineNum">    1270</span>              :         }</span>
-<span id="L1271"><span class="lineNum">    1271</span>              : </span>
-<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaGNC">          22 :         if (sld) {</span></span>
-<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaGNC">          16 :             sld-&gt;setChordLineType(slideType);</span></span>
-<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaGNC">          16 :             sld-&gt;setStraight(true);</span></span>
-<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaGNC">          16 :             note-&gt;chord()-&gt;add(sld);</span></span>
-<span id="L1276"><span class="lineNum">    1276</span> <span class="tlaGNC">          16 :             sld-&gt;setNote(note);</span></span>
-<span id="L1277"><span class="lineNum">    1277</span>              :         }</span>
-<span id="L1278"><span class="lineNum">    1278</span>              : </span>
-<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaGNC">          22 :         if (slideKind &amp; LEGATO_SLIDE) {</span></span>
-<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaGNC">           2 :             slideKind &amp;= ~LEGATO_SLIDE;</span></span>
-<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaGNC">           2 :             slideList.push_back(nullptr);</span></span>
-<span id="L1282"><span class="lineNum">    1282</span> <span class="tlaGNC">           2 :             createSlur(true, note-&gt;staffIdx(), note-&gt;chord());</span></span>
-<span id="L1283"><span class="lineNum">    1283</span>              :         }</span>
-<span id="L1284"><span class="lineNum">    1284</span>              : </span>
-<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaGNC">          22 :         if (slideKind &amp; SHIFT_SLIDE) {</span></span>
-<span id="L1286"><span class="lineNum">    1286</span> <span class="tlaGNC">           1 :             slideKind &amp;= ~SHIFT_SLIDE;</span></span>
-<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaGNC">           1 :             slideList.push_back(note);</span></span>
-<span id="L1288"><span class="lineNum">    1288</span>              :         }</span>
-<span id="L1289"><span class="lineNum">    1289</span>              :     }</span>
-<span id="L1290"><span class="lineNum">    1290</span>              : </span>
-<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaGNC">          89 :     if (modMask2 &amp; EFFECT_ARTIFICIAL_HARMONIC) {</span></span>
-<span id="L1292"><span class="lineNum">    1292</span> <span class="tlaGNC">          25 :         int type = readChar();</span></span>
-<span id="L1293"><span class="lineNum">    1293</span> <span class="tlaGNC">          25 :         if (type == HARMONIC_MARK_NATURAL) {</span></span>
-<span id="L1294"><span class="lineNum">    1294</span> <span class="tlaUNC tlaBgUNC">           0 :             int fret = note-&gt;fret();</span></span>
-<span id="L1295"><span class="lineNum">    1295</span>              : </span>
-<span id="L1296"><span class="lineNum">    1296</span> <span class="tlaUNC">           0 :             note-&gt;setHarmonic(true);</span></span>
-<span id="L1297"><span class="lineNum">    1297</span> <span class="tlaUNC">           0 :             float harmonicFret = naturalHarmonicFromFret(fret);</span></span>
-<span id="L1298"><span class="lineNum">    1298</span> <span class="tlaUNC">           0 :             int harmonicOvertone = utils::harmonicOvertone(note, harmonicFret, type);</span></span>
-<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaUNC">           0 :             note-&gt;setDisplayFret(Note::DisplayFretOption::NaturalHarmonic);</span></span>
-<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaUNC">           0 :             note-&gt;setHarmonicFret(harmonicFret);</span></span>
-<span id="L1301"><span class="lineNum">    1301</span> <span class="tlaUNC">           0 :             auto staff = note-&gt;staff();</span></span>
-<span id="L1302"><span class="lineNum">    1302</span> <span class="tlaUNC">           0 :             int pitch = staff-&gt;part()-&gt;instrument()-&gt;stringData()-&gt;getPitch(note-&gt;string(), harmonicOvertone, staff, note-&gt;tick());</span></span>
-<span id="L1303"><span class="lineNum">    1303</span>              : </span>
-<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :             note-&gt;setPitch(clampPitch(pitch));</span></span>
-<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaUNC">           0 :             note-&gt;setTpcFromPitch(Prefer::SHARPS);</span></span>
-<span id="L1306"><span class="lineNum">    1306</span> <span class="tlaGNC tlaBgGNC">          25 :         } else if (type &gt;= HARMONIC_MARK_ARTIFICIAL &amp;&amp; type &lt;= HARMONIC_MARK_SEMI) {</span></span>
-<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaGNC">          25 :             int fret = (type == HARMONIC_MARK_TAP ? (readChar() - note-&gt;fret()) : note-&gt;fret());</span></span>
-<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaGNC">          25 :             float midi = note-&gt;pitch() + fret;</span></span>
-<span id="L1309"><span class="lineNum">    1309</span> <span class="tlaGNC">          25 :             int currentOctave = floor(midi / 12);</span></span>
-<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaGNC">          25 :             auto harmNote = (type == HARMONIC_MARK_ARTIFICIAL ? readChar() : 0);</span></span>
-<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaGNC">          25 :             if (type == HARMONIC_MARK_ARTIFICIAL) {</span></span>
-<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaGNC">          19 :                 readChar();</span></span>
-<span id="L1313"><span class="lineNum">    1313</span>              :             }</span>
-<span id="L1314"><span class="lineNum">    1314</span>              : </span>
-<span id="L1315"><span class="lineNum">    1315</span> <span class="tlaGNC">          25 :             auto octave = currentOctave + (type == HARMONIC_MARK_ARTIFICIAL ? readChar() : 0);</span></span>
-<span id="L1316"><span class="lineNum">    1316</span>              : </span>
-<span id="L1317"><span class="lineNum">    1317</span> <span class="tlaGNC">          25 :             Note* harmonicNote = Factory::createNote(note-&gt;chord());</span></span>
-<span id="L1318"><span class="lineNum">    1318</span>              : </span>
-<span id="L1319"><span class="lineNum">    1319</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setHarmonic(true);</span></span>
-<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setPlay(false);</span></span>
-<span id="L1321"><span class="lineNum">    1321</span> <span class="tlaGNC">          25 :             note-&gt;setPlay(true);</span></span>
-<span id="L1322"><span class="lineNum">    1322</span>              :             /// @note option to show or not additional harmonic fret in &quot;&lt;&gt;&quot; to be implemented</span>
-<span id="L1323"><span class="lineNum">    1323</span>              :             ///harmonicNote-&gt;setDisplayFret(Note::DisplayFretOption::ArtificialHarmonic);</span>
-<span id="L1324"><span class="lineNum">    1324</span>              :             ///note-&gt;setDisplayFret(Note::DisplayFretOption::Hide);</span>
-<span id="L1325"><span class="lineNum">    1325</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setDisplayFret(Note::DisplayFretOption::Hide);</span></span>
-<span id="L1326"><span class="lineNum">    1326</span> <span class="tlaGNC">          25 :             m_harmonicNotes[note] = harmonicNote;</span></span>
-<span id="L1327"><span class="lineNum">    1327</span>              : </span>
-<span id="L1328"><span class="lineNum">    1328</span> <span class="tlaGNC">          25 :             Staff* staff = note-&gt;staff();</span></span>
-<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaGNC">          25 :             float harmonicFret = 0;</span></span>
-<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaGNC">          25 :             switch (static_cast&lt;int&gt;(((octave * 12) + harmNote) - midi)) {</span></span>
-<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaUNC tlaBgUNC">           0 :             case 4:</span></span>
-<span id="L1332"><span class="lineNum">    1332</span> <span class="tlaUNC">           0 :                 harmonicFret = 12;</span></span>
-<span id="L1333"><span class="lineNum">    1333</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaUNC">           0 :             case 11:</span></span>
-<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaUNC">           0 :                 harmonicFret = 7;</span></span>
-<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaUNC">           0 :             case 16:</span></span>
-<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaUNC">           0 :                 harmonicFret = 5;</span></span>
-<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaGNC tlaBgGNC">           1 :             case 20:</span></span>
-<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaGNC">           1 :                 harmonicFret = 4;</span></span>
-<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaGNC">           1 :                 break;</span></span>
-<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaUNC tlaBgUNC">           0 :             case 23:</span></span>
-<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 :                 harmonicFret = 3.2f;</span></span>
-<span id="L1345"><span class="lineNum">    1345</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaUNC">           0 :             case 25:</span></span>
-<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaUNC">           0 :                 harmonicFret = 2.7f;</span></span>
-<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaUNC">           0 :             case 28:</span></span>
-<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaUNC">           0 :                 harmonicFret = 2.4f;</span></span>
-<span id="L1351"><span class="lineNum">    1351</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L1352"><span class="lineNum">    1352</span> <span class="tlaGNC tlaBgGNC">          24 :             default:</span></span>
-<span id="L1353"><span class="lineNum">    1353</span> <span class="tlaGNC">          24 :                 harmonicFret = 12;</span></span>
-<span id="L1354"><span class="lineNum">    1354</span> <span class="tlaGNC">          24 :                 break;</span></span>
-<span id="L1355"><span class="lineNum">    1355</span>              :             }</span>
-<span id="L1356"><span class="lineNum">    1356</span>              : </span>
-<span id="L1357"><span class="lineNum">    1357</span> <span class="tlaGNC">          25 :             int overtoneFret = utils::harmonicOvertone(note, harmonicFret, type);</span></span>
-<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setString(note-&gt;string());</span></span>
-<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setFret(note-&gt;fret());</span></span>
-<span id="L1360"><span class="lineNum">    1360</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setHarmonicFret(harmonicFret + fret);</span></span>
-<span id="L1361"><span class="lineNum">    1361</span>              : </span>
-<span id="L1362"><span class="lineNum">    1362</span> <span class="tlaGNC">          25 :             int pitch = staff-&gt;part()-&gt;instrument()-&gt;stringData()-&gt;getPitch(note-&gt;string(), overtoneFret, staff, note-&gt;tick());</span></span>
-<span id="L1363"><span class="lineNum">    1363</span>              : </span>
-<span id="L1364"><span class="lineNum">    1364</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setPitch(clampPitch(pitch));</span></span>
-<span id="L1365"><span class="lineNum">    1365</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setTpcFromPitch(Prefer::SHARPS);</span></span>
-<span id="L1366"><span class="lineNum">    1366</span> <span class="tlaGNC">          25 :             note-&gt;setHarmonicPitchOffset(harmonicNote-&gt;pitch() - note-&gt;pitch());</span></span>
-<span id="L1367"><span class="lineNum">    1367</span> <span class="tlaGNC">          25 :             note-&gt;chord()-&gt;add(harmonicNote);</span></span>
-<span id="L1368"><span class="lineNum">    1368</span>              : </span>
-<span id="L1369"><span class="lineNum">    1369</span> <span class="tlaGNC">          25 :             switch (type) {</span></span>
-<span id="L1370"><span class="lineNum">    1370</span> <span class="tlaGNC">          19 :             case HARMONIC_MARK_ARTIFICIAL:</span></span>
-<span id="L1371"><span class="lineNum">    1371</span> <span class="tlaGNC">          19 :                 result.harmonicArtificial = true;</span></span>
-<span id="L1372"><span class="lineNum">    1372</span> <span class="tlaGNC">          19 :                 break;</span></span>
-<span id="L1373"><span class="lineNum">    1373</span> <span class="tlaUNC tlaBgUNC">           0 :             case HARMONIC_MARK_PINCH:</span></span>
-<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaUNC">           0 :                 result.harmonicPinch = true;</span></span>
-<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L1376"><span class="lineNum">    1376</span> <span class="tlaGNC tlaBgGNC">           1 :             case HARMONIC_MARK_TAP:</span></span>
-<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaGNC">           1 :                 result.harmonicTap = true;</span></span>
-<span id="L1378"><span class="lineNum">    1378</span> <span class="tlaGNC">           1 :                 break;</span></span>
-<span id="L1379"><span class="lineNum">    1379</span> <span class="tlaGNC">           5 :             case HARMONIC_MARK_SEMI:</span></span>
-<span id="L1380"><span class="lineNum">    1380</span> <span class="tlaGNC">           5 :                 result.harmonicSemi = true;</span></span>
-<span id="L1381"><span class="lineNum">    1381</span> <span class="tlaGNC">           5 :                 break;</span></span>
-<span id="L1382"><span class="lineNum">    1382</span>              :             }</span>
-<span id="L1383"><span class="lineNum">    1383</span>              :         }</span>
-<span id="L1384"><span class="lineNum">    1384</span>              :     }</span>
-<span id="L1385"><span class="lineNum">    1385</span>              : </span>
-<span id="L1386"><span class="lineNum">    1386</span> <span class="tlaGNC">          89 :     if (bendParent) {</span></span>
-<span id="L1387"><span class="lineNum">    1387</span> <span class="tlaGNC">          12 :         createBend(bendParent, bendData);</span></span>
-<span id="L1388"><span class="lineNum">    1388</span>              :     }</span>
-<span id="L1389"><span class="lineNum">    1389</span>              : </span>
-<span id="L1390"><span class="lineNum">    1390</span> <span class="tlaGNC">          89 :     if (modMask2 &amp; EFFECT_VIBRATO) {</span></span>
-<span id="L1391"><span class="lineNum">    1391</span> <span class="tlaGNC">           7 :         result.vibrato = true;</span></span>
-<span id="L1392"><span class="lineNum">    1392</span>              :     }</span>
-<span id="L1393"><span class="lineNum">    1393</span>              : </span>
-<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaGNC">          89 :     if (modMask2 &amp; EFFECT_TRILL) {</span></span>
-<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaUNC tlaBgUNC">           0 :         readUInt8();          // trill fret</span></span>
-<span id="L1396"><span class="lineNum">    1396</span>              : </span>
-<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaUNC">           0 :         int period = readUInt8();          // trill length</span></span>
-<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaUNC">           0 :         result.trill = true;</span></span>
-<span id="L1399"><span class="lineNum">    1399</span>              : </span>
-<span id="L1400"><span class="lineNum">    1400</span> <span class="tlaUNC">           0 :         switch (period) {</span></span>
-<span id="L1401"><span class="lineNum">    1401</span> <span class="tlaUNC">           0 :         case 1:                     // 16</span></span>
-<span id="L1402"><span class="lineNum">    1402</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaUNC">           0 :         case 2:                     // 32</span></span>
-<span id="L1404"><span class="lineNum">    1404</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L1405"><span class="lineNum">    1405</span> <span class="tlaUNC">           0 :         case 3:                     // 64</span></span>
-<span id="L1406"><span class="lineNum">    1406</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L1407"><span class="lineNum">    1407</span> <span class="tlaUNC">           0 :         default:</span></span>
-<span id="L1408"><span class="lineNum">    1408</span> <span class="tlaUNC">           0 :             LOGD(&quot;unknown trill period %d&quot;, period);</span></span>
-<span id="L1409"><span class="lineNum">    1409</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L1410"><span class="lineNum">    1410</span>              :         }</span>
-<span id="L1411"><span class="lineNum">    1411</span>              :     }</span>
-<span id="L1412"><span class="lineNum">    1412</span> <span class="tlaGNC tlaBgGNC">          89 :     return result;</span></span>
-<span id="L1413"><span class="lineNum">    1413</span> <span class="tlaGNC">          89 : }</span></span>
-<span id="L1414"><span class="lineNum">    1414</span>              : </span>
-<span id="L1415"><span class="lineNum">    1415</span>              : //---------------------------------------------------------</span>
-<span id="L1416"><span class="lineNum">    1416</span>              : //   readNote</span>
-<span id="L1417"><span class="lineNum">    1417</span>              : //---------------------------------------------------------</span>
-<span id="L1418"><span class="lineNum">    1418</span>              : </span>
-<span id="L1419"><span class="lineNum">    1419</span> <span class="tlaGNC">         639 : GuitarPro::ReadNoteResult GuitarPro5::readNote(int string, Note* note)</span></span>
-<span id="L1420"><span class="lineNum">    1420</span>              : {</span>
-<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaGNC">         639 :     uint8_t noteBits = readUInt8();</span></span>
-<span id="L1422"><span class="lineNum">    1422</span>              :     //</span>
-<span id="L1423"><span class="lineNum">    1423</span>              :     // noteBits:</span>
-<span id="L1424"><span class="lineNum">    1424</span>              :     //    7 - Right hand or left hand fingering;</span>
-<span id="L1425"><span class="lineNum">    1425</span>              :     //    6 - Accentuated note</span>
-<span id="L1426"><span class="lineNum">    1426</span>              :     //    5 - Note type (rest, empty note, normal note);</span>
-<span id="L1427"><span class="lineNum">    1427</span>              :     //    4 - note dynamic;</span>
-<span id="L1428"><span class="lineNum">    1428</span>              :     //    3 - Presence of effects linked to the note;</span>
-<span id="L1429"><span class="lineNum">    1429</span>              :     //    2 - Ghost note;</span>
-<span id="L1430"><span class="lineNum">    1430</span>              :     //    1 - Dotted note;  ?</span>
-<span id="L1431"><span class="lineNum">    1431</span>              :     //    0 - Time-independent duration</span>
-<span id="L1432"><span class="lineNum">    1432</span>              : </span>
-<span id="L1433"><span class="lineNum">    1433</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_GHOST) {</span></span>
-<span id="L1434"><span class="lineNum">    1434</span> <span class="tlaUNC tlaBgUNC">           0 :         note-&gt;setGhost(true);</span></span>
-<span id="L1435"><span class="lineNum">    1435</span>              :     }</span>
-<span id="L1436"><span class="lineNum">    1436</span>              : </span>
-<span id="L1437"><span class="lineNum">    1437</span> <span class="tlaGNC tlaBgGNC">         639 :     bool tieNote = false;</span></span>
-<span id="L1438"><span class="lineNum">    1438</span>              : </span>
-<span id="L1439"><span class="lineNum">    1439</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_DEAD) {</span></span>
-<span id="L1440"><span class="lineNum">    1440</span> <span class="tlaGNC">         639 :         uint8_t noteType = readUInt8();</span></span>
-<span id="L1441"><span class="lineNum">    1441</span> <span class="tlaGNC">         639 :         if (noteType == 1) {</span></span>
-<span id="L1442"><span class="lineNum">    1442</span>              :         }                         //standard note</span>
-<span id="L1443"><span class="lineNum">    1443</span> <span class="tlaGNC">          28 :         else if (noteType == 2) {</span></span>
-<span id="L1444"><span class="lineNum">    1444</span> <span class="tlaGNC">          21 :             tieNote = true;</span></span>
-<span id="L1445"><span class="lineNum">    1445</span> <span class="tlaGNC">           7 :         } else if (noteType == 3) {                   // dead notes</span></span>
-<span id="L1446"><span class="lineNum">    1446</span> <span class="tlaGNC">           7 :             note-&gt;setHeadGroup(NoteHeadGroup::HEAD_CROSS);</span></span>
-<span id="L1447"><span class="lineNum">    1447</span> <span class="tlaGNC">           7 :             note-&gt;setDeadNote(true);</span></span>
-<span id="L1448"><span class="lineNum">    1448</span>              :         } else {</span>
-<span id="L1449"><span class="lineNum">    1449</span> <span class="tlaUNC tlaBgUNC">           0 :             LOGD(&quot;unknown note type: %d&quot;, noteType);</span></span>
-<span id="L1450"><span class="lineNum">    1450</span>              :         }</span>
-<span id="L1451"><span class="lineNum">    1451</span>              :     }</span>
-<span id="L1452"><span class="lineNum">    1452</span>              : </span>
-<span id="L1453"><span class="lineNum">    1453</span> <span class="tlaGNC tlaBgGNC">         639 :     int&amp; previousDynamic = previousDynamicByTrack[note-&gt;track()];</span></span>
-<span id="L1454"><span class="lineNum">    1454</span>              : </span>
-<span id="L1455"><span class="lineNum">    1455</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_DYNAMIC) {            // velocity</span></span>
-<span id="L1456"><span class="lineNum">    1456</span> <span class="tlaGNC">         478 :         int d = readChar();</span></span>
-<span id="L1457"><span class="lineNum">    1457</span> <span class="tlaGNC">         478 :         if (previousDynamic != d) {</span></span>
-<span id="L1458"><span class="lineNum">    1458</span> <span class="tlaGNC">          51 :             previousDynamic = d;</span></span>
-<span id="L1459"><span class="lineNum">    1459</span> <span class="tlaGNC">          51 :             addDynamic(note, d);</span></span>
-<span id="L1460"><span class="lineNum">    1460</span>              :         }</span>
-<span id="L1461"><span class="lineNum">    1461</span> <span class="tlaGNC">         161 :     } else if (previousDynamic != DEFAULT_DYNAMIC) {</span></span>
-<span id="L1462"><span class="lineNum">    1462</span> <span class="tlaGNC">          19 :         previousDynamic = DEFAULT_DYNAMIC;</span></span>
-<span id="L1463"><span class="lineNum">    1463</span> <span class="tlaGNC">          19 :         addDynamic(note, previousDynamic);</span></span>
-<span id="L1464"><span class="lineNum">    1464</span>              :     }</span>
-<span id="L1465"><span class="lineNum">    1465</span>              : </span>
-<span id="L1466"><span class="lineNum">    1466</span> <span class="tlaGNC">         639 :     int fretNumber = 0;</span></span>
-<span id="L1467"><span class="lineNum">    1467</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_FRET) {</span></span>
-<span id="L1468"><span class="lineNum">    1468</span> <span class="tlaGNC">         639 :         fretNumber = readChar();</span></span>
-<span id="L1469"><span class="lineNum">    1469</span>              :     }</span>
-<span id="L1470"><span class="lineNum">    1470</span>              : </span>
-<span id="L1471"><span class="lineNum">    1471</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_FINGERING) {</span></span>
-<span id="L1472"><span class="lineNum">    1472</span> <span class="tlaGNC">          10 :         int leftFinger = readUInt8();</span></span>
-<span id="L1473"><span class="lineNum">    1473</span> <span class="tlaGNC">          10 :         int rightFinger = readUInt8();</span></span>
-<span id="L1474"><span class="lineNum">    1474</span> <span class="tlaGNC">          10 :         Fingering* fi = Factory::createFingering(note);</span></span>
-<span id="L1475"><span class="lineNum">    1475</span> <span class="tlaGNC">          10 :         String finger;</span></span>
-<span id="L1476"><span class="lineNum">    1476</span>              :         // if there is a valid left hand fingering</span>
-<span id="L1477"><span class="lineNum">    1477</span> <span class="tlaGNC">          10 :         if (leftFinger &lt; 5) {</span></span>
-<span id="L1478"><span class="lineNum">    1478</span> <span class="tlaGNC">           5 :             if (leftFinger == 0) {</span></span>
-<span id="L1479"><span class="lineNum">    1479</span> <span class="tlaGNC">           1 :                 finger = u&quot;T&quot;;</span></span>
-<span id="L1480"><span class="lineNum">    1480</span> <span class="tlaGNC">           4 :             } else if (leftFinger == 1) {</span></span>
-<span id="L1481"><span class="lineNum">    1481</span> <span class="tlaGNC">           1 :                 finger = u&quot;1&quot;;</span></span>
-<span id="L1482"><span class="lineNum">    1482</span> <span class="tlaGNC">           3 :             } else if (leftFinger == 2) {</span></span>
-<span id="L1483"><span class="lineNum">    1483</span> <span class="tlaGNC">           1 :                 finger = u&quot;2&quot;;</span></span>
-<span id="L1484"><span class="lineNum">    1484</span> <span class="tlaGNC">           2 :             } else if (leftFinger == 3) {</span></span>
-<span id="L1485"><span class="lineNum">    1485</span> <span class="tlaGNC">           1 :                 finger = u&quot;3&quot;;</span></span>
-<span id="L1486"><span class="lineNum">    1486</span> <span class="tlaGNC">           1 :             } else if (leftFinger == 4) {</span></span>
-<span id="L1487"><span class="lineNum">    1487</span> <span class="tlaGNC">           1 :                 finger = u&quot;4&quot;;</span></span>
-<span id="L1488"><span class="lineNum">    1488</span>              :             }</span>
-<span id="L1489"><span class="lineNum">    1489</span>              :         } else {</span>
-<span id="L1490"><span class="lineNum">    1490</span> <span class="tlaGNC">           5 :             if (rightFinger == 0) {</span></span>
-<span id="L1491"><span class="lineNum">    1491</span> <span class="tlaGNC">           1 :                 finger = u&quot;T&quot;;</span></span>
-<span id="L1492"><span class="lineNum">    1492</span> <span class="tlaGNC">           4 :             } else if (rightFinger == 1) {</span></span>
-<span id="L1493"><span class="lineNum">    1493</span> <span class="tlaGNC">           1 :                 finger = u&quot;I&quot;;</span></span>
-<span id="L1494"><span class="lineNum">    1494</span> <span class="tlaGNC">           3 :             } else if (rightFinger == 2) {</span></span>
-<span id="L1495"><span class="lineNum">    1495</span> <span class="tlaGNC">           1 :                 finger = u&quot;M&quot;;</span></span>
-<span id="L1496"><span class="lineNum">    1496</span> <span class="tlaGNC">           2 :             } else if (rightFinger == 3) {</span></span>
-<span id="L1497"><span class="lineNum">    1497</span> <span class="tlaGNC">           1 :                 finger = u&quot;A&quot;;</span></span>
-<span id="L1498"><span class="lineNum">    1498</span> <span class="tlaGNC">           1 :             } else if (rightFinger == 4) {</span></span>
-<span id="L1499"><span class="lineNum">    1499</span> <span class="tlaGNC">           1 :                 finger = u&quot;O&quot;;</span></span>
-<span id="L1500"><span class="lineNum">    1500</span>              :             }</span>
-<span id="L1501"><span class="lineNum">    1501</span>              :         }</span>
-<span id="L1502"><span class="lineNum">    1502</span> <span class="tlaGNC">          10 :         fi-&gt;setPlainText(finger);</span></span>
-<span id="L1503"><span class="lineNum">    1503</span> <span class="tlaGNC">          10 :         note-&gt;add(fi);</span></span>
-<span id="L1504"><span class="lineNum">    1504</span> <span class="tlaGNC">          10 :         fi-&gt;reset();</span></span>
-<span id="L1505"><span class="lineNum">    1505</span> <span class="tlaGNC">          10 :     }</span></span>
-<span id="L1506"><span class="lineNum">    1506</span>              : </span>
-<span id="L1507"><span class="lineNum">    1507</span> <span class="tlaGNC">         639 :     if (noteBits &amp; 0x1) {     // Time independent duration</span></span>
-<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaUNC tlaBgUNC">           0 :         skip(8);</span></span>
-<span id="L1509"><span class="lineNum">    1509</span>              :     }</span>
-<span id="L1510"><span class="lineNum">    1510</span>              : </span>
-<span id="L1511"><span class="lineNum">    1511</span>              :     // check if a note is supposed to be accented, and give it the marcato type</span>
-<span id="L1512"><span class="lineNum">    1512</span> <span class="tlaGNC tlaBgGNC">         639 :     if (noteBits &amp; NOTE_MARCATO) {</span></span>
-<span id="L1513"><span class="lineNum">    1513</span> <span class="tlaGNC">           1 :         Articulation* art = Factory::createArticulation(note-&gt;score()-&gt;dummy());</span></span>
-<span id="L1514"><span class="lineNum">    1514</span> <span class="tlaGNC">           1 :         art-&gt;setSymId(SymId::articMarcatoAbove);</span></span>
-<span id="L1515"><span class="lineNum">    1515</span> <span class="tlaGNC">           1 :         if (!EditChord::toggleArticulation(note-&gt;score(), note, art)) {</span></span>
-<span id="L1516"><span class="lineNum">    1516</span> <span class="tlaUNC tlaBgUNC">           0 :             delete art;</span></span>
-<span id="L1517"><span class="lineNum">    1517</span>              :         }</span>
-<span id="L1518"><span class="lineNum">    1518</span>              :     }</span>
-<span id="L1519"><span class="lineNum">    1519</span>              :     // check if a note is supposed to be accented, and give it the sforzato type</span>
-<span id="L1520"><span class="lineNum">    1520</span> <span class="tlaGNC tlaBgGNC">         638 :     else if (noteBits &amp; NOTE_SFORZATO) {</span></span>
-<span id="L1521"><span class="lineNum">    1521</span> <span class="tlaUNC tlaBgUNC">           0 :         Articulation* art = Factory::createArticulation(note-&gt;score()-&gt;dummy());</span></span>
-<span id="L1522"><span class="lineNum">    1522</span> <span class="tlaUNC">           0 :         art-&gt;setSymId(SymId::articAccentAbove);</span></span>
-<span id="L1523"><span class="lineNum">    1523</span> <span class="tlaUNC">           0 :         note-&gt;add(art);</span></span>
-<span id="L1524"><span class="lineNum">    1524</span> <span class="tlaUNC">           0 :         if (!EditChord::toggleArticulation(note-&gt;score(), note, art)) {</span></span>
-<span id="L1525"><span class="lineNum">    1525</span> <span class="tlaUNC">           0 :             delete art;</span></span>
-<span id="L1526"><span class="lineNum">    1526</span>              :         }</span>
-<span id="L1527"><span class="lineNum">    1527</span>              :     }</span>
-<span id="L1528"><span class="lineNum">    1528</span>              : </span>
-<span id="L1529"><span class="lineNum">    1529</span> <span class="tlaGNC tlaBgGNC">         639 :     readUInt8();   //skip</span></span>
-<span id="L1530"><span class="lineNum">    1530</span>              : </span>
-<span id="L1531"><span class="lineNum">    1531</span> <span class="tlaGNC">         639 :     Staff* staff = note-&gt;staff();</span></span>
-<span id="L1532"><span class="lineNum">    1532</span> <span class="tlaGNC">         639 :     if (fretNumber == 255 || fretNumber &lt; 0) {</span></span>
-<span id="L1533"><span class="lineNum">    1533</span> <span class="tlaUNC tlaBgUNC">           0 :         fretNumber = 0;</span></span>
-<span id="L1534"><span class="lineNum">    1534</span> <span class="tlaUNC">           0 :         note-&gt;setHeadGroup(NoteHeadGroup::HEAD_CROSS);</span></span>
-<span id="L1535"><span class="lineNum">    1535</span> <span class="tlaUNC">           0 :         note-&gt;setDeadNote(true);</span></span>
-<span id="L1536"><span class="lineNum">    1536</span>              :     }</span>
-<span id="L1537"><span class="lineNum">    1537</span> <span class="tlaGNC tlaBgGNC">         639 :     int pitch = staff-&gt;part()-&gt;instrument()-&gt;stringData()-&gt;getPitch(string, fretNumber, staff, note-&gt;tick());</span></span>
-<span id="L1538"><span class="lineNum">    1538</span> <span class="tlaGNC">         639 :     note-&gt;setFret(fretNumber);</span></span>
-<span id="L1539"><span class="lineNum">    1539</span> <span class="tlaGNC">         639 :     note-&gt;setString(string);</span></span>
-<span id="L1540"><span class="lineNum">    1540</span> <span class="tlaGNC">         639 :     note-&gt;setPitch(pitch);</span></span>
-<span id="L1541"><span class="lineNum">    1541</span>              : </span>
-<span id="L1542"><span class="lineNum">    1542</span>              :     // This function uses string and fret number, so it should be set before this</span>
-<span id="L1543"><span class="lineNum">    1543</span> <span class="tlaGNC">         639 :     ReadNoteResult result;</span></span>
-<span id="L1544"><span class="lineNum">    1544</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_SLUR) {</span></span>
-<span id="L1545"><span class="lineNum">    1545</span> <span class="tlaGNC">          89 :         result = readNoteEffects(note);</span></span>
-<span id="L1546"><span class="lineNum">    1546</span>              :     }</span>
-<span id="L1547"><span class="lineNum">    1547</span>              : </span>
-<span id="L1548"><span class="lineNum">    1548</span> <span class="tlaGNC">         639 :     if (tieNote) {</span></span>
-<span id="L1549"><span class="lineNum">    1549</span> <span class="tlaGNC">          21 :         auto staffIdx = note-&gt;staffIdx();</span></span>
-<span id="L1550"><span class="lineNum">    1550</span> <span class="tlaGNC">          21 :         if (dead_end[{ static_cast&lt;int&gt;(staffIdx), string }]) {</span></span>
-<span id="L1551"><span class="lineNum">    1551</span> <span class="tlaUNC tlaBgUNC">           0 :             note-&gt;setFret(INVALID_FRET_INDEX);</span></span>
-<span id="L1552"><span class="lineNum">    1552</span> <span class="tlaUNC">           0 :             result.slur = false;</span></span>
-<span id="L1553"><span class="lineNum">    1553</span> <span class="tlaUNC">           0 :             return result;</span></span>
-<span id="L1554"><span class="lineNum">    1554</span>              :         }</span>
-<span id="L1555"><span class="lineNum">    1555</span> <span class="tlaGNC tlaBgGNC">          21 :         if (slurs[staffIdx]) {</span></span>
-<span id="L1556"><span class="lineNum">    1556</span> <span class="tlaGNC">           1 :             score-&gt;removeSpanner(slurs[staffIdx]);</span></span>
-<span id="L1557"><span class="lineNum">    1557</span> <span class="tlaGNC">           1 :             delete slurs[staffIdx];</span></span>
-<span id="L1558"><span class="lineNum">    1558</span> <span class="tlaGNC">           1 :             slurs[staffIdx] = 0;</span></span>
-<span id="L1559"><span class="lineNum">    1559</span>              :         }</span>
-<span id="L1560"><span class="lineNum">    1560</span> <span class="tlaGNC">          21 :         bool found = false;</span></span>
-<span id="L1561"><span class="lineNum">    1561</span> <span class="tlaGNC">          21 :         Chord* chord     = note-&gt;chord();</span></span>
-<span id="L1562"><span class="lineNum">    1562</span> <span class="tlaGNC">          21 :         Segment* segment = chord-&gt;segment()-&gt;prev1(SegmentType::ChordRest);</span></span>
-<span id="L1563"><span class="lineNum">    1563</span> <span class="tlaGNC">          21 :         track_idx_t track = note-&gt;track();</span></span>
-<span id="L1564"><span class="lineNum">    1564</span> <span class="tlaGNC">          21 :         std::vector&lt;ChordRest*&gt; chords;</span></span>
-<span id="L1565"><span class="lineNum">    1565</span> <span class="tlaGNC">          21 :         Note* true_note = nullptr;</span></span>
-<span id="L1566"><span class="lineNum">    1566</span> <span class="tlaGNC">          25 :         while (segment) {</span></span>
-<span id="L1567"><span class="lineNum">    1567</span> <span class="tlaGNC">          25 :             EngravingItem* e = segment-&gt;element(track);</span></span>
-<span id="L1568"><span class="lineNum">    1568</span> <span class="tlaGNC">          25 :             if (e &amp;&amp; e-&gt;isChord()) {</span></span>
-<span id="L1569"><span class="lineNum">    1569</span> <span class="tlaGNC">          23 :                 Chord* chord2 = toChord(e);</span></span>
-<span id="L1570"><span class="lineNum">    1570</span> <span class="tlaGNC">          38 :                 for (Note* note2 : chord2-&gt;notes()) {</span></span>
-<span id="L1571"><span class="lineNum">    1571</span> <span class="tlaGNC">          36 :                     if (note2-&gt;string() == string) {</span></span>
-<span id="L1572"><span class="lineNum">    1572</span> <span class="tlaGNC">          21 :                         if (chords.empty()) {</span></span>
-<span id="L1573"><span class="lineNum">    1573</span> <span class="tlaGNC">          19 :                             Tie* tie = Factory::createTie(note2);</span></span>
-<span id="L1574"><span class="lineNum">    1574</span> <span class="tlaGNC">          19 :                             tie-&gt;setEndNote(note);</span></span>
-<span id="L1575"><span class="lineNum">    1575</span> <span class="tlaGNC">          19 :                             note2-&gt;add(tie);</span></span>
-<span id="L1576"><span class="lineNum">    1576</span>              :                         }</span>
-<span id="L1577"><span class="lineNum">    1577</span>              : </span>
-<span id="L1578"><span class="lineNum">    1578</span>              :                         //  fixing gp5 bug with not storying let ring for tied notes</span>
-<span id="L1579"><span class="lineNum">    1579</span> <span class="tlaGNC">          21 :                         if (m_letRingForChords.find(chord2) != m_letRingForChords.end()) {</span></span>
-<span id="L1580"><span class="lineNum">    1580</span> <span class="tlaGNC">           2 :                             result.letRing = true;</span></span>
-<span id="L1581"><span class="lineNum">    1581</span> <span class="tlaGNC">           2 :                             muse::remove(m_letRingForChords, chord2);</span></span>
-<span id="L1582"><span class="lineNum">    1582</span>              :                         }</span>
-<span id="L1583"><span class="lineNum">    1583</span>              : </span>
-<span id="L1584"><span class="lineNum">    1584</span> <span class="tlaGNC">          21 :                         if (m_harmonicNotes.find(note) != m_harmonicNotes.end() &amp;&amp; m_harmonicNotes.find(note2) != m_harmonicNotes.end()) {</span></span>
-<span id="L1585"><span class="lineNum">    1585</span> <span class="tlaGNC">          12 :                             Note* startHarmonicNote = m_harmonicNotes.at(note2);</span></span>
-<span id="L1586"><span class="lineNum">    1586</span> <span class="tlaGNC">          12 :                             Note* endHarmonicNote = m_harmonicNotes.at(note);</span></span>
-<span id="L1587"><span class="lineNum">    1587</span>              : </span>
-<span id="L1588"><span class="lineNum">    1588</span> <span class="tlaGNC">          12 :                             Tie* tieHarmonic = Factory::createTie(startHarmonicNote);</span></span>
-<span id="L1589"><span class="lineNum">    1589</span> <span class="tlaGNC">          12 :                             tieHarmonic-&gt;setEndNote(endHarmonicNote);</span></span>
-<span id="L1590"><span class="lineNum">    1590</span> <span class="tlaGNC">          12 :                             startHarmonicNote-&gt;add(tieHarmonic);</span></span>
-<span id="L1591"><span class="lineNum">    1591</span>              : </span>
-<span id="L1592"><span class="lineNum">    1592</span> <span class="tlaGNC">          12 :                             muse::remove(m_harmonicNotes, startHarmonicNote);</span></span>
-<span id="L1593"><span class="lineNum">    1593</span> <span class="tlaGNC">          12 :                             muse::remove(m_harmonicNotes, endHarmonicNote);</span></span>
-<span id="L1594"><span class="lineNum">    1594</span>              :                         }</span>
-<span id="L1595"><span class="lineNum">    1595</span>              : </span>
-<span id="L1596"><span class="lineNum">    1596</span> <span class="tlaGNC">          21 :                         note-&gt;setFret(note2-&gt;fret());</span></span>
-<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaGNC">          21 :                         note-&gt;setPitch(note2-&gt;pitch());</span></span>
-<span id="L1598"><span class="lineNum">    1598</span> <span class="tlaGNC">          21 :                         true_note = note2;</span></span>
-<span id="L1599"><span class="lineNum">    1599</span> <span class="tlaGNC">          21 :                         if (m_tremolosInChords.find(chord2) != m_tremolosInChords.end()) {</span></span>
-<span id="L1600"><span class="lineNum">    1600</span> <span class="tlaUNC tlaBgUNC">           0 :                             TremoloType type = m_tremolosInChords.at(chord2);</span></span>
-<span id="L1601"><span class="lineNum">    1601</span> <span class="tlaUNC">           0 :                             DO_ASSERT(!isTremoloTwoChord(type));</span></span>
-<span id="L1602"><span class="lineNum">    1602</span> <span class="tlaUNC">           0 :                             TremoloSingleChord* t = Factory::createTremoloSingleChord(chord);</span></span>
-<span id="L1603"><span class="lineNum">    1603</span> <span class="tlaUNC">           0 :                             t-&gt;setTremoloType(type);</span></span>
-<span id="L1604"><span class="lineNum">    1604</span> <span class="tlaUNC">           0 :                             chord-&gt;add(t);</span></span>
-<span id="L1605"><span class="lineNum">    1605</span> <span class="tlaUNC">           0 :                             muse::remove(m_tremolosInChords, chord2);</span></span>
-<span id="L1606"><span class="lineNum">    1606</span> <span class="tlaUNC">           0 :                             m_tremolosInChords[chord] = type;</span></span>
-<span id="L1607"><span class="lineNum">    1607</span>              :                         }</span>
-<span id="L1608"><span class="lineNum">    1608</span>              : </span>
-<span id="L1609"><span class="lineNum">    1609</span> <span class="tlaGNC tlaBgGNC">          21 :                         found = true;</span></span>
-<span id="L1610"><span class="lineNum">    1610</span> <span class="tlaGNC">          21 :                         break;</span></span>
-<span id="L1611"><span class="lineNum">    1611</span>              :                     }</span>
-<span id="L1612"><span class="lineNum">    1612</span>              :                 }</span>
-<span id="L1613"><span class="lineNum">    1613</span> <span class="tlaGNC">          23 :                 if (found) {</span></span>
-<span id="L1614"><span class="lineNum">    1614</span> <span class="tlaGNC">          21 :                     break;</span></span>
-<span id="L1615"><span class="lineNum">    1615</span> <span class="tlaGNC">           2 :                 } else if (e) {</span></span>
-<span id="L1616"><span class="lineNum">    1616</span> <span class="tlaGNC">           2 :                     chords.push_back(toChordRest(e));</span></span>
-<span id="L1617"><span class="lineNum">    1617</span>              :                 }</span>
-<span id="L1618"><span class="lineNum">    1618</span>              :             }</span>
-<span id="L1619"><span class="lineNum">    1619</span> <span class="tlaGNC">           4 :             segment = segment-&gt;prev1(SegmentType::ChordRest);</span></span>
-<span id="L1620"><span class="lineNum">    1620</span>              :         }</span>
-<span id="L1621"><span class="lineNum">    1621</span>              : </span>
-<span id="L1622"><span class="lineNum">    1622</span> <span class="tlaGNC">          21 :         if (true_note &amp;&amp; !chords.empty()) {</span></span>
-<span id="L1623"><span class="lineNum">    1623</span> <span class="tlaGNC">           2 :             Note* end_note = note;</span></span>
-<span id="L1624"><span class="lineNum">    1624</span> <span class="tlaGNC">           4 :             for (unsigned int i = 0; i &lt; chords.size(); ++i) {</span></span>
-<span id="L1625"><span class="lineNum">    1625</span> <span class="tlaGNC">           2 :                 Chord* chord1 = nullptr;</span></span>
-<span id="L1626"><span class="lineNum">    1626</span> <span class="tlaGNC">           2 :                 ChordRest* cr = chords.at(i);</span></span>
-<span id="L1627"><span class="lineNum">    1627</span> <span class="tlaGNC">           2 :                 if (cr-&gt;isChord()) {</span></span>
-<span id="L1628"><span class="lineNum">    1628</span> <span class="tlaGNC">           2 :                     chord1 = toChord(cr);</span></span>
-<span id="L1629"><span class="lineNum">    1629</span>              :                 } else {</span>
-<span id="L1630"><span class="lineNum">    1630</span> <span class="tlaUNC tlaBgUNC">           0 :                     Rest* rest = toRest(cr);</span></span>
-<span id="L1631"><span class="lineNum">    1631</span> <span class="tlaUNC">           0 :                     Fraction dur = rest-&gt;ticks();</span></span>
-<span id="L1632"><span class="lineNum">    1632</span> <span class="tlaUNC">           0 :                     TDuration dut = rest-&gt;durationType();</span></span>
-<span id="L1633"><span class="lineNum">    1633</span> <span class="tlaUNC">           0 :                     Segment* seg = rest-&gt;segment();</span></span>
-<span id="L1634"><span class="lineNum">    1634</span> <span class="tlaUNC">           0 :                     seg-&gt;remove(rest);</span></span>
-<span id="L1635"><span class="lineNum">    1635</span> <span class="tlaUNC">           0 :                     Tuplet* tuplet = rest-&gt;tuplet();</span></span>
-<span id="L1636"><span class="lineNum">    1636</span> <span class="tlaUNC">           0 :                     if (tuplet) {</span></span>
-<span id="L1637"><span class="lineNum">    1637</span> <span class="tlaUNC">           0 :                         tuplet-&gt;remove(rest);</span></span>
-<span id="L1638"><span class="lineNum">    1638</span>              :                     }</span>
-<span id="L1639"><span class="lineNum">    1639</span> <span class="tlaUNC">           0 :                     delete rest;</span></span>
-<span id="L1640"><span class="lineNum">    1640</span> <span class="tlaUNC">           0 :                     chord1 = Factory::createChord(seg);</span></span>
-<span id="L1641"><span class="lineNum">    1641</span> <span class="tlaUNC">           0 :                     chord1-&gt;setTrack(note-&gt;track());</span></span>
-<span id="L1642"><span class="lineNum">    1642</span> <span class="tlaUNC">           0 :                     chord1-&gt;setTicks(dur);</span></span>
-<span id="L1643"><span class="lineNum">    1643</span> <span class="tlaUNC">           0 :                     chord1-&gt;setDurationType(dut);</span></span>
-<span id="L1644"><span class="lineNum">    1644</span> <span class="tlaUNC">           0 :                     seg-&gt;add(chord1);</span></span>
-<span id="L1645"><span class="lineNum">    1645</span> <span class="tlaUNC">           0 :                     if (tuplet) {</span></span>
-<span id="L1646"><span class="lineNum">    1646</span> <span class="tlaUNC">           0 :                         tuplet-&gt;add(chord1);</span></span>
-<span id="L1647"><span class="lineNum">    1647</span>              :                     }</span>
-<span id="L1648"><span class="lineNum">    1648</span>              :                 }</span>
-<span id="L1649"><span class="lineNum">    1649</span>              : </span>
-<span id="L1650"><span class="lineNum">    1650</span> <span class="tlaGNC tlaBgGNC">           2 :                 Note* note2 = Factory::createNote(chord1);</span></span>
-<span id="L1651"><span class="lineNum">    1651</span> <span class="tlaGNC">           2 :                 note2-&gt;setString(true_note-&gt;string());</span></span>
-<span id="L1652"><span class="lineNum">    1652</span> <span class="tlaGNC">           2 :                 note2-&gt;setFret(true_note-&gt;fret());</span></span>
-<span id="L1653"><span class="lineNum">    1653</span> <span class="tlaGNC">           2 :                 note2-&gt;setPitch(true_note-&gt;pitch());</span></span>
-<span id="L1654"><span class="lineNum">    1654</span> <span class="tlaGNC">           2 :                 note2-&gt;setTpcFromPitch(Prefer::SHARPS);</span></span>
-<span id="L1655"><span class="lineNum">    1655</span> <span class="tlaGNC">           2 :                 chord1-&gt;setNoteType(true_note-&gt;noteType());</span></span>
-<span id="L1656"><span class="lineNum">    1656</span> <span class="tlaGNC">           2 :                 chord1-&gt;add(note2);</span></span>
-<span id="L1657"><span class="lineNum">    1657</span> <span class="tlaGNC">           2 :                 Tie* tie = Factory::createTie(note2);</span></span>
-<span id="L1658"><span class="lineNum">    1658</span> <span class="tlaGNC">           2 :                 tie-&gt;setEndNote(end_note);</span></span>
-<span id="L1659"><span class="lineNum">    1659</span> <span class="tlaGNC">           2 :                 end_note-&gt;setHarmonic(true_note-&gt;harmonic());</span></span>
-<span id="L1660"><span class="lineNum">    1660</span> <span class="tlaGNC">           2 :                 end_note = note2;</span></span>
-<span id="L1661"><span class="lineNum">    1661</span> <span class="tlaGNC">           2 :                 note2-&gt;add(tie);</span></span>
-<span id="L1662"><span class="lineNum">    1662</span>              :             }</span>
-<span id="L1663"><span class="lineNum">    1663</span> <span class="tlaGNC">           2 :             Tie* tie = Factory::createTie(true_note);</span></span>
-<span id="L1664"><span class="lineNum">    1664</span> <span class="tlaGNC">           2 :             tie-&gt;setEndNote(end_note);</span></span>
-<span id="L1665"><span class="lineNum">    1665</span> <span class="tlaGNC">           2 :             end_note-&gt;setHarmonic(true_note-&gt;harmonic());</span></span>
-<span id="L1666"><span class="lineNum">    1666</span> <span class="tlaGNC">           2 :             true_note-&gt;add(tie);</span></span>
-<span id="L1667"><span class="lineNum">    1667</span>              :         }</span>
-<span id="L1668"><span class="lineNum">    1668</span> <span class="tlaGNC">          21 :         if (!found) {</span></span>
-<span id="L1669"><span class="lineNum">    1669</span> <span class="tlaUNC tlaBgUNC">           0 :             note-&gt;setFret(INVALID_FRET_INDEX);</span></span>
-<span id="L1670"><span class="lineNum">    1670</span> <span class="tlaUNC">           0 :             dead_end[{ static_cast&lt;int&gt;(staffIdx), string }] = true;</span></span>
-<span id="L1671"><span class="lineNum">    1671</span> <span class="tlaUNC">           0 :             LOGD(&quot;tied note not found, pitch %d fret %d string %d&quot;, note-&gt;pitch(), note-&gt;fret(), note-&gt;string());</span></span>
-<span id="L1672"><span class="lineNum">    1672</span> <span class="tlaUNC">           0 :             result.slur = false;</span></span>
-<span id="L1673"><span class="lineNum">    1673</span> <span class="tlaUNC">           0 :             return result;</span></span>
-<span id="L1674"><span class="lineNum">    1674</span>              :         }</span>
-<span id="L1675"><span class="lineNum">    1675</span> <span class="tlaGNC tlaBgGNC">          21 :     }</span></span>
-<span id="L1676"><span class="lineNum">    1676</span> <span class="tlaGNC">         639 :     dead_end[{ static_cast&lt;int&gt;(note-&gt;staffIdx()), string }] = false;</span></span>
-<span id="L1677"><span class="lineNum">    1677</span> <span class="tlaGNC">         639 :     return result;</span></span>
-<span id="L1678"><span class="lineNum">    1678</span>              : }</span>
-<span id="L1679"><span class="lineNum">    1679</span>              : </span>
-<span id="L1680"><span class="lineNum">    1680</span> <span class="tlaUNC tlaBgUNC">           0 : float GuitarPro5::naturalHarmonicFromFret(int fret)</span></span>
-<span id="L1681"><span class="lineNum">    1681</span>              : {</span>
-<span id="L1682"><span class="lineNum">    1682</span> <span class="tlaUNC">           0 :     switch (fret) {</span></span>
-<span id="L1683"><span class="lineNum">    1683</span> <span class="tlaUNC">           0 :     case 2:</span></span>
-<span id="L1684"><span class="lineNum">    1684</span> <span class="tlaUNC">           0 :         return 2.4f;</span></span>
-<span id="L1685"><span class="lineNum">    1685</span> <span class="tlaUNC">           0 :     case 3:</span></span>
-<span id="L1686"><span class="lineNum">    1686</span> <span class="tlaUNC">           0 :         return 3.2f;</span></span>
-<span id="L1687"><span class="lineNum">    1687</span> <span class="tlaUNC">           0 :     case 4:</span></span>
-<span id="L1688"><span class="lineNum">    1688</span>              :     case 5:</span>
-<span id="L1689"><span class="lineNum">    1689</span>              :     case 7:</span>
-<span id="L1690"><span class="lineNum">    1690</span>              :     case 9:</span>
-<span id="L1691"><span class="lineNum">    1691</span>              :     case 12:</span>
-<span id="L1692"><span class="lineNum">    1692</span>              :     case 16:</span>
-<span id="L1693"><span class="lineNum">    1693</span>              :     case 17:</span>
-<span id="L1694"><span class="lineNum">    1694</span>              :     case 19:</span>
-<span id="L1695"><span class="lineNum">    1695</span>              :     case 24:</span>
-<span id="L1696"><span class="lineNum">    1696</span> <span class="tlaUNC">           0 :         return fret;</span></span>
-<span id="L1697"><span class="lineNum">    1697</span> <span class="tlaUNC">           0 :     case 8:</span></span>
-<span id="L1698"><span class="lineNum">    1698</span> <span class="tlaUNC">           0 :         return 8.2f;</span></span>
-<span id="L1699"><span class="lineNum">    1699</span> <span class="tlaUNC">           0 :     case 10:</span></span>
-<span id="L1700"><span class="lineNum">    1700</span> <span class="tlaUNC">           0 :         return 9.6f;</span></span>
-<span id="L1701"><span class="lineNum">    1701</span> <span class="tlaUNC">           0 :     case 14:</span></span>
-<span id="L1702"><span class="lineNum">    1702</span> <span class="tlaUNC">           0 :         return 14.7f;</span></span>
-<span id="L1703"><span class="lineNum">    1703</span> <span class="tlaUNC">           0 :     case 15:</span></span>
-<span id="L1704"><span class="lineNum">    1704</span> <span class="tlaUNC">           0 :         return 14.7f;</span></span>
-<span id="L1705"><span class="lineNum">    1705</span> <span class="tlaUNC">           0 :     case 21:</span></span>
-<span id="L1706"><span class="lineNum">    1706</span> <span class="tlaUNC">           0 :         return 21.7f;</span></span>
-<span id="L1707"><span class="lineNum">    1707</span> <span class="tlaUNC">           0 :     case 22:</span></span>
-<span id="L1708"><span class="lineNum">    1708</span> <span class="tlaUNC">           0 :         return 21.7f;</span></span>
-<span id="L1709"><span class="lineNum">    1709</span> <span class="tlaUNC">           0 :     default:</span></span>
-<span id="L1710"><span class="lineNum">    1710</span> <span class="tlaUNC">           0 :         return 12.0f;</span></span>
-<span id="L1711"><span class="lineNum">    1711</span>              :     }</span>
-<span id="L1712"><span class="lineNum">    1712</span>              : }</span>
-<span id="L1713"><span class="lineNum">    1713</span>              : </span>
-<span id="L1714"><span class="lineNum">    1714</span> <span class="tlaGNC tlaBgGNC">          40 : void GuitarPro5::addGlissandos()</span></span>
-<span id="L1715"><span class="lineNum">    1715</span>              : {</span>
-<span id="L1716"><span class="lineNum">    1716</span> <span class="tlaGNC">          43 :     for (auto&amp; [startNote, endNote] : m_glissandoNotePairs) {</span></span>
-<span id="L1717"><span class="lineNum">    1717</span> <span class="tlaGNC">           3 :         Note* currentStart = startNote;</span></span>
-<span id="L1718"><span class="lineNum">    1718</span> <span class="tlaGNC">           3 :         if (startNote-&gt;bendFor()) {</span></span>
-<span id="L1719"><span class="lineNum">    1719</span> <span class="tlaGNC">           1 :             Note* bendNote = startNote;</span></span>
-<span id="L1720"><span class="lineNum">    1720</span> <span class="tlaGNC">           1 :             GuitarBend* bend = bendNote-&gt;bendFor();</span></span>
-<span id="L1721"><span class="lineNum">    1721</span>              : </span>
-<span id="L1722"><span class="lineNum">    1722</span> <span class="tlaGNC">           2 :             while (bend) {</span></span>
-<span id="L1723"><span class="lineNum">    1723</span> <span class="tlaGNC">           1 :                 bendNote = bend-&gt;endNote();</span></span>
-<span id="L1724"><span class="lineNum">    1724</span> <span class="tlaGNC">           1 :                 IF_ASSERT_FAILED(bendNote) {</span></span>
-<span id="L1725"><span class="lineNum">    1725</span> <span class="tlaUNC tlaBgUNC">           0 :                     LOGE() &lt;&lt; &quot;glissando start note may be incorrect&quot;;</span></span>
-<span id="L1726"><span class="lineNum">    1726</span> <span class="tlaUNC">           0 :                     break;</span></span>
-<span id="L1727"><span class="lineNum">    1727</span>              :                 }</span>
-<span id="L1728"><span class="lineNum">    1728</span>              : </span>
-<span id="L1729"><span class="lineNum">    1729</span> <span class="tlaGNC tlaBgGNC">           1 :                 if (!bendNote-&gt;chord()-&gt;isGraceAfter()) {</span></span>
-<span id="L1730"><span class="lineNum">    1730</span> <span class="tlaUNC tlaBgUNC">           0 :                     break;</span></span>
-<span id="L1731"><span class="lineNum">    1731</span>              :                 }</span>
-<span id="L1732"><span class="lineNum">    1732</span>              : </span>
-<span id="L1733"><span class="lineNum">    1733</span> <span class="tlaGNC tlaBgGNC">           1 :                 currentStart = bendNote;</span></span>
-<span id="L1734"><span class="lineNum">    1734</span> <span class="tlaGNC">           1 :                 bend = bendNote-&gt;bendFor();</span></span>
-<span id="L1735"><span class="lineNum">    1735</span>              :             }</span>
-<span id="L1736"><span class="lineNum">    1736</span>              :         }</span>
-<span id="L1737"><span class="lineNum">    1737</span>              : </span>
-<span id="L1738"><span class="lineNum">    1738</span> <span class="tlaGNC">           3 :         Glissando* gliss = mu::engraving::Factory::createGlissando(currentStart);</span></span>
-<span id="L1739"><span class="lineNum">    1739</span> <span class="tlaGNC">           3 :         gliss-&gt;setStartElement(currentStart);</span></span>
-<span id="L1740"><span class="lineNum">    1740</span> <span class="tlaGNC">           3 :         gliss-&gt;setTick(currentStart-&gt;tick());</span></span>
-<span id="L1741"><span class="lineNum">    1741</span> <span class="tlaGNC">           3 :         gliss-&gt;setTrack(currentStart-&gt;track());</span></span>
-<span id="L1742"><span class="lineNum">    1742</span> <span class="tlaGNC">           3 :         gliss-&gt;setGlissandoType(GlissandoType::STRAIGHT);</span></span>
-<span id="L1743"><span class="lineNum">    1743</span> <span class="tlaGNC">           3 :         gliss-&gt;setGlissandoShift(true);</span></span>
-<span id="L1744"><span class="lineNum">    1744</span> <span class="tlaGNC">           3 :         gliss-&gt;setEndElement(endNote);</span></span>
-<span id="L1745"><span class="lineNum">    1745</span> <span class="tlaGNC">           3 :         gliss-&gt;setTick2(endNote-&gt;tick());</span></span>
-<span id="L1746"><span class="lineNum">    1746</span> <span class="tlaGNC">           3 :         gliss-&gt;setTrack2(endNote-&gt;track());</span></span>
-<span id="L1747"><span class="lineNum">    1747</span> <span class="tlaGNC">           3 :         score-&gt;addElement(gliss);</span></span>
-<span id="L1748"><span class="lineNum">    1748</span>              : </span>
-<span id="L1749"><span class="lineNum">    1749</span> <span class="tlaGNC">           3 :         std::vector&lt;std::pair&lt;Slur*, Note*&gt; &gt; movedSlurs;</span></span>
-<span id="L1750"><span class="lineNum">    1750</span> <span class="tlaGNC">           3 :         for (Spanner* spanner : startNote-&gt;chord()-&gt;startingSpanners()) {</span></span>
-<span id="L1751"><span class="lineNum">    1751</span> <span class="tlaGNC">           2 :             if (spanner &amp;&amp; spanner-&gt;isSlur()) {</span></span>
-<span id="L1752"><span class="lineNum">    1752</span> <span class="tlaGNC">           2 :                 Slur* slur = toSlur(spanner);</span></span>
-<span id="L1753"><span class="lineNum">    1753</span> <span class="tlaGNC">           2 :                 if (slur-&gt;endElement() == endNote-&gt;chord()) {</span></span>
-<span id="L1754"><span class="lineNum">    1754</span> <span class="tlaGNC">           2 :                     gliss-&gt;setGlissandoShift(false);</span></span>
-<span id="L1755"><span class="lineNum">    1755</span> <span class="tlaGNC">           2 :                     slur-&gt;setConnectedElement(mu::engraving::Slur::ConnectedElement::GLISSANDO);</span></span>
-<span id="L1756"><span class="lineNum">    1756</span> <span class="tlaGNC">           2 :                     movedSlurs.push_back({ slur, currentStart });</span></span>
-<span id="L1757"><span class="lineNum">    1757</span> <span class="tlaGNC">           2 :                     break;</span></span>
-<span id="L1758"><span class="lineNum">    1758</span>              :                 }</span>
-<span id="L1759"><span class="lineNum">    1759</span>              :             }</span>
-<span id="L1760"><span class="lineNum">    1760</span>              :         }</span>
-<span id="L1761"><span class="lineNum">    1761</span>              : </span>
-<span id="L1762"><span class="lineNum">    1762</span> <span class="tlaGNC">           5 :         for (auto&amp; [slur, note] : movedSlurs) {</span></span>
-<span id="L1763"><span class="lineNum">    1763</span> <span class="tlaGNC">           2 :             slur-&gt;setStartElement(note-&gt;chord());</span></span>
-<span id="L1764"><span class="lineNum">    1764</span> <span class="tlaGNC">           2 :             slur-&gt;setTick(note-&gt;tick());</span></span>
-<span id="L1765"><span class="lineNum">    1765</span> <span class="tlaGNC">           2 :             slur-&gt;setTrack(note-&gt;track());</span></span>
-<span id="L1766"><span class="lineNum">    1766</span>              :         }</span>
-<span id="L1767"><span class="lineNum">    1767</span> <span class="tlaGNC">           3 :     }</span></span>
-<span id="L1768"><span class="lineNum">    1768</span> <span class="tlaGNC">          40 : }</span></span>
-<span id="L1769"><span class="lineNum">    1769</span>              : } // namespace mu::iex::guitarpro</span>
+<span id="L1200"><span class="lineNum">    1200</span> <span class="tlaGNC">           1 :             slur1-&gt;setTrack(note-&gt;staffIdx());</span></span>
+<span id="L1201"><span class="lineNum">    1201</span> <span class="tlaGNC">           1 :             slur1-&gt;setTrack2(note-&gt;staffIdx());</span></span>
+<span id="L1202"><span class="lineNum">    1202</span> <span class="tlaGNC">           1 :             slur1-&gt;setTick(gnote-&gt;chord()-&gt;tick());</span></span>
+<span id="L1203"><span class="lineNum">    1203</span> <span class="tlaGNC">           1 :             slur1-&gt;setTick2(note-&gt;chord()-&gt;tick());</span></span>
+<span id="L1204"><span class="lineNum">    1204</span> <span class="tlaGNC">           1 :             score-&gt;addElement(slur1);</span></span>
+<span id="L1205"><span class="lineNum">    1205</span>              :             //TODO: Add a 'slide' guitar effect when implemented</span>
+<span id="L1206"><span class="lineNum">    1206</span>              :             //note-&gt;setSlideNote(gn);</span>
+<span id="L1207"><span class="lineNum">    1207</span>              :         }</span>
+<span id="L1208"><span class="lineNum">    1208</span>              :     }</span>
+<span id="L1209"><span class="lineNum">    1209</span> <span class="tlaGNC">          89 :     if (modMask2 &amp; EFFECT_STACCATO) {</span></span>
+<span id="L1210"><span class="lineNum">    1210</span> <span class="tlaUNC tlaBgUNC">           0 :         Chord* chord = note-&gt;chord();</span></span>
+<span id="L1211"><span class="lineNum">    1211</span> <span class="tlaUNC">           0 :         Articulation* a = Factory::createArticulation(chord);</span></span>
+<span id="L1212"><span class="lineNum">    1212</span> <span class="tlaUNC">           0 :         a-&gt;setSymId(SymId::articStaccatoAbove);</span></span>
+<span id="L1213"><span class="lineNum">    1213</span> <span class="tlaUNC">           0 :         bool add = true;</span></span>
+<span id="L1214"><span class="lineNum">    1214</span> <span class="tlaUNC">           0 :         for (auto a1 : chord-&gt;articulations()) {</span></span>
+<span id="L1215"><span class="lineNum">    1215</span> <span class="tlaUNC">           0 :             if (a1-&gt;symId() == SymId::articStaccatoAbove) {</span></span>
+<span id="L1216"><span class="lineNum">    1216</span> <span class="tlaUNC">           0 :                 add = false;</span></span>
+<span id="L1217"><span class="lineNum">    1217</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L1218"><span class="lineNum">    1218</span>              :             }</span>
+<span id="L1219"><span class="lineNum">    1219</span>              :         }</span>
+<span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 :         if (add) {</span></span>
+<span id="L1221"><span class="lineNum">    1221</span> <span class="tlaUNC">           0 :             chord-&gt;add(a);</span></span>
+<span id="L1222"><span class="lineNum">    1222</span>              :         }</span>
+<span id="L1223"><span class="lineNum">    1223</span>              :     }</span>
+<span id="L1224"><span class="lineNum">    1224</span> <span class="tlaGNC tlaBgGNC">          89 :     if (modMask2 &amp; EFFECT_PALM_MUTE) {</span></span>
+<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaGNC">           3 :         result.palmMute = true;</span></span>
+<span id="L1226"><span class="lineNum">    1226</span>              :     }</span>
+<span id="L1227"><span class="lineNum">    1227</span>              : </span>
+<span id="L1228"><span class="lineNum">    1228</span> <span class="tlaGNC">          89 :     if (modMask2 &amp; EFFECT_TREMOLO) {      // tremolo picking length</span></span>
+<span id="L1229"><span class="lineNum">    1229</span> <span class="tlaGNC">           2 :         int tremoloDivision = readUInt8();</span></span>
+<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaGNC">           2 :         if (tremoloDivision &gt;= 1 &amp;&amp; tremoloDivision &lt;= 3) {</span></span>
+<span id="L1231"><span class="lineNum">    1231</span> <span class="tlaGNC">           2 :             TremoloType type = tremoloType(tremoloDivision);</span></span>
+<span id="L1232"><span class="lineNum">    1232</span> <span class="tlaGNC">           2 :             DO_ASSERT(!isTremoloTwoChord(type));</span></span>
+<span id="L1233"><span class="lineNum">    1233</span> <span class="tlaGNC">           2 :             Chord* chord = note-&gt;chord();</span></span>
+<span id="L1234"><span class="lineNum">    1234</span> <span class="tlaGNC">           2 :             TremoloSingleChord* t = Factory::createTremoloSingleChord(chord);</span></span>
+<span id="L1235"><span class="lineNum">    1235</span> <span class="tlaGNC">           2 :             t-&gt;setTremoloType(type);</span></span>
+<span id="L1236"><span class="lineNum">    1236</span> <span class="tlaGNC">           2 :             chord-&gt;add(t);</span></span>
+<span id="L1237"><span class="lineNum">    1237</span> <span class="tlaGNC">           2 :             m_tremolosInChords[chord] = type;</span></span>
+<span id="L1238"><span class="lineNum">    1238</span> <span class="tlaGNC">           2 :         } else {</span></span>
+<span id="L1239"><span class="lineNum">    1239</span> <span class="tlaUNC tlaBgUNC">           0 :             LOGD(&quot;Unknown tremolo value&quot;);</span></span>
+<span id="L1240"><span class="lineNum">    1240</span>              :         }</span>
+<span id="L1241"><span class="lineNum">    1241</span>              :     }</span>
+<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaGNC tlaBgGNC">          89 :     if (modMask2 &amp; EFFECT_SLIDE) {</span></span>
+<span id="L1243"><span class="lineNum">    1243</span> <span class="tlaGNC">          22 :         int slideKind = readUInt8();</span></span>
+<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaGNC">          22 :         ChordLine* sld = nullptr;</span></span>
+<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaGNC">          22 :         ChordLineType slideType = ChordLineType::NOTYPE;</span></span>
+<span id="L1246"><span class="lineNum">    1246</span>              : </span>
+<span id="L1247"><span class="lineNum">    1247</span> <span class="tlaGNC">          22 :         if (slideKind &amp; SLIDE_OUT_DOWN) {</span></span>
+<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaGNC">           4 :             slideKind &amp;= ~SLIDE_OUT_DOWN;</span></span>
+<span id="L1249"><span class="lineNum">    1249</span> <span class="tlaGNC">           4 :             sld = Factory::createChordLine(score-&gt;dummy());</span></span>
+<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaGNC">           4 :             slideType = ChordLineType::FALL;</span></span>
+<span id="L1251"><span class="lineNum">    1251</span>              :         }</span>
+<span id="L1252"><span class="lineNum">    1252</span>              :         // slide out upwards (doit)</span>
+<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaGNC">          22 :         if (slideKind &amp; SLIDE_OUT_UP) {</span></span>
+<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaGNC">           4 :             slideKind &amp;= ~SLIDE_OUT_UP;</span></span>
+<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaGNC">           4 :             sld = Factory::createChordLine(score-&gt;dummy());</span></span>
+<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaGNC">           4 :             slideType = ChordLineType::DOIT;</span></span>
+<span id="L1257"><span class="lineNum">    1257</span>              :         }</span>
+<span id="L1258"><span class="lineNum">    1258</span>              :         // slide in from below (plop)</span>
+<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaGNC">          22 :         if (slideKind &amp; SLIDE_IN_BELOW) {</span></span>
+<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaGNC">           4 :             slideKind &amp;= ~SLIDE_IN_BELOW;</span></span>
+<span id="L1261"><span class="lineNum">    1261</span> <span class="tlaGNC">           4 :             sld = Factory::createChordLine(score-&gt;dummy());</span></span>
+<span id="L1262"><span class="lineNum">    1262</span> <span class="tlaGNC">           4 :             slideType = ChordLineType::PLOP;</span></span>
+<span id="L1263"><span class="lineNum">    1263</span>              :         }</span>
+<span id="L1264"><span class="lineNum">    1264</span>              :         // slide in from above (scoop)</span>
+<span id="L1265"><span class="lineNum">    1265</span> <span class="tlaGNC">          22 :         if (slideKind &amp; SLIDE_IN_ABOVE) {</span></span>
+<span id="L1266"><span class="lineNum">    1266</span> <span class="tlaGNC">           4 :             slideKind &amp;= ~SLIDE_IN_ABOVE;</span></span>
+<span id="L1267"><span class="lineNum">    1267</span> <span class="tlaGNC">           4 :             sld = Factory::createChordLine(score-&gt;dummy());</span></span>
+<span id="L1268"><span class="lineNum">    1268</span> <span class="tlaGNC">           4 :             slideType = ChordLineType::SCOOP;</span></span>
+<span id="L1269"><span class="lineNum">    1269</span>              :         }</span>
+<span id="L1270"><span class="lineNum">    1270</span>              : </span>
+<span id="L1271"><span class="lineNum">    1271</span> <span class="tlaGNC">          22 :         if (sld) {</span></span>
+<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaGNC">          16 :             sld-&gt;setChordLineType(slideType);</span></span>
+<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaGNC">          16 :             sld-&gt;setStraight(true);</span></span>
+<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaGNC">          16 :             note-&gt;chord()-&gt;add(sld);</span></span>
+<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaGNC">          16 :             sld-&gt;setNote(note);</span></span>
+<span id="L1276"><span class="lineNum">    1276</span>              :         }</span>
+<span id="L1277"><span class="lineNum">    1277</span>              : </span>
+<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaGNC">          22 :         if (slideKind &amp; LEGATO_SLIDE) {</span></span>
+<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaGNC">           2 :             slideKind &amp;= ~LEGATO_SLIDE;</span></span>
+<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaGNC">           2 :             slideList.push_back(nullptr);</span></span>
+<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaGNC">           2 :             createSlur(true, note-&gt;staffIdx(), note-&gt;chord());</span></span>
+<span id="L1282"><span class="lineNum">    1282</span>              :         }</span>
+<span id="L1283"><span class="lineNum">    1283</span>              : </span>
+<span id="L1284"><span class="lineNum">    1284</span> <span class="tlaGNC">          22 :         if (slideKind &amp; SHIFT_SLIDE) {</span></span>
+<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaGNC">           1 :             slideKind &amp;= ~SHIFT_SLIDE;</span></span>
+<span id="L1286"><span class="lineNum">    1286</span> <span class="tlaGNC">           1 :             slideList.push_back(note);</span></span>
+<span id="L1287"><span class="lineNum">    1287</span>              :         }</span>
+<span id="L1288"><span class="lineNum">    1288</span>              :     }</span>
+<span id="L1289"><span class="lineNum">    1289</span>              : </span>
+<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaGNC">          89 :     if (modMask2 &amp; EFFECT_ARTIFICIAL_HARMONIC) {</span></span>
+<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaGNC">          25 :         int type = readChar();</span></span>
+<span id="L1292"><span class="lineNum">    1292</span> <span class="tlaGNC">          25 :         if (type == HARMONIC_MARK_NATURAL) {</span></span>
+<span id="L1293"><span class="lineNum">    1293</span> <span class="tlaUNC tlaBgUNC">           0 :             int fret = note-&gt;fret();</span></span>
+<span id="L1294"><span class="lineNum">    1294</span>              : </span>
+<span id="L1295"><span class="lineNum">    1295</span> <span class="tlaUNC">           0 :             note-&gt;setHarmonic(true);</span></span>
+<span id="L1296"><span class="lineNum">    1296</span> <span class="tlaUNC">           0 :             float harmonicFret = naturalHarmonicFromFret(fret);</span></span>
+<span id="L1297"><span class="lineNum">    1297</span> <span class="tlaUNC">           0 :             int harmonicOvertone = utils::harmonicOvertone(note, harmonicFret, type);</span></span>
+<span id="L1298"><span class="lineNum">    1298</span> <span class="tlaUNC">           0 :             note-&gt;setDisplayFret(Note::DisplayFretOption::NaturalHarmonic);</span></span>
+<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaUNC">           0 :             note-&gt;setHarmonicFret(harmonicFret);</span></span>
+<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaUNC">           0 :             auto staff = note-&gt;staff();</span></span>
+<span id="L1301"><span class="lineNum">    1301</span> <span class="tlaUNC">           0 :             int pitch = staff-&gt;part()-&gt;instrument()-&gt;stringData()-&gt;getPitch(note-&gt;string(), harmonicOvertone, staff, note-&gt;tick());</span></span>
+<span id="L1302"><span class="lineNum">    1302</span>              : </span>
+<span id="L1303"><span class="lineNum">    1303</span> <span class="tlaUNC">           0 :             note-&gt;setPitch(clampPitch(pitch));</span></span>
+<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :             note-&gt;setTpcFromPitch(Prefer::SHARPS);</span></span>
+<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaGNC tlaBgGNC">          25 :         } else if (type &gt;= HARMONIC_MARK_ARTIFICIAL &amp;&amp; type &lt;= HARMONIC_MARK_SEMI) {</span></span>
+<span id="L1306"><span class="lineNum">    1306</span> <span class="tlaGNC">          25 :             int fret = (type == HARMONIC_MARK_TAP ? (readChar() - note-&gt;fret()) : note-&gt;fret());</span></span>
+<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaGNC">          25 :             float midi = note-&gt;pitch() + fret;</span></span>
+<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaGNC">          25 :             int currentOctave = floor(midi / 12);</span></span>
+<span id="L1309"><span class="lineNum">    1309</span> <span class="tlaGNC">          25 :             auto harmNote = (type == HARMONIC_MARK_ARTIFICIAL ? readChar() : 0);</span></span>
+<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaGNC">          25 :             if (type == HARMONIC_MARK_ARTIFICIAL) {</span></span>
+<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaGNC">          19 :                 readChar();</span></span>
+<span id="L1312"><span class="lineNum">    1312</span>              :             }</span>
+<span id="L1313"><span class="lineNum">    1313</span>              : </span>
+<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaGNC">          25 :             auto octave = currentOctave + (type == HARMONIC_MARK_ARTIFICIAL ? readChar() : 0);</span></span>
+<span id="L1315"><span class="lineNum">    1315</span>              : </span>
+<span id="L1316"><span class="lineNum">    1316</span> <span class="tlaGNC">          25 :             Note* harmonicNote = Factory::createNote(note-&gt;chord());</span></span>
+<span id="L1317"><span class="lineNum">    1317</span>              : </span>
+<span id="L1318"><span class="lineNum">    1318</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setHarmonic(true);</span></span>
+<span id="L1319"><span class="lineNum">    1319</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setPlay(false);</span></span>
+<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaGNC">          25 :             note-&gt;setPlay(true);</span></span>
+<span id="L1321"><span class="lineNum">    1321</span>              :             /// @note option to show or not additional harmonic fret in &quot;&lt;&gt;&quot; to be implemented</span>
+<span id="L1322"><span class="lineNum">    1322</span>              :             ///harmonicNote-&gt;setDisplayFret(Note::DisplayFretOption::ArtificialHarmonic);</span>
+<span id="L1323"><span class="lineNum">    1323</span>              :             ///note-&gt;setDisplayFret(Note::DisplayFretOption::Hide);</span>
+<span id="L1324"><span class="lineNum">    1324</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setDisplayFret(Note::DisplayFretOption::Hide);</span></span>
+<span id="L1325"><span class="lineNum">    1325</span> <span class="tlaGNC">          25 :             m_harmonicNotes[note] = harmonicNote;</span></span>
+<span id="L1326"><span class="lineNum">    1326</span>              : </span>
+<span id="L1327"><span class="lineNum">    1327</span> <span class="tlaGNC">          25 :             Staff* staff = note-&gt;staff();</span></span>
+<span id="L1328"><span class="lineNum">    1328</span> <span class="tlaGNC">          25 :             float harmonicFret = 0;</span></span>
+<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaGNC">          25 :             switch (static_cast&lt;int&gt;(((octave * 12) + harmNote) - midi)) {</span></span>
+<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaUNC tlaBgUNC">           0 :             case 4:</span></span>
+<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaUNC">           0 :                 harmonicFret = 12;</span></span>
+<span id="L1332"><span class="lineNum">    1332</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L1333"><span class="lineNum">    1333</span> <span class="tlaUNC">           0 :             case 11:</span></span>
+<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaUNC">           0 :                 harmonicFret = 7;</span></span>
+<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaUNC">           0 :             case 16:</span></span>
+<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaUNC">           0 :                 harmonicFret = 5;</span></span>
+<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaGNC tlaBgGNC">           1 :             case 20:</span></span>
+<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaGNC">           1 :                 harmonicFret = 4;</span></span>
+<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaGNC">           1 :                 break;</span></span>
+<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaUNC tlaBgUNC">           0 :             case 23:</span></span>
+<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaUNC">           0 :                 harmonicFret = 3.2f;</span></span>
+<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L1345"><span class="lineNum">    1345</span> <span class="tlaUNC">           0 :             case 25:</span></span>
+<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaUNC">           0 :                 harmonicFret = 2.7f;</span></span>
+<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaUNC">           0 :             case 28:</span></span>
+<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaUNC">           0 :                 harmonicFret = 2.4f;</span></span>
+<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L1351"><span class="lineNum">    1351</span> <span class="tlaGNC tlaBgGNC">          24 :             default:</span></span>
+<span id="L1352"><span class="lineNum">    1352</span> <span class="tlaGNC">          24 :                 harmonicFret = 12;</span></span>
+<span id="L1353"><span class="lineNum">    1353</span> <span class="tlaGNC">          24 :                 break;</span></span>
+<span id="L1354"><span class="lineNum">    1354</span>              :             }</span>
+<span id="L1355"><span class="lineNum">    1355</span>              : </span>
+<span id="L1356"><span class="lineNum">    1356</span> <span class="tlaGNC">          25 :             int overtoneFret = utils::harmonicOvertone(note, harmonicFret, type);</span></span>
+<span id="L1357"><span class="lineNum">    1357</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setString(note-&gt;string());</span></span>
+<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setFret(note-&gt;fret());</span></span>
+<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setHarmonicFret(harmonicFret + fret);</span></span>
+<span id="L1360"><span class="lineNum">    1360</span>              : </span>
+<span id="L1361"><span class="lineNum">    1361</span> <span class="tlaGNC">          25 :             int pitch = staff-&gt;part()-&gt;instrument()-&gt;stringData()-&gt;getPitch(note-&gt;string(), overtoneFret, staff, note-&gt;tick());</span></span>
+<span id="L1362"><span class="lineNum">    1362</span>              : </span>
+<span id="L1363"><span class="lineNum">    1363</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setPitch(clampPitch(pitch));</span></span>
+<span id="L1364"><span class="lineNum">    1364</span> <span class="tlaGNC">          25 :             harmonicNote-&gt;setTpcFromPitch(Prefer::SHARPS);</span></span>
+<span id="L1365"><span class="lineNum">    1365</span> <span class="tlaGNC">          25 :             note-&gt;setHarmonicPitchOffset(harmonicNote-&gt;pitch() - note-&gt;pitch());</span></span>
+<span id="L1366"><span class="lineNum">    1366</span> <span class="tlaGNC">          25 :             note-&gt;chord()-&gt;add(harmonicNote);</span></span>
+<span id="L1367"><span class="lineNum">    1367</span>              : </span>
+<span id="L1368"><span class="lineNum">    1368</span> <span class="tlaGNC">          25 :             switch (type) {</span></span>
+<span id="L1369"><span class="lineNum">    1369</span> <span class="tlaGNC">          19 :             case HARMONIC_MARK_ARTIFICIAL:</span></span>
+<span id="L1370"><span class="lineNum">    1370</span> <span class="tlaGNC">          19 :                 result.harmonicArtificial = true;</span></span>
+<span id="L1371"><span class="lineNum">    1371</span> <span class="tlaGNC">          19 :                 break;</span></span>
+<span id="L1372"><span class="lineNum">    1372</span> <span class="tlaUNC tlaBgUNC">           0 :             case HARMONIC_MARK_PINCH:</span></span>
+<span id="L1373"><span class="lineNum">    1373</span> <span class="tlaUNC">           0 :                 result.harmonicPinch = true;</span></span>
+<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaGNC tlaBgGNC">           1 :             case HARMONIC_MARK_TAP:</span></span>
+<span id="L1376"><span class="lineNum">    1376</span> <span class="tlaGNC">           1 :                 result.harmonicTap = true;</span></span>
+<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaGNC">           1 :                 break;</span></span>
+<span id="L1378"><span class="lineNum">    1378</span> <span class="tlaGNC">           5 :             case HARMONIC_MARK_SEMI:</span></span>
+<span id="L1379"><span class="lineNum">    1379</span> <span class="tlaGNC">           5 :                 result.harmonicSemi = true;</span></span>
+<span id="L1380"><span class="lineNum">    1380</span> <span class="tlaGNC">           5 :                 break;</span></span>
+<span id="L1381"><span class="lineNum">    1381</span>              :             }</span>
+<span id="L1382"><span class="lineNum">    1382</span>              :         }</span>
+<span id="L1383"><span class="lineNum">    1383</span>              :     }</span>
+<span id="L1384"><span class="lineNum">    1384</span>              : </span>
+<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaGNC">          89 :     if (bendParent) {</span></span>
+<span id="L1386"><span class="lineNum">    1386</span> <span class="tlaGNC">          12 :         createBend(bendParent, bendData);</span></span>
+<span id="L1387"><span class="lineNum">    1387</span>              :     }</span>
+<span id="L1388"><span class="lineNum">    1388</span>              : </span>
+<span id="L1389"><span class="lineNum">    1389</span> <span class="tlaGNC">          89 :     if (modMask2 &amp; EFFECT_VIBRATO) {</span></span>
+<span id="L1390"><span class="lineNum">    1390</span> <span class="tlaGNC">           7 :         result.vibrato = true;</span></span>
+<span id="L1391"><span class="lineNum">    1391</span>              :     }</span>
+<span id="L1392"><span class="lineNum">    1392</span>              : </span>
+<span id="L1393"><span class="lineNum">    1393</span> <span class="tlaGNC">          89 :     if (modMask2 &amp; EFFECT_TRILL) {</span></span>
+<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaUNC tlaBgUNC">           0 :         readUInt8();          // trill fret</span></span>
+<span id="L1395"><span class="lineNum">    1395</span>              : </span>
+<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaUNC">           0 :         int period = readUInt8();          // trill length</span></span>
+<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaUNC">           0 :         result.trill = true;</span></span>
+<span id="L1398"><span class="lineNum">    1398</span>              : </span>
+<span id="L1399"><span class="lineNum">    1399</span> <span class="tlaUNC">           0 :         switch (period) {</span></span>
+<span id="L1400"><span class="lineNum">    1400</span> <span class="tlaUNC">           0 :         case 1:                     // 16</span></span>
+<span id="L1401"><span class="lineNum">    1401</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L1402"><span class="lineNum">    1402</span> <span class="tlaUNC">           0 :         case 2:                     // 32</span></span>
+<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L1404"><span class="lineNum">    1404</span> <span class="tlaUNC">           0 :         case 3:                     // 64</span></span>
+<span id="L1405"><span class="lineNum">    1405</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L1406"><span class="lineNum">    1406</span> <span class="tlaUNC">           0 :         default:</span></span>
+<span id="L1407"><span class="lineNum">    1407</span> <span class="tlaUNC">           0 :             LOGD(&quot;unknown trill period %d&quot;, period);</span></span>
+<span id="L1408"><span class="lineNum">    1408</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L1409"><span class="lineNum">    1409</span>              :         }</span>
+<span id="L1410"><span class="lineNum">    1410</span>              :     }</span>
+<span id="L1411"><span class="lineNum">    1411</span> <span class="tlaGNC tlaBgGNC">          89 :     return result;</span></span>
+<span id="L1412"><span class="lineNum">    1412</span> <span class="tlaGNC">          89 : }</span></span>
+<span id="L1413"><span class="lineNum">    1413</span>              : </span>
+<span id="L1414"><span class="lineNum">    1414</span>              : //---------------------------------------------------------</span>
+<span id="L1415"><span class="lineNum">    1415</span>              : //   readNote</span>
+<span id="L1416"><span class="lineNum">    1416</span>              : //---------------------------------------------------------</span>
+<span id="L1417"><span class="lineNum">    1417</span>              : </span>
+<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaGNC">         639 : GuitarPro::ReadNoteResult GuitarPro5::readNote(int string, Note* note)</span></span>
+<span id="L1419"><span class="lineNum">    1419</span>              : {</span>
+<span id="L1420"><span class="lineNum">    1420</span> <span class="tlaGNC">         639 :     uint8_t noteBits = readUInt8();</span></span>
+<span id="L1421"><span class="lineNum">    1421</span>              :     //</span>
+<span id="L1422"><span class="lineNum">    1422</span>              :     // noteBits:</span>
+<span id="L1423"><span class="lineNum">    1423</span>              :     //    7 - Right hand or left hand fingering;</span>
+<span id="L1424"><span class="lineNum">    1424</span>              :     //    6 - Accentuated note</span>
+<span id="L1425"><span class="lineNum">    1425</span>              :     //    5 - Note type (rest, empty note, normal note);</span>
+<span id="L1426"><span class="lineNum">    1426</span>              :     //    4 - note dynamic;</span>
+<span id="L1427"><span class="lineNum">    1427</span>              :     //    3 - Presence of effects linked to the note;</span>
+<span id="L1428"><span class="lineNum">    1428</span>              :     //    2 - Ghost note;</span>
+<span id="L1429"><span class="lineNum">    1429</span>              :     //    1 - Dotted note;  ?</span>
+<span id="L1430"><span class="lineNum">    1430</span>              :     //    0 - Time-independent duration</span>
+<span id="L1431"><span class="lineNum">    1431</span>              : </span>
+<span id="L1432"><span class="lineNum">    1432</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_GHOST) {</span></span>
+<span id="L1433"><span class="lineNum">    1433</span> <span class="tlaUNC tlaBgUNC">           0 :         note-&gt;setGhost(true);</span></span>
+<span id="L1434"><span class="lineNum">    1434</span>              :     }</span>
+<span id="L1435"><span class="lineNum">    1435</span>              : </span>
+<span id="L1436"><span class="lineNum">    1436</span> <span class="tlaGNC tlaBgGNC">         639 :     bool tieNote = false;</span></span>
+<span id="L1437"><span class="lineNum">    1437</span>              : </span>
+<span id="L1438"><span class="lineNum">    1438</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_DEAD) {</span></span>
+<span id="L1439"><span class="lineNum">    1439</span> <span class="tlaGNC">         639 :         uint8_t noteType = readUInt8();</span></span>
+<span id="L1440"><span class="lineNum">    1440</span> <span class="tlaGNC">         639 :         if (noteType == 1) {</span></span>
+<span id="L1441"><span class="lineNum">    1441</span>              :         }                         //standard note</span>
+<span id="L1442"><span class="lineNum">    1442</span> <span class="tlaGNC">          28 :         else if (noteType == 2) {</span></span>
+<span id="L1443"><span class="lineNum">    1443</span> <span class="tlaGNC">          21 :             tieNote = true;</span></span>
+<span id="L1444"><span class="lineNum">    1444</span> <span class="tlaGNC">           7 :         } else if (noteType == 3) {                   // dead notes</span></span>
+<span id="L1445"><span class="lineNum">    1445</span> <span class="tlaGNC">           7 :             note-&gt;setHeadGroup(NoteHeadGroup::HEAD_CROSS);</span></span>
+<span id="L1446"><span class="lineNum">    1446</span> <span class="tlaGNC">           7 :             note-&gt;setDeadNote(true);</span></span>
+<span id="L1447"><span class="lineNum">    1447</span>              :         } else {</span>
+<span id="L1448"><span class="lineNum">    1448</span> <span class="tlaUNC tlaBgUNC">           0 :             LOGD(&quot;unknown note type: %d&quot;, noteType);</span></span>
+<span id="L1449"><span class="lineNum">    1449</span>              :         }</span>
+<span id="L1450"><span class="lineNum">    1450</span>              :     }</span>
+<span id="L1451"><span class="lineNum">    1451</span>              : </span>
+<span id="L1452"><span class="lineNum">    1452</span> <span class="tlaGNC tlaBgGNC">         639 :     int&amp; previousDynamic = previousDynamicByTrack[note-&gt;track()];</span></span>
+<span id="L1453"><span class="lineNum">    1453</span>              : </span>
+<span id="L1454"><span class="lineNum">    1454</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_DYNAMIC) {            // velocity</span></span>
+<span id="L1455"><span class="lineNum">    1455</span> <span class="tlaGNC">         478 :         int d = readChar();</span></span>
+<span id="L1456"><span class="lineNum">    1456</span> <span class="tlaGNC">         478 :         if (previousDynamic != d) {</span></span>
+<span id="L1457"><span class="lineNum">    1457</span> <span class="tlaGNC">          51 :             previousDynamic = d;</span></span>
+<span id="L1458"><span class="lineNum">    1458</span> <span class="tlaGNC">          51 :             addDynamic(note, d);</span></span>
+<span id="L1459"><span class="lineNum">    1459</span>              :         }</span>
+<span id="L1460"><span class="lineNum">    1460</span> <span class="tlaGNC">         161 :     } else if (previousDynamic != DEFAULT_DYNAMIC) {</span></span>
+<span id="L1461"><span class="lineNum">    1461</span> <span class="tlaGNC">          19 :         previousDynamic = DEFAULT_DYNAMIC;</span></span>
+<span id="L1462"><span class="lineNum">    1462</span> <span class="tlaGNC">          19 :         addDynamic(note, previousDynamic);</span></span>
+<span id="L1463"><span class="lineNum">    1463</span>              :     }</span>
+<span id="L1464"><span class="lineNum">    1464</span>              : </span>
+<span id="L1465"><span class="lineNum">    1465</span> <span class="tlaGNC">         639 :     int fretNumber = 0;</span></span>
+<span id="L1466"><span class="lineNum">    1466</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_FRET) {</span></span>
+<span id="L1467"><span class="lineNum">    1467</span> <span class="tlaGNC">         639 :         fretNumber = readChar();</span></span>
+<span id="L1468"><span class="lineNum">    1468</span>              :     }</span>
+<span id="L1469"><span class="lineNum">    1469</span>              : </span>
+<span id="L1470"><span class="lineNum">    1470</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_FINGERING) {</span></span>
+<span id="L1471"><span class="lineNum">    1471</span> <span class="tlaGNC">          10 :         int leftFinger = readUInt8();</span></span>
+<span id="L1472"><span class="lineNum">    1472</span> <span class="tlaGNC">          10 :         int rightFinger = readUInt8();</span></span>
+<span id="L1473"><span class="lineNum">    1473</span> <span class="tlaGNC">          10 :         Fingering* fi = Factory::createFingering(note);</span></span>
+<span id="L1474"><span class="lineNum">    1474</span> <span class="tlaGNC">          10 :         String finger;</span></span>
+<span id="L1475"><span class="lineNum">    1475</span>              :         // if there is a valid left hand fingering</span>
+<span id="L1476"><span class="lineNum">    1476</span> <span class="tlaGNC">          10 :         if (leftFinger &lt; 5) {</span></span>
+<span id="L1477"><span class="lineNum">    1477</span> <span class="tlaGNC">           5 :             if (leftFinger == 0) {</span></span>
+<span id="L1478"><span class="lineNum">    1478</span> <span class="tlaGNC">           1 :                 finger = u&quot;T&quot;;</span></span>
+<span id="L1479"><span class="lineNum">    1479</span> <span class="tlaGNC">           4 :             } else if (leftFinger == 1) {</span></span>
+<span id="L1480"><span class="lineNum">    1480</span> <span class="tlaGNC">           1 :                 finger = u&quot;1&quot;;</span></span>
+<span id="L1481"><span class="lineNum">    1481</span> <span class="tlaGNC">           3 :             } else if (leftFinger == 2) {</span></span>
+<span id="L1482"><span class="lineNum">    1482</span> <span class="tlaGNC">           1 :                 finger = u&quot;2&quot;;</span></span>
+<span id="L1483"><span class="lineNum">    1483</span> <span class="tlaGNC">           2 :             } else if (leftFinger == 3) {</span></span>
+<span id="L1484"><span class="lineNum">    1484</span> <span class="tlaGNC">           1 :                 finger = u&quot;3&quot;;</span></span>
+<span id="L1485"><span class="lineNum">    1485</span> <span class="tlaGNC">           1 :             } else if (leftFinger == 4) {</span></span>
+<span id="L1486"><span class="lineNum">    1486</span> <span class="tlaGNC">           1 :                 finger = u&quot;4&quot;;</span></span>
+<span id="L1487"><span class="lineNum">    1487</span>              :             }</span>
+<span id="L1488"><span class="lineNum">    1488</span>              :         } else {</span>
+<span id="L1489"><span class="lineNum">    1489</span> <span class="tlaGNC">           5 :             if (rightFinger == 0) {</span></span>
+<span id="L1490"><span class="lineNum">    1490</span> <span class="tlaGNC">           1 :                 finger = u&quot;T&quot;;</span></span>
+<span id="L1491"><span class="lineNum">    1491</span> <span class="tlaGNC">           4 :             } else if (rightFinger == 1) {</span></span>
+<span id="L1492"><span class="lineNum">    1492</span> <span class="tlaGNC">           1 :                 finger = u&quot;I&quot;;</span></span>
+<span id="L1493"><span class="lineNum">    1493</span> <span class="tlaGNC">           3 :             } else if (rightFinger == 2) {</span></span>
+<span id="L1494"><span class="lineNum">    1494</span> <span class="tlaGNC">           1 :                 finger = u&quot;M&quot;;</span></span>
+<span id="L1495"><span class="lineNum">    1495</span> <span class="tlaGNC">           2 :             } else if (rightFinger == 3) {</span></span>
+<span id="L1496"><span class="lineNum">    1496</span> <span class="tlaGNC">           1 :                 finger = u&quot;A&quot;;</span></span>
+<span id="L1497"><span class="lineNum">    1497</span> <span class="tlaGNC">           1 :             } else if (rightFinger == 4) {</span></span>
+<span id="L1498"><span class="lineNum">    1498</span> <span class="tlaGNC">           1 :                 finger = u&quot;O&quot;;</span></span>
+<span id="L1499"><span class="lineNum">    1499</span>              :             }</span>
+<span id="L1500"><span class="lineNum">    1500</span>              :         }</span>
+<span id="L1501"><span class="lineNum">    1501</span> <span class="tlaGNC">          10 :         fi-&gt;setPlainText(finger);</span></span>
+<span id="L1502"><span class="lineNum">    1502</span> <span class="tlaGNC">          10 :         note-&gt;add(fi);</span></span>
+<span id="L1503"><span class="lineNum">    1503</span> <span class="tlaGNC">          10 :         fi-&gt;reset();</span></span>
+<span id="L1504"><span class="lineNum">    1504</span> <span class="tlaGNC">          10 :     }</span></span>
+<span id="L1505"><span class="lineNum">    1505</span>              : </span>
+<span id="L1506"><span class="lineNum">    1506</span> <span class="tlaGNC">         639 :     if (noteBits &amp; 0x1) {     // Time independent duration</span></span>
+<span id="L1507"><span class="lineNum">    1507</span> <span class="tlaUNC tlaBgUNC">           0 :         skip(8);</span></span>
+<span id="L1508"><span class="lineNum">    1508</span>              :     }</span>
+<span id="L1509"><span class="lineNum">    1509</span>              : </span>
+<span id="L1510"><span class="lineNum">    1510</span>              :     // check if a note is supposed to be accented, and give it the marcato type</span>
+<span id="L1511"><span class="lineNum">    1511</span> <span class="tlaGNC tlaBgGNC">         639 :     if (noteBits &amp; NOTE_MARCATO) {</span></span>
+<span id="L1512"><span class="lineNum">    1512</span> <span class="tlaGNC">           1 :         Articulation* art = Factory::createArticulation(note-&gt;score()-&gt;dummy());</span></span>
+<span id="L1513"><span class="lineNum">    1513</span> <span class="tlaGNC">           1 :         art-&gt;setSymId(SymId::articMarcatoAbove);</span></span>
+<span id="L1514"><span class="lineNum">    1514</span> <span class="tlaGNC">           1 :         if (!EditChord::toggleArticulation(note-&gt;score(), note, art)) {</span></span>
+<span id="L1515"><span class="lineNum">    1515</span> <span class="tlaUNC tlaBgUNC">           0 :             delete art;</span></span>
+<span id="L1516"><span class="lineNum">    1516</span>              :         }</span>
+<span id="L1517"><span class="lineNum">    1517</span>              :     }</span>
+<span id="L1518"><span class="lineNum">    1518</span>              :     // check if a note is supposed to be accented, and give it the sforzato type</span>
+<span id="L1519"><span class="lineNum">    1519</span> <span class="tlaGNC tlaBgGNC">         638 :     else if (noteBits &amp; NOTE_SFORZATO) {</span></span>
+<span id="L1520"><span class="lineNum">    1520</span> <span class="tlaUNC tlaBgUNC">           0 :         Articulation* art = Factory::createArticulation(note-&gt;score()-&gt;dummy());</span></span>
+<span id="L1521"><span class="lineNum">    1521</span> <span class="tlaUNC">           0 :         art-&gt;setSymId(SymId::articAccentAbove);</span></span>
+<span id="L1522"><span class="lineNum">    1522</span> <span class="tlaUNC">           0 :         note-&gt;add(art);</span></span>
+<span id="L1523"><span class="lineNum">    1523</span> <span class="tlaUNC">           0 :         if (!EditChord::toggleArticulation(note-&gt;score(), note, art)) {</span></span>
+<span id="L1524"><span class="lineNum">    1524</span> <span class="tlaUNC">           0 :             delete art;</span></span>
+<span id="L1525"><span class="lineNum">    1525</span>              :         }</span>
+<span id="L1526"><span class="lineNum">    1526</span>              :     }</span>
+<span id="L1527"><span class="lineNum">    1527</span>              : </span>
+<span id="L1528"><span class="lineNum">    1528</span> <span class="tlaGNC tlaBgGNC">         639 :     readUInt8();   //skip</span></span>
+<span id="L1529"><span class="lineNum">    1529</span>              : </span>
+<span id="L1530"><span class="lineNum">    1530</span> <span class="tlaGNC">         639 :     Staff* staff = note-&gt;staff();</span></span>
+<span id="L1531"><span class="lineNum">    1531</span> <span class="tlaGNC">         639 :     if (fretNumber == 255 || fretNumber &lt; 0) {</span></span>
+<span id="L1532"><span class="lineNum">    1532</span> <span class="tlaUNC tlaBgUNC">           0 :         fretNumber = 0;</span></span>
+<span id="L1533"><span class="lineNum">    1533</span> <span class="tlaUNC">           0 :         note-&gt;setHeadGroup(NoteHeadGroup::HEAD_CROSS);</span></span>
+<span id="L1534"><span class="lineNum">    1534</span> <span class="tlaUNC">           0 :         note-&gt;setDeadNote(true);</span></span>
+<span id="L1535"><span class="lineNum">    1535</span>              :     }</span>
+<span id="L1536"><span class="lineNum">    1536</span> <span class="tlaGNC tlaBgGNC">         639 :     int pitch = staff-&gt;part()-&gt;instrument()-&gt;stringData()-&gt;getPitch(string, fretNumber, staff, note-&gt;tick());</span></span>
+<span id="L1537"><span class="lineNum">    1537</span> <span class="tlaGNC">         639 :     note-&gt;setFret(fretNumber);</span></span>
+<span id="L1538"><span class="lineNum">    1538</span> <span class="tlaGNC">         639 :     note-&gt;setString(string);</span></span>
+<span id="L1539"><span class="lineNum">    1539</span> <span class="tlaGNC">         639 :     note-&gt;setPitch(pitch);</span></span>
+<span id="L1540"><span class="lineNum">    1540</span>              : </span>
+<span id="L1541"><span class="lineNum">    1541</span>              :     // This function uses string and fret number, so it should be set before this</span>
+<span id="L1542"><span class="lineNum">    1542</span> <span class="tlaGNC">         639 :     ReadNoteResult result;</span></span>
+<span id="L1543"><span class="lineNum">    1543</span> <span class="tlaGNC">         639 :     if (noteBits &amp; NOTE_SLUR) {</span></span>
+<span id="L1544"><span class="lineNum">    1544</span> <span class="tlaGNC">          89 :         result = readNoteEffects(note);</span></span>
+<span id="L1545"><span class="lineNum">    1545</span>              :     }</span>
+<span id="L1546"><span class="lineNum">    1546</span>              : </span>
+<span id="L1547"><span class="lineNum">    1547</span> <span class="tlaGNC">         639 :     if (tieNote) {</span></span>
+<span id="L1548"><span class="lineNum">    1548</span> <span class="tlaGNC">          21 :         auto staffIdx = note-&gt;staffIdx();</span></span>
+<span id="L1549"><span class="lineNum">    1549</span> <span class="tlaGNC">          21 :         if (dead_end[{ static_cast&lt;int&gt;(staffIdx), string }]) {</span></span>
+<span id="L1550"><span class="lineNum">    1550</span> <span class="tlaUNC tlaBgUNC">           0 :             note-&gt;setFret(INVALID_FRET_INDEX);</span></span>
+<span id="L1551"><span class="lineNum">    1551</span> <span class="tlaUNC">           0 :             result.slur = false;</span></span>
+<span id="L1552"><span class="lineNum">    1552</span> <span class="tlaUNC">           0 :             return result;</span></span>
+<span id="L1553"><span class="lineNum">    1553</span>              :         }</span>
+<span id="L1554"><span class="lineNum">    1554</span> <span class="tlaGNC tlaBgGNC">          21 :         if (slurs[staffIdx]) {</span></span>
+<span id="L1555"><span class="lineNum">    1555</span> <span class="tlaGNC">           1 :             score-&gt;removeSpanner(slurs[staffIdx]);</span></span>
+<span id="L1556"><span class="lineNum">    1556</span> <span class="tlaGNC">           1 :             delete slurs[staffIdx];</span></span>
+<span id="L1557"><span class="lineNum">    1557</span> <span class="tlaGNC">           1 :             slurs[staffIdx] = 0;</span></span>
+<span id="L1558"><span class="lineNum">    1558</span>              :         }</span>
+<span id="L1559"><span class="lineNum">    1559</span> <span class="tlaGNC">          21 :         bool found = false;</span></span>
+<span id="L1560"><span class="lineNum">    1560</span> <span class="tlaGNC">          21 :         Chord* chord     = note-&gt;chord();</span></span>
+<span id="L1561"><span class="lineNum">    1561</span> <span class="tlaGNC">          21 :         Segment* segment = chord-&gt;segment()-&gt;prev1(SegmentType::ChordRest);</span></span>
+<span id="L1562"><span class="lineNum">    1562</span> <span class="tlaGNC">          21 :         track_idx_t track = note-&gt;track();</span></span>
+<span id="L1563"><span class="lineNum">    1563</span> <span class="tlaGNC">          21 :         std::vector&lt;ChordRest*&gt; chords;</span></span>
+<span id="L1564"><span class="lineNum">    1564</span> <span class="tlaGNC">          21 :         Note* true_note = nullptr;</span></span>
+<span id="L1565"><span class="lineNum">    1565</span> <span class="tlaGNC">          25 :         while (segment) {</span></span>
+<span id="L1566"><span class="lineNum">    1566</span> <span class="tlaGNC">          25 :             EngravingItem* e = segment-&gt;element(track);</span></span>
+<span id="L1567"><span class="lineNum">    1567</span> <span class="tlaGNC">          25 :             if (e &amp;&amp; e-&gt;isChord()) {</span></span>
+<span id="L1568"><span class="lineNum">    1568</span> <span class="tlaGNC">          23 :                 Chord* chord2 = toChord(e);</span></span>
+<span id="L1569"><span class="lineNum">    1569</span> <span class="tlaGNC">          38 :                 for (Note* note2 : chord2-&gt;notes()) {</span></span>
+<span id="L1570"><span class="lineNum">    1570</span> <span class="tlaGNC">          36 :                     if (note2-&gt;string() == string) {</span></span>
+<span id="L1571"><span class="lineNum">    1571</span> <span class="tlaGNC">          21 :                         if (chords.empty()) {</span></span>
+<span id="L1572"><span class="lineNum">    1572</span> <span class="tlaGNC">          19 :                             Tie* tie = Factory::createTie(note2);</span></span>
+<span id="L1573"><span class="lineNum">    1573</span> <span class="tlaGNC">          19 :                             tie-&gt;setEndNote(note);</span></span>
+<span id="L1574"><span class="lineNum">    1574</span> <span class="tlaGNC">          19 :                             note2-&gt;add(tie);</span></span>
+<span id="L1575"><span class="lineNum">    1575</span>              :                         }</span>
+<span id="L1576"><span class="lineNum">    1576</span>              : </span>
+<span id="L1577"><span class="lineNum">    1577</span>              :                         //  fixing gp5 bug with not storying let ring for tied notes</span>
+<span id="L1578"><span class="lineNum">    1578</span> <span class="tlaGNC">          21 :                         if (m_letRingForChords.find(chord2) != m_letRingForChords.end()) {</span></span>
+<span id="L1579"><span class="lineNum">    1579</span> <span class="tlaGNC">           2 :                             result.letRing = true;</span></span>
+<span id="L1580"><span class="lineNum">    1580</span> <span class="tlaGNC">           2 :                             muse::remove(m_letRingForChords, chord2);</span></span>
+<span id="L1581"><span class="lineNum">    1581</span>              :                         }</span>
+<span id="L1582"><span class="lineNum">    1582</span>              : </span>
+<span id="L1583"><span class="lineNum">    1583</span> <span class="tlaGNC">          21 :                         if (m_harmonicNotes.find(note) != m_harmonicNotes.end() &amp;&amp; m_harmonicNotes.find(note2) != m_harmonicNotes.end()) {</span></span>
+<span id="L1584"><span class="lineNum">    1584</span> <span class="tlaGNC">          12 :                             Note* startHarmonicNote = m_harmonicNotes.at(note2);</span></span>
+<span id="L1585"><span class="lineNum">    1585</span> <span class="tlaGNC">          12 :                             Note* endHarmonicNote = m_harmonicNotes.at(note);</span></span>
+<span id="L1586"><span class="lineNum">    1586</span>              : </span>
+<span id="L1587"><span class="lineNum">    1587</span> <span class="tlaGNC">          12 :                             Tie* tieHarmonic = Factory::createTie(startHarmonicNote);</span></span>
+<span id="L1588"><span class="lineNum">    1588</span> <span class="tlaGNC">          12 :                             tieHarmonic-&gt;setEndNote(endHarmonicNote);</span></span>
+<span id="L1589"><span class="lineNum">    1589</span> <span class="tlaGNC">          12 :                             startHarmonicNote-&gt;add(tieHarmonic);</span></span>
+<span id="L1590"><span class="lineNum">    1590</span>              : </span>
+<span id="L1591"><span class="lineNum">    1591</span> <span class="tlaGNC">          12 :                             muse::remove(m_harmonicNotes, startHarmonicNote);</span></span>
+<span id="L1592"><span class="lineNum">    1592</span> <span class="tlaGNC">          12 :                             muse::remove(m_harmonicNotes, endHarmonicNote);</span></span>
+<span id="L1593"><span class="lineNum">    1593</span>              :                         }</span>
+<span id="L1594"><span class="lineNum">    1594</span>              : </span>
+<span id="L1595"><span class="lineNum">    1595</span> <span class="tlaGNC">          21 :                         note-&gt;setFret(note2-&gt;fret());</span></span>
+<span id="L1596"><span class="lineNum">    1596</span> <span class="tlaGNC">          21 :                         note-&gt;setPitch(note2-&gt;pitch());</span></span>
+<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaGNC">          21 :                         true_note = note2;</span></span>
+<span id="L1598"><span class="lineNum">    1598</span> <span class="tlaGNC">          21 :                         if (m_tremolosInChords.find(chord2) != m_tremolosInChords.end()) {</span></span>
+<span id="L1599"><span class="lineNum">    1599</span> <span class="tlaUNC tlaBgUNC">           0 :                             TremoloType type = m_tremolosInChords.at(chord2);</span></span>
+<span id="L1600"><span class="lineNum">    1600</span> <span class="tlaUNC">           0 :                             DO_ASSERT(!isTremoloTwoChord(type));</span></span>
+<span id="L1601"><span class="lineNum">    1601</span> <span class="tlaUNC">           0 :                             TremoloSingleChord* t = Factory::createTremoloSingleChord(chord);</span></span>
+<span id="L1602"><span class="lineNum">    1602</span> <span class="tlaUNC">           0 :                             t-&gt;setTremoloType(type);</span></span>
+<span id="L1603"><span class="lineNum">    1603</span> <span class="tlaUNC">           0 :                             chord-&gt;add(t);</span></span>
+<span id="L1604"><span class="lineNum">    1604</span> <span class="tlaUNC">           0 :                             muse::remove(m_tremolosInChords, chord2);</span></span>
+<span id="L1605"><span class="lineNum">    1605</span> <span class="tlaUNC">           0 :                             m_tremolosInChords[chord] = type;</span></span>
+<span id="L1606"><span class="lineNum">    1606</span>              :                         }</span>
+<span id="L1607"><span class="lineNum">    1607</span>              : </span>
+<span id="L1608"><span class="lineNum">    1608</span> <span class="tlaGNC tlaBgGNC">          21 :                         found = true;</span></span>
+<span id="L1609"><span class="lineNum">    1609</span> <span class="tlaGNC">          21 :                         break;</span></span>
+<span id="L1610"><span class="lineNum">    1610</span>              :                     }</span>
+<span id="L1611"><span class="lineNum">    1611</span>              :                 }</span>
+<span id="L1612"><span class="lineNum">    1612</span> <span class="tlaGNC">          23 :                 if (found) {</span></span>
+<span id="L1613"><span class="lineNum">    1613</span> <span class="tlaGNC">          21 :                     break;</span></span>
+<span id="L1614"><span class="lineNum">    1614</span> <span class="tlaGNC">           2 :                 } else if (e) {</span></span>
+<span id="L1615"><span class="lineNum">    1615</span> <span class="tlaGNC">           2 :                     chords.push_back(toChordRest(e));</span></span>
+<span id="L1616"><span class="lineNum">    1616</span>              :                 }</span>
+<span id="L1617"><span class="lineNum">    1617</span>              :             }</span>
+<span id="L1618"><span class="lineNum">    1618</span> <span class="tlaGNC">           4 :             segment = segment-&gt;prev1(SegmentType::ChordRest);</span></span>
+<span id="L1619"><span class="lineNum">    1619</span>              :         }</span>
+<span id="L1620"><span class="lineNum">    1620</span>              : </span>
+<span id="L1621"><span class="lineNum">    1621</span> <span class="tlaGNC">          21 :         if (true_note &amp;&amp; !chords.empty()) {</span></span>
+<span id="L1622"><span class="lineNum">    1622</span> <span class="tlaGNC">           2 :             Note* end_note = note;</span></span>
+<span id="L1623"><span class="lineNum">    1623</span> <span class="tlaGNC">           4 :             for (unsigned int i = 0; i &lt; chords.size(); ++i) {</span></span>
+<span id="L1624"><span class="lineNum">    1624</span> <span class="tlaGNC">           2 :                 Chord* chord1 = nullptr;</span></span>
+<span id="L1625"><span class="lineNum">    1625</span> <span class="tlaGNC">           2 :                 ChordRest* cr = chords.at(i);</span></span>
+<span id="L1626"><span class="lineNum">    1626</span> <span class="tlaGNC">           2 :                 if (cr-&gt;isChord()) {</span></span>
+<span id="L1627"><span class="lineNum">    1627</span> <span class="tlaGNC">           2 :                     chord1 = toChord(cr);</span></span>
+<span id="L1628"><span class="lineNum">    1628</span>              :                 } else {</span>
+<span id="L1629"><span class="lineNum">    1629</span> <span class="tlaUNC tlaBgUNC">           0 :                     Rest* rest = toRest(cr);</span></span>
+<span id="L1630"><span class="lineNum">    1630</span> <span class="tlaUNC">           0 :                     Fraction dur = rest-&gt;ticks();</span></span>
+<span id="L1631"><span class="lineNum">    1631</span> <span class="tlaUNC">           0 :                     TDuration dut = rest-&gt;durationType();</span></span>
+<span id="L1632"><span class="lineNum">    1632</span> <span class="tlaUNC">           0 :                     Segment* seg = rest-&gt;segment();</span></span>
+<span id="L1633"><span class="lineNum">    1633</span> <span class="tlaUNC">           0 :                     seg-&gt;remove(rest);</span></span>
+<span id="L1634"><span class="lineNum">    1634</span> <span class="tlaUNC">           0 :                     Tuplet* tuplet = rest-&gt;tuplet();</span></span>
+<span id="L1635"><span class="lineNum">    1635</span> <span class="tlaUNC">           0 :                     if (tuplet) {</span></span>
+<span id="L1636"><span class="lineNum">    1636</span> <span class="tlaUNC">           0 :                         tuplet-&gt;remove(rest);</span></span>
+<span id="L1637"><span class="lineNum">    1637</span>              :                     }</span>
+<span id="L1638"><span class="lineNum">    1638</span> <span class="tlaUNC">           0 :                     delete rest;</span></span>
+<span id="L1639"><span class="lineNum">    1639</span> <span class="tlaUNC">           0 :                     chord1 = Factory::createChord(seg);</span></span>
+<span id="L1640"><span class="lineNum">    1640</span> <span class="tlaUNC">           0 :                     chord1-&gt;setTrack(note-&gt;track());</span></span>
+<span id="L1641"><span class="lineNum">    1641</span> <span class="tlaUNC">           0 :                     chord1-&gt;setTicks(dur);</span></span>
+<span id="L1642"><span class="lineNum">    1642</span> <span class="tlaUNC">           0 :                     chord1-&gt;setDurationType(dut);</span></span>
+<span id="L1643"><span class="lineNum">    1643</span> <span class="tlaUNC">           0 :                     seg-&gt;add(chord1);</span></span>
+<span id="L1644"><span class="lineNum">    1644</span> <span class="tlaUNC">           0 :                     if (tuplet) {</span></span>
+<span id="L1645"><span class="lineNum">    1645</span> <span class="tlaUNC">           0 :                         tuplet-&gt;add(chord1);</span></span>
+<span id="L1646"><span class="lineNum">    1646</span>              :                     }</span>
+<span id="L1647"><span class="lineNum">    1647</span>              :                 }</span>
+<span id="L1648"><span class="lineNum">    1648</span>              : </span>
+<span id="L1649"><span class="lineNum">    1649</span> <span class="tlaGNC tlaBgGNC">           2 :                 Note* note2 = Factory::createNote(chord1);</span></span>
+<span id="L1650"><span class="lineNum">    1650</span> <span class="tlaGNC">           2 :                 note2-&gt;setString(true_note-&gt;string());</span></span>
+<span id="L1651"><span class="lineNum">    1651</span> <span class="tlaGNC">           2 :                 note2-&gt;setFret(true_note-&gt;fret());</span></span>
+<span id="L1652"><span class="lineNum">    1652</span> <span class="tlaGNC">           2 :                 note2-&gt;setPitch(true_note-&gt;pitch());</span></span>
+<span id="L1653"><span class="lineNum">    1653</span> <span class="tlaGNC">           2 :                 note2-&gt;setTpcFromPitch(Prefer::SHARPS);</span></span>
+<span id="L1654"><span class="lineNum">    1654</span> <span class="tlaGNC">           2 :                 chord1-&gt;setNoteType(true_note-&gt;noteType());</span></span>
+<span id="L1655"><span class="lineNum">    1655</span> <span class="tlaGNC">           2 :                 chord1-&gt;add(note2);</span></span>
+<span id="L1656"><span class="lineNum">    1656</span> <span class="tlaGNC">           2 :                 Tie* tie = Factory::createTie(note2);</span></span>
+<span id="L1657"><span class="lineNum">    1657</span> <span class="tlaGNC">           2 :                 tie-&gt;setEndNote(end_note);</span></span>
+<span id="L1658"><span class="lineNum">    1658</span> <span class="tlaGNC">           2 :                 end_note-&gt;setHarmonic(true_note-&gt;harmonic());</span></span>
+<span id="L1659"><span class="lineNum">    1659</span> <span class="tlaGNC">           2 :                 end_note = note2;</span></span>
+<span id="L1660"><span class="lineNum">    1660</span> <span class="tlaGNC">           2 :                 note2-&gt;add(tie);</span></span>
+<span id="L1661"><span class="lineNum">    1661</span>              :             }</span>
+<span id="L1662"><span class="lineNum">    1662</span> <span class="tlaGNC">           2 :             Tie* tie = Factory::createTie(true_note);</span></span>
+<span id="L1663"><span class="lineNum">    1663</span> <span class="tlaGNC">           2 :             tie-&gt;setEndNote(end_note);</span></span>
+<span id="L1664"><span class="lineNum">    1664</span> <span class="tlaGNC">           2 :             end_note-&gt;setHarmonic(true_note-&gt;harmonic());</span></span>
+<span id="L1665"><span class="lineNum">    1665</span> <span class="tlaGNC">           2 :             true_note-&gt;add(tie);</span></span>
+<span id="L1666"><span class="lineNum">    1666</span>              :         }</span>
+<span id="L1667"><span class="lineNum">    1667</span> <span class="tlaGNC">          21 :         if (!found) {</span></span>
+<span id="L1668"><span class="lineNum">    1668</span> <span class="tlaUNC tlaBgUNC">           0 :             note-&gt;setFret(INVALID_FRET_INDEX);</span></span>
+<span id="L1669"><span class="lineNum">    1669</span> <span class="tlaUNC">           0 :             dead_end[{ static_cast&lt;int&gt;(staffIdx), string }] = true;</span></span>
+<span id="L1670"><span class="lineNum">    1670</span> <span class="tlaUNC">           0 :             LOGD(&quot;tied note not found, pitch %d fret %d string %d&quot;, note-&gt;pitch(), note-&gt;fret(), note-&gt;string());</span></span>
+<span id="L1671"><span class="lineNum">    1671</span> <span class="tlaUNC">           0 :             result.slur = false;</span></span>
+<span id="L1672"><span class="lineNum">    1672</span> <span class="tlaUNC">           0 :             return result;</span></span>
+<span id="L1673"><span class="lineNum">    1673</span>              :         }</span>
+<span id="L1674"><span class="lineNum">    1674</span> <span class="tlaGNC tlaBgGNC">          21 :     }</span></span>
+<span id="L1675"><span class="lineNum">    1675</span> <span class="tlaGNC">         639 :     dead_end[{ static_cast&lt;int&gt;(note-&gt;staffIdx()), string }] = false;</span></span>
+<span id="L1676"><span class="lineNum">    1676</span> <span class="tlaGNC">         639 :     return result;</span></span>
+<span id="L1677"><span class="lineNum">    1677</span>              : }</span>
+<span id="L1678"><span class="lineNum">    1678</span>              : </span>
+<span id="L1679"><span class="lineNum">    1679</span> <span class="tlaUNC tlaBgUNC">           0 : float GuitarPro5::naturalHarmonicFromFret(int fret)</span></span>
+<span id="L1680"><span class="lineNum">    1680</span>              : {</span>
+<span id="L1681"><span class="lineNum">    1681</span> <span class="tlaUNC">           0 :     switch (fret) {</span></span>
+<span id="L1682"><span class="lineNum">    1682</span> <span class="tlaUNC">           0 :     case 2:</span></span>
+<span id="L1683"><span class="lineNum">    1683</span> <span class="tlaUNC">           0 :         return 2.4f;</span></span>
+<span id="L1684"><span class="lineNum">    1684</span> <span class="tlaUNC">           0 :     case 3:</span></span>
+<span id="L1685"><span class="lineNum">    1685</span> <span class="tlaUNC">           0 :         return 3.2f;</span></span>
+<span id="L1686"><span class="lineNum">    1686</span> <span class="tlaUNC">           0 :     case 4:</span></span>
+<span id="L1687"><span class="lineNum">    1687</span>              :     case 5:</span>
+<span id="L1688"><span class="lineNum">    1688</span>              :     case 7:</span>
+<span id="L1689"><span class="lineNum">    1689</span>              :     case 9:</span>
+<span id="L1690"><span class="lineNum">    1690</span>              :     case 12:</span>
+<span id="L1691"><span class="lineNum">    1691</span>              :     case 16:</span>
+<span id="L1692"><span class="lineNum">    1692</span>              :     case 17:</span>
+<span id="L1693"><span class="lineNum">    1693</span>              :     case 19:</span>
+<span id="L1694"><span class="lineNum">    1694</span>              :     case 24:</span>
+<span id="L1695"><span class="lineNum">    1695</span> <span class="tlaUNC">           0 :         return fret;</span></span>
+<span id="L1696"><span class="lineNum">    1696</span> <span class="tlaUNC">           0 :     case 8:</span></span>
+<span id="L1697"><span class="lineNum">    1697</span> <span class="tlaUNC">           0 :         return 8.2f;</span></span>
+<span id="L1698"><span class="lineNum">    1698</span> <span class="tlaUNC">           0 :     case 10:</span></span>
+<span id="L1699"><span class="lineNum">    1699</span> <span class="tlaUNC">           0 :         return 9.6f;</span></span>
+<span id="L1700"><span class="lineNum">    1700</span> <span class="tlaUNC">           0 :     case 14:</span></span>
+<span id="L1701"><span class="lineNum">    1701</span> <span class="tlaUNC">           0 :         return 14.7f;</span></span>
+<span id="L1702"><span class="lineNum">    1702</span> <span class="tlaUNC">           0 :     case 15:</span></span>
+<span id="L1703"><span class="lineNum">    1703</span> <span class="tlaUNC">           0 :         return 14.7f;</span></span>
+<span id="L1704"><span class="lineNum">    1704</span> <span class="tlaUNC">           0 :     case 21:</span></span>
+<span id="L1705"><span class="lineNum">    1705</span> <span class="tlaUNC">           0 :         return 21.7f;</span></span>
+<span id="L1706"><span class="lineNum">    1706</span> <span class="tlaUNC">           0 :     case 22:</span></span>
+<span id="L1707"><span class="lineNum">    1707</span> <span class="tlaUNC">           0 :         return 21.7f;</span></span>
+<span id="L1708"><span class="lineNum">    1708</span> <span class="tlaUNC">           0 :     default:</span></span>
+<span id="L1709"><span class="lineNum">    1709</span> <span class="tlaUNC">           0 :         return 12.0f;</span></span>
+<span id="L1710"><span class="lineNum">    1710</span>              :     }</span>
+<span id="L1711"><span class="lineNum">    1711</span>              : }</span>
+<span id="L1712"><span class="lineNum">    1712</span>              : </span>
+<span id="L1713"><span class="lineNum">    1713</span> <span class="tlaGNC tlaBgGNC">          40 : void GuitarPro5::addGlissandos()</span></span>
+<span id="L1714"><span class="lineNum">    1714</span>              : {</span>
+<span id="L1715"><span class="lineNum">    1715</span> <span class="tlaGNC">          43 :     for (auto&amp; [startNote, endNote] : m_glissandoNotePairs) {</span></span>
+<span id="L1716"><span class="lineNum">    1716</span> <span class="tlaGNC">           3 :         Note* currentStart = startNote;</span></span>
+<span id="L1717"><span class="lineNum">    1717</span> <span class="tlaGNC">           3 :         if (startNote-&gt;bendFor()) {</span></span>
+<span id="L1718"><span class="lineNum">    1718</span> <span class="tlaGNC">           1 :             Note* bendNote = startNote;</span></span>
+<span id="L1719"><span class="lineNum">    1719</span> <span class="tlaGNC">           1 :             GuitarBend* bend = bendNote-&gt;bendFor();</span></span>
+<span id="L1720"><span class="lineNum">    1720</span>              : </span>
+<span id="L1721"><span class="lineNum">    1721</span> <span class="tlaGNC">           2 :             while (bend) {</span></span>
+<span id="L1722"><span class="lineNum">    1722</span> <span class="tlaGNC">           1 :                 bendNote = bend-&gt;endNote();</span></span>
+<span id="L1723"><span class="lineNum">    1723</span> <span class="tlaGNC">           1 :                 IF_ASSERT_FAILED(bendNote) {</span></span>
+<span id="L1724"><span class="lineNum">    1724</span> <span class="tlaUNC tlaBgUNC">           0 :                     LOGE() &lt;&lt; &quot;glissando start note may be incorrect&quot;;</span></span>
+<span id="L1725"><span class="lineNum">    1725</span> <span class="tlaUNC">           0 :                     break;</span></span>
+<span id="L1726"><span class="lineNum">    1726</span>              :                 }</span>
+<span id="L1727"><span class="lineNum">    1727</span>              : </span>
+<span id="L1728"><span class="lineNum">    1728</span> <span class="tlaGNC tlaBgGNC">           1 :                 if (!bendNote-&gt;chord()-&gt;isGraceAfter()) {</span></span>
+<span id="L1729"><span class="lineNum">    1729</span> <span class="tlaUNC tlaBgUNC">           0 :                     break;</span></span>
+<span id="L1730"><span class="lineNum">    1730</span>              :                 }</span>
+<span id="L1731"><span class="lineNum">    1731</span>              : </span>
+<span id="L1732"><span class="lineNum">    1732</span> <span class="tlaGNC tlaBgGNC">           1 :                 currentStart = bendNote;</span></span>
+<span id="L1733"><span class="lineNum">    1733</span> <span class="tlaGNC">           1 :                 bend = bendNote-&gt;bendFor();</span></span>
+<span id="L1734"><span class="lineNum">    1734</span>              :             }</span>
+<span id="L1735"><span class="lineNum">    1735</span>              :         }</span>
+<span id="L1736"><span class="lineNum">    1736</span>              : </span>
+<span id="L1737"><span class="lineNum">    1737</span> <span class="tlaGNC">           3 :         Glissando* gliss = mu::engraving::Factory::createGlissando(currentStart);</span></span>
+<span id="L1738"><span class="lineNum">    1738</span> <span class="tlaGNC">           3 :         gliss-&gt;setStartElement(currentStart);</span></span>
+<span id="L1739"><span class="lineNum">    1739</span> <span class="tlaGNC">           3 :         gliss-&gt;setTick(currentStart-&gt;tick());</span></span>
+<span id="L1740"><span class="lineNum">    1740</span> <span class="tlaGNC">           3 :         gliss-&gt;setTrack(currentStart-&gt;track());</span></span>
+<span id="L1741"><span class="lineNum">    1741</span> <span class="tlaGNC">           3 :         gliss-&gt;setGlissandoType(GlissandoType::STRAIGHT);</span></span>
+<span id="L1742"><span class="lineNum">    1742</span> <span class="tlaGNC">           3 :         gliss-&gt;setGlissandoShift(true);</span></span>
+<span id="L1743"><span class="lineNum">    1743</span> <span class="tlaGNC">           3 :         gliss-&gt;setEndElement(endNote);</span></span>
+<span id="L1744"><span class="lineNum">    1744</span> <span class="tlaGNC">           3 :         gliss-&gt;setTick2(endNote-&gt;tick());</span></span>
+<span id="L1745"><span class="lineNum">    1745</span> <span class="tlaGNC">           3 :         gliss-&gt;setTrack2(endNote-&gt;track());</span></span>
+<span id="L1746"><span class="lineNum">    1746</span> <span class="tlaGNC">           3 :         score-&gt;addElement(gliss);</span></span>
+<span id="L1747"><span class="lineNum">    1747</span>              : </span>
+<span id="L1748"><span class="lineNum">    1748</span> <span class="tlaGNC">           3 :         std::vector&lt;std::pair&lt;Slur*, Note*&gt; &gt; movedSlurs;</span></span>
+<span id="L1749"><span class="lineNum">    1749</span> <span class="tlaGNC">           3 :         for (Spanner* spanner : startNote-&gt;chord()-&gt;startingSpanners()) {</span></span>
+<span id="L1750"><span class="lineNum">    1750</span> <span class="tlaGNC">           2 :             if (spanner &amp;&amp; spanner-&gt;isSlur()) {</span></span>
+<span id="L1751"><span class="lineNum">    1751</span> <span class="tlaGNC">           2 :                 Slur* slur = toSlur(spanner);</span></span>
+<span id="L1752"><span class="lineNum">    1752</span> <span class="tlaGNC">           2 :                 if (slur-&gt;endElement() == endNote-&gt;chord()) {</span></span>
+<span id="L1753"><span class="lineNum">    1753</span> <span class="tlaGNC">           2 :                     gliss-&gt;setGlissandoShift(false);</span></span>
+<span id="L1754"><span class="lineNum">    1754</span> <span class="tlaGNC">           2 :                     slur-&gt;setConnectedElement(mu::engraving::Slur::ConnectedElement::GLISSANDO);</span></span>
+<span id="L1755"><span class="lineNum">    1755</span> <span class="tlaGNC">           2 :                     movedSlurs.push_back({ slur, currentStart });</span></span>
+<span id="L1756"><span class="lineNum">    1756</span> <span class="tlaGNC">           2 :                     break;</span></span>
+<span id="L1757"><span class="lineNum">    1757</span>              :                 }</span>
+<span id="L1758"><span class="lineNum">    1758</span>              :             }</span>
+<span id="L1759"><span class="lineNum">    1759</span>              :         }</span>
+<span id="L1760"><span class="lineNum">    1760</span>              : </span>
+<span id="L1761"><span class="lineNum">    1761</span> <span class="tlaGNC">           5 :         for (auto&amp; [slur, note] : movedSlurs) {</span></span>
+<span id="L1762"><span class="lineNum">    1762</span> <span class="tlaGNC">           2 :             slur-&gt;setStartElement(note-&gt;chord());</span></span>
+<span id="L1763"><span class="lineNum">    1763</span> <span class="tlaGNC">           2 :             slur-&gt;setTick(note-&gt;tick());</span></span>
+<span id="L1764"><span class="lineNum">    1764</span> <span class="tlaGNC">           2 :             slur-&gt;setTrack(note-&gt;track());</span></span>
+<span id="L1765"><span class="lineNum">    1765</span>              :         }</span>
+<span id="L1766"><span class="lineNum">    1766</span> <span class="tlaGNC">           3 :     }</span></span>
+<span id="L1767"><span class="lineNum">    1767</span> <span class="tlaGNC">          40 : }</span></span>
+<span id="L1768"><span class="lineNum">    1768</span>              : } // namespace mu::iex::guitarpro</span>
         </pre>
               </td>
             </tr>

@@ -31,13 +31,13 @@
             <td class="headerValue">filtered_coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">88.6&nbsp;%</td>
+            <td class="headerCovTableEntryHi">91.4&nbsp;%</td>
             <td class="headerCovTableEntry">70</td>
-            <td class="headerCovTableEntry">62</td>
+            <td class="headerCovTableEntry">64</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -143,7 +143,7 @@
 <span id="L85"><span class="lineNum">      85</span>              : </span>
 <span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">           2 :         bool isValid() const { return trackId.isValid(); }</span></span>
 <span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">           1 :         bool operator==(const Instrument&amp; o) const { return trackId == o.trackId; }</span></span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          12 :         bool operator&lt;(const Instrument&amp; o) const { return trackId &lt; o.trackId; }</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          56 :         bool operator&lt;(const Instrument&amp; o) const { return trackId &lt; o.trackId; }</span></span>
 <span id="L89"><span class="lineNum">      89</span>              :     };</span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
 <span id="L91"><span class="lineNum">      91</span>              :     //! NOTE: applies to a specific staff (and optionally voice) (e.g. Dynamics)</span>
@@ -162,19 +162,19 @@
 <span id="L104"><span class="lineNum">     104</span>              :     AutomationType type = AutomationType::Unknown;</span>
 <span id="L105"><span class="lineNum">     105</span>              :     Scope scope;</span>
 <span id="L106"><span class="lineNum">     106</span>              : </span>
-<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">          21 :     static AutomationCurveKey global(AutomationType type)</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">          46 :     static AutomationCurveKey global(AutomationType type)</span></span>
 <span id="L108"><span class="lineNum">     108</span>              :     {</span>
-<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">          21 :         AutomationCurveKey key;</span></span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">          21 :         key.type = type;</span></span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">          21 :         return key;</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">          46 :         AutomationCurveKey key;</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">          46 :         key.type = type;</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">          46 :         return key;</span></span>
 <span id="L112"><span class="lineNum">     112</span>              :     }</span>
 <span id="L113"><span class="lineNum">     113</span>              : </span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">           2 :     static AutomationCurveKey instrument(AutomationType type, const InstrumentTrackId&amp; trackId)</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">          29 :     static AutomationCurveKey instrument(AutomationType type, const InstrumentTrackId&amp; trackId)</span></span>
 <span id="L115"><span class="lineNum">     115</span>              :     {</span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">           2 :         AutomationCurveKey key;</span></span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">           2 :         key.type = type;</span></span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">           2 :         key.scope = Instrument { trackId };</span></span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">           2 :         return key;</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">          29 :         AutomationCurveKey key;</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">          29 :         key.type = type;</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">          29 :         key.scope = Instrument { trackId };</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          29 :         return key;</span></span>
 <span id="L120"><span class="lineNum">     120</span> <span class="tlaUNC tlaBgUNC">           0 :     }</span></span>
 <span id="L121"><span class="lineNum">     121</span>              : </span>
 <span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC tlaBgGNC">          30 :     static AutomationCurveKey staff(AutomationType type, const muse::ID&amp; staffId, std::optional&lt;size_t&gt; voiceIdx = std::nullopt)</span></span>
@@ -201,15 +201,15 @@
 <span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">         237 :         }, scope);</span></span>
 <span id="L144"><span class="lineNum">     144</span>              :     }</span>
 <span id="L145"><span class="lineNum">     145</span>              : </span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC tlaBgUNC">           0 :     bool isGlobal() const</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">           5 :     bool isGlobal() const</span></span>
 <span id="L147"><span class="lineNum">     147</span>              :     {</span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC">           0 :         return std::holds_alternative&lt;std::monostate&gt;(scope);</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">           5 :         return std::holds_alternative&lt;std::monostate&gt;(scope);</span></span>
 <span id="L149"><span class="lineNum">     149</span>              :     }</span>
 <span id="L150"><span class="lineNum">     150</span>              : </span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC tlaBgGNC">           8 :     std::optional&lt;InstrumentTrackId&gt; trackId() const</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">          12 :     std::optional&lt;InstrumentTrackId&gt; trackId() const</span></span>
 <span id="L152"><span class="lineNum">     152</span>              :     {</span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">           8 :         const Instrument* instrument = std::get_if&lt;Instrument&gt;(&amp;scope);</span></span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">           8 :         return instrument ? std::optional(instrument-&gt;trackId) : std::nullopt;</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">          12 :         const Instrument* instrument = std::get_if&lt;Instrument&gt;(&amp;scope);</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">          12 :         return instrument ? std::optional(instrument-&gt;trackId) : std::nullopt;</span></span>
 <span id="L155"><span class="lineNum">     155</span>              :     }</span>
 <span id="L156"><span class="lineNum">     156</span>              : </span>
 <span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">         125 :     std::optional&lt;muse::ID&gt; staffId() const</span></span>
@@ -239,9 +239,9 @@
 <span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">          19 :         return type == k.type &amp;&amp; scope == k.scope;</span></span>
 <span id="L182"><span class="lineNum">     182</span>              :     }</span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">        3004 :     bool operator&lt;(const AutomationCurveKey&amp; k) const</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">        3116 :     bool operator&lt;(const AutomationCurveKey&amp; k) const</span></span>
 <span id="L185"><span class="lineNum">     185</span>              :     {</span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">        3004 :         return std::tie(type, scope) &lt; std::tie(k.type, k.scope);</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">        3116 :         return std::tie(type, scope) &lt; std::tie(k.type, k.scope);</span></span>
 <span id="L187"><span class="lineNum">     187</span>              :     }</span>
 <span id="L188"><span class="lineNum">     188</span>              : };</span>
 <span id="L189"><span class="lineNum">     189</span>              : </span>
@@ -274,22 +274,22 @@
 <span id="L216"><span class="lineNum">     216</span>              :     utick_t tickFrom = -1;</span>
 <span id="L217"><span class="lineNum">     217</span>              :     utick_t tickTo = -1;</span>
 <span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">         196 :     bool isEmpty() const</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">         213 :     bool isEmpty() const</span></span>
 <span id="L220"><span class="lineNum">     220</span>              :     {</span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">         196 :         return !isFullReset &amp;&amp; affectedKeys.empty();</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">         213 :         return !isFullReset &amp;&amp; affectedKeys.empty();</span></span>
 <span id="L222"><span class="lineNum">     222</span>              :     }</span>
 <span id="L223"><span class="lineNum">     223</span>              : </span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">          51 :     void extend(utick_t from, utick_t to)</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">          68 :     void extend(utick_t from, utick_t to)</span></span>
 <span id="L225"><span class="lineNum">     225</span>              :     {</span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">          51 :         tickFrom = (tickFrom &lt; 0) ? from : std::min(tickFrom, from);</span></span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">          51 :         tickTo = std::max(tickTo, to);</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">          51 :     }</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">          68 :         tickFrom = (tickFrom &lt; 0) ? from : std::min(tickFrom, from);</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">          68 :         tickTo = std::max(tickTo, to);</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">          68 :     }</span></span>
 <span id="L229"><span class="lineNum">     229</span>              : </span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">          20 :     void extend(const AutomationCurveKey&amp; key, utick_t from, utick_t to)</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">          22 :     void extend(const AutomationCurveKey&amp; key, utick_t from, utick_t to)</span></span>
 <span id="L231"><span class="lineNum">     231</span>              :     {</span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">          20 :         affectedKeys.insert(key);</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">          20 :         extend(from, to);</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">          20 :     }</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">          22 :         affectedKeys.insert(key);</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">          22 :         extend(from, to);</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">          22 :     }</span></span>
 <span id="L235"><span class="lineNum">     235</span>              : </span>
 <span id="L236"><span class="lineNum">     236</span> <span class="tlaUNC tlaBgUNC">           0 :     void clear()</span></span>
 <span id="L237"><span class="lineNum">     237</span>              :     {</span>

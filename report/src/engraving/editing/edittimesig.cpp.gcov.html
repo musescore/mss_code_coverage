@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -121,10 +121,10 @@
 <span id="L63"><span class="lineNum">      63</span>              : //    timesig change.</span>
 <span id="L64"><span class="lineNum">      64</span>              : //---------------------------------------------------------</span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC tlaBgGNC">          21 : bool EditTimeSig::rewriteMeasures(Transaction&amp; tx, Score* score, Measure* startMeasure, Measure* endMeasure, const Fraction&amp; newTimeSig,</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC tlaBgGNC">          22 : bool EditTimeSig::rewriteMeasures(Transaction&amp; tx, Score* score, Measure* startMeasure, Measure* endMeasure, const Fraction&amp; newTimeSig,</span></span>
 <span id="L67"><span class="lineNum">      67</span>              :                                   staff_idx_t staffIdx)</span>
 <span id="L68"><span class="lineNum">      68</span>              : {</span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">          21 :     if (staffIdx != muse::nidx) {</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">          22 :     if (staffIdx != muse::nidx) {</span></span>
 <span id="L70"><span class="lineNum">      70</span>              :         // local timesig</span>
 <span id="L71"><span class="lineNum">      71</span>              :         // don't actually rewrite, just update measure rest durations</span>
 <span id="L72"><span class="lineNum">      72</span>              :         // abort if there is anything other than measure rests in range</span>
@@ -151,42 +151,42 @@
 <span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">           3 :         return true;</span></span>
 <span id="L94"><span class="lineNum">      94</span>              :     }</span>
 <span id="L95"><span class="lineNum">      95</span>              : </span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">          18 :     bool fmr = true;</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">          19 :     bool fmr = true;</span></span>
 <span id="L97"><span class="lineNum">      97</span>              : </span>
 <span id="L98"><span class="lineNum">      98</span>              :     // Format: chord 1 tick, chord 2 tick, tremolo, track</span>
-<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">          18 :     std::vector&lt;std::tuple&lt;Fraction, Fraction, TremoloTwoChord*, track_idx_t&gt; &gt; tremoloChordTicks;</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">          19 :     std::vector&lt;std::tuple&lt;Fraction, Fraction, TremoloTwoChord*, track_idx_t&gt; &gt; tremoloChordTicks;</span></span>
 <span id="L100"><span class="lineNum">     100</span>              : </span>
 <span id="L101"><span class="lineNum">     101</span>              :     track_idx_t strack, etrack;</span>
-<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">          18 :     if (staffIdx == muse::nidx) {</span></span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">          18 :         strack = 0;</span></span>
-<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">          18 :         etrack = score-&gt;ntracks();</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">          19 :     if (staffIdx == muse::nidx) {</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">          19 :         strack = 0;</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">          19 :         etrack = score-&gt;ntracks();</span></span>
 <span id="L105"><span class="lineNum">     105</span>              :     } else {</span>
 <span id="L106"><span class="lineNum">     106</span> <span class="tlaUNC tlaBgUNC">           0 :         strack = staffIdx * VOICES;</span></span>
 <span id="L107"><span class="lineNum">     107</span> <span class="tlaUNC">           0 :         etrack = strack + VOICES;</span></span>
 <span id="L108"><span class="lineNum">     108</span>              :     }</span>
 <span id="L109"><span class="lineNum">     109</span>              : </span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC tlaBgGNC">          18 :     std::vector&lt;Segment*&gt; endOfMeasureTimeSigsToRemove;</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC tlaBgGNC">          19 :     std::vector&lt;Segment*&gt; endOfMeasureTimeSigsToRemove;</span></span>
 <span id="L111"><span class="lineNum">     111</span>              : </span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">          55 :     for (Measure* m = startMeasure; m; m = m-&gt;nextMeasure()) {</span></span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">          55 :         if (!m-&gt;isFullMeasureRest()) {</span></span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">          20 :             fmr = false;</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">          59 :     for (Measure* m = startMeasure; m; m = m-&gt;nextMeasure()) {</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">          59 :         if (!m-&gt;isFullMeasureRest()) {</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">          24 :             fmr = false;</span></span>
 <span id="L115"><span class="lineNum">     115</span>              :         }</span>
 <span id="L116"><span class="lineNum">     116</span>              : </span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">         284 :         for (Segment* s = m-&gt;first(); s; s = s-&gt;next()) {</span></span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">         229 :             if (!s-&gt;isChordRestType() &amp;&amp; !(s-&gt;isTimeSigType() &amp;&amp; s-&gt;endOfMeasureChange())) {</span></span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          94 :                 continue;</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">         325 :         for (Segment* s = m-&gt;first(); s; s = s-&gt;next()) {</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">         266 :             if (!s-&gt;isChordRestType() &amp;&amp; !(s-&gt;isTimeSigType() &amp;&amp; s-&gt;endOfMeasureChange())) {</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">         111 :                 continue;</span></span>
 <span id="L120"><span class="lineNum">     120</span>              :             }</span>
 <span id="L121"><span class="lineNum">     121</span>              : </span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">         135 :             if (s-&gt;isTimeSigType()) {</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">         155 :             if (s-&gt;isTimeSigType()) {</span></span>
 <span id="L123"><span class="lineNum">     123</span> <span class="tlaUNC tlaBgUNC">           0 :                 endOfMeasureTimeSigsToRemove.push_back(s);</span></span>
 <span id="L124"><span class="lineNum">     124</span> <span class="tlaUNC">           0 :                 continue;</span></span>
 <span id="L125"><span class="lineNum">     125</span>              :             }</span>
 <span id="L126"><span class="lineNum">     126</span>              : </span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC tlaBgGNC">         935 :             for (track_idx_t track = strack; track &lt; etrack; ++track) {</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">         800 :                 ChordRest* cr = toChordRest(s-&gt;element(track));</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">         800 :                 if (cr &amp;&amp; cr-&gt;isChord()) {</span></span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         104 :                     Chord* chord = toChord(cr);</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">         104 :                     if (chord-&gt;tremoloTwoChord()) {</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC tlaBgGNC">        1275 :             for (track_idx_t track = strack; track &lt; etrack; ++track) {</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">        1120 :                 ChordRest* cr = toChordRest(s-&gt;element(track));</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">        1120 :                 if (cr &amp;&amp; cr-&gt;isChord()) {</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         152 :                     Chord* chord = toChord(cr);</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">         152 :                     if (chord-&gt;tremoloTwoChord()) {</span></span>
 <span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">           4 :                         TremoloTwoChord* trem = chord-&gt;tremoloTwoChord();</span></span>
 <span id="L133"><span class="lineNum">     133</span>              : </span>
 <span id="L134"><span class="lineNum">     134</span>              :                         // Don't add same chord twice</span>
@@ -202,104 +202,104 @@
 <span id="L144"><span class="lineNum">     144</span>              :             }</span>
 <span id="L145"><span class="lineNum">     145</span>              :         }</span>
 <span id="L146"><span class="lineNum">     146</span>              : </span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">          55 :         if (m == endMeasure) {</span></span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">          18 :             break;</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">          59 :         if (m == endMeasure) {</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">          19 :             break;</span></span>
 <span id="L149"><span class="lineNum">     149</span>              :         }</span>
 <span id="L150"><span class="lineNum">     150</span>              :     }</span>
 <span id="L151"><span class="lineNum">     151</span>              : </span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">          18 :     if (!fmr) {</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">          19 :     if (!fmr) {</span></span>
 <span id="L153"><span class="lineNum">     153</span>              :         // check for local time signatures</span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">          64 :         for (Measure* m = startMeasure; m; m = m-&gt;nextMeasure()) {</span></span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">         101 :             for (size_t si = 0; si &lt; score-&gt;nstaves(); ++si) {</span></span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">          61 :                 if (score-&gt;staff(si)-&gt;timeStretch(m-&gt;tick()) != Fraction(1, 1)) {</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">          69 :         for (Measure* m = startMeasure; m; m = m-&gt;nextMeasure()) {</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">         117 :             for (size_t si = 0; si &lt; score-&gt;nstaves(); ++si) {</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">          74 :                 if (score-&gt;staff(si)-&gt;timeStretch(m-&gt;tick()) != Fraction(1, 1)) {</span></span>
 <span id="L157"><span class="lineNum">     157</span>              :                     // we cannot change a staff with a local time signature</span>
 <span id="L158"><span class="lineNum">     158</span> <span class="tlaUNC tlaBgUNC">           0 :                     return false;</span></span>
 <span id="L159"><span class="lineNum">     159</span>              :                 }</span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC tlaBgGNC">          61 :                 if (m == endMeasure) {</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          12 :                     break;</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC tlaBgGNC">          74 :                 if (m == endMeasure) {</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          13 :                     break;</span></span>
 <span id="L162"><span class="lineNum">     162</span>              :                 }</span>
 <span id="L163"><span class="lineNum">     163</span>              :             }</span>
 <span id="L164"><span class="lineNum">     164</span>              :         }</span>
 <span id="L165"><span class="lineNum">     165</span>              :     }</span>
 <span id="L166"><span class="lineNum">     166</span>              : </span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">          18 :     for (Segment* seg : endOfMeasureTimeSigsToRemove) {</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">          19 :     for (Segment* seg : endOfMeasureTimeSigsToRemove) {</span></span>
 <span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC tlaBgUNC">           0 :         score-&gt;doUndoRemoveElement(seg);</span></span>
 <span id="L169"><span class="lineNum">     169</span>              :     }</span>
 <span id="L170"><span class="lineNum">     170</span>              : </span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC tlaBgGNC">          18 :     ScoreRange range;</span></span>
-<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">          18 :     Measure* nextMeasure = endMeasure-&gt;nextMeasure();</span></span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">          18 :     Segment* finalSeg = endMeasure-&gt;last();</span></span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">          18 :     if (nextMeasure) {</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC tlaBgGNC">          19 :     ScoreRange range;</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">          19 :     Measure* nextMeasure = endMeasure-&gt;nextMeasure();</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">          19 :     Segment* finalSeg = endMeasure-&gt;last();</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">          19 :     if (nextMeasure) {</span></span>
 <span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">           3 :         finalSeg = nextMeasure-&gt;first();</span></span>
 <span id="L176"><span class="lineNum">     176</span>              :     }</span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">          18 :     range.read(startMeasure-&gt;first(), finalSeg);</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">          19 :     range.read(startMeasure-&gt;first(), finalSeg);</span></span>
 <span id="L178"><span class="lineNum">     178</span>              : </span>
 <span id="L179"><span class="lineNum">     179</span>              :     //</span>
 <span id="L180"><span class="lineNum">     180</span>              :     // calculate number of required measures = newMeasures</span>
 <span id="L181"><span class="lineNum">     181</span>              :     //</span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">          18 :     Fraction ticks = range.ticks().isNotZero() ? range.ticks() : score-&gt;endTick() - startMeasure-&gt;first()-&gt;tick();</span></span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">          18 :     Fraction k = ticks / newTimeSig;</span></span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">          18 :     int newMeasures     = (k.numerator() + k.denominator() - 1) / k.denominator();</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">          19 :     Fraction ticks = range.ticks().isNotZero() ? range.ticks() : score-&gt;endTick() - startMeasure-&gt;first()-&gt;tick();</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">          19 :     Fraction k = ticks / newTimeSig;</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">          19 :     int newMeasures     = (k.numerator() + k.denominator() - 1) / k.denominator();</span></span>
 <span id="L185"><span class="lineNum">     185</span>              : </span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">          18 :     Fraction newDuration = newTimeSig * Fraction(newMeasures, 1);</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">          19 :     Fraction newDuration = newTimeSig * Fraction(newMeasures, 1);</span></span>
 <span id="L187"><span class="lineNum">     187</span>              : </span>
 <span id="L188"><span class="lineNum">     188</span>              :     // evtl. we have to fill the last measure</span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">          18 :     Fraction fill = newDuration - ticks;</span></span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">          18 :     range.fill(fill);</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">          19 :     Fraction fill = newDuration - ticks;</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">          19 :     range.fill(fill);</span></span>
 <span id="L191"><span class="lineNum">     191</span>              : </span>
-<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">          36 :     for (Score* s : score-&gt;scoreList()) {</span></span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">          18 :         Measure* m1 = s-&gt;tick2measure(startMeasure-&gt;tick());</span></span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">          18 :         Measure* m2 = s-&gt;tick2measure(endMeasure-&gt;tick());</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">          38 :     for (Score* s : score-&gt;scoreList()) {</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">          19 :         Measure* m1 = s-&gt;tick2measure(startMeasure-&gt;tick());</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">          19 :         Measure* m2 = s-&gt;tick2measure(endMeasure-&gt;tick());</span></span>
 <span id="L195"><span class="lineNum">     195</span>              : </span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          18 :         Fraction tick1 = m1-&gt;tick();</span></span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          18 :         Fraction tick2 = m2-&gt;endTick();</span></span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">          18 :         auto spanners = s-&gt;spannerMap().findOverlapping(tick1.ticks(), tick2.ticks());</span></span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">          22 :         for (auto i : spanners) {</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          19 :         Fraction tick1 = m1-&gt;tick();</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          19 :         Fraction tick2 = m2-&gt;endTick();</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">          19 :         auto spanners = s-&gt;spannerMap().findOverlapping(tick1.ticks(), tick2.ticks());</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">          23 :         for (auto i : spanners) {</span></span>
 <span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">           4 :             if (i.value-&gt;tick() &gt;= tick1 &amp;&amp; i.value-&gt;tick() &lt; tick2) {</span></span>
 <span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">           4 :                 score-&gt;doUndoRemoveElement(i.value);</span></span>
 <span id="L202"><span class="lineNum">     202</span>              :             }</span>
 <span id="L203"><span class="lineNum">     203</span>              :         }</span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">          18 :         s-&gt;undoRemoveMeasures(m1, m2, true);</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">          19 :         s-&gt;undoRemoveMeasures(m1, m2, true);</span></span>
 <span id="L205"><span class="lineNum">     205</span>              : </span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">          18 :         Measure* newFirstMeasure = nullptr;</span></span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          18 :         Measure* newLastMeasure = nullptr;</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">          18 :         Fraction tick     = startMeasure-&gt;tick();</span></span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">          93 :         for (int i = 0; i &lt; newMeasures; ++i) {</span></span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">          75 :             Measure* m = Factory::createMeasure(s);</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          75 :             m-&gt;setPrev(newLastMeasure);</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">          75 :             if (newLastMeasure) {</span></span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">          57 :                 newLastMeasure-&gt;setNext(m);</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">          19 :         Measure* newFirstMeasure = nullptr;</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          19 :         Measure* newLastMeasure = nullptr;</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">          19 :         Fraction tick     = startMeasure-&gt;tick();</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">         102 :         for (int i = 0; i &lt; newMeasures; ++i) {</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">          83 :             Measure* m = Factory::createMeasure(s);</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          83 :             m-&gt;setPrev(newLastMeasure);</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">          83 :             if (newLastMeasure) {</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">          64 :                 newLastMeasure-&gt;setNext(m);</span></span>
 <span id="L214"><span class="lineNum">     214</span>              :             }</span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">          75 :             m-&gt;setTimesig(newTimeSig);</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">          75 :             m-&gt;setTicks(newTimeSig);</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">          75 :             m-&gt;setTick(tick);</span></span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">          75 :             tick += m-&gt;ticks();</span></span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">          75 :             newLastMeasure = m;</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">          75 :             if (newFirstMeasure == 0) {</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">          18 :                 newFirstMeasure = m;</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">          83 :             m-&gt;setTimesig(newTimeSig);</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">          83 :             m-&gt;setTicks(newTimeSig);</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">          83 :             m-&gt;setTick(tick);</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">          83 :             tick += m-&gt;ticks();</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">          83 :             newLastMeasure = m;</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">          83 :             if (newFirstMeasure == 0) {</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">          19 :                 newFirstMeasure = m;</span></span>
 <span id="L222"><span class="lineNum">     222</span>              :             }</span>
 <span id="L223"><span class="lineNum">     223</span>              :         }</span>
 <span id="L224"><span class="lineNum">     224</span>              :         //</span>
 <span id="L225"><span class="lineNum">     225</span>              :         // insert new calculated measures</span>
 <span id="L226"><span class="lineNum">     226</span>              :         //</span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">          18 :         newFirstMeasure-&gt;setPrev(m1-&gt;prev());</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">          18 :         newLastMeasure-&gt;setNext(m2-&gt;next());</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">          18 :         tx.push(new InsertMeasures(newFirstMeasure, newLastMeasure));</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">          36 :     }</span></span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">          18 :     if (!fill.isZero()) {</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">          19 :         newFirstMeasure-&gt;setPrev(m1-&gt;prev());</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">          19 :         newLastMeasure-&gt;setNext(m2-&gt;next());</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">          19 :         tx.push(new InsertMeasures(newFirstMeasure, newLastMeasure));</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">          38 :     }</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">          19 :     if (!fill.isZero()) {</span></span>
 <span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">          12 :         score-&gt;undoInsertTime(endMeasure-&gt;endTick(), fill);</span></span>
 <span id="L233"><span class="lineNum">     233</span>              :     }</span>
 <span id="L234"><span class="lineNum">     234</span>              : </span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">          18 :     if (!range.write(score-&gt;masterScore(), startMeasure-&gt;tick())) {</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">          19 :     if (!range.write(score-&gt;masterScore(), startMeasure-&gt;tick())) {</span></span>
 <span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">           1 :         return false;</span></span>
 <span id="L237"><span class="lineNum">     237</span>              :     }</span>
 <span id="L238"><span class="lineNum">     238</span>              : </span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">          34 :     for (Score* s : score-&gt;scoreList()) {</span></span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">          17 :         s-&gt;connectTies(true);</span></span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">          17 :     }</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">          36 :     for (Score* s : score-&gt;scoreList()) {</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">          18 :         s-&gt;connectTies(true);</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">          18 :     }</span></span>
 <span id="L242"><span class="lineNum">     242</span>              : </span>
 <span id="L243"><span class="lineNum">     243</span>              :     // reset start and end elements for slurs that overlap the rewritten measures</span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">          20 :     for (auto spanner : score-&gt;spannerMap().findOverlapping(startMeasure-&gt;tick().ticks(), endMeasure-&gt;tick().ticks())) {</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">          21 :     for (auto spanner : score-&gt;spannerMap().findOverlapping(startMeasure-&gt;tick().ticks(), endMeasure-&gt;tick().ticks())) {</span></span>
 <span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">           3 :         Slur* slur = (spanner.value-&gt;isSlur() ? toSlur(spanner.value) : nullptr);</span></span>
 <span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">           3 :         if (slur) {</span></span>
 <span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">           1 :             EngravingItem* startEl = slur-&gt;startElement();</span></span>
@@ -311,7 +311,7 @@
 <span id="L253"><span class="lineNum">     253</span>              :         }</span>
 <span id="L254"><span class="lineNum">     254</span>              :     }</span>
 <span id="L255"><span class="lineNum">     255</span>              :     // Attempt to move tremolos to correct chords</span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">          19 :     for (auto tremPair : tremoloChordTicks) {</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">          20 :     for (auto tremPair : tremoloChordTicks) {</span></span>
 <span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">           2 :         Fraction chord1Tick = std::get&lt;0&gt;(tremPair);</span></span>
 <span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">           2 :         Fraction chord2Tick = std::get&lt;1&gt;(tremPair);</span></span>
 <span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">           2 :         TremoloTwoChord* trem = std::get&lt;2&gt;(tremPair);</span></span>
@@ -320,7 +320,7 @@
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">           2 :         tx.push(new MoveTremolo(trem-&gt;score(), chord1Tick, chord2Tick, trem, track));</span></span>
 <span id="L263"><span class="lineNum">     263</span>              :     }</span>
 <span id="L264"><span class="lineNum">     264</span>              : </span>
-<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">          17 :     if (score-&gt;noteEntryMode()) {</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">          18 :     if (score-&gt;noteEntryMode()) {</span></span>
 <span id="L266"><span class="lineNum">     266</span>              :         // set input cursor to possibly re-written segment</span>
 <span id="L267"><span class="lineNum">     267</span> <span class="tlaUNC tlaBgUNC">           0 :         Fraction icTick = score-&gt;inputState().tick();</span></span>
 <span id="L268"><span class="lineNum">     268</span> <span class="tlaUNC">           0 :         Segment* icSegment = score-&gt;tick2segment(icTick, false, SegmentType::ChordRest);</span></span>
@@ -336,53 +336,53 @@
 <span id="L278"><span class="lineNum">     278</span> <span class="tlaUNC">           0 :         score-&gt;inputState().setSegment(icSegment);</span></span>
 <span id="L279"><span class="lineNum">     279</span>              :     }</span>
 <span id="L280"><span class="lineNum">     280</span>              : </span>
-<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC tlaBgGNC">          17 :     return true;</span></span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">          18 : }</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC tlaBgGNC">          18 :     return true;</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">          19 : }</span></span>
 <span id="L283"><span class="lineNum">     283</span>              : </span>
 <span id="L284"><span class="lineNum">     284</span>              : //---------------------------------------------------------</span>
 <span id="L285"><span class="lineNum">     285</span>              : //   rewriteMeasures</span>
 <span id="L286"><span class="lineNum">     286</span>              : //    rewrite all measures up to the next time signature or section break</span>
 <span id="L287"><span class="lineNum">     287</span>              : //---------------------------------------------------------</span>
 <span id="L288"><span class="lineNum">     288</span>              : </span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">          21 : bool EditTimeSig::rewriteMeasures(Transaction&amp; tx, Score* score, Measure* fm, const Fraction&amp; ns, staff_idx_t staffIdx)</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">          22 : bool EditTimeSig::rewriteMeasures(Transaction&amp; tx, Score* score, Measure* fm, const Fraction&amp; ns, staff_idx_t staffIdx)</span></span>
 <span id="L290"><span class="lineNum">     290</span>              : {</span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">          21 :     Measure* lm  = fm;</span></span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">          21 :     Measure* fm1 = fm;</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">          21 :     Measure* nm  = nullptr;</span></span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">          21 :     LayoutBreak* sectionBreak = nullptr;</span></span>
-<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">          21 :     Segment* endOfMeasureTimeSigSeg = nullptr;</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">          22 :     Measure* lm  = fm;</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">          22 :     Measure* fm1 = fm;</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">          22 :     Measure* nm  = nullptr;</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">          22 :     LayoutBreak* sectionBreak = nullptr;</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">          22 :     Segment* endOfMeasureTimeSigSeg = nullptr;</span></span>
 <span id="L296"><span class="lineNum">     296</span>              : </span>
 <span id="L297"><span class="lineNum">     297</span>              :     //</span>
 <span id="L298"><span class="lineNum">     298</span>              :     // split into Measure segments fm-lm</span>
 <span id="L299"><span class="lineNum">     299</span>              :     //</span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">         138 :     auto foundLM = [fm, staffIdx, &amp;endOfMeasureTimeSigSeg](MeasureBase* curMeas, Measure* curLM) {</span></span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">         138 :         if (!curMeas || !curMeas-&gt;isMeasure() || curLM-&gt;sectionBreak()) {</span></span>
-<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">          17 :             return true;</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">         143 :     auto foundLM = [fm, staffIdx, &amp;endOfMeasureTimeSigSeg](MeasureBase* curMeas, Measure* curLM) {</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">         143 :         if (!curMeas || !curMeas-&gt;isMeasure() || curLM-&gt;sectionBreak()) {</span></span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">          18 :             return true;</span></span>
 <span id="L303"><span class="lineNum">     303</span>              :         }</span>
-<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">         121 :         Segment* timeSigSeg = toMeasure(curMeas)-&gt;findSegmentR(SegmentType::TimeSig, Fraction(0, 1));</span></span>
-<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">         121 :         if (!timeSigSeg &amp;&amp; curMeas-&gt;prevMeasure()) {</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">         125 :         Segment* timeSigSeg = toMeasure(curMeas)-&gt;findSegmentR(SegmentType::TimeSig, Fraction(0, 1));</span></span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">         125 :         if (!timeSigSeg &amp;&amp; curMeas-&gt;prevMeasure()) {</span></span>
 <span id="L306"><span class="lineNum">     306</span>              :             // find time sig at end of previous measure</span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">          97 :             Measure* prevMeasure = curMeas-&gt;prevMeasure();</span></span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">          97 :             timeSigSeg = prevMeasure-&gt;findSegmentR(SegmentType::TimeSig, prevMeasure-&gt;ticks());</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">          97 :             if (timeSigSeg) {</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">         100 :             Measure* prevMeasure = curMeas-&gt;prevMeasure();</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">         100 :             timeSigSeg = prevMeasure-&gt;findSegmentR(SegmentType::TimeSig, prevMeasure-&gt;ticks());</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">         100 :             if (timeSigSeg) {</span></span>
 <span id="L310"><span class="lineNum">     310</span> <span class="tlaUNC tlaBgUNC">           0 :                 endOfMeasureTimeSigSeg = timeSigSeg;</span></span>
 <span id="L311"><span class="lineNum">     311</span>              :             }</span>
 <span id="L312"><span class="lineNum">     312</span>              :         }</span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC tlaBgGNC">         121 :         if (timeSigSeg &amp;&amp; curMeas != fm) {</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC tlaBgGNC">         125 :         if (timeSigSeg &amp;&amp; curMeas != fm) {</span></span>
 <span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">           5 :             return staffIdx == muse::nidx || timeSigSeg-&gt;element(staff2track(staffIdx));</span></span>
 <span id="L315"><span class="lineNum">     315</span>              :         }</span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">         116 :         return false;</span></span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">          21 :     };</span></span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">         138 :     for (MeasureBase* measure = fm;; measure = measure-&gt;next()) {</span></span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">         138 :         if (foundLM(measure, lm)) {</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">         120 :         return false;</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">          22 :     };</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">         143 :     for (MeasureBase* measure = fm;; measure = measure-&gt;next()) {</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">         143 :         if (foundLM(measure, lm)) {</span></span>
 <span id="L320"><span class="lineNum">     320</span>              :             // save section break to reinstate after rewrite</span>
-<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">          21 :             LayoutBreak* layoutBreak = lm-&gt;sectionBreakElement();</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">          22 :             LayoutBreak* layoutBreak = lm-&gt;sectionBreakElement();</span></span>
 <span id="L322"><span class="lineNum">     322</span>              : </span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">          21 :             if (lm &amp;&amp; layoutBreak) {</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">          22 :             if (lm &amp;&amp; layoutBreak) {</span></span>
 <span id="L324"><span class="lineNum">     324</span> <span class="tlaUNC tlaBgUNC">           0 :                 sectionBreak = Factory::copyLayoutBreak(*layoutBreak);</span></span>
 <span id="L325"><span class="lineNum">     325</span>              :             }</span>
 <span id="L326"><span class="lineNum">     326</span>              : </span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC tlaBgGNC">          21 :             if (!rewriteMeasures(tx, score, fm1, lm, ns, staffIdx)) {</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC tlaBgGNC">          22 :             if (!rewriteMeasures(tx, score, fm1, lm, ns, staffIdx)) {</span></span>
 <span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">           1 :                 if (staffIdx != muse::nidx) {</span></span>
 <span id="L329"><span class="lineNum">     329</span> <span class="tlaUNC tlaBgUNC">           0 :                     MScore::setError(MsError::CANNOT_CHANGE_LOCAL_TIMESIG_MEASURE_NOT_EMPTY);</span></span>
 <span id="L330"><span class="lineNum">     330</span>              :                     // restore measure rests that were prematurely modified</span>
@@ -411,13 +411,13 @@
 <span id="L353"><span class="lineNum">     353</span>              :             // m-&gt;prevMeasure () is new last measure of range</span>
 <span id="L354"><span class="lineNum">     354</span>              :             // set nm to first true Measure after rewritten range</span>
 <span id="L355"><span class="lineNum">     355</span>              :             // we may use this to reinstate time signatures</span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">          20 :             if (measure &amp;&amp; measure-&gt;prevMeasure()) {</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">          21 :             if (measure &amp;&amp; measure-&gt;prevMeasure()) {</span></span>
 <span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">           4 :                 nm = measure-&gt;prevMeasure()-&gt;nextMeasure();</span></span>
 <span id="L358"><span class="lineNum">     358</span>              :             } else {</span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">          16 :                 nm = nullptr;</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">          17 :                 nm = nullptr;</span></span>
 <span id="L360"><span class="lineNum">     360</span>              :             }</span>
 <span id="L361"><span class="lineNum">     361</span>              : </span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">          20 :             if (sectionBreak) {</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">          21 :             if (sectionBreak) {</span></span>
 <span id="L363"><span class="lineNum">     363</span>              :                 // reinstate section break, then stop rewriting</span>
 <span id="L364"><span class="lineNum">     364</span> <span class="tlaUNC tlaBgUNC">           0 :                 if (measure &amp;&amp; measure-&gt;prevMeasure()) {</span></span>
 <span id="L365"><span class="lineNum">     365</span> <span class="tlaUNC">           0 :                     sectionBreak-&gt;setOwnershipParent(measure-&gt;prevMeasure());</span></span>
@@ -435,8 +435,8 @@
 <span id="L377"><span class="lineNum">     377</span>              : </span>
 <span id="L378"><span class="lineNum">     378</span>              :             // stop rewriting at end of score</span>
 <span id="L379"><span class="lineNum">     379</span>              :             // or at a measure (which means we found a time signature segment)</span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC tlaBgGNC">          20 :             if (!measure || measure-&gt;isMeasure()) {</span></span>
-<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">          20 :                 break;</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC tlaBgGNC">          21 :             if (!measure || measure-&gt;isMeasure()) {</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">          21 :                 break;</span></span>
 <span id="L382"><span class="lineNum">     382</span>              :             }</span>
 <span id="L383"><span class="lineNum">     383</span>              : </span>
 <span id="L384"><span class="lineNum">     384</span>              :             // skip frames</span>
@@ -469,13 +469,13 @@
 <span id="L411"><span class="lineNum">     411</span>              :         // if we didn't break the loop already,</span>
 <span id="L412"><span class="lineNum">     412</span>              :         // we must have an ordinary measure</span>
 <span id="L413"><span class="lineNum">     413</span>              :         // add measure to range to rewrite</span>
-<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC tlaBgGNC">         117 :         lm = toMeasure(measure);</span></span>
-<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">         117 :     }</span></span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC tlaBgGNC">         121 :         lm = toMeasure(measure);</span></span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">         121 :     }</span></span>
 <span id="L416"><span class="lineNum">     416</span>              : </span>
 <span id="L417"><span class="lineNum">     417</span>              :     // if any staves don't have time signatures at the point where we stopped,</span>
 <span id="L418"><span class="lineNum">     418</span>              :     // we need to reinstate their previous time signatures</span>
-<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">          20 :     if (!nm) {</span></span>
-<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">          16 :         return true;</span></span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">          21 :     if (!nm) {</span></span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">          17 :         return true;</span></span>
 <span id="L421"><span class="lineNum">     421</span>              :     }</span>
 <span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">           4 :     Segment* timeSigSeg = nm-&gt;undoGetSegment(SegmentType::TimeSig, nm-&gt;tick());</span></span>
 <span id="L423"><span class="lineNum">     423</span>              : </span>
@@ -508,33 +508,33 @@
 <span id="L450"><span class="lineNum">     450</span>              : //    to gui command (drop timesig on measure or timesig)</span>
 <span id="L451"><span class="lineNum">     451</span>              : //---------------------------------------------------------</span>
 <span id="L452"><span class="lineNum">     452</span>              : </span>
-<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">          21 : void EditTimeSig::addTimeSig(Transaction&amp; tx, Score* score, Measure* fm, staff_idx_t staffIdx, TimeSig* ts, bool local)</span></span>
+<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">          22 : void EditTimeSig::addTimeSig(Transaction&amp; tx, Score* score, Measure* fm, staff_idx_t staffIdx, TimeSig* ts, bool local)</span></span>
 <span id="L454"><span class="lineNum">     454</span>              : {</span>
-<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">          21 :     score-&gt;deselectAll();</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">          22 :     score-&gt;deselectAll();</span></span>
 <span id="L456"><span class="lineNum">     456</span>              : </span>
-<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">          21 :     if (fm-&gt;isMMRest()) {</span></span>
+<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">          22 :     if (fm-&gt;isMMRest()) {</span></span>
 <span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC tlaBgUNC">           0 :         fm = fm-&gt;mmRestFirst();</span></span>
 <span id="L459"><span class="lineNum">     459</span>              :     }</span>
 <span id="L460"><span class="lineNum">     460</span>              : </span>
-<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC tlaBgGNC">          21 :     Fraction ns   = ts-&gt;sig();</span></span>
-<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">          21 :     Fraction tick = fm-&gt;tick();</span></span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">          21 :     if (local) {</span></span>
+<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC tlaBgGNC">          22 :     Fraction ns   = ts-&gt;sig();</span></span>
+<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">          22 :     Fraction tick = fm-&gt;tick();</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">          22 :     if (local) {</span></span>
 <span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">           3 :         Fraction stretch = (ns / fm-&gt;timesig()).reduced();</span></span>
 <span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">           3 :         ts-&gt;setStretch(stretch);</span></span>
 <span id="L466"><span class="lineNum">     466</span>              :     }</span>
 <span id="L467"><span class="lineNum">     467</span>              : </span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">          21 :     track_idx_t track = staffIdx * VOICES;</span></span>
-<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">          21 :     Segment* seg = fm-&gt;findSegment(SegmentType::TimeSig, tick);</span></span>
-<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">          21 :     TimeSig* ots = seg ? toTimeSig(seg-&gt;element(track)) : nullptr;</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">          22 :     track_idx_t track = staffIdx * VOICES;</span></span>
+<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">          22 :     Segment* seg = fm-&gt;findSegment(SegmentType::TimeSig, tick);</span></span>
+<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">          22 :     TimeSig* ots = seg ? toTimeSig(seg-&gt;element(track)) : nullptr;</span></span>
 <span id="L471"><span class="lineNum">     471</span>              : </span>
 <span id="L472"><span class="lineNum">     472</span>              :     // Check same tick at end of previous measure</span>
-<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">          21 :     if (!ots) {</span></span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">          10 :         Measure* prevMeasure = fm-&gt;prevMeasure();</span></span>
-<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">          10 :         seg = prevMeasure ? prevMeasure-&gt;findSegmentR(SegmentType::TimeSig, prevMeasure-&gt;ticks()) : seg;</span></span>
-<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">          10 :         ots = seg ? toTimeSig(seg-&gt;element(track)) : nullptr;</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">          22 :     if (!ots) {</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">          11 :         Measure* prevMeasure = fm-&gt;prevMeasure();</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">          11 :         seg = prevMeasure ? prevMeasure-&gt;findSegmentR(SegmentType::TimeSig, prevMeasure-&gt;ticks()) : seg;</span></span>
+<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">          11 :         ots = seg ? toTimeSig(seg-&gt;element(track)) : nullptr;</span></span>
 <span id="L477"><span class="lineNum">     477</span>              :     }</span>
 <span id="L478"><span class="lineNum">     478</span>              : </span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">          21 :     if (ots &amp;&amp; (*ots == *ts)) {</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">          22 :     if (ots &amp;&amp; (*ots == *ts)) {</span></span>
 <span id="L480"><span class="lineNum">     480</span>              :         //</span>
 <span id="L481"><span class="lineNum">     481</span>              :         //  ignore if there is already a timesig</span>
 <span id="L482"><span class="lineNum">     482</span>              :         //  with same values</span>
@@ -543,11 +543,11 @@
 <span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC tlaBgGNC">           1 :         return;</span></span>
 <span id="L486"><span class="lineNum">     486</span>              :     }</span>
 <span id="L487"><span class="lineNum">     487</span>              : </span>
-<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">          21 :     seg = fm-&gt;undoGetSegment(SegmentType::TimeSig, tick);</span></span>
+<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">          22 :     seg = fm-&gt;undoGetSegment(SegmentType::TimeSig, tick);</span></span>
 <span id="L489"><span class="lineNum">     489</span>              : </span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">          51 :     auto getStaffIdxRange = [score, local, staffIdx](const Score* lscore) -&gt; std::pair&lt;staff_idx_t /*start*/, staff_idx_t /*end*/&gt; {</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">          53 :     auto getStaffIdxRange = [score, local, staffIdx](const Score* lscore) -&gt; std::pair&lt;staff_idx_t /*start*/, staff_idx_t /*end*/&gt; {</span></span>
 <span id="L491"><span class="lineNum">     491</span>              :         staff_idx_t startStaffIdx, endStaffIdx;</span>
-<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">          51 :         if (local) {</span></span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">          53 :         if (local) {</span></span>
 <span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">          18 :             if (lscore == score) {</span></span>
 <span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">           6 :                 startStaffIdx = staffIdx;</span></span>
 <span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">           6 :                 endStaffIdx = startStaffIdx + 1;</span></span>
@@ -563,13 +563,13 @@
 <span id="L505"><span class="lineNum">     505</span>              :                 }</span>
 <span id="L506"><span class="lineNum">     506</span>              :             }</span>
 <span id="L507"><span class="lineNum">     507</span>              :         } else {</span>
-<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">          33 :             startStaffIdx = 0;</span></span>
-<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">          33 :             endStaffIdx = lscore-&gt;nstaves();</span></span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">          35 :             startStaffIdx = 0;</span></span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">          35 :             endStaffIdx = lscore-&gt;nstaves();</span></span>
 <span id="L510"><span class="lineNum">     510</span>              :         }</span>
-<span id="L511"><span class="lineNum">     511</span> <span class="tlaGNC">         102 :         return std::make_pair(startStaffIdx, endStaffIdx);</span></span>
-<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">          21 :     };</span></span>
+<span id="L511"><span class="lineNum">     511</span> <span class="tlaGNC">         106 :         return std::make_pair(startStaffIdx, endStaffIdx);</span></span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">          22 :     };</span></span>
 <span id="L513"><span class="lineNum">     513</span>              : </span>
-<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">          21 :     if (ots &amp;&amp; ots-&gt;sig() == ns &amp;&amp; ots-&gt;stretch() == ts-&gt;stretch()) {</span></span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">          22 :     if (ots &amp;&amp; ots-&gt;sig() == ns &amp;&amp; ots-&gt;stretch() == ts-&gt;stretch()) {</span></span>
 <span id="L515"><span class="lineNum">     515</span>              :         //</span>
 <span id="L516"><span class="lineNum">     516</span>              :         // the measure duration does not change,</span>
 <span id="L517"><span class="lineNum">     517</span>              :         // so its ok to just update the time signatures</span>
@@ -604,20 +604,20 @@
 <span id="L546"><span class="lineNum">     546</span>              :             }</span>
 <span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">           2 :         }</span></span>
 <span id="L548"><span class="lineNum">     548</span>              :     } else {</span>
-<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">          19 :         Score* mScore = score-&gt;masterScore();</span></span>
-<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">          19 :         Measure* mf  = mScore-&gt;tick2measure(tick);</span></span>
+<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">          20 :         Score* mScore = score-&gt;masterScore();</span></span>
+<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">          20 :         Measure* mf  = mScore-&gt;tick2measure(tick);</span></span>
 <span id="L551"><span class="lineNum">     551</span>              : </span>
 <span id="L552"><span class="lineNum">     552</span>              :         //</span>
 <span id="L553"><span class="lineNum">     553</span>              :         // rewrite all measures up to the next time signature</span>
 <span id="L554"><span class="lineNum">     554</span>              :         //</span>
-<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">          19 :         if (mf == mScore-&gt;firstMeasure() &amp;&amp; mf-&gt;nextMeasure() &amp;&amp; (mf-&gt;ticks() != mf-&gt;timesig())) {</span></span>
+<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">          20 :         if (mf == mScore-&gt;firstMeasure() &amp;&amp; mf-&gt;nextMeasure() &amp;&amp; (mf-&gt;ticks() != mf-&gt;timesig())) {</span></span>
 <span id="L556"><span class="lineNum">     556</span>              :             // handle upbeat</span>
 <span id="L557"><span class="lineNum">     557</span> <span class="tlaUNC tlaBgUNC">           0 :             mf-&gt;undoChangeProperty(Pid::TIMESIG_NOMINAL, ns);</span></span>
 <span id="L558"><span class="lineNum">     558</span> <span class="tlaUNC">           0 :             Measure* m = mf-&gt;nextMeasure();</span></span>
 <span id="L559"><span class="lineNum">     559</span> <span class="tlaUNC">           0 :             Segment* s = m-&gt;findSegment(SegmentType::TimeSig, m-&gt;tick());</span></span>
 <span id="L560"><span class="lineNum">     560</span> <span class="tlaUNC">           0 :             mf = s ? 0 : mf-&gt;nextMeasure();</span></span>
 <span id="L561"><span class="lineNum">     561</span>              :         } else {</span>
-<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC tlaBgGNC">          19 :             if (score-&gt;sigmap()-&gt;timesig(seg-&gt;tick().ticks()).nominal().identical(ns)) {</span></span>
+<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC tlaBgGNC">          20 :             if (score-&gt;sigmap()-&gt;timesig(seg-&gt;tick().ticks()).nominal().identical(ns)) {</span></span>
 <span id="L563"><span class="lineNum">     563</span>              :                 // no change to global time signature,</span>
 <span id="L564"><span class="lineNum">     564</span>              :                 // but we need to rewrite any staves with local time signatures</span>
 <span id="L565"><span class="lineNum">     565</span> <span class="tlaUNC tlaBgUNC">           0 :                 for (size_t i = 0; i &lt; score-&gt;nstaves(); ++i) {</span></span>
@@ -635,33 +635,33 @@
 <span id="L577"><span class="lineNum">     577</span>              :         // try to rewrite the measures first</span>
 <span id="L578"><span class="lineNum">     578</span>              :         // we will only add time signatures if this succeeds</span>
 <span id="L579"><span class="lineNum">     579</span>              :         // this means, however, that the rewrite cannot depend on the time signatures being in place</span>
-<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC tlaBgGNC">          19 :         if (mf) {</span></span>
-<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">          19 :             auto staffIdxRangeOnMaster = getStaffIdxRange(mScore);</span></span>
-<span id="L582"><span class="lineNum">     582</span> <span class="tlaGNC">          38 :             if (staffIdxRangeOnMaster.second != staffIdxRangeOnMaster.first</span></span>
-<span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">          19 :                 &amp;&amp; !rewriteMeasures(tx, mScore, mf, ns, local ? staffIdxRangeOnMaster.first : muse::nidx)) {</span></span>
+<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC tlaBgGNC">          20 :         if (mf) {</span></span>
+<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">          20 :             auto staffIdxRangeOnMaster = getStaffIdxRange(mScore);</span></span>
+<span id="L582"><span class="lineNum">     582</span> <span class="tlaGNC">          40 :             if (staffIdxRangeOnMaster.second != staffIdxRangeOnMaster.first</span></span>
+<span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">          20 :                 &amp;&amp; !rewriteMeasures(tx, mScore, mf, ns, local ? staffIdxRangeOnMaster.first : muse::nidx)) {</span></span>
 <span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">           1 :                 score-&gt;undoStack()-&gt;activeTransaction()-&gt;unwind();</span></span>
 <span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">           1 :                 return;</span></span>
 <span id="L586"><span class="lineNum">     586</span>              :             }</span>
 <span id="L587"><span class="lineNum">     587</span>              :         }</span>
 <span id="L588"><span class="lineNum">     588</span>              :         // add the time signatures</span>
-<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">          18 :         std::map&lt;track_idx_t, TimeSig*&gt; masterTimeSigs;</span></span>
-<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">          48 :         for (Score* lscore : score-&gt;scoreList()) {</span></span>
-<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">          30 :             Measure* nfm = lscore-&gt;tick2measure(tick);</span></span>
-<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">          30 :             seg = nfm-&gt;undoGetSegment(SegmentType::TimeSig, nfm-&gt;tick());</span></span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">          30 :             std::pair&lt;staff_idx_t, staff_idx_t&gt; staffIdxRange = getStaffIdxRange(lscore);</span></span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">          56 :             for (staff_idx_t si = staffIdxRange.first; si &lt; staffIdxRange.second; ++si) {</span></span>
-<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">          26 :                 if (fm-&gt;isMeasureRepeatGroup(si)) {</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">          19 :         std::map&lt;track_idx_t, TimeSig*&gt; masterTimeSigs;</span></span>
+<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">          50 :         for (Score* lscore : score-&gt;scoreList()) {</span></span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">          31 :             Measure* nfm = lscore-&gt;tick2measure(tick);</span></span>
+<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">          31 :             seg = nfm-&gt;undoGetSegment(SegmentType::TimeSig, nfm-&gt;tick());</span></span>
+<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">          31 :             std::pair&lt;staff_idx_t, staff_idx_t&gt; staffIdxRange = getStaffIdxRange(lscore);</span></span>
+<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">          61 :             for (staff_idx_t si = staffIdxRange.first; si &lt; staffIdxRange.second; ++si) {</span></span>
+<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">          30 :                 if (fm-&gt;isMeasureRepeatGroup(si)) {</span></span>
 <span id="L596"><span class="lineNum">     596</span> <span class="tlaUNC tlaBgUNC">           0 :                     score-&gt;deleteItem(fm-&gt;measureRepeatElement(si));</span></span>
 <span id="L597"><span class="lineNum">     597</span>              :                 }</span>
-<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC tlaBgGNC">          26 :                 TimeSig* nsig = toTimeSig(seg-&gt;element(si * VOICES));</span></span>
-<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">          26 :                 if (nsig == 0) {</span></span>
-<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">          14 :                     nsig = Factory::copyTimeSig(*ts);</span></span>
-<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">          14 :                     nsig-&gt;setScore(lscore);</span></span>
-<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">          14 :                     nsig-&gt;setTrack(si * VOICES);</span></span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">          14 :                     nsig-&gt;setOwnershipParent(seg);</span></span>
-<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">          14 :                     nsig-&gt;styleChanged();</span></span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">          14 :                     score-&gt;undoAddElement(nsig);</span></span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">          14 :                     if (lscore-&gt;excerpt()) {</span></span>
+<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC tlaBgGNC">          30 :                 TimeSig* nsig = toTimeSig(seg-&gt;element(si * VOICES));</span></span>
+<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">          30 :                 if (nsig == 0) {</span></span>
+<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">          18 :                     nsig = Factory::copyTimeSig(*ts);</span></span>
+<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">          18 :                     nsig-&gt;setScore(lscore);</span></span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">          18 :                     nsig-&gt;setTrack(si * VOICES);</span></span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">          18 :                     nsig-&gt;setOwnershipParent(seg);</span></span>
+<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">          18 :                     nsig-&gt;styleChanged();</span></span>
+<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">          18 :                     score-&gt;undoAddElement(nsig);</span></span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">          18 :                     if (lscore-&gt;excerpt()) {</span></span>
 <span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC">           3 :                         const track_idx_t masterTrack = muse::key(lscore-&gt;excerpt()-&gt;tracksMapping(), nsig-&gt;track());</span></span>
 <span id="L608"><span class="lineNum">     608</span> <span class="tlaGNC">           3 :                         TimeSig* masterTimeSig = masterTimeSigs[masterTrack];</span></span>
 <span id="L609"><span class="lineNum">     609</span> <span class="tlaGNC">           3 :                         if (masterTimeSig) {</span></span>
@@ -683,13 +683,13 @@
 <span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">          12 :                     nsig-&gt;setDropTarget(false);                 // DEBUG</span></span>
 <span id="L626"><span class="lineNum">     626</span>              :                 }</span>
 <span id="L627"><span class="lineNum">     627</span>              : </span>
-<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">          26 :                 if (lscore-&gt;isMaster()) {</span></span>
-<span id="L629"><span class="lineNum">     629</span> <span class="tlaGNC">          23 :                     masterTimeSigs[nsig-&gt;track()] = nsig;</span></span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">          30 :                 if (lscore-&gt;isMaster()) {</span></span>
+<span id="L629"><span class="lineNum">     629</span> <span class="tlaGNC">          27 :                     masterTimeSigs[nsig-&gt;track()] = nsig;</span></span>
 <span id="L630"><span class="lineNum">     630</span>              :                 }</span>
 <span id="L631"><span class="lineNum">     631</span>              :             }</span>
-<span id="L632"><span class="lineNum">     632</span> <span class="tlaGNC">          18 :         }</span></span>
-<span id="L633"><span class="lineNum">     633</span> <span class="tlaGNC">          18 :     }</span></span>
-<span id="L634"><span class="lineNum">     634</span> <span class="tlaGNC">          20 :     delete ts;</span></span>
+<span id="L632"><span class="lineNum">     632</span> <span class="tlaGNC">          19 :         }</span></span>
+<span id="L633"><span class="lineNum">     633</span> <span class="tlaGNC">          19 :     }</span></span>
+<span id="L634"><span class="lineNum">     634</span> <span class="tlaGNC">          21 :     delete ts;</span></span>
 <span id="L635"><span class="lineNum">     635</span>              : }</span>
 <span id="L636"><span class="lineNum">     636</span>              : </span>
 <span id="L637"><span class="lineNum">     637</span>              : //---------------------------------------------------------</span>

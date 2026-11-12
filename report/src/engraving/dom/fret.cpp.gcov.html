@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">52.3&nbsp;%</td>
-            <td class="headerCovTableEntry">774</td>
+            <td class="headerCovTableEntry">775</td>
             <td class="headerCovTableEntry">405</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-05 04:07:02</td>
+            <td class="headerValue">2026-11-12 03:59:05</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -223,7 +223,7 @@
 <span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">          69 :     return result;</span></span>
 <span id="L166"><span class="lineNum">     166</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L167"><span class="lineNum">     167</span>              : </span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC tlaBgGNC">         130 : FretDiagram::FretDiagram(DummyParentOr&lt;Segment&gt; parent)</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC tlaBgGNC">         130 : FretDiagram::FretDiagram(DummyParentOr&lt;Segment, FBox&gt; parent)</span></span>
 <span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">         260 :     : EngravingItem(ElementType::FRET_DIAGRAM, parent, ElementFlag::MOVABLE | ElementFlag::ON_STAFF)</span></span>
 <span id="L170"><span class="lineNum">     170</span>              : {</span>
 <span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">         130 :     initDefaultValues();</span></span>
@@ -1097,7 +1097,7 @@
 <span id="L1039"><span class="lineNum">    1039</span>              : </span>
 <span id="L1040"><span class="lineNum">    1040</span> <span class="tlaUNC">           0 : bool FretDiagram::acceptDrop(EditData&amp; data) const</span></span>
 <span id="L1041"><span class="lineNum">    1041</span>              : {</span>
-<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaUNC">           0 :     return data.dropElement-&gt;isHarmony();</span></span>
+<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaUNC">           0 :     return data.dropElement-&gt;isHarmony() &amp;&amp; segment();</span></span>
 <span id="L1043"><span class="lineNum">    1043</span>              : }</span>
 <span id="L1044"><span class="lineNum">    1044</span>              : </span>
 <span id="L1045"><span class="lineNum">    1045</span>              : //---------------------------------------------------------</span>
@@ -1107,508 +1107,509 @@
 <span id="L1049"><span class="lineNum">    1049</span> <span class="tlaUNC">           0 : EngravingItem* FretDiagram::drop(Transaction&amp;, EditData&amp; data)</span></span>
 <span id="L1050"><span class="lineNum">    1050</span>              : {</span>
 <span id="L1051"><span class="lineNum">    1051</span> <span class="tlaUNC">           0 :     EngravingItem* e = data.dropElement;</span></span>
-<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaUNC">           0 :     if (e-&gt;isHarmony()) {</span></span>
-<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaUNC">           0 :         Harmony* h = toHarmony(e);</span></span>
-<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaUNC">           0 :         h-&gt;setOwnershipParent(ownershipParent());</span></span>
-<span id="L1055"><span class="lineNum">    1055</span> <span class="tlaUNC">           0 :         h-&gt;setTrack(track());</span></span>
-<span id="L1056"><span class="lineNum">    1056</span> <span class="tlaUNC">           0 :         score()-&gt;undoAddElement(h);</span></span>
-<span id="L1057"><span class="lineNum">    1057</span>              :     } else {</span>
-<span id="L1058"><span class="lineNum">    1058</span> <span class="tlaUNC">           0 :         LOGW(&quot;FretDiagram: cannot drop &lt;%s&gt;\n&quot;, e-&gt;typeName());</span></span>
-<span id="L1059"><span class="lineNum">    1059</span> <span class="tlaUNC">           0 :         delete e;</span></span>
-<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaUNC">           0 :         e = 0;</span></span>
-<span id="L1061"><span class="lineNum">    1061</span>              :     }</span>
-<span id="L1062"><span class="lineNum">    1062</span> <span class="tlaUNC">           0 :     return e;</span></span>
-<span id="L1063"><span class="lineNum">    1063</span>              : }</span>
-<span id="L1064"><span class="lineNum">    1064</span>              : </span>
-<span id="L1065"><span class="lineNum">    1065</span>              : //---------------------------------------------------------</span>
-<span id="L1066"><span class="lineNum">    1066</span>              : //   scanElements</span>
-<span id="L1067"><span class="lineNum">    1067</span>              : //---------------------------------------------------------</span>
-<span id="L1068"><span class="lineNum">    1068</span>              : </span>
-<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaGNC tlaBgGNC">           9 : void FretDiagram::scanElements(std::function&lt;void(EngravingItem*)&gt; func)</span></span>
-<span id="L1070"><span class="lineNum">    1070</span>              : {</span>
-<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaGNC">           9 :     func(this);</span></span>
-<span id="L1072"><span class="lineNum">    1072</span>              : </span>
-<span id="L1073"><span class="lineNum">    1073</span>              :     // don't display harmony in palette</span>
-<span id="L1074"><span class="lineNum">    1074</span> <span class="tlaGNC">           9 :     if (m_harmony &amp;&amp; !score()-&gt;isPaletteScore()) {</span></span>
-<span id="L1075"><span class="lineNum">    1075</span> <span class="tlaGNC">           2 :         func(m_harmony);</span></span>
-<span id="L1076"><span class="lineNum">    1076</span>              :     }</span>
-<span id="L1077"><span class="lineNum">    1077</span> <span class="tlaGNC">           9 : }</span></span>
-<span id="L1078"><span class="lineNum">    1078</span>              : </span>
-<span id="L1079"><span class="lineNum">    1079</span>              : //---------------------------------------------------------</span>
-<span id="L1080"><span class="lineNum">    1080</span>              : //   getProperty</span>
-<span id="L1081"><span class="lineNum">    1081</span>              : //---------------------------------------------------------</span>
-<span id="L1082"><span class="lineNum">    1082</span>              : </span>
-<span id="L1083"><span class="lineNum">    1083</span> <span class="tlaGNC">           1 : void FretDiagram::undoChangeProperty(Pid id, const PropertyValue&amp; v, PropertyFlags ps)</span></span>
-<span id="L1084"><span class="lineNum">    1084</span>              : {</span>
-<span id="L1085"><span class="lineNum">    1085</span> <span class="tlaGNC">           1 :     if (id == Pid::EXCLUDE_VERTICAL_ALIGN) {</span></span>
-<span id="L1086"><span class="lineNum">    1086</span> <span class="tlaUNC tlaBgUNC">           0 :         EngravingItem::undoChangeProperty(id, v, ps);</span></span>
-<span id="L1087"><span class="lineNum">    1087</span>              : </span>
-<span id="L1088"><span class="lineNum">    1088</span> <span class="tlaUNC">           0 :         bool val = v.toBool();</span></span>
-<span id="L1089"><span class="lineNum">    1089</span> <span class="tlaUNC">           0 :         Harmony* h = harmony();</span></span>
-<span id="L1090"><span class="lineNum">    1090</span> <span class="tlaUNC">           0 :         if (h &amp;&amp; h-&gt;excludeVerticalAlign() != val) {</span></span>
-<span id="L1091"><span class="lineNum">    1091</span> <span class="tlaUNC">           0 :             h-&gt;undoChangeProperty(Pid::EXCLUDE_VERTICAL_ALIGN, val, ps);</span></span>
-<span id="L1092"><span class="lineNum">    1092</span>              :         }</span>
-<span id="L1093"><span class="lineNum">    1093</span> <span class="tlaUNC">           0 :         Segment* parentSeg = segment();</span></span>
-<span id="L1094"><span class="lineNum">    1094</span> <span class="tlaUNC">           0 :         if (!parentSeg) {</span></span>
-<span id="L1095"><span class="lineNum">    1095</span> <span class="tlaUNC">           0 :             return;</span></span>
-<span id="L1096"><span class="lineNum">    1096</span>              :         }</span>
-<span id="L1097"><span class="lineNum">    1097</span>              : </span>
-<span id="L1098"><span class="lineNum">    1098</span> <span class="tlaUNC">           0 :         for (EngravingItem* item : parentSeg-&gt;annotations()) {</span></span>
-<span id="L1099"><span class="lineNum">    1099</span> <span class="tlaUNC">           0 :             if ((!item-&gt;isFretDiagram() &amp;&amp; !item-&gt;isHarmony()) || item == this || track2staff(item-&gt;track()) != staffIdx()) {</span></span>
-<span id="L1100"><span class="lineNum">    1100</span> <span class="tlaUNC">           0 :                 continue;</span></span>
-<span id="L1101"><span class="lineNum">    1101</span>              :             }</span>
-<span id="L1102"><span class="lineNum">    1102</span>              : </span>
-<span id="L1103"><span class="lineNum">    1103</span> <span class="tlaUNC">           0 :             if (item-&gt;excludeVerticalAlign() != val) {</span></span>
-<span id="L1104"><span class="lineNum">    1104</span> <span class="tlaUNC">           0 :                 item-&gt;undoChangeProperty(Pid::EXCLUDE_VERTICAL_ALIGN, val, ps);</span></span>
-<span id="L1105"><span class="lineNum">    1105</span>              :             }</span>
-<span id="L1106"><span class="lineNum">    1106</span>              :         }</span>
-<span id="L1107"><span class="lineNum">    1107</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1108"><span class="lineNum">    1108</span>              :     }</span>
-<span id="L1109"><span class="lineNum">    1109</span>              : </span>
-<span id="L1110"><span class="lineNum">    1110</span> <span class="tlaGNC tlaBgGNC">           1 :     EngravingItem::undoChangeProperty(id, v, ps);</span></span>
-<span id="L1111"><span class="lineNum">    1111</span>              : }</span>
-<span id="L1112"><span class="lineNum">    1112</span>              : </span>
-<span id="L1113"><span class="lineNum">    1113</span> <span class="tlaGNC">         745 : PropertyValue FretDiagram::getProperty(Pid propertyId) const</span></span>
-<span id="L1114"><span class="lineNum">    1114</span>              : {</span>
-<span id="L1115"><span class="lineNum">    1115</span> <span class="tlaGNC">         745 :     switch (propertyId) {</span></span>
-<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::MAG:</span></span>
-<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaUNC">           0 :         return userMag();</span></span>
-<span id="L1118"><span class="lineNum">    1118</span> <span class="tlaUNC">           0 :     case Pid::FRET_STRINGS:</span></span>
-<span id="L1119"><span class="lineNum">    1119</span> <span class="tlaUNC">           0 :         return strings();</span></span>
-<span id="L1120"><span class="lineNum">    1120</span> <span class="tlaUNC">           0 :     case Pid::FRET_FRETS:</span></span>
-<span id="L1121"><span class="lineNum">    1121</span> <span class="tlaUNC">           0 :         return frets();</span></span>
-<span id="L1122"><span class="lineNum">    1122</span> <span class="tlaUNC">           0 :     case Pid::FRET_NUT:</span></span>
-<span id="L1123"><span class="lineNum">    1123</span> <span class="tlaUNC">           0 :         return showNut();</span></span>
-<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaGNC tlaBgGNC">          74 :     case Pid::FRET_OFFSET:</span></span>
-<span id="L1125"><span class="lineNum">    1125</span> <span class="tlaGNC">          74 :         return fretOffset();</span></span>
-<span id="L1126"><span class="lineNum">    1126</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::ORIENTATION:</span></span>
-<span id="L1127"><span class="lineNum">    1127</span> <span class="tlaUNC">           0 :         return m_orientation;</span></span>
-<span id="L1128"><span class="lineNum">    1128</span> <span class="tlaUNC">           0 :     case Pid::FRET_SHOW_FINGERINGS:</span></span>
-<span id="L1129"><span class="lineNum">    1129</span> <span class="tlaUNC">           0 :         return m_showFingering;</span></span>
-<span id="L1130"><span class="lineNum">    1130</span> <span class="tlaGNC tlaBgGNC">          67 :     case Pid::FRET_FINGERING:</span></span>
-<span id="L1131"><span class="lineNum">    1131</span> <span class="tlaGNC">          67 :         return m_fingering;</span></span>
-<span id="L1132"><span class="lineNum">    1132</span> <span class="tlaGNC">         604 :     default:</span></span>
-<span id="L1133"><span class="lineNum">    1133</span> <span class="tlaGNC">         604 :         return EngravingItem::getProperty(propertyId);</span></span>
-<span id="L1134"><span class="lineNum">    1134</span>              :     }</span>
-<span id="L1135"><span class="lineNum">    1135</span>              : }</span>
-<span id="L1136"><span class="lineNum">    1136</span>              : </span>
-<span id="L1137"><span class="lineNum">    1137</span>              : //---------------------------------------------------------</span>
-<span id="L1138"><span class="lineNum">    1138</span>              : //   setProperty</span>
-<span id="L1139"><span class="lineNum">    1139</span>              : //---------------------------------------------------------</span>
-<span id="L1140"><span class="lineNum">    1140</span>              : </span>
-<span id="L1141"><span class="lineNum">    1141</span> <span class="tlaGNC">        1438 : bool FretDiagram::setProperty(Pid propertyId, const PropertyValue&amp; v)</span></span>
-<span id="L1142"><span class="lineNum">    1142</span>              : {</span>
-<span id="L1143"><span class="lineNum">    1143</span> <span class="tlaGNC">        1438 :     switch (propertyId) {</span></span>
-<span id="L1144"><span class="lineNum">    1144</span> <span class="tlaGNC">         156 :     case Pid::MAG:</span></span>
-<span id="L1145"><span class="lineNum">    1145</span> <span class="tlaGNC">         156 :         setUserMag(v.toDouble());</span></span>
-<span id="L1146"><span class="lineNum">    1146</span> <span class="tlaGNC">         156 :         break;</span></span>
-<span id="L1147"><span class="lineNum">    1147</span> <span class="tlaGNC">         156 :     case Pid::FRET_STRINGS:</span></span>
-<span id="L1148"><span class="lineNum">    1148</span> <span class="tlaGNC">         156 :         setStrings(v.toInt());</span></span>
-<span id="L1149"><span class="lineNum">    1149</span> <span class="tlaGNC">         156 :         break;</span></span>
-<span id="L1150"><span class="lineNum">    1150</span> <span class="tlaGNC">         179 :     case Pid::FRET_FRETS:</span></span>
-<span id="L1151"><span class="lineNum">    1151</span> <span class="tlaGNC">         179 :         setFrets(v.toInt());</span></span>
-<span id="L1152"><span class="lineNum">    1152</span> <span class="tlaGNC">         179 :         break;</span></span>
-<span id="L1153"><span class="lineNum">    1153</span> <span class="tlaGNC">         156 :     case Pid::FRET_NUT:</span></span>
-<span id="L1154"><span class="lineNum">    1154</span> <span class="tlaGNC">         156 :         setShowNut(v.toBool());</span></span>
-<span id="L1155"><span class="lineNum">    1155</span> <span class="tlaGNC">         156 :         break;</span></span>
-<span id="L1156"><span class="lineNum">    1156</span> <span class="tlaGNC">          11 :     case Pid::FRET_OFFSET:</span></span>
-<span id="L1157"><span class="lineNum">    1157</span> <span class="tlaGNC">          11 :         setFretOffset(v.toInt());</span></span>
-<span id="L1158"><span class="lineNum">    1158</span> <span class="tlaGNC">          11 :         break;</span></span>
-<span id="L1159"><span class="lineNum">    1159</span> <span class="tlaGNC">         156 :     case Pid::ORIENTATION:</span></span>
-<span id="L1160"><span class="lineNum">    1160</span> <span class="tlaGNC">         156 :         m_orientation = v.value&lt;Orientation&gt;();</span></span>
-<span id="L1161"><span class="lineNum">    1161</span> <span class="tlaGNC">         156 :         break;</span></span>
-<span id="L1162"><span class="lineNum">    1162</span> <span class="tlaGNC">         156 :     case Pid::FRET_SHOW_FINGERINGS:</span></span>
-<span id="L1163"><span class="lineNum">    1163</span> <span class="tlaGNC">         156 :         setShowFingering(v.toBool());</span></span>
-<span id="L1164"><span class="lineNum">    1164</span> <span class="tlaGNC">         156 :         break;</span></span>
-<span id="L1165"><span class="lineNum">    1165</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::FRET_FINGERING:</span></span>
-<span id="L1166"><span class="lineNum">    1166</span> <span class="tlaUNC">           0 :         setFingering(v.value&lt;std::vector&lt;int&gt; &gt;());</span></span>
-<span id="L1167"><span class="lineNum">    1167</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L1168"><span class="lineNum">    1168</span> <span class="tlaUNC">           0 :     case Pid::EXCLUDE_VERTICAL_ALIGN: {</span></span>
-<span id="L1169"><span class="lineNum">    1169</span> <span class="tlaUNC">           0 :         setExcludeVerticalAlign(v.toBool());</span></span>
-<span id="L1170"><span class="lineNum">    1170</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L1171"><span class="lineNum">    1171</span>              :     }</span>
-<span id="L1172"><span class="lineNum">    1172</span> <span class="tlaGNC tlaBgGNC">         468 :     default:</span></span>
-<span id="L1173"><span class="lineNum">    1173</span> <span class="tlaGNC">         468 :         return EngravingItem::setProperty(propertyId, v);</span></span>
-<span id="L1174"><span class="lineNum">    1174</span>              :     }</span>
-<span id="L1175"><span class="lineNum">    1175</span> <span class="tlaGNC">         970 :     triggerLayout();</span></span>
-<span id="L1176"><span class="lineNum">    1176</span> <span class="tlaGNC">         970 :     return true;</span></span>
-<span id="L1177"><span class="lineNum">    1177</span>              : }</span>
-<span id="L1178"><span class="lineNum">    1178</span>              : </span>
-<span id="L1179"><span class="lineNum">    1179</span>              : //---------------------------------------------------------</span>
-<span id="L1180"><span class="lineNum">    1180</span>              : //   propertyDefault</span>
-<span id="L1181"><span class="lineNum">    1181</span>              : //---------------------------------------------------------</span>
-<span id="L1182"><span class="lineNum">    1182</span>              : </span>
-<span id="L1183"><span class="lineNum">    1183</span> <span class="tlaGNC">         747 : PropertyValue FretDiagram::propertyDefault(Pid pid) const</span></span>
-<span id="L1184"><span class="lineNum">    1184</span>              : {</span>
-<span id="L1185"><span class="lineNum">    1185</span>              :     // We shouldn't style the fret offset</span>
-<span id="L1186"><span class="lineNum">    1186</span> <span class="tlaGNC">         747 :     if (pid == Pid::FRET_OFFSET) {</span></span>
-<span id="L1187"><span class="lineNum">    1187</span> <span class="tlaGNC">          67 :         return PropertyValue(0);</span></span>
-<span id="L1188"><span class="lineNum">    1188</span> <span class="tlaGNC">         680 :     } else if (pid == Pid::FRET_FINGERING) {</span></span>
-<span id="L1189"><span class="lineNum">    1189</span> <span class="tlaGNC">          67 :         return std::vector&lt;int&gt;(m_strings, 0);</span></span>
-<span id="L1190"><span class="lineNum">    1190</span>              :     }</span>
-<span id="L1191"><span class="lineNum">    1191</span>              : </span>
-<span id="L1192"><span class="lineNum">    1192</span> <span class="tlaGNC">        6080 :     for (const StyledProperty&amp; p : *styledProperties()) {</span></span>
-<span id="L1193"><span class="lineNum">    1193</span> <span class="tlaGNC">        5477 :         if (p.pid == pid) {</span></span>
-<span id="L1194"><span class="lineNum">    1194</span> <span class="tlaGNC">          10 :             if (propertyType(pid) == P_TYPE::ABSOLUTE) {</span></span>
-<span id="L1195"><span class="lineNum">    1195</span> <span class="tlaGNC">          10 :                 return style().styleAbsolute(p.sid);</span></span>
-<span id="L1196"><span class="lineNum">    1196</span>              :             }</span>
-<span id="L1197"><span class="lineNum">    1197</span> <span class="tlaGNC">          10 :             return style().styleV(p.sid);</span></span>
-<span id="L1198"><span class="lineNum">    1198</span>              :         }</span>
-<span id="L1199"><span class="lineNum">    1199</span>              :     }</span>
-<span id="L1200"><span class="lineNum">    1200</span> <span class="tlaGNC">         603 :     return EngravingItem::propertyDefault(pid);</span></span>
-<span id="L1201"><span class="lineNum">    1201</span>              : }</span>
-<span id="L1202"><span class="lineNum">    1202</span>              : </span>
-<span id="L1203"><span class="lineNum">    1203</span> <span class="tlaGNC">         155 : void FretDiagram::setTrack(track_idx_t val)</span></span>
-<span id="L1204"><span class="lineNum">    1204</span>              : {</span>
-<span id="L1205"><span class="lineNum">    1205</span> <span class="tlaGNC">         155 :     EngravingItem::setTrack(val);</span></span>
-<span id="L1206"><span class="lineNum">    1206</span>              : </span>
-<span id="L1207"><span class="lineNum">    1207</span> <span class="tlaGNC">         155 :     if (m_harmony) {</span></span>
-<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaGNC">          72 :         m_harmony-&gt;setTrack(val);</span></span>
-<span id="L1209"><span class="lineNum">    1209</span>              :     }</span>
-<span id="L1210"><span class="lineNum">    1210</span> <span class="tlaGNC">         155 : }</span></span>
-<span id="L1211"><span class="lineNum">    1211</span>              : </span>
-<span id="L1212"><span class="lineNum">    1212</span>              : //---------------------------------------------------------</span>
-<span id="L1213"><span class="lineNum">    1213</span>              : //   accessibleInfo</span>
-<span id="L1214"><span class="lineNum">    1214</span>              : //---------------------------------------------------------</span>
-<span id="L1215"><span class="lineNum">    1215</span>              : </span>
-<span id="L1216"><span class="lineNum">    1216</span> <span class="tlaUNC tlaBgUNC">           0 : String FretDiagram::accessibleInfo() const</span></span>
-<span id="L1217"><span class="lineNum">    1217</span>              : {</span>
-<span id="L1218"><span class="lineNum">    1218</span> <span class="tlaUNC">           0 :     String chordName;</span></span>
-<span id="L1219"><span class="lineNum">    1219</span> <span class="tlaUNC">           0 :     if (m_harmony) {</span></span>
-<span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 :         chordName = muse::mtrc(&quot;engraving&quot;, &quot;with chord symbol %1&quot;).arg(m_harmony-&gt;harmonyName());</span></span>
-<span id="L1221"><span class="lineNum">    1221</span>              :     } else {</span>
-<span id="L1222"><span class="lineNum">    1222</span> <span class="tlaUNC">           0 :         chordName = muse::mtrc(&quot;engraving&quot;, &quot;without chord symbol&quot;);</span></span>
-<span id="L1223"><span class="lineNum">    1223</span>              :     }</span>
-<span id="L1224"><span class="lineNum">    1224</span> <span class="tlaUNC">           0 :     return String(u&quot;%1 %2&quot;).arg(translatedTypeUserName(), chordName);</span></span>
-<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1226"><span class="lineNum">    1226</span>              : </span>
-<span id="L1227"><span class="lineNum">    1227</span>              : //---------------------------------------------------------</span>
-<span id="L1228"><span class="lineNum">    1228</span>              : //   screenReaderInfo</span>
-<span id="L1229"><span class="lineNum">    1229</span>              : //---------------------------------------------------------</span>
-<span id="L1230"><span class="lineNum">    1230</span>              : </span>
-<span id="L1231"><span class="lineNum">    1231</span> <span class="tlaUNC">           0 : String FretDiagram::screenReaderInfo() const</span></span>
-<span id="L1232"><span class="lineNum">    1232</span>              : {</span>
-<span id="L1233"><span class="lineNum">    1233</span> <span class="tlaUNC">           0 :     String detailedInfo;</span></span>
-<span id="L1234"><span class="lineNum">    1234</span> <span class="tlaUNC">           0 :     for (int i = 0; i &lt; m_strings; i++) {</span></span>
-<span id="L1235"><span class="lineNum">    1235</span> <span class="tlaUNC">           0 :         String stringIdent = muse::mtrc(&quot;engraving&quot;, &quot;string %1&quot;).arg(i + 1);</span></span>
-<span id="L1236"><span class="lineNum">    1236</span>              : </span>
-<span id="L1237"><span class="lineNum">    1237</span> <span class="tlaUNC">           0 :         const FretItem::Marker&amp; m = marker(i);</span></span>
-<span id="L1238"><span class="lineNum">    1238</span> <span class="tlaUNC">           0 :         String markerName;</span></span>
-<span id="L1239"><span class="lineNum">    1239</span> <span class="tlaUNC">           0 :         switch (m.mtype) {</span></span>
-<span id="L1240"><span class="lineNum">    1240</span> <span class="tlaUNC">           0 :         case FretMarkerType::CIRCLE:</span></span>
-<span id="L1241"><span class="lineNum">    1241</span> <span class="tlaUNC">           0 :             markerName = muse::mtrc(&quot;engraving&quot;, &quot;circle marker&quot;);</span></span>
-<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L1243"><span class="lineNum">    1243</span> <span class="tlaUNC">           0 :         case FretMarkerType::CROSS:</span></span>
-<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaUNC">           0 :             markerName = muse::mtrc(&quot;engraving&quot;, &quot;cross marker&quot;);</span></span>
-<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L1246"><span class="lineNum">    1246</span> <span class="tlaUNC">           0 :         case FretMarkerType::NONE:</span></span>
-<span id="L1247"><span class="lineNum">    1247</span>              :         default:</span>
-<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L1249"><span class="lineNum">    1249</span>              :         }</span>
-<span id="L1250"><span class="lineNum">    1250</span>              : </span>
-<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaUNC">           0 :         int dotsCount = 0;</span></span>
-<span id="L1252"><span class="lineNum">    1252</span> <span class="tlaUNC">           0 :         std::vector&lt;int&gt; fretsWithDots;</span></span>
-<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaUNC">           0 :         for (auto const&amp; d : dot(i)) {</span></span>
-<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaUNC">           0 :             if (!d.exists()) {</span></span>
-<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaUNC">           0 :                 continue;</span></span>
-<span id="L1256"><span class="lineNum">    1256</span>              :             }</span>
-<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaUNC">           0 :             fretsWithDots.push_back(d.fret + m_fretOffset);</span></span>
-<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaUNC">           0 :             dotsCount += 1;</span></span>
-<span id="L1259"><span class="lineNum">    1259</span>              :             // TODO consider: do we need to announce what type of dot a dot is?</span>
-<span id="L1260"><span class="lineNum">    1260</span>              :             // i.e. triangle, square, normal dot. It's mostly just information</span>
-<span id="L1261"><span class="lineNum">    1261</span>              :             // that clutters the screenreader output and makes it harder to</span>
-<span id="L1262"><span class="lineNum">    1262</span>              :             // understand, so leaving it out for now.</span>
-<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1264"><span class="lineNum">    1264</span>              : </span>
-<span id="L1265"><span class="lineNum">    1265</span> <span class="tlaUNC">           0 :         if (dotsCount == 0 &amp;&amp; markerName.size() == 0) {</span></span>
-<span id="L1266"><span class="lineNum">    1266</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L1267"><span class="lineNum">    1267</span>              :         }</span>
-<span id="L1268"><span class="lineNum">    1268</span>              : </span>
-<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaUNC">           0 :         String fretInfo;</span></span>
-<span id="L1270"><span class="lineNum">    1270</span> <span class="tlaUNC">           0 :         if (dotsCount == 1) {</span></span>
-<span id="L1271"><span class="lineNum">    1271</span> <span class="tlaUNC">           0 :             fretInfo = String::number(fretsWithDots.front());</span></span>
-<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaUNC">           0 :         } else if (dotsCount &gt; 1) {</span></span>
-<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaUNC">           0 :             int max = int(fretsWithDots.size());</span></span>
-<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaUNC">           0 :             for (int j = 0; j &lt; max; j++) {</span></span>
-<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaUNC">           0 :                 if (j == max - 1) {</span></span>
-<span id="L1276"><span class="lineNum">    1276</span> <span class="tlaUNC">           0 :                     fretInfo = muse::mtrc(&quot;engraving&quot;, &quot;%1 and %2&quot;).arg(fretInfo).arg(fretsWithDots[j]);</span></span>
-<span id="L1277"><span class="lineNum">    1277</span>              :                 } else {</span>
-<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaUNC">           0 :                     fretInfo = String(u&quot;%1 %2&quot;).arg(fretInfo).arg(fretsWithDots[j]);</span></span>
-<span id="L1279"><span class="lineNum">    1279</span>              :                 }</span>
-<span id="L1280"><span class="lineNum">    1280</span>              :             }</span>
-<span id="L1281"><span class="lineNum">    1281</span>              :         }</span>
-<span id="L1282"><span class="lineNum">    1282</span>              : </span>
-<span id="L1283"><span class="lineNum">    1283</span>              :         //: Omit the &quot;%n &quot; for the singular translation (and the &quot;(s)&quot; too)</span>
-<span id="L1284"><span class="lineNum">    1284</span> <span class="tlaUNC">           0 :         String dotsInfo = muse::mtrc(&quot;engraving&quot;, &quot;%n dot(s) on fret(s) %1&quot;, &quot;&quot;, dotsCount).arg(fretInfo);</span></span>
-<span id="L1285"><span class="lineNum">    1285</span>              : </span>
-<span id="L1286"><span class="lineNum">    1286</span> <span class="tlaUNC">           0 :         detailedInfo = String(u&quot;%1 %2 %3 %4&quot;).arg(detailedInfo, stringIdent, markerName, dotsInfo);</span></span>
-<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L1288"><span class="lineNum">    1288</span>              : </span>
-<span id="L1289"><span class="lineNum">    1289</span> <span class="tlaUNC">           0 :     String barreInfo;</span></span>
-<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaUNC">           0 :     for (auto const&amp; iter : m_barres) {</span></span>
-<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaUNC">           0 :         const FretItem::Barre&amp; b = iter.second;</span></span>
-<span id="L1292"><span class="lineNum">    1292</span> <span class="tlaUNC">           0 :         if (!b.exists()) {</span></span>
-<span id="L1293"><span class="lineNum">    1293</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L1294"><span class="lineNum">    1294</span>              :         }</span>
-<span id="L1295"><span class="lineNum">    1295</span>              : </span>
-<span id="L1296"><span class="lineNum">    1296</span> <span class="tlaUNC">           0 :         String fretInfo = muse::mtrc(&quot;engraving&quot;, &quot;fret %1&quot;).arg(iter.first);</span></span>
-<span id="L1297"><span class="lineNum">    1297</span>              : </span>
-<span id="L1298"><span class="lineNum">    1298</span> <span class="tlaUNC">           0 :         String newBarreInfo;</span></span>
-<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaUNC">           0 :         if (b.startString == 0 &amp;&amp; (b.endString == -1 || b.endString == m_strings - 1)) {</span></span>
-<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaUNC">           0 :             newBarreInfo = muse::mtrc(&quot;engraving&quot;, &quot;barré %1&quot;).arg(fretInfo);</span></span>
-<span id="L1301"><span class="lineNum">    1301</span>              :         } else {</span>
-<span id="L1302"><span class="lineNum">    1302</span> <span class="tlaUNC">           0 :             String startPart = muse::mtrc(&quot;engraving&quot;, &quot;beginning string %1&quot;).arg(b.startString + 1);</span></span>
-<span id="L1303"><span class="lineNum">    1303</span> <span class="tlaUNC">           0 :             String endPart;</span></span>
-<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :             if (b.endString != -1) {</span></span>
-<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaUNC">           0 :                 endPart = muse::mtrc(&quot;engraving&quot;, &quot;and ending string %1&quot;).arg(b.endString + 1);</span></span>
-<span id="L1306"><span class="lineNum">    1306</span>              :             }</span>
-<span id="L1307"><span class="lineNum">    1307</span>              : </span>
-<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaUNC">           0 :             newBarreInfo = muse::mtrc(&quot;engraving&quot;, &quot;partial barré %1 %2 %3&quot;).arg(fretInfo, startPart, endPart);</span></span>
-<span id="L1309"><span class="lineNum">    1309</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1310"><span class="lineNum">    1310</span>              : </span>
-<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaUNC">           0 :         barreInfo = String(u&quot;%1 %2&quot;).arg(barreInfo, newBarreInfo);</span></span>
-<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L1313"><span class="lineNum">    1313</span>              : </span>
-<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaUNC">           0 :     detailedInfo = String(u&quot;%1 %2&quot;).arg(detailedInfo, barreInfo);</span></span>
-<span id="L1315"><span class="lineNum">    1315</span>              : </span>
-<span id="L1316"><span class="lineNum">    1316</span> <span class="tlaUNC">           0 :     if (detailedInfo.trimmed().size() == 0) {</span></span>
-<span id="L1317"><span class="lineNum">    1317</span> <span class="tlaUNC">           0 :         detailedInfo = muse::mtrc(&quot;engraving&quot;, &quot;no content&quot;);</span></span>
-<span id="L1318"><span class="lineNum">    1318</span>              :     }</span>
-<span id="L1319"><span class="lineNum">    1319</span>              : </span>
-<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaUNC">           0 :     String chordName = m_harmony</span></span>
-<span id="L1321"><span class="lineNum">    1321</span> <span class="tlaUNC">           0 :                        ? muse::mtrc(&quot;engraving&quot;, &quot;with chord symbol %1&quot;).arg(m_harmony-&gt;generateScreenReaderInfo())</span></span>
-<span id="L1322"><span class="lineNum">    1322</span> <span class="tlaUNC">           0 :                        : muse::mtrc(&quot;engraving&quot;, &quot;without chord symbol&quot;);</span></span>
-<span id="L1323"><span class="lineNum">    1323</span>              : </span>
-<span id="L1324"><span class="lineNum">    1324</span> <span class="tlaUNC">           0 :     String basicInfo = String(u&quot;%1 %2&quot;).arg(translatedTypeUserName(), chordName);</span></span>
-<span id="L1325"><span class="lineNum">    1325</span>              : </span>
-<span id="L1326"><span class="lineNum">    1326</span> <span class="tlaUNC">           0 :     String generalInfo = muse::mtrc(&quot;engraving&quot;, &quot;%n string(s) total&quot;, &quot;&quot;, m_strings);</span></span>
-<span id="L1327"><span class="lineNum">    1327</span>              : </span>
-<span id="L1328"><span class="lineNum">    1328</span> <span class="tlaUNC">           0 :     String res = String(u&quot;%1 %2 %3&quot;).arg(basicInfo, generalInfo, detailedInfo);</span></span>
-<span id="L1329"><span class="lineNum">    1329</span>              : </span>
-<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaUNC">           0 :     return res;</span></span>
-<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1332"><span class="lineNum">    1332</span>              : </span>
-<span id="L1333"><span class="lineNum">    1333</span> <span class="tlaUNC">           0 : void FretDiagram::setFingering(std::vector&lt;int&gt; v)</span></span>
-<span id="L1334"><span class="lineNum">    1334</span>              : {</span>
-<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaUNC">           0 :     m_fingering = std::move(v);</span></span>
-<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1337"><span class="lineNum">    1337</span>              : </span>
-<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaGNC tlaBgGNC">          22 : FretDiagram* FretDiagram::makeFromHarmonyOrFretDiagram(const EngravingItem* harmonyOrFretDiagram)</span></span>
-<span id="L1339"><span class="lineNum">    1339</span>              : {</span>
-<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaGNC">          22 :     IF_ASSERT_FAILED(!harmonyOrFretDiagram || !harmonyOrFretDiagram-&gt;isHarmony() || !harmonyOrFretDiagram-&gt;isFretDiagram()) {</span></span>
-<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaUNC tlaBgUNC">           0 :         return nullptr;</span></span>
-<span id="L1342"><span class="lineNum">    1342</span>              :     }</span>
-<span id="L1343"><span class="lineNum">    1343</span>              : </span>
-<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaGNC tlaBgGNC">          22 :     FretDiagram* fretDiagram = nullptr;</span></span>
-<span id="L1345"><span class="lineNum">    1345</span>              : </span>
-<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaGNC">          22 :     if (harmonyOrFretDiagram-&gt;isHarmony() &amp;&amp; !harmonyOrFretDiagram-&gt;ownershipParent()-&gt;isFretDiagram()) {</span></span>
-<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaUNC tlaBgUNC">           0 :         Harmony* harmony = toHarmony(harmonyOrFretDiagram)-&gt;clone();</span></span>
-<span id="L1348"><span class="lineNum">    1348</span>              : </span>
-<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaUNC">           0 :         fretDiagram = Factory::createFretDiagram(harmonyOrFretDiagram-&gt;score()-&gt;dummy());</span></span>
-<span id="L1350"><span class="lineNum">    1350</span>              : </span>
-<span id="L1351"><span class="lineNum">    1351</span> <span class="tlaUNC">           0 :         fretDiagram-&gt;updateDiagram(harmony-&gt;plainText());</span></span>
-<span id="L1352"><span class="lineNum">    1352</span>              : </span>
-<span id="L1353"><span class="lineNum">    1353</span> <span class="tlaUNC">           0 :         harmony-&gt;resetProperty(Pid::OFFSET);</span></span>
-<span id="L1354"><span class="lineNum">    1354</span> <span class="tlaUNC">           0 :         harmony-&gt;setProperty(Pid::ALIGN, Align(AlignH::HCENTER, AlignV::BASELINE));</span></span>
-<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaUNC">           0 :         harmony-&gt;setPropertyFlags(Pid::ALIGN, PropertyFlags::UNSTYLED);</span></span>
-<span id="L1356"><span class="lineNum">    1356</span>              : </span>
-<span id="L1357"><span class="lineNum">    1357</span> <span class="tlaUNC">           0 :         fretDiagram-&gt;add(harmony);</span></span>
-<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaGNC tlaBgGNC">          22 :     } else if (harmonyOrFretDiagram-&gt;isHarmony() &amp;&amp; harmonyOrFretDiagram-&gt;ownershipParent()-&gt;isFretDiagram()) {</span></span>
-<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaUNC tlaBgUNC">           0 :         fretDiagram = toFretDiagram(harmonyOrFretDiagram-&gt;ownershipParent())-&gt;clone();</span></span>
-<span id="L1360"><span class="lineNum">    1360</span> <span class="tlaGNC tlaBgGNC">          22 :     } else if (harmonyOrFretDiagram-&gt;isFretDiagram()) {</span></span>
-<span id="L1361"><span class="lineNum">    1361</span> <span class="tlaGNC">          22 :         fretDiagram = toFretDiagram(harmonyOrFretDiagram)-&gt;clone();</span></span>
-<span id="L1362"><span class="lineNum">    1362</span> <span class="tlaGNC">          22 :         fretDiagram-&gt;setOffset(PointF());</span></span>
-<span id="L1363"><span class="lineNum">    1363</span> <span class="tlaGNC">          22 :         if (!fretDiagram-&gt;harmony()) {</span></span>
-<span id="L1364"><span class="lineNum">    1364</span>              :             //! generate from diagram and add harmony</span>
-<span id="L1365"><span class="lineNum">    1365</span> <span class="tlaUNC tlaBgUNC">           0 :             fretDiagram-&gt;add(Factory::createHarmony(fretDiagram));</span></span>
-<span id="L1366"><span class="lineNum">    1366</span>              :         }</span>
-<span id="L1367"><span class="lineNum">    1367</span>              :     }</span>
-<span id="L1368"><span class="lineNum">    1368</span>              : </span>
-<span id="L1369"><span class="lineNum">    1369</span> <span class="tlaGNC tlaBgGNC">          22 :     return fretDiagram;</span></span>
-<span id="L1370"><span class="lineNum">    1370</span>              : }</span>
-<span id="L1371"><span class="lineNum">    1371</span>              : </span>
-<span id="L1372"><span class="lineNum">    1372</span> <span class="tlaUNC tlaBgUNC">           0 : bool FretDiagram::isInFretBox() const</span></span>
-<span id="L1373"><span class="lineNum">    1373</span>              : {</span>
-<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaUNC">           0 :     EngravingObject* parent = ownershipParent();</span></span>
-<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaUNC">           0 :     return parent ? parent-&gt;isFBox() : false;</span></span>
-<span id="L1376"><span class="lineNum">    1376</span>              : }</span>
-<span id="L1377"><span class="lineNum">    1377</span>              : </span>
-<span id="L1378"><span class="lineNum">    1378</span> <span class="tlaUNC">           0 : bool FretDiagram::isCustom(const String&amp; harmonyNameForCompare) const</span></span>
-<span id="L1379"><span class="lineNum">    1379</span>              : {</span>
-<span id="L1380"><span class="lineNum">    1380</span> <span class="tlaUNC">           0 :     if (harmonyNameForCompare.empty()) {</span></span>
-<span id="L1381"><span class="lineNum">    1381</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1382"><span class="lineNum">    1382</span>              :     }</span>
-<span id="L1383"><span class="lineNum">    1383</span>              : </span>
-<span id="L1384"><span class="lineNum">    1384</span>              :     static constexpr std::array props {</span>
-<span id="L1385"><span class="lineNum">    1385</span>              :         Pid::FRET_STRINGS,</span>
-<span id="L1386"><span class="lineNum">    1386</span>              :         Pid::FRET_FRETS,</span>
-<span id="L1387"><span class="lineNum">    1387</span>              :         Pid::FRET_NUT,</span>
-<span id="L1388"><span class="lineNum">    1388</span>              :         Pid::FRET_FINGERING</span>
-<span id="L1389"><span class="lineNum">    1389</span>              :     };</span>
-<span id="L1390"><span class="lineNum">    1390</span>              : </span>
-<span id="L1391"><span class="lineNum">    1391</span> <span class="tlaUNC">           0 :     for (const Pid&amp; pid : props) {</span></span>
-<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaUNC">           0 :         if (pid == Pid::FRET_FINGERING) {</span></span>
-<span id="L1393"><span class="lineNum">    1393</span> <span class="tlaUNC">           0 :             if (custom(Pid::FRET_SHOW_FINGERINGS)) {</span></span>
-<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L1395"><span class="lineNum">    1395</span>              :             }</span>
-<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaUNC">           0 :         } else if (custom(pid)) {</span></span>
-<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaUNC">           0 :             return true;</span></span>
-<span id="L1398"><span class="lineNum">    1398</span>              :         }</span>
-<span id="L1399"><span class="lineNum">    1399</span>              :     }</span>
-<span id="L1400"><span class="lineNum">    1400</span>              : </span>
-<span id="L1401"><span class="lineNum">    1401</span> <span class="tlaUNC">           0 :     if (s_harmonyToDiagramMap.empty()) {</span></span>
-<span id="L1402"><span class="lineNum">    1402</span> <span class="tlaUNC">           0 :         readHarmonyToDiagramFile(HARMONY_TO_DIAGRAM_FILE_PATH);</span></span>
-<span id="L1403"><span class="lineNum">    1403</span>              :     }</span>
-<span id="L1404"><span class="lineNum">    1404</span>              : </span>
-<span id="L1405"><span class="lineNum">    1405</span> <span class="tlaUNC">           0 :     NoteSpellingType spellingType = style().styleV(Sid::chordSymbolSpelling).value&lt;NoteSpellingType&gt;();</span></span>
-<span id="L1406"><span class="lineNum">    1406</span> <span class="tlaUNC">           0 :     HarmonyMapKey key = createHarmonyMapKey(harmonyNameForCompare, spellingType, score()-&gt;chordList());</span></span>
-<span id="L1407"><span class="lineNum">    1407</span>              : </span>
-<span id="L1408"><span class="lineNum">    1408</span> <span class="tlaUNC">           0 :     if (tpcIsValid(key.rootTpc)) {</span></span>
-<span id="L1409"><span class="lineNum">    1409</span> <span class="tlaUNC">           0 :         key.rootTpc = canonicalEnharmonicTpc(key.rootTpc);</span></span>
-<span id="L1410"><span class="lineNum">    1410</span>              :     }</span>
-<span id="L1411"><span class="lineNum">    1411</span> <span class="tlaUNC">           0 :     if (tpcIsValid(key.bassTpc)) {</span></span>
-<span id="L1412"><span class="lineNum">    1412</span> <span class="tlaUNC">           0 :         key.bassTpc = canonicalEnharmonicTpc(key.bassTpc);</span></span>
-<span id="L1413"><span class="lineNum">    1413</span>              :     }</span>
-<span id="L1414"><span class="lineNum">    1414</span>              : </span>
-<span id="L1415"><span class="lineNum">    1415</span> <span class="tlaUNC">           0 :     std::vector&lt;DiagramInfo&gt; availableDiagrams = muse::value(s_harmonyToDiagramMap, key);</span></span>
-<span id="L1416"><span class="lineNum">    1416</span> <span class="tlaUNC">           0 :     if (availableDiagrams.empty()) {</span></span>
-<span id="L1417"><span class="lineNum">    1417</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L1418"><span class="lineNum">    1418</span>              :     }</span>
-<span id="L1419"><span class="lineNum">    1419</span>              : </span>
-<span id="L1420"><span class="lineNum">    1420</span> <span class="tlaUNC">           0 :     String currentPattern = patternFromDiagram();</span></span>
-<span id="L1421"><span class="lineNum">    1421</span>              : </span>
-<span id="L1422"><span class="lineNum">    1422</span> <span class="tlaUNC">           0 :     for (const DiagramInfo&amp; diagram : availableDiagrams) {</span></span>
-<span id="L1423"><span class="lineNum">    1423</span> <span class="tlaUNC">           0 :         if (diagram.diagramPattern == currentPattern) {</span></span>
-<span id="L1424"><span class="lineNum">    1424</span> <span class="tlaUNC">           0 :             return false;</span></span>
-<span id="L1425"><span class="lineNum">    1425</span>              :         }</span>
-<span id="L1426"><span class="lineNum">    1426</span>              :     }</span>
-<span id="L1427"><span class="lineNum">    1427</span>              : </span>
-<span id="L1428"><span class="lineNum">    1428</span> <span class="tlaUNC">           0 :     return true;</span></span>
-<span id="L1429"><span class="lineNum">    1429</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1430"><span class="lineNum">    1430</span>              : </span>
-<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaGNC tlaBgGNC">           2 : void FretDiagram::readHarmonyToDiagramFile(const muse::io::path_t&amp; filePath) const</span></span>
-<span id="L1432"><span class="lineNum">    1432</span>              : {</span>
-<span id="L1433"><span class="lineNum">    1433</span> <span class="tlaGNC">           4 :     TRACEFUNC;</span></span>
-<span id="L1434"><span class="lineNum">    1434</span>              : </span>
-<span id="L1435"><span class="lineNum">    1435</span> <span class="tlaGNC">           2 :     muse::io::File file(filePath);</span></span>
-<span id="L1436"><span class="lineNum">    1436</span> <span class="tlaGNC">           2 :     if (!file.open()) {</span></span>
-<span id="L1437"><span class="lineNum">    1437</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGE() &lt;&lt; file.errorString();</span></span>
-<span id="L1438"><span class="lineNum">    1438</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1439"><span class="lineNum">    1439</span>              :     }</span>
-<span id="L1440"><span class="lineNum">    1440</span>              : </span>
-<span id="L1441"><span class="lineNum">    1441</span> <span class="tlaGNC tlaBgGNC">           2 :     XmlReader reader(&amp;file);</span></span>
-<span id="L1442"><span class="lineNum">    1442</span>              : </span>
-<span id="L1443"><span class="lineNum">    1443</span>              :     std::unordered_map&lt;String, rw::HarmonyToDiagramReader::FretDiagramInfo&gt; harmonyToDiagramMap</span>
-<span id="L1444"><span class="lineNum">    1444</span> <span class="tlaGNC">           2 :         = rw::HarmonyToDiagramReader::read(reader);</span></span>
-<span id="L1445"><span class="lineNum">    1445</span>              : </span>
-<span id="L1446"><span class="lineNum">    1446</span> <span class="tlaGNC">           2 :     const ChordList* chordList = score()-&gt;chordList();</span></span>
-<span id="L1447"><span class="lineNum">    1447</span> <span class="tlaGNC">           2 :     const NoteSpellingType spellingType = NoteSpellingType::STANDARD;</span></span>
-<span id="L1448"><span class="lineNum">    1448</span>              : </span>
-<span id="L1449"><span class="lineNum">    1449</span> <span class="tlaGNC">        6250 :     for (auto&amp; [key, value] : harmonyToDiagramMap) {</span></span>
-<span id="L1450"><span class="lineNum">    1450</span> <span class="tlaGNC">        6248 :         HarmonyMapKey mapKey = createHarmonyMapKey(key, spellingType, chordList);</span></span>
-<span id="L1451"><span class="lineNum">    1451</span>              : </span>
-<span id="L1452"><span class="lineNum">    1452</span> <span class="tlaGNC">        6248 :         if (tpcIsValid(mapKey.rootTpc)) {</span></span>
-<span id="L1453"><span class="lineNum">    1453</span> <span class="tlaGNC">        6246 :             mapKey.rootTpc = canonicalEnharmonicTpc(mapKey.rootTpc);</span></span>
-<span id="L1454"><span class="lineNum">    1454</span>              :         }</span>
-<span id="L1455"><span class="lineNum">    1455</span> <span class="tlaGNC">        6248 :         if (tpcIsValid(mapKey.bassTpc)) {</span></span>
-<span id="L1456"><span class="lineNum">    1456</span> <span class="tlaGNC">        3512 :             mapKey.bassTpc = canonicalEnharmonicTpc(mapKey.bassTpc);</span></span>
-<span id="L1457"><span class="lineNum">    1457</span>              :         }</span>
-<span id="L1458"><span class="lineNum">    1458</span>              : </span>
-<span id="L1459"><span class="lineNum">    1459</span> <span class="tlaGNC">       12496 :         s_harmonyToDiagramMap[mapKey].push_back({ key, value.xml, value.pattern });</span></span>
-<span id="L1460"><span class="lineNum">    1460</span> <span class="tlaGNC">        6248 :         s_diagramPatternToHarmoniesMap[value.pattern].push_back(key);</span></span>
-<span id="L1461"><span class="lineNum">    1461</span>              :     }</span>
-<span id="L1462"><span class="lineNum">    1462</span> <span class="tlaGNC">        6250 : }</span></span>
-<span id="L1463"><span class="lineNum">    1463</span>              : </span>
-<span id="L1464"><span class="lineNum">    1464</span>              : //---------------------------------------------------------</span>
-<span id="L1465"><span class="lineNum">    1465</span>              : //   markerToChar</span>
-<span id="L1466"><span class="lineNum">    1466</span>              : //---------------------------------------------------------</span>
-<span id="L1467"><span class="lineNum">    1467</span>              : </span>
-<span id="L1468"><span class="lineNum">    1468</span> <span class="tlaUNC tlaBgUNC">           0 : Char FretItem::markerToChar(FretMarkerType t)</span></span>
-<span id="L1469"><span class="lineNum">    1469</span>              : {</span>
-<span id="L1470"><span class="lineNum">    1470</span> <span class="tlaUNC">           0 :     switch (t) {</span></span>
-<span id="L1471"><span class="lineNum">    1471</span> <span class="tlaUNC">           0 :     case FretMarkerType::CIRCLE: return Char(u'O');</span></span>
-<span id="L1472"><span class="lineNum">    1472</span> <span class="tlaUNC">           0 :     case FretMarkerType::CROSS: return Char(u'X');</span></span>
-<span id="L1473"><span class="lineNum">    1473</span> <span class="tlaUNC">           0 :     case FretMarkerType::NONE:</span></span>
-<span id="L1474"><span class="lineNum">    1474</span>              :     default:</span>
-<span id="L1475"><span class="lineNum">    1475</span> <span class="tlaUNC">           0 :         return Char();</span></span>
-<span id="L1476"><span class="lineNum">    1476</span>              :     }</span>
-<span id="L1477"><span class="lineNum">    1477</span>              : }</span>
-<span id="L1478"><span class="lineNum">    1478</span>              : </span>
-<span id="L1479"><span class="lineNum">    1479</span>              : //---------------------------------------------------------</span>
-<span id="L1480"><span class="lineNum">    1480</span>              : //   markerTypeToName</span>
-<span id="L1481"><span class="lineNum">    1481</span>              : //---------------------------------------------------------</span>
-<span id="L1482"><span class="lineNum">    1482</span>              : </span>
-<span id="L1483"><span class="lineNum">    1483</span>              : const std::vector&lt;FretItem::MarkerTypeNameItem&gt; FretItem::markerTypeNameMap = {</span>
-<span id="L1484"><span class="lineNum">    1484</span>              :     { FretMarkerType::CIRCLE,     &quot;circle&quot; },</span>
-<span id="L1485"><span class="lineNum">    1485</span>              :     { FretMarkerType::CROSS,      &quot;cross&quot; },</span>
-<span id="L1486"><span class="lineNum">    1486</span>              :     { FretMarkerType::NONE,       &quot;none&quot; }</span>
-<span id="L1487"><span class="lineNum">    1487</span>              : };</span>
-<span id="L1488"><span class="lineNum">    1488</span>              : </span>
-<span id="L1489"><span class="lineNum">    1489</span> <span class="tlaGNC tlaBgGNC">         130 : String FretItem::markerTypeToName(FretMarkerType t)</span></span>
-<span id="L1490"><span class="lineNum">    1490</span>              : {</span>
-<span id="L1491"><span class="lineNum">    1491</span> <span class="tlaGNC">         177 :     for (auto i : FretItem::markerTypeNameMap) {</span></span>
-<span id="L1492"><span class="lineNum">    1492</span> <span class="tlaGNC">         177 :         if (i.mtype == t) {</span></span>
-<span id="L1493"><span class="lineNum">    1493</span> <span class="tlaGNC">         130 :             return String::fromAscii(i.name);</span></span>
-<span id="L1494"><span class="lineNum">    1494</span>              :         }</span>
-<span id="L1495"><span class="lineNum">    1495</span>              :     }</span>
-<span id="L1496"><span class="lineNum">    1496</span>              : </span>
-<span id="L1497"><span class="lineNum">    1497</span> <span class="tlaUNC tlaBgUNC">           0 :     ASSERT_X(&quot;Unrecognised FretMarkerType!&quot;);</span></span>
-<span id="L1498"><span class="lineNum">    1498</span>              :     return String();         // prevent compiler warnings</span>
-<span id="L1499"><span class="lineNum">    1499</span>              : }</span>
-<span id="L1500"><span class="lineNum">    1500</span>              : </span>
-<span id="L1501"><span class="lineNum">    1501</span>              : //---------------------------------------------------------</span>
-<span id="L1502"><span class="lineNum">    1502</span>              : //   nameToMarkerType</span>
-<span id="L1503"><span class="lineNum">    1503</span>              : //---------------------------------------------------------</span>
-<span id="L1504"><span class="lineNum">    1504</span>              : </span>
-<span id="L1505"><span class="lineNum">    1505</span> <span class="tlaGNC tlaBgGNC">         271 : FretMarkerType FretItem::nameToMarkerType(String n)</span></span>
-<span id="L1506"><span class="lineNum">    1506</span>              : {</span>
-<span id="L1507"><span class="lineNum">    1507</span> <span class="tlaGNC">         366 :     for (auto i : FretItem::markerTypeNameMap) {</span></span>
-<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaGNC">         366 :         if (String::fromAscii(i.name) == n) {</span></span>
-<span id="L1509"><span class="lineNum">    1509</span> <span class="tlaGNC">         271 :             return i.mtype;</span></span>
-<span id="L1510"><span class="lineNum">    1510</span>              :         }</span>
-<span id="L1511"><span class="lineNum">    1511</span>              :     }</span>
-<span id="L1512"><span class="lineNum">    1512</span> <span class="tlaUNC tlaBgUNC">           0 :     LOGW(&quot;Unrecognised marker name!&quot;);</span></span>
-<span id="L1513"><span class="lineNum">    1513</span> <span class="tlaUNC">           0 :     return FretMarkerType::NONE;         // default</span></span>
-<span id="L1514"><span class="lineNum">    1514</span>              : }</span>
-<span id="L1515"><span class="lineNum">    1515</span>              : </span>
-<span id="L1516"><span class="lineNum">    1516</span>              : //---------------------------------------------------------</span>
-<span id="L1517"><span class="lineNum">    1517</span>              : //   dotTypeToName</span>
-<span id="L1518"><span class="lineNum">    1518</span>              : //---------------------------------------------------------</span>
-<span id="L1519"><span class="lineNum">    1519</span>              : </span>
-<span id="L1520"><span class="lineNum">    1520</span>              : const std::vector&lt;FretItem::DotTypeNameItem&gt; FretItem::dotTypeNameMap = {</span>
-<span id="L1521"><span class="lineNum">    1521</span>              :     { FretDotType::NORMAL,        &quot;normal&quot; },</span>
-<span id="L1522"><span class="lineNum">    1522</span>              :     { FretDotType::CROSS,         &quot;cross&quot; },</span>
-<span id="L1523"><span class="lineNum">    1523</span>              :     { FretDotType::SQUARE,        &quot;square&quot; },</span>
-<span id="L1524"><span class="lineNum">    1524</span>              :     { FretDotType::TRIANGLE,      &quot;triangle&quot; },</span>
-<span id="L1525"><span class="lineNum">    1525</span>              : };</span>
-<span id="L1526"><span class="lineNum">    1526</span>              : </span>
-<span id="L1527"><span class="lineNum">    1527</span> <span class="tlaGNC tlaBgGNC">         202 : String FretItem::dotTypeToName(FretDotType t)</span></span>
-<span id="L1528"><span class="lineNum">    1528</span>              : {</span>
-<span id="L1529"><span class="lineNum">    1529</span> <span class="tlaGNC">         202 :     for (auto i : FretItem::dotTypeNameMap) {</span></span>
-<span id="L1530"><span class="lineNum">    1530</span> <span class="tlaGNC">         202 :         if (i.dtype == t) {</span></span>
-<span id="L1531"><span class="lineNum">    1531</span> <span class="tlaGNC">         202 :             return String::fromAscii(i.name);</span></span>
-<span id="L1532"><span class="lineNum">    1532</span>              :         }</span>
-<span id="L1533"><span class="lineNum">    1533</span>              :     }</span>
-<span id="L1534"><span class="lineNum">    1534</span>              : </span>
-<span id="L1535"><span class="lineNum">    1535</span> <span class="tlaUNC tlaBgUNC">           0 :     ASSERT_X(&quot;Unrecognised FretDotType!&quot;);</span></span>
-<span id="L1536"><span class="lineNum">    1536</span>              :     return String();         // prevent compiler warnings</span>
-<span id="L1537"><span class="lineNum">    1537</span>              : }</span>
-<span id="L1538"><span class="lineNum">    1538</span>              : </span>
-<span id="L1539"><span class="lineNum">    1539</span>              : //---------------------------------------------------------</span>
-<span id="L1540"><span class="lineNum">    1540</span>              : //   nameToDotType</span>
-<span id="L1541"><span class="lineNum">    1541</span>              : //---------------------------------------------------------</span>
-<span id="L1542"><span class="lineNum">    1542</span>              : </span>
-<span id="L1543"><span class="lineNum">    1543</span> <span class="tlaGNC tlaBgGNC">         333 : FretDotType FretItem::nameToDotType(String n)</span></span>
-<span id="L1544"><span class="lineNum">    1544</span>              : {</span>
-<span id="L1545"><span class="lineNum">    1545</span> <span class="tlaGNC">         333 :     for (auto i : FretItem::dotTypeNameMap) {</span></span>
-<span id="L1546"><span class="lineNum">    1546</span> <span class="tlaGNC">         333 :         if (String::fromAscii(i.name) == n) {</span></span>
-<span id="L1547"><span class="lineNum">    1547</span> <span class="tlaGNC">         333 :             return i.dtype;</span></span>
-<span id="L1548"><span class="lineNum">    1548</span>              :         }</span>
-<span id="L1549"><span class="lineNum">    1549</span>              :     }</span>
-<span id="L1550"><span class="lineNum">    1550</span> <span class="tlaUNC tlaBgUNC">           0 :     LOGW(&quot;Unrecognised dot name!&quot;);</span></span>
-<span id="L1551"><span class="lineNum">    1551</span> <span class="tlaUNC">           0 :     return FretDotType::NORMAL;         // default</span></span>
-<span id="L1552"><span class="lineNum">    1552</span>              : }</span>
+<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaUNC">           0 :     Segment* seg = segment();</span></span>
+<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaUNC">           0 :     if (e-&gt;isHarmony() &amp;&amp; seg) {</span></span>
+<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaUNC">           0 :         Harmony* h = toHarmony(e);</span></span>
+<span id="L1055"><span class="lineNum">    1055</span> <span class="tlaUNC">           0 :         h-&gt;setOwnershipParent(seg);</span></span>
+<span id="L1056"><span class="lineNum">    1056</span> <span class="tlaUNC">           0 :         h-&gt;setTrack(track());</span></span>
+<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaUNC">           0 :         score()-&gt;undoAddElement(h);</span></span>
+<span id="L1058"><span class="lineNum">    1058</span>              :     } else {</span>
+<span id="L1059"><span class="lineNum">    1059</span> <span class="tlaUNC">           0 :         LOGW(&quot;FretDiagram: cannot drop &lt;%s&gt;\n&quot;, e-&gt;typeName());</span></span>
+<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaUNC">           0 :         delete e;</span></span>
+<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaUNC">           0 :         e = 0;</span></span>
+<span id="L1062"><span class="lineNum">    1062</span>              :     }</span>
+<span id="L1063"><span class="lineNum">    1063</span> <span class="tlaUNC">           0 :     return e;</span></span>
+<span id="L1064"><span class="lineNum">    1064</span>              : }</span>
+<span id="L1065"><span class="lineNum">    1065</span>              : </span>
+<span id="L1066"><span class="lineNum">    1066</span>              : //---------------------------------------------------------</span>
+<span id="L1067"><span class="lineNum">    1067</span>              : //   scanElements</span>
+<span id="L1068"><span class="lineNum">    1068</span>              : //---------------------------------------------------------</span>
+<span id="L1069"><span class="lineNum">    1069</span>              : </span>
+<span id="L1070"><span class="lineNum">    1070</span> <span class="tlaGNC tlaBgGNC">           9 : void FretDiagram::scanElements(std::function&lt;void(EngravingItem*)&gt; func)</span></span>
+<span id="L1071"><span class="lineNum">    1071</span>              : {</span>
+<span id="L1072"><span class="lineNum">    1072</span> <span class="tlaGNC">           9 :     func(this);</span></span>
+<span id="L1073"><span class="lineNum">    1073</span>              : </span>
+<span id="L1074"><span class="lineNum">    1074</span>              :     // don't display harmony in palette</span>
+<span id="L1075"><span class="lineNum">    1075</span> <span class="tlaGNC">           9 :     if (m_harmony &amp;&amp; !score()-&gt;isPaletteScore()) {</span></span>
+<span id="L1076"><span class="lineNum">    1076</span> <span class="tlaGNC">           2 :         func(m_harmony);</span></span>
+<span id="L1077"><span class="lineNum">    1077</span>              :     }</span>
+<span id="L1078"><span class="lineNum">    1078</span> <span class="tlaGNC">           9 : }</span></span>
+<span id="L1079"><span class="lineNum">    1079</span>              : </span>
+<span id="L1080"><span class="lineNum">    1080</span>              : //---------------------------------------------------------</span>
+<span id="L1081"><span class="lineNum">    1081</span>              : //   getProperty</span>
+<span id="L1082"><span class="lineNum">    1082</span>              : //---------------------------------------------------------</span>
+<span id="L1083"><span class="lineNum">    1083</span>              : </span>
+<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaGNC">           1 : void FretDiagram::undoChangeProperty(Pid id, const PropertyValue&amp; v, PropertyFlags ps)</span></span>
+<span id="L1085"><span class="lineNum">    1085</span>              : {</span>
+<span id="L1086"><span class="lineNum">    1086</span> <span class="tlaGNC">           1 :     if (id == Pid::EXCLUDE_VERTICAL_ALIGN) {</span></span>
+<span id="L1087"><span class="lineNum">    1087</span> <span class="tlaUNC tlaBgUNC">           0 :         EngravingItem::undoChangeProperty(id, v, ps);</span></span>
+<span id="L1088"><span class="lineNum">    1088</span>              : </span>
+<span id="L1089"><span class="lineNum">    1089</span> <span class="tlaUNC">           0 :         bool val = v.toBool();</span></span>
+<span id="L1090"><span class="lineNum">    1090</span> <span class="tlaUNC">           0 :         Harmony* h = harmony();</span></span>
+<span id="L1091"><span class="lineNum">    1091</span> <span class="tlaUNC">           0 :         if (h &amp;&amp; h-&gt;excludeVerticalAlign() != val) {</span></span>
+<span id="L1092"><span class="lineNum">    1092</span> <span class="tlaUNC">           0 :             h-&gt;undoChangeProperty(Pid::EXCLUDE_VERTICAL_ALIGN, val, ps);</span></span>
+<span id="L1093"><span class="lineNum">    1093</span>              :         }</span>
+<span id="L1094"><span class="lineNum">    1094</span> <span class="tlaUNC">           0 :         Segment* parentSeg = segment();</span></span>
+<span id="L1095"><span class="lineNum">    1095</span> <span class="tlaUNC">           0 :         if (!parentSeg) {</span></span>
+<span id="L1096"><span class="lineNum">    1096</span> <span class="tlaUNC">           0 :             return;</span></span>
+<span id="L1097"><span class="lineNum">    1097</span>              :         }</span>
+<span id="L1098"><span class="lineNum">    1098</span>              : </span>
+<span id="L1099"><span class="lineNum">    1099</span> <span class="tlaUNC">           0 :         for (EngravingItem* item : parentSeg-&gt;annotations()) {</span></span>
+<span id="L1100"><span class="lineNum">    1100</span> <span class="tlaUNC">           0 :             if ((!item-&gt;isFretDiagram() &amp;&amp; !item-&gt;isHarmony()) || item == this || track2staff(item-&gt;track()) != staffIdx()) {</span></span>
+<span id="L1101"><span class="lineNum">    1101</span> <span class="tlaUNC">           0 :                 continue;</span></span>
+<span id="L1102"><span class="lineNum">    1102</span>              :             }</span>
+<span id="L1103"><span class="lineNum">    1103</span>              : </span>
+<span id="L1104"><span class="lineNum">    1104</span> <span class="tlaUNC">           0 :             if (item-&gt;excludeVerticalAlign() != val) {</span></span>
+<span id="L1105"><span class="lineNum">    1105</span> <span class="tlaUNC">           0 :                 item-&gt;undoChangeProperty(Pid::EXCLUDE_VERTICAL_ALIGN, val, ps);</span></span>
+<span id="L1106"><span class="lineNum">    1106</span>              :             }</span>
+<span id="L1107"><span class="lineNum">    1107</span>              :         }</span>
+<span id="L1108"><span class="lineNum">    1108</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1109"><span class="lineNum">    1109</span>              :     }</span>
+<span id="L1110"><span class="lineNum">    1110</span>              : </span>
+<span id="L1111"><span class="lineNum">    1111</span> <span class="tlaGNC tlaBgGNC">           1 :     EngravingItem::undoChangeProperty(id, v, ps);</span></span>
+<span id="L1112"><span class="lineNum">    1112</span>              : }</span>
+<span id="L1113"><span class="lineNum">    1113</span>              : </span>
+<span id="L1114"><span class="lineNum">    1114</span> <span class="tlaGNC">         745 : PropertyValue FretDiagram::getProperty(Pid propertyId) const</span></span>
+<span id="L1115"><span class="lineNum">    1115</span>              : {</span>
+<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaGNC">         745 :     switch (propertyId) {</span></span>
+<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::MAG:</span></span>
+<span id="L1118"><span class="lineNum">    1118</span> <span class="tlaUNC">           0 :         return userMag();</span></span>
+<span id="L1119"><span class="lineNum">    1119</span> <span class="tlaUNC">           0 :     case Pid::FRET_STRINGS:</span></span>
+<span id="L1120"><span class="lineNum">    1120</span> <span class="tlaUNC">           0 :         return strings();</span></span>
+<span id="L1121"><span class="lineNum">    1121</span> <span class="tlaUNC">           0 :     case Pid::FRET_FRETS:</span></span>
+<span id="L1122"><span class="lineNum">    1122</span> <span class="tlaUNC">           0 :         return frets();</span></span>
+<span id="L1123"><span class="lineNum">    1123</span> <span class="tlaUNC">           0 :     case Pid::FRET_NUT:</span></span>
+<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaUNC">           0 :         return showNut();</span></span>
+<span id="L1125"><span class="lineNum">    1125</span> <span class="tlaGNC tlaBgGNC">          74 :     case Pid::FRET_OFFSET:</span></span>
+<span id="L1126"><span class="lineNum">    1126</span> <span class="tlaGNC">          74 :         return fretOffset();</span></span>
+<span id="L1127"><span class="lineNum">    1127</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::ORIENTATION:</span></span>
+<span id="L1128"><span class="lineNum">    1128</span> <span class="tlaUNC">           0 :         return m_orientation;</span></span>
+<span id="L1129"><span class="lineNum">    1129</span> <span class="tlaUNC">           0 :     case Pid::FRET_SHOW_FINGERINGS:</span></span>
+<span id="L1130"><span class="lineNum">    1130</span> <span class="tlaUNC">           0 :         return m_showFingering;</span></span>
+<span id="L1131"><span class="lineNum">    1131</span> <span class="tlaGNC tlaBgGNC">          67 :     case Pid::FRET_FINGERING:</span></span>
+<span id="L1132"><span class="lineNum">    1132</span> <span class="tlaGNC">          67 :         return m_fingering;</span></span>
+<span id="L1133"><span class="lineNum">    1133</span> <span class="tlaGNC">         604 :     default:</span></span>
+<span id="L1134"><span class="lineNum">    1134</span> <span class="tlaGNC">         604 :         return EngravingItem::getProperty(propertyId);</span></span>
+<span id="L1135"><span class="lineNum">    1135</span>              :     }</span>
+<span id="L1136"><span class="lineNum">    1136</span>              : }</span>
+<span id="L1137"><span class="lineNum">    1137</span>              : </span>
+<span id="L1138"><span class="lineNum">    1138</span>              : //---------------------------------------------------------</span>
+<span id="L1139"><span class="lineNum">    1139</span>              : //   setProperty</span>
+<span id="L1140"><span class="lineNum">    1140</span>              : //---------------------------------------------------------</span>
+<span id="L1141"><span class="lineNum">    1141</span>              : </span>
+<span id="L1142"><span class="lineNum">    1142</span> <span class="tlaGNC">        1438 : bool FretDiagram::setProperty(Pid propertyId, const PropertyValue&amp; v)</span></span>
+<span id="L1143"><span class="lineNum">    1143</span>              : {</span>
+<span id="L1144"><span class="lineNum">    1144</span> <span class="tlaGNC">        1438 :     switch (propertyId) {</span></span>
+<span id="L1145"><span class="lineNum">    1145</span> <span class="tlaGNC">         156 :     case Pid::MAG:</span></span>
+<span id="L1146"><span class="lineNum">    1146</span> <span class="tlaGNC">         156 :         setUserMag(v.toDouble());</span></span>
+<span id="L1147"><span class="lineNum">    1147</span> <span class="tlaGNC">         156 :         break;</span></span>
+<span id="L1148"><span class="lineNum">    1148</span> <span class="tlaGNC">         156 :     case Pid::FRET_STRINGS:</span></span>
+<span id="L1149"><span class="lineNum">    1149</span> <span class="tlaGNC">         156 :         setStrings(v.toInt());</span></span>
+<span id="L1150"><span class="lineNum">    1150</span> <span class="tlaGNC">         156 :         break;</span></span>
+<span id="L1151"><span class="lineNum">    1151</span> <span class="tlaGNC">         179 :     case Pid::FRET_FRETS:</span></span>
+<span id="L1152"><span class="lineNum">    1152</span> <span class="tlaGNC">         179 :         setFrets(v.toInt());</span></span>
+<span id="L1153"><span class="lineNum">    1153</span> <span class="tlaGNC">         179 :         break;</span></span>
+<span id="L1154"><span class="lineNum">    1154</span> <span class="tlaGNC">         156 :     case Pid::FRET_NUT:</span></span>
+<span id="L1155"><span class="lineNum">    1155</span> <span class="tlaGNC">         156 :         setShowNut(v.toBool());</span></span>
+<span id="L1156"><span class="lineNum">    1156</span> <span class="tlaGNC">         156 :         break;</span></span>
+<span id="L1157"><span class="lineNum">    1157</span> <span class="tlaGNC">          11 :     case Pid::FRET_OFFSET:</span></span>
+<span id="L1158"><span class="lineNum">    1158</span> <span class="tlaGNC">          11 :         setFretOffset(v.toInt());</span></span>
+<span id="L1159"><span class="lineNum">    1159</span> <span class="tlaGNC">          11 :         break;</span></span>
+<span id="L1160"><span class="lineNum">    1160</span> <span class="tlaGNC">         156 :     case Pid::ORIENTATION:</span></span>
+<span id="L1161"><span class="lineNum">    1161</span> <span class="tlaGNC">         156 :         m_orientation = v.value&lt;Orientation&gt;();</span></span>
+<span id="L1162"><span class="lineNum">    1162</span> <span class="tlaGNC">         156 :         break;</span></span>
+<span id="L1163"><span class="lineNum">    1163</span> <span class="tlaGNC">         156 :     case Pid::FRET_SHOW_FINGERINGS:</span></span>
+<span id="L1164"><span class="lineNum">    1164</span> <span class="tlaGNC">         156 :         setShowFingering(v.toBool());</span></span>
+<span id="L1165"><span class="lineNum">    1165</span> <span class="tlaGNC">         156 :         break;</span></span>
+<span id="L1166"><span class="lineNum">    1166</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::FRET_FINGERING:</span></span>
+<span id="L1167"><span class="lineNum">    1167</span> <span class="tlaUNC">           0 :         setFingering(v.value&lt;std::vector&lt;int&gt; &gt;());</span></span>
+<span id="L1168"><span class="lineNum">    1168</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L1169"><span class="lineNum">    1169</span> <span class="tlaUNC">           0 :     case Pid::EXCLUDE_VERTICAL_ALIGN: {</span></span>
+<span id="L1170"><span class="lineNum">    1170</span> <span class="tlaUNC">           0 :         setExcludeVerticalAlign(v.toBool());</span></span>
+<span id="L1171"><span class="lineNum">    1171</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L1172"><span class="lineNum">    1172</span>              :     }</span>
+<span id="L1173"><span class="lineNum">    1173</span> <span class="tlaGNC tlaBgGNC">         468 :     default:</span></span>
+<span id="L1174"><span class="lineNum">    1174</span> <span class="tlaGNC">         468 :         return EngravingItem::setProperty(propertyId, v);</span></span>
+<span id="L1175"><span class="lineNum">    1175</span>              :     }</span>
+<span id="L1176"><span class="lineNum">    1176</span> <span class="tlaGNC">         970 :     triggerLayout();</span></span>
+<span id="L1177"><span class="lineNum">    1177</span> <span class="tlaGNC">         970 :     return true;</span></span>
+<span id="L1178"><span class="lineNum">    1178</span>              : }</span>
+<span id="L1179"><span class="lineNum">    1179</span>              : </span>
+<span id="L1180"><span class="lineNum">    1180</span>              : //---------------------------------------------------------</span>
+<span id="L1181"><span class="lineNum">    1181</span>              : //   propertyDefault</span>
+<span id="L1182"><span class="lineNum">    1182</span>              : //---------------------------------------------------------</span>
+<span id="L1183"><span class="lineNum">    1183</span>              : </span>
+<span id="L1184"><span class="lineNum">    1184</span> <span class="tlaGNC">         747 : PropertyValue FretDiagram::propertyDefault(Pid pid) const</span></span>
+<span id="L1185"><span class="lineNum">    1185</span>              : {</span>
+<span id="L1186"><span class="lineNum">    1186</span>              :     // We shouldn't style the fret offset</span>
+<span id="L1187"><span class="lineNum">    1187</span> <span class="tlaGNC">         747 :     if (pid == Pid::FRET_OFFSET) {</span></span>
+<span id="L1188"><span class="lineNum">    1188</span> <span class="tlaGNC">          67 :         return PropertyValue(0);</span></span>
+<span id="L1189"><span class="lineNum">    1189</span> <span class="tlaGNC">         680 :     } else if (pid == Pid::FRET_FINGERING) {</span></span>
+<span id="L1190"><span class="lineNum">    1190</span> <span class="tlaGNC">          67 :         return std::vector&lt;int&gt;(m_strings, 0);</span></span>
+<span id="L1191"><span class="lineNum">    1191</span>              :     }</span>
+<span id="L1192"><span class="lineNum">    1192</span>              : </span>
+<span id="L1193"><span class="lineNum">    1193</span> <span class="tlaGNC">        6080 :     for (const StyledProperty&amp; p : *styledProperties()) {</span></span>
+<span id="L1194"><span class="lineNum">    1194</span> <span class="tlaGNC">        5477 :         if (p.pid == pid) {</span></span>
+<span id="L1195"><span class="lineNum">    1195</span> <span class="tlaGNC">          10 :             if (propertyType(pid) == P_TYPE::ABSOLUTE) {</span></span>
+<span id="L1196"><span class="lineNum">    1196</span> <span class="tlaGNC">          10 :                 return style().styleAbsolute(p.sid);</span></span>
+<span id="L1197"><span class="lineNum">    1197</span>              :             }</span>
+<span id="L1198"><span class="lineNum">    1198</span> <span class="tlaGNC">          10 :             return style().styleV(p.sid);</span></span>
+<span id="L1199"><span class="lineNum">    1199</span>              :         }</span>
+<span id="L1200"><span class="lineNum">    1200</span>              :     }</span>
+<span id="L1201"><span class="lineNum">    1201</span> <span class="tlaGNC">         603 :     return EngravingItem::propertyDefault(pid);</span></span>
+<span id="L1202"><span class="lineNum">    1202</span>              : }</span>
+<span id="L1203"><span class="lineNum">    1203</span>              : </span>
+<span id="L1204"><span class="lineNum">    1204</span> <span class="tlaGNC">         155 : void FretDiagram::setTrack(track_idx_t val)</span></span>
+<span id="L1205"><span class="lineNum">    1205</span>              : {</span>
+<span id="L1206"><span class="lineNum">    1206</span> <span class="tlaGNC">         155 :     EngravingItem::setTrack(val);</span></span>
+<span id="L1207"><span class="lineNum">    1207</span>              : </span>
+<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaGNC">         155 :     if (m_harmony) {</span></span>
+<span id="L1209"><span class="lineNum">    1209</span> <span class="tlaGNC">          72 :         m_harmony-&gt;setTrack(val);</span></span>
+<span id="L1210"><span class="lineNum">    1210</span>              :     }</span>
+<span id="L1211"><span class="lineNum">    1211</span> <span class="tlaGNC">         155 : }</span></span>
+<span id="L1212"><span class="lineNum">    1212</span>              : </span>
+<span id="L1213"><span class="lineNum">    1213</span>              : //---------------------------------------------------------</span>
+<span id="L1214"><span class="lineNum">    1214</span>              : //   accessibleInfo</span>
+<span id="L1215"><span class="lineNum">    1215</span>              : //---------------------------------------------------------</span>
+<span id="L1216"><span class="lineNum">    1216</span>              : </span>
+<span id="L1217"><span class="lineNum">    1217</span> <span class="tlaUNC tlaBgUNC">           0 : String FretDiagram::accessibleInfo() const</span></span>
+<span id="L1218"><span class="lineNum">    1218</span>              : {</span>
+<span id="L1219"><span class="lineNum">    1219</span> <span class="tlaUNC">           0 :     String chordName;</span></span>
+<span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 :     if (m_harmony) {</span></span>
+<span id="L1221"><span class="lineNum">    1221</span> <span class="tlaUNC">           0 :         chordName = muse::mtrc(&quot;engraving&quot;, &quot;with chord symbol %1&quot;).arg(m_harmony-&gt;harmonyName());</span></span>
+<span id="L1222"><span class="lineNum">    1222</span>              :     } else {</span>
+<span id="L1223"><span class="lineNum">    1223</span> <span class="tlaUNC">           0 :         chordName = muse::mtrc(&quot;engraving&quot;, &quot;without chord symbol&quot;);</span></span>
+<span id="L1224"><span class="lineNum">    1224</span>              :     }</span>
+<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaUNC">           0 :     return String(u&quot;%1 %2&quot;).arg(translatedTypeUserName(), chordName);</span></span>
+<span id="L1226"><span class="lineNum">    1226</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1227"><span class="lineNum">    1227</span>              : </span>
+<span id="L1228"><span class="lineNum">    1228</span>              : //---------------------------------------------------------</span>
+<span id="L1229"><span class="lineNum">    1229</span>              : //   screenReaderInfo</span>
+<span id="L1230"><span class="lineNum">    1230</span>              : //---------------------------------------------------------</span>
+<span id="L1231"><span class="lineNum">    1231</span>              : </span>
+<span id="L1232"><span class="lineNum">    1232</span> <span class="tlaUNC">           0 : String FretDiagram::screenReaderInfo() const</span></span>
+<span id="L1233"><span class="lineNum">    1233</span>              : {</span>
+<span id="L1234"><span class="lineNum">    1234</span> <span class="tlaUNC">           0 :     String detailedInfo;</span></span>
+<span id="L1235"><span class="lineNum">    1235</span> <span class="tlaUNC">           0 :     for (int i = 0; i &lt; m_strings; i++) {</span></span>
+<span id="L1236"><span class="lineNum">    1236</span> <span class="tlaUNC">           0 :         String stringIdent = muse::mtrc(&quot;engraving&quot;, &quot;string %1&quot;).arg(i + 1);</span></span>
+<span id="L1237"><span class="lineNum">    1237</span>              : </span>
+<span id="L1238"><span class="lineNum">    1238</span> <span class="tlaUNC">           0 :         const FretItem::Marker&amp; m = marker(i);</span></span>
+<span id="L1239"><span class="lineNum">    1239</span> <span class="tlaUNC">           0 :         String markerName;</span></span>
+<span id="L1240"><span class="lineNum">    1240</span> <span class="tlaUNC">           0 :         switch (m.mtype) {</span></span>
+<span id="L1241"><span class="lineNum">    1241</span> <span class="tlaUNC">           0 :         case FretMarkerType::CIRCLE:</span></span>
+<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaUNC">           0 :             markerName = muse::mtrc(&quot;engraving&quot;, &quot;circle marker&quot;);</span></span>
+<span id="L1243"><span class="lineNum">    1243</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaUNC">           0 :         case FretMarkerType::CROSS:</span></span>
+<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaUNC">           0 :             markerName = muse::mtrc(&quot;engraving&quot;, &quot;cross marker&quot;);</span></span>
+<span id="L1246"><span class="lineNum">    1246</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L1247"><span class="lineNum">    1247</span> <span class="tlaUNC">           0 :         case FretMarkerType::NONE:</span></span>
+<span id="L1248"><span class="lineNum">    1248</span>              :         default:</span>
+<span id="L1249"><span class="lineNum">    1249</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L1250"><span class="lineNum">    1250</span>              :         }</span>
+<span id="L1251"><span class="lineNum">    1251</span>              : </span>
+<span id="L1252"><span class="lineNum">    1252</span> <span class="tlaUNC">           0 :         int dotsCount = 0;</span></span>
+<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaUNC">           0 :         std::vector&lt;int&gt; fretsWithDots;</span></span>
+<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaUNC">           0 :         for (auto const&amp; d : dot(i)) {</span></span>
+<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaUNC">           0 :             if (!d.exists()) {</span></span>
+<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaUNC">           0 :                 continue;</span></span>
+<span id="L1257"><span class="lineNum">    1257</span>              :             }</span>
+<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaUNC">           0 :             fretsWithDots.push_back(d.fret + m_fretOffset);</span></span>
+<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaUNC">           0 :             dotsCount += 1;</span></span>
+<span id="L1260"><span class="lineNum">    1260</span>              :             // TODO consider: do we need to announce what type of dot a dot is?</span>
+<span id="L1261"><span class="lineNum">    1261</span>              :             // i.e. triangle, square, normal dot. It's mostly just information</span>
+<span id="L1262"><span class="lineNum">    1262</span>              :             // that clutters the screenreader output and makes it harder to</span>
+<span id="L1263"><span class="lineNum">    1263</span>              :             // understand, so leaving it out for now.</span>
+<span id="L1264"><span class="lineNum">    1264</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1265"><span class="lineNum">    1265</span>              : </span>
+<span id="L1266"><span class="lineNum">    1266</span> <span class="tlaUNC">           0 :         if (dotsCount == 0 &amp;&amp; markerName.size() == 0) {</span></span>
+<span id="L1267"><span class="lineNum">    1267</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L1268"><span class="lineNum">    1268</span>              :         }</span>
+<span id="L1269"><span class="lineNum">    1269</span>              : </span>
+<span id="L1270"><span class="lineNum">    1270</span> <span class="tlaUNC">           0 :         String fretInfo;</span></span>
+<span id="L1271"><span class="lineNum">    1271</span> <span class="tlaUNC">           0 :         if (dotsCount == 1) {</span></span>
+<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaUNC">           0 :             fretInfo = String::number(fretsWithDots.front());</span></span>
+<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaUNC">           0 :         } else if (dotsCount &gt; 1) {</span></span>
+<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaUNC">           0 :             int max = int(fretsWithDots.size());</span></span>
+<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaUNC">           0 :             for (int j = 0; j &lt; max; j++) {</span></span>
+<span id="L1276"><span class="lineNum">    1276</span> <span class="tlaUNC">           0 :                 if (j == max - 1) {</span></span>
+<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaUNC">           0 :                     fretInfo = muse::mtrc(&quot;engraving&quot;, &quot;%1 and %2&quot;).arg(fretInfo).arg(fretsWithDots[j]);</span></span>
+<span id="L1278"><span class="lineNum">    1278</span>              :                 } else {</span>
+<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaUNC">           0 :                     fretInfo = String(u&quot;%1 %2&quot;).arg(fretInfo).arg(fretsWithDots[j]);</span></span>
+<span id="L1280"><span class="lineNum">    1280</span>              :                 }</span>
+<span id="L1281"><span class="lineNum">    1281</span>              :             }</span>
+<span id="L1282"><span class="lineNum">    1282</span>              :         }</span>
+<span id="L1283"><span class="lineNum">    1283</span>              : </span>
+<span id="L1284"><span class="lineNum">    1284</span>              :         //: Omit the &quot;%n &quot; for the singular translation (and the &quot;(s)&quot; too)</span>
+<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaUNC">           0 :         String dotsInfo = muse::mtrc(&quot;engraving&quot;, &quot;%n dot(s) on fret(s) %1&quot;, &quot;&quot;, dotsCount).arg(fretInfo);</span></span>
+<span id="L1286"><span class="lineNum">    1286</span>              : </span>
+<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaUNC">           0 :         detailedInfo = String(u&quot;%1 %2 %3 %4&quot;).arg(detailedInfo, stringIdent, markerName, dotsInfo);</span></span>
+<span id="L1288"><span class="lineNum">    1288</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L1289"><span class="lineNum">    1289</span>              : </span>
+<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaUNC">           0 :     String barreInfo;</span></span>
+<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaUNC">           0 :     for (auto const&amp; iter : m_barres) {</span></span>
+<span id="L1292"><span class="lineNum">    1292</span> <span class="tlaUNC">           0 :         const FretItem::Barre&amp; b = iter.second;</span></span>
+<span id="L1293"><span class="lineNum">    1293</span> <span class="tlaUNC">           0 :         if (!b.exists()) {</span></span>
+<span id="L1294"><span class="lineNum">    1294</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L1295"><span class="lineNum">    1295</span>              :         }</span>
+<span id="L1296"><span class="lineNum">    1296</span>              : </span>
+<span id="L1297"><span class="lineNum">    1297</span> <span class="tlaUNC">           0 :         String fretInfo = muse::mtrc(&quot;engraving&quot;, &quot;fret %1&quot;).arg(iter.first);</span></span>
+<span id="L1298"><span class="lineNum">    1298</span>              : </span>
+<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaUNC">           0 :         String newBarreInfo;</span></span>
+<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaUNC">           0 :         if (b.startString == 0 &amp;&amp; (b.endString == -1 || b.endString == m_strings - 1)) {</span></span>
+<span id="L1301"><span class="lineNum">    1301</span> <span class="tlaUNC">           0 :             newBarreInfo = muse::mtrc(&quot;engraving&quot;, &quot;barré %1&quot;).arg(fretInfo);</span></span>
+<span id="L1302"><span class="lineNum">    1302</span>              :         } else {</span>
+<span id="L1303"><span class="lineNum">    1303</span> <span class="tlaUNC">           0 :             String startPart = muse::mtrc(&quot;engraving&quot;, &quot;beginning string %1&quot;).arg(b.startString + 1);</span></span>
+<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :             String endPart;</span></span>
+<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaUNC">           0 :             if (b.endString != -1) {</span></span>
+<span id="L1306"><span class="lineNum">    1306</span> <span class="tlaUNC">           0 :                 endPart = muse::mtrc(&quot;engraving&quot;, &quot;and ending string %1&quot;).arg(b.endString + 1);</span></span>
+<span id="L1307"><span class="lineNum">    1307</span>              :             }</span>
+<span id="L1308"><span class="lineNum">    1308</span>              : </span>
+<span id="L1309"><span class="lineNum">    1309</span> <span class="tlaUNC">           0 :             newBarreInfo = muse::mtrc(&quot;engraving&quot;, &quot;partial barré %1 %2 %3&quot;).arg(fretInfo, startPart, endPart);</span></span>
+<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1311"><span class="lineNum">    1311</span>              : </span>
+<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaUNC">           0 :         barreInfo = String(u&quot;%1 %2&quot;).arg(barreInfo, newBarreInfo);</span></span>
+<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L1314"><span class="lineNum">    1314</span>              : </span>
+<span id="L1315"><span class="lineNum">    1315</span> <span class="tlaUNC">           0 :     detailedInfo = String(u&quot;%1 %2&quot;).arg(detailedInfo, barreInfo);</span></span>
+<span id="L1316"><span class="lineNum">    1316</span>              : </span>
+<span id="L1317"><span class="lineNum">    1317</span> <span class="tlaUNC">           0 :     if (detailedInfo.trimmed().size() == 0) {</span></span>
+<span id="L1318"><span class="lineNum">    1318</span> <span class="tlaUNC">           0 :         detailedInfo = muse::mtrc(&quot;engraving&quot;, &quot;no content&quot;);</span></span>
+<span id="L1319"><span class="lineNum">    1319</span>              :     }</span>
+<span id="L1320"><span class="lineNum">    1320</span>              : </span>
+<span id="L1321"><span class="lineNum">    1321</span> <span class="tlaUNC">           0 :     String chordName = m_harmony</span></span>
+<span id="L1322"><span class="lineNum">    1322</span> <span class="tlaUNC">           0 :                        ? muse::mtrc(&quot;engraving&quot;, &quot;with chord symbol %1&quot;).arg(m_harmony-&gt;generateScreenReaderInfo())</span></span>
+<span id="L1323"><span class="lineNum">    1323</span> <span class="tlaUNC">           0 :                        : muse::mtrc(&quot;engraving&quot;, &quot;without chord symbol&quot;);</span></span>
+<span id="L1324"><span class="lineNum">    1324</span>              : </span>
+<span id="L1325"><span class="lineNum">    1325</span> <span class="tlaUNC">           0 :     String basicInfo = String(u&quot;%1 %2&quot;).arg(translatedTypeUserName(), chordName);</span></span>
+<span id="L1326"><span class="lineNum">    1326</span>              : </span>
+<span id="L1327"><span class="lineNum">    1327</span> <span class="tlaUNC">           0 :     String generalInfo = muse::mtrc(&quot;engraving&quot;, &quot;%n string(s) total&quot;, &quot;&quot;, m_strings);</span></span>
+<span id="L1328"><span class="lineNum">    1328</span>              : </span>
+<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaUNC">           0 :     String res = String(u&quot;%1 %2 %3&quot;).arg(basicInfo, generalInfo, detailedInfo);</span></span>
+<span id="L1330"><span class="lineNum">    1330</span>              : </span>
+<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaUNC">           0 :     return res;</span></span>
+<span id="L1332"><span class="lineNum">    1332</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1333"><span class="lineNum">    1333</span>              : </span>
+<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaUNC">           0 : void FretDiagram::setFingering(std::vector&lt;int&gt; v)</span></span>
+<span id="L1335"><span class="lineNum">    1335</span>              : {</span>
+<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaUNC">           0 :     m_fingering = std::move(v);</span></span>
+<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1338"><span class="lineNum">    1338</span>              : </span>
+<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaGNC tlaBgGNC">          22 : FretDiagram* FretDiagram::makeFromHarmonyOrFretDiagram(const EngravingItem* harmonyOrFretDiagram)</span></span>
+<span id="L1340"><span class="lineNum">    1340</span>              : {</span>
+<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaGNC">          22 :     IF_ASSERT_FAILED(!harmonyOrFretDiagram || !harmonyOrFretDiagram-&gt;isHarmony() || !harmonyOrFretDiagram-&gt;isFretDiagram()) {</span></span>
+<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaUNC tlaBgUNC">           0 :         return nullptr;</span></span>
+<span id="L1343"><span class="lineNum">    1343</span>              :     }</span>
+<span id="L1344"><span class="lineNum">    1344</span>              : </span>
+<span id="L1345"><span class="lineNum">    1345</span> <span class="tlaGNC tlaBgGNC">          22 :     FretDiagram* fretDiagram = nullptr;</span></span>
+<span id="L1346"><span class="lineNum">    1346</span>              : </span>
+<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaGNC">          22 :     if (harmonyOrFretDiagram-&gt;isHarmony() &amp;&amp; !harmonyOrFretDiagram-&gt;ownershipParent()-&gt;isFretDiagram()) {</span></span>
+<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaUNC tlaBgUNC">           0 :         Harmony* harmony = toHarmony(harmonyOrFretDiagram)-&gt;clone();</span></span>
+<span id="L1349"><span class="lineNum">    1349</span>              : </span>
+<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaUNC">           0 :         fretDiagram = Factory::createFretDiagram(harmonyOrFretDiagram-&gt;score()-&gt;dummy());</span></span>
+<span id="L1351"><span class="lineNum">    1351</span>              : </span>
+<span id="L1352"><span class="lineNum">    1352</span> <span class="tlaUNC">           0 :         fretDiagram-&gt;updateDiagram(harmony-&gt;plainText());</span></span>
+<span id="L1353"><span class="lineNum">    1353</span>              : </span>
+<span id="L1354"><span class="lineNum">    1354</span> <span class="tlaUNC">           0 :         harmony-&gt;resetProperty(Pid::OFFSET);</span></span>
+<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaUNC">           0 :         harmony-&gt;setProperty(Pid::ALIGN, Align(AlignH::HCENTER, AlignV::BASELINE));</span></span>
+<span id="L1356"><span class="lineNum">    1356</span> <span class="tlaUNC">           0 :         harmony-&gt;setPropertyFlags(Pid::ALIGN, PropertyFlags::UNSTYLED);</span></span>
+<span id="L1357"><span class="lineNum">    1357</span>              : </span>
+<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaUNC">           0 :         fretDiagram-&gt;add(harmony);</span></span>
+<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaGNC tlaBgGNC">          22 :     } else if (harmonyOrFretDiagram-&gt;isHarmony() &amp;&amp; harmonyOrFretDiagram-&gt;ownershipParent()-&gt;isFretDiagram()) {</span></span>
+<span id="L1360"><span class="lineNum">    1360</span> <span class="tlaUNC tlaBgUNC">           0 :         fretDiagram = toFretDiagram(harmonyOrFretDiagram-&gt;ownershipParent())-&gt;clone();</span></span>
+<span id="L1361"><span class="lineNum">    1361</span> <span class="tlaGNC tlaBgGNC">          22 :     } else if (harmonyOrFretDiagram-&gt;isFretDiagram()) {</span></span>
+<span id="L1362"><span class="lineNum">    1362</span> <span class="tlaGNC">          22 :         fretDiagram = toFretDiagram(harmonyOrFretDiagram)-&gt;clone();</span></span>
+<span id="L1363"><span class="lineNum">    1363</span> <span class="tlaGNC">          22 :         fretDiagram-&gt;setOffset(PointF());</span></span>
+<span id="L1364"><span class="lineNum">    1364</span> <span class="tlaGNC">          22 :         if (!fretDiagram-&gt;harmony()) {</span></span>
+<span id="L1365"><span class="lineNum">    1365</span>              :             //! generate from diagram and add harmony</span>
+<span id="L1366"><span class="lineNum">    1366</span> <span class="tlaUNC tlaBgUNC">           0 :             fretDiagram-&gt;add(Factory::createHarmony(fretDiagram));</span></span>
+<span id="L1367"><span class="lineNum">    1367</span>              :         }</span>
+<span id="L1368"><span class="lineNum">    1368</span>              :     }</span>
+<span id="L1369"><span class="lineNum">    1369</span>              : </span>
+<span id="L1370"><span class="lineNum">    1370</span> <span class="tlaGNC tlaBgGNC">          22 :     return fretDiagram;</span></span>
+<span id="L1371"><span class="lineNum">    1371</span>              : }</span>
+<span id="L1372"><span class="lineNum">    1372</span>              : </span>
+<span id="L1373"><span class="lineNum">    1373</span> <span class="tlaUNC tlaBgUNC">           0 : bool FretDiagram::isInFretBox() const</span></span>
+<span id="L1374"><span class="lineNum">    1374</span>              : {</span>
+<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaUNC">           0 :     EngravingObject* parent = ownershipParent();</span></span>
+<span id="L1376"><span class="lineNum">    1376</span> <span class="tlaUNC">           0 :     return parent ? parent-&gt;isFBox() : false;</span></span>
+<span id="L1377"><span class="lineNum">    1377</span>              : }</span>
+<span id="L1378"><span class="lineNum">    1378</span>              : </span>
+<span id="L1379"><span class="lineNum">    1379</span> <span class="tlaUNC">           0 : bool FretDiagram::isCustom(const String&amp; harmonyNameForCompare) const</span></span>
+<span id="L1380"><span class="lineNum">    1380</span>              : {</span>
+<span id="L1381"><span class="lineNum">    1381</span> <span class="tlaUNC">           0 :     if (harmonyNameForCompare.empty()) {</span></span>
+<span id="L1382"><span class="lineNum">    1382</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1383"><span class="lineNum">    1383</span>              :     }</span>
+<span id="L1384"><span class="lineNum">    1384</span>              : </span>
+<span id="L1385"><span class="lineNum">    1385</span>              :     static constexpr std::array props {</span>
+<span id="L1386"><span class="lineNum">    1386</span>              :         Pid::FRET_STRINGS,</span>
+<span id="L1387"><span class="lineNum">    1387</span>              :         Pid::FRET_FRETS,</span>
+<span id="L1388"><span class="lineNum">    1388</span>              :         Pid::FRET_NUT,</span>
+<span id="L1389"><span class="lineNum">    1389</span>              :         Pid::FRET_FINGERING</span>
+<span id="L1390"><span class="lineNum">    1390</span>              :     };</span>
+<span id="L1391"><span class="lineNum">    1391</span>              : </span>
+<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaUNC">           0 :     for (const Pid&amp; pid : props) {</span></span>
+<span id="L1393"><span class="lineNum">    1393</span> <span class="tlaUNC">           0 :         if (pid == Pid::FRET_FINGERING) {</span></span>
+<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaUNC">           0 :             if (custom(Pid::FRET_SHOW_FINGERINGS)) {</span></span>
+<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaUNC">           0 :                 return true;</span></span>
+<span id="L1396"><span class="lineNum">    1396</span>              :             }</span>
+<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaUNC">           0 :         } else if (custom(pid)) {</span></span>
+<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaUNC">           0 :             return true;</span></span>
+<span id="L1399"><span class="lineNum">    1399</span>              :         }</span>
+<span id="L1400"><span class="lineNum">    1400</span>              :     }</span>
+<span id="L1401"><span class="lineNum">    1401</span>              : </span>
+<span id="L1402"><span class="lineNum">    1402</span> <span class="tlaUNC">           0 :     if (s_harmonyToDiagramMap.empty()) {</span></span>
+<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaUNC">           0 :         readHarmonyToDiagramFile(HARMONY_TO_DIAGRAM_FILE_PATH);</span></span>
+<span id="L1404"><span class="lineNum">    1404</span>              :     }</span>
+<span id="L1405"><span class="lineNum">    1405</span>              : </span>
+<span id="L1406"><span class="lineNum">    1406</span> <span class="tlaUNC">           0 :     NoteSpellingType spellingType = style().styleV(Sid::chordSymbolSpelling).value&lt;NoteSpellingType&gt;();</span></span>
+<span id="L1407"><span class="lineNum">    1407</span> <span class="tlaUNC">           0 :     HarmonyMapKey key = createHarmonyMapKey(harmonyNameForCompare, spellingType, score()-&gt;chordList());</span></span>
+<span id="L1408"><span class="lineNum">    1408</span>              : </span>
+<span id="L1409"><span class="lineNum">    1409</span> <span class="tlaUNC">           0 :     if (tpcIsValid(key.rootTpc)) {</span></span>
+<span id="L1410"><span class="lineNum">    1410</span> <span class="tlaUNC">           0 :         key.rootTpc = canonicalEnharmonicTpc(key.rootTpc);</span></span>
+<span id="L1411"><span class="lineNum">    1411</span>              :     }</span>
+<span id="L1412"><span class="lineNum">    1412</span> <span class="tlaUNC">           0 :     if (tpcIsValid(key.bassTpc)) {</span></span>
+<span id="L1413"><span class="lineNum">    1413</span> <span class="tlaUNC">           0 :         key.bassTpc = canonicalEnharmonicTpc(key.bassTpc);</span></span>
+<span id="L1414"><span class="lineNum">    1414</span>              :     }</span>
+<span id="L1415"><span class="lineNum">    1415</span>              : </span>
+<span id="L1416"><span class="lineNum">    1416</span> <span class="tlaUNC">           0 :     std::vector&lt;DiagramInfo&gt; availableDiagrams = muse::value(s_harmonyToDiagramMap, key);</span></span>
+<span id="L1417"><span class="lineNum">    1417</span> <span class="tlaUNC">           0 :     if (availableDiagrams.empty()) {</span></span>
+<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L1419"><span class="lineNum">    1419</span>              :     }</span>
+<span id="L1420"><span class="lineNum">    1420</span>              : </span>
+<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaUNC">           0 :     String currentPattern = patternFromDiagram();</span></span>
+<span id="L1422"><span class="lineNum">    1422</span>              : </span>
+<span id="L1423"><span class="lineNum">    1423</span> <span class="tlaUNC">           0 :     for (const DiagramInfo&amp; diagram : availableDiagrams) {</span></span>
+<span id="L1424"><span class="lineNum">    1424</span> <span class="tlaUNC">           0 :         if (diagram.diagramPattern == currentPattern) {</span></span>
+<span id="L1425"><span class="lineNum">    1425</span> <span class="tlaUNC">           0 :             return false;</span></span>
+<span id="L1426"><span class="lineNum">    1426</span>              :         }</span>
+<span id="L1427"><span class="lineNum">    1427</span>              :     }</span>
+<span id="L1428"><span class="lineNum">    1428</span>              : </span>
+<span id="L1429"><span class="lineNum">    1429</span> <span class="tlaUNC">           0 :     return true;</span></span>
+<span id="L1430"><span class="lineNum">    1430</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1431"><span class="lineNum">    1431</span>              : </span>
+<span id="L1432"><span class="lineNum">    1432</span> <span class="tlaGNC tlaBgGNC">           2 : void FretDiagram::readHarmonyToDiagramFile(const muse::io::path_t&amp; filePath) const</span></span>
+<span id="L1433"><span class="lineNum">    1433</span>              : {</span>
+<span id="L1434"><span class="lineNum">    1434</span> <span class="tlaGNC">           4 :     TRACEFUNC;</span></span>
+<span id="L1435"><span class="lineNum">    1435</span>              : </span>
+<span id="L1436"><span class="lineNum">    1436</span> <span class="tlaGNC">           2 :     muse::io::File file(filePath);</span></span>
+<span id="L1437"><span class="lineNum">    1437</span> <span class="tlaGNC">           2 :     if (!file.open()) {</span></span>
+<span id="L1438"><span class="lineNum">    1438</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGE() &lt;&lt; file.errorString();</span></span>
+<span id="L1439"><span class="lineNum">    1439</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1440"><span class="lineNum">    1440</span>              :     }</span>
+<span id="L1441"><span class="lineNum">    1441</span>              : </span>
+<span id="L1442"><span class="lineNum">    1442</span> <span class="tlaGNC tlaBgGNC">           2 :     XmlReader reader(&amp;file);</span></span>
+<span id="L1443"><span class="lineNum">    1443</span>              : </span>
+<span id="L1444"><span class="lineNum">    1444</span>              :     std::unordered_map&lt;String, rw::HarmonyToDiagramReader::FretDiagramInfo&gt; harmonyToDiagramMap</span>
+<span id="L1445"><span class="lineNum">    1445</span> <span class="tlaGNC">           2 :         = rw::HarmonyToDiagramReader::read(reader);</span></span>
+<span id="L1446"><span class="lineNum">    1446</span>              : </span>
+<span id="L1447"><span class="lineNum">    1447</span> <span class="tlaGNC">           2 :     const ChordList* chordList = score()-&gt;chordList();</span></span>
+<span id="L1448"><span class="lineNum">    1448</span> <span class="tlaGNC">           2 :     const NoteSpellingType spellingType = NoteSpellingType::STANDARD;</span></span>
+<span id="L1449"><span class="lineNum">    1449</span>              : </span>
+<span id="L1450"><span class="lineNum">    1450</span> <span class="tlaGNC">        6250 :     for (auto&amp; [key, value] : harmonyToDiagramMap) {</span></span>
+<span id="L1451"><span class="lineNum">    1451</span> <span class="tlaGNC">        6248 :         HarmonyMapKey mapKey = createHarmonyMapKey(key, spellingType, chordList);</span></span>
+<span id="L1452"><span class="lineNum">    1452</span>              : </span>
+<span id="L1453"><span class="lineNum">    1453</span> <span class="tlaGNC">        6248 :         if (tpcIsValid(mapKey.rootTpc)) {</span></span>
+<span id="L1454"><span class="lineNum">    1454</span> <span class="tlaGNC">        6246 :             mapKey.rootTpc = canonicalEnharmonicTpc(mapKey.rootTpc);</span></span>
+<span id="L1455"><span class="lineNum">    1455</span>              :         }</span>
+<span id="L1456"><span class="lineNum">    1456</span> <span class="tlaGNC">        6248 :         if (tpcIsValid(mapKey.bassTpc)) {</span></span>
+<span id="L1457"><span class="lineNum">    1457</span> <span class="tlaGNC">        3512 :             mapKey.bassTpc = canonicalEnharmonicTpc(mapKey.bassTpc);</span></span>
+<span id="L1458"><span class="lineNum">    1458</span>              :         }</span>
+<span id="L1459"><span class="lineNum">    1459</span>              : </span>
+<span id="L1460"><span class="lineNum">    1460</span> <span class="tlaGNC">       12496 :         s_harmonyToDiagramMap[mapKey].push_back({ key, value.xml, value.pattern });</span></span>
+<span id="L1461"><span class="lineNum">    1461</span> <span class="tlaGNC">        6248 :         s_diagramPatternToHarmoniesMap[value.pattern].push_back(key);</span></span>
+<span id="L1462"><span class="lineNum">    1462</span>              :     }</span>
+<span id="L1463"><span class="lineNum">    1463</span> <span class="tlaGNC">        6250 : }</span></span>
+<span id="L1464"><span class="lineNum">    1464</span>              : </span>
+<span id="L1465"><span class="lineNum">    1465</span>              : //---------------------------------------------------------</span>
+<span id="L1466"><span class="lineNum">    1466</span>              : //   markerToChar</span>
+<span id="L1467"><span class="lineNum">    1467</span>              : //---------------------------------------------------------</span>
+<span id="L1468"><span class="lineNum">    1468</span>              : </span>
+<span id="L1469"><span class="lineNum">    1469</span> <span class="tlaUNC tlaBgUNC">           0 : Char FretItem::markerToChar(FretMarkerType t)</span></span>
+<span id="L1470"><span class="lineNum">    1470</span>              : {</span>
+<span id="L1471"><span class="lineNum">    1471</span> <span class="tlaUNC">           0 :     switch (t) {</span></span>
+<span id="L1472"><span class="lineNum">    1472</span> <span class="tlaUNC">           0 :     case FretMarkerType::CIRCLE: return Char(u'O');</span></span>
+<span id="L1473"><span class="lineNum">    1473</span> <span class="tlaUNC">           0 :     case FretMarkerType::CROSS: return Char(u'X');</span></span>
+<span id="L1474"><span class="lineNum">    1474</span> <span class="tlaUNC">           0 :     case FretMarkerType::NONE:</span></span>
+<span id="L1475"><span class="lineNum">    1475</span>              :     default:</span>
+<span id="L1476"><span class="lineNum">    1476</span> <span class="tlaUNC">           0 :         return Char();</span></span>
+<span id="L1477"><span class="lineNum">    1477</span>              :     }</span>
+<span id="L1478"><span class="lineNum">    1478</span>              : }</span>
+<span id="L1479"><span class="lineNum">    1479</span>              : </span>
+<span id="L1480"><span class="lineNum">    1480</span>              : //---------------------------------------------------------</span>
+<span id="L1481"><span class="lineNum">    1481</span>              : //   markerTypeToName</span>
+<span id="L1482"><span class="lineNum">    1482</span>              : //---------------------------------------------------------</span>
+<span id="L1483"><span class="lineNum">    1483</span>              : </span>
+<span id="L1484"><span class="lineNum">    1484</span>              : const std::vector&lt;FretItem::MarkerTypeNameItem&gt; FretItem::markerTypeNameMap = {</span>
+<span id="L1485"><span class="lineNum">    1485</span>              :     { FretMarkerType::CIRCLE,     &quot;circle&quot; },</span>
+<span id="L1486"><span class="lineNum">    1486</span>              :     { FretMarkerType::CROSS,      &quot;cross&quot; },</span>
+<span id="L1487"><span class="lineNum">    1487</span>              :     { FretMarkerType::NONE,       &quot;none&quot; }</span>
+<span id="L1488"><span class="lineNum">    1488</span>              : };</span>
+<span id="L1489"><span class="lineNum">    1489</span>              : </span>
+<span id="L1490"><span class="lineNum">    1490</span> <span class="tlaGNC tlaBgGNC">         130 : String FretItem::markerTypeToName(FretMarkerType t)</span></span>
+<span id="L1491"><span class="lineNum">    1491</span>              : {</span>
+<span id="L1492"><span class="lineNum">    1492</span> <span class="tlaGNC">         177 :     for (auto i : FretItem::markerTypeNameMap) {</span></span>
+<span id="L1493"><span class="lineNum">    1493</span> <span class="tlaGNC">         177 :         if (i.mtype == t) {</span></span>
+<span id="L1494"><span class="lineNum">    1494</span> <span class="tlaGNC">         130 :             return String::fromAscii(i.name);</span></span>
+<span id="L1495"><span class="lineNum">    1495</span>              :         }</span>
+<span id="L1496"><span class="lineNum">    1496</span>              :     }</span>
+<span id="L1497"><span class="lineNum">    1497</span>              : </span>
+<span id="L1498"><span class="lineNum">    1498</span> <span class="tlaUNC tlaBgUNC">           0 :     ASSERT_X(&quot;Unrecognised FretMarkerType!&quot;);</span></span>
+<span id="L1499"><span class="lineNum">    1499</span>              :     return String();         // prevent compiler warnings</span>
+<span id="L1500"><span class="lineNum">    1500</span>              : }</span>
+<span id="L1501"><span class="lineNum">    1501</span>              : </span>
+<span id="L1502"><span class="lineNum">    1502</span>              : //---------------------------------------------------------</span>
+<span id="L1503"><span class="lineNum">    1503</span>              : //   nameToMarkerType</span>
+<span id="L1504"><span class="lineNum">    1504</span>              : //---------------------------------------------------------</span>
+<span id="L1505"><span class="lineNum">    1505</span>              : </span>
+<span id="L1506"><span class="lineNum">    1506</span> <span class="tlaGNC tlaBgGNC">         271 : FretMarkerType FretItem::nameToMarkerType(String n)</span></span>
+<span id="L1507"><span class="lineNum">    1507</span>              : {</span>
+<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaGNC">         366 :     for (auto i : FretItem::markerTypeNameMap) {</span></span>
+<span id="L1509"><span class="lineNum">    1509</span> <span class="tlaGNC">         366 :         if (String::fromAscii(i.name) == n) {</span></span>
+<span id="L1510"><span class="lineNum">    1510</span> <span class="tlaGNC">         271 :             return i.mtype;</span></span>
+<span id="L1511"><span class="lineNum">    1511</span>              :         }</span>
+<span id="L1512"><span class="lineNum">    1512</span>              :     }</span>
+<span id="L1513"><span class="lineNum">    1513</span> <span class="tlaUNC tlaBgUNC">           0 :     LOGW(&quot;Unrecognised marker name!&quot;);</span></span>
+<span id="L1514"><span class="lineNum">    1514</span> <span class="tlaUNC">           0 :     return FretMarkerType::NONE;         // default</span></span>
+<span id="L1515"><span class="lineNum">    1515</span>              : }</span>
+<span id="L1516"><span class="lineNum">    1516</span>              : </span>
+<span id="L1517"><span class="lineNum">    1517</span>              : //---------------------------------------------------------</span>
+<span id="L1518"><span class="lineNum">    1518</span>              : //   dotTypeToName</span>
+<span id="L1519"><span class="lineNum">    1519</span>              : //---------------------------------------------------------</span>
+<span id="L1520"><span class="lineNum">    1520</span>              : </span>
+<span id="L1521"><span class="lineNum">    1521</span>              : const std::vector&lt;FretItem::DotTypeNameItem&gt; FretItem::dotTypeNameMap = {</span>
+<span id="L1522"><span class="lineNum">    1522</span>              :     { FretDotType::NORMAL,        &quot;normal&quot; },</span>
+<span id="L1523"><span class="lineNum">    1523</span>              :     { FretDotType::CROSS,         &quot;cross&quot; },</span>
+<span id="L1524"><span class="lineNum">    1524</span>              :     { FretDotType::SQUARE,        &quot;square&quot; },</span>
+<span id="L1525"><span class="lineNum">    1525</span>              :     { FretDotType::TRIANGLE,      &quot;triangle&quot; },</span>
+<span id="L1526"><span class="lineNum">    1526</span>              : };</span>
+<span id="L1527"><span class="lineNum">    1527</span>              : </span>
+<span id="L1528"><span class="lineNum">    1528</span> <span class="tlaGNC tlaBgGNC">         202 : String FretItem::dotTypeToName(FretDotType t)</span></span>
+<span id="L1529"><span class="lineNum">    1529</span>              : {</span>
+<span id="L1530"><span class="lineNum">    1530</span> <span class="tlaGNC">         202 :     for (auto i : FretItem::dotTypeNameMap) {</span></span>
+<span id="L1531"><span class="lineNum">    1531</span> <span class="tlaGNC">         202 :         if (i.dtype == t) {</span></span>
+<span id="L1532"><span class="lineNum">    1532</span> <span class="tlaGNC">         202 :             return String::fromAscii(i.name);</span></span>
+<span id="L1533"><span class="lineNum">    1533</span>              :         }</span>
+<span id="L1534"><span class="lineNum">    1534</span>              :     }</span>
+<span id="L1535"><span class="lineNum">    1535</span>              : </span>
+<span id="L1536"><span class="lineNum">    1536</span> <span class="tlaUNC tlaBgUNC">           0 :     ASSERT_X(&quot;Unrecognised FretDotType!&quot;);</span></span>
+<span id="L1537"><span class="lineNum">    1537</span>              :     return String();         // prevent compiler warnings</span>
+<span id="L1538"><span class="lineNum">    1538</span>              : }</span>
+<span id="L1539"><span class="lineNum">    1539</span>              : </span>
+<span id="L1540"><span class="lineNum">    1540</span>              : //---------------------------------------------------------</span>
+<span id="L1541"><span class="lineNum">    1541</span>              : //   nameToDotType</span>
+<span id="L1542"><span class="lineNum">    1542</span>              : //---------------------------------------------------------</span>
+<span id="L1543"><span class="lineNum">    1543</span>              : </span>
+<span id="L1544"><span class="lineNum">    1544</span> <span class="tlaGNC tlaBgGNC">         333 : FretDotType FretItem::nameToDotType(String n)</span></span>
+<span id="L1545"><span class="lineNum">    1545</span>              : {</span>
+<span id="L1546"><span class="lineNum">    1546</span> <span class="tlaGNC">         333 :     for (auto i : FretItem::dotTypeNameMap) {</span></span>
+<span id="L1547"><span class="lineNum">    1547</span> <span class="tlaGNC">         333 :         if (String::fromAscii(i.name) == n) {</span></span>
+<span id="L1548"><span class="lineNum">    1548</span> <span class="tlaGNC">         333 :             return i.dtype;</span></span>
+<span id="L1549"><span class="lineNum">    1549</span>              :         }</span>
+<span id="L1550"><span class="lineNum">    1550</span>              :     }</span>
+<span id="L1551"><span class="lineNum">    1551</span> <span class="tlaUNC tlaBgUNC">           0 :     LOGW(&quot;Unrecognised dot name!&quot;);</span></span>
+<span id="L1552"><span class="lineNum">    1552</span> <span class="tlaUNC">           0 :     return FretDotType::NORMAL;         // default</span></span>
 <span id="L1553"><span class="lineNum">    1553</span>              : }</span>
+<span id="L1554"><span class="lineNum">    1554</span>              : }</span>
         </pre>
               </td>
             </tr>
