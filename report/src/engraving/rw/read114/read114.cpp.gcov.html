@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -184,8 +184,8 @@
 <span id="L126"><span class="lineNum">     126</span>              : struct PaperSize {</span>
 <span id="L127"><span class="lineNum">     127</span>              :     const char* name;</span>
 <span id="L128"><span class="lineNum">     128</span>              :     double w, h;              // size in inch</span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC tlaBgGNC">         640 :     PaperSize(const char* n, double wi, double hi)</span></span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         640 :         : name(n), w(wi), h(hi) {}</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC tlaBgGNC">         672 :     PaperSize(const char* n, double wi, double hi)</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         672 :         : name(n), w(wi), h(hi) {}</span></span>
 <span id="L131"><span class="lineNum">     131</span>              : };</span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
 <span id="L133"><span class="lineNum">     133</span>              : static const PaperSize paperSizes114[] = {</span>
@@ -2456,7 +2456,7 @@
 <span id="L2398"><span class="lineNum">    2398</span> <span class="tlaUNC tlaBgUNC">           0 :                 staff-&gt;clefList().insert(std::pair&lt;int, ClefType&gt;(0, ClefType::G));</span></span>
 <span id="L2399"><span class="lineNum">    2399</span>              :             }</span>
 <span id="L2400"><span class="lineNum">    2400</span> <span class="tlaGNC tlaBgGNC">          66 :         } else if (tag == &quot;keylist&quot;) {</span></span>
-<span id="L2401"><span class="lineNum">    2401</span> <span class="tlaGNC">          33 :             read400::TRead::read(staff-&gt;keyList(), e, ctx);</span></span>
+<span id="L2401"><span class="lineNum">    2401</span> <span class="tlaGNC">          33 :             read400::TRead::read(&amp;staff-&gt;keyList(), e, ctx);</span></span>
 <span id="L2402"><span class="lineNum">    2402</span> <span class="tlaGNC">          33 :         } else if (tag == &quot;bracket&quot;) {</span></span>
 <span id="L2403"><span class="lineNum">    2403</span> <span class="tlaGNC">          26 :             size_t col = ctx.score()-&gt;brackets(staff-&gt;idx()).size();</span></span>
 <span id="L2404"><span class="lineNum">    2404</span> <span class="tlaGNC">          26 :             EditStaffBrackets::setBracketType(ctx.score(), staff-&gt;idx(), col, BracketType(e.intAttribute(&quot;type&quot;, -1)));</span></span>
@@ -3021,8 +3021,8 @@
 <span id="L2963"><span class="lineNum">    2963</span>              :         }</span>
 <span id="L2964"><span class="lineNum">    2964</span>              : </span>
 <span id="L2965"><span class="lineNum">    2965</span>              :         // create missing KeySig</span>
-<span id="L2966"><span class="lineNum">    2966</span> <span class="tlaGNC">          33 :         KeyList* km = s-&gt;keyList();</span></span>
-<span id="L2967"><span class="lineNum">    2967</span> <span class="tlaGNC">          69 :         for (auto i = km-&gt;begin(); i != km-&gt;end(); ++i) {</span></span>
+<span id="L2966"><span class="lineNum">    2966</span> <span class="tlaGNC">          33 :         const KeyList&amp; km = s-&gt;keyList();</span></span>
+<span id="L2967"><span class="lineNum">    2967</span> <span class="tlaGNC">          69 :         for (auto i = km.begin(); i != km.end(); ++i) {</span></span>
 <span id="L2968"><span class="lineNum">    2968</span> <span class="tlaGNC">          36 :             Fraction tick = Fraction::fromTicks(i-&gt;first);</span></span>
 <span id="L2969"><span class="lineNum">    2969</span> <span class="tlaGNC">          36 :             if (tick &lt; Fraction(0, 1)) {</span></span>
 <span id="L2970"><span class="lineNum">    2970</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGD(&quot;read114: Key tick %d&quot;, tick.ticks());</span></span>

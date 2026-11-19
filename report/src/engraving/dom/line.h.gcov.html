@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -113,13 +113,13 @@
 <span id="L55"><span class="lineNum">      55</span>              : public:</span>
 <span id="L56"><span class="lineNum">      56</span>              : </span>
 <span id="L57"><span class="lineNum">      57</span>              :     LineSegment(const LineSegment&amp;);</span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC tlaBgGNC">        5572 :     SLine* line() const { return (SLine*)spanner(); }</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC tlaBgGNC">        5732 :     SLine* line() const { return (SLine*)spanner(); }</span></span>
 <span id="L59"><span class="lineNum">      59</span>              :     virtual void spatiumChanged(double, double) override;</span>
 <span id="L60"><span class="lineNum">      60</span>              :     virtual void localSpatiumChanged(double, double) override;</span>
 <span id="L61"><span class="lineNum">      61</span>              : </span>
 <span id="L62"><span class="lineNum">      62</span>              :     friend class SLine;</span>
 <span id="L63"><span class="lineNum">      63</span>              : </span>
-<span id="L64"><span class="lineNum">      64</span>              :     virtual EngravingObject* propertyDelegate(Pid) const override;</span>
+<span id="L64"><span class="lineNum">      64</span>              :     PropertyDelegate resolvePropertyDelegate(Pid) const override;</span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
 <span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC tlaBgUNC">           0 :     bool needStartEditingAfterSelecting() const override { return true; }</span></span>
 <span id="L67"><span class="lineNum">      67</span> <span class="tlaUNC">           0 :     int gripsCount() const override { return 3; }</span></span>
@@ -160,32 +160,32 @@
 <span id="L102"><span class="lineNum">     102</span> <span class="tlaUNC">           0 :     OBJECT_ALLOCATOR(engraving, SLine)</span></span>
 <span id="L103"><span class="lineNum">     103</span>              : </span>
 <span id="L104"><span class="lineNum">     104</span>              : public:</span>
-<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC tlaBgGNC">         346 :     SLine(const ElementType&amp; type, EngravingObject* parent, ElementFlags = ElementFlag::NOTHING);</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC tlaBgGNC">         356 :     SLine(const ElementType&amp; type, EngravingObject* parent, ElementFlags = ElementFlag::NOTHING);</span></span>
 <span id="L106"><span class="lineNum">     106</span>              :     SLine(const SLine&amp;);</span>
 <span id="L107"><span class="lineNum">     107</span>              : </span>
 <span id="L108"><span class="lineNum">     108</span>              :     virtual LineSegment* createLineSegment() = 0;</span>
 <span id="L109"><span class="lineNum">     109</span>              :     void setLen(double l);</span>
 <span id="L110"><span class="lineNum">     110</span>              : </span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        2685 :     bool diagonal() const { return m_diagonal; }</span></span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">         258 :     void setDiagonal(bool v) { m_diagonal = v; }</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">        2810 :     bool diagonal() const { return m_diagonal; }</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">         270 :     void setDiagonal(bool v) { m_diagonal = v; }</span></span>
 <span id="L113"><span class="lineNum">     113</span>              : </span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">        3564 :     Spatium lineWidth() const { return m_lineWidth; }</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        3379 :     Color lineColor() const { return m_lineColor; }</span></span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">        2499 :     LineType lineStyle() const { return m_lineStyle; }</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">        3949 :     Spatium lineWidth() const { return m_lineWidth; }</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        3629 :     Color lineColor() const { return m_lineColor; }</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">        2814 :     LineType lineStyle() const { return m_lineStyle; }</span></span>
 <span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">           1 :     void setLineWidth(const Spatium&amp; v) { m_lineWidth = v; }</span></span>
 <span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">         134 :     void setLineColor(const Color&amp; v) { m_lineColor = v; }</span></span>
 <span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          57 :     void setLineStyle(LineType v) { m_lineStyle = v; }</span></span>
 <span id="L120"><span class="lineNum">     120</span>              : </span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">         416 :     double dashLineLen() const { return m_dashLineLen; }</span></span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">        2547 :     void setDashLineLen(double val) { m_dashLineLen = val; }</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">        2584 :     void setDashLineLen(double val) { m_dashLineLen = val; }</span></span>
 <span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">         416 :     double dashGapLen() const { return m_dashGapLen; }</span></span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">        2547 :     void setDashGapLen(double val) { m_dashGapLen = val; }</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">        2584 :     void setDashGapLen(double val) { m_dashGapLen = val; }</span></span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">        3190 :     LineSegment* frontSegment() { return toLineSegment(Spanner::frontSegment()); }</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">        3262 :     LineSegment* frontSegment() { return toLineSegment(Spanner::frontSegment()); }</span></span>
 <span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">          22 :     const LineSegment* frontSegment() const { return toLineSegment(Spanner::frontSegment()); }</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">         676 :     LineSegment* backSegment() { return toLineSegment(Spanner::backSegment()); }</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">         105 :     const LineSegment* backSegment() const { return toLineSegment(Spanner::backSegment()); }</span></span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         632 :     LineSegment* segmentAt(int n) { return toLineSegment(Spanner::segmentAt(n)); }</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">         753 :     LineSegment* backSegment() { return toLineSegment(Spanner::backSegment()); }</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">         156 :     const LineSegment* backSegment() const { return toLineSegment(Spanner::backSegment()); }</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         662 :     LineSegment* segmentAt(int n) { return toLineSegment(Spanner::segmentAt(n)); }</span></span>
 <span id="L131"><span class="lineNum">     131</span>              :     const LineSegment* segmentAt(int n) const { return toLineSegment(Spanner::segmentAt(n)); }</span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
 <span id="L133"><span class="lineNum">     133</span>              :     PropertyValue getProperty(Pid id) const override;</span>

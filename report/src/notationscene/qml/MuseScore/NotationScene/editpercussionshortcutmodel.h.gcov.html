@@ -31,13 +31,13 @@
             <td class="headerValue">filtered_coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">1</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -84,64 +84,70 @@
 <span id="L26"><span class="lineNum">      26</span>              : #include &lt;QKeySequence&gt;</span>
 <span id="L27"><span class="lineNum">      27</span>              : #include &lt;qqmlintegration.h&gt;</span>
 <span id="L28"><span class="lineNum">      28</span>              : </span>
-<span id="L29"><span class="lineNum">      29</span>              : #include &quot;modularity/ioc.h&quot;</span>
-<span id="L30"><span class="lineNum">      30</span>              : #include &quot;interactive/iinteractive.h&quot;</span>
-<span id="L31"><span class="lineNum">      31</span>              : </span>
-<span id="L32"><span class="lineNum">      32</span>              : namespace mu::notation {</span>
-<span id="L33"><span class="lineNum">      33</span>              : class EditPercussionShortcutModel : public QObject, public muse::Contextable</span>
-<span id="L34"><span class="lineNum">      34</span>              : {</span>
-<span id="L35"><span class="lineNum">      35</span>              :     Q_OBJECT</span>
-<span id="L36"><span class="lineNum">      36</span>              :     QML_ELEMENT;</span>
-<span id="L37"><span class="lineNum">      37</span>              : </span>
-<span id="L38"><span class="lineNum">      38</span>              :     Q_PROPERTY(QString originShortcutText READ originShortcutText NOTIFY originShortcutTextChanged)</span>
-<span id="L39"><span class="lineNum">      39</span>              :     Q_PROPERTY(QString newShortcutText READ newShortcutText NOTIFY newShortcutTextChanged)</span>
-<span id="L40"><span class="lineNum">      40</span>              :     Q_PROPERTY(QString informationText READ informationText NOTIFY newShortcutTextChanged)</span>
-<span id="L41"><span class="lineNum">      41</span>              : </span>
-<span id="L42"><span class="lineNum">      42</span>              :     Q_PROPERTY(bool cleared READ cleared NOTIFY clearedChanged)</span>
-<span id="L43"><span class="lineNum">      43</span>              : </span>
-<span id="L44"><span class="lineNum">      44</span>              :     muse::ContextInject&lt;muse::IInteractive&gt; interactive = { this };</span>
-<span id="L45"><span class="lineNum">      45</span>              : </span>
-<span id="L46"><span class="lineNum">      46</span>              : public:</span>
-<span id="L47"><span class="lineNum">      47</span>              :     explicit EditPercussionShortcutModel(QObject* parent = nullptr);</span>
-<span id="L48"><span class="lineNum">      48</span>              : </span>
-<span id="L49"><span class="lineNum">      49</span>              :     Q_INVOKABLE void load(const QVariant&amp; originDrum, const QVariantList&amp; drumsWithShortcut, const QVariantList&amp; applicationShortcuts);</span>
-<span id="L50"><span class="lineNum">      50</span>              :     Q_INVOKABLE void inputKey(Qt::Key key);</span>
-<span id="L51"><span class="lineNum">      51</span>              :     Q_INVOKABLE void clear();</span>
-<span id="L52"><span class="lineNum">      52</span>              :     Q_INVOKABLE bool trySave();</span>
-<span id="L53"><span class="lineNum">      53</span>              : </span>
-<span id="L54"><span class="lineNum">      54</span>              :     Q_INVOKABLE int conflictDrumPitch() const;</span>
-<span id="L55"><span class="lineNum">      55</span>              : </span>
-<span id="L56"><span class="lineNum">      56</span>              :     QString originShortcutText() const;</span>
-<span id="L57"><span class="lineNum">      57</span>              :     QString newShortcutText() const;</span>
-<span id="L58"><span class="lineNum">      58</span>              :     QString informationText() const;</span>
-<span id="L59"><span class="lineNum">      59</span>              : </span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC tlaBgUNC">           0 :     bool cleared() const { return m_cleared; }</span></span>
-<span id="L61"><span class="lineNum">      61</span>              : </span>
-<span id="L62"><span class="lineNum">      62</span>              : signals:</span>
-<span id="L63"><span class="lineNum">      63</span>              :     void originShortcutTextChanged();</span>
-<span id="L64"><span class="lineNum">      64</span>              :     void newShortcutTextChanged();</span>
-<span id="L65"><span class="lineNum">      65</span>              :     void clearedChanged();</span>
-<span id="L66"><span class="lineNum">      66</span>              : </span>
-<span id="L67"><span class="lineNum">      67</span>              : private:</span>
-<span id="L68"><span class="lineNum">      68</span>              :     bool checkDrumShortcutsForConflict();</span>
-<span id="L69"><span class="lineNum">      69</span>              :     bool checkApplicationShortcutsForConflict();</span>
-<span id="L70"><span class="lineNum">      70</span>              : </span>
-<span id="L71"><span class="lineNum">      71</span>              :     QString getConflictWarningText() const;</span>
+<span id="L29"><span class="lineNum">      29</span>              : #include &quot;async/asyncable.h&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;modularity/ioc.h&quot;</span>
+<span id="L31"><span class="lineNum">      31</span>              : #include &quot;interactive/iinteractive.h&quot;</span>
+<span id="L32"><span class="lineNum">      32</span>              : </span>
+<span id="L33"><span class="lineNum">      33</span>              : namespace mu::notation {</span>
+<span id="L34"><span class="lineNum">      34</span>              : class EditPercussionShortcutModel : public QObject, public muse::Contextable, public muse::async::Asyncable</span>
+<span id="L35"><span class="lineNum">      35</span>              : {</span>
+<span id="L36"><span class="lineNum">      36</span>              :     Q_OBJECT</span>
+<span id="L37"><span class="lineNum">      37</span>              :     QML_ELEMENT;</span>
+<span id="L38"><span class="lineNum">      38</span>              : </span>
+<span id="L39"><span class="lineNum">      39</span>              :     Q_PROPERTY(QString originShortcutText READ originShortcutText NOTIFY originShortcutTextChanged)</span>
+<span id="L40"><span class="lineNum">      40</span>              :     Q_PROPERTY(QString newShortcutText READ newShortcutText NOTIFY newShortcutTextChanged)</span>
+<span id="L41"><span class="lineNum">      41</span>              :     Q_PROPERTY(QString informationText READ informationText NOTIFY newShortcutTextChanged)</span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span>              :     Q_PROPERTY(bool cleared READ cleared NOTIFY clearedChanged)</span>
+<span id="L44"><span class="lineNum">      44</span>              : </span>
+<span id="L45"><span class="lineNum">      45</span>              :     muse::ContextInject&lt;muse::IInteractive&gt; interactive = { this };</span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span>              : public:</span>
+<span id="L48"><span class="lineNum">      48</span>              :     explicit EditPercussionShortcutModel(QObject* parent = nullptr);</span>
+<span id="L49"><span class="lineNum">      49</span>              : </span>
+<span id="L50"><span class="lineNum">      50</span>              :     Q_INVOKABLE void load(const QVariant&amp; originDrum, const QVariantList&amp; drumsWithShortcut, const QVariantList&amp; applicationShortcuts);</span>
+<span id="L51"><span class="lineNum">      51</span>              :     Q_INVOKABLE void inputKey(Qt::Key key);</span>
+<span id="L52"><span class="lineNum">      52</span>              :     Q_INVOKABLE void clear();</span>
+<span id="L53"><span class="lineNum">      53</span>              :     Q_INVOKABLE void trySave();</span>
+<span id="L54"><span class="lineNum">      54</span>              : </span>
+<span id="L55"><span class="lineNum">      55</span>              :     Q_INVOKABLE int conflictDrumPitch() const;</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span>              :     QString originShortcutText() const;</span>
+<span id="L58"><span class="lineNum">      58</span>              :     QString newShortcutText() const;</span>
+<span id="L59"><span class="lineNum">      59</span>              :     QString informationText() const;</span>
+<span id="L60"><span class="lineNum">      60</span>              : </span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC tlaBgGNC">           1 :     bool cleared() const { return m_cleared; }</span></span>
+<span id="L62"><span class="lineNum">      62</span>              : </span>
+<span id="L63"><span class="lineNum">      63</span>              : signals:</span>
+<span id="L64"><span class="lineNum">      64</span>              :     void closeRequested(bool accepted);</span>
+<span id="L65"><span class="lineNum">      65</span>              : </span>
+<span id="L66"><span class="lineNum">      66</span>              :     void originShortcutTextChanged();</span>
+<span id="L67"><span class="lineNum">      67</span>              :     void newShortcutTextChanged();</span>
+<span id="L68"><span class="lineNum">      68</span>              :     void clearedChanged();</span>
+<span id="L69"><span class="lineNum">      69</span>              : </span>
+<span id="L70"><span class="lineNum">      70</span>              : private:</span>
+<span id="L71"><span class="lineNum">      71</span>              :     friend class EditPercussionShortcutModelTests;</span>
 <span id="L72"><span class="lineNum">      72</span>              : </span>
-<span id="L73"><span class="lineNum">      73</span>              :     bool needIgnoreKey(const Qt::Key&amp; key) const;</span>
-<span id="L74"><span class="lineNum">      74</span>              : </span>
-<span id="L75"><span class="lineNum">      75</span>              :     QVariantMap m_originDrum;</span>
-<span id="L76"><span class="lineNum">      76</span>              : </span>
-<span id="L77"><span class="lineNum">      77</span>              :     QKeySequence m_newShortcut;</span>
-<span id="L78"><span class="lineNum">      78</span>              :     QVariantMap m_conflictShortcut;</span>
+<span id="L73"><span class="lineNum">      73</span>              :     bool checkDrumShortcutsForConflict();</span>
+<span id="L74"><span class="lineNum">      74</span>              :     bool checkApplicationShortcutsForConflict();</span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span>              :     QString getConflictWarningText() const;</span>
+<span id="L77"><span class="lineNum">      77</span>              : </span>
+<span id="L78"><span class="lineNum">      78</span>              :     bool needIgnoreKey(const Qt::Key&amp; key) const;</span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
-<span id="L80"><span class="lineNum">      80</span>              :     QVariantList m_drumsWithShortcut;</span>
-<span id="L81"><span class="lineNum">      81</span>              :     QVariantList m_applicationShortcuts;</span>
-<span id="L82"><span class="lineNum">      82</span>              : </span>
-<span id="L83"><span class="lineNum">      83</span>              :     bool m_conflictInAppShortcuts = false;</span>
-<span id="L84"><span class="lineNum">      84</span>              :     bool m_cleared = false;</span>
-<span id="L85"><span class="lineNum">      85</span>              : };</span>
-<span id="L86"><span class="lineNum">      86</span>              : }</span>
+<span id="L80"><span class="lineNum">      80</span>              :     QVariantMap m_originDrum;</span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span>              :     QKeySequence m_newShortcut;</span>
+<span id="L83"><span class="lineNum">      83</span>              :     QVariantMap m_conflictShortcut;</span>
+<span id="L84"><span class="lineNum">      84</span>              : </span>
+<span id="L85"><span class="lineNum">      85</span>              :     QVariantList m_drumsWithShortcut;</span>
+<span id="L86"><span class="lineNum">      86</span>              :     QVariantList m_applicationShortcuts;</span>
+<span id="L87"><span class="lineNum">      87</span>              : </span>
+<span id="L88"><span class="lineNum">      88</span>              :     bool m_conflictInAppShortcuts = false;</span>
+<span id="L89"><span class="lineNum">      89</span>              :     bool m_cleared = false;</span>
+<span id="L90"><span class="lineNum">      90</span>              :     bool m_isAskingToSave = false;</span>
+<span id="L91"><span class="lineNum">      91</span>              : };</span>
+<span id="L92"><span class="lineNum">      92</span>              : }</span>
         </pre>
               </td>
             </tr>

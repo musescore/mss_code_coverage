@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -101,26 +101,26 @@
 <span id="L43"><span class="lineNum">      43</span>              : </span>
 <span id="L44"><span class="lineNum">      44</span>              : class ConnectSharedPart : public UndoableCommand</span>
 <span id="L45"><span class="lineNum">      45</span>              : {</span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">          74 :     OBJECT_ALLOCATOR(engraving, ConnectSharedPart)</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">          78 :     OBJECT_ALLOCATOR(engraving, ConnectSharedPart)</span></span>
 <span id="L47"><span class="lineNum">      47</span>              : </span>
 <span id="L48"><span class="lineNum">      48</span>              :     SharedPart* sharedPart = nullptr;</span>
 <span id="L49"><span class="lineNum">      49</span>              :     Part* originPart = nullptr;</span>
 <span id="L50"><span class="lineNum">      50</span>              : </span>
 <span id="L51"><span class="lineNum">      51</span>              : public:</span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">          38 :     ConnectSharedPart(SharedPart* s, Part* o)</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">          38 :         : sharedPart(s), originPart(o) {}</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">          40 :     ConnectSharedPart(SharedPart* s, Part* o)</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">          40 :         : sharedPart(s), originPart(o) {}</span></span>
 <span id="L54"><span class="lineNum">      54</span>              : </span>
 <span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           8 :     void undo() override</span></span>
 <span id="L56"><span class="lineNum">      56</span>              :     {</span>
 <span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">           8 :         sharedPart-&gt;removeOriginPart(originPart);</span></span>
 <span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           8 :     }</span></span>
 <span id="L59"><span class="lineNum">      59</span>              : </span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">          40 :     void redo() override</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">          42 :     void redo() override</span></span>
 <span id="L61"><span class="lineNum">      61</span>              :     {</span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">          40 :         sharedPart-&gt;addOriginPart(originPart);</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          40 :     }</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">          42 :         sharedPart-&gt;addOriginPart(originPart);</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          42 :     }</span></span>
 <span id="L64"><span class="lineNum">      64</span>              : </span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          48 :     UNDO_TYPE(CommandType::ConnectSharedPart)</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          50 :     UNDO_TYPE(CommandType::ConnectSharedPart)</span></span>
 <span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC tlaBgUNC">           0 :     UNDO_NAME(&quot;Connect shared part&quot;)</span></span>
 <span id="L67"><span class="lineNum">      67</span>              : };</span>
 <span id="L68"><span class="lineNum">      68</span>              : </span>
@@ -303,18 +303,18 @@
 <span id="L245"><span class="lineNum">     245</span>              : // EditStaveSharing</span>
 <span id="L246"><span class="lineNum">     246</span>              : //-------------------------------------------------------------------</span>
 <span id="L247"><span class="lineNum">     247</span>              : </span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">          22 : void EditStaveSharing::toggleStaveSharing(Transaction&amp; tx, Score* score, bool on)</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">          23 : void EditStaveSharing::toggleStaveSharing(Transaction&amp; tx, Score* score, bool on)</span></span>
 <span id="L249"><span class="lineNum">     249</span>              : {</span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">          22 :     score-&gt;undoChangeStyleVal(Sid::enableStaveSharing, on);</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">          23 :     score-&gt;undoChangeStyleVal(Sid::enableStaveSharing, on);</span></span>
 <span id="L251"><span class="lineNum">     251</span>              : </span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">          22 :     if (on &amp;&amp; score-&gt;sharedParts().empty()) {</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">          17 :         cmdCreateSharedStaves(tx, score);</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">          23 :     if (on &amp;&amp; score-&gt;sharedParts().empty()) {</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">          18 :         cmdCreateSharedStaves(tx, score);</span></span>
 <span id="L254"><span class="lineNum">     254</span>              :     }</span>
 <span id="L255"><span class="lineNum">     255</span>              : </span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">          22 :     score-&gt;setBracketsAndBarlines();</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">          23 :     score-&gt;setBracketsAndBarlines();</span></span>
 <span id="L257"><span class="lineNum">     257</span>              : </span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">          22 :     score-&gt;update();</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">          22 : }</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">          23 :     score-&gt;update();</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">          23 : }</span></span>
 <span id="L260"><span class="lineNum">     260</span>              : </span>
 <span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC tlaBgUNC">           0 : void EditStaveSharing::cmdRemoveSharedStaves(Score* score)</span></span>
 <span id="L262"><span class="lineNum">     262</span>              : {</span>
@@ -327,147 +327,147 @@
 <span id="L269"><span class="lineNum">     269</span>              :     }</span>
 <span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L271"><span class="lineNum">     271</span>              : </span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC tlaBgGNC">          17 : void EditStaveSharing::cmdCreateSharedStaves(Transaction&amp; tx, Score* score)</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC tlaBgGNC">          18 : void EditStaveSharing::cmdCreateSharedStaves(Transaction&amp; tx, Score* score)</span></span>
 <span id="L273"><span class="lineNum">     273</span>              : {</span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">          17 :     StaveSharingGroups staveSharingGroups = computeGroups(score);</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">          18 :     StaveSharingGroups staveSharingGroups = computeGroups(score);</span></span>
 <span id="L275"><span class="lineNum">     275</span>              : </span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">          17 :     createSharedParts(tx, staveSharingGroups, score);</span></span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">          17 : }</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">          18 :     createSharedParts(tx, staveSharingGroups, score);</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">          18 : }</span></span>
 <span id="L278"><span class="lineNum">     278</span>              : </span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">          17 : StaveSharingGroups EditStaveSharing::computeGroups(Score* score)</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">          18 : StaveSharingGroups EditStaveSharing::computeGroups(Score* score)</span></span>
 <span id="L280"><span class="lineNum">     280</span>              : {</span>
-<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">          17 :     const std::vector&lt;Part*&gt;&amp; parts = score-&gt;parts();</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">          18 :     const std::vector&lt;Part*&gt;&amp; parts = score-&gt;parts();</span></span>
 <span id="L282"><span class="lineNum">     282</span>              : </span>
-<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">          17 :     StaveSharingGroups staveSharingGroups;</span></span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">          18 :     StaveSharingGroups staveSharingGroups;</span></span>
 <span id="L284"><span class="lineNum">     284</span>              : </span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">          63 :     auto excludePart = [](Part* part) {</span></span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">          63 :         if (part-&gt;nstaves() &gt; 1 || part-&gt;isSharedPart()) {</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">          66 :     auto excludePart = [](Part* part) {</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">          66 :         if (part-&gt;nstaves() &gt; 1 || part-&gt;isSharedPart()) {</span></span>
 <span id="L287"><span class="lineNum">     287</span> <span class="tlaUNC tlaBgUNC">           0 :             return true;</span></span>
 <span id="L288"><span class="lineNum">     288</span>              :         }</span>
 <span id="L289"><span class="lineNum">     289</span>              : </span>
-<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC tlaBgGNC">          63 :         Staff* firstStaff = part-&gt;staves().front();</span></span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">          63 :         const StaffType* staffType = firstStaff-&gt;staffType();</span></span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">          63 :         if (staffType-&gt;group() != StaffGroup::STANDARD &amp;&amp; staffType-&gt;group() != StaffGroup::JIANPU) {</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC tlaBgGNC">          66 :         Staff* firstStaff = part-&gt;staves().front();</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">          66 :         const StaffType* staffType = firstStaff-&gt;staffType();</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">          66 :         if (staffType-&gt;group() != StaffGroup::STANDARD &amp;&amp; staffType-&gt;group() != StaffGroup::JIANPU) {</span></span>
 <span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC tlaBgUNC">           0 :             return true;</span></span>
 <span id="L294"><span class="lineNum">     294</span>              :         }</span>
 <span id="L295"><span class="lineNum">     295</span>              : </span>
-<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC tlaBgGNC">          63 :         return false;</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC tlaBgGNC">          66 :         return false;</span></span>
 <span id="L297"><span class="lineNum">     297</span>              :     };</span>
 <span id="L298"><span class="lineNum">     298</span>              : </span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">          37 :     for (size_t partIdx = 0; partIdx &lt; parts.size();) {</span></span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">          20 :         Part* part = parts[partIdx];</span></span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">          20 :         if (excludePart(part)) {</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">          39 :     for (size_t partIdx = 0; partIdx &lt; parts.size();) {</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">          21 :         Part* part = parts[partIdx];</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">          21 :         if (excludePart(part)) {</span></span>
 <span id="L302"><span class="lineNum">     302</span> <span class="tlaUNC tlaBgUNC">           0 :             ++partIdx;</span></span>
 <span id="L303"><span class="lineNum">     303</span> <span class="tlaUNC">           0 :             continue;</span></span>
 <span id="L304"><span class="lineNum">     304</span>              :         }</span>
 <span id="L305"><span class="lineNum">     305</span>              : </span>
-<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC tlaBgGNC">          20 :         Instrument* instr = part-&gt;instrument();</span></span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">          20 :         String instrGroup = instr-&gt;group();</span></span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">          20 :         if (instrGroup != &quot;woodwinds&quot; &amp;&amp; instrGroup != &quot;brass&quot;) { // TODO: styles</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC tlaBgGNC">          21 :         Instrument* instr = part-&gt;instrument();</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">          21 :         String instrGroup = instr-&gt;group();</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">          21 :         if (instrGroup != &quot;woodwinds&quot; &amp;&amp; instrGroup != &quot;brass&quot;) { // TODO: styles</span></span>
 <span id="L309"><span class="lineNum">     309</span> <span class="tlaUNC tlaBgUNC">           0 :             ++partIdx;</span></span>
 <span id="L310"><span class="lineNum">     310</span> <span class="tlaUNC">           0 :             continue;</span></span>
 <span id="L311"><span class="lineNum">     311</span>              :         }</span>
 <span id="L312"><span class="lineNum">     312</span>              : </span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC tlaBgGNC">          20 :         StaveSharingGroup staveSharingGroup;</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC tlaBgGNC">          21 :         StaveSharingGroup staveSharingGroup;</span></span>
 <span id="L314"><span class="lineNum">     314</span>              : </span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">          20 :         size_t nextPartIdx = partIdx;</span></span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">          60 :         while (nextPartIdx &lt; parts.size()) {</span></span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">          43 :             Part* nextPart = parts[nextPartIdx];</span></span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">          43 :             if (excludePart(nextPart)) {</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">          21 :         size_t nextPartIdx = partIdx;</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">          63 :         while (nextPartIdx &lt; parts.size()) {</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">          45 :             Part* nextPart = parts[nextPartIdx];</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">          45 :             if (excludePart(nextPart)) {</span></span>
 <span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">           3 :                 break;</span></span>
 <span id="L320"><span class="lineNum">     320</span>              :             }</span>
-<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">          43 :             Instrument* nextInstr = nextPart-&gt;instrument();</span></span>
-<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">          43 :             if (nextPart != part &amp;&amp; nextInstr-&gt;id() != instr-&gt;id()) {</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">          45 :             Instrument* nextInstr = nextPart-&gt;instrument();</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">          45 :             if (nextPart != part &amp;&amp; nextInstr-&gt;id() != instr-&gt;id()) {</span></span>
 <span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">           3 :                 break;</span></span>
 <span id="L324"><span class="lineNum">     324</span>              :             }</span>
 <span id="L325"><span class="lineNum">     325</span>              : </span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">          40 :             staveSharingGroup.push_back(nextPart);</span></span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">          40 :             ++nextPartIdx;</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">          42 :             staveSharingGroup.push_back(nextPart);</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">          42 :             ++nextPartIdx;</span></span>
 <span id="L328"><span class="lineNum">     328</span>              :         }</span>
 <span id="L329"><span class="lineNum">     329</span>              : </span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">          20 :         if (staveSharingGroup.size() &gt; 1) {</span></span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">          18 :             staveSharingGroups.push_back(staveSharingGroup);</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">          21 :         if (staveSharingGroup.size() &gt; 1) {</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">          19 :             staveSharingGroups.push_back(staveSharingGroup);</span></span>
 <span id="L332"><span class="lineNum">     332</span>              :         }</span>
 <span id="L333"><span class="lineNum">     333</span>              : </span>
-<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">          20 :         partIdx = nextPartIdx;</span></span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">          20 :     }</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">          21 :         partIdx = nextPartIdx;</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">          21 :     }</span></span>
 <span id="L336"><span class="lineNum">     336</span>              : </span>
-<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">          17 :     return staveSharingGroups;</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">          18 :     return staveSharingGroups;</span></span>
 <span id="L338"><span class="lineNum">     338</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L339"><span class="lineNum">     339</span>              : </span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC tlaBgGNC">          17 : void EditStaveSharing::createSharedParts(Transaction&amp; tx, const StaveSharingGroups&amp; groups, Score* score)</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC tlaBgGNC">          18 : void EditStaveSharing::createSharedParts(Transaction&amp; tx, const StaveSharingGroups&amp; groups, Score* score)</span></span>
 <span id="L341"><span class="lineNum">     341</span>              : {</span>
-<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">          35 :     for (const StaveSharingGroup&amp; group : groups) {</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">          18 :         SharedPart* sharedPart = nullptr;</span></span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">          56 :         for (Part* part : group) {</span></span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">          38 :             if (part-&gt;sharedPart() &amp;&amp; !sharedPart) {</span></span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">          37 :     for (const StaveSharingGroup&amp; group : groups) {</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">          19 :         SharedPart* sharedPart = nullptr;</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">          59 :         for (Part* part : group) {</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">          40 :             if (part-&gt;sharedPart() &amp;&amp; !sharedPart) {</span></span>
 <span id="L346"><span class="lineNum">     346</span> <span class="tlaUNC tlaBgUNC">           0 :                 sharedPart = part-&gt;sharedPart();</span></span>
 <span id="L347"><span class="lineNum">     347</span> <span class="tlaUNC">           0 :                 break;</span></span>
 <span id="L348"><span class="lineNum">     348</span>              :             }</span>
 <span id="L349"><span class="lineNum">     349</span>              :         }</span>
 <span id="L350"><span class="lineNum">     350</span>              : </span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC tlaBgGNC">          18 :         Part* firstPart = group.front();</span></span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">          18 :         const Instrument* instr = firstPart-&gt;instrument();</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC tlaBgGNC">          19 :         Part* firstPart = group.front();</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">          19 :         const Instrument* instr = firstPart-&gt;instrument();</span></span>
 <span id="L353"><span class="lineNum">     353</span>              : </span>
-<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">          18 :         if (!sharedPart) {</span></span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">          18 :             size_t idx = muse::indexOf(score-&gt;parts(), firstPart);</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">          18 :             sharedPart = createSharedPart(score, idx, instr);</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">          19 :         if (!sharedPart) {</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">          19 :             size_t idx = muse::indexOf(score-&gt;parts(), firstPart);</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">          19 :             sharedPart = createSharedPart(score, idx, instr);</span></span>
 <span id="L357"><span class="lineNum">     357</span>              :         }</span>
 <span id="L358"><span class="lineNum">     358</span>              : </span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">          56 :         for (Part* originPart : group) {</span></span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">          38 :             SharedPart* existingSharedPart = originPart-&gt;sharedPart();</span></span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">          38 :             if (existingSharedPart &amp;&amp; existingSharedPart != sharedPart) {</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">          59 :         for (Part* originPart : group) {</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">          40 :             SharedPart* existingSharedPart = originPart-&gt;sharedPart();</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">          40 :             if (existingSharedPart &amp;&amp; existingSharedPart != sharedPart) {</span></span>
 <span id="L362"><span class="lineNum">     362</span> <span class="tlaUNC tlaBgUNC">           0 :                 disconnectSharedPart(tx, existingSharedPart, originPart);</span></span>
 <span id="L363"><span class="lineNum">     363</span> <span class="tlaUNC">           0 :                 connectSharedPart(tx, sharedPart, originPart);</span></span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC tlaBgGNC">          38 :             } else if (!existingSharedPart) {</span></span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">          38 :                 connectSharedPart(tx, sharedPart, originPart);</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC tlaBgGNC">          40 :             } else if (!existingSharedPart) {</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">          40 :                 connectSharedPart(tx, sharedPart, originPart);</span></span>
 <span id="L366"><span class="lineNum">     366</span>              :             }</span>
 <span id="L367"><span class="lineNum">     367</span>              :         }</span>
 <span id="L368"><span class="lineNum">     368</span>              :     }</span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">          17 : }</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">          18 : }</span></span>
 <span id="L370"><span class="lineNum">     370</span>              : </span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">          18 : SharedPart* EditStaveSharing::createSharedPart(Score* score, size_t idx, const Instrument* instr)</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">          19 : SharedPart* EditStaveSharing::createSharedPart(Score* score, size_t idx, const Instrument* instr)</span></span>
 <span id="L372"><span class="lineNum">     372</span>              : {</span>
-<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">          18 :     SharedPart* sharedPart = new SharedPart(score);</span></span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">          18 :     score-&gt;undoInsertPart(sharedPart, idx);</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">          19 :     SharedPart* sharedPart = new SharedPart(score);</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">          19 :     score-&gt;undoInsertPart(sharedPart, idx);</span></span>
 <span id="L375"><span class="lineNum">     375</span>              : </span>
-<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">          18 :     Instrument* instrument = new Instrument(*instr);</span></span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">          18 :     InstrumentLabel&amp; label = instrument-&gt;instrumentLabel();</span></span>
-<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">          18 :     label.setAllowGroupName(false);</span></span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">          18 :     label.setNumber(0);</span></span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">          18 :     label.setShowNumberLong(false);</span></span>
-<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">          18 :     label.setShowNumberShort(false);</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">          19 :     Instrument* instrument = new Instrument(*instr);</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">          19 :     InstrumentLabel&amp; label = instrument-&gt;instrumentLabel();</span></span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">          19 :     label.setAllowGroupName(false);</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">          19 :     label.setNumber(0);</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">          19 :     label.setShowNumberLong(false);</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">          19 :     label.setShowNumberShort(false);</span></span>
 <span id="L382"><span class="lineNum">     382</span>              : </span>
-<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">          18 :     sharedPart-&gt;setInstrument(instrument);</span></span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">          19 :     sharedPart-&gt;setInstrument(instrument);</span></span>
 <span id="L384"><span class="lineNum">     384</span>              : </span>
-<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">          18 :     return sharedPart;</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">          19 :     return sharedPart;</span></span>
 <span id="L386"><span class="lineNum">     386</span>              : }</span>
 <span id="L387"><span class="lineNum">     387</span>              : </span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">          38 : void EditStaveSharing::addStaffToSharedPart(SharedPart* sharedPart, const Part* originPart, const KeyList&amp; keyList,</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">          40 : void EditStaveSharing::addStaffToSharedPart(SharedPart* sharedPart, const Part* originPart, const KeyList&amp; keyList,</span></span>
 <span id="L389"><span class="lineNum">     389</span>              :                                             const StaffType* staffType)</span>
 <span id="L390"><span class="lineNum">     390</span>              : {</span>
-<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">          38 :     Staff* staff = Factory::createStaff(sharedPart);</span></span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">          38 :     staff-&gt;setStaffType(Fraction(0, 1), *staffType);</span></span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">          38 :     staff-&gt;setPart(sharedPart);</span></span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">          40 :     Staff* staff = Factory::createStaff(sharedPart);</span></span>
+<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">          40 :     staff-&gt;setStaffType(Fraction(0, 1), *staffType);</span></span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">          40 :     staff-&gt;setPart(sharedPart);</span></span>
 <span id="L394"><span class="lineNum">     394</span>              : </span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">          38 :     Score* score = sharedPart-&gt;score();</span></span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">          38 :     staff-&gt;setScore(score);</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">          40 :     Score* score = sharedPart-&gt;score();</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">          40 :     staff-&gt;setScore(score);</span></span>
 <span id="L397"><span class="lineNum">     397</span>              : </span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">          38 :     staff_idx_t relStaffIdx = sharedPart-&gt;nstaves();</span></span>
-<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">          38 :     staff-&gt;setDefaultClefType(originPart-&gt;instrument()-&gt;clefType(0));</span></span>
+<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">          40 :     staff_idx_t relStaffIdx = sharedPart-&gt;nstaves();</span></span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">          40 :     staff-&gt;setDefaultClefType(originPart-&gt;instrument()-&gt;clefType(0));</span></span>
 <span id="L400"><span class="lineNum">     400</span>              : </span>
-<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">          38 :     score-&gt;undoInsertStaff(staff, relStaffIdx);</span></span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">          40 :     score-&gt;undoInsertStaff(staff, relStaffIdx);</span></span>
 <span id="L402"><span class="lineNum">     402</span>              : </span>
-<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">          38 :     staff_idx_t absStaffIdx = track2staff(sharedPart-&gt;trackRange().startTrack) + relStaffIdx;</span></span>
-<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">          38 :     score-&gt;adjustKeySigs(absStaffIdx, absStaffIdx + 1, keyList);</span></span>
-<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">          38 : }</span></span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">          40 :     staff_idx_t absStaffIdx = track2staff(sharedPart-&gt;trackRange().startTrack) + relStaffIdx;</span></span>
+<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">          40 :     score-&gt;adjustKeySigs(absStaffIdx, absStaffIdx + 1, keyList);</span></span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">          40 : }</span></span>
 <span id="L406"><span class="lineNum">     406</span>              : </span>
-<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">          38 : void EditStaveSharing::connectSharedPart(Transaction&amp; tx, SharedPart* sharedPart, Part* originPart)</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">          40 : void EditStaveSharing::connectSharedPart(Transaction&amp; tx, SharedPart* sharedPart, Part* originPart)</span></span>
 <span id="L408"><span class="lineNum">     408</span>              : {</span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          38 :     Score* score = originPart-&gt;score();</span></span>
-<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">          38 :     tx.push(new ConnectSharedPart(sharedPart, originPart));</span></span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          38 :     addStaffToSharedPart(sharedPart, originPart, score-&gt;keyList(), originPart-&gt;staff(0)-&gt;staffType());</span></span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          38 : }</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          40 :     Score* score = originPart-&gt;score();</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">          40 :     tx.push(new ConnectSharedPart(sharedPart, originPart));</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          40 :     addStaffToSharedPart(sharedPart, originPart, score-&gt;keyList(), originPart-&gt;staff(0)-&gt;staffType());</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          40 : }</span></span>
 <span id="L413"><span class="lineNum">     413</span>              : </span>
 <span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">           2 : void EditStaveSharing::disconnectSharedPart(Transaction&amp; tx, SharedPart* sharedPart, Part* originPart)</span></span>
 <span id="L415"><span class="lineNum">     415</span>              : {</span>
@@ -476,23 +476,23 @@
 <span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">           2 :     score-&gt;undoRemoveStaff(sharedPart-&gt;staves().back());</span></span>
 <span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">           2 : }</span></span>
 <span id="L420"><span class="lineNum">     420</span>              : </span>
-<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">           8 : void EditStaveSharing::handleRemovePart(Transaction&amp; tx, Part* part)</span></span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">          14 : void EditStaveSharing::handleRemovePart(Transaction&amp; tx, Part* part)</span></span>
 <span id="L422"><span class="lineNum">     422</span>              : {</span>
-<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">           8 :     Score* score = part-&gt;score();</span></span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">          14 :     Score* score = part-&gt;score();</span></span>
 <span id="L424"><span class="lineNum">     424</span>              : </span>
-<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">           8 :     if (SharedPart* sharedPart = part-&gt;sharedPart()) {</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">          14 :     if (SharedPart* sharedPart = part-&gt;sharedPart()) {</span></span>
 <span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">           2 :         disconnectSharedPart(tx, sharedPart, part);</span></span>
 <span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">           2 :         if (sharedPart-&gt;originParts().empty()) {</span></span>
 <span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">           1 :             score-&gt;cmdRemovePart(sharedPart);</span></span>
 <span id="L429"><span class="lineNum">     429</span>              :         }</span>
-<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">           6 :     } else if (part-&gt;isSharedPart()) {</span></span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">          12 :     } else if (part-&gt;isSharedPart()) {</span></span>
 <span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">           2 :         sharedPart = toSharedPart(part);</span></span>
 <span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">           2 :         std::vector&lt;Part*&gt; originParts = sharedPart-&gt;originParts();</span></span>
 <span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">           4 :         for (Part* originPart : originParts) {</span></span>
 <span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">           2 :             tx.push(new DisconnectSharedPart(sharedPart, originPart));</span></span>
 <span id="L435"><span class="lineNum">     435</span>              :         }</span>
 <span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">           2 :     }</span></span>
-<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">           8 : }</span></span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">          14 : }</span></span>
 <span id="L438"><span class="lineNum">     438</span>              : </span>
 <span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">           6 : void EditStaveSharing::addStaveSharingChange(Transaction&amp; tx, Segment* seg, Part* part, bool reset)</span></span>
 <span id="L440"><span class="lineNum">     440</span>              : {</span>
@@ -619,42 +619,42 @@
 <span id="L561"><span class="lineNum">     561</span> <span class="tlaUNC">           0 :     tx.push(new RemoveStaveSharingChange(sharedPart, staveSharingChange-&gt;tick()));</span></span>
 <span id="L562"><span class="lineNum">     562</span>              : }</span>
 <span id="L563"><span class="lineNum">     563</span>              : </span>
-<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC tlaBgGNC">         115 : void EditStaveSharing::removeStaveSharingStatesOnRemoveTime(Transaction&amp; tx, Score* score, const Fraction&amp; startTick,</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC tlaBgGNC">         116 : void EditStaveSharing::removeStaveSharingStatesOnRemoveTime(Transaction&amp; tx, Score* score, const Fraction&amp; startTick,</span></span>
 <span id="L565"><span class="lineNum">     565</span>              :                                                             const Fraction&amp; endTick)</span>
 <span id="L566"><span class="lineNum">     566</span>              : {</span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">         124 :     for (SharedPart* sharedPart : score-&gt;sharedParts()) {</span></span>
+<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">         125 :     for (SharedPart* sharedPart : score-&gt;sharedParts()) {</span></span>
 <span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">          20 :         for (const auto&amp; [tick, state] : sharedPart-&gt;staveSharingStatesBetweenTicks(startTick, endTick)) {</span></span>
 <span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC">          11 :             if (state.isUserModified()) {</span></span>
 <span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">           7 :                 tx.push(new RemoveStaveSharingChange(sharedPart, tick));</span></span>
 <span id="L571"><span class="lineNum">     571</span>              :             }</span>
 <span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">           9 :         }</span></span>
-<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">         115 :     }</span></span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">         115 : }</span></span>
+<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">         116 :     }</span></span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">         116 : }</span></span>
 <span id="L575"><span class="lineNum">     575</span>              : </span>
-<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">          54 : StaveSharingStatesByPart EditStaveSharing::userStaveSharingStatesBetweenTicks(Score* score, const Fraction&amp; startTick,</span></span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">          55 : StaveSharingStatesByPart EditStaveSharing::userStaveSharingStatesBetweenTicks(Score* score, const Fraction&amp; startTick,</span></span>
 <span id="L577"><span class="lineNum">     577</span>              :                                                                               const Fraction&amp; endTick)</span>
 <span id="L578"><span class="lineNum">     578</span>              : {</span>
-<span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">          54 :     StaveSharingStatesByPart result;</span></span>
+<span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">          55 :     StaveSharingStatesByPart result;</span></span>
 <span id="L580"><span class="lineNum">     580</span>              : </span>
-<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">          57 :     for (SharedPart* sharedPart : score-&gt;sharedParts()) {</span></span>
+<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">          58 :     for (SharedPart* sharedPart : score-&gt;sharedParts()) {</span></span>
 <span id="L582"><span class="lineNum">     582</span> <span class="tlaGNC">          10 :         for (const auto&amp; [tick, state] : sharedPart-&gt;staveSharingStatesBetweenTicks(startTick, endTick)) {</span></span>
 <span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">           7 :             if (state.isUserModified()) {</span></span>
 <span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">           5 :                 result[sharedPart].emplace(tick, state);</span></span>
 <span id="L585"><span class="lineNum">     585</span>              :             }</span>
 <span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">           3 :         }</span></span>
-<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">          54 :     }</span></span>
+<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">          55 :     }</span></span>
 <span id="L588"><span class="lineNum">     588</span>              : </span>
-<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">          54 :     return result;</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">          55 :     return result;</span></span>
 <span id="L590"><span class="lineNum">     590</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L591"><span class="lineNum">     591</span>              : </span>
-<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC tlaBgGNC">          53 : void EditStaveSharing::restoreStaveSharingStates(Transaction&amp; tx, const StaveSharingStatesByPart&amp; states)</span></span>
+<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC tlaBgGNC">          54 : void EditStaveSharing::restoreStaveSharingStates(Transaction&amp; tx, const StaveSharingStatesByPart&amp; states)</span></span>
 <span id="L593"><span class="lineNum">     593</span>              : {</span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">          56 :     for (const auto&amp; [sharedPart, statesByTick] : states) {</span></span>
+<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">          57 :     for (const auto&amp; [sharedPart, statesByTick] : states) {</span></span>
 <span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">           8 :         for (const auto&amp; [tick, state] : statesByTick) {</span></span>
 <span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">           5 :             undoSetStaveSharingState(tx, sharedPart, tick, state);</span></span>
 <span id="L597"><span class="lineNum">     597</span>              :         }</span>
 <span id="L598"><span class="lineNum">     598</span>              :     }</span>
-<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">          53 : }</span></span>
+<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">          54 : }</span></span>
         </pre>
               </td>
             </tr>

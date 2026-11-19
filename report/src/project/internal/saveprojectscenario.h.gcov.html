@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -121,8 +121,8 @@
 <span id="L63"><span class="lineNum">      63</span>              :     muse::ContextInject&lt;project::IProjectSession&gt; projectSession = { this };</span>
 <span id="L64"><span class="lineNum">      64</span>              :     muse::ContextInject&lt;IOpenProjectScenario&gt; openProjectScenario = { this };</span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC tlaBgGNC">          61 :     SaveProjectScenario(const muse::modularity::ContextPtr&amp; iocCtx)</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">          61 :         : muse::Contextable(iocCtx) {}</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC tlaBgGNC">          62 :     SaveProjectScenario(const muse::modularity::ContextPtr&amp; iocCtx)</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">          62 :         : muse::Contextable(iocCtx) {}</span></span>
 <span id="L68"><span class="lineNum">      68</span>              : </span>
 <span id="L69"><span class="lineNum">      69</span>              :     muse::async::Promise&lt;muse::Ret&gt; saveProject(SaveMode saveMode, SaveLocationType saveLocationType = SaveLocationType::Undefined,</span>
 <span id="L70"><span class="lineNum">      70</span>              :                                                 bool force = false) override;</span>
@@ -145,11 +145,11 @@
 <span id="L87"><span class="lineNum">      87</span>              :         QString format;</span>
 <span id="L88"><span class="lineNum">      88</span>              :         std::shared_ptr&lt;QIODevice&gt; device = nullptr;</span>
 <span id="L89"><span class="lineNum">      89</span>              : </span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">          25 :         AudioFile() {}</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">          26 :         AudioFile() {}</span></span>
 <span id="L91"><span class="lineNum">      91</span>              : </span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">          10 :         bool isValid() const</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">          12 :         bool isValid() const</span></span>
 <span id="L93"><span class="lineNum">      93</span>              :         {</span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">          10 :             return !format.isEmpty() &amp;&amp; device != nullptr;</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">          12 :             return !format.isEmpty() &amp;&amp; device != nullptr;</span></span>
 <span id="L95"><span class="lineNum">      95</span>              :         }</span>
 <span id="L96"><span class="lineNum">      96</span>              :     };</span>
 <span id="L97"><span class="lineNum">      97</span>              : </span>
@@ -216,53 +216,54 @@
 <span id="L158"><span class="lineNum">     158</span>              :     muse::async::Promise&lt;muse::Ret&gt; askAudioGenerationSettings() const;</span>
 <span id="L159"><span class="lineNum">     159</span>              :     muse::async::Promise&lt;muse::RetVal&lt;bool&gt; &gt; needGenerateAudio(bool isPublic) const;</span>
 <span id="L160"><span class="lineNum">     160</span>              :     bool needGenerateAudioAccordingToSettings() const;</span>
-<span id="L161"><span class="lineNum">     161</span>              :     AudioFile exportMp3(const notation::INotationPtr notation) const;</span>
+<span id="L161"><span class="lineNum">     161</span>              :     muse::async::Promise&lt;AudioFile&gt; exportMp3(const notation::INotationPtr notation) const;</span>
 <span id="L162"><span class="lineNum">     162</span>              : </span>
 <span id="L163"><span class="lineNum">     163</span>              :     void showUploadProgressDialog();</span>
 <span id="L164"><span class="lineNum">     164</span>              :     void closeUploadProgressDialog();</span>
 <span id="L165"><span class="lineNum">     165</span>              : </span>
-<span id="L166"><span class="lineNum">     166</span>              :     muse::async::Promise&lt;muse::Ret&gt; uploadProject(const CloudProjectInfo&amp; info, const AudioFile&amp; audio, bool openEditUrl, bool publishMode);</span>
-<span id="L167"><span class="lineNum">     167</span>              :     muse::async::Promise&lt;muse::Ret&gt; uploadAudioToMuseScoreCom(const AudioFile&amp; audio, const QUrl&amp; sourceUrl, const QUrl&amp; urlToOpen,</span>
-<span id="L168"><span class="lineNum">     168</span>              :                                                               bool isFirstSave, bool publishMode);</span>
-<span id="L169"><span class="lineNum">     169</span>              : </span>
-<span id="L170"><span class="lineNum">     170</span>              :     muse::async::Promise&lt;muse::Ret&gt; onUploadFinished(const QUrl&amp; urlToOpen, bool isFirstSave, const AudioFile&amp; audio, bool publishMode);</span>
-<span id="L171"><span class="lineNum">     171</span>              :     muse::async::Promise&lt;muse::Ret&gt; onProjectSuccessfullyUploaded(const QUrl&amp; urlToOpen = QUrl(), bool isFirstSave = true);</span>
-<span id="L172"><span class="lineNum">     172</span>              :     muse::async::Promise&lt;muse::Ret&gt; onProjectUploadFailed(const muse::Ret&amp; ret, const CloudProjectInfo&amp; info, const AudioFile&amp; audio,</span>
-<span id="L173"><span class="lineNum">     173</span>              :                                                           bool openEditUrl, bool publishMode);</span>
-<span id="L174"><span class="lineNum">     174</span>              : </span>
-<span id="L175"><span class="lineNum">     175</span>              :     void onAudioSuccessfullyUploaded(const QUrl&amp; urlToOpen);</span>
-<span id="L176"><span class="lineNum">     176</span>              :     muse::async::Promise&lt;muse::Ret&gt; onAudioUploadFailed(const muse::Ret&amp; ret);</span>
-<span id="L177"><span class="lineNum">     177</span>              : </span>
-<span id="L178"><span class="lineNum">     178</span>              :     muse::async::Promise&lt;muse::Ret&gt; warnCloudIsNotAvailable();</span>
-<span id="L179"><span class="lineNum">     179</span>              : </span>
-<span id="L180"><span class="lineNum">     180</span>              :     muse::async::Promise&lt;bool&gt; askIfUserAgreesToSaveProjectWithErrors(const muse::Ret&amp; ret, const SaveLocation&amp; location);</span>
-<span id="L181"><span class="lineNum">     181</span>              :     muse::async::Promise&lt;bool&gt; askIfUserAgreesToSaveCorruptedScore(const SaveLocation&amp; location, const std::string&amp; errorText,</span>
-<span id="L182"><span class="lineNum">     182</span>              :                                                                    bool newlyCreated);</span>
-<span id="L183"><span class="lineNum">     183</span>              :     muse::async::Promise&lt;muse::Ret&gt; warnCorruptedScoreCannotBeSavedOnCloud(const std::string&amp; errorText, bool canRevert);</span>
-<span id="L184"><span class="lineNum">     184</span>              :     muse::async::Promise&lt;bool&gt; askIfUserAgreesToSaveCorruptedScoreLocally(const std::string&amp; errorText, bool canRevert);</span>
-<span id="L185"><span class="lineNum">     185</span>              :     muse::async::Promise&lt;bool&gt; askIfUserAgreesToSaveCorruptedScoreUponOpenning(const SaveLocation&amp; location, const std::string&amp; errorText);</span>
-<span id="L186"><span class="lineNum">     186</span>              :     muse::async::Promise&lt;muse::Ret&gt; showErrCorruptedScoreCannotBeSaved(const SaveLocation&amp; location, const std::string&amp; errorText);</span>
-<span id="L187"><span class="lineNum">     187</span>              : </span>
-<span id="L188"><span class="lineNum">     188</span>              :     muse::async::Promise&lt;muse::Ret&gt; warnScoreCouldnotBeSaved(const muse::Ret&amp; ret);</span>
-<span id="L189"><span class="lineNum">     189</span>              :     muse::async::Promise&lt;muse::Ret&gt; warnScoreCouldnotBeSaved(const std::string&amp; errorText);</span>
-<span id="L190"><span class="lineNum">     190</span>              :     muse::async::Promise&lt;int&gt; warnScoreHasBecomeCorruptedAfterSave(const muse::Ret&amp; ret);</span>
-<span id="L191"><span class="lineNum">     191</span>              : </span>
-<span id="L192"><span class="lineNum">     192</span>              :     muse::async::Promise&lt;muse::Ret&gt; askToRevertCorruptedScoreToLastSaved();</span>
-<span id="L193"><span class="lineNum">     193</span>              : </span>
-<span id="L194"><span class="lineNum">     194</span>              :     RecentFile makeRecentFile(INotationProjectPtr project);</span>
-<span id="L195"><span class="lineNum">     195</span>              :     void moveProject(INotationProjectPtr project, const muse::io::path_t&amp; newPath, bool replace);</span>
-<span id="L196"><span class="lineNum">     196</span>              : </span>
-<span id="L197"><span class="lineNum">     197</span>              :     QUrl scoreManagerUrl() const;</span>
-<span id="L198"><span class="lineNum">     198</span>              : </span>
-<span id="L199"><span class="lineNum">     199</span>              :     std::set&lt;BusyStatus&gt; m_busyStatuses;</span>
-<span id="L200"><span class="lineNum">     200</span>              :     muse::async::Notification m_busyChanged;</span>
-<span id="L201"><span class="lineNum">     201</span>              : </span>
-<span id="L202"><span class="lineNum">     202</span>              :     muse::ProgressPtr m_uploadingProjectProgress = nullptr;</span>
-<span id="L203"><span class="lineNum">     203</span>              :     muse::ProgressPtr m_uploadingAudioProgress = nullptr;</span>
-<span id="L204"><span class="lineNum">     204</span>              : </span>
-<span id="L205"><span class="lineNum">     205</span>              :     int m_numberOfSavesToCloud = 0;</span>
-<span id="L206"><span class="lineNum">     206</span>              : };</span>
-<span id="L207"><span class="lineNum">     207</span>              : }</span>
+<span id="L166"><span class="lineNum">     166</span>              :     muse::async::Promise&lt;muse::Ret&gt; uploadProject(INotationProjectPtr project, const CloudProjectInfo&amp; info, const AudioFile&amp; audio,</span>
+<span id="L167"><span class="lineNum">     167</span>              :                                                   bool openEditUrl, bool publishMode);</span>
+<span id="L168"><span class="lineNum">     168</span>              :     muse::async::Promise&lt;muse::Ret&gt; uploadAudioToMuseScoreCom(const AudioFile&amp; audio, const QUrl&amp; sourceUrl, const QUrl&amp; urlToOpen,</span>
+<span id="L169"><span class="lineNum">     169</span>              :                                                               bool isFirstSave, bool publishMode);</span>
+<span id="L170"><span class="lineNum">     170</span>              : </span>
+<span id="L171"><span class="lineNum">     171</span>              :     muse::async::Promise&lt;muse::Ret&gt; onUploadFinished(const QUrl&amp; urlToOpen, bool isFirstSave, const AudioFile&amp; audio, bool publishMode);</span>
+<span id="L172"><span class="lineNum">     172</span>              :     muse::async::Promise&lt;muse::Ret&gt; onProjectSuccessfullyUploaded(const QUrl&amp; urlToOpen = QUrl(), bool isFirstSave = true);</span>
+<span id="L173"><span class="lineNum">     173</span>              :     muse::async::Promise&lt;muse::Ret&gt; onProjectUploadFailed(INotationProjectPtr project, const muse::Ret&amp; ret, const CloudProjectInfo&amp; info,</span>
+<span id="L174"><span class="lineNum">     174</span>              :                                                           const AudioFile&amp; audio, bool openEditUrl, bool publishMode);</span>
+<span id="L175"><span class="lineNum">     175</span>              : </span>
+<span id="L176"><span class="lineNum">     176</span>              :     void onAudioSuccessfullyUploaded(const QUrl&amp; urlToOpen);</span>
+<span id="L177"><span class="lineNum">     177</span>              :     muse::async::Promise&lt;muse::Ret&gt; onAudioUploadFailed(const muse::Ret&amp; ret);</span>
+<span id="L178"><span class="lineNum">     178</span>              : </span>
+<span id="L179"><span class="lineNum">     179</span>              :     muse::async::Promise&lt;muse::Ret&gt; warnCloudIsNotAvailable();</span>
+<span id="L180"><span class="lineNum">     180</span>              : </span>
+<span id="L181"><span class="lineNum">     181</span>              :     muse::async::Promise&lt;bool&gt; askIfUserAgreesToSaveProjectWithErrors(const muse::Ret&amp; ret, const SaveLocation&amp; location);</span>
+<span id="L182"><span class="lineNum">     182</span>              :     muse::async::Promise&lt;bool&gt; askIfUserAgreesToSaveCorruptedScore(const SaveLocation&amp; location, const std::string&amp; errorText,</span>
+<span id="L183"><span class="lineNum">     183</span>              :                                                                    bool newlyCreated);</span>
+<span id="L184"><span class="lineNum">     184</span>              :     muse::async::Promise&lt;muse::Ret&gt; warnCorruptedScoreCannotBeSavedOnCloud(const std::string&amp; errorText, bool canRevert);</span>
+<span id="L185"><span class="lineNum">     185</span>              :     muse::async::Promise&lt;bool&gt; askIfUserAgreesToSaveCorruptedScoreLocally(const std::string&amp; errorText, bool canRevert);</span>
+<span id="L186"><span class="lineNum">     186</span>              :     muse::async::Promise&lt;bool&gt; askIfUserAgreesToSaveCorruptedScoreUponOpenning(const SaveLocation&amp; location, const std::string&amp; errorText);</span>
+<span id="L187"><span class="lineNum">     187</span>              :     muse::async::Promise&lt;muse::Ret&gt; showErrCorruptedScoreCannotBeSaved(const SaveLocation&amp; location, const std::string&amp; errorText);</span>
+<span id="L188"><span class="lineNum">     188</span>              : </span>
+<span id="L189"><span class="lineNum">     189</span>              :     muse::async::Promise&lt;muse::Ret&gt; warnScoreCouldnotBeSaved(const muse::Ret&amp; ret);</span>
+<span id="L190"><span class="lineNum">     190</span>              :     muse::async::Promise&lt;muse::Ret&gt; warnScoreCouldnotBeSaved(const std::string&amp; errorText);</span>
+<span id="L191"><span class="lineNum">     191</span>              :     muse::async::Promise&lt;int&gt; warnScoreHasBecomeCorruptedAfterSave(const muse::Ret&amp; ret);</span>
+<span id="L192"><span class="lineNum">     192</span>              : </span>
+<span id="L193"><span class="lineNum">     193</span>              :     muse::async::Promise&lt;muse::Ret&gt; askToRevertCorruptedScoreToLastSaved();</span>
+<span id="L194"><span class="lineNum">     194</span>              : </span>
+<span id="L195"><span class="lineNum">     195</span>              :     RecentFile makeRecentFile(INotationProjectPtr project);</span>
+<span id="L196"><span class="lineNum">     196</span>              :     void moveProject(INotationProjectPtr project, const muse::io::path_t&amp; newPath, bool replace);</span>
+<span id="L197"><span class="lineNum">     197</span>              : </span>
+<span id="L198"><span class="lineNum">     198</span>              :     QUrl scoreManagerUrl() const;</span>
+<span id="L199"><span class="lineNum">     199</span>              : </span>
+<span id="L200"><span class="lineNum">     200</span>              :     std::set&lt;BusyStatus&gt; m_busyStatuses;</span>
+<span id="L201"><span class="lineNum">     201</span>              :     muse::async::Notification m_busyChanged;</span>
+<span id="L202"><span class="lineNum">     202</span>              : </span>
+<span id="L203"><span class="lineNum">     203</span>              :     muse::ProgressPtr m_uploadingProjectProgress = nullptr;</span>
+<span id="L204"><span class="lineNum">     204</span>              :     muse::ProgressPtr m_uploadingAudioProgress = nullptr;</span>
+<span id="L205"><span class="lineNum">     205</span>              : </span>
+<span id="L206"><span class="lineNum">     206</span>              :     int m_numberOfSavesToCloud = 0;</span>
+<span id="L207"><span class="lineNum">     207</span>              : };</span>
+<span id="L208"><span class="lineNum">     208</span>              : }</span>
         </pre>
               </td>
             </tr>

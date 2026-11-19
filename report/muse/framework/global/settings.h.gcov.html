@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -113,7 +113,7 @@
 <span id="L55"><span class="lineNum">      55</span>              :         std::string moduleName;</span>
 <span id="L56"><span class="lineNum">      56</span>              :         std::string key;</span>
 <span id="L57"><span class="lineNum">      57</span>              : </span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC tlaBgGNC">         468 :         Key() = default;</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC tlaBgGNC">         507 :         Key() = default;</span></span>
 <span id="L59"><span class="lineNum">      59</span>              :         Key(std::string moduleName, std::string key);</span>
 <span id="L60"><span class="lineNum">      60</span>              : </span>
 <span id="L61"><span class="lineNum">      61</span>              :         bool isNull() const;</span>
@@ -132,7 +132,7 @@
 <span id="L74"><span class="lineNum">      74</span>              :         Val minValue;</span>
 <span id="L75"><span class="lineNum">      75</span>              :         Val maxValue;</span>
 <span id="L76"><span class="lineNum">      76</span>              : </span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        2952 :         bool isNull() const { return key.isNull(); }</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        3034 :         bool isNull() const { return key.isNull(); }</span></span>
 <span id="L78"><span class="lineNum">      78</span>              :     };</span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
 <span id="L80"><span class="lineNum">      80</span>              :     using Items = std::map&lt;Key, Item&gt;;</span>
@@ -183,20 +183,20 @@
 <span id="L125"><span class="lineNum">     125</span>              :     Items readItems() const;</span>
 <span id="L126"><span class="lineNum">     126</span>              :     void writeValue(const Key&amp; key, const Val&amp; value);</span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span>              :     QString dataPath() const;</span>
+<span id="L128"><span class="lineNum">     128</span>              :     io::path_t dataPath() const;</span>
 <span id="L129"><span class="lineNum">     129</span>              :     QSettings* qsettings() const;</span>
 <span id="L130"><span class="lineNum">     130</span>              : </span>
 <span id="L131"><span class="lineNum">     131</span>              :     mutable QSettings* m_settings = nullptr;</span>
-<span id="L132"><span class="lineNum">     132</span>              :     QString m_dataPath;</span>
+<span id="L132"><span class="lineNum">     132</span>              :     io::path_t m_dataPath;</span>
 <span id="L133"><span class="lineNum">     133</span>              :     mutable Items m_items;</span>
 <span id="L134"><span class="lineNum">     134</span>              :     mutable Items m_localSettings;</span>
 <span id="L135"><span class="lineNum">     135</span>              :     mutable bool m_isTransactionStarted = false;</span>
 <span id="L136"><span class="lineNum">     136</span>              :     mutable std::map&lt;Key, async::Channel&lt;Val&gt; &gt; m_channels;</span>
 <span id="L137"><span class="lineNum">     137</span>              : };</span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">       41281 : inline Settings* settings()</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">       41414 : inline Settings* settings()</span></span>
 <span id="L140"><span class="lineNum">     140</span>              : {</span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">       41281 :     return Settings::instance();</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">       41414 :     return Settings::instance();</span></span>
 <span id="L142"><span class="lineNum">     142</span>              : }</span>
 <span id="L143"><span class="lineNum">     143</span>              : }</span>
         </pre>

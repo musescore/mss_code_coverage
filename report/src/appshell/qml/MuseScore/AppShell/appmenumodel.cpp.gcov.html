@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -98,7 +98,7 @@
 <span id="L40"><span class="lineNum">      40</span>              : #include &quot;notationscene/notationcommands.h&quot;</span>
 <span id="L41"><span class="lineNum">      41</span>              : #include &quot;playback/playbackcommands.h&quot;</span>
 <span id="L42"><span class="lineNum">      42</span>              : #include &quot;palette/palettecommands.h&quot;</span>
-<span id="L43"><span class="lineNum">      43</span>              : #include &quot;dockwindow_v2/dockcommands.h&quot;</span>
+<span id="L43"><span class="lineNum">      43</span>              : #include &quot;dockwindow/dockcommands.h&quot;</span>
 <span id="L44"><span class="lineNum">      44</span>              : #include &quot;update/updatecommands.h&quot;</span>
 <span id="L45"><span class="lineNum">      45</span>              : #include &quot;diagnostics/diagnosticscommands.h&quot;</span>
 <span id="L46"><span class="lineNum">      46</span>              : #include &quot;musesampler/musesamplercommands.h&quot;</span>
@@ -228,10 +228,10 @@
 <span id="L170"><span class="lineNum">     170</span> <span class="tlaUNC">           0 : MenuItemList AppMenuModel::makeChordAndFretboardDiagramsItems()</span></span>
 <span id="L171"><span class="lineNum">     171</span>              : {</span>
 <span id="L172"><span class="lineNum">     172</span>              :     MenuItemList items {</span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_CHORD_TEXT_COMMAND),</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 :         makeMenuItem(AddChordTextCommand::id),</span></span>
 <span id="L174"><span class="lineNum">     174</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_FRETBOARD_DIAGRAM_COMMAND),</span></span>
 <span id="L175"><span class="lineNum">     175</span> <span class="tlaUNC">           0 :         makeSeparator(),</span></span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaUNC">           0 :         makeMenuItem(INSERT_FRETFRAME_COMMAND, TranslatableString(&quot;appshell/menu/add/chordandfret&quot;, &quot;Fretboard diagram legend&quot;))</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaUNC">           0 :         makeMenuItem(InsertFretFrameCommand::id, TranslatableString(&quot;appshell/menu/add/chordandfret&quot;, &quot;Fretboard diagram legend&quot;))</span></span>
 <span id="L177"><span class="lineNum">     177</span> <span class="tlaUNC">           0 :     };</span></span>
 <span id="L178"><span class="lineNum">     178</span>              : </span>
 <span id="L179"><span class="lineNum">     179</span> <span class="tlaUNC">           0 :     return items;</span></span>
@@ -284,17 +284,17 @@
 <span id="L226"><span class="lineNum">     226</span> <span class="tlaUNC">           0 : MenuItem* AppMenuModel::makeEditMenu()</span></span>
 <span id="L227"><span class="lineNum">     227</span>              : {</span>
 <span id="L228"><span class="lineNum">     228</span>              :     MenuItemList editItems {</span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaUNC">           0 :         makeMenuItem(UNDO_COMMAND),</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 :         makeMenuItem(REDO_COMMAND),</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaUNC">           0 :         makeMenuItem(UndoCommand::id),</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 :         makeMenuItem(RedoCommand::id),</span></span>
 <span id="L231"><span class="lineNum">     231</span> <span class="tlaUNC">           0 :         makeMenuItem(DOCK_TOGGLE_UNDO_HISTORY_COMMAND),</span></span>
 <span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 :         makeSeparator(),</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaUNC">           0 :         makeMenuItem(CUT_COMMAND),</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaUNC">           0 :         makeMenuItem(COPY_COMMAND),</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaUNC">           0 :         makeMenuItem(PASTE_COMMAND),</span></span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaUNC">           0 :         makeMenuItem(PASTE_HALF_COMMAND),</span></span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC">           0 :         makeMenuItem(PASTE_DOUBLE_COMMAND),</span></span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaUNC">           0 :         makeMenuItem(COPY_PASTE_SWAP_COMMAND),</span></span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 :         makeMenuItem(DELETE_COMMAND),</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaUNC">           0 :         makeMenuItem(CutCommand::id),</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaUNC">           0 :         makeMenuItem(CopyCommand::id),</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaUNC">           0 :         makeMenuItem(PasteDefaultCommand::id),</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaUNC">           0 :         makeMenuItem(PasteHalfCommand::id),</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC">           0 :         makeMenuItem(PasteDoubleCommand::id),</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaUNC">           0 :         makeMenuItem(CopyPasteSwapCommand::id),</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 :         makeMenuItem(DeleteCommand::id),</span></span>
 <span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :         makeSeparator(),</span></span>
 <span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC">           0 :         makeMenuItem(SelectAllCommand::id),</span></span>
 <span id="L242"><span class="lineNum">     242</span> <span class="tlaUNC">           0 :         makeMenuItem(SelectSectionCommand::id),</span></span>
@@ -316,13 +316,13 @@
 <span id="L258"><span class="lineNum">     258</span>              : {</span>
 <span id="L259"><span class="lineNum">     259</span> <span class="tlaUNC">           0 :     auto stack = undoStack();</span></span>
 <span id="L260"><span class="lineNum">     260</span>              : </span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :     MenuItem&amp; undoItem = findItem(UNDO_COMMAND);</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :     MenuItem&amp; undoItem = findItem(UndoCommand::id);</span></span>
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :     const TranslatableString undoActionName = stack ? stack-&gt;topMostUndoActionName() : TranslatableString();</span></span>
 <span id="L263"><span class="lineNum">     263</span> <span class="tlaUNC">           0 :     undoItem.setTitle(undoActionName.isEmpty()</span></span>
 <span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 :                       ? TranslatableString(&quot;action&quot;, &quot;Undo&quot;)</span></span>
 <span id="L265"><span class="lineNum">     265</span> <span class="tlaUNC">           0 :                       : TranslatableString(&quot;action&quot;, &quot;Undo ‘%1’&quot;).arg(undoActionName));</span></span>
 <span id="L266"><span class="lineNum">     266</span>              : </span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaUNC">           0 :     MenuItem&amp; redoItem = findItem(REDO_COMMAND);</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaUNC">           0 :     MenuItem&amp; redoItem = findItem(RedoCommand::id);</span></span>
 <span id="L268"><span class="lineNum">     268</span> <span class="tlaUNC">           0 :     const TranslatableString redoActionName = stack ? stack-&gt;topMostRedoActionName() : TranslatableString();</span></span>
 <span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC">           0 :     redoItem.setTitle(redoActionName.isEmpty()</span></span>
 <span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 :                       ? TranslatableString(&quot;action&quot;, &quot;Redo&quot;)</span></span>
@@ -425,12 +425,12 @@
 <span id="L367"><span class="lineNum">     367</span> <span class="tlaUNC">           0 :         makeMenuItem(STAFF_IMPLODE_COMMAND),</span></span>
 <span id="L368"><span class="lineNum">     368</span> <span class="tlaUNC">           0 :         makeMenuItem(OPEN_REALIZECHORDSYMBOLS_COMMAND),</span></span>
 <span id="L369"><span class="lineNum">     369</span> <span class="tlaUNC">           0 :         makeMenu(TranslatableString(&quot;appshell/menu/tools&quot;, &quot;&amp;Voices&quot;), {</span></span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaUNC">           0 :             makeMenuItem(SWAP_VOICE_X12_COMMAND),</span></span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaUNC">           0 :             makeMenuItem(SWAP_VOICE_X13_COMMAND),</span></span>
-<span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC">           0 :             makeMenuItem(SWAP_VOICE_X14_COMMAND),</span></span>
-<span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC">           0 :             makeMenuItem(SWAP_VOICE_X23_COMMAND),</span></span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaUNC">           0 :             makeMenuItem(SWAP_VOICE_X24_COMMAND),</span></span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaUNC">           0 :             makeMenuItem(SWAP_VOICE_X34_COMMAND)</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaUNC">           0 :             makeMenuItem(SwapVoice12Command::id),</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaUNC">           0 :             makeMenuItem(SwapVoice13Command::id),</span></span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC">           0 :             makeMenuItem(SwapVoice14Command::id),</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC">           0 :             makeMenuItem(SwapVoice23Command::id),</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaUNC">           0 :             makeMenuItem(SwapVoice24Command::id),</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaUNC">           0 :             makeMenuItem(SwapVoice34Command::id)</span></span>
 <span id="L376"><span class="lineNum">     376</span>              :         }, &quot;menu-voices&quot;),</span>
 <span id="L377"><span class="lineNum">     377</span> <span class="tlaUNC">           0 :         makeMenu(TranslatableString(&quot;appshell/menu/tools&quot;, &quot;&amp;Measures&quot;), {</span></span>
 <span id="L378"><span class="lineNum">     378</span> <span class="tlaUNC">           0 :             makeMenuItem(SPLIT_MEASURE_COMMAND),</span></span>
@@ -452,7 +452,7 @@
 <span id="L394"><span class="lineNum">     394</span> <span class="tlaUNC">           0 :         makeMenuItem(REGROUP_RHYTHMS_COMMAND),</span></span>
 <span id="L395"><span class="lineNum">     395</span> <span class="tlaUNC">           0 :         makeMenuItem(RESEQUENCE_REHEARSAL_MARKS_COMMAND),</span></span>
 <span id="L396"><span class="lineNum">     396</span> <span class="tlaUNC">           0 :         makeSeparator(),</span></span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaUNC">           0 :         makeMenuItem(COPY_LYRICS_COMMAND),</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaUNC">           0 :         makeMenuItem(CopyLyricsCommand::id),</span></span>
 <span id="L398"><span class="lineNum">     398</span> <span class="tlaUNC">           0 :         makeMenuItem(REMOVE_EMPTY_TRAILING_MEASURES_COMMAND),</span></span>
 <span id="L399"><span class="lineNum">     399</span> <span class="tlaUNC">           0 :     };</span></span>
 <span id="L400"><span class="lineNum">     400</span>              : </span>
@@ -669,26 +669,26 @@
 <span id="L611"><span class="lineNum">     611</span> <span class="tlaUNC">           0 : MenuItemList AppMenuModel::makeIntervalsItems()</span></span>
 <span id="L612"><span class="lineNum">     612</span>              : {</span>
 <span id="L613"><span class="lineNum">     613</span>              :     MenuItemList items {</span>
-<span id="L614"><span class="lineNum">     614</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_PLUS_1_COMMAND),</span></span>
-<span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_PLUS_2_COMMAND),</span></span>
-<span id="L616"><span class="lineNum">     616</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_PLUS_3_COMMAND),</span></span>
-<span id="L617"><span class="lineNum">     617</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_PLUS_4_COMMAND),</span></span>
-<span id="L618"><span class="lineNum">     618</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_PLUS_5_COMMAND),</span></span>
-<span id="L619"><span class="lineNum">     619</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_PLUS_6_COMMAND),</span></span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_PLUS_7_COMMAND),</span></span>
-<span id="L621"><span class="lineNum">     621</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_PLUS_8_COMMAND),</span></span>
-<span id="L622"><span class="lineNum">     622</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_PLUS_9_COMMAND),</span></span>
-<span id="L623"><span class="lineNum">     623</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_PLUS_10_COMMAND),</span></span>
+<span id="L614"><span class="lineNum">     614</span> <span class="tlaUNC">           0 :         makeMenuItem(AddInterval1Command::id),</span></span>
+<span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC">           0 :         makeMenuItem(AddInterval2Command::id),</span></span>
+<span id="L616"><span class="lineNum">     616</span> <span class="tlaUNC">           0 :         makeMenuItem(AddInterval3Command::id),</span></span>
+<span id="L617"><span class="lineNum">     617</span> <span class="tlaUNC">           0 :         makeMenuItem(AddInterval4Command::id),</span></span>
+<span id="L618"><span class="lineNum">     618</span> <span class="tlaUNC">           0 :         makeMenuItem(AddInterval5Command::id),</span></span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaUNC">           0 :         makeMenuItem(AddInterval6Command::id),</span></span>
+<span id="L620"><span class="lineNum">     620</span> <span class="tlaUNC">           0 :         makeMenuItem(AddInterval7Command::id),</span></span>
+<span id="L621"><span class="lineNum">     621</span> <span class="tlaUNC">           0 :         makeMenuItem(AddInterval8Command::id),</span></span>
+<span id="L622"><span class="lineNum">     622</span> <span class="tlaUNC">           0 :         makeMenuItem(AddInterval9Command::id),</span></span>
+<span id="L623"><span class="lineNum">     623</span> <span class="tlaUNC">           0 :         makeMenuItem(AddInterval10Command::id),</span></span>
 <span id="L624"><span class="lineNum">     624</span> <span class="tlaUNC">           0 :         makeSeparator(),</span></span>
-<span id="L625"><span class="lineNum">     625</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_MINUS_2_COMMAND),</span></span>
-<span id="L626"><span class="lineNum">     626</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_MINUS_3_COMMAND),</span></span>
-<span id="L627"><span class="lineNum">     627</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_MINUS_4_COMMAND),</span></span>
-<span id="L628"><span class="lineNum">     628</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_MINUS_5_COMMAND),</span></span>
-<span id="L629"><span class="lineNum">     629</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_MINUS_6_COMMAND),</span></span>
-<span id="L630"><span class="lineNum">     630</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_MINUS_7_COMMAND),</span></span>
-<span id="L631"><span class="lineNum">     631</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_MINUS_8_COMMAND),</span></span>
-<span id="L632"><span class="lineNum">     632</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_MINUS_9_COMMAND),</span></span>
-<span id="L633"><span class="lineNum">     633</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INTERVAL_MINUS_10_COMMAND)</span></span>
+<span id="L625"><span class="lineNum">     625</span> <span class="tlaUNC">           0 :         makeMenuItem(AddIntervalMinus2Command::id),</span></span>
+<span id="L626"><span class="lineNum">     626</span> <span class="tlaUNC">           0 :         makeMenuItem(AddIntervalMinus3Command::id),</span></span>
+<span id="L627"><span class="lineNum">     627</span> <span class="tlaUNC">           0 :         makeMenuItem(AddIntervalMinus4Command::id),</span></span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaUNC">           0 :         makeMenuItem(AddIntervalMinus5Command::id),</span></span>
+<span id="L629"><span class="lineNum">     629</span> <span class="tlaUNC">           0 :         makeMenuItem(AddIntervalMinus6Command::id),</span></span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaUNC">           0 :         makeMenuItem(AddIntervalMinus7Command::id),</span></span>
+<span id="L631"><span class="lineNum">     631</span> <span class="tlaUNC">           0 :         makeMenuItem(AddIntervalMinus8Command::id),</span></span>
+<span id="L632"><span class="lineNum">     632</span> <span class="tlaUNC">           0 :         makeMenuItem(AddIntervalMinus9Command::id),</span></span>
+<span id="L633"><span class="lineNum">     633</span> <span class="tlaUNC">           0 :         makeMenuItem(AddIntervalMinus10Command::id)</span></span>
 <span id="L634"><span class="lineNum">     634</span> <span class="tlaUNC">           0 :     };</span></span>
 <span id="L635"><span class="lineNum">     635</span>              : </span>
 <span id="L636"><span class="lineNum">     636</span> <span class="tlaUNC">           0 :     return items;</span></span>
@@ -697,15 +697,15 @@
 <span id="L639"><span class="lineNum">     639</span> <span class="tlaUNC">           0 : MenuItemList AppMenuModel::makeTupletsItems()</span></span>
 <span id="L640"><span class="lineNum">     640</span>              : {</span>
 <span id="L641"><span class="lineNum">     641</span>              :     MenuItemList items {</span>
-<span id="L642"><span class="lineNum">     642</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_DUPLET_COMMAND),</span></span>
-<span id="L643"><span class="lineNum">     643</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_TRIPLET_COMMAND),</span></span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_QUADRUPLET_COMMAND),</span></span>
-<span id="L645"><span class="lineNum">     645</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_QUINTUPLET_COMMAND),</span></span>
-<span id="L646"><span class="lineNum">     646</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_SEXTUPLET_COMMAND),</span></span>
-<span id="L647"><span class="lineNum">     647</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_SEPTUPLET_COMMAND),</span></span>
-<span id="L648"><span class="lineNum">     648</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_OCTUPLET_COMMAND),</span></span>
-<span id="L649"><span class="lineNum">     649</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_NONUPLET_COMMAND),</span></span>
-<span id="L650"><span class="lineNum">     650</span> <span class="tlaUNC">           0 :         makeMenuItem(OPEN_TUPLET_CONFIGURE_COMMAND)</span></span>
+<span id="L642"><span class="lineNum">     642</span> <span class="tlaUNC">           0 :         makeMenuItem(AddDupletCommand::id),</span></span>
+<span id="L643"><span class="lineNum">     643</span> <span class="tlaUNC">           0 :         makeMenuItem(AddTripletCommand::id),</span></span>
+<span id="L644"><span class="lineNum">     644</span> <span class="tlaUNC">           0 :         makeMenuItem(AddQuadrupletCommand::id),</span></span>
+<span id="L645"><span class="lineNum">     645</span> <span class="tlaUNC">           0 :         makeMenuItem(AddQuintupletCommand::id),</span></span>
+<span id="L646"><span class="lineNum">     646</span> <span class="tlaUNC">           0 :         makeMenuItem(AddSextupletCommand::id),</span></span>
+<span id="L647"><span class="lineNum">     647</span> <span class="tlaUNC">           0 :         makeMenuItem(AddSeptupletCommand::id),</span></span>
+<span id="L648"><span class="lineNum">     648</span> <span class="tlaUNC">           0 :         makeMenuItem(AddOctupletCommand::id),</span></span>
+<span id="L649"><span class="lineNum">     649</span> <span class="tlaUNC">           0 :         makeMenuItem(AddNonupletCommand::id),</span></span>
+<span id="L650"><span class="lineNum">     650</span> <span class="tlaUNC">           0 :         makeMenuItem(OpenTupletConfigureCommand::id)</span></span>
 <span id="L651"><span class="lineNum">     651</span> <span class="tlaUNC">           0 :     };</span></span>
 <span id="L652"><span class="lineNum">     652</span>              : </span>
 <span id="L653"><span class="lineNum">     653</span> <span class="tlaUNC">           0 :     return items;</span></span>
@@ -714,14 +714,14 @@
 <span id="L656"><span class="lineNum">     656</span> <span class="tlaUNC">           0 : MenuItemList AppMenuModel::makeMeasuresItems()</span></span>
 <span id="L657"><span class="lineNum">     657</span>              : {</span>
 <span id="L658"><span class="lineNum">     658</span>              :     MenuItemList items {</span>
-<span id="L659"><span class="lineNum">     659</span> <span class="tlaUNC">           0 :         makeMenuItem(INSERT_MEASURE_COMMAND),</span></span>
-<span id="L660"><span class="lineNum">     660</span> <span class="tlaUNC">           0 :         makeMenuItem(APPEND_MEASURE_COMMAND),</span></span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaUNC">           0 :         makeMenuItem(InsertMeasureCommand::id),</span></span>
+<span id="L660"><span class="lineNum">     660</span> <span class="tlaUNC">           0 :         makeMenuItem(AppendMeasureCommand::id),</span></span>
 <span id="L661"><span class="lineNum">     661</span> <span class="tlaUNC">           0 :         makeSeparator(),</span></span>
-<span id="L662"><span class="lineNum">     662</span> <span class="tlaUNC">           0 :         makeMenuItem(INSERT_MEASURES_COMMAND),</span></span>
-<span id="L663"><span class="lineNum">     663</span> <span class="tlaUNC">           0 :         makeMenuItem(INSERT_MEASURES_AFTER_SELECTION_COMMAND),</span></span>
+<span id="L662"><span class="lineNum">     662</span> <span class="tlaUNC">           0 :         makeMenuItem(InsertMeasuresCommand::id),</span></span>
+<span id="L663"><span class="lineNum">     663</span> <span class="tlaUNC">           0 :         makeMenuItem(InsertMeasuresAfterSelectionCommand::id),</span></span>
 <span id="L664"><span class="lineNum">     664</span> <span class="tlaUNC">           0 :         makeSeparator(),</span></span>
-<span id="L665"><span class="lineNum">     665</span> <span class="tlaUNC">           0 :         makeMenuItem(INSERT_MEASURES_AT_START_OF_SCORE_COMMAND),</span></span>
-<span id="L666"><span class="lineNum">     666</span> <span class="tlaUNC">           0 :         makeMenuItem(APPEND_MEASURES_COMMAND)</span></span>
+<span id="L665"><span class="lineNum">     665</span> <span class="tlaUNC">           0 :         makeMenuItem(InsertMeasuresAtStartOfScoreCommand::id),</span></span>
+<span id="L666"><span class="lineNum">     666</span> <span class="tlaUNC">           0 :         makeMenuItem(AppendMeasuresCommand::id)</span></span>
 <span id="L667"><span class="lineNum">     667</span> <span class="tlaUNC">           0 :     };</span></span>
 <span id="L668"><span class="lineNum">     668</span>              : </span>
 <span id="L669"><span class="lineNum">     669</span> <span class="tlaUNC">           0 :     return items;</span></span>
@@ -730,16 +730,16 @@
 <span id="L672"><span class="lineNum">     672</span> <span class="tlaUNC">           0 : MenuItemList AppMenuModel::makeFramesItems()</span></span>
 <span id="L673"><span class="lineNum">     673</span>              : {</span>
 <span id="L674"><span class="lineNum">     674</span>              :     MenuItemList items {</span>
-<span id="L675"><span class="lineNum">     675</span> <span class="tlaUNC">           0 :         makeMenuItem(INSERT_HBOX_COMMAND),</span></span>
-<span id="L676"><span class="lineNum">     676</span> <span class="tlaUNC">           0 :         makeMenuItem(INSERT_VBOX_COMMAND),</span></span>
-<span id="L677"><span class="lineNum">     677</span> <span class="tlaUNC">           0 :         makeMenuItem(INSERT_TEXTFRAME_COMMAND),</span></span>
-<span id="L678"><span class="lineNum">     678</span> <span class="tlaUNC">           0 :         makeMenuItem(INSERT_FRETFRAME_COMMAND),</span></span>
+<span id="L675"><span class="lineNum">     675</span> <span class="tlaUNC">           0 :         makeMenuItem(InsertHBoxCommand::id),</span></span>
+<span id="L676"><span class="lineNum">     676</span> <span class="tlaUNC">           0 :         makeMenuItem(InsertVBoxCommand::id),</span></span>
+<span id="L677"><span class="lineNum">     677</span> <span class="tlaUNC">           0 :         makeMenuItem(InsertTextFrameCommand::id),</span></span>
+<span id="L678"><span class="lineNum">     678</span> <span class="tlaUNC">           0 :         makeMenuItem(InsertFretFrameCommand::id),</span></span>
 <span id="L679"><span class="lineNum">     679</span> <span class="tlaUNC">           0 :         makeSeparator(),</span></span>
 <span id="L680"><span class="lineNum">     680</span> <span class="tlaUNC">           0 :         makeMenu(TranslatableString(&quot;notation&quot;, &quot;Insert at end of score&quot;), {</span></span>
-<span id="L681"><span class="lineNum">     681</span> <span class="tlaUNC">           0 :             makeMenuItem(APPEND_HBOX_COMMAND),</span></span>
-<span id="L682"><span class="lineNum">     682</span> <span class="tlaUNC">           0 :             makeMenuItem(APPEND_VBOX_COMMAND),</span></span>
-<span id="L683"><span class="lineNum">     683</span> <span class="tlaUNC">           0 :             makeMenuItem(APPEND_TEXTFRAME_COMMAND),</span></span>
-<span id="L684"><span class="lineNum">     684</span> <span class="tlaUNC">           0 :             makeMenuItem(APPEND_FRETFRAME_COMMAND)</span></span>
+<span id="L681"><span class="lineNum">     681</span> <span class="tlaUNC">           0 :             makeMenuItem(AppendHBoxCommand::id),</span></span>
+<span id="L682"><span class="lineNum">     682</span> <span class="tlaUNC">           0 :             makeMenuItem(AppendVBoxCommand::id),</span></span>
+<span id="L683"><span class="lineNum">     683</span> <span class="tlaUNC">           0 :             makeMenuItem(AppendTextFrameCommand::id),</span></span>
+<span id="L684"><span class="lineNum">     684</span> <span class="tlaUNC">           0 :             makeMenuItem(AppendFretFrameCommand::id)</span></span>
 <span id="L685"><span class="lineNum">     685</span>              :         })</span>
 <span id="L686"><span class="lineNum">     686</span> <span class="tlaUNC">           0 :     };</span></span>
 <span id="L687"><span class="lineNum">     687</span>              : </span>
@@ -749,27 +749,27 @@
 <span id="L691"><span class="lineNum">     691</span> <span class="tlaUNC">           0 : MenuItemList AppMenuModel::makeTextItems()</span></span>
 <span id="L692"><span class="lineNum">     692</span>              : {</span>
 <span id="L693"><span class="lineNum">     693</span>              :     MenuItemList items {</span>
-<span id="L694"><span class="lineNum">     694</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_TITLE_TEXT_COMMAND),</span></span>
-<span id="L695"><span class="lineNum">     695</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_SUBTITLE_TEXT_COMMAND),</span></span>
-<span id="L696"><span class="lineNum">     696</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_COMPOSER_TEXT_COMMAND),</span></span>
-<span id="L697"><span class="lineNum">     697</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_LYRICIST_TEXT_COMMAND),</span></span>
-<span id="L698"><span class="lineNum">     698</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_PART_TEXT_COMMAND),</span></span>
+<span id="L694"><span class="lineNum">     694</span> <span class="tlaUNC">           0 :         makeMenuItem(AddTitleTextCommand::id),</span></span>
+<span id="L695"><span class="lineNum">     695</span> <span class="tlaUNC">           0 :         makeMenuItem(AddSubtitleTextCommand::id),</span></span>
+<span id="L696"><span class="lineNum">     696</span> <span class="tlaUNC">           0 :         makeMenuItem(AddComposerTextCommand::id),</span></span>
+<span id="L697"><span class="lineNum">     697</span> <span class="tlaUNC">           0 :         makeMenuItem(AddLyricistTextCommand::id),</span></span>
+<span id="L698"><span class="lineNum">     698</span> <span class="tlaUNC">           0 :         makeMenuItem(AddPartTextCommand::id),</span></span>
 <span id="L699"><span class="lineNum">     699</span> <span class="tlaUNC">           0 :         makeSeparator(),</span></span>
-<span id="L700"><span class="lineNum">     700</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_SYSTEM_TEXT_COMMAND),</span></span>
-<span id="L701"><span class="lineNum">     701</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_STAFF_TEXT_COMMAND),</span></span>
+<span id="L700"><span class="lineNum">     700</span> <span class="tlaUNC">           0 :         makeMenuItem(AddSystemTextCommand::id),</span></span>
+<span id="L701"><span class="lineNum">     701</span> <span class="tlaUNC">           0 :         makeMenuItem(AddStaffTextCommand::id),</span></span>
 <span id="L702"><span class="lineNum">     702</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_DYNAMIC_COMMAND),</span></span>
-<span id="L703"><span class="lineNum">     703</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_EXPRESSION_TEXT_COMMAND),</span></span>
-<span id="L704"><span class="lineNum">     704</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_REHEARSALMARK_TEXT_COMMAND),</span></span>
-<span id="L705"><span class="lineNum">     705</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_INSTRUMENT_CHANGE_TEXT_COMMAND),</span></span>
-<span id="L706"><span class="lineNum">     706</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_FINGERING_TEXT_COMMAND),</span></span>
+<span id="L703"><span class="lineNum">     703</span> <span class="tlaUNC">           0 :         makeMenuItem(AddExpressionTextCommand::id),</span></span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaUNC">           0 :         makeMenuItem(AddRehearsalMarkTextCommand::id),</span></span>
+<span id="L705"><span class="lineNum">     705</span> <span class="tlaUNC">           0 :         makeMenuItem(AddInstrumentChangeTextCommand::id),</span></span>
+<span id="L706"><span class="lineNum">     706</span> <span class="tlaUNC">           0 :         makeMenuItem(AddFingeringTextCommand::id),</span></span>
 <span id="L707"><span class="lineNum">     707</span> <span class="tlaUNC">           0 :         makeSeparator(),</span></span>
-<span id="L708"><span class="lineNum">     708</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_STICKING_TEXT_COMMAND),</span></span>
-<span id="L709"><span class="lineNum">     709</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_CHORD_TEXT_COMMAND),</span></span>
-<span id="L710"><span class="lineNum">     710</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_ROMAN_NUMERAL_TEXT_COMMAND),</span></span>
-<span id="L711"><span class="lineNum">     711</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_NASHVILLE_NUMBER_TEXT_COMMAND),</span></span>
-<span id="L712"><span class="lineNum">     712</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_LYRICS_COMMAND),</span></span>
+<span id="L708"><span class="lineNum">     708</span> <span class="tlaUNC">           0 :         makeMenuItem(AddStickingTextCommand::id),</span></span>
+<span id="L709"><span class="lineNum">     709</span> <span class="tlaUNC">           0 :         makeMenuItem(AddChordTextCommand::id),</span></span>
+<span id="L710"><span class="lineNum">     710</span> <span class="tlaUNC">           0 :         makeMenuItem(AddRomanNumeralTextCommand::id),</span></span>
+<span id="L711"><span class="lineNum">     711</span> <span class="tlaUNC">           0 :         makeMenuItem(AddNashvilleNumberTextCommand::id),</span></span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaUNC">           0 :         makeMenuItem(AddLyricsCommand::id),</span></span>
 <span id="L713"><span class="lineNum">     713</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_FIGURED_BASS_COMMAND),</span></span>
-<span id="L714"><span class="lineNum">     714</span> <span class="tlaUNC">           0 :         makeMenuItem(ADD_TEMPO_COMMAND)</span></span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaUNC">           0 :         makeMenuItem(AddTempoCommand::id)</span></span>
 <span id="L715"><span class="lineNum">     715</span> <span class="tlaUNC">           0 :     };</span></span>
 <span id="L716"><span class="lineNum">     716</span>              : </span>
 <span id="L717"><span class="lineNum">     717</span> <span class="tlaUNC">           0 :     return items;</span></span>

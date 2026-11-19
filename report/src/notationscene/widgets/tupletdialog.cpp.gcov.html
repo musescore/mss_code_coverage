@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">85</td>
+            <td class="headerCovTableEntry">86</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -200,14 +200,14 @@
 <span id="L142"><span class="lineNum">     142</span>              : </span>
 <span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC">           0 : void TupletDialog::apply()</span></span>
 <span id="L144"><span class="lineNum">     144</span>              : {</span>
-<span id="L145"><span class="lineNum">     145</span>              :     rcommand::Params params = {</span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC">           0 :         { &quot;ratio&quot;, Val(Fraction(actualNotes-&gt;value(), normalNotes-&gt;value()).toString().toStdString()) },</span></span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaUNC">           0 :         EnumContract&lt;TupletNumberType&gt;::param(numberType()),</span></span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC">           0 :         EnumContract&lt;TupletBracketType&gt;::param(bracketType()),</span></span>
-<span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 :         EnumContract&lt;TupletSelectedDuration&gt;::param(selectedDurationAs()),</span></span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 :     };</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC">           0 :     AddTupletCommand cmd;</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC">           0 :     cmd.ratio = Fraction(actualNotes-&gt;value(), normalNotes-&gt;value()).toString().toStdString();</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaUNC">           0 :     cmd.numberType = numberType();</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC">           0 :     cmd.bracketType = bracketType();</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 :     cmd.selectedDurationAs = selectedDurationAs();</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 :     cmd.autoBaseLen = false;</span></span>
 <span id="L151"><span class="lineNum">     151</span>              : </span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaUNC">           0 :     dispatcher()-&gt;dispatch(ADD_TUPLET_COMMAND, params);</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaUNC">           0 :     dispatcher()-&gt;dispatch(cmd);</span></span>
 <span id="L153"><span class="lineNum">     153</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L154"><span class="lineNum">     154</span>              : </span>
 <span id="L155"><span class="lineNum">     155</span> <span class="tlaUNC">           0 : void TupletDialog::bboxClicked(QAbstractButton* button)</span></span>

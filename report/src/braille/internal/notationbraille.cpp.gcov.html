@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">607</td>
+            <td class="headerCovTableEntry">611</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -622,410 +622,420 @@
 <span id="L564"><span class="lineNum">     564</span> <span class="tlaUNC">           0 :                 return;</span></span>
 <span id="L565"><span class="lineNum">     565</span>              :             }</span>
 <span id="L566"><span class="lineNum">     566</span>              : </span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaUNC">           0 :             interaction()-&gt;noteInput()-&gt;addNote(params, NoteAddingMode::NextChord);</span></span>
-<span id="L568"><span class="lineNum">     568</span>              : </span>
-<span id="L569"><span class="lineNum">     569</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;addedOctave() != -1) {</span></span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaUNC">           0 :                 if (brailleInput()-&gt;addedOctave() &lt; brailleInput()-&gt;octave()) {</span></span>
-<span id="L571"><span class="lineNum">     571</span> <span class="tlaUNC">           0 :                     for (int i = brailleInput()-&gt;addedOctave(); i &lt; brailleInput()-&gt;octave(); i++) {</span></span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaUNC">           0 :                         interaction()-&gt;movePitch(MoveDirection::Down, PitchMode::OCTAVE);</span></span>
-<span id="L573"><span class="lineNum">     573</span>              :                     }</span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaUNC">           0 :                 } else if (brailleInput()-&gt;addedOctave() &gt; brailleInput()-&gt;octave()) {</span></span>
-<span id="L575"><span class="lineNum">     575</span> <span class="tlaUNC">           0 :                     for (int i = brailleInput()-&gt;octave(); i &lt; brailleInput()-&gt;addedOctave(); i++) {</span></span>
-<span id="L576"><span class="lineNum">     576</span> <span class="tlaUNC">           0 :                         interaction()-&gt;movePitch(MoveDirection::Up, PitchMode::OCTAVE);</span></span>
-<span id="L577"><span class="lineNum">     577</span>              :                     }</span>
-<span id="L578"><span class="lineNum">     578</span>              :                 }</span>
-<span id="L579"><span class="lineNum">     579</span> <span class="tlaUNC">           0 :                 brailleInput()-&gt;setOctave(brailleInput()-&gt;addedOctave(), true);</span></span>
-<span id="L580"><span class="lineNum">     580</span>              :             }</span>
-<span id="L581"><span class="lineNum">     581</span>              : </span>
-<span id="L582"><span class="lineNum">     582</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;longSlurStart()) {</span></span>
-<span id="L583"><span class="lineNum">     583</span> <span class="tlaUNC">           0 :                 if (brailleInput()-&gt;longSlurStartNote() == NULL) {</span></span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaUNC">           0 :                     if (currentEngravingItem() != NULL &amp;&amp; currentEngravingItem()-&gt;isNote()) {</span></span>
-<span id="L585"><span class="lineNum">     585</span> <span class="tlaUNC">           0 :                         Note* currentNote = toNote(currentEngravingItem());</span></span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaUNC">           0 :                         brailleInput()-&gt;setLongSlurStartNote(currentNote);</span></span>
-<span id="L587"><span class="lineNum">     587</span>              :                     }</span>
-<span id="L588"><span class="lineNum">     588</span>              :                 }</span>
-<span id="L589"><span class="lineNum">     589</span>              :             }</span>
-<span id="L590"><span class="lineNum">     590</span>              : </span>
-<span id="L591"><span class="lineNum">     591</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;tieStartNote() != NULL) {</span></span>
-<span id="L592"><span class="lineNum">     592</span> <span class="tlaUNC">           0 :                 addTie();</span></span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaUNC">           0 :                 brailleInput()-&gt;clearTie();</span></span>
+<span id="L567"><span class="lineNum">     567</span>              :             //! NOTE There is no one to ask whether to remove a measure repeat for it</span>
+<span id="L568"><span class="lineNum">     568</span> <span class="tlaUNC">           0 :             if (!interaction()-&gt;noteInput()-&gt;canAddNote(NoteAddingMode::NextChord)) {</span></span>
+<span id="L569"><span class="lineNum">     569</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L570"><span class="lineNum">     570</span>              :             }</span>
+<span id="L571"><span class="lineNum">     571</span>              : </span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaUNC">           0 :             interaction()-&gt;noteInput()-&gt;addNote(params, NoteAddingMode::NextChord);</span></span>
+<span id="L573"><span class="lineNum">     573</span>              : </span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;addedOctave() != -1) {</span></span>
+<span id="L575"><span class="lineNum">     575</span> <span class="tlaUNC">           0 :                 if (brailleInput()-&gt;addedOctave() &lt; brailleInput()-&gt;octave()) {</span></span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaUNC">           0 :                     for (int i = brailleInput()-&gt;addedOctave(); i &lt; brailleInput()-&gt;octave(); i++) {</span></span>
+<span id="L577"><span class="lineNum">     577</span> <span class="tlaUNC">           0 :                         interaction()-&gt;movePitch(MoveDirection::Down, PitchMode::OCTAVE);</span></span>
+<span id="L578"><span class="lineNum">     578</span>              :                     }</span>
+<span id="L579"><span class="lineNum">     579</span> <span class="tlaUNC">           0 :                 } else if (brailleInput()-&gt;addedOctave() &gt; brailleInput()-&gt;octave()) {</span></span>
+<span id="L580"><span class="lineNum">     580</span> <span class="tlaUNC">           0 :                     for (int i = brailleInput()-&gt;octave(); i &lt; brailleInput()-&gt;addedOctave(); i++) {</span></span>
+<span id="L581"><span class="lineNum">     581</span> <span class="tlaUNC">           0 :                         interaction()-&gt;movePitch(MoveDirection::Up, PitchMode::OCTAVE);</span></span>
+<span id="L582"><span class="lineNum">     582</span>              :                     }</span>
+<span id="L583"><span class="lineNum">     583</span>              :                 }</span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaUNC">           0 :                 brailleInput()-&gt;setOctave(brailleInput()-&gt;addedOctave(), true);</span></span>
+<span id="L585"><span class="lineNum">     585</span>              :             }</span>
+<span id="L586"><span class="lineNum">     586</span>              : </span>
+<span id="L587"><span class="lineNum">     587</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;longSlurStart()) {</span></span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaUNC">           0 :                 if (brailleInput()-&gt;longSlurStartNote() == NULL) {</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaUNC">           0 :                     if (currentEngravingItem() != NULL &amp;&amp; currentEngravingItem()-&gt;isNote()) {</span></span>
+<span id="L590"><span class="lineNum">     590</span> <span class="tlaUNC">           0 :                         Note* currentNote = toNote(currentEngravingItem());</span></span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaUNC">           0 :                         brailleInput()-&gt;setLongSlurStartNote(currentNote);</span></span>
+<span id="L592"><span class="lineNum">     592</span>              :                     }</span>
+<span id="L593"><span class="lineNum">     593</span>              :                 }</span>
 <span id="L594"><span class="lineNum">     594</span>              :             }</span>
 <span id="L595"><span class="lineNum">     595</span>              : </span>
-<span id="L596"><span class="lineNum">     596</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;slurStartNote() != NULL) {</span></span>
-<span id="L597"><span class="lineNum">     597</span> <span class="tlaUNC">           0 :                 addSlur();</span></span>
-<span id="L598"><span class="lineNum">     598</span> <span class="tlaUNC">           0 :                 brailleInput()-&gt;clearSlur();</span></span>
+<span id="L596"><span class="lineNum">     596</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;tieStartNote() != NULL) {</span></span>
+<span id="L597"><span class="lineNum">     597</span> <span class="tlaUNC">           0 :                 addTie();</span></span>
+<span id="L598"><span class="lineNum">     598</span> <span class="tlaUNC">           0 :                 brailleInput()-&gt;clearTie();</span></span>
 <span id="L599"><span class="lineNum">     599</span>              :             }</span>
 <span id="L600"><span class="lineNum">     600</span>              : </span>
-<span id="L601"><span class="lineNum">     601</span> <span class="tlaUNC">           0 :             playbackController()-&gt;playElements({ currentEngravingItem() });</span></span>
-<span id="L602"><span class="lineNum">     602</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L604"><span class="lineNum">     604</span>              :         }</span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::Rest: {</span></span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;rest&quot;;</span></span>
-<span id="L607"><span class="lineNum">     607</span> <span class="tlaUNC">           0 :             DurationType d = brailleInput()-&gt;getCloseDuration();</span></span>
-<span id="L608"><span class="lineNum">     608</span> <span class="tlaUNC">           0 :             Duration duration = Duration(d);</span></span>
-<span id="L609"><span class="lineNum">     609</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;dots() &gt; 0) {</span></span>
-<span id="L610"><span class="lineNum">     610</span> <span class="tlaUNC">           0 :                 duration.setDots(brailleInput()-&gt;dots());</span></span>
-<span id="L611"><span class="lineNum">     611</span>              :             }</span>
-<span id="L612"><span class="lineNum">     612</span> <span class="tlaUNC">           0 :             setInputNoteDuration(Duration(duration));</span></span>
-<span id="L613"><span class="lineNum">     613</span> <span class="tlaUNC">           0 :             interaction()-&gt;putRest(duration);</span></span>
-<span id="L614"><span class="lineNum">     614</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
-<span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L616"><span class="lineNum">     616</span>              :         }</span>
-<span id="L617"><span class="lineNum">     617</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::Interval: {</span></span>
-<span id="L618"><span class="lineNum">     618</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;interval&quot;;</span></span>
-<span id="L619"><span class="lineNum">     619</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;accidental() != mu::notation::AccidentalType::NONE) {</span></span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaUNC">           0 :                 interaction()-&gt;noteInput()-&gt;setAccidental(brailleInput()-&gt;accidental());</span></span>
-<span id="L621"><span class="lineNum">     621</span>              :             }</span>
-<span id="L622"><span class="lineNum">     622</span>              : </span>
-<span id="L623"><span class="lineNum">     623</span> <span class="tlaUNC">           0 :             NoteInputParams params;</span></span>
-<span id="L624"><span class="lineNum">     624</span> <span class="tlaUNC">           0 :             const int note = static_cast&lt;int&gt;(brailleInput()-&gt;noteName());</span></span>
-<span id="L625"><span class="lineNum">     625</span> <span class="tlaUNC">           0 :             bool ok = mu::engraving::NoteInput::resolveNoteInputParams(score(), note, /*addFlag*/ true, params);</span></span>
-<span id="L626"><span class="lineNum">     626</span> <span class="tlaUNC">           0 :             if (!ok) {</span></span>
-<span id="L627"><span class="lineNum">     627</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L628"><span class="lineNum">     628</span>              :             }</span>
-<span id="L629"><span class="lineNum">     629</span>              : </span>
-<span id="L630"><span class="lineNum">     630</span> <span class="tlaUNC">           0 :             interaction()-&gt;noteInput()-&gt;addNote(params, NoteAddingMode::CurrentChord);</span></span>
-<span id="L631"><span class="lineNum">     631</span>              : </span>
-<span id="L632"><span class="lineNum">     632</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;addedOctave() != -1) {</span></span>
-<span id="L633"><span class="lineNum">     633</span> <span class="tlaUNC">           0 :                 if (brailleInput()-&gt;addedOctave() &lt; brailleInput()-&gt;octave()) {</span></span>
-<span id="L634"><span class="lineNum">     634</span> <span class="tlaUNC">           0 :                     for (int i = brailleInput()-&gt;addedOctave(); i &lt; brailleInput()-&gt;octave(); i++) {</span></span>
-<span id="L635"><span class="lineNum">     635</span> <span class="tlaUNC">           0 :                         interaction()-&gt;movePitch(MoveDirection::Down, PitchMode::OCTAVE);</span></span>
-<span id="L636"><span class="lineNum">     636</span>              :                     }</span>
-<span id="L637"><span class="lineNum">     637</span> <span class="tlaUNC">           0 :                 } else if (brailleInput()-&gt;addedOctave() &gt; brailleInput()-&gt;octave()) {</span></span>
-<span id="L638"><span class="lineNum">     638</span> <span class="tlaUNC">           0 :                     for (int i = brailleInput()-&gt;octave(); i &lt; brailleInput()-&gt;addedOctave(); i++) {</span></span>
-<span id="L639"><span class="lineNum">     639</span> <span class="tlaUNC">           0 :                         interaction()-&gt;movePitch(MoveDirection::Up, PitchMode::OCTAVE);</span></span>
-<span id="L640"><span class="lineNum">     640</span>              :                     }</span>
-<span id="L641"><span class="lineNum">     641</span>              :                 }</span>
-<span id="L642"><span class="lineNum">     642</span> <span class="tlaUNC">           0 :                 brailleInput()-&gt;setOctave(brailleInput()-&gt;addedOctave());</span></span>
-<span id="L643"><span class="lineNum">     643</span>              :             }</span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaUNC">           0 :             playbackController()-&gt;playElements({ currentEngravingItem() });</span></span>
-<span id="L645"><span class="lineNum">     645</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
-<span id="L646"><span class="lineNum">     646</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L647"><span class="lineNum">     647</span>              :         }</span>
-<span id="L648"><span class="lineNum">     648</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::Tuplet: case BieSequencePatternType::Tuplet3: {</span></span>
-<span id="L649"><span class="lineNum">     649</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;tuplet&quot;;</span></span>
-<span id="L650"><span class="lineNum">     650</span> <span class="tlaUNC">           0 :             const QString stateTuplet = muse::qtrc(&quot;braille/notation&quot;, &quot;Tuplet %1&quot;).arg(brailleInput()-&gt;tupletNumber());</span></span>
-<span id="L651"><span class="lineNum">     651</span> <span class="tlaUNC">           0 :             accessibilityController()-&gt;announce(stateTuplet);</span></span>
-<span id="L652"><span class="lineNum">     652</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L653"><span class="lineNum">     653</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L654"><span class="lineNum">     654</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::Tie: {</span></span>
-<span id="L655"><span class="lineNum">     655</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;tie&quot;;</span></span>
-<span id="L656"><span class="lineNum">     656</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;tie()) {</span></span>
-<span id="L657"><span class="lineNum">     657</span> <span class="tlaUNC">           0 :                 if (currentEngravingItem() != NULL &amp;&amp; currentEngravingItem()-&gt;isNote()) {</span></span>
-<span id="L658"><span class="lineNum">     658</span> <span class="tlaUNC">           0 :                     Note* note = toNote(currentEngravingItem());</span></span>
-<span id="L659"><span class="lineNum">     659</span> <span class="tlaUNC">           0 :                     brailleInput()-&gt;setTieStartNote(note);</span></span>
-<span id="L660"><span class="lineNum">     660</span>              :                 }</span>
-<span id="L661"><span class="lineNum">     661</span>              :             }</span>
-<span id="L662"><span class="lineNum">     662</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
-<span id="L663"><span class="lineNum">     663</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L664"><span class="lineNum">     664</span>              :         }</span>
-<span id="L665"><span class="lineNum">     665</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::NoteSlur: {</span></span>
-<span id="L666"><span class="lineNum">     666</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;note slur&quot;;</span></span>
-<span id="L667"><span class="lineNum">     667</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;noteSlur()) {</span></span>
-<span id="L668"><span class="lineNum">     668</span> <span class="tlaUNC">           0 :                 if (brailleInput()-&gt;slurStartNote() == NULL) {</span></span>
-<span id="L669"><span class="lineNum">     669</span> <span class="tlaUNC">           0 :                     if (currentEngravingItem() != NULL &amp;&amp; currentEngravingItem()-&gt;isNote()) {</span></span>
-<span id="L670"><span class="lineNum">     670</span> <span class="tlaUNC">           0 :                         Note* note = toNote(currentEngravingItem());</span></span>
-<span id="L671"><span class="lineNum">     671</span> <span class="tlaUNC">           0 :                         brailleInput()-&gt;setSlurStartNote(note);</span></span>
-<span id="L672"><span class="lineNum">     672</span>              :                     }</span>
-<span id="L673"><span class="lineNum">     673</span>              :                 }</span>
-<span id="L674"><span class="lineNum">     674</span>              :             }</span>
-<span id="L675"><span class="lineNum">     675</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
-<span id="L676"><span class="lineNum">     676</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L677"><span class="lineNum">     677</span>              :         }</span>
-<span id="L678"><span class="lineNum">     678</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::LongSlurStop: {</span></span>
-<span id="L679"><span class="lineNum">     679</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;long slur stop&quot;;</span></span>
-<span id="L680"><span class="lineNum">     680</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;longSlurStop()) {</span></span>
-<span id="L681"><span class="lineNum">     681</span> <span class="tlaUNC">           0 :                 if (brailleInput()-&gt;longSlurStartNote() != NULL) {</span></span>
-<span id="L682"><span class="lineNum">     682</span> <span class="tlaUNC">           0 :                     addLongSlur();</span></span>
-<span id="L683"><span class="lineNum">     683</span> <span class="tlaUNC">           0 :                     brailleInput()-&gt;clearLongSlur();</span></span>
-<span id="L684"><span class="lineNum">     684</span>              :                 }</span>
-<span id="L685"><span class="lineNum">     685</span>              :             }</span>
-<span id="L686"><span class="lineNum">     686</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
-<span id="L687"><span class="lineNum">     687</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L688"><span class="lineNum">     688</span>              :         }</span>
-<span id="L689"><span class="lineNum">     689</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::Dot: {</span></span>
-<span id="L690"><span class="lineNum">     690</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;dot &quot; &lt;&lt; brailleInput()-&gt;dots();</span></span>
-<span id="L691"><span class="lineNum">     691</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;dots() &gt; 0) {</span></span>
-<span id="L692"><span class="lineNum">     692</span> <span class="tlaUNC">           0 :                 interaction()-&gt;increaseDecreaseDuration(-brailleInput()-&gt;dots(), true);</span></span>
-<span id="L693"><span class="lineNum">     693</span>              :             }</span>
-<span id="L694"><span class="lineNum">     694</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
-<span id="L695"><span class="lineNum">     695</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L696"><span class="lineNum">     696</span>              :         }</span>
-<span id="L697"><span class="lineNum">     697</span> <span class="tlaUNC">           0 :         default: {</span></span>
-<span id="L698"><span class="lineNum">     698</span>              :             // TODO</span>
-<span id="L699"><span class="lineNum">     699</span>              :         }</span>
-<span id="L700"><span class="lineNum">     700</span>              :         }</span>
-<span id="L701"><span class="lineNum">     701</span> <span class="tlaUNC">           0 :     } else if (isBrailleInputMode() &amp;&amp; !sequence.isEmpty()) {</span></span>
-<span id="L702"><span class="lineNum">     702</span> <span class="tlaUNC">           0 :         QString pattern = parseBrailleKeyInput(sequence);</span></span>
-<span id="L703"><span class="lineNum">     703</span> <span class="tlaUNC">           0 :         if (!pattern.isEmpty()) {</span></span>
-<span id="L704"><span class="lineNum">     704</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;insertToBuffer(pattern);</span></span>
-<span id="L705"><span class="lineNum">     705</span>              :         } else {</span>
-<span id="L706"><span class="lineNum">     706</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;insertToBuffer(sequence);</span></span>
-<span id="L707"><span class="lineNum">     707</span>              :         }</span>
-<span id="L708"><span class="lineNum">     708</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L709"><span class="lineNum">     709</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L710"><span class="lineNum">     710</span>              : </span>
-<span id="L711"><span class="lineNum">     711</span> <span class="tlaUNC">           0 : bool NotationBraille::addTie()</span></span>
-<span id="L712"><span class="lineNum">     712</span>              : {</span>
-<span id="L713"><span class="lineNum">     713</span> <span class="tlaUNC">           0 :     if (!brailleInput()-&gt;tieStartNote()) {</span></span>
-<span id="L714"><span class="lineNum">     714</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L715"><span class="lineNum">     715</span>              :     }</span>
-<span id="L716"><span class="lineNum">     716</span>              : </span>
-<span id="L717"><span class="lineNum">     717</span> <span class="tlaUNC">           0 :     if (!currentEngravingItem() || !currentEngravingItem()-&gt;isNote()) {</span></span>
-<span id="L718"><span class="lineNum">     718</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L719"><span class="lineNum">     719</span>              :     }</span>
+<span id="L601"><span class="lineNum">     601</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;slurStartNote() != NULL) {</span></span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaUNC">           0 :                 addSlur();</span></span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaUNC">           0 :                 brailleInput()-&gt;clearSlur();</span></span>
+<span id="L604"><span class="lineNum">     604</span>              :             }</span>
+<span id="L605"><span class="lineNum">     605</span>              : </span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaUNC">           0 :             playbackController()-&gt;playElements({ currentEngravingItem() });</span></span>
+<span id="L607"><span class="lineNum">     607</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
+<span id="L608"><span class="lineNum">     608</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L609"><span class="lineNum">     609</span>              :         }</span>
+<span id="L610"><span class="lineNum">     610</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::Rest: {</span></span>
+<span id="L611"><span class="lineNum">     611</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;rest&quot;;</span></span>
+<span id="L612"><span class="lineNum">     612</span> <span class="tlaUNC">           0 :             DurationType d = brailleInput()-&gt;getCloseDuration();</span></span>
+<span id="L613"><span class="lineNum">     613</span> <span class="tlaUNC">           0 :             Duration duration = Duration(d);</span></span>
+<span id="L614"><span class="lineNum">     614</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;dots() &gt; 0) {</span></span>
+<span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC">           0 :                 duration.setDots(brailleInput()-&gt;dots());</span></span>
+<span id="L616"><span class="lineNum">     616</span>              :             }</span>
+<span id="L617"><span class="lineNum">     617</span> <span class="tlaUNC">           0 :             setInputNoteDuration(Duration(duration));</span></span>
+<span id="L618"><span class="lineNum">     618</span> <span class="tlaUNC">           0 :             interaction()-&gt;putRest(duration);</span></span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
+<span id="L620"><span class="lineNum">     620</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L621"><span class="lineNum">     621</span>              :         }</span>
+<span id="L622"><span class="lineNum">     622</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::Interval: {</span></span>
+<span id="L623"><span class="lineNum">     623</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;interval&quot;;</span></span>
+<span id="L624"><span class="lineNum">     624</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;accidental() != mu::notation::AccidentalType::NONE) {</span></span>
+<span id="L625"><span class="lineNum">     625</span> <span class="tlaUNC">           0 :                 interaction()-&gt;noteInput()-&gt;setAccidental(brailleInput()-&gt;accidental());</span></span>
+<span id="L626"><span class="lineNum">     626</span>              :             }</span>
+<span id="L627"><span class="lineNum">     627</span>              : </span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaUNC">           0 :             NoteInputParams params;</span></span>
+<span id="L629"><span class="lineNum">     629</span> <span class="tlaUNC">           0 :             const int note = static_cast&lt;int&gt;(brailleInput()-&gt;noteName());</span></span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaUNC">           0 :             bool ok = mu::engraving::NoteInput::resolveNoteInputParams(score(), note, /*addFlag*/ true, params);</span></span>
+<span id="L631"><span class="lineNum">     631</span> <span class="tlaUNC">           0 :             if (!ok) {</span></span>
+<span id="L632"><span class="lineNum">     632</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L633"><span class="lineNum">     633</span>              :             }</span>
+<span id="L634"><span class="lineNum">     634</span>              : </span>
+<span id="L635"><span class="lineNum">     635</span>              :             //! NOTE There is no one to ask whether to remove a measure repeat for it</span>
+<span id="L636"><span class="lineNum">     636</span> <span class="tlaUNC">           0 :             if (!interaction()-&gt;noteInput()-&gt;canAddNote(NoteAddingMode::CurrentChord)) {</span></span>
+<span id="L637"><span class="lineNum">     637</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L638"><span class="lineNum">     638</span>              :             }</span>
+<span id="L639"><span class="lineNum">     639</span>              : </span>
+<span id="L640"><span class="lineNum">     640</span> <span class="tlaUNC">           0 :             interaction()-&gt;noteInput()-&gt;addNote(params, NoteAddingMode::CurrentChord);</span></span>
+<span id="L641"><span class="lineNum">     641</span>              : </span>
+<span id="L642"><span class="lineNum">     642</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;addedOctave() != -1) {</span></span>
+<span id="L643"><span class="lineNum">     643</span> <span class="tlaUNC">           0 :                 if (brailleInput()-&gt;addedOctave() &lt; brailleInput()-&gt;octave()) {</span></span>
+<span id="L644"><span class="lineNum">     644</span> <span class="tlaUNC">           0 :                     for (int i = brailleInput()-&gt;addedOctave(); i &lt; brailleInput()-&gt;octave(); i++) {</span></span>
+<span id="L645"><span class="lineNum">     645</span> <span class="tlaUNC">           0 :                         interaction()-&gt;movePitch(MoveDirection::Down, PitchMode::OCTAVE);</span></span>
+<span id="L646"><span class="lineNum">     646</span>              :                     }</span>
+<span id="L647"><span class="lineNum">     647</span> <span class="tlaUNC">           0 :                 } else if (brailleInput()-&gt;addedOctave() &gt; brailleInput()-&gt;octave()) {</span></span>
+<span id="L648"><span class="lineNum">     648</span> <span class="tlaUNC">           0 :                     for (int i = brailleInput()-&gt;octave(); i &lt; brailleInput()-&gt;addedOctave(); i++) {</span></span>
+<span id="L649"><span class="lineNum">     649</span> <span class="tlaUNC">           0 :                         interaction()-&gt;movePitch(MoveDirection::Up, PitchMode::OCTAVE);</span></span>
+<span id="L650"><span class="lineNum">     650</span>              :                     }</span>
+<span id="L651"><span class="lineNum">     651</span>              :                 }</span>
+<span id="L652"><span class="lineNum">     652</span> <span class="tlaUNC">           0 :                 brailleInput()-&gt;setOctave(brailleInput()-&gt;addedOctave());</span></span>
+<span id="L653"><span class="lineNum">     653</span>              :             }</span>
+<span id="L654"><span class="lineNum">     654</span> <span class="tlaUNC">           0 :             playbackController()-&gt;playElements({ currentEngravingItem() });</span></span>
+<span id="L655"><span class="lineNum">     655</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
+<span id="L656"><span class="lineNum">     656</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L657"><span class="lineNum">     657</span>              :         }</span>
+<span id="L658"><span class="lineNum">     658</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::Tuplet: case BieSequencePatternType::Tuplet3: {</span></span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;tuplet&quot;;</span></span>
+<span id="L660"><span class="lineNum">     660</span> <span class="tlaUNC">           0 :             const QString stateTuplet = muse::qtrc(&quot;braille/notation&quot;, &quot;Tuplet %1&quot;).arg(brailleInput()-&gt;tupletNumber());</span></span>
+<span id="L661"><span class="lineNum">     661</span> <span class="tlaUNC">           0 :             accessibilityController()-&gt;announce(stateTuplet);</span></span>
+<span id="L662"><span class="lineNum">     662</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L663"><span class="lineNum">     663</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L664"><span class="lineNum">     664</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::Tie: {</span></span>
+<span id="L665"><span class="lineNum">     665</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;tie&quot;;</span></span>
+<span id="L666"><span class="lineNum">     666</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;tie()) {</span></span>
+<span id="L667"><span class="lineNum">     667</span> <span class="tlaUNC">           0 :                 if (currentEngravingItem() != NULL &amp;&amp; currentEngravingItem()-&gt;isNote()) {</span></span>
+<span id="L668"><span class="lineNum">     668</span> <span class="tlaUNC">           0 :                     Note* note = toNote(currentEngravingItem());</span></span>
+<span id="L669"><span class="lineNum">     669</span> <span class="tlaUNC">           0 :                     brailleInput()-&gt;setTieStartNote(note);</span></span>
+<span id="L670"><span class="lineNum">     670</span>              :                 }</span>
+<span id="L671"><span class="lineNum">     671</span>              :             }</span>
+<span id="L672"><span class="lineNum">     672</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
+<span id="L673"><span class="lineNum">     673</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L674"><span class="lineNum">     674</span>              :         }</span>
+<span id="L675"><span class="lineNum">     675</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::NoteSlur: {</span></span>
+<span id="L676"><span class="lineNum">     676</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;note slur&quot;;</span></span>
+<span id="L677"><span class="lineNum">     677</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;noteSlur()) {</span></span>
+<span id="L678"><span class="lineNum">     678</span> <span class="tlaUNC">           0 :                 if (brailleInput()-&gt;slurStartNote() == NULL) {</span></span>
+<span id="L679"><span class="lineNum">     679</span> <span class="tlaUNC">           0 :                     if (currentEngravingItem() != NULL &amp;&amp; currentEngravingItem()-&gt;isNote()) {</span></span>
+<span id="L680"><span class="lineNum">     680</span> <span class="tlaUNC">           0 :                         Note* note = toNote(currentEngravingItem());</span></span>
+<span id="L681"><span class="lineNum">     681</span> <span class="tlaUNC">           0 :                         brailleInput()-&gt;setSlurStartNote(note);</span></span>
+<span id="L682"><span class="lineNum">     682</span>              :                     }</span>
+<span id="L683"><span class="lineNum">     683</span>              :                 }</span>
+<span id="L684"><span class="lineNum">     684</span>              :             }</span>
+<span id="L685"><span class="lineNum">     685</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
+<span id="L686"><span class="lineNum">     686</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L687"><span class="lineNum">     687</span>              :         }</span>
+<span id="L688"><span class="lineNum">     688</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::LongSlurStop: {</span></span>
+<span id="L689"><span class="lineNum">     689</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;long slur stop&quot;;</span></span>
+<span id="L690"><span class="lineNum">     690</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;longSlurStop()) {</span></span>
+<span id="L691"><span class="lineNum">     691</span> <span class="tlaUNC">           0 :                 if (brailleInput()-&gt;longSlurStartNote() != NULL) {</span></span>
+<span id="L692"><span class="lineNum">     692</span> <span class="tlaUNC">           0 :                     addLongSlur();</span></span>
+<span id="L693"><span class="lineNum">     693</span> <span class="tlaUNC">           0 :                     brailleInput()-&gt;clearLongSlur();</span></span>
+<span id="L694"><span class="lineNum">     694</span>              :                 }</span>
+<span id="L695"><span class="lineNum">     695</span>              :             }</span>
+<span id="L696"><span class="lineNum">     696</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
+<span id="L697"><span class="lineNum">     697</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L698"><span class="lineNum">     698</span>              :         }</span>
+<span id="L699"><span class="lineNum">     699</span> <span class="tlaUNC">           0 :         case BieSequencePatternType::Dot: {</span></span>
+<span id="L700"><span class="lineNum">     700</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;dot &quot; &lt;&lt; brailleInput()-&gt;dots();</span></span>
+<span id="L701"><span class="lineNum">     701</span> <span class="tlaUNC">           0 :             if (brailleInput()-&gt;dots() &gt; 0) {</span></span>
+<span id="L702"><span class="lineNum">     702</span> <span class="tlaUNC">           0 :                 interaction()-&gt;increaseDecreaseDuration(-brailleInput()-&gt;dots(), true);</span></span>
+<span id="L703"><span class="lineNum">     703</span>              :             }</span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;reset();</span></span>
+<span id="L705"><span class="lineNum">     705</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L706"><span class="lineNum">     706</span>              :         }</span>
+<span id="L707"><span class="lineNum">     707</span> <span class="tlaUNC">           0 :         default: {</span></span>
+<span id="L708"><span class="lineNum">     708</span>              :             // TODO</span>
+<span id="L709"><span class="lineNum">     709</span>              :         }</span>
+<span id="L710"><span class="lineNum">     710</span>              :         }</span>
+<span id="L711"><span class="lineNum">     711</span> <span class="tlaUNC">           0 :     } else if (isBrailleInputMode() &amp;&amp; !sequence.isEmpty()) {</span></span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaUNC">           0 :         QString pattern = parseBrailleKeyInput(sequence);</span></span>
+<span id="L713"><span class="lineNum">     713</span> <span class="tlaUNC">           0 :         if (!pattern.isEmpty()) {</span></span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;insertToBuffer(pattern);</span></span>
+<span id="L715"><span class="lineNum">     715</span>              :         } else {</span>
+<span id="L716"><span class="lineNum">     716</span> <span class="tlaUNC">           0 :             brailleInput()-&gt;insertToBuffer(sequence);</span></span>
+<span id="L717"><span class="lineNum">     717</span>              :         }</span>
+<span id="L718"><span class="lineNum">     718</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L719"><span class="lineNum">     719</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L720"><span class="lineNum">     720</span>              : </span>
-<span id="L721"><span class="lineNum">     721</span> <span class="tlaUNC">           0 :     score()-&gt;startCmd(TranslatableString(&quot;undoableAction&quot;, &quot;Add tie&quot;));</span></span>
-<span id="L722"><span class="lineNum">     722</span>              : </span>
-<span id="L723"><span class="lineNum">     723</span> <span class="tlaUNC">           0 :     Note* startNote = brailleInput()-&gt;tieStartNote();</span></span>
-<span id="L724"><span class="lineNum">     724</span> <span class="tlaUNC">           0 :     Note* endNote = toNote(currentEngravingItem());</span></span>
-<span id="L725"><span class="lineNum">     725</span>              : </span>
-<span id="L726"><span class="lineNum">     726</span> <span class="tlaUNC">           0 :     Tie* tie = Factory::createTie(startNote);</span></span>
-<span id="L727"><span class="lineNum">     727</span> <span class="tlaUNC">           0 :     tie-&gt;setStartNote(startNote);</span></span>
-<span id="L728"><span class="lineNum">     728</span> <span class="tlaUNC">           0 :     tie-&gt;setEndNote(endNote);</span></span>
-<span id="L729"><span class="lineNum">     729</span> <span class="tlaUNC">           0 :     tie-&gt;setTrack(startNote-&gt;track());</span></span>
-<span id="L730"><span class="lineNum">     730</span> <span class="tlaUNC">           0 :     tie-&gt;setTick(startNote-&gt;chord()-&gt;segment()-&gt;tick());</span></span>
-<span id="L731"><span class="lineNum">     731</span> <span class="tlaUNC">           0 :     tie-&gt;setTicks(endNote-&gt;chord()-&gt;segment()-&gt;tick() - startNote-&gt;chord()-&gt;segment()-&gt;tick());</span></span>
-<span id="L732"><span class="lineNum">     732</span> <span class="tlaUNC">           0 :     score()-&gt;undoAddElement(tie);</span></span>
-<span id="L733"><span class="lineNum">     733</span> <span class="tlaUNC">           0 :     score()-&gt;endCmd();</span></span>
-<span id="L734"><span class="lineNum">     734</span> <span class="tlaUNC">           0 :     return true;</span></span>
-<span id="L735"><span class="lineNum">     735</span>              : }</span>
-<span id="L736"><span class="lineNum">     736</span>              : </span>
-<span id="L737"><span class="lineNum">     737</span> <span class="tlaUNC">           0 : bool NotationBraille::addSlur()</span></span>
-<span id="L738"><span class="lineNum">     738</span>              : {</span>
-<span id="L739"><span class="lineNum">     739</span> <span class="tlaUNC">           0 :     if (brailleInput()-&gt;slurStartNote() != NULL</span></span>
-<span id="L740"><span class="lineNum">     740</span> <span class="tlaUNC">           0 :         &amp;&amp; currentEngravingItem() != NULL &amp;&amp; currentEngravingItem()-&gt;isNote()) {</span></span>
-<span id="L741"><span class="lineNum">     741</span> <span class="tlaUNC">           0 :         Note* note1 = brailleInput()-&gt;slurStartNote();</span></span>
-<span id="L742"><span class="lineNum">     742</span> <span class="tlaUNC">           0 :         Note* note2 = toNote(currentEngravingItem());</span></span>
-<span id="L743"><span class="lineNum">     743</span>              : </span>
-<span id="L744"><span class="lineNum">     744</span> <span class="tlaUNC">           0 :         if (note1-&gt;parent()-&gt;isChordRest() &amp;&amp; note2-&gt;parent()-&gt;isChordRest()) {</span></span>
-<span id="L745"><span class="lineNum">     745</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;add slur&quot;;</span></span>
-<span id="L746"><span class="lineNum">     746</span> <span class="tlaUNC">           0 :             ChordRest* firstChordRest = toChordRest(note1-&gt;parent());</span></span>
-<span id="L747"><span class="lineNum">     747</span> <span class="tlaUNC">           0 :             ChordRest* secondChordRest = toChordRest(note2-&gt;parent());</span></span>
-<span id="L748"><span class="lineNum">     748</span>              : </span>
-<span id="L749"><span class="lineNum">     749</span> <span class="tlaUNC">           0 :             score()-&gt;startCmd(TranslatableString(&quot;undoableAction&quot;, &quot;Add slur&quot;));</span></span>
-<span id="L750"><span class="lineNum">     750</span>              : </span>
-<span id="L751"><span class="lineNum">     751</span> <span class="tlaUNC">           0 :             Slur* slur = Factory::createSlur(firstChordRest-&gt;score()-&gt;dummy());</span></span>
-<span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC">           0 :             slur-&gt;setScore(firstChordRest-&gt;score());</span></span>
-<span id="L753"><span class="lineNum">     753</span> <span class="tlaUNC">           0 :             slur-&gt;setTick(firstChordRest-&gt;tick());</span></span>
-<span id="L754"><span class="lineNum">     754</span> <span class="tlaUNC">           0 :             slur-&gt;setTick2(secondChordRest-&gt;tick());</span></span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaUNC">           0 :             slur-&gt;setTrack(firstChordRest-&gt;track());</span></span>
-<span id="L756"><span class="lineNum">     756</span> <span class="tlaUNC">           0 :             if (secondChordRest-&gt;staff()-&gt;part() == firstChordRest-&gt;staff()-&gt;part()</span></span>
-<span id="L757"><span class="lineNum">     757</span> <span class="tlaUNC">           0 :                 &amp;&amp; !secondChordRest-&gt;staff()-&gt;isLinked(firstChordRest-&gt;staff())) {</span></span>
-<span id="L758"><span class="lineNum">     758</span> <span class="tlaUNC">           0 :                 slur-&gt;setTrack2(secondChordRest-&gt;track());</span></span>
-<span id="L759"><span class="lineNum">     759</span>              :             } else {</span>
-<span id="L760"><span class="lineNum">     760</span> <span class="tlaUNC">           0 :                 slur-&gt;setTrack2(firstChordRest-&gt;track());</span></span>
-<span id="L761"><span class="lineNum">     761</span>              :             }</span>
-<span id="L762"><span class="lineNum">     762</span> <span class="tlaUNC">           0 :             slur-&gt;setStartElement(firstChordRest);</span></span>
-<span id="L763"><span class="lineNum">     763</span> <span class="tlaUNC">           0 :             slur-&gt;setEndElement(secondChordRest);</span></span>
-<span id="L764"><span class="lineNum">     764</span>              : </span>
-<span id="L765"><span class="lineNum">     765</span> <span class="tlaUNC">           0 :             firstChordRest-&gt;score()-&gt;undoAddElement(slur);</span></span>
-<span id="L766"><span class="lineNum">     766</span> <span class="tlaUNC">           0 :             SlurSegment* ss = new SlurSegment(slur);</span></span>
-<span id="L767"><span class="lineNum">     767</span> <span class="tlaUNC">           0 :             ss-&gt;setSpannerSegmentType(SpannerSegmentType::SINGLE);</span></span>
-<span id="L768"><span class="lineNum">     768</span> <span class="tlaUNC">           0 :             if (firstChordRest == secondChordRest) {</span></span>
-<span id="L769"><span class="lineNum">     769</span> <span class="tlaUNC">           0 :                 ss-&gt;setSlurOffset(Grip::END, PointF(3.0 * firstChordRest-&gt;spatium(), 0.0));</span></span>
-<span id="L770"><span class="lineNum">     770</span>              :             }</span>
-<span id="L771"><span class="lineNum">     771</span> <span class="tlaUNC">           0 :             slur-&gt;add(ss);</span></span>
-<span id="L772"><span class="lineNum">     772</span>              : </span>
-<span id="L773"><span class="lineNum">     773</span> <span class="tlaUNC">           0 :             score()-&gt;endCmd();</span></span>
-<span id="L774"><span class="lineNum">     774</span> <span class="tlaUNC">           0 :             doBraille(true);</span></span>
-<span id="L775"><span class="lineNum">     775</span> <span class="tlaUNC">           0 :             return true;</span></span>
-<span id="L776"><span class="lineNum">     776</span>              :         }</span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L778"><span class="lineNum">     778</span>              :     } else {</span>
-<span id="L779"><span class="lineNum">     779</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L780"><span class="lineNum">     780</span>              :     }</span>
-<span id="L781"><span class="lineNum">     781</span>              : }</span>
+<span id="L721"><span class="lineNum">     721</span> <span class="tlaUNC">           0 : bool NotationBraille::addTie()</span></span>
+<span id="L722"><span class="lineNum">     722</span>              : {</span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaUNC">           0 :     if (!brailleInput()-&gt;tieStartNote()) {</span></span>
+<span id="L724"><span class="lineNum">     724</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L725"><span class="lineNum">     725</span>              :     }</span>
+<span id="L726"><span class="lineNum">     726</span>              : </span>
+<span id="L727"><span class="lineNum">     727</span> <span class="tlaUNC">           0 :     if (!currentEngravingItem() || !currentEngravingItem()-&gt;isNote()) {</span></span>
+<span id="L728"><span class="lineNum">     728</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L729"><span class="lineNum">     729</span>              :     }</span>
+<span id="L730"><span class="lineNum">     730</span>              : </span>
+<span id="L731"><span class="lineNum">     731</span> <span class="tlaUNC">           0 :     score()-&gt;startCmd(TranslatableString(&quot;undoableAction&quot;, &quot;Add tie&quot;));</span></span>
+<span id="L732"><span class="lineNum">     732</span>              : </span>
+<span id="L733"><span class="lineNum">     733</span> <span class="tlaUNC">           0 :     Note* startNote = brailleInput()-&gt;tieStartNote();</span></span>
+<span id="L734"><span class="lineNum">     734</span> <span class="tlaUNC">           0 :     Note* endNote = toNote(currentEngravingItem());</span></span>
+<span id="L735"><span class="lineNum">     735</span>              : </span>
+<span id="L736"><span class="lineNum">     736</span> <span class="tlaUNC">           0 :     Tie* tie = Factory::createTie(startNote);</span></span>
+<span id="L737"><span class="lineNum">     737</span> <span class="tlaUNC">           0 :     tie-&gt;setStartNote(startNote);</span></span>
+<span id="L738"><span class="lineNum">     738</span> <span class="tlaUNC">           0 :     tie-&gt;setEndNote(endNote);</span></span>
+<span id="L739"><span class="lineNum">     739</span> <span class="tlaUNC">           0 :     tie-&gt;setTrack(startNote-&gt;track());</span></span>
+<span id="L740"><span class="lineNum">     740</span> <span class="tlaUNC">           0 :     tie-&gt;setTick(startNote-&gt;chord()-&gt;segment()-&gt;tick());</span></span>
+<span id="L741"><span class="lineNum">     741</span> <span class="tlaUNC">           0 :     tie-&gt;setTicks(endNote-&gt;chord()-&gt;segment()-&gt;tick() - startNote-&gt;chord()-&gt;segment()-&gt;tick());</span></span>
+<span id="L742"><span class="lineNum">     742</span> <span class="tlaUNC">           0 :     score()-&gt;undoAddElement(tie);</span></span>
+<span id="L743"><span class="lineNum">     743</span> <span class="tlaUNC">           0 :     score()-&gt;endCmd();</span></span>
+<span id="L744"><span class="lineNum">     744</span> <span class="tlaUNC">           0 :     return true;</span></span>
+<span id="L745"><span class="lineNum">     745</span>              : }</span>
+<span id="L746"><span class="lineNum">     746</span>              : </span>
+<span id="L747"><span class="lineNum">     747</span> <span class="tlaUNC">           0 : bool NotationBraille::addSlur()</span></span>
+<span id="L748"><span class="lineNum">     748</span>              : {</span>
+<span id="L749"><span class="lineNum">     749</span> <span class="tlaUNC">           0 :     if (brailleInput()-&gt;slurStartNote() != NULL</span></span>
+<span id="L750"><span class="lineNum">     750</span> <span class="tlaUNC">           0 :         &amp;&amp; currentEngravingItem() != NULL &amp;&amp; currentEngravingItem()-&gt;isNote()) {</span></span>
+<span id="L751"><span class="lineNum">     751</span> <span class="tlaUNC">           0 :         Note* note1 = brailleInput()-&gt;slurStartNote();</span></span>
+<span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC">           0 :         Note* note2 = toNote(currentEngravingItem());</span></span>
+<span id="L753"><span class="lineNum">     753</span>              : </span>
+<span id="L754"><span class="lineNum">     754</span> <span class="tlaUNC">           0 :         if (note1-&gt;parent()-&gt;isChordRest() &amp;&amp; note2-&gt;parent()-&gt;isChordRest()) {</span></span>
+<span id="L755"><span class="lineNum">     755</span> <span class="tlaUNC">           0 :             LOGD() &lt;&lt; &quot;add slur&quot;;</span></span>
+<span id="L756"><span class="lineNum">     756</span> <span class="tlaUNC">           0 :             ChordRest* firstChordRest = toChordRest(note1-&gt;parent());</span></span>
+<span id="L757"><span class="lineNum">     757</span> <span class="tlaUNC">           0 :             ChordRest* secondChordRest = toChordRest(note2-&gt;parent());</span></span>
+<span id="L758"><span class="lineNum">     758</span>              : </span>
+<span id="L759"><span class="lineNum">     759</span> <span class="tlaUNC">           0 :             score()-&gt;startCmd(TranslatableString(&quot;undoableAction&quot;, &quot;Add slur&quot;));</span></span>
+<span id="L760"><span class="lineNum">     760</span>              : </span>
+<span id="L761"><span class="lineNum">     761</span> <span class="tlaUNC">           0 :             Slur* slur = Factory::createSlur(firstChordRest-&gt;score()-&gt;dummy());</span></span>
+<span id="L762"><span class="lineNum">     762</span> <span class="tlaUNC">           0 :             slur-&gt;setScore(firstChordRest-&gt;score());</span></span>
+<span id="L763"><span class="lineNum">     763</span> <span class="tlaUNC">           0 :             slur-&gt;setTick(firstChordRest-&gt;tick());</span></span>
+<span id="L764"><span class="lineNum">     764</span> <span class="tlaUNC">           0 :             slur-&gt;setTick2(secondChordRest-&gt;tick());</span></span>
+<span id="L765"><span class="lineNum">     765</span> <span class="tlaUNC">           0 :             slur-&gt;setTrack(firstChordRest-&gt;track());</span></span>
+<span id="L766"><span class="lineNum">     766</span> <span class="tlaUNC">           0 :             if (secondChordRest-&gt;staff()-&gt;part() == firstChordRest-&gt;staff()-&gt;part()</span></span>
+<span id="L767"><span class="lineNum">     767</span> <span class="tlaUNC">           0 :                 &amp;&amp; !secondChordRest-&gt;staff()-&gt;isLinked(firstChordRest-&gt;staff())) {</span></span>
+<span id="L768"><span class="lineNum">     768</span> <span class="tlaUNC">           0 :                 slur-&gt;setTrack2(secondChordRest-&gt;track());</span></span>
+<span id="L769"><span class="lineNum">     769</span>              :             } else {</span>
+<span id="L770"><span class="lineNum">     770</span> <span class="tlaUNC">           0 :                 slur-&gt;setTrack2(firstChordRest-&gt;track());</span></span>
+<span id="L771"><span class="lineNum">     771</span>              :             }</span>
+<span id="L772"><span class="lineNum">     772</span> <span class="tlaUNC">           0 :             slur-&gt;setStartElement(firstChordRest);</span></span>
+<span id="L773"><span class="lineNum">     773</span> <span class="tlaUNC">           0 :             slur-&gt;setEndElement(secondChordRest);</span></span>
+<span id="L774"><span class="lineNum">     774</span>              : </span>
+<span id="L775"><span class="lineNum">     775</span> <span class="tlaUNC">           0 :             firstChordRest-&gt;score()-&gt;undoAddElement(slur);</span></span>
+<span id="L776"><span class="lineNum">     776</span> <span class="tlaUNC">           0 :             SlurSegment* ss = new SlurSegment(slur);</span></span>
+<span id="L777"><span class="lineNum">     777</span> <span class="tlaUNC">           0 :             ss-&gt;setSpannerSegmentType(SpannerSegmentType::SINGLE);</span></span>
+<span id="L778"><span class="lineNum">     778</span> <span class="tlaUNC">           0 :             if (firstChordRest == secondChordRest) {</span></span>
+<span id="L779"><span class="lineNum">     779</span> <span class="tlaUNC">           0 :                 ss-&gt;setSlurOffset(Grip::END, PointF(3.0 * firstChordRest-&gt;spatium(), 0.0));</span></span>
+<span id="L780"><span class="lineNum">     780</span>              :             }</span>
+<span id="L781"><span class="lineNum">     781</span> <span class="tlaUNC">           0 :             slur-&gt;add(ss);</span></span>
 <span id="L782"><span class="lineNum">     782</span>              : </span>
-<span id="L783"><span class="lineNum">     783</span> <span class="tlaUNC">           0 : bool NotationBraille::addLongSlur()</span></span>
-<span id="L784"><span class="lineNum">     784</span>              : {</span>
-<span id="L785"><span class="lineNum">     785</span> <span class="tlaUNC">           0 :     if (brailleInput()-&gt;longSlurStartNote() != NULL</span></span>
-<span id="L786"><span class="lineNum">     786</span> <span class="tlaUNC">           0 :         &amp;&amp; currentEngravingItem() != NULL &amp;&amp; currentEngravingItem()-&gt;isNote()) {</span></span>
-<span id="L787"><span class="lineNum">     787</span> <span class="tlaUNC">           0 :         Note* note1 = brailleInput()-&gt;longSlurStartNote();</span></span>
-<span id="L788"><span class="lineNum">     788</span> <span class="tlaUNC">           0 :         Note* note2 = toNote(currentEngravingItem());</span></span>
-<span id="L789"><span class="lineNum">     789</span>              : </span>
-<span id="L790"><span class="lineNum">     790</span> <span class="tlaUNC">           0 :         if (note1-&gt;parent()-&gt;isChordRest() &amp;&amp; note2-&gt;parent()-&gt;isChordRest()) {</span></span>
-<span id="L791"><span class="lineNum">     791</span> <span class="tlaUNC">           0 :             ChordRest* firstChordRest = toChordRest(note1-&gt;parent());</span></span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaUNC">           0 :             ChordRest* secondChordRest = toChordRest(note2-&gt;parent());</span></span>
-<span id="L793"><span class="lineNum">     793</span>              : </span>
-<span id="L794"><span class="lineNum">     794</span> <span class="tlaUNC">           0 :             score()-&gt;startCmd(TranslatableString(&quot;undoableAction&quot;, &quot;Add long slur&quot;));</span></span>
-<span id="L795"><span class="lineNum">     795</span>              : </span>
-<span id="L796"><span class="lineNum">     796</span> <span class="tlaUNC">           0 :             Slur* slur = Factory::createSlur(firstChordRest-&gt;score()-&gt;dummy());</span></span>
-<span id="L797"><span class="lineNum">     797</span> <span class="tlaUNC">           0 :             slur-&gt;setScore(firstChordRest-&gt;score());</span></span>
-<span id="L798"><span class="lineNum">     798</span> <span class="tlaUNC">           0 :             slur-&gt;setTick(firstChordRest-&gt;tick());</span></span>
-<span id="L799"><span class="lineNum">     799</span> <span class="tlaUNC">           0 :             slur-&gt;setTick2(secondChordRest-&gt;tick());</span></span>
-<span id="L800"><span class="lineNum">     800</span> <span class="tlaUNC">           0 :             slur-&gt;setTrack(firstChordRest-&gt;track());</span></span>
-<span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 :             if (secondChordRest-&gt;staff()-&gt;part() == firstChordRest-&gt;staff()-&gt;part()</span></span>
-<span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC">           0 :                 &amp;&amp; !secondChordRest-&gt;staff()-&gt;isLinked(firstChordRest-&gt;staff())) {</span></span>
-<span id="L803"><span class="lineNum">     803</span> <span class="tlaUNC">           0 :                 slur-&gt;setTrack2(secondChordRest-&gt;track());</span></span>
-<span id="L804"><span class="lineNum">     804</span>              :             } else {</span>
-<span id="L805"><span class="lineNum">     805</span> <span class="tlaUNC">           0 :                 slur-&gt;setTrack2(firstChordRest-&gt;track());</span></span>
-<span id="L806"><span class="lineNum">     806</span>              :             }</span>
-<span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :             slur-&gt;setStartElement(firstChordRest);</span></span>
-<span id="L808"><span class="lineNum">     808</span> <span class="tlaUNC">           0 :             slur-&gt;setEndElement(secondChordRest);</span></span>
-<span id="L809"><span class="lineNum">     809</span>              : </span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaUNC">           0 :             firstChordRest-&gt;score()-&gt;undoAddElement(slur);</span></span>
-<span id="L811"><span class="lineNum">     811</span> <span class="tlaUNC">           0 :             SlurSegment* ss = new SlurSegment(slur);</span></span>
-<span id="L812"><span class="lineNum">     812</span> <span class="tlaUNC">           0 :             ss-&gt;setSpannerSegmentType(SpannerSegmentType::SINGLE);</span></span>
-<span id="L813"><span class="lineNum">     813</span> <span class="tlaUNC">           0 :             if (firstChordRest == secondChordRest) {</span></span>
-<span id="L814"><span class="lineNum">     814</span> <span class="tlaUNC">           0 :                 ss-&gt;setSlurOffset(Grip::END, PointF(3.0 * firstChordRest-&gt;spatium(), 0.0));</span></span>
-<span id="L815"><span class="lineNum">     815</span>              :             }</span>
-<span id="L816"><span class="lineNum">     816</span> <span class="tlaUNC">           0 :             slur-&gt;add(ss);</span></span>
-<span id="L817"><span class="lineNum">     817</span>              : </span>
-<span id="L818"><span class="lineNum">     818</span> <span class="tlaUNC">           0 :             score()-&gt;endCmd();</span></span>
-<span id="L819"><span class="lineNum">     819</span> <span class="tlaUNC">           0 :             doBraille(true);</span></span>
-<span id="L820"><span class="lineNum">     820</span> <span class="tlaUNC">           0 :             return true;</span></span>
-<span id="L821"><span class="lineNum">     821</span>              :         }</span>
-<span id="L822"><span class="lineNum">     822</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L823"><span class="lineNum">     823</span>              :     } else {</span>
-<span id="L824"><span class="lineNum">     824</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L825"><span class="lineNum">     825</span>              :     }</span>
-<span id="L826"><span class="lineNum">     826</span>              : }</span>
+<span id="L783"><span class="lineNum">     783</span> <span class="tlaUNC">           0 :             score()-&gt;endCmd();</span></span>
+<span id="L784"><span class="lineNum">     784</span> <span class="tlaUNC">           0 :             doBraille(true);</span></span>
+<span id="L785"><span class="lineNum">     785</span> <span class="tlaUNC">           0 :             return true;</span></span>
+<span id="L786"><span class="lineNum">     786</span>              :         }</span>
+<span id="L787"><span class="lineNum">     787</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L788"><span class="lineNum">     788</span>              :     } else {</span>
+<span id="L789"><span class="lineNum">     789</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L790"><span class="lineNum">     790</span>              :     }</span>
+<span id="L791"><span class="lineNum">     791</span>              : }</span>
+<span id="L792"><span class="lineNum">     792</span>              : </span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaUNC">           0 : bool NotationBraille::addLongSlur()</span></span>
+<span id="L794"><span class="lineNum">     794</span>              : {</span>
+<span id="L795"><span class="lineNum">     795</span> <span class="tlaUNC">           0 :     if (brailleInput()-&gt;longSlurStartNote() != NULL</span></span>
+<span id="L796"><span class="lineNum">     796</span> <span class="tlaUNC">           0 :         &amp;&amp; currentEngravingItem() != NULL &amp;&amp; currentEngravingItem()-&gt;isNote()) {</span></span>
+<span id="L797"><span class="lineNum">     797</span> <span class="tlaUNC">           0 :         Note* note1 = brailleInput()-&gt;longSlurStartNote();</span></span>
+<span id="L798"><span class="lineNum">     798</span> <span class="tlaUNC">           0 :         Note* note2 = toNote(currentEngravingItem());</span></span>
+<span id="L799"><span class="lineNum">     799</span>              : </span>
+<span id="L800"><span class="lineNum">     800</span> <span class="tlaUNC">           0 :         if (note1-&gt;parent()-&gt;isChordRest() &amp;&amp; note2-&gt;parent()-&gt;isChordRest()) {</span></span>
+<span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 :             ChordRest* firstChordRest = toChordRest(note1-&gt;parent());</span></span>
+<span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC">           0 :             ChordRest* secondChordRest = toChordRest(note2-&gt;parent());</span></span>
+<span id="L803"><span class="lineNum">     803</span>              : </span>
+<span id="L804"><span class="lineNum">     804</span> <span class="tlaUNC">           0 :             score()-&gt;startCmd(TranslatableString(&quot;undoableAction&quot;, &quot;Add long slur&quot;));</span></span>
+<span id="L805"><span class="lineNum">     805</span>              : </span>
+<span id="L806"><span class="lineNum">     806</span> <span class="tlaUNC">           0 :             Slur* slur = Factory::createSlur(firstChordRest-&gt;score()-&gt;dummy());</span></span>
+<span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :             slur-&gt;setScore(firstChordRest-&gt;score());</span></span>
+<span id="L808"><span class="lineNum">     808</span> <span class="tlaUNC">           0 :             slur-&gt;setTick(firstChordRest-&gt;tick());</span></span>
+<span id="L809"><span class="lineNum">     809</span> <span class="tlaUNC">           0 :             slur-&gt;setTick2(secondChordRest-&gt;tick());</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaUNC">           0 :             slur-&gt;setTrack(firstChordRest-&gt;track());</span></span>
+<span id="L811"><span class="lineNum">     811</span> <span class="tlaUNC">           0 :             if (secondChordRest-&gt;staff()-&gt;part() == firstChordRest-&gt;staff()-&gt;part()</span></span>
+<span id="L812"><span class="lineNum">     812</span> <span class="tlaUNC">           0 :                 &amp;&amp; !secondChordRest-&gt;staff()-&gt;isLinked(firstChordRest-&gt;staff())) {</span></span>
+<span id="L813"><span class="lineNum">     813</span> <span class="tlaUNC">           0 :                 slur-&gt;setTrack2(secondChordRest-&gt;track());</span></span>
+<span id="L814"><span class="lineNum">     814</span>              :             } else {</span>
+<span id="L815"><span class="lineNum">     815</span> <span class="tlaUNC">           0 :                 slur-&gt;setTrack2(firstChordRest-&gt;track());</span></span>
+<span id="L816"><span class="lineNum">     816</span>              :             }</span>
+<span id="L817"><span class="lineNum">     817</span> <span class="tlaUNC">           0 :             slur-&gt;setStartElement(firstChordRest);</span></span>
+<span id="L818"><span class="lineNum">     818</span> <span class="tlaUNC">           0 :             slur-&gt;setEndElement(secondChordRest);</span></span>
+<span id="L819"><span class="lineNum">     819</span>              : </span>
+<span id="L820"><span class="lineNum">     820</span> <span class="tlaUNC">           0 :             firstChordRest-&gt;score()-&gt;undoAddElement(slur);</span></span>
+<span id="L821"><span class="lineNum">     821</span> <span class="tlaUNC">           0 :             SlurSegment* ss = new SlurSegment(slur);</span></span>
+<span id="L822"><span class="lineNum">     822</span> <span class="tlaUNC">           0 :             ss-&gt;setSpannerSegmentType(SpannerSegmentType::SINGLE);</span></span>
+<span id="L823"><span class="lineNum">     823</span> <span class="tlaUNC">           0 :             if (firstChordRest == secondChordRest) {</span></span>
+<span id="L824"><span class="lineNum">     824</span> <span class="tlaUNC">           0 :                 ss-&gt;setSlurOffset(Grip::END, PointF(3.0 * firstChordRest-&gt;spatium(), 0.0));</span></span>
+<span id="L825"><span class="lineNum">     825</span>              :             }</span>
+<span id="L826"><span class="lineNum">     826</span> <span class="tlaUNC">           0 :             slur-&gt;add(ss);</span></span>
 <span id="L827"><span class="lineNum">     827</span>              : </span>
-<span id="L828"><span class="lineNum">     828</span> <span class="tlaUNC">           0 : bool NotationBraille::setVoice(bool new_voice)</span></span>
-<span id="L829"><span class="lineNum">     829</span>              : {</span>
-<span id="L830"><span class="lineNum">     830</span> <span class="tlaUNC">           0 :     if (currentEngravingItem() == NULL || currentMeasure() == NULL) {</span></span>
-<span id="L831"><span class="lineNum">     831</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L832"><span class="lineNum">     832</span>              :     }</span>
-<span id="L833"><span class="lineNum">     833</span>              : </span>
-<span id="L834"><span class="lineNum">     834</span> <span class="tlaUNC">           0 :     staff_idx_t staff = currentEngravingItem()-&gt;staffIdx();</span></span>
-<span id="L835"><span class="lineNum">     835</span>              : </span>
-<span id="L836"><span class="lineNum">     836</span> <span class="tlaUNC">           0 :     if (new_voice) {</span></span>
-<span id="L837"><span class="lineNum">     837</span> <span class="tlaUNC">           0 :         int voices = 0;</span></span>
-<span id="L838"><span class="lineNum">     838</span> <span class="tlaUNC">           0 :         for (size_t i = 1; i &lt; VOICES; ++i) {</span></span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaUNC">           0 :             if (current_measure-&gt;hasVoice(staff * VOICES + i)) {</span></span>
-<span id="L840"><span class="lineNum">     840</span> <span class="tlaUNC">           0 :                 voices++;</span></span>
-<span id="L841"><span class="lineNum">     841</span>              :             }</span>
-<span id="L842"><span class="lineNum">     842</span>              :         }</span>
-<span id="L843"><span class="lineNum">     843</span> <span class="tlaUNC">           0 :         if (voices &gt;= 3) {</span></span>
-<span id="L844"><span class="lineNum">     844</span> <span class="tlaUNC">           0 :             return false;</span></span>
-<span id="L845"><span class="lineNum">     845</span>              :         }</span>
-<span id="L846"><span class="lineNum">     846</span>              : </span>
-<span id="L847"><span class="lineNum">     847</span> <span class="tlaUNC">           0 :         score()-&gt;inputState().moveInputPos(currentMeasure()-&gt;segments().firstCRSegment());</span></span>
-<span id="L848"><span class="lineNum">     848</span> <span class="tlaUNC">           0 :         interaction()-&gt;noteInput()-&gt;setCurrentVoice(voices + 1);</span></span>
-<span id="L849"><span class="lineNum">     849</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L850"><span class="lineNum">     850</span>              :     } else {</span>
-<span id="L851"><span class="lineNum">     851</span> <span class="tlaUNC">           0 :         Segment* segment = score()-&gt;inputState().segment();</span></span>
-<span id="L852"><span class="lineNum">     852</span> <span class="tlaUNC">           0 :         Measure* measure = segment-&gt;measure();</span></span>
-<span id="L853"><span class="lineNum">     853</span> <span class="tlaUNC">           0 :         if (!measure-&gt;hasVoice(staff + 1) &amp;&amp; segment-&gt;tick() == measure-&gt;tick()) {</span></span>
-<span id="L854"><span class="lineNum">     854</span> <span class="tlaUNC">           0 :             interaction()-&gt;noteInput()-&gt;setCurrentVoice(0);</span></span>
+<span id="L828"><span class="lineNum">     828</span> <span class="tlaUNC">           0 :             score()-&gt;endCmd();</span></span>
+<span id="L829"><span class="lineNum">     829</span> <span class="tlaUNC">           0 :             doBraille(true);</span></span>
+<span id="L830"><span class="lineNum">     830</span> <span class="tlaUNC">           0 :             return true;</span></span>
+<span id="L831"><span class="lineNum">     831</span>              :         }</span>
+<span id="L832"><span class="lineNum">     832</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L833"><span class="lineNum">     833</span>              :     } else {</span>
+<span id="L834"><span class="lineNum">     834</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L835"><span class="lineNum">     835</span>              :     }</span>
+<span id="L836"><span class="lineNum">     836</span>              : }</span>
+<span id="L837"><span class="lineNum">     837</span>              : </span>
+<span id="L838"><span class="lineNum">     838</span> <span class="tlaUNC">           0 : bool NotationBraille::setVoice(bool new_voice)</span></span>
+<span id="L839"><span class="lineNum">     839</span>              : {</span>
+<span id="L840"><span class="lineNum">     840</span> <span class="tlaUNC">           0 :     if (currentEngravingItem() == NULL || currentMeasure() == NULL) {</span></span>
+<span id="L841"><span class="lineNum">     841</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L842"><span class="lineNum">     842</span>              :     }</span>
+<span id="L843"><span class="lineNum">     843</span>              : </span>
+<span id="L844"><span class="lineNum">     844</span> <span class="tlaUNC">           0 :     staff_idx_t staff = currentEngravingItem()-&gt;staffIdx();</span></span>
+<span id="L845"><span class="lineNum">     845</span>              : </span>
+<span id="L846"><span class="lineNum">     846</span> <span class="tlaUNC">           0 :     if (new_voice) {</span></span>
+<span id="L847"><span class="lineNum">     847</span> <span class="tlaUNC">           0 :         int voices = 0;</span></span>
+<span id="L848"><span class="lineNum">     848</span> <span class="tlaUNC">           0 :         for (size_t i = 1; i &lt; VOICES; ++i) {</span></span>
+<span id="L849"><span class="lineNum">     849</span> <span class="tlaUNC">           0 :             if (current_measure-&gt;hasVoice(staff * VOICES + i)) {</span></span>
+<span id="L850"><span class="lineNum">     850</span> <span class="tlaUNC">           0 :                 voices++;</span></span>
+<span id="L851"><span class="lineNum">     851</span>              :             }</span>
+<span id="L852"><span class="lineNum">     852</span>              :         }</span>
+<span id="L853"><span class="lineNum">     853</span> <span class="tlaUNC">           0 :         if (voices &gt;= 3) {</span></span>
+<span id="L854"><span class="lineNum">     854</span> <span class="tlaUNC">           0 :             return false;</span></span>
 <span id="L855"><span class="lineNum">     855</span>              :         }</span>
-<span id="L856"><span class="lineNum">     856</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L857"><span class="lineNum">     857</span>              :     }</span>
-<span id="L858"><span class="lineNum">     858</span>              : }</span>
-<span id="L859"><span class="lineNum">     859</span>              : </span>
-<span id="L860"><span class="lineNum">     860</span> <span class="tlaUNC">           0 : void NotationBraille::setMode(const BrailleMode mode)</span></span>
-<span id="L861"><span class="lineNum">     861</span>              : {</span>
-<span id="L862"><span class="lineNum">     862</span> <span class="tlaUNC">           0 :     switch (mode) {</span></span>
-<span id="L863"><span class="lineNum">     863</span> <span class="tlaUNC">           0 :     case BrailleMode::Undefined:</span></span>
-<span id="L864"><span class="lineNum">     864</span>              :     case BrailleMode::Navigation:</span>
-<span id="L865"><span class="lineNum">     865</span> <span class="tlaUNC">           0 :         setCursorColor(&quot;black&quot;);</span></span>
-<span id="L866"><span class="lineNum">     866</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L867"><span class="lineNum">     867</span> <span class="tlaUNC">           0 :     case BrailleMode::BrailleInput:</span></span>
-<span id="L868"><span class="lineNum">     868</span> <span class="tlaUNC">           0 :         setCursorColor(&quot;green&quot;);</span></span>
-<span id="L869"><span class="lineNum">     869</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L870"><span class="lineNum">     870</span>              :     }</span>
-<span id="L871"><span class="lineNum">     871</span>              : </span>
-<span id="L872"><span class="lineNum">     872</span> <span class="tlaUNC">           0 :     m_mode.set((int)mode);</span></span>
-<span id="L873"><span class="lineNum">     873</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L874"><span class="lineNum">     874</span>              : </span>
-<span id="L875"><span class="lineNum">     875</span> <span class="tlaUNC">           0 : void NotationBraille::toggleMode()</span></span>
-<span id="L876"><span class="lineNum">     876</span>              : {</span>
-<span id="L877"><span class="lineNum">     877</span> <span class="tlaUNC">           0 :     switch ((BrailleMode)mode().val) {</span></span>
-<span id="L878"><span class="lineNum">     878</span> <span class="tlaUNC">           0 :     case BrailleMode::Undefined:</span></span>
-<span id="L879"><span class="lineNum">     879</span>              :     case BrailleMode::Navigation:</span>
-<span id="L880"><span class="lineNum">     880</span> <span class="tlaUNC">           0 :         setMode(BrailleMode::BrailleInput);</span></span>
-<span id="L881"><span class="lineNum">     881</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L882"><span class="lineNum">     882</span> <span class="tlaUNC">           0 :     case BrailleMode::BrailleInput:</span></span>
-<span id="L883"><span class="lineNum">     883</span> <span class="tlaUNC">           0 :         setMode(BrailleMode::Navigation);</span></span>
-<span id="L884"><span class="lineNum">     884</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L885"><span class="lineNum">     885</span>              :     }</span>
-<span id="L886"><span class="lineNum">     886</span>              : </span>
-<span id="L887"><span class="lineNum">     887</span> <span class="tlaUNC">           0 :     commandDispatcher()-&gt;dispatch(notation::ToggleNoteInputDefaultCommand {});</span></span>
-<span id="L888"><span class="lineNum">     888</span>              : </span>
-<span id="L889"><span class="lineNum">     889</span> <span class="tlaUNC">           0 :     const QString stateTitle = interaction()-&gt;noteInput()-&gt;isNoteInputMode()</span></span>
-<span id="L890"><span class="lineNum">     890</span>              :                                //: Braille input with 6 keyboard keys (F,D,S &amp; J,K,L) to represent the 6 dots in a braille cell.</span>
-<span id="L891"><span class="lineNum">     891</span> <span class="tlaUNC">           0 :                                ? muse::qtrc(&quot;braille/notation&quot;, &quot;Six-key input mode&quot;)</span></span>
-<span id="L892"><span class="lineNum">     892</span>              :                                //: Braille navigation.</span>
-<span id="L893"><span class="lineNum">     893</span> <span class="tlaUNC">           0 :                                : muse::qtrc(&quot;braille/notation&quot;, &quot;Navigation mode&quot;);</span></span>
-<span id="L894"><span class="lineNum">     894</span>              : </span>
-<span id="L895"><span class="lineNum">     895</span> <span class="tlaUNC">           0 :     accessibilityController()-&gt;announce(stateTitle);</span></span>
-<span id="L896"><span class="lineNum">     896</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L897"><span class="lineNum">     897</span>              : </span>
-<span id="L898"><span class="lineNum">     898</span> <span class="tlaUNC">           0 : bool NotationBraille::isNavigationMode()</span></span>
-<span id="L899"><span class="lineNum">     899</span>              : {</span>
-<span id="L900"><span class="lineNum">     900</span> <span class="tlaUNC">           0 :     return mode().val == (int)BrailleMode::Navigation;</span></span>
-<span id="L901"><span class="lineNum">     901</span>              : }</span>
-<span id="L902"><span class="lineNum">     902</span>              : </span>
-<span id="L903"><span class="lineNum">     903</span> <span class="tlaUNC">           0 : bool NotationBraille::isBrailleInputMode()</span></span>
-<span id="L904"><span class="lineNum">     904</span>              : {</span>
-<span id="L905"><span class="lineNum">     905</span> <span class="tlaUNC">           0 :     return mode().val == (int)BrailleMode::BrailleInput;</span></span>
-<span id="L906"><span class="lineNum">     906</span>              : }</span>
+<span id="L856"><span class="lineNum">     856</span>              : </span>
+<span id="L857"><span class="lineNum">     857</span> <span class="tlaUNC">           0 :         score()-&gt;inputState().moveInputPos(currentMeasure()-&gt;segments().firstCRSegment());</span></span>
+<span id="L858"><span class="lineNum">     858</span> <span class="tlaUNC">           0 :         interaction()-&gt;noteInput()-&gt;setCurrentVoice(voices + 1);</span></span>
+<span id="L859"><span class="lineNum">     859</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L860"><span class="lineNum">     860</span>              :     } else {</span>
+<span id="L861"><span class="lineNum">     861</span> <span class="tlaUNC">           0 :         Segment* segment = score()-&gt;inputState().segment();</span></span>
+<span id="L862"><span class="lineNum">     862</span> <span class="tlaUNC">           0 :         Measure* measure = segment-&gt;measure();</span></span>
+<span id="L863"><span class="lineNum">     863</span> <span class="tlaUNC">           0 :         if (!measure-&gt;hasVoice(staff + 1) &amp;&amp; segment-&gt;tick() == measure-&gt;tick()) {</span></span>
+<span id="L864"><span class="lineNum">     864</span> <span class="tlaUNC">           0 :             interaction()-&gt;noteInput()-&gt;setCurrentVoice(0);</span></span>
+<span id="L865"><span class="lineNum">     865</span>              :         }</span>
+<span id="L866"><span class="lineNum">     866</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L867"><span class="lineNum">     867</span>              :     }</span>
+<span id="L868"><span class="lineNum">     868</span>              : }</span>
+<span id="L869"><span class="lineNum">     869</span>              : </span>
+<span id="L870"><span class="lineNum">     870</span> <span class="tlaUNC">           0 : void NotationBraille::setMode(const BrailleMode mode)</span></span>
+<span id="L871"><span class="lineNum">     871</span>              : {</span>
+<span id="L872"><span class="lineNum">     872</span> <span class="tlaUNC">           0 :     switch (mode) {</span></span>
+<span id="L873"><span class="lineNum">     873</span> <span class="tlaUNC">           0 :     case BrailleMode::Undefined:</span></span>
+<span id="L874"><span class="lineNum">     874</span>              :     case BrailleMode::Navigation:</span>
+<span id="L875"><span class="lineNum">     875</span> <span class="tlaUNC">           0 :         setCursorColor(&quot;black&quot;);</span></span>
+<span id="L876"><span class="lineNum">     876</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L877"><span class="lineNum">     877</span> <span class="tlaUNC">           0 :     case BrailleMode::BrailleInput:</span></span>
+<span id="L878"><span class="lineNum">     878</span> <span class="tlaUNC">           0 :         setCursorColor(&quot;green&quot;);</span></span>
+<span id="L879"><span class="lineNum">     879</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L880"><span class="lineNum">     880</span>              :     }</span>
+<span id="L881"><span class="lineNum">     881</span>              : </span>
+<span id="L882"><span class="lineNum">     882</span> <span class="tlaUNC">           0 :     m_mode.set((int)mode);</span></span>
+<span id="L883"><span class="lineNum">     883</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L884"><span class="lineNum">     884</span>              : </span>
+<span id="L885"><span class="lineNum">     885</span> <span class="tlaUNC">           0 : void NotationBraille::toggleMode()</span></span>
+<span id="L886"><span class="lineNum">     886</span>              : {</span>
+<span id="L887"><span class="lineNum">     887</span> <span class="tlaUNC">           0 :     switch ((BrailleMode)mode().val) {</span></span>
+<span id="L888"><span class="lineNum">     888</span> <span class="tlaUNC">           0 :     case BrailleMode::Undefined:</span></span>
+<span id="L889"><span class="lineNum">     889</span>              :     case BrailleMode::Navigation:</span>
+<span id="L890"><span class="lineNum">     890</span> <span class="tlaUNC">           0 :         setMode(BrailleMode::BrailleInput);</span></span>
+<span id="L891"><span class="lineNum">     891</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L892"><span class="lineNum">     892</span> <span class="tlaUNC">           0 :     case BrailleMode::BrailleInput:</span></span>
+<span id="L893"><span class="lineNum">     893</span> <span class="tlaUNC">           0 :         setMode(BrailleMode::Navigation);</span></span>
+<span id="L894"><span class="lineNum">     894</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L895"><span class="lineNum">     895</span>              :     }</span>
+<span id="L896"><span class="lineNum">     896</span>              : </span>
+<span id="L897"><span class="lineNum">     897</span> <span class="tlaUNC">           0 :     commandDispatcher()-&gt;dispatch(notation::ToggleNoteInputDefaultCommand {});</span></span>
+<span id="L898"><span class="lineNum">     898</span>              : </span>
+<span id="L899"><span class="lineNum">     899</span> <span class="tlaUNC">           0 :     const QString stateTitle = interaction()-&gt;noteInput()-&gt;isNoteInputMode()</span></span>
+<span id="L900"><span class="lineNum">     900</span>              :                                //: Braille input with 6 keyboard keys (F,D,S &amp; J,K,L) to represent the 6 dots in a braille cell.</span>
+<span id="L901"><span class="lineNum">     901</span> <span class="tlaUNC">           0 :                                ? muse::qtrc(&quot;braille/notation&quot;, &quot;Six-key input mode&quot;)</span></span>
+<span id="L902"><span class="lineNum">     902</span>              :                                //: Braille navigation.</span>
+<span id="L903"><span class="lineNum">     903</span> <span class="tlaUNC">           0 :                                : muse::qtrc(&quot;braille/notation&quot;, &quot;Navigation mode&quot;);</span></span>
+<span id="L904"><span class="lineNum">     904</span>              : </span>
+<span id="L905"><span class="lineNum">     905</span> <span class="tlaUNC">           0 :     accessibilityController()-&gt;announce(stateTitle);</span></span>
+<span id="L906"><span class="lineNum">     906</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L907"><span class="lineNum">     907</span>              : </span>
-<span id="L908"><span class="lineNum">     908</span> <span class="tlaUNC">           0 : void NotationBraille::setCursorColor(const QString color)</span></span>
+<span id="L908"><span class="lineNum">     908</span> <span class="tlaUNC">           0 : bool NotationBraille::isNavigationMode()</span></span>
 <span id="L909"><span class="lineNum">     909</span>              : {</span>
-<span id="L910"><span class="lineNum">     910</span> <span class="tlaUNC">           0 :     m_cursorColor.set(color.toStdString());</span></span>
-<span id="L911"><span class="lineNum">     911</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L910"><span class="lineNum">     910</span> <span class="tlaUNC">           0 :     return mode().val == (int)BrailleMode::Navigation;</span></span>
+<span id="L911"><span class="lineNum">     911</span>              : }</span>
 <span id="L912"><span class="lineNum">     912</span>              : </span>
-<span id="L913"><span class="lineNum">     913</span> <span class="tlaUNC">           0 : path_t NotationBraille::tablesDefaultDirPath() const</span></span>
+<span id="L913"><span class="lineNum">     913</span> <span class="tlaUNC">           0 : bool NotationBraille::isBrailleInputMode()</span></span>
 <span id="L914"><span class="lineNum">     914</span>              : {</span>
-<span id="L915"><span class="lineNum">     915</span> <span class="tlaUNC">           0 :     return globalConfiguration()-&gt;appDataPath() + &quot;tables&quot;;</span></span>
+<span id="L915"><span class="lineNum">     915</span> <span class="tlaUNC">           0 :     return mode().val == (int)BrailleMode::BrailleInput;</span></span>
 <span id="L916"><span class="lineNum">     916</span>              : }</span>
 <span id="L917"><span class="lineNum">     917</span>              : </span>
-<span id="L918"><span class="lineNum">     918</span> <span class="tlaUNC">           0 : void NotationBraille::setCurrentEngravingItem(EngravingItem* e, bool select)</span></span>
+<span id="L918"><span class="lineNum">     918</span> <span class="tlaUNC">           0 : void NotationBraille::setCursorColor(const QString color)</span></span>
 <span id="L919"><span class="lineNum">     919</span>              : {</span>
-<span id="L920"><span class="lineNum">     920</span> <span class="tlaUNC">           0 :     if (!e) {</span></span>
-<span id="L921"><span class="lineNum">     921</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L922"><span class="lineNum">     922</span>              :     }</span>
-<span id="L923"><span class="lineNum">     923</span>              : </span>
-<span id="L924"><span class="lineNum">     924</span> <span class="tlaUNC">           0 :     bool play = current_engraving_item != e;</span></span>
-<span id="L925"><span class="lineNum">     925</span> <span class="tlaUNC">           0 :     current_engraving_item = e;</span></span>
-<span id="L926"><span class="lineNum">     926</span> <span class="tlaUNC">           0 :     if (isNavigationMode()) {</span></span>
-<span id="L927"><span class="lineNum">     927</span> <span class="tlaUNC">           0 :         if (select) {</span></span>
-<span id="L928"><span class="lineNum">     928</span> <span class="tlaUNC">           0 :             if (play) {</span></span>
-<span id="L929"><span class="lineNum">     929</span> <span class="tlaUNC">           0 :                 playbackController()-&gt;playElements({ e });</span></span>
-<span id="L930"><span class="lineNum">     930</span>              :             }</span>
-<span id="L931"><span class="lineNum">     931</span> <span class="tlaUNC">           0 :             if (e-&gt;isChord()) {</span></span>
-<span id="L932"><span class="lineNum">     932</span> <span class="tlaUNC">           0 :                 e = toChord(e)-&gt;upNote(); // select a note rather than the chord</span></span>
-<span id="L933"><span class="lineNum">     933</span>              :             }</span>
-<span id="L934"><span class="lineNum">     934</span> <span class="tlaUNC">           0 :             interaction()-&gt;select({ e });</span></span>
-<span id="L935"><span class="lineNum">     935</span>              :         }</span>
-<span id="L936"><span class="lineNum">     936</span>              :     }</span>
-<span id="L937"><span class="lineNum">     937</span>              : }</span>
-<span id="L938"><span class="lineNum">     938</span>              : </span>
-<span id="L939"><span class="lineNum">     939</span> <span class="tlaUNC">           0 : IntervalDirection NotationBraille::currentIntervalDirection()</span></span>
-<span id="L940"><span class="lineNum">     940</span>              : {</span>
-<span id="L941"><span class="lineNum">     941</span> <span class="tlaUNC">           0 :     switch (m_intervalDirection.val) {</span></span>
-<span id="L942"><span class="lineNum">     942</span> <span class="tlaUNC">           0 :     case BrailleIntervalDirection::Up:</span></span>
-<span id="L943"><span class="lineNum">     943</span> <span class="tlaUNC">           0 :         return IntervalDirection::Up;</span></span>
-<span id="L944"><span class="lineNum">     944</span> <span class="tlaUNC">           0 :     case BrailleIntervalDirection::Down:</span></span>
-<span id="L945"><span class="lineNum">     945</span> <span class="tlaUNC">           0 :         return IntervalDirection::Down;</span></span>
-<span id="L946"><span class="lineNum">     946</span> <span class="tlaUNC">           0 :     case BrailleIntervalDirection::Auto:</span></span>
-<span id="L947"><span class="lineNum">     947</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L948"><span class="lineNum">     948</span>              :     }</span>
-<span id="L949"><span class="lineNum">     949</span> <span class="tlaUNC">           0 :     if (EngravingItem* element = currentEngravingItem()) {</span></span>
-<span id="L950"><span class="lineNum">     950</span> <span class="tlaUNC">           0 :         if (Staff* staff = element-&gt;staff()) {</span></span>
-<span id="L951"><span class="lineNum">     951</span> <span class="tlaUNC">           0 :             ClefType clef = staff-&gt;clef(element-&gt;tick());</span></span>
-<span id="L952"><span class="lineNum">     952</span> <span class="tlaUNC">           0 :             if (clef &gt;= ClefType::G &amp;&amp; clef &lt;= ClefType::C3) {</span></span>
-<span id="L953"><span class="lineNum">     953</span> <span class="tlaUNC">           0 :                 return IntervalDirection::Down;</span></span>
-<span id="L954"><span class="lineNum">     954</span>              :             }</span>
-<span id="L955"><span class="lineNum">     955</span> <span class="tlaUNC">           0 :             return IntervalDirection::Up;</span></span>
-<span id="L956"><span class="lineNum">     956</span>              :         }</span>
-<span id="L957"><span class="lineNum">     957</span>              :     }</span>
-<span id="L958"><span class="lineNum">     958</span> <span class="tlaUNC">           0 :     return IntervalDirection::Down;</span></span>
-<span id="L959"><span class="lineNum">     959</span>              : }</span>
-<span id="L960"><span class="lineNum">     960</span>              : </span>
-<span id="L961"><span class="lineNum">     961</span> <span class="tlaUNC">           0 : EngravingItem* NotationBraille::currentEngravingItem()</span></span>
-<span id="L962"><span class="lineNum">     962</span>              : {</span>
-<span id="L963"><span class="lineNum">     963</span> <span class="tlaUNC">           0 :     return current_engraving_item;</span></span>
-<span id="L964"><span class="lineNum">     964</span>              : }</span>
-<span id="L965"><span class="lineNum">     965</span>              : </span>
-<span id="L966"><span class="lineNum">     966</span> <span class="tlaUNC">           0 : Measure* NotationBraille::currentMeasure()</span></span>
-<span id="L967"><span class="lineNum">     967</span>              : {</span>
-<span id="L968"><span class="lineNum">     968</span> <span class="tlaUNC">           0 :     return current_measure;</span></span>
+<span id="L920"><span class="lineNum">     920</span> <span class="tlaUNC">           0 :     m_cursorColor.set(color.toStdString());</span></span>
+<span id="L921"><span class="lineNum">     921</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L922"><span class="lineNum">     922</span>              : </span>
+<span id="L923"><span class="lineNum">     923</span> <span class="tlaUNC">           0 : path_t NotationBraille::tablesDefaultDirPath() const</span></span>
+<span id="L924"><span class="lineNum">     924</span>              : {</span>
+<span id="L925"><span class="lineNum">     925</span> <span class="tlaUNC">           0 :     return globalConfiguration()-&gt;appDataPath() + &quot;tables&quot;;</span></span>
+<span id="L926"><span class="lineNum">     926</span>              : }</span>
+<span id="L927"><span class="lineNum">     927</span>              : </span>
+<span id="L928"><span class="lineNum">     928</span> <span class="tlaUNC">           0 : void NotationBraille::setCurrentEngravingItem(EngravingItem* e, bool select)</span></span>
+<span id="L929"><span class="lineNum">     929</span>              : {</span>
+<span id="L930"><span class="lineNum">     930</span> <span class="tlaUNC">           0 :     if (!e) {</span></span>
+<span id="L931"><span class="lineNum">     931</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L932"><span class="lineNum">     932</span>              :     }</span>
+<span id="L933"><span class="lineNum">     933</span>              : </span>
+<span id="L934"><span class="lineNum">     934</span> <span class="tlaUNC">           0 :     bool play = current_engraving_item != e;</span></span>
+<span id="L935"><span class="lineNum">     935</span> <span class="tlaUNC">           0 :     current_engraving_item = e;</span></span>
+<span id="L936"><span class="lineNum">     936</span> <span class="tlaUNC">           0 :     if (isNavigationMode()) {</span></span>
+<span id="L937"><span class="lineNum">     937</span> <span class="tlaUNC">           0 :         if (select) {</span></span>
+<span id="L938"><span class="lineNum">     938</span> <span class="tlaUNC">           0 :             if (play) {</span></span>
+<span id="L939"><span class="lineNum">     939</span> <span class="tlaUNC">           0 :                 playbackController()-&gt;playElements({ e });</span></span>
+<span id="L940"><span class="lineNum">     940</span>              :             }</span>
+<span id="L941"><span class="lineNum">     941</span> <span class="tlaUNC">           0 :             if (e-&gt;isChord()) {</span></span>
+<span id="L942"><span class="lineNum">     942</span> <span class="tlaUNC">           0 :                 e = toChord(e)-&gt;upNote(); // select a note rather than the chord</span></span>
+<span id="L943"><span class="lineNum">     943</span>              :             }</span>
+<span id="L944"><span class="lineNum">     944</span> <span class="tlaUNC">           0 :             interaction()-&gt;select({ e });</span></span>
+<span id="L945"><span class="lineNum">     945</span>              :         }</span>
+<span id="L946"><span class="lineNum">     946</span>              :     }</span>
+<span id="L947"><span class="lineNum">     947</span>              : }</span>
+<span id="L948"><span class="lineNum">     948</span>              : </span>
+<span id="L949"><span class="lineNum">     949</span> <span class="tlaUNC">           0 : IntervalDirection NotationBraille::currentIntervalDirection()</span></span>
+<span id="L950"><span class="lineNum">     950</span>              : {</span>
+<span id="L951"><span class="lineNum">     951</span> <span class="tlaUNC">           0 :     switch (m_intervalDirection.val) {</span></span>
+<span id="L952"><span class="lineNum">     952</span> <span class="tlaUNC">           0 :     case BrailleIntervalDirection::Up:</span></span>
+<span id="L953"><span class="lineNum">     953</span> <span class="tlaUNC">           0 :         return IntervalDirection::Up;</span></span>
+<span id="L954"><span class="lineNum">     954</span> <span class="tlaUNC">           0 :     case BrailleIntervalDirection::Down:</span></span>
+<span id="L955"><span class="lineNum">     955</span> <span class="tlaUNC">           0 :         return IntervalDirection::Down;</span></span>
+<span id="L956"><span class="lineNum">     956</span> <span class="tlaUNC">           0 :     case BrailleIntervalDirection::Auto:</span></span>
+<span id="L957"><span class="lineNum">     957</span> <span class="tlaUNC">           0 :         break;</span></span>
+<span id="L958"><span class="lineNum">     958</span>              :     }</span>
+<span id="L959"><span class="lineNum">     959</span> <span class="tlaUNC">           0 :     if (EngravingItem* element = currentEngravingItem()) {</span></span>
+<span id="L960"><span class="lineNum">     960</span> <span class="tlaUNC">           0 :         if (Staff* staff = element-&gt;staff()) {</span></span>
+<span id="L961"><span class="lineNum">     961</span> <span class="tlaUNC">           0 :             ClefType clef = staff-&gt;clef(element-&gt;tick());</span></span>
+<span id="L962"><span class="lineNum">     962</span> <span class="tlaUNC">           0 :             if (clef &gt;= ClefType::G &amp;&amp; clef &lt;= ClefType::C3) {</span></span>
+<span id="L963"><span class="lineNum">     963</span> <span class="tlaUNC">           0 :                 return IntervalDirection::Down;</span></span>
+<span id="L964"><span class="lineNum">     964</span>              :             }</span>
+<span id="L965"><span class="lineNum">     965</span> <span class="tlaUNC">           0 :             return IntervalDirection::Up;</span></span>
+<span id="L966"><span class="lineNum">     966</span>              :         }</span>
+<span id="L967"><span class="lineNum">     967</span>              :     }</span>
+<span id="L968"><span class="lineNum">     968</span> <span class="tlaUNC">           0 :     return IntervalDirection::Down;</span></span>
 <span id="L969"><span class="lineNum">     969</span>              : }</span>
-<span id="L970"><span class="lineNum">     970</span>              : }</span>
+<span id="L970"><span class="lineNum">     970</span>              : </span>
+<span id="L971"><span class="lineNum">     971</span> <span class="tlaUNC">           0 : EngravingItem* NotationBraille::currentEngravingItem()</span></span>
+<span id="L972"><span class="lineNum">     972</span>              : {</span>
+<span id="L973"><span class="lineNum">     973</span> <span class="tlaUNC">           0 :     return current_engraving_item;</span></span>
+<span id="L974"><span class="lineNum">     974</span>              : }</span>
+<span id="L975"><span class="lineNum">     975</span>              : </span>
+<span id="L976"><span class="lineNum">     976</span> <span class="tlaUNC">           0 : Measure* NotationBraille::currentMeasure()</span></span>
+<span id="L977"><span class="lineNum">     977</span>              : {</span>
+<span id="L978"><span class="lineNum">     978</span> <span class="tlaUNC">           0 :     return current_measure;</span></span>
+<span id="L979"><span class="lineNum">     979</span>              : }</span>
+<span id="L980"><span class="lineNum">     980</span>              : }</span>
         </pre>
               </td>
             </tr>

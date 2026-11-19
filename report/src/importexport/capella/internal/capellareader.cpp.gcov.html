@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">10</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -88,21 +88,24 @@
 <span id="L30"><span class="lineNum">      30</span>              : using namespace mu::engraving;</span>
 <span id="L31"><span class="lineNum">      31</span>              : </span>
 <span id="L32"><span class="lineNum">      32</span>              : namespace mu::iex::capella {</span>
-<span id="L33"><span class="lineNum">      33</span>              : extern Err importCapella(MasterScore*, const QString&amp; name);</span>
+<span id="L33"><span class="lineNum">      33</span>              : extern muse::Ret importCapella(MasterScore*, const QString&amp; name, bool forceMode);</span>
 <span id="L34"><span class="lineNum">      34</span>              : extern Err importCapXml(MasterScore*, const QString&amp; name);</span>
 <span id="L35"><span class="lineNum">      35</span>              : }</span>
 <span id="L36"><span class="lineNum">      36</span>              : </span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaUNC tlaBgUNC">           0 : muse::Ret CapellaReader::read(MasterScore* score, const muse::io::path_t&amp; path, const Options&amp;)</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaUNC tlaBgUNC">           0 : muse::Ret CapellaReader::read(MasterScore* score, const muse::io::path_t&amp; path, const Options&amp; options)</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : {</span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaUNC">           0 :     Err err = Err::FileUnknownType;</span></span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaUNC">           0 :     std::string suffix = muse::io::suffix(path);</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaUNC">           0 :     if (suffix == &quot;cap&quot;) {</span></span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaUNC">           0 :         err = importCapella(score, path.toQString());</span></span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaUNC">           0 :     } else if (suffix == &quot;capx&quot;) {</span></span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaUNC">           0 :         err = importCapXml(score, path.toQString());</span></span>
-<span id="L45"><span class="lineNum">      45</span>              :     }</span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaUNC">           0 :     return make_ret(err, path);</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaUNC">           0 :     std::string suffix = muse::io::suffix(path);</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaUNC">           0 :     if (suffix == &quot;cap&quot;) {</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaUNC">           0 :         bool forceMode = muse::value(options, OptionKey::ForceMode, muse::Val(false)).toBool();</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaUNC">           0 :         return importCapella(score, path.toQString(), forceMode);</span></span>
+<span id="L43"><span class="lineNum">      43</span>              :     }</span>
+<span id="L44"><span class="lineNum">      44</span>              : </span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :     Err err = Err::FileUnknownType;</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaUNC">           0 :     if (suffix == &quot;capx&quot;) {</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :         err = importCapXml(score, path.toQString());</span></span>
+<span id="L48"><span class="lineNum">      48</span>              :     }</span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC">           0 :     return make_ret(err, path);</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>
             </tr>

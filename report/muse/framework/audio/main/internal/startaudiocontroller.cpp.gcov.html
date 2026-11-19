@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.7&nbsp;%</td>
-            <td class="headerCovTableEntry">137</td>
+            <td class="headerCovTableEntry">138</td>
             <td class="headerCovTableEntry">1</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -250,101 +250,104 @@
 <span id="L192"><span class="lineNum">     192</span> <span class="tlaUNC">           0 :                 once = true;</span></span>
 <span id="L193"><span class="lineNum">     193</span>              :             }</span>
 <span id="L194"><span class="lineNum">     194</span>              : </span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaUNC">           0 :             m_rpcChannel-&gt;process();</span></span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaUNC">           0 :             m_engineController-&gt;process(procDest, (unsigned)procSamplesPerChannel);</span></span>
-<span id="L197"><span class="lineNum">     197</span>              :         } else {</span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaUNC">           0 :             UNREACHABLE;</span></span>
-<span id="L199"><span class="lineNum">     199</span>              :         }</span>
-<span id="L200"><span class="lineNum">     200</span>              : </span>
-<span id="L201"><span class="lineNum">     201</span>              :         // write temp and fill driver dest</span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaUNC">           0 :         if (useAlignBuffer) {</span></span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaUNC">           0 :             assert(alignbuf);</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC">           0 :             alignbuf-&gt;write(procDest, procSamplesTotal);</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaUNC">           0 :             alignbuf-&gt;read(driverDest, driverSamplesTotal);</span></span>
-<span id="L206"><span class="lineNum">     206</span>              :         }</span>
-<span id="L207"><span class="lineNum">     207</span>              : </span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :         if (shouldMeasureInputLag) {</span></span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaUNC">           0 :             measureInputLag(procDest, procSamplesTotal);</span></span>
-<span id="L210"><span class="lineNum">     210</span>              :         }</span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :     };</span></span>
-<span id="L212"><span class="lineNum">     212</span>              : </span>
-<span id="L213"><span class="lineNum">     213</span>              : #endif // Q_OS_WASM</span>
-<span id="L214"><span class="lineNum">     214</span>              : </span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaUNC">           0 :     IAudioDriver::Spec activeSpec;</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaUNC">           0 :     if (mode == IApplication::RunMode::GuiApp) {</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 :         if (!audioDriverController()-&gt;open(requiredSpec, &amp;activeSpec)) {</span></span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaUNC">           0 :             return;</span></span>
-<span id="L219"><span class="lineNum">     219</span>              :         }</span>
-<span id="L220"><span class="lineNum">     220</span>              :     } else {</span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaUNC">           0 :         activeSpec = requiredSpec;</span></span>
-<span id="L222"><span class="lineNum">     222</span>              :     }</span>
-<span id="L223"><span class="lineNum">     223</span>              : </span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaUNC">           0 :     AudioEngineConfig conf = configuration()-&gt;engineConfig();</span></span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaUNC">           0 :     auto sendEngineInit = [this, activeSpec, conf]() {</span></span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaUNC">           0 :         m_rpcChannel-&gt;send(rpc::make_request(rpc::GLOBAL_CTX_ID, MsgCode::EngineInit, RpcPacker::pack(activeSpec.output, conf)),</span></span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaUNC">           0 :                            [this](const Msg&amp;) {</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaUNC">           0 :             m_isAudioStarted.set(true);</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaUNC">           0 :         });</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 :     };</span></span>
-<span id="L231"><span class="lineNum">     231</span>              : </span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 :     if (m_isEngineRunning.val) {</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaUNC">           0 :         sendEngineInit();</span></span>
-<span id="L234"><span class="lineNum">     234</span>              :     } else {</span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaUNC">           0 :         m_isEngineRunning.ch.onReceive(this, [sendEngineInit](bool arg) {</span></span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaUNC">           0 :             if (arg) {</span></span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC">           0 :                 sendEngineInit();</span></span>
-<span id="L238"><span class="lineNum">     238</span>              :             }</span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 :         });</span></span>
-<span id="L240"><span class="lineNum">     240</span>              :     }</span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L242"><span class="lineNum">     242</span>              : </span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaUNC">           0 : void StartAudioController::stopAudioProcessing()</span></span>
-<span id="L244"><span class="lineNum">     244</span>              : {</span>
-<span id="L245"><span class="lineNum">     245</span>              : #ifndef Q_OS_WASM</span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaUNC">           0 :     bool isEngineDeinited = false;</span></span>
-<span id="L247"><span class="lineNum">     247</span>              : </span>
-<span id="L248"><span class="lineNum">     248</span>              :     //! NOTE Stop waiting for the engine to start: below we process the RPC channel,</span>
-<span id="L249"><span class="lineNum">     249</span>              :     //! and a still pending EngineRunning would send EngineInit in the middle of the shutdown</span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaUNC">           0 :     m_isEngineRunning.ch.disconnect(this);</span></span>
-<span id="L251"><span class="lineNum">     251</span>              : </span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaUNC">           0 :     m_rpcChannel-&gt;send(rpc::make_request(rpc::GLOBAL_CTX_ID, MsgCode::EngineDeinit), [this, &amp;isEngineDeinited](const Msg&amp;) {</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC">           0 :         isEngineDeinited = true;</span></span>
+<span id="L195"><span class="lineNum">     195</span>              :             //! NOTE The engine runs in the driver callback, the async messages</span>
+<span id="L196"><span class="lineNum">     196</span>              :             //! of this thread (promises, notifications) are processed here, as in the hybrid mode worker</span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 :             async::processMessages();</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaUNC">           0 :             m_rpcChannel-&gt;process();</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaUNC">           0 :             m_engineController-&gt;process(procDest, (unsigned)procSamplesPerChannel);</span></span>
+<span id="L200"><span class="lineNum">     200</span>              :         } else {</span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC">           0 :             UNREACHABLE;</span></span>
+<span id="L202"><span class="lineNum">     202</span>              :         }</span>
+<span id="L203"><span class="lineNum">     203</span>              : </span>
+<span id="L204"><span class="lineNum">     204</span>              :         // write temp and fill driver dest</span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaUNC">           0 :         if (useAlignBuffer) {</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaUNC">           0 :             assert(alignbuf);</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC">           0 :             alignbuf-&gt;write(procDest, procSamplesTotal);</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :             alignbuf-&gt;read(driverDest, driverSamplesTotal);</span></span>
+<span id="L209"><span class="lineNum">     209</span>              :         }</span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :         if (shouldMeasureInputLag) {</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaUNC">           0 :             measureInputLag(procDest, procSamplesTotal);</span></span>
+<span id="L213"><span class="lineNum">     213</span>              :         }</span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaUNC">           0 :     };</span></span>
+<span id="L215"><span class="lineNum">     215</span>              : </span>
+<span id="L216"><span class="lineNum">     216</span>              : #endif // Q_OS_WASM</span>
+<span id="L217"><span class="lineNum">     217</span>              : </span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaUNC">           0 :     IAudioDriver::Spec activeSpec;</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaUNC">           0 :     if (mode == IApplication::RunMode::GuiApp) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaUNC">           0 :         if (!audioDriverController()-&gt;open(requiredSpec, &amp;activeSpec)) {</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaUNC">           0 :             return;</span></span>
+<span id="L222"><span class="lineNum">     222</span>              :         }</span>
+<span id="L223"><span class="lineNum">     223</span>              :     } else {</span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaUNC">           0 :         activeSpec = requiredSpec;</span></span>
+<span id="L225"><span class="lineNum">     225</span>              :     }</span>
+<span id="L226"><span class="lineNum">     226</span>              : </span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaUNC">           0 :     AudioEngineConfig conf = configuration()-&gt;engineConfig();</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaUNC">           0 :     auto sendEngineInit = [this, activeSpec, conf]() {</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaUNC">           0 :         m_rpcChannel-&gt;send(rpc::make_request(rpc::GLOBAL_CTX_ID, MsgCode::EngineInit, RpcPacker::pack(activeSpec.output, conf)),</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 :                            [this](const Msg&amp;) {</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaUNC">           0 :             m_isAudioStarted.set(true);</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 :         });</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaUNC">           0 :     };</span></span>
+<span id="L234"><span class="lineNum">     234</span>              : </span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaUNC">           0 :     if (m_isEngineRunning.val) {</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaUNC">           0 :         sendEngineInit();</span></span>
+<span id="L237"><span class="lineNum">     237</span>              :     } else {</span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaUNC">           0 :         m_isEngineRunning.ch.onReceive(this, [sendEngineInit](bool arg) {</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 :             if (arg) {</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :                 sendEngineInit();</span></span>
+<span id="L241"><span class="lineNum">     241</span>              :             }</span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaUNC">           0 :         });</span></span>
+<span id="L243"><span class="lineNum">     243</span>              :     }</span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L245"><span class="lineNum">     245</span>              : </span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaUNC">           0 : void StartAudioController::stopAudioProcessing()</span></span>
+<span id="L247"><span class="lineNum">     247</span>              : {</span>
+<span id="L248"><span class="lineNum">     248</span>              : #ifndef Q_OS_WASM</span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaUNC">           0 :     bool isEngineDeinited = false;</span></span>
+<span id="L250"><span class="lineNum">     250</span>              : </span>
+<span id="L251"><span class="lineNum">     251</span>              :     //! NOTE Stop waiting for the engine to start: below we process the RPC channel,</span>
+<span id="L252"><span class="lineNum">     252</span>              :     //! and a still pending EngineRunning would send EngineInit in the middle of the shutdown</span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC">           0 :     m_isEngineRunning.ch.disconnect(this);</span></span>
 <span id="L254"><span class="lineNum">     254</span>              : </span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaUNC">           0 :         if (m_isAudioStarted.val) {</span></span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaUNC">           0 :             m_isAudioStarted.set(false);</span></span>
-<span id="L257"><span class="lineNum">     257</span>              :         }</span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L259"><span class="lineNum">     259</span>              : </span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaUNC">           0 :     int attemptsLimit = 100;</span></span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :     int attempt = 0;</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaUNC">           0 :     m_rpcChannel-&gt;send(rpc::make_request(rpc::GLOBAL_CTX_ID, MsgCode::EngineDeinit), [this, &amp;isEngineDeinited](const Msg&amp;) {</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaUNC">           0 :         isEngineDeinited = true;</span></span>
+<span id="L257"><span class="lineNum">     257</span>              : </span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaUNC">           0 :         if (m_isAudioStarted.val) {</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaUNC">           0 :             m_isAudioStarted.set(false);</span></span>
+<span id="L260"><span class="lineNum">     260</span>              :         }</span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :     });</span></span>
 <span id="L262"><span class="lineNum">     262</span>              : </span>
-<span id="L263"><span class="lineNum">     263</span>              :     do {</span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 :         ++attempt;</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaUNC">           0 :     int attemptsLimit = 100;</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 :     int attempt = 0;</span></span>
 <span id="L265"><span class="lineNum">     265</span>              : </span>
-<span id="L266"><span class="lineNum">     266</span>              :         // Ensure that RPC process() is called at least once</span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaUNC">           0 :         m_rpcChannel-&gt;process();</span></span>
+<span id="L266"><span class="lineNum">     266</span>              :     do {</span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaUNC">           0 :         ++attempt;</span></span>
 <span id="L268"><span class="lineNum">     268</span>              : </span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC">           0 :         if (isEngineDeinited) {</span></span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L271"><span class="lineNum">     271</span>              :         }</span>
-<span id="L272"><span class="lineNum">     272</span>              : </span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaUNC">           0 :         std::this_thread::yield();</span></span>
-<span id="L274"><span class="lineNum">     274</span>              :         using namespace std::chrono_literals;</span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaUNC">           0 :         std::this_thread::sleep_for(10ms);</span></span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaUNC">           0 :     } while (!isEngineDeinited &amp;&amp; attempt &lt;= attemptsLimit);</span></span>
-<span id="L277"><span class="lineNum">     277</span>              : </span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaUNC">           0 :     if (attempt &gt;= attemptsLimit) {</span></span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaUNC">           0 :         LOGE() &lt;&lt; &quot;Engine deinit failed because of number of attempts exceeded&quot;;</span></span>
-<span id="L280"><span class="lineNum">     280</span>              :     }</span>
-<span id="L281"><span class="lineNum">     281</span>              : </span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaUNC">           0 :     audioDriverController()-&gt;close();</span></span>
-<span id="L283"><span class="lineNum">     283</span>              : </span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaUNC">           0 :     if (m_worker &amp;&amp; m_worker-&gt;isRunning()) {</span></span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaUNC">           0 :         m_worker-&gt;stop();</span></span>
-<span id="L286"><span class="lineNum">     286</span>              :     }</span>
-<span id="L287"><span class="lineNum">     287</span>              : </span>
-<span id="L288"><span class="lineNum">     288</span>              : #endif</span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L269"><span class="lineNum">     269</span>              :         // Ensure that RPC process() is called at least once</span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 :         m_rpcChannel-&gt;process();</span></span>
+<span id="L271"><span class="lineNum">     271</span>              : </span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaUNC">           0 :         if (isEngineDeinited) {</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaUNC">           0 :             break;</span></span>
+<span id="L274"><span class="lineNum">     274</span>              :         }</span>
+<span id="L275"><span class="lineNum">     275</span>              : </span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaUNC">           0 :         std::this_thread::yield();</span></span>
+<span id="L277"><span class="lineNum">     277</span>              :         using namespace std::chrono_literals;</span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaUNC">           0 :         std::this_thread::sleep_for(10ms);</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaUNC">           0 :     } while (!isEngineDeinited &amp;&amp; attempt &lt;= attemptsLimit);</span></span>
+<span id="L280"><span class="lineNum">     280</span>              : </span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaUNC">           0 :     if (attempt &gt;= attemptsLimit) {</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaUNC">           0 :         LOGE() &lt;&lt; &quot;Engine deinit failed because of number of attempts exceeded&quot;;</span></span>
+<span id="L283"><span class="lineNum">     283</span>              :     }</span>
+<span id="L284"><span class="lineNum">     284</span>              : </span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaUNC">           0 :     audioDriverController()-&gt;close();</span></span>
+<span id="L286"><span class="lineNum">     286</span>              : </span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaUNC">           0 :     if (m_worker &amp;&amp; m_worker-&gt;isRunning()) {</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaUNC">           0 :         m_worker-&gt;stop();</span></span>
+<span id="L289"><span class="lineNum">     289</span>              :     }</span>
+<span id="L290"><span class="lineNum">     290</span>              : </span>
+<span id="L291"><span class="lineNum">     291</span>              : #endif</span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>
             </tr>

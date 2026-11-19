@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -96,16 +96,16 @@
 <span id="L38"><span class="lineNum">      38</span>              : //   tpcIsValid</span>
 <span id="L39"><span class="lineNum">      39</span>              : //---------------------------------------------------------</span>
 <span id="L40"><span class="lineNum">      40</span>              : </span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC tlaBgGNC">      358517 : bool tpcIsValid(int val)</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC tlaBgGNC">      344457 : bool tpcIsValid(int val)</span></span>
 <span id="L42"><span class="lineNum">      42</span>              : {</span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">      358517 :     return val &gt;= Tpc::TPC_MIN &amp;&amp; val &lt;= Tpc::TPC_MAX;</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">      344457 :     return val &gt;= Tpc::TPC_MIN &amp;&amp; val &lt;= Tpc::TPC_MAX;</span></span>
 <span id="L44"><span class="lineNum">      44</span>              : }</span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
 <span id="L46"><span class="lineNum">      46</span>              : //---------------------------------------------------------</span>
 <span id="L47"><span class="lineNum">      47</span>              : //   step2tpc</span>
 <span id="L48"><span class="lineNum">      48</span>              : //---------------------------------------------------------</span>
 <span id="L49"><span class="lineNum">      49</span>              : </span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       14731 : int step2tpc(int step, AccidentalVal alter)</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       14766 : int step2tpc(int step, AccidentalVal alter)</span></span>
 <span id="L51"><span class="lineNum">      51</span>              : {</span>
 <span id="L52"><span class="lineNum">      52</span>              :     //    TPC - tonal pitch classes</span>
 <span id="L53"><span class="lineNum">      53</span>              :     //    &quot;line of fifth's&quot; LOF</span>
@@ -121,9 +121,9 @@
 <span id="L63"><span class="lineNum">      63</span>              :         -2,  5, 12, 19, 26, 33, 40,  // B</span>
 <span id="L64"><span class="lineNum">      64</span>              :     };</span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       14731 :     int i = (step * TPCS_PER_STEP) + (int(alter) - int(AccidentalVal::MIN));</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">       14731 :     assert(i &gt;= 0 &amp;&amp; (i &lt; int(sizeof(spellings) / sizeof(*spellings))));</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">       14731 :     return spellings[i];</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       14766 :     int i = (step * TPCS_PER_STEP) + (int(alter) - int(AccidentalVal::MIN));</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">       14766 :     assert(i &gt;= 0 &amp;&amp; (i &lt; int(sizeof(spellings) / sizeof(*spellings))));</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">       14766 :     return spellings[i];</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : }</span>
 <span id="L70"><span class="lineNum">      70</span>              : </span>
 <span id="L71"><span class="lineNum">      71</span>              : static const int tpcByStepAndKey[int(Key::NUM_OF)][STEP_DELTA_OCTAVE] = {</span>
@@ -158,14 +158,14 @@
 <span id="L100"><span class="lineNum">     100</span>              : //   tpc2step</span>
 <span id="L101"><span class="lineNum">     101</span>              : //---------------------------------------------------------</span>
 <span id="L102"><span class="lineNum">     102</span>              : </span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">      246589 : int tpc2step(int tpc)</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">      232526 : int tpc2step(int tpc)</span></span>
 <span id="L104"><span class="lineNum">     104</span>              : {</span>
 <span id="L105"><span class="lineNum">     105</span>              :     // 14 - C</span>
 <span id="L106"><span class="lineNum">     106</span>              :     // 15 % 7 = 1</span>
 <span id="L107"><span class="lineNum">     107</span>              :     //                                            f  c  g  d  a  e  b</span>
 <span id="L108"><span class="lineNum">     108</span>              :     static const int steps[STEP_DELTA_OCTAVE] = { 3, 0, 4, 1, 5, 2, 6 };</span>
 <span id="L109"><span class="lineNum">     109</span>              :     // TODO: optimize -TCP_MIN</span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">      246589 :     return steps[(tpc - Tpc::TPC_MIN) % STEP_DELTA_OCTAVE];</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">      232526 :     return steps[(tpc - Tpc::TPC_MIN) % STEP_DELTA_OCTAVE];</span></span>
 <span id="L111"><span class="lineNum">     111</span>              : // without a table, could also be rendered as:</span>
 <span id="L112"><span class="lineNum">     112</span>              : //      return ((tpc-Tpc::TPC_MIN) * STEP_DELTA_TPC) / STEP_DELTA_OCTAVE + TPC_FIRST_STEP;</span>
 <span id="L113"><span class="lineNum">     113</span>              : }</span>
@@ -250,9 +250,9 @@
 <span id="L192"><span class="lineNum">     192</span>              : //   tpc2pitch</span>
 <span id="L193"><span class="lineNum">     193</span>              : //---------------------------------------------------------</span>
 <span id="L194"><span class="lineNum">     194</span>              : </span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">      221160 : int tpc2pitch(int tpc)</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">      205395 : int tpc2pitch(int tpc)</span></span>
 <span id="L196"><span class="lineNum">     196</span>              : {</span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">      221160 :     assert(tpcIsValid(tpc));</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">      205395 :     assert(tpcIsValid(tpc));</span></span>
 <span id="L198"><span class="lineNum">     198</span>              : </span>
 <span id="L199"><span class="lineNum">     199</span>              :     static int pitches[] = {</span>
 <span id="L200"><span class="lineNum">     200</span>              : //step: F   C   G   D   A   E   B</span>
@@ -264,7 +264,7 @@
 <span id="L206"><span class="lineNum">     206</span>              :         7,  2,  9,  4, 11,  6, 13,     // ##</span>
 <span id="L207"><span class="lineNum">     207</span>              :         8,  3, 10,  5, 12,  7, 14      // ###</span>
 <span id="L208"><span class="lineNum">     208</span>              :     };</span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">      221160 :     return pitches[tpc - Tpc::TPC_MIN];</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">      205395 :     return pitches[tpc - Tpc::TPC_MIN];</span></span>
 <span id="L210"><span class="lineNum">     210</span>              : }</span>
 <span id="L211"><span class="lineNum">     211</span>              : </span>
 <span id="L212"><span class="lineNum">     212</span>              : //---------------------------------------------------------</span>
@@ -298,23 +298,23 @@
 <span id="L240"><span class="lineNum">     240</span>              : //    return note name</span>
 <span id="L241"><span class="lineNum">     241</span>              : //---------------------------------------------------------</span>
 <span id="L242"><span class="lineNum">     242</span>              : </span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">        1172 : String tpc2name(int tpc, NoteSpellingType noteSpelling, NoteCaseType noteCase, bool explicitAccidental, bool full)</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">        1175 : String tpc2name(int tpc, NoteSpellingType noteSpelling, NoteCaseType noteCase, bool explicitAccidental, bool full)</span></span>
 <span id="L244"><span class="lineNum">     244</span>              : {</span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">        1172 :     String s;</span></span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        1172 :     String acc;</span></span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        1172 :     tpc2name(tpc, noteSpelling, noteCase, s, acc, explicitAccidental, full);</span></span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        2344 :     return s + (explicitAccidental ? u&quot; &quot; : u&quot;&quot;) + acc;</span></span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        1172 : }</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">        1175 :     String s;</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        1175 :     String acc;</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        1175 :     tpc2name(tpc, noteSpelling, noteCase, s, acc, explicitAccidental, full);</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        2350 :     return s + (explicitAccidental ? u&quot; &quot; : u&quot;&quot;) + acc;</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        1175 : }</span></span>
 <span id="L250"><span class="lineNum">     250</span>              : </span>
 <span id="L251"><span class="lineNum">     251</span>              : //---------------------------------------------------------</span>
 <span id="L252"><span class="lineNum">     252</span>              : //   tpc2name</span>
 <span id="L253"><span class="lineNum">     253</span>              : //---------------------------------------------------------</span>
 <span id="L254"><span class="lineNum">     254</span>              : </span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">        7526 : void tpc2name(int tpc, NoteSpellingType noteSpelling, NoteCaseType noteCase, String&amp; s, String&amp; acc, bool explicitAccidental, bool full)</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">        7513 : void tpc2name(int tpc, NoteSpellingType noteSpelling, NoteCaseType noteCase, String&amp; s, String&amp; acc, bool explicitAccidental, bool full)</span></span>
 <span id="L256"><span class="lineNum">     256</span>              : {</span>
 <span id="L257"><span class="lineNum">     257</span>              :     AccidentalVal accVal;</span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">        7526 :     tpc2name(tpc, noteSpelling, noteCase, s, accVal);</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">        7526 :     switch (accVal) {</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">        7513 :     tpc2name(tpc, noteSpelling, noteCase, s, accVal);</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">        7513 :     switch (accVal) {</span></span>
 <span id="L260"><span class="lineNum">     260</span> <span class="tlaUNC tlaBgUNC">           0 :     case AccidentalVal::FLAT3:</span></span>
 <span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :         if (explicitAccidental) {</span></span>
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :             acc = muse::mtrc(&quot;engraving&quot;, TConv::userName(AccidentalVal::FLAT3, full));</span></span>
@@ -345,24 +345,24 @@
 <span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC tlaBgGNC">           5 :             acc = u&quot;bb&quot;;</span></span>
 <span id="L288"><span class="lineNum">     288</span>              :         }</span>
 <span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">           5 :         break;</span></span>
-<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">         449 :     case AccidentalVal::FLAT:</span></span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">         449 :         if (explicitAccidental) {</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">         452 :     case AccidentalVal::FLAT:</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">         452 :         if (explicitAccidental) {</span></span>
 <span id="L292"><span class="lineNum">     292</span> <span class="tlaUNC tlaBgUNC">           0 :             acc = muse::mtrc(&quot;engraving&quot;, TConv::userName(AccidentalVal::FLAT, full));</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC tlaBgGNC">         449 :         } else if (noteSpelling == NoteSpellingType::GERMAN_PURE) {</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC tlaBgGNC">         452 :         } else if (noteSpelling == NoteSpellingType::GERMAN_PURE) {</span></span>
 <span id="L294"><span class="lineNum">     294</span> <span class="tlaUNC tlaBgUNC">           0 :             acc = (tpc == TPC_A_B || tpc == TPC_E_B) ? u&quot;s&quot; : u&quot;es&quot;;</span></span>
 <span id="L295"><span class="lineNum">     295</span>              :         } else {</span>
-<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC tlaBgGNC">         449 :             acc = u&quot;b&quot;;</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC tlaBgGNC">         452 :             acc = u&quot;b&quot;;</span></span>
 <span id="L297"><span class="lineNum">     297</span>              :         }</span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">         449 :         break;</span></span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">        5985 :     case  AccidentalVal::NATURAL: acc = u&quot;&quot;;</span></span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">        5985 :         break;</span></span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">        1083 :     case  AccidentalVal::SHARP:</span></span>
-<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">        1083 :         if (explicitAccidental) {</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">         452 :         break;</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">        5961 :     case  AccidentalVal::NATURAL: acc = u&quot;&quot;;</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">        5961 :         break;</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">        1091 :     case  AccidentalVal::SHARP:</span></span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">        1091 :         if (explicitAccidental) {</span></span>
 <span id="L303"><span class="lineNum">     303</span> <span class="tlaUNC tlaBgUNC">           0 :             acc = muse::mtrc(&quot;engraving&quot;, TConv::userName(AccidentalVal::SHARP, full));</span></span>
 <span id="L304"><span class="lineNum">     304</span>              :         } else {</span>
-<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC tlaBgGNC">        1083 :             acc = (noteSpelling == NoteSpellingType::GERMAN_PURE) ? u&quot;is&quot; : u&quot;#&quot;;</span></span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC tlaBgGNC">        1091 :             acc = (noteSpelling == NoteSpellingType::GERMAN_PURE) ? u&quot;is&quot; : u&quot;#&quot;;</span></span>
 <span id="L306"><span class="lineNum">     306</span>              :         }</span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">        1083 :         break;</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">        1091 :         break;</span></span>
 <span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           4 :     case  AccidentalVal::SHARP2:</span></span>
 <span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">           4 :         if (explicitAccidental) {</span></span>
 <span id="L310"><span class="lineNum">     310</span> <span class="tlaUNC tlaBgUNC">           0 :             acc = muse::mtrc(&quot;engraving&quot;, TConv::userName(AccidentalVal::SHARP2, full));</span></span>
@@ -382,21 +382,21 @@
 <span id="L324"><span class="lineNum">     324</span> <span class="tlaUNC">           0 :         acc = u&quot;&quot;;</span></span>
 <span id="L325"><span class="lineNum">     325</span> <span class="tlaUNC">           0 :         break;</span></span>
 <span id="L326"><span class="lineNum">     326</span>              :     }</span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC tlaBgGNC">        7526 : }</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC tlaBgGNC">        7513 : }</span></span>
 <span id="L328"><span class="lineNum">     328</span>              : </span>
 <span id="L329"><span class="lineNum">     329</span>              : //---------------------------------------------------------</span>
 <span id="L330"><span class="lineNum">     330</span>              : //   tpc2name</span>
 <span id="L331"><span class="lineNum">     331</span>              : //---------------------------------------------------------</span>
 <span id="L332"><span class="lineNum">     332</span>              : </span>
-<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">       10329 : void tpc2name(int tpc, NoteSpellingType noteSpelling, NoteCaseType noteCase, String&amp; s, AccidentalVal&amp; acc)</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">       10300 : void tpc2name(int tpc, NoteSpellingType noteSpelling, NoteCaseType noteCase, String&amp; s, AccidentalVal&amp; acc)</span></span>
 <span id="L334"><span class="lineNum">     334</span>              : {</span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">       10329 :     const char names[]  = &quot;FCGDAEB&quot;;</span></span>
-<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">       10329 :     const char gnames[] = &quot;FCGDAEH&quot;;</span></span>
-<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">       92961 :     const String snames[] = { u&quot;Fa&quot;, u&quot;Do&quot;, u&quot;Sol&quot;, u&quot;Re&quot;, u&quot;La&quot;, u&quot;Mi&quot;, u&quot;Si&quot; };</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">       10300 :     const char names[]  = &quot;FCGDAEB&quot;;</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">       10300 :     const char gnames[] = &quot;FCGDAEH&quot;;</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">       92700 :     const String snames[] = { u&quot;Fa&quot;, u&quot;Do&quot;, u&quot;Sol&quot;, u&quot;Re&quot;, u&quot;La&quot;, u&quot;Mi&quot;, u&quot;Si&quot; };</span></span>
 <span id="L338"><span class="lineNum">     338</span>              : </span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">       10329 :     acc = tpc2alter(tpc);</span></span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">       10329 :     int idx = (tpc - Tpc::TPC_MIN) % TPC_DELTA_SEMITONE;</span></span>
-<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">       10329 :     switch (noteSpelling) {</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">       10300 :     acc = tpc2alter(tpc);</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">       10300 :     int idx = (tpc - Tpc::TPC_MIN) % TPC_DELTA_SEMITONE;</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">       10300 :     switch (noteSpelling) {</span></span>
 <span id="L342"><span class="lineNum">     342</span> <span class="tlaUNC tlaBgUNC">           0 :     case NoteSpellingType::GERMAN:</span></span>
 <span id="L343"><span class="lineNum">     343</span>              :     case NoteSpellingType::GERMAN_PURE:</span>
 <span id="L344"><span class="lineNum">     344</span> <span class="tlaUNC">           0 :         s = String(Char::fromAscii(gnames[idx]));</span></span>
@@ -416,21 +416,21 @@
 <span id="L358"><span class="lineNum">     358</span> <span class="tlaUNC">           0 :             s = u&quot;Ré&quot;;</span></span>
 <span id="L359"><span class="lineNum">     359</span>              :         }</span>
 <span id="L360"><span class="lineNum">     360</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC tlaBgGNC">       10299 :     default:</span></span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">       10299 :         s = String(Char::fromAscii(names[idx]));</span></span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">       10299 :         break;</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC tlaBgGNC">       10270 :     default:</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">       10270 :         s = String(Char::fromAscii(names[idx]));</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">       10270 :         break;</span></span>
 <span id="L364"><span class="lineNum">     364</span>              :     }</span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">       10329 :     switch (noteCase) {</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">       10300 :     switch (noteCase) {</span></span>
 <span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">          51 :     case NoteCaseType::LOWER: s = s.toLower();</span></span>
 <span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">          51 :         break;</span></span>
 <span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">        3551 :     case NoteCaseType::UPPER: s = s.toUpper();</span></span>
 <span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">        3551 :         break;</span></span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">        6727 :     case NoteCaseType::CAPITAL:</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">        6698 :     case NoteCaseType::CAPITAL:</span></span>
 <span id="L371"><span class="lineNum">     371</span>              :     case NoteCaseType::AUTO:</span>
 <span id="L372"><span class="lineNum">     372</span>              :     default:</span>
-<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">        6727 :         break;</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">        6698 :         break;</span></span>
 <span id="L374"><span class="lineNum">     374</span>              :     }</span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">       92961 : }</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">       92700 : }</span></span>
 <span id="L376"><span class="lineNum">     376</span>              : </span>
 <span id="L377"><span class="lineNum">     377</span>              : //---------------------------------------------------------</span>
 <span id="L378"><span class="lineNum">     378</span>              : //   tpc2stepName</span>
@@ -484,9 +484,9 @@
 <span id="L426"><span class="lineNum">     426</span>              : // Gb major will use Bbb Fb [Cb Gb Db Ab Eb Bb F] Cn Gn Dn.</span>
 <span id="L427"><span class="lineNum">     427</span>              : //---------------------------------------------------------</span>
 <span id="L428"><span class="lineNum">     428</span>              : </span>
-<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC tlaBgGNC">        6914 : int pitch2tpc(int pitch, Key key, Prefer prefer)</span></span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC tlaBgGNC">        6965 : int pitch2tpc(int pitch, Key key, Prefer prefer)</span></span>
 <span id="L430"><span class="lineNum">     430</span>              : {</span>
-<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">        6914 :     return (pitch * 7 + 26 - (int(prefer) + int(key))) % 12 + (int(prefer) + int(key));</span></span>
+<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">        6965 :     return (pitch * 7 + 26 - (int(prefer) + int(key))) % 12 + (int(prefer) + int(key));</span></span>
 <span id="L432"><span class="lineNum">     432</span>              : }</span>
 <span id="L433"><span class="lineNum">     433</span>              : </span>
 <span id="L434"><span class="lineNum">     434</span>              : //---------------------------------------------------------</span>
@@ -984,20 +984,20 @@
 <span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">        9966 :     return r;</span></span>
 <span id="L927"><span class="lineNum">     927</span>              : }</span>
 <span id="L928"><span class="lineNum">     928</span>              : </span>
-<span id="L929"><span class="lineNum">     929</span> <span class="tlaGNC">       12325 : int clampEnharmonic(int tpc, bool useDoubleSharpsFlats)</span></span>
+<span id="L929"><span class="lineNum">     929</span> <span class="tlaGNC">       12342 : int clampEnharmonic(int tpc, bool useDoubleSharpsFlats)</span></span>
 <span id="L930"><span class="lineNum">     930</span>              : {</span>
-<span id="L931"><span class="lineNum">     931</span> <span class="tlaGNC">       12325 :     while (tpc &gt; (useDoubleSharpsFlats ? Tpc::TPC_MAX : Tpc::TPC_B_S)) {</span></span>
+<span id="L931"><span class="lineNum">     931</span> <span class="tlaGNC">       12342 :     while (tpc &gt; (useDoubleSharpsFlats ? Tpc::TPC_MAX : Tpc::TPC_B_S)) {</span></span>
 <span id="L932"><span class="lineNum">     932</span> <span class="tlaUNC tlaBgUNC">           0 :         tpc -= TPC_DELTA_ENHARMONIC;</span></span>
 <span id="L933"><span class="lineNum">     933</span>              :     }</span>
-<span id="L934"><span class="lineNum">     934</span> <span class="tlaGNC tlaBgGNC">       12343 :     while (tpc &lt; (useDoubleSharpsFlats ? Tpc::TPC_MIN : Tpc::TPC_F_B)) {</span></span>
+<span id="L934"><span class="lineNum">     934</span> <span class="tlaGNC tlaBgGNC">       12360 :     while (tpc &lt; (useDoubleSharpsFlats ? Tpc::TPC_MIN : Tpc::TPC_F_B)) {</span></span>
 <span id="L935"><span class="lineNum">     935</span> <span class="tlaGNC">          18 :         tpc += TPC_DELTA_ENHARMONIC;</span></span>
 <span id="L936"><span class="lineNum">     936</span>              :     }</span>
-<span id="L937"><span class="lineNum">     937</span> <span class="tlaGNC">       12325 :     return tpc;</span></span>
+<span id="L937"><span class="lineNum">     937</span> <span class="tlaGNC">       12342 :     return tpc;</span></span>
 <span id="L938"><span class="lineNum">     938</span>              : }</span>
 <span id="L939"><span class="lineNum">     939</span>              : </span>
-<span id="L940"><span class="lineNum">     940</span> <span class="tlaGNC">       21913 : int clampPitch(int pitch)</span></span>
+<span id="L940"><span class="lineNum">     940</span> <span class="tlaGNC">       22419 : int clampPitch(int pitch)</span></span>
 <span id="L941"><span class="lineNum">     941</span>              : {</span>
-<span id="L942"><span class="lineNum">     942</span> <span class="tlaGNC">       21913 :     return std::clamp(pitch, MIN_PITCH, MAX_PITCH);</span></span>
+<span id="L942"><span class="lineNum">     942</span> <span class="tlaGNC">       22419 :     return std::clamp(pitch, MIN_PITCH, MAX_PITCH);</span></span>
 <span id="L943"><span class="lineNum">     943</span>              : }</span>
 <span id="L944"><span class="lineNum">     944</span>              : </span>
 <span id="L945"><span class="lineNum">     945</span> <span class="tlaGNC">        3166 : int clampPitchOctaved(int pitch)</span></span>
@@ -1011,34 +1011,34 @@
 <span id="L953"><span class="lineNum">     953</span> <span class="tlaGNC tlaBgGNC">        3166 :     return pitch;</span></span>
 <span id="L954"><span class="lineNum">     954</span>              : }</span>
 <span id="L955"><span class="lineNum">     955</span>              : </span>
-<span id="L956"><span class="lineNum">     956</span> <span class="tlaGNC">        6816 : Key clampKey(Key key, PreferSharpFlat prefer)</span></span>
+<span id="L956"><span class="lineNum">     956</span> <span class="tlaGNC">        6928 : Key clampKey(Key key, PreferSharpFlat prefer)</span></span>
 <span id="L957"><span class="lineNum">     957</span>              : {</span>
-<span id="L958"><span class="lineNum">     958</span> <span class="tlaGNC">        6816 :     Key smallest = Key::G_B;</span></span>
-<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">        6816 :     Key largest = Key::F_S;</span></span>
+<span id="L958"><span class="lineNum">     958</span> <span class="tlaGNC">        6928 :     Key smallest = Key::G_B;</span></span>
+<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">        6928 :     Key largest = Key::F_S;</span></span>
 <span id="L960"><span class="lineNum">     960</span>              : </span>
-<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">        6816 :     if (prefer != PreferSharpFlat::AUTO) {</span></span>
-<span id="L962"><span class="lineNum">     962</span> <span class="tlaGNC">        6011 :         smallest = (prefer == PreferSharpFlat::SHARPS) ? Key::A_B : Key::MIN;</span></span>
-<span id="L963"><span class="lineNum">     963</span> <span class="tlaGNC">        6011 :         largest  = (prefer == PreferSharpFlat::FLATS) ? Key::E : Key::MAX;</span></span>
+<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">        6928 :     if (prefer != PreferSharpFlat::AUTO) {</span></span>
+<span id="L962"><span class="lineNum">     962</span> <span class="tlaGNC">        6116 :         smallest = (prefer == PreferSharpFlat::SHARPS) ? Key::A_B : Key::MIN;</span></span>
+<span id="L963"><span class="lineNum">     963</span> <span class="tlaGNC">        6116 :         largest  = (prefer == PreferSharpFlat::FLATS) ? Key::E : Key::MAX;</span></span>
 <span id="L964"><span class="lineNum">     964</span>              :     }</span>
 <span id="L965"><span class="lineNum">     965</span>              : </span>
-<span id="L966"><span class="lineNum">     966</span> <span class="tlaGNC">        6834 :     while (key &lt; smallest) {</span></span>
+<span id="L966"><span class="lineNum">     966</span> <span class="tlaGNC">        6946 :     while (key &lt; smallest) {</span></span>
 <span id="L967"><span class="lineNum">     967</span> <span class="tlaGNC">          18 :         key += Key::DELTA_ENHARMONIC;</span></span>
 <span id="L968"><span class="lineNum">     968</span>              :     }</span>
-<span id="L969"><span class="lineNum">     969</span> <span class="tlaGNC">        6878 :     while (key &gt; largest) {</span></span>
+<span id="L969"><span class="lineNum">     969</span> <span class="tlaGNC">        6990 :     while (key &gt; largest) {</span></span>
 <span id="L970"><span class="lineNum">     970</span> <span class="tlaGNC">          62 :         key -= Key::DELTA_ENHARMONIC;</span></span>
 <span id="L971"><span class="lineNum">     971</span>              :     }</span>
 <span id="L972"><span class="lineNum">     972</span>              : </span>
-<span id="L973"><span class="lineNum">     973</span> <span class="tlaGNC">        6816 :     return key;</span></span>
+<span id="L973"><span class="lineNum">     973</span> <span class="tlaGNC">        6928 :     return key;</span></span>
 <span id="L974"><span class="lineNum">     974</span>              : }</span>
 <span id="L975"><span class="lineNum">     975</span>              : </span>
-<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">        7928 : int key2Tpc(Key key)</span></span>
+<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">        8040 : int key2Tpc(Key key)</span></span>
 <span id="L977"><span class="lineNum">     977</span>              : {</span>
-<span id="L978"><span class="lineNum">     978</span> <span class="tlaGNC">        7928 :     return (int)key + KEY_TO_TPC_OFFSET;</span></span>
+<span id="L978"><span class="lineNum">     978</span> <span class="tlaGNC">        8040 :     return (int)key + KEY_TO_TPC_OFFSET;</span></span>
 <span id="L979"><span class="lineNum">     979</span>              : }</span>
 <span id="L980"><span class="lineNum">     980</span>              : </span>
-<span id="L981"><span class="lineNum">     981</span> <span class="tlaGNC">        4168 : Key tpc2Key(int tpc)</span></span>
+<span id="L981"><span class="lineNum">     981</span> <span class="tlaGNC">        4280 : Key tpc2Key(int tpc)</span></span>
 <span id="L982"><span class="lineNum">     982</span>              : {</span>
-<span id="L983"><span class="lineNum">     983</span> <span class="tlaGNC">        4168 :     return Key(tpc - KEY_TO_TPC_OFFSET);</span></span>
+<span id="L983"><span class="lineNum">     983</span> <span class="tlaGNC">        4280 :     return Key(tpc - KEY_TO_TPC_OFFSET);</span></span>
 <span id="L984"><span class="lineNum">     984</span>              : }</span>
 <span id="L985"><span class="lineNum">     985</span>              : }</span>
         </pre>

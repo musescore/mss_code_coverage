@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -95,17 +95,17 @@
 <span id="L37"><span class="lineNum">      37</span>              : </span>
 <span id="L38"><span class="lineNum">      38</span>              : class VoltaSegment final : public TextLineBaseSegment</span>
 <span id="L39"><span class="lineNum">      39</span>              : {</span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC tlaBgGNC">         496 :     OBJECT_ALLOCATOR(engraving, VoltaSegment)</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC tlaBgGNC">         626 :     OBJECT_ALLOCATOR(engraving, VoltaSegment)</span></span>
 <span id="L41"><span class="lineNum">      41</span>              :     DECLARE_CLASSOF(ElementType::VOLTA_SEGMENT)</span>
 <span id="L42"><span class="lineNum">      42</span>              : </span>
 <span id="L43"><span class="lineNum">      43</span>              : public:</span>
 <span id="L44"><span class="lineNum">      44</span>              :     VoltaSegment(Volta*);</span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">          75 :     VoltaSegment* clone() const override { return new VoltaSegment(*this); }</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">         103 :     VoltaSegment* clone() const override { return new VoltaSegment(*this); }</span></span>
 <span id="L47"><span class="lineNum">      47</span>              : </span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">         243 :     Volta* volta() const { return (Volta*)spanner(); }</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">         335 :     Volta* volta() const { return (Volta*)spanner(); }</span></span>
 <span id="L49"><span class="lineNum">      49</span>              : </span>
-<span id="L50"><span class="lineNum">      50</span>              :     EngravingObject* propertyDelegate(Pid) const override;</span>
+<span id="L50"><span class="lineNum">      50</span>              :     PropertyDelegate resolvePropertyDelegate(Pid) const override;</span>
 <span id="L51"><span class="lineNum">      51</span>              : };</span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span>              : //---------------------------------------------------------</span>
@@ -115,8 +115,8 @@
 <span id="L57"><span class="lineNum">      57</span>              : </span>
 <span id="L58"><span class="lineNum">      58</span>              : class Volta final : public TextLineBase</span>
 <span id="L59"><span class="lineNum">      59</span>              : {</span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">         793 :     OBJECT_ALLOCATOR(engraving, Volta)</span></span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        1449 :     DECLARE_CLASSOF(ElementType::VOLTA)</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">         999 :     OBJECT_ALLOCATOR(engraving, Volta)</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">        1549 :     DECLARE_CLASSOF(ElementType::VOLTA)</span></span>
 <span id="L62"><span class="lineNum">      62</span>              : </span>
 <span id="L63"><span class="lineNum">      63</span>              : public:</span>
 <span id="L64"><span class="lineNum">      64</span>              :     enum class Type : char {</span>
@@ -125,10 +125,10 @@
 <span id="L67"><span class="lineNum">      67</span>              : </span>
 <span id="L68"><span class="lineNum">      68</span>              :     Volta(DummyParent* parent);</span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">         231 :     Volta* clone() const override { return new Volta(*this); }</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">         297 :     Volta* clone() const override { return new Volta(*this); }</span></span>
 <span id="L71"><span class="lineNum">      71</span>              :     void setOwnershipParent(EngravingObject*) = delete;</span>
 <span id="L72"><span class="lineNum">      72</span>              : </span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        2918 :     Anchor anchor() const override { return Anchor::MEASURE; }</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        3706 :     Anchor anchor() const override { return Anchor::MEASURE; }</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
 <span id="L75"><span class="lineNum">      75</span>              :     LineSegment* createLineSegment() override;</span>
 <span id="L76"><span class="lineNum">      76</span>              : </span>
@@ -136,7 +136,7 @@
 <span id="L78"><span class="lineNum">      78</span>              : </span>
 <span id="L79"><span class="lineNum">      79</span>              :     void setChannel() const;</span>
 <span id="L80"><span class="lineNum">      80</span>              : </span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">         549 :     std::vector&lt;int&gt; endings() const { return m_endings; }</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">         647 :     std::vector&lt;int&gt; endings() const { return m_endings; }</span></span>
 <span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">         135 :     std::vector&lt;int&gt;&amp; endings() { return m_endings; }</span></span>
 <span id="L83"><span class="lineNum">      83</span>              :     void setEndings(const std::vector&lt;int&gt;&amp; l);</span>
 <span id="L84"><span class="lineNum">      84</span>              :     void setText(const String&amp; s);</span>
@@ -167,7 +167,7 @@
 <span id="L109"><span class="lineNum">     109</span>              : } // namespace mu::engraving</span>
 <span id="L110"><span class="lineNum">     110</span>              : </span>
 <span id="L111"><span class="lineNum">     111</span>              : #ifndef NO_QT_SUPPORT</span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">          16 : Q_DECLARE_METATYPE(mu::engraving::Volta::Type)</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">          18 : Q_DECLARE_METATYPE(mu::engraving::Volta::Type)</span></span>
 <span id="L113"><span class="lineNum">     113</span>              : #endif</span>
 <span id="L114"><span class="lineNum">     114</span>              : </span>
 <span id="L115"><span class="lineNum">     115</span>              : #endif</span>

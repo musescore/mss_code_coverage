@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -89,12 +89,12 @@
 <span id="L31"><span class="lineNum">      31</span>              :     unsigned int allMask = 0;</span>
 <span id="L32"><span class="lineNum">      32</span>              : };</span>
 <span id="L33"><span class="lineNum">      33</span>              : </span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC tlaBgGNC">       32918 : static bool isFiltered_Impl(const unsigned int&amp; currentFilter, const FilterParams&amp; params)</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC tlaBgGNC">       33647 : static bool isFiltered_Impl(const unsigned int&amp; currentFilter, const FilterParams&amp; params)</span></span>
 <span id="L35"><span class="lineNum">      35</span>              : {</span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">       32918 :     if (params.otherFilter == params.noneMask || params.otherFilter == params.allMask) {</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">       33647 :     if (params.otherFilter == params.noneMask || params.otherFilter == params.allMask) {</span></span>
 <span id="L37"><span class="lineNum">      37</span> <span class="tlaUNC tlaBgUNC">           0 :         return currentFilter == params.otherFilter;</span></span>
 <span id="L38"><span class="lineNum">      38</span>              :     }</span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC tlaBgGNC">       32918 :     return currentFilter &amp; params.otherFilter;</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC tlaBgGNC">       33647 :     return currentFilter &amp; params.otherFilter;</span></span>
 <span id="L40"><span class="lineNum">      40</span>              : }</span>
 <span id="L41"><span class="lineNum">      41</span>              : </span>
 <span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">          68 : static void setFiltered_Impl(unsigned int&amp; currentFilter, FilterParams&amp; params, bool filtered)</span></span>
@@ -107,17 +107,17 @@
 <span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">          64 :     filtered ? currentFilter |= params.otherFilter : currentFilter &amp;= ~params.otherFilter;</span></span>
 <span id="L50"><span class="lineNum">      50</span>              : }</span>
 <span id="L51"><span class="lineNum">      51</span>              : </span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">       32918 : bool SelectionFilter::isFiltered(const SelectionFilterTypesVariant&amp; variant) const</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">       33647 : bool SelectionFilter::isFiltered(const SelectionFilterTypesVariant&amp; variant) const</span></span>
 <span id="L53"><span class="lineNum">      53</span>              : {</span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">       32918 :     switch (variant.index()) {</span></span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">       24989 :     case 0: {</span></span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       24989 :         const VoicesSelectionFilterTypes type = std::get&lt;VoicesSelectionFilterTypes&gt;(variant);</span></span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       24989 :         const FilterParams params {</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">       33647 :     switch (variant.index()) {</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">       25629 :     case 0: {</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       25629 :         const VoicesSelectionFilterTypes type = std::get&lt;VoicesSelectionFilterTypes&gt;(variant);</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       25629 :         const FilterParams params {</span></span>
 <span id="L58"><span class="lineNum">      58</span>              :             /*otherFilter*/ static_cast&lt;unsigned int&gt;(type),</span>
 <span id="L59"><span class="lineNum">      59</span>              :             /*noneMask*/ static_cast&lt;unsigned int&gt;(VoicesSelectionFilterTypes::NONE),</span>
 <span id="L60"><span class="lineNum">      60</span>              :             /*allMask*/ static_cast&lt;unsigned int&gt;(VoicesSelectionFilterTypes::ALL)</span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">       24989 :         };</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">       24989 :         return isFiltered_Impl(m_filteredVoicesTypes, params);</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">       25629 :         };</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">       25629 :         return isFiltered_Impl(m_filteredVoicesTypes, params);</span></span>
 <span id="L63"><span class="lineNum">      63</span>              :     }</span>
 <span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        4193 :     case 1: {</span></span>
 <span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">        4193 :         const NotesInChordSelectionFilterTypes type = std::get&lt;NotesInChordSelectionFilterTypes&gt;(variant);</span></span>
@@ -128,14 +128,14 @@
 <span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">        4193 :         };</span></span>
 <span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">        4193 :         return isFiltered_Impl(m_filteredNotesInChordTypes, params);</span></span>
 <span id="L72"><span class="lineNum">      72</span>              :     }</span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        3736 :     case 2: {</span></span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">        3736 :         const ElementsSelectionFilterTypes type = std::get&lt;ElementsSelectionFilterTypes&gt;(variant);</span></span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">        3736 :         const FilterParams params {</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        3825 :     case 2: {</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">        3825 :         const ElementsSelectionFilterTypes type = std::get&lt;ElementsSelectionFilterTypes&gt;(variant);</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">        3825 :         const FilterParams params {</span></span>
 <span id="L76"><span class="lineNum">      76</span>              :             /*otherFilter*/ static_cast&lt;unsigned int&gt;(type),</span>
 <span id="L77"><span class="lineNum">      77</span>              :             /*noneMask*/ static_cast&lt;unsigned int&gt;(ElementsSelectionFilterTypes::NONE),</span>
 <span id="L78"><span class="lineNum">      78</span>              :             /*allMask*/ static_cast&lt;unsigned int&gt;(ElementsSelectionFilterTypes::ALL)</span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        3736 :         };</span></span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">        3736 :         return isFiltered_Impl(m_filteredElementsTypes, params);</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        3825 :         };</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">        3825 :         return isFiltered_Impl(m_filteredElementsTypes, params);</span></span>
 <span id="L81"><span class="lineNum">      81</span>              :     }</span>
 <span id="L82"><span class="lineNum">      82</span> <span class="tlaUNC tlaBgUNC">           0 :     default: break;</span></span>
 <span id="L83"><span class="lineNum">      83</span>              :     }</span>
@@ -183,14 +183,14 @@
 <span id="L125"><span class="lineNum">     125</span> <span class="tlaUNC">           0 :     UNREACHABLE;</span></span>
 <span id="L126"><span class="lineNum">     126</span>              : }</span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC tlaBgGNC">        9339 : bool SelectionFilter::canSelect(const EngravingItem* e) const</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC tlaBgGNC">        9618 : bool SelectionFilter::canSelect(const EngravingItem* e) const</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : {</span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">        9339 :     IF_ASSERT_FAILED(!e-&gt;isNote() &amp;&amp; !e-&gt;isTuplet()) {</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">        9618 :     IF_ASSERT_FAILED(!e-&gt;isNote() &amp;&amp; !e-&gt;isTuplet()) {</span></span>
 <span id="L131"><span class="lineNum">     131</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGE() &lt;&lt; &quot;Using canSelect on a Note or Tuplet - use canSelectNoteIdx or canSelectTuplet instead&quot;;</span></span>
 <span id="L132"><span class="lineNum">     132</span> <span class="tlaUNC">           0 :         return true;</span></span>
 <span id="L133"><span class="lineNum">     133</span>              :     }</span>
 <span id="L134"><span class="lineNum">     134</span>              : </span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC tlaBgGNC">        9339 :     switch (e-&gt;type()) {</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC tlaBgGNC">        9618 :     switch (e-&gt;type()) {</span></span>
 <span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">         126 :     case ElementType::DYNAMIC:</span></span>
 <span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">         126 :         return isFiltered(ElementsSelectionFilterTypes::DYNAMIC);</span></span>
 <span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">          69 :     case ElementType::HAIRPIN:</span></span>
@@ -214,8 +214,8 @@
 <span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">          44 :         return isFiltered(ElementsSelectionFilterTypes::LYRICS);</span></span>
 <span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">          12 :     case ElementType::FINGERING:</span></span>
 <span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">          12 :         return isFiltered(ElementsSelectionFilterTypes::FINGERING);</span></span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">         222 :     case ElementType::HARMONY:</span></span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">         222 :         return isFiltered(ElementsSelectionFilterTypes::CHORD_SYMBOL);</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">         226 :     case ElementType::HARMONY:</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">         226 :         return isFiltered(ElementsSelectionFilterTypes::CHORD_SYMBOL);</span></span>
 <span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">         123 :     case ElementType::SLUR:</span></span>
 <span id="L162"><span class="lineNum">     162</span>              :     case ElementType::SLUR_SEGMENT:</span>
 <span id="L163"><span class="lineNum">     163</span>              :     case ElementType::HAMMER_ON_PULL_OFF:</span>
@@ -245,30 +245,30 @@
 <span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">          19 :     case ElementType::TREMOLO_SINGLECHORD:</span></span>
 <span id="L188"><span class="lineNum">     188</span>              :     case ElementType::TREMOLO_TWOCHORD:</span>
 <span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">          19 :         return isFiltered(ElementsSelectionFilterTypes::TREMOLO);</span></span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">        6417 :     default: break;</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">        6692 :     default: break;</span></span>
 <span id="L191"><span class="lineNum">     191</span>              :     }</span>
 <span id="L192"><span class="lineNum">     192</span>              : </span>
 <span id="L193"><span class="lineNum">     193</span>              :     // Special cases...</span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">        6417 :     if (e-&gt;isTextBase()) {</span></span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">         541 :         return isFiltered(ElementsSelectionFilterTypes::OTHER_TEXT);</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">        6692 :     if (e-&gt;isTextBase()) {</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">         546 :         return isFiltered(ElementsSelectionFilterTypes::OTHER_TEXT);</span></span>
 <span id="L196"><span class="lineNum">     196</span>              :     }</span>
 <span id="L197"><span class="lineNum">     197</span>              : </span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        5876 :     if (e-&gt;isSLine() || e-&gt;isSLineSegment()) { // NoteLine, Volta</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">        6146 :     if (e-&gt;isSLine() || e-&gt;isSLineSegment()) { // NoteLine, Volta</span></span>
 <span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">           6 :         return isFiltered(ElementsSelectionFilterTypes::OTHER_LINE);</span></span>
 <span id="L200"><span class="lineNum">     200</span>              :     }</span>
 <span id="L201"><span class="lineNum">     201</span>              : </span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">        5870 :     if (e-&gt;isChord() &amp;&amp; toChord(e)-&gt;isGrace()) {</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">        6140 :     if (e-&gt;isChord() &amp;&amp; toChord(e)-&gt;isGrace()) {</span></span>
 <span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">          73 :         return isFiltered(ElementsSelectionFilterTypes::GRACE_NOTE);</span></span>
 <span id="L204"><span class="lineNum">     204</span>              :     }</span>
 <span id="L205"><span class="lineNum">     205</span>              : </span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        5797 :     return true;</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        6067 :     return true;</span></span>
 <span id="L207"><span class="lineNum">     207</span>              : }</span>
 <span id="L208"><span class="lineNum">     208</span>              : </span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">        7282 : bool SelectionFilter::canSelectNoteIdx(size_t noteIdx, size_t totalNotesInChord, bool selectionContainsMultiNoteChords) const</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">        7290 : bool SelectionFilter::canSelectNoteIdx(size_t noteIdx, size_t totalNotesInChord, bool selectionContainsMultiNoteChords) const</span></span>
 <span id="L210"><span class="lineNum">     210</span>              : {</span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">        7282 :     if (totalNotesInChord == 1) {</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">        7290 :     if (totalNotesInChord == 1) {</span></span>
 <span id="L212"><span class="lineNum">     212</span>              :         //! NOTE: Always include single notes when the selection consists solely of single notes...</span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        3354 :         return m_includeSingleNotes || !selectionContainsMultiNoteChords;</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">        3362 :         return m_includeSingleNotes || !selectionContainsMultiNoteChords;</span></span>
 <span id="L214"><span class="lineNum">     214</span>              :     }</span>
 <span id="L215"><span class="lineNum">     215</span>              : </span>
 <span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        3928 :     NotesInChordSelectionFilterTypes type = NotesInChordSelectionFilterTypes::NONE;</span></span>
@@ -342,18 +342,18 @@
 <span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC tlaBgGNC">         456 :     return true;</span></span>
 <span id="L285"><span class="lineNum">     285</span>              : }</span>
 <span id="L286"><span class="lineNum">     286</span>              : </span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">       24989 : bool SelectionFilter::canSelectVoice(track_idx_t track) const</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">       25629 : bool SelectionFilter::canSelectVoice(track_idx_t track) const</span></span>
 <span id="L288"><span class="lineNum">     288</span>              : {</span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">       24989 :     voice_idx_t voice = track2voice(track);</span></span>
-<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">       24989 :     switch (voice) {</span></span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">       21318 :     case 0:</span></span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       21318 :         return isFiltered(VoicesSelectionFilterTypes::FIRST_VOICE);</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">        2037 :     case 1:</span></span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">        2037 :         return isFiltered(VoicesSelectionFilterTypes::SECOND_VOICE);</span></span>
-<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">         887 :     case 2:</span></span>
-<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">         887 :         return isFiltered(VoicesSelectionFilterTypes::THIRD_VOICE);</span></span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">         747 :     case 3:</span></span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">         747 :         return isFiltered(VoicesSelectionFilterTypes::FOURTH_VOICE);</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">       25629 :     voice_idx_t voice = track2voice(track);</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">       25629 :     switch (voice) {</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">       21904 :     case 0:</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       21904 :         return isFiltered(VoicesSelectionFilterTypes::FIRST_VOICE);</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">        2055 :     case 1:</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">        2055 :         return isFiltered(VoicesSelectionFilterTypes::SECOND_VOICE);</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">         905 :     case 2:</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">         905 :         return isFiltered(VoicesSelectionFilterTypes::THIRD_VOICE);</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">         765 :     case 3:</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">         765 :         return isFiltered(VoicesSelectionFilterTypes::FOURTH_VOICE);</span></span>
 <span id="L299"><span class="lineNum">     299</span>              :     }</span>
 <span id="L300"><span class="lineNum">     300</span> <span class="tlaUNC tlaBgUNC">           0 :     return true;</span></span>
 <span id="L301"><span class="lineNum">     301</span>              : }</span>

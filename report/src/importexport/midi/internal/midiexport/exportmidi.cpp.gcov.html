@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -192,7 +192,7 @@
 <span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">          12 :     staffIdx = 0;</span></span>
 <span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">         173 :     for (auto&amp; track1: m_midiFile.tracks()) {</span></span>
 <span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">         161 :         Staff* staff  = m_score-&gt;staff(staffIdx);</span></span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">         161 :         KeyList* keys = staff-&gt;keyList();</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">         161 :         const KeyList&amp; keys = staff-&gt;keyList();</span></span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
 <span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">         161 :         bool initialKeySigFound = false;</span></span>
 <span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">         333 :         for (const RepeatSegment* rs : m_score-&gt;repeatList()) {</span></span>
@@ -200,8 +200,8 @@
 <span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         172 :             int endTick    = startTick + rs-&gt;len();</span></span>
 <span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">         172 :             int tickOffset = rs-&gt;utick - rs-&gt;tick;</span></span>
 <span id="L144"><span class="lineNum">     144</span>              : </span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">         172 :             auto sk = keys-&gt;lower_bound(startTick);</span></span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">         172 :             auto ek = keys-&gt;lower_bound(endTick);</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">         172 :             auto sk = keys.lower_bound(startTick);</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">         172 :             auto ek = keys.lower_bound(endTick);</span></span>
 <span id="L147"><span class="lineNum">     147</span>              : </span>
 <span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         189 :             for (auto ik = sk; ik != ek; ++ik) {</span></span>
 <span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">          17 :                 MidiEvent ev;</span></span>

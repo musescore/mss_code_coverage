@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">11</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -88,19 +88,19 @@
 <span id="L30"><span class="lineNum">      30</span>              : </span>
 <span id="L31"><span class="lineNum">      31</span> <span class="tlaUNC tlaBgUNC">           0 : muse::Ret MusicXmlReader::read(MasterScore* score, const muse::io::path_t&amp; path, const Options&amp; options)</span></span>
 <span id="L32"><span class="lineNum">      32</span>              : {</span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaUNC">           0 :     Err err = Err::FileUnknownType;</span></span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaUNC">           0 :     std::string suffix = muse::io::suffix(path);</span></span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaUNC">           0 :     bool forceMode = false;</span></span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC">           0 :     if (options.find(INotationReader::OptionKey::ForceMode) != options.end()) {</span></span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaUNC">           0 :         forceMode = options.at(INotationReader::OptionKey::ForceMode).toBool();</span></span>
-<span id="L38"><span class="lineNum">      38</span>              :     }</span>
-<span id="L39"><span class="lineNum">      39</span>              : </span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaUNC">           0 :     if (suffix == &quot;xml&quot; || suffix == &quot;musicxml&quot;) {</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaUNC">           0 :         err = importMusicXml(score, path.toString(), forceMode);</span></span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaUNC">           0 :     } else if (suffix == &quot;mxl&quot;) {</span></span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaUNC">           0 :         err = importCompressedMusicXml(score, path.toString(), forceMode);</span></span>
-<span id="L44"><span class="lineNum">      44</span>              :     }</span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :     return make_ret(err, path);</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaUNC">           0 :     std::string suffix = muse::io::suffix(path);</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaUNC">           0 :     bool forceMode = false;</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaUNC">           0 :     if (options.find(INotationReader::OptionKey::ForceMode) != options.end()) {</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC">           0 :         forceMode = options.at(INotationReader::OptionKey::ForceMode).toBool();</span></span>
+<span id="L37"><span class="lineNum">      37</span>              :     }</span>
+<span id="L38"><span class="lineNum">      38</span>              : </span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaUNC">           0 :     if (suffix == &quot;xml&quot; || suffix == &quot;musicxml&quot;) {</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaUNC">           0 :         return importMusicXml(score, path.toString(), forceMode);</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaUNC">           0 :     } else if (suffix == &quot;mxl&quot;) {</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaUNC">           0 :         return importCompressedMusicXml(score, path.toString(), forceMode);</span></span>
+<span id="L43"><span class="lineNum">      43</span>              :     }</span>
+<span id="L44"><span class="lineNum">      44</span>              : </span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :     return make_ret(Err::FileUnknownType, path);</span></span>
 <span id="L46"><span class="lineNum">      46</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>

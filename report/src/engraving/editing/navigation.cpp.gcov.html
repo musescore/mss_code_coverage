@@ -31,13 +31,13 @@
             <td class="headerValue">filtered_coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">11.8&nbsp;%</td>
+            <td class="headerCovTableEntryLo">11.9&nbsp;%</td>
             <td class="headerCovTableEntry">927</td>
-            <td class="headerCovTableEntry">109</td>
+            <td class="headerCovTableEntry">110</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -209,13 +209,13 @@
 <span id="L151"><span class="lineNum">     151</span>              : //    return next Chord or Rest</span>
 <span id="L152"><span class="lineNum">     152</span>              : //---------------------------------------------------------</span>
 <span id="L153"><span class="lineNum">     153</span>              : </span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC tlaBgGNC">         829 : ChordRest* Navigation::nextChordRest(const ChordRest* cr, const ChordRestNavigateOptions&amp; options)</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC tlaBgGNC">         783 : ChordRest* Navigation::nextChordRest(const ChordRest* cr, const ChordRestNavigateOptions&amp; options)</span></span>
 <span id="L155"><span class="lineNum">     155</span>              : {</span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         829 :     if (!cr) {</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         783 :     if (!cr) {</span></span>
 <span id="L157"><span class="lineNum">     157</span> <span class="tlaUNC tlaBgUNC">           0 :         return nullptr;</span></span>
 <span id="L158"><span class="lineNum">     158</span>              :     }</span>
 <span id="L159"><span class="lineNum">     159</span>              : </span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC tlaBgGNC">         829 :     if (cr-&gt;isGrace()) {</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC tlaBgGNC">         783 :     if (cr-&gt;isGrace()) {</span></span>
 <span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          13 :         const Chord* c  = toChord(cr);</span></span>
 <span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">          13 :         Chord* pc = toChord(cr-&gt;ownershipParent());</span></span>
 <span id="L163"><span class="lineNum">     163</span>              : </span>
@@ -247,9 +247,9 @@
 <span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">           5 :             cr = pc;</span></span>
 <span id="L190"><span class="lineNum">     190</span>              :         }</span>
 <span id="L191"><span class="lineNum">     191</span>              :     } else { // cr is not a grace note</span>
-<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">         816 :         if (cr-&gt;isChord() &amp;&amp; !options.skipGrace) {</span></span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">         487 :             const Chord* c = toChord(cr);</span></span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">         487 :             if (!c-&gt;graceNotes().empty()) {</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">         770 :         if (cr-&gt;isChord() &amp;&amp; !options.skipGrace) {</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">         441 :             const Chord* c = toChord(cr);</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">         441 :             if (!c-&gt;graceNotes().empty()) {</span></span>
 <span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">          21 :                 const GraceNotesGroup&amp; group = c-&gt;graceNotesAfter();</span></span>
 <span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          21 :                 if (!group.empty()) {</span></span>
 <span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">           4 :                     return group.front();</span></span>
@@ -258,28 +258,28 @@
 <span id="L200"><span class="lineNum">     200</span>              :         }</span>
 <span id="L201"><span class="lineNum">     201</span>              :     }</span>
 <span id="L202"><span class="lineNum">     202</span>              : </span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">         817 :     track_idx_t track = cr-&gt;track();</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">         817 :     SegmentType st = SegmentType::ChordRest;</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">         817 :     Segment* curSeg = cr-&gt;segment();</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">         841 :     for (Segment* seg = curSeg-&gt;next1MM(st); seg; seg = seg-&gt;next1MM(st)) {</span></span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">         808 :         if (options.disableOverRepeats &amp;&amp; !segmentsAreAdjacent(curSeg, seg)) {</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">         771 :     track_idx_t track = cr-&gt;track();</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">         771 :     SegmentType st = SegmentType::ChordRest;</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">         771 :     Segment* curSeg = cr-&gt;segment();</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">         795 :     for (Segment* seg = curSeg-&gt;next1MM(st); seg; seg = seg-&gt;next1MM(st)) {</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">         762 :         if (options.disableOverRepeats &amp;&amp; !segmentsAreAdjacent(curSeg, seg)) {</span></span>
 <span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC tlaBgUNC">           0 :             return nullptr;</span></span>
 <span id="L209"><span class="lineNum">     209</span>              :         }</span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC tlaBgGNC">         808 :         ChordRest* e = toChordRest(seg-&gt;element(track));</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">         808 :         if (e) {</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">         785 :             if (options.skipMeasureRepeatRests &amp;&amp; e-&gt;isRest() &amp;&amp; e-&gt;measure()-&gt;isMeasureRepeatGroup(track2staff(track))) {</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC tlaBgGNC">         762 :         ChordRest* e = toChordRest(seg-&gt;element(track));</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">         762 :         if (e) {</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">         739 :             if (options.skipMeasureRepeatRests &amp;&amp; e-&gt;isRest() &amp;&amp; e-&gt;measure()-&gt;isMeasureRepeatGroup(track2staff(track))) {</span></span>
 <span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">           1 :                 continue; // these rests are not shown, skip them</span></span>
 <span id="L214"><span class="lineNum">     214</span>              :             }</span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">         784 :             if (e-&gt;isChord() &amp;&amp; !options.skipGrace) {</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">         291 :                 Chord* c = toChord(e);</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">         291 :                 if (!c-&gt;graceNotes().empty()) {</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">         738 :             if (e-&gt;isChord() &amp;&amp; !options.skipGrace) {</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">         297 :                 Chord* c = toChord(e);</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">         297 :                 if (!c-&gt;graceNotes().empty()) {</span></span>
 <span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">          16 :                     const GraceNotesGroup&amp; group = c-&gt;graceNotesBefore();</span></span>
 <span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">          16 :                     if (!group.empty()) {</span></span>
 <span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">          12 :                         return group.front();</span></span>
 <span id="L221"><span class="lineNum">     221</span>              :                     }</span>
 <span id="L222"><span class="lineNum">     222</span>              :                 }</span>
 <span id="L223"><span class="lineNum">     223</span>              :             }</span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">         772 :             return e;</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">         726 :             return e;</span></span>
 <span id="L225"><span class="lineNum">     225</span>              :         }</span>
 <span id="L226"><span class="lineNum">     226</span>              :     }</span>
 <span id="L227"><span class="lineNum">     227</span>              : </span>
@@ -292,13 +292,13 @@
 <span id="L234"><span class="lineNum">     234</span>              : //    if grace is true, include grace notes</span>
 <span id="L235"><span class="lineNum">     235</span>              : //---------------------------------------------------------</span>
 <span id="L236"><span class="lineNum">     236</span>              : </span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">         869 : ChordRest* Navigation::prevChordRest(const ChordRest* cr, const ChordRestNavigateOptions&amp; options)</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">         823 : ChordRest* Navigation::prevChordRest(const ChordRest* cr, const ChordRestNavigateOptions&amp; options)</span></span>
 <span id="L238"><span class="lineNum">     238</span>              : {</span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">         869 :     if (!cr) {</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">         823 :     if (!cr) {</span></span>
 <span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC tlaBgUNC">           0 :         return nullptr;</span></span>
 <span id="L241"><span class="lineNum">     241</span>              :     }</span>
 <span id="L242"><span class="lineNum">     242</span>              : </span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC tlaBgGNC">         869 :     if (cr-&gt;isGrace()) {</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC tlaBgGNC">         823 :     if (cr-&gt;isGrace()) {</span></span>
 <span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">         563 :         const Chord* c  = toChord(cr);</span></span>
 <span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">         563 :         Chord* pc = toChord(cr-&gt;ownershipParent());</span></span>
 <span id="L246"><span class="lineNum">     246</span>              : </span>
@@ -330,39 +330,39 @@
 <span id="L272"><span class="lineNum">     272</span>              :     } else {</span>
 <span id="L273"><span class="lineNum">     273</span>              :         //</span>
 <span id="L274"><span class="lineNum">     274</span>              :         // cr is not a grace note</span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC tlaBgGNC">         306 :         if (cr-&gt;isChord() &amp;&amp; !options.skipGrace) {</span></span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">         306 :             const Chord* c = toChord(cr);</span></span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">         306 :             const GraceNotesGroup&amp; group = c-&gt;graceNotesBefore();</span></span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">         306 :             if (!group.empty()) {</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC tlaBgGNC">         260 :         if (cr-&gt;isChord() &amp;&amp; !options.skipGrace) {</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">         260 :             const Chord* c = toChord(cr);</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">         260 :             const GraceNotesGroup&amp; group = c-&gt;graceNotesBefore();</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">         260 :             if (!group.empty()) {</span></span>
 <span id="L279"><span class="lineNum">     279</span> <span class="tlaUNC tlaBgUNC">           0 :                 return group.back();</span></span>
 <span id="L280"><span class="lineNum">     280</span>              :             }</span>
 <span id="L281"><span class="lineNum">     281</span>              :         }</span>
 <span id="L282"><span class="lineNum">     282</span>              :     }</span>
 <span id="L283"><span class="lineNum">     283</span>              : </span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC tlaBgGNC">         869 :     track_idx_t track = cr-&gt;track();</span></span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">         869 :     SegmentType st = SegmentType::ChordRest;</span></span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">         869 :     Segment* curSeg = cr-&gt;segment();</span></span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">         882 :     for (Segment* seg = cr-&gt;segment()-&gt;prev1MM(st); seg; seg = seg-&gt;prev1MM(st)) {</span></span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">         679 :         if (options.disableOverRepeats &amp;&amp; !segmentsAreAdjacent(curSeg, seg)) {</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC tlaBgGNC">         823 :     track_idx_t track = cr-&gt;track();</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">         823 :     SegmentType st = SegmentType::ChordRest;</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">         823 :     Segment* curSeg = cr-&gt;segment();</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">         836 :     for (Segment* seg = cr-&gt;segment()-&gt;prev1MM(st); seg; seg = seg-&gt;prev1MM(st)) {</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">         631 :         if (options.disableOverRepeats &amp;&amp; !segmentsAreAdjacent(curSeg, seg)) {</span></span>
 <span id="L289"><span class="lineNum">     289</span> <span class="tlaUNC tlaBgUNC">           0 :             return nullptr;</span></span>
 <span id="L290"><span class="lineNum">     290</span>              :         }</span>
 <span id="L291"><span class="lineNum">     291</span>              : </span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC tlaBgGNC">         679 :         ChordRest* e = toChordRest(seg-&gt;element(track));</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">         679 :         if (e) {</span></span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">         666 :             if (options.skipMeasureRepeatRests &amp;&amp; e-&gt;isRest() &amp;&amp; e-&gt;measure()-&gt;isMeasureRepeatGroup(track2staff(track))) {</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC tlaBgGNC">         631 :         ChordRest* e = toChordRest(seg-&gt;element(track));</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">         631 :         if (e) {</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">         618 :             if (options.skipMeasureRepeatRests &amp;&amp; e-&gt;isRest() &amp;&amp; e-&gt;measure()-&gt;isMeasureRepeatGroup(track2staff(track))) {</span></span>
 <span id="L295"><span class="lineNum">     295</span> <span class="tlaUNC tlaBgUNC">           0 :                 continue; // these rests are not shown, skip them</span></span>
 <span id="L296"><span class="lineNum">     296</span>              :             }</span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC tlaBgGNC">         666 :             if (e-&gt;isChord() &amp;&amp; !options.skipGrace) {</span></span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">         543 :                 const GraceNotesGroup&amp; group = toChord(e)-&gt;graceNotesAfter();</span></span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">         543 :                 if (!group.empty()) {</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC tlaBgGNC">         618 :             if (e-&gt;isChord() &amp;&amp; !options.skipGrace) {</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">         495 :                 const GraceNotesGroup&amp; group = toChord(e)-&gt;graceNotesAfter();</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">         495 :                 if (!group.empty()) {</span></span>
 <span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">         117 :                     return group.back();</span></span>
 <span id="L301"><span class="lineNum">     301</span>              :                 }</span>
 <span id="L302"><span class="lineNum">     302</span>              :             }</span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">         549 :             return e;</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">         501 :             return e;</span></span>
 <span id="L304"><span class="lineNum">     304</span>              :         }</span>
 <span id="L305"><span class="lineNum">     305</span>              :     }</span>
 <span id="L306"><span class="lineNum">     306</span>              : </span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">         203 :     return nullptr;</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">         205 :     return nullptr;</span></span>
 <span id="L308"><span class="lineNum">     308</span>              : }</span>
 <span id="L309"><span class="lineNum">     309</span>              : </span>
 <span id="L310"><span class="lineNum">     310</span>              : //---------------------------------------------------------</span>
@@ -1306,41 +1306,41 @@
 <span id="L1248"><span class="lineNum">    1248</span>              : //    - currently used to determine the first lyric of a melisma</span>
 <span id="L1249"><span class="lineNum">    1249</span>              : //---------------------------------------------------------</span>
 <span id="L1250"><span class="lineNum">    1250</span>              : </span>
-<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaGNC tlaBgGNC">           9 : Lyrics* Navigation::lastLyricsInMeasure(const Segment* seg, const staff_idx_t staffIdx, const int no, const PlacementV&amp; placement)</span></span>
+<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaGNC tlaBgGNC">          13 : Lyrics* Navigation::lastLyricsInMeasure(const Segment* seg, const staff_idx_t staffIdx, const int no, const PlacementV&amp; placement)</span></span>
 <span id="L1252"><span class="lineNum">    1252</span>              : {</span>
-<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaGNC">          15 :     while (seg) {</span></span>
-<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaGNC">           9 :         const track_idx_t strack = staffIdx * VOICES;</span></span>
-<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaGNC">           9 :         const track_idx_t etrack = strack + VOICES;</span></span>
-<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaGNC">          34 :         for (track_idx_t track = strack; track &lt; etrack; ++track) {</span></span>
-<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaGNC">          28 :             EngravingItem* el = seg-&gt;element(track);</span></span>
-<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaGNC">          28 :             Lyrics* prevLyrics = el &amp;&amp; el-&gt;isChord() ? toChordRest(el)-&gt;lyrics(no, placement) : nullptr;</span></span>
-<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaGNC">          28 :             if (prevLyrics) {</span></span>
-<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaGNC">           3 :                 return prevLyrics;</span></span>
+<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaGNC">          43 :     while (seg) {</span></span>
+<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaGNC">          37 :         const track_idx_t strack = staffIdx * VOICES;</span></span>
+<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaGNC">          37 :         const track_idx_t etrack = strack + VOICES;</span></span>
+<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaGNC">         158 :         for (track_idx_t track = strack; track &lt; etrack; ++track) {</span></span>
+<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaGNC">         128 :             EngravingItem* el = seg-&gt;element(track);</span></span>
+<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaGNC">         128 :             Lyrics* prevLyrics = el &amp;&amp; el-&gt;isChord() ? toChordRest(el)-&gt;lyrics(no, placement) : nullptr;</span></span>
+<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaGNC">         128 :             if (prevLyrics) {</span></span>
+<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaGNC">           7 :                 return prevLyrics;</span></span>
 <span id="L1261"><span class="lineNum">    1261</span>              :             }</span>
 <span id="L1262"><span class="lineNum">    1262</span>              :         }</span>
-<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaGNC">           6 :         seg = seg-&gt;prev1(mu::engraving::SegmentType::ChordRest);</span></span>
+<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaGNC">          30 :         seg = seg-&gt;prev1(mu::engraving::SegmentType::ChordRest);</span></span>
 <span id="L1264"><span class="lineNum">    1264</span>              :     }</span>
 <span id="L1265"><span class="lineNum">    1265</span> <span class="tlaGNC">           6 :     return nullptr;</span></span>
 <span id="L1266"><span class="lineNum">    1266</span>              : }</span>
 <span id="L1267"><span class="lineNum">    1267</span>              : </span>
-<span id="L1268"><span class="lineNum">    1268</span> <span class="tlaGNC">          48 : Lyrics* Navigation::prevLyrics(const Lyrics* lyrics)</span></span>
+<span id="L1268"><span class="lineNum">    1268</span> <span class="tlaGNC">          55 : Lyrics* Navigation::prevLyrics(const Lyrics* lyrics)</span></span>
 <span id="L1269"><span class="lineNum">    1269</span>              : {</span>
-<span id="L1270"><span class="lineNum">    1270</span> <span class="tlaGNC">          48 :     Segment* seg = lyrics-&gt;ownershipParent() ? lyrics-&gt;segment() : nullptr;</span></span>
-<span id="L1271"><span class="lineNum">    1271</span> <span class="tlaGNC">          48 :     if (!seg) {</span></span>
+<span id="L1270"><span class="lineNum">    1270</span> <span class="tlaGNC">          55 :     Segment* seg = lyrics-&gt;ownershipParent() ? lyrics-&gt;segment() : nullptr;</span></span>
+<span id="L1271"><span class="lineNum">    1271</span> <span class="tlaGNC">          55 :     if (!seg) {</span></span>
 <span id="L1272"><span class="lineNum">    1272</span> <span class="tlaUNC tlaBgUNC">           0 :         return nullptr;</span></span>
 <span id="L1273"><span class="lineNum">    1273</span>              :     }</span>
-<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaGNC tlaBgGNC">         101 :     while ((seg = seg-&gt;prev1(mu::engraving::SegmentType::ChordRest))) {</span></span>
-<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaGNC">          53 :         const track_idx_t strack = lyrics-&gt;staffIdx() * VOICES;</span></span>
-<span id="L1276"><span class="lineNum">    1276</span> <span class="tlaGNC">          53 :         const track_idx_t etrack = strack + VOICES;</span></span>
-<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaGNC">         265 :         for (track_idx_t track = strack; track &lt; etrack; ++track) {</span></span>
-<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaGNC">         212 :             EngravingItem* el = seg-&gt;element(track);</span></span>
-<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaGNC">         212 :             Lyrics* prevLyrics = el &amp;&amp; el-&gt;isChord() ? toChordRest(el)-&gt;lyrics(lyrics-&gt;verse(), lyrics-&gt;placement()) : nullptr;</span></span>
-<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaGNC">         212 :             if (prevLyrics) {</span></span>
-<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaUNC tlaBgUNC">           0 :                 return prevLyrics;</span></span>
+<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaGNC tlaBgGNC">         109 :     while ((seg = seg-&gt;prev1(mu::engraving::SegmentType::ChordRest))) {</span></span>
+<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaGNC">          59 :         const track_idx_t strack = lyrics-&gt;staffIdx() * VOICES;</span></span>
+<span id="L1276"><span class="lineNum">    1276</span> <span class="tlaGNC">          59 :         const track_idx_t etrack = strack + VOICES;</span></span>
+<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaGNC">         275 :         for (track_idx_t track = strack; track &lt; etrack; ++track) {</span></span>
+<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaGNC">         221 :             EngravingItem* el = seg-&gt;element(track);</span></span>
+<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaGNC">         221 :             Lyrics* prevLyrics = el &amp;&amp; el-&gt;isChord() ? toChordRest(el)-&gt;lyrics(lyrics-&gt;verse(), lyrics-&gt;placement()) : nullptr;</span></span>
+<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaGNC">         221 :             if (prevLyrics) {</span></span>
+<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaGNC">           5 :                 return prevLyrics;</span></span>
 <span id="L1282"><span class="lineNum">    1282</span>              :             }</span>
 <span id="L1283"><span class="lineNum">    1283</span>              :         }</span>
 <span id="L1284"><span class="lineNum">    1284</span>              :     }</span>
-<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaGNC tlaBgGNC">          48 :     return nullptr;</span></span>
+<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaGNC">          50 :     return nullptr;</span></span>
 <span id="L1286"><span class="lineNum">    1286</span>              : }</span>
 <span id="L1287"><span class="lineNum">    1287</span>              : </span>
 <span id="L1288"><span class="lineNum">    1288</span> <span class="tlaUNC tlaBgUNC">           0 : Lyrics* Navigation::nextLyrics(const Lyrics* lyrics)</span></span>

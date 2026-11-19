@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -102,11 +102,11 @@
 <span id="L44"><span class="lineNum">      44</span>              : //   SlurTieSegment</span>
 <span id="L45"><span class="lineNum">      45</span>              : //---------------------------------------------------------</span>
 <span id="L46"><span class="lineNum">      46</span>              : </span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC tlaBgGNC">        2547 : SlurTieSegment::SlurTieSegment(const ElementType&amp; type, SlurTie* sp)</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">        2547 :     : SpannerSegment(type, sp)</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC tlaBgGNC">        2549 : SlurTieSegment::SlurTieSegment(const ElementType&amp; type, SlurTie* sp)</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">        2549 :     : SpannerSegment(type, sp)</span></span>
 <span id="L49"><span class="lineNum">      49</span>              : {</span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">        2547 :     setFlag(ElementFlag::ON_STAFF, true);</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">        2547 : }</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">        2549 :     setFlag(ElementFlag::ON_STAFF, true);</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">        2549 : }</span></span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">         482 : SlurTieSegment::SlurTieSegment(const SlurTieSegment&amp; b)</span></span>
 <span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">         482 :     : SpannerSegment(b)</span></span>
@@ -281,15 +281,15 @@
 <span id="L223"><span class="lineNum">     223</span>              : //   propertyDelegate</span>
 <span id="L224"><span class="lineNum">     224</span>              : //---------------------------------------------------------</span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC tlaBgGNC">       12051 : EngravingObject* SlurTieSegment::propertyDelegate(Pid pid) const</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC tlaBgGNC">       11908 : PropertyDelegate SlurTieSegment::resolvePropertyDelegate(Pid pid) const</span></span>
 <span id="L227"><span class="lineNum">     227</span>              : {</span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">       12051 :     switch (pid) {</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        3373 :     case Pid::SLUR_STYLE_TYPE:</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">       11908 :     switch (pid) {</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">        3378 :     case Pid::SLUR_STYLE_TYPE:</span></span>
 <span id="L230"><span class="lineNum">     230</span>              :     case Pid::SLUR_DIRECTION:</span>
 <span id="L231"><span class="lineNum">     231</span>              :     case Pid::MASK_SLURTIE:</span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">        3373 :         return slurTie();</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        8678 :     default:</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        8678 :         return SpannerSegment::propertyDelegate(pid);</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">        3378 :         return PropertyDelegate(slurTie());</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        8530 :     default:</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        8530 :         return SpannerSegment::resolvePropertyDelegate(pid);</span></span>
 <span id="L235"><span class="lineNum">     235</span>              :     }</span>
 <span id="L236"><span class="lineNum">     236</span>              : }</span>
 <span id="L237"><span class="lineNum">     237</span>              : </span>
@@ -297,10 +297,10 @@
 <span id="L239"><span class="lineNum">     239</span>              : //   getProperty</span>
 <span id="L240"><span class="lineNum">     240</span>              : //---------------------------------------------------------</span>
 <span id="L241"><span class="lineNum">     241</span>              : </span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        5092 : PropertyValue SlurTieSegment::getProperty(Pid propertyId) const</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">        5097 : PropertyValue SlurTieSegment::getProperty(Pid propertyId) const</span></span>
 <span id="L243"><span class="lineNum">     243</span>              : {</span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        5092 :     if (EngravingObject* e = const_cast&lt;SlurTieSegment*&gt;(this)-&gt;propertyDelegate(propertyId)) {</span></span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">        3758 :         return e-&gt;getProperty(propertyId);</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">        5097 :     if (const PropertyDelegate d = resolvePropertyDelegate(propertyId); d.hasDelegate) {</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">        3763 :         return d.delegate ? d.delegate-&gt;getProperty(propertyId) : propertyDefault(propertyId);</span></span>
 <span id="L246"><span class="lineNum">     246</span>              :     }</span>
 <span id="L247"><span class="lineNum">     247</span>              : </span>
 <span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        1334 :     switch (propertyId) {</span></span>
@@ -321,13 +321,13 @@
 <span id="L263"><span class="lineNum">     263</span>              : //   setProperty</span>
 <span id="L264"><span class="lineNum">     264</span>              : //---------------------------------------------------------</span>
 <span id="L265"><span class="lineNum">     265</span>              : </span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">         118 : bool SlurTieSegment::setProperty(Pid propertyId, const PropertyValue&amp; v)</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">          44 : bool SlurTieSegment::setProperty(Pid propertyId, const PropertyValue&amp; v)</span></span>
 <span id="L267"><span class="lineNum">     267</span>              : {</span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">         118 :     if (EngravingObject* e = const_cast&lt;SlurTieSegment*&gt;(this)-&gt;propertyDelegate(propertyId)) {</span></span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">           5 :         return e-&gt;setProperty(propertyId, v);</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">          44 :     if (const PropertyDelegate d = resolvePropertyDelegate(propertyId); d.hasDelegate) {</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">           5 :         return d.delegate ? d.delegate-&gt;setProperty(propertyId, v) : false;</span></span>
 <span id="L270"><span class="lineNum">     270</span>              :     }</span>
 <span id="L271"><span class="lineNum">     271</span>              : </span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">         113 :     switch (propertyId) {</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">          39 :     switch (propertyId) {</span></span>
 <span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">           3 :     case Pid::BEZIER_OFFSET1:</span></span>
 <span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">           3 :         ups(Grip::START).off = v.value&lt;PointF&gt;();</span></span>
 <span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">           3 :         break;</span></span>
@@ -340,8 +340,8 @@
 <span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">           4 :     case Pid::BEZIER_OFFSET4:</span></span>
 <span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">           4 :         ups(Grip::END).off = v.value&lt;PointF&gt;();</span></span>
 <span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">           4 :         break;</span></span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">          95 :     default:</span></span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">          95 :         return SpannerSegment::setProperty(propertyId, v);</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">          21 :     default:</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">          21 :         return SpannerSegment::setProperty(propertyId, v);</span></span>
 <span id="L287"><span class="lineNum">     287</span>              :     }</span>
 <span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">          18 :     triggerLayout();</span></span>
 <span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">          18 :     return true;</span></span>
@@ -353,8 +353,8 @@
 <span id="L295"><span class="lineNum">     295</span>              : </span>
 <span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">        1655 : PropertyValue SlurTieSegment::propertyDefault(Pid id) const</span></span>
 <span id="L297"><span class="lineNum">     297</span>              : {</span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">        1655 :     if (EngravingObject* e = const_cast&lt;SlurTieSegment*&gt;(this)-&gt;propertyDelegate(id)) {</span></span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">         371 :         return e-&gt;propertyDefault(id);</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">        1655 :     if (const PropertyDelegate d = resolvePropertyDelegate(id); d.hasDelegate) {</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">         371 :         return d.delegate ? d.delegate-&gt;propertyDefault(id) : PropertyValue();</span></span>
 <span id="L300"><span class="lineNum">     300</span>              :     }</span>
 <span id="L301"><span class="lineNum">     301</span>              : </span>
 <span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">        1284 :     switch (id) {</span></span>
@@ -404,14 +404,14 @@
 <span id="L346"><span class="lineNum">     346</span>              : //   SlurTie</span>
 <span id="L347"><span class="lineNum">     347</span>              : //---------------------------------------------------------</span>
 <span id="L348"><span class="lineNum">     348</span>              : </span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">        2381 : SlurTie::SlurTie(const ElementType&amp; type, EngravingObject* parent)</span></span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">        2381 :     : Spanner(type, parent)</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">        2384 : SlurTie::SlurTie(const ElementType&amp; type, EngravingObject* parent)</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">        2384 :     : Spanner(type, parent)</span></span>
 <span id="L351"><span class="lineNum">     351</span>              : {</span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">        2381 :     m_slurDirection = DirectionV::AUTO;</span></span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">        2381 :     m_up            = true;</span></span>
-<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">        2381 :     m_styleType     = SlurStyleType::Solid;</span></span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">        2381 :     m_maskSlurTie   = AutoOnOff::AUTO;</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">        2381 : }</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">        2384 :     m_slurDirection = DirectionV::AUTO;</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">        2384 :     m_up            = true;</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">        2384 :     m_styleType     = SlurStyleType::Solid;</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">        2384 :     m_maskSlurTie   = AutoOnOff::AUTO;</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">        2384 : }</span></span>
 <span id="L357"><span class="lineNum">     357</span>              : </span>
 <span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">         510 : SlurTie::SlurTie(const SlurTie&amp; t)</span></span>
 <span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">         510 :     : Spanner(t)</span></span>
@@ -426,9 +426,9 @@
 <span id="L368"><span class="lineNum">     368</span>              : //   SlurTie</span>
 <span id="L369"><span class="lineNum">     369</span>              : //---------------------------------------------------------</span>
 <span id="L370"><span class="lineNum">     370</span>              : </span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">        2417 : SlurTie::~SlurTie()</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">        2420 : SlurTie::~SlurTie()</span></span>
 <span id="L372"><span class="lineNum">     372</span>              : {</span>
-<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">        2417 : }</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">        2420 : }</span></span>
 <span id="L374"><span class="lineNum">     374</span>              : </span>
 <span id="L375"><span class="lineNum">     375</span>              : //---------------------------------------------------------</span>
 <span id="L376"><span class="lineNum">     376</span>              : //   undoSetSlurDirection</span>
@@ -443,15 +443,15 @@
 <span id="L385"><span class="lineNum">     385</span>              : //   getProperty</span>
 <span id="L386"><span class="lineNum">     386</span>              : //---------------------------------------------------------</span>
 <span id="L387"><span class="lineNum">     387</span>              : </span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC tlaBgGNC">       16540 : PropertyValue SlurTie::getProperty(Pid propertyId) const</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC tlaBgGNC">       16545 : PropertyValue SlurTie::getProperty(Pid propertyId) const</span></span>
 <span id="L389"><span class="lineNum">     389</span>              : {</span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">       16540 :     switch (propertyId) {</span></span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">       16545 :     switch (propertyId) {</span></span>
 <span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">         969 :     case Pid::SLUR_STYLE_TYPE:</span></span>
 <span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">         969 :         return styleType();</span></span>
 <span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">         975 :     case Pid::SLUR_DIRECTION:</span></span>
 <span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">         975 :         return PropertyValue::fromValue&lt;DirectionV&gt;(slurDirection());</span></span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">        4342 :     case Pid::MASK_SLURTIE:</span></span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">        4342 :         return maskSlurTie();</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">        4347 :     case Pid::MASK_SLURTIE:</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">        4347 :         return maskSlurTie();</span></span>
 <span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">       10254 :     default:</span></span>
 <span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">       10254 :         return Spanner::getProperty(propertyId);</span></span>
 <span id="L399"><span class="lineNum">     399</span>              :     }</span>
@@ -461,9 +461,9 @@
 <span id="L403"><span class="lineNum">     403</span>              : //   setProperty</span>
 <span id="L404"><span class="lineNum">     404</span>              : //---------------------------------------------------------</span>
 <span id="L405"><span class="lineNum">     405</span>              : </span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">         197 : bool SlurTie::setProperty(Pid propertyId, const PropertyValue&amp; v)</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">         123 : bool SlurTie::setProperty(Pid propertyId, const PropertyValue&amp; v)</span></span>
 <span id="L407"><span class="lineNum">     407</span>              : {</span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">         197 :     switch (propertyId) {</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">         123 :     switch (propertyId) {</span></span>
 <span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          18 :     case Pid::SLUR_STYLE_TYPE:</span></span>
 <span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">          18 :         setStyleType(v.value&lt;SlurStyleType&gt;());</span></span>
 <span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          18 :         break;</span></span>
@@ -473,8 +473,8 @@
 <span id="L415"><span class="lineNum">     415</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::MASK_SLURTIE:</span></span>
 <span id="L416"><span class="lineNum">     416</span> <span class="tlaUNC">           0 :         setMaskSlurTie(v.value&lt;AutoOnOff&gt;());</span></span>
 <span id="L417"><span class="lineNum">     417</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC tlaBgGNC">         130 :     default:</span></span>
-<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">         130 :         return Spanner::setProperty(propertyId, v);</span></span>
+<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC tlaBgGNC">          56 :     default:</span></span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">          56 :         return Spanner::setProperty(propertyId, v);</span></span>
 <span id="L420"><span class="lineNum">     420</span>              :     }</span>
 <span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">          67 :     triggerLayout();</span></span>
 <span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">          67 :     return true;</span></span>
@@ -502,10 +502,10 @@
 <span id="L444"><span class="lineNum">     444</span>              : //   fixupSegments</span>
 <span id="L445"><span class="lineNum">     445</span>              : //---------------------------------------------------------</span>
 <span id="L446"><span class="lineNum">     446</span>              : </span>
-<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">        5408 : void SlurTie::fixupSegments(unsigned nsegs)</span></span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">        5415 : void SlurTie::fixupSegments(unsigned nsegs)</span></span>
 <span id="L448"><span class="lineNum">     448</span>              : {</span>
-<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">        7398 :     Spanner::fixupSegments(nsegs, [this]() { return newSlurTieSegment(); });</span></span>
-<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">        5408 : }</span></span>
+<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">        7407 :     Spanner::fixupSegments(nsegs, [this]() { return newSlurTieSegment(); });</span></span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">        5415 : }</span></span>
 <span id="L451"><span class="lineNum">     451</span>              : </span>
 <span id="L452"><span class="lineNum">     452</span>              : //---------------------------------------------------------</span>
 <span id="L453"><span class="lineNum">     453</span>              : //   reset</span>

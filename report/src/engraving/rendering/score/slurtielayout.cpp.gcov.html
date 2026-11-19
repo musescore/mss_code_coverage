@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -415,16 +415,16 @@
 <span id="L357"><span class="lineNum">     357</span>              :     }</span>
 <span id="L358"><span class="lineNum">     358</span>              : }</span>
 <span id="L359"><span class="lineNum">     359</span>              : </span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC tlaBgGNC">         624 : double SlurTieLayout::endingXForOpenEndedSlurTie(const Measure* measure, staff_idx_t staffIdx)</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC tlaBgGNC">         625 : double SlurTieLayout::endingXForOpenEndedSlurTie(const Measure* measure, staff_idx_t staffIdx)</span></span>
 <span id="L361"><span class="lineNum">     361</span>              : {</span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">         624 :     double endingX = measure-&gt;endingXForOpenEndedLines();</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">         625 :     double endingX = measure-&gt;endingXForOpenEndedLines();</span></span>
 <span id="L363"><span class="lineNum">     363</span>              : </span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">         624 :     const SegmentType segmentTypesToAvoid = SegmentType::TimeSigTypes | SegmentType::KeySigTypes | SegmentType::ClefTypes;</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">         625 :     const SegmentType segmentTypesToAvoid = SegmentType::TimeSigTypes | SegmentType::KeySigTypes | SegmentType::ClefTypes;</span></span>
 <span id="L365"><span class="lineNum">     365</span>              : </span>
 <span id="L366"><span class="lineNum">     366</span>              :     // Find the first segment at the end of the measure which meets the criteria for the SlurTie to stop before it:</span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">         624 :     const Segment* endSegment = measure-&gt;findSegmentR(segmentTypesToAvoid, measure-&gt;ticks());</span></span>
-<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">         624 :     const EngravingItem* endItem = nullptr;</span></span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">         626 :     while (endSegment) {</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">         625 :     const Segment* endSegment = measure-&gt;findSegmentR(segmentTypesToAvoid, measure-&gt;ticks());</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">         625 :     const EngravingItem* endItem = nullptr;</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">         627 :     while (endSegment) {</span></span>
 <span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">           2 :         if (endSegment-&gt;isType(segmentTypesToAvoid) &amp;&amp; endSegment-&gt;enabled()) {</span></span>
 <span id="L371"><span class="lineNum">     371</span> <span class="tlaUNC tlaBgUNC">           0 :             endItem = endSegment-&gt;element(staff2track(staffIdx));</span></span>
 <span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC">           0 :             if (endItem &amp;&amp; endItem-&gt;visible() &amp;&amp; endItem-&gt;addToSkyline()) {</span></span>
@@ -434,8 +434,8 @@
 <span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC tlaBgGNC">           2 :         endSegment = endSegment-&gt;next();</span></span>
 <span id="L377"><span class="lineNum">     377</span>              :     }</span>
 <span id="L378"><span class="lineNum">     378</span>              : </span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">         624 :     if (!endSegment || !endItem) {</span></span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">         624 :         return endingX;</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">         625 :     if (!endSegment || !endItem) {</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">         625 :         return endingX;</span></span>
 <span id="L381"><span class="lineNum">     381</span>              :     }</span>
 <span id="L382"><span class="lineNum">     382</span>              : </span>
 <span id="L383"><span class="lineNum">     383</span> <span class="tlaUNC tlaBgUNC">           0 :     const double margin = endItem-&gt;style().styleAbsolute(Sid::lineEndToBarlineDistance);</span></span>
@@ -1625,12 +1625,12 @@
 <span id="L1567"><span class="lineNum">    1567</span>              :     }</span>
 <span id="L1568"><span class="lineNum">    1568</span> <span class="tlaGNC tlaBgGNC">          31 : }</span></span>
 <span id="L1569"><span class="lineNum">    1569</span>              : </span>
-<span id="L1570"><span class="lineNum">    1570</span> <span class="tlaGNC">        5437 : bool SlurTieLayout::tieSegmentShouldBeSkipped(const Tie* item)</span></span>
+<span id="L1570"><span class="lineNum">    1570</span> <span class="tlaGNC">        5444 : bool SlurTieLayout::tieSegmentShouldBeSkipped(const Tie* item)</span></span>
 <span id="L1571"><span class="lineNum">    1571</span>              : {</span>
-<span id="L1572"><span class="lineNum">    1572</span> <span class="tlaGNC">        5437 :     Note* startNote = item-&gt;startNote();</span></span>
-<span id="L1573"><span class="lineNum">    1573</span> <span class="tlaGNC">        5437 :     StaffType* st = item-&gt;staff()-&gt;staffType(startNote ? startNote-&gt;tick() : Fraction(0, 1));</span></span>
-<span id="L1574"><span class="lineNum">    1574</span> <span class="tlaGNC">        5437 :     if (!st || !st-&gt;isTabStaff()) {</span></span>
-<span id="L1575"><span class="lineNum">    1575</span> <span class="tlaGNC">        5384 :         return false;</span></span>
+<span id="L1572"><span class="lineNum">    1572</span> <span class="tlaGNC">        5444 :     Note* startNote = item-&gt;startNote();</span></span>
+<span id="L1573"><span class="lineNum">    1573</span> <span class="tlaGNC">        5444 :     StaffType* st = item-&gt;staff()-&gt;staffType(startNote ? startNote-&gt;tick() : Fraction(0, 1));</span></span>
+<span id="L1574"><span class="lineNum">    1574</span> <span class="tlaGNC">        5444 :     if (!st || !st-&gt;isTabStaff()) {</span></span>
+<span id="L1575"><span class="lineNum">    1575</span> <span class="tlaGNC">        5391 :         return false;</span></span>
 <span id="L1576"><span class="lineNum">    1576</span>              :     }</span>
 <span id="L1577"><span class="lineNum">    1577</span>              : </span>
 <span id="L1578"><span class="lineNum">    1578</span> <span class="tlaGNC">          53 :     if (startNote &amp;&amp; startNote-&gt;isContinuationOfBend()) {</span></span>
@@ -1642,17 +1642,17 @@
 <span id="L1584"><span class="lineNum">    1584</span> <span class="tlaGNC">          49 :     return showTiedFret == ShowTiedFret::NONE;</span></span>
 <span id="L1585"><span class="lineNum">    1585</span>              : }</span>
 <span id="L1586"><span class="lineNum">    1586</span>              : </span>
-<span id="L1587"><span class="lineNum">    1587</span> <span class="tlaGNC">        4514 : TieSegment* SlurTieLayout::layoutTieFor(Tie* item, System* system)</span></span>
+<span id="L1587"><span class="lineNum">    1587</span> <span class="tlaGNC">        4520 : TieSegment* SlurTieLayout::layoutTieFor(Tie* item, System* system)</span></span>
 <span id="L1588"><span class="lineNum">    1588</span>              : {</span>
-<span id="L1589"><span class="lineNum">    1589</span> <span class="tlaGNC">        4514 :     item-&gt;setPos(0, 0);</span></span>
+<span id="L1589"><span class="lineNum">    1589</span> <span class="tlaGNC">        4520 :     item-&gt;setPos(0, 0);</span></span>
 <span id="L1590"><span class="lineNum">    1590</span>              : </span>
-<span id="L1591"><span class="lineNum">    1591</span> <span class="tlaGNC">        4514 :     if (!item-&gt;startNote()) {</span></span>
+<span id="L1591"><span class="lineNum">    1591</span> <span class="tlaGNC">        4520 :     if (!item-&gt;startNote()) {</span></span>
 <span id="L1592"><span class="lineNum">    1592</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGD(&quot;no start note&quot;);</span></span>
 <span id="L1593"><span class="lineNum">    1593</span> <span class="tlaUNC">           0 :         return nullptr;</span></span>
 <span id="L1594"><span class="lineNum">    1594</span>              :     }</span>
 <span id="L1595"><span class="lineNum">    1595</span>              : </span>
 <span id="L1596"><span class="lineNum">    1596</span>              :     // do not layout ties in tablature if not showing back-tied fret marks</span>
-<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaGNC tlaBgGNC">        4514 :     if (tieSegmentShouldBeSkipped(item)) {</span></span>
+<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaGNC tlaBgGNC">        4520 :     if (tieSegmentShouldBeSkipped(item)) {</span></span>
 <span id="L1598"><span class="lineNum">    1598</span> <span class="tlaGNC">           4 :         if (!item-&gt;segmentsEmpty()) {</span></span>
 <span id="L1599"><span class="lineNum">    1599</span> <span class="tlaUNC tlaBgUNC">           0 :             item-&gt;eraseSpannerSegments();</span></span>
 <span id="L1600"><span class="lineNum">    1600</span>              :         }</span>
@@ -1660,70 +1660,70 @@
 <span id="L1602"><span class="lineNum">    1602</span> <span class="tlaGNC tlaBgGNC">           4 :         return nullptr;</span></span>
 <span id="L1603"><span class="lineNum">    1603</span>              :     }</span>
 <span id="L1604"><span class="lineNum">    1604</span>              : </span>
-<span id="L1605"><span class="lineNum">    1605</span> <span class="tlaGNC">        4510 :     if (item-&gt;isPartialTie()) {</span></span>
+<span id="L1605"><span class="lineNum">    1605</span> <span class="tlaGNC">        4516 :     if (item-&gt;isPartialTie()) {</span></span>
 <span id="L1606"><span class="lineNum">    1606</span> <span class="tlaGNC">         110 :         return layoutPartialTie(toPartialTie(item));</span></span>
 <span id="L1607"><span class="lineNum">    1607</span>              :     }</span>
 <span id="L1608"><span class="lineNum">    1608</span>              : </span>
-<span id="L1609"><span class="lineNum">    1609</span> <span class="tlaGNC">        4400 :     calculateDirection(item);</span></span>
-<span id="L1610"><span class="lineNum">    1610</span> <span class="tlaGNC">        4400 :     calculateIsInside(item);</span></span>
+<span id="L1609"><span class="lineNum">    1609</span> <span class="tlaGNC">        4406 :     calculateDirection(item);</span></span>
+<span id="L1610"><span class="lineNum">    1610</span> <span class="tlaGNC">        4406 :     calculateIsInside(item);</span></span>
 <span id="L1611"><span class="lineNum">    1611</span>              : </span>
-<span id="L1612"><span class="lineNum">    1612</span> <span class="tlaGNC">        4400 :     SlurTiePos sPos;</span></span>
-<span id="L1613"><span class="lineNum">    1613</span> <span class="tlaGNC">        4400 :     sPos.p1 = computeDefaultStartOrEndPoint(item, Grip::START);</span></span>
+<span id="L1612"><span class="lineNum">    1612</span> <span class="tlaGNC">        4406 :     SlurTiePos sPos;</span></span>
+<span id="L1613"><span class="lineNum">    1613</span> <span class="tlaGNC">        4406 :     sPos.p1 = computeDefaultStartOrEndPoint(item, Grip::START);</span></span>
 <span id="L1614"><span class="lineNum">    1614</span>              : </span>
-<span id="L1615"><span class="lineNum">    1615</span> <span class="tlaGNC">        4400 :     computeStartAndEndSystem(item, sPos);</span></span>
+<span id="L1615"><span class="lineNum">    1615</span> <span class="tlaGNC">        4406 :     computeStartAndEndSystem(item, sPos);</span></span>
 <span id="L1616"><span class="lineNum">    1616</span>              : </span>
-<span id="L1617"><span class="lineNum">    1617</span> <span class="tlaGNC">        4400 :     int segmentCount = sPos.system1 == sPos.system2 ? 1 : 2;</span></span>
-<span id="L1618"><span class="lineNum">    1618</span> <span class="tlaGNC">        4400 :     if (segmentCount == 2) {</span></span>
-<span id="L1619"><span class="lineNum">    1619</span> <span class="tlaGNC">         573 :         sPos.p2 = PointF(endingXForOpenEndedSlurTie(system-&gt;lastMeasure(), item-&gt;startNote()-&gt;vStaffIdx()), sPos.p1.y());</span></span>
+<span id="L1617"><span class="lineNum">    1617</span> <span class="tlaGNC">        4406 :     int segmentCount = sPos.system1 == sPos.system2 ? 1 : 2;</span></span>
+<span id="L1618"><span class="lineNum">    1618</span> <span class="tlaGNC">        4406 :     if (segmentCount == 2) {</span></span>
+<span id="L1619"><span class="lineNum">    1619</span> <span class="tlaGNC">         574 :         sPos.p2 = PointF(endingXForOpenEndedSlurTie(system-&gt;lastMeasure(), item-&gt;startNote()-&gt;vStaffIdx()), sPos.p1.y());</span></span>
 <span id="L1620"><span class="lineNum">    1620</span>              :     } else {</span>
-<span id="L1621"><span class="lineNum">    1621</span> <span class="tlaGNC">        3827 :         sPos.p2 = computeDefaultStartOrEndPoint(item, Grip::END);</span></span>
+<span id="L1621"><span class="lineNum">    1621</span> <span class="tlaGNC">        3832 :         sPos.p2 = computeDefaultStartOrEndPoint(item, Grip::END);</span></span>
 <span id="L1622"><span class="lineNum">    1622</span>              :     }</span>
 <span id="L1623"><span class="lineNum">    1623</span>              : </span>
-<span id="L1624"><span class="lineNum">    1624</span> <span class="tlaGNC">        4400 :     correctForCrossStaff(item, sPos, sPos.system1 != sPos.system2 ? SpannerSegmentType::BEGIN : SpannerSegmentType::SINGLE);</span></span>
-<span id="L1625"><span class="lineNum">    1625</span> <span class="tlaGNC">        4400 :     forceHorizontal(item, sPos);</span></span>
-<span id="L1626"><span class="lineNum">    1626</span> <span class="tlaGNC">        4400 :     correctForJianpu(item, sPos);</span></span>
+<span id="L1624"><span class="lineNum">    1624</span> <span class="tlaGNC">        4406 :     correctForCrossStaff(item, sPos, sPos.system1 != sPos.system2 ? SpannerSegmentType::BEGIN : SpannerSegmentType::SINGLE);</span></span>
+<span id="L1625"><span class="lineNum">    1625</span> <span class="tlaGNC">        4406 :     forceHorizontal(item, sPos);</span></span>
+<span id="L1626"><span class="lineNum">    1626</span> <span class="tlaGNC">        4406 :     correctForJianpu(item, sPos);</span></span>
 <span id="L1627"><span class="lineNum">    1627</span>              : </span>
-<span id="L1628"><span class="lineNum">    1628</span> <span class="tlaGNC">        4400 :     item-&gt;fixupSegments(segmentCount);</span></span>
-<span id="L1629"><span class="lineNum">    1629</span> <span class="tlaGNC">        4400 :     TieSegment* segment = item-&gt;segmentAt(0);</span></span>
-<span id="L1630"><span class="lineNum">    1630</span> <span class="tlaGNC">        4400 :     segment-&gt;setTrack(item-&gt;track());</span></span>
-<span id="L1631"><span class="lineNum">    1631</span> <span class="tlaGNC">        4400 :     segment-&gt;setSpannerSegmentType(sPos.system1 != sPos.system2 ? SpannerSegmentType::BEGIN : SpannerSegmentType::SINGLE);</span></span>
-<span id="L1632"><span class="lineNum">    1632</span> <span class="tlaGNC">        4400 :     segment-&gt;moveToSystem(system);   // Needed to populate System.spannerSegments</span></span>
-<span id="L1633"><span class="lineNum">    1633</span> <span class="tlaGNC">        4400 :     segment-&gt;resetAdjustmentOffset();</span></span>
-<span id="L1634"><span class="lineNum">    1634</span> <span class="tlaGNC">        4400 :     segment-&gt;mutldata()-&gt;allJumpPointsInactive = item-&gt;allJumpPointsInactive();</span></span>
+<span id="L1628"><span class="lineNum">    1628</span> <span class="tlaGNC">        4406 :     item-&gt;fixupSegments(segmentCount);</span></span>
+<span id="L1629"><span class="lineNum">    1629</span> <span class="tlaGNC">        4406 :     TieSegment* segment = item-&gt;segmentAt(0);</span></span>
+<span id="L1630"><span class="lineNum">    1630</span> <span class="tlaGNC">        4406 :     segment-&gt;setTrack(item-&gt;track());</span></span>
+<span id="L1631"><span class="lineNum">    1631</span> <span class="tlaGNC">        4406 :     segment-&gt;setSpannerSegmentType(sPos.system1 != sPos.system2 ? SpannerSegmentType::BEGIN : SpannerSegmentType::SINGLE);</span></span>
+<span id="L1632"><span class="lineNum">    1632</span> <span class="tlaGNC">        4406 :     segment-&gt;moveToSystem(system);   // Needed to populate System.spannerSegments</span></span>
+<span id="L1633"><span class="lineNum">    1633</span> <span class="tlaGNC">        4406 :     segment-&gt;resetAdjustmentOffset();</span></span>
+<span id="L1634"><span class="lineNum">    1634</span> <span class="tlaGNC">        4406 :     segment-&gt;mutldata()-&gt;allJumpPointsInactive = item-&gt;allJumpPointsInactive();</span></span>
 <span id="L1635"><span class="lineNum">    1635</span>              : </span>
-<span id="L1636"><span class="lineNum">    1636</span> <span class="tlaGNC">        4400 :     const Chord* startChord = item-&gt;startNote()-&gt;chord();</span></span>
-<span id="L1637"><span class="lineNum">    1637</span> <span class="tlaGNC">        4400 :     item-&gt;setTick(startChord-&gt;tick()); // Why is this here?? (M.S.)</span></span>
+<span id="L1636"><span class="lineNum">    1636</span> <span class="tlaGNC">        4406 :     const Chord* startChord = item-&gt;startNote()-&gt;chord();</span></span>
+<span id="L1637"><span class="lineNum">    1637</span> <span class="tlaGNC">        4406 :     item-&gt;setTick(startChord-&gt;tick()); // Why is this here?? (M.S.)</span></span>
 <span id="L1638"><span class="lineNum">    1638</span>              : </span>
-<span id="L1639"><span class="lineNum">    1639</span> <span class="tlaGNC">        4400 :     if (segment-&gt;autoplace() &amp;&amp; !segment-&gt;isEdited()) {</span></span>
-<span id="L1640"><span class="lineNum">    1640</span> <span class="tlaGNC">        4400 :         adjustX(segment, sPos, Grip::START);</span></span>
-<span id="L1641"><span class="lineNum">    1641</span> <span class="tlaGNC">        4400 :         if (segment-&gt;isSingleType()) {</span></span>
-<span id="L1642"><span class="lineNum">    1642</span> <span class="tlaGNC">        3827 :             adjustX(segment, sPos, Grip::END);</span></span>
+<span id="L1639"><span class="lineNum">    1639</span> <span class="tlaGNC">        4406 :     if (segment-&gt;autoplace() &amp;&amp; !segment-&gt;isEdited()) {</span></span>
+<span id="L1640"><span class="lineNum">    1640</span> <span class="tlaGNC">        4406 :         adjustX(segment, sPos, Grip::START);</span></span>
+<span id="L1641"><span class="lineNum">    1641</span> <span class="tlaGNC">        4406 :         if (segment-&gt;isSingleType()) {</span></span>
+<span id="L1642"><span class="lineNum">    1642</span> <span class="tlaGNC">        3832 :             adjustX(segment, sPos, Grip::END);</span></span>
 <span id="L1643"><span class="lineNum">    1643</span>              :         }</span>
 <span id="L1644"><span class="lineNum">    1644</span>              :     }</span>
 <span id="L1645"><span class="lineNum">    1645</span>              : </span>
-<span id="L1646"><span class="lineNum">    1646</span> <span class="tlaGNC">        4400 :     adjustYforLedgerLines(segment, sPos);</span></span>
+<span id="L1646"><span class="lineNum">    1646</span> <span class="tlaGNC">        4406 :     adjustYforLedgerLines(segment, sPos);</span></span>
 <span id="L1647"><span class="lineNum">    1647</span>              : </span>
-<span id="L1648"><span class="lineNum">    1648</span> <span class="tlaGNC">        4400 :     segment-&gt;ups(Grip::START).p = sPos.p1;</span></span>
-<span id="L1649"><span class="lineNum">    1649</span> <span class="tlaGNC">        4400 :     segment-&gt;ups(Grip::END).p = sPos.p2;</span></span>
+<span id="L1648"><span class="lineNum">    1648</span> <span class="tlaGNC">        4406 :     segment-&gt;ups(Grip::START).p = sPos.p1;</span></span>
+<span id="L1649"><span class="lineNum">    1649</span> <span class="tlaGNC">        4406 :     segment-&gt;ups(Grip::END).p = sPos.p2;</span></span>
 <span id="L1650"><span class="lineNum">    1650</span>              : </span>
-<span id="L1651"><span class="lineNum">    1651</span> <span class="tlaGNC">        4400 :     if (segment-&gt;autoplace() &amp;&amp; !segment-&gt;isEdited()) {</span></span>
-<span id="L1652"><span class="lineNum">    1652</span> <span class="tlaGNC">        4400 :         adjustY(segment);</span></span>
+<span id="L1651"><span class="lineNum">    1651</span> <span class="tlaGNC">        4406 :     if (segment-&gt;autoplace() &amp;&amp; !segment-&gt;isEdited()) {</span></span>
+<span id="L1652"><span class="lineNum">    1652</span> <span class="tlaGNC">        4406 :         adjustY(segment);</span></span>
 <span id="L1653"><span class="lineNum">    1653</span>              :     } else {</span>
 <span id="L1654"><span class="lineNum">    1654</span> <span class="tlaUNC tlaBgUNC">           0 :         computeBezier(segment);</span></span>
 <span id="L1655"><span class="lineNum">    1655</span>              :     }</span>
 <span id="L1656"><span class="lineNum">    1656</span>              : </span>
-<span id="L1657"><span class="lineNum">    1657</span> <span class="tlaGNC tlaBgGNC">        4400 :     addLineAttachPoints(segment); // add attach points to start and end note</span></span>
-<span id="L1658"><span class="lineNum">    1658</span> <span class="tlaGNC">        4400 :     return segment;</span></span>
+<span id="L1657"><span class="lineNum">    1657</span> <span class="tlaGNC tlaBgGNC">        4406 :     addLineAttachPoints(segment); // add attach points to start and end note</span></span>
+<span id="L1658"><span class="lineNum">    1658</span> <span class="tlaGNC">        4406 :     return segment;</span></span>
 <span id="L1659"><span class="lineNum">    1659</span>              : }</span>
 <span id="L1660"><span class="lineNum">    1660</span>              : </span>
-<span id="L1661"><span class="lineNum">    1661</span> <span class="tlaGNC">        4400 : void SlurTieLayout::correctForJianpu(Tie* item, SlurTiePos&amp; sPos)</span></span>
+<span id="L1661"><span class="lineNum">    1661</span> <span class="tlaGNC">        4406 : void SlurTieLayout::correctForJianpu(Tie* item, SlurTiePos&amp; sPos)</span></span>
 <span id="L1662"><span class="lineNum">    1662</span>              : {</span>
-<span id="L1663"><span class="lineNum">    1663</span> <span class="tlaGNC">        4400 :     if (!item-&gt;startNote() || !item-&gt;endNote()) {</span></span>
-<span id="L1664"><span class="lineNum">    1664</span> <span class="tlaGNC">        4400 :         return;</span></span>
+<span id="L1663"><span class="lineNum">    1663</span> <span class="tlaGNC">        4406 :     if (!item-&gt;startNote() || !item-&gt;endNote()) {</span></span>
+<span id="L1664"><span class="lineNum">    1664</span> <span class="tlaGNC">        4406 :         return;</span></span>
 <span id="L1665"><span class="lineNum">    1665</span>              :     }</span>
 <span id="L1666"><span class="lineNum">    1666</span>              : </span>
-<span id="L1667"><span class="lineNum">    1667</span> <span class="tlaGNC">        4400 :     if (!item-&gt;staff()-&gt;isJianpuStaff(item-&gt;startNote()-&gt;tick())) {</span></span>
-<span id="L1668"><span class="lineNum">    1668</span> <span class="tlaGNC">        4400 :         return;</span></span>
+<span id="L1667"><span class="lineNum">    1667</span> <span class="tlaGNC">        4406 :     if (!item-&gt;staff()-&gt;isJianpuStaff(item-&gt;startNote()-&gt;tick())) {</span></span>
+<span id="L1668"><span class="lineNum">    1668</span> <span class="tlaGNC">        4406 :         return;</span></span>
 <span id="L1669"><span class="lineNum">    1669</span>              :     }</span>
 <span id="L1670"><span class="lineNum">    1670</span>              : </span>
 <span id="L1671"><span class="lineNum">    1671</span> <span class="tlaUNC tlaBgUNC">           0 :     Chord* chord1 = item-&gt;startNote()-&gt;chord();</span></span>
@@ -1739,16 +1739,16 @@
 <span id="L1681"><span class="lineNum">    1681</span> <span class="tlaUNC">           0 :     sPos.p2 += PointF(0, minY);</span></span>
 <span id="L1682"><span class="lineNum">    1682</span>              : }</span>
 <span id="L1683"><span class="lineNum">    1683</span>              : </span>
-<span id="L1684"><span class="lineNum">    1684</span> <span class="tlaGNC tlaBgGNC">         824 : TieSegment* SlurTieLayout::layoutTieBack(Tie* item, System* system, LayoutContext&amp; ctx)</span></span>
+<span id="L1684"><span class="lineNum">    1684</span> <span class="tlaGNC tlaBgGNC">         825 : TieSegment* SlurTieLayout::layoutTieBack(Tie* item, System* system, LayoutContext&amp; ctx)</span></span>
 <span id="L1685"><span class="lineNum">    1685</span>              : {</span>
-<span id="L1686"><span class="lineNum">    1686</span> <span class="tlaGNC">         824 :     Chord* chord = item-&gt;endNote() ? item-&gt;endNote()-&gt;chord() : nullptr;</span></span>
+<span id="L1686"><span class="lineNum">    1686</span> <span class="tlaGNC">         825 :     Chord* chord = item-&gt;endNote() ? item-&gt;endNote()-&gt;chord() : nullptr;</span></span>
 <span id="L1687"><span class="lineNum">    1687</span>              : </span>
-<span id="L1688"><span class="lineNum">    1688</span> <span class="tlaGNC">         824 :     if (item-&gt;staffType() &amp;&amp; item-&gt;staffType()-&gt;isTabStaff()) {</span></span>
+<span id="L1688"><span class="lineNum">    1688</span> <span class="tlaGNC">         825 :     if (item-&gt;staffType() &amp;&amp; item-&gt;staffType()-&gt;isTabStaff()) {</span></span>
 <span id="L1689"><span class="lineNum">    1689</span>              :         // On TAB, the presence of this tie may require to add a parenthesis</span>
 <span id="L1690"><span class="lineNum">    1690</span> <span class="tlaGNC">          10 :         ChordLayout::layout(chord, ctx);</span></span>
 <span id="L1691"><span class="lineNum">    1691</span>              :     }</span>
 <span id="L1692"><span class="lineNum">    1692</span>              :     // do not layout ties in tablature if not showing back-tied fret marks</span>
-<span id="L1693"><span class="lineNum">    1693</span> <span class="tlaGNC">         824 :     if (tieSegmentShouldBeSkipped(item)) {</span></span>
+<span id="L1693"><span class="lineNum">    1693</span> <span class="tlaGNC">         825 :     if (tieSegmentShouldBeSkipped(item)) {</span></span>
 <span id="L1694"><span class="lineNum">    1694</span> <span class="tlaUNC tlaBgUNC">           0 :         if (!item-&gt;segmentsEmpty()) {</span></span>
 <span id="L1695"><span class="lineNum">    1695</span> <span class="tlaUNC">           0 :             item-&gt;eraseSpannerSegments();</span></span>
 <span id="L1696"><span class="lineNum">    1696</span>              :         }</span>
@@ -1756,60 +1756,60 @@
 <span id="L1698"><span class="lineNum">    1698</span> <span class="tlaUNC">           0 :         return nullptr;</span></span>
 <span id="L1699"><span class="lineNum">    1699</span>              :     }</span>
 <span id="L1700"><span class="lineNum">    1700</span>              : </span>
-<span id="L1701"><span class="lineNum">    1701</span> <span class="tlaGNC tlaBgGNC">         824 :     if (item-&gt;isPartialTie()) {</span></span>
+<span id="L1701"><span class="lineNum">    1701</span> <span class="tlaGNC tlaBgGNC">         825 :     if (item-&gt;isPartialTie()) {</span></span>
 <span id="L1702"><span class="lineNum">    1702</span> <span class="tlaGNC">         230 :         return layoutPartialTie(toPartialTie(item));</span></span>
 <span id="L1703"><span class="lineNum">    1703</span>              :     }</span>
 <span id="L1704"><span class="lineNum">    1704</span>              : </span>
-<span id="L1705"><span class="lineNum">    1705</span> <span class="tlaGNC">         594 :     SlurTiePos sPos;</span></span>
-<span id="L1706"><span class="lineNum">    1706</span> <span class="tlaGNC">         594 :     computeStartAndEndSystem(item, sPos);</span></span>
-<span id="L1707"><span class="lineNum">    1707</span> <span class="tlaGNC">         594 :     sPos.p2 = computeDefaultStartOrEndPoint(item, Grip::END);</span></span>
+<span id="L1705"><span class="lineNum">    1705</span> <span class="tlaGNC">         595 :     SlurTiePos sPos;</span></span>
+<span id="L1706"><span class="lineNum">    1706</span> <span class="tlaGNC">         595 :     computeStartAndEndSystem(item, sPos);</span></span>
+<span id="L1707"><span class="lineNum">    1707</span> <span class="tlaGNC">         595 :     sPos.p2 = computeDefaultStartOrEndPoint(item, Grip::END);</span></span>
 <span id="L1708"><span class="lineNum">    1708</span>              : </span>
-<span id="L1709"><span class="lineNum">    1709</span> <span class="tlaGNC">         594 :     double x = system ? system-&gt;firstNoteRestSegmentX(true) : 0;</span></span>
-<span id="L1710"><span class="lineNum">    1710</span> <span class="tlaGNC">         594 :     double y = sPos.p2.y();</span></span>
-<span id="L1711"><span class="lineNum">    1711</span> <span class="tlaGNC">         594 :     sPos.p1 = PointF(x, y);</span></span>
+<span id="L1709"><span class="lineNum">    1709</span> <span class="tlaGNC">         595 :     double x = system ? system-&gt;firstNoteRestSegmentX(true) : 0;</span></span>
+<span id="L1710"><span class="lineNum">    1710</span> <span class="tlaGNC">         595 :     double y = sPos.p2.y();</span></span>
+<span id="L1711"><span class="lineNum">    1711</span> <span class="tlaGNC">         595 :     sPos.p1 = PointF(x, y);</span></span>
 <span id="L1712"><span class="lineNum">    1712</span>              : </span>
-<span id="L1713"><span class="lineNum">    1713</span> <span class="tlaGNC">         594 :     item-&gt;fixupSegments(2);</span></span>
-<span id="L1714"><span class="lineNum">    1714</span> <span class="tlaGNC">         594 :     TieSegment* segment = item-&gt;segmentAt(1);</span></span>
-<span id="L1715"><span class="lineNum">    1715</span> <span class="tlaGNC">         594 :     segment-&gt;setTrack(item-&gt;track());</span></span>
-<span id="L1716"><span class="lineNum">    1716</span> <span class="tlaGNC">         594 :     segment-&gt;moveToSystem(system);</span></span>
-<span id="L1717"><span class="lineNum">    1717</span> <span class="tlaGNC">         594 :     segment-&gt;resetAdjustmentOffset();</span></span>
+<span id="L1713"><span class="lineNum">    1713</span> <span class="tlaGNC">         595 :     item-&gt;fixupSegments(2);</span></span>
+<span id="L1714"><span class="lineNum">    1714</span> <span class="tlaGNC">         595 :     TieSegment* segment = item-&gt;segmentAt(1);</span></span>
+<span id="L1715"><span class="lineNum">    1715</span> <span class="tlaGNC">         595 :     segment-&gt;setTrack(item-&gt;track());</span></span>
+<span id="L1716"><span class="lineNum">    1716</span> <span class="tlaGNC">         595 :     segment-&gt;moveToSystem(system);</span></span>
+<span id="L1717"><span class="lineNum">    1717</span> <span class="tlaGNC">         595 :     segment-&gt;resetAdjustmentOffset();</span></span>
 <span id="L1718"><span class="lineNum">    1718</span>              : </span>
-<span id="L1719"><span class="lineNum">    1719</span> <span class="tlaGNC">         594 :     if (chord) {</span></span>
-<span id="L1720"><span class="lineNum">    1720</span> <span class="tlaGNC">         594 :         segment-&gt;setStaffMove(static_cast&lt;int&gt;(chord-&gt;vStaffIdx() - segment-&gt;staffIdx()));</span></span>
+<span id="L1719"><span class="lineNum">    1719</span> <span class="tlaGNC">         595 :     if (chord) {</span></span>
+<span id="L1720"><span class="lineNum">    1720</span> <span class="tlaGNC">         595 :         segment-&gt;setStaffMove(static_cast&lt;int&gt;(chord-&gt;vStaffIdx() - segment-&gt;staffIdx()));</span></span>
 <span id="L1721"><span class="lineNum">    1721</span>              :     }</span>
 <span id="L1722"><span class="lineNum">    1722</span>              : </span>
-<span id="L1723"><span class="lineNum">    1723</span> <span class="tlaGNC">         594 :     adjustY(segment);</span></span>
-<span id="L1724"><span class="lineNum">    1724</span> <span class="tlaGNC">         594 :     segment-&gt;setSpannerSegmentType(SpannerSegmentType::END);</span></span>
+<span id="L1723"><span class="lineNum">    1723</span> <span class="tlaGNC">         595 :     adjustY(segment);</span></span>
+<span id="L1724"><span class="lineNum">    1724</span> <span class="tlaGNC">         595 :     segment-&gt;setSpannerSegmentType(SpannerSegmentType::END);</span></span>
 <span id="L1725"><span class="lineNum">    1725</span>              : </span>
-<span id="L1726"><span class="lineNum">    1726</span> <span class="tlaGNC">         594 :     if (segment-&gt;autoplace() &amp;&amp; !segment-&gt;isEdited()) {</span></span>
-<span id="L1727"><span class="lineNum">    1727</span> <span class="tlaGNC">         594 :         adjustX(segment, sPos, Grip::END);</span></span>
+<span id="L1726"><span class="lineNum">    1726</span> <span class="tlaGNC">         595 :     if (segment-&gt;autoplace() &amp;&amp; !segment-&gt;isEdited()) {</span></span>
+<span id="L1727"><span class="lineNum">    1727</span> <span class="tlaGNC">         595 :         adjustX(segment, sPos, Grip::END);</span></span>
 <span id="L1728"><span class="lineNum">    1728</span>              :     }</span>
 <span id="L1729"><span class="lineNum">    1729</span>              : </span>
-<span id="L1730"><span class="lineNum">    1730</span> <span class="tlaGNC">         594 :     adjustYforLedgerLines(segment, sPos);</span></span>
+<span id="L1730"><span class="lineNum">    1730</span> <span class="tlaGNC">         595 :     adjustYforLedgerLines(segment, sPos);</span></span>
 <span id="L1731"><span class="lineNum">    1731</span>              : </span>
-<span id="L1732"><span class="lineNum">    1732</span> <span class="tlaGNC">         594 :     segment-&gt;ups(Grip::START).p = sPos.p1;</span></span>
-<span id="L1733"><span class="lineNum">    1733</span> <span class="tlaGNC">         594 :     segment-&gt;ups(Grip::END).p = sPos.p2;</span></span>
+<span id="L1732"><span class="lineNum">    1732</span> <span class="tlaGNC">         595 :     segment-&gt;ups(Grip::START).p = sPos.p1;</span></span>
+<span id="L1733"><span class="lineNum">    1733</span> <span class="tlaGNC">         595 :     segment-&gt;ups(Grip::END).p = sPos.p2;</span></span>
 <span id="L1734"><span class="lineNum">    1734</span>              : </span>
-<span id="L1735"><span class="lineNum">    1735</span> <span class="tlaGNC">         594 :     if (segment-&gt;autoplace() &amp;&amp; !segment-&gt;isEdited()) {</span></span>
-<span id="L1736"><span class="lineNum">    1736</span> <span class="tlaGNC">         594 :         adjustY(segment);</span></span>
+<span id="L1735"><span class="lineNum">    1735</span> <span class="tlaGNC">         595 :     if (segment-&gt;autoplace() &amp;&amp; !segment-&gt;isEdited()) {</span></span>
+<span id="L1736"><span class="lineNum">    1736</span> <span class="tlaGNC">         595 :         adjustY(segment);</span></span>
 <span id="L1737"><span class="lineNum">    1737</span>              :     } else {</span>
 <span id="L1738"><span class="lineNum">    1738</span> <span class="tlaUNC tlaBgUNC">           0 :         computeBezier(segment);</span></span>
 <span id="L1739"><span class="lineNum">    1739</span>              :     }</span>
 <span id="L1740"><span class="lineNum">    1740</span>              : </span>
-<span id="L1741"><span class="lineNum">    1741</span> <span class="tlaGNC tlaBgGNC">         594 :     addLineAttachPoints(segment);</span></span>
-<span id="L1742"><span class="lineNum">    1742</span> <span class="tlaGNC">         594 :     return segment;</span></span>
+<span id="L1741"><span class="lineNum">    1741</span> <span class="tlaGNC tlaBgGNC">         595 :     addLineAttachPoints(segment);</span></span>
+<span id="L1742"><span class="lineNum">    1742</span> <span class="tlaGNC">         595 :     return segment;</span></span>
 <span id="L1743"><span class="lineNum">    1743</span>              : }</span>
 <span id="L1744"><span class="lineNum">    1744</span>              : </span>
-<span id="L1745"><span class="lineNum">    1745</span> <span class="tlaGNC">        5408 : void SlurTieLayout::computeStartAndEndSystem(Tie* item, SlurTiePos&amp; slurTiePos)</span></span>
+<span id="L1745"><span class="lineNum">    1745</span> <span class="tlaGNC">        5415 : void SlurTieLayout::computeStartAndEndSystem(Tie* item, SlurTiePos&amp; slurTiePos)</span></span>
 <span id="L1746"><span class="lineNum">    1746</span>              : {</span>
-<span id="L1747"><span class="lineNum">    1747</span> <span class="tlaGNC">        5408 :     Chord* startChord = item-&gt;startNote() ? item-&gt;startNote()-&gt;chord() : nullptr;</span></span>
-<span id="L1748"><span class="lineNum">    1748</span> <span class="tlaGNC">        5408 :     Chord* endChord = item-&gt;endNote() ? item-&gt;endNote()-&gt;chord() : nullptr;</span></span>
+<span id="L1747"><span class="lineNum">    1747</span> <span class="tlaGNC">        5415 :     Chord* startChord = item-&gt;startNote() ? item-&gt;startNote()-&gt;chord() : nullptr;</span></span>
+<span id="L1748"><span class="lineNum">    1748</span> <span class="tlaGNC">        5415 :     Chord* endChord = item-&gt;endNote() ? item-&gt;endNote()-&gt;chord() : nullptr;</span></span>
 <span id="L1749"><span class="lineNum">    1749</span>              : </span>
-<span id="L1750"><span class="lineNum">    1750</span> <span class="tlaGNC">        5408 :     System* startSystem = startChord ? startChord-&gt;measure()-&gt;system() : nullptr;</span></span>
+<span id="L1750"><span class="lineNum">    1750</span> <span class="tlaGNC">        5415 :     System* startSystem = startChord ? startChord-&gt;measure()-&gt;system() : nullptr;</span></span>
 <span id="L1751"><span class="lineNum">    1751</span>              : </span>
-<span id="L1752"><span class="lineNum">    1752</span> <span class="tlaGNC">        5408 :     System* endSystem = endChord ? endChord-&gt;measure()-&gt;system() : startSystem;</span></span>
+<span id="L1752"><span class="lineNum">    1752</span> <span class="tlaGNC">        5415 :     System* endSystem = endChord ? endChord-&gt;measure()-&gt;system() : startSystem;</span></span>
 <span id="L1753"><span class="lineNum">    1753</span>              : </span>
-<span id="L1754"><span class="lineNum">    1754</span> <span class="tlaGNC">        5408 :     if (!startSystem &amp;&amp; !endSystem) {</span></span>
+<span id="L1754"><span class="lineNum">    1754</span> <span class="tlaGNC">        5415 :     if (!startSystem &amp;&amp; !endSystem) {</span></span>
 <span id="L1755"><span class="lineNum">    1755</span> <span class="tlaUNC tlaBgUNC">           0 :         if (startChord) {</span></span>
 <span id="L1756"><span class="lineNum">    1756</span> <span class="tlaUNC">           0 :             Measure* m = startChord-&gt;measure();</span></span>
 <span id="L1757"><span class="lineNum">    1757</span> <span class="tlaUNC">           0 :             LOGD(&quot;No system: measure is %d has %d count %d&quot;, m-&gt;isMMRest(), m-&gt;hasMMRest(), m-&gt;mmRestCount());</span></span>
@@ -1818,75 +1818,75 @@
 <span id="L1760"><span class="lineNum">    1760</span>              :         }</span>
 <span id="L1761"><span class="lineNum">    1761</span>              :     }</span>
 <span id="L1762"><span class="lineNum">    1762</span>              : </span>
-<span id="L1763"><span class="lineNum">    1763</span> <span class="tlaGNC tlaBgGNC">        5408 :     slurTiePos.system1 = startSystem;</span></span>
-<span id="L1764"><span class="lineNum">    1764</span> <span class="tlaGNC">        5408 :     slurTiePos.system2 = endSystem;</span></span>
-<span id="L1765"><span class="lineNum">    1765</span> <span class="tlaGNC">        5408 : }</span></span>
+<span id="L1763"><span class="lineNum">    1763</span> <span class="tlaGNC tlaBgGNC">        5415 :     slurTiePos.system1 = startSystem;</span></span>
+<span id="L1764"><span class="lineNum">    1764</span> <span class="tlaGNC">        5415 :     slurTiePos.system2 = endSystem;</span></span>
+<span id="L1765"><span class="lineNum">    1765</span> <span class="tlaGNC">        5415 : }</span></span>
 <span id="L1766"><span class="lineNum">    1766</span>              : </span>
-<span id="L1767"><span class="lineNum">    1767</span> <span class="tlaGNC">        9235 : PointF SlurTieLayout::computeDefaultStartOrEndPoint(const Tie* tie, Grip startOrEnd)</span></span>
+<span id="L1767"><span class="lineNum">    1767</span> <span class="tlaGNC">        9247 : PointF SlurTieLayout::computeDefaultStartOrEndPoint(const Tie* tie, Grip startOrEnd)</span></span>
 <span id="L1768"><span class="lineNum">    1768</span>              : {</span>
-<span id="L1769"><span class="lineNum">    1769</span> <span class="tlaGNC">        9235 :     if (startOrEnd != Grip::START &amp;&amp; startOrEnd != Grip::END) {</span></span>
+<span id="L1769"><span class="lineNum">    1769</span> <span class="tlaGNC">        9247 :     if (startOrEnd != Grip::START &amp;&amp; startOrEnd != Grip::END) {</span></span>
 <span id="L1770"><span class="lineNum">    1770</span> <span class="tlaUNC tlaBgUNC">           0 :         return PointF();</span></span>
 <span id="L1771"><span class="lineNum">    1771</span>              :     }</span>
 <span id="L1772"><span class="lineNum">    1772</span>              : </span>
-<span id="L1773"><span class="lineNum">    1773</span> <span class="tlaGNC tlaBgGNC">        9235 :     bool start = startOrEnd == Grip::START;</span></span>
+<span id="L1773"><span class="lineNum">    1773</span> <span class="tlaGNC tlaBgGNC">        9247 :     bool start = startOrEnd == Grip::START;</span></span>
 <span id="L1774"><span class="lineNum">    1774</span>              : </span>
-<span id="L1775"><span class="lineNum">    1775</span> <span class="tlaGNC">        9235 :     Note* note = start ? tie-&gt;startNote() : tie-&gt;endNote();</span></span>
-<span id="L1776"><span class="lineNum">    1776</span> <span class="tlaGNC">        9235 :     Chord* chord = note ? note-&gt;chord() : nullptr;</span></span>
+<span id="L1775"><span class="lineNum">    1775</span> <span class="tlaGNC">        9247 :     Note* note = start ? tie-&gt;startNote() : tie-&gt;endNote();</span></span>
+<span id="L1776"><span class="lineNum">    1776</span> <span class="tlaGNC">        9247 :     Chord* chord = note ? note-&gt;chord() : nullptr;</span></span>
 <span id="L1777"><span class="lineNum">    1777</span>              : </span>
-<span id="L1778"><span class="lineNum">    1778</span> <span class="tlaGNC">        9235 :     if (!chord) {</span></span>
+<span id="L1778"><span class="lineNum">    1778</span> <span class="tlaGNC">        9247 :     if (!chord) {</span></span>
 <span id="L1779"><span class="lineNum">    1779</span> <span class="tlaUNC tlaBgUNC">           0 :         return PointF();</span></span>
 <span id="L1780"><span class="lineNum">    1780</span>              :     }</span>
 <span id="L1781"><span class="lineNum">    1781</span>              : </span>
-<span id="L1782"><span class="lineNum">    1782</span> <span class="tlaGNC tlaBgGNC">        9235 :     PointF result = note-&gt;pos() + chord-&gt;pos() + chord-&gt;segment()-&gt;pos() + chord-&gt;measure()-&gt;pos();</span></span>
+<span id="L1782"><span class="lineNum">    1782</span> <span class="tlaGNC tlaBgGNC">        9247 :     PointF result = note-&gt;pos() + chord-&gt;pos() + chord-&gt;segment()-&gt;pos() + chord-&gt;measure()-&gt;pos();</span></span>
 <span id="L1783"><span class="lineNum">    1783</span>              : </span>
-<span id="L1784"><span class="lineNum">    1784</span> <span class="tlaGNC">        9235 :     const bool up = tie-&gt;up();</span></span>
-<span id="L1785"><span class="lineNum">    1785</span> <span class="tlaGNC">        9235 :     const bool inside = tie-&gt;isInside();</span></span>
-<span id="L1786"><span class="lineNum">    1786</span> <span class="tlaGNC">        9235 :     const bool noteIsHiddenFret = note-&gt;shouldHideFret();</span></span>
-<span id="L1787"><span class="lineNum">    1787</span> <span class="tlaGNC">        9235 :     const int upSign = up ? -1 : 1;</span></span>
-<span id="L1788"><span class="lineNum">    1788</span> <span class="tlaGNC">        9235 :     const int leftRightSign = start ? +1 : -1;</span></span>
-<span id="L1789"><span class="lineNum">    1789</span> <span class="tlaGNC">        9235 :     const double noteWidth = note-&gt;width();</span></span>
-<span id="L1790"><span class="lineNum">    1790</span> <span class="tlaGNC">        9235 :     const double noteHeight = note-&gt;height();</span></span>
-<span id="L1791"><span class="lineNum">    1791</span> <span class="tlaGNC">        9235 :     const double spatium = tie-&gt;spatium();</span></span>
+<span id="L1784"><span class="lineNum">    1784</span> <span class="tlaGNC">        9247 :     const bool up = tie-&gt;up();</span></span>
+<span id="L1785"><span class="lineNum">    1785</span> <span class="tlaGNC">        9247 :     const bool inside = tie-&gt;isInside();</span></span>
+<span id="L1786"><span class="lineNum">    1786</span> <span class="tlaGNC">        9247 :     const bool noteIsHiddenFret = note-&gt;shouldHideFret();</span></span>
+<span id="L1787"><span class="lineNum">    1787</span> <span class="tlaGNC">        9247 :     const int upSign = up ? -1 : 1;</span></span>
+<span id="L1788"><span class="lineNum">    1788</span> <span class="tlaGNC">        9247 :     const int leftRightSign = start ? +1 : -1;</span></span>
+<span id="L1789"><span class="lineNum">    1789</span> <span class="tlaGNC">        9247 :     const double noteWidth = note-&gt;width();</span></span>
+<span id="L1790"><span class="lineNum">    1790</span> <span class="tlaGNC">        9247 :     const double noteHeight = note-&gt;height();</span></span>
+<span id="L1791"><span class="lineNum">    1791</span> <span class="tlaGNC">        9247 :     const double spatium = tie-&gt;spatium();</span></span>
 <span id="L1792"><span class="lineNum">    1792</span>              : </span>
-<span id="L1793"><span class="lineNum">    1793</span> <span class="tlaGNC">        9235 :     double baseX = (inside &amp;&amp; !noteIsHiddenFret) ? (start ? noteWidth : 0.0) : noteOpticalCenterForTie(note, up);</span></span>
-<span id="L1794"><span class="lineNum">    1794</span> <span class="tlaGNC">        9235 :     double baseY = inside ? 0.0 : upSign * noteHeight / 2;</span></span>
+<span id="L1793"><span class="lineNum">    1793</span> <span class="tlaGNC">        9247 :     double baseX = (inside &amp;&amp; !noteIsHiddenFret) ? (start ? noteWidth : 0.0) : noteOpticalCenterForTie(note, up);</span></span>
+<span id="L1794"><span class="lineNum">    1794</span> <span class="tlaGNC">        9247 :     double baseY = inside ? 0.0 : upSign * noteHeight / 2;</span></span>
 <span id="L1795"><span class="lineNum">    1795</span>              : </span>
-<span id="L1796"><span class="lineNum">    1796</span> <span class="tlaGNC">        9235 :     result += PointF(baseX, baseY);</span></span>
+<span id="L1796"><span class="lineNum">    1796</span> <span class="tlaGNC">        9247 :     result += PointF(baseX, baseY);</span></span>
 <span id="L1797"><span class="lineNum">    1797</span>              : </span>
-<span id="L1798"><span class="lineNum">    1798</span> <span class="tlaGNC">        9235 :     double visualInsetSp = 0.0;</span></span>
-<span id="L1799"><span class="lineNum">    1799</span> <span class="tlaGNC">        9235 :     if (inside || note-&gt;headGroup() == NoteHeadGroup::HEAD_SLASH || noteIsHiddenFret) {</span></span>
+<span id="L1798"><span class="lineNum">    1798</span> <span class="tlaGNC">        9247 :     double visualInsetSp = 0.0;</span></span>
+<span id="L1799"><span class="lineNum">    1799</span> <span class="tlaGNC">        9247 :     if (inside || note-&gt;headGroup() == NoteHeadGroup::HEAD_SLASH || noteIsHiddenFret) {</span></span>
 <span id="L1800"><span class="lineNum">    1800</span> <span class="tlaGNC">          24 :         visualInsetSp = 0.2;</span></span>
-<span id="L1801"><span class="lineNum">    1801</span> <span class="tlaGNC">        9211 :     } else if (note-&gt;hasAnotherStraightAboveOrBelow(up)) {</span></span>
+<span id="L1801"><span class="lineNum">    1801</span> <span class="tlaGNC">        9223 :     } else if (note-&gt;hasAnotherStraightAboveOrBelow(up)) {</span></span>
 <span id="L1802"><span class="lineNum">    1802</span> <span class="tlaGNC">         386 :         visualInsetSp = 0.45;</span></span>
 <span id="L1803"><span class="lineNum">    1803</span>              :     } else {</span>
-<span id="L1804"><span class="lineNum">    1804</span> <span class="tlaGNC">        8825 :         visualInsetSp = 0.1;</span></span>
+<span id="L1804"><span class="lineNum">    1804</span> <span class="tlaGNC">        8837 :         visualInsetSp = 0.1;</span></span>
 <span id="L1805"><span class="lineNum">    1805</span>              :     }</span>
 <span id="L1806"><span class="lineNum">    1806</span>              : </span>
-<span id="L1807"><span class="lineNum">    1807</span> <span class="tlaGNC">        9235 :     double visualInset = visualInsetSp * spatium * leftRightSign;</span></span>
-<span id="L1808"><span class="lineNum">    1808</span> <span class="tlaGNC">        9235 :     const double yOffset = 0.20 * spatium * upSign; // TODO: style</span></span>
+<span id="L1807"><span class="lineNum">    1807</span> <span class="tlaGNC">        9247 :     double visualInset = visualInsetSp * spatium * leftRightSign;</span></span>
+<span id="L1808"><span class="lineNum">    1808</span> <span class="tlaGNC">        9247 :     const double yOffset = 0.20 * spatium * upSign; // TODO: style</span></span>
 <span id="L1809"><span class="lineNum">    1809</span>              : </span>
-<span id="L1810"><span class="lineNum">    1810</span> <span class="tlaGNC">        9235 :     result += PointF(visualInset, yOffset);</span></span>
+<span id="L1810"><span class="lineNum">    1810</span> <span class="tlaGNC">        9247 :     result += PointF(visualInset, yOffset);</span></span>
 <span id="L1811"><span class="lineNum">    1811</span>              : </span>
-<span id="L1812"><span class="lineNum">    1812</span> <span class="tlaGNC">        9235 :     return result;</span></span>
+<span id="L1812"><span class="lineNum">    1812</span> <span class="tlaGNC">        9247 :     return result;</span></span>
 <span id="L1813"><span class="lineNum">    1813</span>              : }</span>
 <span id="L1814"><span class="lineNum">    1814</span>              : </span>
-<span id="L1815"><span class="lineNum">    1815</span> <span class="tlaGNC">        9235 : double SlurTieLayout::noteOpticalCenterForTie(const Note* note, bool up)</span></span>
+<span id="L1815"><span class="lineNum">    1815</span> <span class="tlaGNC">        9247 : double SlurTieLayout::noteOpticalCenterForTie(const Note* note, bool up)</span></span>
 <span id="L1816"><span class="lineNum">    1816</span>              : {</span>
-<span id="L1817"><span class="lineNum">    1817</span> <span class="tlaGNC">        9235 :     if (note-&gt;headGroup() == NoteHeadGroup::HEAD_SLASH) {</span></span>
+<span id="L1817"><span class="lineNum">    1817</span> <span class="tlaGNC">        9247 :     if (note-&gt;headGroup() == NoteHeadGroup::HEAD_SLASH) {</span></span>
 <span id="L1818"><span class="lineNum">    1818</span> <span class="tlaGNC">          24 :         double singleSlashWidth = note-&gt;symBbox(SymId::noteheadSlashHorizontalEnds).width();</span></span>
 <span id="L1819"><span class="lineNum">    1819</span> <span class="tlaGNC">          24 :         double noteWidth = note-&gt;headWidth();</span></span>
 <span id="L1820"><span class="lineNum">    1820</span> <span class="tlaGNC">          24 :         double center = 0.20 * note-&gt;spatium() + 0.5 * (noteWidth - singleSlashWidth);</span></span>
 <span id="L1821"><span class="lineNum">    1821</span> <span class="tlaGNC">          24 :         return up ? note-&gt;ldata()-&gt;bbox().right() - center : note-&gt;ldata()-&gt;bbox().left() + center;</span></span>
 <span id="L1822"><span class="lineNum">    1822</span>              :     }</span>
-<span id="L1823"><span class="lineNum">    1823</span> <span class="tlaGNC">        9211 :     SymId symId = note-&gt;ldata()-&gt;cachedNoteheadSym.value();</span></span>
-<span id="L1824"><span class="lineNum">    1824</span> <span class="tlaGNC">        9211 :     PointF cutOutLeft = note-&gt;symSmuflAnchor(symId, up ? SmuflAnchorId::cutOutNW : SmuflAnchorId::cutOutSW);</span></span>
-<span id="L1825"><span class="lineNum">    1825</span> <span class="tlaGNC">        9211 :     PointF cutOutRight = note-&gt;symSmuflAnchor(symId, up ? SmuflAnchorId::cutOutNE : SmuflAnchorId::cutOutSE);</span></span>
+<span id="L1823"><span class="lineNum">    1823</span> <span class="tlaGNC">        9223 :     SymId symId = note-&gt;ldata()-&gt;cachedNoteheadSym.value();</span></span>
+<span id="L1824"><span class="lineNum">    1824</span> <span class="tlaGNC">        9223 :     PointF cutOutLeft = note-&gt;symSmuflAnchor(symId, up ? SmuflAnchorId::cutOutNW : SmuflAnchorId::cutOutSW);</span></span>
+<span id="L1825"><span class="lineNum">    1825</span> <span class="tlaGNC">        9223 :     PointF cutOutRight = note-&gt;symSmuflAnchor(symId, up ? SmuflAnchorId::cutOutNE : SmuflAnchorId::cutOutSE);</span></span>
 <span id="L1826"><span class="lineNum">    1826</span>              : </span>
-<span id="L1827"><span class="lineNum">    1827</span> <span class="tlaGNC">        9211 :     if (cutOutLeft.isNull() || cutOutRight.isNull()) {</span></span>
+<span id="L1827"><span class="lineNum">    1827</span> <span class="tlaGNC">        9223 :     if (cutOutLeft.isNull() || cutOutRight.isNull()) {</span></span>
 <span id="L1828"><span class="lineNum">    1828</span> <span class="tlaGNC">        5959 :         return 0.5 * note-&gt;width();</span></span>
 <span id="L1829"><span class="lineNum">    1829</span>              :     }</span>
 <span id="L1830"><span class="lineNum">    1830</span>              : </span>
-<span id="L1831"><span class="lineNum">    1831</span> <span class="tlaGNC">        3252 :     return 0.5 * (cutOutLeft.x() + cutOutRight.x());</span></span>
+<span id="L1831"><span class="lineNum">    1831</span> <span class="tlaGNC">        3264 :     return 0.5 * (cutOutLeft.x() + cutOutRight.x());</span></span>
 <span id="L1832"><span class="lineNum">    1832</span>              : }</span>
 <span id="L1833"><span class="lineNum">    1833</span>              : </span>
 <span id="L1834"><span class="lineNum">    1834</span> <span class="tlaUNC tlaBgUNC">           0 : void SlurTieLayout::createSlurSegments(Slur* item, LayoutContext&amp; ctx)</span></span>
@@ -2191,19 +2191,19 @@
 <span id="L2133"><span class="lineNum">    2133</span>              :     }</span>
 <span id="L2134"><span class="lineNum">    2134</span>              : }</span>
 <span id="L2135"><span class="lineNum">    2135</span>              : </span>
-<span id="L2136"><span class="lineNum">    2136</span> <span class="tlaGNC">      112064 : void SlurTieLayout::layoutLaissezVibChord(Chord* chord, LayoutContext&amp; ctx)</span></span>
+<span id="L2136"><span class="lineNum">    2136</span> <span class="tlaGNC">      111790 : void SlurTieLayout::layoutLaissezVibChord(Chord* chord, LayoutContext&amp; ctx)</span></span>
 <span id="L2137"><span class="lineNum">    2137</span>              : {</span>
 <span id="L2138"><span class="lineNum">    2138</span>              :     // Laissez vib ties should all end at the same rightmost point while honouring each tie's minimum length</span>
 <span id="L2139"><span class="lineNum">    2139</span>              :     // Ties drawn by MuseScore can start at differing points</span>
 <span id="L2140"><span class="lineNum">    2140</span>              :     // SMuFL symbols will also start at the same point because they are of fixed length</span>
-<span id="L2141"><span class="lineNum">    2141</span> <span class="tlaGNC">      112064 :     double chordLvEndPoint = -DBL_MAX;</span></span>
-<span id="L2142"><span class="lineNum">    2142</span> <span class="tlaGNC">      112064 :     std::map&lt;LaissezVibSegment*, SlurTiePos&gt; lvSegmentsWithPositions;</span></span>
-<span id="L2143"><span class="lineNum">    2143</span> <span class="tlaGNC">      112064 :     const bool smuflLayout = ctx.conf().styleB(Sid::laissezVibUseSmuflSym);</span></span>
+<span id="L2141"><span class="lineNum">    2141</span> <span class="tlaGNC">      111790 :     double chordLvEndPoint = -DBL_MAX;</span></span>
+<span id="L2142"><span class="lineNum">    2142</span> <span class="tlaGNC">      111790 :     std::map&lt;LaissezVibSegment*, SlurTiePos&gt; lvSegmentsWithPositions;</span></span>
+<span id="L2143"><span class="lineNum">    2143</span> <span class="tlaGNC">      111790 :     const bool smuflLayout = ctx.conf().styleB(Sid::laissezVibUseSmuflSym);</span></span>
 <span id="L2144"><span class="lineNum">    2144</span>              : </span>
-<span id="L2145"><span class="lineNum">    2145</span> <span class="tlaGNC">      242696 :     for (const Note* note : chord-&gt;notes()) {</span></span>
-<span id="L2146"><span class="lineNum">    2146</span> <span class="tlaGNC">      130632 :         LaissezVib* lv = note-&gt;laissezVib();</span></span>
-<span id="L2147"><span class="lineNum">    2147</span> <span class="tlaGNC">      130632 :         if (!lv) {</span></span>
-<span id="L2148"><span class="lineNum">    2148</span> <span class="tlaGNC">      130558 :             continue;</span></span>
+<span id="L2145"><span class="lineNum">    2145</span> <span class="tlaGNC">      238830 :     for (const Note* note : chord-&gt;notes()) {</span></span>
+<span id="L2146"><span class="lineNum">    2146</span> <span class="tlaGNC">      127040 :         LaissezVib* lv = note-&gt;laissezVib();</span></span>
+<span id="L2147"><span class="lineNum">    2147</span> <span class="tlaGNC">      127040 :         if (!lv) {</span></span>
+<span id="L2148"><span class="lineNum">    2148</span> <span class="tlaGNC">      126966 :             continue;</span></span>
 <span id="L2149"><span class="lineNum">    2149</span>              :         }</span>
 <span id="L2150"><span class="lineNum">    2150</span> <span class="tlaGNC">          74 :         SlurTiePos sPos;</span></span>
 <span id="L2151"><span class="lineNum">    2151</span> <span class="tlaGNC">          74 :         LaissezVibSegment* lvSeg = createLaissezVibSegment(lv);</span></span>
@@ -2215,7 +2215,7 @@
 <span id="L2157"><span class="lineNum">    2157</span> <span class="tlaGNC">          74 :         lvSegmentsWithPositions.insert({ lvSeg, sPos });</span></span>
 <span id="L2158"><span class="lineNum">    2158</span>              :     }</span>
 <span id="L2159"><span class="lineNum">    2159</span>              : </span>
-<span id="L2160"><span class="lineNum">    2160</span> <span class="tlaGNC">      112138 :     for (auto&amp; segWithPos : lvSegmentsWithPositions) {</span></span>
+<span id="L2160"><span class="lineNum">    2160</span> <span class="tlaGNC">      111864 :     for (auto&amp; segWithPos : lvSegmentsWithPositions) {</span></span>
 <span id="L2161"><span class="lineNum">    2161</span> <span class="tlaGNC">          74 :         LaissezVibSegment* lvSeg = segWithPos.first;</span></span>
 <span id="L2162"><span class="lineNum">    2162</span> <span class="tlaGNC">          74 :         Note* note = lvSeg-&gt;laissezVib()-&gt;startNote();</span></span>
 <span id="L2163"><span class="lineNum">    2163</span> <span class="tlaGNC">          74 :         SlurTiePos sPos = segWithPos.second;</span></span>
@@ -2244,34 +2244,34 @@
 <span id="L2186"><span class="lineNum">    2186</span>              : </span>
 <span id="L2187"><span class="lineNum">    2187</span> <span class="tlaGNC">          74 :         TLayout::fillNoteShape(note, note-&gt;mutldata());</span></span>
 <span id="L2188"><span class="lineNum">    2188</span>              :     }</span>
-<span id="L2189"><span class="lineNum">    2189</span> <span class="tlaGNC">      112064 : }</span></span>
+<span id="L2189"><span class="lineNum">    2189</span> <span class="tlaGNC">      111790 : }</span></span>
 <span id="L2190"><span class="lineNum">    2190</span>              : </span>
-<span id="L2191"><span class="lineNum">    2191</span> <span class="tlaGNC">        4814 : void SlurTieLayout::correctForCrossStaff(Tie* tie, SlurTiePos&amp; sPos, SpannerSegmentType type)</span></span>
+<span id="L2191"><span class="lineNum">    2191</span> <span class="tlaGNC">        4820 : void SlurTieLayout::correctForCrossStaff(Tie* tie, SlurTiePos&amp; sPos, SpannerSegmentType type)</span></span>
 <span id="L2192"><span class="lineNum">    2192</span>              : {</span>
-<span id="L2193"><span class="lineNum">    2193</span> <span class="tlaGNC">        4814 :     Chord* startChord = tie-&gt;startNote() ? tie-&gt;startNote()-&gt;chord() : nullptr;</span></span>
-<span id="L2194"><span class="lineNum">    2194</span> <span class="tlaGNC">        4814 :     Chord* endChord = tie-&gt;endNote() ? tie-&gt;endNote()-&gt;chord() : nullptr;</span></span>
+<span id="L2193"><span class="lineNum">    2193</span> <span class="tlaGNC">        4820 :     Chord* startChord = tie-&gt;startNote() ? tie-&gt;startNote()-&gt;chord() : nullptr;</span></span>
+<span id="L2194"><span class="lineNum">    2194</span> <span class="tlaGNC">        4820 :     Chord* endChord = tie-&gt;endNote() ? tie-&gt;endNote()-&gt;chord() : nullptr;</span></span>
 <span id="L2195"><span class="lineNum">    2195</span>              : </span>
-<span id="L2196"><span class="lineNum">    2196</span> <span class="tlaGNC">        4814 :     if (!startChord) {</span></span>
+<span id="L2196"><span class="lineNum">    2196</span> <span class="tlaGNC">        4820 :     if (!startChord) {</span></span>
 <span id="L2197"><span class="lineNum">    2197</span> <span class="tlaGNC">          16 :         return;</span></span>
 <span id="L2198"><span class="lineNum">    2198</span>              :     }</span>
 <span id="L2199"><span class="lineNum">    2199</span>              : </span>
-<span id="L2200"><span class="lineNum">    2200</span> <span class="tlaGNC">        4798 :     bool startStaffDiff = startChord-&gt;vStaffIdx() != tie-&gt;staffIdx();</span></span>
-<span id="L2201"><span class="lineNum">    2201</span> <span class="tlaGNC">        4798 :     bool endStaffDiff = endChord ? endChord-&gt;vStaffIdx() != tie-&gt;staffIdx() : false;</span></span>
-<span id="L2202"><span class="lineNum">    2202</span> <span class="tlaGNC">        4798 :     double curY1 = sPos.p1.y();</span></span>
-<span id="L2203"><span class="lineNum">    2203</span> <span class="tlaGNC">        4798 :     double curY2 = sPos.p2.y();</span></span>
+<span id="L2200"><span class="lineNum">    2200</span> <span class="tlaGNC">        4804 :     bool startStaffDiff = startChord-&gt;vStaffIdx() != tie-&gt;staffIdx();</span></span>
+<span id="L2201"><span class="lineNum">    2201</span> <span class="tlaGNC">        4804 :     bool endStaffDiff = endChord ? endChord-&gt;vStaffIdx() != tie-&gt;staffIdx() : false;</span></span>
+<span id="L2202"><span class="lineNum">    2202</span> <span class="tlaGNC">        4804 :     double curY1 = sPos.p1.y();</span></span>
+<span id="L2203"><span class="lineNum">    2203</span> <span class="tlaGNC">        4804 :     double curY2 = sPos.p2.y();</span></span>
 <span id="L2204"><span class="lineNum">    2204</span>              : </span>
-<span id="L2205"><span class="lineNum">    2205</span> <span class="tlaGNC">        4798 :     if (type == SpannerSegmentType::BEGIN) {</span></span>
+<span id="L2205"><span class="lineNum">    2205</span> <span class="tlaGNC">        4804 :     if (type == SpannerSegmentType::BEGIN) {</span></span>
 <span id="L2206"><span class="lineNum">    2206</span>              :         // Cross-system start tie</span>
-<span id="L2207"><span class="lineNum">    2207</span> <span class="tlaGNC">         573 :         if (startStaffDiff &amp;&amp; sPos.system1) {</span></span>
+<span id="L2207"><span class="lineNum">    2207</span> <span class="tlaGNC">         574 :         if (startStaffDiff &amp;&amp; sPos.system1) {</span></span>
 <span id="L2208"><span class="lineNum">    2208</span> <span class="tlaUNC tlaBgUNC">           0 :             double yOrigin = sPos.system1-&gt;staff(tie-&gt;staffIdx())-&gt;y();</span></span>
 <span id="L2209"><span class="lineNum">    2209</span> <span class="tlaUNC">           0 :             double yMoved = sPos.system1-&gt;staff(startChord-&gt;vStaffIdx())-&gt;y();</span></span>
 <span id="L2210"><span class="lineNum">    2210</span> <span class="tlaUNC">           0 :             double yDiff = yMoved - yOrigin;</span></span>
 <span id="L2211"><span class="lineNum">    2211</span> <span class="tlaUNC">           0 :             sPos.p1.setY(curY1 + yDiff);</span></span>
 <span id="L2212"><span class="lineNum">    2212</span> <span class="tlaUNC">           0 :             sPos.p2.setY(curY2 + yDiff);</span></span>
 <span id="L2213"><span class="lineNum">    2213</span>              :         }</span>
-<span id="L2214"><span class="lineNum">    2214</span> <span class="tlaGNC tlaBgGNC">        4225 :     } else if (type == SpannerSegmentType::SINGLE) {</span></span>
+<span id="L2214"><span class="lineNum">    2214</span> <span class="tlaGNC tlaBgGNC">        4230 :     } else if (type == SpannerSegmentType::SINGLE) {</span></span>
 <span id="L2215"><span class="lineNum">    2215</span>              :         // Same system single tie</span>
-<span id="L2216"><span class="lineNum">    2216</span> <span class="tlaGNC">        4225 :         if (startStaffDiff &amp;&amp; sPos.system1) {</span></span>
+<span id="L2216"><span class="lineNum">    2216</span> <span class="tlaGNC">        4230 :         if (startStaffDiff &amp;&amp; sPos.system1) {</span></span>
 <span id="L2217"><span class="lineNum">    2217</span> <span class="tlaUNC tlaBgUNC">           0 :             double yOrigin = sPos.system1-&gt;staff(tie-&gt;staffIdx())-&gt;y();</span></span>
 <span id="L2218"><span class="lineNum">    2218</span> <span class="tlaUNC">           0 :             double yMoved = sPos.system1-&gt;staff(startChord-&gt;vStaffIdx())-&gt;y();</span></span>
 <span id="L2219"><span class="lineNum">    2219</span> <span class="tlaUNC">           0 :             double yDiff = yMoved - yOrigin;</span></span>
@@ -2281,10 +2281,10 @@
 <span id="L2223"><span class="lineNum">    2223</span> <span class="tlaUNC">           0 :                 return;</span></span>
 <span id="L2224"><span class="lineNum">    2224</span>              :             }</span>
 <span id="L2225"><span class="lineNum">    2225</span>              :         }</span>
-<span id="L2226"><span class="lineNum">    2226</span> <span class="tlaGNC tlaBgGNC">        4225 :         if (!endChord) {</span></span>
+<span id="L2226"><span class="lineNum">    2226</span> <span class="tlaGNC tlaBgGNC">        4230 :         if (!endChord) {</span></span>
 <span id="L2227"><span class="lineNum">    2227</span> <span class="tlaGNC">         184 :             return;</span></span>
 <span id="L2228"><span class="lineNum">    2228</span>              :         }</span>
-<span id="L2229"><span class="lineNum">    2229</span> <span class="tlaGNC">        4041 :         if (endStaffDiff &amp;&amp; sPos.system2) {</span></span>
+<span id="L2229"><span class="lineNum">    2229</span> <span class="tlaGNC">        4046 :         if (endStaffDiff &amp;&amp; sPos.system2) {</span></span>
 <span id="L2230"><span class="lineNum">    2230</span> <span class="tlaGNC">           6 :             double yOrigin = sPos.system2-&gt;staff(tie-&gt;staffIdx())-&gt;y();</span></span>
 <span id="L2231"><span class="lineNum">    2231</span> <span class="tlaGNC">           6 :             double yMoved = sPos.system2-&gt;staff(endChord-&gt;vStaffIdx())-&gt;y();</span></span>
 <span id="L2232"><span class="lineNum">    2232</span> <span class="tlaGNC">           6 :             double yDiff = yMoved - yOrigin;</span></span>
@@ -2293,57 +2293,57 @@
 <span id="L2235"><span class="lineNum">    2235</span>              :     }</span>
 <span id="L2236"><span class="lineNum">    2236</span>              : }</span>
 <span id="L2237"><span class="lineNum">    2237</span>              : </span>
-<span id="L2238"><span class="lineNum">    2238</span> <span class="tlaGNC">        4400 : void SlurTieLayout::forceHorizontal(Tie* tie, SlurTiePos&amp; sPos)</span></span>
+<span id="L2238"><span class="lineNum">    2238</span> <span class="tlaGNC">        4406 : void SlurTieLayout::forceHorizontal(Tie* tie, SlurTiePos&amp; sPos)</span></span>
 <span id="L2239"><span class="lineNum">    2239</span>              : {</span>
-<span id="L2240"><span class="lineNum">    2240</span> <span class="tlaGNC">        4400 :     Note* startNote = tie-&gt;startNote();</span></span>
-<span id="L2241"><span class="lineNum">    2241</span> <span class="tlaGNC">        4400 :     Note* endNote = tie-&gt;endNote();</span></span>
+<span id="L2240"><span class="lineNum">    2240</span> <span class="tlaGNC">        4406 :     Note* startNote = tie-&gt;startNote();</span></span>
+<span id="L2241"><span class="lineNum">    2241</span> <span class="tlaGNC">        4406 :     Note* endNote = tie-&gt;endNote();</span></span>
 <span id="L2242"><span class="lineNum">    2242</span>              : </span>
-<span id="L2243"><span class="lineNum">    2243</span> <span class="tlaGNC">        4400 :     if (startNote &amp;&amp; endNote</span></span>
-<span id="L2244"><span class="lineNum">    2244</span> <span class="tlaGNC">        4400 :         &amp;&amp; startNote-&gt;line() == endNote-&gt;line()</span></span>
-<span id="L2245"><span class="lineNum">    2245</span> <span class="tlaGNC">        8800 :         &amp;&amp; startNote-&gt;vStaffIdx() == endNote-&gt;vStaffIdx()) {</span></span>
-<span id="L2246"><span class="lineNum">    2246</span> <span class="tlaGNC">        4062 :         double y1 = sPos.p1.y();</span></span>
-<span id="L2247"><span class="lineNum">    2247</span> <span class="tlaGNC">        4062 :         double y2 = sPos.p2.y();</span></span>
-<span id="L2248"><span class="lineNum">    2248</span> <span class="tlaGNC">        4062 :         double outerY = tie-&gt;up() ? std::min(y1, y2) : std::max(y1, y2);</span></span>
-<span id="L2249"><span class="lineNum">    2249</span> <span class="tlaGNC">        4062 :         sPos.p1.setY(outerY);</span></span>
-<span id="L2250"><span class="lineNum">    2250</span> <span class="tlaGNC">        4062 :         sPos.p2.setY(outerY);</span></span>
+<span id="L2243"><span class="lineNum">    2243</span> <span class="tlaGNC">        4406 :     if (startNote &amp;&amp; endNote</span></span>
+<span id="L2244"><span class="lineNum">    2244</span> <span class="tlaGNC">        4406 :         &amp;&amp; startNote-&gt;line() == endNote-&gt;line()</span></span>
+<span id="L2245"><span class="lineNum">    2245</span> <span class="tlaGNC">        8812 :         &amp;&amp; startNote-&gt;vStaffIdx() == endNote-&gt;vStaffIdx()) {</span></span>
+<span id="L2246"><span class="lineNum">    2246</span> <span class="tlaGNC">        4067 :         double y1 = sPos.p1.y();</span></span>
+<span id="L2247"><span class="lineNum">    2247</span> <span class="tlaGNC">        4067 :         double y2 = sPos.p2.y();</span></span>
+<span id="L2248"><span class="lineNum">    2248</span> <span class="tlaGNC">        4067 :         double outerY = tie-&gt;up() ? std::min(y1, y2) : std::max(y1, y2);</span></span>
+<span id="L2249"><span class="lineNum">    2249</span> <span class="tlaGNC">        4067 :         sPos.p1.setY(outerY);</span></span>
+<span id="L2250"><span class="lineNum">    2250</span> <span class="tlaGNC">        4067 :         sPos.p2.setY(outerY);</span></span>
 <span id="L2251"><span class="lineNum">    2251</span>              :     }</span>
-<span id="L2252"><span class="lineNum">    2252</span> <span class="tlaGNC">        4400 : }</span></span>
+<span id="L2252"><span class="lineNum">    2252</span> <span class="tlaGNC">        4406 : }</span></span>
 <span id="L2253"><span class="lineNum">    2253</span>              : </span>
-<span id="L2254"><span class="lineNum">    2254</span> <span class="tlaGNC">        9235 : void SlurTieLayout::adjustX(TieSegment* tieSegment, SlurTiePos&amp; sPos, Grip startOrEnd)</span></span>
+<span id="L2254"><span class="lineNum">    2254</span> <span class="tlaGNC">        9247 : void SlurTieLayout::adjustX(TieSegment* tieSegment, SlurTiePos&amp; sPos, Grip startOrEnd)</span></span>
 <span id="L2255"><span class="lineNum">    2255</span>              : {</span>
-<span id="L2256"><span class="lineNum">    2256</span> <span class="tlaGNC">        9235 :     bool start = startOrEnd == Grip::START;</span></span>
+<span id="L2256"><span class="lineNum">    2256</span> <span class="tlaGNC">        9247 :     bool start = startOrEnd == Grip::START;</span></span>
 <span id="L2257"><span class="lineNum">    2257</span>              : </span>
-<span id="L2258"><span class="lineNum">    2258</span> <span class="tlaGNC">        9235 :     PointF&amp; tiePoint = start ? sPos.p1 : sPos.p2;</span></span>
-<span id="L2259"><span class="lineNum">    2259</span> <span class="tlaGNC">        9235 :     double resultingX = tiePoint.x();</span></span>
+<span id="L2258"><span class="lineNum">    2258</span> <span class="tlaGNC">        9247 :     PointF&amp; tiePoint = start ? sPos.p1 : sPos.p2;</span></span>
+<span id="L2259"><span class="lineNum">    2259</span> <span class="tlaGNC">        9247 :     double resultingX = tiePoint.x();</span></span>
 <span id="L2260"><span class="lineNum">    2260</span>              : </span>
-<span id="L2261"><span class="lineNum">    2261</span> <span class="tlaGNC">        9235 :     Tie* tie = tieSegment-&gt;tie();</span></span>
-<span id="L2262"><span class="lineNum">    2262</span> <span class="tlaGNC">        9235 :     Note* note = start ? tie-&gt;startNote() : tie-&gt;endNote();</span></span>
-<span id="L2263"><span class="lineNum">    2263</span> <span class="tlaGNC">        9235 :     const Note* otherNote = start ? tie-&gt;endNote() : tie-&gt;startNote();</span></span>
-<span id="L2264"><span class="lineNum">    2264</span> <span class="tlaGNC">        9235 :     if (!note || note-&gt;shouldHideFret()) {</span></span>
-<span id="L2265"><span class="lineNum">    2265</span> <span class="tlaGNC">        7608 :         return;</span></span>
+<span id="L2261"><span class="lineNum">    2261</span> <span class="tlaGNC">        9247 :     Tie* tie = tieSegment-&gt;tie();</span></span>
+<span id="L2262"><span class="lineNum">    2262</span> <span class="tlaGNC">        9247 :     Note* note = start ? tie-&gt;startNote() : tie-&gt;endNote();</span></span>
+<span id="L2263"><span class="lineNum">    2263</span> <span class="tlaGNC">        9247 :     const Note* otherNote = start ? tie-&gt;endNote() : tie-&gt;startNote();</span></span>
+<span id="L2264"><span class="lineNum">    2264</span> <span class="tlaGNC">        9247 :     if (!note || note-&gt;shouldHideFret()) {</span></span>
+<span id="L2265"><span class="lineNum">    2265</span> <span class="tlaGNC">        7620 :         return;</span></span>
 <span id="L2266"><span class="lineNum">    2266</span>              :     }</span>
 <span id="L2267"><span class="lineNum">    2267</span>              : </span>
-<span id="L2268"><span class="lineNum">    2268</span> <span class="tlaGNC">        9235 :     Chord* chord = note-&gt;chord();</span></span>
-<span id="L2269"><span class="lineNum">    2269</span> <span class="tlaGNC">        9235 :     const Chord* otherChord = otherNote ? otherNote-&gt;chord() : nullptr;</span></span>
-<span id="L2270"><span class="lineNum">    2270</span> <span class="tlaGNC">        9235 :     const Segment* chordSeg = chord-&gt;segment();</span></span>
-<span id="L2271"><span class="lineNum">    2271</span> <span class="tlaGNC">        9235 :     const double spatium = tieSegment-&gt;spatium();</span></span>
-<span id="L2272"><span class="lineNum">    2272</span> <span class="tlaGNC">        9235 :     const double padding = 0.20 * spatium * (start ? 1 : -1); // TODO: style</span></span>
-<span id="L2273"><span class="lineNum">    2273</span> <span class="tlaGNC">        9235 :     const bool isGrace = (chord &amp;&amp; chord-&gt;isGrace())</span></span>
-<span id="L2274"><span class="lineNum">    2274</span> <span class="tlaGNC">       18470 :                          || ((otherChord &amp;&amp; otherChord-&gt;isGrace()) &amp;&amp; chord-&gt;segment() == otherChord-&gt;segment());</span></span>
+<span id="L2268"><span class="lineNum">    2268</span> <span class="tlaGNC">        9247 :     Chord* chord = note-&gt;chord();</span></span>
+<span id="L2269"><span class="lineNum">    2269</span> <span class="tlaGNC">        9247 :     const Chord* otherChord = otherNote ? otherNote-&gt;chord() : nullptr;</span></span>
+<span id="L2270"><span class="lineNum">    2270</span> <span class="tlaGNC">        9247 :     const Segment* chordSeg = chord-&gt;segment();</span></span>
+<span id="L2271"><span class="lineNum">    2271</span> <span class="tlaGNC">        9247 :     const double spatium = tieSegment-&gt;spatium();</span></span>
+<span id="L2272"><span class="lineNum">    2272</span> <span class="tlaGNC">        9247 :     const double padding = 0.20 * spatium * (start ? 1 : -1); // TODO: style</span></span>
+<span id="L2273"><span class="lineNum">    2273</span> <span class="tlaGNC">        9247 :     const bool isGrace = (chord &amp;&amp; chord-&gt;isGrace())</span></span>
+<span id="L2274"><span class="lineNum">    2274</span> <span class="tlaGNC">       18494 :                          || ((otherChord &amp;&amp; otherChord-&gt;isGrace()) &amp;&amp; chord-&gt;segment() == otherChord-&gt;segment());</span></span>
 <span id="L2275"><span class="lineNum">    2275</span>              : </span>
-<span id="L2276"><span class="lineNum">    2276</span> <span class="tlaGNC">        9235 :     PointF systemPos = chordSeg-&gt;pos() + chord-&gt;measure()-&gt;pos() + (isGrace ? chord-&gt;pos() : PointF());</span></span>
-<span id="L2277"><span class="lineNum">    2277</span> <span class="tlaGNC">        9235 :     if (chord-&gt;vStaffIdx() != tieSegment-&gt;vStaffIdx()) {</span></span>
+<span id="L2276"><span class="lineNum">    2276</span> <span class="tlaGNC">        9247 :     PointF systemPos = chordSeg-&gt;pos() + chord-&gt;measure()-&gt;pos() + (isGrace ? chord-&gt;pos() : PointF());</span></span>
+<span id="L2277"><span class="lineNum">    2277</span> <span class="tlaGNC">        9247 :     if (chord-&gt;vStaffIdx() != tieSegment-&gt;vStaffIdx()) {</span></span>
 <span id="L2278"><span class="lineNum">    2278</span> <span class="tlaGNC">           6 :         System* system = tieSegment-&gt;system();</span></span>
 <span id="L2279"><span class="lineNum">    2279</span> <span class="tlaGNC">           6 :         double yDiff = system-&gt;staff(chord-&gt;vStaffIdx())-&gt;y() - system-&gt;staff(tie-&gt;staffIdx())-&gt;y();</span></span>
 <span id="L2280"><span class="lineNum">    2280</span> <span class="tlaGNC">           6 :         systemPos += PointF(0.0, yDiff);</span></span>
 <span id="L2281"><span class="lineNum">    2281</span>              :     }</span>
 <span id="L2282"><span class="lineNum">    2282</span>              : </span>
-<span id="L2283"><span class="lineNum">    2283</span> <span class="tlaGNC">        9235 :     const bool isOuterTieOfChord = tie-&gt;isOuterTieOfChord(startOrEnd);</span></span>
+<span id="L2283"><span class="lineNum">    2283</span> <span class="tlaGNC">        9247 :     const bool isOuterTieOfChord = tie-&gt;isOuterTieOfChord(startOrEnd);</span></span>
 <span id="L2284"><span class="lineNum">    2284</span>              : </span>
-<span id="L2285"><span class="lineNum">    2285</span> <span class="tlaGNC">        9235 :     TieDotsPlacement dotsPlacement = tie-&gt;style().styleV(Sid::tieDotsPlacement).value&lt;TieDotsPlacement&gt;();</span></span>
-<span id="L2286"><span class="lineNum">    2286</span> <span class="tlaGNC">        4584 :     bool clearAllDots = start &amp;&amp; dotsPlacement == TieDotsPlacement::AFTER_DOTS &amp;&amp; !isOuterTieOfChord</span></span>
-<span id="L2287"><span class="lineNum">    2287</span> <span class="tlaGNC">       13819 :                         &amp;&amp; chord-&gt;dots() &gt; 0 &amp;&amp; !ChordLayout::chordHasDotsAllInvisible(chord);</span></span>
-<span id="L2288"><span class="lineNum">    2288</span> <span class="tlaGNC">        9235 :     if (clearAllDots) {</span></span>
+<span id="L2285"><span class="lineNum">    2285</span> <span class="tlaGNC">        9247 :     TieDotsPlacement dotsPlacement = tie-&gt;style().styleV(Sid::tieDotsPlacement).value&lt;TieDotsPlacement&gt;();</span></span>
+<span id="L2286"><span class="lineNum">    2286</span> <span class="tlaGNC">        4590 :     bool clearAllDots = start &amp;&amp; dotsPlacement == TieDotsPlacement::AFTER_DOTS &amp;&amp; !isOuterTieOfChord</span></span>
+<span id="L2287"><span class="lineNum">    2287</span> <span class="tlaGNC">       13837 :                         &amp;&amp; chord-&gt;dots() &gt; 0 &amp;&amp; !ChordLayout::chordHasDotsAllInvisible(chord);</span></span>
+<span id="L2288"><span class="lineNum">    2288</span> <span class="tlaGNC">        9247 :     if (clearAllDots) {</span></span>
 <span id="L2289"><span class="lineNum">    2289</span> <span class="tlaUNC tlaBgUNC">           0 :         double dotsOuterEdge = -DBL_MAX;</span></span>
 <span id="L2290"><span class="lineNum">    2290</span> <span class="tlaUNC">           0 :         for (const Note* n : chord-&gt;notes()) {</span></span>
 <span id="L2291"><span class="lineNum">    2291</span> <span class="tlaUNC">           0 :             for (const NoteDot* dot : n-&gt;dots()) {</span></span>
@@ -2357,20 +2357,20 @@
 <span id="L2299"><span class="lineNum">    2299</span> <span class="tlaUNC">           0 :         return;</span></span>
 <span id="L2300"><span class="lineNum">    2300</span>              :     }</span>
 <span id="L2301"><span class="lineNum">    2301</span>              : </span>
-<span id="L2302"><span class="lineNum">    2302</span> <span class="tlaGNC tlaBgGNC">        9235 :     if (isOuterTieOfChord) {</span></span>
-<span id="L2303"><span class="lineNum">    2303</span> <span class="tlaGNC">        8696 :         Tie* otherTie = start ? note-&gt;tieBack() : note-&gt;tieFor();</span></span>
-<span id="L2304"><span class="lineNum">    2304</span> <span class="tlaGNC">        8696 :         bool avoidOtherTie = otherTie &amp;&amp; otherTie-&gt;up() == tie-&gt;up() &amp;&amp; !otherTie-&gt;isInside();</span></span>
-<span id="L2305"><span class="lineNum">    2305</span> <span class="tlaGNC">        8696 :         if (avoidOtherTie) {</span></span>
+<span id="L2302"><span class="lineNum">    2302</span> <span class="tlaGNC tlaBgGNC">        9247 :     if (isOuterTieOfChord) {</span></span>
+<span id="L2303"><span class="lineNum">    2303</span> <span class="tlaGNC">        8708 :         Tie* otherTie = start ? note-&gt;tieBack() : note-&gt;tieFor();</span></span>
+<span id="L2304"><span class="lineNum">    2304</span> <span class="tlaGNC">        8708 :         bool avoidOtherTie = otherTie &amp;&amp; otherTie-&gt;up() == tie-&gt;up() &amp;&amp; !otherTie-&gt;isInside();</span></span>
+<span id="L2305"><span class="lineNum">    2305</span> <span class="tlaGNC">        8708 :         if (avoidOtherTie) {</span></span>
 <span id="L2306"><span class="lineNum">    2306</span> <span class="tlaGNC">        3188 :             resultingX += 0.1 * spatium * (start ? 1 : -1);</span></span>
 <span id="L2307"><span class="lineNum">    2307</span>              :         }</span>
 <span id="L2308"><span class="lineNum">    2308</span>              :     }</span>
 <span id="L2309"><span class="lineNum">    2309</span>              : </span>
-<span id="L2310"><span class="lineNum">    2310</span> <span class="tlaGNC">        9235 :     const bool avoidStem = chord-&gt;stem() &amp;&amp; chord-&gt;stem()-&gt;visible() &amp;&amp; chord-&gt;up() == tie-&gt;up();</span></span>
+<span id="L2310"><span class="lineNum">    2310</span> <span class="tlaGNC">        9247 :     const bool avoidStem = chord-&gt;stem() &amp;&amp; chord-&gt;stem()-&gt;visible() &amp;&amp; chord-&gt;up() == tie-&gt;up();</span></span>
 <span id="L2311"><span class="lineNum">    2311</span>              : </span>
-<span id="L2312"><span class="lineNum">    2312</span> <span class="tlaGNC">        9235 :     if (isOuterTieOfChord &amp;&amp; !avoidStem) {</span></span>
-<span id="L2313"><span class="lineNum">    2313</span> <span class="tlaGNC">        7608 :         tieSegment-&gt;addAdjustmentOffset(PointF(resultingX - tiePoint.x(), 0.0), startOrEnd);</span></span>
-<span id="L2314"><span class="lineNum">    2314</span> <span class="tlaGNC">        7608 :         tiePoint.setX(resultingX);</span></span>
-<span id="L2315"><span class="lineNum">    2315</span> <span class="tlaGNC">        7608 :         return;</span></span>
+<span id="L2312"><span class="lineNum">    2312</span> <span class="tlaGNC">        9247 :     if (isOuterTieOfChord &amp;&amp; !avoidStem) {</span></span>
+<span id="L2313"><span class="lineNum">    2313</span> <span class="tlaGNC">        7620 :         tieSegment-&gt;addAdjustmentOffset(PointF(resultingX - tiePoint.x(), 0.0), startOrEnd);</span></span>
+<span id="L2314"><span class="lineNum">    2314</span> <span class="tlaGNC">        7620 :         tiePoint.setX(resultingX);</span></span>
+<span id="L2315"><span class="lineNum">    2315</span> <span class="tlaGNC">        7620 :         return;</span></span>
 <span id="L2316"><span class="lineNum">    2316</span>              :     }</span>
 <span id="L2317"><span class="lineNum">    2317</span>              : </span>
 <span id="L2318"><span class="lineNum">    2318</span> <span class="tlaGNC">        1627 :     Shape shape = isGrace ? chord-&gt;shape().translate(systemPos) : chordSeg-&gt;staffShape(chord-&gt;vStaffIdx()).translated(systemPos);</span></span>
@@ -2463,17 +2463,17 @@
 <span id="L2405"><span class="lineNum">    2405</span> <span class="tlaGNC">         185 :     resultingX = start ? std::max(resultingX, xNoteEdge) : std::min(resultingX, xNoteEdge);</span></span>
 <span id="L2406"><span class="lineNum">    2406</span> <span class="tlaGNC">         185 : }</span></span>
 <span id="L2407"><span class="lineNum">    2407</span>              : </span>
-<span id="L2408"><span class="lineNum">    2408</span> <span class="tlaGNC">        5408 : void SlurTieLayout::adjustYforLedgerLines(TieSegment* tieSegment, SlurTiePos&amp; sPos)</span></span>
+<span id="L2408"><span class="lineNum">    2408</span> <span class="tlaGNC">        5415 : void SlurTieLayout::adjustYforLedgerLines(TieSegment* tieSegment, SlurTiePos&amp; sPos)</span></span>
 <span id="L2409"><span class="lineNum">    2409</span>              : {</span>
-<span id="L2410"><span class="lineNum">    2410</span> <span class="tlaGNC">        5408 :     Tie* tie = tieSegment-&gt;tie();</span></span>
-<span id="L2411"><span class="lineNum">    2411</span> <span class="tlaGNC">        5408 :     Note* note = tieSegment-&gt;isSingleBeginType() ? tie-&gt;startNote() : tie-&gt;endNote();</span></span>
-<span id="L2412"><span class="lineNum">    2412</span> <span class="tlaGNC">        5408 :     if (!note) {</span></span>
-<span id="L2413"><span class="lineNum">    2413</span> <span class="tlaGNC">        4500 :         return;</span></span>
+<span id="L2410"><span class="lineNum">    2410</span> <span class="tlaGNC">        5415 :     Tie* tie = tieSegment-&gt;tie();</span></span>
+<span id="L2411"><span class="lineNum">    2411</span> <span class="tlaGNC">        5415 :     Note* note = tieSegment-&gt;isSingleBeginType() ? tie-&gt;startNote() : tie-&gt;endNote();</span></span>
+<span id="L2412"><span class="lineNum">    2412</span> <span class="tlaGNC">        5415 :     if (!note) {</span></span>
+<span id="L2413"><span class="lineNum">    2413</span> <span class="tlaGNC">        4507 :         return;</span></span>
 <span id="L2414"><span class="lineNum">    2414</span>              :     }</span>
 <span id="L2415"><span class="lineNum">    2415</span>              : </span>
-<span id="L2416"><span class="lineNum">    2416</span> <span class="tlaGNC">        5392 :     Chord* chord = note-&gt;chord();</span></span>
-<span id="L2417"><span class="lineNum">    2417</span> <span class="tlaGNC">        5392 :     if (chord-&gt;ledgerLines().empty()) {</span></span>
-<span id="L2418"><span class="lineNum">    2418</span> <span class="tlaGNC">        4484 :         return;</span></span>
+<span id="L2416"><span class="lineNum">    2416</span> <span class="tlaGNC">        5399 :     Chord* chord = note-&gt;chord();</span></span>
+<span id="L2417"><span class="lineNum">    2417</span> <span class="tlaGNC">        5399 :     if (chord-&gt;ledgerLines().empty()) {</span></span>
+<span id="L2418"><span class="lineNum">    2418</span> <span class="tlaGNC">        4491 :         return;</span></span>
 <span id="L2419"><span class="lineNum">    2419</span>              :     }</span>
 <span id="L2420"><span class="lineNum">    2420</span> <span class="tlaGNC">         908 :     PointF chordSystemPos = chord-&gt;pos() + chord-&gt;segment()-&gt;pos() + chord-&gt;segment()-&gt;measure()-&gt;pos();</span></span>
 <span id="L2421"><span class="lineNum">    2421</span> <span class="tlaGNC">         908 :     PointF&amp; tiePoint = tieSegment-&gt;isSingleBeginType() ? sPos.p1 : sPos.p2;</span></span>
@@ -2494,86 +2494,86 @@
 <span id="L2436"><span class="lineNum">    2436</span>              :     }</span>
 <span id="L2437"><span class="lineNum">    2437</span>              : }</span>
 <span id="L2438"><span class="lineNum">    2438</span>              : </span>
-<span id="L2439"><span class="lineNum">    2439</span> <span class="tlaGNC">        6002 : void SlurTieLayout::adjustY(TieSegment* tieSegment)</span></span>
+<span id="L2439"><span class="lineNum">    2439</span> <span class="tlaGNC">        6010 : void SlurTieLayout::adjustY(TieSegment* tieSegment)</span></span>
 <span id="L2440"><span class="lineNum">    2440</span>              : {</span>
-<span id="L2441"><span class="lineNum">    2441</span> <span class="tlaGNC">        6002 :     Staff* staff = tieSegment-&gt;score() ? tieSegment-&gt;score()-&gt;staff(tieSegment-&gt;vStaffIdx()) : nullptr;</span></span>
-<span id="L2442"><span class="lineNum">    2442</span> <span class="tlaGNC">        6002 :     if (!staff) {</span></span>
-<span id="L2443"><span class="lineNum">    2443</span> <span class="tlaGNC">        2799 :         return;</span></span>
+<span id="L2441"><span class="lineNum">    2441</span> <span class="tlaGNC">        6010 :     Staff* staff = tieSegment-&gt;score() ? tieSegment-&gt;score()-&gt;staff(tieSegment-&gt;vStaffIdx()) : nullptr;</span></span>
+<span id="L2442"><span class="lineNum">    2442</span> <span class="tlaGNC">        6010 :     if (!staff) {</span></span>
+<span id="L2443"><span class="lineNum">    2443</span> <span class="tlaGNC">        2805 :         return;</span></span>
 <span id="L2444"><span class="lineNum">    2444</span>              :     }</span>
 <span id="L2445"><span class="lineNum">    2445</span>              : </span>
-<span id="L2446"><span class="lineNum">    2446</span> <span class="tlaGNC">        6002 :     const double spatium = tieSegment-&gt;spatium();</span></span>
-<span id="L2447"><span class="lineNum">    2447</span> <span class="tlaGNC">        6002 :     TieSegment::LayoutData* ldata = tieSegment-&gt;mutldata();</span></span>
+<span id="L2446"><span class="lineNum">    2446</span> <span class="tlaGNC">        6010 :     const double spatium = tieSegment-&gt;spatium();</span></span>
+<span id="L2447"><span class="lineNum">    2447</span> <span class="tlaGNC">        6010 :     TieSegment::LayoutData* ldata = tieSegment-&gt;mutldata();</span></span>
 <span id="L2448"><span class="lineNum">    2448</span>              : </span>
-<span id="L2449"><span class="lineNum">    2449</span> <span class="tlaGNC">        6002 :     ldata-&gt;setPos(PointF());</span></span>
-<span id="L2450"><span class="lineNum">    2450</span> <span class="tlaGNC">        6002 :     ldata-&gt;moveY(tieSegment-&gt;staffOffsetY());</span></span>
+<span id="L2449"><span class="lineNum">    2449</span> <span class="tlaGNC">        6010 :     ldata-&gt;setPos(PointF());</span></span>
+<span id="L2450"><span class="lineNum">    2450</span> <span class="tlaGNC">        6010 :     ldata-&gt;moveY(tieSegment-&gt;staffOffsetY());</span></span>
 <span id="L2451"><span class="lineNum">    2451</span>              : </span>
-<span id="L2452"><span class="lineNum">    2452</span> <span class="tlaGNC">        6002 :     Fraction tick = tieSegment-&gt;tick();</span></span>
+<span id="L2452"><span class="lineNum">    2452</span> <span class="tlaGNC">        6010 :     Fraction tick = tieSegment-&gt;tick();</span></span>
 <span id="L2453"><span class="lineNum">    2453</span>              : </span>
-<span id="L2454"><span class="lineNum">    2454</span> <span class="tlaGNC">        6002 :     computeBezier(tieSegment);</span></span>
+<span id="L2454"><span class="lineNum">    2454</span> <span class="tlaGNC">        6010 :     computeBezier(tieSegment);</span></span>
 <span id="L2455"><span class="lineNum">    2455</span>              : </span>
-<span id="L2456"><span class="lineNum">    2456</span> <span class="tlaGNC">        6002 :     bool up = tieSegment-&gt;tie()-&gt;up();</span></span>
-<span id="L2457"><span class="lineNum">    2457</span> <span class="tlaGNC">        6002 :     int upSign = up ? -1 : 1;</span></span>
+<span id="L2456"><span class="lineNum">    2456</span> <span class="tlaGNC">        6010 :     bool up = tieSegment-&gt;tie()-&gt;up();</span></span>
+<span id="L2457"><span class="lineNum">    2457</span> <span class="tlaGNC">        6010 :     int upSign = up ? -1 : 1;</span></span>
 <span id="L2458"><span class="lineNum">    2458</span>              : </span>
-<span id="L2459"><span class="lineNum">    2459</span> <span class="tlaGNC">        6002 :     const double staffLineDist = staff-&gt;lineDistance(tick) * spatium;</span></span>
-<span id="L2460"><span class="lineNum">    2460</span> <span class="tlaGNC">        6002 :     const double staffLineThickness = tieSegment-&gt;style().styleAbsolute(Sid::staffLineWidth) * staff-&gt;staffMag(tick);</span></span>
+<span id="L2459"><span class="lineNum">    2459</span> <span class="tlaGNC">        6010 :     const double staffLineDist = staff-&gt;lineDistance(tick) * spatium;</span></span>
+<span id="L2460"><span class="lineNum">    2460</span> <span class="tlaGNC">        6010 :     const double staffLineThickness = tieSegment-&gt;style().styleAbsolute(Sid::staffLineWidth) * staff-&gt;staffMag(tick);</span></span>
 <span id="L2461"><span class="lineNum">    2461</span>              : </span>
 <span id="L2462"><span class="lineNum">    2462</span>              :     // 1. Check for bad end point protrusion</span>
 <span id="L2463"><span class="lineNum">    2463</span>              : </span>
-<span id="L2464"><span class="lineNum">    2464</span> <span class="tlaGNC">        6002 :     const double endPointY = tieSegment-&gt;ups(Grip::START).p.y();</span></span>
-<span id="L2465"><span class="lineNum">    2465</span> <span class="tlaGNC">        6002 :     const int closestLineToEndpoints = up ? floor(endPointY / staffLineDist) : ceil(endPointY / staffLineDist);</span></span>
-<span id="L2466"><span class="lineNum">    2466</span> <span class="tlaGNC">        6002 :     const bool isEndInsideStaff = closestLineToEndpoints &gt;= 0 &amp;&amp; closestLineToEndpoints &lt; staff-&gt;lines(tick);</span></span>
-<span id="L2467"><span class="lineNum">    2467</span> <span class="tlaGNC">        6002 :     const bool isEndInsideLedgerLines = !isEndInsideStaff &amp;&amp; !tieSegment-&gt;tie()-&gt;isOuterTieOfChord(Grip::START);</span></span>
+<span id="L2464"><span class="lineNum">    2464</span> <span class="tlaGNC">        6010 :     const double endPointY = tieSegment-&gt;ups(Grip::START).p.y();</span></span>
+<span id="L2465"><span class="lineNum">    2465</span> <span class="tlaGNC">        6010 :     const int closestLineToEndpoints = up ? floor(endPointY / staffLineDist) : ceil(endPointY / staffLineDist);</span></span>
+<span id="L2466"><span class="lineNum">    2466</span> <span class="tlaGNC">        6010 :     const bool isEndInsideStaff = closestLineToEndpoints &gt;= 0 &amp;&amp; closestLineToEndpoints &lt; staff-&gt;lines(tick);</span></span>
+<span id="L2467"><span class="lineNum">    2467</span> <span class="tlaGNC">        6010 :     const bool isEndInsideLedgerLines = !isEndInsideStaff &amp;&amp; !tieSegment-&gt;tie()-&gt;isOuterTieOfChord(Grip::START);</span></span>
 <span id="L2468"><span class="lineNum">    2468</span>              : </span>
-<span id="L2469"><span class="lineNum">    2469</span> <span class="tlaGNC">        6002 :     const double halfLineThicknessCorrection = 0.5 * staffLineThickness * upSign;</span></span>
-<span id="L2470"><span class="lineNum">    2470</span> <span class="tlaGNC">        6002 :     const double protrusion = std::abs(endPointY - (closestLineToEndpoints * spatium - halfLineThicknessCorrection));</span></span>
-<span id="L2471"><span class="lineNum">    2471</span> <span class="tlaGNC">        6002 :     const double badIntersectionLimit = 0.15 * spatium; // TODO: style</span></span>
+<span id="L2469"><span class="lineNum">    2469</span> <span class="tlaGNC">        6010 :     const double halfLineThicknessCorrection = 0.5 * staffLineThickness * upSign;</span></span>
+<span id="L2470"><span class="lineNum">    2470</span> <span class="tlaGNC">        6010 :     const double protrusion = std::abs(endPointY - (closestLineToEndpoints * spatium - halfLineThicknessCorrection));</span></span>
+<span id="L2471"><span class="lineNum">    2471</span> <span class="tlaGNC">        6010 :     const double badIntersectionLimit = 0.15 * spatium; // TODO: style</span></span>
 <span id="L2472"><span class="lineNum">    2472</span>              : </span>
-<span id="L2473"><span class="lineNum">    2473</span> <span class="tlaGNC">        6002 :     bool badIntersection = protrusion &lt; badIntersectionLimit &amp;&amp; (isEndInsideStaff || isEndInsideLedgerLines);</span></span>
-<span id="L2474"><span class="lineNum">    2474</span> <span class="tlaGNC">        6002 :     if (badIntersection) {</span></span>
-<span id="L2475"><span class="lineNum">    2475</span> <span class="tlaGNC">         387 :         double correctedY = closestLineToEndpoints * spatium + halfLineThicknessCorrection + badIntersectionLimit * upSign;</span></span>
-<span id="L2476"><span class="lineNum">    2476</span> <span class="tlaGNC">         387 :         tieSegment-&gt;addAdjustmentOffset(PointF(0.0, correctedY - endPointY), Grip::START);</span></span>
-<span id="L2477"><span class="lineNum">    2477</span> <span class="tlaGNC">         387 :         tieSegment-&gt;addAdjustmentOffset(PointF(0.0, correctedY - endPointY), Grip::END);</span></span>
-<span id="L2478"><span class="lineNum">    2478</span> <span class="tlaGNC">         387 :         tieSegment-&gt;ups(Grip::START).p.setY(correctedY);</span></span>
-<span id="L2479"><span class="lineNum">    2479</span> <span class="tlaGNC">         387 :         tieSegment-&gt;ups(Grip::END).p.setY(correctedY);</span></span>
-<span id="L2480"><span class="lineNum">    2480</span> <span class="tlaGNC">         387 :         computeBezier(tieSegment);</span></span>
+<span id="L2473"><span class="lineNum">    2473</span> <span class="tlaGNC">        6010 :     bool badIntersection = protrusion &lt; badIntersectionLimit &amp;&amp; (isEndInsideStaff || isEndInsideLedgerLines);</span></span>
+<span id="L2474"><span class="lineNum">    2474</span> <span class="tlaGNC">        6010 :     if (badIntersection) {</span></span>
+<span id="L2475"><span class="lineNum">    2475</span> <span class="tlaGNC">         388 :         double correctedY = closestLineToEndpoints * spatium + halfLineThicknessCorrection + badIntersectionLimit * upSign;</span></span>
+<span id="L2476"><span class="lineNum">    2476</span> <span class="tlaGNC">         388 :         tieSegment-&gt;addAdjustmentOffset(PointF(0.0, correctedY - endPointY), Grip::START);</span></span>
+<span id="L2477"><span class="lineNum">    2477</span> <span class="tlaGNC">         388 :         tieSegment-&gt;addAdjustmentOffset(PointF(0.0, correctedY - endPointY), Grip::END);</span></span>
+<span id="L2478"><span class="lineNum">    2478</span> <span class="tlaGNC">         388 :         tieSegment-&gt;ups(Grip::START).p.setY(correctedY);</span></span>
+<span id="L2479"><span class="lineNum">    2479</span> <span class="tlaGNC">         388 :         tieSegment-&gt;ups(Grip::END).p.setY(correctedY);</span></span>
+<span id="L2480"><span class="lineNum">    2480</span> <span class="tlaGNC">         388 :         computeBezier(tieSegment);</span></span>
 <span id="L2481"><span class="lineNum">    2481</span>              :     }</span>
 <span id="L2482"><span class="lineNum">    2482</span>              : </span>
 <span id="L2483"><span class="lineNum">    2483</span>              :     // 2. Check for bad arc protrusion</span>
 <span id="L2484"><span class="lineNum">    2484</span>              : </span>
-<span id="L2485"><span class="lineNum">    2485</span> <span class="tlaGNC">        6002 :     RectF tieSegmentBBox = tieSegment-&gt;ldata()-&gt;bbox();</span></span>
-<span id="L2486"><span class="lineNum">    2486</span> <span class="tlaGNC">        6002 :     double tieLength = tieSegmentBBox.width();</span></span>
-<span id="L2487"><span class="lineNum">    2487</span> <span class="tlaGNC">        6002 :     double tieHeight = tieSegmentBBox.height();</span></span>
-<span id="L2488"><span class="lineNum">    2488</span> <span class="tlaGNC">        6002 :     double midThickness = tieSegment-&gt;ldata()-&gt;midThickness() * 2;</span></span>
-<span id="L2489"><span class="lineNum">    2489</span> <span class="tlaGNC">        6002 :     double yOuterApogee = up ? tieSegmentBBox.top() : tieSegmentBBox.bottom();</span></span>
-<span id="L2490"><span class="lineNum">    2490</span> <span class="tlaGNC">        6002 :     double yInnerApogee = yOuterApogee - midThickness * upSign;</span></span>
-<span id="L2491"><span class="lineNum">    2491</span> <span class="tlaGNC">        6002 :     double yMidApogee = 0.5 * (yOuterApogee + yInnerApogee);</span></span>
+<span id="L2485"><span class="lineNum">    2485</span> <span class="tlaGNC">        6010 :     RectF tieSegmentBBox = tieSegment-&gt;ldata()-&gt;bbox();</span></span>
+<span id="L2486"><span class="lineNum">    2486</span> <span class="tlaGNC">        6010 :     double tieLength = tieSegmentBBox.width();</span></span>
+<span id="L2487"><span class="lineNum">    2487</span> <span class="tlaGNC">        6010 :     double tieHeight = tieSegmentBBox.height();</span></span>
+<span id="L2488"><span class="lineNum">    2488</span> <span class="tlaGNC">        6010 :     double midThickness = tieSegment-&gt;ldata()-&gt;midThickness() * 2;</span></span>
+<span id="L2489"><span class="lineNum">    2489</span> <span class="tlaGNC">        6010 :     double yOuterApogee = up ? tieSegmentBBox.top() : tieSegmentBBox.bottom();</span></span>
+<span id="L2490"><span class="lineNum">    2490</span> <span class="tlaGNC">        6010 :     double yInnerApogee = yOuterApogee - midThickness * upSign;</span></span>
+<span id="L2491"><span class="lineNum">    2491</span> <span class="tlaGNC">        6010 :     double yMidApogee = 0.5 * (yOuterApogee + yInnerApogee);</span></span>
 <span id="L2492"><span class="lineNum">    2492</span>              : </span>
-<span id="L2493"><span class="lineNum">    2493</span> <span class="tlaGNC">        6002 :     int closestLineToArc = round(yMidApogee / staffLineDist);</span></span>
-<span id="L2494"><span class="lineNum">    2494</span> <span class="tlaGNC">        6002 :     bool isArcInsideStaff =  closestLineToArc &gt;= 0 &amp;&amp; closestLineToArc &lt; staff-&gt;lines(tick);</span></span>
-<span id="L2495"><span class="lineNum">    2495</span> <span class="tlaGNC">        6002 :     if (!isArcInsideStaff) {</span></span>
-<span id="L2496"><span class="lineNum">    2496</span> <span class="tlaGNC">        1298 :         return;</span></span>
+<span id="L2493"><span class="lineNum">    2493</span> <span class="tlaGNC">        6010 :     int closestLineToArc = round(yMidApogee / staffLineDist);</span></span>
+<span id="L2494"><span class="lineNum">    2494</span> <span class="tlaGNC">        6010 :     bool isArcInsideStaff =  closestLineToArc &gt;= 0 &amp;&amp; closestLineToArc &lt; staff-&gt;lines(tick);</span></span>
+<span id="L2495"><span class="lineNum">    2495</span> <span class="tlaGNC">        6010 :     if (!isArcInsideStaff) {</span></span>
+<span id="L2496"><span class="lineNum">    2496</span> <span class="tlaGNC">        1304 :         return;</span></span>
 <span id="L2497"><span class="lineNum">    2497</span>              :     }</span>
 <span id="L2498"><span class="lineNum">    2498</span>              : </span>
-<span id="L2499"><span class="lineNum">    2499</span> <span class="tlaGNC">        4704 :     double outwardMargin = -upSign * (yOuterApogee - (closestLineToArc * staffLineDist - halfLineThicknessCorrection));</span></span>
-<span id="L2500"><span class="lineNum">    2500</span> <span class="tlaGNC">        4704 :     double inwardMargin = upSign * (yInnerApogee - (closestLineToArc * staffLineDist + halfLineThicknessCorrection));</span></span>
-<span id="L2501"><span class="lineNum">    2501</span> <span class="tlaGNC">        4704 :     const double badArcIntersectionLimit = tieLength &lt; 3 * spatium ? 0.1 * spatium : 0.15 * spatium;</span></span>
+<span id="L2499"><span class="lineNum">    2499</span> <span class="tlaGNC">        4706 :     double outwardMargin = -upSign * (yOuterApogee - (closestLineToArc * staffLineDist - halfLineThicknessCorrection));</span></span>
+<span id="L2500"><span class="lineNum">    2500</span> <span class="tlaGNC">        4706 :     double inwardMargin = upSign * (yInnerApogee - (closestLineToArc * staffLineDist + halfLineThicknessCorrection));</span></span>
+<span id="L2501"><span class="lineNum">    2501</span> <span class="tlaGNC">        4706 :     const double badArcIntersectionLimit = tieLength &lt; 3 * spatium ? 0.1 * spatium : 0.15 * spatium;</span></span>
 <span id="L2502"><span class="lineNum">    2502</span>              : </span>
-<span id="L2503"><span class="lineNum">    2503</span> <span class="tlaGNC">        4704 :     bool increaseArc = outwardMargin - 0.5 * badArcIntersectionLimit &lt; inwardMargin;</span></span>
-<span id="L2504"><span class="lineNum">    2504</span> <span class="tlaGNC">        4704 :     bool correctOutwards = inwardMargin &lt; badArcIntersectionLimit &amp;&amp; increaseArc;</span></span>
-<span id="L2505"><span class="lineNum">    2505</span> <span class="tlaGNC">        4704 :     bool correctInwards = outwardMargin &lt; badArcIntersectionLimit &amp;&amp; !increaseArc;</span></span>
+<span id="L2503"><span class="lineNum">    2503</span> <span class="tlaGNC">        4706 :     bool increaseArc = outwardMargin - 0.5 * badArcIntersectionLimit &lt; inwardMargin;</span></span>
+<span id="L2504"><span class="lineNum">    2504</span> <span class="tlaGNC">        4706 :     bool correctOutwards = inwardMargin &lt; badArcIntersectionLimit &amp;&amp; increaseArc;</span></span>
+<span id="L2505"><span class="lineNum">    2505</span> <span class="tlaGNC">        4706 :     bool correctInwards = outwardMargin &lt; badArcIntersectionLimit &amp;&amp; !increaseArc;</span></span>
 <span id="L2506"><span class="lineNum">    2506</span>              : </span>
-<span id="L2507"><span class="lineNum">    2507</span> <span class="tlaGNC">        4704 :     if (!correctInwards &amp;&amp; !correctOutwards) {</span></span>
+<span id="L2507"><span class="lineNum">    2507</span> <span class="tlaGNC">        4706 :     if (!correctInwards &amp;&amp; !correctOutwards) {</span></span>
 <span id="L2508"><span class="lineNum">    2508</span> <span class="tlaGNC">        1441 :         return;</span></span>
 <span id="L2509"><span class="lineNum">    2509</span>              :     }</span>
 <span id="L2510"><span class="lineNum">    2510</span>              : </span>
-<span id="L2511"><span class="lineNum">    2511</span> <span class="tlaGNC">        3263 :     bool isSmallTie = tieLength &lt; 2.0 * spatium &amp;&amp; tieHeight &lt; 0.7 * spatium;</span></span>
+<span id="L2511"><span class="lineNum">    2511</span> <span class="tlaGNC">        3265 :     bool isSmallTie = tieLength &lt; 2.0 * spatium &amp;&amp; tieHeight &lt; 0.7 * spatium;</span></span>
 <span id="L2512"><span class="lineNum">    2512</span>              :     // For ties this small, try to fit them within a staff space before changing their arc</span>
-<span id="L2513"><span class="lineNum">    2513</span> <span class="tlaGNC">        3263 :     if (isSmallTie) {</span></span>
-<span id="L2514"><span class="lineNum">    2514</span> <span class="tlaGNC">        2364 :         Tie* tie2 = tieSegment-&gt;tie();</span></span>
-<span id="L2515"><span class="lineNum">    2515</span> <span class="tlaGNC">        2364 :         bool isInside = tie2-&gt;isInside();</span></span>
-<span id="L2516"><span class="lineNum">    2516</span> <span class="tlaGNC">        2364 :         bool isOuterOfChord = tie2-&gt;isOuterTieOfChord(Grip::START) || tie2-&gt;isOuterTieOfChord(Grip::END);</span></span>
-<span id="L2517"><span class="lineNum">    2517</span> <span class="tlaGNC">        2364 :         bool hasTiedSecondInside = tie2-&gt;hasTiedSecondInside();</span></span>
-<span id="L2518"><span class="lineNum">    2518</span> <span class="tlaGNC">        2364 :         if (!isInside &amp;&amp; !isOuterOfChord &amp;&amp; !hasTiedSecondInside &amp;&amp; !hasEndPointAboveNote(tieSegment)) {</span></span>
+<span id="L2513"><span class="lineNum">    2513</span> <span class="tlaGNC">        3265 :     if (isSmallTie) {</span></span>
+<span id="L2514"><span class="lineNum">    2514</span> <span class="tlaGNC">        2366 :         Tie* tie2 = tieSegment-&gt;tie();</span></span>
+<span id="L2515"><span class="lineNum">    2515</span> <span class="tlaGNC">        2366 :         bool isInside = tie2-&gt;isInside();</span></span>
+<span id="L2516"><span class="lineNum">    2516</span> <span class="tlaGNC">        2366 :         bool isOuterOfChord = tie2-&gt;isOuterTieOfChord(Grip::START) || tie2-&gt;isOuterTieOfChord(Grip::END);</span></span>
+<span id="L2517"><span class="lineNum">    2517</span> <span class="tlaGNC">        2366 :         bool hasTiedSecondInside = tie2-&gt;hasTiedSecondInside();</span></span>
+<span id="L2518"><span class="lineNum">    2518</span> <span class="tlaGNC">        2366 :         if (!isInside &amp;&amp; !isOuterOfChord &amp;&amp; !hasTiedSecondInside &amp;&amp; !hasEndPointAboveNote(tieSegment)) {</span></span>
 <span id="L2519"><span class="lineNum">    2519</span> <span class="tlaGNC">          60 :             double currentY = tieSegment-&gt;ups(Grip::START).p.y();</span></span>
 <span id="L2520"><span class="lineNum">    2520</span> <span class="tlaGNC">          60 :             double yCorrection = -upSign * (badArcIntersectionLimit - outwardMargin);</span></span>
 <span id="L2521"><span class="lineNum">    2521</span> <span class="tlaGNC">          60 :             tieSegment-&gt;addAdjustmentOffset(PointF(0.0, yCorrection), Grip::START);</span></span>
@@ -2583,24 +2583,24 @@
 <span id="L2525"><span class="lineNum">    2525</span> <span class="tlaGNC">          60 :             computeBezier(tieSegment);</span></span>
 <span id="L2526"><span class="lineNum">    2526</span> <span class="tlaGNC">          60 :             return;</span></span>
 <span id="L2527"><span class="lineNum">    2527</span>              :         } else {</span>
-<span id="L2528"><span class="lineNum">    2528</span> <span class="tlaGNC">        2304 :             correctOutwards = true;</span></span>
+<span id="L2528"><span class="lineNum">    2528</span> <span class="tlaGNC">        2306 :             correctOutwards = true;</span></span>
 <span id="L2529"><span class="lineNum">    2529</span>              :         }</span>
 <span id="L2530"><span class="lineNum">    2530</span>              :     }</span>
 <span id="L2531"><span class="lineNum">    2531</span>              : </span>
-<span id="L2532"><span class="lineNum">    2532</span> <span class="tlaGNC">        3203 :     double arcCorrection = correctOutwards ? (badArcIntersectionLimit - inwardMargin) : (badArcIntersectionLimit - outwardMargin);</span></span>
-<span id="L2533"><span class="lineNum">    2533</span> <span class="tlaGNC">        3203 :     double maxArcCorrection = 0.75 * tieHeight;</span></span>
-<span id="L2534"><span class="lineNum">    2534</span> <span class="tlaGNC">        3203 :     double rest = arcCorrection &gt; maxArcCorrection ? arcCorrection - maxArcCorrection : 0.0;</span></span>
-<span id="L2535"><span class="lineNum">    2535</span> <span class="tlaGNC">        3203 :     arcCorrection = std::min(arcCorrection, maxArcCorrection);</span></span>
-<span id="L2536"><span class="lineNum">    2536</span> <span class="tlaGNC">        3203 :     if (correctOutwards) {</span></span>
-<span id="L2537"><span class="lineNum">    2537</span> <span class="tlaGNC">        2865 :         if (rest &gt; 0) {</span></span>
-<span id="L2538"><span class="lineNum">    2538</span> <span class="tlaGNC">        1950 :             rest *= upSign;</span></span>
-<span id="L2539"><span class="lineNum">    2539</span> <span class="tlaGNC">        1950 :             double currentY = tieSegment-&gt;ups(Grip::START).p.y();</span></span>
-<span id="L2540"><span class="lineNum">    2540</span> <span class="tlaGNC">        1950 :             tieSegment-&gt;addAdjustmentOffset(PointF(0.0, rest), Grip::START);</span></span>
-<span id="L2541"><span class="lineNum">    2541</span> <span class="tlaGNC">        1950 :             tieSegment-&gt;addAdjustmentOffset(PointF(0.0, rest), Grip::END);</span></span>
-<span id="L2542"><span class="lineNum">    2542</span> <span class="tlaGNC">        1950 :             tieSegment-&gt;ups(Grip::START).p.setY(currentY + rest);</span></span>
-<span id="L2543"><span class="lineNum">    2543</span> <span class="tlaGNC">        1950 :             tieSegment-&gt;ups(Grip::END).p.setY(currentY + rest);</span></span>
+<span id="L2532"><span class="lineNum">    2532</span> <span class="tlaGNC">        3205 :     double arcCorrection = correctOutwards ? (badArcIntersectionLimit - inwardMargin) : (badArcIntersectionLimit - outwardMargin);</span></span>
+<span id="L2533"><span class="lineNum">    2533</span> <span class="tlaGNC">        3205 :     double maxArcCorrection = 0.75 * tieHeight;</span></span>
+<span id="L2534"><span class="lineNum">    2534</span> <span class="tlaGNC">        3205 :     double rest = arcCorrection &gt; maxArcCorrection ? arcCorrection - maxArcCorrection : 0.0;</span></span>
+<span id="L2535"><span class="lineNum">    2535</span> <span class="tlaGNC">        3205 :     arcCorrection = std::min(arcCorrection, maxArcCorrection);</span></span>
+<span id="L2536"><span class="lineNum">    2536</span> <span class="tlaGNC">        3205 :     if (correctOutwards) {</span></span>
+<span id="L2537"><span class="lineNum">    2537</span> <span class="tlaGNC">        2867 :         if (rest &gt; 0) {</span></span>
+<span id="L2538"><span class="lineNum">    2538</span> <span class="tlaGNC">        1952 :             rest *= upSign;</span></span>
+<span id="L2539"><span class="lineNum">    2539</span> <span class="tlaGNC">        1952 :             double currentY = tieSegment-&gt;ups(Grip::START).p.y();</span></span>
+<span id="L2540"><span class="lineNum">    2540</span> <span class="tlaGNC">        1952 :             tieSegment-&gt;addAdjustmentOffset(PointF(0.0, rest), Grip::START);</span></span>
+<span id="L2541"><span class="lineNum">    2541</span> <span class="tlaGNC">        1952 :             tieSegment-&gt;addAdjustmentOffset(PointF(0.0, rest), Grip::END);</span></span>
+<span id="L2542"><span class="lineNum">    2542</span> <span class="tlaGNC">        1952 :             tieSegment-&gt;ups(Grip::START).p.setY(currentY + rest);</span></span>
+<span id="L2543"><span class="lineNum">    2543</span> <span class="tlaGNC">        1952 :             tieSegment-&gt;ups(Grip::END).p.setY(currentY + rest);</span></span>
 <span id="L2544"><span class="lineNum">    2544</span>              :         }</span>
-<span id="L2545"><span class="lineNum">    2545</span> <span class="tlaGNC">        2865 :         computeBezier(tieSegment, PointF(0.0, -arcCorrection));</span></span>
+<span id="L2545"><span class="lineNum">    2545</span> <span class="tlaGNC">        2867 :         computeBezier(tieSegment, PointF(0.0, -arcCorrection));</span></span>
 <span id="L2546"><span class="lineNum">    2546</span> <span class="tlaGNC">         338 :     } else if (correctInwards) {</span></span>
 <span id="L2547"><span class="lineNum">    2547</span> <span class="tlaGNC">         338 :         computeBezier(tieSegment, PointF(0.0, arcCorrection));</span></span>
 <span id="L2548"><span class="lineNum">    2548</span>              :     }</span>
@@ -2628,10 +2628,10 @@
 <span id="L2570"><span class="lineNum">    2570</span> <span class="tlaGNC">         227 :            || (tieEndPos.x() &gt; endNotePos.x() &amp;&amp; !endNote-&gt;shouldHideFret());</span></span>
 <span id="L2571"><span class="lineNum">    2571</span>              : }</span>
 <span id="L2572"><span class="lineNum">    2572</span>              : </span>
-<span id="L2573"><span class="lineNum">    2573</span> <span class="tlaGNC">      106560 : void SlurTieLayout::resolveVerticalTieCollisions(const std::vector&lt;TieSegment*&gt;&amp; stackedTies)</span></span>
+<span id="L2573"><span class="lineNum">    2573</span> <span class="tlaGNC">      106374 : void SlurTieLayout::resolveVerticalTieCollisions(const std::vector&lt;TieSegment*&gt;&amp; stackedTies)</span></span>
 <span id="L2574"><span class="lineNum">    2574</span>              : {</span>
-<span id="L2575"><span class="lineNum">    2575</span> <span class="tlaGNC">      106560 :     if (stackedTies.size() &lt; 2) {</span></span>
-<span id="L2576"><span class="lineNum">    2576</span> <span class="tlaGNC">      106459 :         return;</span></span>
+<span id="L2575"><span class="lineNum">    2575</span> <span class="tlaGNC">      106374 :     if (stackedTies.size() &lt; 2) {</span></span>
+<span id="L2576"><span class="lineNum">    2576</span> <span class="tlaGNC">      106273 :         return;</span></span>
 <span id="L2577"><span class="lineNum">    2577</span>              :     }</span>
 <span id="L2578"><span class="lineNum">    2578</span>              : </span>
 <span id="L2579"><span class="lineNum">    2579</span> <span class="tlaGNC">         101 :     std::list&lt;TieSegment*&gt; downwardTies;</span></span>
@@ -2785,93 +2785,93 @@
 <span id="L2727"><span class="lineNum">    2727</span>              :     }</span>
 <span id="L2728"><span class="lineNum">    2728</span> <span class="tlaGNC">        1783 : }</span></span>
 <span id="L2729"><span class="lineNum">    2729</span>              : </span>
-<span id="L2730"><span class="lineNum">    2730</span> <span class="tlaGNC">        9725 : void SlurTieLayout::computeBezier(TieSegment* tieSeg, PointF shoulderOffset)</span></span>
+<span id="L2730"><span class="lineNum">    2730</span> <span class="tlaGNC">        9736 : void SlurTieLayout::computeBezier(TieSegment* tieSeg, PointF shoulderOffset)</span></span>
 <span id="L2731"><span class="lineNum">    2731</span>              : {</span>
-<span id="L2732"><span class="lineNum">    2732</span> <span class="tlaGNC">        9725 :     const PointF tieStart = tieSeg-&gt;ups(Grip::START).p + tieSeg-&gt;ups(Grip::START).off;</span></span>
-<span id="L2733"><span class="lineNum">    2733</span> <span class="tlaGNC">        9725 :     const PointF tieEnd = tieSeg-&gt;ups(Grip::END).p + tieSeg-&gt;ups(Grip::END).off;</span></span>
-<span id="L2734"><span class="lineNum">    2734</span> <span class="tlaGNC">        9725 :     if (!muse::RealIsEqualOrMore(tieEnd.x(), tieStart.x())) {</span></span>
-<span id="L2735"><span class="lineNum">    2735</span> <span class="tlaGNC">        4475 :         return;</span></span>
+<span id="L2732"><span class="lineNum">    2732</span> <span class="tlaGNC">        9736 :     const PointF tieStart = tieSeg-&gt;ups(Grip::START).p + tieSeg-&gt;ups(Grip::START).off;</span></span>
+<span id="L2733"><span class="lineNum">    2733</span> <span class="tlaGNC">        9736 :     const PointF tieEnd = tieSeg-&gt;ups(Grip::END).p + tieSeg-&gt;ups(Grip::END).off;</span></span>
+<span id="L2734"><span class="lineNum">    2734</span> <span class="tlaGNC">        9736 :     if (!muse::RealIsEqualOrMore(tieEnd.x(), tieStart.x())) {</span></span>
+<span id="L2735"><span class="lineNum">    2735</span> <span class="tlaGNC">        4480 :         return;</span></span>
 <span id="L2736"><span class="lineNum">    2736</span>              :     }</span>
 <span id="L2737"><span class="lineNum">    2737</span>              : </span>
-<span id="L2738"><span class="lineNum">    2738</span> <span class="tlaGNC">        6375 :     PointF tieEndNormalized = tieEnd - tieStart;  // normalize to zero</span></span>
-<span id="L2739"><span class="lineNum">    2739</span> <span class="tlaGNC">        6375 :     if (muse::RealIsNull(tieEndNormalized.x())) {</span></span>
-<span id="L2740"><span class="lineNum">    2740</span> <span class="tlaGNC">        1125 :         return;</span></span>
+<span id="L2738"><span class="lineNum">    2738</span> <span class="tlaGNC">        6384 :     PointF tieEndNormalized = tieEnd - tieStart;  // normalize to zero</span></span>
+<span id="L2739"><span class="lineNum">    2739</span> <span class="tlaGNC">        6384 :     if (muse::RealIsNull(tieEndNormalized.x())) {</span></span>
+<span id="L2740"><span class="lineNum">    2740</span> <span class="tlaGNC">        1128 :         return;</span></span>
 <span id="L2741"><span class="lineNum">    2741</span>              :     }</span>
 <span id="L2742"><span class="lineNum">    2742</span>              : </span>
-<span id="L2743"><span class="lineNum">    2743</span> <span class="tlaGNC">        5250 :     const double tieAngle = atan(tieEndNormalized.y() / tieEndNormalized.x()); // angle required from tie start to tie end--zero if horizontal</span></span>
-<span id="L2744"><span class="lineNum">    2744</span> <span class="tlaGNC">        5250 :     Transform t;</span></span>
-<span id="L2745"><span class="lineNum">    2745</span> <span class="tlaGNC">        5250 :     t.rotateRadians(-tieAngle);  // rotate so that we are working with horizontal ties regardless of endpoint height difference</span></span>
-<span id="L2746"><span class="lineNum">    2746</span> <span class="tlaGNC">        5250 :     tieEndNormalized = t.map(tieEndNormalized);  // apply that rotation</span></span>
-<span id="L2747"><span class="lineNum">    2747</span> <span class="tlaGNC">        5250 :     shoulderOffset = t.map(shoulderOffset);  // also apply to shoulderOffset</span></span>
+<span id="L2743"><span class="lineNum">    2743</span> <span class="tlaGNC">        5256 :     const double tieAngle = atan(tieEndNormalized.y() / tieEndNormalized.x()); // angle required from tie start to tie end--zero if horizontal</span></span>
+<span id="L2744"><span class="lineNum">    2744</span> <span class="tlaGNC">        5256 :     Transform t;</span></span>
+<span id="L2745"><span class="lineNum">    2745</span> <span class="tlaGNC">        5256 :     t.rotateRadians(-tieAngle);  // rotate so that we are working with horizontal ties regardless of endpoint height difference</span></span>
+<span id="L2746"><span class="lineNum">    2746</span> <span class="tlaGNC">        5256 :     tieEndNormalized = t.map(tieEndNormalized);  // apply that rotation</span></span>
+<span id="L2747"><span class="lineNum">    2747</span> <span class="tlaGNC">        5256 :     shoulderOffset = t.map(shoulderOffset);  // also apply to shoulderOffset</span></span>
 <span id="L2748"><span class="lineNum">    2748</span>              : </span>
-<span id="L2749"><span class="lineNum">    2749</span> <span class="tlaGNC">        5250 :     const double _spatium = tieSeg-&gt;spatium();</span></span>
-<span id="L2750"><span class="lineNum">    2750</span> <span class="tlaGNC">        5250 :     double tieLengthInSp = tieEndNormalized.x() / _spatium;</span></span>
+<span id="L2749"><span class="lineNum">    2749</span> <span class="tlaGNC">        5256 :     const double _spatium = tieSeg-&gt;spatium();</span></span>
+<span id="L2750"><span class="lineNum">    2750</span> <span class="tlaGNC">        5256 :     double tieLengthInSp = tieEndNormalized.x() / _spatium;</span></span>
 <span id="L2751"><span class="lineNum">    2751</span>              : </span>
-<span id="L2752"><span class="lineNum">    2752</span> <span class="tlaGNC">        5250 :     const double minShoulderHeight = tieSeg-&gt;minShoulderHeight();</span></span>
-<span id="L2753"><span class="lineNum">    2753</span> <span class="tlaGNC">        5250 :     const double maxShoulderHeight = tieSeg-&gt;maxShoulderHeight();</span></span>
-<span id="L2754"><span class="lineNum">    2754</span> <span class="tlaGNC">        5250 :     double shoulderH = minShoulderHeight + _spatium * 0.3 * sqrt(std::abs(tieLengthInSp - 1));</span></span>
-<span id="L2755"><span class="lineNum">    2755</span> <span class="tlaGNC">        5250 :     shoulderH = std::clamp(shoulderH, minShoulderHeight, maxShoulderHeight);</span></span>
+<span id="L2752"><span class="lineNum">    2752</span> <span class="tlaGNC">        5256 :     const double minShoulderHeight = tieSeg-&gt;minShoulderHeight();</span></span>
+<span id="L2753"><span class="lineNum">    2753</span> <span class="tlaGNC">        5256 :     const double maxShoulderHeight = tieSeg-&gt;maxShoulderHeight();</span></span>
+<span id="L2754"><span class="lineNum">    2754</span> <span class="tlaGNC">        5256 :     double shoulderH = minShoulderHeight + _spatium * 0.3 * sqrt(std::abs(tieLengthInSp - 1));</span></span>
+<span id="L2755"><span class="lineNum">    2755</span> <span class="tlaGNC">        5256 :     shoulderH = std::clamp(shoulderH, minShoulderHeight, maxShoulderHeight);</span></span>
 <span id="L2756"><span class="lineNum">    2756</span>              : </span>
-<span id="L2757"><span class="lineNum">    2757</span> <span class="tlaGNC">        5250 :     shoulderH -= shoulderOffset.y();</span></span>
+<span id="L2757"><span class="lineNum">    2757</span> <span class="tlaGNC">        5256 :     shoulderH -= shoulderOffset.y();</span></span>
 <span id="L2758"><span class="lineNum">    2758</span>              : </span>
-<span id="L2759"><span class="lineNum">    2759</span> <span class="tlaGNC">        5250 :     PointF shoulderAdjustOffset = tieSeg-&gt;tie()-&gt;up() ? PointF(0.0, shoulderOffset.y()) : PointF(0.0, -shoulderOffset.y());</span></span>
-<span id="L2760"><span class="lineNum">    2760</span> <span class="tlaGNC">        5250 :     tieSeg-&gt;addAdjustmentOffset(shoulderAdjustOffset, Grip::BEZIER1);</span></span>
-<span id="L2761"><span class="lineNum">    2761</span> <span class="tlaGNC">        5250 :     tieSeg-&gt;addAdjustmentOffset(shoulderAdjustOffset, Grip::BEZIER2);</span></span>
+<span id="L2759"><span class="lineNum">    2759</span> <span class="tlaGNC">        5256 :     PointF shoulderAdjustOffset = tieSeg-&gt;tie()-&gt;up() ? PointF(0.0, shoulderOffset.y()) : PointF(0.0, -shoulderOffset.y());</span></span>
+<span id="L2760"><span class="lineNum">    2760</span> <span class="tlaGNC">        5256 :     tieSeg-&gt;addAdjustmentOffset(shoulderAdjustOffset, Grip::BEZIER1);</span></span>
+<span id="L2761"><span class="lineNum">    2761</span> <span class="tlaGNC">        5256 :     tieSeg-&gt;addAdjustmentOffset(shoulderAdjustOffset, Grip::BEZIER2);</span></span>
 <span id="L2762"><span class="lineNum">    2762</span>              : </span>
-<span id="L2763"><span class="lineNum">    2763</span> <span class="tlaGNC">        5250 :     if (!tieSeg-&gt;tie()-&gt;up()) {</span></span>
+<span id="L2763"><span class="lineNum">    2763</span> <span class="tlaGNC">        5256 :     if (!tieSeg-&gt;tie()-&gt;up()) {</span></span>
 <span id="L2764"><span class="lineNum">    2764</span> <span class="tlaGNC">        1531 :         shoulderH = -shoulderH;</span></span>
 <span id="L2765"><span class="lineNum">    2765</span>              :     }</span>
 <span id="L2766"><span class="lineNum">    2766</span>              : </span>
-<span id="L2767"><span class="lineNum">    2767</span> <span class="tlaGNC">        5250 :     double shoulderW = 0.6; // TODO: style</span></span>
+<span id="L2767"><span class="lineNum">    2767</span> <span class="tlaGNC">        5256 :     double shoulderW = 0.6; // TODO: style</span></span>
 <span id="L2768"><span class="lineNum">    2768</span>              : </span>
-<span id="L2769"><span class="lineNum">    2769</span> <span class="tlaGNC">        5250 :     const double tieWidth = tieEndNormalized.x();</span></span>
-<span id="L2770"><span class="lineNum">    2770</span> <span class="tlaGNC">        5250 :     const double bezier1X = (tieWidth - tieWidth * shoulderW) * .5 + shoulderOffset.x();</span></span>
-<span id="L2771"><span class="lineNum">    2771</span> <span class="tlaGNC">        5250 :     const double bezier2X = bezier1X + tieWidth * shoulderW + shoulderOffset.x();</span></span>
+<span id="L2769"><span class="lineNum">    2769</span> <span class="tlaGNC">        5256 :     const double tieWidth = tieEndNormalized.x();</span></span>
+<span id="L2770"><span class="lineNum">    2770</span> <span class="tlaGNC">        5256 :     const double bezier1X = (tieWidth - tieWidth * shoulderW) * .5 + shoulderOffset.x();</span></span>
+<span id="L2771"><span class="lineNum">    2771</span> <span class="tlaGNC">        5256 :     const double bezier2X = bezier1X + tieWidth * shoulderW + shoulderOffset.x();</span></span>
 <span id="L2772"><span class="lineNum">    2772</span>              : </span>
-<span id="L2773"><span class="lineNum">    2773</span> <span class="tlaGNC">        5250 :     const PointF tieDrag = PointF(tieWidth * .5, 0.0);</span></span>
+<span id="L2773"><span class="lineNum">    2773</span> <span class="tlaGNC">        5256 :     const PointF tieDrag = PointF(tieWidth * .5, 0.0);</span></span>
 <span id="L2774"><span class="lineNum">    2774</span>              : </span>
-<span id="L2775"><span class="lineNum">    2775</span> <span class="tlaGNC">        5250 :     const PointF bezier1(bezier1X, -shoulderH);</span></span>
-<span id="L2776"><span class="lineNum">    2776</span> <span class="tlaGNC">        5250 :     const PointF bezier2(bezier2X, -shoulderH);</span></span>
+<span id="L2775"><span class="lineNum">    2775</span> <span class="tlaGNC">        5256 :     const PointF bezier1(bezier1X, -shoulderH);</span></span>
+<span id="L2776"><span class="lineNum">    2776</span> <span class="tlaGNC">        5256 :     const PointF bezier2(bezier2X, -shoulderH);</span></span>
 <span id="L2777"><span class="lineNum">    2777</span>              : </span>
-<span id="L2778"><span class="lineNum">    2778</span> <span class="tlaGNC">        5250 :     computeMidThickness(tieSeg, tieLengthInSp);</span></span>
+<span id="L2778"><span class="lineNum">    2778</span> <span class="tlaGNC">        5256 :     computeMidThickness(tieSeg, tieLengthInSp);</span></span>
 <span id="L2779"><span class="lineNum">    2779</span>              : </span>
-<span id="L2780"><span class="lineNum">    2780</span> <span class="tlaGNC">        5250 :     PointF tieThickness(0.0, 0.0);</span></span>
-<span id="L2781"><span class="lineNum">    2781</span> <span class="tlaGNC">        5250 :     if (tieSeg-&gt;tie()-&gt;styleType() == SlurStyleType::Solid) {</span></span>
-<span id="L2782"><span class="lineNum">    2782</span> <span class="tlaGNC">        5222 :         tieThickness.setY(tieSeg-&gt;ldata()-&gt;midThickness());</span></span>
+<span id="L2780"><span class="lineNum">    2780</span> <span class="tlaGNC">        5256 :     PointF tieThickness(0.0, 0.0);</span></span>
+<span id="L2781"><span class="lineNum">    2781</span> <span class="tlaGNC">        5256 :     if (tieSeg-&gt;tie()-&gt;styleType() == SlurStyleType::Solid) {</span></span>
+<span id="L2782"><span class="lineNum">    2782</span> <span class="tlaGNC">        5228 :         tieThickness.setY(tieSeg-&gt;ldata()-&gt;midThickness());</span></span>
 <span id="L2783"><span class="lineNum">    2783</span>              :     }</span>
 <span id="L2784"><span class="lineNum">    2784</span>              : </span>
-<span id="L2785"><span class="lineNum">    2785</span> <span class="tlaGNC">        5250 :     const PointF bezier1Offset = t.map(tieSeg-&gt;ups(Grip::BEZIER1).off);</span></span>
-<span id="L2786"><span class="lineNum">    2786</span> <span class="tlaGNC">        5250 :     const PointF bezier2Offset = t.map(tieSeg-&gt;ups(Grip::BEZIER2).off);</span></span>
+<span id="L2785"><span class="lineNum">    2785</span> <span class="tlaGNC">        5256 :     const PointF bezier1Offset = t.map(tieSeg-&gt;ups(Grip::BEZIER1).off);</span></span>
+<span id="L2786"><span class="lineNum">    2786</span> <span class="tlaGNC">        5256 :     const PointF bezier2Offset = t.map(tieSeg-&gt;ups(Grip::BEZIER2).off);</span></span>
 <span id="L2787"><span class="lineNum">    2787</span>              : </span>
 <span id="L2788"><span class="lineNum">    2788</span>              :     //-----------------------------------calculate p6</span>
-<span id="L2789"><span class="lineNum">    2789</span> <span class="tlaGNC">        5250 :     const PointF bezier1Final = bezier1 + bezier1Offset;</span></span>
-<span id="L2790"><span class="lineNum">    2790</span> <span class="tlaGNC">        5250 :     const PointF bezier2Final = bezier2 + bezier2Offset;</span></span>
+<span id="L2789"><span class="lineNum">    2789</span> <span class="tlaGNC">        5256 :     const PointF bezier1Final = bezier1 + bezier1Offset;</span></span>
+<span id="L2790"><span class="lineNum">    2790</span> <span class="tlaGNC">        5256 :     const PointF bezier2Final = bezier2 + bezier2Offset;</span></span>
 <span id="L2791"><span class="lineNum">    2791</span>              : </span>
-<span id="L2792"><span class="lineNum">    2792</span> <span class="tlaGNC">        5250 :     const PointF tieShoulder = 0.5 * (bezier1Final + bezier2Final);</span></span>
+<span id="L2792"><span class="lineNum">    2792</span> <span class="tlaGNC">        5256 :     const PointF tieShoulder = 0.5 * (bezier1Final + bezier2Final);</span></span>
 <span id="L2793"><span class="lineNum">    2793</span>              :     //-----------------------------------</span>
 <span id="L2794"><span class="lineNum">    2794</span>              : </span>
-<span id="L2795"><span class="lineNum">    2795</span> <span class="tlaGNC">        5250 :     PainterPath path = PainterPath();</span></span>
-<span id="L2796"><span class="lineNum">    2796</span> <span class="tlaGNC">        5250 :     path.moveTo(PointF());</span></span>
-<span id="L2797"><span class="lineNum">    2797</span> <span class="tlaGNC">        5250 :     path.cubicTo(bezier1 + bezier1Offset - tieThickness, bezier2 + bezier2Offset - tieThickness, tieEndNormalized);</span></span>
-<span id="L2798"><span class="lineNum">    2798</span> <span class="tlaGNC">        5250 :     if (tieSeg-&gt;tie()-&gt;styleType() == SlurStyleType::Solid) {</span></span>
-<span id="L2799"><span class="lineNum">    2799</span> <span class="tlaGNC">        5222 :         path.cubicTo(bezier2 + bezier2Offset + tieThickness, bezier1 + bezier1Offset + tieThickness, PointF());</span></span>
+<span id="L2795"><span class="lineNum">    2795</span> <span class="tlaGNC">        5256 :     PainterPath path = PainterPath();</span></span>
+<span id="L2796"><span class="lineNum">    2796</span> <span class="tlaGNC">        5256 :     path.moveTo(PointF());</span></span>
+<span id="L2797"><span class="lineNum">    2797</span> <span class="tlaGNC">        5256 :     path.cubicTo(bezier1 + bezier1Offset - tieThickness, bezier2 + bezier2Offset - tieThickness, tieEndNormalized);</span></span>
+<span id="L2798"><span class="lineNum">    2798</span> <span class="tlaGNC">        5256 :     if (tieSeg-&gt;tie()-&gt;styleType() == SlurStyleType::Solid) {</span></span>
+<span id="L2799"><span class="lineNum">    2799</span> <span class="tlaGNC">        5228 :         path.cubicTo(bezier2 + bezier2Offset + tieThickness, bezier1 + bezier1Offset + tieThickness, PointF());</span></span>
 <span id="L2800"><span class="lineNum">    2800</span>              :     }</span>
 <span id="L2801"><span class="lineNum">    2801</span>              : </span>
 <span id="L2802"><span class="lineNum">    2802</span>              :     // translate back</span>
-<span id="L2803"><span class="lineNum">    2803</span> <span class="tlaGNC">        5250 :     t.reset();</span></span>
-<span id="L2804"><span class="lineNum">    2804</span> <span class="tlaGNC">        5250 :     t.translate(tieStart.x(), tieStart.y());</span></span>
-<span id="L2805"><span class="lineNum">    2805</span> <span class="tlaGNC">        5250 :     t.rotateRadians(tieAngle);</span></span>
-<span id="L2806"><span class="lineNum">    2806</span> <span class="tlaGNC">        5250 :     path = t.map(path);</span></span>
-<span id="L2807"><span class="lineNum">    2807</span> <span class="tlaGNC">        5250 :     tieSeg-&gt;mutldata()-&gt;path.set_value(path);</span></span>
+<span id="L2803"><span class="lineNum">    2803</span> <span class="tlaGNC">        5256 :     t.reset();</span></span>
+<span id="L2804"><span class="lineNum">    2804</span> <span class="tlaGNC">        5256 :     t.translate(tieStart.x(), tieStart.y());</span></span>
+<span id="L2805"><span class="lineNum">    2805</span> <span class="tlaGNC">        5256 :     t.rotateRadians(tieAngle);</span></span>
+<span id="L2806"><span class="lineNum">    2806</span> <span class="tlaGNC">        5256 :     path = t.map(path);</span></span>
+<span id="L2807"><span class="lineNum">    2807</span> <span class="tlaGNC">        5256 :     tieSeg-&gt;mutldata()-&gt;path.set_value(path);</span></span>
 <span id="L2808"><span class="lineNum">    2808</span>              : </span>
-<span id="L2809"><span class="lineNum">    2809</span> <span class="tlaGNC">        5250 :     tieSeg-&gt;ups(Grip::BEZIER1).p = t.map(bezier1);</span></span>
-<span id="L2810"><span class="lineNum">    2810</span> <span class="tlaGNC">        5250 :     tieSeg-&gt;ups(Grip::BEZIER2).p = t.map(bezier2);</span></span>
-<span id="L2811"><span class="lineNum">    2811</span> <span class="tlaGNC">        5250 :     tieSeg-&gt;ups(Grip::END).p = t.map(tieEndNormalized) - tieSeg-&gt;ups(Grip::END).off;</span></span>
-<span id="L2812"><span class="lineNum">    2812</span> <span class="tlaGNC">        5250 :     tieSeg-&gt;ups(Grip::DRAG).p = t.map(tieDrag);</span></span>
-<span id="L2813"><span class="lineNum">    2813</span> <span class="tlaGNC">        5250 :     tieSeg-&gt;ups(Grip::SHOULDER).p = t.map(tieShoulder);</span></span>
+<span id="L2809"><span class="lineNum">    2809</span> <span class="tlaGNC">        5256 :     tieSeg-&gt;ups(Grip::BEZIER1).p = t.map(bezier1);</span></span>
+<span id="L2810"><span class="lineNum">    2810</span> <span class="tlaGNC">        5256 :     tieSeg-&gt;ups(Grip::BEZIER2).p = t.map(bezier2);</span></span>
+<span id="L2811"><span class="lineNum">    2811</span> <span class="tlaGNC">        5256 :     tieSeg-&gt;ups(Grip::END).p = t.map(tieEndNormalized) - tieSeg-&gt;ups(Grip::END).off;</span></span>
+<span id="L2812"><span class="lineNum">    2812</span> <span class="tlaGNC">        5256 :     tieSeg-&gt;ups(Grip::DRAG).p = t.map(tieDrag);</span></span>
+<span id="L2813"><span class="lineNum">    2813</span> <span class="tlaGNC">        5256 :     tieSeg-&gt;ups(Grip::SHOULDER).p = t.map(tieShoulder);</span></span>
 <span id="L2814"><span class="lineNum">    2814</span>              : </span>
-<span id="L2815"><span class="lineNum">    2815</span> <span class="tlaGNC">        5250 :     fillShape(tieSeg, tieLengthInSp);</span></span>
-<span id="L2816"><span class="lineNum">    2816</span> <span class="tlaGNC">        5250 : }</span></span>
+<span id="L2815"><span class="lineNum">    2815</span> <span class="tlaGNC">        5256 :     fillShape(tieSeg, tieLengthInSp);</span></span>
+<span id="L2816"><span class="lineNum">    2816</span> <span class="tlaGNC">        5256 : }</span></span>
 <span id="L2817"><span class="lineNum">    2817</span>              : </span>
 <span id="L2818"><span class="lineNum">    2818</span> <span class="tlaGNC">         969 : void SlurTieLayout::computeBezier(SlurSegment* slurSeg, PointF shoulderOffset)</span></span>
 <span id="L2819"><span class="lineNum">    2819</span>              : {</span>
@@ -3121,26 +3121,26 @@
 <span id="L3063"><span class="lineNum">    3063</span> <span class="tlaGNC tlaBgGNC">         883 :     return false;</span></span>
 <span id="L3064"><span class="lineNum">    3064</span>              : }</span>
 <span id="L3065"><span class="lineNum">    3065</span>              : </span>
-<span id="L3066"><span class="lineNum">    3066</span> <span class="tlaGNC">        4994 : void SlurTieLayout::addLineAttachPoints(TieSegment* segment)</span></span>
+<span id="L3066"><span class="lineNum">    3066</span> <span class="tlaGNC">        5001 : void SlurTieLayout::addLineAttachPoints(TieSegment* segment)</span></span>
 <span id="L3067"><span class="lineNum">    3067</span>              : {</span>
 <span id="L3068"><span class="lineNum">    3068</span>              :     // Add tie attach point to start and end note of segment</span>
-<span id="L3069"><span class="lineNum">    3069</span> <span class="tlaGNC">        4994 :     Tie* tie = segment-&gt;tie();</span></span>
-<span id="L3070"><span class="lineNum">    3070</span> <span class="tlaGNC">        4994 :     Note* startNote = tie-&gt;startNote();</span></span>
-<span id="L3071"><span class="lineNum">    3071</span> <span class="tlaGNC">        4994 :     Note* endNote = tie-&gt;endNote();</span></span>
+<span id="L3069"><span class="lineNum">    3069</span> <span class="tlaGNC">        5001 :     Tie* tie = segment-&gt;tie();</span></span>
+<span id="L3070"><span class="lineNum">    3070</span> <span class="tlaGNC">        5001 :     Note* startNote = tie-&gt;startNote();</span></span>
+<span id="L3071"><span class="lineNum">    3071</span> <span class="tlaGNC">        5001 :     Note* endNote = tie-&gt;endNote();</span></span>
 <span id="L3072"><span class="lineNum">    3072</span>              : </span>
-<span id="L3073"><span class="lineNum">    3073</span> <span class="tlaGNC">        4994 :     const bool singleOrBegin = segment-&gt;spannerSegmentType() == SpannerSegmentType::SINGLE</span></span>
-<span id="L3074"><span class="lineNum">    3074</span> <span class="tlaGNC">        4994 :                                || segment-&gt;spannerSegmentType() == SpannerSegmentType::BEGIN;</span></span>
+<span id="L3073"><span class="lineNum">    3073</span> <span class="tlaGNC">        5001 :     const bool singleOrBegin = segment-&gt;spannerSegmentType() == SpannerSegmentType::SINGLE</span></span>
+<span id="L3074"><span class="lineNum">    3074</span> <span class="tlaGNC">        5001 :                                || segment-&gt;spannerSegmentType() == SpannerSegmentType::BEGIN;</span></span>
 <span id="L3075"><span class="lineNum">    3075</span>              : </span>
-<span id="L3076"><span class="lineNum">    3076</span> <span class="tlaGNC">        4994 :     const bool singleOrEnd = segment-&gt;spannerSegmentType() == SpannerSegmentType::SINGLE</span></span>
-<span id="L3077"><span class="lineNum">    3077</span> <span class="tlaGNC">        4994 :                              || segment-&gt;spannerSegmentType() == SpannerSegmentType::END;</span></span>
+<span id="L3076"><span class="lineNum">    3076</span> <span class="tlaGNC">        5001 :     const bool singleOrEnd = segment-&gt;spannerSegmentType() == SpannerSegmentType::SINGLE</span></span>
+<span id="L3077"><span class="lineNum">    3077</span> <span class="tlaGNC">        5001 :                              || segment-&gt;spannerSegmentType() == SpannerSegmentType::END;</span></span>
 <span id="L3078"><span class="lineNum">    3078</span>              : </span>
-<span id="L3079"><span class="lineNum">    3079</span> <span class="tlaGNC">        4994 :     if (startNote &amp;&amp; singleOrBegin) {</span></span>
-<span id="L3080"><span class="lineNum">    3080</span> <span class="tlaGNC">        4400 :         startNote-&gt;addStartLineAttachPoint(segment-&gt;ups(Grip::START).pos(), tie);</span></span>
+<span id="L3079"><span class="lineNum">    3079</span> <span class="tlaGNC">        5001 :     if (startNote &amp;&amp; singleOrBegin) {</span></span>
+<span id="L3080"><span class="lineNum">    3080</span> <span class="tlaGNC">        4406 :         startNote-&gt;addStartLineAttachPoint(segment-&gt;ups(Grip::START).pos(), tie);</span></span>
 <span id="L3081"><span class="lineNum">    3081</span>              :     }</span>
-<span id="L3082"><span class="lineNum">    3082</span> <span class="tlaGNC">        4994 :     if (endNote &amp;&amp; singleOrEnd) {</span></span>
-<span id="L3083"><span class="lineNum">    3083</span> <span class="tlaGNC">        4421 :         endNote-&gt;addEndLineAttachPoint(segment-&gt;ups(Grip::END).pos(), tie);</span></span>
+<span id="L3082"><span class="lineNum">    3082</span> <span class="tlaGNC">        5001 :     if (endNote &amp;&amp; singleOrEnd) {</span></span>
+<span id="L3083"><span class="lineNum">    3083</span> <span class="tlaGNC">        4427 :         endNote-&gt;addEndLineAttachPoint(segment-&gt;ups(Grip::END).pos(), tie);</span></span>
 <span id="L3084"><span class="lineNum">    3084</span>              :     }</span>
-<span id="L3085"><span class="lineNum">    3085</span> <span class="tlaGNC">        4994 : }</span></span>
+<span id="L3085"><span class="lineNum">    3085</span> <span class="tlaGNC">        5001 : }</span></span>
 <span id="L3086"><span class="lineNum">    3086</span>              : </span>
 <span id="L3087"><span class="lineNum">    3087</span> <span class="tlaGNC">         340 : void SlurTieLayout::addLineAttachPoints(PartialTieSegment* segment)</span></span>
 <span id="L3088"><span class="lineNum">    3088</span>              : {</span>
@@ -3160,43 +3160,43 @@
 <span id="L3102"><span class="lineNum">    3102</span>              :     }</span>
 <span id="L3103"><span class="lineNum">    3103</span>              : }</span>
 <span id="L3104"><span class="lineNum">    3104</span>              : </span>
-<span id="L3105"><span class="lineNum">    3105</span> <span class="tlaGNC">        4851 : void SlurTieLayout::calculateDirection(Tie* item)</span></span>
+<span id="L3105"><span class="lineNum">    3105</span> <span class="tlaGNC">        4857 : void SlurTieLayout::calculateDirection(Tie* item)</span></span>
 <span id="L3106"><span class="lineNum">    3106</span>              : {</span>
-<span id="L3107"><span class="lineNum">    3107</span> <span class="tlaGNC">        4851 :     if (!item-&gt;startNote() &amp;&amp; !item-&gt;endNote()) {</span></span>
+<span id="L3107"><span class="lineNum">    3107</span> <span class="tlaGNC">        4857 :     if (!item-&gt;startNote() &amp;&amp; !item-&gt;endNote()) {</span></span>
 <span id="L3108"><span class="lineNum">    3108</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L3109"><span class="lineNum">    3109</span>              :     }</span>
-<span id="L3110"><span class="lineNum">    3110</span> <span class="tlaGNC tlaBgGNC">        4851 :     const bool tieHasBothNotes = item-&gt;startNote() &amp;&amp; item-&gt;endNote();</span></span>
+<span id="L3110"><span class="lineNum">    3110</span> <span class="tlaGNC tlaBgGNC">        4857 :     const bool tieHasBothNotes = item-&gt;startNote() &amp;&amp; item-&gt;endNote();</span></span>
 <span id="L3111"><span class="lineNum">    3111</span>              : </span>
-<span id="L3112"><span class="lineNum">    3112</span> <span class="tlaGNC">        4851 :     const Note* primaryNote = item-&gt;startNote() ? item-&gt;startNote() : item-&gt;endNote();</span></span>
-<span id="L3113"><span class="lineNum">    3113</span> <span class="tlaGNC">        4851 :     const Chord* primaryChord = primaryNote-&gt;chord();</span></span>
-<span id="L3114"><span class="lineNum">    3114</span> <span class="tlaGNC">        4851 :     const Measure* primaryMeasure = primaryChord-&gt;measure();</span></span>
+<span id="L3112"><span class="lineNum">    3112</span> <span class="tlaGNC">        4857 :     const Note* primaryNote = item-&gt;startNote() ? item-&gt;startNote() : item-&gt;endNote();</span></span>
+<span id="L3113"><span class="lineNum">    3113</span> <span class="tlaGNC">        4857 :     const Chord* primaryChord = primaryNote-&gt;chord();</span></span>
+<span id="L3114"><span class="lineNum">    3114</span> <span class="tlaGNC">        4857 :     const Measure* primaryMeasure = primaryChord-&gt;measure();</span></span>
 <span id="L3115"><span class="lineNum">    3115</span>              : </span>
-<span id="L3116"><span class="lineNum">    3116</span> <span class="tlaGNC">        4851 :     const Note* secondaryNote = tieHasBothNotes ? item-&gt;endNote() : nullptr;</span></span>
-<span id="L3117"><span class="lineNum">    3117</span> <span class="tlaGNC">        4851 :     const Chord* secondaryChord = secondaryNote ? secondaryNote-&gt;chord() : nullptr;</span></span>
-<span id="L3118"><span class="lineNum">    3118</span> <span class="tlaGNC">        4851 :     const Measure* secondaryMeasure = secondaryChord ? secondaryChord-&gt;measure() : nullptr;</span></span>
+<span id="L3116"><span class="lineNum">    3116</span> <span class="tlaGNC">        4857 :     const Note* secondaryNote = tieHasBothNotes ? item-&gt;endNote() : nullptr;</span></span>
+<span id="L3117"><span class="lineNum">    3117</span> <span class="tlaGNC">        4857 :     const Chord* secondaryChord = secondaryNote ? secondaryNote-&gt;chord() : nullptr;</span></span>
+<span id="L3118"><span class="lineNum">    3118</span> <span class="tlaGNC">        4857 :     const Measure* secondaryMeasure = secondaryChord ? secondaryChord-&gt;measure() : nullptr;</span></span>
 <span id="L3119"><span class="lineNum">    3119</span>              : </span>
-<span id="L3120"><span class="lineNum">    3120</span> <span class="tlaGNC">        4851 :     if (item-&gt;slurDirection() == DirectionV::AUTO) {</span></span>
-<span id="L3121"><span class="lineNum">    3121</span> <span class="tlaGNC">        4716 :         std::vector&lt;Note*&gt; notes = primaryChord-&gt;notes();</span></span>
-<span id="L3122"><span class="lineNum">    3122</span> <span class="tlaGNC">        4716 :         size_t n = notes.size();</span></span>
-<span id="L3123"><span class="lineNum">    3123</span> <span class="tlaGNC">        4716 :         StaffType* st = item-&gt;staff()-&gt;staffType(primaryNote ? primaryNote-&gt;tick() : Fraction(0, 1));</span></span>
-<span id="L3124"><span class="lineNum">    3124</span> <span class="tlaGNC">        4716 :         bool simpleException = st &amp;&amp; st-&gt;isSimpleTabStaff();</span></span>
+<span id="L3120"><span class="lineNum">    3120</span> <span class="tlaGNC">        4857 :     if (item-&gt;slurDirection() == DirectionV::AUTO) {</span></span>
+<span id="L3121"><span class="lineNum">    3121</span> <span class="tlaGNC">        4722 :         std::vector&lt;Note*&gt; notes = primaryChord-&gt;notes();</span></span>
+<span id="L3122"><span class="lineNum">    3122</span> <span class="tlaGNC">        4722 :         size_t n = notes.size();</span></span>
+<span id="L3123"><span class="lineNum">    3123</span> <span class="tlaGNC">        4722 :         StaffType* st = item-&gt;staff()-&gt;staffType(primaryNote ? primaryNote-&gt;tick() : Fraction(0, 1));</span></span>
+<span id="L3124"><span class="lineNum">    3124</span> <span class="tlaGNC">        4722 :         bool simpleException = st &amp;&amp; st-&gt;isSimpleTabStaff();</span></span>
 <span id="L3125"><span class="lineNum">    3125</span>              :         // if there are multiple voices, the tie direction goes on stem side</span>
-<span id="L3126"><span class="lineNum">    3126</span> <span class="tlaGNC">        4716 :         if (item-&gt;staff()-&gt;isJianpuStaff(primaryNote ? primaryNote-&gt;tick() : Fraction(0, 1))) {</span></span>
+<span id="L3126"><span class="lineNum">    3126</span> <span class="tlaGNC">        4722 :         if (item-&gt;staff()-&gt;isJianpuStaff(primaryNote ? primaryNote-&gt;tick() : Fraction(0, 1))) {</span></span>
 <span id="L3127"><span class="lineNum">    3127</span> <span class="tlaUNC tlaBgUNC">           0 :             item-&gt;setUp(true);</span></span>
-<span id="L3128"><span class="lineNum">    3128</span> <span class="tlaGNC tlaBgGNC">        4716 :         } else if (primaryMeasure-&gt;hasVoices(primaryChord-&gt;staffIdx(), primaryChord-&gt;tick(), primaryChord-&gt;actualTicks())) {</span></span>
+<span id="L3128"><span class="lineNum">    3128</span> <span class="tlaGNC tlaBgGNC">        4722 :         } else if (primaryMeasure-&gt;hasVoices(primaryChord-&gt;staffIdx(), primaryChord-&gt;tick(), primaryChord-&gt;actualTicks())) {</span></span>
 <span id="L3129"><span class="lineNum">    3129</span> <span class="tlaGNC">         330 :             item-&gt;setUp(simpleException ? isUpVoice(primaryChord-&gt;voice()) : primaryChord-&gt;up());</span></span>
-<span id="L3130"><span class="lineNum">    3130</span> <span class="tlaGNC">        4386 :         } else if (tieHasBothNotes &amp;&amp; secondaryMeasure-&gt;hasVoices(secondaryChord-&gt;staffIdx(), secondaryChord-&gt;tick(),</span></span>
+<span id="L3130"><span class="lineNum">    3130</span> <span class="tlaGNC">        4392 :         } else if (tieHasBothNotes &amp;&amp; secondaryMeasure-&gt;hasVoices(secondaryChord-&gt;staffIdx(), secondaryChord-&gt;tick(),</span></span>
 <span id="L3131"><span class="lineNum">    3131</span>              :                                                                   secondaryChord-&gt;actualTicks())) {</span>
 <span id="L3132"><span class="lineNum">    3132</span> <span class="tlaGNC">          15 :             item-&gt;setUp(simpleException ? isUpVoice(secondaryChord-&gt;voice()) : secondaryChord-&gt;up());</span></span>
-<span id="L3133"><span class="lineNum">    3133</span> <span class="tlaGNC">        4371 :         } else if (n == 1) {</span></span>
+<span id="L3133"><span class="lineNum">    3133</span> <span class="tlaGNC">        4377 :         } else if (n == 1) {</span></span>
 <span id="L3134"><span class="lineNum">    3134</span>              :             //</span>
 <span id="L3135"><span class="lineNum">    3135</span>              :             // single note</span>
 <span id="L3136"><span class="lineNum">    3136</span>              :             //</span>
-<span id="L3137"><span class="lineNum">    3137</span> <span class="tlaGNC">        3732 :             if (tieHasBothNotes &amp;&amp; primaryChord-&gt;up() != secondaryChord-&gt;up()) {</span></span>
+<span id="L3137"><span class="lineNum">    3137</span> <span class="tlaGNC">        3738 :             if (tieHasBothNotes &amp;&amp; primaryChord-&gt;up() != secondaryChord-&gt;up()) {</span></span>
 <span id="L3138"><span class="lineNum">    3138</span>              :                 // if stem direction is mixed, always up</span>
-<span id="L3139"><span class="lineNum">    3139</span> <span class="tlaGNC">         166 :                 item-&gt;setUp(true);</span></span>
+<span id="L3139"><span class="lineNum">    3139</span> <span class="tlaGNC">         167 :                 item-&gt;setUp(true);</span></span>
 <span id="L3140"><span class="lineNum">    3140</span>              :             } else {</span>
-<span id="L3141"><span class="lineNum">    3141</span> <span class="tlaGNC">        3566 :                 item-&gt;setUp(!primaryChord-&gt;up());</span></span>
+<span id="L3141"><span class="lineNum">    3141</span> <span class="tlaGNC">        3571 :                 item-&gt;setUp(!primaryChord-&gt;up());</span></span>
 <span id="L3142"><span class="lineNum">    3142</span>              :             }</span>
 <span id="L3143"><span class="lineNum">    3143</span>              :         } else {</span>
 <span id="L3144"><span class="lineNum">    3144</span>              :             //</span>
@@ -3278,35 +3278,35 @@
 <span id="L3220"><span class="lineNum">    3220</span> <span class="tlaGNC">         116 :                 item-&gt;setUp(noteDiff &gt;= 0);</span></span>
 <span id="L3221"><span class="lineNum">    3221</span>              :             }</span>
 <span id="L3222"><span class="lineNum">    3222</span>              :         }</span>
-<span id="L3223"><span class="lineNum">    3223</span> <span class="tlaGNC">        4716 :     } else {</span></span>
+<span id="L3223"><span class="lineNum">    3223</span> <span class="tlaGNC">        4722 :     } else {</span></span>
 <span id="L3224"><span class="lineNum">    3224</span> <span class="tlaGNC">         135 :         item-&gt;setUp(item-&gt;slurDirection() == DirectionV::UP ? true : false);</span></span>
 <span id="L3225"><span class="lineNum">    3225</span>              :     }</span>
 <span id="L3226"><span class="lineNum">    3226</span>              : }</span>
 <span id="L3227"><span class="lineNum">    3227</span>              : </span>
-<span id="L3228"><span class="lineNum">    3228</span> <span class="tlaGNC">        4814 : void SlurTieLayout::calculateIsInside(Tie* item)</span></span>
+<span id="L3228"><span class="lineNum">    3228</span> <span class="tlaGNC">        4820 : void SlurTieLayout::calculateIsInside(Tie* item)</span></span>
 <span id="L3229"><span class="lineNum">    3229</span>              : {</span>
-<span id="L3230"><span class="lineNum">    3230</span> <span class="tlaGNC">        4814 :     if (item-&gt;tiePlacement() != TiePlacement::AUTO) {</span></span>
+<span id="L3230"><span class="lineNum">    3230</span> <span class="tlaGNC">        4820 :     if (item-&gt;tiePlacement() != TiePlacement::AUTO) {</span></span>
 <span id="L3231"><span class="lineNum">    3231</span> <span class="tlaUNC tlaBgUNC">           0 :         item-&gt;setIsInside(item-&gt;tiePlacement() == TiePlacement::INSIDE);</span></span>
 <span id="L3232"><span class="lineNum">    3232</span> <span class="tlaUNC">           0 :         return;</span></span>
 <span id="L3233"><span class="lineNum">    3233</span>              :     }</span>
 <span id="L3234"><span class="lineNum">    3234</span>              : </span>
-<span id="L3235"><span class="lineNum">    3235</span> <span class="tlaGNC tlaBgGNC">        4814 :     const Note* startN = item-&gt;startNote();</span></span>
-<span id="L3236"><span class="lineNum">    3236</span> <span class="tlaGNC">        4814 :     const Chord* startChord = startN ? startN-&gt;chord() : nullptr;</span></span>
-<span id="L3237"><span class="lineNum">    3237</span> <span class="tlaGNC">        4814 :     const Note* endN = item-&gt;endNote();</span></span>
-<span id="L3238"><span class="lineNum">    3238</span> <span class="tlaGNC">        4814 :     const Chord* endChord = endN ? endN-&gt;chord() : nullptr;</span></span>
+<span id="L3235"><span class="lineNum">    3235</span> <span class="tlaGNC tlaBgGNC">        4820 :     const Note* startN = item-&gt;startNote();</span></span>
+<span id="L3236"><span class="lineNum">    3236</span> <span class="tlaGNC">        4820 :     const Chord* startChord = startN ? startN-&gt;chord() : nullptr;</span></span>
+<span id="L3237"><span class="lineNum">    3237</span> <span class="tlaGNC">        4820 :     const Note* endN = item-&gt;endNote();</span></span>
+<span id="L3238"><span class="lineNum">    3238</span> <span class="tlaGNC">        4820 :     const Chord* endChord = endN ? endN-&gt;chord() : nullptr;</span></span>
 <span id="L3239"><span class="lineNum">    3239</span>              : </span>
-<span id="L3240"><span class="lineNum">    3240</span> <span class="tlaGNC">        4814 :     if (!startChord &amp;&amp; !endChord) {</span></span>
+<span id="L3240"><span class="lineNum">    3240</span> <span class="tlaGNC">        4820 :     if (!startChord &amp;&amp; !endChord) {</span></span>
 <span id="L3241"><span class="lineNum">    3241</span> <span class="tlaUNC tlaBgUNC">           0 :         item-&gt;setIsInside(false);</span></span>
 <span id="L3242"><span class="lineNum">    3242</span> <span class="tlaUNC">           0 :         return;</span></span>
 <span id="L3243"><span class="lineNum">    3243</span>              :     }</span>
 <span id="L3244"><span class="lineNum">    3244</span>              : </span>
-<span id="L3245"><span class="lineNum">    3245</span> <span class="tlaGNC tlaBgGNC">        4814 :     const bool startIsSingleNote = startChord ? startChord-&gt;notes().size() &lt;= 1 : false;</span></span>
-<span id="L3246"><span class="lineNum">    3246</span> <span class="tlaGNC">        4814 :     const bool endIsSingleNote = endChord ? endChord-&gt;notes().size() &lt;= 1 : false;</span></span>
+<span id="L3245"><span class="lineNum">    3245</span> <span class="tlaGNC tlaBgGNC">        4820 :     const bool startIsSingleNote = startChord ? startChord-&gt;notes().size() &lt;= 1 : false;</span></span>
+<span id="L3246"><span class="lineNum">    3246</span> <span class="tlaGNC">        4820 :     const bool endIsSingleNote = endChord ? endChord-&gt;notes().size() &lt;= 1 : false;</span></span>
 <span id="L3247"><span class="lineNum">    3247</span>              : </span>
-<span id="L3248"><span class="lineNum">    3248</span> <span class="tlaGNC">        4814 :     const bool shouldPlaceInside = startChord &amp;&amp; endChord ? startIsSingleNote &amp;&amp; endIsSingleNote : startIsSingleNote || endIsSingleNote;</span></span>
+<span id="L3248"><span class="lineNum">    3248</span> <span class="tlaGNC">        4820 :     const bool shouldPlaceInside = startChord &amp;&amp; endChord ? startIsSingleNote &amp;&amp; endIsSingleNote : startIsSingleNote || endIsSingleNote;</span></span>
 <span id="L3249"><span class="lineNum">    3249</span>              : </span>
-<span id="L3250"><span class="lineNum">    3250</span> <span class="tlaGNC">        4814 :     if (shouldPlaceInside) {</span></span>
-<span id="L3251"><span class="lineNum">    3251</span> <span class="tlaGNC">        4057 :         item-&gt;setIsInside(item-&gt;style().styleV(Sid::tiePlacementSingleNote).value&lt;TiePlacement&gt;() == TiePlacement::INSIDE);</span></span>
+<span id="L3250"><span class="lineNum">    3250</span> <span class="tlaGNC">        4820 :     if (shouldPlaceInside) {</span></span>
+<span id="L3251"><span class="lineNum">    3251</span> <span class="tlaGNC">        4063 :         item-&gt;setIsInside(item-&gt;style().styleV(Sid::tiePlacementSingleNote).value&lt;TiePlacement&gt;() == TiePlacement::INSIDE);</span></span>
 <span id="L3252"><span class="lineNum">    3252</span>              :     } else {</span>
 <span id="L3253"><span class="lineNum">    3253</span> <span class="tlaGNC">         757 :         item-&gt;setIsInside(item-&gt;style().styleV(Sid::tiePlacementChord).value&lt;TiePlacement&gt;() == TiePlacement::INSIDE);</span></span>
 <span id="L3254"><span class="lineNum">    3254</span>              :     }</span>
@@ -3333,29 +3333,29 @@
 <span id="L3275"><span class="lineNum">    3275</span> <span class="tlaGNC">         945 :     computeBezier(item);</span></span>
 <span id="L3276"><span class="lineNum">    3276</span>              : }</span>
 <span id="L3277"><span class="lineNum">    3277</span>              : </span>
-<span id="L3278"><span class="lineNum">    3278</span> <span class="tlaGNC">        6219 : void SlurTieLayout::computeMidThickness(SlurTieSegment* slurTieSeg, double slurTieLengthInSp)</span></span>
+<span id="L3278"><span class="lineNum">    3278</span> <span class="tlaGNC">        6225 : void SlurTieLayout::computeMidThickness(SlurTieSegment* slurTieSeg, double slurTieLengthInSp)</span></span>
 <span id="L3279"><span class="lineNum">    3279</span>              : {</span>
-<span id="L3280"><span class="lineNum">    3280</span> <span class="tlaGNC">        6219 :     Staff* staff = slurTieSeg-&gt;score() ? slurTieSeg-&gt;score()-&gt;staff(slurTieSeg-&gt;vStaffIdx()) : nullptr;</span></span>
-<span id="L3281"><span class="lineNum">    3281</span> <span class="tlaGNC">        6219 :     const double mag = staff ? staff-&gt;staffMag(slurTieSeg-&gt;slurTie()-&gt;tick()) : 1.0;</span></span>
-<span id="L3282"><span class="lineNum">    3282</span> <span class="tlaGNC">        6219 :     const double scalingFactor = slurTieSeg-&gt;slurTie()-&gt;scalingFactor();</span></span>
+<span id="L3280"><span class="lineNum">    3280</span> <span class="tlaGNC">        6225 :     Staff* staff = slurTieSeg-&gt;score() ? slurTieSeg-&gt;score()-&gt;staff(slurTieSeg-&gt;vStaffIdx()) : nullptr;</span></span>
+<span id="L3281"><span class="lineNum">    3281</span> <span class="tlaGNC">        6225 :     const double mag = staff ? staff-&gt;staffMag(slurTieSeg-&gt;slurTie()-&gt;tick()) : 1.0;</span></span>
+<span id="L3282"><span class="lineNum">    3282</span> <span class="tlaGNC">        6225 :     const double scalingFactor = slurTieSeg-&gt;slurTie()-&gt;scalingFactor();</span></span>
 <span id="L3283"><span class="lineNum">    3283</span>              : </span>
-<span id="L3284"><span class="lineNum">    3284</span> <span class="tlaGNC">        6219 :     if (slurTieSeg-&gt;slurTie()-&gt;styleType() != SlurStyleType::Solid) {</span></span>
+<span id="L3284"><span class="lineNum">    3284</span> <span class="tlaGNC">        6225 :     if (slurTieSeg-&gt;slurTie()-&gt;styleType() != SlurStyleType::Solid) {</span></span>
 <span id="L3285"><span class="lineNum">    3285</span> <span class="tlaGNC">          57 :         slurTieSeg-&gt;mutldata()-&gt;midThickness.set_value(0.5 * slurTieSeg-&gt;dottedWidth() * mag * scalingFactor);</span></span>
 <span id="L3286"><span class="lineNum">    3286</span> <span class="tlaGNC">          57 :         return;</span></span>
 <span id="L3287"><span class="lineNum">    3287</span>              :     }</span>
 <span id="L3288"><span class="lineNum">    3288</span>              : </span>
-<span id="L3289"><span class="lineNum">    3289</span> <span class="tlaGNC">        6162 :     const double endWidth = slurTieSeg-&gt;endWidth();</span></span>
-<span id="L3290"><span class="lineNum">    3290</span> <span class="tlaGNC">        6162 :     const double midWidth = slurTieSeg-&gt;midWidth();</span></span>
-<span id="L3291"><span class="lineNum">    3291</span> <span class="tlaGNC">        6162 :     const double minTieLength = mag * slurTieSeg-&gt;style().styleS(Sid::minTieLength).val();</span></span>
-<span id="L3292"><span class="lineNum">    3292</span> <span class="tlaGNC">        6162 :     const double shortTieLimit = mag * 4.0;</span></span>
-<span id="L3293"><span class="lineNum">    3293</span> <span class="tlaGNC">        6162 :     const double minTieThickness = mag * (0.15 * slurTieSeg-&gt;spatium() - endWidth);</span></span>
-<span id="L3294"><span class="lineNum">    3294</span> <span class="tlaGNC">        6162 :     const double normalThickness = mag * (midWidth - endWidth);</span></span>
+<span id="L3289"><span class="lineNum">    3289</span> <span class="tlaGNC">        6168 :     const double endWidth = slurTieSeg-&gt;endWidth();</span></span>
+<span id="L3290"><span class="lineNum">    3290</span> <span class="tlaGNC">        6168 :     const double midWidth = slurTieSeg-&gt;midWidth();</span></span>
+<span id="L3291"><span class="lineNum">    3291</span> <span class="tlaGNC">        6168 :     const double minTieLength = mag * slurTieSeg-&gt;style().styleS(Sid::minTieLength).val();</span></span>
+<span id="L3292"><span class="lineNum">    3292</span> <span class="tlaGNC">        6168 :     const double shortTieLimit = mag * 4.0;</span></span>
+<span id="L3293"><span class="lineNum">    3293</span> <span class="tlaGNC">        6168 :     const double minTieThickness = mag * (0.15 * slurTieSeg-&gt;spatium() - endWidth);</span></span>
+<span id="L3294"><span class="lineNum">    3294</span> <span class="tlaGNC">        6168 :     const double normalThickness = mag * (midWidth - endWidth);</span></span>
 <span id="L3295"><span class="lineNum">    3295</span>              : </span>
-<span id="L3296"><span class="lineNum">    3296</span> <span class="tlaGNC">        6162 :     bool invalid = muse::RealIsEqualOrMore(minTieLength, shortTieLimit);</span></span>
+<span id="L3296"><span class="lineNum">    3296</span> <span class="tlaGNC">        6168 :     bool invalid = muse::RealIsEqualOrMore(minTieLength, shortTieLimit);</span></span>
 <span id="L3297"><span class="lineNum">    3297</span>              : </span>
 <span id="L3298"><span class="lineNum">    3298</span>              :     double finalThickness;</span>
-<span id="L3299"><span class="lineNum">    3299</span> <span class="tlaGNC">        6162 :     if (slurTieLengthInSp &gt; shortTieLimit || invalid) {</span></span>
-<span id="L3300"><span class="lineNum">    3300</span> <span class="tlaGNC">        3117 :         finalThickness = normalThickness;</span></span>
+<span id="L3299"><span class="lineNum">    3299</span> <span class="tlaGNC">        6168 :     if (slurTieLengthInSp &gt; shortTieLimit || invalid) {</span></span>
+<span id="L3300"><span class="lineNum">    3300</span> <span class="tlaGNC">        3123 :         finalThickness = normalThickness;</span></span>
 <span id="L3301"><span class="lineNum">    3301</span>              :     } else {</span>
 <span id="L3302"><span class="lineNum">    3302</span> <span class="tlaGNC">        3045 :         const double A = 1 / (shortTieLimit - minTieLength);</span></span>
 <span id="L3303"><span class="lineNum">    3303</span> <span class="tlaGNC">        3045 :         const double B = normalThickness - minTieThickness;</span></span>
@@ -3363,40 +3363,40 @@
 <span id="L3305"><span class="lineNum">    3305</span> <span class="tlaGNC">        3045 :         finalThickness = A * (B * slurTieLengthInSp + C);</span></span>
 <span id="L3306"><span class="lineNum">    3306</span>              :     }</span>
 <span id="L3307"><span class="lineNum">    3307</span>              : </span>
-<span id="L3308"><span class="lineNum">    3308</span> <span class="tlaGNC">        6162 :     finalThickness = std::min(finalThickness, normalThickness * scalingFactor);</span></span>
+<span id="L3308"><span class="lineNum">    3308</span> <span class="tlaGNC">        6168 :     finalThickness = std::min(finalThickness, normalThickness * scalingFactor);</span></span>
 <span id="L3309"><span class="lineNum">    3309</span>              : </span>
-<span id="L3310"><span class="lineNum">    3310</span> <span class="tlaGNC">        6162 :     slurTieSeg-&gt;mutldata()-&gt;midThickness.set_value(finalThickness);</span></span>
+<span id="L3310"><span class="lineNum">    3310</span> <span class="tlaGNC">        6168 :     slurTieSeg-&gt;mutldata()-&gt;midThickness.set_value(finalThickness);</span></span>
 <span id="L3311"><span class="lineNum">    3311</span>              : }</span>
 <span id="L3312"><span class="lineNum">    3312</span>              : </span>
-<span id="L3313"><span class="lineNum">    3313</span> <span class="tlaGNC">        6219 : void SlurTieLayout::fillShape(SlurTieSegment* slurTieSeg, double slurTieLengthInSp)</span></span>
+<span id="L3313"><span class="lineNum">    3313</span> <span class="tlaGNC">        6225 : void SlurTieLayout::fillShape(SlurTieSegment* slurTieSeg, double slurTieLengthInSp)</span></span>
 <span id="L3314"><span class="lineNum">    3314</span>              : {</span>
-<span id="L3315"><span class="lineNum">    3315</span> <span class="tlaGNC">        6219 :     Shape shape(Shape::Type::Composite);</span></span>
-<span id="L3316"><span class="lineNum">    3316</span> <span class="tlaGNC">        6219 :     PointF startPoint = slurTieSeg-&gt;ups(Grip::START).pos();</span></span>
+<span id="L3315"><span class="lineNum">    3315</span> <span class="tlaGNC">        6225 :     Shape shape(Shape::Type::Composite);</span></span>
+<span id="L3316"><span class="lineNum">    3316</span> <span class="tlaGNC">        6225 :     PointF startPoint = slurTieSeg-&gt;ups(Grip::START).pos();</span></span>
 <span id="L3317"><span class="lineNum">    3317</span>              : </span>
-<span id="L3318"><span class="lineNum">    3318</span> <span class="tlaGNC">        6219 :     double midThickness = 2 * slurTieSeg-&gt;ldata()-&gt;midThickness();</span></span>
-<span id="L3319"><span class="lineNum">    3319</span> <span class="tlaGNC">        6219 :     int nbShapes = round(5.0 * slurTieLengthInSp);</span></span>
-<span id="L3320"><span class="lineNum">    3320</span> <span class="tlaGNC">        6219 :     nbShapes = std::max(nbShapes, 20);</span></span>
-<span id="L3321"><span class="lineNum">    3321</span> <span class="tlaGNC">        6219 :     nbShapes = std::min(nbShapes, 50);</span></span>
-<span id="L3322"><span class="lineNum">    3322</span> <span class="tlaGNC">       12438 :     const CubicBezier b(startPoint, slurTieSeg-&gt;ups(Grip::BEZIER1).pos(), slurTieSeg-&gt;ups(Grip::BEZIER2).pos(),</span></span>
-<span id="L3323"><span class="lineNum">    3323</span> <span class="tlaGNC">       18657 :                         slurTieSeg-&gt;ups(Grip::END).pos());</span></span>
-<span id="L3324"><span class="lineNum">    3324</span> <span class="tlaGNC">      202656 :     for (int i = 1; i &lt;= nbShapes; i++) {</span></span>
-<span id="L3325"><span class="lineNum">    3325</span> <span class="tlaGNC">      196437 :         double percent = pow(sin(0.5 * M_PI * (double(i) / double(nbShapes))), 2);</span></span>
-<span id="L3326"><span class="lineNum">    3326</span> <span class="tlaGNC">      196437 :         const PointF point = b.pointAtPercent(percent);</span></span>
-<span id="L3327"><span class="lineNum">    3327</span> <span class="tlaGNC">      196437 :         RectF re = RectF(startPoint, point).normalized();</span></span>
-<span id="L3328"><span class="lineNum">    3328</span> <span class="tlaGNC">      196437 :         double approxThicknessAtPercent = midThickness;</span></span>
-<span id="L3329"><span class="lineNum">    3329</span> <span class="tlaGNC">      196437 :         if (slurTieSeg-&gt;slurTie()-&gt;styleType() == SlurStyleType::Solid) {</span></span>
-<span id="L3330"><span class="lineNum">    3330</span> <span class="tlaGNC">      193980 :             approxThicknessAtPercent *= (1 - 2 * std::abs(0.5 - percent));</span></span>
+<span id="L3318"><span class="lineNum">    3318</span> <span class="tlaGNC">        6225 :     double midThickness = 2 * slurTieSeg-&gt;ldata()-&gt;midThickness();</span></span>
+<span id="L3319"><span class="lineNum">    3319</span> <span class="tlaGNC">        6225 :     int nbShapes = round(5.0 * slurTieLengthInSp);</span></span>
+<span id="L3320"><span class="lineNum">    3320</span> <span class="tlaGNC">        6225 :     nbShapes = std::max(nbShapes, 20);</span></span>
+<span id="L3321"><span class="lineNum">    3321</span> <span class="tlaGNC">        6225 :     nbShapes = std::min(nbShapes, 50);</span></span>
+<span id="L3322"><span class="lineNum">    3322</span> <span class="tlaGNC">       12450 :     const CubicBezier b(startPoint, slurTieSeg-&gt;ups(Grip::BEZIER1).pos(), slurTieSeg-&gt;ups(Grip::BEZIER2).pos(),</span></span>
+<span id="L3323"><span class="lineNum">    3323</span> <span class="tlaGNC">       18675 :                         slurTieSeg-&gt;ups(Grip::END).pos());</span></span>
+<span id="L3324"><span class="lineNum">    3324</span> <span class="tlaGNC">      202962 :     for (int i = 1; i &lt;= nbShapes; i++) {</span></span>
+<span id="L3325"><span class="lineNum">    3325</span> <span class="tlaGNC">      196737 :         double percent = pow(sin(0.5 * M_PI * (double(i) / double(nbShapes))), 2);</span></span>
+<span id="L3326"><span class="lineNum">    3326</span> <span class="tlaGNC">      196737 :         const PointF point = b.pointAtPercent(percent);</span></span>
+<span id="L3327"><span class="lineNum">    3327</span> <span class="tlaGNC">      196737 :         RectF re = RectF(startPoint, point).normalized();</span></span>
+<span id="L3328"><span class="lineNum">    3328</span> <span class="tlaGNC">      196737 :         double approxThicknessAtPercent = midThickness;</span></span>
+<span id="L3329"><span class="lineNum">    3329</span> <span class="tlaGNC">      196737 :         if (slurTieSeg-&gt;slurTie()-&gt;styleType() == SlurStyleType::Solid) {</span></span>
+<span id="L3330"><span class="lineNum">    3330</span> <span class="tlaGNC">      194280 :             approxThicknessAtPercent *= (1 - 2 * std::abs(0.5 - percent));</span></span>
 <span id="L3331"><span class="lineNum">    3331</span>              :         }</span>
-<span id="L3332"><span class="lineNum">    3332</span> <span class="tlaGNC">      196437 :         if (re.height() &lt; approxThicknessAtPercent) {</span></span>
-<span id="L3333"><span class="lineNum">    3333</span> <span class="tlaGNC">       90393 :             double adjust = (approxThicknessAtPercent - re.height()) * .5;</span></span>
-<span id="L3334"><span class="lineNum">    3334</span> <span class="tlaGNC">       90393 :             re.adjust(0.0, -adjust, 0.0, adjust);</span></span>
+<span id="L3332"><span class="lineNum">    3332</span> <span class="tlaGNC">      196737 :         if (re.height() &lt; approxThicknessAtPercent) {</span></span>
+<span id="L3333"><span class="lineNum">    3333</span> <span class="tlaGNC">       90543 :             double adjust = (approxThicknessAtPercent - re.height()) * .5;</span></span>
+<span id="L3334"><span class="lineNum">    3334</span> <span class="tlaGNC">       90543 :             re.adjust(0.0, -adjust, 0.0, adjust);</span></span>
 <span id="L3335"><span class="lineNum">    3335</span>              :         }</span>
-<span id="L3336"><span class="lineNum">    3336</span> <span class="tlaGNC">      196437 :         shape.add(re, slurTieSeg);</span></span>
-<span id="L3337"><span class="lineNum">    3337</span> <span class="tlaGNC">      196437 :         startPoint = point;</span></span>
+<span id="L3336"><span class="lineNum">    3336</span> <span class="tlaGNC">      196737 :         shape.add(re, slurTieSeg);</span></span>
+<span id="L3337"><span class="lineNum">    3337</span> <span class="tlaGNC">      196737 :         startPoint = point;</span></span>
 <span id="L3338"><span class="lineNum">    3338</span>              :     }</span>
 <span id="L3339"><span class="lineNum">    3339</span>              : </span>
-<span id="L3340"><span class="lineNum">    3340</span> <span class="tlaGNC">        6219 :     slurTieSeg-&gt;mutldata()-&gt;setShape(shape);</span></span>
-<span id="L3341"><span class="lineNum">    3341</span> <span class="tlaGNC">        6219 : }</span></span>
+<span id="L3340"><span class="lineNum">    3340</span> <span class="tlaGNC">        6225 :     slurTieSeg-&gt;mutldata()-&gt;setShape(shape);</span></span>
+<span id="L3341"><span class="lineNum">    3341</span> <span class="tlaGNC">        6225 : }</span></span>
         </pre>
               </td>
             </tr>

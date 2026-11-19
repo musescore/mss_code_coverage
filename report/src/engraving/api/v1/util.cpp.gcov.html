@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -416,20 +416,23 @@
 <span id="L358"><span class="lineNum">     358</span> <span class="tlaUNC">           0 :     return fileInfo.lastModified().toSecsSinceEpoch();</span></span>
 <span id="L359"><span class="lineNum">     359</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L360"><span class="lineNum">     360</span>              : </span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaUNC">           0 : void MsProcess::start(const QString&amp; command)</span></span>
-<span id="L362"><span class="lineNum">     362</span>              : {</span>
-<span id="L363"><span class="lineNum">     363</span>              :     QT_WARNING_PUSH;</span>
-<span id="L364"><span class="lineNum">     364</span>              :     QT_WARNING_DISABLE_DEPRECATED;</span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaUNC">           0 :     DEPRECATED_USE(&quot;startWithArgs(program, [arg1, arg2, ...])&quot;);</span></span>
-<span id="L366"><span class="lineNum">     366</span> <span class="tlaUNC">           0 :     QProcess::start(command);</span></span>
-<span id="L367"><span class="lineNum">     367</span>              :     QT_WARNING_POP;</span>
-<span id="L368"><span class="lineNum">     368</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L369"><span class="lineNum">     369</span>              : </span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaUNC">           0 : void MsProcess::startWithArgs(const QString&amp; program, const QStringList&amp; args)</span></span>
-<span id="L371"><span class="lineNum">     371</span>              : {</span>
-<span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC">           0 :     QProcess::start(program, args, ReadWrite);</span></span>
-<span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L374"><span class="lineNum">     374</span>              : }</span>
+<span id="L361"><span class="lineNum">     361</span>              : #ifdef QT_QPROCESS_SUPPORTED</span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaUNC">           0 : void MsProcess::start(const QString&amp; command)</span></span>
+<span id="L363"><span class="lineNum">     363</span>              : {</span>
+<span id="L364"><span class="lineNum">     364</span>              :     QT_WARNING_PUSH;</span>
+<span id="L365"><span class="lineNum">     365</span>              :     QT_WARNING_DISABLE_DEPRECATED;</span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaUNC">           0 :     DEPRECATED_USE(&quot;startWithArgs(program, [arg1, arg2, ...])&quot;);</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaUNC">           0 :     QProcess::start(command);</span></span>
+<span id="L368"><span class="lineNum">     368</span>              :     QT_WARNING_POP;</span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L370"><span class="lineNum">     370</span>              : </span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaUNC">           0 : void MsProcess::startWithArgs(const QString&amp; program, const QStringList&amp; args)</span></span>
+<span id="L372"><span class="lineNum">     372</span>              : {</span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC">           0 :     QProcess::start(program, args, ReadWrite);</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L375"><span class="lineNum">     375</span>              : </span>
+<span id="L376"><span class="lineNum">     376</span>              : #endif // QT_QPROCESS_SUPPORTED</span>
+<span id="L377"><span class="lineNum">     377</span>              : }</span>
         </pre>
               </td>
             </tr>

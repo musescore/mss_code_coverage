@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -101,11 +101,11 @@
 <span id="L43"><span class="lineNum">      43</span>              : //   Symbol</span>
 <span id="L44"><span class="lineNum">      44</span>              : //---------------------------------------------------------</span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">        1458 : Symbol::Symbol(const ElementType&amp; type, EngravingObject* parent, ElementFlags f)</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        1458 :     : BSymbol(type, parent, f)</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">        1459 : Symbol::Symbol(const ElementType&amp; type, EngravingObject* parent, ElementFlags f)</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">        1459 :     : BSymbol(type, parent, f)</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : {</span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        1458 :     m_sym = SymId::accidentalSharp;          // arbitrary valid default</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">        1458 : }</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">        1459 :     m_sym = SymId::accidentalSharp;          // arbitrary valid default</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">        1459 : }</span></span>
 <span id="L51"><span class="lineNum">      51</span>              : </span>
 <span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">         108 : Symbol::Symbol(EngravingObject* parent, ElementFlags f)</span></span>
 <span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">         108 :     : Symbol(ElementType::SYMBOL, parent, f)</span></span>
@@ -121,14 +121,14 @@
 <span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">         448 :     m_symAngle    = s.m_symAngle;</span></span>
 <span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">         448 : }</span></span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        3962 : void Symbol::setSym(SymId s, const std::shared_ptr&lt;IEngravingFont&gt;&amp; sf)</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        3483 : void Symbol::setSym(SymId s, const std::shared_ptr&lt;IEngravingFont&gt;&amp; sf)</span></span>
 <span id="L67"><span class="lineNum">      67</span>              : {</span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        3962 :     m_sym  = s;</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        3483 :     m_sym  = s;</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">        3962 :     if (sf.get()) {</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">        3483 :     if (sf.get()) {</span></span>
 <span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">          18 :         m_scoreFont = sf;</span></span>
 <span id="L72"><span class="lineNum">      72</span>              :     }</span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        3962 : }</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        3483 : }</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
 <span id="L75"><span class="lineNum">      75</span>              : //---------------------------------------------------------</span>
 <span id="L76"><span class="lineNum">      76</span>              : //   symName</span>
@@ -201,10 +201,10 @@
 <span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC">           0 :         m_symAngle = v.toDouble();</span></span>
 <span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :         break;</span></span>
 <span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC tlaBgGNC">          43 :     default:</span></span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">          43 :         break;</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">          43 :         return BSymbol::setProperty(propertyId, v);</span></span>
 <span id="L147"><span class="lineNum">     147</span>              :     }</span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">          71 :     triggerLayout();</span></span>
-<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">          71 :     return BSymbol::setProperty(propertyId, v);</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">          28 :     triggerLayout();</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">          28 :     return true;</span></span>
 <span id="L150"><span class="lineNum">     150</span>              : }</span>
 <span id="L151"><span class="lineNum">     151</span>              : </span>
 <span id="L152"><span class="lineNum">     152</span>              : //---------------------------------------------------------</span>

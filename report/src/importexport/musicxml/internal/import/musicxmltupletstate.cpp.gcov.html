@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -339,19 +339,19 @@
 <span id="L281"><span class="lineNum">     281</span>              :  TODO Nested tuplets are not (yet) supported.</span>
 <span id="L282"><span class="lineNum">     282</span>              :  */</span>
 <span id="L283"><span class="lineNum">     283</span>              : </span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">       13959 : MusicXmlTupletFlags MusicXmlTupletState::determineTupletAction(const Fraction noteDuration,</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">       13963 : MusicXmlTupletFlags MusicXmlTupletState::determineTupletAction(const Fraction noteDuration,</span></span>
 <span id="L285"><span class="lineNum">     285</span>              :                                                                const Fraction timeMod,</span>
 <span id="L286"><span class="lineNum">     286</span>              :                                                                const MusicXmlStartStop tupletStartStop,</span>
 <span id="L287"><span class="lineNum">     287</span>              :                                                                const TDuration normalType,</span>
 <span id="L288"><span class="lineNum">     288</span>              :                                                                Fraction&amp; missingPreviousDuration,</span>
 <span id="L289"><span class="lineNum">     289</span>              :                                                                Fraction&amp; missingCurrentDuration)</span>
 <span id="L290"><span class="lineNum">     290</span>              : {</span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">       13959 :     const int actNotes = timeMod.denominator();</span></span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       13959 :     const int norNotes = timeMod.numerator();</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">       13959 :     MusicXmlTupletFlags res = MusicXmlTupletFlag::NONE;</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">       13963 :     const int actNotes = timeMod.denominator();</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       13963 :     const int norNotes = timeMod.numerator();</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">       13963 :     MusicXmlTupletFlags res = MusicXmlTupletFlag::NONE;</span></span>
 <span id="L294"><span class="lineNum">     294</span>              : </span>
 <span id="L295"><span class="lineNum">     295</span>              :     // check for unexpected termination of previous tuplet</span>
-<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">       13959 :     if (inTuplet &amp;&amp; timeMod == Fraction(1, 1)) {</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">       13963 :     if (inTuplet &amp;&amp; timeMod == Fraction(1, 1)) {</span></span>
 <span id="L297"><span class="lineNum">     297</span>              :         // recover by simply stopping the current tuplet first</span>
 <span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">           8 :         if (!isTupletFilled(normalType, timeMod)) {</span></span>
 <span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">           2 :             missingPreviousDuration = missingTupletDuration(duration);</span></span>
@@ -362,7 +362,7 @@
 <span id="L304"><span class="lineNum">     304</span>              :     }</span>
 <span id="L305"><span class="lineNum">     305</span>              : </span>
 <span id="L306"><span class="lineNum">     306</span>              :     // check for obvious errors</span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">       13959 :     if (inTuplet &amp;&amp; tupletStartStop == MusicXmlStartStop::START) {</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">       13963 :     if (inTuplet &amp;&amp; tupletStartStop == MusicXmlStartStop::START) {</span></span>
 <span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           2 :         LOGD(&quot;tuplet already started&quot;);</span></span>
 <span id="L309"><span class="lineNum">     309</span>              :         // recover by simply stopping the current tuplet first</span>
 <span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">           2 :         if (!isTupletFilled(normalType, timeMod)) {</span></span>
@@ -372,16 +372,16 @@
 <span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC tlaBgGNC">           2 :         *this = {};</span></span>
 <span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">           2 :         res |= MusicXmlTupletFlag::STOP_PREVIOUS;</span></span>
 <span id="L316"><span class="lineNum">     316</span>              :     }</span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">       13959 :     if (tupletStartStop == MusicXmlStartStop::STOP &amp;&amp; !inTuplet) {</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">       13963 :     if (tupletStartStop == MusicXmlStartStop::STOP &amp;&amp; !inTuplet) {</span></span>
 <span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">           8 :         LOGD(&quot;tuplet stop but no tuplet started&quot;);           // TODO</span></span>
 <span id="L319"><span class="lineNum">     319</span>              :         // recovery handled later (automatically, no special case needed)</span>
 <span id="L320"><span class="lineNum">     320</span>              :     }</span>
 <span id="L321"><span class="lineNum">     321</span>              : </span>
 <span id="L322"><span class="lineNum">     322</span>              :     // Tuplet are either started by the tuplet start</span>
 <span id="L323"><span class="lineNum">     323</span>              :     // or when the time modification is first found.</span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">       13959 :     if (!inTuplet) {</span></span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">       13503 :         if (tupletStartStop == MusicXmlStartStop::START</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">       13301 :             || (!inTuplet &amp;&amp; (actNotes != 1 || norNotes != 1))) {</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">       13963 :     if (!inTuplet) {</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">       13507 :         if (tupletStartStop == MusicXmlStartStop::START</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">       13305 :             || (!inTuplet &amp;&amp; (actNotes != 1 || norNotes != 1))) {</span></span>
 <span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">         236 :             if (tupletStartStop != MusicXmlStartStop::START) {</span></span>
 <span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">          34 :                 implicit = true;</span></span>
 <span id="L329"><span class="lineNum">     329</span>              :             } else {</span>
@@ -396,7 +396,7 @@
 <span id="L338"><span class="lineNum">     338</span>              :     // Add chord to the current tuplet.</span>
 <span id="L339"><span class="lineNum">     339</span>              :     // Must also check for actual/normal notes to prevent</span>
 <span id="L340"><span class="lineNum">     340</span>              :     // adding one chord too much if tuplet stop is missing.</span>
-<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">       13959 :     if (inTuplet &amp;&amp; !(actNotes == 1 &amp;&amp; norNotes == 1)) {</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">       13963 :     if (inTuplet &amp;&amp; !(actNotes == 1 &amp;&amp; norNotes == 1)) {</span></span>
 <span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">         692 :         addDurationToTuplet(noteDuration, timeMod);</span></span>
 <span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">         692 :         res |= MusicXmlTupletFlag::ADD_CHORD;</span></span>
 <span id="L344"><span class="lineNum">     344</span>              :     }</span>
@@ -408,7 +408,7 @@
 <span id="L350"><span class="lineNum">     350</span>              :     // actual and normal notes plus total duration)</span>
 <span id="L351"><span class="lineNum">     351</span>              :     // or when the time-modification is not found.</span>
 <span id="L352"><span class="lineNum">     352</span>              : </span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">       13959 :     if (inTuplet) {</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">       13963 :     if (inTuplet) {</span></span>
 <span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">         692 :         if (tupletStartStop == MusicXmlStartStop::STOP</span></span>
 <span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">         498 :             || (implicit &amp;&amp; isTupletFilled(normalType, timeMod))</span></span>
 <span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">        1190 :             || (actNotes == 1 &amp;&amp; norNotes == 1)) {           // incorrect ??? check scenario incomplete tuplet w/o start</span></span>
@@ -422,7 +422,7 @@
 <span id="L364"><span class="lineNum">     364</span>              :         }</span>
 <span id="L365"><span class="lineNum">     365</span>              :     }</span>
 <span id="L366"><span class="lineNum">     366</span>              : </span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">       13959 :     return res;</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">       13963 :     return res;</span></span>
 <span id="L368"><span class="lineNum">     368</span>              : }</span>
         </pre>
               </td>

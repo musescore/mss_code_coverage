@@ -31,13 +31,13 @@
             <td class="headerValue">filtered_coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">22.1&nbsp;%</td>
-            <td class="headerCovTableEntry">331</td>
-            <td class="headerCovTableEntry">73</td>
+            <td class="headerCovTableEntryLo">27.1&nbsp;%</td>
+            <td class="headerCovTableEntry">328</td>
+            <td class="headerCovTableEntry">89</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -105,11 +105,11 @@
 <span id="L47"><span class="lineNum">      47</span>              : </span>
 <span id="L48"><span class="lineNum">      48</span>              : using namespace mu::engraving::apiv1;</span>
 <span id="L49"><span class="lineNum">      49</span>              : </span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC tlaBgGNC">           9 : Cursor::Cursor(mu::engraving::Score* s)</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           9 :     : QObject(0), m_filter(mu::engraving::SegmentType::ChordRest)</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC tlaBgGNC">          18 : Cursor::Cursor(mu::engraving::Score* s)</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">          18 :     : QObject(0), m_filter(mu::engraving::SegmentType::ChordRest)</span></span>
 <span id="L52"><span class="lineNum">      52</span>              : {</span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           9 :     setScore(s);</span></span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           9 : }</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">          18 :     setScore(s);</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">          18 : }</span></span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
 <span id="L56"><span class="lineNum">      56</span>              : //---------------------------------------------------------</span>
 <span id="L57"><span class="lineNum">      57</span>              : //   score</span>
@@ -124,18 +124,18 @@
 <span id="L66"><span class="lineNum">      66</span>              : //   setScore</span>
 <span id="L67"><span class="lineNum">      67</span>              : //---------------------------------------------------------</span>
 <span id="L68"><span class="lineNum">      68</span>              : </span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC tlaBgGNC">           9 : void Cursor::setScore(mu::engraving::Score* s)</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC tlaBgGNC">          18 : void Cursor::setScore(mu::engraving::Score* s)</span></span>
 <span id="L70"><span class="lineNum">      70</span>              : {</span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           9 :     if (m_score == s) {</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">          18 :     if (m_score == s) {</span></span>
 <span id="L72"><span class="lineNum">      72</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L73"><span class="lineNum">      73</span>              :     }</span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC tlaBgGNC">           9 :     m_score = s;</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC tlaBgGNC">          18 :     m_score = s;</span></span>
 <span id="L76"><span class="lineNum">      76</span>              : </span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">           9 :     switch (m_inputStateMode) {</span></span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">           9 :     case INPUT_STATE_INDEPENDENT:</span></span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">           9 :         is.reset(new InputState);</span></span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">           9 :         break;</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">          18 :     switch (m_inputStateMode) {</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">          18 :     case INPUT_STATE_INDEPENDENT:</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">          18 :         is.reset(new InputState);</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">          18 :         break;</span></span>
 <span id="L81"><span class="lineNum">      81</span> <span class="tlaUNC tlaBgUNC">           0 :     case INPUT_STATE_SYNC_WITH_SCORE:</span></span>
 <span id="L82"><span class="lineNum">      82</span> <span class="tlaUNC">           0 :         break;</span></span>
 <span id="L83"><span class="lineNum">      83</span>              :     }</span>
@@ -146,9 +146,9 @@
 <span id="L88"><span class="lineNum">      88</span> <span class="tlaUNC">           0 :     setScore(s ? s-&gt;score() : nullptr);</span></span>
 <span id="L89"><span class="lineNum">      89</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC tlaBgGNC">         177 : mu::engraving::InputState&amp; Cursor::inputState()</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC tlaBgGNC">         480 : mu::engraving::InputState&amp; Cursor::inputState()</span></span>
 <span id="L92"><span class="lineNum">      92</span>              : {</span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">         177 :     return is ? *is.get() : m_score-&gt;inputState();</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">         480 :     return is ? *is.get() : m_score-&gt;inputState();</span></span>
 <span id="L94"><span class="lineNum">      94</span>              : }</span>
 <span id="L95"><span class="lineNum">      95</span>              : </span>
 <span id="L96"><span class="lineNum">      96</span>              : //---------------------------------------------------------</span>
@@ -178,16 +178,16 @@
 <span id="L120"><span class="lineNum">     120</span>              : ///   recommended to use RewindMode enumerators instead.</span>
 <span id="L121"><span class="lineNum">     121</span>              : //---------------------------------------------------------</span>
 <span id="L122"><span class="lineNum">     122</span>              : </span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC tlaBgGNC">          10 : void Cursor::rewind(RewindMode mode)</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC tlaBgGNC">          22 : void Cursor::rewind(RewindMode mode)</span></span>
 <span id="L124"><span class="lineNum">     124</span>              : {</span>
 <span id="L125"><span class="lineNum">     125</span>              :     //</span>
 <span id="L126"><span class="lineNum">     126</span>              :     // rewind to start of score</span>
 <span id="L127"><span class="lineNum">     127</span>              :     //</span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          10 :     if (mode == SCORE_START) {</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">          10 :         mu::engraving::Measure* m = m_score-&gt;firstMeasure();</span></span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">          10 :         if (m) {</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          10 :             setSegment(m-&gt;first(m_filter));</span></span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">          10 :             nextInTrack();</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          22 :     if (mode == SCORE_START) {</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">          22 :         mu::engraving::Measure* m = m_score-&gt;firstMeasure();</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">          22 :         if (m) {</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          22 :             setSegment(m-&gt;first(m_filter));</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">          22 :             nextInTrack();</span></span>
 <span id="L133"><span class="lineNum">     133</span>              :         } else {</span>
 <span id="L134"><span class="lineNum">     134</span> <span class="tlaUNC tlaBgUNC">           0 :             setSegment(nullptr);</span></span>
 <span id="L135"><span class="lineNum">     135</span>              :         }</span>
@@ -292,14 +292,14 @@
 <span id="L234"><span class="lineNum">     234</span>              : ///   \p true otherwise.</span>
 <span id="L235"><span class="lineNum">     235</span>              : //---------------------------------------------------------</span>
 <span id="L236"><span class="lineNum">     236</span>              : </span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC tlaBgGNC">           1 : bool Cursor::next()</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC tlaBgGNC">          18 : bool Cursor::next()</span></span>
 <span id="L238"><span class="lineNum">     238</span>              : {</span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">           1 :     if (!segment()) {</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">          18 :     if (!segment()) {</span></span>
 <span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC tlaBgUNC">           0 :         return false;</span></span>
 <span id="L241"><span class="lineNum">     241</span>              :     }</span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC tlaBgGNC">           1 :     setSegment(segment()-&gt;next1(m_filter));</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">           1 :     nextInTrack();</span></span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">           1 :     return segment();</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC tlaBgGNC">          18 :     setSegment(segment()-&gt;next1(m_filter));</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">          18 :     nextInTrack();</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">          18 :     return segment();</span></span>
 <span id="L245"><span class="lineNum">     245</span>              : }</span>
 <span id="L246"><span class="lineNum">     246</span>              : </span>
 <span id="L247"><span class="lineNum">     247</span>              : //---------------------------------------------------------</span>
@@ -505,21 +505,21 @@
 <span id="L447"><span class="lineNum">     447</span>              : ///   since MuseScore 3.3.4.</span>
 <span id="L448"><span class="lineNum">     448</span>              : //---------------------------------------------------------</span>
 <span id="L449"><span class="lineNum">     449</span>              : </span>
-<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC tlaBgGNC">          40 : void Cursor::addNote(int pitch, bool addToChord)</span></span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC tlaBgGNC">          65 : void Cursor::addNote(int pitch, bool addToChord)</span></span>
 <span id="L451"><span class="lineNum">     451</span>              : {</span>
-<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">          40 :     if (!pitchIsValid(pitch)) {</span></span>
+<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">          65 :     if (!pitchIsValid(pitch)) {</span></span>
 <span id="L453"><span class="lineNum">     453</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGW(&quot;Cursor::addNote: invalid pitch: %d&quot;, pitch);</span></span>
 <span id="L454"><span class="lineNum">     454</span> <span class="tlaUNC">           0 :         return;</span></span>
 <span id="L455"><span class="lineNum">     455</span>              :     }</span>
-<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC tlaBgGNC">          40 :     if (!segment()) {</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC tlaBgGNC">          65 :     if (!segment()) {</span></span>
 <span id="L457"><span class="lineNum">     457</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGW(&quot;Cursor::addNote: cursor location is undefined, use rewind() to define its location&quot;);</span></span>
 <span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC">           0 :         return;</span></span>
 <span id="L459"><span class="lineNum">     459</span>              :     }</span>
-<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC tlaBgGNC">          40 :     if (!inputState().duration().isValid()) {</span></span>
+<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC tlaBgGNC">          65 :     if (!inputState().duration().isValid()) {</span></span>
 <span id="L461"><span class="lineNum">     461</span> <span class="tlaUNC tlaBgUNC">           0 :         setDuration(1, 4);</span></span>
 <span id="L462"><span class="lineNum">     462</span>              :     }</span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC tlaBgGNC">          40 :     NoteVal nval(pitch);</span></span>
-<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">          40 :     NoteInput::addPitch(m_score-&gt;transactionManager()-&gt;currentOrDummyTransaction(), m_score, nval, addToChord, is.get());</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC tlaBgGNC">          65 :     NoteVal nval(pitch);</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">          65 :     NoteInput::addPitch(m_score-&gt;transactionManager()-&gt;currentOrDummyTransaction(), m_score, nval, addToChord, is.get());</span></span>
 <span id="L465"><span class="lineNum">     465</span>              : }</span>
 <span id="L466"><span class="lineNum">     466</span>              : </span>
 <span id="L467"><span class="lineNum">     467</span>              : //---------------------------------------------------------</span>
@@ -572,347 +572,346 @@
 <span id="L514"><span class="lineNum">     514</span>              : ///   existing chord or rest, use its</span>
 <span id="L515"><span class="lineNum">     515</span>              : ///   \ref DurationElement.duration &quot;duration&quot; value as</span>
 <span id="L516"><span class="lineNum">     516</span>              : ///   a parameter.</span>
-<span id="L517"><span class="lineNum">     517</span>              : ///   \since MuseScore 3.5</span>
-<span id="L518"><span class="lineNum">     518</span>              : ///   \see \ref DurationElement.tuplet</span>
-<span id="L519"><span class="lineNum">     519</span>              : //---------------------------------------------------------</span>
-<span id="L520"><span class="lineNum">     520</span>              : </span>
-<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC tlaBgGNC">           6 : void Cursor::addTuplet(Fraction* ratio, Fraction* duration)</span></span>
-<span id="L522"><span class="lineNum">     522</span>              : {</span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">           6 :     if (!segment()) {</span></span>
-<span id="L524"><span class="lineNum">     524</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGW(&quot;Cursor::addTuplet: cursor location is undefined, use rewind() to define its location&quot;);</span></span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC tlaBgGNC">           1 :         return;</span></span>
-<span id="L526"><span class="lineNum">     526</span>              :     }</span>
-<span id="L527"><span class="lineNum">     527</span>              : </span>
-<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">           6 :     const mu::engraving::Fraction fRatio = ratio-&gt;fraction();</span></span>
-<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">           6 :     const mu::engraving::Fraction fDuration = duration-&gt;fraction();</span></span>
-<span id="L530"><span class="lineNum">     530</span>              : </span>
-<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">          12 :     if (!fRatio.isValid() || fRatio.isZero() || fRatio.negative()</span></span>
-<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">          12 :         || !fDuration.isValid() || fDuration.isZero() || fDuration.negative()) {</span></span>
-<span id="L533"><span class="lineNum">     533</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGW(&quot;Cursor::addTuplet: invalid parameter values: %s, %s&quot;, qPrintable(fRatio.toString()), qPrintable(fDuration.toString()));</span></span>
-<span id="L534"><span class="lineNum">     534</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L535"><span class="lineNum">     535</span>              :     }</span>
-<span id="L536"><span class="lineNum">     536</span>              : </span>
-<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC tlaBgGNC">           6 :     mu::engraving::Measure* tupletMeasure = segment()-&gt;measure();</span></span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">           6 :     const mu::engraving::Fraction tupletTick = segment()-&gt;tick();</span></span>
-<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">           6 :     if (tupletTick + fDuration &gt; tupletMeasure-&gt;endTick()) {</span></span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGW(</span></span>
-<span id="L541"><span class="lineNum">     541</span>              :             &quot;Cursor::addTuplet: cannot add cross-measure tuplet (measure %d, rel.tick %s, duration %s)&quot;,</span>
-<span id="L542"><span class="lineNum">     542</span> <span class="tlaUNC">           0 :             tupletMeasure-&gt;measureNumber() + 1, qPrintable(segment()-&gt;rtick().toString()), qPrintable(fDuration.toString()));</span></span>
+<span id="L517"><span class="lineNum">     517</span>              : ///   \note If the tuplet doesn't fit where the cursor is (it would end after</span>
+<span id="L518"><span class="lineNum">     518</span>              : ///   the barline, or after the end of the tuplet it starts in), or the cursor</span>
+<span id="L519"><span class="lineNum">     519</span>              : ///   is inside a longer chord or rest of its voice, nothing changes and a</span>
+<span id="L520"><span class="lineNum">     520</span>              : ///   warning is logged.</span>
+<span id="L521"><span class="lineNum">     521</span>              : ///   \since MuseScore 3.5</span>
+<span id="L522"><span class="lineNum">     522</span>              : ///   \see \ref DurationElement.tuplet</span>
+<span id="L523"><span class="lineNum">     523</span>              : //---------------------------------------------------------</span>
+<span id="L524"><span class="lineNum">     524</span>              : </span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC tlaBgGNC">          14 : void Cursor::addTuplet(Fraction* ratio, Fraction* duration)</span></span>
+<span id="L526"><span class="lineNum">     526</span>              : {</span>
+<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">          14 :     if (!segment()) {</span></span>
+<span id="L528"><span class="lineNum">     528</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGW(&quot;Cursor::addTuplet: cursor location is undefined, use rewind() to define its location&quot;);</span></span>
+<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC tlaBgGNC">           6 :         return;</span></span>
+<span id="L530"><span class="lineNum">     530</span>              :     }</span>
+<span id="L531"><span class="lineNum">     531</span>              : </span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">          14 :     const mu::engraving::Fraction fRatio = ratio-&gt;fraction();</span></span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">          14 :     const mu::engraving::Fraction fDuration = duration-&gt;fraction();</span></span>
+<span id="L534"><span class="lineNum">     534</span>              : </span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">          28 :     if (!fRatio.isValid() || fRatio.isZero() || fRatio.negative()</span></span>
+<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">          28 :         || !fDuration.isValid() || fDuration.isZero() || fDuration.negative()) {</span></span>
+<span id="L537"><span class="lineNum">     537</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGW(&quot;Cursor::addTuplet: invalid parameter values: %s, %s&quot;, qPrintable(fRatio.toString()), qPrintable(fDuration.toString()));</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L539"><span class="lineNum">     539</span>              :     }</span>
+<span id="L540"><span class="lineNum">     540</span>              : </span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC tlaBgGNC">          14 :     mu::engraving::Measure* tupletMeasure = segment()-&gt;measure();</span></span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">          14 :     const mu::engraving::Fraction tupletTick = segment()-&gt;tick();</span></span>
 <span id="L543"><span class="lineNum">     543</span>              : </span>
-<span id="L544"><span class="lineNum">     544</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L545"><span class="lineNum">     545</span>              :     }</span>
-<span id="L546"><span class="lineNum">     546</span>              : </span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC tlaBgGNC">           6 :     const mu::engraving::Fraction baseLen = fDuration * mu::engraving::Fraction(1, fRatio.denominator());</span></span>
-<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">           6 :     if (!TDuration::isValid(baseLen)) {</span></span>
-<span id="L549"><span class="lineNum">     549</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGW(</span></span>
-<span id="L550"><span class="lineNum">     550</span>              :             &quot;Cursor::addTuplet: cannot create tuplet for ratio %s and duration %s&quot;,</span>
-<span id="L551"><span class="lineNum">     551</span> <span class="tlaUNC">           0 :             qPrintable(fRatio.toString()), qPrintable(fDuration.toString()));</span></span>
+<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">          14 :     const mu::engraving::Fraction baseLen = fDuration * mu::engraving::Fraction(1, fRatio.denominator());</span></span>
+<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">          14 :     if (!TDuration::isValid(baseLen)) {</span></span>
+<span id="L546"><span class="lineNum">     546</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGW(</span></span>
+<span id="L547"><span class="lineNum">     547</span>              :             &quot;Cursor::addTuplet: cannot create tuplet for ratio %s and duration %s&quot;,</span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaUNC">           0 :             qPrintable(fRatio.toString()), qPrintable(fDuration.toString()));</span></span>
+<span id="L549"><span class="lineNum">     549</span>              : </span>
+<span id="L550"><span class="lineNum">     550</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L551"><span class="lineNum">     551</span>              :     }</span>
 <span id="L552"><span class="lineNum">     552</span>              : </span>
-<span id="L553"><span class="lineNum">     553</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L554"><span class="lineNum">     554</span>              :     }</span>
-<span id="L555"><span class="lineNum">     555</span>              : </span>
-<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC tlaBgGNC">           6 :     m_score-&gt;expandVoice(inputState().segment(), inputState().track());</span></span>
-<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">           6 :     mu::engraving::ChordRest* cr = inputState().cr();</span></span>
-<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">           6 :     if (!cr) { // shouldn't happen?</span></span>
-<span id="L559"><span class="lineNum">     559</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L553"><span class="lineNum">     553</span>              :     // check first: Score::addTuplet() shows a dialog when it can't, but the Cursor only logs;</span>
+<span id="L554"><span class="lineNum">     554</span>              :     // and before expandVoice(), so that a refused tuplet leaves no rests in an empty voice</span>
+<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC tlaBgGNC">          14 :     if (!m_score-&gt;canAddTuplet(inputState().segment(), inputState().track(), fRatio, TDuration(baseLen))) {</span></span>
+<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">          20 :         LOGW(&quot;Cursor::addTuplet: cannot add tuplet for ratio %s and duration %s&quot;,</span></span>
+<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">          15 :              qPrintable(fRatio.toString()), qPrintable(fDuration.toString()));</span></span>
+<span id="L558"><span class="lineNum">     558</span>              : </span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">           5 :         return;</span></span>
 <span id="L560"><span class="lineNum">     560</span>              :     }</span>
 <span id="L561"><span class="lineNum">     561</span>              : </span>
-<span id="L562"><span class="lineNum">     562</span>              :     // check first: Score::addTuplet() shows a dialog when it can't, but the Cursor only logs</span>
-<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC tlaBgGNC">           6 :     if (!m_score-&gt;canAddTuplet(cr, fRatio, TDuration(baseLen))) {</span></span>
-<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">           4 :         LOGW(&quot;Cursor::addTuplet: cannot add tuplet for ratio %s and duration %s&quot;,</span></span>
-<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">           3 :              qPrintable(fRatio.toString()), qPrintable(fDuration.toString()));</span></span>
-<span id="L566"><span class="lineNum">     566</span>              : </span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">           1 :         return;</span></span>
-<span id="L568"><span class="lineNum">     568</span>              :     }</span>
-<span id="L569"><span class="lineNum">     569</span>              : </span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">           5 :     const mu::engraving::MStyle&amp; style = m_score-&gt;style();</span></span>
-<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">           5 :     const auto numberType = mu::engraving::TupletNumberType(style.styleI(mu::engraving::Sid::tupletNumberType));</span></span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">           5 :     const auto bracketType = mu::engraving::TupletBracketType(style.styleI(mu::engraving::Sid::tupletBracketType));</span></span>
-<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">           5 :     if (!m_score-&gt;addTuplet(cr, fRatio, TDuration(baseLen), numberType, bracketType)) {</span></span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
-<span id="L575"><span class="lineNum">     575</span>              :     }</span>
-<span id="L576"><span class="lineNum">     576</span>              : </span>
-<span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC tlaBgGNC">           5 :     inputState().setSegment(tupletMeasure-&gt;tick2segment(tupletTick));</span></span>
-<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">           5 :     inputState().setDuration(baseLen);</span></span>
-<span id="L579"><span class="lineNum">     579</span>              : }</span>
-<span id="L580"><span class="lineNum">     580</span>              : </span>
-<span id="L581"><span class="lineNum">     581</span>              : //---------------------------------------------------------</span>
-<span id="L582"><span class="lineNum">     582</span>              : //   setDuration</span>
-<span id="L583"><span class="lineNum">     583</span>              : ///   Set duration of the notes added by the cursor.</span>
-<span id="L584"><span class="lineNum">     584</span>              : ///   \param z: numerator</span>
-<span id="L585"><span class="lineNum">     585</span>              : ///   \param n: denominator. If n == 0, sets duration to</span>
-<span id="L586"><span class="lineNum">     586</span>              : ///   a quarter.</span>
-<span id="L587"><span class="lineNum">     587</span>              : ///   \see addNote()</span>
-<span id="L588"><span class="lineNum">     588</span>              : //---------------------------------------------------------</span>
-<span id="L589"><span class="lineNum">     589</span>              : </span>
-<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">           4 : void Cursor::setDuration(int z, int n)</span></span>
-<span id="L591"><span class="lineNum">     591</span>              : {</span>
-<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">           4 :     TDuration d(mu::engraving::Fraction(z, n));</span></span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">           4 :     if (!d.isValid()) {</span></span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaUNC tlaBgUNC">           0 :         d = TDuration(DurationType::V_QUARTER);</span></span>
-<span id="L595"><span class="lineNum">     595</span>              :     }</span>
-<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC tlaBgGNC">           4 :     inputState().setDuration(d);</span></span>
-<span id="L597"><span class="lineNum">     597</span> <span class="tlaGNC">           4 : }</span></span>
-<span id="L598"><span class="lineNum">     598</span>              : </span>
-<span id="L599"><span class="lineNum">     599</span>              : //---------------------------------------------------------</span>
-<span id="L600"><span class="lineNum">     600</span>              : //   tick</span>
-<span id="L601"><span class="lineNum">     601</span>              : //---------------------------------------------------------</span>
-<span id="L602"><span class="lineNum">     602</span>              : </span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaUNC tlaBgUNC">           0 : int Cursor::tick()</span></span>
-<span id="L604"><span class="lineNum">     604</span>              : {</span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaUNC">           0 :     const mu::engraving::Segment* seg = segment();</span></span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaUNC">           0 :     return seg ? seg-&gt;tick().ticks() : 0;</span></span>
-<span id="L607"><span class="lineNum">     607</span>              : }</span>
-<span id="L608"><span class="lineNum">     608</span>              : </span>
-<span id="L609"><span class="lineNum">     609</span> <span class="tlaUNC">           0 : int Cursor::utick()</span></span>
-<span id="L610"><span class="lineNum">     610</span>              : {</span>
-<span id="L611"><span class="lineNum">     611</span> <span class="tlaUNC">           0 :     return m_score-&gt;repeatList(true).tick2utick(tick());</span></span>
-<span id="L612"><span class="lineNum">     612</span>              : }</span>
-<span id="L613"><span class="lineNum">     613</span>              : </span>
-<span id="L614"><span class="lineNum">     614</span> <span class="tlaUNC">           0 : mu::engraving::Fraction Cursor::fraction() const</span></span>
-<span id="L615"><span class="lineNum">     615</span>              : {</span>
-<span id="L616"><span class="lineNum">     616</span> <span class="tlaUNC">           0 :     const mu::engraving::Segment* seg = segment();</span></span>
-<span id="L617"><span class="lineNum">     617</span> <span class="tlaUNC">           0 :     return seg ? seg-&gt;tick() : mu::engraving::Fraction(0, 1);</span></span>
-<span id="L618"><span class="lineNum">     618</span>              : }</span>
-<span id="L619"><span class="lineNum">     619</span>              : </span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaUNC">           0 : Fraction* Cursor::qmlFraction() const</span></span>
-<span id="L621"><span class="lineNum">     621</span>              : {</span>
-<span id="L622"><span class="lineNum">     622</span> <span class="tlaUNC">           0 :     return wrap(fraction());</span></span>
-<span id="L623"><span class="lineNum">     623</span>              : }</span>
-<span id="L624"><span class="lineNum">     624</span>              : </span>
-<span id="L625"><span class="lineNum">     625</span>              : //---------------------------------------------------------</span>
-<span id="L626"><span class="lineNum">     626</span>              : //   time</span>
-<span id="L627"><span class="lineNum">     627</span>              : /// Time at tick position, read only</span>
-<span id="L628"><span class="lineNum">     628</span>              : /// \param includeRepeats since 4.6</span>
-<span id="L629"><span class="lineNum">     629</span>              : //---------------------------------------------------------</span>
-<span id="L630"><span class="lineNum">     630</span>              : </span>
-<span id="L631"><span class="lineNum">     631</span> <span class="tlaUNC">           0 : double Cursor::time(bool includeRepeats)</span></span>
-<span id="L632"><span class="lineNum">     632</span>              : {</span>
-<span id="L633"><span class="lineNum">     633</span> <span class="tlaUNC">           0 :     return m_score-&gt;tempoTimeline(includeRepeats).utick2utime(includeRepeats ? utick() : tick()) * 1000;</span></span>
-<span id="L634"><span class="lineNum">     634</span>              : }</span>
-<span id="L635"><span class="lineNum">     635</span>              : </span>
-<span id="L636"><span class="lineNum">     636</span>              : //---------------------------------------------------------</span>
-<span id="L637"><span class="lineNum">     637</span>              : //   tempo</span>
-<span id="L638"><span class="lineNum">     638</span>              : //---------------------------------------------------------</span>
-<span id="L639"><span class="lineNum">     639</span>              : </span>
-<span id="L640"><span class="lineNum">     640</span> <span class="tlaUNC">           0 : qreal Cursor::tempo()</span></span>
-<span id="L641"><span class="lineNum">     641</span>              : {</span>
-<span id="L642"><span class="lineNum">     642</span> <span class="tlaUNC">           0 :     return m_score-&gt;tempo(fraction()).val;</span></span>
-<span id="L643"><span class="lineNum">     643</span>              : }</span>
-<span id="L644"><span class="lineNum">     644</span>              : </span>
-<span id="L645"><span class="lineNum">     645</span>              : //---------------------------------------------------------</span>
-<span id="L646"><span class="lineNum">     646</span>              : //   currentElement</span>
-<span id="L647"><span class="lineNum">     647</span>              : //---------------------------------------------------------</span>
-<span id="L648"><span class="lineNum">     648</span>              : </span>
-<span id="L649"><span class="lineNum">     649</span> <span class="tlaUNC">           0 : mu::engraving::EngravingItem* Cursor::currentElement() const</span></span>
-<span id="L650"><span class="lineNum">     650</span>              : {</span>
-<span id="L651"><span class="lineNum">     651</span> <span class="tlaUNC">           0 :     const int t = track();</span></span>
-<span id="L652"><span class="lineNum">     652</span> <span class="tlaUNC">           0 :     mu::engraving::Segment* seg = segment();</span></span>
-<span id="L653"><span class="lineNum">     653</span> <span class="tlaUNC">           0 :     return seg &amp;&amp; seg-&gt;element(t) ? seg-&gt;element(t) : nullptr;</span></span>
-<span id="L654"><span class="lineNum">     654</span>              : }</span>
-<span id="L655"><span class="lineNum">     655</span>              : </span>
-<span id="L656"><span class="lineNum">     656</span>              : //---------------------------------------------------------</span>
-<span id="L657"><span class="lineNum">     657</span>              : //   segment</span>
-<span id="L658"><span class="lineNum">     658</span>              : //---------------------------------------------------------</span>
-<span id="L659"><span class="lineNum">     659</span>              : </span>
-<span id="L660"><span class="lineNum">     660</span> <span class="tlaUNC">           0 : Segment* Cursor::qmlSegment() const</span></span>
-<span id="L661"><span class="lineNum">     661</span>              : {</span>
-<span id="L662"><span class="lineNum">     662</span> <span class="tlaUNC">           0 :     mu::engraving::Segment* seg = segment();</span></span>
-<span id="L663"><span class="lineNum">     663</span> <span class="tlaUNC">           0 :     return seg ? wrap&lt;Segment&gt;(seg, Ownership::SCORE) : nullptr;</span></span>
-<span id="L664"><span class="lineNum">     664</span>              : }</span>
-<span id="L665"><span class="lineNum">     665</span>              : </span>
-<span id="L666"><span class="lineNum">     666</span>              : //---------------------------------------------------------</span>
-<span id="L667"><span class="lineNum">     667</span>              : //   element</span>
-<span id="L668"><span class="lineNum">     668</span>              : //---------------------------------------------------------</span>
-<span id="L669"><span class="lineNum">     669</span>              : </span>
-<span id="L670"><span class="lineNum">     670</span> <span class="tlaUNC">           0 : EngravingItem* Cursor::element() const</span></span>
-<span id="L671"><span class="lineNum">     671</span>              : {</span>
-<span id="L672"><span class="lineNum">     672</span> <span class="tlaUNC">           0 :     mu::engraving::EngravingItem* e = currentElement();</span></span>
-<span id="L673"><span class="lineNum">     673</span> <span class="tlaUNC">           0 :     if (!e) {</span></span>
-<span id="L674"><span class="lineNum">     674</span> <span class="tlaUNC">           0 :         return nullptr;</span></span>
-<span id="L675"><span class="lineNum">     675</span>              :     }</span>
-<span id="L676"><span class="lineNum">     676</span> <span class="tlaUNC">           0 :     return wrap(e, Ownership::SCORE);</span></span>
-<span id="L677"><span class="lineNum">     677</span>              : }</span>
-<span id="L678"><span class="lineNum">     678</span>              : </span>
-<span id="L679"><span class="lineNum">     679</span>              : //---------------------------------------------------------</span>
-<span id="L680"><span class="lineNum">     680</span>              : //   measure</span>
-<span id="L681"><span class="lineNum">     681</span>              : //---------------------------------------------------------</span>
-<span id="L682"><span class="lineNum">     682</span>              : </span>
-<span id="L683"><span class="lineNum">     683</span> <span class="tlaUNC">           0 : Measure* Cursor::measure() const</span></span>
-<span id="L684"><span class="lineNum">     684</span>              : {</span>
-<span id="L685"><span class="lineNum">     685</span> <span class="tlaUNC">           0 :     mu::engraving::Segment* seg = segment();</span></span>
-<span id="L686"><span class="lineNum">     686</span> <span class="tlaUNC">           0 :     return seg ? wrap&lt;Measure&gt;(seg-&gt;measure(), Ownership::SCORE) : nullptr;</span></span>
-<span id="L687"><span class="lineNum">     687</span>              : }</span>
-<span id="L688"><span class="lineNum">     688</span>              : </span>
-<span id="L689"><span class="lineNum">     689</span>              : //---------------------------------------------------------</span>
-<span id="L690"><span class="lineNum">     690</span>              : //   track</span>
-<span id="L691"><span class="lineNum">     691</span>              : //---------------------------------------------------------</span>
-<span id="L692"><span class="lineNum">     692</span>              : </span>
-<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC tlaBgGNC">          11 : int Cursor::track() const</span></span>
-<span id="L694"><span class="lineNum">     694</span>              : {</span>
-<span id="L695"><span class="lineNum">     695</span> <span class="tlaGNC">          11 :     return static_cast&lt;int&gt;(inputState().track());</span></span>
-<span id="L696"><span class="lineNum">     696</span>              : }</span>
-<span id="L697"><span class="lineNum">     697</span>              : </span>
-<span id="L698"><span class="lineNum">     698</span>              : //---------------------------------------------------------</span>
-<span id="L699"><span class="lineNum">     699</span>              : //   setTrack</span>
-<span id="L700"><span class="lineNum">     700</span>              : //---------------------------------------------------------</span>
-<span id="L701"><span class="lineNum">     701</span>              : </span>
-<span id="L702"><span class="lineNum">     702</span> <span class="tlaUNC tlaBgUNC">           0 : void Cursor::setTrack(int track)</span></span>
-<span id="L703"><span class="lineNum">     703</span>              : {</span>
-<span id="L704"><span class="lineNum">     704</span> <span class="tlaUNC">           0 :     if (m_score-&gt;ntracks() == 0) {</span></span>
-<span id="L705"><span class="lineNum">     705</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L706"><span class="lineNum">     706</span>              :     }</span>
-<span id="L707"><span class="lineNum">     707</span> <span class="tlaUNC">           0 :     int m_track = std::clamp(track, 0, int(m_score-&gt;ntracks() - 1));</span></span>
-<span id="L708"><span class="lineNum">     708</span> <span class="tlaUNC">           0 :     inputState().setTrack(static_cast&lt;track_idx_t&gt;(m_track));</span></span>
-<span id="L709"><span class="lineNum">     709</span>              : }</span>
-<span id="L710"><span class="lineNum">     710</span>              : </span>
-<span id="L711"><span class="lineNum">     711</span>              : //---------------------------------------------------------</span>
-<span id="L712"><span class="lineNum">     712</span>              : //   voice</span>
-<span id="L713"><span class="lineNum">     713</span>              : //---------------------------------------------------------</span>
-<span id="L714"><span class="lineNum">     714</span>              : </span>
-<span id="L715"><span class="lineNum">     715</span> <span class="tlaUNC">           0 : int Cursor::voice() const</span></span>
-<span id="L716"><span class="lineNum">     716</span>              : {</span>
-<span id="L717"><span class="lineNum">     717</span> <span class="tlaUNC">           0 :     return track() % VOICES;</span></span>
-<span id="L718"><span class="lineNum">     718</span>              : }</span>
-<span id="L719"><span class="lineNum">     719</span>              : </span>
-<span id="L720"><span class="lineNum">     720</span>              : //---------------------------------------------------------</span>
-<span id="L721"><span class="lineNum">     721</span>              : //   setVoice</span>
-<span id="L722"><span class="lineNum">     722</span>              : //---------------------------------------------------------</span>
-<span id="L723"><span class="lineNum">     723</span>              : </span>
-<span id="L724"><span class="lineNum">     724</span> <span class="tlaUNC">           0 : void Cursor::setVoice(int v)</span></span>
-<span id="L725"><span class="lineNum">     725</span>              : {</span>
-<span id="L726"><span class="lineNum">     726</span> <span class="tlaUNC">           0 :     int m_track = (track() / VOICES) * VOICES + v;</span></span>
-<span id="L727"><span class="lineNum">     727</span> <span class="tlaUNC">           0 :     setTrack(m_track);</span></span>
-<span id="L728"><span class="lineNum">     728</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L729"><span class="lineNum">     729</span>              : </span>
-<span id="L730"><span class="lineNum">     730</span>              : //---------------------------------------------------------</span>
-<span id="L731"><span class="lineNum">     731</span>              : //   staffIdx</span>
-<span id="L732"><span class="lineNum">     732</span>              : //---------------------------------------------------------</span>
-<span id="L733"><span class="lineNum">     733</span>              : </span>
-<span id="L734"><span class="lineNum">     734</span> <span class="tlaUNC">           0 : int Cursor::staffIdx() const</span></span>
-<span id="L735"><span class="lineNum">     735</span>              : {</span>
-<span id="L736"><span class="lineNum">     736</span> <span class="tlaUNC">           0 :     return track() / VOICES;</span></span>
-<span id="L737"><span class="lineNum">     737</span>              : }</span>
-<span id="L738"><span class="lineNum">     738</span>              : </span>
-<span id="L739"><span class="lineNum">     739</span>              : //---------------------------------------------------------</span>
-<span id="L740"><span class="lineNum">     740</span>              : //   staff</span>
-<span id="L741"><span class="lineNum">     741</span>              : //---------------------------------------------------------</span>
-<span id="L742"><span class="lineNum">     742</span>              : </span>
-<span id="L743"><span class="lineNum">     743</span> <span class="tlaUNC">           0 : Staff* Cursor::staff() const</span></span>
-<span id="L744"><span class="lineNum">     744</span>              : {</span>
-<span id="L745"><span class="lineNum">     745</span> <span class="tlaUNC">           0 :     return wrap&lt;Staff&gt;(inputState().staff(), Ownership::SCORE);</span></span>
-<span id="L746"><span class="lineNum">     746</span>              : }</span>
-<span id="L747"><span class="lineNum">     747</span>              : </span>
-<span id="L748"><span class="lineNum">     748</span>              : //---------------------------------------------------------</span>
-<span id="L749"><span class="lineNum">     749</span>              : //   setStaffIdx</span>
-<span id="L750"><span class="lineNum">     750</span>              : //---------------------------------------------------------</span>
-<span id="L751"><span class="lineNum">     751</span>              : </span>
-<span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC">           0 : void Cursor::setStaffIdx(int v)</span></span>
-<span id="L753"><span class="lineNum">     753</span>              : {</span>
-<span id="L754"><span class="lineNum">     754</span> <span class="tlaUNC">           0 :     int m_track = v * VOICES + track() % VOICES;</span></span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaUNC">           0 :     setTrack(m_track);</span></span>
-<span id="L756"><span class="lineNum">     756</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L757"><span class="lineNum">     757</span>              : </span>
-<span id="L758"><span class="lineNum">     758</span>              : //---------------------------------------------------------</span>
-<span id="L759"><span class="lineNum">     759</span>              : //   setStaff</span>
-<span id="L760"><span class="lineNum">     760</span>              : ///   \brief Positions the cursor on a specific \ref Staff.</span>
-<span id="L761"><span class="lineNum">     761</span>              : ///   \details As opposed to \ref cursor.setStaffIdx, this</span>
-<span id="L762"><span class="lineNum">     762</span>              : ///   method is used to set the position of the cursor to</span>
-<span id="L763"><span class="lineNum">     763</span>              : ///   a specific \ref Staff object (as obtained e.g. through</span>
-<span id="L764"><span class="lineNum">     764</span>              : ///   \ref element.staff).</span>
-<span id="L765"><span class="lineNum">     765</span>              : ///   \since MuseScore 4.6</span>
-<span id="L766"><span class="lineNum">     766</span>              : ///   \see \ref Staff</span>
-<span id="L767"><span class="lineNum">     767</span>              : //---------------------------------------------------------</span>
-<span id="L768"><span class="lineNum">     768</span>              : </span>
-<span id="L769"><span class="lineNum">     769</span> <span class="tlaUNC">           0 : void Cursor::setStaff(Staff* s)</span></span>
-<span id="L770"><span class="lineNum">     770</span>              : {</span>
-<span id="L771"><span class="lineNum">     771</span> <span class="tlaUNC">           0 :     mu::engraving::Staff* staff = s-&gt;staff();</span></span>
-<span id="L772"><span class="lineNum">     772</span> <span class="tlaUNC">           0 :     if (!staff || staff == inputState().staff()) {</span></span>
-<span id="L773"><span class="lineNum">     773</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L774"><span class="lineNum">     774</span>              :     }</span>
-<span id="L775"><span class="lineNum">     775</span>              : </span>
-<span id="L776"><span class="lineNum">     776</span> <span class="tlaUNC">           0 :     int m_track = int(staff-&gt;idx()) + track() % VOICES;</span></span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaUNC">           0 :     setTrack(m_track);</span></span>
-<span id="L778"><span class="lineNum">     778</span>              : }</span>
-<span id="L779"><span class="lineNum">     779</span>              : </span>
-<span id="L780"><span class="lineNum">     780</span>              : //---------------------------------------------------------</span>
-<span id="L781"><span class="lineNum">     781</span>              : //   segment</span>
-<span id="L782"><span class="lineNum">     782</span>              : //---------------------------------------------------------</span>
-<span id="L783"><span class="lineNum">     783</span>              : </span>
-<span id="L784"><span class="lineNum">     784</span> <span class="tlaGNC tlaBgGNC">          72 : mu::engraving::Segment* Cursor::segment() const</span></span>
-<span id="L785"><span class="lineNum">     785</span>              : {</span>
-<span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC">          72 :     return inputState().segment();</span></span>
-<span id="L787"><span class="lineNum">     787</span>              : }</span>
-<span id="L788"><span class="lineNum">     788</span>              : </span>
-<span id="L789"><span class="lineNum">     789</span>              : //---------------------------------------------------------</span>
-<span id="L790"><span class="lineNum">     790</span>              : //   setSegment</span>
-<span id="L791"><span class="lineNum">     791</span>              : //---------------------------------------------------------</span>
-<span id="L792"><span class="lineNum">     792</span>              : </span>
-<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">          22 : void Cursor::setSegment(mu::engraving::Segment* seg)</span></span>
-<span id="L794"><span class="lineNum">     794</span>              : {</span>
-<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">          22 :     inputState().setSegment(seg);</span></span>
-<span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">          22 : }</span></span>
-<span id="L797"><span class="lineNum">     797</span>              : </span>
-<span id="L798"><span class="lineNum">     798</span>              : //---------------------------------------------------------</span>
-<span id="L799"><span class="lineNum">     799</span>              : //   prevInTrack</span>
-<span id="L800"><span class="lineNum">     800</span>              : //    go to first segment before _segment which has notes / rests in m_track</span>
-<span id="L801"><span class="lineNum">     801</span>              : //---------------------------------------------------------</span>
-<span id="L802"><span class="lineNum">     802</span>              : </span>
-<span id="L803"><span class="lineNum">     803</span> <span class="tlaUNC tlaBgUNC">           0 : void Cursor::prevInTrack()</span></span>
-<span id="L804"><span class="lineNum">     804</span>              : {</span>
-<span id="L805"><span class="lineNum">     805</span> <span class="tlaUNC">           0 :     const int t = track();</span></span>
-<span id="L806"><span class="lineNum">     806</span> <span class="tlaUNC">           0 :     mu::engraving::Segment* seg = segment();</span></span>
-<span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :     if (seg) {</span></span>
-<span id="L808"><span class="lineNum">     808</span> <span class="tlaUNC">           0 :         seg = seg-&gt;prev1(m_filter);</span></span>
-<span id="L809"><span class="lineNum">     809</span>              :     }</span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaUNC">           0 :     while (seg &amp;&amp; !seg-&gt;element(t)) {</span></span>
-<span id="L811"><span class="lineNum">     811</span> <span class="tlaUNC">           0 :         seg = seg-&gt;prev1(m_filter);</span></span>
-<span id="L812"><span class="lineNum">     812</span>              :     }</span>
-<span id="L813"><span class="lineNum">     813</span> <span class="tlaUNC">           0 :     setSegment(seg);</span></span>
-<span id="L814"><span class="lineNum">     814</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L815"><span class="lineNum">     815</span>              : </span>
-<span id="L816"><span class="lineNum">     816</span>              : //---------------------------------------------------------</span>
-<span id="L817"><span class="lineNum">     817</span>              : //   nextInTrack</span>
-<span id="L818"><span class="lineNum">     818</span>              : //    go to first segment at or after _segment which has notes / rests in m_track</span>
-<span id="L819"><span class="lineNum">     819</span>              : //---------------------------------------------------------</span>
-<span id="L820"><span class="lineNum">     820</span>              : </span>
-<span id="L821"><span class="lineNum">     821</span> <span class="tlaGNC tlaBgGNC">          11 : void Cursor::nextInTrack()</span></span>
-<span id="L822"><span class="lineNum">     822</span>              : {</span>
-<span id="L823"><span class="lineNum">     823</span> <span class="tlaGNC">          11 :     const int t = track();</span></span>
-<span id="L824"><span class="lineNum">     824</span> <span class="tlaGNC">          11 :     mu::engraving::Segment* seg = segment();</span></span>
-<span id="L825"><span class="lineNum">     825</span> <span class="tlaGNC">          11 :     while (seg &amp;&amp; !seg-&gt;element(t)) {</span></span>
-<span id="L826"><span class="lineNum">     826</span> <span class="tlaUNC tlaBgUNC">           0 :         seg = seg-&gt;next1(m_filter);</span></span>
-<span id="L827"><span class="lineNum">     827</span>              :     }</span>
-<span id="L828"><span class="lineNum">     828</span> <span class="tlaGNC tlaBgGNC">          11 :     setSegment(seg);</span></span>
-<span id="L829"><span class="lineNum">     829</span> <span class="tlaGNC">          11 : }</span></span>
-<span id="L830"><span class="lineNum">     830</span>              : </span>
-<span id="L831"><span class="lineNum">     831</span>              : //---------------------------------------------------------</span>
-<span id="L832"><span class="lineNum">     832</span>              : //   qmlKeySignature</span>
-<span id="L833"><span class="lineNum">     833</span>              : //   read access to key signature in current track</span>
-<span id="L834"><span class="lineNum">     834</span>              : //   at current position</span>
-<span id="L835"><span class="lineNum">     835</span>              : //---------------------------------------------------------</span>
-<span id="L836"><span class="lineNum">     836</span>              : </span>
-<span id="L837"><span class="lineNum">     837</span> <span class="tlaUNC tlaBgUNC">           0 : int Cursor::qmlKeySignature()</span></span>
-<span id="L838"><span class="lineNum">     838</span>              : {</span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaUNC">           0 :     return static_cast&lt;int&gt;(inputState().staff()-&gt;key(fraction()));</span></span>
-<span id="L840"><span class="lineNum">     840</span>              : }</span>
-<span id="L841"><span class="lineNum">     841</span>              : </span>
-<span id="L842"><span class="lineNum">     842</span>              : //---------------------------------------------------------</span>
-<span id="L843"><span class="lineNum">     843</span>              : //   inputStateString</span>
-<span id="L844"><span class="lineNum">     844</span>              : //---------------------------------------------------------</span>
-<span id="L845"><span class="lineNum">     845</span>              : </span>
-<span id="L846"><span class="lineNum">     846</span> <span class="tlaUNC">           0 : int Cursor::inputStateString() const</span></span>
-<span id="L847"><span class="lineNum">     847</span>              : {</span>
-<span id="L848"><span class="lineNum">     848</span> <span class="tlaUNC">           0 :     const InputState&amp; istate = inputState();</span></span>
-<span id="L849"><span class="lineNum">     849</span> <span class="tlaUNC">           0 :     return istate.staff()-&gt;staffType(istate.tick())-&gt;visualStringToPhys(istate.string());</span></span>
-<span id="L850"><span class="lineNum">     850</span>              : }</span>
-<span id="L851"><span class="lineNum">     851</span>              : </span>
-<span id="L852"><span class="lineNum">     852</span> <span class="tlaUNC">           0 : void Cursor::setInputStateString(int string)</span></span>
-<span id="L853"><span class="lineNum">     853</span>              : {</span>
-<span id="L854"><span class="lineNum">     854</span> <span class="tlaUNC">           0 :     InputState&amp; istate = inputState();</span></span>
-<span id="L855"><span class="lineNum">     855</span> <span class="tlaUNC">           0 :     const int visString = istate.staff()-&gt;staffType(istate.tick())-&gt;visualStringToPhys(string);</span></span>
-<span id="L856"><span class="lineNum">     856</span> <span class="tlaUNC">           0 :     istate.setString(visString);</span></span>
-<span id="L857"><span class="lineNum">     857</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC">           9 :     m_score-&gt;expandVoice(inputState().segment(), inputState().track());</span></span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">           9 :     mu::engraving::ChordRest* cr = inputState().cr();</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">           9 :     if (!cr) { // inside a longer chord/rest of this voice: expandVoice() can't start one here</span></span>
+<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">           1 :         LOGW(&quot;Cursor::addTuplet: cannot add a tuplet inside a longer chord or rest&quot;);</span></span>
+<span id="L566"><span class="lineNum">     566</span> <span class="tlaGNC">           1 :         return;</span></span>
+<span id="L567"><span class="lineNum">     567</span>              :     }</span>
+<span id="L568"><span class="lineNum">     568</span>              : </span>
+<span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC">           8 :     const mu::engraving::MStyle&amp; style = m_score-&gt;style();</span></span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">           8 :     const auto numberType = mu::engraving::TupletNumberType(style.styleI(mu::engraving::Sid::tupletNumberType));</span></span>
+<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">           8 :     const auto bracketType = mu::engraving::TupletBracketType(style.styleI(mu::engraving::Sid::tupletBracketType));</span></span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">           8 :     if (!m_score-&gt;addTuplet(cr, fRatio, TDuration(baseLen), numberType, bracketType)) {</span></span>
+<span id="L573"><span class="lineNum">     573</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L574"><span class="lineNum">     574</span>              :     }</span>
+<span id="L575"><span class="lineNum">     575</span>              : </span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC tlaBgGNC">           8 :     inputState().setSegment(tupletMeasure-&gt;tick2segment(tupletTick));</span></span>
+<span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC">           8 :     inputState().setDuration(baseLen);</span></span>
+<span id="L578"><span class="lineNum">     578</span>              : }</span>
+<span id="L579"><span class="lineNum">     579</span>              : </span>
+<span id="L580"><span class="lineNum">     580</span>              : //---------------------------------------------------------</span>
+<span id="L581"><span class="lineNum">     581</span>              : //   setDuration</span>
+<span id="L582"><span class="lineNum">     582</span>              : ///   Set duration of the notes added by the cursor.</span>
+<span id="L583"><span class="lineNum">     583</span>              : ///   \param z: numerator</span>
+<span id="L584"><span class="lineNum">     584</span>              : ///   \param n: denominator. If n == 0, sets duration to</span>
+<span id="L585"><span class="lineNum">     585</span>              : ///   a quarter.</span>
+<span id="L586"><span class="lineNum">     586</span>              : ///   \see addNote()</span>
+<span id="L587"><span class="lineNum">     587</span>              : //---------------------------------------------------------</span>
+<span id="L588"><span class="lineNum">     588</span>              : </span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">           8 : void Cursor::setDuration(int z, int n)</span></span>
+<span id="L590"><span class="lineNum">     590</span>              : {</span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">           8 :     TDuration d(mu::engraving::Fraction(z, n));</span></span>
+<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">           8 :     if (!d.isValid()) {</span></span>
+<span id="L593"><span class="lineNum">     593</span> <span class="tlaUNC tlaBgUNC">           0 :         d = TDuration(DurationType::V_QUARTER);</span></span>
+<span id="L594"><span class="lineNum">     594</span>              :     }</span>
+<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC tlaBgGNC">           8 :     inputState().setDuration(d);</span></span>
+<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">           8 : }</span></span>
+<span id="L597"><span class="lineNum">     597</span>              : </span>
+<span id="L598"><span class="lineNum">     598</span>              : //---------------------------------------------------------</span>
+<span id="L599"><span class="lineNum">     599</span>              : //   tick</span>
+<span id="L600"><span class="lineNum">     600</span>              : //---------------------------------------------------------</span>
+<span id="L601"><span class="lineNum">     601</span>              : </span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">           1 : int Cursor::tick()</span></span>
+<span id="L603"><span class="lineNum">     603</span>              : {</span>
+<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">           1 :     const mu::engraving::Segment* seg = segment();</span></span>
+<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">           1 :     return seg ? seg-&gt;tick().ticks() : 0;</span></span>
+<span id="L606"><span class="lineNum">     606</span>              : }</span>
+<span id="L607"><span class="lineNum">     607</span>              : </span>
+<span id="L608"><span class="lineNum">     608</span> <span class="tlaUNC tlaBgUNC">           0 : int Cursor::utick()</span></span>
+<span id="L609"><span class="lineNum">     609</span>              : {</span>
+<span id="L610"><span class="lineNum">     610</span> <span class="tlaUNC">           0 :     return m_score-&gt;repeatList(true).tick2utick(tick());</span></span>
+<span id="L611"><span class="lineNum">     611</span>              : }</span>
+<span id="L612"><span class="lineNum">     612</span>              : </span>
+<span id="L613"><span class="lineNum">     613</span> <span class="tlaUNC">           0 : mu::engraving::Fraction Cursor::fraction() const</span></span>
+<span id="L614"><span class="lineNum">     614</span>              : {</span>
+<span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC">           0 :     const mu::engraving::Segment* seg = segment();</span></span>
+<span id="L616"><span class="lineNum">     616</span> <span class="tlaUNC">           0 :     return seg ? seg-&gt;tick() : mu::engraving::Fraction(0, 1);</span></span>
+<span id="L617"><span class="lineNum">     617</span>              : }</span>
+<span id="L618"><span class="lineNum">     618</span>              : </span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaUNC">           0 : Fraction* Cursor::qmlFraction() const</span></span>
+<span id="L620"><span class="lineNum">     620</span>              : {</span>
+<span id="L621"><span class="lineNum">     621</span> <span class="tlaUNC">           0 :     return wrap(fraction());</span></span>
+<span id="L622"><span class="lineNum">     622</span>              : }</span>
+<span id="L623"><span class="lineNum">     623</span>              : </span>
+<span id="L624"><span class="lineNum">     624</span>              : //---------------------------------------------------------</span>
+<span id="L625"><span class="lineNum">     625</span>              : //   time</span>
+<span id="L626"><span class="lineNum">     626</span>              : /// Time at tick position, read only</span>
+<span id="L627"><span class="lineNum">     627</span>              : /// \param includeRepeats since 4.6</span>
+<span id="L628"><span class="lineNum">     628</span>              : //---------------------------------------------------------</span>
+<span id="L629"><span class="lineNum">     629</span>              : </span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaUNC">           0 : double Cursor::time(bool includeRepeats)</span></span>
+<span id="L631"><span class="lineNum">     631</span>              : {</span>
+<span id="L632"><span class="lineNum">     632</span> <span class="tlaUNC">           0 :     return m_score-&gt;tempoTimeline(includeRepeats).utick2utime(includeRepeats ? utick() : tick()) * 1000;</span></span>
+<span id="L633"><span class="lineNum">     633</span>              : }</span>
+<span id="L634"><span class="lineNum">     634</span>              : </span>
+<span id="L635"><span class="lineNum">     635</span>              : //---------------------------------------------------------</span>
+<span id="L636"><span class="lineNum">     636</span>              : //   tempo</span>
+<span id="L637"><span class="lineNum">     637</span>              : //---------------------------------------------------------</span>
+<span id="L638"><span class="lineNum">     638</span>              : </span>
+<span id="L639"><span class="lineNum">     639</span> <span class="tlaUNC">           0 : qreal Cursor::tempo()</span></span>
+<span id="L640"><span class="lineNum">     640</span>              : {</span>
+<span id="L641"><span class="lineNum">     641</span> <span class="tlaUNC">           0 :     return m_score-&gt;tempo(fraction()).val;</span></span>
+<span id="L642"><span class="lineNum">     642</span>              : }</span>
+<span id="L643"><span class="lineNum">     643</span>              : </span>
+<span id="L644"><span class="lineNum">     644</span>              : //---------------------------------------------------------</span>
+<span id="L645"><span class="lineNum">     645</span>              : //   currentElement</span>
+<span id="L646"><span class="lineNum">     646</span>              : //---------------------------------------------------------</span>
+<span id="L647"><span class="lineNum">     647</span>              : </span>
+<span id="L648"><span class="lineNum">     648</span> <span class="tlaUNC">           0 : mu::engraving::EngravingItem* Cursor::currentElement() const</span></span>
+<span id="L649"><span class="lineNum">     649</span>              : {</span>
+<span id="L650"><span class="lineNum">     650</span> <span class="tlaUNC">           0 :     const int t = track();</span></span>
+<span id="L651"><span class="lineNum">     651</span> <span class="tlaUNC">           0 :     mu::engraving::Segment* seg = segment();</span></span>
+<span id="L652"><span class="lineNum">     652</span> <span class="tlaUNC">           0 :     return seg &amp;&amp; seg-&gt;element(t) ? seg-&gt;element(t) : nullptr;</span></span>
+<span id="L653"><span class="lineNum">     653</span>              : }</span>
+<span id="L654"><span class="lineNum">     654</span>              : </span>
+<span id="L655"><span class="lineNum">     655</span>              : //---------------------------------------------------------</span>
+<span id="L656"><span class="lineNum">     656</span>              : //   segment</span>
+<span id="L657"><span class="lineNum">     657</span>              : //---------------------------------------------------------</span>
+<span id="L658"><span class="lineNum">     658</span>              : </span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaUNC">           0 : Segment* Cursor::qmlSegment() const</span></span>
+<span id="L660"><span class="lineNum">     660</span>              : {</span>
+<span id="L661"><span class="lineNum">     661</span> <span class="tlaUNC">           0 :     mu::engraving::Segment* seg = segment();</span></span>
+<span id="L662"><span class="lineNum">     662</span> <span class="tlaUNC">           0 :     return seg ? wrap&lt;Segment&gt;(seg, Ownership::SCORE) : nullptr;</span></span>
+<span id="L663"><span class="lineNum">     663</span>              : }</span>
+<span id="L664"><span class="lineNum">     664</span>              : </span>
+<span id="L665"><span class="lineNum">     665</span>              : //---------------------------------------------------------</span>
+<span id="L666"><span class="lineNum">     666</span>              : //   element</span>
+<span id="L667"><span class="lineNum">     667</span>              : //---------------------------------------------------------</span>
+<span id="L668"><span class="lineNum">     668</span>              : </span>
+<span id="L669"><span class="lineNum">     669</span> <span class="tlaUNC">           0 : EngravingItem* Cursor::element() const</span></span>
+<span id="L670"><span class="lineNum">     670</span>              : {</span>
+<span id="L671"><span class="lineNum">     671</span> <span class="tlaUNC">           0 :     mu::engraving::EngravingItem* e = currentElement();</span></span>
+<span id="L672"><span class="lineNum">     672</span> <span class="tlaUNC">           0 :     if (!e) {</span></span>
+<span id="L673"><span class="lineNum">     673</span> <span class="tlaUNC">           0 :         return nullptr;</span></span>
+<span id="L674"><span class="lineNum">     674</span>              :     }</span>
+<span id="L675"><span class="lineNum">     675</span> <span class="tlaUNC">           0 :     return wrap(e, Ownership::SCORE);</span></span>
+<span id="L676"><span class="lineNum">     676</span>              : }</span>
+<span id="L677"><span class="lineNum">     677</span>              : </span>
+<span id="L678"><span class="lineNum">     678</span>              : //---------------------------------------------------------</span>
+<span id="L679"><span class="lineNum">     679</span>              : //   measure</span>
+<span id="L680"><span class="lineNum">     680</span>              : //---------------------------------------------------------</span>
+<span id="L681"><span class="lineNum">     681</span>              : </span>
+<span id="L682"><span class="lineNum">     682</span> <span class="tlaUNC">           0 : Measure* Cursor::measure() const</span></span>
+<span id="L683"><span class="lineNum">     683</span>              : {</span>
+<span id="L684"><span class="lineNum">     684</span> <span class="tlaUNC">           0 :     mu::engraving::Segment* seg = segment();</span></span>
+<span id="L685"><span class="lineNum">     685</span> <span class="tlaUNC">           0 :     return seg ? wrap&lt;Measure&gt;(seg-&gt;measure(), Ownership::SCORE) : nullptr;</span></span>
+<span id="L686"><span class="lineNum">     686</span>              : }</span>
+<span id="L687"><span class="lineNum">     687</span>              : </span>
+<span id="L688"><span class="lineNum">     688</span>              : //---------------------------------------------------------</span>
+<span id="L689"><span class="lineNum">     689</span>              : //   track</span>
+<span id="L690"><span class="lineNum">     690</span>              : //---------------------------------------------------------</span>
+<span id="L691"><span class="lineNum">     691</span>              : </span>
+<span id="L692"><span class="lineNum">     692</span> <span class="tlaGNC tlaBgGNC">          47 : int Cursor::track() const</span></span>
+<span id="L693"><span class="lineNum">     693</span>              : {</span>
+<span id="L694"><span class="lineNum">     694</span> <span class="tlaGNC">          47 :     return static_cast&lt;int&gt;(inputState().track());</span></span>
+<span id="L695"><span class="lineNum">     695</span>              : }</span>
+<span id="L696"><span class="lineNum">     696</span>              : </span>
+<span id="L697"><span class="lineNum">     697</span>              : //---------------------------------------------------------</span>
+<span id="L698"><span class="lineNum">     698</span>              : //   setTrack</span>
+<span id="L699"><span class="lineNum">     699</span>              : //---------------------------------------------------------</span>
+<span id="L700"><span class="lineNum">     700</span>              : </span>
+<span id="L701"><span class="lineNum">     701</span> <span class="tlaGNC">           7 : void Cursor::setTrack(int track)</span></span>
+<span id="L702"><span class="lineNum">     702</span>              : {</span>
+<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">           7 :     if (m_score-&gt;ntracks() == 0) {</span></span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L705"><span class="lineNum">     705</span>              :     }</span>
+<span id="L706"><span class="lineNum">     706</span> <span class="tlaGNC tlaBgGNC">           7 :     int m_track = std::clamp(track, 0, int(m_score-&gt;ntracks() - 1));</span></span>
+<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">           7 :     inputState().setTrack(static_cast&lt;track_idx_t&gt;(m_track));</span></span>
+<span id="L708"><span class="lineNum">     708</span>              : }</span>
+<span id="L709"><span class="lineNum">     709</span>              : </span>
+<span id="L710"><span class="lineNum">     710</span>              : //---------------------------------------------------------</span>
+<span id="L711"><span class="lineNum">     711</span>              : //   voice</span>
+<span id="L712"><span class="lineNum">     712</span>              : //---------------------------------------------------------</span>
+<span id="L713"><span class="lineNum">     713</span>              : </span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaUNC tlaBgUNC">           0 : int Cursor::voice() const</span></span>
+<span id="L715"><span class="lineNum">     715</span>              : {</span>
+<span id="L716"><span class="lineNum">     716</span> <span class="tlaUNC">           0 :     return track() % VOICES;</span></span>
+<span id="L717"><span class="lineNum">     717</span>              : }</span>
+<span id="L718"><span class="lineNum">     718</span>              : </span>
+<span id="L719"><span class="lineNum">     719</span>              : //---------------------------------------------------------</span>
+<span id="L720"><span class="lineNum">     720</span>              : //   setVoice</span>
+<span id="L721"><span class="lineNum">     721</span>              : //---------------------------------------------------------</span>
+<span id="L722"><span class="lineNum">     722</span>              : </span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC tlaBgGNC">           4 : void Cursor::setVoice(int v)</span></span>
+<span id="L724"><span class="lineNum">     724</span>              : {</span>
+<span id="L725"><span class="lineNum">     725</span> <span class="tlaGNC">           4 :     int m_track = (track() / VOICES) * VOICES + v;</span></span>
+<span id="L726"><span class="lineNum">     726</span> <span class="tlaGNC">           4 :     setTrack(m_track);</span></span>
+<span id="L727"><span class="lineNum">     727</span> <span class="tlaGNC">           4 : }</span></span>
+<span id="L728"><span class="lineNum">     728</span>              : </span>
+<span id="L729"><span class="lineNum">     729</span>              : //---------------------------------------------------------</span>
+<span id="L730"><span class="lineNum">     730</span>              : //   staffIdx</span>
+<span id="L731"><span class="lineNum">     731</span>              : //---------------------------------------------------------</span>
+<span id="L732"><span class="lineNum">     732</span>              : </span>
+<span id="L733"><span class="lineNum">     733</span> <span class="tlaUNC tlaBgUNC">           0 : int Cursor::staffIdx() const</span></span>
+<span id="L734"><span class="lineNum">     734</span>              : {</span>
+<span id="L735"><span class="lineNum">     735</span> <span class="tlaUNC">           0 :     return track() / VOICES;</span></span>
+<span id="L736"><span class="lineNum">     736</span>              : }</span>
+<span id="L737"><span class="lineNum">     737</span>              : </span>
+<span id="L738"><span class="lineNum">     738</span>              : //---------------------------------------------------------</span>
+<span id="L739"><span class="lineNum">     739</span>              : //   staff</span>
+<span id="L740"><span class="lineNum">     740</span>              : //---------------------------------------------------------</span>
+<span id="L741"><span class="lineNum">     741</span>              : </span>
+<span id="L742"><span class="lineNum">     742</span> <span class="tlaUNC">           0 : Staff* Cursor::staff() const</span></span>
+<span id="L743"><span class="lineNum">     743</span>              : {</span>
+<span id="L744"><span class="lineNum">     744</span> <span class="tlaUNC">           0 :     return wrap&lt;Staff&gt;(inputState().staff(), Ownership::SCORE);</span></span>
+<span id="L745"><span class="lineNum">     745</span>              : }</span>
+<span id="L746"><span class="lineNum">     746</span>              : </span>
+<span id="L747"><span class="lineNum">     747</span>              : //---------------------------------------------------------</span>
+<span id="L748"><span class="lineNum">     748</span>              : //   setStaffIdx</span>
+<span id="L749"><span class="lineNum">     749</span>              : //---------------------------------------------------------</span>
+<span id="L750"><span class="lineNum">     750</span>              : </span>
+<span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC tlaBgGNC">           3 : void Cursor::setStaffIdx(int v)</span></span>
+<span id="L752"><span class="lineNum">     752</span>              : {</span>
+<span id="L753"><span class="lineNum">     753</span> <span class="tlaGNC">           3 :     int m_track = v * VOICES + track() % VOICES;</span></span>
+<span id="L754"><span class="lineNum">     754</span> <span class="tlaGNC">           3 :     setTrack(m_track);</span></span>
+<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">           3 : }</span></span>
+<span id="L756"><span class="lineNum">     756</span>              : </span>
+<span id="L757"><span class="lineNum">     757</span>              : //---------------------------------------------------------</span>
+<span id="L758"><span class="lineNum">     758</span>              : //   setStaff</span>
+<span id="L759"><span class="lineNum">     759</span>              : ///   \brief Positions the cursor on a specific \ref Staff.</span>
+<span id="L760"><span class="lineNum">     760</span>              : ///   \details As opposed to \ref cursor.setStaffIdx, this</span>
+<span id="L761"><span class="lineNum">     761</span>              : ///   method is used to set the position of the cursor to</span>
+<span id="L762"><span class="lineNum">     762</span>              : ///   a specific \ref Staff object (as obtained e.g. through</span>
+<span id="L763"><span class="lineNum">     763</span>              : ///   \ref element.staff).</span>
+<span id="L764"><span class="lineNum">     764</span>              : ///   \since MuseScore 4.6</span>
+<span id="L765"><span class="lineNum">     765</span>              : ///   \see \ref Staff</span>
+<span id="L766"><span class="lineNum">     766</span>              : //---------------------------------------------------------</span>
+<span id="L767"><span class="lineNum">     767</span>              : </span>
+<span id="L768"><span class="lineNum">     768</span> <span class="tlaUNC tlaBgUNC">           0 : void Cursor::setStaff(Staff* s)</span></span>
+<span id="L769"><span class="lineNum">     769</span>              : {</span>
+<span id="L770"><span class="lineNum">     770</span> <span class="tlaUNC">           0 :     mu::engraving::Staff* staff = s-&gt;staff();</span></span>
+<span id="L771"><span class="lineNum">     771</span> <span class="tlaUNC">           0 :     if (!staff || staff == inputState().staff()) {</span></span>
+<span id="L772"><span class="lineNum">     772</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L773"><span class="lineNum">     773</span>              :     }</span>
+<span id="L774"><span class="lineNum">     774</span>              : </span>
+<span id="L775"><span class="lineNum">     775</span> <span class="tlaUNC">           0 :     int m_track = int(staff-&gt;idx()) + track() % VOICES;</span></span>
+<span id="L776"><span class="lineNum">     776</span> <span class="tlaUNC">           0 :     setTrack(m_track);</span></span>
+<span id="L777"><span class="lineNum">     777</span>              : }</span>
+<span id="L778"><span class="lineNum">     778</span>              : </span>
+<span id="L779"><span class="lineNum">     779</span>              : //---------------------------------------------------------</span>
+<span id="L780"><span class="lineNum">     780</span>              : //   segment</span>
+<span id="L781"><span class="lineNum">     781</span>              : //---------------------------------------------------------</span>
+<span id="L782"><span class="lineNum">     782</span>              : </span>
+<span id="L783"><span class="lineNum">     783</span> <span class="tlaGNC tlaBgGNC">         202 : mu::engraving::Segment* Cursor::segment() const</span></span>
+<span id="L784"><span class="lineNum">     784</span>              : {</span>
+<span id="L785"><span class="lineNum">     785</span> <span class="tlaGNC">         202 :     return inputState().segment();</span></span>
+<span id="L786"><span class="lineNum">     786</span>              : }</span>
+<span id="L787"><span class="lineNum">     787</span>              : </span>
+<span id="L788"><span class="lineNum">     788</span>              : //---------------------------------------------------------</span>
+<span id="L789"><span class="lineNum">     789</span>              : //   setSegment</span>
+<span id="L790"><span class="lineNum">     790</span>              : //---------------------------------------------------------</span>
+<span id="L791"><span class="lineNum">     791</span>              : </span>
+<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">          80 : void Cursor::setSegment(mu::engraving::Segment* seg)</span></span>
+<span id="L793"><span class="lineNum">     793</span>              : {</span>
+<span id="L794"><span class="lineNum">     794</span> <span class="tlaGNC">          80 :     inputState().setSegment(seg);</span></span>
+<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">          80 : }</span></span>
+<span id="L796"><span class="lineNum">     796</span>              : </span>
+<span id="L797"><span class="lineNum">     797</span>              : //---------------------------------------------------------</span>
+<span id="L798"><span class="lineNum">     798</span>              : //   prevInTrack</span>
+<span id="L799"><span class="lineNum">     799</span>              : //    go to first segment before _segment which has notes / rests in m_track</span>
+<span id="L800"><span class="lineNum">     800</span>              : //---------------------------------------------------------</span>
+<span id="L801"><span class="lineNum">     801</span>              : </span>
+<span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC tlaBgUNC">           0 : void Cursor::prevInTrack()</span></span>
+<span id="L803"><span class="lineNum">     803</span>              : {</span>
+<span id="L804"><span class="lineNum">     804</span> <span class="tlaUNC">           0 :     const int t = track();</span></span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaUNC">           0 :     mu::engraving::Segment* seg = segment();</span></span>
+<span id="L806"><span class="lineNum">     806</span> <span class="tlaUNC">           0 :     if (seg) {</span></span>
+<span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :         seg = seg-&gt;prev1(m_filter);</span></span>
+<span id="L808"><span class="lineNum">     808</span>              :     }</span>
+<span id="L809"><span class="lineNum">     809</span> <span class="tlaUNC">           0 :     while (seg &amp;&amp; !seg-&gt;element(t)) {</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaUNC">           0 :         seg = seg-&gt;prev1(m_filter);</span></span>
+<span id="L811"><span class="lineNum">     811</span>              :     }</span>
+<span id="L812"><span class="lineNum">     812</span> <span class="tlaUNC">           0 :     setSegment(seg);</span></span>
+<span id="L813"><span class="lineNum">     813</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L814"><span class="lineNum">     814</span>              : </span>
+<span id="L815"><span class="lineNum">     815</span>              : //---------------------------------------------------------</span>
+<span id="L816"><span class="lineNum">     816</span>              : //   nextInTrack</span>
+<span id="L817"><span class="lineNum">     817</span>              : //    go to first segment at or after _segment which has notes / rests in m_track</span>
+<span id="L818"><span class="lineNum">     818</span>              : //---------------------------------------------------------</span>
+<span id="L819"><span class="lineNum">     819</span>              : </span>
+<span id="L820"><span class="lineNum">     820</span> <span class="tlaGNC tlaBgGNC">          40 : void Cursor::nextInTrack()</span></span>
+<span id="L821"><span class="lineNum">     821</span>              : {</span>
+<span id="L822"><span class="lineNum">     822</span> <span class="tlaGNC">          40 :     const int t = track();</span></span>
+<span id="L823"><span class="lineNum">     823</span> <span class="tlaGNC">          40 :     mu::engraving::Segment* seg = segment();</span></span>
+<span id="L824"><span class="lineNum">     824</span> <span class="tlaGNC">          40 :     while (seg &amp;&amp; !seg-&gt;element(t)) {</span></span>
+<span id="L825"><span class="lineNum">     825</span> <span class="tlaUNC tlaBgUNC">           0 :         seg = seg-&gt;next1(m_filter);</span></span>
+<span id="L826"><span class="lineNum">     826</span>              :     }</span>
+<span id="L827"><span class="lineNum">     827</span> <span class="tlaGNC tlaBgGNC">          40 :     setSegment(seg);</span></span>
+<span id="L828"><span class="lineNum">     828</span> <span class="tlaGNC">          40 : }</span></span>
+<span id="L829"><span class="lineNum">     829</span>              : </span>
+<span id="L830"><span class="lineNum">     830</span>              : //---------------------------------------------------------</span>
+<span id="L831"><span class="lineNum">     831</span>              : //   qmlKeySignature</span>
+<span id="L832"><span class="lineNum">     832</span>              : //   read access to key signature in current track</span>
+<span id="L833"><span class="lineNum">     833</span>              : //   at current position</span>
+<span id="L834"><span class="lineNum">     834</span>              : //---------------------------------------------------------</span>
+<span id="L835"><span class="lineNum">     835</span>              : </span>
+<span id="L836"><span class="lineNum">     836</span> <span class="tlaUNC tlaBgUNC">           0 : int Cursor::qmlKeySignature()</span></span>
+<span id="L837"><span class="lineNum">     837</span>              : {</span>
+<span id="L838"><span class="lineNum">     838</span> <span class="tlaUNC">           0 :     return static_cast&lt;int&gt;(inputState().staff()-&gt;key(fraction()));</span></span>
+<span id="L839"><span class="lineNum">     839</span>              : }</span>
+<span id="L840"><span class="lineNum">     840</span>              : </span>
+<span id="L841"><span class="lineNum">     841</span>              : //---------------------------------------------------------</span>
+<span id="L842"><span class="lineNum">     842</span>              : //   inputStateString</span>
+<span id="L843"><span class="lineNum">     843</span>              : //---------------------------------------------------------</span>
+<span id="L844"><span class="lineNum">     844</span>              : </span>
+<span id="L845"><span class="lineNum">     845</span> <span class="tlaUNC">           0 : int Cursor::inputStateString() const</span></span>
+<span id="L846"><span class="lineNum">     846</span>              : {</span>
+<span id="L847"><span class="lineNum">     847</span> <span class="tlaUNC">           0 :     const InputState&amp; istate = inputState();</span></span>
+<span id="L848"><span class="lineNum">     848</span> <span class="tlaUNC">           0 :     return istate.staff()-&gt;staffType(istate.tick())-&gt;visualStringToPhys(istate.string());</span></span>
+<span id="L849"><span class="lineNum">     849</span>              : }</span>
+<span id="L850"><span class="lineNum">     850</span>              : </span>
+<span id="L851"><span class="lineNum">     851</span> <span class="tlaUNC">           0 : void Cursor::setInputStateString(int string)</span></span>
+<span id="L852"><span class="lineNum">     852</span>              : {</span>
+<span id="L853"><span class="lineNum">     853</span> <span class="tlaUNC">           0 :     InputState&amp; istate = inputState();</span></span>
+<span id="L854"><span class="lineNum">     854</span> <span class="tlaUNC">           0 :     const int visString = istate.staff()-&gt;staffType(istate.tick())-&gt;visualStringToPhys(string);</span></span>
+<span id="L855"><span class="lineNum">     855</span> <span class="tlaUNC">           0 :     istate.setString(visString);</span></span>
+<span id="L856"><span class="lineNum">     856</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>
             </tr>

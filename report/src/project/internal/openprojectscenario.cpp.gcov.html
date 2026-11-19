@@ -31,13 +31,13 @@
             <td class="headerValue">filtered_coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">78.8&nbsp;%</td>
-            <td class="headerCovTableEntry">548</td>
-            <td class="headerCovTableEntry">432</td>
+            <td class="headerCovTableEntryMed">79.0&nbsp;%</td>
+            <td class="headerCovTableEntry">553</td>
+            <td class="headerCovTableEntry">437</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -106,25 +106,25 @@
 <span id="L48"><span class="lineNum">      48</span>              : using namespace muse;</span>
 <span id="L49"><span class="lineNum">      49</span>              : using muse::async::Promise;</span>
 <span id="L50"><span class="lineNum">      50</span>              : </span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC tlaBgGNC">          44 : bool OpenProjectScenario::isBusy(BusyStatus status) const</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC tlaBgGNC">          46 : bool OpenProjectScenario::isBusy(BusyStatus status) const</span></span>
 <span id="L52"><span class="lineNum">      52</span>              : {</span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">          44 :     return m_busyStatuses.contains(status);</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">          46 :     return m_busyStatuses.contains(status);</span></span>
 <span id="L54"><span class="lineNum">      54</span>              : }</span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">          71 : void OpenProjectScenario::setBusy(BusyStatus status, bool isBusy)</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">          75 : void OpenProjectScenario::setBusy(BusyStatus status, bool isBusy)</span></span>
 <span id="L57"><span class="lineNum">      57</span>              : {</span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">          71 :     bool wasBusy = m_busyStatuses.contains(status);</span></span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">          71 :     if (wasBusy == isBusy) {</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">          75 :     bool wasBusy = m_busyStatuses.contains(status);</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">          75 :     if (wasBusy == isBusy) {</span></span>
 <span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L61"><span class="lineNum">      61</span>              :     }</span>
 <span id="L62"><span class="lineNum">      62</span>              : </span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC tlaBgGNC">          71 :     if (isBusy) {</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          39 :         m_busyStatuses.insert(status);</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC tlaBgGNC">          75 :     if (isBusy) {</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          41 :         m_busyStatuses.insert(status);</span></span>
 <span id="L65"><span class="lineNum">      65</span>              :     } else {</span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          32 :         m_busyStatuses.erase(status);</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          34 :         m_busyStatuses.erase(status);</span></span>
 <span id="L67"><span class="lineNum">      67</span>              :     }</span>
 <span id="L68"><span class="lineNum">      68</span>              : </span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">          71 :     m_busyChanged.notify();</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">          75 :     m_busyChanged.notify();</span></span>
 <span id="L70"><span class="lineNum">      70</span>              : }</span>
 <span id="L71"><span class="lineNum">      71</span>              : </span>
 <span id="L72"><span class="lineNum">      72</span> <span class="tlaUNC tlaBgUNC">           0 : muse::async::Notification OpenProjectScenario::busyChanged() const</span></span>
@@ -132,18 +132,18 @@
 <span id="L74"><span class="lineNum">      74</span> <span class="tlaUNC">           0 :     return m_busyChanged;</span></span>
 <span id="L75"><span class="lineNum">      75</span>              : }</span>
 <span id="L76"><span class="lineNum">      76</span>              : </span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC tlaBgGNC">          40 : Promise&lt;Ret&gt; OpenProjectScenario::runIfNotBusy(BusyStatus status, const std::function&lt;Promise&lt;Ret&gt;()&gt;&amp; flow)</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC tlaBgGNC">          42 : Promise&lt;Ret&gt; OpenProjectScenario::runIfNotBusy(BusyStatus status, const std::function&lt;Promise&lt;Ret&gt;()&gt;&amp; flow)</span></span>
 <span id="L78"><span class="lineNum">      78</span>              : {</span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">          40 :     if (isBusy(status)) {</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">          42 :     if (isBusy(status)) {</span></span>
 <span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">           1 :         return resolvedPromise(make_ret(Ret::Code::Busy));</span></span>
 <span id="L81"><span class="lineNum">      81</span>              :     }</span>
 <span id="L82"><span class="lineNum">      82</span>              : </span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">          39 :     setBusy(status, true);</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">          41 :     setBusy(status, true);</span></span>
 <span id="L84"><span class="lineNum">      84</span>              : </span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">          78 :     return flow().then&lt;Ret&gt;(this, [this, status](const Ret&amp; ret, auto resolve) {</span></span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">          32 :         setBusy(status, false);</span></span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">          32 :         return resolve(ret);</span></span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          39 :     });</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">          82 :     return flow().then&lt;Ret&gt;(this, [this, status](const Ret&amp; ret, auto resolve) {</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">          34 :         setBusy(status, false);</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">          34 :         return resolve(ret);</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          41 :     });</span></span>
 <span id="L89"><span class="lineNum">      89</span>              : }</span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
 <span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">           2 : Promise&lt;RetVal&lt;Val&gt; &gt; OpenProjectScenario::openDialog(const UriQuery&amp; query) const</span></span>
@@ -335,30 +335,30 @@
 <span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">           1 :     return resolvedPromise(make_ret(Err::UnsupportedUrl));</span></span>
 <span id="L278"><span class="lineNum">     278</span>              : }</span>
 <span id="L279"><span class="lineNum">     279</span>              : </span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">          24 : Promise&lt;Ret&gt; OpenProjectScenario::openProject(const muse::io::path_t&amp; givenPath, const QString&amp; displayNameOverride)</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">          26 : Promise&lt;Ret&gt; OpenProjectScenario::openProject(const muse::io::path_t&amp; givenPath, const QString&amp; displayNameOverride)</span></span>
 <span id="L281"><span class="lineNum">     281</span>              : {</span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">          48 :     return runIfNotBusy(BusyStatus::Opening, [this, givenPath, displayNameOverride]() -&gt; Promise&lt;Ret&gt; {</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">          52 :     return runIfNotBusy(BusyStatus::Opening, [this, givenPath, displayNameOverride]() -&gt; Promise&lt;Ret&gt; {</span></span>
 <span id="L283"><span class="lineNum">     283</span>              :         //! Step 1. Take absolute path</span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">          23 :         muse::io::path_t actualPath = fileSystem()-&gt;absoluteFilePath(givenPath);</span></span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">          23 :         if (actualPath.empty()) {</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">          25 :         muse::io::path_t actualPath = fileSystem()-&gt;absoluteFilePath(givenPath);</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">          25 :         if (actualPath.empty()) {</span></span>
 <span id="L286"><span class="lineNum">     286</span>              :             // We assume that a valid path has been specified to this method</span>
 <span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">           1 :             return resolvedPromise(make_ret(Ret::Code::UnknownError));</span></span>
 <span id="L288"><span class="lineNum">     288</span>              :         }</span>
 <span id="L289"><span class="lineNum">     289</span>              : </span>
 <span id="L290"><span class="lineNum">     290</span>              :         //! Step 2. If the project is already open in the current window, then just switch to showing the notation</span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">          22 :         if (isProjectOpened(actualPath)) {</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">          24 :         if (isProjectOpened(actualPath)) {</span></span>
 <span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">           1 :             return resolvedPromise(finishOpening());</span></span>
 <span id="L293"><span class="lineNum">     293</span>              :         }</span>
 <span id="L294"><span class="lineNum">     294</span>              : </span>
 <span id="L295"><span class="lineNum">     295</span>              :         //! Step 3. Check, if the project already opened in another window, then activate the window with the project</span>
-<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">          21 :         if (multiwindowsProvider()-&gt;isProjectAlreadyOpened(actualPath)) {</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">          23 :         if (multiwindowsProvider()-&gt;isProjectAlreadyOpened(actualPath)) {</span></span>
 <span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">           1 :             multiwindowsProvider()-&gt;activateWindowWithProject(actualPath);</span></span>
 <span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">           1 :             return resolvedPromise(make_ok());</span></span>
 <span id="L299"><span class="lineNum">     299</span>              :         }</span>
 <span id="L300"><span class="lineNum">     300</span>              : </span>
 <span id="L301"><span class="lineNum">     301</span>              :         //! Step 4. Check, if a any project is already open in the current window,</span>
 <span id="L302"><span class="lineNum">     302</span>              :         //! then create a new instance</span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">          20 :         if (projectSession()-&gt;project()) {</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">          22 :         if (projectSession()-&gt;project()) {</span></span>
 <span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">           3 :             QStringList args;</span></span>
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">           3 :             args &lt;&lt; actualPath.toQString();</span></span>
 <span id="L306"><span class="lineNum">     306</span>              : </span>
@@ -371,7 +371,7 @@
 <span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">           3 :         }</span></span>
 <span id="L314"><span class="lineNum">     314</span>              : </span>
 <span id="L315"><span class="lineNum">     315</span>              :         //! Step 5. If it's a cloud project, download the latest version</span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">          17 :         if (configuration()-&gt;isCloudProject(actualPath) &amp;&amp; !configuration()-&gt;isLegacyCloudProject(actualPath)) {</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">          19 :         if (configuration()-&gt;isCloudProject(actualPath) &amp;&amp; !configuration()-&gt;isLegacyCloudProject(actualPath)) {</span></span>
 <span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">           6 :             return museScoreComService()-&gt;authorization()-&gt;checkCloudIsAvailable()</span></span>
 <span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">           6 :                    .then&lt;Ret&gt;(this, [this, actualPath, displayNameOverride](const Ret&amp; isCloudAvailable, auto resolve) {</span></span>
 <span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">           3 :                 if (isCloudAvailable) {</span></span>
@@ -398,28 +398,28 @@
 <span id="L340"><span class="lineNum">     340</span>              :         }</span>
 <span id="L341"><span class="lineNum">     341</span>              : </span>
 <span id="L342"><span class="lineNum">     342</span>              :         //! Step 6. Open project in the current window</span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">          14 :         return doOpenProject(actualPath);</span></span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">          71 :     });</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">          16 :         return doOpenProject(actualPath);</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">          77 :     });</span></span>
 <span id="L345"><span class="lineNum">     345</span>              : }</span>
 <span id="L346"><span class="lineNum">     346</span>              : </span>
-<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">          18 : Promise&lt;RetVal&lt;INotationProjectPtr&gt; &gt; OpenProjectScenario::loadProject(const muse::io::path_t&amp; filePath)</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">          20 : Promise&lt;RetVal&lt;INotationProjectPtr&gt; &gt; OpenProjectScenario::loadProject(const muse::io::path_t&amp; filePath)</span></span>
 <span id="L348"><span class="lineNum">     348</span>              : {</span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">          19 :     TRACEFUNC;</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">          21 :     TRACEFUNC;</span></span>
 <span id="L350"><span class="lineNum">     350</span>              : </span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">          18 :     const auto project = projectCreator()-&gt;newProject(iocContext());</span></span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">          18 :     IF_ASSERT_FAILED(project) {</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">          20 :     const auto project = projectCreator()-&gt;newProject(iocContext());</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">          20 :     IF_ASSERT_FAILED(project) {</span></span>
 <span id="L353"><span class="lineNum">     353</span> <span class="tlaUNC tlaBgUNC">           0 :         return resolvedPromise(RetVal&lt;INotationProjectPtr&gt;(make_ret(Ret::Code::InternalError)));</span></span>
 <span id="L354"><span class="lineNum">     354</span>              :     }</span>
 <span id="L355"><span class="lineNum">     355</span>              : </span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC tlaBgGNC">          18 :     const bool hasUnsavedChanges = projectAutoSaver()-&gt;projectHasUnsavedChanges(filePath);</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC tlaBgGNC">          20 :     const bool hasUnsavedChanges = projectAutoSaver()-&gt;projectHasUnsavedChanges(filePath);</span></span>
 <span id="L357"><span class="lineNum">     357</span>              : </span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">          18 :     const muse::io::path_t loadPath = hasUnsavedChanges ? projectAutoSaver()-&gt;projectAutoSavePath(filePath) : filePath;</span></span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">          18 :     const std::string format = io::suffix(filePath);</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">          20 :     const muse::io::path_t loadPath = hasUnsavedChanges ? projectAutoSaver()-&gt;projectAutoSavePath(filePath) : filePath;</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">          20 :     const std::string format = io::suffix(filePath);</span></span>
 <span id="L360"><span class="lineNum">     360</span>              : </span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">          18 :     return loadWithFallback(project, loadPath, format)</span></span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">          36 :            .then&lt;RetVal&lt;INotationProjectPtr&gt; &gt;(this, [this, project, filePath, hasUnsavedChanges](const Ret&amp; result, auto resolve) {</span></span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">          18 :         if (!result) {</span></span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">           8 :             return resolve(RetVal&lt;INotationProjectPtr&gt;(result));</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">          20 :     return loadWithFallback(project, loadPath, format)</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">          40 :            .then&lt;RetVal&lt;INotationProjectPtr&gt; &gt;(this, [this, project, filePath, hasUnsavedChanges](const Ret&amp; result, auto resolve) {</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">          20 :         if (!result) {</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">          10 :             return resolve(RetVal&lt;INotationProjectPtr&gt;(result));</span></span>
 <span id="L365"><span class="lineNum">     365</span>              :         }</span>
 <span id="L366"><span class="lineNum">     366</span>              : </span>
 <span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">          10 :         if (hasUnsavedChanges) {</span></span>
@@ -434,38 +434,38 @@
 <span id="L376"><span class="lineNum">     376</span>              :         }</span>
 <span id="L377"><span class="lineNum">     377</span>              : </span>
 <span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">          10 :         return resolve(RetVal&lt;INotationProjectPtr&gt;::make_ok(project));</span></span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">          18 :     });</span></span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">          18 : }</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">          20 :     });</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">          20 : }</span></span>
 <span id="L381"><span class="lineNum">     381</span>              : </span>
-<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">          18 : Promise&lt;Ret&gt; OpenProjectScenario::loadWithFallback(const std::shared_ptr&lt;INotationProject&gt;&amp; project,</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">          20 : Promise&lt;Ret&gt; OpenProjectScenario::loadWithFallback(const std::shared_ptr&lt;INotationProject&gt;&amp; project,</span></span>
 <span id="L383"><span class="lineNum">     383</span>              :                                                    const muse::io::path_t&amp; loadPath,</span>
 <span id="L384"><span class="lineNum">     384</span>              :                                                    const std::string&amp; format)</span>
 <span id="L385"><span class="lineNum">     385</span>              : {</span>
-<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">          18 :     Ret result = project-&gt;load(loadPath, OpenParams(), format);</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">          20 :     Ret result = project-&gt;load(loadPath, OpenParams(), format);</span></span>
 <span id="L387"><span class="lineNum">     387</span>              : </span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">          18 :     if (result || result.code() == static_cast&lt;int&gt;(Ret::Code::Cancel)) {</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">          20 :     if (result || result.code() == static_cast&lt;int&gt;(Ret::Code::Cancel)) {</span></span>
 <span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">          11 :         return resolvedPromise(result);</span></span>
 <span id="L390"><span class="lineNum">     390</span>              :     }</span>
 <span id="L391"><span class="lineNum">     391</span>              : </span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">          14 :     return shouldRetryLoadAfterError(result, loadPath)</span></span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">          14 :            .then&lt;Ret&gt;(this, [project, loadPath, format, result](bool forceLoad, auto resolve) {</span></span>
-<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">           7 :         if (!forceLoad) {</span></span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">           4 :             return resolve(result);</span></span>
+<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">          18 :     return shouldRetryLoadAfterError(result, loadPath)</span></span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">          18 :            .then&lt;Ret&gt;(this, [project, loadPath, format, result](bool forceLoad, auto resolve) {</span></span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">           9 :         if (!forceLoad) {</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">           6 :             return resolve(result);</span></span>
 <span id="L396"><span class="lineNum">     396</span>              :         }</span>
 <span id="L397"><span class="lineNum">     397</span>              : </span>
 <span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">           3 :         OpenParams params;</span></span>
 <span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">           3 :         params.forceMode = forceLoad;</span></span>
 <span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">           3 :         return resolve(project-&gt;load(loadPath, params, format));</span></span>
-<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">          10 :     });</span></span>
-<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          18 : }</span></span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">          12 :     });</span></span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          20 : }</span></span>
 <span id="L403"><span class="lineNum">     403</span>              : </span>
-<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">          14 : Promise&lt;Ret&gt; OpenProjectScenario::doOpenProject(const muse::io::path_t&amp; filePath)</span></span>
+<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">          16 : Promise&lt;Ret&gt; OpenProjectScenario::doOpenProject(const muse::io::path_t&amp; filePath)</span></span>
 <span id="L405"><span class="lineNum">     405</span>              : {</span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">          15 :     TRACEFUNC;</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">          17 :     TRACEFUNC;</span></span>
 <span id="L407"><span class="lineNum">     407</span>              : </span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">          28 :     return loadProject(filePath).then&lt;Ret&gt;(this, [this, filePath](const RetVal&lt;INotationProjectPtr&gt;&amp; rv, auto resolve) {</span></span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          14 :         if (!rv.ret) {</span></span>
-<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">           8 :             return resolve(rv.ret);</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">          32 :     return loadProject(filePath).then&lt;Ret&gt;(this, [this, filePath](const RetVal&lt;INotationProjectPtr&gt;&amp; rv, auto resolve) {</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          16 :         if (!rv.ret) {</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">          10 :             return resolve(rv.ret);</span></span>
 <span id="L411"><span class="lineNum">     411</span>              :         }</span>
 <span id="L412"><span class="lineNum">     412</span>              : </span>
 <span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">           6 :         INotationProjectPtr project = rv.val;</span></span>
@@ -478,8 +478,8 @@
 <span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">           6 :         projectSession()-&gt;setProject(project);</span></span>
 <span id="L421"><span class="lineNum">     421</span>              : </span>
 <span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">           6 :         return resolve(finishOpening());</span></span>
-<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">          34 :     });</span></span>
-<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">          14 : }</span></span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">          38 :     });</span></span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">          16 : }</span></span>
 <span id="L425"><span class="lineNum">     425</span>              : </span>
 <span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">           3 : Promise&lt;Ret&gt; OpenProjectScenario::doOpenCloudProject(const muse::io::path_t&amp; filePath, const CloudProjectInfo&amp; info, bool isOwner)</span></span>
 <span id="L427"><span class="lineNum">     427</span>              : {</span>
@@ -535,7 +535,7 @@
 <span id="L477"><span class="lineNum">     477</span>              : </span>
 <span id="L478"><span class="lineNum">     478</span>              :     //! Show MuseSounds / MuseSampler update if need</span>
 <span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">          11 :     auto showUpdateNotification = [this]() {</span></span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">          11 :         QTimer::singleShot(1000, [this]() {</span></span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">          11 :         QTimer::singleShot(1000, &amp;m_timersContext, [this]() {</span></span>
 <span id="L481"><span class="lineNum">     481</span> <span class="tlaUNC tlaBgUNC">           0 :             if (museSoundsCheckUpdateScenario()-&gt;hasUpdate()) {</span></span>
 <span id="L482"><span class="lineNum">     482</span> <span class="tlaUNC">           0 :                 museSoundsCheckUpdateScenario()-&gt;showUpdate();</span></span>
 <span id="L483"><span class="lineNum">     483</span> <span class="tlaUNC">           0 :             } else if (!museSamplerCheckStatusScenario()-&gt;alreadyChecked()) {</span></span>
@@ -801,11 +801,11 @@
 <span id="L743"><span class="lineNum">     743</span> <span class="tlaGNC tlaBgGNC">          11 :     return make_ret(Ret::Code::Ok);</span></span>
 <span id="L744"><span class="lineNum">     744</span>              : }</span>
 <span id="L745"><span class="lineNum">     745</span>              : </span>
-<span id="L746"><span class="lineNum">     746</span> <span class="tlaGNC">          23 : bool OpenProjectScenario::isProjectOpened(const muse::io::path_t&amp; scorePath) const</span></span>
+<span id="L746"><span class="lineNum">     746</span> <span class="tlaGNC">          25 : bool OpenProjectScenario::isProjectOpened(const muse::io::path_t&amp; scorePath) const</span></span>
 <span id="L747"><span class="lineNum">     747</span>              : {</span>
-<span id="L748"><span class="lineNum">     748</span> <span class="tlaGNC">          23 :     auto project = projectSession()-&gt;project();</span></span>
-<span id="L749"><span class="lineNum">     749</span> <span class="tlaGNC">          23 :     if (!project) {</span></span>
-<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">          19 :         return false;</span></span>
+<span id="L748"><span class="lineNum">     748</span> <span class="tlaGNC">          25 :     auto project = projectSession()-&gt;project();</span></span>
+<span id="L749"><span class="lineNum">     749</span> <span class="tlaGNC">          25 :     if (!project) {</span></span>
+<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">          21 :         return false;</span></span>
 <span id="L751"><span class="lineNum">     751</span>              :     }</span>
 <span id="L752"><span class="lineNum">     752</span>              : </span>
 <span id="L753"><span class="lineNum">     753</span> <span class="tlaGNC">           4 :     LOGD() &lt;&lt; &quot;project-&gt;path: &quot; &lt;&lt; project-&gt;path() &lt;&lt; &quot;, check path: &quot; &lt;&lt; scorePath;</span></span>
@@ -814,7 +814,7 @@
 <span id="L756"><span class="lineNum">     756</span>              :     }</span>
 <span id="L757"><span class="lineNum">     757</span>              : </span>
 <span id="L758"><span class="lineNum">     758</span> <span class="tlaGNC">           3 :     return false;</span></span>
-<span id="L759"><span class="lineNum">     759</span> <span class="tlaGNC">          23 : }</span></span>
+<span id="L759"><span class="lineNum">     759</span> <span class="tlaGNC">          25 : }</span></span>
 <span id="L760"><span class="lineNum">     760</span>              : </span>
 <span id="L761"><span class="lineNum">     761</span> <span class="tlaGNC">           8 : RecentFile OpenProjectScenario::makeRecentFile(INotationProjectPtr project)</span></span>
 <span id="L762"><span class="lineNum">     762</span>              : {</span>
@@ -850,13 +850,13 @@
 <span id="L792"><span class="lineNum">     792</span> <span class="tlaUNC">           0 :     });</span></span>
 <span id="L793"><span class="lineNum">     793</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L794"><span class="lineNum">     794</span>              : </span>
-<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC tlaBgGNC">           7 : Promise&lt;bool&gt; OpenProjectScenario::shouldRetryLoadAfterError(const Ret&amp; ret, const muse::io::path_t&amp; filepath)</span></span>
+<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC tlaBgGNC">           9 : Promise&lt;bool&gt; OpenProjectScenario::shouldRetryLoadAfterError(const Ret&amp; ret, const muse::io::path_t&amp; filepath)</span></span>
 <span id="L796"><span class="lineNum">     796</span>              : {</span>
-<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">           7 :     if (ret) {</span></span>
+<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">           9 :     if (ret) {</span></span>
 <span id="L798"><span class="lineNum">     798</span> <span class="tlaUNC tlaBgUNC">           0 :         return resolvedPromise(true);</span></span>
 <span id="L799"><span class="lineNum">     799</span>              :     }</span>
 <span id="L800"><span class="lineNum">     800</span>              : </span>
-<span id="L801"><span class="lineNum">     801</span> <span class="tlaGNC tlaBgGNC">           7 :     switch (static_cast&lt;engraving::Err&gt;(ret.code())) {</span></span>
+<span id="L801"><span class="lineNum">     801</span> <span class="tlaGNC tlaBgGNC">           9 :     switch (static_cast&lt;engraving::Err&gt;(ret.code())) {</span></span>
 <span id="L802"><span class="lineNum">     802</span> <span class="tlaGNC">           2 :     case engraving::Err::FileTooOld:</span></span>
 <span id="L803"><span class="lineNum">     803</span>              :     case engraving::Err::FileOld300Format:</span>
 <span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC">           2 :         return askIfUserAgreesToOpenProjectWithIncompatibleVersion(ret.text());</span></span>
@@ -868,12 +868,12 @@
 <span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">           1 :     case engraving::Err::FileCriticallyCorrupted:</span></span>
 <span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC">           1 :         warnProjectCriticallyCorrupted(io::filename(filepath).toString(), ret.text());</span></span>
 <span id="L812"><span class="lineNum">     812</span> <span class="tlaGNC">           2 :         return resolvedPromise(false);</span></span>
-<span id="L813"><span class="lineNum">     813</span> <span class="tlaGNC">           1 :     default:</span></span>
-<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">           1 :         warnProjectCannotBeOpened(ret, filepath);</span></span>
-<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">           1 :         break;</span></span>
+<span id="L813"><span class="lineNum">     813</span> <span class="tlaGNC">           3 :     default:</span></span>
+<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">           3 :         warnProjectCannotBeOpened(ret, filepath);</span></span>
+<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">           3 :         break;</span></span>
 <span id="L816"><span class="lineNum">     816</span>              :     }</span>
 <span id="L817"><span class="lineNum">     817</span>              : </span>
-<span id="L818"><span class="lineNum">     818</span> <span class="tlaGNC">           2 :     return resolvedPromise(false);</span></span>
+<span id="L818"><span class="lineNum">     818</span> <span class="tlaGNC">           6 :     return resolvedPromise(false);</span></span>
 <span id="L819"><span class="lineNum">     819</span>              : }</span>
 <span id="L820"><span class="lineNum">     820</span>              : </span>
 <span id="L821"><span class="lineNum">     821</span> <span class="tlaGNC">           2 : Promise&lt;bool&gt; OpenProjectScenario::askIfUserAgreesToOpenProjectWithIncompatibleVersion(const std::string&amp; errorText)</span></span>
@@ -934,82 +934,90 @@
 <span id="L876"><span class="lineNum">     876</span> <span class="tlaGNC tlaBgGNC">           1 :     });</span></span>
 <span id="L877"><span class="lineNum">     877</span> <span class="tlaGNC">           3 : }</span></span>
 <span id="L878"><span class="lineNum">     878</span>              : </span>
-<span id="L879"><span class="lineNum">     879</span> <span class="tlaGNC">           1 : void OpenProjectScenario::warnProjectCannotBeOpened(const Ret&amp; ret, const muse::io::path_t&amp; filepath)</span></span>
+<span id="L879"><span class="lineNum">     879</span> <span class="tlaGNC">           3 : void OpenProjectScenario::warnProjectCannotBeOpened(const Ret&amp; ret, const muse::io::path_t&amp; filepath)</span></span>
 <span id="L880"><span class="lineNum">     880</span>              : {</span>
-<span id="L881"><span class="lineNum">     881</span> <span class="tlaGNC">           1 :     std::string title = muse::mtrc(&quot;project&quot;, &quot;Cannot read file %1&quot;).arg(io::toNativeSeparators(filepath).toString()).toStdString();</span></span>
-<span id="L882"><span class="lineNum">     882</span> <span class="tlaGNC">           1 :     std::string body;</span></span>
+<span id="L881"><span class="lineNum">     881</span> <span class="tlaGNC">           3 :     std::string title = muse::mtrc(&quot;project&quot;, &quot;Cannot read file %1&quot;).arg(io::toNativeSeparators(filepath).toString()).toStdString();</span></span>
+<span id="L882"><span class="lineNum">     882</span> <span class="tlaGNC">           3 :     IInteractive::Text text;</span></span>
 <span id="L883"><span class="lineNum">     883</span>              : </span>
-<span id="L884"><span class="lineNum">     884</span> <span class="tlaGNC">           1 :     switch (ret.code()) {</span></span>
+<span id="L884"><span class="lineNum">     884</span> <span class="tlaGNC">           3 :     switch (ret.code()) {</span></span>
 <span id="L885"><span class="lineNum">     885</span> <span class="tlaGNC">           1 :     case int(engraving::Err::FileNotFound):</span></span>
-<span id="L886"><span class="lineNum">     886</span> <span class="tlaGNC">           1 :         body = muse::trc(&quot;project&quot;, &quot;This file does not exist or cannot be accessed at the moment.&quot;);</span></span>
+<span id="L886"><span class="lineNum">     886</span> <span class="tlaGNC">           1 :         text.text = muse::trc(&quot;project&quot;, &quot;This file does not exist or cannot be accessed at the moment.&quot;);</span></span>
 <span id="L887"><span class="lineNum">     887</span> <span class="tlaGNC">           1 :         break;</span></span>
 <span id="L888"><span class="lineNum">     888</span> <span class="tlaUNC tlaBgUNC">           0 :     case int(engraving::Err::FileOpenError):</span></span>
-<span id="L889"><span class="lineNum">     889</span> <span class="tlaUNC">           0 :         body = muse::trc(&quot;project&quot;,</span></span>
-<span id="L890"><span class="lineNum">     890</span> <span class="tlaUNC">           0 :                          &quot;This file could not be opened. Please make sure that MuseScore Studio has permission to read this file.&quot;);</span></span>
+<span id="L889"><span class="lineNum">     889</span> <span class="tlaUNC">           0 :         text.text = muse::trc(&quot;project&quot;,</span></span>
+<span id="L890"><span class="lineNum">     890</span> <span class="tlaUNC">           0 :                               &quot;This file could not be opened. Please make sure that MuseScore Studio has permission to read this file.&quot;);</span></span>
 <span id="L891"><span class="lineNum">     891</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L892"><span class="lineNum">     892</span> <span class="tlaUNC">           0 :     default:</span></span>
-<span id="L893"><span class="lineNum">     893</span> <span class="tlaUNC">           0 :         if (!ret.text().empty()) {</span></span>
-<span id="L894"><span class="lineNum">     894</span> <span class="tlaUNC">           0 :             body = ret.text();</span></span>
-<span id="L895"><span class="lineNum">     895</span>              :         } else {</span>
-<span id="L896"><span class="lineNum">     896</span> <span class="tlaUNC">           0 :             body = muse::trc(&quot;project&quot;, &quot;An error occurred while reading this file.&quot;);</span></span>
-<span id="L897"><span class="lineNum">     897</span>              :         }</span>
-<span id="L898"><span class="lineNum">     898</span>              :     }</span>
-<span id="L899"><span class="lineNum">     899</span>              : </span>
-<span id="L900"><span class="lineNum">     900</span> <span class="tlaGNC tlaBgGNC">           1 :     interactive()-&gt;error(title, body);</span></span>
-<span id="L901"><span class="lineNum">     901</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L902"><span class="lineNum">     902</span>              : </span>
-<span id="L903"><span class="lineNum">     903</span> <span class="tlaGNC">           2 : async::Promise&lt;io::path_t&gt; OpenProjectScenario::selectScoreOpeningFile() const</span></span>
-<span id="L904"><span class="lineNum">     904</span>              : {</span>
-<span id="L905"><span class="lineNum">     905</span>              :     std::string allExt = &quot;*.mscz *.mxl *.musicxml *.xml *.mid *.midi *.kar *.md *.mgu *.sgu *.cap *.capx &quot;</span>
-<span id="L906"><span class="lineNum">     906</span> <span class="tlaGNC">           2 :                          &quot;*.ove *.scw *.bmw *.bww *.gtp *.gp3 *.gp4 *.gp5 *.gpx *.gp *.ptb *.mei *.mnx *.json *.tef *.mscx *.mscs *.mscz~&quot;;</span></span>
+<span id="L892"><span class="lineNum">     892</span> <span class="tlaGNC tlaBgGNC">           2 :     case int(engraving::Err::FileBadFormat):</span></span>
+<span id="L893"><span class="lineNum">     893</span> <span class="tlaGNC">           2 :         text.text = muse::trc(&quot;project&quot;, &quot;This file is damaged or is not in a supported format.&quot;);</span></span>
+<span id="L894"><span class="lineNum">     894</span>              : </span>
+<span id="L895"><span class="lineNum">     895</span>              :         //! NOTE An importer may tell what exactly is wrong with the file</span>
+<span id="L896"><span class="lineNum">     896</span> <span class="tlaGNC">           2 :         if (ret.text() != engraving::make_ret(engraving::Err::FileBadFormat).text()) {</span></span>
+<span id="L897"><span class="lineNum">     897</span> <span class="tlaGNC">           1 :             text.detailedText = ret.text();</span></span>
+<span id="L898"><span class="lineNum">     898</span>              :         }</span>
+<span id="L899"><span class="lineNum">     899</span> <span class="tlaGNC">           2 :         break;</span></span>
+<span id="L900"><span class="lineNum">     900</span> <span class="tlaUNC tlaBgUNC">           0 :     default:</span></span>
+<span id="L901"><span class="lineNum">     901</span> <span class="tlaUNC">           0 :         if (!ret.text().empty()) {</span></span>
+<span id="L902"><span class="lineNum">     902</span> <span class="tlaUNC">           0 :             text.text = ret.text();</span></span>
+<span id="L903"><span class="lineNum">     903</span>              :         } else {</span>
+<span id="L904"><span class="lineNum">     904</span> <span class="tlaUNC">           0 :             text.text = muse::trc(&quot;project&quot;, &quot;An error occurred while reading this file.&quot;);</span></span>
+<span id="L905"><span class="lineNum">     905</span>              :         }</span>
+<span id="L906"><span class="lineNum">     906</span>              :     }</span>
 <span id="L907"><span class="lineNum">     907</span>              : </span>
-<span id="L908"><span class="lineNum">     908</span> <span class="tlaGNC">           4 :     std::vector&lt;std::string&gt; filter { muse::trc(&quot;project&quot;, &quot;All supported files&quot;) + &quot; (&quot; + allExt + &quot;)&quot;,</span></span>
-<span id="L909"><span class="lineNum">     909</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MuseScore files&quot;) + &quot; (*.mscz)&quot;,</span></span>
-<span id="L910"><span class="lineNum">     910</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MusicXML files&quot;) + &quot; (*.mxl *.musicxml *.xml)&quot;,</span></span>
-<span id="L911"><span class="lineNum">     911</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MIDI files&quot;) + &quot; (*.mid *.midi *.kar)&quot;,</span></span>
-<span id="L912"><span class="lineNum">     912</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MNX files [experimental]&quot;) + &quot; (*.mnx *.json)&quot;,</span></span>
-<span id="L913"><span class="lineNum">     913</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MuseData files&quot;) + &quot; (*.md)&quot;,</span></span>
-<span id="L914"><span class="lineNum">     914</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Capella files&quot;) + &quot; (*.cap *.capx)&quot;,</span></span>
-<span id="L915"><span class="lineNum">     915</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;BB files [experimental]&quot;) + &quot; (*.mgu *.sgu)&quot;,</span></span>
-<span id="L916"><span class="lineNum">     916</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Overture / Score Writer files [experimental]&quot;) + &quot; (*.ove *.scw)&quot;,</span></span>
-<span id="L917"><span class="lineNum">     917</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Bagpipe Music Writer files [experimental]&quot;) + &quot; (*.bmw *.bww)&quot;,</span></span>
-<span id="L918"><span class="lineNum">     918</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Guitar Pro files&quot;) + &quot; (*.gtp *.gp3 *.gp4 *.gp5 *.gpx *.gp)&quot;,</span></span>
-<span id="L919"><span class="lineNum">     919</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Power Tab Editor files [experimental]&quot;) + &quot; (*.ptb)&quot;,</span></span>
-<span id="L920"><span class="lineNum">     920</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MEI files&quot;) + &quot; (*.mei)&quot;,</span></span>
-<span id="L921"><span class="lineNum">     921</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;TablEdit files [experimental]&quot;) + &quot; (*.tef)&quot;,</span></span>
-<span id="L922"><span class="lineNum">     922</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Uncompressed MuseScore folders [experimental]&quot;) + &quot; (*.mscx)&quot;,</span></span>
-<span id="L923"><span class="lineNum">     923</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MuseScore developer files&quot;) + &quot; (*.mscs)&quot;,</span></span>
-<span id="L924"><span class="lineNum">     924</span> <span class="tlaGNC">          38 :                                       muse::trc(&quot;project&quot;, &quot;MuseScore backup files&quot;) + &quot; (*.mscz~)&quot; };</span></span>
-<span id="L925"><span class="lineNum">     925</span>              : </span>
-<span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">           2 :     muse::io::path_t defaultDir = configuration()-&gt;lastOpenedProjectsPath();</span></span>
-<span id="L927"><span class="lineNum">     927</span>              : </span>
-<span id="L928"><span class="lineNum">     928</span> <span class="tlaGNC">           2 :     if (defaultDir.empty()) {</span></span>
-<span id="L929"><span class="lineNum">     929</span> <span class="tlaGNC">           2 :         defaultDir = configuration()-&gt;userProjectsPath();</span></span>
-<span id="L930"><span class="lineNum">     930</span>              :     }</span>
-<span id="L931"><span class="lineNum">     931</span>              : </span>
-<span id="L932"><span class="lineNum">     932</span> <span class="tlaGNC">           2 :     if (defaultDir.empty()) {</span></span>
-<span id="L933"><span class="lineNum">     933</span> <span class="tlaGNC">           2 :         defaultDir = configuration()-&gt;defaultUserProjectsPath();</span></span>
-<span id="L934"><span class="lineNum">     934</span>              :     }</span>
+<span id="L908"><span class="lineNum">     908</span> <span class="tlaGNC tlaBgGNC">           3 :     interactive()-&gt;error(title, text);</span></span>
+<span id="L909"><span class="lineNum">     909</span> <span class="tlaGNC">           3 : }</span></span>
+<span id="L910"><span class="lineNum">     910</span>              : </span>
+<span id="L911"><span class="lineNum">     911</span> <span class="tlaGNC">           2 : async::Promise&lt;io::path_t&gt; OpenProjectScenario::selectScoreOpeningFile() const</span></span>
+<span id="L912"><span class="lineNum">     912</span>              : {</span>
+<span id="L913"><span class="lineNum">     913</span>              :     std::string allExt = &quot;*.mscz *.mxl *.musicxml *.xml *.mid *.midi *.kar *.md *.mgu *.sgu *.cap *.capx &quot;</span>
+<span id="L914"><span class="lineNum">     914</span> <span class="tlaGNC">           2 :                          &quot;*.ove *.scw *.bmw *.bww *.gtp *.gp3 *.gp4 *.gp5 *.gpx *.gp *.ptb *.mei *.mnx *.json *.tef *.mscx *.mscs *.mscz~&quot;;</span></span>
+<span id="L915"><span class="lineNum">     915</span>              : </span>
+<span id="L916"><span class="lineNum">     916</span> <span class="tlaGNC">           4 :     std::vector&lt;std::string&gt; filter { muse::trc(&quot;project&quot;, &quot;All supported files&quot;) + &quot; (&quot; + allExt + &quot;)&quot;,</span></span>
+<span id="L917"><span class="lineNum">     917</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MuseScore files&quot;) + &quot; (*.mscz)&quot;,</span></span>
+<span id="L918"><span class="lineNum">     918</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MusicXML files&quot;) + &quot; (*.mxl *.musicxml *.xml)&quot;,</span></span>
+<span id="L919"><span class="lineNum">     919</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MIDI files&quot;) + &quot; (*.mid *.midi *.kar)&quot;,</span></span>
+<span id="L920"><span class="lineNum">     920</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MNX files [experimental]&quot;) + &quot; (*.mnx *.json)&quot;,</span></span>
+<span id="L921"><span class="lineNum">     921</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MuseData files&quot;) + &quot; (*.md)&quot;,</span></span>
+<span id="L922"><span class="lineNum">     922</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Capella files&quot;) + &quot; (*.cap *.capx)&quot;,</span></span>
+<span id="L923"><span class="lineNum">     923</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;BB files [experimental]&quot;) + &quot; (*.mgu *.sgu)&quot;,</span></span>
+<span id="L924"><span class="lineNum">     924</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Overture / Score Writer files [experimental]&quot;) + &quot; (*.ove *.scw)&quot;,</span></span>
+<span id="L925"><span class="lineNum">     925</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Bagpipe Music Writer files [experimental]&quot;) + &quot; (*.bmw *.bww)&quot;,</span></span>
+<span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Guitar Pro files&quot;) + &quot; (*.gtp *.gp3 *.gp4 *.gp5 *.gpx *.gp)&quot;,</span></span>
+<span id="L927"><span class="lineNum">     927</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Power Tab Editor files [experimental]&quot;) + &quot; (*.ptb)&quot;,</span></span>
+<span id="L928"><span class="lineNum">     928</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MEI files&quot;) + &quot; (*.mei)&quot;,</span></span>
+<span id="L929"><span class="lineNum">     929</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;TablEdit files [experimental]&quot;) + &quot; (*.tef)&quot;,</span></span>
+<span id="L930"><span class="lineNum">     930</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;Uncompressed MuseScore folders [experimental]&quot;) + &quot; (*.mscx)&quot;,</span></span>
+<span id="L931"><span class="lineNum">     931</span> <span class="tlaGNC">           2 :                                       muse::trc(&quot;project&quot;, &quot;MuseScore developer files&quot;) + &quot; (*.mscs)&quot;,</span></span>
+<span id="L932"><span class="lineNum">     932</span> <span class="tlaGNC">          38 :                                       muse::trc(&quot;project&quot;, &quot;MuseScore backup files&quot;) + &quot; (*.mscz~)&quot; };</span></span>
+<span id="L933"><span class="lineNum">     933</span>              : </span>
+<span id="L934"><span class="lineNum">     934</span> <span class="tlaGNC">           2 :     muse::io::path_t defaultDir = configuration()-&gt;lastOpenedProjectsPath();</span></span>
 <span id="L935"><span class="lineNum">     935</span>              : </span>
-<span id="L936"><span class="lineNum">     936</span> <span class="tlaGNC">           4 :     return interactive()-&gt;selectOpeningFile(muse::trc(&quot;project&quot;, &quot;Open&quot;), defaultDir, filter);</span></span>
-<span id="L937"><span class="lineNum">     937</span> <span class="tlaGNC">           6 : }</span></span>
-<span id="L938"><span class="lineNum">     938</span>              : </span>
-<span id="L939"><span class="lineNum">     939</span> <span class="tlaGNC">          14 : Promise&lt;RetVal&lt;Val&gt; &gt; OpenProjectScenario::ensureAuthorization() const</span></span>
-<span id="L940"><span class="lineNum">     940</span>              : {</span>
-<span id="L941"><span class="lineNum">     941</span> <span class="tlaGNC">          14 :     bool userAuthorized = museScoreComService()-&gt;authorization()-&gt;userAuthorized().val;</span></span>
-<span id="L942"><span class="lineNum">     942</span>              : </span>
-<span id="L943"><span class="lineNum">     943</span> <span class="tlaGNC">          14 :     if (userAuthorized) {</span></span>
-<span id="L944"><span class="lineNum">     944</span> <span class="tlaGNC">          12 :         return resolvedPromise(RetVal&lt;Val&gt;::make_ok(Val()));</span></span>
-<span id="L945"><span class="lineNum">     945</span>              :     }</span>
+<span id="L936"><span class="lineNum">     936</span> <span class="tlaGNC">           2 :     if (defaultDir.empty()) {</span></span>
+<span id="L937"><span class="lineNum">     937</span> <span class="tlaGNC">           2 :         defaultDir = configuration()-&gt;userProjectsPath();</span></span>
+<span id="L938"><span class="lineNum">     938</span>              :     }</span>
+<span id="L939"><span class="lineNum">     939</span>              : </span>
+<span id="L940"><span class="lineNum">     940</span> <span class="tlaGNC">           2 :     if (defaultDir.empty()) {</span></span>
+<span id="L941"><span class="lineNum">     941</span> <span class="tlaGNC">           2 :         defaultDir = configuration()-&gt;defaultUserProjectsPath();</span></span>
+<span id="L942"><span class="lineNum">     942</span>              :     }</span>
+<span id="L943"><span class="lineNum">     943</span>              : </span>
+<span id="L944"><span class="lineNum">     944</span> <span class="tlaGNC">           4 :     return interactive()-&gt;selectOpeningFile(muse::trc(&quot;project&quot;, &quot;Open&quot;), defaultDir, filter);</span></span>
+<span id="L945"><span class="lineNum">     945</span> <span class="tlaGNC">           6 : }</span></span>
 <span id="L946"><span class="lineNum">     946</span>              : </span>
-<span id="L947"><span class="lineNum">     947</span> <span class="tlaGNC">           2 :     const std::string dialogText = muse::trc(&quot;project/save&quot;, &quot;Log in or create a free account on MuseScore.com to open this score.&quot;);</span></span>
-<span id="L948"><span class="lineNum">     948</span>              : </span>
-<span id="L949"><span class="lineNum">     949</span> <span class="tlaGNC">           2 :     UriQuery query(&quot;muse://cloud/requireauthorization&quot;);</span></span>
-<span id="L950"><span class="lineNum">     950</span> <span class="tlaGNC">           6 :     query.addParam(&quot;text&quot;, Val(dialogText));</span></span>
-<span id="L951"><span class="lineNum">     951</span> <span class="tlaGNC">           6 :     query.addParam(&quot;cloudCode&quot;, Val(muse::cloud::MUSESCORE_COM_CLOUD_CODE));</span></span>
-<span id="L952"><span class="lineNum">     952</span> <span class="tlaGNC">           6 :     query.addParam(&quot;publishingScore&quot;, Val(false));</span></span>
-<span id="L953"><span class="lineNum">     953</span> <span class="tlaGNC">           2 :     return openDialog(query);</span></span>
-<span id="L954"><span class="lineNum">     954</span> <span class="tlaGNC">           2 : }</span></span>
+<span id="L947"><span class="lineNum">     947</span> <span class="tlaGNC">          14 : Promise&lt;RetVal&lt;Val&gt; &gt; OpenProjectScenario::ensureAuthorization() const</span></span>
+<span id="L948"><span class="lineNum">     948</span>              : {</span>
+<span id="L949"><span class="lineNum">     949</span> <span class="tlaGNC">          14 :     bool userAuthorized = museScoreComService()-&gt;authorization()-&gt;userAuthorized().val;</span></span>
+<span id="L950"><span class="lineNum">     950</span>              : </span>
+<span id="L951"><span class="lineNum">     951</span> <span class="tlaGNC">          14 :     if (userAuthorized) {</span></span>
+<span id="L952"><span class="lineNum">     952</span> <span class="tlaGNC">          12 :         return resolvedPromise(RetVal&lt;Val&gt;::make_ok(Val()));</span></span>
+<span id="L953"><span class="lineNum">     953</span>              :     }</span>
+<span id="L954"><span class="lineNum">     954</span>              : </span>
+<span id="L955"><span class="lineNum">     955</span> <span class="tlaGNC">           2 :     const std::string dialogText = muse::trc(&quot;project/save&quot;, &quot;Log in or create a free account on MuseScore.com to open this score.&quot;);</span></span>
+<span id="L956"><span class="lineNum">     956</span>              : </span>
+<span id="L957"><span class="lineNum">     957</span> <span class="tlaGNC">           2 :     UriQuery query(&quot;muse://cloud/requireauthorization&quot;);</span></span>
+<span id="L958"><span class="lineNum">     958</span> <span class="tlaGNC">           6 :     query.addParam(&quot;text&quot;, Val(dialogText));</span></span>
+<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">           6 :     query.addParam(&quot;cloudCode&quot;, Val(muse::cloud::MUSESCORE_COM_CLOUD_CODE));</span></span>
+<span id="L960"><span class="lineNum">     960</span> <span class="tlaGNC">           6 :     query.addParam(&quot;publishingScore&quot;, Val(false));</span></span>
+<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">           2 :     return openDialog(query);</span></span>
+<span id="L962"><span class="lineNum">     962</span> <span class="tlaGNC">           2 : }</span></span>
         </pre>
               </td>
             </tr>

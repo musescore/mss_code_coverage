@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -553,10 +553,10 @@
 <span id="L495"><span class="lineNum">     495</span>              :     }</span>
 <span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC tlaBgGNC">          28 : }</span></span>
 <span id="L497"><span class="lineNum">     497</span>              : </span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">          67 : void EditSystemLocks::removeSystemLocksOnRemoveMeasures(Transaction&amp; tx, Score* score, const MeasureBase* m1, const MeasureBase* m2)</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">          68 : void EditSystemLocks::removeSystemLocksOnRemoveMeasures(Transaction&amp; tx, Score* score, const MeasureBase* m1, const MeasureBase* m2)</span></span>
 <span id="L499"><span class="lineNum">     499</span>              : {</span>
-<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">          67 :     std::vector&lt;const RangeLock*&gt; allSysLocks = score-&gt;systemLocks()-&gt;allLocks();</span></span>
-<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">          67 :     for (const RangeLock* lock : allSysLocks) {</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">          68 :     std::vector&lt;const RangeLock*&gt; allSysLocks = score-&gt;systemLocks()-&gt;allLocks();</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">          68 :     for (const RangeLock* lock : allSysLocks) {</span></span>
 <span id="L502"><span class="lineNum">     502</span> <span class="tlaUNC tlaBgUNC">           0 :         MeasureBase* lockStart = lock-&gt;startMB();</span></span>
 <span id="L503"><span class="lineNum">     503</span> <span class="tlaUNC">           0 :         MeasureBase* lockEnd = lock-&gt;endMB();</span></span>
 <span id="L504"><span class="lineNum">     504</span> <span class="tlaUNC">           0 :         bool lockStartIsInRange = lockStart-&gt;isAfterOrEqual(m1) &amp;&amp; lockStart-&gt;isBeforeOrEqual(m2);</span></span>
@@ -576,12 +576,12 @@
 <span id="L518"><span class="lineNum">     518</span>              :             }</span>
 <span id="L519"><span class="lineNum">     519</span>              :         }</span>
 <span id="L520"><span class="lineNum">     520</span>              :     }</span>
-<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC tlaBgGNC">          67 : }</span></span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC tlaBgGNC">          68 : }</span></span>
 <span id="L522"><span class="lineNum">     522</span>              : </span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">           2 : void EditSystemLocks::removeSystemLocksContainingMMRests(Transaction&amp; tx, Score* score)</span></span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">           8 : void EditSystemLocks::removeSystemLocksContainingMMRests(Transaction&amp; tx, Score* score)</span></span>
 <span id="L524"><span class="lineNum">     524</span>              : {</span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">           2 :     std::vector&lt;const RangeLock*&gt; allLocks = score-&gt;systemLocks()-&gt;allLocks(); // copy</span></span>
-<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">           2 :     for (const RangeLock* lock : allLocks) {</span></span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">           8 :     std::vector&lt;const RangeLock*&gt; allLocks = score-&gt;systemLocks()-&gt;allLocks(); // copy</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">           8 :     for (const RangeLock* lock : allLocks) {</span></span>
 <span id="L527"><span class="lineNum">     527</span> <span class="tlaUNC tlaBgUNC">           0 :         for (MeasureBase* mb = lock-&gt;startMB(); mb; mb = mb-&gt;next()) {</span></span>
 <span id="L528"><span class="lineNum">     528</span> <span class="tlaUNC">           0 :             if (mb-&gt;isMeasure() &amp;&amp; toMeasure(mb)-&gt;mmRest()) {</span></span>
 <span id="L529"><span class="lineNum">     529</span> <span class="tlaUNC">           0 :                 undoRemoveSystemLock(tx, lock);</span></span>
@@ -592,21 +592,21 @@
 <span id="L534"><span class="lineNum">     534</span>              :             }</span>
 <span id="L535"><span class="lineNum">     535</span>              :         }</span>
 <span id="L536"><span class="lineNum">     536</span>              :     }</span>
-<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC tlaBgGNC">           2 : }</span></span>
+<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC tlaBgGNC">           8 : }</span></span>
 <span id="L538"><span class="lineNum">     538</span>              : </span>
-<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">         166 : void EditSystemLocks::updateSystemLocksOnCreateMMRests(Transaction&amp; tx, Score* score, Measure* first, Measure* last)</span></span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">         200 : void EditSystemLocks::updateSystemLocksOnCreateMMRests(Transaction&amp; tx, Score* score, Measure* first, Measure* last)</span></span>
 <span id="L540"><span class="lineNum">     540</span>              : {</span>
 <span id="L541"><span class="lineNum">     541</span>              :     // NOTE: this must be done during layout as the mmRests get created.</span>
 <span id="L542"><span class="lineNum">     542</span>              : </span>
-<span id="L543"><span class="lineNum">     543</span> <span class="tlaGNC">         166 :     for (const RangeLock* lock : score-&gt;systemLocks()-&gt;locksContainedInRange(first, last)) {</span></span>
+<span id="L543"><span class="lineNum">     543</span> <span class="tlaGNC">         200 :     for (const RangeLock* lock : score-&gt;systemLocks()-&gt;locksContainedInRange(first, last)) {</span></span>
 <span id="L544"><span class="lineNum">     544</span>              :         // These locks are inside the range of the mmRest so remove them</span>
 <span id="L545"><span class="lineNum">     545</span> <span class="tlaUNC tlaBgUNC">           0 :         undoRemoveSystemLock(tx, lock);</span></span>
-<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC tlaBgGNC">         166 :     }</span></span>
+<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC tlaBgGNC">         200 :     }</span></span>
 <span id="L547"><span class="lineNum">     547</span>              : </span>
-<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">         166 :     const RangeLock* lockOnFirst = score-&gt;systemLocks()-&gt;lockContaining(first);</span></span>
-<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">         166 :     const RangeLock* lockOnLast = score-&gt;systemLocks()-&gt;lockContaining(last);</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">         200 :     const RangeLock* lockOnFirst = score-&gt;systemLocks()-&gt;lockContaining(first);</span></span>
+<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">         200 :     const RangeLock* lockOnLast = score-&gt;systemLocks()-&gt;lockContaining(last);</span></span>
 <span id="L550"><span class="lineNum">     550</span>              : </span>
-<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">         166 :     if (lockOnFirst) {</span></span>
+<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">         200 :     if (lockOnFirst) {</span></span>
 <span id="L552"><span class="lineNum">     552</span> <span class="tlaUNC tlaBgUNC">           0 :         MeasureBase* startMB = lockOnFirst-&gt;startMB();</span></span>
 <span id="L553"><span class="lineNum">     553</span> <span class="tlaUNC">           0 :         MeasureBase* endMB = lockOnFirst-&gt;endMB();</span></span>
 <span id="L554"><span class="lineNum">     554</span>              : </span>
@@ -626,8 +626,8 @@
 <span id="L568"><span class="lineNum">     568</span>              :         }</span>
 <span id="L569"><span class="lineNum">     569</span>              :     }</span>
 <span id="L570"><span class="lineNum">     570</span>              : </span>
-<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC tlaBgGNC">         166 :     if (!lockOnLast || lockOnLast == lockOnFirst) {</span></span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">         166 :         return;</span></span>
+<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC tlaBgGNC">         200 :     if (!lockOnLast || lockOnLast == lockOnFirst) {</span></span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">         200 :         return;</span></span>
 <span id="L573"><span class="lineNum">     573</span>              :     }</span>
 <span id="L574"><span class="lineNum">     574</span>              : </span>
 <span id="L575"><span class="lineNum">     575</span> <span class="tlaUNC tlaBgUNC">           0 :     MeasureBase* startMB = lockOnLast-&gt;startMB();</span></span>

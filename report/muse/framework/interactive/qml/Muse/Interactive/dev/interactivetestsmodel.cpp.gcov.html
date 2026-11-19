@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">157</td>
+            <td class="headerCovTableEntry">170</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -226,107 +226,117 @@
 <span id="L168"><span class="lineNum">     168</span>              : </span>
 <span id="L169"><span class="lineNum">     169</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::question()</span></span>
 <span id="L170"><span class="lineNum">     170</span>              : {</span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaUNC">           0 :     IInteractive::Result result = interactive()-&gt;questionSync(</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaUNC">           0 :     auto promise = interactive()-&gt;question(</span></span>
 <span id="L172"><span class="lineNum">     172</span>              :         &quot;Do you really want to delete the 'xxx' workspace?&quot;, &quot;&quot;,</span>
 <span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 :         { interactive()-&gt;buttonData(IInteractive::Button::No),</span></span>
 <span id="L174"><span class="lineNum">     174</span> <span class="tlaUNC">           0 :           interactive()-&gt;buttonData(IInteractive::Button::Yes) }, 0,</span></span>
-<span id="L175"><span class="lineNum">     175</span>              :         IInteractive::Option::WithIcon);</span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaUNC">           0 :         IInteractive::Option::WithIcon);</span></span>
 <span id="L176"><span class="lineNum">     176</span>              : </span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaUNC">           0 :     if (result.standardButton() == IInteractive::Button::Yes) {</span></span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaUNC">           0 :         LOGI() &lt;&lt; &quot;Yes!!&quot;;</span></span>
-<span id="L179"><span class="lineNum">     179</span>              :     } else {</span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaUNC">           0 :         LOGI() &lt;&lt; &quot;No!!&quot;;</span></span>
-<span id="L181"><span class="lineNum">     181</span>              :     }</span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L183"><span class="lineNum">     183</span>              : </span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::questionByUri()</span></span>
-<span id="L185"><span class="lineNum">     185</span>              : {</span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC">           0 :     auto promise = interactive()-&gt;question(</span></span>
-<span id="L187"><span class="lineNum">     187</span>              :         &quot;Do you really want to delete the 'xxx' workspace?&quot;, &quot;&quot;,</span>
-<span id="L188"><span class="lineNum">     188</span>              :         { IInteractive::Button::No, IInteractive::Button::Yes }, IInteractive::Button::NoButton,</span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaUNC">           0 :         IInteractive::Option::WithIcon);</span></span>
-<span id="L190"><span class="lineNum">     190</span>              : </span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaUNC">           0 :     promise.onResolve(this, [](const IInteractive::Result&amp; res) {</span></span>
-<span id="L192"><span class="lineNum">     192</span> <span class="tlaUNC">           0 :         if (res.standardButton() == IInteractive::Button::Yes) {</span></span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaUNC">           0 :             LOGI() &lt;&lt; &quot;Yes!!&quot;;</span></span>
-<span id="L194"><span class="lineNum">     194</span>              :         } else {</span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaUNC">           0 :             LOGI() &lt;&lt; &quot;No!!&quot;;</span></span>
-<span id="L196"><span class="lineNum">     196</span>              :         }</span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 :     }).onReject(this, [](int code, const std::string&amp; err) {</span></span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaUNC">           0 :         LOGE() &lt;&lt; code &lt;&lt; err;</span></span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L201"><span class="lineNum">     201</span>              : </span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::customQuestion()</span></span>
-<span id="L203"><span class="lineNum">     203</span>              : {</span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC">           0 :     int maybeBtn = int(IInteractive::Button::CustomButton) + 1;</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaUNC">           0 :     IInteractive::Result result = interactive()-&gt;questionSync(&quot;Test&quot;, &quot;It works?&quot;, {</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaUNC">           0 :         IInteractive::ButtonData(maybeBtn, &quot;Maybe&quot;),</span></span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC">           0 :         interactive()-&gt;buttonData(IInteractive::Button::No)</span></span>
-<span id="L208"><span class="lineNum">     208</span>              :     });</span>
-<span id="L209"><span class="lineNum">     209</span>              : </span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :     if (result.button() == maybeBtn) {</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :         LOGI() &lt;&lt; &quot;Maybe!!&quot;;</span></span>
-<span id="L212"><span class="lineNum">     212</span>              :     } else {</span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC">           0 :         LOGE() &lt;&lt; &quot;No!!&quot;;</span></span>
-<span id="L214"><span class="lineNum">     214</span>              :     }</span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L216"><span class="lineNum">     216</span>              : </span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::information()</span></span>
-<span id="L218"><span class="lineNum">     218</span>              : {</span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaUNC">           0 :     auto result = interactive()-&gt;info(&quot;Tuplet cannot cross barlines&quot;,</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaUNC">           0 :                                       std::string(), {}, 0,</span></span>
-<span id="L221"><span class="lineNum">     221</span>              :                                       IInteractive::Option::WithIcon</span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaUNC">           0 :                                       | IInteractive::Option::WithDontShowAgainCheckBox)</span></span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaUNC">           0 :                   .onResolve(this, [this](const IInteractive::Result&amp; res) {</span></span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaUNC">           0 :         LOGD() &lt;&lt; interactive()-&gt;buttonData(res.standardButton()).text;</span></span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L227"><span class="lineNum">     227</span>              : </span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::warning()</span></span>
-<span id="L229"><span class="lineNum">     229</span>              : {</span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 :     IInteractive::Result result = interactive()-&gt;warningSync(&quot;Do you want to save changes to the score “Untitled” before closing?&quot;,</span></span>
-<span id="L231"><span class="lineNum">     231</span>              :                                                              &quot;Your changes will be lost if you don’t save them.&quot;,</span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 :                                                              { interactive()-&gt;buttonData(IInteractive::Button::DontSave),</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaUNC">           0 :                                                                interactive()-&gt;buttonData(IInteractive::Button::Save),</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaUNC">           0 :                                                                interactive()-&gt;buttonData(IInteractive::Button::Cancel) });</span></span>
-<span id="L235"><span class="lineNum">     235</span>              : </span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaUNC">           0 :     if (result.standardButton() == IInteractive::Button::DontSave) {</span></span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC">           0 :         LOGI() &lt;&lt; &quot;Don’t save!!&quot;;</span></span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaUNC">           0 :     } else if (result.standardButton() == IInteractive::Button::Save) {</span></span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 :         LOGE() &lt;&lt; &quot;Save!!&quot;;</span></span>
-<span id="L240"><span class="lineNum">     240</span>              :     } else {</span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC">           0 :         LOGE() &lt;&lt; &quot;Cancel!!&quot;;</span></span>
-<span id="L242"><span class="lineNum">     242</span>              :     }</span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L244"><span class="lineNum">     244</span>              : </span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::critical()</span></span>
-<span id="L246"><span class="lineNum">     246</span>              : {</span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaUNC">           0 :     IInteractive::Result result = interactive()-&gt;errorSync(&quot;Cannot read file C:/Users/Username/Desktop/Composition.mscz&quot;,</span></span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaUNC">           0 :                                                            std::string(&quot;An error has occurred when trying to open this file&quot;));</span></span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaUNC">           0 :     LOGD() &lt;&lt; interactive()-&gt;buttonData(result.standardButton()).text;</span></span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L251"><span class="lineNum">     251</span>              : </span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::criticalWithDetailedText()</span></span>
-<span id="L253"><span class="lineNum">     253</span>              : {</span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC">           0 :     IInteractive::Text text;</span></span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaUNC">           0 :     text.text = std::string(&quot;An error has occurred when trying to open this file&quot;);</span></span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaUNC">           0 :     text.detailedText = std::string(&quot;Permission denied&quot;);</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaUNC">           0 :     IInteractive::Result result = interactive()-&gt;errorSync(&quot;Cannot read file C:/Users/Username/Desktop/Composition.mscz&quot;, text);</span></span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaUNC">           0 :     LOGD() &lt;&lt; interactive()-&gt;buttonData(result.standardButton()).text;</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L260"><span class="lineNum">     260</span>              : </span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::require()</span></span>
-<span id="L262"><span class="lineNum">     262</span>              : {</span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaUNC">           0 :     RetVal&lt;Val&gt; rv = interactive()-&gt;openSync(&quot;muse://devtools/interactive/sample?title='Test'&quot;);</span></span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 :     if (rv.ret) {</span></span>
-<span id="L265"><span class="lineNum">     265</span> <span class="tlaUNC">           0 :         LOGI() &lt;&lt; &quot;received: &quot; &lt;&lt; rv.val.toString();</span></span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaUNC">           0 :     } else if (check_ret(rv.ret, Ret::Code::Cancel)) {</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaUNC">           0 :         LOGI() &lt;&lt; &quot;was cancelled&quot;;</span></span>
-<span id="L268"><span class="lineNum">     268</span>              :     } else {</span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC">           0 :         LOGE() &lt;&lt; &quot;some error: &quot; &lt;&lt; rv.ret.code();</span></span>
-<span id="L270"><span class="lineNum">     270</span>              :     }</span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaUNC">           0 :     promise.onResolve(this, [](const IInteractive::Result&amp; res) {</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaUNC">           0 :         if (res.standardButton() == IInteractive::Button::Yes) {</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaUNC">           0 :             LOGI() &lt;&lt; &quot;Yes!!&quot;;</span></span>
+<span id="L180"><span class="lineNum">     180</span>              :         } else {</span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaUNC">           0 :             LOGI() &lt;&lt; &quot;No!!&quot;;</span></span>
+<span id="L182"><span class="lineNum">     182</span>              :         }</span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L185"><span class="lineNum">     185</span>              : </span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::questionByUri()</span></span>
+<span id="L187"><span class="lineNum">     187</span>              : {</span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC">           0 :     auto promise = interactive()-&gt;question(</span></span>
+<span id="L189"><span class="lineNum">     189</span>              :         &quot;Do you really want to delete the 'xxx' workspace?&quot;, &quot;&quot;,</span>
+<span id="L190"><span class="lineNum">     190</span>              :         { IInteractive::Button::No, IInteractive::Button::Yes }, IInteractive::Button::NoButton,</span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaUNC">           0 :         IInteractive::Option::WithIcon);</span></span>
+<span id="L192"><span class="lineNum">     192</span>              : </span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaUNC">           0 :     promise.onResolve(this, [](const IInteractive::Result&amp; res) {</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaUNC">           0 :         if (res.standardButton() == IInteractive::Button::Yes) {</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaUNC">           0 :             LOGI() &lt;&lt; &quot;Yes!!&quot;;</span></span>
+<span id="L196"><span class="lineNum">     196</span>              :         } else {</span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 :             LOGI() &lt;&lt; &quot;No!!&quot;;</span></span>
+<span id="L198"><span class="lineNum">     198</span>              :         }</span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaUNC">           0 :     }).onReject(this, [](int code, const std::string&amp; err) {</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaUNC">           0 :         LOGE() &lt;&lt; code &lt;&lt; err;</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L203"><span class="lineNum">     203</span>              : </span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::customQuestion()</span></span>
+<span id="L205"><span class="lineNum">     205</span>              : {</span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaUNC">           0 :     int maybeBtn = int(IInteractive::Button::CustomButton) + 1;</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC">           0 :     auto promise = interactive()-&gt;question(&quot;Test&quot;, &quot;It works?&quot;, {</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :         IInteractive::ButtonData(maybeBtn, &quot;Maybe&quot;),</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaUNC">           0 :         interactive()-&gt;buttonData(IInteractive::Button::No)</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L211"><span class="lineNum">     211</span>              : </span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaUNC">           0 :     promise.onResolve(this, [maybeBtn](const IInteractive::Result&amp; res) {</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC">           0 :         if (res.button() == maybeBtn) {</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaUNC">           0 :             LOGI() &lt;&lt; &quot;Maybe!!&quot;;</span></span>
+<span id="L215"><span class="lineNum">     215</span>              :         } else {</span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaUNC">           0 :             LOGE() &lt;&lt; &quot;No!!&quot;;</span></span>
+<span id="L217"><span class="lineNum">     217</span>              :         }</span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L220"><span class="lineNum">     220</span>              : </span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::information()</span></span>
+<span id="L222"><span class="lineNum">     222</span>              : {</span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaUNC">           0 :     auto result = interactive()-&gt;info(&quot;Tuplet cannot cross barlines&quot;,</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaUNC">           0 :                                       std::string(), {}, 0,</span></span>
+<span id="L225"><span class="lineNum">     225</span>              :                                       IInteractive::Option::WithIcon</span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaUNC">           0 :                                       | IInteractive::Option::WithDontShowAgainCheckBox)</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaUNC">           0 :                   .onResolve(this, [this](const IInteractive::Result&amp; res) {</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaUNC">           0 :         LOGD() &lt;&lt; interactive()-&gt;buttonData(res.standardButton()).text;</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L231"><span class="lineNum">     231</span>              : </span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::warning()</span></span>
+<span id="L233"><span class="lineNum">     233</span>              : {</span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaUNC">           0 :     interactive()-&gt;warning(&quot;Do you want to save changes to the score “Untitled” before closing?&quot;,</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaUNC">           0 :                            IInteractive::Text(&quot;Your changes will be lost if you don’t save them.&quot;),</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaUNC">           0 :                            { interactive()-&gt;buttonData(IInteractive::Button::DontSave),</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC">           0 :                              interactive()-&gt;buttonData(IInteractive::Button::Save),</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaUNC">           0 :                              interactive()-&gt;buttonData(IInteractive::Button::Cancel) })</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 :     .onResolve(this, [](const IInteractive::Result&amp; result) {</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :         if (result.standardButton() == IInteractive::Button::DontSave) {</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaUNC">           0 :             LOGI() &lt;&lt; &quot;Don’t save!!&quot;;</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaUNC">           0 :         } else if (result.standardButton() == IInteractive::Button::Save) {</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaUNC">           0 :             LOGE() &lt;&lt; &quot;Save!!&quot;;</span></span>
+<span id="L244"><span class="lineNum">     244</span>              :         } else {</span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC">           0 :             LOGE() &lt;&lt; &quot;Cancel!!&quot;;</span></span>
+<span id="L246"><span class="lineNum">     246</span>              :         }</span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L249"><span class="lineNum">     249</span>              : </span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::critical()</span></span>
+<span id="L251"><span class="lineNum">     251</span>              : {</span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaUNC">           0 :     interactive()-&gt;error(&quot;Cannot read file C:/Users/Username/Desktop/Composition.mscz&quot;,</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC">           0 :                          IInteractive::Text(&quot;An error has occurred when trying to open this file&quot;))</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC">           0 :     .onResolve(this, [this](const IInteractive::Result&amp; result) {</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaUNC">           0 :         LOGD() &lt;&lt; interactive()-&gt;buttonData(result.standardButton()).text;</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L258"><span class="lineNum">     258</span>              : </span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::criticalWithDetailedText()</span></span>
+<span id="L260"><span class="lineNum">     260</span>              : {</span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :     IInteractive::Text text;</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :     text.text = std::string(&quot;An error has occurred when trying to open this file&quot;);</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaUNC">           0 :     text.detailedText = std::string(&quot;Permission denied&quot;);</span></span>
+<span id="L264"><span class="lineNum">     264</span>              : </span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaUNC">           0 :     interactive()-&gt;error(&quot;Cannot read file C:/Users/Username/Desktop/Composition.mscz&quot;, text)</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaUNC">           0 :     .onResolve(this, [this](const IInteractive::Result&amp; result) {</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaUNC">           0 :         LOGD() &lt;&lt; interactive()-&gt;buttonData(result.standardButton()).text;</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L270"><span class="lineNum">     270</span>              : </span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaUNC">           0 : void InteractiveTestsModel::require()</span></span>
+<span id="L272"><span class="lineNum">     272</span>              : {</span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaUNC">           0 :     RetVal&lt;Val&gt; rv = interactive()-&gt;openSync(&quot;muse://devtools/interactive/sample?title='Test'&quot;);</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaUNC">           0 :     if (rv.ret) {</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaUNC">           0 :         LOGI() &lt;&lt; &quot;received: &quot; &lt;&lt; rv.val.toString();</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaUNC">           0 :     } else if (check_ret(rv.ret, Ret::Code::Cancel)) {</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaUNC">           0 :         LOGI() &lt;&lt; &quot;was cancelled&quot;;</span></span>
+<span id="L278"><span class="lineNum">     278</span>              :     } else {</span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaUNC">           0 :         LOGE() &lt;&lt; &quot;some error: &quot; &lt;&lt; rv.ret.code();</span></span>
+<span id="L280"><span class="lineNum">     280</span>              :     }</span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>
             </tr>

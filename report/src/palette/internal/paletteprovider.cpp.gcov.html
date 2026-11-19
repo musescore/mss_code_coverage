@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">575</td>
+            <td class="headerCovTableEntry">587</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-12 03:59:05</td>
+            <td class="headerValue">2026-11-19 04:14:36</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -651,430 +651,446 @@
 <span id="L593"><span class="lineNum">     593</span> <span class="tlaUNC">           0 :         return false;</span></span>
 <span id="L594"><span class="lineNum">     594</span>              :     }</span>
 <span id="L595"><span class="lineNum">     595</span>              : </span>
-<span id="L596"><span class="lineNum">     596</span> <span class="tlaUNC">           0 :     return notation-&gt;interaction()-&gt;applyPaletteElement(cell-&gt;element.get(), modifiers);</span></span>
-<span id="L597"><span class="lineNum">     597</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L596"><span class="lineNum">     596</span> <span class="tlaUNC">           0 :     mu::notation::INotationInteractionPtr interaction = notation-&gt;interaction();</span></span>
+<span id="L597"><span class="lineNum">     597</span> <span class="tlaUNC">           0 :     mu::engraving::ElementPtr element = cell-&gt;element;</span></span>
 <span id="L598"><span class="lineNum">     598</span>              : </span>
-<span id="L599"><span class="lineNum">     599</span>              : // ========================================================</span>
-<span id="L600"><span class="lineNum">     600</span>              : // PaletteProvider</span>
-<span id="L601"><span class="lineNum">     601</span>              : // ========================================================</span>
-<span id="L602"><span class="lineNum">     602</span>              : </span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaUNC">           0 : void PaletteProvider::init()</span></span>
-<span id="L604"><span class="lineNum">     604</span>              : {</span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaUNC">           0 :     m_userPaletteModel = new PaletteTreeModel(std::make_shared&lt;PaletteTree&gt;(), iocContext(), this);</span></span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaUNC">           0 :     connect(m_userPaletteModel, &amp;PaletteTreeModel::treeChanged, this, &amp;PaletteProvider::notifyAboutUserPaletteChanged);</span></span>
-<span id="L607"><span class="lineNum">     607</span>              : </span>
-<span id="L608"><span class="lineNum">     608</span> <span class="tlaUNC">           0 :     m_masterPaletteModel = new PaletteTreeModel(PaletteCreator(iocContext()).newMasterPaletteTree(), iocContext(), this);</span></span>
-<span id="L609"><span class="lineNum">     609</span>              : </span>
-<span id="L610"><span class="lineNum">     610</span> <span class="tlaUNC">           0 :     m_searchFilterModel = new PaletteCellFilterProxyModel(this);</span></span>
-<span id="L611"><span class="lineNum">     611</span> <span class="tlaUNC">           0 :     m_searchFilterModel-&gt;setFilterCaseSensitivity(Qt::CaseInsensitive);</span></span>
-<span id="L612"><span class="lineNum">     612</span>              : </span>
-<span id="L613"><span class="lineNum">     613</span> <span class="tlaUNC">           0 :     m_visibilityFilterModel = new QSortFilterProxyModel(this);</span></span>
-<span id="L614"><span class="lineNum">     614</span> <span class="tlaUNC">           0 :     m_visibilityFilterModel-&gt;setFilterRole(PaletteTreeModel::VisibleRole);</span></span>
-<span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC">           0 :     m_visibilityFilterModel-&gt;setFilterFixedString(&quot;true&quot;);</span></span>
-<span id="L616"><span class="lineNum">     616</span> <span class="tlaUNC">           0 :     m_visibilityFilterModel-&gt;setSourceModel(m_userPaletteModel);</span></span>
-<span id="L617"><span class="lineNum">     617</span>              : </span>
-<span id="L618"><span class="lineNum">     618</span> <span class="tlaUNC">           0 :     configuration()-&gt;isSinglePalette().ch.onReceive(this, [this](bool) {</span></span>
-<span id="L619"><span class="lineNum">     619</span> <span class="tlaUNC">           0 :         emit isSinglePaletteChanged();</span></span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L621"><span class="lineNum">     621</span>              : </span>
-<span id="L622"><span class="lineNum">     622</span> <span class="tlaUNC">           0 :     configuration()-&gt;isSingleClickToOpenPalette().ch.onReceive(this, [this](bool) {</span></span>
-<span id="L623"><span class="lineNum">     623</span> <span class="tlaUNC">           0 :         emit isSingleClickToOpenPaletteChanged();</span></span>
-<span id="L624"><span class="lineNum">     624</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L599"><span class="lineNum">     599</span> <span class="tlaUNC">           0 :     Ret ret = interaction-&gt;canApplyPaletteElement(element.get());</span></span>
+<span id="L600"><span class="lineNum">     600</span> <span class="tlaUNC">           0 :     if (!ret) {</span></span>
+<span id="L601"><span class="lineNum">     601</span>              :         //! NOTE The element is applied once the user agrees, unless the notation is closed or changed meanwhile</span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaUNC">           0 :         std::weak_ptr&lt;mu::notation::INotation&gt; weakNotation = notation;</span></span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaUNC">           0 :         interactive()-&gt;askToContinue(ret).onResolve(this, [this, weakNotation, element, modifiers](bool proceed) {</span></span>
+<span id="L604"><span class="lineNum">     604</span> <span class="tlaUNC">           0 :             mu::notation::INotationPtr notation = weakNotation.lock();</span></span>
+<span id="L605"><span class="lineNum">     605</span> <span class="tlaUNC">           0 :             if (proceed &amp;&amp; notation &amp;&amp; notation == projectSession()-&gt;currentNotation()) {</span></span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaUNC">           0 :                 notation-&gt;interaction()-&gt;applyPaletteElement(element.get(), modifiers);</span></span>
+<span id="L607"><span class="lineNum">     607</span>              :             }</span>
+<span id="L608"><span class="lineNum">     608</span> <span class="tlaUNC">           0 :         });</span></span>
+<span id="L609"><span class="lineNum">     609</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L610"><span class="lineNum">     610</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L611"><span class="lineNum">     611</span>              : </span>
+<span id="L612"><span class="lineNum">     612</span> <span class="tlaUNC">           0 :     return interaction-&gt;applyPaletteElement(element.get(), modifiers);</span></span>
+<span id="L613"><span class="lineNum">     613</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L614"><span class="lineNum">     614</span>              : </span>
+<span id="L615"><span class="lineNum">     615</span>              : // ========================================================</span>
+<span id="L616"><span class="lineNum">     616</span>              : // PaletteProvider</span>
+<span id="L617"><span class="lineNum">     617</span>              : // ========================================================</span>
+<span id="L618"><span class="lineNum">     618</span>              : </span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaUNC">           0 : void PaletteProvider::init()</span></span>
+<span id="L620"><span class="lineNum">     620</span>              : {</span>
+<span id="L621"><span class="lineNum">     621</span> <span class="tlaUNC">           0 :     m_userPaletteModel = new PaletteTreeModel(std::make_shared&lt;PaletteTree&gt;(), iocContext(), this);</span></span>
+<span id="L622"><span class="lineNum">     622</span> <span class="tlaUNC">           0 :     connect(m_userPaletteModel, &amp;PaletteTreeModel::treeChanged, this, &amp;PaletteProvider::notifyAboutUserPaletteChanged);</span></span>
+<span id="L623"><span class="lineNum">     623</span>              : </span>
+<span id="L624"><span class="lineNum">     624</span> <span class="tlaUNC">           0 :     m_masterPaletteModel = new PaletteTreeModel(PaletteCreator(iocContext()).newMasterPaletteTree(), iocContext(), this);</span></span>
 <span id="L625"><span class="lineNum">     625</span>              : </span>
-<span id="L626"><span class="lineNum">     626</span> <span class="tlaUNC">           0 :     configuration()-&gt;isPaletteDragEnabled().ch.onReceive(this, [this](bool) {</span></span>
-<span id="L627"><span class="lineNum">     627</span> <span class="tlaUNC">           0 :         emit isPaletteDragEnabledChanged();</span></span>
-<span id="L628"><span class="lineNum">     628</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L629"><span class="lineNum">     629</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L630"><span class="lineNum">     630</span>              : </span>
-<span id="L631"><span class="lineNum">     631</span> <span class="tlaUNC">           0 : void PaletteProvider::setFilter(const QString&amp; filter)</span></span>
-<span id="L632"><span class="lineNum">     632</span>              : {</span>
-<span id="L633"><span class="lineNum">     633</span>              :     // Unbind the model when there is no search text so as to return no results</span>
-<span id="L634"><span class="lineNum">     634</span>              :     // and thus speed up the opening of the palette search. Rebind the model</span>
-<span id="L635"><span class="lineNum">     635</span>              :     // as soon as the search text is non-empty.</span>
-<span id="L636"><span class="lineNum">     636</span>              :     // Doing this *trick* also when the search text is non-empty helps</span>
-<span id="L637"><span class="lineNum">     637</span>              :     // speed up the search in certain other scenarios,</span>
-<span id="L638"><span class="lineNum">     638</span>              :     // e.g. when deleting search characters (going from fewer to more search results).</span>
-<span id="L639"><span class="lineNum">     639</span> <span class="tlaUNC">           0 :     m_searchFilterModel-&gt;setSourceModel(nullptr);</span></span>
-<span id="L640"><span class="lineNum">     640</span> <span class="tlaUNC">           0 :     m_searchFilterModel-&gt;setFilterFixedString(filter);</span></span>
-<span id="L641"><span class="lineNum">     641</span> <span class="tlaUNC">           0 :     if (!filter.isEmpty()) {</span></span>
-<span id="L642"><span class="lineNum">     642</span> <span class="tlaUNC">           0 :         m_searchFilterModel-&gt;setSourceModel(m_masterPaletteModel);</span></span>
-<span id="L643"><span class="lineNum">     643</span>              :     }</span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L645"><span class="lineNum">     645</span>              : </span>
-<span id="L646"><span class="lineNum">     646</span> <span class="tlaUNC">           0 : void PaletteProvider::setSearching(bool searching)</span></span>
-<span id="L647"><span class="lineNum">     647</span>              : {</span>
-<span id="L648"><span class="lineNum">     648</span> <span class="tlaUNC">           0 :     if (m_isSearching == searching) {</span></span>
-<span id="L649"><span class="lineNum">     649</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L650"><span class="lineNum">     650</span>              :     }</span>
-<span id="L651"><span class="lineNum">     651</span>              : </span>
-<span id="L652"><span class="lineNum">     652</span> <span class="tlaUNC">           0 :     m_isSearching = searching;</span></span>
-<span id="L653"><span class="lineNum">     653</span>              : </span>
-<span id="L654"><span class="lineNum">     654</span> <span class="tlaUNC">           0 :     m_mainPalette = nullptr;</span></span>
-<span id="L655"><span class="lineNum">     655</span> <span class="tlaUNC">           0 :     m_mainPaletteController = nullptr;</span></span>
-<span id="L656"><span class="lineNum">     656</span> <span class="tlaUNC">           0 :     emit mainPaletteChanged();</span></span>
-<span id="L657"><span class="lineNum">     657</span>              : }</span>
-<span id="L658"><span class="lineNum">     658</span>              : </span>
-<span id="L659"><span class="lineNum">     659</span> <span class="tlaUNC">           0 : bool PaletteProvider::isSinglePalette() const</span></span>
-<span id="L660"><span class="lineNum">     660</span>              : {</span>
-<span id="L661"><span class="lineNum">     661</span> <span class="tlaUNC">           0 :     return configuration()-&gt;isSinglePalette().val;</span></span>
-<span id="L662"><span class="lineNum">     662</span>              : }</span>
-<span id="L663"><span class="lineNum">     663</span>              : </span>
-<span id="L664"><span class="lineNum">     664</span> <span class="tlaUNC">           0 : bool PaletteProvider::isSingleClickToOpenPalette() const</span></span>
-<span id="L665"><span class="lineNum">     665</span>              : {</span>
-<span id="L666"><span class="lineNum">     666</span> <span class="tlaUNC">           0 :     return configuration()-&gt;isSingleClickToOpenPalette().val;</span></span>
-<span id="L667"><span class="lineNum">     667</span>              : }</span>
-<span id="L668"><span class="lineNum">     668</span>              : </span>
-<span id="L669"><span class="lineNum">     669</span> <span class="tlaUNC">           0 : bool PaletteProvider::isPaletteDragEnabled() const</span></span>
-<span id="L670"><span class="lineNum">     670</span>              : {</span>
-<span id="L671"><span class="lineNum">     671</span> <span class="tlaUNC">           0 :     return configuration()-&gt;isPaletteDragEnabled().val;</span></span>
-<span id="L672"><span class="lineNum">     672</span>              : }</span>
-<span id="L673"><span class="lineNum">     673</span>              : </span>
-<span id="L674"><span class="lineNum">     674</span> <span class="tlaUNC">           0 : QAbstractItemModel* PaletteProvider::mainPaletteModel()</span></span>
-<span id="L675"><span class="lineNum">     675</span>              : {</span>
-<span id="L676"><span class="lineNum">     676</span> <span class="tlaUNC">           0 :     if (m_isSearching) {</span></span>
-<span id="L677"><span class="lineNum">     677</span> <span class="tlaUNC">           0 :         m_mainPalette = m_searchFilterModel;</span></span>
-<span id="L678"><span class="lineNum">     678</span>              :     } else {</span>
-<span id="L679"><span class="lineNum">     679</span> <span class="tlaUNC">           0 :         m_mainPalette = m_visibilityFilterModel;</span></span>
-<span id="L680"><span class="lineNum">     680</span>              :     }</span>
-<span id="L681"><span class="lineNum">     681</span>              : </span>
-<span id="L682"><span class="lineNum">     682</span> <span class="tlaUNC">           0 :     return m_mainPalette;</span></span>
+<span id="L626"><span class="lineNum">     626</span> <span class="tlaUNC">           0 :     m_searchFilterModel = new PaletteCellFilterProxyModel(this);</span></span>
+<span id="L627"><span class="lineNum">     627</span> <span class="tlaUNC">           0 :     m_searchFilterModel-&gt;setFilterCaseSensitivity(Qt::CaseInsensitive);</span></span>
+<span id="L628"><span class="lineNum">     628</span>              : </span>
+<span id="L629"><span class="lineNum">     629</span> <span class="tlaUNC">           0 :     m_visibilityFilterModel = new QSortFilterProxyModel(this);</span></span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaUNC">           0 :     m_visibilityFilterModel-&gt;setFilterRole(PaletteTreeModel::VisibleRole);</span></span>
+<span id="L631"><span class="lineNum">     631</span> <span class="tlaUNC">           0 :     m_visibilityFilterModel-&gt;setFilterFixedString(&quot;true&quot;);</span></span>
+<span id="L632"><span class="lineNum">     632</span> <span class="tlaUNC">           0 :     m_visibilityFilterModel-&gt;setSourceModel(m_userPaletteModel);</span></span>
+<span id="L633"><span class="lineNum">     633</span>              : </span>
+<span id="L634"><span class="lineNum">     634</span> <span class="tlaUNC">           0 :     configuration()-&gt;isSinglePalette().ch.onReceive(this, [this](bool) {</span></span>
+<span id="L635"><span class="lineNum">     635</span> <span class="tlaUNC">           0 :         emit isSinglePaletteChanged();</span></span>
+<span id="L636"><span class="lineNum">     636</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L637"><span class="lineNum">     637</span>              : </span>
+<span id="L638"><span class="lineNum">     638</span> <span class="tlaUNC">           0 :     configuration()-&gt;isSingleClickToOpenPalette().ch.onReceive(this, [this](bool) {</span></span>
+<span id="L639"><span class="lineNum">     639</span> <span class="tlaUNC">           0 :         emit isSingleClickToOpenPaletteChanged();</span></span>
+<span id="L640"><span class="lineNum">     640</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L641"><span class="lineNum">     641</span>              : </span>
+<span id="L642"><span class="lineNum">     642</span> <span class="tlaUNC">           0 :     configuration()-&gt;isPaletteDragEnabled().ch.onReceive(this, [this](bool) {</span></span>
+<span id="L643"><span class="lineNum">     643</span> <span class="tlaUNC">           0 :         emit isPaletteDragEnabledChanged();</span></span>
+<span id="L644"><span class="lineNum">     644</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L645"><span class="lineNum">     645</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L646"><span class="lineNum">     646</span>              : </span>
+<span id="L647"><span class="lineNum">     647</span> <span class="tlaUNC">           0 : void PaletteProvider::setFilter(const QString&amp; filter)</span></span>
+<span id="L648"><span class="lineNum">     648</span>              : {</span>
+<span id="L649"><span class="lineNum">     649</span>              :     // Unbind the model when there is no search text so as to return no results</span>
+<span id="L650"><span class="lineNum">     650</span>              :     // and thus speed up the opening of the palette search. Rebind the model</span>
+<span id="L651"><span class="lineNum">     651</span>              :     // as soon as the search text is non-empty.</span>
+<span id="L652"><span class="lineNum">     652</span>              :     // Doing this *trick* also when the search text is non-empty helps</span>
+<span id="L653"><span class="lineNum">     653</span>              :     // speed up the search in certain other scenarios,</span>
+<span id="L654"><span class="lineNum">     654</span>              :     // e.g. when deleting search characters (going from fewer to more search results).</span>
+<span id="L655"><span class="lineNum">     655</span> <span class="tlaUNC">           0 :     m_searchFilterModel-&gt;setSourceModel(nullptr);</span></span>
+<span id="L656"><span class="lineNum">     656</span> <span class="tlaUNC">           0 :     m_searchFilterModel-&gt;setFilterFixedString(filter);</span></span>
+<span id="L657"><span class="lineNum">     657</span> <span class="tlaUNC">           0 :     if (!filter.isEmpty()) {</span></span>
+<span id="L658"><span class="lineNum">     658</span> <span class="tlaUNC">           0 :         m_searchFilterModel-&gt;setSourceModel(m_masterPaletteModel);</span></span>
+<span id="L659"><span class="lineNum">     659</span>              :     }</span>
+<span id="L660"><span class="lineNum">     660</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L661"><span class="lineNum">     661</span>              : </span>
+<span id="L662"><span class="lineNum">     662</span> <span class="tlaUNC">           0 : void PaletteProvider::setSearching(bool searching)</span></span>
+<span id="L663"><span class="lineNum">     663</span>              : {</span>
+<span id="L664"><span class="lineNum">     664</span> <span class="tlaUNC">           0 :     if (m_isSearching == searching) {</span></span>
+<span id="L665"><span class="lineNum">     665</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L666"><span class="lineNum">     666</span>              :     }</span>
+<span id="L667"><span class="lineNum">     667</span>              : </span>
+<span id="L668"><span class="lineNum">     668</span> <span class="tlaUNC">           0 :     m_isSearching = searching;</span></span>
+<span id="L669"><span class="lineNum">     669</span>              : </span>
+<span id="L670"><span class="lineNum">     670</span> <span class="tlaUNC">           0 :     m_mainPalette = nullptr;</span></span>
+<span id="L671"><span class="lineNum">     671</span> <span class="tlaUNC">           0 :     m_mainPaletteController = nullptr;</span></span>
+<span id="L672"><span class="lineNum">     672</span> <span class="tlaUNC">           0 :     emit mainPaletteChanged();</span></span>
+<span id="L673"><span class="lineNum">     673</span>              : }</span>
+<span id="L674"><span class="lineNum">     674</span>              : </span>
+<span id="L675"><span class="lineNum">     675</span> <span class="tlaUNC">           0 : bool PaletteProvider::isSinglePalette() const</span></span>
+<span id="L676"><span class="lineNum">     676</span>              : {</span>
+<span id="L677"><span class="lineNum">     677</span> <span class="tlaUNC">           0 :     return configuration()-&gt;isSinglePalette().val;</span></span>
+<span id="L678"><span class="lineNum">     678</span>              : }</span>
+<span id="L679"><span class="lineNum">     679</span>              : </span>
+<span id="L680"><span class="lineNum">     680</span> <span class="tlaUNC">           0 : bool PaletteProvider::isSingleClickToOpenPalette() const</span></span>
+<span id="L681"><span class="lineNum">     681</span>              : {</span>
+<span id="L682"><span class="lineNum">     682</span> <span class="tlaUNC">           0 :     return configuration()-&gt;isSingleClickToOpenPalette().val;</span></span>
 <span id="L683"><span class="lineNum">     683</span>              : }</span>
 <span id="L684"><span class="lineNum">     684</span>              : </span>
-<span id="L685"><span class="lineNum">     685</span> <span class="tlaUNC">           0 : AbstractPaletteController* PaletteProvider::mainPaletteController()</span></span>
+<span id="L685"><span class="lineNum">     685</span> <span class="tlaUNC">           0 : bool PaletteProvider::isPaletteDragEnabled() const</span></span>
 <span id="L686"><span class="lineNum">     686</span>              : {</span>
-<span id="L687"><span class="lineNum">     687</span> <span class="tlaUNC">           0 :     if (!m_mainPaletteController) {</span></span>
-<span id="L688"><span class="lineNum">     688</span> <span class="tlaUNC">           0 :         m_mainPaletteController = new UserPaletteController(mainPaletteModel(), m_userPaletteModel, iocContext(), this);</span></span>
-<span id="L689"><span class="lineNum">     689</span>              :     }</span>
-<span id="L690"><span class="lineNum">     690</span> <span class="tlaUNC">           0 :     return m_mainPaletteController;</span></span>
-<span id="L691"><span class="lineNum">     691</span>              : }</span>
-<span id="L692"><span class="lineNum">     692</span>              : </span>
-<span id="L693"><span class="lineNum">     693</span> <span class="tlaUNC">           0 : QModelIndex PaletteProvider::customElementsPaletteIndex(const QModelIndex&amp; index)</span></span>
-<span id="L694"><span class="lineNum">     694</span>              : {</span>
-<span id="L695"><span class="lineNum">     695</span> <span class="tlaUNC">           0 :     const QAbstractItemModel* model = customElementsPaletteModel();</span></span>
-<span id="L696"><span class="lineNum">     696</span> <span class="tlaUNC">           0 :     if (index.model() == m_mainPalette &amp;&amp; index.parent() == QModelIndex()) {</span></span>
-<span id="L697"><span class="lineNum">     697</span> <span class="tlaUNC">           0 :         const int row = convertProxyIndex(index, m_userPaletteModel).row();</span></span>
-<span id="L698"><span class="lineNum">     698</span> <span class="tlaUNC">           0 :         return model-&gt;index(row, 0);</span></span>
-<span id="L699"><span class="lineNum">     699</span>              :     }</span>
-<span id="L700"><span class="lineNum">     700</span> <span class="tlaUNC">           0 :     return convertIndex(index, model);</span></span>
-<span id="L701"><span class="lineNum">     701</span>              : }</span>
-<span id="L702"><span class="lineNum">     702</span>              : </span>
-<span id="L703"><span class="lineNum">     703</span> <span class="tlaUNC">           0 : FilterPaletteTreeModel* PaletteProvider::customElementsPaletteModel()</span></span>
-<span id="L704"><span class="lineNum">     704</span>              : {</span>
-<span id="L705"><span class="lineNum">     705</span> <span class="tlaUNC">           0 :     if (!m_customPoolPalette) {</span></span>
-<span id="L706"><span class="lineNum">     706</span> <span class="tlaUNC">           0 :         PaletteCellFilter* filter = new VisibilityCellFilter(/* acceptedValue */ false);</span></span>
-<span id="L707"><span class="lineNum">     707</span> <span class="tlaUNC">           0 :         filter-&gt;addChainedFilter(new CustomizedCellFilter(/* acceptedValue */ true));</span></span>
-<span id="L708"><span class="lineNum">     708</span> <span class="tlaUNC">           0 :         m_customPoolPalette = new FilterPaletteTreeModel(filter, m_userPaletteModel, this);</span></span>
-<span id="L709"><span class="lineNum">     709</span>              :     }</span>
-<span id="L710"><span class="lineNum">     710</span> <span class="tlaUNC">           0 :     return m_customPoolPalette;</span></span>
-<span id="L711"><span class="lineNum">     711</span>              : }</span>
-<span id="L712"><span class="lineNum">     712</span>              : </span>
-<span id="L713"><span class="lineNum">     713</span> <span class="tlaUNC">           0 : AbstractPaletteController* PaletteProvider::customElementsPaletteController()</span></span>
-<span id="L714"><span class="lineNum">     714</span>              : {</span>
-<span id="L715"><span class="lineNum">     715</span> <span class="tlaUNC">           0 :     if (!m_customElementsPaletteController) {</span></span>
-<span id="L716"><span class="lineNum">     716</span> <span class="tlaUNC">           0 :         m_customElementsPaletteController = new UserPaletteController(customElementsPaletteModel(), m_userPaletteModel, iocContext(), this);</span></span>
-<span id="L717"><span class="lineNum">     717</span> <span class="tlaUNC">           0 :         m_customElementsPaletteController-&gt;setCustom(true);</span></span>
-<span id="L718"><span class="lineNum">     718</span>              :     }</span>
-<span id="L719"><span class="lineNum">     719</span>              : </span>
-<span id="L720"><span class="lineNum">     720</span> <span class="tlaUNC">           0 :     return m_customElementsPaletteController;</span></span>
-<span id="L721"><span class="lineNum">     721</span>              : }</span>
-<span id="L722"><span class="lineNum">     722</span>              : </span>
-<span id="L723"><span class="lineNum">     723</span> <span class="tlaUNC">           0 : QModelIndex PaletteProvider::poolPaletteIndex(const QModelIndex&amp; index, FilterPaletteTreeModel* poolPalette) const</span></span>
-<span id="L724"><span class="lineNum">     724</span>              : {</span>
-<span id="L725"><span class="lineNum">     725</span> <span class="tlaUNC">           0 :     const QModelIndex poolPaletteIndex = convertIndex(index, poolPalette);</span></span>
-<span id="L726"><span class="lineNum">     726</span> <span class="tlaUNC">           0 :     if (poolPaletteIndex.isValid()) {</span></span>
-<span id="L727"><span class="lineNum">     727</span> <span class="tlaUNC">           0 :         return poolPaletteIndex;</span></span>
-<span id="L728"><span class="lineNum">     728</span>              :     }</span>
-<span id="L729"><span class="lineNum">     729</span> <span class="tlaUNC">           0 :     const auto contentType = index.data(PaletteTreeModel::PaletteContentTypeRole).value&lt;Palette::Type&gt;();</span></span>
-<span id="L730"><span class="lineNum">     730</span> <span class="tlaUNC">           0 :     return findPaletteIndex(poolPalette, contentType);</span></span>
-<span id="L731"><span class="lineNum">     731</span>              : }</span>
-<span id="L732"><span class="lineNum">     732</span>              : </span>
-<span id="L733"><span class="lineNum">     733</span> <span class="tlaUNC">           0 : FilterPaletteTreeModel* PaletteProvider::poolPaletteModel(const QModelIndex&amp; index) const</span></span>
-<span id="L734"><span class="lineNum">     734</span>              : {</span>
-<span id="L735"><span class="lineNum">     735</span> <span class="tlaUNC">           0 :     const QModelIndex filterIndex = convertProxyIndex(index, m_userPaletteModel);</span></span>
-<span id="L736"><span class="lineNum">     736</span> <span class="tlaUNC">           0 :     PaletteCellFilter* filter = m_userPaletteModel-&gt;getFilter(filterIndex);</span></span>
-<span id="L737"><span class="lineNum">     737</span> <span class="tlaUNC">           0 :     if (!filter) {</span></span>
-<span id="L738"><span class="lineNum">     738</span> <span class="tlaUNC">           0 :         return nullptr;</span></span>
-<span id="L739"><span class="lineNum">     739</span>              :     }</span>
-<span id="L740"><span class="lineNum">     740</span>              : </span>
-<span id="L741"><span class="lineNum">     741</span> <span class="tlaUNC">           0 :     FilterPaletteTreeModel* m = new FilterPaletteTreeModel(filter, m_masterPaletteModel);</span></span>
-<span id="L742"><span class="lineNum">     742</span> <span class="tlaUNC">           0 :     QQmlEngine::setObjectOwnership(m, QQmlEngine::JavaScriptOwnership);</span></span>
-<span id="L743"><span class="lineNum">     743</span> <span class="tlaUNC">           0 :     return m;</span></span>
-<span id="L744"><span class="lineNum">     744</span>              : }</span>
-<span id="L745"><span class="lineNum">     745</span>              : </span>
-<span id="L746"><span class="lineNum">     746</span> <span class="tlaUNC">           0 : AbstractPaletteController* PaletteProvider::poolPaletteController(FilterPaletteTreeModel* poolPaletteModel,</span></span>
-<span id="L747"><span class="lineNum">     747</span>              :                                                                   const QModelIndex&amp; rootIndex) const</span>
-<span id="L748"><span class="lineNum">     748</span>              : {</span>
-<span id="L749"><span class="lineNum">     749</span>              :     Q_UNUSED(rootIndex);</span>
-<span id="L750"><span class="lineNum">     750</span> <span class="tlaUNC">           0 :     UserPaletteController* c = new UserPaletteController(poolPaletteModel, m_userPaletteModel, iocContext());</span></span>
-<span id="L751"><span class="lineNum">     751</span> <span class="tlaUNC">           0 :     c-&gt;setVisible(false);</span></span>
-<span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC">           0 :     c-&gt;setCustom(false);</span></span>
-<span id="L753"><span class="lineNum">     753</span> <span class="tlaUNC">           0 :     c-&gt;setUserEditable(false);</span></span>
-<span id="L754"><span class="lineNum">     754</span>              : //       AbstractPaletteController* c = new MasterPaletteController(poolPaletteModel, userPalette, this);</span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaUNC">           0 :     QQmlEngine::setObjectOwnership(c, QQmlEngine::JavaScriptOwnership);</span></span>
-<span id="L756"><span class="lineNum">     756</span> <span class="tlaUNC">           0 :     return c;</span></span>
-<span id="L757"><span class="lineNum">     757</span>              : }</span>
-<span id="L758"><span class="lineNum">     758</span>              : </span>
-<span id="L759"><span class="lineNum">     759</span> <span class="tlaUNC">           0 : QAbstractItemModel* PaletteProvider::availableExtraPalettesModel() const</span></span>
-<span id="L760"><span class="lineNum">     760</span>              : {</span>
-<span id="L761"><span class="lineNum">     761</span> <span class="tlaUNC">           0 :     QStandardItemModel* m = new QStandardItemModel;</span></span>
-<span id="L762"><span class="lineNum">     762</span>              : </span>
-<span id="L763"><span class="lineNum">     763</span>              :     {</span>
-<span id="L764"><span class="lineNum">     764</span> <span class="tlaUNC">           0 :         auto roleNames = m-&gt;roleNames();</span></span>
-<span id="L765"><span class="lineNum">     765</span> <span class="tlaUNC">           0 :         roleNames[CustomRole] = &quot;custom&quot;;</span></span>
-<span id="L766"><span class="lineNum">     766</span> <span class="tlaUNC">           0 :         roleNames[PaletteIndexRole] = &quot;paletteIndex&quot;;</span></span>
-<span id="L767"><span class="lineNum">     767</span> <span class="tlaUNC">           0 :         m-&gt;setItemRoleNames(roleNames);</span></span>
-<span id="L768"><span class="lineNum">     768</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L769"><span class="lineNum">     769</span>              : </span>
-<span id="L770"><span class="lineNum">     770</span> <span class="tlaUNC">           0 :     QStandardItem* root = m-&gt;invisibleRootItem();</span></span>
-<span id="L771"><span class="lineNum">     771</span>              : </span>
-<span id="L772"><span class="lineNum">     772</span> <span class="tlaUNC">           0 :     const int masterRows = m_masterPaletteModel-&gt;rowCount();</span></span>
-<span id="L773"><span class="lineNum">     773</span> <span class="tlaUNC">           0 :     for (int row = 0; row &lt; masterRows; ++row) {</span></span>
-<span id="L774"><span class="lineNum">     774</span> <span class="tlaUNC">           0 :         const QModelIndex idx = m_masterPaletteModel-&gt;index(row, 0);</span></span>
-<span id="L775"><span class="lineNum">     775</span>              :         // add everything that cannot be found in user palette</span>
-<span id="L776"><span class="lineNum">     776</span> <span class="tlaUNC">           0 :         if (!convertIndex(idx, m_userPaletteModel).isValid()) {</span></span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaUNC">           0 :             const QString name = m_masterPaletteModel-&gt;data(idx, Qt::DisplayRole).toString();</span></span>
-<span id="L778"><span class="lineNum">     778</span> <span class="tlaUNC">           0 :             QStandardItem* item = new QStandardItem(name);</span></span>
-<span id="L779"><span class="lineNum">     779</span> <span class="tlaUNC">           0 :             item-&gt;setData(false, CustomRole);       // this palette is from master palette, hence not custom</span></span>
-<span id="L780"><span class="lineNum">     780</span> <span class="tlaUNC">           0 :             item-&gt;setData(QPersistentModelIndex(idx), PaletteIndexRole);</span></span>
-<span id="L781"><span class="lineNum">     781</span> <span class="tlaUNC">           0 :             root-&gt;appendRow(item);</span></span>
-<span id="L782"><span class="lineNum">     782</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L783"><span class="lineNum">     783</span>              :     }</span>
-<span id="L784"><span class="lineNum">     784</span>              : </span>
-<span id="L785"><span class="lineNum">     785</span> <span class="tlaUNC">           0 :     const int userRows = m_userPaletteModel-&gt;rowCount();</span></span>
-<span id="L786"><span class="lineNum">     786</span> <span class="tlaUNC">           0 :     for (int row = 0; row &lt; userRows; ++row) {</span></span>
-<span id="L787"><span class="lineNum">     787</span> <span class="tlaUNC">           0 :         const QModelIndex idx = m_userPaletteModel-&gt;index(row, 0);</span></span>
-<span id="L788"><span class="lineNum">     788</span>              :         // add invisible custom palettes</span>
-<span id="L789"><span class="lineNum">     789</span> <span class="tlaUNC">           0 :         const bool visible = m_userPaletteModel-&gt;data(idx, PaletteTreeModel::VisibleRole).toBool();</span></span>
-<span id="L790"><span class="lineNum">     790</span> <span class="tlaUNC">           0 :         const bool custom = m_userPaletteModel-&gt;data(idx, PaletteTreeModel::CustomRole).toBool();</span></span>
-<span id="L791"><span class="lineNum">     791</span> <span class="tlaUNC">           0 :         if (!visible) {</span></span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaUNC">           0 :             const QString name = m_userPaletteModel-&gt;data(idx, Qt::DisplayRole).toString();</span></span>
-<span id="L793"><span class="lineNum">     793</span> <span class="tlaUNC">           0 :             QStandardItem* item = new QStandardItem(name);</span></span>
-<span id="L794"><span class="lineNum">     794</span> <span class="tlaUNC">           0 :             item-&gt;setData(custom, CustomRole);</span></span>
-<span id="L795"><span class="lineNum">     795</span> <span class="tlaUNC">           0 :             item-&gt;setData(QPersistentModelIndex(idx), PaletteIndexRole);</span></span>
-<span id="L796"><span class="lineNum">     796</span> <span class="tlaUNC">           0 :             root-&gt;appendRow(item);</span></span>
-<span id="L797"><span class="lineNum">     797</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L798"><span class="lineNum">     798</span>              :     }</span>
-<span id="L799"><span class="lineNum">     799</span>              : </span>
-<span id="L800"><span class="lineNum">     800</span> <span class="tlaUNC">           0 :     QQmlEngine::setObjectOwnership(m, QQmlEngine::JavaScriptOwnership);</span></span>
-<span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 :     return m;</span></span>
-<span id="L802"><span class="lineNum">     802</span>              : }</span>
-<span id="L803"><span class="lineNum">     803</span>              : </span>
-<span id="L804"><span class="lineNum">     804</span> <span class="tlaUNC">           0 : bool PaletteProvider::addPalette(const QPersistentModelIndex&amp; index)</span></span>
-<span id="L805"><span class="lineNum">     805</span>              : {</span>
-<span id="L806"><span class="lineNum">     806</span> <span class="tlaUNC">           0 :     if (!index.isValid()) {</span></span>
-<span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L808"><span class="lineNum">     808</span>              :     }</span>
-<span id="L809"><span class="lineNum">     809</span>              : </span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaUNC">           0 :     if (index.model() == m_userPaletteModel) {</span></span>
-<span id="L811"><span class="lineNum">     811</span> <span class="tlaUNC">           0 :         const bool ok = m_userPaletteModel-&gt;setData(index, true, PaletteTreeModel::VisibleRole);</span></span>
-<span id="L812"><span class="lineNum">     812</span> <span class="tlaUNC">           0 :         if (!ok) {</span></span>
-<span id="L813"><span class="lineNum">     813</span> <span class="tlaUNC">           0 :             return false;</span></span>
-<span id="L814"><span class="lineNum">     814</span>              :         }</span>
-<span id="L815"><span class="lineNum">     815</span> <span class="tlaUNC">           0 :         const QModelIndex parent = index.parent();</span></span>
-<span id="L816"><span class="lineNum">     816</span> <span class="tlaUNC">           0 :         m_userPaletteModel-&gt;moveRow(parent, index.row(), parent, 0);</span></span>
-<span id="L817"><span class="lineNum">     817</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L818"><span class="lineNum">     818</span>              :     }</span>
+<span id="L687"><span class="lineNum">     687</span> <span class="tlaUNC">           0 :     return configuration()-&gt;isPaletteDragEnabled().val;</span></span>
+<span id="L688"><span class="lineNum">     688</span>              : }</span>
+<span id="L689"><span class="lineNum">     689</span>              : </span>
+<span id="L690"><span class="lineNum">     690</span> <span class="tlaUNC">           0 : QAbstractItemModel* PaletteProvider::mainPaletteModel()</span></span>
+<span id="L691"><span class="lineNum">     691</span>              : {</span>
+<span id="L692"><span class="lineNum">     692</span> <span class="tlaUNC">           0 :     if (m_isSearching) {</span></span>
+<span id="L693"><span class="lineNum">     693</span> <span class="tlaUNC">           0 :         m_mainPalette = m_searchFilterModel;</span></span>
+<span id="L694"><span class="lineNum">     694</span>              :     } else {</span>
+<span id="L695"><span class="lineNum">     695</span> <span class="tlaUNC">           0 :         m_mainPalette = m_visibilityFilterModel;</span></span>
+<span id="L696"><span class="lineNum">     696</span>              :     }</span>
+<span id="L697"><span class="lineNum">     697</span>              : </span>
+<span id="L698"><span class="lineNum">     698</span> <span class="tlaUNC">           0 :     return m_mainPalette;</span></span>
+<span id="L699"><span class="lineNum">     699</span>              : }</span>
+<span id="L700"><span class="lineNum">     700</span>              : </span>
+<span id="L701"><span class="lineNum">     701</span> <span class="tlaUNC">           0 : AbstractPaletteController* PaletteProvider::mainPaletteController()</span></span>
+<span id="L702"><span class="lineNum">     702</span>              : {</span>
+<span id="L703"><span class="lineNum">     703</span> <span class="tlaUNC">           0 :     if (!m_mainPaletteController) {</span></span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaUNC">           0 :         m_mainPaletteController = new UserPaletteController(mainPaletteModel(), m_userPaletteModel, iocContext(), this);</span></span>
+<span id="L705"><span class="lineNum">     705</span>              :     }</span>
+<span id="L706"><span class="lineNum">     706</span> <span class="tlaUNC">           0 :     return m_mainPaletteController;</span></span>
+<span id="L707"><span class="lineNum">     707</span>              : }</span>
+<span id="L708"><span class="lineNum">     708</span>              : </span>
+<span id="L709"><span class="lineNum">     709</span> <span class="tlaUNC">           0 : QModelIndex PaletteProvider::customElementsPaletteIndex(const QModelIndex&amp; index)</span></span>
+<span id="L710"><span class="lineNum">     710</span>              : {</span>
+<span id="L711"><span class="lineNum">     711</span> <span class="tlaUNC">           0 :     const QAbstractItemModel* model = customElementsPaletteModel();</span></span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaUNC">           0 :     if (index.model() == m_mainPalette &amp;&amp; index.parent() == QModelIndex()) {</span></span>
+<span id="L713"><span class="lineNum">     713</span> <span class="tlaUNC">           0 :         const int row = convertProxyIndex(index, m_userPaletteModel).row();</span></span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaUNC">           0 :         return model-&gt;index(row, 0);</span></span>
+<span id="L715"><span class="lineNum">     715</span>              :     }</span>
+<span id="L716"><span class="lineNum">     716</span> <span class="tlaUNC">           0 :     return convertIndex(index, model);</span></span>
+<span id="L717"><span class="lineNum">     717</span>              : }</span>
+<span id="L718"><span class="lineNum">     718</span>              : </span>
+<span id="L719"><span class="lineNum">     719</span> <span class="tlaUNC">           0 : FilterPaletteTreeModel* PaletteProvider::customElementsPaletteModel()</span></span>
+<span id="L720"><span class="lineNum">     720</span>              : {</span>
+<span id="L721"><span class="lineNum">     721</span> <span class="tlaUNC">           0 :     if (!m_customPoolPalette) {</span></span>
+<span id="L722"><span class="lineNum">     722</span> <span class="tlaUNC">           0 :         PaletteCellFilter* filter = new VisibilityCellFilter(/* acceptedValue */ false);</span></span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaUNC">           0 :         filter-&gt;addChainedFilter(new CustomizedCellFilter(/* acceptedValue */ true));</span></span>
+<span id="L724"><span class="lineNum">     724</span> <span class="tlaUNC">           0 :         m_customPoolPalette = new FilterPaletteTreeModel(filter, m_userPaletteModel, this);</span></span>
+<span id="L725"><span class="lineNum">     725</span>              :     }</span>
+<span id="L726"><span class="lineNum">     726</span> <span class="tlaUNC">           0 :     return m_customPoolPalette;</span></span>
+<span id="L727"><span class="lineNum">     727</span>              : }</span>
+<span id="L728"><span class="lineNum">     728</span>              : </span>
+<span id="L729"><span class="lineNum">     729</span> <span class="tlaUNC">           0 : AbstractPaletteController* PaletteProvider::customElementsPaletteController()</span></span>
+<span id="L730"><span class="lineNum">     730</span>              : {</span>
+<span id="L731"><span class="lineNum">     731</span> <span class="tlaUNC">           0 :     if (!m_customElementsPaletteController) {</span></span>
+<span id="L732"><span class="lineNum">     732</span> <span class="tlaUNC">           0 :         m_customElementsPaletteController = new UserPaletteController(customElementsPaletteModel(), m_userPaletteModel, iocContext(), this);</span></span>
+<span id="L733"><span class="lineNum">     733</span> <span class="tlaUNC">           0 :         m_customElementsPaletteController-&gt;setCustom(true);</span></span>
+<span id="L734"><span class="lineNum">     734</span>              :     }</span>
+<span id="L735"><span class="lineNum">     735</span>              : </span>
+<span id="L736"><span class="lineNum">     736</span> <span class="tlaUNC">           0 :     return m_customElementsPaletteController;</span></span>
+<span id="L737"><span class="lineNum">     737</span>              : }</span>
+<span id="L738"><span class="lineNum">     738</span>              : </span>
+<span id="L739"><span class="lineNum">     739</span> <span class="tlaUNC">           0 : QModelIndex PaletteProvider::poolPaletteIndex(const QModelIndex&amp; index, FilterPaletteTreeModel* poolPalette) const</span></span>
+<span id="L740"><span class="lineNum">     740</span>              : {</span>
+<span id="L741"><span class="lineNum">     741</span> <span class="tlaUNC">           0 :     const QModelIndex poolPaletteIndex = convertIndex(index, poolPalette);</span></span>
+<span id="L742"><span class="lineNum">     742</span> <span class="tlaUNC">           0 :     if (poolPaletteIndex.isValid()) {</span></span>
+<span id="L743"><span class="lineNum">     743</span> <span class="tlaUNC">           0 :         return poolPaletteIndex;</span></span>
+<span id="L744"><span class="lineNum">     744</span>              :     }</span>
+<span id="L745"><span class="lineNum">     745</span> <span class="tlaUNC">           0 :     const auto contentType = index.data(PaletteTreeModel::PaletteContentTypeRole).value&lt;Palette::Type&gt;();</span></span>
+<span id="L746"><span class="lineNum">     746</span> <span class="tlaUNC">           0 :     return findPaletteIndex(poolPalette, contentType);</span></span>
+<span id="L747"><span class="lineNum">     747</span>              : }</span>
+<span id="L748"><span class="lineNum">     748</span>              : </span>
+<span id="L749"><span class="lineNum">     749</span> <span class="tlaUNC">           0 : FilterPaletteTreeModel* PaletteProvider::poolPaletteModel(const QModelIndex&amp; index) const</span></span>
+<span id="L750"><span class="lineNum">     750</span>              : {</span>
+<span id="L751"><span class="lineNum">     751</span> <span class="tlaUNC">           0 :     const QModelIndex filterIndex = convertProxyIndex(index, m_userPaletteModel);</span></span>
+<span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC">           0 :     PaletteCellFilter* filter = m_userPaletteModel-&gt;getFilter(filterIndex);</span></span>
+<span id="L753"><span class="lineNum">     753</span> <span class="tlaUNC">           0 :     if (!filter) {</span></span>
+<span id="L754"><span class="lineNum">     754</span> <span class="tlaUNC">           0 :         return nullptr;</span></span>
+<span id="L755"><span class="lineNum">     755</span>              :     }</span>
+<span id="L756"><span class="lineNum">     756</span>              : </span>
+<span id="L757"><span class="lineNum">     757</span> <span class="tlaUNC">           0 :     FilterPaletteTreeModel* m = new FilterPaletteTreeModel(filter, m_masterPaletteModel);</span></span>
+<span id="L758"><span class="lineNum">     758</span> <span class="tlaUNC">           0 :     QQmlEngine::setObjectOwnership(m, QQmlEngine::JavaScriptOwnership);</span></span>
+<span id="L759"><span class="lineNum">     759</span> <span class="tlaUNC">           0 :     return m;</span></span>
+<span id="L760"><span class="lineNum">     760</span>              : }</span>
+<span id="L761"><span class="lineNum">     761</span>              : </span>
+<span id="L762"><span class="lineNum">     762</span> <span class="tlaUNC">           0 : AbstractPaletteController* PaletteProvider::poolPaletteController(FilterPaletteTreeModel* poolPaletteModel,</span></span>
+<span id="L763"><span class="lineNum">     763</span>              :                                                                   const QModelIndex&amp; rootIndex) const</span>
+<span id="L764"><span class="lineNum">     764</span>              : {</span>
+<span id="L765"><span class="lineNum">     765</span>              :     Q_UNUSED(rootIndex);</span>
+<span id="L766"><span class="lineNum">     766</span> <span class="tlaUNC">           0 :     UserPaletteController* c = new UserPaletteController(poolPaletteModel, m_userPaletteModel, iocContext());</span></span>
+<span id="L767"><span class="lineNum">     767</span> <span class="tlaUNC">           0 :     c-&gt;setVisible(false);</span></span>
+<span id="L768"><span class="lineNum">     768</span> <span class="tlaUNC">           0 :     c-&gt;setCustom(false);</span></span>
+<span id="L769"><span class="lineNum">     769</span> <span class="tlaUNC">           0 :     c-&gt;setUserEditable(false);</span></span>
+<span id="L770"><span class="lineNum">     770</span>              : //       AbstractPaletteController* c = new MasterPaletteController(poolPaletteModel, userPalette, this);</span>
+<span id="L771"><span class="lineNum">     771</span> <span class="tlaUNC">           0 :     QQmlEngine::setObjectOwnership(c, QQmlEngine::JavaScriptOwnership);</span></span>
+<span id="L772"><span class="lineNum">     772</span> <span class="tlaUNC">           0 :     return c;</span></span>
+<span id="L773"><span class="lineNum">     773</span>              : }</span>
+<span id="L774"><span class="lineNum">     774</span>              : </span>
+<span id="L775"><span class="lineNum">     775</span> <span class="tlaUNC">           0 : QAbstractItemModel* PaletteProvider::availableExtraPalettesModel() const</span></span>
+<span id="L776"><span class="lineNum">     776</span>              : {</span>
+<span id="L777"><span class="lineNum">     777</span> <span class="tlaUNC">           0 :     QStandardItemModel* m = new QStandardItemModel;</span></span>
+<span id="L778"><span class="lineNum">     778</span>              : </span>
+<span id="L779"><span class="lineNum">     779</span>              :     {</span>
+<span id="L780"><span class="lineNum">     780</span> <span class="tlaUNC">           0 :         auto roleNames = m-&gt;roleNames();</span></span>
+<span id="L781"><span class="lineNum">     781</span> <span class="tlaUNC">           0 :         roleNames[CustomRole] = &quot;custom&quot;;</span></span>
+<span id="L782"><span class="lineNum">     782</span> <span class="tlaUNC">           0 :         roleNames[PaletteIndexRole] = &quot;paletteIndex&quot;;</span></span>
+<span id="L783"><span class="lineNum">     783</span> <span class="tlaUNC">           0 :         m-&gt;setItemRoleNames(roleNames);</span></span>
+<span id="L784"><span class="lineNum">     784</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L785"><span class="lineNum">     785</span>              : </span>
+<span id="L786"><span class="lineNum">     786</span> <span class="tlaUNC">           0 :     QStandardItem* root = m-&gt;invisibleRootItem();</span></span>
+<span id="L787"><span class="lineNum">     787</span>              : </span>
+<span id="L788"><span class="lineNum">     788</span> <span class="tlaUNC">           0 :     const int masterRows = m_masterPaletteModel-&gt;rowCount();</span></span>
+<span id="L789"><span class="lineNum">     789</span> <span class="tlaUNC">           0 :     for (int row = 0; row &lt; masterRows; ++row) {</span></span>
+<span id="L790"><span class="lineNum">     790</span> <span class="tlaUNC">           0 :         const QModelIndex idx = m_masterPaletteModel-&gt;index(row, 0);</span></span>
+<span id="L791"><span class="lineNum">     791</span>              :         // add everything that cannot be found in user palette</span>
+<span id="L792"><span class="lineNum">     792</span> <span class="tlaUNC">           0 :         if (!convertIndex(idx, m_userPaletteModel).isValid()) {</span></span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaUNC">           0 :             const QString name = m_masterPaletteModel-&gt;data(idx, Qt::DisplayRole).toString();</span></span>
+<span id="L794"><span class="lineNum">     794</span> <span class="tlaUNC">           0 :             QStandardItem* item = new QStandardItem(name);</span></span>
+<span id="L795"><span class="lineNum">     795</span> <span class="tlaUNC">           0 :             item-&gt;setData(false, CustomRole);       // this palette is from master palette, hence not custom</span></span>
+<span id="L796"><span class="lineNum">     796</span> <span class="tlaUNC">           0 :             item-&gt;setData(QPersistentModelIndex(idx), PaletteIndexRole);</span></span>
+<span id="L797"><span class="lineNum">     797</span> <span class="tlaUNC">           0 :             root-&gt;appendRow(item);</span></span>
+<span id="L798"><span class="lineNum">     798</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L799"><span class="lineNum">     799</span>              :     }</span>
+<span id="L800"><span class="lineNum">     800</span>              : </span>
+<span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 :     const int userRows = m_userPaletteModel-&gt;rowCount();</span></span>
+<span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC">           0 :     for (int row = 0; row &lt; userRows; ++row) {</span></span>
+<span id="L803"><span class="lineNum">     803</span> <span class="tlaUNC">           0 :         const QModelIndex idx = m_userPaletteModel-&gt;index(row, 0);</span></span>
+<span id="L804"><span class="lineNum">     804</span>              :         // add invisible custom palettes</span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaUNC">           0 :         const bool visible = m_userPaletteModel-&gt;data(idx, PaletteTreeModel::VisibleRole).toBool();</span></span>
+<span id="L806"><span class="lineNum">     806</span> <span class="tlaUNC">           0 :         const bool custom = m_userPaletteModel-&gt;data(idx, PaletteTreeModel::CustomRole).toBool();</span></span>
+<span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :         if (!visible) {</span></span>
+<span id="L808"><span class="lineNum">     808</span> <span class="tlaUNC">           0 :             const QString name = m_userPaletteModel-&gt;data(idx, Qt::DisplayRole).toString();</span></span>
+<span id="L809"><span class="lineNum">     809</span> <span class="tlaUNC">           0 :             QStandardItem* item = new QStandardItem(name);</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaUNC">           0 :             item-&gt;setData(custom, CustomRole);</span></span>
+<span id="L811"><span class="lineNum">     811</span> <span class="tlaUNC">           0 :             item-&gt;setData(QPersistentModelIndex(idx), PaletteIndexRole);</span></span>
+<span id="L812"><span class="lineNum">     812</span> <span class="tlaUNC">           0 :             root-&gt;appendRow(item);</span></span>
+<span id="L813"><span class="lineNum">     813</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L814"><span class="lineNum">     814</span>              :     }</span>
+<span id="L815"><span class="lineNum">     815</span>              : </span>
+<span id="L816"><span class="lineNum">     816</span> <span class="tlaUNC">           0 :     QQmlEngine::setObjectOwnership(m, QQmlEngine::JavaScriptOwnership);</span></span>
+<span id="L817"><span class="lineNum">     817</span> <span class="tlaUNC">           0 :     return m;</span></span>
+<span id="L818"><span class="lineNum">     818</span>              : }</span>
 <span id="L819"><span class="lineNum">     819</span>              : </span>
-<span id="L820"><span class="lineNum">     820</span> <span class="tlaUNC">           0 :     if (index.model() == m_masterPaletteModel) {</span></span>
-<span id="L821"><span class="lineNum">     821</span> <span class="tlaUNC">           0 :         QMimeData* data = m_masterPaletteModel-&gt;mimeData({ QModelIndex(index) });</span></span>
-<span id="L822"><span class="lineNum">     822</span> <span class="tlaUNC">           0 :         QModelIndex dropIndex = m_userPaletteModel-&gt;index(0, 0);</span></span>
-<span id="L823"><span class="lineNum">     823</span>              : </span>
-<span id="L824"><span class="lineNum">     824</span> <span class="tlaUNC">           0 :         const bool success = m_userPaletteModel-&gt;dropMimeData(data, Qt::CopyAction, dropIndex.row(), dropIndex.column(), QModelIndex());</span></span>
-<span id="L825"><span class="lineNum">     825</span> <span class="tlaUNC">           0 :         if (success) {</span></span>
-<span id="L826"><span class="lineNum">     826</span> <span class="tlaUNC">           0 :             m_userPaletteModel-&gt;setData(dropIndex, true, PaletteTreeModel::VisibleRole);</span></span>
-<span id="L827"><span class="lineNum">     827</span>              :         }</span>
-<span id="L828"><span class="lineNum">     828</span>              : </span>
-<span id="L829"><span class="lineNum">     829</span> <span class="tlaUNC">           0 :         data-&gt;deleteLater();</span></span>
-<span id="L830"><span class="lineNum">     830</span> <span class="tlaUNC">           0 :         return success;</span></span>
-<span id="L831"><span class="lineNum">     831</span>              :     }</span>
-<span id="L832"><span class="lineNum">     832</span>              : </span>
-<span id="L833"><span class="lineNum">     833</span> <span class="tlaUNC">           0 :     return false;</span></span>
-<span id="L834"><span class="lineNum">     834</span>              : }</span>
+<span id="L820"><span class="lineNum">     820</span> <span class="tlaUNC">           0 : bool PaletteProvider::addPalette(const QPersistentModelIndex&amp; index)</span></span>
+<span id="L821"><span class="lineNum">     821</span>              : {</span>
+<span id="L822"><span class="lineNum">     822</span> <span class="tlaUNC">           0 :     if (!index.isValid()) {</span></span>
+<span id="L823"><span class="lineNum">     823</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L824"><span class="lineNum">     824</span>              :     }</span>
+<span id="L825"><span class="lineNum">     825</span>              : </span>
+<span id="L826"><span class="lineNum">     826</span> <span class="tlaUNC">           0 :     if (index.model() == m_userPaletteModel) {</span></span>
+<span id="L827"><span class="lineNum">     827</span> <span class="tlaUNC">           0 :         const bool ok = m_userPaletteModel-&gt;setData(index, true, PaletteTreeModel::VisibleRole);</span></span>
+<span id="L828"><span class="lineNum">     828</span> <span class="tlaUNC">           0 :         if (!ok) {</span></span>
+<span id="L829"><span class="lineNum">     829</span> <span class="tlaUNC">           0 :             return false;</span></span>
+<span id="L830"><span class="lineNum">     830</span>              :         }</span>
+<span id="L831"><span class="lineNum">     831</span> <span class="tlaUNC">           0 :         const QModelIndex parent = index.parent();</span></span>
+<span id="L832"><span class="lineNum">     832</span> <span class="tlaUNC">           0 :         m_userPaletteModel-&gt;moveRow(parent, index.row(), parent, 0);</span></span>
+<span id="L833"><span class="lineNum">     833</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L834"><span class="lineNum">     834</span>              :     }</span>
 <span id="L835"><span class="lineNum">     835</span>              : </span>
-<span id="L836"><span class="lineNum">     836</span> <span class="tlaUNC">           0 : void PaletteProvider::resetPalette(const QModelIndex&amp; index)</span></span>
-<span id="L837"><span class="lineNum">     837</span>              : {</span>
-<span id="L838"><span class="lineNum">     838</span> <span class="tlaUNC">           0 :     if (!index.isValid()) {</span></span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L840"><span class="lineNum">     840</span>              :     }</span>
-<span id="L841"><span class="lineNum">     841</span>              : </span>
-<span id="L842"><span class="lineNum">     842</span>              :     std::string title = muse::trc(&quot;palette&quot;,</span>
-<span id="L843"><span class="lineNum">     843</span> <span class="tlaUNC">           0 :                                   &quot;Do you want to restore this palette to its default state? All changes to this palette will be lost.&quot;);</span></span>
+<span id="L836"><span class="lineNum">     836</span> <span class="tlaUNC">           0 :     if (index.model() == m_masterPaletteModel) {</span></span>
+<span id="L837"><span class="lineNum">     837</span> <span class="tlaUNC">           0 :         QMimeData* data = m_masterPaletteModel-&gt;mimeData({ QModelIndex(index) });</span></span>
+<span id="L838"><span class="lineNum">     838</span> <span class="tlaUNC">           0 :         QModelIndex dropIndex = m_userPaletteModel-&gt;index(0, 0);</span></span>
+<span id="L839"><span class="lineNum">     839</span>              : </span>
+<span id="L840"><span class="lineNum">     840</span> <span class="tlaUNC">           0 :         const bool success = m_userPaletteModel-&gt;dropMimeData(data, Qt::CopyAction, dropIndex.row(), dropIndex.column(), QModelIndex());</span></span>
+<span id="L841"><span class="lineNum">     841</span> <span class="tlaUNC">           0 :         if (success) {</span></span>
+<span id="L842"><span class="lineNum">     842</span> <span class="tlaUNC">           0 :             m_userPaletteModel-&gt;setData(dropIndex, true, PaletteTreeModel::VisibleRole);</span></span>
+<span id="L843"><span class="lineNum">     843</span>              :         }</span>
 <span id="L844"><span class="lineNum">     844</span>              : </span>
-<span id="L845"><span class="lineNum">     845</span> <span class="tlaUNC">           0 :     interactive()-&gt;question(&quot;&quot;, title, {</span></span>
-<span id="L846"><span class="lineNum">     846</span>              :         IInteractive::Button::No, IInteractive::Button::Yes</span>
-<span id="L847"><span class="lineNum">     847</span>              :     })</span>
-<span id="L848"><span class="lineNum">     848</span> <span class="tlaUNC">           0 :     .onResolve(this, [this, index](const IInteractive::Result&amp; res) {</span></span>
-<span id="L849"><span class="lineNum">     849</span> <span class="tlaUNC">           0 :         if (res.isButton(IInteractive::Button::Yes)) {</span></span>
-<span id="L850"><span class="lineNum">     850</span> <span class="tlaUNC">           0 :             doResetPalette(index);</span></span>
-<span id="L851"><span class="lineNum">     851</span>              :         }</span>
-<span id="L852"><span class="lineNum">     852</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L853"><span class="lineNum">     853</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L854"><span class="lineNum">     854</span>              : </span>
-<span id="L855"><span class="lineNum">     855</span> <span class="tlaUNC">           0 : void PaletteProvider::doResetPalette(const QModelIndex&amp; index)</span></span>
-<span id="L856"><span class="lineNum">     856</span>              : {</span>
-<span id="L857"><span class="lineNum">     857</span> <span class="tlaUNC">           0 :     Q_ASSERT(m_defaultPaletteModel != m_userPaletteModel);</span></span>
-<span id="L858"><span class="lineNum">     858</span>              : </span>
-<span id="L859"><span class="lineNum">     859</span> <span class="tlaUNC">           0 :     QAbstractItemModel* resetModel = nullptr;</span></span>
-<span id="L860"><span class="lineNum">     860</span> <span class="tlaUNC">           0 :     QModelIndex resetIndex;</span></span>
-<span id="L861"><span class="lineNum">     861</span>              : </span>
-<span id="L862"><span class="lineNum">     862</span> <span class="tlaUNC">           0 :     if (m_defaultPaletteModel) {</span></span>
-<span id="L863"><span class="lineNum">     863</span> <span class="tlaUNC">           0 :         resetModel = m_defaultPaletteModel;</span></span>
-<span id="L864"><span class="lineNum">     864</span> <span class="tlaUNC">           0 :         resetIndex = convertIndex(index, m_defaultPaletteModel);</span></span>
-<span id="L865"><span class="lineNum">     865</span>              :     }</span>
-<span id="L866"><span class="lineNum">     866</span>              : </span>
-<span id="L867"><span class="lineNum">     867</span> <span class="tlaUNC">           0 :     if (!resetIndex.isValid()) {</span></span>
-<span id="L868"><span class="lineNum">     868</span> <span class="tlaUNC">           0 :         resetModel = m_masterPaletteModel;</span></span>
-<span id="L869"><span class="lineNum">     869</span> <span class="tlaUNC">           0 :         resetIndex = convertIndex(index, m_masterPaletteModel);</span></span>
-<span id="L870"><span class="lineNum">     870</span>              :     }</span>
-<span id="L871"><span class="lineNum">     871</span>              : </span>
-<span id="L872"><span class="lineNum">     872</span> <span class="tlaUNC">           0 :     const QModelIndex userPaletteIndex = convertProxyIndex(index, m_userPaletteModel);</span></span>
-<span id="L873"><span class="lineNum">     873</span> <span class="tlaUNC">           0 :     const QModelIndex parent = userPaletteIndex.parent();</span></span>
-<span id="L874"><span class="lineNum">     874</span> <span class="tlaUNC">           0 :     const int row = userPaletteIndex.row();</span></span>
-<span id="L875"><span class="lineNum">     875</span> <span class="tlaUNC">           0 :     const int column = userPaletteIndex.column();</span></span>
-<span id="L876"><span class="lineNum">     876</span>              : </span>
-<span id="L877"><span class="lineNum">     877</span>              :     // restore visibility and expanded state of the palette after restoring its state</span>
-<span id="L878"><span class="lineNum">     878</span> <span class="tlaUNC">           0 :     const bool wasVisible = index.data(PaletteTreeModel::VisibleRole).toBool();</span></span>
-<span id="L879"><span class="lineNum">     879</span> <span class="tlaUNC">           0 :     const bool wasExpanded = index.data(PaletteTreeModel::PaletteExpandedRole).toBool();</span></span>
-<span id="L880"><span class="lineNum">     880</span>              : </span>
-<span id="L881"><span class="lineNum">     881</span> <span class="tlaUNC">           0 :     if (!m_userPaletteModel-&gt;removeRow(row, parent)) {</span></span>
-<span id="L882"><span class="lineNum">     882</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L883"><span class="lineNum">     883</span>              :     }</span>
-<span id="L884"><span class="lineNum">     884</span>              : </span>
-<span id="L885"><span class="lineNum">     885</span> <span class="tlaUNC">           0 :     if (resetIndex.isValid()) {</span></span>
-<span id="L886"><span class="lineNum">     886</span> <span class="tlaUNC">           0 :         QMimeData* data = resetModel-&gt;mimeData({ resetIndex });</span></span>
-<span id="L887"><span class="lineNum">     887</span> <span class="tlaUNC">           0 :         m_userPaletteModel-&gt;dropMimeData(data, Qt::CopyAction, row, column, parent);</span></span>
-<span id="L888"><span class="lineNum">     888</span> <span class="tlaUNC">           0 :         data-&gt;deleteLater();</span></span>
-<span id="L889"><span class="lineNum">     889</span>              :     } else {</span>
-<span id="L890"><span class="lineNum">     890</span> <span class="tlaUNC">           0 :         m_userPaletteModel-&gt;insertRow(row, parent);</span></span>
-<span id="L891"><span class="lineNum">     891</span>              :     }</span>
+<span id="L845"><span class="lineNum">     845</span> <span class="tlaUNC">           0 :         data-&gt;deleteLater();</span></span>
+<span id="L846"><span class="lineNum">     846</span> <span class="tlaUNC">           0 :         return success;</span></span>
+<span id="L847"><span class="lineNum">     847</span>              :     }</span>
+<span id="L848"><span class="lineNum">     848</span>              : </span>
+<span id="L849"><span class="lineNum">     849</span> <span class="tlaUNC">           0 :     return false;</span></span>
+<span id="L850"><span class="lineNum">     850</span>              : }</span>
+<span id="L851"><span class="lineNum">     851</span>              : </span>
+<span id="L852"><span class="lineNum">     852</span> <span class="tlaUNC">           0 : void PaletteProvider::resetPalette(const QModelIndex&amp; index)</span></span>
+<span id="L853"><span class="lineNum">     853</span>              : {</span>
+<span id="L854"><span class="lineNum">     854</span> <span class="tlaUNC">           0 :     if (!index.isValid()) {</span></span>
+<span id="L855"><span class="lineNum">     855</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L856"><span class="lineNum">     856</span>              :     }</span>
+<span id="L857"><span class="lineNum">     857</span>              : </span>
+<span id="L858"><span class="lineNum">     858</span>              :     std::string title = muse::trc(&quot;palette&quot;,</span>
+<span id="L859"><span class="lineNum">     859</span> <span class="tlaUNC">           0 :                                   &quot;Do you want to restore this palette to its default state? All changes to this palette will be lost.&quot;);</span></span>
+<span id="L860"><span class="lineNum">     860</span>              : </span>
+<span id="L861"><span class="lineNum">     861</span> <span class="tlaUNC">           0 :     interactive()-&gt;question(&quot;&quot;, title, {</span></span>
+<span id="L862"><span class="lineNum">     862</span>              :         IInteractive::Button::No, IInteractive::Button::Yes</span>
+<span id="L863"><span class="lineNum">     863</span>              :     })</span>
+<span id="L864"><span class="lineNum">     864</span> <span class="tlaUNC">           0 :     .onResolve(this, [this, index](const IInteractive::Result&amp; res) {</span></span>
+<span id="L865"><span class="lineNum">     865</span> <span class="tlaUNC">           0 :         if (res.isButton(IInteractive::Button::Yes)) {</span></span>
+<span id="L866"><span class="lineNum">     866</span> <span class="tlaUNC">           0 :             doResetPalette(index);</span></span>
+<span id="L867"><span class="lineNum">     867</span>              :         }</span>
+<span id="L868"><span class="lineNum">     868</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L869"><span class="lineNum">     869</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L870"><span class="lineNum">     870</span>              : </span>
+<span id="L871"><span class="lineNum">     871</span> <span class="tlaUNC">           0 : void PaletteProvider::doResetPalette(const QModelIndex&amp; index)</span></span>
+<span id="L872"><span class="lineNum">     872</span>              : {</span>
+<span id="L873"><span class="lineNum">     873</span> <span class="tlaUNC">           0 :     Q_ASSERT(m_defaultPaletteModel != m_userPaletteModel);</span></span>
+<span id="L874"><span class="lineNum">     874</span>              : </span>
+<span id="L875"><span class="lineNum">     875</span> <span class="tlaUNC">           0 :     QAbstractItemModel* resetModel = nullptr;</span></span>
+<span id="L876"><span class="lineNum">     876</span> <span class="tlaUNC">           0 :     QModelIndex resetIndex;</span></span>
+<span id="L877"><span class="lineNum">     877</span>              : </span>
+<span id="L878"><span class="lineNum">     878</span> <span class="tlaUNC">           0 :     if (m_defaultPaletteModel) {</span></span>
+<span id="L879"><span class="lineNum">     879</span> <span class="tlaUNC">           0 :         resetModel = m_defaultPaletteModel;</span></span>
+<span id="L880"><span class="lineNum">     880</span> <span class="tlaUNC">           0 :         resetIndex = convertIndex(index, m_defaultPaletteModel);</span></span>
+<span id="L881"><span class="lineNum">     881</span>              :     }</span>
+<span id="L882"><span class="lineNum">     882</span>              : </span>
+<span id="L883"><span class="lineNum">     883</span> <span class="tlaUNC">           0 :     if (!resetIndex.isValid()) {</span></span>
+<span id="L884"><span class="lineNum">     884</span> <span class="tlaUNC">           0 :         resetModel = m_masterPaletteModel;</span></span>
+<span id="L885"><span class="lineNum">     885</span> <span class="tlaUNC">           0 :         resetIndex = convertIndex(index, m_masterPaletteModel);</span></span>
+<span id="L886"><span class="lineNum">     886</span>              :     }</span>
+<span id="L887"><span class="lineNum">     887</span>              : </span>
+<span id="L888"><span class="lineNum">     888</span> <span class="tlaUNC">           0 :     const QModelIndex userPaletteIndex = convertProxyIndex(index, m_userPaletteModel);</span></span>
+<span id="L889"><span class="lineNum">     889</span> <span class="tlaUNC">           0 :     const QModelIndex parent = userPaletteIndex.parent();</span></span>
+<span id="L890"><span class="lineNum">     890</span> <span class="tlaUNC">           0 :     const int row = userPaletteIndex.row();</span></span>
+<span id="L891"><span class="lineNum">     891</span> <span class="tlaUNC">           0 :     const int column = userPaletteIndex.column();</span></span>
 <span id="L892"><span class="lineNum">     892</span>              : </span>
-<span id="L893"><span class="lineNum">     893</span> <span class="tlaUNC">           0 :     const QModelIndex newIndex = m_userPaletteModel-&gt;index(row, column, parent);</span></span>
-<span id="L894"><span class="lineNum">     894</span> <span class="tlaUNC">           0 :     m_userPaletteModel-&gt;setData(newIndex, wasVisible, PaletteTreeModel::VisibleRole);</span></span>
-<span id="L895"><span class="lineNum">     895</span> <span class="tlaUNC">           0 :     m_userPaletteModel-&gt;setData(newIndex, wasExpanded, PaletteTreeModel::PaletteExpandedRole);</span></span>
-<span id="L896"><span class="lineNum">     896</span>              : }</span>
-<span id="L897"><span class="lineNum">     897</span>              : </span>
-<span id="L898"><span class="lineNum">     898</span> <span class="tlaUNC">           0 : QString PaletteProvider::getPaletteFilename(bool open, const QString&amp; name) const</span></span>
-<span id="L899"><span class="lineNum">     899</span>              : {</span>
-<span id="L900"><span class="lineNum">     900</span> <span class="tlaUNC">           0 :     std::string title;</span></span>
-<span id="L901"><span class="lineNum">     901</span> <span class="tlaUNC">           0 :     std::vector&lt;std::string&gt; filter;</span></span>
-<span id="L902"><span class="lineNum">     902</span>              : #ifdef WIN_PORTABLE</span>
-<span id="L903"><span class="lineNum">     903</span>              :     QString wd = QDir::cleanPath(QString(&quot;%1/../../../Data/settings&quot;).arg(QCoreApplication::applicationDirPath()));</span>
-<span id="L904"><span class="lineNum">     904</span>              : #else</span>
-<span id="L905"><span class="lineNum">     905</span> <span class="tlaUNC">           0 :     QString wd = QString(&quot;%1/%2&quot;).arg(QStandardPaths::writableLocation(QStandardPaths::HomeLocation))</span></span>
-<span id="L906"><span class="lineNum">     906</span> <span class="tlaUNC">           0 :                  .arg(QCoreApplication::applicationName());</span></span>
-<span id="L907"><span class="lineNum">     907</span>              : #endif</span>
-<span id="L908"><span class="lineNum">     908</span> <span class="tlaUNC">           0 :     if (open) {</span></span>
-<span id="L909"><span class="lineNum">     909</span> <span class="tlaUNC">           0 :         title  = muse::trc(&quot;palette&quot;, &quot;Load palette&quot;);</span></span>
-<span id="L910"><span class="lineNum">     910</span> <span class="tlaUNC">           0 :         filter = { muse::trc(&quot;palette&quot;, &quot;MuseScore Studio palette&quot;) + &quot; (*.mpal)&quot; };</span></span>
-<span id="L911"><span class="lineNum">     911</span>              :     } else {</span>
-<span id="L912"><span class="lineNum">     912</span> <span class="tlaUNC">           0 :         title  = muse::trc(&quot;palette&quot;, &quot;Save palette&quot;);</span></span>
-<span id="L913"><span class="lineNum">     913</span> <span class="tlaUNC">           0 :         filter = { muse::trc(&quot;palette&quot;, &quot;MuseScore Studio palette&quot;) + &quot; (*.mpal)&quot; };</span></span>
-<span id="L914"><span class="lineNum">     914</span>              :     }</span>
-<span id="L915"><span class="lineNum">     915</span>              : </span>
-<span id="L916"><span class="lineNum">     916</span> <span class="tlaUNC">           0 :     QFileInfo myPalettes(wd);</span></span>
-<span id="L917"><span class="lineNum">     917</span> <span class="tlaUNC">           0 :     QString defaultPath = myPalettes.absoluteFilePath();</span></span>
-<span id="L918"><span class="lineNum">     918</span> <span class="tlaUNC">           0 :     if (!name.isEmpty()) {</span></span>
-<span id="L919"><span class="lineNum">     919</span> <span class="tlaUNC">           0 :         QString fname = muse::io::escapeFileName(name).toQString();</span></span>
-<span id="L920"><span class="lineNum">     920</span> <span class="tlaUNC">           0 :         QFileInfo myName(fname);</span></span>
-<span id="L921"><span class="lineNum">     921</span> <span class="tlaUNC">           0 :         if (myName.isRelative()) {</span></span>
-<span id="L922"><span class="lineNum">     922</span> <span class="tlaUNC">           0 :             myName.setFile(defaultPath, fname);</span></span>
-<span id="L923"><span class="lineNum">     923</span>              :         }</span>
-<span id="L924"><span class="lineNum">     924</span> <span class="tlaUNC">           0 :         defaultPath = myName.absoluteFilePath();</span></span>
-<span id="L925"><span class="lineNum">     925</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L926"><span class="lineNum">     926</span>              : </span>
-<span id="L927"><span class="lineNum">     927</span> <span class="tlaUNC">           0 :     muse::io::path_t fn;</span></span>
-<span id="L928"><span class="lineNum">     928</span> <span class="tlaUNC">           0 :     if (open) {</span></span>
-<span id="L929"><span class="lineNum">     929</span> <span class="tlaUNC">           0 :         fn = interactive()-&gt;selectOpeningFileSync(title, defaultPath, filter);</span></span>
-<span id="L930"><span class="lineNum">     930</span>              :     } else {</span>
-<span id="L931"><span class="lineNum">     931</span> <span class="tlaUNC">           0 :         fn = interactive()-&gt;selectSavingFileSync(title, defaultPath, filter);</span></span>
-<span id="L932"><span class="lineNum">     932</span>              :     }</span>
-<span id="L933"><span class="lineNum">     933</span> <span class="tlaUNC">           0 :     return fn.toQString();</span></span>
-<span id="L934"><span class="lineNum">     934</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L935"><span class="lineNum">     935</span>              : </span>
-<span id="L936"><span class="lineNum">     936</span> <span class="tlaUNC">           0 : bool PaletteProvider::savePalette(const QModelIndex&amp; index)</span></span>
-<span id="L937"><span class="lineNum">     937</span>              : {</span>
-<span id="L938"><span class="lineNum">     938</span> <span class="tlaUNC">           0 :     const QModelIndex srcIndex = convertProxyIndex(index, m_userPaletteModel);</span></span>
-<span id="L939"><span class="lineNum">     939</span> <span class="tlaUNC">           0 :     const Palette* pp = m_userPaletteModel-&gt;findPalette(srcIndex);</span></span>
-<span id="L940"><span class="lineNum">     940</span> <span class="tlaUNC">           0 :     if (!pp) {</span></span>
-<span id="L941"><span class="lineNum">     941</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L942"><span class="lineNum">     942</span>              :     }</span>
-<span id="L943"><span class="lineNum">     943</span>              : </span>
-<span id="L944"><span class="lineNum">     944</span> <span class="tlaUNC">           0 :     const QString path = getPaletteFilename(/* load? */ false, pp-&gt;translatedName());</span></span>
-<span id="L945"><span class="lineNum">     945</span>              : </span>
-<span id="L946"><span class="lineNum">     946</span> <span class="tlaUNC">           0 :     if (path.isEmpty()) {</span></span>
-<span id="L947"><span class="lineNum">     947</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L893"><span class="lineNum">     893</span>              :     // restore visibility and expanded state of the palette after restoring its state</span>
+<span id="L894"><span class="lineNum">     894</span> <span class="tlaUNC">           0 :     const bool wasVisible = index.data(PaletteTreeModel::VisibleRole).toBool();</span></span>
+<span id="L895"><span class="lineNum">     895</span> <span class="tlaUNC">           0 :     const bool wasExpanded = index.data(PaletteTreeModel::PaletteExpandedRole).toBool();</span></span>
+<span id="L896"><span class="lineNum">     896</span>              : </span>
+<span id="L897"><span class="lineNum">     897</span> <span class="tlaUNC">           0 :     if (!m_userPaletteModel-&gt;removeRow(row, parent)) {</span></span>
+<span id="L898"><span class="lineNum">     898</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L899"><span class="lineNum">     899</span>              :     }</span>
+<span id="L900"><span class="lineNum">     900</span>              : </span>
+<span id="L901"><span class="lineNum">     901</span> <span class="tlaUNC">           0 :     if (resetIndex.isValid()) {</span></span>
+<span id="L902"><span class="lineNum">     902</span> <span class="tlaUNC">           0 :         QMimeData* data = resetModel-&gt;mimeData({ resetIndex });</span></span>
+<span id="L903"><span class="lineNum">     903</span> <span class="tlaUNC">           0 :         m_userPaletteModel-&gt;dropMimeData(data, Qt::CopyAction, row, column, parent);</span></span>
+<span id="L904"><span class="lineNum">     904</span> <span class="tlaUNC">           0 :         data-&gt;deleteLater();</span></span>
+<span id="L905"><span class="lineNum">     905</span>              :     } else {</span>
+<span id="L906"><span class="lineNum">     906</span> <span class="tlaUNC">           0 :         m_userPaletteModel-&gt;insertRow(row, parent);</span></span>
+<span id="L907"><span class="lineNum">     907</span>              :     }</span>
+<span id="L908"><span class="lineNum">     908</span>              : </span>
+<span id="L909"><span class="lineNum">     909</span> <span class="tlaUNC">           0 :     const QModelIndex newIndex = m_userPaletteModel-&gt;index(row, column, parent);</span></span>
+<span id="L910"><span class="lineNum">     910</span> <span class="tlaUNC">           0 :     m_userPaletteModel-&gt;setData(newIndex, wasVisible, PaletteTreeModel::VisibleRole);</span></span>
+<span id="L911"><span class="lineNum">     911</span> <span class="tlaUNC">           0 :     m_userPaletteModel-&gt;setData(newIndex, wasExpanded, PaletteTreeModel::PaletteExpandedRole);</span></span>
+<span id="L912"><span class="lineNum">     912</span>              : }</span>
+<span id="L913"><span class="lineNum">     913</span>              : </span>
+<span id="L914"><span class="lineNum">     914</span> <span class="tlaUNC">           0 : QString PaletteProvider::getPaletteFilename(bool open, const QString&amp; name) const</span></span>
+<span id="L915"><span class="lineNum">     915</span>              : {</span>
+<span id="L916"><span class="lineNum">     916</span> <span class="tlaUNC">           0 :     std::string title;</span></span>
+<span id="L917"><span class="lineNum">     917</span> <span class="tlaUNC">           0 :     std::vector&lt;std::string&gt; filter;</span></span>
+<span id="L918"><span class="lineNum">     918</span>              : #ifdef WIN_PORTABLE</span>
+<span id="L919"><span class="lineNum">     919</span>              :     QString wd = QDir::cleanPath(QString(&quot;%1/../../../Data/settings&quot;).arg(QCoreApplication::applicationDirPath()));</span>
+<span id="L920"><span class="lineNum">     920</span>              : #else</span>
+<span id="L921"><span class="lineNum">     921</span> <span class="tlaUNC">           0 :     QString wd = QString(&quot;%1/%2&quot;).arg(QStandardPaths::writableLocation(QStandardPaths::HomeLocation))</span></span>
+<span id="L922"><span class="lineNum">     922</span> <span class="tlaUNC">           0 :                  .arg(QCoreApplication::applicationName());</span></span>
+<span id="L923"><span class="lineNum">     923</span>              : #endif</span>
+<span id="L924"><span class="lineNum">     924</span> <span class="tlaUNC">           0 :     if (open) {</span></span>
+<span id="L925"><span class="lineNum">     925</span> <span class="tlaUNC">           0 :         title  = muse::trc(&quot;palette&quot;, &quot;Load palette&quot;);</span></span>
+<span id="L926"><span class="lineNum">     926</span> <span class="tlaUNC">           0 :         filter = { muse::trc(&quot;palette&quot;, &quot;MuseScore Studio palette&quot;) + &quot; (*.mpal)&quot; };</span></span>
+<span id="L927"><span class="lineNum">     927</span>              :     } else {</span>
+<span id="L928"><span class="lineNum">     928</span> <span class="tlaUNC">           0 :         title  = muse::trc(&quot;palette&quot;, &quot;Save palette&quot;);</span></span>
+<span id="L929"><span class="lineNum">     929</span> <span class="tlaUNC">           0 :         filter = { muse::trc(&quot;palette&quot;, &quot;MuseScore Studio palette&quot;) + &quot; (*.mpal)&quot; };</span></span>
+<span id="L930"><span class="lineNum">     930</span>              :     }</span>
+<span id="L931"><span class="lineNum">     931</span>              : </span>
+<span id="L932"><span class="lineNum">     932</span> <span class="tlaUNC">           0 :     QFileInfo myPalettes(wd);</span></span>
+<span id="L933"><span class="lineNum">     933</span> <span class="tlaUNC">           0 :     QString defaultPath = myPalettes.absoluteFilePath();</span></span>
+<span id="L934"><span class="lineNum">     934</span> <span class="tlaUNC">           0 :     if (!name.isEmpty()) {</span></span>
+<span id="L935"><span class="lineNum">     935</span> <span class="tlaUNC">           0 :         QString fname = muse::io::escapeFileName(name).toQString();</span></span>
+<span id="L936"><span class="lineNum">     936</span> <span class="tlaUNC">           0 :         QFileInfo myName(fname);</span></span>
+<span id="L937"><span class="lineNum">     937</span> <span class="tlaUNC">           0 :         if (myName.isRelative()) {</span></span>
+<span id="L938"><span class="lineNum">     938</span> <span class="tlaUNC">           0 :             myName.setFile(defaultPath, fname);</span></span>
+<span id="L939"><span class="lineNum">     939</span>              :         }</span>
+<span id="L940"><span class="lineNum">     940</span> <span class="tlaUNC">           0 :         defaultPath = myName.absoluteFilePath();</span></span>
+<span id="L941"><span class="lineNum">     941</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L942"><span class="lineNum">     942</span>              : </span>
+<span id="L943"><span class="lineNum">     943</span> <span class="tlaUNC">           0 :     muse::io::path_t fn;</span></span>
+<span id="L944"><span class="lineNum">     944</span> <span class="tlaUNC">           0 :     if (open) {</span></span>
+<span id="L945"><span class="lineNum">     945</span> <span class="tlaUNC">           0 :         fn = interactive()-&gt;selectOpeningFileSync(title, defaultPath, filter);</span></span>
+<span id="L946"><span class="lineNum">     946</span>              :     } else {</span>
+<span id="L947"><span class="lineNum">     947</span> <span class="tlaUNC">           0 :         fn = interactive()-&gt;selectSavingFileSync(title, defaultPath, filter);</span></span>
 <span id="L948"><span class="lineNum">     948</span>              :     }</span>
-<span id="L949"><span class="lineNum">     949</span> <span class="tlaUNC">           0 :     return pp-&gt;writeToFile(path);</span></span>
+<span id="L949"><span class="lineNum">     949</span> <span class="tlaUNC">           0 :     return fn.toQString();</span></span>
 <span id="L950"><span class="lineNum">     950</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L951"><span class="lineNum">     951</span>              : </span>
-<span id="L952"><span class="lineNum">     952</span> <span class="tlaUNC">           0 : bool PaletteProvider::loadPalette(const QModelIndex&amp; index)</span></span>
+<span id="L952"><span class="lineNum">     952</span> <span class="tlaUNC">           0 : bool PaletteProvider::savePalette(const QModelIndex&amp; index)</span></span>
 <span id="L953"><span class="lineNum">     953</span>              : {</span>
-<span id="L954"><span class="lineNum">     954</span> <span class="tlaUNC">           0 :     const QString path = getPaletteFilename(/* load? */ true);</span></span>
-<span id="L955"><span class="lineNum">     955</span> <span class="tlaUNC">           0 :     if (path.isEmpty()) {</span></span>
-<span id="L956"><span class="lineNum">     956</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L957"><span class="lineNum">     957</span>              :     }</span>
-<span id="L958"><span class="lineNum">     958</span>              : </span>
-<span id="L959"><span class="lineNum">     959</span> <span class="tlaUNC">           0 :     PalettePtr pp = std::make_shared&lt;Palette&gt;(iocContext());</span></span>
-<span id="L960"><span class="lineNum">     960</span> <span class="tlaUNC">           0 :     if (!pp-&gt;readFromFile(path)) {</span></span>
-<span id="L961"><span class="lineNum">     961</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L962"><span class="lineNum">     962</span>              :     }</span>
-<span id="L963"><span class="lineNum">     963</span> <span class="tlaUNC">           0 :     pp-&gt;setType(Palette::Type::Custom);   // mark the loaded palette custom</span></span>
-<span id="L964"><span class="lineNum">     964</span>              : </span>
-<span id="L965"><span class="lineNum">     965</span> <span class="tlaUNC">           0 :     const QModelIndex srcIndex = convertProxyIndex(index, m_userPaletteModel);</span></span>
-<span id="L966"><span class="lineNum">     966</span>              : </span>
-<span id="L967"><span class="lineNum">     967</span> <span class="tlaUNC">           0 :     const int row = srcIndex.row();</span></span>
-<span id="L968"><span class="lineNum">     968</span> <span class="tlaUNC">           0 :     const QModelIndex parent = srcIndex.parent();</span></span>
-<span id="L969"><span class="lineNum">     969</span>              : </span>
-<span id="L970"><span class="lineNum">     970</span> <span class="tlaUNC">           0 :     return m_userPaletteModel-&gt;insertPalette(pp, row, parent);</span></span>
-<span id="L971"><span class="lineNum">     971</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L972"><span class="lineNum">     972</span>              : </span>
-<span id="L973"><span class="lineNum">     973</span> <span class="tlaUNC">           0 : void PaletteProvider::setUserPaletteTree(PaletteTreePtr tree)</span></span>
-<span id="L974"><span class="lineNum">     974</span>              : {</span>
-<span id="L975"><span class="lineNum">     975</span> <span class="tlaUNC">           0 :     if (m_userPaletteModel) {</span></span>
-<span id="L976"><span class="lineNum">     976</span> <span class="tlaUNC">           0 :         disconnect(m_userPaletteModel, &amp;PaletteTreeModel::treeChanged, this, &amp;PaletteProvider::notifyAboutUserPaletteChanged);</span></span>
-<span id="L977"><span class="lineNum">     977</span> <span class="tlaUNC">           0 :         m_userPaletteModel-&gt;setPaletteTree(tree);</span></span>
-<span id="L978"><span class="lineNum">     978</span> <span class="tlaUNC">           0 :         connect(m_userPaletteModel, &amp;PaletteTreeModel::treeChanged, this, &amp;PaletteProvider::notifyAboutUserPaletteChanged);</span></span>
-<span id="L979"><span class="lineNum">     979</span>              :     } else {</span>
-<span id="L980"><span class="lineNum">     980</span> <span class="tlaUNC">           0 :         m_userPaletteModel = new PaletteTreeModel(tree, iocContext(), /* parent */ this);</span></span>
-<span id="L981"><span class="lineNum">     981</span> <span class="tlaUNC">           0 :         connect(m_userPaletteModel, &amp;PaletteTreeModel::treeChanged, this, &amp;PaletteProvider::notifyAboutUserPaletteChanged);</span></span>
-<span id="L982"><span class="lineNum">     982</span>              :     }</span>
-<span id="L983"><span class="lineNum">     983</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L984"><span class="lineNum">     984</span>              : </span>
-<span id="L985"><span class="lineNum">     985</span> <span class="tlaUNC">           0 : void PaletteProvider::setDefaultPaletteTree(PaletteTreePtr tree)</span></span>
-<span id="L986"><span class="lineNum">     986</span>              : {</span>
-<span id="L987"><span class="lineNum">     987</span> <span class="tlaUNC">           0 :     if (m_defaultPaletteModel) {</span></span>
-<span id="L988"><span class="lineNum">     988</span> <span class="tlaUNC">           0 :         m_defaultPaletteModel-&gt;setPaletteTree(tree);</span></span>
-<span id="L989"><span class="lineNum">     989</span>              :     } else {</span>
-<span id="L990"><span class="lineNum">     990</span> <span class="tlaUNC">           0 :         m_defaultPaletteModel = new PaletteTreeModel(tree, iocContext(), /* parent */ this);</span></span>
-<span id="L991"><span class="lineNum">     991</span>              :     }</span>
-<span id="L992"><span class="lineNum">     992</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L993"><span class="lineNum">     993</span>              : </span>
-<span id="L994"><span class="lineNum">     994</span> <span class="tlaUNC">           0 : muse::async::Channel&lt;ElementPtr&gt; PaletteProvider::addCustomItemRequested() const</span></span>
-<span id="L995"><span class="lineNum">     995</span>              : {</span>
-<span id="L996"><span class="lineNum">     996</span> <span class="tlaUNC">           0 :     return m_addCustomItemRequested;</span></span>
-<span id="L997"><span class="lineNum">     997</span>              : }</span>
-<span id="L998"><span class="lineNum">     998</span>              : </span>
-<span id="L999"><span class="lineNum">     999</span> <span class="tlaUNC">           0 : void PaletteProvider::write(XmlWriter&amp; xml, bool pasteMode) const</span></span>
-<span id="L1000"><span class="lineNum">    1000</span>              : {</span>
-<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaUNC">           0 :     if (!m_userPaletteModel) {</span></span>
-<span id="L1002"><span class="lineNum">    1002</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1003"><span class="lineNum">    1003</span>              :     }</span>
-<span id="L1004"><span class="lineNum">    1004</span> <span class="tlaUNC">           0 :     if (const PaletteTree* tree = m_userPaletteModel-&gt;paletteTree()) {</span></span>
-<span id="L1005"><span class="lineNum">    1005</span> <span class="tlaUNC">           0 :         tree-&gt;write(xml, pasteMode);</span></span>
-<span id="L1006"><span class="lineNum">    1006</span>              :     }</span>
-<span id="L1007"><span class="lineNum">    1007</span>              : }</span>
-<span id="L1008"><span class="lineNum">    1008</span>              : </span>
-<span id="L1009"><span class="lineNum">    1009</span> <span class="tlaUNC">           0 : bool PaletteProvider::read(XmlReader&amp; e, bool pasteMode)</span></span>
-<span id="L1010"><span class="lineNum">    1010</span>              : {</span>
-<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaUNC">           0 :     PaletteTreePtr tree = std::make_shared&lt;PaletteTree&gt;();</span></span>
-<span id="L1012"><span class="lineNum">    1012</span> <span class="tlaUNC">           0 :     if (!tree-&gt;read(e, pasteMode, iocContext())) {</span></span>
-<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1014"><span class="lineNum">    1014</span>              :     }</span>
-<span id="L1015"><span class="lineNum">    1015</span>              : </span>
-<span id="L1016"><span class="lineNum">    1016</span> <span class="tlaUNC">           0 :     setUserPaletteTree(tree);</span></span>
-<span id="L1017"><span class="lineNum">    1017</span>              : </span>
-<span id="L1018"><span class="lineNum">    1018</span> <span class="tlaUNC">           0 :     return true;</span></span>
-<span id="L1019"><span class="lineNum">    1019</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L954"><span class="lineNum">     954</span> <span class="tlaUNC">           0 :     const QModelIndex srcIndex = convertProxyIndex(index, m_userPaletteModel);</span></span>
+<span id="L955"><span class="lineNum">     955</span> <span class="tlaUNC">           0 :     const Palette* pp = m_userPaletteModel-&gt;findPalette(srcIndex);</span></span>
+<span id="L956"><span class="lineNum">     956</span> <span class="tlaUNC">           0 :     if (!pp) {</span></span>
+<span id="L957"><span class="lineNum">     957</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L958"><span class="lineNum">     958</span>              :     }</span>
+<span id="L959"><span class="lineNum">     959</span>              : </span>
+<span id="L960"><span class="lineNum">     960</span> <span class="tlaUNC">           0 :     const QString path = getPaletteFilename(/* load? */ false, pp-&gt;translatedName());</span></span>
+<span id="L961"><span class="lineNum">     961</span>              : </span>
+<span id="L962"><span class="lineNum">     962</span> <span class="tlaUNC">           0 :     if (path.isEmpty()) {</span></span>
+<span id="L963"><span class="lineNum">     963</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L964"><span class="lineNum">     964</span>              :     }</span>
+<span id="L965"><span class="lineNum">     965</span> <span class="tlaUNC">           0 :     return pp-&gt;writeToFile(path);</span></span>
+<span id="L966"><span class="lineNum">     966</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L967"><span class="lineNum">     967</span>              : </span>
+<span id="L968"><span class="lineNum">     968</span> <span class="tlaUNC">           0 : bool PaletteProvider::loadPalette(const QModelIndex&amp; index)</span></span>
+<span id="L969"><span class="lineNum">     969</span>              : {</span>
+<span id="L970"><span class="lineNum">     970</span> <span class="tlaUNC">           0 :     const QString path = getPaletteFilename(/* load? */ true);</span></span>
+<span id="L971"><span class="lineNum">     971</span> <span class="tlaUNC">           0 :     if (path.isEmpty()) {</span></span>
+<span id="L972"><span class="lineNum">     972</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L973"><span class="lineNum">     973</span>              :     }</span>
+<span id="L974"><span class="lineNum">     974</span>              : </span>
+<span id="L975"><span class="lineNum">     975</span> <span class="tlaUNC">           0 :     PalettePtr pp = std::make_shared&lt;Palette&gt;(iocContext());</span></span>
+<span id="L976"><span class="lineNum">     976</span> <span class="tlaUNC">           0 :     if (!pp-&gt;readFromFile(path)) {</span></span>
+<span id="L977"><span class="lineNum">     977</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L978"><span class="lineNum">     978</span>              :     }</span>
+<span id="L979"><span class="lineNum">     979</span> <span class="tlaUNC">           0 :     pp-&gt;setType(Palette::Type::Custom);   // mark the loaded palette custom</span></span>
+<span id="L980"><span class="lineNum">     980</span>              : </span>
+<span id="L981"><span class="lineNum">     981</span> <span class="tlaUNC">           0 :     const QModelIndex srcIndex = convertProxyIndex(index, m_userPaletteModel);</span></span>
+<span id="L982"><span class="lineNum">     982</span>              : </span>
+<span id="L983"><span class="lineNum">     983</span> <span class="tlaUNC">           0 :     const int row = srcIndex.row();</span></span>
+<span id="L984"><span class="lineNum">     984</span> <span class="tlaUNC">           0 :     const QModelIndex parent = srcIndex.parent();</span></span>
+<span id="L985"><span class="lineNum">     985</span>              : </span>
+<span id="L986"><span class="lineNum">     986</span> <span class="tlaUNC">           0 :     return m_userPaletteModel-&gt;insertPalette(pp, row, parent);</span></span>
+<span id="L987"><span class="lineNum">     987</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L988"><span class="lineNum">     988</span>              : </span>
+<span id="L989"><span class="lineNum">     989</span> <span class="tlaUNC">           0 : void PaletteProvider::setUserPaletteTree(PaletteTreePtr tree)</span></span>
+<span id="L990"><span class="lineNum">     990</span>              : {</span>
+<span id="L991"><span class="lineNum">     991</span> <span class="tlaUNC">           0 :     if (m_userPaletteModel) {</span></span>
+<span id="L992"><span class="lineNum">     992</span> <span class="tlaUNC">           0 :         disconnect(m_userPaletteModel, &amp;PaletteTreeModel::treeChanged, this, &amp;PaletteProvider::notifyAboutUserPaletteChanged);</span></span>
+<span id="L993"><span class="lineNum">     993</span> <span class="tlaUNC">           0 :         m_userPaletteModel-&gt;setPaletteTree(tree);</span></span>
+<span id="L994"><span class="lineNum">     994</span> <span class="tlaUNC">           0 :         connect(m_userPaletteModel, &amp;PaletteTreeModel::treeChanged, this, &amp;PaletteProvider::notifyAboutUserPaletteChanged);</span></span>
+<span id="L995"><span class="lineNum">     995</span>              :     } else {</span>
+<span id="L996"><span class="lineNum">     996</span> <span class="tlaUNC">           0 :         m_userPaletteModel = new PaletteTreeModel(tree, iocContext(), /* parent */ this);</span></span>
+<span id="L997"><span class="lineNum">     997</span> <span class="tlaUNC">           0 :         connect(m_userPaletteModel, &amp;PaletteTreeModel::treeChanged, this, &amp;PaletteProvider::notifyAboutUserPaletteChanged);</span></span>
+<span id="L998"><span class="lineNum">     998</span>              :     }</span>
+<span id="L999"><span class="lineNum">     999</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1000"><span class="lineNum">    1000</span>              : </span>
+<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaUNC">           0 : void PaletteProvider::setDefaultPaletteTree(PaletteTreePtr tree)</span></span>
+<span id="L1002"><span class="lineNum">    1002</span>              : {</span>
+<span id="L1003"><span class="lineNum">    1003</span> <span class="tlaUNC">           0 :     if (m_defaultPaletteModel) {</span></span>
+<span id="L1004"><span class="lineNum">    1004</span> <span class="tlaUNC">           0 :         m_defaultPaletteModel-&gt;setPaletteTree(tree);</span></span>
+<span id="L1005"><span class="lineNum">    1005</span>              :     } else {</span>
+<span id="L1006"><span class="lineNum">    1006</span> <span class="tlaUNC">           0 :         m_defaultPaletteModel = new PaletteTreeModel(tree, iocContext(), /* parent */ this);</span></span>
+<span id="L1007"><span class="lineNum">    1007</span>              :     }</span>
+<span id="L1008"><span class="lineNum">    1008</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1009"><span class="lineNum">    1009</span>              : </span>
+<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaUNC">           0 : muse::async::Channel&lt;ElementPtr&gt; PaletteProvider::addCustomItemRequested() const</span></span>
+<span id="L1011"><span class="lineNum">    1011</span>              : {</span>
+<span id="L1012"><span class="lineNum">    1012</span> <span class="tlaUNC">           0 :     return m_addCustomItemRequested;</span></span>
+<span id="L1013"><span class="lineNum">    1013</span>              : }</span>
+<span id="L1014"><span class="lineNum">    1014</span>              : </span>
+<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaUNC">           0 : void PaletteProvider::write(XmlWriter&amp; xml, bool pasteMode) const</span></span>
+<span id="L1016"><span class="lineNum">    1016</span>              : {</span>
+<span id="L1017"><span class="lineNum">    1017</span> <span class="tlaUNC">           0 :     if (!m_userPaletteModel) {</span></span>
+<span id="L1018"><span class="lineNum">    1018</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1019"><span class="lineNum">    1019</span>              :     }</span>
+<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaUNC">           0 :     if (const PaletteTree* tree = m_userPaletteModel-&gt;paletteTree()) {</span></span>
+<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaUNC">           0 :         tree-&gt;write(xml, pasteMode);</span></span>
+<span id="L1022"><span class="lineNum">    1022</span>              :     }</span>
+<span id="L1023"><span class="lineNum">    1023</span>              : }</span>
+<span id="L1024"><span class="lineNum">    1024</span>              : </span>
+<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaUNC">           0 : bool PaletteProvider::read(XmlReader&amp; e, bool pasteMode)</span></span>
+<span id="L1026"><span class="lineNum">    1026</span>              : {</span>
+<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaUNC">           0 :     PaletteTreePtr tree = std::make_shared&lt;PaletteTree&gt;();</span></span>
+<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaUNC">           0 :     if (!tree-&gt;read(e, pasteMode, iocContext())) {</span></span>
+<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1030"><span class="lineNum">    1030</span>              :     }</span>
+<span id="L1031"><span class="lineNum">    1031</span>              : </span>
+<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaUNC">           0 :     setUserPaletteTree(tree);</span></span>
+<span id="L1033"><span class="lineNum">    1033</span>              : </span>
+<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaUNC">           0 :     return true;</span></span>
+<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>
             </tr>
