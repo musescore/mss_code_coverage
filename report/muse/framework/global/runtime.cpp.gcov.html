@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -93,22 +93,22 @@
 <span id="L35"><span class="lineNum">      35</span>              : </span>
 <span id="L36"><span class="lineNum">      36</span>              : static thread_local std::string s_threadName;</span>
 <span id="L37"><span class="lineNum">      37</span>              : </span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">         144 : void muse::runtime::setThreadName(const std::string&amp; name)</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">         148 : void muse::runtime::setThreadName(const std::string&amp; name)</span></span>
 <span id="L39"><span class="lineNum">      39</span>              : {</span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">         144 :     s_threadName = name;</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">         148 :     s_threadName = name;</span></span>
 <span id="L41"><span class="lineNum">      41</span>              : #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)</span>
 <span id="L42"><span class="lineNum">      42</span>              :     // Set thread name through pthreads to aid debuggers that display such names.</span>
 <span id="L43"><span class="lineNum">      43</span>              :     // Thread names are limited to 16 bytes on Linux, including the</span>
 <span id="L44"><span class="lineNum">      44</span>              :     // terminating null.</span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">         144 :     DO_ASSERT(name.length() &lt;= 15);</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">         144 :     std::string truncated_name = name.length() &gt; 15 ? name.substr(0, 15) : name;</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">         144 :     if (pthread_setname_np(pthread_self(), truncated_name.c_str()) &gt; 0) {</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">         148 :     DO_ASSERT(name.length() &lt;= 15);</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">         148 :     std::string truncated_name = name.length() &gt; 15 ? name.substr(0, 15) : name;</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">         148 :     if (pthread_setname_np(pthread_self(), truncated_name.c_str()) &gt; 0) {</span></span>
 <span id="L48"><span class="lineNum">      48</span> <span class="tlaUNC tlaBgUNC">           0 :         LOGW() &lt;&lt; &quot;Couldn't set thread name through pthreads&quot;;</span></span>
 <span id="L49"><span class="lineNum">      49</span>              :     }</span>
 <span id="L50"><span class="lineNum">      50</span>              : #elif defined(Q_OS_MACOS)</span>
 <span id="L51"><span class="lineNum">      51</span>              :     pthread_setname_np(name.c_str());</span>
 <span id="L52"><span class="lineNum">      52</span>              : #endif</span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC tlaBgGNC">         144 : }</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC tlaBgGNC">         148 : }</span></span>
 <span id="L54"><span class="lineNum">      54</span>              : </span>
 <span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC tlaBgUNC">           0 : const std::string&amp; muse::runtime::threadName()</span></span>
 <span id="L56"><span class="lineNum">      56</span>              : {</span>

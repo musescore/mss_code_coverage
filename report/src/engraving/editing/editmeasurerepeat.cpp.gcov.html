@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -100,12 +100,12 @@
 <span id="L42"><span class="lineNum">      42</span>              : //   addMeasureRepeat</span>
 <span id="L43"><span class="lineNum">      43</span>              : //---------------------------------------------------------</span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC tlaBgGNC">          11 : void EditMeasureRepeat::addMeasureRepeat(Transaction&amp; tx, Score* score, Measure* firstMeasure, int numMeasures, staff_idx_t staffIdx)</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC tlaBgGNC">          15 : void EditMeasureRepeat::addMeasureRepeat(Transaction&amp; tx, Score* score, Measure* firstMeasure, int numMeasures, staff_idx_t staffIdx)</span></span>
 <span id="L46"><span class="lineNum">      46</span>              : {</span>
 <span id="L47"><span class="lineNum">      47</span>              :     //</span>
 <span id="L48"><span class="lineNum">      48</span>              :     // make measures into group</span>
 <span id="L49"><span class="lineNum">      49</span>              :     //</span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">          11 :     if (!makeMeasureRepeatGroup(tx, score, firstMeasure, numMeasures, staffIdx)) {</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">          15 :     if (!makeMeasureRepeatGroup(tx, score, firstMeasure, numMeasures, staffIdx)) {</span></span>
 <span id="L51"><span class="lineNum">      51</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
 <span id="L52"><span class="lineNum">      52</span>              :     }</span>
 <span id="L53"><span class="lineNum">      53</span>              : </span>
@@ -113,21 +113,21 @@
 <span id="L55"><span class="lineNum">      55</span>              :     // add MeasureRepeat element</span>
 <span id="L56"><span class="lineNum">      56</span>              :     //</span>
 <span id="L57"><span class="lineNum">      57</span>              :     int measureWithElementNo;</span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC tlaBgGNC">          11 :     if (numMeasures % 2) {</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC tlaBgGNC">          15 :     if (numMeasures % 2) {</span></span>
 <span id="L59"><span class="lineNum">      59</span>              :         // odd number, element anchored to center measure of group</span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           1 :         measureWithElementNo = numMeasures / 2 + 1;</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           5 :         measureWithElementNo = numMeasures / 2 + 1;</span></span>
 <span id="L61"><span class="lineNum">      61</span>              :     } else {</span>
 <span id="L62"><span class="lineNum">      62</span>              :         // even number, element anchored to last measure in first half of group</span>
 <span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          10 :         measureWithElementNo = numMeasures / 2;</span></span>
 <span id="L64"><span class="lineNum">      64</span>              :     }</span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          11 :     Measure* measureWithElement = firstMeasure;</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          14 :     for (int i = 1; i &lt; measureWithElementNo; ++i) {</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          15 :     Measure* measureWithElement = firstMeasure;</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          18 :     for (int i = 1; i &lt; measureWithElementNo; ++i) {</span></span>
 <span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">           3 :         measureWithElement = measureWithElement-&gt;nextMeasure();</span></span>
 <span id="L68"><span class="lineNum">      68</span>              :     }</span>
 <span id="L69"><span class="lineNum">      69</span>              :     // MeasureRepeat element will be positioned appropriately (in center of measure / on following barline)</span>
 <span id="L70"><span class="lineNum">      70</span>              :     // when stretchMeasure() is called on measureWithElement</span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">          11 :     MeasureRepeat* mr = addMeasureRepeat(tx, score, measureWithElement-&gt;tick(), staff2track(staffIdx), numMeasures);</span></span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">          11 :     score-&gt;select(mr, SelectType::SINGLE, 0);</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">          15 :     MeasureRepeat* mr = addMeasureRepeat(tx, score, measureWithElement-&gt;tick(), staff2track(staffIdx), numMeasures);</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">          15 :     score-&gt;select(mr, SelectType::SINGLE, 0);</span></span>
 <span id="L73"><span class="lineNum">      73</span>              : }</span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
 <span id="L75"><span class="lineNum">      75</span>              : //---------------------------------------------------------</span>
@@ -135,20 +135,20 @@
 <span id="L77"><span class="lineNum">      77</span>              : //    empty if there are not enough of them, with equal durations</span>
 <span id="L78"><span class="lineNum">      78</span>              : //---------------------------------------------------------</span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">          18 : static std::vector&lt;Measure*&gt; groupMeasures(Measure* firstMeasure, int numMeasures)</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">          22 : static std::vector&lt;Measure*&gt; groupMeasures(Measure* firstMeasure, int numMeasures)</span></span>
 <span id="L81"><span class="lineNum">      81</span>              : {</span>
-<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">          18 :     std::vector&lt;Measure*&gt; measures;</span></span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">          18 :     Measure* measure = firstMeasure;</span></span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">          55 :     for (int i = 1; i &lt;= numMeasures; ++i) {</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">          38 :         if (!measure || measure-&gt;ticks() != firstMeasure-&gt;ticks()) {</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">          22 :     std::vector&lt;Measure*&gt; measures;</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">          22 :     Measure* measure = firstMeasure;</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">          63 :     for (int i = 1; i &lt;= numMeasures; ++i) {</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">          42 :         if (!measure || measure-&gt;ticks() != firstMeasure-&gt;ticks()) {</span></span>
 <span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">           1 :             return {};</span></span>
 <span id="L87"><span class="lineNum">      87</span>              :         }</span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          37 :         measures.push_back(measure);</span></span>
-<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">          37 :         measure = measure-&gt;nextMeasure();</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          41 :         measures.push_back(measure);</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">          41 :         measure = measure-&gt;nextMeasure();</span></span>
 <span id="L90"><span class="lineNum">      90</span>              :     }</span>
 <span id="L91"><span class="lineNum">      91</span>              : </span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">          17 :     return measures;</span></span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">          18 : }</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">          21 :     return measures;</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">          22 : }</span></span>
 <span id="L94"><span class="lineNum">      94</span>              : </span>
 <span id="L95"><span class="lineNum">      95</span>              : //---------------------------------------------------------</span>
 <span id="L96"><span class="lineNum">      96</span>              : //   whether there is something in the measures, deleted to make room for a measure repeat</span>
@@ -215,14 +215,14 @@
 <span id="L157"><span class="lineNum">     157</span>              : ///   returns false if these measures won't work</span>
 <span id="L158"><span class="lineNum">     158</span>              : //---------------------------------------------------------</span>
 <span id="L159"><span class="lineNum">     159</span>              : </span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">          11 : bool EditMeasureRepeat::makeMeasureRepeatGroup(Transaction&amp;, Score* score, Measure* firstMeasure, int numMeasures,</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">          15 : bool EditMeasureRepeat::makeMeasureRepeatGroup(Transaction&amp;, Score* score, Measure* firstMeasure, int numMeasures,</span></span>
 <span id="L161"><span class="lineNum">     161</span>              :                                                staff_idx_t staffIdx)</span>
 <span id="L162"><span class="lineNum">     162</span>              : {</span>
 <span id="L163"><span class="lineNum">     163</span>              :     //</span>
 <span id="L164"><span class="lineNum">     164</span>              :     // check that sufficient measures exist, with equal durations</span>
 <span id="L165"><span class="lineNum">     165</span>              :     //</span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">          11 :     std::vector&lt;Measure*&gt; measures = groupMeasures(firstMeasure, numMeasures);</span></span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">          11 :     if (measures.empty()) {</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">          15 :     std::vector&lt;Measure*&gt; measures = groupMeasures(firstMeasure, numMeasures);</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">          15 :     if (measures.empty()) {</span></span>
 <span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC tlaBgUNC">           0 :         MScore::setError(MsError::INSUFFICIENT_MEASURES);</span></span>
 <span id="L169"><span class="lineNum">     169</span> <span class="tlaUNC">           0 :         return false;</span></span>
 <span id="L170"><span class="lineNum">     170</span>              :     }</span>
@@ -233,27 +233,27 @@
 <span id="L175"><span class="lineNum">     175</span>              :     // group measures and clear current contents</span>
 <span id="L176"><span class="lineNum">     176</span>              :     //</span>
 <span id="L177"><span class="lineNum">     177</span>              : </span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC tlaBgGNC">          11 :     score-&gt;deselectAll();</span></span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">          11 :     int i = 1;</span></span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">          38 :     for (auto m : measures) {</span></span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">          27 :         score-&gt;select(m, SelectType::RANGE, staffIdx);</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">          27 :         if (m-&gt;isMeasureRepeatGroup(staffIdx)) {</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC tlaBgGNC">          15 :     score-&gt;deselectAll();</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">          15 :     int i = 1;</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">          46 :     for (auto m : measures) {</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">          31 :         score-&gt;select(m, SelectType::RANGE, staffIdx);</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">          31 :         if (m-&gt;isMeasureRepeatGroup(staffIdx)) {</span></span>
 <span id="L183"><span class="lineNum">     183</span> <span class="tlaUNC tlaBgUNC">           0 :             score-&gt;deleteItem(m-&gt;measureRepeatElement(staffIdx)); // reset measures related to an earlier MeasureRepeat</span></span>
 <span id="L184"><span class="lineNum">     184</span>              :         }</span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC tlaBgGNC">          27 :         score-&gt;undoChangeMeasureRepeatCount(m, i++, staffIdx);</span></span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">          27 :         if (m != measures.front()) {</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC tlaBgGNC">          31 :         score-&gt;undoChangeMeasureRepeatCount(m, i++, staffIdx);</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">          31 :         if (m != measures.front()) {</span></span>
 <span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">          16 :             m-&gt;undoChangeProperty(Pid::REPEAT_START, false);</span></span>
 <span id="L188"><span class="lineNum">     188</span>              :         }</span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">          27 :         if (m != measures.back()) {</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">          31 :         if (m != measures.back()) {</span></span>
 <span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">          16 :             m-&gt;undoSetNoBreak(true);</span></span>
 <span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">          16 :             Segment* seg = m-&gt;findSegmentR(SegmentType::EndBarLine, m-&gt;ticks());</span></span>
 <span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">          16 :             BarLine* endBarLine = toBarLine(seg-&gt;element(staff2track(staffIdx)));</span></span>
 <span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">          16 :             score-&gt;deleteItem(endBarLine); // also takes care of Pid::REPEAT_END</span></span>
 <span id="L194"><span class="lineNum">     194</span>              :         }</span>
 <span id="L195"><span class="lineNum">     195</span>              :     }</span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          11 :     score-&gt;cmdDeleteSelection();</span></span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          11 :     return true;</span></span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">          11 : }</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          15 :     score-&gt;cmdDeleteSelection();</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          15 :     return true;</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">          15 : }</span></span>
 <span id="L199"><span class="lineNum">     199</span>              : </span>
 <span id="L200"><span class="lineNum">     200</span>              : //---------------------------------------------------------</span>
 <span id="L201"><span class="lineNum">     201</span>              : //   addMeasureRepeat</span>
@@ -262,16 +262,16 @@
 <span id="L204"><span class="lineNum">     204</span>              : //    does NOT set measureRepeatCount or do anything else with measure(s)!</span>
 <span id="L205"><span class="lineNum">     205</span>              : //---------------------------------------------------------</span>
 <span id="L206"><span class="lineNum">     206</span>              : </span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          36 : MeasureRepeat* EditMeasureRepeat::addMeasureRepeat(Transaction&amp;, Score* score, const Fraction&amp; tick, track_idx_t track,</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          40 : MeasureRepeat* EditMeasureRepeat::addMeasureRepeat(Transaction&amp;, Score* score, const Fraction&amp; tick, track_idx_t track,</span></span>
 <span id="L208"><span class="lineNum">     208</span>              :                                                    int numMeasures)</span>
 <span id="L209"><span class="lineNum">     209</span>              : {</span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">          36 :     Measure* measure = score-&gt;tick2measure(tick);</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          36 :     MeasureRepeat* mr = Factory::createMeasureRepeat(score-&gt;dummy());</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">          36 :     mr-&gt;setNumMeasures(numMeasures);</span></span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">          36 :     mr-&gt;setTicks(measure-&gt;stretchedLen(score-&gt;staff(track2staff(track))));</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">          36 :     mr-&gt;setTrack(track);</span></span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">          36 :     score-&gt;undoAddCR(mr, measure, tick);</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">          36 :     return mr;</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">          40 :     Measure* measure = score-&gt;tick2measure(tick);</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          40 :     MeasureRepeat* mr = Factory::createMeasureRepeat(score-&gt;dummy());</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">          40 :     mr-&gt;setNumMeasures(numMeasures);</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">          40 :     mr-&gt;setTicks(measure-&gt;stretchedLen(score-&gt;staff(track2staff(track))));</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">          40 :     mr-&gt;setTrack(track);</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">          40 :     score-&gt;undoAddCR(mr, measure, tick);</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">          40 :     return mr;</span></span>
 <span id="L217"><span class="lineNum">     217</span>              : }</span>
         </pre>
               </td>

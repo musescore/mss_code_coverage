@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -103,12 +103,12 @@
 <span id="L45"><span class="lineNum">      45</span>              : </span>
 <span id="L46"><span class="lineNum">      46</span>              : protected:</span>
 <span id="L47"><span class="lineNum">      47</span>              :     static constexpr double MU_ENGRAVING_DPI = 1200; // Same as mu::engraving::DPI. TODO: pass as parameter</span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC tlaBgGNC">     1122976 :     int metric(PaintDeviceMetric m) const override</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC tlaBgGNC">     1202080 :     int metric(PaintDeviceMetric m) const override</span></span>
 <span id="L49"><span class="lineNum">      49</span>              :     {</span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">     1122976 :         switch (m) {</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">     1122976 :         case QPaintDevice::PdmDpiX:</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">     1202080 :         switch (m) {</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">     1202080 :         case QPaintDevice::PdmDpiX:</span></span>
 <span id="L52"><span class="lineNum">      52</span>              :         case QPaintDevice::PdmDpiY:</span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">     1122976 :             return MU_ENGRAVING_DPI;</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">     1202080 :             return MU_ENGRAVING_DPI;</span></span>
 <span id="L54"><span class="lineNum">      54</span> <span class="tlaUNC tlaBgUNC">           0 :         default:</span></span>
 <span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC">           0 :             return 1;</span></span>
 <span id="L56"><span class="lineNum">      56</span>              :         }</span>
@@ -122,11 +122,11 @@
 <span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          46 :     return addSymbolFont(family, std::make_shared&lt;io::File&gt;(path));</span></span>
 <span id="L65"><span class="lineNum">      65</span>              : }</span>
 <span id="L66"><span class="lineNum">      66</span>              : </span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">         190 : int QFontProvider::addSymbolFont(const String&amp;, std::shared_ptr&lt;io::IODevice&gt; ioDevice)</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">         198 : int QFontProvider::addSymbolFont(const String&amp;, std::shared_ptr&lt;io::IODevice&gt; ioDevice)</span></span>
 <span id="L68"><span class="lineNum">      68</span>              : {</span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">         380 :     const std::string filePath = ioDevice-&gt;meta(&quot;file_path&quot;);</span></span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">         190 :     if (!filePath.empty()) {</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">         190 :         return QFontDatabase::addApplicationFont(QString::fromStdString(filePath));</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">         396 :     const std::string filePath = ioDevice-&gt;meta(&quot;file_path&quot;);</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">         198 :     if (!filePath.empty()) {</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">         198 :         return QFontDatabase::addApplicationFont(QString::fromStdString(filePath));</span></span>
 <span id="L72"><span class="lineNum">      72</span>              :     }</span>
 <span id="L73"><span class="lineNum">      73</span>              : </span>
 <span id="L74"><span class="lineNum">      74</span> <span class="tlaUNC tlaBgUNC">           0 :     if (!ioDevice-&gt;open(io::IODevice::ReadOnly)) {</span></span>
@@ -134,16 +134,16 @@
 <span id="L76"><span class="lineNum">      76</span>              :     }</span>
 <span id="L77"><span class="lineNum">      77</span>              : </span>
 <span id="L78"><span class="lineNum">      78</span> <span class="tlaUNC">           0 :     return QFontDatabase::addApplicationFontFromData(ioDevice-&gt;readAll().toQByteArray());</span></span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC tlaBgGNC">         190 : }</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC tlaBgGNC">         198 : }</span></span>
 <span id="L80"><span class="lineNum">      80</span>              : </span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">       79301 : double QFontProvider::lineSpacing(const Font&amp; f) const</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">       89210 : double QFontProvider::lineSpacing(const Font&amp; f) const</span></span>
 <span id="L82"><span class="lineNum">      82</span>              : {</span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">       79301 :     return QFontMetricsF(f.toQFont(), &amp;device).lineSpacing();</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">       89210 :     return QFontMetricsF(f.toQFont(), &amp;device).lineSpacing();</span></span>
 <span id="L84"><span class="lineNum">      84</span>              : }</span>
 <span id="L85"><span class="lineNum">      85</span>              : </span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">        2170 : double QFontProvider::xHeight(const Font&amp; f) const</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">        2172 : double QFontProvider::xHeight(const Font&amp; f) const</span></span>
 <span id="L87"><span class="lineNum">      87</span>              : {</span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">        2170 :     return QFontMetricsF(f.toQFont(), &amp;device).xHeight();</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">        2172 :     return QFontMetricsF(f.toQFont(), &amp;device).xHeight();</span></span>
 <span id="L89"><span class="lineNum">      89</span>              : }</span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
 <span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">           6 : double QFontProvider::height(const Font&amp; f) const</span></span>
@@ -156,9 +156,9 @@
 <span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">       17709 :     return QFontMetrics(f.toQFont(), &amp;device).capHeight();</span></span>
 <span id="L99"><span class="lineNum">      99</span>              : }</span>
 <span id="L100"><span class="lineNum">     100</span>              : </span>
-<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">        4504 : double QFontProvider::ascent(const Font&amp; f) const</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">        4606 : double QFontProvider::ascent(const Font&amp; f) const</span></span>
 <span id="L102"><span class="lineNum">     102</span>              : {</span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">        4504 :     return QFontMetricsF(f.toQFont(), &amp;device).ascent();</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">        4606 :     return QFontMetricsF(f.toQFont(), &amp;device).ascent();</span></span>
 <span id="L104"><span class="lineNum">     104</span>              : }</span>
 <span id="L105"><span class="lineNum">     105</span>              : </span>
 <span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">           6 : double QFontProvider::descent(const Font&amp; f) const</span></span>
@@ -181,37 +181,37 @@
 <span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">           6 :     return QFontMetricsF(f.toQFont(), &amp;device).strikeOutPos();</span></span>
 <span id="L124"><span class="lineNum">     124</span>              : }</span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">      708426 : bool QFontProvider::inFont(const Font&amp; f, char32_t ucs4) const</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">      747278 : bool QFontProvider::inFont(const Font&amp; f, char32_t ucs4) const</span></span>
 <span id="L127"><span class="lineNum">     127</span>              : {</span>
 <span id="L128"><span class="lineNum">     128</span>              :     // NOTE: QFontMetricsF::inFontUcs4 is unreliable for our use case because it uses Qt's fallback</span>
 <span id="L129"><span class="lineNum">     129</span>              :     // system even if the flag noFontMerging is set, and returns true if the character</span>
 <span id="L130"><span class="lineNum">     130</span>              :     // is found in any of the fallbacks. We need to use instead QRawFont, which represents the</span>
 <span id="L131"><span class="lineNum">     131</span>              :     // *actual* font, not Qt's interpretation of the query. From QRawFont we can query the glyph index</span>
 <span id="L132"><span class="lineNum">     132</span>              :     // of a character (zero if not in font) and the bounding rectangle of the actual glyph at that index.</span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">      708426 :     QRawFont qRawFont = QRawFont::fromFont(f.toQFont());</span></span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">      708426 :     int glyphIndex = qRawFont.glyphIndexesForString(QString(QChar::fromUcs4(ucs4)))[0];</span></span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">      708426 :     if (glyphIndex == 0) {</span></span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">      443023 :         return false;</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">      747278 :     QRawFont qRawFont = QRawFont::fromFont(f.toQFont());</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">      747278 :     int glyphIndex = qRawFont.glyphIndexesForString(QString(QChar::fromUcs4(ucs4)))[0];</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">      747278 :     if (glyphIndex == 0) {</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">      467564 :         return false;</span></span>
 <span id="L137"><span class="lineNum">     137</span>              :     }</span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
 <span id="L139"><span class="lineNum">     139</span>              :     //! @NOTE some symbols in fonts dont have glyph. For example U+ee80</span>
 <span id="L140"><span class="lineNum">     140</span>              :     //! exists in Bravura.otf but doesn't have glyph</span>
 <span id="L141"><span class="lineNum">     141</span>              :     //! so QFontMetricsF returns true in that case</span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">      265403 :     return qRawFont.boundingRect(glyphIndex).isValid();</span></span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">      708426 : }</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">      279714 :     return qRawFont.boundingRect(glyphIndex).isValid();</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">      747278 : }</span></span>
 <span id="L144"><span class="lineNum">     144</span>              : </span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">      255247 : double QFontProvider::horizontalAdvance(const Font&amp; f, const String&amp; string) const</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">      271832 : double QFontProvider::horizontalAdvance(const Font&amp; f, const String&amp; string) const</span></span>
 <span id="L146"><span class="lineNum">     146</span>              : {</span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">      255247 :     return QFontMetricsF(f.toQFont(), &amp;device).horizontalAdvance(string);</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">      271832 :     return QFontMetricsF(f.toQFont(), &amp;device).horizontalAdvance(string);</span></span>
 <span id="L148"><span class="lineNum">     148</span>              : }</span>
 <span id="L149"><span class="lineNum">     149</span>              : </span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">      156930 : double QFontProvider::horizontalAdvance(const Font&amp; f, char32_t ucs4) const</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">      165629 : double QFontProvider::horizontalAdvance(const Font&amp; f, char32_t ucs4) const</span></span>
 <span id="L151"><span class="lineNum">     151</span>              : {</span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">      156930 :     if (Char::requiresSurrogates(ucs4)) {</span></span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">          54 :         return QFontMetricsF(f.toQFont(), &amp;device).horizontalAdvance(String::fromUcs4(ucs4));</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">      165629 :     if (Char::requiresSurrogates(ucs4)) {</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">          57 :         return QFontMetricsF(f.toQFont(), &amp;device).horizontalAdvance(String::fromUcs4(ucs4));</span></span>
 <span id="L154"><span class="lineNum">     154</span>              :     }</span>
 <span id="L155"><span class="lineNum">     155</span>              : </span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">      156876 :     return QFontMetricsF(f.toQFont(), &amp;device).horizontalAdvance(static_cast&lt;char16_t&gt;(ucs4));</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">      165572 :     return QFontMetricsF(f.toQFont(), &amp;device).horizontalAdvance(static_cast&lt;char16_t&gt;(ucs4));</span></span>
 <span id="L157"><span class="lineNum">     157</span>              : }</span>
 <span id="L158"><span class="lineNum">     158</span>              : </span>
 <span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">          99 : RectF QFontProvider::boundingRect(const Font&amp; f, const String&amp; string) const</span></span>
@@ -219,37 +219,37 @@
 <span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          99 :     return RectF::fromQRectF(QFontMetricsF(f.toQFont(), &amp;device).boundingRect(string));</span></span>
 <span id="L162"><span class="lineNum">     162</span>              : }</span>
 <span id="L163"><span class="lineNum">     163</span>              : </span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">      156700 : RectF QFontProvider::boundingRect(const Font&amp; f, char32_t ucs4) const</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">      165399 : RectF QFontProvider::boundingRect(const Font&amp; f, char32_t ucs4) const</span></span>
 <span id="L165"><span class="lineNum">     165</span>              : {</span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">      156700 :     if (Char::requiresSurrogates(ucs4)) {</span></span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">          54 :         return RectF::fromQRectF(QFontMetrics(f.toQFont(), &amp;device).boundingRect(String::fromUcs4(ucs4)));</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">      165399 :     if (Char::requiresSurrogates(ucs4)) {</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">          57 :         return RectF::fromQRectF(QFontMetrics(f.toQFont(), &amp;device).boundingRect(String::fromUcs4(ucs4)));</span></span>
 <span id="L168"><span class="lineNum">     168</span>              :     }</span>
 <span id="L169"><span class="lineNum">     169</span>              : </span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">      156646 :     if (f.type() == Font::Type::MusicSymbol || f.type() == Font::Type::MusicSymbolText) {</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">      165342 :     if (f.type() == Font::Type::MusicSymbol || f.type() == Font::Type::MusicSymbolText) {</span></span>
 <span id="L171"><span class="lineNum">     171</span>              :         // QFontMetrics::boundingRect returns pixel values obtained by rasterization of the font.</span>
 <span id="L172"><span class="lineNum">     172</span>              :         // QPainterPath::boundingRect works from the actual vector shape so it's more accurate.</span>
 <span id="L173"><span class="lineNum">     173</span>              :         // There is still some discretization going on so we can make it even more accurate by upscaling.</span>
 <span id="L174"><span class="lineNum">     174</span>              :         // CAUTION: More expensive! Ok for music glyphs because they are cached.</span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">      156586 :         QFont qf = f.toQFont();</span></span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">      156586 :         qf = QFont(qf, &amp;device);</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">      165282 :         QFont qf = f.toQFont();</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">      165282 :         qf = QFont(qf, &amp;device);</span></span>
 <span id="L177"><span class="lineNum">     177</span>              :         static constexpr double UPSCALING = 4.0;</span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">      156586 :         qf.setPointSizeF(qf.pointSizeF() * UPSCALING);</span></span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">      156586 :         QPainterPath path;</span></span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">      156586 :         path.addText(QPointF(), qf, QString(static_cast&lt;char16_t&gt;(ucs4)));</span></span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">      156586 :         return RectF::fromQRectF(path.boundingRect()).scaled(SizeF(1.0 / UPSCALING, 1.0 / UPSCALING));</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">      156586 :     }</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">      165282 :         qf.setPointSizeF(qf.pointSizeF() * UPSCALING);</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">      165282 :         QPainterPath path;</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">      165282 :         path.addText(QPointF(), qf, QString(static_cast&lt;char16_t&gt;(ucs4)));</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">      165282 :         return RectF::fromQRectF(path.boundingRect()).scaled(SizeF(1.0 / UPSCALING, 1.0 / UPSCALING));</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">      165282 :     }</span></span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
 <span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">          60 :     return RectF::fromQRectF(QFontMetricsF(f.toQFont(), &amp;device).boundingRect(static_cast&lt;char16_t&gt;(ucs4)));</span></span>
 <span id="L185"><span class="lineNum">     185</span>              : }</span>
 <span id="L186"><span class="lineNum">     186</span>              : </span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">      450286 : RectF QFontProvider::tightBoundingRect(const Font&amp; f, const String&amp; string) const</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">      485394 : RectF QFontProvider::tightBoundingRect(const Font&amp; f, const String&amp; string) const</span></span>
 <span id="L188"><span class="lineNum">     188</span>              : {</span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">      450286 :     auto boundingRect = QFontMetricsF(f.toQFont(), &amp;device).tightBoundingRect(string);</span></span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">      450286 :     if (!boundingRect.isValid()) {</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">      485394 :     auto boundingRect = QFontMetricsF(f.toQFont(), &amp;device).tightBoundingRect(string);</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">      485394 :     if (!boundingRect.isValid()) {</span></span>
 <span id="L191"><span class="lineNum">     191</span>              :         // fix for https://github.com/musescore/MuseScore/issues/19503 - Qt can return garbage bounding rectangles that corrupt layout</span>
-<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">       15395 :         return RectF();</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">       16907 :         return RectF();</span></span>
 <span id="L193"><span class="lineNum">     193</span>              :     }</span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">      434891 :     return RectF::fromQRectF(boundingRect);</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">      468487 :     return RectF::fromQRectF(boundingRect);</span></span>
 <span id="L195"><span class="lineNum">     195</span>              : }</span>
         </pre>
               </td>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -111,13 +111,15 @@
 <span id="L53"><span class="lineNum">      53</span>              : </span>
 <span id="L54"><span class="lineNum">      54</span>              :     static void readDrumset(const muse::ByteArray&amp; drumMapping, mu::engraving::Drumset&amp; drumset);</span>
 <span id="L55"><span class="lineNum">      55</span>              :     std::shared_ptr&lt;mu::engraving::Chord&gt; getDrumNoteForPreview(const mu::engraving::Drumset* drumset, int pitch);</span>
-<span id="L56"><span class="lineNum">      56</span>              :     bool editPercussionShortcut(mu::engraving::Drumset&amp; drumset, int originPitch);</span>
-<span id="L57"><span class="lineNum">      57</span>              : </span>
-<span id="L58"><span class="lineNum">      58</span>              : private:</span>
-<span id="L59"><span class="lineNum">      59</span>              :     muse::RetVal&lt;muse::Val&gt; openPercussionShortcutDialog(const mu::engraving::Drumset&amp; drumset, int originPitch);</span>
-<span id="L60"><span class="lineNum">      60</span>              :     QVariantMap drumToQVariantMap(int pitch, const engraving::DrumInstrument&amp; drum);</span>
-<span id="L61"><span class="lineNum">      61</span>              : };</span>
-<span id="L62"><span class="lineNum">      62</span>              : }</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span>              :     //! Resolves with the shortcut the user saves, to apply with applyPercussionShortcut</span>
+<span id="L58"><span class="lineNum">      58</span>              :     muse::async::Promise&lt;muse::Val&gt; openPercussionShortcutDialog(const mu::engraving::Drumset&amp; drumset, int originPitch);</span>
+<span id="L59"><span class="lineNum">      59</span>              :     static void applyPercussionShortcut(mu::engraving::Drumset&amp; drumset, int originPitch, const muse::Val&amp; dialogResult);</span>
+<span id="L60"><span class="lineNum">      60</span>              : </span>
+<span id="L61"><span class="lineNum">      61</span>              : private:</span>
+<span id="L62"><span class="lineNum">      62</span>              :     QVariantMap drumToQVariantMap(int pitch, const engraving::DrumInstrument&amp; drum);</span>
+<span id="L63"><span class="lineNum">      63</span>              : };</span>
+<span id="L64"><span class="lineNum">      64</span>              : }</span>
         </pre>
               </td>
             </tr>

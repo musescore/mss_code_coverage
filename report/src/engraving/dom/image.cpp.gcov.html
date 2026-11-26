@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -183,15 +183,15 @@
 <span id="L125"><span class="lineNum">     125</span>              : //   imageSize</span>
 <span id="L126"><span class="lineNum">     126</span>              : //---------------------------------------------------------</span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          34 : muse::SizeF Image::imageSize() const</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          56 : muse::SizeF Image::imageSize() const</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : {</span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">          34 :     if (!isValid()) {</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">           8 :         return muse::SizeF();</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">          56 :     if (!isValid()) {</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          10 :         return muse::SizeF();</span></span>
 <span id="L132"><span class="lineNum">     132</span>              :     }</span>
 <span id="L133"><span class="lineNum">     133</span>              : </span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">          26 :     if (m_imageType == ImageType::RASTER) {</span></span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">          26 :         muse::Size rasterSize = m_rasterDoc-&gt;size();</span></span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">          26 :         return muse::SizeF(rasterSize.width(), rasterSize.height());</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">          46 :     if (m_imageType == ImageType::RASTER) {</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">          46 :         muse::Size rasterSize = m_rasterDoc-&gt;size();</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">          46 :         return muse::SizeF(rasterSize.width(), rasterSize.height());</span></span>
 <span id="L137"><span class="lineNum">     137</span>              :     }</span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
 <span id="L139"><span class="lineNum">     139</span> <span class="tlaUNC tlaBgUNC">           0 :     return m_svgDoc-&gt;defaultSize();</span></span>
@@ -413,9 +413,9 @@
 <span id="L355"><span class="lineNum">     355</span>              : //   pixel2Size</span>
 <span id="L356"><span class="lineNum">     356</span>              : //---------------------------------------------------------</span>
 <span id="L357"><span class="lineNum">     357</span>              : </span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC tlaBgGNC">          34 : SizeF Image::pixel2size(const SizeF&amp; s) const</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC tlaBgGNC">          56 : SizeF Image::pixel2size(const SizeF&amp; s) const</span></span>
 <span id="L359"><span class="lineNum">     359</span>              : {</span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">          34 :     return s / (m_sizeIsSpatium ? spatium() : DPMM);</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">          56 :     return s / (m_sizeIsSpatium ? spatium() : DPMM);</span></span>
 <span id="L361"><span class="lineNum">     361</span>              : }</span>
 <span id="L362"><span class="lineNum">     362</span>              : </span>
 <span id="L363"><span class="lineNum">     363</span>              : //---------------------------------------------------------</span>
@@ -450,25 +450,25 @@
 <span id="L392"><span class="lineNum">     392</span>              : //   getProperty</span>
 <span id="L393"><span class="lineNum">     393</span>              : //---------------------------------------------------------</span>
 <span id="L394"><span class="lineNum">     394</span>              : </span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">         299 : PropertyValue Image::getProperty(Pid propertyId) const</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">         585 : PropertyValue Image::getProperty(Pid propertyId) const</span></span>
 <span id="L396"><span class="lineNum">     396</span>              : {</span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">         299 :     switch (propertyId) {</span></span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">          23 :     case Pid::AUTOSCALE:</span></span>
-<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">          23 :         return autoScale();</span></span>
-<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">          23 :     case Pid::SIZE:</span></span>
-<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">          23 :         return PropertyValue::fromValue(size());</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">         585 :     switch (propertyId) {</span></span>
+<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">          45 :     case Pid::AUTOSCALE:</span></span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">          45 :         return autoScale();</span></span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">          45 :     case Pid::SIZE:</span></span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">          45 :         return PropertyValue::fromValue(size());</span></span>
 <span id="L402"><span class="lineNum">     402</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::IMAGE_HEIGHT:</span></span>
 <span id="L403"><span class="lineNum">     403</span> <span class="tlaUNC">           0 :         return imageHeight();</span></span>
 <span id="L404"><span class="lineNum">     404</span> <span class="tlaUNC">           0 :     case Pid::IMAGE_WIDTH:</span></span>
 <span id="L405"><span class="lineNum">     405</span> <span class="tlaUNC">           0 :         return imageWidth();</span></span>
 <span id="L406"><span class="lineNum">     406</span> <span class="tlaUNC">           0 :     case Pid::IMAGE_FRAMED:</span></span>
 <span id="L407"><span class="lineNum">     407</span> <span class="tlaUNC">           0 :         return isImageFramed();</span></span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC tlaBgGNC">          23 :     case Pid::LOCK_ASPECT_RATIO:</span></span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          23 :         return lockAspectRatio();</span></span>
-<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">          23 :     case Pid::SIZE_IS_SPATIUM:</span></span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          23 :         return sizeIsSpatium();</span></span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">         207 :     default:</span></span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">         207 :         return EngravingItem::getProperty(propertyId);</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC tlaBgGNC">          45 :     case Pid::LOCK_ASPECT_RATIO:</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          45 :         return lockAspectRatio();</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">          45 :     case Pid::SIZE_IS_SPATIUM:</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          45 :         return sizeIsSpatium();</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">         405 :     default:</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">         405 :         return EngravingItem::getProperty(propertyId);</span></span>
 <span id="L414"><span class="lineNum">     414</span>              :     }</span>
 <span id="L415"><span class="lineNum">     415</span>              : }</span>
 <span id="L416"><span class="lineNum">     416</span>              : </span>
@@ -518,25 +518,25 @@
 <span id="L460"><span class="lineNum">     460</span>              : //   propertyDefault</span>
 <span id="L461"><span class="lineNum">     461</span>              : //---------------------------------------------------------</span>
 <span id="L462"><span class="lineNum">     462</span>              : </span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">         299 : PropertyValue Image::propertyDefault(Pid id) const</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">         585 : PropertyValue Image::propertyDefault(Pid id) const</span></span>
 <span id="L464"><span class="lineNum">     464</span>              : {</span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">         299 :     switch (id) {</span></span>
-<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">          23 :     case Pid::AUTOSCALE:</span></span>
-<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">          23 :         return defaultAutoScale;</span></span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">          23 :     case Pid::SIZE:</span></span>
-<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">          23 :         return PropertyValue::fromValue(pixel2size(imageSize()));</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">         585 :     switch (id) {</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">          45 :     case Pid::AUTOSCALE:</span></span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">          45 :         return defaultAutoScale;</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">          45 :     case Pid::SIZE:</span></span>
+<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">          45 :         return PropertyValue::fromValue(pixel2size(imageSize()));</span></span>
 <span id="L470"><span class="lineNum">     470</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::IMAGE_HEIGHT:</span></span>
 <span id="L471"><span class="lineNum">     471</span> <span class="tlaUNC">           0 :         return pixel2size(imageSize()).height();</span></span>
 <span id="L472"><span class="lineNum">     472</span> <span class="tlaUNC">           0 :     case Pid::IMAGE_WIDTH:</span></span>
 <span id="L473"><span class="lineNum">     473</span> <span class="tlaUNC">           0 :         return pixel2size(imageSize()).width();</span></span>
 <span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC">           0 :     case Pid::IMAGE_FRAMED:</span></span>
 <span id="L475"><span class="lineNum">     475</span> <span class="tlaUNC">           0 :         return isImageFramed();</span></span>
-<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC tlaBgGNC">          23 :     case Pid::LOCK_ASPECT_RATIO:</span></span>
-<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">          23 :         return defaultLockAspectRatio;</span></span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">          23 :     case Pid::SIZE_IS_SPATIUM:</span></span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">          23 :         return defaultSizeIsSpatium;</span></span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">         207 :     default:</span></span>
-<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">         207 :         return EngravingItem::propertyDefault(id);</span></span>
+<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC tlaBgGNC">          45 :     case Pid::LOCK_ASPECT_RATIO:</span></span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">          45 :         return defaultLockAspectRatio;</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">          45 :     case Pid::SIZE_IS_SPATIUM:</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">          45 :         return defaultSizeIsSpatium;</span></span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">         405 :     default:</span></span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">         405 :         return EngravingItem::propertyDefault(id);</span></span>
 <span id="L482"><span class="lineNum">     482</span>              :     }</span>
 <span id="L483"><span class="lineNum">     483</span>              : }</span>
 <span id="L484"><span class="lineNum">     484</span>              : }</span>

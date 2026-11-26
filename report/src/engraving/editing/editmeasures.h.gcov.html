@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -101,11 +101,11 @@
 <span id="L43"><span class="lineNum">      43</span>              :     void insertMeasures();</span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
 <span id="L45"><span class="lineNum">      45</span>              : public:</span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">         665 :     InsertRemoveMeasures(MeasureBase* _fm, MeasureBase* _lm, bool _moveStc)</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">         665 :         : fm(_fm), lm(_lm), moveStc(_moveStc) {}</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">         730 :     InsertRemoveMeasures(MeasureBase* _fm, MeasureBase* _lm, bool _moveStc)</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">         730 :         : fm(_fm), lm(_lm), moveStc(_moveStc) {}</span></span>
 <span id="L48"><span class="lineNum">      48</span>              :     virtual void undo() override = 0;</span>
 <span id="L49"><span class="lineNum">      49</span>              :     virtual void redo() override = 0;</span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">         720 :     UNDO_CHANGED_OBJECTS({ fm, lm })</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">         735 :     UNDO_CHANGED_OBJECTS({ fm, lm })</span></span>
 <span id="L51"><span class="lineNum">      51</span>              : };</span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span>              : class RemoveMeasures : public InsertRemoveMeasures</span>
@@ -123,20 +123,20 @@
 <span id="L65"><span class="lineNum">      65</span>              : </span>
 <span id="L66"><span class="lineNum">      66</span>              : class InsertMeasures : public InsertRemoveMeasures</span>
 <span id="L67"><span class="lineNum">      67</span>              : {</span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">        1184 :     OBJECT_ALLOCATOR(engraving, InsertMeasures)</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">        1314 :     OBJECT_ALLOCATOR(engraving, InsertMeasures)</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : public:</span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">         597 :     InsertMeasures(MeasureBase* m1, MeasureBase* m2, bool moveStc = true)</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">         597 :         : InsertRemoveMeasures(m1, m2, moveStc) {}</span></span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">         597 :     void redo() override { insertMeasures(); }</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">         662 :     InsertMeasures(MeasureBase* m1, MeasureBase* m2, bool moveStc = true)</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">         662 :         : InsertRemoveMeasures(m1, m2, moveStc) {}</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">         662 :     void redo() override { insertMeasures(); }</span></span>
 <span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          24 :     void undo() override { removeMeasures(); }</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">         169 :     UNDO_TYPE(CommandType::InsertMeasures)</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">         174 :     UNDO_TYPE(CommandType::InsertMeasures)</span></span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaUNC tlaBgUNC">           0 :     UNDO_NAME(&quot;InsertMeasures&quot;)</span></span>
 <span id="L77"><span class="lineNum">      77</span>              : };</span>
 <span id="L78"><span class="lineNum">      78</span>              : </span>
 <span id="L79"><span class="lineNum">      79</span>              : class ChangeMeasureLen : public UndoableCommand</span>
 <span id="L80"><span class="lineNum">      80</span>              : {</span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">         142 :     OBJECT_ALLOCATOR(engraving, ChangeMeasureLen)</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">         148 :     OBJECT_ALLOCATOR(engraving, ChangeMeasureLen)</span></span>
 <span id="L82"><span class="lineNum">      82</span>              : </span>
 <span id="L83"><span class="lineNum">      83</span>              :     Measure* measure = nullptr;</span>
 <span id="L84"><span class="lineNum">      84</span>              :     Fraction len;</span>
@@ -146,9 +146,9 @@
 <span id="L88"><span class="lineNum">      88</span>              : public:</span>
 <span id="L89"><span class="lineNum">      89</span>              :     ChangeMeasureLen(Measure*, Fraction);</span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">          91 :     UNDO_TYPE(CommandType::ChangeMeasureLen)</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">          94 :     UNDO_TYPE(CommandType::ChangeMeasureLen)</span></span>
 <span id="L92"><span class="lineNum">      92</span> <span class="tlaUNC tlaBgUNC">           0 :     UNDO_NAME(&quot;ChangeMeasureLen&quot;)</span></span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">         273 :     UNDO_CHANGED_OBJECTS({ measure })</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">         282 :     UNDO_CHANGED_OBJECTS({ measure })</span></span>
 <span id="L94"><span class="lineNum">      94</span>              : };</span>
 <span id="L95"><span class="lineNum">      95</span>              : </span>
 <span id="L96"><span class="lineNum">      96</span>              : class ChangeMMRest : public UndoableCommand</span>
@@ -208,7 +208,7 @@
 <span id="L150"><span class="lineNum">     150</span>              : </span>
 <span id="L151"><span class="lineNum">     151</span>              : class ChangeMeasureRepeatCount : public UndoableCommand</span>
 <span id="L152"><span class="lineNum">     152</span>              : {</span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">         140 :     OBJECT_ALLOCATOR(engraving, ChangeMeasureRepeatCount)</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">         160 :     OBJECT_ALLOCATOR(engraving, ChangeMeasureRepeatCount)</span></span>
 <span id="L154"><span class="lineNum">     154</span>              : </span>
 <span id="L155"><span class="lineNum">     155</span>              :     Measure* m = nullptr;</span>
 <span id="L156"><span class="lineNum">     156</span>              :     int count = 0;</span>
@@ -217,12 +217,12 @@
 <span id="L159"><span class="lineNum">     159</span>              :     void flip() override;</span>
 <span id="L160"><span class="lineNum">     160</span>              : </span>
 <span id="L161"><span class="lineNum">     161</span>              : public:</span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">          70 :     ChangeMeasureRepeatCount(Measure* _m, int _count, staff_idx_t _staffIdx)</span></span>
-<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">          70 :         : m(_m), count(_count), staffIdx(_staffIdx) {}</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">          80 :     ChangeMeasureRepeatCount(Measure* _m, int _count, staff_idx_t _staffIdx)</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">          80 :         : m(_m), count(_count), staffIdx(_staffIdx) {}</span></span>
 <span id="L164"><span class="lineNum">     164</span>              : </span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">         106 :     UNDO_TYPE(CommandType::ChangeMeasureRepeatCount)</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">         118 :     UNDO_TYPE(CommandType::ChangeMeasureRepeatCount)</span></span>
 <span id="L166"><span class="lineNum">     166</span> <span class="tlaUNC tlaBgUNC">           0 :     UNDO_NAME(&quot;ChangeMeasureRepeatCount&quot;)</span></span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC tlaBgGNC">         318 :     UNDO_CHANGED_OBJECTS({ m })</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC tlaBgGNC">         354 :     UNDO_CHANGED_OBJECTS({ m })</span></span>
 <span id="L168"><span class="lineNum">     168</span>              : };</span>
 <span id="L169"><span class="lineNum">     169</span>              : }</span>
         </pre>

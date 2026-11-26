@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -208,7 +208,7 @@
 <span id="L150"><span class="lineNum">     150</span>              :     void setUnitType(int unitType);</span>
 <span id="L151"><span class="lineNum">     151</span>              :     void setUnitType(project::INotationWriter::UnitType unitType);</span>
 <span id="L152"><span class="lineNum">     152</span>              : </span>
-<span id="L153"><span class="lineNum">     153</span>              :     Q_INVOKABLE bool exportScores();</span>
+<span id="L153"><span class="lineNum">     153</span>              :     Q_INVOKABLE void exportScores();</span>
 <span id="L154"><span class="lineNum">     154</span>              : </span>
 <span id="L155"><span class="lineNum">     155</span>              :     int pdfResolution() const;</span>
 <span id="L156"><span class="lineNum">     156</span>              :     void setPdfResolution(const int&amp; resolution);</span>
@@ -301,84 +301,85 @@
 <span id="L243"><span class="lineNum">     243</span>              : </span>
 <span id="L244"><span class="lineNum">     244</span>              : signals:</span>
 <span id="L245"><span class="lineNum">     245</span>              :     void selectionChanged();</span>
-<span id="L246"><span class="lineNum">     246</span>              : </span>
-<span id="L247"><span class="lineNum">     247</span>              :     void selectedExportTypeChanged(QVariantMap newExportType);</span>
-<span id="L248"><span class="lineNum">     248</span>              :     void selectedUnitTypeChanged(project::INotationWriter::UnitType newUnitType);</span>
-<span id="L249"><span class="lineNum">     249</span>              : </span>
-<span id="L250"><span class="lineNum">     250</span>              :     void pdfResolutionChanged(int resolution);</span>
-<span id="L251"><span class="lineNum">     251</span>              :     void pdfTransparentBackgroundChanged(bool transparent);</span>
-<span id="L252"><span class="lineNum">     252</span>              :     void pdfGrayscaleChanged(bool grayscale);</span>
-<span id="L253"><span class="lineNum">     253</span>              : </span>
-<span id="L254"><span class="lineNum">     254</span>              :     void pngResolutionChanged(int resolution);</span>
-<span id="L255"><span class="lineNum">     255</span>              :     void pngTransparentBackgroundChanged(bool transparent);</span>
-<span id="L256"><span class="lineNum">     256</span>              :     void pngGrayscaleChanged(bool grayscale);</span>
-<span id="L257"><span class="lineNum">     257</span>              : </span>
-<span id="L258"><span class="lineNum">     258</span>              :     void svgTransparentBackgroundChanged(bool transparent);</span>
-<span id="L259"><span class="lineNum">     259</span>              :     void svgIllustratorCompatChanged(bool compat);</span>
-<span id="L260"><span class="lineNum">     260</span>              : </span>
-<span id="L261"><span class="lineNum">     261</span>              :     void videoResolutionChanged(const QString&amp; resolution);</span>
-<span id="L262"><span class="lineNum">     262</span>              :     void viewModeChanged(ViewMode v);</span>
-<span id="L263"><span class="lineNum">     263</span>              : </span>
-<span id="L264"><span class="lineNum">     264</span>              :     void availableSampleRatesChanged();</span>
-<span id="L265"><span class="lineNum">     265</span>              :     void sampleRateChanged(int sampleRate);</span>
-<span id="L266"><span class="lineNum">     266</span>              :     void availableBitRatesChanged();</span>
-<span id="L267"><span class="lineNum">     267</span>              :     void bitRateChanged(int bitRate);</span>
-<span id="L268"><span class="lineNum">     268</span>              :     void availableSampleFormatsChanged();</span>
-<span id="L269"><span class="lineNum">     269</span>              :     void selectedSampleFormatChanged();</span>
-<span id="L270"><span class="lineNum">     270</span>              : </span>
-<span id="L271"><span class="lineNum">     271</span>              :     void midiExpandRepeatsChanged(bool expandRepeats);</span>
-<span id="L272"><span class="lineNum">     272</span>              :     void midiExportRpnsChanged(bool exportRpns);</span>
-<span id="L273"><span class="lineNum">     273</span>              : </span>
-<span id="L274"><span class="lineNum">     274</span>              :     void musicXmlLayoutTypeChanged(MusicXmlLayoutType layoutType);</span>
-<span id="L275"><span class="lineNum">     275</span>              : </span>
-<span id="L276"><span class="lineNum">     276</span>              :     void meiExportLayoutChanged(bool exportLayout);</span>
-<span id="L277"><span class="lineNum">     277</span>              :     void meiUseMuseScoreIdsChanged(bool useMuseScoreIds);</span>
-<span id="L278"><span class="lineNum">     278</span>              : </span>
-<span id="L279"><span class="lineNum">     279</span>              :     void lrcUseEnhancedFormatChanged(bool enhancedFormat);</span>
-<span id="L280"><span class="lineNum">     280</span>              : </span>
-<span id="L281"><span class="lineNum">     281</span>              :     void mnxIndentSpacesChanged(int spaces);</span>
-<span id="L282"><span class="lineNum">     282</span>              :     void mnxExportBeamsChanged(bool exportBeams);</span>
-<span id="L283"><span class="lineNum">     283</span>              :     void mnxExportRestPositionsChanged(bool exportRestPositions);</span>
-<span id="L284"><span class="lineNum">     284</span>              : </span>
-<span id="L285"><span class="lineNum">     285</span>              :     void shouldDestinationFolderBeOpenedOnExportChanged(bool shouldDestinationFolderBeOpenedOnExport);</span>
-<span id="L286"><span class="lineNum">     286</span>              : </span>
-<span id="L287"><span class="lineNum">     287</span>              :     void isFFmpegAvailableChanged();</span>
-<span id="L288"><span class="lineNum">     288</span>              :     void ffmpegDirChanged();</span>
-<span id="L289"><span class="lineNum">     289</span>              : </span>
-<span id="L290"><span class="lineNum">     290</span>              : private:</span>
-<span id="L291"><span class="lineNum">     291</span>              :     void classBegin() override;</span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaUNC">           0 :     void componentComplete() override {}</span></span>
-<span id="L293"><span class="lineNum">     293</span>              :     void init();</span>
-<span id="L294"><span class="lineNum">     294</span>              : </span>
-<span id="L295"><span class="lineNum">     295</span>              :     enum Roles {</span>
-<span id="L296"><span class="lineNum">     296</span>              :         RoleTitle = Qt::UserRole + 1,</span>
-<span id="L297"><span class="lineNum">     297</span>              :         RoleIsSelected,</span>
-<span id="L298"><span class="lineNum">     298</span>              :         RoleIsMain</span>
-<span id="L299"><span class="lineNum">     299</span>              :     };</span>
-<span id="L300"><span class="lineNum">     300</span>              : </span>
-<span id="L301"><span class="lineNum">     301</span>              :     bool isIndexValid(int index) const;</span>
-<span id="L302"><span class="lineNum">     302</span>              : </span>
-<span id="L303"><span class="lineNum">     303</span>              :     bool isFormatSelected(const QString&amp; formatSuffix) const;</span>
-<span id="L304"><span class="lineNum">     304</span>              : </span>
-<span id="L305"><span class="lineNum">     305</span>              :     bool isMainNotation(notation::INotationPtr notation) const;</span>
-<span id="L306"><span class="lineNum">     306</span>              :     notation::IMasterNotationPtr masterNotation() const;</span>
-<span id="L307"><span class="lineNum">     307</span>              : </span>
-<span id="L308"><span class="lineNum">     308</span>              :     void selectSavedNotations();</span>
-<span id="L309"><span class="lineNum">     309</span>              : </span>
-<span id="L310"><span class="lineNum">     310</span>              : #ifdef MUE_BUILD_IMPEXP_VIDEOEXPORT_MODULE</span>
-<span id="L311"><span class="lineNum">     311</span>              :     void disableVideoExportSettingMode();</span>
-<span id="L312"><span class="lineNum">     312</span>              :     void updateVideoExportSettingMode();</span>
-<span id="L313"><span class="lineNum">     313</span>              : #endif</span>
-<span id="L314"><span class="lineNum">     314</span>              : </span>
-<span id="L315"><span class="lineNum">     315</span>              :     QList&lt;notation::INotationPtr&gt; m_notations {};</span>
-<span id="L316"><span class="lineNum">     316</span>              :     QItemSelectionModel* m_selectionModel = nullptr;</span>
-<span id="L317"><span class="lineNum">     317</span>              : </span>
-<span id="L318"><span class="lineNum">     318</span>              :     ExportTypeList m_exportTypeList {};</span>
-<span id="L319"><span class="lineNum">     319</span>              :     ExportType m_selectedExportType = ExportType();</span>
-<span id="L320"><span class="lineNum">     320</span>              :     muse::io::path_t m_exportDirPath;</span>
-<span id="L321"><span class="lineNum">     321</span>              :     project::INotationWriter::UnitType m_selectedUnitType = project::INotationWriter::UnitType::PER_PART;</span>
-<span id="L322"><span class="lineNum">     322</span>              : };</span>
-<span id="L323"><span class="lineNum">     323</span>              : }</span>
+<span id="L246"><span class="lineNum">     246</span>              :     void exportStarted();</span>
+<span id="L247"><span class="lineNum">     247</span>              : </span>
+<span id="L248"><span class="lineNum">     248</span>              :     void selectedExportTypeChanged(QVariantMap newExportType);</span>
+<span id="L249"><span class="lineNum">     249</span>              :     void selectedUnitTypeChanged(project::INotationWriter::UnitType newUnitType);</span>
+<span id="L250"><span class="lineNum">     250</span>              : </span>
+<span id="L251"><span class="lineNum">     251</span>              :     void pdfResolutionChanged(int resolution);</span>
+<span id="L252"><span class="lineNum">     252</span>              :     void pdfTransparentBackgroundChanged(bool transparent);</span>
+<span id="L253"><span class="lineNum">     253</span>              :     void pdfGrayscaleChanged(bool grayscale);</span>
+<span id="L254"><span class="lineNum">     254</span>              : </span>
+<span id="L255"><span class="lineNum">     255</span>              :     void pngResolutionChanged(int resolution);</span>
+<span id="L256"><span class="lineNum">     256</span>              :     void pngTransparentBackgroundChanged(bool transparent);</span>
+<span id="L257"><span class="lineNum">     257</span>              :     void pngGrayscaleChanged(bool grayscale);</span>
+<span id="L258"><span class="lineNum">     258</span>              : </span>
+<span id="L259"><span class="lineNum">     259</span>              :     void svgTransparentBackgroundChanged(bool transparent);</span>
+<span id="L260"><span class="lineNum">     260</span>              :     void svgIllustratorCompatChanged(bool compat);</span>
+<span id="L261"><span class="lineNum">     261</span>              : </span>
+<span id="L262"><span class="lineNum">     262</span>              :     void videoResolutionChanged(const QString&amp; resolution);</span>
+<span id="L263"><span class="lineNum">     263</span>              :     void viewModeChanged(ViewMode v);</span>
+<span id="L264"><span class="lineNum">     264</span>              : </span>
+<span id="L265"><span class="lineNum">     265</span>              :     void availableSampleRatesChanged();</span>
+<span id="L266"><span class="lineNum">     266</span>              :     void sampleRateChanged(int sampleRate);</span>
+<span id="L267"><span class="lineNum">     267</span>              :     void availableBitRatesChanged();</span>
+<span id="L268"><span class="lineNum">     268</span>              :     void bitRateChanged(int bitRate);</span>
+<span id="L269"><span class="lineNum">     269</span>              :     void availableSampleFormatsChanged();</span>
+<span id="L270"><span class="lineNum">     270</span>              :     void selectedSampleFormatChanged();</span>
+<span id="L271"><span class="lineNum">     271</span>              : </span>
+<span id="L272"><span class="lineNum">     272</span>              :     void midiExpandRepeatsChanged(bool expandRepeats);</span>
+<span id="L273"><span class="lineNum">     273</span>              :     void midiExportRpnsChanged(bool exportRpns);</span>
+<span id="L274"><span class="lineNum">     274</span>              : </span>
+<span id="L275"><span class="lineNum">     275</span>              :     void musicXmlLayoutTypeChanged(MusicXmlLayoutType layoutType);</span>
+<span id="L276"><span class="lineNum">     276</span>              : </span>
+<span id="L277"><span class="lineNum">     277</span>              :     void meiExportLayoutChanged(bool exportLayout);</span>
+<span id="L278"><span class="lineNum">     278</span>              :     void meiUseMuseScoreIdsChanged(bool useMuseScoreIds);</span>
+<span id="L279"><span class="lineNum">     279</span>              : </span>
+<span id="L280"><span class="lineNum">     280</span>              :     void lrcUseEnhancedFormatChanged(bool enhancedFormat);</span>
+<span id="L281"><span class="lineNum">     281</span>              : </span>
+<span id="L282"><span class="lineNum">     282</span>              :     void mnxIndentSpacesChanged(int spaces);</span>
+<span id="L283"><span class="lineNum">     283</span>              :     void mnxExportBeamsChanged(bool exportBeams);</span>
+<span id="L284"><span class="lineNum">     284</span>              :     void mnxExportRestPositionsChanged(bool exportRestPositions);</span>
+<span id="L285"><span class="lineNum">     285</span>              : </span>
+<span id="L286"><span class="lineNum">     286</span>              :     void shouldDestinationFolderBeOpenedOnExportChanged(bool shouldDestinationFolderBeOpenedOnExport);</span>
+<span id="L287"><span class="lineNum">     287</span>              : </span>
+<span id="L288"><span class="lineNum">     288</span>              :     void isFFmpegAvailableChanged();</span>
+<span id="L289"><span class="lineNum">     289</span>              :     void ffmpegDirChanged();</span>
+<span id="L290"><span class="lineNum">     290</span>              : </span>
+<span id="L291"><span class="lineNum">     291</span>              : private:</span>
+<span id="L292"><span class="lineNum">     292</span>              :     void classBegin() override;</span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC">           0 :     void componentComplete() override {}</span></span>
+<span id="L294"><span class="lineNum">     294</span>              :     void init();</span>
+<span id="L295"><span class="lineNum">     295</span>              : </span>
+<span id="L296"><span class="lineNum">     296</span>              :     enum Roles {</span>
+<span id="L297"><span class="lineNum">     297</span>              :         RoleTitle = Qt::UserRole + 1,</span>
+<span id="L298"><span class="lineNum">     298</span>              :         RoleIsSelected,</span>
+<span id="L299"><span class="lineNum">     299</span>              :         RoleIsMain</span>
+<span id="L300"><span class="lineNum">     300</span>              :     };</span>
+<span id="L301"><span class="lineNum">     301</span>              : </span>
+<span id="L302"><span class="lineNum">     302</span>              :     bool isIndexValid(int index) const;</span>
+<span id="L303"><span class="lineNum">     303</span>              : </span>
+<span id="L304"><span class="lineNum">     304</span>              :     bool isFormatSelected(const QString&amp; formatSuffix) const;</span>
+<span id="L305"><span class="lineNum">     305</span>              : </span>
+<span id="L306"><span class="lineNum">     306</span>              :     bool isMainNotation(notation::INotationPtr notation) const;</span>
+<span id="L307"><span class="lineNum">     307</span>              :     notation::IMasterNotationPtr masterNotation() const;</span>
+<span id="L308"><span class="lineNum">     308</span>              : </span>
+<span id="L309"><span class="lineNum">     309</span>              :     void selectSavedNotations();</span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span>              : #ifdef MUE_BUILD_IMPEXP_VIDEOEXPORT_MODULE</span>
+<span id="L312"><span class="lineNum">     312</span>              :     void disableVideoExportSettingMode();</span>
+<span id="L313"><span class="lineNum">     313</span>              :     void updateVideoExportSettingMode();</span>
+<span id="L314"><span class="lineNum">     314</span>              : #endif</span>
+<span id="L315"><span class="lineNum">     315</span>              : </span>
+<span id="L316"><span class="lineNum">     316</span>              :     QList&lt;notation::INotationPtr&gt; m_notations {};</span>
+<span id="L317"><span class="lineNum">     317</span>              :     QItemSelectionModel* m_selectionModel = nullptr;</span>
+<span id="L318"><span class="lineNum">     318</span>              : </span>
+<span id="L319"><span class="lineNum">     319</span>              :     ExportTypeList m_exportTypeList {};</span>
+<span id="L320"><span class="lineNum">     320</span>              :     ExportType m_selectedExportType = ExportType();</span>
+<span id="L321"><span class="lineNum">     321</span>              :     muse::io::path_t m_exportDirPath;</span>
+<span id="L322"><span class="lineNum">     322</span>              :     project::INotationWriter::UnitType m_selectedUnitType = project::INotationWriter::UnitType::PER_PART;</span>
+<span id="L323"><span class="lineNum">     323</span>              : };</span>
+<span id="L324"><span class="lineNum">     324</span>              : }</span>
         </pre>
               </td>
             </tr>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -92,7 +92,7 @@
 <span id="L34"><span class="lineNum">      34</span>              : namespace mu::engraving {</span>
 <span id="L35"><span class="lineNum">      35</span>              : class InsertPart : public UndoableCommand</span>
 <span id="L36"><span class="lineNum">      36</span>              : {</span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC tlaBgGNC">         207 :     OBJECT_ALLOCATOR(engraving, InsertPart)</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC tlaBgGNC">         341 :     OBJECT_ALLOCATOR(engraving, InsertPart)</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : </span>
 <span id="L39"><span class="lineNum">      39</span>              :     Part* m_part = nullptr;</span>
 <span id="L40"><span class="lineNum">      40</span>              :     size_t m_targetPartIdx = 0;</span>
@@ -103,14 +103,14 @@
 <span id="L45"><span class="lineNum">      45</span>              :     void redo() override;</span>
 <span id="L46"><span class="lineNum">      46</span>              :     void cleanup(bool) override;</span>
 <span id="L47"><span class="lineNum">      47</span>              : </span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">         110 :     UNDO_TYPE(CommandType::InsertPart)</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">         180 :     UNDO_TYPE(CommandType::InsertPart)</span></span>
 <span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC tlaBgUNC">           0 :     UNDO_NAME(&quot;InsertPart&quot;)</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC tlaBgGNC">         330 :     UNDO_CHANGED_OBJECTS({ m_part })</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC tlaBgGNC">         540 :     UNDO_CHANGED_OBJECTS({ m_part })</span></span>
 <span id="L51"><span class="lineNum">      51</span>              : };</span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span>              : class RemovePart : public UndoableCommand</span>
 <span id="L54"><span class="lineNum">      54</span>              : {</span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">          25 :     OBJECT_ALLOCATOR(engraving, RemovePart)</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">          31 :     OBJECT_ALLOCATOR(engraving, RemovePart)</span></span>
 <span id="L56"><span class="lineNum">      56</span>              : </span>
 <span id="L57"><span class="lineNum">      57</span>              :     Part* m_part = nullptr;</span>
 <span id="L58"><span class="lineNum">      58</span>              :     size_t m_partIdx = muse::nidx;</span>
@@ -121,9 +121,9 @@
 <span id="L63"><span class="lineNum">      63</span>              :     void redo() override;</span>
 <span id="L64"><span class="lineNum">      64</span>              :     void cleanup(bool) override;</span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          17 :     UNDO_TYPE(CommandType::RemovePart)</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          22 :     UNDO_TYPE(CommandType::RemovePart)</span></span>
 <span id="L67"><span class="lineNum">      67</span> <span class="tlaUNC tlaBgUNC">           0 :     UNDO_NAME(&quot;RemovePart&quot;)</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">          51 :     UNDO_CHANGED_OBJECTS({ m_part })</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">          66 :     UNDO_CHANGED_OBJECTS({ m_part })</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : };</span>
 <span id="L70"><span class="lineNum">      70</span>              : </span>
 <span id="L71"><span class="lineNum">      71</span>              : class SetSoloist : public UndoableCommand</span>
@@ -304,108 +304,130 @@
 <span id="L246"><span class="lineNum">     246</span>              : class InstrumentTemplate;</span>
 <span id="L247"><span class="lineNum">     247</span>              : class Staff;</span>
 <span id="L248"><span class="lineNum">     248</span>              : class StaffType;</span>
-<span id="L249"><span class="lineNum">     249</span>              : </span>
-<span id="L250"><span class="lineNum">     250</span>              : class EditPart</span>
-<span id="L251"><span class="lineNum">     251</span>              : {</span>
-<span id="L252"><span class="lineNum">     252</span>              : public:</span>
-<span id="L253"><span class="lineNum">     253</span>              :     struct PartEntry {</span>
-<span id="L254"><span class="lineNum">     254</span>              :         Part* part = nullptr;                                   // existing</span>
-<span id="L255"><span class="lineNum">     255</span>              :         const InstrumentTemplate* instrumentTemplate = nullptr; // new</span>
-<span id="L256"><span class="lineNum">     256</span>              :         bool isSoloist = false;</span>
-<span id="L257"><span class="lineNum">     257</span>              :     };</span>
-<span id="L258"><span class="lineNum">     258</span>              : </span>
-<span id="L259"><span class="lineNum">     259</span>              :     struct SetPartsResult {</span>
-<span id="L260"><span class="lineNum">     260</span>              :         std::vector&lt;Part*&gt; addedParts;</span>
-<span id="L261"><span class="lineNum">     261</span>              :         std::vector&lt;Part*&gt; removedParts;</span>
-<span id="L262"><span class="lineNum">     262</span>              :     };</span>
-<span id="L263"><span class="lineNum">     263</span>              : </span>
-<span id="L264"><span class="lineNum">     264</span>              :     static SetPartsResult setParts(Score* score, const std::vector&lt;PartEntry&gt;&amp; entries, const ScoreOrder&amp; order);</span>
-<span id="L265"><span class="lineNum">     265</span>              :     static void setScoreOrder(Score* score, const ScoreOrder&amp; order);</span>
-<span id="L266"><span class="lineNum">     266</span>              : </span>
-<span id="L267"><span class="lineNum">     267</span>              :     static void setPartVisible(Score* score, Part* part, bool visible);</span>
-<span id="L268"><span class="lineNum">     268</span>              :     static bool setVoiceVisible(Score* score, Staff* staff, int voiceIndex, bool visible);</span>
-<span id="L269"><span class="lineNum">     269</span>              :     static void setStaffVisible(Score* score, Staff* staff, bool visible);</span>
-<span id="L270"><span class="lineNum">     270</span>              :     static void setPartSharpFlat(Score* score, Part* part, PreferSharpFlat sharpFlat);</span>
-<span id="L271"><span class="lineNum">     271</span>              :     static void setInstrumentName(Score* score, Part* part, const Fraction&amp; tick, const String&amp; name);</span>
-<span id="L272"><span class="lineNum">     272</span>              :     static void setInstrumentAbbreviature(Score* score, Part* part, const Fraction&amp; tick, const String&amp; abbreviature);</span>
-<span id="L273"><span class="lineNum">     273</span>              :     static bool setInstrumentGroupNameOptions(Score* score, Part* part, const Fraction&amp; tick, bool useCustom, const String&amp; longName,</span>
-<span id="L274"><span class="lineNum">     274</span>              :                                               const String&amp; shortName);</span>
-<span id="L275"><span class="lineNum">     275</span>              :     static void setInstrumentNumber(Score* score, Part* part, const Fraction&amp; tick, int number);</span>
-<span id="L276"><span class="lineNum">     276</span>              :     static void setStaffType(Score* score, Staff* staff, StaffTypes typeId);</span>
-<span id="L277"><span class="lineNum">     277</span>              :     static void setStaffConfig(Score* score, Staff* staff, const StaffConfig&amp; config, const Fraction&amp; tick = Fraction(0, 1));</span>
-<span id="L278"><span class="lineNum">     278</span>              :     static void setSharedPartEnabled(Score* score, Part* part, bool enabled);</span>
-<span id="L279"><span class="lineNum">     279</span>              : </span>
-<span id="L280"><span class="lineNum">     280</span>              :     static void removeParts(Score* score, const std::vector&lt;Part*&gt;&amp; parts);</span>
-<span id="L281"><span class="lineNum">     281</span>              :     static void removeStaves(Score* score, const std::vector&lt;Staff*&gt;&amp; staves);</span>
-<span id="L282"><span class="lineNum">     282</span>              : </span>
-<span id="L283"><span class="lineNum">     283</span>              :     struct SystemObjectsMove {</span>
-<span id="L284"><span class="lineNum">     284</span>              :         Staff* staff = nullptr;</span>
-<span id="L285"><span class="lineNum">     285</span>              :         Staff* destination = nullptr;</span>
-<span id="L286"><span class="lineNum">     286</span>              :         bool belowBottomStaff = false;</span>
-<span id="L287"><span class="lineNum">     287</span>              :     };</span>
-<span id="L288"><span class="lineNum">     288</span>              : </span>
-<span id="L289"><span class="lineNum">     289</span>              :     static bool reorderPartsChangesScore(const Score* score, const std::vector&lt;Part*&gt;&amp; parts, const std::vector&lt;SystemObjectsMove&gt;&amp; moves);</span>
-<span id="L290"><span class="lineNum">     290</span>              :     static void reorderParts(Score* score, const std::vector&lt;Part*&gt;&amp; parts, const std::vector&lt;SystemObjectsMove&gt;&amp; moves);</span>
-<span id="L291"><span class="lineNum">     291</span>              : </span>
-<span id="L292"><span class="lineNum">     292</span>              :     static bool reorderStavesChangesScore(const std::vector&lt;Staff*&gt;&amp; staves);</span>
-<span id="L293"><span class="lineNum">     293</span>              :     static void reorderStaves(Score* score, const std::vector&lt;Staff*&gt;&amp; staves);</span>
-<span id="L294"><span class="lineNum">     294</span>              : </span>
-<span id="L295"><span class="lineNum">     295</span>              :     static void moveParts(Score* score, const std::vector&lt;Part*&gt;&amp; sourceParts, Part* destinationPart, bool insertAfter);</span>
-<span id="L296"><span class="lineNum">     296</span>              :     static void moveStaves(Score* score, const std::vector&lt;Staff*&gt;&amp; sourceStaves, Staff* destinationStaff, bool insertAfter);</span>
-<span id="L297"><span class="lineNum">     297</span>              : </span>
-<span id="L298"><span class="lineNum">     298</span>              :     static Staff* appendStaff(Score* score, Part* destinationPart);</span>
-<span id="L299"><span class="lineNum">     299</span>              :     static void appendStaff(Score* score, Staff* staff, Part* destinationPart, bool createRests = true);</span>
-<span id="L300"><span class="lineNum">     300</span>              : </span>
-<span id="L301"><span class="lineNum">     301</span>              :     static Staff* appendLinkedStaff(Score* score, Staff* sourceStaff, Part* destinationPart);</span>
-<span id="L302"><span class="lineNum">     302</span>              :     static void appendLinkedStaff(Score* score, Staff* staff, Staff* sourceStaff, Part* destinationPart);</span>
-<span id="L303"><span class="lineNum">     303</span>              : </span>
-<span id="L304"><span class="lineNum">     304</span>              :     static void insertPart(Score* score, const InstrumentTemplate* templ, size_t index);</span>
-<span id="L305"><span class="lineNum">     305</span>              :     static void insertPart(Score* score, Part* part, size_t index);</span>
+<span id="L249"><span class="lineNum">     249</span>              : class Transaction;</span>
+<span id="L250"><span class="lineNum">     250</span>              : </span>
+<span id="L251"><span class="lineNum">     251</span>              : class EditPart</span>
+<span id="L252"><span class="lineNum">     252</span>              : {</span>
+<span id="L253"><span class="lineNum">     253</span>              : public:</span>
+<span id="L254"><span class="lineNum">     254</span>              :     struct PartEntry {</span>
+<span id="L255"><span class="lineNum">     255</span>              :         Part* part = nullptr;                                   // existing</span>
+<span id="L256"><span class="lineNum">     256</span>              :         const InstrumentTemplate* instrumentTemplate = nullptr; // new</span>
+<span id="L257"><span class="lineNum">     257</span>              :         bool isSoloist = false;</span>
+<span id="L258"><span class="lineNum">     258</span>              :     };</span>
+<span id="L259"><span class="lineNum">     259</span>              : </span>
+<span id="L260"><span class="lineNum">     260</span>              :     struct SetPartsResult {</span>
+<span id="L261"><span class="lineNum">     261</span>              :         std::vector&lt;Part*&gt; addedParts;</span>
+<span id="L262"><span class="lineNum">     262</span>              :         std::vector&lt;Part*&gt; removedParts;</span>
+<span id="L263"><span class="lineNum">     263</span>              :     };</span>
+<span id="L264"><span class="lineNum">     264</span>              : </span>
+<span id="L265"><span class="lineNum">     265</span>              :     static SetPartsResult setParts(Transaction&amp; tx, Score* score, const std::vector&lt;PartEntry&gt;&amp; entries, const ScoreOrder&amp; order);</span>
+<span id="L266"><span class="lineNum">     266</span>              :     static void setScoreOrder(Transaction&amp; tx, Score* score, const ScoreOrder&amp; order);</span>
+<span id="L267"><span class="lineNum">     267</span>              : </span>
+<span id="L268"><span class="lineNum">     268</span>              :     static void setPartVisible(Transaction&amp; tx, Score* score, Part* part, bool visible);</span>
+<span id="L269"><span class="lineNum">     269</span>              :     static bool setVoiceVisible(Transaction&amp; tx, Score* score, Staff* staff, int voiceIndex, bool visible);</span>
+<span id="L270"><span class="lineNum">     270</span>              :     static void setStaffVisible(Transaction&amp; tx, Score* score, Staff* staff, bool visible);</span>
+<span id="L271"><span class="lineNum">     271</span>              :     static void setPartSharpFlat(Transaction&amp; tx, Score* score, Part* part, PreferSharpFlat sharpFlat);</span>
+<span id="L272"><span class="lineNum">     272</span>              :     static void setInstrumentName(Transaction&amp; tx, Score* score, Part* part, const Fraction&amp; tick, const String&amp; name);</span>
+<span id="L273"><span class="lineNum">     273</span>              :     static void setInstrumentAbbreviature(Transaction&amp; tx, Score* score, Part* part, const Fraction&amp; tick, const String&amp; abbreviature);</span>
+<span id="L274"><span class="lineNum">     274</span>              :     static bool setInstrumentGroupNameOptions(Transaction&amp; tx, Score* score, Part* part, const Fraction&amp; tick, bool useCustom,</span>
+<span id="L275"><span class="lineNum">     275</span>              :                                               const String&amp; longName, const String&amp; shortName);</span>
+<span id="L276"><span class="lineNum">     276</span>              :     static void setInstrumentNumber(Transaction&amp; tx, Score* score, Part* part, const Fraction&amp; tick, int number);</span>
+<span id="L277"><span class="lineNum">     277</span>              :     static void setStaffType(Transaction&amp; tx, Score* score, Staff* staff, StaffTypes typeId);</span>
+<span id="L278"><span class="lineNum">     278</span>              :     static void setStaffConfig(Transaction&amp; tx, Score* score, Staff* staff, const StaffConfig&amp; config, const Fraction&amp; tick = Fraction());</span>
+<span id="L279"><span class="lineNum">     279</span>              :     static void setSharedPartEnabled(Transaction&amp; tx, Score* score, Part* part, bool enabled);</span>
+<span id="L280"><span class="lineNum">     280</span>              : </span>
+<span id="L281"><span class="lineNum">     281</span>              :     static void removeParts(Transaction&amp; tx, Score* score, const std::vector&lt;Part*&gt;&amp; parts);</span>
+<span id="L282"><span class="lineNum">     282</span>              :     static void removeStaves(Transaction&amp; tx, Score* score, const std::vector&lt;Staff*&gt;&amp; staves);</span>
+<span id="L283"><span class="lineNum">     283</span>              : </span>
+<span id="L284"><span class="lineNum">     284</span>              :     struct SystemObjectsMove {</span>
+<span id="L285"><span class="lineNum">     285</span>              :         Staff* staff = nullptr;</span>
+<span id="L286"><span class="lineNum">     286</span>              :         Staff* destination = nullptr;</span>
+<span id="L287"><span class="lineNum">     287</span>              :         bool belowBottomStaff = false;</span>
+<span id="L288"><span class="lineNum">     288</span>              :     };</span>
+<span id="L289"><span class="lineNum">     289</span>              : </span>
+<span id="L290"><span class="lineNum">     290</span>              :     //! A part and its shared part afterwards</span>
+<span id="L291"><span class="lineNum">     291</span>              :     struct PartPlacement {</span>
+<span id="L292"><span class="lineNum">     292</span>              :         Part* part = nullptr;</span>
+<span id="L293"><span class="lineNum">     293</span>              :         SharedPart* sharedPart = nullptr; // nullptr: not in a shared part</span>
+<span id="L294"><span class="lineNum">     294</span>              :     };</span>
+<span id="L295"><span class="lineNum">     295</span>              : </span>
+<span id="L296"><span class="lineNum">     296</span>              :     //! The parts' new order and shared parts, and where their system markings go</span>
+<span id="L297"><span class="lineNum">     297</span>              :     struct PartsLayout {</span>
+<span id="L298"><span class="lineNum">     298</span>              :         std::vector&lt;PartPlacement&gt; parts;</span>
+<span id="L299"><span class="lineNum">     299</span>              :         std::vector&lt;SystemObjectsMove&gt; systemObjects;</span>
+<span id="L300"><span class="lineNum">     300</span>              :     };</span>
+<span id="L301"><span class="lineNum">     301</span>              : </span>
+<span id="L302"><span class="lineNum">     302</span>              :     //! A non-empty layout must list each of the score's parts exactly once</span>
+<span id="L303"><span class="lineNum">     303</span>              :     static bool isValidPartsLayout(const Score* score, const PartsLayout&amp; layout);</span>
+<span id="L304"><span class="lineNum">     304</span>              :     static bool partsLayoutChangesScore(const Score* score, const PartsLayout&amp; layout);</span>
+<span id="L305"><span class="lineNum">     305</span>              :     static void setPartsLayout(Transaction&amp; tx, Score* score, const PartsLayout&amp; layout);</span>
 <span id="L306"><span class="lineNum">     306</span>              : </span>
-<span id="L307"><span class="lineNum">     307</span>              :     static void replacePart(Score* score, Part* oldPart, const InstrumentTemplate* templ);</span>
-<span id="L308"><span class="lineNum">     308</span>              :     static void replacePart(Score* score, Part* oldPart, Part* newPart);</span>
+<span id="L307"><span class="lineNum">     307</span>              :     static bool reorderStavesChangesScore(const std::vector&lt;Staff*&gt;&amp; staves);</span>
+<span id="L308"><span class="lineNum">     308</span>              :     static void reorderStaves(Transaction&amp; tx, Score* score, const std::vector&lt;Staff*&gt;&amp; staves);</span>
 <span id="L309"><span class="lineNum">     309</span>              : </span>
-<span id="L310"><span class="lineNum">     310</span>              :     static bool replaceInstrument(Score* score, Part* part, const Fraction&amp; tick, const Instrument&amp; newInstrument,</span>
-<span id="L311"><span class="lineNum">     311</span>              :                                   const StaffType* newStaffType = nullptr);</span>
-<span id="L312"><span class="lineNum">     312</span>              :     static void replacePartInstrument(Score* score, Part* part, const Instrument&amp; newInstrument, const StaffType* newStaffType = nullptr);</span>
-<span id="L313"><span class="lineNum">     313</span>              :     static void replaceDrumset(Score* score, Part* part, const Fraction&amp; tick, const Drumset&amp; newDrumset, bool undoable = true);</span>
-<span id="L314"><span class="lineNum">     314</span>              : </span>
-<span id="L315"><span class="lineNum">     315</span>              :     static void addSystemObjects(Score* score, const std::vector&lt;Staff*&gt;&amp; staves);</span>
-<span id="L316"><span class="lineNum">     316</span>              :     static void removeSystemObjects(Score* score, const std::vector&lt;Staff*&gt;&amp; staves);</span>
-<span id="L317"><span class="lineNum">     317</span>              :     static void moveSystemObjects(Score* score, Staff* sourceStaff, Staff* destinationStaff);</span>
-<span id="L318"><span class="lineNum">     318</span>              : </span>
-<span id="L319"><span class="lineNum">     319</span>              : private:</span>
-<span id="L320"><span class="lineNum">     320</span>              :     static bool doReplaceInstrument(Score* score, Part* part, const Fraction&amp; tick, const Instrument&amp; newInstrument,</span>
-<span id="L321"><span class="lineNum">     321</span>              :                                     const StaffType* newStaffType);</span>
-<span id="L322"><span class="lineNum">     322</span>              :     static void renameExcerptOfPart(MasterScore* master, const Part* part);</span>
-<span id="L323"><span class="lineNum">     323</span>              : </span>
-<span id="L324"><span class="lineNum">     324</span>              :     static void doRemoveParts(Score* score, const std::vector&lt;Part*&gt;&amp; parts);</span>
-<span id="L325"><span class="lineNum">     325</span>              :     static void doRemoveStaves(Score* score, const std::vector&lt;Staff*&gt;&amp; staves);</span>
-<span id="L326"><span class="lineNum">     326</span>              :     static void doReorderParts(Score* score, const std::vector&lt;Part*&gt;&amp; parts, const std::vector&lt;SystemObjectsMove&gt;&amp; moves);</span>
-<span id="L327"><span class="lineNum">     327</span>              : </span>
-<span id="L328"><span class="lineNum">     328</span>              :     static void doAppendStaff(Score* score, Staff* staff, Part* destinationPart, bool createRests);</span>
-<span id="L329"><span class="lineNum">     329</span>              :     static void doAppendLinkedStaff(Score* score, Staff* staff, Staff* sourceStaff, Part* destinationPart);</span>
-<span id="L330"><span class="lineNum">     330</span>              : </span>
-<span id="L331"><span class="lineNum">     331</span>              :     static void doReplaceDrumset(Score* score, Part* part, const Fraction&amp; tick, const Drumset&amp; newDrumset, bool undoable);</span>
-<span id="L332"><span class="lineNum">     332</span>              : </span>
-<span id="L333"><span class="lineNum">     333</span>              :     static void removeLocksContainingMMRests(Score* score);</span>
-<span id="L334"><span class="lineNum">     334</span>              : </span>
-<span id="L335"><span class="lineNum">     335</span>              :     static void appendStaves(Score* score, Part* part, const InstrumentTemplate&amp; templ, const KeyList&amp; keyList);</span>
-<span id="L336"><span class="lineNum">     336</span>              :     static Part* insertPart(Score* score, const InstrumentTemplate&amp; templ, size_t index, const KeyList&amp; keyList);</span>
-<span id="L337"><span class="lineNum">     337</span>              :     static void doInsertPart(Score* score, Part* part, size_t index);</span>
-<span id="L338"><span class="lineNum">     338</span>              :     static void insertPartCopy(Score* score, Part* part, size_t index);</span>
+<span id="L310"><span class="lineNum">     310</span>              :     static void moveParts(Transaction&amp; tx, Score* score, const std::vector&lt;Part*&gt;&amp; sourceParts, Part* destinationPart, bool insertAfter);</span>
+<span id="L311"><span class="lineNum">     311</span>              : </span>
+<span id="L312"><span class="lineNum">     312</span>              :     static void movePartsToSharedPart(Transaction&amp; tx, Score* score, const std::vector&lt;Part*&gt;&amp; parts, SharedPart* sharedPart);</span>
+<span id="L313"><span class="lineNum">     313</span>              :     static SharedPart* movePartsToNewSharedPart(Transaction&amp; tx, Score* score, const std::vector&lt;Part*&gt;&amp; parts);</span>
+<span id="L314"><span class="lineNum">     314</span>              :     static void moveStaves(Transaction&amp; tx, Score* score, const std::vector&lt;Staff*&gt;&amp; sourceStaves, Staff* destinationStaff,</span>
+<span id="L315"><span class="lineNum">     315</span>              :                            bool insertAfter);</span>
+<span id="L316"><span class="lineNum">     316</span>              : </span>
+<span id="L317"><span class="lineNum">     317</span>              :     static Staff* appendStaff(Transaction&amp; tx, Score* score, Part* destinationPart);</span>
+<span id="L318"><span class="lineNum">     318</span>              :     static void appendStaff(Transaction&amp; tx, Score* score, Staff* staff, Part* destinationPart, bool createRests = true);</span>
+<span id="L319"><span class="lineNum">     319</span>              : </span>
+<span id="L320"><span class="lineNum">     320</span>              :     static Staff* appendLinkedStaff(Transaction&amp; tx, Score* score, Staff* sourceStaff, Part* destinationPart);</span>
+<span id="L321"><span class="lineNum">     321</span>              :     static void appendLinkedStaff(Transaction&amp; tx, Score* score, Staff* staff, Staff* sourceStaff, Part* destinationPart);</span>
+<span id="L322"><span class="lineNum">     322</span>              : </span>
+<span id="L323"><span class="lineNum">     323</span>              :     static void insertPart(Transaction&amp; tx, Score* score, const InstrumentTemplate* templ, size_t index);</span>
+<span id="L324"><span class="lineNum">     324</span>              :     static void insertPart(Transaction&amp; tx, Score* score, Part* part, size_t index);</span>
+<span id="L325"><span class="lineNum">     325</span>              : </span>
+<span id="L326"><span class="lineNum">     326</span>              :     static void replacePart(Transaction&amp; tx, Score* score, Part* oldPart, const InstrumentTemplate* templ);</span>
+<span id="L327"><span class="lineNum">     327</span>              :     static void replacePart(Transaction&amp; tx, Score* score, Part* oldPart, Part* newPart);</span>
+<span id="L328"><span class="lineNum">     328</span>              : </span>
+<span id="L329"><span class="lineNum">     329</span>              :     static bool replaceInstrument(Transaction&amp; tx, Score* score, Part* part, const Fraction&amp; tick, const Instrument&amp; newInstrument,</span>
+<span id="L330"><span class="lineNum">     330</span>              :                                   const StaffType* newStaffType = nullptr);</span>
+<span id="L331"><span class="lineNum">     331</span>              :     static void replacePartInstrument(Transaction&amp; tx, Score* score, Part* part, const Instrument&amp; newInstrument,</span>
+<span id="L332"><span class="lineNum">     332</span>              :                                       const StaffType* newStaffType = nullptr);</span>
+<span id="L333"><span class="lineNum">     333</span>              :     static void replaceDrumset(Transaction&amp; tx, Score* score, Part* part, const Fraction&amp; tick, const Drumset&amp; newDrumset,</span>
+<span id="L334"><span class="lineNum">     334</span>              :                                bool undoable = true);</span>
+<span id="L335"><span class="lineNum">     335</span>              : </span>
+<span id="L336"><span class="lineNum">     336</span>              :     static void addSystemObjects(Transaction&amp; tx, Score* score, const std::vector&lt;Staff*&gt;&amp; staves);</span>
+<span id="L337"><span class="lineNum">     337</span>              :     static void removeSystemObjects(Transaction&amp; tx, Score* score, const std::vector&lt;Staff*&gt;&amp; staves);</span>
+<span id="L338"><span class="lineNum">     338</span>              :     static void moveSystemObjects(Transaction&amp; tx, Score* score, Staff* sourceStaff, Staff* destinationStaff);</span>
 <span id="L339"><span class="lineNum">     339</span>              : </span>
-<span id="L340"><span class="lineNum">     340</span>              :     static std::vector&lt;Part*&gt; removeMissingParts(Score* score, const std::vector&lt;PartEntry&gt;&amp; entries);</span>
-<span id="L341"><span class="lineNum">     341</span>              :     static std::vector&lt;Part*&gt; insertNewParts(Score* score, const std::vector&lt;PartEntry&gt;&amp; entries, const KeyList&amp; keyList);</span>
-<span id="L342"><span class="lineNum">     342</span>              :     static std::vector&lt;int&gt; resolveInstrumentNumbers(const std::vector&lt;PartEntry&gt;&amp; entries);</span>
-<span id="L343"><span class="lineNum">     343</span>              :     static void updateSoloist(Score* score, const std::vector&lt;PartEntry&gt;&amp; entries);</span>
-<span id="L344"><span class="lineNum">     344</span>              :     static void sortParts(Score* score, const std::vector&lt;PartEntry&gt;&amp; entries);</span>
-<span id="L345"><span class="lineNum">     345</span>              :     static void sortStaves(Score* score, const std::vector&lt;Part*&gt;&amp; orderedParts);</span>
-<span id="L346"><span class="lineNum">     346</span>              : </span>
-<span id="L347"><span class="lineNum">     347</span>              :     static void deleteExcerptsOfParts(MasterScore* master, const std::vector&lt;Part*&gt;&amp; parts);</span>
-<span id="L348"><span class="lineNum">     348</span>              :     static bool moveSystemObjects(Score* score, std::vector&lt;std::pair&lt;staff_idx_t, Staff*&gt; &gt; moves, bool belowBottomStaff);</span>
-<span id="L349"><span class="lineNum">     349</span>              : };</span>
-<span id="L350"><span class="lineNum">     350</span>              : }</span>
+<span id="L340"><span class="lineNum">     340</span>              : private:</span>
+<span id="L341"><span class="lineNum">     341</span>              :     static bool doReplaceInstrument(Transaction&amp; tx, Score* score, Part* part, const Fraction&amp; tick, const Instrument&amp; newInstrument,</span>
+<span id="L342"><span class="lineNum">     342</span>              :                                     const StaffType* newStaffType);</span>
+<span id="L343"><span class="lineNum">     343</span>              :     static void renameExcerptOfPart(Transaction&amp; tx, MasterScore* master, const Part* part);</span>
+<span id="L344"><span class="lineNum">     344</span>              : </span>
+<span id="L345"><span class="lineNum">     345</span>              :     static void doRemoveParts(Transaction&amp; tx, Score* score, const std::vector&lt;Part*&gt;&amp; parts);</span>
+<span id="L346"><span class="lineNum">     346</span>              :     static void doRemoveStaves(Transaction&amp; tx, Score* score, const std::vector&lt;Staff*&gt;&amp; staves);</span>
+<span id="L347"><span class="lineNum">     347</span>              :     static void doReorderParts(Transaction&amp; tx, Score* score, const std::vector&lt;Part*&gt;&amp; parts, const std::vector&lt;SystemObjectsMove&gt;&amp; moves);</span>
+<span id="L348"><span class="lineNum">     348</span>              : </span>
+<span id="L349"><span class="lineNum">     349</span>              :     static void doAppendStaff(Transaction&amp; tx, Score* score, Staff* staff, Part* destinationPart, bool createRests);</span>
+<span id="L350"><span class="lineNum">     350</span>              :     static void doAppendLinkedStaff(Transaction&amp; tx, Score* score, Staff* staff, Staff* sourceStaff, Part* destinationPart);</span>
+<span id="L351"><span class="lineNum">     351</span>              : </span>
+<span id="L352"><span class="lineNum">     352</span>              :     static void doReplaceDrumset(Transaction&amp; tx, Score* score, Part* part, const Fraction&amp; tick, const Drumset&amp; newDrumset, bool undoable);</span>
+<span id="L353"><span class="lineNum">     353</span>              : </span>
+<span id="L354"><span class="lineNum">     354</span>              :     static void removeLocksContainingMMRests(Transaction&amp; tx, Score* score);</span>
+<span id="L355"><span class="lineNum">     355</span>              : </span>
+<span id="L356"><span class="lineNum">     356</span>              :     static void appendStaves(Transaction&amp; tx, Score* score, Part* part, const InstrumentTemplate&amp; templ, const KeyList&amp; keyList);</span>
+<span id="L357"><span class="lineNum">     357</span>              :     static Part* insertPart(Transaction&amp; tx, Score* score, const InstrumentTemplate&amp; templ, size_t index, const KeyList&amp; keyList);</span>
+<span id="L358"><span class="lineNum">     358</span>              :     static void doInsertPart(Transaction&amp; tx, Score* score, Part* part, size_t index);</span>
+<span id="L359"><span class="lineNum">     359</span>              :     static void insertPartCopy(Transaction&amp; tx, Score* score, Part* part, size_t index);</span>
+<span id="L360"><span class="lineNum">     360</span>              : </span>
+<span id="L361"><span class="lineNum">     361</span>              :     static std::vector&lt;Part*&gt; removeMissingParts(Transaction&amp; tx, Score* score, const std::vector&lt;PartEntry&gt;&amp; entries);</span>
+<span id="L362"><span class="lineNum">     362</span>              :     static std::vector&lt;Part*&gt; insertNewParts(Transaction&amp; tx, Score* score, const std::vector&lt;PartEntry&gt;&amp; entries, const KeyList&amp; keyList);</span>
+<span id="L363"><span class="lineNum">     363</span>              :     static std::vector&lt;int&gt; resolveInstrumentNumbers(const std::vector&lt;PartEntry&gt;&amp; entries);</span>
+<span id="L364"><span class="lineNum">     364</span>              :     static void updateSoloist(Transaction&amp; tx, Score* score, const std::vector&lt;PartEntry&gt;&amp; entries);</span>
+<span id="L365"><span class="lineNum">     365</span>              :     static void sortParts(Transaction&amp; tx, Score* score, const std::vector&lt;PartEntry&gt;&amp; entries);</span>
+<span id="L366"><span class="lineNum">     366</span>              :     static void sortStaves(Transaction&amp; tx, Score* score, const std::vector&lt;Part*&gt;&amp; orderedParts);</span>
+<span id="L367"><span class="lineNum">     367</span>              :     static void pushSortStaves(Transaction&amp; tx, Score* score, const std::vector&lt;staff_idx_t&gt;&amp; staffMapping);</span>
+<span id="L368"><span class="lineNum">     368</span>              : </span>
+<span id="L369"><span class="lineNum">     369</span>              :     static void deleteExcerptsOfParts(Transaction&amp; tx, MasterScore* master, const std::vector&lt;Part*&gt;&amp; parts);</span>
+<span id="L370"><span class="lineNum">     370</span>              :     static bool moveSystemObjects(Transaction&amp; tx, Score* score, std::vector&lt;std::pair&lt;staff_idx_t, Staff*&gt; &gt; moves, bool belowBottomStaff);</span>
+<span id="L371"><span class="lineNum">     371</span>              : };</span>
+<span id="L372"><span class="lineNum">     372</span>              : }</span>
         </pre>
               </td>
             </tr>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -97,13 +97,13 @@
 <span id="L39"><span class="lineNum">      39</span>              : inline double _compare_float_epsilon(COMPARE_FLOAT_EPSILON);</span>
 <span id="L40"><span class="lineNum">      40</span>              : inline double _compare_float_null(COMPARE_FLOAT_NULL);</span>
 <span id="L41"><span class="lineNum">      41</span>              : </span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC tlaBgGNC">        5064 : inline constexpr int _pow10(int power)</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC tlaBgGNC">        5112 : inline constexpr int _pow10(int power)</span></span>
 <span id="L43"><span class="lineNum">      43</span>              : {</span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">        5064 :     int result = 1;</span></span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">       11308 :     for (int i = 0; i &lt; power; ++i) {</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">        6244 :         result *= 10;</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">        5112 :     int result = 1;</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">       11452 :     for (int i = 0; i &lt; power; ++i) {</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">        6340 :         result *= 10;</span></span>
 <span id="L47"><span class="lineNum">      47</span>              :     }</span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">        5064 :     return result;</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">        5112 :     return result;</span></span>
 <span id="L49"><span class="lineNum">      49</span>              : }</span>
 <span id="L50"><span class="lineNum">      50</span>              : </span>
 <span id="L51"><span class="lineNum">      51</span> <span class="tlaUNC tlaBgUNC">           0 : inline void SetCompareDoublePrecision(int prec)</span></span>
@@ -143,9 +143,9 @@
 <span id="L85"><span class="lineNum">      85</span>              :     SetDefaultCompareFloatPrecision();</span>
 <span id="L86"><span class="lineNum">      86</span>              : }</span>
 <span id="L87"><span class="lineNum">      87</span>              : </span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC tlaBgGNC">     2012058 : inline bool RealIsEqual(double p1, double p2)</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC tlaBgGNC">     2266233 : inline bool RealIsEqual(double p1, double p2)</span></span>
 <span id="L89"><span class="lineNum">      89</span>              : {</span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">     2012058 :     return std::abs(p1 - p2) * _compare_double_epsilon &lt;= std::min(std::abs(p1), std::abs(p2));</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">     2266233 :     return std::abs(p1 - p2) * _compare_double_epsilon &lt;= std::min(std::abs(p1), std::abs(p2));</span></span>
 <span id="L91"><span class="lineNum">      91</span>              : }</span>
 <span id="L92"><span class="lineNum">      92</span>              : </span>
 <span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">         252 : inline bool RealIsEqual(float p1, float p2)</span></span>
@@ -183,14 +183,14 @@
 <span id="L125"><span class="lineNum">     125</span>              :     return true;</span>
 <span id="L126"><span class="lineNum">     126</span>              : }</span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">      648867 : inline bool RealIsEqualOrMore(double p1, double p2)</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">      691138 : inline bool RealIsEqualOrMore(double p1, double p2)</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : {</span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">      648867 :     return p1 &gt; p2 || RealIsEqual(p1, p2);</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">      691138 :     return p1 &gt; p2 || RealIsEqual(p1, p2);</span></span>
 <span id="L131"><span class="lineNum">     131</span>              : }</span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">      487392 : inline bool RealIsEqualOrLess(double p1, double p2)</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">      524171 : inline bool RealIsEqualOrLess(double p1, double p2)</span></span>
 <span id="L134"><span class="lineNum">     134</span>              : {</span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">      487392 :     return p1 &lt; p2 || RealIsEqual(p1, p2);</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">      524171 :     return p1 &lt; p2 || RealIsEqual(p1, p2);</span></span>
 <span id="L136"><span class="lineNum">     136</span>              : }</span>
 <span id="L137"><span class="lineNum">     137</span>              : </span>
 <span id="L138"><span class="lineNum">     138</span> <span class="tlaUNC tlaBgUNC">           0 : inline bool RealIsEqualOrMore(float p1, float p2)</span></span>
@@ -203,9 +203,9 @@
 <span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">          58 :     return p1 &lt; p2 || RealIsEqual(p1, p2);</span></span>
 <span id="L146"><span class="lineNum">     146</span>              : }</span>
 <span id="L147"><span class="lineNum">     147</span>              : </span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">     1396537 : inline bool RealIsNull(double d)</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">     1516644 : inline bool RealIsNull(double d)</span></span>
 <span id="L149"><span class="lineNum">     149</span>              : {</span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">     1396537 :     return std::abs(d) &lt;= _compare_double_null;</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">     1516644 :     return std::abs(d) &lt;= _compare_double_null;</span></span>
 <span id="L151"><span class="lineNum">     151</span>              : }</span>
 <span id="L152"><span class="lineNum">     152</span>              : </span>
 <span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">        2395 : inline bool RealIsNull(float d)</span></span>
@@ -213,15 +213,15 @@
 <span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">        2395 :     return std::fabs(d) &lt;= _compare_float_null;</span></span>
 <span id="L156"><span class="lineNum">     156</span>              : }</span>
 <span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        3544 : inline double RealRound(double value, int prec)</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">        3592 : inline double RealRound(double value, int prec)</span></span>
 <span id="L159"><span class="lineNum">     159</span>              : {</span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        3544 :     int round = _pow10(prec);</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        3544 :     return std::floor(value * round + 0.5) / round;</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">        3592 :     int round = _pow10(prec);</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">        3592 :     return std::floor(value * round + 0.5) / round;</span></span>
 <span id="L162"><span class="lineNum">     162</span>              : }</span>
 <span id="L163"><span class="lineNum">     163</span>              : </span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">        3439 : inline double RealRound(float value, int prec)</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">        3487 : inline double RealRound(float value, int prec)</span></span>
 <span id="L165"><span class="lineNum">     165</span>              : {</span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">        3439 :     return RealRound(static_cast&lt;double&gt;(value), prec);</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">        3487 :     return RealRound(static_cast&lt;double&gt;(value), prec);</span></span>
 <span id="L167"><span class="lineNum">     167</span>              : }</span>
 <span id="L168"><span class="lineNum">     168</span>              : </span>
 <span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">        1520 : inline double RealFloor(double value, int prec)</span></span>

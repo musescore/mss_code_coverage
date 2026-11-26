@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -123,12 +123,12 @@
 <span id="L65"><span class="lineNum">      65</span>              : static const Color UNLINKED_ITEM_COLOR = &quot;#FF9300&quot;;</span>
 <span id="L66"><span class="lineNum">      66</span>              : static const Color DEFAULT_DISPLAYED_INVERTED_COLOR = &quot;#CBCBCD&quot;;</span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">          18 : EngravingConfiguration::EngravingConfiguration()</span></span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">          18 :     : m_cachedDisplayedDefaultColor(Color::BLACK),</span></span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">         216 :     m_cachedInvertedDisplayedDefaultColor(DEFAULT_DISPLAYED_INVERTED_COLOR)</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">         198 : {}</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC tlaBgGNC">          19 : EngravingConfiguration::EngravingConfiguration()</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">          19 :     : m_cachedDisplayedDefaultColor(Color::BLACK),</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">         228 :     m_cachedInvertedDisplayedDefaultColor(DEFAULT_DISPLAYED_INVERTED_COLOR)</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">         209 : {}</span></span>
 <span id="L72"><span class="lineNum">      72</span>              : </span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          18 : void EngravingConfiguration::init()</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          19 : void EngravingConfiguration::init()</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : {</span>
 <span id="L75"><span class="lineNum">      75</span>              :     static const Color DEFAULT_VOICE_COLORS[VOICES + 1] {</span>
 <span id="L76"><span class="lineNum">      76</span>              :         &quot;#0065BF&quot;,</span>
@@ -136,118 +136,118 @@
 <span id="L78"><span class="lineNum">      78</span>              :         &quot;#C53F00&quot;,</span>
 <span id="L79"><span class="lineNum">      79</span>              :         &quot;#C31989&quot;,</span>
 <span id="L80"><span class="lineNum">      80</span>              :         &quot;#6038FC&quot;, // &quot;all voices&quot;</span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">          18 :     };</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">          19 :     };</span></span>
 <span id="L82"><span class="lineNum">      82</span>              : </span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">          18 :     settings()-&gt;setDefaultValue(DEFAULT_STYLE_FILE_PATH, Val(muse::io::path_t()));</span></span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">          18 :     settings()-&gt;valueChanged(DEFAULT_STYLE_FILE_PATH).onReceive(this, [this](const Val&amp; val) {</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">          19 :     settings()-&gt;setDefaultValue(DEFAULT_STYLE_FILE_PATH, Val(muse::io::path_t()));</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">          19 :     settings()-&gt;valueChanged(DEFAULT_STYLE_FILE_PATH).onReceive(this, [this](const Val&amp; val) {</span></span>
 <span id="L85"><span class="lineNum">      85</span> <span class="tlaUNC tlaBgUNC">           0 :         m_defaultStyleFilePathChanged.send(val.toPath());</span></span>
 <span id="L86"><span class="lineNum">      86</span> <span class="tlaUNC">           0 :     });</span></span>
 <span id="L87"><span class="lineNum">      87</span>              : </span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC tlaBgGNC">          18 :     settings()-&gt;setDefaultValue(PART_STYLE_FILE_PATH, Val(muse::io::path_t()));</span></span>
-<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">          18 :     settings()-&gt;valueChanged(PART_STYLE_FILE_PATH).onReceive(this, [this](const Val&amp; val) {</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC tlaBgGNC">          19 :     settings()-&gt;setDefaultValue(PART_STYLE_FILE_PATH, Val(muse::io::path_t()));</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">          19 :     settings()-&gt;valueChanged(PART_STYLE_FILE_PATH).onReceive(this, [this](const Val&amp; val) {</span></span>
 <span id="L90"><span class="lineNum">      90</span> <span class="tlaUNC tlaBgUNC">           0 :         m_partStyleFilePathChanged.send(val.toPath());</span></span>
 <span id="L91"><span class="lineNum">      91</span> <span class="tlaUNC">           0 :     });</span></span>
 <span id="L92"><span class="lineNum">      92</span>              : </span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">          18 :     settings()-&gt;setDefaultValue(DISPLAYED_DEFAULT_COLOR, Val(defaultColor().toQColor()));</span></span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">          18 :     settings()-&gt;setDescription(DISPLAYED_DEFAULT_COLOR, muse::trc(&quot;engraving&quot;, &quot;Displayed default color&quot;));</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">          18 :     settings()-&gt;setCanBeManuallyEdited(DISPLAYED_DEFAULT_COLOR, true);</span></span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">          18 :     settings()-&gt;valueChanged(DISPLAYED_DEFAULT_COLOR).onReceive(this, [this](const Val&amp; val) {</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">          19 :     settings()-&gt;setDefaultValue(DISPLAYED_DEFAULT_COLOR, Val(defaultColor().toQColor()));</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">          19 :     settings()-&gt;setDescription(DISPLAYED_DEFAULT_COLOR, muse::trc(&quot;engraving&quot;, &quot;Displayed default color&quot;));</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">          19 :     settings()-&gt;setCanBeManuallyEdited(DISPLAYED_DEFAULT_COLOR, true);</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">          19 :     settings()-&gt;valueChanged(DISPLAYED_DEFAULT_COLOR).onReceive(this, [this](const Val&amp; val) {</span></span>
 <span id="L97"><span class="lineNum">      97</span> <span class="tlaUNC tlaBgUNC">           0 :         const Color color = val.toQColor();</span></span>
 <span id="L98"><span class="lineNum">      98</span> <span class="tlaUNC">           0 :         m_cachedDisplayedDefaultColor = color;</span></span>
 <span id="L99"><span class="lineNum">      99</span> <span class="tlaUNC">           0 :         m_displayedDefaultColorChanged.send(false, color);</span></span>
 <span id="L100"><span class="lineNum">     100</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC tlaBgGNC">          18 :     m_cachedDisplayedDefaultColor = settings()-&gt;value(DISPLAYED_DEFAULT_COLOR).toQColor();</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC tlaBgGNC">          19 :     m_cachedDisplayedDefaultColor = settings()-&gt;value(DISPLAYED_DEFAULT_COLOR).toQColor();</span></span>
 <span id="L102"><span class="lineNum">     102</span>              : </span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">          18 :     settings()-&gt;setDefaultValue(INVERTED_DISPLAYED_DEFAULT_COLOR, Val(Color(DEFAULT_DISPLAYED_INVERTED_COLOR).toQColor()));</span></span>
-<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">          36 :     settings()-&gt;setDescription(INVERTED_DISPLAYED_DEFAULT_COLOR,</span></span>
-<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">          36 :                                muse::trc(&quot;engraving&quot;, &quot;Displayed default color when score colors are inverted&quot;));</span></span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">          18 :     settings()-&gt;setCanBeManuallyEdited(INVERTED_DISPLAYED_DEFAULT_COLOR, true);</span></span>
-<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">          18 :     settings()-&gt;valueChanged(INVERTED_DISPLAYED_DEFAULT_COLOR).onReceive(this, [this](const Val&amp; val) {</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">          19 :     settings()-&gt;setDefaultValue(INVERTED_DISPLAYED_DEFAULT_COLOR, Val(Color(DEFAULT_DISPLAYED_INVERTED_COLOR).toQColor()));</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">          38 :     settings()-&gt;setDescription(INVERTED_DISPLAYED_DEFAULT_COLOR,</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">          38 :                                muse::trc(&quot;engraving&quot;, &quot;Displayed default color when score colors are inverted&quot;));</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">          19 :     settings()-&gt;setCanBeManuallyEdited(INVERTED_DISPLAYED_DEFAULT_COLOR, true);</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">          19 :     settings()-&gt;valueChanged(INVERTED_DISPLAYED_DEFAULT_COLOR).onReceive(this, [this](const Val&amp; val) {</span></span>
 <span id="L108"><span class="lineNum">     108</span> <span class="tlaUNC tlaBgUNC">           0 :         const Color color = val.toQColor();</span></span>
 <span id="L109"><span class="lineNum">     109</span> <span class="tlaUNC">           0 :         m_cachedInvertedDisplayedDefaultColor = color;</span></span>
 <span id="L110"><span class="lineNum">     110</span> <span class="tlaUNC">           0 :         m_displayedDefaultColorChanged.send(true, color);</span></span>
 <span id="L111"><span class="lineNum">     111</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC tlaBgGNC">          18 :     m_cachedInvertedDisplayedDefaultColor = settings()-&gt;value(INVERTED_DISPLAYED_DEFAULT_COLOR).toQColor();</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC tlaBgGNC">          19 :     m_cachedInvertedDisplayedDefaultColor = settings()-&gt;value(INVERTED_DISPLAYED_DEFAULT_COLOR).toQColor();</span></span>
 <span id="L113"><span class="lineNum">     113</span>              : </span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">          90 :     for (voice_idx_t voice = 0; voice &lt; VOICES; ++voice) {</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">         216 :         Settings::Key key(&quot;engraving&quot;, &quot;engraving/colors/voice&quot; + std::to_string(voice + 1));</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">          95 :     for (voice_idx_t voice = 0; voice &lt; VOICES; ++voice) {</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">         228 :         Settings::Key key(&quot;engraving&quot;, &quot;engraving/colors/voice&quot; + std::to_string(voice + 1));</span></span>
 <span id="L116"><span class="lineNum">     116</span>              : </span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">          72 :         settings()-&gt;setDefaultValue(key, Val(DEFAULT_VOICE_COLORS[voice].toQColor()));</span></span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">         144 :         settings()-&gt;setDescription(key, muse::qtrc(&quot;engraving&quot;, &quot;Voice %1 color&quot;).arg(voice + 1).toStdString());</span></span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          72 :         settings()-&gt;setCanBeManuallyEdited(key, true);</span></span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">          72 :         settings()-&gt;valueChanged(key).onReceive(this, [this, voice](const Val&amp; val) {</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">          76 :         settings()-&gt;setDefaultValue(key, Val(DEFAULT_VOICE_COLORS[voice].toQColor()));</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">         152 :         settings()-&gt;setDescription(key, muse::qtrc(&quot;engraving&quot;, &quot;Voice %1 color&quot;).arg(voice + 1).toStdString());</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          76 :         settings()-&gt;setCanBeManuallyEdited(key, true);</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">          76 :         settings()-&gt;valueChanged(key).onReceive(this, [this, voice](const Val&amp; val) {</span></span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaUNC tlaBgUNC">           0 :             Color color = val.toQColor();</span></span>
 <span id="L122"><span class="lineNum">     122</span> <span class="tlaUNC">           0 :             VOICE_COLORS[voice].color = color;</span></span>
 <span id="L123"><span class="lineNum">     123</span> <span class="tlaUNC">           0 :             m_voiceColorChanged.send(voice, color);</span></span>
 <span id="L124"><span class="lineNum">     124</span> <span class="tlaUNC">           0 :         });</span></span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC tlaBgGNC">          72 :         Color currentColor = settings()-&gt;value(key).toQColor();</span></span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">          72 :         VOICE_COLORS[voice] = VoiceColor { std::move(key), currentColor };</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          72 :     }</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC tlaBgGNC">          76 :         Color currentColor = settings()-&gt;value(key).toQColor();</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">          76 :         VOICE_COLORS[voice] = VoiceColor { std::move(key), currentColor };</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          76 :     }</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : </span>
 <span id="L130"><span class="lineNum">     130</span>              :     static constexpr int ALL_VOICES_IDX = VOICES;</span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          18 :     settings()-&gt;setDefaultValue(ALL_VOICES_COLOR, Val(DEFAULT_VOICE_COLORS[ALL_VOICES_IDX].toQColor()));</span></span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">          18 :     settings()-&gt;setDescription(ALL_VOICES_COLOR, muse::trc(&quot;engraving&quot;, &quot;All voices color&quot;));</span></span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">          18 :     settings()-&gt;setCanBeManuallyEdited(ALL_VOICES_COLOR, true);</span></span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">          18 :     settings()-&gt;valueChanged(ALL_VOICES_COLOR).onReceive(this, [&amp;](const Val&amp; val) {</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          19 :     settings()-&gt;setDefaultValue(ALL_VOICES_COLOR, Val(DEFAULT_VOICE_COLORS[ALL_VOICES_IDX].toQColor()));</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">          19 :     settings()-&gt;setDescription(ALL_VOICES_COLOR, muse::trc(&quot;engraving&quot;, &quot;All voices color&quot;));</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">          19 :     settings()-&gt;setCanBeManuallyEdited(ALL_VOICES_COLOR, true);</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">          19 :     settings()-&gt;valueChanged(ALL_VOICES_COLOR).onReceive(this, [&amp;](const Val&amp; val) {</span></span>
 <span id="L135"><span class="lineNum">     135</span> <span class="tlaUNC tlaBgUNC">           0 :         Color color = val.toQColor();</span></span>
 <span id="L136"><span class="lineNum">     136</span> <span class="tlaUNC">           0 :         VOICE_COLORS[ALL_VOICES_IDX].color = color;</span></span>
 <span id="L137"><span class="lineNum">     137</span> <span class="tlaUNC">           0 :         m_voiceColorChanged.send(ALL_VOICES_IDX, color);</span></span>
 <span id="L138"><span class="lineNum">     138</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC tlaBgGNC">          18 :     Color currentColor = settings()-&gt;value(ALL_VOICES_COLOR).toQColor();</span></span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">          18 :     VOICE_COLORS[ALL_VOICES_IDX] = VoiceColor { std::move(ALL_VOICES_COLOR), currentColor };</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC tlaBgGNC">          19 :     Color currentColor = settings()-&gt;value(ALL_VOICES_COLOR).toQColor();</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">          19 :     VOICE_COLORS[ALL_VOICES_IDX] = VoiceColor { std::move(ALL_VOICES_COLOR), currentColor };</span></span>
 <span id="L141"><span class="lineNum">     141</span>              : </span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">          18 :     settings()-&gt;setDefaultValue(DYNAMICS_APPLY_TO_ALL_VOICES, Val(true));</span></span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">          18 :     settings()-&gt;valueChanged(DYNAMICS_APPLY_TO_ALL_VOICES).onReceive(this, [this](const Val&amp; val) {</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">          19 :     settings()-&gt;setDefaultValue(DYNAMICS_APPLY_TO_ALL_VOICES, Val(true));</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">          19 :     settings()-&gt;valueChanged(DYNAMICS_APPLY_TO_ALL_VOICES).onReceive(this, [this](const Val&amp; val) {</span></span>
 <span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC tlaBgUNC">           0 :         m_dynamicsApplyToAllVoicesChanged.send(val.toBool());</span></span>
 <span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC">           0 :     });</span></span>
 <span id="L146"><span class="lineNum">     146</span>              : </span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC tlaBgGNC">          18 :     settings()-&gt;setDefaultValue(FRETBOARD_DIAGRAMS_AUTO_UPDATE, Val(true));</span></span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">          18 :     settings()-&gt;valueChanged(FRETBOARD_DIAGRAMS_AUTO_UPDATE).onReceive(this, [this](const Val&amp; val) {</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC tlaBgGNC">          19 :     settings()-&gt;setDefaultValue(FRETBOARD_DIAGRAMS_AUTO_UPDATE, Val(true));</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">          19 :     settings()-&gt;valueChanged(FRETBOARD_DIAGRAMS_AUTO_UPDATE).onReceive(this, [this](const Val&amp; val) {</span></span>
 <span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC tlaBgUNC">           0 :         m_fretboardDiagramsAutoUpdateChanged.send(val.toBool());</span></span>
 <span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 :     });</span></span>
 <span id="L151"><span class="lineNum">     151</span>              : </span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC tlaBgGNC">          18 :     settings()-&gt;setDefaultValue(FRAME_COLOR, Val(Color(&quot;#A0A0A4&quot;).toQColor()));</span></span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">          18 :     settings()-&gt;setDescription(FRAME_COLOR, muse::trc(&quot;engraving&quot;, &quot;Frame color&quot;));</span></span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">          18 :     settings()-&gt;setCanBeManuallyEdited(FRAME_COLOR, true);</span></span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">          18 :     settings()-&gt;valueChanged(FRAME_COLOR).onReceive(nullptr, [this](const Val&amp; val) {</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC tlaBgGNC">          19 :     settings()-&gt;setDefaultValue(FRAME_COLOR, Val(Color(&quot;#A0A0A4&quot;).toQColor()));</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">          19 :     settings()-&gt;setDescription(FRAME_COLOR, muse::trc(&quot;engraving&quot;, &quot;Frame color&quot;));</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">          19 :     settings()-&gt;setCanBeManuallyEdited(FRAME_COLOR, true);</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">          19 :     settings()-&gt;valueChanged(FRAME_COLOR).onReceive(nullptr, [this](const Val&amp; val) {</span></span>
 <span id="L156"><span class="lineNum">     156</span> <span class="tlaUNC tlaBgUNC">           0 :         m_frameColorChanged.send(Color::fromQColor(val.toQColor()));</span></span>
 <span id="L157"><span class="lineNum">     157</span> <span class="tlaUNC">           0 :     });</span></span>
 <span id="L158"><span class="lineNum">     158</span>              : </span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC tlaBgGNC">          18 :     settings()-&gt;setDefaultValue(SCORE_GREY_COLOR, Val(Color(&quot;#A0A0A4&quot;).toQColor()));</span></span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">          18 :     settings()-&gt;setDescription(SCORE_GREY_COLOR, muse::trc(&quot;engraving&quot;, &quot;Score grey color&quot;));</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          18 :     settings()-&gt;setCanBeManuallyEdited(SCORE_GREY_COLOR, false);</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC tlaBgGNC">          19 :     settings()-&gt;setDefaultValue(SCORE_GREY_COLOR, Val(Color(&quot;#A0A0A4&quot;).toQColor()));</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">          19 :     settings()-&gt;setDescription(SCORE_GREY_COLOR, muse::trc(&quot;engraving&quot;, &quot;Score grey color&quot;));</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          19 :     settings()-&gt;setCanBeManuallyEdited(SCORE_GREY_COLOR, false);</span></span>
 <span id="L162"><span class="lineNum">     162</span>              : </span>
-<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">          18 :     settings()-&gt;setDefaultValue(FORMATTING_COLOR, Val(Color(&quot;#C31989&quot;).toQColor()));</span></span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">          18 :     settings()-&gt;setDescription(FORMATTING_COLOR, muse::trc(&quot;engraving&quot;, &quot;Formatting color&quot;));</span></span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">          18 :     settings()-&gt;setCanBeManuallyEdited(FORMATTING_COLOR, true);</span></span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">          18 :     settings()-&gt;valueChanged(FORMATTING_COLOR).onReceive(nullptr, [this](const Val&amp; val) {</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">          19 :     settings()-&gt;setDefaultValue(FORMATTING_COLOR, Val(Color(&quot;#C31989&quot;).toQColor()));</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">          19 :     settings()-&gt;setDescription(FORMATTING_COLOR, muse::trc(&quot;engraving&quot;, &quot;Formatting color&quot;));</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">          19 :     settings()-&gt;setCanBeManuallyEdited(FORMATTING_COLOR, true);</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">          19 :     settings()-&gt;valueChanged(FORMATTING_COLOR).onReceive(nullptr, [this](const Val&amp; val) {</span></span>
 <span id="L167"><span class="lineNum">     167</span> <span class="tlaUNC tlaBgUNC">           0 :         m_formattingColorChanged.send(Color::fromQColor(val.toQColor()));</span></span>
 <span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC">           0 :     });</span></span>
 <span id="L169"><span class="lineNum">     169</span>              : </span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC tlaBgGNC">          18 :     settings()-&gt;setDefaultValue(INVISIBLE_COLOR, Val(Color(&quot;#808080&quot;).toQColor()));</span></span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">          18 :     settings()-&gt;setDescription(INVISIBLE_COLOR, muse::trc(&quot;engraving&quot;, &quot;Invisible color&quot;));</span></span>
-<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">          18 :     settings()-&gt;setCanBeManuallyEdited(INVISIBLE_COLOR, true);</span></span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">          18 :     settings()-&gt;valueChanged(INVISIBLE_COLOR).onReceive(nullptr, [this](const Val&amp; val) {</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC tlaBgGNC">          19 :     settings()-&gt;setDefaultValue(INVISIBLE_COLOR, Val(Color(&quot;#808080&quot;).toQColor()));</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">          19 :     settings()-&gt;setDescription(INVISIBLE_COLOR, muse::trc(&quot;engraving&quot;, &quot;Invisible color&quot;));</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">          19 :     settings()-&gt;setCanBeManuallyEdited(INVISIBLE_COLOR, true);</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">          19 :     settings()-&gt;valueChanged(INVISIBLE_COLOR).onReceive(nullptr, [this](const Val&amp; val) {</span></span>
 <span id="L174"><span class="lineNum">     174</span> <span class="tlaUNC tlaBgUNC">           0 :         m_invisibleColorChanged.send(Color::fromQColor(val.toQColor()));</span></span>
 <span id="L175"><span class="lineNum">     175</span> <span class="tlaUNC">           0 :     });</span></span>
 <span id="L176"><span class="lineNum">     176</span>              : </span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC tlaBgGNC">          18 :     settings()-&gt;setDefaultValue(UNLINKED_COLOR, Val(Color(UNLINKED_ITEM_COLOR).toQColor()));</span></span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">          18 :     settings()-&gt;setDescription(UNLINKED_COLOR, muse::trc(&quot;engraving&quot;, &quot;Desynchronized color&quot;));</span></span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">          18 :     settings()-&gt;setCanBeManuallyEdited(UNLINKED_COLOR, true);</span></span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">          18 :     settings()-&gt;valueChanged(UNLINKED_COLOR).onReceive(nullptr, [this](const Val&amp; val) {</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC tlaBgGNC">          19 :     settings()-&gt;setDefaultValue(UNLINKED_COLOR, Val(Color(UNLINKED_ITEM_COLOR).toQColor()));</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">          19 :     settings()-&gt;setDescription(UNLINKED_COLOR, muse::trc(&quot;engraving&quot;, &quot;Desynchronized color&quot;));</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">          19 :     settings()-&gt;setCanBeManuallyEdited(UNLINKED_COLOR, true);</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">          19 :     settings()-&gt;valueChanged(UNLINKED_COLOR).onReceive(nullptr, [this](const Val&amp; val) {</span></span>
 <span id="L181"><span class="lineNum">     181</span> <span class="tlaUNC tlaBgUNC">           0 :         m_unlinkedColorChanged.send(Color::fromQColor(val.toQColor()));</span></span>
 <span id="L182"><span class="lineNum">     182</span> <span class="tlaUNC">           0 :     });</span></span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC tlaBgGNC">          18 : }</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC tlaBgGNC">          19 : }</span></span>
 <span id="L184"><span class="lineNum">     184</span>              : </span>
 <span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC tlaBgUNC">           0 : muse::io::path_t EngravingConfiguration::appDataPath() const</span></span>
 <span id="L186"><span class="lineNum">     186</span>              : {</span>
 <span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC">           0 :     return globalConfiguration()-&gt;appDataPath();</span></span>
 <span id="L188"><span class="lineNum">     188</span>              : }</span>
 <span id="L189"><span class="lineNum">     189</span>              : </span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">          18 : muse::io::path_t EngravingConfiguration::defaultStyleFilePath() const</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC tlaBgGNC">          19 : muse::io::path_t EngravingConfiguration::defaultStyleFilePath() const</span></span>
 <span id="L191"><span class="lineNum">     191</span>              : {</span>
-<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">          18 :     return settings()-&gt;value(DEFAULT_STYLE_FILE_PATH).toPath();</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">          19 :     return settings()-&gt;value(DEFAULT_STYLE_FILE_PATH).toPath();</span></span>
 <span id="L193"><span class="lineNum">     193</span>              : }</span>
 <span id="L194"><span class="lineNum">     194</span>              : </span>
 <span id="L195"><span class="lineNum">     195</span> <span class="tlaUNC tlaBgUNC">           0 : void EngravingConfiguration::setDefaultStyleFilePath(const muse::io::path_t&amp; path)</span></span>
@@ -260,9 +260,9 @@
 <span id="L202"><span class="lineNum">     202</span> <span class="tlaUNC">           0 :     return m_defaultStyleFilePathChanged;</span></span>
 <span id="L203"><span class="lineNum">     203</span>              : }</span>
 <span id="L204"><span class="lineNum">     204</span>              : </span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC tlaBgGNC">          18 : muse::io::path_t EngravingConfiguration::partStyleFilePath() const</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC tlaBgGNC">          19 : muse::io::path_t EngravingConfiguration::partStyleFilePath() const</span></span>
 <span id="L206"><span class="lineNum">     206</span>              : {</span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          18 :     return settings()-&gt;value(PART_STYLE_FILE_PATH).toPath();</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          19 :     return settings()-&gt;value(PART_STYLE_FILE_PATH).toPath();</span></span>
 <span id="L208"><span class="lineNum">     208</span>              : }</span>
 <span id="L209"><span class="lineNum">     209</span>              : </span>
 <span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC tlaBgUNC">           0 : void EngravingConfiguration::setPartStyleFilePath(const muse::io::path_t&amp; path)</span></span>
@@ -275,16 +275,16 @@
 <span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 :     return m_partStyleFilePathChanged;</span></span>
 <span id="L218"><span class="lineNum">     218</span>              : }</span>
 <span id="L219"><span class="lineNum">     219</span>              : </span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC tlaBgGNC">          18 : static bool defaultPageSizeIsLetter()</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC tlaBgGNC">          19 : static bool defaultPageSizeIsLetter()</span></span>
 <span id="L221"><span class="lineNum">     221</span>              : {</span>
 <span id="L222"><span class="lineNum">     222</span>              :     // try PAPERSIZE environment variable</span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">          18 :     const char* papersize = getenv(&quot;PAPERSIZE&quot;);</span></span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">          18 :     if (papersize) {</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">          19 :     const char* papersize = getenv(&quot;PAPERSIZE&quot;);</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">          19 :     if (papersize) {</span></span>
 <span id="L225"><span class="lineNum">     225</span> <span class="tlaUNC tlaBgUNC">           0 :         return strcmp(papersize, &quot;letter&quot;) == 0;</span></span>
 <span id="L226"><span class="lineNum">     226</span>              :     }</span>
 <span id="L227"><span class="lineNum">     227</span>              : #ifndef NO_QT_SUPPORT</span>
 <span id="L228"><span class="lineNum">     228</span>              :     // try locale</span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC tlaBgGNC">          18 :     switch (QLocale::system().territory()) {</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC tlaBgGNC">          19 :     switch (QLocale::system().territory()) {</span></span>
 <span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC tlaBgUNC">           0 :     case QLocale::UnitedStates:</span></span>
 <span id="L231"><span class="lineNum">     231</span>              :     case QLocale::Canada:</span>
 <span id="L232"><span class="lineNum">     232</span>              :     case QLocale::Mexico:</span>
@@ -296,21 +296,21 @@
 <span id="L238"><span class="lineNum">     238</span>              :     case QLocale::DominicanRepublic:</span>
 <span id="L239"><span class="lineNum">     239</span>              :     case QLocale::Philippines:</span>
 <span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC tlaBgGNC">          18 :     default:</span></span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">          18 :         return false;</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC tlaBgGNC">          19 :     default:</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">          19 :         return false;</span></span>
 <span id="L243"><span class="lineNum">     243</span>              :     }</span>
 <span id="L244"><span class="lineNum">     244</span>              : #else</span>
 <span id="L245"><span class="lineNum">     245</span>              :     return false;</span>
 <span id="L246"><span class="lineNum">     246</span>              : #endif</span>
 <span id="L247"><span class="lineNum">     247</span>              : }</span>
 <span id="L248"><span class="lineNum">     248</span>              : </span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">          18 : SizeF EngravingConfiguration::defaultPageSize() const</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">          19 : SizeF EngravingConfiguration::defaultPageSize() const</span></span>
 <span id="L250"><span class="lineNum">     250</span>              : {</span>
 <span id="L251"><span class="lineNum">     251</span>              :     // Needs to be determined only once, therefore static</span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">          18 :     static SizeF size = SizeF::fromQSizeF(</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">          36 :         QPageSize::size(defaultPageSizeIsLetter() ? QPageSize::Letter : QPageSize::A4, QPageSize::Inch));</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">          19 :     static SizeF size = SizeF::fromQSizeF(</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">          38 :         QPageSize::size(defaultPageSizeIsLetter() ? QPageSize::Letter : QPageSize::A4, QPageSize::Inch));</span></span>
 <span id="L254"><span class="lineNum">     254</span>              : </span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">          18 :     return size;</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">          19 :     return size;</span></span>
 <span id="L256"><span class="lineNum">     256</span>              : }</span>
 <span id="L257"><span class="lineNum">     257</span>              : </span>
 <span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">         667 : bool EngravingConfiguration::canLayoutIcons() const</span></span>
@@ -323,9 +323,9 @@
 <span id="L265"><span class="lineNum">     265</span> <span class="tlaUNC">           0 :     return uiConfiguration() ? String::fromStdString(uiConfiguration()-&gt;iconsFontFamily()) : String();</span></span>
 <span id="L266"><span class="lineNum">     266</span>              : }</span>
 <span id="L267"><span class="lineNum">     267</span>              : </span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC tlaBgGNC">      458699 : Color EngravingConfiguration::defaultColor() const</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC tlaBgGNC">      459161 : Color EngravingConfiguration::defaultColor() const</span></span>
 <span id="L269"><span class="lineNum">     269</span>              : {</span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">      458699 :     return Color::BLACK;</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">      459161 :     return Color::BLACK;</span></span>
 <span id="L271"><span class="lineNum">     271</span>              : }</span>
 <span id="L272"><span class="lineNum">     272</span>              : </span>
 <span id="L273"><span class="lineNum">     273</span> <span class="tlaUNC tlaBgUNC">           0 : Color EngravingConfiguration::displayedDefaultColor(bool inverted) const</span></span>
@@ -518,9 +518,9 @@
 <span id="L460"><span class="lineNum">     460</span> <span class="tlaUNC">           0 :     return m_unlinkedColorChanged;</span></span>
 <span id="L461"><span class="lineNum">     461</span>              : }</span>
 <span id="L462"><span class="lineNum">     462</span>              : </span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC tlaBgGNC">     1407927 : const IEngravingConfiguration::DebuggingOptions&amp; EngravingConfiguration::debuggingOptions() const</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC tlaBgGNC">     1410081 : const IEngravingConfiguration::DebuggingOptions&amp; EngravingConfiguration::debuggingOptions() const</span></span>
 <span id="L464"><span class="lineNum">     464</span>              : {</span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">     1407927 :     return m_debuggingOptions.val;</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">     1410081 :     return m_debuggingOptions.val;</span></span>
 <span id="L466"><span class="lineNum">     466</span>              : }</span>
 <span id="L467"><span class="lineNum">     467</span>              : </span>
 <span id="L468"><span class="lineNum">     468</span> <span class="tlaUNC tlaBgUNC">           0 : void EngravingConfiguration::setDebuggingOptions(const DebuggingOptions&amp; options)</span></span>
@@ -538,9 +538,9 @@
 <span id="L480"><span class="lineNum">     480</span> <span class="tlaUNC">           0 :     return false;</span></span>
 <span id="L481"><span class="lineNum">     481</span>              : }</span>
 <span id="L482"><span class="lineNum">     482</span>              : </span>
-<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC tlaBgGNC">        9517 : bool EngravingConfiguration::guitarProImportExperimental() const</span></span>
+<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC tlaBgGNC">        9529 : bool EngravingConfiguration::guitarProImportExperimental() const</span></span>
 <span id="L484"><span class="lineNum">     484</span>              : {</span>
-<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">        9517 :     return guitarProConfiguration() ? guitarProConfiguration()-&gt;experimental() : false;</span></span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">        9529 :     return guitarProConfiguration() ? guitarProConfiguration()-&gt;experimental() : false;</span></span>
 <span id="L486"><span class="lineNum">     486</span>              : }</span>
 <span id="L487"><span class="lineNum">     487</span>              : </span>
 <span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">        4731 : bool EngravingConfiguration::negativeFretsAllowed() const</span></span>
@@ -563,9 +563,9 @@
 <span id="L505"><span class="lineNum">     505</span> <span class="tlaUNC">           0 :     return guitarProImportExperimental();</span></span>
 <span id="L506"><span class="lineNum">     506</span>              : }</span>
 <span id="L507"><span class="lineNum">     507</span>              : </span>
-<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC tlaBgGNC">         403 : bool EngravingConfiguration::specificSlursLayoutWorkaround() const</span></span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC tlaBgGNC">         415 : bool EngravingConfiguration::specificSlursLayoutWorkaround() const</span></span>
 <span id="L509"><span class="lineNum">     509</span>              : {</span>
-<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">         403 :     return guitarProImportExperimental();</span></span>
+<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">         415 :     return guitarProImportExperimental();</span></span>
 <span id="L511"><span class="lineNum">     511</span>              : }</span>
 <span id="L512"><span class="lineNum">     512</span>              : </span>
 <span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC">        1160 : bool EngravingConfiguration::preferSameStringForTranspose() const</span></span>

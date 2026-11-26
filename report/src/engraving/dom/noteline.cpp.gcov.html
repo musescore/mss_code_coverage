@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -128,13 +128,13 @@
 <span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           1 :     m_endText-&gt;setTextStyleType(propertyDefault(Pid::TEXT_STYLE).value&lt;TextStyleType&gt;());</span></span>
 <span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L72"><span class="lineNum">      72</span>              : </span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          13 : PropertyDelegate NoteLineSegment::resolvePropertyDelegate(Pid pid) const</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          18 : PropertyDelegate NoteLineSegment::resolvePropertyDelegate(Pid pid) const</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : {</span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">          13 :     if (pid == Pid::NOTELINE_PLACEMENT) {</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">          18 :     if (pid == Pid::NOTELINE_PLACEMENT) {</span></span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaUNC tlaBgUNC">           0 :         return PropertyDelegate(noteLine());</span></span>
 <span id="L77"><span class="lineNum">      77</span>              :     }</span>
 <span id="L78"><span class="lineNum">      78</span>              : </span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC tlaBgGNC">          13 :     return TextLineBaseSegment::resolvePropertyDelegate(pid);</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC tlaBgGNC">          18 :     return TextLineBaseSegment::resolvePropertyDelegate(pid);</span></span>
 <span id="L80"><span class="lineNum">      80</span>              : }</span>
 <span id="L81"><span class="lineNum">      81</span>              : </span>
 <span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">           1 : NoteLine::NoteLine(DummyParentOr&lt;Note&gt; parent)</span></span>
@@ -180,57 +180,57 @@
 <span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">           1 :     return seg;</span></span>
 <span id="L123"><span class="lineNum">     123</span>              : }</span>
 <span id="L124"><span class="lineNum">     124</span>              : </span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">          66 : PropertyValue NoteLine::propertyDefault(Pid propertyId) const</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">          89 : PropertyValue NoteLine::propertyDefault(Pid propertyId) const</span></span>
 <span id="L126"><span class="lineNum">     126</span>              : {</span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">          66 :     switch (propertyId) {</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">           9 :     case Pid::BEGIN_TEXT:</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">          89 :     switch (propertyId) {</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          12 :     case Pid::BEGIN_TEXT:</span></span>
 <span id="L129"><span class="lineNum">     129</span>              :     case Pid::CONTINUE_TEXT:</span>
 <span id="L130"><span class="lineNum">     130</span>              :     case Pid::END_TEXT:</span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">           9 :         return &quot;&quot;;</span></span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">           3 :     case Pid::LINE_VISIBLE:</span></span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">           3 :         return true;</span></span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">           9 :     case Pid::BEGIN_TEXT_OFFSET:</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          12 :         return &quot;&quot;;</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">           4 :     case Pid::LINE_VISIBLE:</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">           4 :         return true;</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">          12 :     case Pid::BEGIN_TEXT_OFFSET:</span></span>
 <span id="L135"><span class="lineNum">     135</span>              :     case Pid::CONTINUE_TEXT_OFFSET:</span>
 <span id="L136"><span class="lineNum">     136</span>              :     case Pid::END_TEXT_OFFSET:</span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">          18 :         return PointF(0, 0);</span></span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">           6 :     case Pid::BEGIN_HOOK_TYPE:</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">          24 :         return PointF(0, 0);</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">           8 :     case Pid::BEGIN_HOOK_TYPE:</span></span>
 <span id="L139"><span class="lineNum">     139</span>              :     case Pid::END_HOOK_TYPE:</span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">           6 :         return HookType::NONE;</span></span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">           9 :     case Pid::BEGIN_TEXT_PLACE:</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">           8 :         return HookType::NONE;</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">          12 :     case Pid::BEGIN_TEXT_PLACE:</span></span>
 <span id="L142"><span class="lineNum">     142</span>              :     case Pid::CONTINUE_TEXT_PLACE:</span>
 <span id="L143"><span class="lineNum">     143</span>              :     case Pid::END_TEXT_PLACE:</span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">           9 :         return TextPlace::LEFT;</span></span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">           6 :     case Pid::BEGIN_HOOK_HEIGHT:</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">          12 :         return TextPlace::LEFT;</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">           8 :     case Pid::BEGIN_HOOK_HEIGHT:</span></span>
 <span id="L146"><span class="lineNum">     146</span>              :     case Pid::END_HOOK_HEIGHT:</span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">           6 :         return 1.5_sp;</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">           8 :         return 1.5_sp;</span></span>
 <span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::PLACEMENT:</span></span>
 <span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 :         return PlacementV::ABOVE;</span></span>
 <span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC tlaBgGNC">           1 :     case Pid::DIAGONAL:</span></span>
 <span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">           1 :         return true;</span></span>
 <span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">           1 :     case Pid::NOTELINE_PLACEMENT:</span></span>
 <span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">           2 :         return NoteLineEndPlacement::OFFSET_ENDS;</span></span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">           3 :     case Pid::GAP_BETWEEN_TEXT_AND_LINE:</span></span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">           3 :         return 0.5_sp;</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">           4 :     case Pid::GAP_BETWEEN_TEXT_AND_LINE:</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">           4 :         return 0.5_sp;</span></span>
 <span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">           1 :     case Pid::SYSTEM_FLAG:</span></span>
 <span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">           1 :         return false;</span></span>
 <span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">           2 :     case Pid::TEXT_STYLE:</span></span>
 <span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">           2 :         return TextStyleType::NOTELINE;</span></span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">          16 :     default:</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          16 :         return TextLineBase::propertyDefault(propertyId);</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">          24 :     default:</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">          24 :         return TextLineBase::propertyDefault(propertyId);</span></span>
 <span id="L162"><span class="lineNum">     162</span>              :     }</span>
 <span id="L163"><span class="lineNum">     163</span>              : }</span>
 <span id="L164"><span class="lineNum">     164</span>              : </span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">          51 : PropertyValue NoteLine::getProperty(Pid propertyId) const</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">          76 : PropertyValue NoteLine::getProperty(Pid propertyId) const</span></span>
 <span id="L166"><span class="lineNum">     166</span>              : {</span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">          51 :     switch (propertyId) {</span></span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">           2 :     case Pid::PLAY:</span></span>
-<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">           2 :         return PropertyValue();</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">          76 :     switch (propertyId) {</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">           3 :     case Pid::PLAY:</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">           3 :         return PropertyValue();</span></span>
 <span id="L170"><span class="lineNum">     170</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::PLACEMENT:</span></span>
 <span id="L171"><span class="lineNum">     171</span> <span class="tlaUNC">           0 :         return PlacementV::ABOVE;</span></span>
 <span id="L172"><span class="lineNum">     172</span> <span class="tlaUNC">           0 :     case Pid::NOTELINE_PLACEMENT:</span></span>
 <span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 :         return m_lineEndPlacement;</span></span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC tlaBgGNC">          49 :     default:</span></span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">          49 :         return TextLineBase::getProperty(propertyId);</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC tlaBgGNC">          73 :     default:</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">          73 :         return TextLineBase::getProperty(propertyId);</span></span>
 <span id="L176"><span class="lineNum">     176</span>              :     }</span>
 <span id="L177"><span class="lineNum">     177</span>              : }</span>
 <span id="L178"><span class="lineNum">     178</span>              : </span>
@@ -255,9 +255,9 @@
 <span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 :     TextLineBase::reset();</span></span>
 <span id="L198"><span class="lineNum">     198</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L199"><span class="lineNum">     199</span>              : </span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC tlaBgGNC">          12 : Sid NoteLine::defaultPosSid() const</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC tlaBgGNC">          16 : Sid NoteLine::defaultPosSid() const</span></span>
 <span id="L201"><span class="lineNum">     201</span>              : {</span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">          12 :     return Sid::NOSTYLE;</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">          16 :     return Sid::NOSTYLE;</span></span>
 <span id="L203"><span class="lineNum">     203</span>              : }</span>
 <span id="L204"><span class="lineNum">     204</span>              : } // namespace mu::engraving</span>
         </pre>

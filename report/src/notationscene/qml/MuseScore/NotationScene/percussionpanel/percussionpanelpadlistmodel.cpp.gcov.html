@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">239</td>
+            <td class="headerCovTableEntry">238</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -435,76 +435,73 @@
 <span id="L377"><span class="lineNum">     377</span> <span class="tlaUNC">           0 :     return modelIndex;</span></span>
 <span id="L378"><span class="lineNum">     378</span>              : }</span>
 <span id="L379"><span class="lineNum">     379</span>              : </span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaUNC">           0 : muse::RetVal&lt;muse::Val&gt; PercussionPanelPadListModel::openPadSwapDialog()</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaUNC">           0 : muse::async::Promise&lt;muse::Val&gt; PercussionPanelPadListModel::openPadSwapDialog()</span></span>
 <span id="L381"><span class="lineNum">     381</span>              : {</span>
 <span id="L382"><span class="lineNum">     382</span> <span class="tlaUNC">           0 :     const bool moveMidiNotesAndShortcuts = configuration()-&gt;percussionPanelMoveMidiNotesAndShortcuts();</span></span>
 <span id="L383"><span class="lineNum">     383</span>              : </span>
 <span id="L384"><span class="lineNum">     384</span> <span class="tlaUNC">           0 :     muse::UriQuery query(&quot;musescore://notation/percussionpanelpadswap?modal=true&quot;);</span></span>
 <span id="L385"><span class="lineNum">     385</span> <span class="tlaUNC">           0 :     query.addParam(&quot;moveMidiNotesAndShortcuts&quot;, muse::Val(moveMidiNotesAndShortcuts));</span></span>
-<span id="L386"><span class="lineNum">     386</span> <span class="tlaUNC">           0 :     muse::RetVal&lt;muse::Val&gt; rv = interactive()-&gt;openSync(query);</span></span>
-<span id="L387"><span class="lineNum">     387</span>              : </span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaUNC">           0 :     const QVariantMap vals = rv.val.toQVariant().toMap();</span></span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaUNC">           0 :     if (!rv.ret) {</span></span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaUNC">           0 :         return rv;</span></span>
-<span id="L391"><span class="lineNum">     391</span>              :     }</span>
-<span id="L392"><span class="lineNum">     392</span>              : </span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaUNC">           0 :     const bool rememberMyChoice = vals[&quot;rememberMyChoice&quot;].toBool();</span></span>
-<span id="L394"><span class="lineNum">     394</span> <span class="tlaUNC">           0 :     if (rememberMyChoice) {</span></span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaUNC">           0 :         configuration()-&gt;setPercussionPanelMoveMidiNotesAndShortcuts(moveMidiNotesAndShortcuts);</span></span>
-<span id="L396"><span class="lineNum">     396</span>              :     }</span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaUNC">           0 :     configuration()-&gt;setShowPercussionPanelPadSwapDialog(!rememberMyChoice);</span></span>
+<span id="L386"><span class="lineNum">     386</span>              : </span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaUNC">           0 :     return interactive()-&gt;open(query).then&lt;muse::Val&gt;(this, [this, moveMidiNotesAndShortcuts](const muse::Val&amp; val, auto resolve) {</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaUNC">           0 :         const QVariantMap vals = val.toQVariant().toMap();</span></span>
+<span id="L389"><span class="lineNum">     389</span> <span class="tlaUNC">           0 :         const bool rememberMyChoice = vals[&quot;rememberMyChoice&quot;].toBool();</span></span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaUNC">           0 :         if (rememberMyChoice) {</span></span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaUNC">           0 :             configuration()-&gt;setPercussionPanelMoveMidiNotesAndShortcuts(moveMidiNotesAndShortcuts);</span></span>
+<span id="L392"><span class="lineNum">     392</span>              :         }</span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaUNC">           0 :         configuration()-&gt;setShowPercussionPanelPadSwapDialog(!rememberMyChoice);</span></span>
+<span id="L394"><span class="lineNum">     394</span>              : </span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaUNC">           0 :         return resolve(val);</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L398"><span class="lineNum">     398</span>              : </span>
-<span id="L399"><span class="lineNum">     399</span> <span class="tlaUNC">           0 :     return rv;</span></span>
-<span id="L400"><span class="lineNum">     400</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L401"><span class="lineNum">     401</span>              : </span>
-<span id="L402"><span class="lineNum">     402</span> <span class="tlaUNC">           0 : void PercussionPanelPadListModel::swapMidiNotesAndShortcuts(int fromIndex, int toIndex)</span></span>
-<span id="L403"><span class="lineNum">     403</span>              : {</span>
-<span id="L404"><span class="lineNum">     404</span> <span class="tlaUNC">           0 :     PercussionPanelPadModel* fromModel = m_padModels.at(fromIndex);</span></span>
-<span id="L405"><span class="lineNum">     405</span> <span class="tlaUNC">           0 :     PercussionPanelPadModel* toModel = m_padModels.at(toIndex);</span></span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaUNC">           0 : void PercussionPanelPadListModel::swapMidiNotesAndShortcuts(int fromIndex, int toIndex)</span></span>
+<span id="L400"><span class="lineNum">     400</span>              : {</span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaUNC">           0 :     PercussionPanelPadModel* fromModel = m_padModels.at(fromIndex);</span></span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaUNC">           0 :     PercussionPanelPadModel* toModel = m_padModels.at(toIndex);</span></span>
+<span id="L403"><span class="lineNum">     403</span>              : </span>
+<span id="L404"><span class="lineNum">     404</span> <span class="tlaUNC">           0 :     const int tempPitch = fromModel-&gt;pitch();</span></span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaUNC">           0 :     const QString tempShortcut = fromModel-&gt;keyboardShortcut();</span></span>
 <span id="L406"><span class="lineNum">     406</span>              : </span>
-<span id="L407"><span class="lineNum">     407</span> <span class="tlaUNC">           0 :     const int tempPitch = fromModel-&gt;pitch();</span></span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaUNC">           0 :     const QString tempShortcut = fromModel-&gt;keyboardShortcut();</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaUNC">           0 :     fromModel-&gt;setPitch(toModel-&gt;pitch());</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaUNC">           0 :     fromModel-&gt;setKeyboardShortcut(toModel-&gt;keyboardShortcut());</span></span>
 <span id="L409"><span class="lineNum">     409</span>              : </span>
-<span id="L410"><span class="lineNum">     410</span> <span class="tlaUNC">           0 :     fromModel-&gt;setPitch(toModel-&gt;pitch());</span></span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaUNC">           0 :     fromModel-&gt;setKeyboardShortcut(toModel-&gt;keyboardShortcut());</span></span>
-<span id="L412"><span class="lineNum">     412</span>              : </span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaUNC">           0 :     toModel-&gt;setPitch(tempPitch);</span></span>
-<span id="L414"><span class="lineNum">     414</span> <span class="tlaUNC">           0 :     toModel-&gt;setKeyboardShortcut(tempShortcut);</span></span>
-<span id="L415"><span class="lineNum">     415</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L416"><span class="lineNum">     416</span>              : </span>
-<span id="L417"><span class="lineNum">     417</span> <span class="tlaUNC">           0 : int PercussionPanelPadListModel::getModelIndexForPitch(int pitch) const</span></span>
-<span id="L418"><span class="lineNum">     418</span>              : {</span>
-<span id="L419"><span class="lineNum">     419</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(m_drumset &amp;&amp; m_drumset-&gt;isValid(pitch)) {</span></span>
-<span id="L420"><span class="lineNum">     420</span> <span class="tlaUNC">           0 :         return -1;</span></span>
-<span id="L421"><span class="lineNum">     421</span>              :     }</span>
-<span id="L422"><span class="lineNum">     422</span>              : </span>
-<span id="L423"><span class="lineNum">     423</span> <span class="tlaUNC">           0 :     for (int i = 0; i &lt; m_padModels.size(); ++i) {</span></span>
-<span id="L424"><span class="lineNum">     424</span> <span class="tlaUNC">           0 :         const PercussionPanelPadModel* model = m_padModels.at(i);</span></span>
-<span id="L425"><span class="lineNum">     425</span> <span class="tlaUNC">           0 :         if (model &amp;&amp; model-&gt;pitch() == pitch) {</span></span>
-<span id="L426"><span class="lineNum">     426</span> <span class="tlaUNC">           0 :             return i;</span></span>
-<span id="L427"><span class="lineNum">     427</span>              :         }</span>
-<span id="L428"><span class="lineNum">     428</span>              :     }</span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaUNC">           0 :     toModel-&gt;setPitch(tempPitch);</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaUNC">           0 :     toModel-&gt;setKeyboardShortcut(tempShortcut);</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L413"><span class="lineNum">     413</span>              : </span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaUNC">           0 : int PercussionPanelPadListModel::getModelIndexForPitch(int pitch) const</span></span>
+<span id="L415"><span class="lineNum">     415</span>              : {</span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(m_drumset &amp;&amp; m_drumset-&gt;isValid(pitch)) {</span></span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaUNC">           0 :         return -1;</span></span>
+<span id="L418"><span class="lineNum">     418</span>              :     }</span>
+<span id="L419"><span class="lineNum">     419</span>              : </span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaUNC">           0 :     for (int i = 0; i &lt; m_padModels.size(); ++i) {</span></span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaUNC">           0 :         const PercussionPanelPadModel* model = m_padModels.at(i);</span></span>
+<span id="L422"><span class="lineNum">     422</span> <span class="tlaUNC">           0 :         if (model &amp;&amp; model-&gt;pitch() == pitch) {</span></span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaUNC">           0 :             return i;</span></span>
+<span id="L424"><span class="lineNum">     424</span>              :         }</span>
+<span id="L425"><span class="lineNum">     425</span>              :     }</span>
+<span id="L426"><span class="lineNum">     426</span>              : </span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaUNC">           0 :     return -1;</span></span>
+<span id="L428"><span class="lineNum">     428</span>              : }</span>
 <span id="L429"><span class="lineNum">     429</span>              : </span>
-<span id="L430"><span class="lineNum">     430</span> <span class="tlaUNC">           0 :     return -1;</span></span>
-<span id="L431"><span class="lineNum">     431</span>              : }</span>
-<span id="L432"><span class="lineNum">     432</span>              : </span>
-<span id="L433"><span class="lineNum">     433</span> <span class="tlaUNC">           0 : void PercussionPanelPadListModel::movePad(int fromIndex, int toIndex)</span></span>
-<span id="L434"><span class="lineNum">     434</span>              : {</span>
-<span id="L435"><span class="lineNum">     435</span> <span class="tlaUNC">           0 :     m_padModels.swapItemsAt(fromIndex, toIndex);</span></span>
-<span id="L436"><span class="lineNum">     436</span> <span class="tlaUNC">           0 :     emit layoutChanged();</span></span>
-<span id="L437"><span class="lineNum">     437</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L438"><span class="lineNum">     438</span>              : </span>
-<span id="L439"><span class="lineNum">     439</span> <span class="tlaUNC">           0 : int PercussionPanelPadListModel::numEmptySlotsAtRow(int row) const</span></span>
-<span id="L440"><span class="lineNum">     440</span>              : {</span>
-<span id="L441"><span class="lineNum">     441</span> <span class="tlaUNC">           0 :     int count = 0;</span></span>
-<span id="L442"><span class="lineNum">     442</span> <span class="tlaUNC">           0 :     const size_t rowStartIdx = row * numColumns();</span></span>
-<span id="L443"><span class="lineNum">     443</span> <span class="tlaUNC">           0 :     for (size_t i = rowStartIdx; i &lt; rowStartIdx + numColumns(); ++i) {</span></span>
-<span id="L444"><span class="lineNum">     444</span> <span class="tlaUNC">           0 :         if (!m_padModels.at(i)) {</span></span>
-<span id="L445"><span class="lineNum">     445</span> <span class="tlaUNC">           0 :             ++count;</span></span>
-<span id="L446"><span class="lineNum">     446</span>              :         }</span>
-<span id="L447"><span class="lineNum">     447</span>              :     }</span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaUNC">           0 :     return count;</span></span>
-<span id="L449"><span class="lineNum">     449</span>              : }</span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaUNC">           0 : void PercussionPanelPadListModel::movePad(int fromIndex, int toIndex)</span></span>
+<span id="L431"><span class="lineNum">     431</span>              : {</span>
+<span id="L432"><span class="lineNum">     432</span> <span class="tlaUNC">           0 :     m_padModels.swapItemsAt(fromIndex, toIndex);</span></span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaUNC">           0 :     emit layoutChanged();</span></span>
+<span id="L434"><span class="lineNum">     434</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L435"><span class="lineNum">     435</span>              : </span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaUNC">           0 : int PercussionPanelPadListModel::numEmptySlotsAtRow(int row) const</span></span>
+<span id="L437"><span class="lineNum">     437</span>              : {</span>
+<span id="L438"><span class="lineNum">     438</span> <span class="tlaUNC">           0 :     int count = 0;</span></span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaUNC">           0 :     const size_t rowStartIdx = row * numColumns();</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaUNC">           0 :     for (size_t i = rowStartIdx; i &lt; rowStartIdx + numColumns(); ++i) {</span></span>
+<span id="L441"><span class="lineNum">     441</span> <span class="tlaUNC">           0 :         if (!m_padModels.at(i)) {</span></span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaUNC">           0 :             ++count;</span></span>
+<span id="L443"><span class="lineNum">     443</span>              :         }</span>
+<span id="L444"><span class="lineNum">     444</span>              :     }</span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaUNC">           0 :     return count;</span></span>
+<span id="L446"><span class="lineNum">     446</span>              : }</span>
         </pre>
               </td>
             </tr>

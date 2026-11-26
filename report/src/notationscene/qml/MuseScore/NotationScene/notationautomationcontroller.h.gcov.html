@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -216,53 +216,54 @@
 <span id="L158"><span class="lineNum">     158</span>              :     void updatePolylinesColors();</span>
 <span id="L159"><span class="lineNum">     159</span>              :     void onCurrentNotationChanged();</span>
 <span id="L160"><span class="lineNum">     160</span>              : </span>
-<span id="L161"><span class="lineNum">     161</span>              :     void rebuildAllPolylines();</span>
-<span id="L162"><span class="lineNum">     162</span>              :     void buildAndAddPolylinesForSystem(const System* system);</span>
-<span id="L163"><span class="lineNum">     163</span>              :     void buildAndAddPolylinesForStaff(const System* system, staff_idx_t staffIdx);</span>
-<span id="L164"><span class="lineNum">     164</span>              :     void buildAndAddPolylineForStaffRegion(const System* system, const mu::engraving::Staff* staff, const Measure* startMeasure,</span>
-<span id="L165"><span class="lineNum">     165</span>              :                                            const Measure* endMeasure);</span>
-<span id="L166"><span class="lineNum">     166</span>              : </span>
-<span id="L167"><span class="lineNum">     167</span>              :     void rebuildPolylinePoints(const PolylineKey&amp; key);</span>
-<span id="L168"><span class="lineNum">     168</span>              : </span>
-<span id="L169"><span class="lineNum">     169</span>              :     void mergePendingChanges(const mu::engraving::AutomationChanges&amp; changes);</span>
-<span id="L170"><span class="lineNum">     170</span>              :     void mergePendingScoreChanges(const mu::engraving::ScoreChanges&amp; changes);</span>
-<span id="L171"><span class="lineNum">     171</span>              :     void scheduleUpdate();</span>
-<span id="L172"><span class="lineNum">     172</span>              :     void processPendingChanges();</span>
-<span id="L173"><span class="lineNum">     173</span>              :     void applyAutomationChanges(const mu::engraving::AutomationChanges&amp; changes);</span>
-<span id="L174"><span class="lineNum">     174</span>              : </span>
-<span id="L175"><span class="lineNum">     175</span>              :     bool requestEditPoint(const PointData&amp; oldPointData, const PolylineKey&amp; key, qreal x, qreal y);</span>
-<span id="L176"><span class="lineNum">     176</span>              :     bool requestAddPoint(const PolylineKey&amp; key, qreal x, qreal y, bool useCurveValue);</span>
-<span id="L177"><span class="lineNum">     177</span>              :     bool requestRemovePoint(const PointData&amp; pointData, const PolylineKey&amp; key);</span>
-<span id="L178"><span class="lineNum">     178</span>              :     void editAutomationPoints(const mu::engraving::AutomationCurveKey&amp; key, mu::engraving::AutomationPointEdits&amp; edits);</span>
-<span id="L179"><span class="lineNum">     179</span>              : </span>
-<span id="L180"><span class="lineNum">     180</span>              :     PolylineData polylineData(const PolylineKey&amp; key) const;</span>
-<span id="L181"><span class="lineNum">     181</span>              :     void setPolylinePointsData(const PolylineKey&amp; key, const QVector&lt;PointData&gt;&amp; pointsData);</span>
-<span id="L182"><span class="lineNum">     182</span>              : </span>
-<span id="L183"><span class="lineNum">     183</span>              :     const mu::engraving::AutomationPoint* automationPointAt(const PolylineKey&amp; key, int tick) const;</span>
-<span id="L184"><span class="lineNum">     184</span>              : </span>
-<span id="L185"><span class="lineNum">     185</span>              :     const DynamicsDisplayRange&amp; dynamicsDisplayRange(const mu::engraving::Staff* staff, int tick) const;</span>
-<span id="L186"><span class="lineNum">     186</span>              :     double automationValueToDisplay(mu::engraving::AutomationType type, const mu::engraving::Staff* staff, int tick,</span>
-<span id="L187"><span class="lineNum">     187</span>              :                                     muse::real_t value) const;</span>
-<span id="L188"><span class="lineNum">     188</span>              :     muse::real_t automationValueFromDisplay(mu::engraving::AutomationType type, const mu::engraving::Staff* staff, int tick,</span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaUNC">           0 :                                             double displayValue, std::optional&lt;muse::real_t&gt; existingValue = std::nullopt) const;</span></span>
-<span id="L190"><span class="lineNum">     190</span>              : </span>
-<span id="L191"><span class="lineNum">     191</span>              :     INotationAutomationPtr automation() const;</span>
-<span id="L192"><span class="lineNum">     192</span>              :     mu::engraving::AutomationDataConstPtr automationData() const;</span>
-<span id="L193"><span class="lineNum">     193</span>              :     INotationPtr currentNotation() const;</span>
-<span id="L194"><span class="lineNum">     194</span>              :     mu::engraving::Score* score() const;</span>
-<span id="L195"><span class="lineNum">     195</span>              : </span>
-<span id="L196"><span class="lineNum">     196</span>              :     QQuickItem* m_linesParent = nullptr;</span>
-<span id="L197"><span class="lineNum">     197</span>              : </span>
-<span id="L198"><span class="lineNum">     198</span>              :     std::map&lt;PolylineKey, PolylineData&gt; m_polylinesDataMap;</span>
-<span id="L199"><span class="lineNum">     199</span>              :     muse::draw::Transform m_viewMatrix;</span>
-<span id="L200"><span class="lineNum">     200</span>              : </span>
-<span id="L201"><span class="lineNum">     201</span>              :     mu::engraving::AutomationChanges m_pendingChanges;</span>
-<span id="L202"><span class="lineNum">     202</span>              :     PendingScoreState m_pendingScoreState;</span>
-<span id="L203"><span class="lineNum">     203</span>              :     bool m_updateScheduled = false;</span>
-<span id="L204"><span class="lineNum">     204</span>              : </span>
-<span id="L205"><span class="lineNum">     205</span>              :     muse::uicomponents::PolylinePlot* m_currentlyEditedPolyline = nullptr;</span>
-<span id="L206"><span class="lineNum">     206</span>              : };</span>
-<span id="L207"><span class="lineNum">     207</span>              : }</span>
+<span id="L161"><span class="lineNum">     161</span>              :     void deleteAllPolylines();</span>
+<span id="L162"><span class="lineNum">     162</span>              :     void rebuildAllPolylines();</span>
+<span id="L163"><span class="lineNum">     163</span>              :     void buildAndAddPolylinesForSystem(const System* system);</span>
+<span id="L164"><span class="lineNum">     164</span>              :     void buildAndAddPolylinesForStaff(const System* system, staff_idx_t staffIdx);</span>
+<span id="L165"><span class="lineNum">     165</span>              :     void buildAndAddPolylineForStaffRegion(const System* system, const mu::engraving::Staff* staff, const Measure* startMeasure,</span>
+<span id="L166"><span class="lineNum">     166</span>              :                                            const Measure* endMeasure);</span>
+<span id="L167"><span class="lineNum">     167</span>              : </span>
+<span id="L168"><span class="lineNum">     168</span>              :     void rebuildPolylinePoints(const PolylineKey&amp; key);</span>
+<span id="L169"><span class="lineNum">     169</span>              : </span>
+<span id="L170"><span class="lineNum">     170</span>              :     void mergePendingChanges(const mu::engraving::AutomationChanges&amp; changes);</span>
+<span id="L171"><span class="lineNum">     171</span>              :     void mergePendingScoreChanges(const mu::engraving::ScoreChanges&amp; changes);</span>
+<span id="L172"><span class="lineNum">     172</span>              :     void scheduleUpdate();</span>
+<span id="L173"><span class="lineNum">     173</span>              :     void processPendingChanges();</span>
+<span id="L174"><span class="lineNum">     174</span>              :     void applyAutomationChanges(const mu::engraving::AutomationChanges&amp; changes);</span>
+<span id="L175"><span class="lineNum">     175</span>              : </span>
+<span id="L176"><span class="lineNum">     176</span>              :     bool requestEditPoint(const PointData&amp; oldPointData, const PolylineKey&amp; key, qreal x, qreal y);</span>
+<span id="L177"><span class="lineNum">     177</span>              :     bool requestAddPoint(const PolylineKey&amp; key, qreal x, qreal y, bool useCurveValue);</span>
+<span id="L178"><span class="lineNum">     178</span>              :     bool requestRemovePoint(const PointData&amp; pointData, const PolylineKey&amp; key);</span>
+<span id="L179"><span class="lineNum">     179</span>              :     void editAutomationPoints(const mu::engraving::AutomationCurveKey&amp; key, mu::engraving::AutomationPointEdits&amp; edits);</span>
+<span id="L180"><span class="lineNum">     180</span>              : </span>
+<span id="L181"><span class="lineNum">     181</span>              :     PolylineData polylineData(const PolylineKey&amp; key) const;</span>
+<span id="L182"><span class="lineNum">     182</span>              :     void setPolylinePointsData(const PolylineKey&amp; key, const QVector&lt;PointData&gt;&amp; pointsData);</span>
+<span id="L183"><span class="lineNum">     183</span>              : </span>
+<span id="L184"><span class="lineNum">     184</span>              :     const mu::engraving::AutomationPoint* automationPointAt(const PolylineKey&amp; key, int tick) const;</span>
+<span id="L185"><span class="lineNum">     185</span>              : </span>
+<span id="L186"><span class="lineNum">     186</span>              :     const DynamicsDisplayRange&amp; dynamicsDisplayRange(const mu::engraving::Staff* staff, int tick) const;</span>
+<span id="L187"><span class="lineNum">     187</span>              :     double automationValueToDisplay(mu::engraving::AutomationType type, const mu::engraving::Staff* staff, int tick,</span>
+<span id="L188"><span class="lineNum">     188</span>              :                                     muse::real_t value) const;</span>
+<span id="L189"><span class="lineNum">     189</span>              :     muse::real_t automationValueFromDisplay(mu::engraving::AutomationType type, const mu::engraving::Staff* staff, int tick,</span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :                                             double displayValue, std::optional&lt;muse::real_t&gt; existingValue = std::nullopt) const;</span></span>
+<span id="L191"><span class="lineNum">     191</span>              : </span>
+<span id="L192"><span class="lineNum">     192</span>              :     INotationAutomationPtr automation() const;</span>
+<span id="L193"><span class="lineNum">     193</span>              :     mu::engraving::AutomationDataConstPtr automationData() const;</span>
+<span id="L194"><span class="lineNum">     194</span>              :     INotationPtr currentNotation() const;</span>
+<span id="L195"><span class="lineNum">     195</span>              :     mu::engraving::Score* score() const;</span>
+<span id="L196"><span class="lineNum">     196</span>              : </span>
+<span id="L197"><span class="lineNum">     197</span>              :     QQuickItem* m_linesParent = nullptr;</span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span>              :     std::map&lt;PolylineKey, PolylineData&gt; m_polylinesDataMap;</span>
+<span id="L200"><span class="lineNum">     200</span>              :     muse::draw::Transform m_viewMatrix;</span>
+<span id="L201"><span class="lineNum">     201</span>              : </span>
+<span id="L202"><span class="lineNum">     202</span>              :     mu::engraving::AutomationChanges m_pendingChanges;</span>
+<span id="L203"><span class="lineNum">     203</span>              :     PendingScoreState m_pendingScoreState;</span>
+<span id="L204"><span class="lineNum">     204</span>              :     bool m_updateScheduled = false;</span>
+<span id="L205"><span class="lineNum">     205</span>              : </span>
+<span id="L206"><span class="lineNum">     206</span>              :     muse::uicomponents::PolylinePlot* m_currentlyEditedPolyline = nullptr;</span>
+<span id="L207"><span class="lineNum">     207</span>              : };</span>
+<span id="L208"><span class="lineNum">     208</span>              : }</span>
         </pre>
               </td>
             </tr>

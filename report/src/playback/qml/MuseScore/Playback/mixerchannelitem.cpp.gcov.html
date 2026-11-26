@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">466</td>
+            <td class="headerCovTableEntry">464</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -832,119 +832,117 @@
 <span id="L774"><span class="lineNum">     774</span>              :             // make and send close</span>
 <span id="L775"><span class="lineNum">     775</span> <span class="tlaUNC">           0 :             rcommand::CommandQuery closeCommand = item-&gt;editorCommand();</span></span>
 <span id="L776"><span class="lineNum">     776</span> <span class="tlaUNC">           0 :             closeCommand.addParam(&quot;operation&quot;, Val(&quot;close&quot;));</span></span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaUNC">           0 :             closeCommand.addParam(&quot;sync&quot;, Val(true));</span></span>
-<span id="L778"><span class="lineNum">     778</span> <span class="tlaUNC">           0 :             commandDispatcher()-&gt;dispatch(closeCommand);</span></span>
-<span id="L779"><span class="lineNum">     779</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L780"><span class="lineNum">     780</span>              :         // set new action</span>
-<span id="L781"><span class="lineNum">     781</span> <span class="tlaUNC">           0 :         item-&gt;setEditorCommand(command);</span></span>
-<span id="L782"><span class="lineNum">     782</span>              :     }</span>
-<span id="L783"><span class="lineNum">     783</span>              : </span>
-<span id="L784"><span class="lineNum">     784</span> <span class="tlaUNC">           0 :     commandDispatcher()-&gt;dispatch(command);</span></span>
-<span id="L785"><span class="lineNum">     785</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L786"><span class="lineNum">     786</span>              : </span>
-<span id="L787"><span class="lineNum">     787</span> <span class="tlaUNC">           0 : void MixerChannelItem::closeEditor(AbstractAudioResourceItem* item)</span></span>
-<span id="L788"><span class="lineNum">     788</span>              : {</span>
-<span id="L789"><span class="lineNum">     789</span>              :     // make and send close</span>
-<span id="L790"><span class="lineNum">     790</span> <span class="tlaUNC">           0 :     rcommand::CommandQuery closeCommand = item-&gt;editorCommand();</span></span>
-<span id="L791"><span class="lineNum">     791</span> <span class="tlaUNC">           0 :     closeCommand.addParam(&quot;operation&quot;, Val(&quot;close&quot;));</span></span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaUNC">           0 :     closeCommand.addParam(&quot;sync&quot;, Val(true));</span></span>
-<span id="L793"><span class="lineNum">     793</span> <span class="tlaUNC">           0 :     commandDispatcher()-&gt;dispatch(closeCommand);</span></span>
-<span id="L794"><span class="lineNum">     794</span>              : </span>
-<span id="L795"><span class="lineNum">     795</span> <span class="tlaUNC">           0 :     item-&gt;setEditorCommand({});</span></span>
-<span id="L796"><span class="lineNum">     796</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L797"><span class="lineNum">     797</span>              : </span>
-<span id="L798"><span class="lineNum">     798</span> <span class="tlaUNC">           0 : async::Promise&lt;bool&gt; MixerChannelItem::askAboutChangingSound()</span></span>
-<span id="L799"><span class="lineNum">     799</span>              : {</span>
-<span id="L800"><span class="lineNum">     800</span> <span class="tlaUNC">           0 :     if (!configuration()-&gt;needToShowResetSoundFlagsWhenChangeSoundWarning()</span></span>
-<span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 :         || !notationPlayback()-&gt;hasSoundFlags({ m_instrumentTrackId })) {</span></span>
-<span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC">           0 :         return async::make_promise&lt;bool&gt;([](auto resolve) {</span></span>
-<span id="L803"><span class="lineNum">     803</span> <span class="tlaUNC">           0 :             return resolve(true);</span></span>
-<span id="L804"><span class="lineNum">     804</span> <span class="tlaUNC">           0 :         });</span></span>
-<span id="L805"><span class="lineNum">     805</span>              :     }</span>
-<span id="L806"><span class="lineNum">     806</span>              : </span>
-<span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :     return async::make_promise&lt;bool&gt;([this](auto resolve) {</span></span>
-<span id="L808"><span class="lineNum">     808</span> <span class="tlaUNC">           0 :         int changeBtn = int(IInteractive::Button::Apply);</span></span>
-<span id="L809"><span class="lineNum">     809</span> <span class="tlaUNC">           0 :         IInteractive::Options options = IInteractive::Option::WithIcon | IInteractive::Option::WithDontShowAgainCheckBox;</span></span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaUNC">           0 :         IInteractive::ButtonDatas buttons = {</span></span>
-<span id="L811"><span class="lineNum">     811</span> <span class="tlaUNC">           0 :             interactive()-&gt;buttonData(IInteractive::Button::Cancel),</span></span>
-<span id="L812"><span class="lineNum">     812</span> <span class="tlaUNC">           0 :             IInteractive::ButtonData(changeBtn, muse::trc(&quot;playback&quot;, &quot;Change sound&quot;), true /*accent*/)</span></span>
-<span id="L813"><span class="lineNum">     813</span>              :         };</span>
-<span id="L814"><span class="lineNum">     814</span>              : </span>
-<span id="L815"><span class="lineNum">     815</span> <span class="tlaUNC">           0 :         interactive()-&gt;warning(muse::trc(&quot;playback&quot;, &quot;Are you sure you want to change this sound?&quot;),</span></span>
-<span id="L816"><span class="lineNum">     816</span> <span class="tlaUNC">           0 :                                IInteractive::Text(muse::trc(&quot;playback&quot;,</span></span>
-<span id="L817"><span class="lineNum">     817</span>              :                                                             &quot;Sound flags on this instrument may be reset, but staff text will remain. This action can’t be undone.&quot;)),</span>
-<span id="L818"><span class="lineNum">     818</span>              :                                buttons, changeBtn, options)</span>
-<span id="L819"><span class="lineNum">     819</span> <span class="tlaUNC">           0 :         .onResolve(this, [this, changeBtn, resolve](const IInteractive::Result&amp; result) {</span></span>
-<span id="L820"><span class="lineNum">     820</span> <span class="tlaUNC">           0 :             if (result.button() != changeBtn) {</span></span>
-<span id="L821"><span class="lineNum">     821</span> <span class="tlaUNC">           0 :                 (void)resolve(false);</span></span>
-<span id="L822"><span class="lineNum">     822</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L823"><span class="lineNum">     823</span>              :             }</span>
-<span id="L824"><span class="lineNum">     824</span>              : </span>
-<span id="L825"><span class="lineNum">     825</span> <span class="tlaUNC">           0 :             if (!result.showAgain()) {</span></span>
-<span id="L826"><span class="lineNum">     826</span> <span class="tlaUNC">           0 :                 configuration()-&gt;setNeedToShowResetSoundFlagsWhenChangeSoundWarning(false);</span></span>
-<span id="L827"><span class="lineNum">     827</span>              :             }</span>
-<span id="L828"><span class="lineNum">     828</span>              : </span>
-<span id="L829"><span class="lineNum">     829</span> <span class="tlaUNC">           0 :             (void)resolve(true);</span></span>
-<span id="L830"><span class="lineNum">     830</span>              :         });</span>
-<span id="L831"><span class="lineNum">     831</span>              : </span>
-<span id="L832"><span class="lineNum">     832</span> <span class="tlaUNC">           0 :         return async::Promise&lt;bool&gt;::dummy_result();</span></span>
-<span id="L833"><span class="lineNum">     833</span> <span class="tlaUNC">           0 :     }, async::PromiseType::AsyncByBody);</span></span>
-<span id="L834"><span class="lineNum">     834</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L835"><span class="lineNum">     835</span>              : </span>
-<span id="L836"><span class="lineNum">     836</span> <span class="tlaUNC">           0 : AudioFxChainOrder MixerChannelItem::resolveNewBlankOutputResourceItemOrder() const</span></span>
-<span id="L837"><span class="lineNum">     837</span>              : {</span>
-<span id="L838"><span class="lineNum">     838</span> <span class="tlaUNC">           0 :     if (m_outputResourceItems.empty()) {</span></span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaUNC">           0 :         return 0;</span></span>
-<span id="L840"><span class="lineNum">     840</span>              :     }</span>
-<span id="L841"><span class="lineNum">     841</span>              : </span>
-<span id="L842"><span class="lineNum">     842</span> <span class="tlaUNC">           0 :     AudioFxChainOrder lastChainOrder = m_outputResourceItems.lastKey();</span></span>
-<span id="L843"><span class="lineNum">     843</span> <span class="tlaUNC">           0 :     if (lastChainOrder &lt; OUTPUT_RESOURCE_COUNT_LIMIT - 1) {</span></span>
-<span id="L844"><span class="lineNum">     844</span> <span class="tlaUNC">           0 :         return lastChainOrder + 1;</span></span>
-<span id="L845"><span class="lineNum">     845</span>              :     }</span>
-<span id="L846"><span class="lineNum">     846</span>              : </span>
-<span id="L847"><span class="lineNum">     847</span> <span class="tlaUNC">           0 :     for (AudioFxChainOrder order = 0; order &lt; OUTPUT_RESOURCE_COUNT_LIMIT; ++order) {</span></span>
-<span id="L848"><span class="lineNum">     848</span> <span class="tlaUNC">           0 :         if (!m_outputResourceItems.contains(order)) {</span></span>
-<span id="L849"><span class="lineNum">     849</span> <span class="tlaUNC">           0 :             return order;</span></span>
-<span id="L850"><span class="lineNum">     850</span>              :         }</span>
-<span id="L851"><span class="lineNum">     851</span>              :     }</span>
-<span id="L852"><span class="lineNum">     852</span>              : </span>
-<span id="L853"><span class="lineNum">     853</span> <span class="tlaUNC">           0 :     return OUTPUT_RESOURCE_COUNT_LIMIT - 1;</span></span>
-<span id="L854"><span class="lineNum">     854</span>              : }</span>
-<span id="L855"><span class="lineNum">     855</span>              : </span>
-<span id="L856"><span class="lineNum">     856</span> <span class="tlaUNC">           0 : bool MixerChannelItem::outputOnly() const</span></span>
-<span id="L857"><span class="lineNum">     857</span>              : {</span>
-<span id="L858"><span class="lineNum">     858</span> <span class="tlaUNC">           0 :     return m_outputOnly;</span></span>
-<span id="L859"><span class="lineNum">     859</span>              : }</span>
-<span id="L860"><span class="lineNum">     860</span>              : </span>
-<span id="L861"><span class="lineNum">     861</span> <span class="tlaUNC">           0 : const AudioInputParams&amp; MixerChannelItem::inputParams() const</span></span>
-<span id="L862"><span class="lineNum">     862</span>              : {</span>
-<span id="L863"><span class="lineNum">     863</span> <span class="tlaUNC">           0 :     return m_inputParams;</span></span>
-<span id="L864"><span class="lineNum">     864</span>              : }</span>
-<span id="L865"><span class="lineNum">     865</span>              : </span>
-<span id="L866"><span class="lineNum">     866</span> <span class="tlaUNC">           0 : const AudioOutputParams&amp; MixerChannelItem::outputParams() const</span></span>
-<span id="L867"><span class="lineNum">     867</span>              : {</span>
-<span id="L868"><span class="lineNum">     868</span> <span class="tlaUNC">           0 :     return m_outParams;</span></span>
-<span id="L869"><span class="lineNum">     869</span>              : }</span>
-<span id="L870"><span class="lineNum">     870</span>              : </span>
-<span id="L871"><span class="lineNum">     871</span> <span class="tlaUNC">           0 : InputResourceItem* MixerChannelItem::inputResourceItem() const</span></span>
-<span id="L872"><span class="lineNum">     872</span>              : {</span>
-<span id="L873"><span class="lineNum">     873</span> <span class="tlaUNC">           0 :     return m_inputResourceItem;</span></span>
-<span id="L874"><span class="lineNum">     874</span>              : }</span>
-<span id="L875"><span class="lineNum">     875</span>              : </span>
-<span id="L876"><span class="lineNum">     876</span> <span class="tlaUNC">           0 : QList&lt;OutputResourceItem*&gt; MixerChannelItem::outputResourceItemList() const</span></span>
-<span id="L877"><span class="lineNum">     877</span>              : {</span>
-<span id="L878"><span class="lineNum">     878</span> <span class="tlaUNC">           0 :     return m_outputResourceItems.values();</span></span>
-<span id="L879"><span class="lineNum">     879</span>              : }</span>
-<span id="L880"><span class="lineNum">     880</span>              : </span>
-<span id="L881"><span class="lineNum">     881</span> <span class="tlaUNC">           0 : QList&lt;AuxSendItem*&gt; MixerChannelItem::auxSendItemList() const</span></span>
-<span id="L882"><span class="lineNum">     882</span>              : {</span>
-<span id="L883"><span class="lineNum">     883</span> <span class="tlaUNC">           0 :     return m_auxSendItems.values();</span></span>
-<span id="L884"><span class="lineNum">     884</span>              : }</span>
-<span id="L885"><span class="lineNum">     885</span>              : </span>
-<span id="L886"><span class="lineNum">     886</span> <span class="tlaUNC">           0 : const QMap&lt;aux_channel_idx_t, AuxSendItem*&gt;&amp; MixerChannelItem::auxSendItems() const</span></span>
-<span id="L887"><span class="lineNum">     887</span>              : {</span>
-<span id="L888"><span class="lineNum">     888</span> <span class="tlaUNC">           0 :     return m_auxSendItems;</span></span>
-<span id="L889"><span class="lineNum">     889</span>              : }</span>
+<span id="L777"><span class="lineNum">     777</span> <span class="tlaUNC">           0 :             commandDispatcher()-&gt;dispatch(closeCommand);</span></span>
+<span id="L778"><span class="lineNum">     778</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L779"><span class="lineNum">     779</span>              :         // set new action</span>
+<span id="L780"><span class="lineNum">     780</span> <span class="tlaUNC">           0 :         item-&gt;setEditorCommand(command);</span></span>
+<span id="L781"><span class="lineNum">     781</span>              :     }</span>
+<span id="L782"><span class="lineNum">     782</span>              : </span>
+<span id="L783"><span class="lineNum">     783</span> <span class="tlaUNC">           0 :     commandDispatcher()-&gt;dispatch(command);</span></span>
+<span id="L784"><span class="lineNum">     784</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L785"><span class="lineNum">     785</span>              : </span>
+<span id="L786"><span class="lineNum">     786</span> <span class="tlaUNC">           0 : void MixerChannelItem::closeEditor(AbstractAudioResourceItem* item)</span></span>
+<span id="L787"><span class="lineNum">     787</span>              : {</span>
+<span id="L788"><span class="lineNum">     788</span>              :     // make and send close</span>
+<span id="L789"><span class="lineNum">     789</span> <span class="tlaUNC">           0 :     rcommand::CommandQuery closeCommand = item-&gt;editorCommand();</span></span>
+<span id="L790"><span class="lineNum">     790</span> <span class="tlaUNC">           0 :     closeCommand.addParam(&quot;operation&quot;, Val(&quot;close&quot;));</span></span>
+<span id="L791"><span class="lineNum">     791</span> <span class="tlaUNC">           0 :     commandDispatcher()-&gt;dispatch(closeCommand);</span></span>
+<span id="L792"><span class="lineNum">     792</span>              : </span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaUNC">           0 :     item-&gt;setEditorCommand({});</span></span>
+<span id="L794"><span class="lineNum">     794</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L795"><span class="lineNum">     795</span>              : </span>
+<span id="L796"><span class="lineNum">     796</span> <span class="tlaUNC">           0 : async::Promise&lt;bool&gt; MixerChannelItem::askAboutChangingSound()</span></span>
+<span id="L797"><span class="lineNum">     797</span>              : {</span>
+<span id="L798"><span class="lineNum">     798</span> <span class="tlaUNC">           0 :     if (!configuration()-&gt;needToShowResetSoundFlagsWhenChangeSoundWarning()</span></span>
+<span id="L799"><span class="lineNum">     799</span> <span class="tlaUNC">           0 :         || !notationPlayback()-&gt;hasSoundFlags({ m_instrumentTrackId })) {</span></span>
+<span id="L800"><span class="lineNum">     800</span> <span class="tlaUNC">           0 :         return async::make_promise&lt;bool&gt;([](auto resolve) {</span></span>
+<span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 :             return resolve(true);</span></span>
+<span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC">           0 :         });</span></span>
+<span id="L803"><span class="lineNum">     803</span>              :     }</span>
+<span id="L804"><span class="lineNum">     804</span>              : </span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaUNC">           0 :     return async::make_promise&lt;bool&gt;([this](auto resolve) {</span></span>
+<span id="L806"><span class="lineNum">     806</span> <span class="tlaUNC">           0 :         int changeBtn = int(IInteractive::Button::Apply);</span></span>
+<span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :         IInteractive::Options options = IInteractive::Option::WithIcon | IInteractive::Option::WithDontShowAgainCheckBox;</span></span>
+<span id="L808"><span class="lineNum">     808</span> <span class="tlaUNC">           0 :         IInteractive::ButtonDatas buttons = {</span></span>
+<span id="L809"><span class="lineNum">     809</span> <span class="tlaUNC">           0 :             interactive()-&gt;buttonData(IInteractive::Button::Cancel),</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaUNC">           0 :             IInteractive::ButtonData(changeBtn, muse::trc(&quot;playback&quot;, &quot;Change sound&quot;), true /*accent*/)</span></span>
+<span id="L811"><span class="lineNum">     811</span>              :         };</span>
+<span id="L812"><span class="lineNum">     812</span>              : </span>
+<span id="L813"><span class="lineNum">     813</span> <span class="tlaUNC">           0 :         interactive()-&gt;warning(muse::trc(&quot;playback&quot;, &quot;Are you sure you want to change this sound?&quot;),</span></span>
+<span id="L814"><span class="lineNum">     814</span> <span class="tlaUNC">           0 :                                IInteractive::Text(muse::trc(&quot;playback&quot;,</span></span>
+<span id="L815"><span class="lineNum">     815</span>              :                                                             &quot;Sound flags on this instrument may be reset, but staff text will remain. This action can’t be undone.&quot;)),</span>
+<span id="L816"><span class="lineNum">     816</span>              :                                buttons, changeBtn, options)</span>
+<span id="L817"><span class="lineNum">     817</span> <span class="tlaUNC">           0 :         .onResolve(this, [this, changeBtn, resolve](const IInteractive::Result&amp; result) {</span></span>
+<span id="L818"><span class="lineNum">     818</span> <span class="tlaUNC">           0 :             if (result.button() != changeBtn) {</span></span>
+<span id="L819"><span class="lineNum">     819</span> <span class="tlaUNC">           0 :                 (void)resolve(false);</span></span>
+<span id="L820"><span class="lineNum">     820</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L821"><span class="lineNum">     821</span>              :             }</span>
+<span id="L822"><span class="lineNum">     822</span>              : </span>
+<span id="L823"><span class="lineNum">     823</span> <span class="tlaUNC">           0 :             if (!result.showAgain()) {</span></span>
+<span id="L824"><span class="lineNum">     824</span> <span class="tlaUNC">           0 :                 configuration()-&gt;setNeedToShowResetSoundFlagsWhenChangeSoundWarning(false);</span></span>
+<span id="L825"><span class="lineNum">     825</span>              :             }</span>
+<span id="L826"><span class="lineNum">     826</span>              : </span>
+<span id="L827"><span class="lineNum">     827</span> <span class="tlaUNC">           0 :             (void)resolve(true);</span></span>
+<span id="L828"><span class="lineNum">     828</span>              :         });</span>
+<span id="L829"><span class="lineNum">     829</span>              : </span>
+<span id="L830"><span class="lineNum">     830</span> <span class="tlaUNC">           0 :         return async::Promise&lt;bool&gt;::dummy_result();</span></span>
+<span id="L831"><span class="lineNum">     831</span> <span class="tlaUNC">           0 :     }, async::PromiseType::AsyncByBody);</span></span>
+<span id="L832"><span class="lineNum">     832</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L833"><span class="lineNum">     833</span>              : </span>
+<span id="L834"><span class="lineNum">     834</span> <span class="tlaUNC">           0 : AudioFxChainOrder MixerChannelItem::resolveNewBlankOutputResourceItemOrder() const</span></span>
+<span id="L835"><span class="lineNum">     835</span>              : {</span>
+<span id="L836"><span class="lineNum">     836</span> <span class="tlaUNC">           0 :     if (m_outputResourceItems.empty()) {</span></span>
+<span id="L837"><span class="lineNum">     837</span> <span class="tlaUNC">           0 :         return 0;</span></span>
+<span id="L838"><span class="lineNum">     838</span>              :     }</span>
+<span id="L839"><span class="lineNum">     839</span>              : </span>
+<span id="L840"><span class="lineNum">     840</span> <span class="tlaUNC">           0 :     AudioFxChainOrder lastChainOrder = m_outputResourceItems.lastKey();</span></span>
+<span id="L841"><span class="lineNum">     841</span> <span class="tlaUNC">           0 :     if (lastChainOrder &lt; OUTPUT_RESOURCE_COUNT_LIMIT - 1) {</span></span>
+<span id="L842"><span class="lineNum">     842</span> <span class="tlaUNC">           0 :         return lastChainOrder + 1;</span></span>
+<span id="L843"><span class="lineNum">     843</span>              :     }</span>
+<span id="L844"><span class="lineNum">     844</span>              : </span>
+<span id="L845"><span class="lineNum">     845</span> <span class="tlaUNC">           0 :     for (AudioFxChainOrder order = 0; order &lt; OUTPUT_RESOURCE_COUNT_LIMIT; ++order) {</span></span>
+<span id="L846"><span class="lineNum">     846</span> <span class="tlaUNC">           0 :         if (!m_outputResourceItems.contains(order)) {</span></span>
+<span id="L847"><span class="lineNum">     847</span> <span class="tlaUNC">           0 :             return order;</span></span>
+<span id="L848"><span class="lineNum">     848</span>              :         }</span>
+<span id="L849"><span class="lineNum">     849</span>              :     }</span>
+<span id="L850"><span class="lineNum">     850</span>              : </span>
+<span id="L851"><span class="lineNum">     851</span> <span class="tlaUNC">           0 :     return OUTPUT_RESOURCE_COUNT_LIMIT - 1;</span></span>
+<span id="L852"><span class="lineNum">     852</span>              : }</span>
+<span id="L853"><span class="lineNum">     853</span>              : </span>
+<span id="L854"><span class="lineNum">     854</span> <span class="tlaUNC">           0 : bool MixerChannelItem::outputOnly() const</span></span>
+<span id="L855"><span class="lineNum">     855</span>              : {</span>
+<span id="L856"><span class="lineNum">     856</span> <span class="tlaUNC">           0 :     return m_outputOnly;</span></span>
+<span id="L857"><span class="lineNum">     857</span>              : }</span>
+<span id="L858"><span class="lineNum">     858</span>              : </span>
+<span id="L859"><span class="lineNum">     859</span> <span class="tlaUNC">           0 : const AudioInputParams&amp; MixerChannelItem::inputParams() const</span></span>
+<span id="L860"><span class="lineNum">     860</span>              : {</span>
+<span id="L861"><span class="lineNum">     861</span> <span class="tlaUNC">           0 :     return m_inputParams;</span></span>
+<span id="L862"><span class="lineNum">     862</span>              : }</span>
+<span id="L863"><span class="lineNum">     863</span>              : </span>
+<span id="L864"><span class="lineNum">     864</span> <span class="tlaUNC">           0 : const AudioOutputParams&amp; MixerChannelItem::outputParams() const</span></span>
+<span id="L865"><span class="lineNum">     865</span>              : {</span>
+<span id="L866"><span class="lineNum">     866</span> <span class="tlaUNC">           0 :     return m_outParams;</span></span>
+<span id="L867"><span class="lineNum">     867</span>              : }</span>
+<span id="L868"><span class="lineNum">     868</span>              : </span>
+<span id="L869"><span class="lineNum">     869</span> <span class="tlaUNC">           0 : InputResourceItem* MixerChannelItem::inputResourceItem() const</span></span>
+<span id="L870"><span class="lineNum">     870</span>              : {</span>
+<span id="L871"><span class="lineNum">     871</span> <span class="tlaUNC">           0 :     return m_inputResourceItem;</span></span>
+<span id="L872"><span class="lineNum">     872</span>              : }</span>
+<span id="L873"><span class="lineNum">     873</span>              : </span>
+<span id="L874"><span class="lineNum">     874</span> <span class="tlaUNC">           0 : QList&lt;OutputResourceItem*&gt; MixerChannelItem::outputResourceItemList() const</span></span>
+<span id="L875"><span class="lineNum">     875</span>              : {</span>
+<span id="L876"><span class="lineNum">     876</span> <span class="tlaUNC">           0 :     return m_outputResourceItems.values();</span></span>
+<span id="L877"><span class="lineNum">     877</span>              : }</span>
+<span id="L878"><span class="lineNum">     878</span>              : </span>
+<span id="L879"><span class="lineNum">     879</span> <span class="tlaUNC">           0 : QList&lt;AuxSendItem*&gt; MixerChannelItem::auxSendItemList() const</span></span>
+<span id="L880"><span class="lineNum">     880</span>              : {</span>
+<span id="L881"><span class="lineNum">     881</span> <span class="tlaUNC">           0 :     return m_auxSendItems.values();</span></span>
+<span id="L882"><span class="lineNum">     882</span>              : }</span>
+<span id="L883"><span class="lineNum">     883</span>              : </span>
+<span id="L884"><span class="lineNum">     884</span> <span class="tlaUNC">           0 : const QMap&lt;aux_channel_idx_t, AuxSendItem*&gt;&amp; MixerChannelItem::auxSendItems() const</span></span>
+<span id="L885"><span class="lineNum">     885</span>              : {</span>
+<span id="L886"><span class="lineNum">     886</span> <span class="tlaUNC">           0 :     return m_auxSendItems;</span></span>
+<span id="L887"><span class="lineNum">     887</span>              : }</span>
         </pre>
               </td>
             </tr>

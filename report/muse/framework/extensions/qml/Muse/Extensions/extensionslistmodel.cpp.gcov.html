@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -240,62 +240,60 @@
 <span id="L182"><span class="lineNum">     182</span> <span class="tlaUNC">           0 :     params[&quot;shortcutCodeKey&quot;] = commandCode;</span></span>
 <span id="L183"><span class="lineNum">     183</span> <span class="tlaUNC">           0 :     preferencesUri.addParam(&quot;params&quot;, Val::fromQVariant(params));</span></span>
 <span id="L184"><span class="lineNum">     184</span>              : </span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC">           0 :     RetVal&lt;Val&gt; retVal = interactive()-&gt;openSync(preferencesUri);</span></span>
-<span id="L186"><span class="lineNum">     186</span>              : </span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC">           0 :     if (!retVal.ret) {</span></span>
-<span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC">           0 :         LOGE() &lt;&lt; retVal.ret.toString();</span></span>
-<span id="L189"><span class="lineNum">     189</span>              :     }</span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L191"><span class="lineNum">     191</span>              : </span>
-<span id="L192"><span class="lineNum">     192</span> <span class="tlaUNC">           0 : void ExtensionsListModel::reloadPlugins()</span></span>
-<span id="L193"><span class="lineNum">     193</span>              : {</span>
-<span id="L194"><span class="lineNum">     194</span>              :     //! NOTE Through the provider: reloading the register alone leaves the QML</span>
-<span id="L195"><span class="lineNum">     195</span>              :     //! engines holding the code they compiled the first time</span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaUNC">           0 :     provider()-&gt;reloadExtensions();</span></span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L198"><span class="lineNum">     198</span>              : </span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaUNC">           0 : void ExtensionsListModel::removeExtension(const QString&amp; uri)</span></span>
-<span id="L200"><span class="lineNum">     200</span>              : {</span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC">           0 :     installer()-&gt;uninstallExtension(Uri(uri.toStdString()));</span></span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L203"><span class="lineNum">     203</span>              : </span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC">           0 : QVariantList ExtensionsListModel::categories() const</span></span>
-<span id="L205"><span class="lineNum">     205</span>              : {</span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaUNC">           0 :     QVariantList result;</span></span>
-<span id="L207"><span class="lineNum">     207</span>              : </span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :     for (const auto&amp; category : extensionsRegister()-&gt;knownCategories()) {</span></span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaUNC">           0 :         QVariantMap obj;</span></span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :         obj[&quot;code&quot;] = QString::fromStdString(category.first);</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :         obj[&quot;title&quot;] = category.second.qTranslated();</span></span>
-<span id="L212"><span class="lineNum">     212</span>              : </span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC">           0 :         result &lt;&lt; obj;</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L215"><span class="lineNum">     215</span>              : </span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaUNC">           0 :     return result;</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaUNC">           0 : void ExtensionsListModel::updateExtension(const Uri&amp; uri)</span></span>
-<span id="L220"><span class="lineNum">     220</span>              : {</span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaUNC">           0 :     for (size_t i = 0; i &lt; m_extensions.size(); ++i) {</span></span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaUNC">           0 :         if (m_extensions.at(i).uri == uri) {</span></span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaUNC">           0 :             QModelIndex index = createIndex(int(i), 0);</span></span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaUNC">           0 :             emit dataChanged(index, index);</span></span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaUNC">           0 :             return;</span></span>
-<span id="L226"><span class="lineNum">     226</span>              :         }</span>
-<span id="L227"><span class="lineNum">     227</span>              :     }</span>
-<span id="L228"><span class="lineNum">     228</span>              : }</span>
-<span id="L229"><span class="lineNum">     229</span>              : </span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 : int ExtensionsListModel::itemIndexByUri(const QString&amp; uri_) const</span></span>
-<span id="L231"><span class="lineNum">     231</span>              : {</span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 :     Uri uri(uri_.toStdString());</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaUNC">           0 :     for (size_t i = 0; i &lt; m_extensions.size(); ++i) {</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaUNC">           0 :         if (m_extensions[i].uri == uri) {</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaUNC">           0 :             return static_cast&lt;int&gt;(i);</span></span>
-<span id="L236"><span class="lineNum">     236</span>              :         }</span>
-<span id="L237"><span class="lineNum">     237</span>              :     }</span>
-<span id="L238"><span class="lineNum">     238</span>              : </span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 :     return INVALID_INDEX;</span></span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC">           0 :     interactive()-&gt;open(preferencesUri).onReject(this, [](int code, const std::string&amp; msg) {</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC">           0 :         LOGE() &lt;&lt; code &lt;&lt; &quot; &quot; &lt;&lt; msg;</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC">           0 :     });</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L189"><span class="lineNum">     189</span>              : </span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 : void ExtensionsListModel::reloadPlugins()</span></span>
+<span id="L191"><span class="lineNum">     191</span>              : {</span>
+<span id="L192"><span class="lineNum">     192</span>              :     //! NOTE Through the provider: reloading the register alone leaves the QML</span>
+<span id="L193"><span class="lineNum">     193</span>              :     //! engines holding the code they compiled the first time</span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaUNC">           0 :     provider()-&gt;reloadExtensions();</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L196"><span class="lineNum">     196</span>              : </span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 : void ExtensionsListModel::removeExtension(const QString&amp; uri)</span></span>
+<span id="L198"><span class="lineNum">     198</span>              : {</span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaUNC">           0 :     installer()-&gt;uninstallExtension(Uri(uri.toStdString()));</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L201"><span class="lineNum">     201</span>              : </span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaUNC">           0 : QVariantList ExtensionsListModel::categories() const</span></span>
+<span id="L203"><span class="lineNum">     203</span>              : {</span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC">           0 :     QVariantList result;</span></span>
+<span id="L205"><span class="lineNum">     205</span>              : </span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaUNC">           0 :     for (const auto&amp; category : extensionsRegister()-&gt;knownCategories()) {</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC">           0 :         QVariantMap obj;</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :         obj[&quot;code&quot;] = QString::fromStdString(category.first);</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaUNC">           0 :         obj[&quot;title&quot;] = category.second.qTranslated();</span></span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :         result &lt;&lt; obj;</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L213"><span class="lineNum">     213</span>              : </span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaUNC">           0 :     return result;</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L216"><span class="lineNum">     216</span>              : </span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 : void ExtensionsListModel::updateExtension(const Uri&amp; uri)</span></span>
+<span id="L218"><span class="lineNum">     218</span>              : {</span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaUNC">           0 :     for (size_t i = 0; i &lt; m_extensions.size(); ++i) {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaUNC">           0 :         if (m_extensions.at(i).uri == uri) {</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaUNC">           0 :             QModelIndex index = createIndex(int(i), 0);</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaUNC">           0 :             emit dataChanged(index, index);</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaUNC">           0 :             return;</span></span>
+<span id="L224"><span class="lineNum">     224</span>              :         }</span>
+<span id="L225"><span class="lineNum">     225</span>              :     }</span>
+<span id="L226"><span class="lineNum">     226</span>              : }</span>
+<span id="L227"><span class="lineNum">     227</span>              : </span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaUNC">           0 : int ExtensionsListModel::itemIndexByUri(const QString&amp; uri_) const</span></span>
+<span id="L229"><span class="lineNum">     229</span>              : {</span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaUNC">           0 :     Uri uri(uri_.toStdString());</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaUNC">           0 :     for (size_t i = 0; i &lt; m_extensions.size(); ++i) {</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaUNC">           0 :         if (m_extensions[i].uri == uri) {</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaUNC">           0 :             return static_cast&lt;int&gt;(i);</span></span>
+<span id="L234"><span class="lineNum">     234</span>              :         }</span>
+<span id="L235"><span class="lineNum">     235</span>              :     }</span>
+<span id="L236"><span class="lineNum">     236</span>              : </span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC">           0 :     return INVALID_INDEX;</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaUNC">           0 : }</span></span>
         </pre>
               </td>
             </tr>

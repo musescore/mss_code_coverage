@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -234,15 +234,15 @@
 <span id="L176"><span class="lineNum">     176</span>              :     std::optional&lt;T&gt; max;</span>
 <span id="L177"><span class="lineNum">     177</span>              :     Presence presence = Presence::Required;</span>
 <span id="L178"><span class="lineNum">     178</span>              : </span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">         602 :     Field(std::string_view key, T S::* member, std::string_view description</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">         850 :     Field(std::string_view key, T S::* member, std::string_view description</span></span>
 <span id="L180"><span class="lineNum">     180</span>              :           , Presence presence = Presence::Required)</span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">         602 :         : key(key), member(member), description(TranslatableString::untranslatable(String::fromUtf8(description))),</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        1204 :         presence(presence) {}</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">         850 :         : key(key), member(member), description(TranslatableString::untranslatable(String::fromUtf8(description))),</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        1700 :         presence(presence) {}</span></span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">         130 :     Field(std::string_view key, T S::* member, std::string_view description,</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">         136 :     Field(std::string_view key, T S::* member, std::string_view description,</span></span>
 <span id="L185"><span class="lineNum">     185</span>              :           const T&amp; min, const T&amp; max, Presence presence = Presence::Required)</span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">         130 :         : key(key), member(member), description(TranslatableString::untranslatable(String::fromUtf8(description))),</span></span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">         260 :         min(min), max(max), presence(presence) {}</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">         136 :         : key(key), member(member), description(TranslatableString::untranslatable(String::fromUtf8(description))),</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">         272 :         min(min), max(max), presence(presence) {}</span></span>
 <span id="L188"><span class="lineNum">     188</span>              : </span>
 <span id="L189"><span class="lineNum">     189</span>              :     Field(std::string_view key, T S::* member, const TranslatableString&amp; label, const TranslatableString&amp; description</span>
 <span id="L190"><span class="lineNum">     190</span>              :           , Presence presence = Presence::Required)</span>
@@ -261,12 +261,12 @@
 <span id="L203"><span class="lineNum">     203</span>              : </span>
 <span id="L204"><span class="lineNum">     204</span>              : namespace internal {</span>
 <span id="L205"><span class="lineNum">     205</span>              : template&lt;typename T&gt;</span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">         104 : DataType dataType()</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">         256 : DataType dataType()</span></span>
 <span id="L207"><span class="lineNum">     207</span>              : {</span>
 <span id="L208"><span class="lineNum">     208</span>              :     if constexpr (std::is_same&lt;T, bool&gt;::value) {</span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">          12 :         return DataType::Bool;</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">          24 :         return DataType::Bool;</span></span>
 <span id="L210"><span class="lineNum">     210</span>              :     } else if constexpr (std::is_same&lt;T, int&gt;::value) {</span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          18 :         return DataType::Int;</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          39 :         return DataType::Int;</span></span>
 <span id="L212"><span class="lineNum">     212</span>              :     } else if constexpr (std::is_same&lt;T, unsigned int&gt;::value) {</span>
 <span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">           4 :         return DataType::Int;</span></span>
 <span id="L214"><span class="lineNum">     214</span>              :     } else if constexpr (std::is_same&lt;T, int64_t&gt;::value) {</span>
@@ -278,9 +278,9 @@
 <span id="L220"><span class="lineNum">     220</span>              :     } else if constexpr (std::is_same&lt;T, double&gt;::value) {</span>
 <span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">           4 :         return DataType::Double;</span></span>
 <span id="L222"><span class="lineNum">     222</span>              :     } else if constexpr (std::is_same&lt;T, std::string&gt;::value) {</span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">           6 :         return DataType::String;</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">           9 :         return DataType::String;</span></span>
 <span id="L224"><span class="lineNum">     224</span>              :     } else if constexpr (std::is_enum&lt;T&gt;::value) {</span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">          48 :         return DataType::Enum;</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">         164 :         return DataType::Enum;</span></span>
 <span id="L226"><span class="lineNum">     226</span>              :     } else if constexpr (std::is_same&lt;T, std::vector&lt;T&gt; &gt;::value) {</span>
 <span id="L227"><span class="lineNum">     227</span>              :         return DataType::List;</span>
 <span id="L228"><span class="lineNum">     228</span>              :     } else if constexpr (std::is_same&lt;T, std::map&lt;std::string, T&gt; &gt;::value) {</span>
@@ -292,10 +292,10 @@
 <span id="L234"><span class="lineNum">     234</span>              : }</span>
 <span id="L235"><span class="lineNum">     235</span>              : </span>
 <span id="L236"><span class="lineNum">     236</span>              : template&lt;typename T&gt;</span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">         819 : Val toVal(const T&amp; val)</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">        2077 : Val toVal(const T&amp; val)</span></span>
 <span id="L238"><span class="lineNum">     238</span>              : {</span>
 <span id="L239"><span class="lineNum">     239</span>              :     if constexpr (std::is_enum&lt;T&gt;::value) {</span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">         501 :         return Val(EnumContract&lt;T&gt;::str_val(val));</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">        1414 :         return Val(EnumContract&lt;T&gt;::str_val(val));</span></span>
 <span id="L241"><span class="lineNum">     241</span>              :     } else if constexpr (std::is_same&lt;T, unsigned int&gt;::value) {</span>
 <span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">           9 :         return Val(static_cast&lt;int&gt;(val));</span></span>
 <span id="L243"><span class="lineNum">     243</span>              :     } else if constexpr (std::is_same&lt;T, uint64_t&gt;::value) {</span>
@@ -303,14 +303,14 @@
 <span id="L245"><span class="lineNum">     245</span>              :     } else if constexpr (std::is_same&lt;T, float&gt;::value) {</span>
 <span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">          17 :         return Val(static_cast&lt;double&gt;(val));</span></span>
 <span id="L247"><span class="lineNum">     247</span>              :     } else {</span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">         283 :         return Val::fromType(val);</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">         628 :         return Val::fromType(val);</span></span>
 <span id="L249"><span class="lineNum">     249</span>              :     }</span>
 <span id="L250"><span class="lineNum">     250</span>              : }</span>
 <span id="L251"><span class="lineNum">     251</span>              : </span>
 <span id="L252"><span class="lineNum">     252</span>              : template&lt;typename S, typename T&gt;</span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">         779 : Val toVal(const S&amp; o, const T S::* member)</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">        2001 : Val toVal(const S&amp; o, const T S::* member)</span></span>
 <span id="L254"><span class="lineNum">     254</span>              : {</span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">         779 :     return toVal(o.*member);</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">        2001 :     return toVal(o.*member);</span></span>
 <span id="L256"><span class="lineNum">     256</span>              : }</span>
 <span id="L257"><span class="lineNum">     257</span>              : </span>
 <span id="L258"><span class="lineNum">     258</span>              : template&lt;typename T&gt;</span>
@@ -430,32 +430,32 @@
 <span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L373"><span class="lineNum">     373</span>              : </span>
 <span id="L374"><span class="lineNum">     374</span>              : template&lt;typename S, typename T&gt;</span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC tlaBgGNC">         104 : Arg makeArg(const Field&lt;S, T&gt;&amp; f, int order)</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC tlaBgGNC">         256 : Arg makeArg(const Field&lt;S, T&gt;&amp; f, int order)</span></span>
 <span id="L376"><span class="lineNum">     376</span>              : {</span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">         104 :     Arg arg(dataType&lt;T&gt;(), f.label, f.description, f.presence);</span></span>
-<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">         104 :     arg.uiHints = UiHints { order };</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">         256 :     Arg arg(dataType&lt;T&gt;(), f.label, f.description, f.presence);</span></span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">         256 :     arg.uiHints = UiHints { order };</span></span>
 <span id="L379"><span class="lineNum">     379</span>              : </span>
 <span id="L380"><span class="lineNum">     380</span>              :     if constexpr (std::is_enum&lt;T&gt;::value) {</span>
-<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">          48 :         arg.allowedValues = toValList(EnumContract&lt;T&gt;::str_vals());</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">         164 :         arg.allowedValues = toValList(EnumContract&lt;T&gt;::str_vals());</span></span>
 <span id="L382"><span class="lineNum">     382</span>              :     }</span>
 <span id="L383"><span class="lineNum">     383</span>              : </span>
-<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">         104 :     if (f.min) {</span></span>
-<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">          20 :         arg.min = toVal(*f.min);</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">         256 :     if (f.min) {</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">          38 :         arg.min = toVal(*f.min);</span></span>
 <span id="L386"><span class="lineNum">     386</span>              :     }</span>
-<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">         104 :     if (f.max) {</span></span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">          20 :         arg.max = toVal(*f.max);</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">         256 :     if (f.max) {</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">          38 :         arg.max = toVal(*f.max);</span></span>
 <span id="L389"><span class="lineNum">     389</span>              :     }</span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">         104 :     return arg;</span></span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">         256 :     return arg;</span></span>
 <span id="L391"><span class="lineNum">     391</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L392"><span class="lineNum">     392</span>              : </span>
 <span id="L393"><span class="lineNum">     393</span>              : template&lt;typename O, typename F&gt;</span>
-<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC tlaBgGNC">         437 : Params toParams(const O&amp; o, const F&amp; fields)</span></span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC tlaBgGNC">        1229 : Params toParams(const O&amp; o, const F&amp; fields)</span></span>
 <span id="L395"><span class="lineNum">     395</span>              : {</span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">         437 :     Params params;</span></span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">        1229 :     std::apply([&amp;](const auto&amp;... f) {</span></span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">         437 :         (params.emplace(f.key, internal::toVal(o, f.member)), ...);</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">        1229 :     Params params;</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">        3589 :     std::apply([&amp;](const auto&amp;... f) {</span></span>
+<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">        1229 :         (params.emplace(f.key, internal::toVal(o, f.member)), ...);</span></span>
 <span id="L399"><span class="lineNum">     399</span>              :     }, fields);</span>
-<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">         437 :     return params;</span></span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">        1229 :     return params;</span></span>
 <span id="L401"><span class="lineNum">     401</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L402"><span class="lineNum">     402</span>              : </span>
 <span id="L403"><span class="lineNum">     403</span>              : template&lt;typename O, typename F&gt;</span>
@@ -478,9 +478,9 @@
 <span id="L420"><span class="lineNum">     420</span>              : </span>
 <span id="L421"><span class="lineNum">     421</span>              : // dispatch (params) --------</span>
 <span id="L422"><span class="lineNum">     422</span>              : template&lt;HasInput C&gt;</span>
-<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC tlaBgGNC">         437 : Params toInputParams(const C&amp; o)</span></span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC tlaBgGNC">        1229 : Params toInputParams(const C&amp; o)</span></span>
 <span id="L424"><span class="lineNum">     424</span>              : {</span>
-<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">         437 :     return internal::toParams(o, C::input);</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">        1229 :     return internal::toParams(o, C::input);</span></span>
 <span id="L426"><span class="lineNum">     426</span>              : }</span>
 <span id="L427"><span class="lineNum">     427</span>              : </span>
 <span id="L428"><span class="lineNum">     428</span>              : template&lt;HasInput C&gt;</span>
@@ -505,62 +505,62 @@
 <span id="L447"><span class="lineNum">     447</span>              : // command info --------</span>
 <span id="L448"><span class="lineNum">     448</span>              : </span>
 <span id="L449"><span class="lineNum">     449</span>              : template&lt;HasInput C&gt;</span>
-<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC tlaBgGNC">          42 : InputSchema inputSchema()</span></span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC tlaBgGNC">         147 : InputSchema inputSchema()</span></span>
 <span id="L451"><span class="lineNum">     451</span>              : {</span>
-<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">          42 :     InputSchema schema;</span></span>
-<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">          42 :     int order = 0;</span></span>
-<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">         122 :     std::apply([&amp;](const auto&amp;... f) {</span></span>
-<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">          42 :         (schema.args.emplace(f.key, internal::makeArg(f, ++order)), ...);</span></span>
+<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">         147 :     InputSchema schema;</span></span>
+<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">         147 :     int order = 0;</span></span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">         437 :     std::apply([&amp;](const auto&amp;... f) {</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">         147 :         (schema.args.emplace(f.key, internal::makeArg(f, ++order)), ...);</span></span>
 <span id="L456"><span class="lineNum">     456</span>              :     }, C::input);</span>
-<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">          42 :     return schema;</span></span>
+<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">         147 :     return schema;</span></span>
 <span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L459"><span class="lineNum">     459</span>              : </span>
 <span id="L460"><span class="lineNum">     460</span>              : template&lt;HasOutput C&gt;</span>
-<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC tlaBgGNC">           4 : OutputSchema outputSchema()</span></span>
+<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC tlaBgGNC">           7 : OutputSchema outputSchema()</span></span>
 <span id="L462"><span class="lineNum">     462</span>              : {</span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">           4 :     OutputSchema schema;</span></span>
-<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">           4 :     int order = 0;</span></span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">           4 :     std::apply([&amp;](const auto&amp;... f) {</span></span>
-<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">           4 :         (schema.args.emplace(f.key, internal::makeArg(f, ++order)), ...);</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">           7 :     OutputSchema schema;</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">           7 :     int order = 0;</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">           7 :     std::apply([&amp;](const auto&amp;... f) {</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">           7 :         (schema.args.emplace(f.key, internal::makeArg(f, ++order)), ...);</span></span>
 <span id="L467"><span class="lineNum">     467</span>              :     }, C::output);</span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">           4 :     return schema;</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">           7 :     return schema;</span></span>
 <span id="L469"><span class="lineNum">     469</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L470"><span class="lineNum">     470</span>              : </span>
 <span id="L471"><span class="lineNum">     471</span>              : template&lt;TypedCommand C&gt;</span>
-<span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC tlaBgGNC">         500 : CommandInfo makeCommandInfo()</span></span>
+<span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC tlaBgGNC">        1562 : CommandInfo makeCommandInfo()</span></span>
 <span id="L473"><span class="lineNum">     473</span>              : {</span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">         500 :     CommandInfo info;</span></span>
-<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">         500 :     info.command = C::id;</span></span>
-<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">         500 :     info.title = C::title;</span></span>
-<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">         500 :     info.description = C::description;</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">        1562 :     CommandInfo info;</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">        1562 :     info.command = C::id;</span></span>
+<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">        1562 :     info.title = C::title;</span></span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">        1562 :     info.description = C::description;</span></span>
 <span id="L478"><span class="lineNum">     478</span>              :     if constexpr (HasInput&lt;C&gt;) {</span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">          41 :         info.inputSchema = inputSchema&lt;C&gt;();</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">         146 :         info.inputSchema = inputSchema&lt;C&gt;();</span></span>
 <span id="L480"><span class="lineNum">     480</span>              :     }</span>
 <span id="L481"><span class="lineNum">     481</span>              :     if constexpr (HasOutput&lt;C&gt;) {</span>
-<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">           3 :         info.outputSchema = outputSchema&lt;C&gt;();</span></span>
+<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">           6 :         info.outputSchema = outputSchema&lt;C&gt;();</span></span>
 <span id="L483"><span class="lineNum">     483</span>              :     }</span>
 <span id="L484"><span class="lineNum">     484</span>              :     if constexpr (HasDecoration&lt;C&gt;) {</span>
-<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">         115 :         info.decoration = C::decoration;</span></span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">         376 :         info.decoration = C::decoration;</span></span>
 <span id="L486"><span class="lineNum">     486</span>              :     }</span>
 <span id="L487"><span class="lineNum">     487</span>              : </span>
 <span id="L488"><span class="lineNum">     488</span>              :     static_assert(!HasAvailability&lt;C&gt;, &quot;`availability` is not correct, use `availabilities` instead&quot;);</span>
 <span id="L489"><span class="lineNum">     489</span>              :     if constexpr (HasAvailabilities&lt;C&gt;) {</span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">         497 :         info.availabilities = C::availabilities;</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">        1556 :         info.availabilities = C::availabilities;</span></span>
 <span id="L491"><span class="lineNum">     491</span>              :     }</span>
 <span id="L492"><span class="lineNum">     492</span>              : </span>
 <span id="L493"><span class="lineNum">     493</span>              :     if constexpr (HasAnnotations&lt;C&gt;) {</span>
-<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">          24 :         info.annotations = C::annotations;</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">          60 :         info.annotations = C::annotations;</span></span>
 <span id="L495"><span class="lineNum">     495</span>              :     }</span>
 <span id="L496"><span class="lineNum">     496</span>              : </span>
 <span id="L497"><span class="lineNum">     497</span>              :     if constexpr (HasRedirect&lt;C&gt;) {</span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">         428 :         Params params;</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">        1220 :         Params params;</span></span>
 <span id="L499"><span class="lineNum">     499</span>              :         using Redirect = std::remove_cvref_t&lt;decltype(C::redirect)&gt;;</span>
 <span id="L500"><span class="lineNum">     500</span>              :         if constexpr (HasInput&lt;Redirect&gt;) {</span>
-<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">         428 :             params = toInputParams(C::redirect);</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">        1220 :             params = toInputParams(C::redirect);</span></span>
 <span id="L502"><span class="lineNum">     502</span>              :         }</span>
-<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">         428 :         info.redirect = std::make_pair(C::redirect.id, params);</span></span>
-<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">         428 :     }</span></span>
-<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">         500 :     return info;</span></span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">        1220 :         info.redirect = std::make_pair(C::redirect.id, params);</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">        1220 :     }</span></span>
+<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">        1562 :     return info;</span></span>
 <span id="L506"><span class="lineNum">     506</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L507"><span class="lineNum">     507</span>              : }</span>
         </pre>

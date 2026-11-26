@@ -31,13 +31,13 @@
             <td class="headerValue">filtered_coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">97.2&nbsp;%</td>
-            <td class="headerCovTableEntry">290</td>
-            <td class="headerCovTableEntry">282</td>
+            <td class="headerCovTableEntryHi">96.9&nbsp;%</td>
+            <td class="headerCovTableEntry">292</td>
+            <td class="headerCovTableEntry">283</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -435,7 +435,7 @@
 <span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">          17 :     setConvertType(type);</span></span>
 <span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">          17 : }</span></span>
 <span id="L379"><span class="lineNum">     379</span>              : </span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">           4 : QStringList ConvertFileToScoreModel::selectFiles(const QStringList&amp; existingPaths)</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">           4 : std::vector&lt;std::string&gt; ConvertFileToScoreModel::filePickerFilters(const QStringList&amp; existingPaths) const</span></span>
 <span id="L381"><span class="lineNum">     381</span>              : {</span>
 <span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">           4 :     const ConvertConfig&amp; config = convertFileToScoreScenario()-&gt;config();</span></span>
 <span id="L383"><span class="lineNum">     383</span>              : </span>
@@ -449,142 +449,145 @@
 <span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">           9 :         patterns &lt;&lt; &quot;*.&quot; + ext.toLower();</span></span>
 <span id="L392"><span class="lineNum">     392</span>              :     }</span>
 <span id="L393"><span class="lineNum">     393</span>              : </span>
-<span id="L394"><span class="lineNum">     394</span>              :     const std::vector&lt;std::string&gt; filters {</span>
+<span id="L394"><span class="lineNum">     394</span>              :     return {</span>
 <span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">           8 :         muse::trc(&quot;project&quot;, &quot;All supported files&quot;) + &quot; (&quot; + patterns.join(' ').toStdString() + &quot;)&quot;,</span></span>
 <span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">           4 :         muse::trc(&quot;project&quot;, &quot;All&quot;) + &quot; (*)&quot;</span></span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">          16 :     };</span></span>
-<span id="L398"><span class="lineNum">     398</span>              : </span>
-<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">           4 :     io::paths_t files;</span></span>
-<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">           4 :     if (canSelectMultipleFiles()) {</span></span>
-<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">           9 :         files = interactive()-&gt;selectOpeningFilesSync(muse::trc(&quot;ui&quot;, &quot;Choose file&quot;),</span></span>
-<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">           9 :                                                       configuration()-&gt;defaultConvertFilePath(), filters);</span></span>
-<span id="L403"><span class="lineNum">     403</span>              :     } else {</span>
-<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">           3 :         io::path_t file = interactive()-&gt;selectOpeningFileSync(muse::trc(&quot;ui&quot;, &quot;Choose file&quot;),</span></span>
-<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">           3 :                                                                configuration()-&gt;defaultConvertFilePath(), filters);</span></span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">           1 :         if (!file.empty()) {</span></span>
-<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">           1 :             files.push_back(file);</span></span>
-<span id="L408"><span class="lineNum">     408</span>              :         }</span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">           1 :     }</span></span>
-<span id="L410"><span class="lineNum">     410</span>              : </span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">           4 :     if (!files.empty()) {</span></span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">           3 :         configuration()-&gt;setLastOpenedConvertFilePath(io::dirpath(files.back()));</span></span>
-<span id="L413"><span class="lineNum">     413</span>              :     }</span>
-<span id="L414"><span class="lineNum">     414</span>              : </span>
-<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">           4 :     QStringList paths;</span></span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">           4 :     paths.reserve(files.size());</span></span>
-<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">           7 :     for (const io::path_t&amp; file : files) {</span></span>
-<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">           3 :         paths &lt;&lt; file.toQString();</span></span>
-<span id="L419"><span class="lineNum">     419</span>              :     }</span>
-<span id="L420"><span class="lineNum">     420</span>              : </span>
-<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">           4 :     return paths;</span></span>
-<span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">          12 : }</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">          20 :     };</span></span>
+<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">          12 : }</span></span>
+<span id="L399"><span class="lineNum">     399</span>              : </span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">           4 : void ConvertFileToScoreModel::selectAndValidateFiles()</span></span>
+<span id="L401"><span class="lineNum">     401</span>              : {</span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">           4 :     const std::string title = muse::trc(&quot;ui&quot;, &quot;Choose file&quot;);</span></span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">           4 :     const io::path_t dir = configuration()-&gt;defaultConvertFilePath();</span></span>
+<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">           4 :     const std::vector&lt;std::string&gt; filters = filePickerFilters(m_fileListModel-&gt;paths());</span></span>
+<span id="L405"><span class="lineNum">     405</span>              : </span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">           4 :     if (canSelectMultipleFiles()) {</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">           3 :         interactive()-&gt;selectOpeningFiles(title, dir, filters).onResolve(this, [this](const io::paths_t&amp; files) {</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">           2 :             onFilesSelected(files);</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">           2 :         });</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">           3 :         return;</span></span>
+<span id="L411"><span class="lineNum">     411</span>              :     }</span>
+<span id="L412"><span class="lineNum">     412</span>              : </span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">           1 :     interactive()-&gt;selectOpeningFile(title, dir, filters).onResolve(this, [this](const io::path_t&amp; file) {</span></span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">           3 :         onFilesSelected({ file });</span></span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">           2 :     });</span></span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">          10 : }</span></span>
+<span id="L417"><span class="lineNum">     417</span>              : </span>
+<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">           3 : void ConvertFileToScoreModel::onFilesSelected(const io::paths_t&amp; files)</span></span>
+<span id="L419"><span class="lineNum">     419</span>              : {</span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">           3 :     if (files.empty()) {</span></span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaUNC tlaBgUNC">           0 :         return;</span></span>
+<span id="L422"><span class="lineNum">     422</span>              :     }</span>
 <span id="L423"><span class="lineNum">     423</span>              : </span>
-<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">           4 : bool ConvertFileToScoreModel::selectAndValidateFiles()</span></span>
-<span id="L425"><span class="lineNum">     425</span>              : {</span>
-<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">           4 :     QStringList files = selectFiles(m_fileListModel-&gt;paths());</span></span>
-<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">           4 :     if (files.isEmpty()) {</span></span>
-<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">           1 :         return false;</span></span>
-<span id="L429"><span class="lineNum">     429</span>              :     }</span>
-<span id="L430"><span class="lineNum">     430</span>              : </span>
-<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">           3 :     return validateAndAddFiles(files);</span></span>
-<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">           4 : }</span></span>
-<span id="L433"><span class="lineNum">     433</span>              : </span>
-<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">           8 : bool ConvertFileToScoreModel::validateAndAddFiles(const QStringList&amp; pathsOrUrls)</span></span>
-<span id="L435"><span class="lineNum">     435</span>              : {</span>
-<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">           8 :     QStringList newPaths;</span></span>
-<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">           8 :     newPaths.reserve(pathsOrUrls.size());</span></span>
-<span id="L438"><span class="lineNum">     438</span>              : </span>
-<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">          16 :     for (const QString&amp; pathOrUrl : pathsOrUrls) {</span></span>
-<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">           8 :         newPaths &lt;&lt; localPath(pathOrUrl);</span></span>
-<span id="L441"><span class="lineNum">     441</span>              :     }</span>
-<span id="L442"><span class="lineNum">     442</span>              : </span>
-<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">           8 :     const QStringList allPaths = m_fileListModel-&gt;paths() + newPaths;</span></span>
-<span id="L444"><span class="lineNum">     444</span>              : </span>
-<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">           8 :     io::paths_t ioPaths;</span></span>
-<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">           8 :     ioPaths.reserve(allPaths.size());</span></span>
-<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">          19 :     for (const QString&amp; path : allPaths) {</span></span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">          11 :         ioPaths.push_back(io::path_t(path));</span></span>
-<span id="L449"><span class="lineNum">     449</span>              :     }</span>
-<span id="L450"><span class="lineNum">     450</span>              : </span>
-<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">           8 :     RetVal&lt;ConvertFilesValidation&gt; result = convertFileToScoreScenario()-&gt;validateFiles(ioPaths);</span></span>
-<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">           8 :     if (!result.ret) {</span></span>
-<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">           1 :         return false;</span></span>
-<span id="L454"><span class="lineNum">     454</span>              :     }</span>
-<span id="L455"><span class="lineNum">     455</span>              : </span>
-<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">           7 :     m_fileListModel-&gt;setPaths(allPaths, result.val.category);</span></span>
-<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">           7 :     setSelectedLink(QString());</span></span>
-<span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC">           7 :     setConvertType(int(result.val.type));</span></span>
-<span id="L459"><span class="lineNum">     459</span>              : </span>
-<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC">           7 :     return true;</span></span>
-<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">           8 : }</span></span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC tlaBgGNC">           3 :     configuration()-&gt;setLastOpenedConvertFilePath(io::dirpath(files.back()));</span></span>
+<span id="L425"><span class="lineNum">     425</span>              : </span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">           3 :     QStringList paths;</span></span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">           3 :     paths.reserve(files.size());</span></span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">           6 :     for (const io::path_t&amp; file : files) {</span></span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">           3 :         paths &lt;&lt; file.toQString();</span></span>
+<span id="L430"><span class="lineNum">     430</span>              :     }</span>
+<span id="L431"><span class="lineNum">     431</span>              : </span>
+<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">           3 :     if (validateAndAddFiles(paths)) {</span></span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">           3 :         emit selectedFilesAdded();</span></span>
+<span id="L434"><span class="lineNum">     434</span>              :     }</span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">           3 : }</span></span>
+<span id="L436"><span class="lineNum">     436</span>              : </span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">           8 : bool ConvertFileToScoreModel::validateAndAddFiles(const QStringList&amp; pathsOrUrls)</span></span>
+<span id="L438"><span class="lineNum">     438</span>              : {</span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">           8 :     QStringList newPaths;</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">           8 :     newPaths.reserve(pathsOrUrls.size());</span></span>
+<span id="L441"><span class="lineNum">     441</span>              : </span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">          16 :     for (const QString&amp; pathOrUrl : pathsOrUrls) {</span></span>
+<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">           8 :         newPaths &lt;&lt; localPath(pathOrUrl);</span></span>
+<span id="L444"><span class="lineNum">     444</span>              :     }</span>
+<span id="L445"><span class="lineNum">     445</span>              : </span>
+<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">           8 :     const QStringList allPaths = m_fileListModel-&gt;paths() + newPaths;</span></span>
+<span id="L447"><span class="lineNum">     447</span>              : </span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">           8 :     io::paths_t ioPaths;</span></span>
+<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">           8 :     ioPaths.reserve(allPaths.size());</span></span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">          19 :     for (const QString&amp; path : allPaths) {</span></span>
+<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">          11 :         ioPaths.push_back(io::path_t(path));</span></span>
+<span id="L452"><span class="lineNum">     452</span>              :     }</span>
+<span id="L453"><span class="lineNum">     453</span>              : </span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">           8 :     RetVal&lt;ConvertFilesValidation&gt; result = convertFileToScoreScenario()-&gt;validateFiles(ioPaths);</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">           8 :     if (!result.ret) {</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">           1 :         return false;</span></span>
+<span id="L457"><span class="lineNum">     457</span>              :     }</span>
+<span id="L458"><span class="lineNum">     458</span>              : </span>
+<span id="L459"><span class="lineNum">     459</span> <span class="tlaGNC">           7 :     m_fileListModel-&gt;setPaths(allPaths, result.val.category);</span></span>
+<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC">           7 :     setSelectedLink(QString());</span></span>
+<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">           7 :     setConvertType(int(result.val.type));</span></span>
 <span id="L462"><span class="lineNum">     462</span>              : </span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">           3 : bool ConvertFileToScoreModel::validateLink(const QString&amp; link) const</span></span>
-<span id="L464"><span class="lineNum">     464</span>              : {</span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">           3 :     return convertFileToScoreScenario()-&gt;validateLink(QUrl::fromUserInput(link)).success();</span></span>
-<span id="L466"><span class="lineNum">     466</span>              : }</span>
-<span id="L467"><span class="lineNum">     467</span>              : </span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">           3 : QString ConvertFileToScoreModel::validateFileName(const QString&amp; name) const</span></span>
-<span id="L469"><span class="lineNum">     469</span>              : {</span>
-<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">           3 :     if (name.isEmpty()) {</span></span>
-<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">           1 :         return QString();</span></span>
-<span id="L472"><span class="lineNum">     472</span>              :     }</span>
-<span id="L473"><span class="lineNum">     473</span>              : </span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">           2 :     if (!io::isAllowedFileName(io::path_t(name))) {</span></span>
-<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">           2 :         return muse::qtrc(&quot;project/convert&quot;, &quot;“%1” cannot be used as a file name. Please choose a different name.&quot;).arg(name);</span></span>
-<span id="L476"><span class="lineNum">     476</span>              :     }</span>
-<span id="L477"><span class="lineNum">     477</span>              : </span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">           1 :     return QString();</span></span>
-<span id="L479"><span class="lineNum">     479</span>              : }</span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">           7 :     return true;</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">           8 : }</span></span>
+<span id="L465"><span class="lineNum">     465</span>              : </span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">           3 : bool ConvertFileToScoreModel::validateLink(const QString&amp; link) const</span></span>
+<span id="L467"><span class="lineNum">     467</span>              : {</span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">           3 :     return convertFileToScoreScenario()-&gt;validateLink(QUrl::fromUserInput(link)).success();</span></span>
+<span id="L469"><span class="lineNum">     469</span>              : }</span>
+<span id="L470"><span class="lineNum">     470</span>              : </span>
+<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">           3 : QString ConvertFileToScoreModel::validateFileName(const QString&amp; name) const</span></span>
+<span id="L472"><span class="lineNum">     472</span>              : {</span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">           3 :     if (name.isEmpty()) {</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">           1 :         return QString();</span></span>
+<span id="L475"><span class="lineNum">     475</span>              :     }</span>
+<span id="L476"><span class="lineNum">     476</span>              : </span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">           2 :     if (!io::isAllowedFileName(io::path_t(name))) {</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">           2 :         return muse::qtrc(&quot;project/convert&quot;, &quot;“%1” cannot be used as a file name. Please choose a different name.&quot;).arg(name);</span></span>
+<span id="L479"><span class="lineNum">     479</span>              :     }</span>
 <span id="L480"><span class="lineNum">     480</span>              : </span>
-<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">           2 : void ConvertFileToScoreModel::confirmCancel()</span></span>
-<span id="L482"><span class="lineNum">     482</span>              : {</span>
-<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">           2 :     constexpr int noBtn = int(IInteractive::Button::No);</span></span>
-<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">           2 :     constexpr int yesBtn = int(IInteractive::Button::Yes);</span></span>
-<span id="L485"><span class="lineNum">     485</span>              : </span>
-<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">           2 :     IInteractive::ButtonData stay(noBtn, muse::trc(&quot;project/convert&quot;, &quot;No, stay here&quot;));</span></span>
-<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">           2 :     stay.role = IInteractive::ButtonRole::RejectRole;</span></span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">           1 :     return QString();</span></span>
+<span id="L482"><span class="lineNum">     482</span>              : }</span>
+<span id="L483"><span class="lineNum">     483</span>              : </span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">           2 : void ConvertFileToScoreModel::confirmCancel()</span></span>
+<span id="L485"><span class="lineNum">     485</span>              : {</span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">           2 :     constexpr int noBtn = int(IInteractive::Button::No);</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">           2 :     constexpr int yesBtn = int(IInteractive::Button::Yes);</span></span>
 <span id="L488"><span class="lineNum">     488</span>              : </span>
-<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">           2 :     IInteractive::ButtonData cancel(yesBtn, muse::trc(&quot;project/convert&quot;, &quot;Yes, cancel&quot;), /*accent*/ true);</span></span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">           2 :     cancel.role = IInteractive::ButtonRole::AcceptRole;</span></span>
+<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">           2 :     IInteractive::ButtonData stay(noBtn, muse::trc(&quot;project/convert&quot;, &quot;No, stay here&quot;));</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">           2 :     stay.role = IInteractive::ButtonRole::RejectRole;</span></span>
 <span id="L491"><span class="lineNum">     491</span>              : </span>
-<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">          16 :     interactive()-&gt;question(</span></span>
-<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">           4 :         muse::trc(&quot;project/convert&quot;, &quot;Are you sure you want to cancel?&quot;),</span></span>
-<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">           4 :         muse::trc(&quot;project/convert&quot;, &quot;Your current selection will be lost.&quot;),</span></span>
-<span id="L495"><span class="lineNum">     495</span>              :         { stay, cancel }, noBtn, IInteractive::WithIcon)</span>
-<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">           2 :     .onResolve(this, [this, yesBtn](const IInteractive::Result&amp; result) {</span></span>
-<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">           2 :         if (result.isButton(yesBtn)) {</span></span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">           1 :             emit cancelConfirmed();</span></span>
-<span id="L499"><span class="lineNum">     499</span>              :         }</span>
-<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">           2 :     });</span></span>
-<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">           4 : }</span></span>
-<span id="L502"><span class="lineNum">     502</span>              : </span>
-<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">           2 : void ConvertFileToScoreModel::confirmGoingBack()</span></span>
-<span id="L504"><span class="lineNum">     504</span>              : {</span>
-<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">           2 :     constexpr int noBtn = int(IInteractive::Button::No);</span></span>
-<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">           2 :     constexpr int yesBtn = int(IInteractive::Button::Yes);</span></span>
-<span id="L507"><span class="lineNum">     507</span>              : </span>
-<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">           2 :     IInteractive::ButtonData stay(noBtn, muse::trc(&quot;project/convert&quot;, &quot;No, stay here&quot;));</span></span>
-<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">           2 :     stay.role = IInteractive::ButtonRole::RejectRole;</span></span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">           2 :     IInteractive::ButtonData cancel(yesBtn, muse::trc(&quot;project/convert&quot;, &quot;Yes, cancel&quot;), /*accent*/ true);</span></span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">           2 :     cancel.role = IInteractive::ButtonRole::AcceptRole;</span></span>
+<span id="L494"><span class="lineNum">     494</span>              : </span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">          16 :     interactive()-&gt;question(</span></span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">           4 :         muse::trc(&quot;project/convert&quot;, &quot;Are you sure you want to cancel?&quot;),</span></span>
+<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">           4 :         muse::trc(&quot;project/convert&quot;, &quot;Your current selection will be lost.&quot;),</span></span>
+<span id="L498"><span class="lineNum">     498</span>              :         { stay, cancel }, noBtn, IInteractive::WithIcon)</span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">           2 :     .onResolve(this, [this, yesBtn](const IInteractive::Result&amp; result) {</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">           2 :         if (result.isButton(yesBtn)) {</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">           1 :             emit cancelConfirmed();</span></span>
+<span id="L502"><span class="lineNum">     502</span>              :         }</span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">           2 :     });</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">           4 : }</span></span>
+<span id="L505"><span class="lineNum">     505</span>              : </span>
+<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">           2 : void ConvertFileToScoreModel::confirmGoingBack()</span></span>
+<span id="L507"><span class="lineNum">     507</span>              : {</span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">           2 :     constexpr int noBtn = int(IInteractive::Button::No);</span></span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">           2 :     constexpr int yesBtn = int(IInteractive::Button::Yes);</span></span>
 <span id="L510"><span class="lineNum">     510</span>              : </span>
-<span id="L511"><span class="lineNum">     511</span> <span class="tlaGNC">           2 :     IInteractive::ButtonData goBack(yesBtn, muse::trc(&quot;project/convert&quot;, &quot;Yes, go back&quot;), /*accent*/ true);</span></span>
-<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">           2 :     goBack.role = IInteractive::ButtonRole::AcceptRole;</span></span>
+<span id="L511"><span class="lineNum">     511</span> <span class="tlaGNC">           2 :     IInteractive::ButtonData stay(noBtn, muse::trc(&quot;project/convert&quot;, &quot;No, stay here&quot;));</span></span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">           2 :     stay.role = IInteractive::ButtonRole::RejectRole;</span></span>
 <span id="L513"><span class="lineNum">     513</span>              : </span>
-<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">          16 :     interactive()-&gt;question(</span></span>
-<span id="L515"><span class="lineNum">     515</span> <span class="tlaGNC">           4 :         muse::trc(&quot;project/convert&quot;, &quot;Are you sure you want to go back?&quot;),</span></span>
-<span id="L516"><span class="lineNum">     516</span> <span class="tlaGNC">           4 :         muse::trc(&quot;project/convert&quot;, &quot;Your current selection will be lost.&quot;),</span></span>
-<span id="L517"><span class="lineNum">     517</span>              :         { stay, goBack }, noBtn, IInteractive::WithIcon)</span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">           2 :     .onResolve(this, [this, yesBtn](const IInteractive::Result&amp; result) {</span></span>
-<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">           2 :         if (result.isButton(yesBtn)) {</span></span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">           1 :             emit goingBackConfirmed();</span></span>
-<span id="L521"><span class="lineNum">     521</span>              :         }</span>
-<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">           2 :     });</span></span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">           4 : }</span></span>
-<span id="L524"><span class="lineNum">     524</span>              : </span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">           2 : void ConvertFileToScoreModel::clearSelection()</span></span>
-<span id="L526"><span class="lineNum">     526</span>              : {</span>
-<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">           2 :     setSelectedLink(QString());</span></span>
-<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">           2 :     m_fileListModel-&gt;clear();</span></span>
-<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">           2 : }</span></span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">           2 :     IInteractive::ButtonData goBack(yesBtn, muse::trc(&quot;project/convert&quot;, &quot;Yes, go back&quot;), /*accent*/ true);</span></span>
+<span id="L515"><span class="lineNum">     515</span> <span class="tlaGNC">           2 :     goBack.role = IInteractive::ButtonRole::AcceptRole;</span></span>
+<span id="L516"><span class="lineNum">     516</span>              : </span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">          16 :     interactive()-&gt;question(</span></span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">           4 :         muse::trc(&quot;project/convert&quot;, &quot;Are you sure you want to go back?&quot;),</span></span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">           4 :         muse::trc(&quot;project/convert&quot;, &quot;Your current selection will be lost.&quot;),</span></span>
+<span id="L520"><span class="lineNum">     520</span>              :         { stay, goBack }, noBtn, IInteractive::WithIcon)</span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">           2 :     .onResolve(this, [this, yesBtn](const IInteractive::Result&amp; result) {</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">           2 :         if (result.isButton(yesBtn)) {</span></span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">           1 :             emit goingBackConfirmed();</span></span>
+<span id="L524"><span class="lineNum">     524</span>              :         }</span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">           2 :     });</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">           4 : }</span></span>
+<span id="L527"><span class="lineNum">     527</span>              : </span>
+<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">           2 : void ConvertFileToScoreModel::clearSelection()</span></span>
+<span id="L529"><span class="lineNum">     529</span>              : {</span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">           2 :     setSelectedLink(QString());</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">           2 :     m_fileListModel-&gt;clear();</span></span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">           2 : }</span></span>
         </pre>
               </td>
             </tr>

@@ -31,13 +31,13 @@
             <td class="headerValue">filtered_coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">40.5&nbsp;%</td>
+            <td class="headerCovTableEntryLo">49.3&nbsp;%</td>
             <td class="headerCovTableEntry">402</td>
-            <td class="headerCovTableEntry">163</td>
+            <td class="headerCovTableEntry">198</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -110,39 +110,39 @@
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span>              : class ChangePitch : public UndoableCommand</span>
 <span id="L54"><span class="lineNum">      54</span>              : {</span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC tlaBgGNC">        3648 :     OBJECT_ALLOCATOR(engraving, ChangePitch)</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC tlaBgGNC">        3656 :     OBJECT_ALLOCATOR(engraving, ChangePitch)</span></span>
 <span id="L56"><span class="lineNum">      56</span>              : </span>
 <span id="L57"><span class="lineNum">      57</span>              :     Note* note = nullptr;</span>
 <span id="L58"><span class="lineNum">      58</span>              :     int pitch = 0;</span>
 <span id="L59"><span class="lineNum">      59</span>              :     int tpc1 = 0;</span>
 <span id="L60"><span class="lineNum">      60</span>              :     int tpc2 = 0;</span>
 <span id="L61"><span class="lineNum">      61</span>              : </span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">        1968 :     void flip() override</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">        1972 :     void flip() override</span></span>
 <span id="L63"><span class="lineNum">      63</span>              :     {</span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        1968 :         int f_pitch = note-&gt;pitch();</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">        1968 :         int f_tpc1  = note-&gt;tpc1();</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        1968 :         int f_tpc2  = note-&gt;tpc2();</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">        1972 :         int f_pitch = note-&gt;pitch();</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">        1972 :         int f_tpc1  = note-&gt;tpc1();</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        1972 :         int f_tpc2  = note-&gt;tpc2();</span></span>
 <span id="L67"><span class="lineNum">      67</span>              :         // do not change unless necessary</span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        1968 :         if (f_pitch == pitch &amp;&amp; f_tpc1 == tpc1 &amp;&amp; f_tpc2 == tpc2) {</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">        1972 :         if (f_pitch == pitch &amp;&amp; f_tpc1 == tpc1 &amp;&amp; f_tpc2 == tpc2) {</span></span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">         817 :             return;</span></span>
 <span id="L70"><span class="lineNum">      70</span>              :         }</span>
 <span id="L71"><span class="lineNum">      71</span>              : </span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">        1151 :         note-&gt;setPitch(pitch, tpc1, tpc2);</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        1151 :         pitch = f_pitch;</span></span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">        1151 :         tpc1  = f_tpc1;</span></span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">        1151 :         tpc2  = f_tpc2;</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">        1155 :         note-&gt;setPitch(pitch, tpc1, tpc2);</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">        1155 :         pitch = f_pitch;</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">        1155 :         tpc1  = f_tpc1;</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">        1155 :         tpc2  = f_tpc2;</span></span>
 <span id="L76"><span class="lineNum">      76</span>              : </span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        1151 :         note-&gt;triggerLayout();</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">        1155 :         note-&gt;triggerLayout();</span></span>
 <span id="L78"><span class="lineNum">      78</span>              :     }</span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
 <span id="L80"><span class="lineNum">      80</span>              : public:</span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">        1827 :     ChangePitch(Note* _note, int _pitch, int _tpc1, int _tpc2)</span></span>
-<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">        1827 :     {</span></span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">        1827 :         note  = _note;</span></span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">        1827 :         pitch = _pitch;</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">        1827 :         tpc1  = _tpc1;</span></span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">        1827 :         tpc2  = _tpc2;</span></span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">        1827 :     }</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">        1831 :     ChangePitch(Note* _note, int _pitch, int _tpc1, int _tpc2)</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">        1831 :     {</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">        1831 :         note  = _note;</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">        1831 :         pitch = _pitch;</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">        1831 :         tpc1  = _tpc1;</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">        1831 :         tpc2  = _tpc2;</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">        1831 :     }</span></span>
 <span id="L88"><span class="lineNum">      88</span>              : </span>
 <span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">         386 :     UNDO_TYPE(CommandType::ChangePitch)</span></span>
 <span id="L90"><span class="lineNum">      90</span> <span class="tlaUNC tlaBgUNC">           0 :     UNDO_NAME(&quot;ChangePitch&quot;)</span></span>
@@ -160,7 +160,7 @@
 <span id="L102"><span class="lineNum">     102</span>              : </span>
 <span id="L103"><span class="lineNum">     103</span>              : class ChangeFretting : public UndoableCommand</span>
 <span id="L104"><span class="lineNum">     104</span>              : {</span>
-<span id="L105"><span class="lineNum">     105</span> <span class="tlaUNC tlaBgUNC">           0 :     OBJECT_ALLOCATOR(engraving, ChangeFretting)</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">          46 :     OBJECT_ALLOCATOR(engraving, ChangeFretting)</span></span>
 <span id="L106"><span class="lineNum">     106</span>              : </span>
 <span id="L107"><span class="lineNum">     107</span>              :     Note* note = nullptr;</span>
 <span id="L108"><span class="lineNum">     108</span>              :     int pitch = 0;</span>
@@ -169,50 +169,50 @@
 <span id="L111"><span class="lineNum">     111</span>              :     int tpc1 = 0;</span>
 <span id="L112"><span class="lineNum">     112</span>              :     int tpc2 = 0;</span>
 <span id="L113"><span class="lineNum">     113</span>              : </span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaUNC">           0 :     void flip() override</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">          23 :     void flip() override</span></span>
 <span id="L115"><span class="lineNum">     115</span>              :     {</span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaUNC">           0 :         int f_pitch = note-&gt;pitch();</span></span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaUNC">           0 :         int f_string= note-&gt;string();</span></span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaUNC">           0 :         int f_fret  = note-&gt;fret();</span></span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaUNC">           0 :         int f_tpc1  = note-&gt;tpc1();</span></span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaUNC">           0 :         int f_tpc2  = note-&gt;tpc2();</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">          23 :         int f_pitch = note-&gt;pitch();</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">          23 :         int f_string= note-&gt;string();</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">          23 :         int f_fret  = note-&gt;fret();</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">          23 :         int f_tpc1  = note-&gt;tpc1();</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">          23 :         int f_tpc2  = note-&gt;tpc2();</span></span>
 <span id="L121"><span class="lineNum">     121</span>              :         // do not change unless necessary</span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaUNC">           0 :         if (f_pitch == pitch &amp;&amp; f_string == string &amp;&amp; f_fret == fret &amp;&amp; f_tpc1 == tpc1 &amp;&amp; f_tpc2 == tpc2) {</span></span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaUNC">           0 :             return;</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">          23 :         if (f_pitch == pitch &amp;&amp; f_string == string &amp;&amp; f_fret == fret &amp;&amp; f_tpc1 == tpc1 &amp;&amp; f_tpc2 == tpc2) {</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaUNC tlaBgUNC">           0 :             return;</span></span>
 <span id="L124"><span class="lineNum">     124</span>              :         }</span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaUNC">           0 :         note-&gt;setPitch(pitch, tpc1, tpc2);</span></span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaUNC">           0 :         note-&gt;setString(string);</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaUNC">           0 :         note-&gt;setFret(fret);</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaUNC">           0 :         pitch = f_pitch;</span></span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaUNC">           0 :         string= f_string;</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaUNC">           0 :         fret  = f_fret;</span></span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaUNC">           0 :         tpc1  = f_tpc1;</span></span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaUNC">           0 :         tpc2  = f_tpc2;</span></span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaUNC">           0 :         note-&gt;triggerLayout();</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC tlaBgGNC">          23 :         note-&gt;setPitch(pitch, tpc1, tpc2);</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">          23 :         note-&gt;setString(string);</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          23 :         note-&gt;setFret(fret);</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">          23 :         pitch = f_pitch;</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">          23 :         string= f_string;</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">          23 :         fret  = f_fret;</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">          23 :         tpc1  = f_tpc1;</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">          23 :         tpc2  = f_tpc2;</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">          23 :         note-&gt;triggerLayout();</span></span>
 <span id="L135"><span class="lineNum">     135</span>              :     }</span>
 <span id="L136"><span class="lineNum">     136</span>              : </span>
 <span id="L137"><span class="lineNum">     137</span>              : public:</span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaUNC">           0 :     ChangeFretting(Note* _note, int _pitch, int _string, int _fret, int _tpc1, int _tpc2)</span></span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaUNC">           0 :     {</span></span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaUNC">           0 :         note  = _note;</span></span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaUNC">           0 :         pitch = _pitch;</span></span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaUNC">           0 :         string= _string;</span></span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC">           0 :         fret  = _fret;</span></span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :         tpc1  = _tpc1;</span></span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC">           0 :         tpc2  = _tpc2;</span></span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">          23 :     ChangeFretting(Note* _note, int _pitch, int _string, int _fret, int _tpc1, int _tpc2)</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">          23 :     {</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">          23 :         note  = _note;</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">          23 :         pitch = _pitch;</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">          23 :         string= _string;</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">          23 :         fret  = _fret;</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">          23 :         tpc1  = _tpc1;</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">          23 :         tpc2  = _tpc2;</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">          23 :     }</span></span>
 <span id="L147"><span class="lineNum">     147</span>              : </span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC">           0 :     UNDO_TYPE(CommandType::ChangeFretting)</span></span>
-<span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 :     UNDO_NAME(&quot;ChangeFretting&quot;)</span></span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 :     UNDO_CHANGED_OBJECTS({ note })</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">           7 :     UNDO_TYPE(CommandType::ChangeFretting)</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC tlaBgUNC">           0 :     UNDO_NAME(&quot;ChangeFretting&quot;)</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC tlaBgGNC">          21 :     UNDO_CHANGED_OBJECTS({ note })</span></span>
 <span id="L151"><span class="lineNum">     151</span>              : };</span>
 <span id="L152"><span class="lineNum">     152</span>              : </span>
 <span id="L153"><span class="lineNum">     153</span>              : //---------------------------------------------------------</span>
 <span id="L154"><span class="lineNum">     154</span>              : //   toggleOrnament</span>
 <span id="L155"><span class="lineNum">     155</span>              : //---------------------------------------------------------</span>
 <span id="L156"><span class="lineNum">     156</span>              : </span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaUNC">           0 : void EditNote::toggleOrnament(Score* score, SymId attr)</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaUNC tlaBgUNC">           0 : void EditNote::toggleOrnament(Score* score, SymId attr)</span></span>
 <span id="L158"><span class="lineNum">     158</span>              : {</span>
 <span id="L159"><span class="lineNum">     159</span> <span class="tlaUNC">           0 :     std::set&lt;Chord*&gt; set;</span></span>
 <span id="L160"><span class="lineNum">     160</span> <span class="tlaUNC">           0 :     for (EngravingItem* el : score-&gt;selection().elements()) {</span></span>
@@ -484,16 +484,16 @@
 <span id="L426"><span class="lineNum">     426</span>              : //   upDownChromatic</span>
 <span id="L427"><span class="lineNum">     427</span>              : //---------------------------------------------------------</span>
 <span id="L428"><span class="lineNum">     428</span>              : </span>
-<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">           2 : void EditNote::upDownChromatic(bool up, int pitch, Note* n, Key key, int tpc1, int tpc2,</span></span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">           4 : void EditNote::upDownChromatic(bool up, int pitch, Note* n, Key key, int tpc1, int tpc2,</span></span>
 <span id="L430"><span class="lineNum">     430</span>              :                                int&amp; newPitch, int&amp; newTpc1, int&amp; newTpc2)</span>
 <span id="L431"><span class="lineNum">     431</span>              : {</span>
-<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">           2 :     bool concertPitch = n-&gt;concertPitch();</span></span>
-<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">           2 :     AccidentalVal noteAccVal = tpc2alter(concertPitch ? tpc1 : tpc2);</span></span>
-<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">           2 :     AccidentalVal accState = AccidentalVal::NATURAL;</span></span>
-<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">           2 :     if (Measure* m = n-&gt;findMeasure()) {</span></span>
-<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">           2 :         accState = m-&gt;findAccidental(n);</span></span>
+<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">           4 :     bool concertPitch = n-&gt;concertPitch();</span></span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">           4 :     AccidentalVal noteAccVal = tpc2alter(concertPitch ? tpc1 : tpc2);</span></span>
+<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">           4 :     AccidentalVal accState = AccidentalVal::NATURAL;</span></span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">           4 :     if (Measure* m = n-&gt;findMeasure()) {</span></span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">           4 :         accState = m-&gt;findAccidental(n);</span></span>
 <span id="L437"><span class="lineNum">     437</span>              :     }</span>
-<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">           2 :     if (up &amp;&amp; pitch &lt; 127) {</span></span>
+<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">           4 :     if (up &amp;&amp; pitch &lt; 127) {</span></span>
 <span id="L439"><span class="lineNum">     439</span> <span class="tlaUNC tlaBgUNC">           0 :         newPitch = pitch + 1;</span></span>
 <span id="L440"><span class="lineNum">     440</span> <span class="tlaUNC">           0 :         if (concertPitch) {</span></span>
 <span id="L441"><span class="lineNum">     441</span> <span class="tlaUNC">           0 :             if (tpc1 &gt; Tpc::TPC_A + int(key) &amp;&amp; noteAccVal &gt;= accState) {</span></span>
@@ -510,9 +510,9 @@
 <span id="L452"><span class="lineNum">     452</span>              :             }</span>
 <span id="L453"><span class="lineNum">     453</span> <span class="tlaUNC">           0 :             newTpc1 = n-&gt;transposeTpc(newTpc2);</span></span>
 <span id="L454"><span class="lineNum">     454</span>              :         }</span>
-<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC tlaBgGNC">           2 :     } else if (!up &amp;&amp; pitch &gt; 0) {</span></span>
-<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">           2 :         newPitch = pitch - 1;</span></span>
-<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">           2 :         if (concertPitch) {</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC tlaBgGNC">           4 :     } else if (!up &amp;&amp; pitch &gt; 0) {</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">           4 :         newPitch = pitch - 1;</span></span>
+<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">           4 :         if (concertPitch) {</span></span>
 <span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC tlaBgUNC">           0 :             if (tpc1 &gt; Tpc::TPC_C + int(key) || noteAccVal &gt; accState) {</span></span>
 <span id="L459"><span class="lineNum">     459</span> <span class="tlaUNC">           0 :                 newTpc1 = tpc1 - 7;           // down semitone chromatic</span></span>
 <span id="L460"><span class="lineNum">     460</span>              :             } else {</span>
@@ -520,54 +520,54 @@
 <span id="L462"><span class="lineNum">     462</span>              :             }</span>
 <span id="L463"><span class="lineNum">     463</span> <span class="tlaUNC">           0 :             newTpc2 = n-&gt;transposeTpc(newTpc1);</span></span>
 <span id="L464"><span class="lineNum">     464</span>              :         } else {</span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC tlaBgGNC">           2 :             if (tpc2 &gt; Tpc::TPC_C + int(key) || noteAccVal &gt; accState) {</span></span>
-<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">           2 :                 newTpc2 = tpc2 - 7;           // down semitone chromatic</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC tlaBgGNC">           4 :             if (tpc2 &gt; Tpc::TPC_C + int(key) || noteAccVal &gt; accState) {</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">           4 :                 newTpc2 = tpc2 - 7;           // down semitone chromatic</span></span>
 <span id="L467"><span class="lineNum">     467</span>              :             } else {</span>
 <span id="L468"><span class="lineNum">     468</span> <span class="tlaUNC tlaBgUNC">           0 :                 newTpc2 = tpc2 + 5;           // down semitone diatonic</span></span>
 <span id="L469"><span class="lineNum">     469</span>              :             }</span>
-<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC tlaBgGNC">           2 :             newTpc1 = n-&gt;transposeTpc(newTpc2);</span></span>
+<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC tlaBgGNC">           4 :             newTpc1 = n-&gt;transposeTpc(newTpc2);</span></span>
 <span id="L471"><span class="lineNum">     471</span>              :         }</span>
 <span id="L472"><span class="lineNum">     472</span>              :     }</span>
-<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">           2 : }</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">           4 : }</span></span>
 <span id="L474"><span class="lineNum">     474</span>              : </span>
 <span id="L475"><span class="lineNum">     475</span>              : //---------------------------------------------------------</span>
 <span id="L476"><span class="lineNum">     476</span>              : //   upDown</span>
 <span id="L477"><span class="lineNum">     477</span>              : //---------------------------------------------------------</span>
 <span id="L478"><span class="lineNum">     478</span>              : </span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">           1 : void EditNote::upDown(Score* score, bool up, UpDownMode mode)</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">           2 : void EditNote::upDown(Score* score, bool up, UpDownMode mode)</span></span>
 <span id="L480"><span class="lineNum">     480</span>              : {</span>
-<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">           1 :     std::vector&lt;Note*&gt; el = score-&gt;selection().uniqueNotes();</span></span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">           2 :     std::vector&lt;Note*&gt; el = score-&gt;selection().uniqueNotes();</span></span>
 <span id="L482"><span class="lineNum">     482</span>              : </span>
-<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">           1 :     std::sort(el.begin(), el.end(), [up](Note* a, Note* b) {</span></span>
-<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">           2 :         if (up) {</span></span>
+<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">           2 :     std::sort(el.begin(), el.end(), [up](Note* a, Note* b) {</span></span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">           4 :         if (up) {</span></span>
 <span id="L485"><span class="lineNum">     485</span> <span class="tlaUNC tlaBgUNC">           0 :             return a-&gt;string() &lt; b-&gt;string();</span></span>
 <span id="L486"><span class="lineNum">     486</span>              :         } else {</span>
-<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC tlaBgGNC">           2 :             return a-&gt;string() &gt; b-&gt;string();</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC tlaBgGNC">           4 :             return a-&gt;string() &gt; b-&gt;string();</span></span>
 <span id="L488"><span class="lineNum">     488</span>              :         }</span>
 <span id="L489"><span class="lineNum">     489</span>              :     });</span>
 <span id="L490"><span class="lineNum">     490</span>              : </span>
-<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">           3 :     for (Note* oNote : el) {</span></span>
-<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">           2 :         Fraction tick     = oNote-&gt;chord()-&gt;tick();</span></span>
-<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">           2 :         Staff* staff = oNote-&gt;staff();</span></span>
-<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">           2 :         Part* part   = oNote-&gt;originPart();</span></span>
-<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">           2 :         Key key      = staff-&gt;key(tick);</span></span>
-<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">           2 :         int tpc1     = oNote-&gt;tpc1();</span></span>
-<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">           2 :         int tpc2     = oNote-&gt;tpc2();</span></span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">           2 :         int pitch    = oNote-&gt;pitch();</span></span>
-<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">           2 :         int pitchOffset = staff-&gt;pitchOffset(tick);</span></span>
-<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">           2 :         int newTpc1  = tpc1;          // default to unchanged</span></span>
-<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">           2 :         int newTpc2  = tpc2;          // default to unchanged</span></span>
-<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">           2 :         int newPitch = pitch;         // default to unchanged</span></span>
-<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">           2 :         int string   = oNote-&gt;string();</span></span>
-<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">           2 :         int fret     = oNote-&gt;fret();</span></span>
+<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">           6 :     for (Note* oNote : el) {</span></span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">           4 :         Fraction tick     = oNote-&gt;chord()-&gt;tick();</span></span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">           4 :         Staff* staff = oNote-&gt;staff();</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">           4 :         Part* part   = oNote-&gt;originPart();</span></span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">           4 :         Key key      = staff-&gt;key(tick);</span></span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">           4 :         int tpc1     = oNote-&gt;tpc1();</span></span>
+<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">           4 :         int tpc2     = oNote-&gt;tpc2();</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">           4 :         int pitch    = oNote-&gt;pitch();</span></span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">           4 :         int pitchOffset = staff-&gt;pitchOffset(tick);</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">           4 :         int newTpc1  = tpc1;          // default to unchanged</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">           4 :         int newTpc2  = tpc2;          // default to unchanged</span></span>
+<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">           4 :         int newPitch = pitch;         // default to unchanged</span></span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">           4 :         int string   = oNote-&gt;string();</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">           4 :         int fret     = oNote-&gt;fret();</span></span>
 <span id="L505"><span class="lineNum">     505</span>              : </span>
-<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">           2 :         StaffGroup staffGroup = staff-&gt;staffType(oNote-&gt;chord()-&gt;tick())-&gt;group();</span></span>
+<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">           4 :         StaffGroup staffGroup = staff-&gt;staffType(oNote-&gt;chord()-&gt;tick())-&gt;group();</span></span>
 <span id="L507"><span class="lineNum">     507</span>              :         // if not tab, check for instrument instead of staffType (for pitched to unpitched instrument changes)</span>
-<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">           2 :         if (staffGroup != StaffGroup::TAB) {</span></span>
-<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">           2 :             staffGroup = part-&gt;instrument(oNote-&gt;tick())-&gt;useDrumset() ? StaffGroup::PERCUSSION : StaffGroup::STANDARD;</span></span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">           4 :         if (staffGroup != StaffGroup::TAB) {</span></span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">           4 :             staffGroup = part-&gt;instrument(oNote-&gt;tick())-&gt;useDrumset() ? StaffGroup::PERCUSSION : StaffGroup::STANDARD;</span></span>
 <span id="L510"><span class="lineNum">     510</span>              :         }</span>
 <span id="L511"><span class="lineNum">     511</span>              : </span>
-<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">           2 :         switch (staffGroup) {</span></span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">           4 :         switch (staffGroup) {</span></span>
 <span id="L513"><span class="lineNum">     513</span> <span class="tlaUNC tlaBgUNC">           0 :         case StaffGroup::PERCUSSION:</span></span>
 <span id="L514"><span class="lineNum">     514</span>              :         {</span>
 <span id="L515"><span class="lineNum">     515</span> <span class="tlaUNC">           0 :             const Drumset* ds = part-&gt;instrument(tick)-&gt;drumset();</span></span>
@@ -624,9 +624,9 @@
 <span id="L566"><span class="lineNum">     566</span>              :             }</span>
 <span id="L567"><span class="lineNum">     567</span>              :         }</span>
 <span id="L568"><span class="lineNum">     568</span> <span class="tlaUNC">           0 :         break;</span></span>
-<span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC tlaBgGNC">           2 :         case StaffGroup::STANDARD:</span></span>
+<span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC tlaBgGNC">           4 :         case StaffGroup::STANDARD:</span></span>
 <span id="L570"><span class="lineNum">     570</span>              :         case StaffGroup::JIANPU:</span>
-<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">           2 :             switch (mode) {</span></span>
+<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">           4 :             switch (mode) {</span></span>
 <span id="L572"><span class="lineNum">     572</span> <span class="tlaUNC tlaBgUNC">           0 :             case UpDownMode::OCTAVE:</span></span>
 <span id="L573"><span class="lineNum">     573</span> <span class="tlaUNC">           0 :                 if (up) {</span></span>
 <span id="L574"><span class="lineNum">     574</span> <span class="tlaUNC">           0 :                     if (pitch &lt; 116) {</span></span>
@@ -639,9 +639,9 @@
 <span id="L581"><span class="lineNum">     581</span>              :                 }</span>
 <span id="L582"><span class="lineNum">     582</span> <span class="tlaUNC">           0 :                 break;</span></span>
 <span id="L583"><span class="lineNum">     583</span>              : </span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC tlaBgGNC">           2 :             case UpDownMode::CHROMATIC:</span></span>
-<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">           2 :                 upDownChromatic(up, pitch, oNote, key, tpc1, tpc2, newPitch, newTpc1, newTpc2);</span></span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">           2 :                 break;</span></span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC tlaBgGNC">           4 :             case UpDownMode::CHROMATIC:</span></span>
+<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">           4 :                 upDownChromatic(up, pitch, oNote, key, tpc1, tpc2, newPitch, newTpc1, newTpc2);</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">           4 :                 break;</span></span>
 <span id="L587"><span class="lineNum">     587</span>              : </span>
 <span id="L588"><span class="lineNum">     588</span> <span class="tlaUNC tlaBgUNC">           0 :             case UpDownMode::DIATONIC:</span></span>
 <span id="L589"><span class="lineNum">     589</span>              :             {</span>
@@ -672,21 +672,21 @@
 <span id="L614"><span class="lineNum">     614</span>              :             }</span>
 <span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC">           0 :             break;</span></span>
 <span id="L616"><span class="lineNum">     616</span>              :             }</span>
-<span id="L617"><span class="lineNum">     617</span> <span class="tlaGNC tlaBgGNC">           2 :             break;</span></span>
+<span id="L617"><span class="lineNum">     617</span> <span class="tlaGNC tlaBgGNC">           4 :             break;</span></span>
 <span id="L618"><span class="lineNum">     618</span>              :         }</span>
 <span id="L619"><span class="lineNum">     619</span>              : </span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">           2 :         if ((oNote-&gt;pitch() != newPitch) || (oNote-&gt;tpc1() != newTpc1) || oNote-&gt;tpc2() != newTpc2) {</span></span>
-<span id="L621"><span class="lineNum">     621</span> <span class="tlaGNC">           2 :             if (mode != UpDownMode::OCTAVE) {</span></span>
-<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC">           2 :                 auto l = oNote-&gt;linkList();</span></span>
-<span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">           4 :                 for (EngravingObject* e : l) {</span></span>
-<span id="L624"><span class="lineNum">     624</span> <span class="tlaGNC">           2 :                     Note* ln = toNote(e);</span></span>
-<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">           2 :                     if (ln-&gt;accidental()) {</span></span>
+<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">           4 :         if ((oNote-&gt;pitch() != newPitch) || (oNote-&gt;tpc1() != newTpc1) || oNote-&gt;tpc2() != newTpc2) {</span></span>
+<span id="L621"><span class="lineNum">     621</span> <span class="tlaGNC">           4 :             if (mode != UpDownMode::OCTAVE) {</span></span>
+<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC">           4 :                 auto l = oNote-&gt;linkList();</span></span>
+<span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">          10 :                 for (EngravingObject* e : l) {</span></span>
+<span id="L624"><span class="lineNum">     624</span> <span class="tlaGNC">           6 :                     Note* ln = toNote(e);</span></span>
+<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">           6 :                     if (ln-&gt;accidental()) {</span></span>
 <span id="L626"><span class="lineNum">     626</span> <span class="tlaUNC tlaBgUNC">           0 :                         score-&gt;doUndoRemoveElement(ln-&gt;accidental());</span></span>
 <span id="L627"><span class="lineNum">     627</span>              :                     }</span>
 <span id="L628"><span class="lineNum">     628</span>              :                 }</span>
-<span id="L629"><span class="lineNum">     629</span> <span class="tlaGNC tlaBgGNC">           2 :             }</span></span>
-<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">           2 :             EditNote::undoChangePitch(score, oNote, newPitch, newTpc1, newTpc2);</span></span>
-<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">           2 :             if (mode == UpDownMode::DIATONIC) {</span></span>
+<span id="L629"><span class="lineNum">     629</span> <span class="tlaGNC tlaBgGNC">           4 :             }</span></span>
+<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">           4 :             EditNote::undoChangePitch(score, oNote, newPitch, newTpc1, newTpc2);</span></span>
+<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">           4 :             if (mode == UpDownMode::DIATONIC) {</span></span>
 <span id="L632"><span class="lineNum">     632</span> <span class="tlaUNC tlaBgUNC">           0 :                 part-&gt;stringData(tick, staff-&gt;idx())-&gt;convertPitch(newPitch, staff, tick, &amp;string, &amp;fret);</span></span>
 <span id="L633"><span class="lineNum">     633</span> <span class="tlaUNC">           0 :                 EditNote::undoChangeFretting(score, oNote, newPitch, string, fret, newTpc1, newTpc2);</span></span>
 <span id="L634"><span class="lineNum">     634</span>              :             }</span>
@@ -706,44 +706,44 @@
 <span id="L648"><span class="lineNum">     648</span>              :             }</span>
 <span id="L649"><span class="lineNum">     649</span>              :         }</span>
 <span id="L650"><span class="lineNum">     650</span>              : </span>
-<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC tlaBgGNC">           2 :         score-&gt;setPlayNote(true);</span></span>
+<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC tlaBgGNC">           4 :         score-&gt;setPlayNote(true);</span></span>
 <span id="L652"><span class="lineNum">     652</span>              :     }</span>
-<span id="L653"><span class="lineNum">     653</span> <span class="tlaGNC">           1 :     score-&gt;setSelectionChanged(true);</span></span>
-<span id="L654"><span class="lineNum">     654</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L653"><span class="lineNum">     653</span> <span class="tlaGNC">           2 :     score-&gt;setSelectionChanged(true);</span></span>
+<span id="L654"><span class="lineNum">     654</span> <span class="tlaGNC">           2 : }</span></span>
 <span id="L655"><span class="lineNum">     655</span>              : </span>
 <span id="L656"><span class="lineNum">     656</span>              : //---------------------------------------------------------</span>
 <span id="L657"><span class="lineNum">     657</span>              : //   undoChangePitch</span>
 <span id="L658"><span class="lineNum">     658</span>              : //---------------------------------------------------------</span>
 <span id="L659"><span class="lineNum">     659</span>              : </span>
-<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">        1801 : void EditNote::undoChangePitch(Score* score, Note* note, int pitch, int tpc1, int tpc2)</span></span>
+<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">        1803 : void EditNote::undoChangePitch(Score* score, Note* note, int pitch, int tpc1, int tpc2)</span></span>
 <span id="L661"><span class="lineNum">     661</span>              : {</span>
-<span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">        1801 :     Transaction&amp; tx = score-&gt;transactionManager()-&gt;currentOrDummyTransaction();</span></span>
+<span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">        1803 :     Transaction&amp; tx = score-&gt;transactionManager()-&gt;currentOrDummyTransaction();</span></span>
 <span id="L663"><span class="lineNum">     663</span>              : </span>
-<span id="L664"><span class="lineNum">     664</span> <span class="tlaGNC">        3604 :     for (EngravingObject* e : note-&gt;linkList()) {</span></span>
-<span id="L665"><span class="lineNum">     665</span> <span class="tlaGNC">        1803 :         Note* n = toNote(e);</span></span>
-<span id="L666"><span class="lineNum">     666</span> <span class="tlaGNC">        1803 :         tx.push(new ChangePitch(n, pitch, tpc1, tpc2));</span></span>
-<span id="L667"><span class="lineNum">     667</span> <span class="tlaGNC">        1801 :     }</span></span>
-<span id="L668"><span class="lineNum">     668</span> <span class="tlaGNC">        1801 : }</span></span>
+<span id="L664"><span class="lineNum">     664</span> <span class="tlaGNC">        3610 :     for (EngravingObject* e : note-&gt;linkList()) {</span></span>
+<span id="L665"><span class="lineNum">     665</span> <span class="tlaGNC">        1807 :         Note* n = toNote(e);</span></span>
+<span id="L666"><span class="lineNum">     666</span> <span class="tlaGNC">        1807 :         tx.push(new ChangePitch(n, pitch, tpc1, tpc2));</span></span>
+<span id="L667"><span class="lineNum">     667</span> <span class="tlaGNC">        1803 :     }</span></span>
+<span id="L668"><span class="lineNum">     668</span> <span class="tlaGNC">        1803 : }</span></span>
 <span id="L669"><span class="lineNum">     669</span>              : </span>
 <span id="L670"><span class="lineNum">     670</span>              : //---------------------------------------------------------</span>
 <span id="L671"><span class="lineNum">     671</span>              : //   undoChangeFretting</span>
 <span id="L672"><span class="lineNum">     672</span>              : //---------------------------------------------------------</span>
 <span id="L673"><span class="lineNum">     673</span>              : </span>
-<span id="L674"><span class="lineNum">     674</span> <span class="tlaUNC tlaBgUNC">           0 : void EditNote::undoChangeFretting(Score* score, Note* note, int pitch, int string, int fret, int tpc1, int tpc2)</span></span>
+<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC">          15 : void EditNote::undoChangeFretting(Score* score, Note* note, int pitch, int string, int fret, int tpc1, int tpc2)</span></span>
 <span id="L675"><span class="lineNum">     675</span>              : {</span>
-<span id="L676"><span class="lineNum">     676</span> <span class="tlaUNC">           0 :     Transaction&amp; tx = score-&gt;transactionManager()-&gt;currentOrDummyTransaction();</span></span>
+<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">          15 :     Transaction&amp; tx = score-&gt;transactionManager()-&gt;currentOrDummyTransaction();</span></span>
 <span id="L677"><span class="lineNum">     677</span>              : </span>
-<span id="L678"><span class="lineNum">     678</span> <span class="tlaUNC">           0 :     for (EngravingObject* e : note-&gt;linkList()) {</span></span>
-<span id="L679"><span class="lineNum">     679</span> <span class="tlaUNC">           0 :         Note* n = toNote(e);</span></span>
-<span id="L680"><span class="lineNum">     680</span> <span class="tlaUNC">           0 :         tx.push(new ChangeFretting(n, pitch, string, fret, tpc1, tpc2));</span></span>
-<span id="L681"><span class="lineNum">     681</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L682"><span class="lineNum">     682</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L678"><span class="lineNum">     678</span> <span class="tlaGNC">          38 :     for (EngravingObject* e : note-&gt;linkList()) {</span></span>
+<span id="L679"><span class="lineNum">     679</span> <span class="tlaGNC">          23 :         Note* n = toNote(e);</span></span>
+<span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC">          23 :         tx.push(new ChangeFretting(n, pitch, string, fret, tpc1, tpc2));</span></span>
+<span id="L681"><span class="lineNum">     681</span> <span class="tlaGNC">          15 :     }</span></span>
+<span id="L682"><span class="lineNum">     682</span> <span class="tlaGNC">          15 : }</span></span>
 <span id="L683"><span class="lineNum">     683</span>              : </span>
 <span id="L684"><span class="lineNum">     684</span>              : //---------------------------------------------------------</span>
 <span id="L685"><span class="lineNum">     685</span>              : //   ChangeVelocity</span>
 <span id="L686"><span class="lineNum">     686</span>              : //---------------------------------------------------------</span>
 <span id="L687"><span class="lineNum">     687</span>              : </span>
-<span id="L688"><span class="lineNum">     688</span> <span class="tlaUNC">           0 : ChangeVelocity::ChangeVelocity(Note* n, int o)</span></span>
+<span id="L688"><span class="lineNum">     688</span> <span class="tlaUNC tlaBgUNC">           0 : ChangeVelocity::ChangeVelocity(Note* n, int o)</span></span>
 <span id="L689"><span class="lineNum">     689</span> <span class="tlaUNC">           0 :     : note(n), userVelocity(o)</span></span>
 <span id="L690"><span class="lineNum">     690</span>              : {</span>
 <span id="L691"><span class="lineNum">     691</span> <span class="tlaUNC">           0 : }</span></span>

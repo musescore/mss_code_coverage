@@ -31,13 +31,13 @@
             <td class="headerValue">filtered_coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">73.8&nbsp;%</td>
-            <td class="headerCovTableEntry">260</td>
-            <td class="headerCovTableEntry">192</td>
+            <td class="headerCovTableEntryLo">74.0&nbsp;%</td>
+            <td class="headerCovTableEntry">265</td>
+            <td class="headerCovTableEntry">196</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -361,129 +361,136 @@
 <span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           6 :     while (xmlReader.readNextStartElement()) {</span></span>
 <span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">           3 :         if (xmlReader.name() == &quot;museScore&quot;) {</span></span>
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">           3 :             const std::string version(xmlReader.asciiAttribute(&quot;version&quot;));</span></span>
-<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">           3 :             bool suitedVersion = version.rfind(&quot;1&quot;, 0) == 0;</span></span>
-<span id="L307"><span class="lineNum">     307</span>              : </span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           3 :             if (suitedVersion) {</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaUNC tlaBgUNC">           0 :                 rawMeta = doReadRawMeta(xmlReader);</span></span>
-<span id="L310"><span class="lineNum">     310</span>              :             } else {</span>
-<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC tlaBgGNC">           6 :                 while (xmlReader.readNextStartElement()) {</span></span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">           3 :                     if (xmlReader.name() == &quot;Score&quot;) {</span></span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">           3 :                         rawMeta = doReadRawMeta(xmlReader);</span></span>
-<span id="L314"><span class="lineNum">     314</span>              :                     } else {</span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaUNC tlaBgUNC">           0 :                         xmlReader.skipCurrentElement();</span></span>
-<span id="L316"><span class="lineNum">     316</span>              :                     }</span>
-<span id="L317"><span class="lineNum">     317</span>              :                 }</span>
-<span id="L318"><span class="lineNum">     318</span>              :             }</span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC tlaBgGNC">           3 :         } else {</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaUNC tlaBgUNC">           0 :             xmlReader.skipCurrentElement();</span></span>
-<span id="L321"><span class="lineNum">     321</span>              :         }</span>
-<span id="L322"><span class="lineNum">     322</span>              :     }</span>
-<span id="L323"><span class="lineNum">     323</span>              : </span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC tlaBgGNC">           3 :     if (!rawMeta.titleStyle.isEmpty()) {</span></span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">           1 :         meta.title = simplified(rawMeta.titleStyle);</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">           2 :     } else if (!rawMeta.titleStyleHtml.isEmpty()) {</span></span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaUNC tlaBgUNC">           0 :         meta.title = simplified(rawMeta.titleStyleHtml);</span></span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC tlaBgGNC">           2 :     } else if (!rawMeta.titleAttribute.isEmpty()) {</span></span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">           2 :         meta.title = simplified(rawMeta.titleAttribute);</span></span>
-<span id="L330"><span class="lineNum">     330</span>              :     } else {</span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaUNC tlaBgUNC">           0 :         meta.title = simplified(rawMeta.titleTag);</span></span>
-<span id="L332"><span class="lineNum">     332</span>              :     }</span>
-<span id="L333"><span class="lineNum">     333</span>              : </span>
-<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC tlaBgGNC">           3 :     if (!rawMeta.subtitleStyle.isEmpty()) {</span></span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">           1 :         meta.subtitle = simplified(rawMeta.subtitleStyle);</span></span>
-<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">           2 :     } else if (!rawMeta.subtitleStyleHtml.isEmpty()) {</span></span>
-<span id="L337"><span class="lineNum">     337</span> <span class="tlaUNC tlaBgUNC">           0 :         meta.subtitle = simplified(rawMeta.subtitleStyleHtml);</span></span>
-<span id="L338"><span class="lineNum">     338</span>              :     }</span>
-<span id="L339"><span class="lineNum">     339</span>              : </span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC tlaBgGNC">           3 :     if (!rawMeta.composerStyle.isEmpty()) {</span></span>
-<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">           1 :         meta.composer = simplified(rawMeta.composerStyle);</span></span>
-<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">           2 :     } else if (!rawMeta.composerStyleHtml.isEmpty()) {</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaUNC tlaBgUNC">           0 :         meta.composer = simplified(rawMeta.composerStyleHtml);</span></span>
-<span id="L344"><span class="lineNum">     344</span>              :     } else {</span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC tlaBgGNC">           2 :         meta.composer = simplified(rawMeta.composerAttribute);</span></span>
-<span id="L346"><span class="lineNum">     346</span>              :     }</span>
-<span id="L347"><span class="lineNum">     347</span>              : </span>
-<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">           3 :     if (!rawMeta.lyricistStyle.isEmpty()) {</span></span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">           1 :         meta.lyricist = simplified(rawMeta.lyricistStyle);</span></span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">           2 :     } else if (!rawMeta.lyricistStyleHtml.isEmpty()) {</span></span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaUNC tlaBgUNC">           0 :         meta.lyricist = simplified(rawMeta.lyricistStyleHtml);</span></span>
-<span id="L352"><span class="lineNum">     352</span>              :     } else {</span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC tlaBgGNC">           2 :         meta.lyricist = simplified(rawMeta.lyricistAttribute);</span></span>
-<span id="L354"><span class="lineNum">     354</span>              :     }</span>
-<span id="L355"><span class="lineNum">     355</span>              : </span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">           3 :     meta.copyright = simplified(rawMeta.copyright);</span></span>
-<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">           3 :     meta.translator = simplified(rawMeta.translator);</span></span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">           3 :     meta.arranger = simplified(rawMeta.arranger);</span></span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">           3 :     meta.partsCount = rawMeta.partsCount;</span></span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">           3 :     meta.creationDate = QDate::fromString(rawMeta.creationDate, &quot;yyyy-MM-dd&quot;);</span></span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">           3 :     meta.additionalTags = std::move(rawMeta.additionalTags);</span></span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">           3 : }</span></span>
-<span id="L363"><span class="lineNum">     363</span>              : </span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">           4 : QString MscMetaReader::formatFromXml(const std::string&amp; xml) const</span></span>
-<span id="L365"><span class="lineNum">     365</span>              : {</span>
-<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">           4 :     size_t bbegin = xml.find(&quot;&lt;body&quot;);</span></span>
-<span id="L367"><span class="lineNum">     367</span>              : </span>
-<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">           4 :     if (bbegin != std::string::npos) {</span></span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaUNC tlaBgUNC">           0 :         size_t bend = xml.find(&quot;&lt;/body&gt;&quot;, bbegin);</span></span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaUNC">           0 :         std::string body = xml.substr(bbegin, (bend - bbegin));</span></span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaUNC">           0 :         return QString::fromStdString(MscMetaReader::cutXmlTags(body));</span></span>
-<span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC tlaBgGNC">           4 :     return QString::fromStdString(MscMetaReader::cutXmlTags(xml));</span></span>
-<span id="L374"><span class="lineNum">     374</span>              : }</span>
-<span id="L375"><span class="lineNum">     375</span>              : </span>
-<span id="L376"><span class="lineNum">     376</span> <span class="tlaUNC tlaBgUNC">           0 : QString MscMetaReader::format(const std::string&amp; str) const</span></span>
-<span id="L377"><span class="lineNum">     377</span>              : {</span>
-<span id="L378"><span class="lineNum">     378</span> <span class="tlaUNC">           0 :     std::string fin = MscMetaReader::cutXmlTags(str);</span></span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaUNC">           0 :     return simplified(fin);</span></span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L381"><span class="lineNum">     381</span>              : </span>
-<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC tlaBgGNC">          19 : QString MscMetaReader::simplified(const QString&amp; str) const</span></span>
-<span id="L383"><span class="lineNum">     383</span>              : {</span>
-<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">          19 :     return simplified(str.toStdString());</span></span>
-<span id="L385"><span class="lineNum">     385</span>              : }</span>
-<span id="L386"><span class="lineNum">     386</span>              : </span>
-<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">          19 : QString MscMetaReader::simplified(const std::string&amp; str) const</span></span>
-<span id="L388"><span class="lineNum">     388</span>              : {</span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">          19 :     std::string fin;</span></span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">         342 :     for (size_t index = 0; str[index]; ++index) {</span></span>
-<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">         323 :         if (str[index] == '\&quot;' || str[index] == '\n') {</span></span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaUNC tlaBgUNC">           0 :             fin += '\\';</span></span>
-<span id="L393"><span class="lineNum">     393</span>              :         }</span>
-<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC tlaBgGNC">         323 :         fin += str[index];</span></span>
-<span id="L395"><span class="lineNum">     395</span>              :     }</span>
-<span id="L396"><span class="lineNum">     396</span>              : </span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">          38 :     return QString::fromStdString(fin);</span></span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">          19 : }</span></span>
-<span id="L399"><span class="lineNum">     399</span>              : </span>
-<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">           4 : std::string MscMetaReader::cutXmlTags(const std::string&amp; str) const</span></span>
-<span id="L401"><span class="lineNum">     401</span>              : {</span>
-<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">           4 :     std::string fin;</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">           6 :             const QStringList versionParts = QString::fromStdString(version).split(u'.');</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">           3 :             if (versionParts.size() == 2) {</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           3 :                 meta.mscVersion = versionParts[0].toInt() * 100 + versionParts[1].toInt();</span></span>
+<span id="L309"><span class="lineNum">     309</span>              :             }</span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">           3 :             bool suitedVersion = version.rfind(&quot;1&quot;, 0) == 0;</span></span>
+<span id="L312"><span class="lineNum">     312</span>              : </span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">           3 :             if (suitedVersion) {</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaUNC tlaBgUNC">           0 :                 rawMeta = doReadRawMeta(xmlReader);</span></span>
+<span id="L315"><span class="lineNum">     315</span>              :             } else {</span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC tlaBgGNC">           6 :                 while (xmlReader.readNextStartElement()) {</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">           3 :                     if (xmlReader.name() == &quot;programVersion&quot;) {</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaUNC tlaBgUNC">           0 :                         meta.musescoreVersion = xmlReader.readText().toQString();</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC tlaBgGNC">           3 :                     } else if (xmlReader.name() == &quot;Score&quot;) {</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           3 :                         rawMeta = doReadRawMeta(xmlReader);</span></span>
+<span id="L321"><span class="lineNum">     321</span>              :                     } else {</span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaUNC tlaBgUNC">           0 :                         xmlReader.skipCurrentElement();</span></span>
+<span id="L323"><span class="lineNum">     323</span>              :                     }</span>
+<span id="L324"><span class="lineNum">     324</span>              :                 }</span>
+<span id="L325"><span class="lineNum">     325</span>              :             }</span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC tlaBgGNC">           3 :         } else {</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaUNC tlaBgUNC">           0 :             xmlReader.skipCurrentElement();</span></span>
+<span id="L328"><span class="lineNum">     328</span>              :         }</span>
+<span id="L329"><span class="lineNum">     329</span>              :     }</span>
+<span id="L330"><span class="lineNum">     330</span>              : </span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC tlaBgGNC">           3 :     if (!rawMeta.titleStyle.isEmpty()) {</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">           1 :         meta.title = simplified(rawMeta.titleStyle);</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">           2 :     } else if (!rawMeta.titleStyleHtml.isEmpty()) {</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaUNC tlaBgUNC">           0 :         meta.title = simplified(rawMeta.titleStyleHtml);</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC tlaBgGNC">           2 :     } else if (!rawMeta.titleAttribute.isEmpty()) {</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">           2 :         meta.title = simplified(rawMeta.titleAttribute);</span></span>
+<span id="L337"><span class="lineNum">     337</span>              :     } else {</span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaUNC tlaBgUNC">           0 :         meta.title = simplified(rawMeta.titleTag);</span></span>
+<span id="L339"><span class="lineNum">     339</span>              :     }</span>
+<span id="L340"><span class="lineNum">     340</span>              : </span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC tlaBgGNC">           3 :     if (!rawMeta.subtitleStyle.isEmpty()) {</span></span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">           1 :         meta.subtitle = simplified(rawMeta.subtitleStyle);</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">           2 :     } else if (!rawMeta.subtitleStyleHtml.isEmpty()) {</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaUNC tlaBgUNC">           0 :         meta.subtitle = simplified(rawMeta.subtitleStyleHtml);</span></span>
+<span id="L345"><span class="lineNum">     345</span>              :     }</span>
+<span id="L346"><span class="lineNum">     346</span>              : </span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC tlaBgGNC">           3 :     if (!rawMeta.composerStyle.isEmpty()) {</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">           1 :         meta.composer = simplified(rawMeta.composerStyle);</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">           2 :     } else if (!rawMeta.composerStyleHtml.isEmpty()) {</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaUNC tlaBgUNC">           0 :         meta.composer = simplified(rawMeta.composerStyleHtml);</span></span>
+<span id="L351"><span class="lineNum">     351</span>              :     } else {</span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC tlaBgGNC">           2 :         meta.composer = simplified(rawMeta.composerAttribute);</span></span>
+<span id="L353"><span class="lineNum">     353</span>              :     }</span>
+<span id="L354"><span class="lineNum">     354</span>              : </span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">           3 :     if (!rawMeta.lyricistStyle.isEmpty()) {</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">           1 :         meta.lyricist = simplified(rawMeta.lyricistStyle);</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">           2 :     } else if (!rawMeta.lyricistStyleHtml.isEmpty()) {</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaUNC tlaBgUNC">           0 :         meta.lyricist = simplified(rawMeta.lyricistStyleHtml);</span></span>
+<span id="L359"><span class="lineNum">     359</span>              :     } else {</span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC tlaBgGNC">           2 :         meta.lyricist = simplified(rawMeta.lyricistAttribute);</span></span>
+<span id="L361"><span class="lineNum">     361</span>              :     }</span>
+<span id="L362"><span class="lineNum">     362</span>              : </span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">           3 :     meta.copyright = simplified(rawMeta.copyright);</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">           3 :     meta.translator = simplified(rawMeta.translator);</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">           3 :     meta.arranger = simplified(rawMeta.arranger);</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">           3 :     meta.partsCount = rawMeta.partsCount;</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">           3 :     meta.creationDate = QDate::fromString(rawMeta.creationDate, &quot;yyyy-MM-dd&quot;);</span></span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">           3 :     meta.additionalTags = std::move(rawMeta.additionalTags);</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">           3 : }</span></span>
+<span id="L370"><span class="lineNum">     370</span>              : </span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">           4 : QString MscMetaReader::formatFromXml(const std::string&amp; xml) const</span></span>
+<span id="L372"><span class="lineNum">     372</span>              : {</span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">           4 :     size_t bbegin = xml.find(&quot;&lt;body&quot;);</span></span>
+<span id="L374"><span class="lineNum">     374</span>              : </span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">           4 :     if (bbegin != std::string::npos) {</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaUNC tlaBgUNC">           0 :         size_t bend = xml.find(&quot;&lt;/body&gt;&quot;, bbegin);</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaUNC">           0 :         std::string body = xml.substr(bbegin, (bend - bbegin));</span></span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaUNC">           0 :         return QString::fromStdString(MscMetaReader::cutXmlTags(body));</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC tlaBgGNC">           4 :     return QString::fromStdString(MscMetaReader::cutXmlTags(xml));</span></span>
+<span id="L381"><span class="lineNum">     381</span>              : }</span>
+<span id="L382"><span class="lineNum">     382</span>              : </span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaUNC tlaBgUNC">           0 : QString MscMetaReader::format(const std::string&amp; str) const</span></span>
+<span id="L384"><span class="lineNum">     384</span>              : {</span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaUNC">           0 :     std::string fin = MscMetaReader::cutXmlTags(str);</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaUNC">           0 :     return simplified(fin);</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L388"><span class="lineNum">     388</span>              : </span>
+<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC tlaBgGNC">          19 : QString MscMetaReader::simplified(const QString&amp; str) const</span></span>
+<span id="L390"><span class="lineNum">     390</span>              : {</span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">          19 :     return simplified(str.toStdString());</span></span>
+<span id="L392"><span class="lineNum">     392</span>              : }</span>
+<span id="L393"><span class="lineNum">     393</span>              : </span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">          19 : QString MscMetaReader::simplified(const std::string&amp; str) const</span></span>
+<span id="L395"><span class="lineNum">     395</span>              : {</span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">          19 :     std::string fin;</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">         342 :     for (size_t index = 0; str[index]; ++index) {</span></span>
+<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">         323 :         if (str[index] == '\&quot;' || str[index] == '\n') {</span></span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaUNC tlaBgUNC">           0 :             fin += '\\';</span></span>
+<span id="L400"><span class="lineNum">     400</span>              :         }</span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC tlaBgGNC">         323 :         fin += str[index];</span></span>
+<span id="L402"><span class="lineNum">     402</span>              :     }</span>
 <span id="L403"><span class="lineNum">     403</span>              : </span>
-<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">          69 :     for (size_t index = 0; str[index]; ++index) {</span></span>
-<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">          65 :         if (str[index] == '&lt;') {</span></span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaUNC tlaBgUNC">           0 :             for (; str[index + 1] &amp;&amp; str[index] != '&gt;'; ++index) {</span></span>
-<span id="L407"><span class="lineNum">     407</span>              :             }</span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L409"><span class="lineNum">     409</span>              :         }</span>
-<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC tlaBgGNC">          65 :         fin += str[index];</span></span>
-<span id="L411"><span class="lineNum">     411</span>              :     }</span>
-<span id="L412"><span class="lineNum">     412</span>              : </span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">           4 :     return fin;</span></span>
-<span id="L414"><span class="lineNum">     414</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
-<span id="L415"><span class="lineNum">     415</span>              : </span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC tlaBgGNC">           4 : QString MscMetaReader::readText(XmlStreamReader&amp; xmlReader) const</span></span>
-<span id="L417"><span class="lineNum">     417</span>              : {</span>
-<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">           4 :     const std::string str = readTextAndChildrenText(xmlReader);</span></span>
+<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">          38 :     return QString::fromStdString(fin);</span></span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">          19 : }</span></span>
+<span id="L406"><span class="lineNum">     406</span>              : </span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">           4 : std::string MscMetaReader::cutXmlTags(const std::string&amp; str) const</span></span>
+<span id="L408"><span class="lineNum">     408</span>              : {</span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">           4 :     std::string fin;</span></span>
+<span id="L410"><span class="lineNum">     410</span>              : </span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          69 :     for (size_t index = 0; str[index]; ++index) {</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          65 :         if (str[index] == '&lt;') {</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaUNC tlaBgUNC">           0 :             for (; str[index + 1] &amp;&amp; str[index] != '&gt;'; ++index) {</span></span>
+<span id="L414"><span class="lineNum">     414</span>              :             }</span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L416"><span class="lineNum">     416</span>              :         }</span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC tlaBgGNC">          65 :         fin += str[index];</span></span>
+<span id="L418"><span class="lineNum">     418</span>              :     }</span>
 <span id="L419"><span class="lineNum">     419</span>              : </span>
-<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">           8 :     return formatFromXml(str);</span></span>
-<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">           4 : }</span></span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">           4 :     return fin;</span></span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaUNC tlaBgUNC">           0 : }</span></span>
 <span id="L422"><span class="lineNum">     422</span>              : </span>
-<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">          24 : QString MscMetaReader::readMetaTagText(XmlStreamReader&amp; xmlReader) const</span></span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC tlaBgGNC">           4 : QString MscMetaReader::readText(XmlStreamReader&amp; xmlReader) const</span></span>
 <span id="L424"><span class="lineNum">     424</span>              : {</span>
-<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">          24 :     const std::string_view metaText = xmlReader.readAsciiText();</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">           4 :     const std::string str = readTextAndChildrenText(xmlReader);</span></span>
 <span id="L426"><span class="lineNum">     426</span>              : </span>
-<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">          24 :     return QString::fromUtf8(metaText);</span></span>
-<span id="L428"><span class="lineNum">     428</span>              : }</span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">           8 :     return formatFromXml(str);</span></span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">           4 : }</span></span>
+<span id="L429"><span class="lineNum">     429</span>              : </span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">          24 : QString MscMetaReader::readMetaTagText(XmlStreamReader&amp; xmlReader) const</span></span>
+<span id="L431"><span class="lineNum">     431</span>              : {</span>
+<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">          24 :     const std::string_view metaText = xmlReader.readAsciiText();</span></span>
+<span id="L433"><span class="lineNum">     433</span>              : </span>
+<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">          24 :     return QString::fromUtf8(metaText);</span></span>
+<span id="L435"><span class="lineNum">     435</span>              : }</span>
         </pre>
               </td>
             </tr>

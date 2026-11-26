@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">835</td>
+            <td class="headerCovTableEntry">838</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -1109,494 +1109,500 @@
 <span id="L1051"><span class="lineNum">    1051</span>              : </span>
 <span id="L1052"><span class="lineNum">    1052</span> <span class="tlaUNC">           0 :     const bool automationVisible = automation() &amp;&amp; automation()-&gt;isAutomationModeEnabled();</span></span>
 <span id="L1053"><span class="lineNum">    1053</span>              : </span>
-<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaUNC">           0 :     if (scoreState.structural) {</span></span>
-<span id="L1055"><span class="lineNum">    1055</span> <span class="tlaUNC">           0 :         if (!automationVisible) {</span></span>
-<span id="L1056"><span class="lineNum">    1056</span>              :             // Nothing visible right now; defer the rebuild until automation mode is enabled again</span>
-<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaUNC">           0 :             m_pendingChanges.isFullReset = true;</span></span>
-<span id="L1058"><span class="lineNum">    1058</span> <span class="tlaUNC">           0 :             return;</span></span>
-<span id="L1059"><span class="lineNum">    1059</span>              :         }</span>
-<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaUNC">           0 :         rebuildAllPolylines();</span></span>
-<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaUNC">           0 :         m_pendingChanges.clear();</span></span>
+<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaUNC">           0 :     if (!automationVisible) {</span></span>
+<span id="L1055"><span class="lineNum">    1055</span> <span class="tlaUNC">           0 :         if (scoreState.hasChanges) {</span></span>
+<span id="L1056"><span class="lineNum">    1056</span>              :             // The layout may have deleted the systems our keys point to, so drop the polylines</span>
+<span id="L1057"><span class="lineNum">    1057</span>              :             // and defer the rebuild until automation mode is enabled again</span>
+<span id="L1058"><span class="lineNum">    1058</span> <span class="tlaUNC">           0 :             deleteAllPolylines();</span></span>
+<span id="L1059"><span class="lineNum">    1059</span> <span class="tlaUNC">           0 :             m_pendingChanges.isFullReset = true;</span></span>
+<span id="L1060"><span class="lineNum">    1060</span>              :         }</span>
+<span id="L1061"><span class="lineNum">    1061</span>              :         // Otherwise m_pendingChanges keeps accumulating for next time</span>
 <span id="L1062"><span class="lineNum">    1062</span> <span class="tlaUNC">           0 :         return;</span></span>
 <span id="L1063"><span class="lineNum">    1063</span>              :     }</span>
 <span id="L1064"><span class="lineNum">    1064</span>              : </span>
-<span id="L1065"><span class="lineNum">    1065</span> <span class="tlaUNC">           0 :     if (!automationVisible) {</span></span>
-<span id="L1066"><span class="lineNum">    1066</span>              :         // Nothing visible right now; m_pendingChanges keeps accumulating for next time</span>
-<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1068"><span class="lineNum">    1068</span>              :     }</span>
-<span id="L1069"><span class="lineNum">    1069</span>              : </span>
-<span id="L1070"><span class="lineNum">    1070</span> <span class="tlaUNC">           0 :     if (!m_pendingChanges.isEmpty()) {</span></span>
-<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaUNC">           0 :         applyAutomationChanges(m_pendingChanges);</span></span>
-<span id="L1072"><span class="lineNum">    1072</span> <span class="tlaUNC">           0 :         m_pendingChanges.clear();</span></span>
-<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1074"><span class="lineNum">    1074</span>              :     }</span>
-<span id="L1075"><span class="lineNum">    1075</span>              : </span>
-<span id="L1076"><span class="lineNum">    1076</span>              :     // No automation-data change and nothing structural - just layout drift</span>
-<span id="L1077"><span class="lineNum">    1077</span>              :     // (e.g. measure widths shifted); refresh point positions using the batch's own range</span>
-<span id="L1078"><span class="lineNum">    1078</span> <span class="tlaUNC">           0 :     for (const auto&amp; [key, data] : m_polylinesDataMap) {</span></span>
-<span id="L1079"><span class="lineNum">    1079</span> <span class="tlaUNC">           0 :         IF_ASSERT_FAILED(key.isValid()) {</span></span>
-<span id="L1080"><span class="lineNum">    1080</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L1081"><span class="lineNum">    1081</span>              :         }</span>
-<span id="L1082"><span class="lineNum">    1082</span> <span class="tlaUNC">           0 :         const Staff* staff = score()-&gt;staff(key.staffIdx);</span></span>
-<span id="L1083"><span class="lineNum">    1083</span> <span class="tlaUNC">           0 :         if (!staff) {</span></span>
-<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L1085"><span class="lineNum">    1085</span>              :         }</span>
-<span id="L1086"><span class="lineNum">    1086</span>              : </span>
-<span id="L1087"><span class="lineNum">    1087</span> <span class="tlaUNC">           0 :         const int regionStartTick = data.startMeasure-&gt;tick().ticks();</span></span>
-<span id="L1088"><span class="lineNum">    1088</span> <span class="tlaUNC">           0 :         const int regionEndTick = data.endMeasure-&gt;endTick().ticks();</span></span>
-<span id="L1089"><span class="lineNum">    1089</span> <span class="tlaUNC">           0 :         if (scoreState.boundary) {</span></span>
-<span id="L1090"><span class="lineNum">    1090</span> <span class="tlaUNC">           0 :             const TickStaffRange&amp; range = *scoreState.boundary;</span></span>
-<span id="L1091"><span class="lineNum">    1091</span> <span class="tlaUNC">           0 :             if (staff-&gt;idx() &lt; range.staffIdxFrom || staff-&gt;idx() &gt; range.staffIdxTo) {</span></span>
-<span id="L1092"><span class="lineNum">    1092</span> <span class="tlaUNC">           0 :                 continue;</span></span>
-<span id="L1093"><span class="lineNum">    1093</span>              :             }</span>
-<span id="L1094"><span class="lineNum">    1094</span> <span class="tlaUNC">           0 :             if (regionEndTick &lt; range.tickFrom || regionStartTick &gt; range.tickTo) {</span></span>
-<span id="L1095"><span class="lineNum">    1095</span> <span class="tlaUNC">           0 :                 continue;</span></span>
-<span id="L1096"><span class="lineNum">    1096</span>              :             }</span>
-<span id="L1097"><span class="lineNum">    1097</span>              :         }</span>
-<span id="L1098"><span class="lineNum">    1098</span>              : </span>
-<span id="L1099"><span class="lineNum">    1099</span> <span class="tlaUNC">           0 :         rebuildPolylinePoints(key);</span></span>
-<span id="L1100"><span class="lineNum">    1100</span>              :     }</span>
-<span id="L1101"><span class="lineNum">    1101</span>              : </span>
-<span id="L1102"><span class="lineNum">    1102</span> <span class="tlaUNC">           0 :     updatePolylinesGeometry();</span></span>
-<span id="L1103"><span class="lineNum">    1103</span>              : }</span>
-<span id="L1104"><span class="lineNum">    1104</span>              : </span>
-<span id="L1105"><span class="lineNum">    1105</span> <span class="tlaUNC">           0 : void NotationAutomationController::rebuildAllPolylines()</span></span>
-<span id="L1106"><span class="lineNum">    1106</span>              : {</span>
-<span id="L1107"><span class="lineNum">    1107</span> <span class="tlaUNC">           0 :     m_currentlyEditedPolyline = nullptr;</span></span>
-<span id="L1108"><span class="lineNum">    1108</span>              : </span>
-<span id="L1109"><span class="lineNum">    1109</span>              :     // TODO: More efficient if we don't clear/recreate the polylines every time...</span>
+<span id="L1065"><span class="lineNum">    1065</span> <span class="tlaUNC">           0 :     if (scoreState.structural) {</span></span>
+<span id="L1066"><span class="lineNum">    1066</span> <span class="tlaUNC">           0 :         rebuildAllPolylines();</span></span>
+<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaUNC">           0 :         m_pendingChanges.clear();</span></span>
+<span id="L1068"><span class="lineNum">    1068</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1069"><span class="lineNum">    1069</span>              :     }</span>
+<span id="L1070"><span class="lineNum">    1070</span>              : </span>
+<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaUNC">           0 :     if (!m_pendingChanges.isEmpty()) {</span></span>
+<span id="L1072"><span class="lineNum">    1072</span> <span class="tlaUNC">           0 :         applyAutomationChanges(m_pendingChanges);</span></span>
+<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaUNC">           0 :         m_pendingChanges.clear();</span></span>
+<span id="L1074"><span class="lineNum">    1074</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1075"><span class="lineNum">    1075</span>              :     }</span>
+<span id="L1076"><span class="lineNum">    1076</span>              : </span>
+<span id="L1077"><span class="lineNum">    1077</span>              :     // No automation-data change and nothing structural - just layout drift</span>
+<span id="L1078"><span class="lineNum">    1078</span>              :     // (e.g. measure widths shifted); refresh point positions using the batch's own range</span>
+<span id="L1079"><span class="lineNum">    1079</span> <span class="tlaUNC">           0 :     for (const auto&amp; [key, data] : m_polylinesDataMap) {</span></span>
+<span id="L1080"><span class="lineNum">    1080</span> <span class="tlaUNC">           0 :         IF_ASSERT_FAILED(key.isValid()) {</span></span>
+<span id="L1081"><span class="lineNum">    1081</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L1082"><span class="lineNum">    1082</span>              :         }</span>
+<span id="L1083"><span class="lineNum">    1083</span> <span class="tlaUNC">           0 :         const Staff* staff = score()-&gt;staff(key.staffIdx);</span></span>
+<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaUNC">           0 :         if (!staff) {</span></span>
+<span id="L1085"><span class="lineNum">    1085</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L1086"><span class="lineNum">    1086</span>              :         }</span>
+<span id="L1087"><span class="lineNum">    1087</span>              : </span>
+<span id="L1088"><span class="lineNum">    1088</span> <span class="tlaUNC">           0 :         const int regionStartTick = data.startMeasure-&gt;tick().ticks();</span></span>
+<span id="L1089"><span class="lineNum">    1089</span> <span class="tlaUNC">           0 :         const int regionEndTick = data.endMeasure-&gt;endTick().ticks();</span></span>
+<span id="L1090"><span class="lineNum">    1090</span> <span class="tlaUNC">           0 :         if (scoreState.boundary) {</span></span>
+<span id="L1091"><span class="lineNum">    1091</span> <span class="tlaUNC">           0 :             const TickStaffRange&amp; range = *scoreState.boundary;</span></span>
+<span id="L1092"><span class="lineNum">    1092</span> <span class="tlaUNC">           0 :             if (staff-&gt;idx() &lt; range.staffIdxFrom || staff-&gt;idx() &gt; range.staffIdxTo) {</span></span>
+<span id="L1093"><span class="lineNum">    1093</span> <span class="tlaUNC">           0 :                 continue;</span></span>
+<span id="L1094"><span class="lineNum">    1094</span>              :             }</span>
+<span id="L1095"><span class="lineNum">    1095</span> <span class="tlaUNC">           0 :             if (regionEndTick &lt; range.tickFrom || regionStartTick &gt; range.tickTo) {</span></span>
+<span id="L1096"><span class="lineNum">    1096</span> <span class="tlaUNC">           0 :                 continue;</span></span>
+<span id="L1097"><span class="lineNum">    1097</span>              :             }</span>
+<span id="L1098"><span class="lineNum">    1098</span>              :         }</span>
+<span id="L1099"><span class="lineNum">    1099</span>              : </span>
+<span id="L1100"><span class="lineNum">    1100</span> <span class="tlaUNC">           0 :         rebuildPolylinePoints(key);</span></span>
+<span id="L1101"><span class="lineNum">    1101</span>              :     }</span>
+<span id="L1102"><span class="lineNum">    1102</span>              : </span>
+<span id="L1103"><span class="lineNum">    1103</span> <span class="tlaUNC">           0 :     updatePolylinesGeometry();</span></span>
+<span id="L1104"><span class="lineNum">    1104</span>              : }</span>
+<span id="L1105"><span class="lineNum">    1105</span>              : </span>
+<span id="L1106"><span class="lineNum">    1106</span> <span class="tlaUNC">           0 : void NotationAutomationController::deleteAllPolylines()</span></span>
+<span id="L1107"><span class="lineNum">    1107</span>              : {</span>
+<span id="L1108"><span class="lineNum">    1108</span> <span class="tlaUNC">           0 :     m_currentlyEditedPolyline = nullptr;</span></span>
+<span id="L1109"><span class="lineNum">    1109</span>              : </span>
 <span id="L1110"><span class="lineNum">    1110</span> <span class="tlaUNC">           0 :     for (const auto&amp; [key, data] : m_polylinesDataMap) {</span></span>
 <span id="L1111"><span class="lineNum">    1111</span> <span class="tlaUNC">           0 :         delete data.polyline;</span></span>
 <span id="L1112"><span class="lineNum">    1112</span>              :     }</span>
 <span id="L1113"><span class="lineNum">    1113</span> <span class="tlaUNC">           0 :     m_polylinesDataMap.clear();</span></span>
-<span id="L1114"><span class="lineNum">    1114</span>              : </span>
-<span id="L1115"><span class="lineNum">    1115</span> <span class="tlaUNC">           0 :     if (!score()) {</span></span>
-<span id="L1116"><span class="lineNum">    1116</span>              :         // Happens on close...</span>
-<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1118"><span class="lineNum">    1118</span>              :     }</span>
-<span id="L1119"><span class="lineNum">    1119</span>              : </span>
-<span id="L1120"><span class="lineNum">    1120</span> <span class="tlaUNC">           0 :     for (const System* system : score()-&gt;systems()) {</span></span>
-<span id="L1121"><span class="lineNum">    1121</span> <span class="tlaUNC">           0 :         buildAndAddPolylinesForSystem(system);</span></span>
-<span id="L1122"><span class="lineNum">    1122</span>              :     }</span>
-<span id="L1123"><span class="lineNum">    1123</span>              : </span>
-<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaUNC">           0 :     updatePolylinesGeometry();</span></span>
-<span id="L1125"><span class="lineNum">    1125</span>              : }</span>
-<span id="L1126"><span class="lineNum">    1126</span>              : </span>
-<span id="L1127"><span class="lineNum">    1127</span> <span class="tlaUNC">           0 : void NotationAutomationController::rebuildPolylinePoints(const PolylineKey&amp; key)</span></span>
-<span id="L1128"><span class="lineNum">    1128</span>              : {</span>
-<span id="L1129"><span class="lineNum">    1129</span> <span class="tlaUNC">           0 :     const PolylineData data = polylineData(key);</span></span>
-<span id="L1130"><span class="lineNum">    1130</span> <span class="tlaUNC">           0 :     PolylinePlot* polyline = data.polyline;</span></span>
-<span id="L1131"><span class="lineNum">    1131</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(key.isValid() &amp;&amp; polyline) {</span></span>
-<span id="L1132"><span class="lineNum">    1132</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1133"><span class="lineNum">    1133</span>              :     }</span>
-<span id="L1134"><span class="lineNum">    1134</span>              : </span>
-<span id="L1135"><span class="lineNum">    1135</span> <span class="tlaUNC">           0 :     const Staff* staff = score() ? score()-&gt;staff(key.staffIdx) : nullptr;</span></span>
-<span id="L1136"><span class="lineNum">    1136</span> <span class="tlaUNC">           0 :     const muse::RectF regionRect = staff ? regionCanvasRect(key.system, key.staffIdx, data.startMeasure, data.endMeasure) : muse::RectF();</span></span>
-<span id="L1137"><span class="lineNum">    1137</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff &amp;&amp; regionRect.isValid()) {</span></span>
+<span id="L1114"><span class="lineNum">    1114</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1115"><span class="lineNum">    1115</span>              : </span>
+<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaUNC">           0 : void NotationAutomationController::rebuildAllPolylines()</span></span>
+<span id="L1117"><span class="lineNum">    1117</span>              : {</span>
+<span id="L1118"><span class="lineNum">    1118</span>              :     // TODO: More efficient if we don't clear/recreate the polylines every time...</span>
+<span id="L1119"><span class="lineNum">    1119</span> <span class="tlaUNC">           0 :     deleteAllPolylines();</span></span>
+<span id="L1120"><span class="lineNum">    1120</span>              : </span>
+<span id="L1121"><span class="lineNum">    1121</span> <span class="tlaUNC">           0 :     if (!score()) {</span></span>
+<span id="L1122"><span class="lineNum">    1122</span>              :         // Happens on close...</span>
+<span id="L1123"><span class="lineNum">    1123</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1124"><span class="lineNum">    1124</span>              :     }</span>
+<span id="L1125"><span class="lineNum">    1125</span>              : </span>
+<span id="L1126"><span class="lineNum">    1126</span> <span class="tlaUNC">           0 :     for (const System* system : score()-&gt;systems()) {</span></span>
+<span id="L1127"><span class="lineNum">    1127</span> <span class="tlaUNC">           0 :         buildAndAddPolylinesForSystem(system);</span></span>
+<span id="L1128"><span class="lineNum">    1128</span>              :     }</span>
+<span id="L1129"><span class="lineNum">    1129</span>              : </span>
+<span id="L1130"><span class="lineNum">    1130</span> <span class="tlaUNC">           0 :     updatePolylinesGeometry();</span></span>
+<span id="L1131"><span class="lineNum">    1131</span>              : }</span>
+<span id="L1132"><span class="lineNum">    1132</span>              : </span>
+<span id="L1133"><span class="lineNum">    1133</span> <span class="tlaUNC">           0 : void NotationAutomationController::rebuildPolylinePoints(const PolylineKey&amp; key)</span></span>
+<span id="L1134"><span class="lineNum">    1134</span>              : {</span>
+<span id="L1135"><span class="lineNum">    1135</span> <span class="tlaUNC">           0 :     const PolylineData data = polylineData(key);</span></span>
+<span id="L1136"><span class="lineNum">    1136</span> <span class="tlaUNC">           0 :     PolylinePlot* polyline = data.polyline;</span></span>
+<span id="L1137"><span class="lineNum">    1137</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(key.isValid() &amp;&amp; polyline) {</span></span>
 <span id="L1138"><span class="lineNum">    1138</span> <span class="tlaUNC">           0 :         return;</span></span>
 <span id="L1139"><span class="lineNum">    1139</span>              :     }</span>
 <span id="L1140"><span class="lineNum">    1140</span>              : </span>
-<span id="L1141"><span class="lineNum">    1141</span>              :     //! NOTE: A polyline only holds the points inside its own region. Whatever lies outside it (which can still affect</span>
-<span id="L1142"><span class="lineNum">    1142</span>              :     //! the polyline) is covered by the edge values...</span>
-<span id="L1143"><span class="lineNum">    1143</span> <span class="tlaUNC">           0 :     const QVector&lt;PointData&gt; pointsData = pointsDataInStaffRegion(staff, regionRect, data.startMeasure-&gt;tick().ticks(),</span></span>
-<span id="L1144"><span class="lineNum">    1144</span> <span class="tlaUNC">           0 :                                                                   regionLastTick(data.endMeasure));</span></span>
-<span id="L1145"><span class="lineNum">    1145</span> <span class="tlaUNC">           0 :     setPolylinePointsData(key, pointsData);</span></span>
+<span id="L1141"><span class="lineNum">    1141</span> <span class="tlaUNC">           0 :     const Staff* staff = score() ? score()-&gt;staff(key.staffIdx) : nullptr;</span></span>
+<span id="L1142"><span class="lineNum">    1142</span> <span class="tlaUNC">           0 :     const muse::RectF regionRect = staff ? regionCanvasRect(key.system, key.staffIdx, data.startMeasure, data.endMeasure) : muse::RectF();</span></span>
+<span id="L1143"><span class="lineNum">    1143</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff &amp;&amp; regionRect.isValid()) {</span></span>
+<span id="L1144"><span class="lineNum">    1144</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1145"><span class="lineNum">    1145</span>              :     }</span>
 <span id="L1146"><span class="lineNum">    1146</span>              : </span>
-<span id="L1147"><span class="lineNum">    1147</span> <span class="tlaUNC">           0 :     QVector&lt;QPointF&gt; points;</span></span>
-<span id="L1148"><span class="lineNum">    1148</span> <span class="tlaUNC">           0 :     points.reserve(pointsData.size());</span></span>
-<span id="L1149"><span class="lineNum">    1149</span> <span class="tlaUNC">           0 :     for (const PointData&amp; pointData : pointsData) {</span></span>
-<span id="L1150"><span class="lineNum">    1150</span> <span class="tlaUNC">           0 :         points.push_back(pointData.qPointF);</span></span>
-<span id="L1151"><span class="lineNum">    1151</span>              :     }</span>
-<span id="L1152"><span class="lineNum">    1152</span> <span class="tlaUNC">           0 :     polyline-&gt;setPoints(points);</span></span>
-<span id="L1153"><span class="lineNum">    1153</span>              : </span>
-<span id="L1154"><span class="lineNum">    1154</span> <span class="tlaUNC">           0 :     applyPolylineEdgeValues(polyline, key);</span></span>
-<span id="L1155"><span class="lineNum">    1155</span> <span class="tlaUNC">           0 :     applyPolylineColorsUnderLine(polyline, key);</span></span>
-<span id="L1156"><span class="lineNum">    1156</span> <span class="tlaUNC">           0 :     polyline-&gt;update();</span></span>
-<span id="L1157"><span class="lineNum">    1157</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1158"><span class="lineNum">    1158</span>              : </span>
-<span id="L1159"><span class="lineNum">    1159</span> <span class="tlaUNC">           0 : void NotationAutomationController::mergePendingChanges(const mu::engraving::AutomationChanges&amp; changes)</span></span>
-<span id="L1160"><span class="lineNum">    1160</span>              : {</span>
-<span id="L1161"><span class="lineNum">    1161</span> <span class="tlaUNC">           0 :     if (changes.isFullReset) {</span></span>
-<span id="L1162"><span class="lineNum">    1162</span> <span class="tlaUNC">           0 :         m_pendingChanges.isFullReset = true;</span></span>
-<span id="L1163"><span class="lineNum">    1163</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1164"><span class="lineNum">    1164</span>              :     }</span>
-<span id="L1165"><span class="lineNum">    1165</span> <span class="tlaUNC">           0 :     for (const mu::engraving::AutomationCurveKey&amp; key : changes.affectedKeys) {</span></span>
-<span id="L1166"><span class="lineNum">    1166</span> <span class="tlaUNC">           0 :         m_pendingChanges.extend(key, changes.tickFrom, changes.tickTo);</span></span>
-<span id="L1167"><span class="lineNum">    1167</span>              :     }</span>
-<span id="L1168"><span class="lineNum">    1168</span>              : }</span>
-<span id="L1169"><span class="lineNum">    1169</span>              : </span>
-<span id="L1170"><span class="lineNum">    1170</span> <span class="tlaUNC">           0 : void NotationAutomationController::applyAutomationChanges(const mu::engraving::AutomationChanges&amp; changes)</span></span>
-<span id="L1171"><span class="lineNum">    1171</span>              : {</span>
-<span id="L1172"><span class="lineNum">    1172</span> <span class="tlaUNC">           0 :     if (changes.isFullReset || !score()) {</span></span>
-<span id="L1173"><span class="lineNum">    1173</span> <span class="tlaUNC">           0 :         rebuildAllPolylines();</span></span>
-<span id="L1174"><span class="lineNum">    1174</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1175"><span class="lineNum">    1175</span>              :     }</span>
-<span id="L1176"><span class="lineNum">    1176</span>              : </span>
-<span id="L1177"><span class="lineNum">    1177</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(automationData()) {</span></span>
-<span id="L1178"><span class="lineNum">    1178</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1179"><span class="lineNum">    1179</span>              :     }</span>
-<span id="L1180"><span class="lineNum">    1180</span>              : </span>
-<span id="L1181"><span class="lineNum">    1181</span> <span class="tlaUNC">           0 :     std::set&lt;muse::ID&gt; affectedStaffIds;</span></span>
-<span id="L1182"><span class="lineNum">    1182</span> <span class="tlaUNC">           0 :     std::set&lt;mu::engraving::InstrumentTrackId&gt; affectedTrackIds;</span></span>
-<span id="L1183"><span class="lineNum">    1183</span> <span class="tlaUNC">           0 :     bool globalAffected = false;</span></span>
-<span id="L1184"><span class="lineNum">    1184</span> <span class="tlaUNC">           0 :     for (const mu::engraving::AutomationCurveKey&amp; key : changes.affectedKeys) {</span></span>
-<span id="L1185"><span class="lineNum">    1185</span> <span class="tlaUNC">           0 :         if (const std::optional&lt;muse::ID&gt; staffId = key.staffId()) {</span></span>
-<span id="L1186"><span class="lineNum">    1186</span> <span class="tlaUNC">           0 :             affectedStaffIds.insert(*staffId);</span></span>
-<span id="L1187"><span class="lineNum">    1187</span> <span class="tlaUNC">           0 :         } else if (const std::optional&lt;mu::engraving::InstrumentTrackId&gt; trackId = key.trackId()) {</span></span>
-<span id="L1188"><span class="lineNum">    1188</span> <span class="tlaUNC">           0 :             affectedTrackIds.insert(*trackId);</span></span>
-<span id="L1189"><span class="lineNum">    1189</span> <span class="tlaUNC">           0 :         } else if (key.isGlobal()) {</span></span>
-<span id="L1190"><span class="lineNum">    1190</span> <span class="tlaUNC">           0 :             globalAffected = true;</span></span>
-<span id="L1191"><span class="lineNum">    1191</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1192"><span class="lineNum">    1192</span>              :     }</span>
-<span id="L1193"><span class="lineNum">    1193</span>              : </span>
-<span id="L1194"><span class="lineNum">    1194</span>              :     //! NOTE: A change can affect any polyline of an affected staff, even ones in other systems (the line between the</span>
-<span id="L1195"><span class="lineNum">    1195</span>              :     //! changed points and the points either side of them can span many regions), so they're all rebuilt...</span>
-<span id="L1196"><span class="lineNum">    1196</span> <span class="tlaUNC">           0 :     for (const auto&amp; [key, data] : m_polylinesDataMap) {</span></span>
-<span id="L1197"><span class="lineNum">    1197</span> <span class="tlaUNC">           0 :         IF_ASSERT_FAILED(key.isValid()) {</span></span>
-<span id="L1198"><span class="lineNum">    1198</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L1199"><span class="lineNum">    1199</span>              :         }</span>
-<span id="L1200"><span class="lineNum">    1200</span> <span class="tlaUNC">           0 :         const Staff* staff = score()-&gt;staff(key.staffIdx);</span></span>
-<span id="L1201"><span class="lineNum">    1201</span> <span class="tlaUNC">           0 :         if (!staff) {</span></span>
-<span id="L1202"><span class="lineNum">    1202</span> <span class="tlaUNC">           0 :             continue;</span></span>
-<span id="L1203"><span class="lineNum">    1203</span>              :         }</span>
-<span id="L1204"><span class="lineNum">    1204</span> <span class="tlaUNC">           0 :         const bool staffAffected = affectedStaffIds.find(staff-&gt;id()) != affectedStaffIds.end();</span></span>
-<span id="L1205"><span class="lineNum">    1205</span> <span class="tlaUNC">           0 :         const mu::engraving::InstrumentTrackId staffTrackId { staff-&gt;part()-&gt;id(), staff-&gt;part()-&gt;instrumentId() };</span></span>
-<span id="L1206"><span class="lineNum">    1206</span> <span class="tlaUNC">           0 :         const bool trackAffected = affectedTrackIds.find(staffTrackId) != affectedTrackIds.end();</span></span>
-<span id="L1207"><span class="lineNum">    1207</span> <span class="tlaUNC">           0 :         const bool globalCurveAffected = globalAffected &amp;&amp; currentCurveKey(staff).isGlobal();</span></span>
-<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaUNC">           0 :         if (staffAffected || trackAffected || globalCurveAffected) {</span></span>
-<span id="L1209"><span class="lineNum">    1209</span> <span class="tlaUNC">           0 :             rebuildPolylinePoints(key);</span></span>
-<span id="L1210"><span class="lineNum">    1210</span>              :         }</span>
-<span id="L1211"><span class="lineNum">    1211</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L1212"><span class="lineNum">    1212</span>              : </span>
-<span id="L1213"><span class="lineNum">    1213</span> <span class="tlaUNC">           0 :     updatePolylinesGeometry();</span></span>
-<span id="L1214"><span class="lineNum">    1214</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1215"><span class="lineNum">    1215</span>              : </span>
-<span id="L1216"><span class="lineNum">    1216</span> <span class="tlaUNC">           0 : bool NotationAutomationController::requestEditPoint(const PointData&amp; oldPointData, const PolylineKey&amp; key, qreal x, qreal y)</span></span>
-<span id="L1217"><span class="lineNum">    1217</span>              : {</span>
-<span id="L1218"><span class="lineNum">    1218</span>              :     // STEP 1 - Check that all of our parameters are valid...</span>
-<span id="L1219"><span class="lineNum">    1219</span> <span class="tlaUNC">           0 :     const PointData::PointType pointType = oldPointData.pointType;</span></span>
-<span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(key.isValid() &amp;&amp; pointType != PointData::PointType::UNKNOWN) {</span></span>
-<span id="L1221"><span class="lineNum">    1221</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1222"><span class="lineNum">    1222</span>              :     }</span>
-<span id="L1223"><span class="lineNum">    1223</span> <span class="tlaUNC">           0 :     const Staff* staff = score() ? score()-&gt;staff(key.staffIdx) : nullptr;</span></span>
-<span id="L1224"><span class="lineNum">    1224</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff) {</span></span>
-<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1226"><span class="lineNum">    1226</span>              :     }</span>
-<span id="L1227"><span class="lineNum">    1227</span>              : </span>
-<span id="L1228"><span class="lineNum">    1228</span> <span class="tlaUNC">           0 :     const PolylineData data = polylineData(key);</span></span>
-<span id="L1229"><span class="lineNum">    1229</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(data.polyline) {</span></span>
-<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1231"><span class="lineNum">    1231</span>              :     }</span>
-<span id="L1232"><span class="lineNum">    1232</span>              : </span>
-<span id="L1233"><span class="lineNum">    1233</span>              :     // STEP 2 - Determine the new tick value based on the x parameter...</span>
-<span id="L1234"><span class="lineNum">    1234</span> <span class="tlaUNC">           0 :     const int resolvedTick = tickFromXInPolyline(key, data, x);</span></span>
-<span id="L1235"><span class="lineNum">    1235</span> <span class="tlaUNC">           0 :     const int newTick = resolvedTick != -1 ? resolvedTick : oldPointData.tick;</span></span>
-<span id="L1236"><span class="lineNum">    1236</span> <span class="tlaUNC">           0 :     const bool tickChanged = newTick != oldPointData.tick;</span></span>
-<span id="L1237"><span class="lineNum">    1237</span>              : </span>
-<span id="L1238"><span class="lineNum">    1238</span>              :     // STEP 3 - Fetch the point being edited...</span>
-<span id="L1239"><span class="lineNum">    1239</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurveKey curveKey = currentCurveKey(staff);</span></span>
-<span id="L1240"><span class="lineNum">    1240</span>              : </span>
-<span id="L1241"><span class="lineNum">    1241</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurve&amp; curve = automationData()-&gt;curve(curveKey);</span></span>
-<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaUNC">           0 :     const auto existingIt = curve.find(oldPointData.tick);</span></span>
-<span id="L1243"><span class="lineNum">    1243</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(existingIt != curve.end()) {</span></span>
-<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1245"><span class="lineNum">    1245</span>              :     }</span>
-<span id="L1246"><span class="lineNum">    1246</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationPoint&amp; existingPoint = existingIt-&gt;second;</span></span>
-<span id="L1247"><span class="lineNum">    1247</span> <span class="tlaUNC">           0 :     const mu::engraving::real_t existingInValue = mu::engraving::resolveInValue(curve, existingIt);</span></span>
-<span id="L1248"><span class="lineNum">    1248</span>              : </span>
-<span id="L1249"><span class="lineNum">    1249</span>              :     //! NOTE: Point in/out values are rescaled to the display range - higher value == lower Y...</span>
-<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaUNC">           0 :     const mu::engraving::real_t referenceValue = pointType == PointData::PointType::IN ? existingInValue : existingPoint.value.outValue;</span></span>
-<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaUNC">           0 :     const mu::engraving::real_t newValue = automationValueFromDisplay(currentAutomationType(), staff, newTick, 1.0 - y, referenceValue);</span></span>
-<span id="L1252"><span class="lineNum">    1252</span>              : </span>
-<span id="L1253"><span class="lineNum">    1253</span>              :     // STEP 4 - Update the point's value, and move it to the new tick if necessary...</span>
+<span id="L1147"><span class="lineNum">    1147</span>              :     //! NOTE: A polyline only holds the points inside its own region. Whatever lies outside it (which can still affect</span>
+<span id="L1148"><span class="lineNum">    1148</span>              :     //! the polyline) is covered by the edge values...</span>
+<span id="L1149"><span class="lineNum">    1149</span> <span class="tlaUNC">           0 :     const QVector&lt;PointData&gt; pointsData = pointsDataInStaffRegion(staff, regionRect, data.startMeasure-&gt;tick().ticks(),</span></span>
+<span id="L1150"><span class="lineNum">    1150</span> <span class="tlaUNC">           0 :                                                                   regionLastTick(data.endMeasure));</span></span>
+<span id="L1151"><span class="lineNum">    1151</span> <span class="tlaUNC">           0 :     setPolylinePointsData(key, pointsData);</span></span>
+<span id="L1152"><span class="lineNum">    1152</span>              : </span>
+<span id="L1153"><span class="lineNum">    1153</span> <span class="tlaUNC">           0 :     QVector&lt;QPointF&gt; points;</span></span>
+<span id="L1154"><span class="lineNum">    1154</span> <span class="tlaUNC">           0 :     points.reserve(pointsData.size());</span></span>
+<span id="L1155"><span class="lineNum">    1155</span> <span class="tlaUNC">           0 :     for (const PointData&amp; pointData : pointsData) {</span></span>
+<span id="L1156"><span class="lineNum">    1156</span> <span class="tlaUNC">           0 :         points.push_back(pointData.qPointF);</span></span>
+<span id="L1157"><span class="lineNum">    1157</span>              :     }</span>
+<span id="L1158"><span class="lineNum">    1158</span> <span class="tlaUNC">           0 :     polyline-&gt;setPoints(points);</span></span>
+<span id="L1159"><span class="lineNum">    1159</span>              : </span>
+<span id="L1160"><span class="lineNum">    1160</span> <span class="tlaUNC">           0 :     applyPolylineEdgeValues(polyline, key);</span></span>
+<span id="L1161"><span class="lineNum">    1161</span> <span class="tlaUNC">           0 :     applyPolylineColorsUnderLine(polyline, key);</span></span>
+<span id="L1162"><span class="lineNum">    1162</span> <span class="tlaUNC">           0 :     polyline-&gt;update();</span></span>
+<span id="L1163"><span class="lineNum">    1163</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1164"><span class="lineNum">    1164</span>              : </span>
+<span id="L1165"><span class="lineNum">    1165</span> <span class="tlaUNC">           0 : void NotationAutomationController::mergePendingChanges(const mu::engraving::AutomationChanges&amp; changes)</span></span>
+<span id="L1166"><span class="lineNum">    1166</span>              : {</span>
+<span id="L1167"><span class="lineNum">    1167</span> <span class="tlaUNC">           0 :     if (changes.isFullReset) {</span></span>
+<span id="L1168"><span class="lineNum">    1168</span> <span class="tlaUNC">           0 :         m_pendingChanges.isFullReset = true;</span></span>
+<span id="L1169"><span class="lineNum">    1169</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1170"><span class="lineNum">    1170</span>              :     }</span>
+<span id="L1171"><span class="lineNum">    1171</span> <span class="tlaUNC">           0 :     for (const mu::engraving::AutomationCurveKey&amp; key : changes.affectedKeys) {</span></span>
+<span id="L1172"><span class="lineNum">    1172</span> <span class="tlaUNC">           0 :         m_pendingChanges.extend(key, changes.tickFrom, changes.tickTo);</span></span>
+<span id="L1173"><span class="lineNum">    1173</span>              :     }</span>
+<span id="L1174"><span class="lineNum">    1174</span>              : }</span>
+<span id="L1175"><span class="lineNum">    1175</span>              : </span>
+<span id="L1176"><span class="lineNum">    1176</span> <span class="tlaUNC">           0 : void NotationAutomationController::applyAutomationChanges(const mu::engraving::AutomationChanges&amp; changes)</span></span>
+<span id="L1177"><span class="lineNum">    1177</span>              : {</span>
+<span id="L1178"><span class="lineNum">    1178</span> <span class="tlaUNC">           0 :     if (changes.isFullReset || !score()) {</span></span>
+<span id="L1179"><span class="lineNum">    1179</span> <span class="tlaUNC">           0 :         rebuildAllPolylines();</span></span>
+<span id="L1180"><span class="lineNum">    1180</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1181"><span class="lineNum">    1181</span>              :     }</span>
+<span id="L1182"><span class="lineNum">    1182</span>              : </span>
+<span id="L1183"><span class="lineNum">    1183</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(automationData()) {</span></span>
+<span id="L1184"><span class="lineNum">    1184</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1185"><span class="lineNum">    1185</span>              :     }</span>
+<span id="L1186"><span class="lineNum">    1186</span>              : </span>
+<span id="L1187"><span class="lineNum">    1187</span> <span class="tlaUNC">           0 :     std::set&lt;muse::ID&gt; affectedStaffIds;</span></span>
+<span id="L1188"><span class="lineNum">    1188</span> <span class="tlaUNC">           0 :     std::set&lt;mu::engraving::InstrumentTrackId&gt; affectedTrackIds;</span></span>
+<span id="L1189"><span class="lineNum">    1189</span> <span class="tlaUNC">           0 :     bool globalAffected = false;</span></span>
+<span id="L1190"><span class="lineNum">    1190</span> <span class="tlaUNC">           0 :     for (const mu::engraving::AutomationCurveKey&amp; key : changes.affectedKeys) {</span></span>
+<span id="L1191"><span class="lineNum">    1191</span> <span class="tlaUNC">           0 :         if (const std::optional&lt;muse::ID&gt; staffId = key.staffId()) {</span></span>
+<span id="L1192"><span class="lineNum">    1192</span> <span class="tlaUNC">           0 :             affectedStaffIds.insert(*staffId);</span></span>
+<span id="L1193"><span class="lineNum">    1193</span> <span class="tlaUNC">           0 :         } else if (const std::optional&lt;mu::engraving::InstrumentTrackId&gt; trackId = key.trackId()) {</span></span>
+<span id="L1194"><span class="lineNum">    1194</span> <span class="tlaUNC">           0 :             affectedTrackIds.insert(*trackId);</span></span>
+<span id="L1195"><span class="lineNum">    1195</span> <span class="tlaUNC">           0 :         } else if (key.isGlobal()) {</span></span>
+<span id="L1196"><span class="lineNum">    1196</span> <span class="tlaUNC">           0 :             globalAffected = true;</span></span>
+<span id="L1197"><span class="lineNum">    1197</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1198"><span class="lineNum">    1198</span>              :     }</span>
+<span id="L1199"><span class="lineNum">    1199</span>              : </span>
+<span id="L1200"><span class="lineNum">    1200</span>              :     //! NOTE: A change can affect any polyline of an affected staff, even ones in other systems (the line between the</span>
+<span id="L1201"><span class="lineNum">    1201</span>              :     //! changed points and the points either side of them can span many regions), so they're all rebuilt...</span>
+<span id="L1202"><span class="lineNum">    1202</span> <span class="tlaUNC">           0 :     for (const auto&amp; [key, data] : m_polylinesDataMap) {</span></span>
+<span id="L1203"><span class="lineNum">    1203</span> <span class="tlaUNC">           0 :         IF_ASSERT_FAILED(key.isValid()) {</span></span>
+<span id="L1204"><span class="lineNum">    1204</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L1205"><span class="lineNum">    1205</span>              :         }</span>
+<span id="L1206"><span class="lineNum">    1206</span> <span class="tlaUNC">           0 :         const Staff* staff = score()-&gt;staff(key.staffIdx);</span></span>
+<span id="L1207"><span class="lineNum">    1207</span> <span class="tlaUNC">           0 :         if (!staff) {</span></span>
+<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaUNC">           0 :             continue;</span></span>
+<span id="L1209"><span class="lineNum">    1209</span>              :         }</span>
+<span id="L1210"><span class="lineNum">    1210</span> <span class="tlaUNC">           0 :         const bool staffAffected = affectedStaffIds.find(staff-&gt;id()) != affectedStaffIds.end();</span></span>
+<span id="L1211"><span class="lineNum">    1211</span> <span class="tlaUNC">           0 :         const mu::engraving::InstrumentTrackId staffTrackId { staff-&gt;part()-&gt;id(), staff-&gt;part()-&gt;instrumentId() };</span></span>
+<span id="L1212"><span class="lineNum">    1212</span> <span class="tlaUNC">           0 :         const bool trackAffected = affectedTrackIds.find(staffTrackId) != affectedTrackIds.end();</span></span>
+<span id="L1213"><span class="lineNum">    1213</span> <span class="tlaUNC">           0 :         const bool globalCurveAffected = globalAffected &amp;&amp; currentCurveKey(staff).isGlobal();</span></span>
+<span id="L1214"><span class="lineNum">    1214</span> <span class="tlaUNC">           0 :         if (staffAffected || trackAffected || globalCurveAffected) {</span></span>
+<span id="L1215"><span class="lineNum">    1215</span> <span class="tlaUNC">           0 :             rebuildPolylinePoints(key);</span></span>
+<span id="L1216"><span class="lineNum">    1216</span>              :         }</span>
+<span id="L1217"><span class="lineNum">    1217</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L1218"><span class="lineNum">    1218</span>              : </span>
+<span id="L1219"><span class="lineNum">    1219</span> <span class="tlaUNC">           0 :     updatePolylinesGeometry();</span></span>
+<span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1221"><span class="lineNum">    1221</span>              : </span>
+<span id="L1222"><span class="lineNum">    1222</span> <span class="tlaUNC">           0 : bool NotationAutomationController::requestEditPoint(const PointData&amp; oldPointData, const PolylineKey&amp; key, qreal x, qreal y)</span></span>
+<span id="L1223"><span class="lineNum">    1223</span>              : {</span>
+<span id="L1224"><span class="lineNum">    1224</span>              :     // STEP 1 - Check that all of our parameters are valid...</span>
+<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaUNC">           0 :     const PointData::PointType pointType = oldPointData.pointType;</span></span>
+<span id="L1226"><span class="lineNum">    1226</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(key.isValid() &amp;&amp; pointType != PointData::PointType::UNKNOWN) {</span></span>
+<span id="L1227"><span class="lineNum">    1227</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1228"><span class="lineNum">    1228</span>              :     }</span>
+<span id="L1229"><span class="lineNum">    1229</span> <span class="tlaUNC">           0 :     const Staff* staff = score() ? score()-&gt;staff(key.staffIdx) : nullptr;</span></span>
+<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff) {</span></span>
+<span id="L1231"><span class="lineNum">    1231</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1232"><span class="lineNum">    1232</span>              :     }</span>
+<span id="L1233"><span class="lineNum">    1233</span>              : </span>
+<span id="L1234"><span class="lineNum">    1234</span> <span class="tlaUNC">           0 :     const PolylineData data = polylineData(key);</span></span>
+<span id="L1235"><span class="lineNum">    1235</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(data.polyline) {</span></span>
+<span id="L1236"><span class="lineNum">    1236</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1237"><span class="lineNum">    1237</span>              :     }</span>
+<span id="L1238"><span class="lineNum">    1238</span>              : </span>
+<span id="L1239"><span class="lineNum">    1239</span>              :     // STEP 2 - Determine the new tick value based on the x parameter...</span>
+<span id="L1240"><span class="lineNum">    1240</span> <span class="tlaUNC">           0 :     const int resolvedTick = tickFromXInPolyline(key, data, x);</span></span>
+<span id="L1241"><span class="lineNum">    1241</span> <span class="tlaUNC">           0 :     const int newTick = resolvedTick != -1 ? resolvedTick : oldPointData.tick;</span></span>
+<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaUNC">           0 :     const bool tickChanged = newTick != oldPointData.tick;</span></span>
+<span id="L1243"><span class="lineNum">    1243</span>              : </span>
+<span id="L1244"><span class="lineNum">    1244</span>              :     // STEP 3 - Fetch the point being edited...</span>
+<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurveKey curveKey = currentCurveKey(staff);</span></span>
+<span id="L1246"><span class="lineNum">    1246</span>              : </span>
+<span id="L1247"><span class="lineNum">    1247</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurve&amp; curve = automationData()-&gt;curve(curveKey);</span></span>
+<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaUNC">           0 :     const auto existingIt = curve.find(oldPointData.tick);</span></span>
+<span id="L1249"><span class="lineNum">    1249</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(existingIt != curve.end()) {</span></span>
+<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1251"><span class="lineNum">    1251</span>              :     }</span>
+<span id="L1252"><span class="lineNum">    1252</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationPoint&amp; existingPoint = existingIt-&gt;second;</span></span>
+<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaUNC">           0 :     const mu::engraving::real_t existingInValue = mu::engraving::resolveInValue(curve, existingIt);</span></span>
 <span id="L1254"><span class="lineNum">    1254</span>              : </span>
-<span id="L1255"><span class="lineNum">    1255</span>              :     //! NOTE: Moving a BOTH point is the simplest case - we can update its value then simply change the tick.</span>
-<span id="L1256"><span class="lineNum">    1256</span>              :     //! Moving IN/OUT points is slightly more complex. In this case we need to set the in/out values to be</span>
-<span id="L1257"><span class="lineNum">    1257</span>              :     //! equal at oldTick (effectively converting the original point to a BOTH point) and create a new point</span>
-<span id="L1258"><span class="lineNum">    1258</span>              :     //! at newTick...</span>
-<span id="L1259"><span class="lineNum">    1259</span>              : </span>
-<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaUNC">           0 :     if (!tickChanged || pointType == PointData::PointType::BOTH) {</span></span>
-<span id="L1261"><span class="lineNum">    1261</span> <span class="tlaUNC">           0 :         mu::engraving::AutomationPoint editedPoint = existingPoint;</span></span>
-<span id="L1262"><span class="lineNum">    1262</span>              :         const mu::engraving::AutomationPoint::Ease preservedEase</span>
-<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaUNC">           0 :             = mu::engraving::ease(editedPoint).value_or(mu::engraving::AutomationPoint::Ease::none());</span></span>
-<span id="L1264"><span class="lineNum">    1264</span> <span class="tlaUNC">           0 :         if (pointType == PointData::PointType::IN) {</span></span>
-<span id="L1265"><span class="lineNum">    1265</span>              :             // The user explicitly chose this arrival value; it no longer follows whatever precedes it</span>
-<span id="L1266"><span class="lineNum">    1266</span> <span class="tlaUNC">           0 :             editedPoint.value.inValue = mu::engraving::AutomationPoint::ExplicitArrival { newValue, preservedEase };</span></span>
-<span id="L1267"><span class="lineNum">    1267</span> <span class="tlaUNC">           0 :         } else if (pointType == PointData::PointType::BOTH) {</span></span>
-<span id="L1268"><span class="lineNum">    1268</span> <span class="tlaUNC">           0 :             editedPoint.value.outValue = newValue;</span></span>
-<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaUNC">           0 :             editedPoint.value.inValue = mu::engraving::AutomationPoint::ExplicitArrival { editedPoint.value.outValue, preservedEase };</span></span>
-<span id="L1270"><span class="lineNum">    1270</span>              :         } else {</span>
-<span id="L1271"><span class="lineNum">    1271</span> <span class="tlaUNC">           0 :             editedPoint.value.outValue = newValue;</span></span>
-<span id="L1272"><span class="lineNum">    1272</span>              :         }</span>
-<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaUNC">           0 :         editedPoint.generated = false;</span></span>
-<span id="L1274"><span class="lineNum">    1274</span>              : </span>
-<span id="L1275"><span class="lineNum">    1275</span>              :         mu::engraving::AutomationPointEdits edits {</span>
-<span id="L1276"><span class="lineNum">    1276</span> <span class="tlaUNC">           0 :             { newTick, MovePoint { editedPoint, oldPointData.tick } }</span></span>
-<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaUNC">           0 :         };</span></span>
-<span id="L1278"><span class="lineNum">    1278</span>              : </span>
-<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaUNC">           0 :         editAutomationPoints(curveKey, edits);</span></span>
+<span id="L1255"><span class="lineNum">    1255</span>              :     //! NOTE: Point in/out values are rescaled to the display range - higher value == lower Y...</span>
+<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaUNC">           0 :     const mu::engraving::real_t referenceValue = pointType == PointData::PointType::IN ? existingInValue : existingPoint.value.outValue;</span></span>
+<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaUNC">           0 :     const mu::engraving::real_t newValue = automationValueFromDisplay(currentAutomationType(), staff, newTick, 1.0 - y, referenceValue);</span></span>
+<span id="L1258"><span class="lineNum">    1258</span>              : </span>
+<span id="L1259"><span class="lineNum">    1259</span>              :     // STEP 4 - Update the point's value, and move it to the new tick if necessary...</span>
+<span id="L1260"><span class="lineNum">    1260</span>              : </span>
+<span id="L1261"><span class="lineNum">    1261</span>              :     //! NOTE: Moving a BOTH point is the simplest case - we can update its value then simply change the tick.</span>
+<span id="L1262"><span class="lineNum">    1262</span>              :     //! Moving IN/OUT points is slightly more complex. In this case we need to set the in/out values to be</span>
+<span id="L1263"><span class="lineNum">    1263</span>              :     //! equal at oldTick (effectively converting the original point to a BOTH point) and create a new point</span>
+<span id="L1264"><span class="lineNum">    1264</span>              :     //! at newTick...</span>
+<span id="L1265"><span class="lineNum">    1265</span>              : </span>
+<span id="L1266"><span class="lineNum">    1266</span> <span class="tlaUNC">           0 :     if (!tickChanged || pointType == PointData::PointType::BOTH) {</span></span>
+<span id="L1267"><span class="lineNum">    1267</span> <span class="tlaUNC">           0 :         mu::engraving::AutomationPoint editedPoint = existingPoint;</span></span>
+<span id="L1268"><span class="lineNum">    1268</span>              :         const mu::engraving::AutomationPoint::Ease preservedEase</span>
+<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaUNC">           0 :             = mu::engraving::ease(editedPoint).value_or(mu::engraving::AutomationPoint::Ease::none());</span></span>
+<span id="L1270"><span class="lineNum">    1270</span> <span class="tlaUNC">           0 :         if (pointType == PointData::PointType::IN) {</span></span>
+<span id="L1271"><span class="lineNum">    1271</span>              :             // The user explicitly chose this arrival value; it no longer follows whatever precedes it</span>
+<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaUNC">           0 :             editedPoint.value.inValue = mu::engraving::AutomationPoint::ExplicitArrival { newValue, preservedEase };</span></span>
+<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaUNC">           0 :         } else if (pointType == PointData::PointType::BOTH) {</span></span>
+<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaUNC">           0 :             editedPoint.value.outValue = newValue;</span></span>
+<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaUNC">           0 :             editedPoint.value.inValue = mu::engraving::AutomationPoint::ExplicitArrival { editedPoint.value.outValue, preservedEase };</span></span>
+<span id="L1276"><span class="lineNum">    1276</span>              :         } else {</span>
+<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaUNC">           0 :             editedPoint.value.outValue = newValue;</span></span>
+<span id="L1278"><span class="lineNum">    1278</span>              :         }</span>
+<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaUNC">           0 :         editedPoint.generated = false;</span></span>
 <span id="L1280"><span class="lineNum">    1280</span>              : </span>
-<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L1282"><span class="lineNum">    1282</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L1283"><span class="lineNum">    1283</span>              : </span>
-<span id="L1284"><span class="lineNum">    1284</span>              :     // oldTick becomes a flat BOTH point, so its inValue is frozen to outValue at edit time (it no</span>
-<span id="L1285"><span class="lineNum">    1285</span>              :     // longer live-tracks outValue if it's edited again later)</span>
-<span id="L1286"><span class="lineNum">    1286</span>              :     const mu::engraving::AutomationPoint::Ease originalEase</span>
-<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaUNC">           0 :         = mu::engraving::ease(existingPoint).value_or(mu::engraving::AutomationPoint::Ease::none());</span></span>
-<span id="L1288"><span class="lineNum">    1288</span>              : </span>
-<span id="L1289"><span class="lineNum">    1289</span> <span class="tlaUNC">           0 :     mu::engraving::AutomationPoint updatedOldPoint = existingPoint;</span></span>
-<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaUNC">           0 :     if (pointType == PointData::PointType::OUT) {</span></span>
-<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaUNC">           0 :         updatedOldPoint.value.outValue = existingInValue;</span></span>
-<span id="L1292"><span class="lineNum">    1292</span>              :     }</span>
-<span id="L1293"><span class="lineNum">    1293</span> <span class="tlaUNC">           0 :     updatedOldPoint.value.inValue = mu::engraving::AutomationPoint::ExplicitArrival { updatedOldPoint.value.outValue, originalEase };</span></span>
-<span id="L1294"><span class="lineNum">    1294</span> <span class="tlaUNC">           0 :     updatedOldPoint.generated = false;</span></span>
-<span id="L1295"><span class="lineNum">    1295</span>              : </span>
-<span id="L1296"><span class="lineNum">    1296</span> <span class="tlaUNC">           0 :     mu::engraving::AutomationPoint newPoint;</span></span>
-<span id="L1297"><span class="lineNum">    1297</span> <span class="tlaUNC">           0 :     newPoint.value.outValue = newValue;</span></span>
-<span id="L1298"><span class="lineNum">    1298</span> <span class="tlaUNC">           0 :     newPoint.value.inValue = mu::engraving::AutomationPoint::ExplicitArrival { newPoint.value.outValue, originalEase };</span></span>
-<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaUNC">           0 :     newPoint.itemId = existingPoint.itemId;</span></span>
-<span id="L1300"><span class="lineNum">    1300</span>              : </span>
-<span id="L1301"><span class="lineNum">    1301</span>              :     mu::engraving::AutomationPointEdits edits {</span>
-<span id="L1302"><span class="lineNum">    1302</span> <span class="tlaUNC">           0 :         { oldPointData.tick, SetPoint { updatedOldPoint } },</span></span>
-<span id="L1303"><span class="lineNum">    1303</span> <span class="tlaUNC">           0 :         { newTick, SetPoint { newPoint } }</span></span>
-<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :     };</span></span>
-<span id="L1305"><span class="lineNum">    1305</span>              : </span>
-<span id="L1306"><span class="lineNum">    1306</span> <span class="tlaUNC">           0 :     editAutomationPoints(curveKey, edits);</span></span>
-<span id="L1307"><span class="lineNum">    1307</span>              : </span>
-<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaUNC">           0 :     return true;</span></span>
-<span id="L1309"><span class="lineNum">    1309</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1310"><span class="lineNum">    1310</span>              : </span>
-<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaUNC">           0 : bool NotationAutomationController::requestAddPoint(const PolylineKey&amp; key, qreal x, qreal y, bool useCurveValue)</span></span>
-<span id="L1312"><span class="lineNum">    1312</span>              : {</span>
-<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(key.isValid()) {</span></span>
-<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1315"><span class="lineNum">    1315</span>              :     }</span>
+<span id="L1281"><span class="lineNum">    1281</span>              :         mu::engraving::AutomationPointEdits edits {</span>
+<span id="L1282"><span class="lineNum">    1282</span> <span class="tlaUNC">           0 :             { newTick, MovePoint { editedPoint, oldPointData.tick } }</span></span>
+<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaUNC">           0 :         };</span></span>
+<span id="L1284"><span class="lineNum">    1284</span>              : </span>
+<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaUNC">           0 :         editAutomationPoints(curveKey, edits);</span></span>
+<span id="L1286"><span class="lineNum">    1286</span>              : </span>
+<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L1288"><span class="lineNum">    1288</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L1289"><span class="lineNum">    1289</span>              : </span>
+<span id="L1290"><span class="lineNum">    1290</span>              :     // oldTick becomes a flat BOTH point, so its inValue is frozen to outValue at edit time (it no</span>
+<span id="L1291"><span class="lineNum">    1291</span>              :     // longer live-tracks outValue if it's edited again later)</span>
+<span id="L1292"><span class="lineNum">    1292</span>              :     const mu::engraving::AutomationPoint::Ease originalEase</span>
+<span id="L1293"><span class="lineNum">    1293</span> <span class="tlaUNC">           0 :         = mu::engraving::ease(existingPoint).value_or(mu::engraving::AutomationPoint::Ease::none());</span></span>
+<span id="L1294"><span class="lineNum">    1294</span>              : </span>
+<span id="L1295"><span class="lineNum">    1295</span> <span class="tlaUNC">           0 :     mu::engraving::AutomationPoint updatedOldPoint = existingPoint;</span></span>
+<span id="L1296"><span class="lineNum">    1296</span> <span class="tlaUNC">           0 :     if (pointType == PointData::PointType::OUT) {</span></span>
+<span id="L1297"><span class="lineNum">    1297</span> <span class="tlaUNC">           0 :         updatedOldPoint.value.outValue = existingInValue;</span></span>
+<span id="L1298"><span class="lineNum">    1298</span>              :     }</span>
+<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaUNC">           0 :     updatedOldPoint.value.inValue = mu::engraving::AutomationPoint::ExplicitArrival { updatedOldPoint.value.outValue, originalEase };</span></span>
+<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaUNC">           0 :     updatedOldPoint.generated = false;</span></span>
+<span id="L1301"><span class="lineNum">    1301</span>              : </span>
+<span id="L1302"><span class="lineNum">    1302</span> <span class="tlaUNC">           0 :     mu::engraving::AutomationPoint newPoint;</span></span>
+<span id="L1303"><span class="lineNum">    1303</span> <span class="tlaUNC">           0 :     newPoint.value.outValue = newValue;</span></span>
+<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :     newPoint.value.inValue = mu::engraving::AutomationPoint::ExplicitArrival { newPoint.value.outValue, originalEase };</span></span>
+<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaUNC">           0 :     newPoint.itemId = existingPoint.itemId;</span></span>
+<span id="L1306"><span class="lineNum">    1306</span>              : </span>
+<span id="L1307"><span class="lineNum">    1307</span>              :     mu::engraving::AutomationPointEdits edits {</span>
+<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaUNC">           0 :         { oldPointData.tick, SetPoint { updatedOldPoint } },</span></span>
+<span id="L1309"><span class="lineNum">    1309</span> <span class="tlaUNC">           0 :         { newTick, SetPoint { newPoint } }</span></span>
+<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaUNC">           0 :     };</span></span>
+<span id="L1311"><span class="lineNum">    1311</span>              : </span>
+<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaUNC">           0 :     editAutomationPoints(curveKey, edits);</span></span>
+<span id="L1313"><span class="lineNum">    1313</span>              : </span>
+<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaUNC">           0 :     return true;</span></span>
+<span id="L1315"><span class="lineNum">    1315</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L1316"><span class="lineNum">    1316</span>              : </span>
-<span id="L1317"><span class="lineNum">    1317</span> <span class="tlaUNC">           0 :     const Staff* staff = score() ? score()-&gt;staff(key.staffIdx) : nullptr;</span></span>
-<span id="L1318"><span class="lineNum">    1318</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff) {</span></span>
-<span id="L1319"><span class="lineNum">    1319</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1320"><span class="lineNum">    1320</span>              :     }</span>
-<span id="L1321"><span class="lineNum">    1321</span>              : </span>
-<span id="L1322"><span class="lineNum">    1322</span> <span class="tlaUNC">           0 :     const PolylineData data = polylineData(key);</span></span>
-<span id="L1323"><span class="lineNum">    1323</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(data.polyline) {</span></span>
-<span id="L1324"><span class="lineNum">    1324</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1325"><span class="lineNum">    1325</span>              :     }</span>
-<span id="L1326"><span class="lineNum">    1326</span>              : </span>
-<span id="L1327"><span class="lineNum">    1327</span>              :     //! NOTE: No need to clamp x here - tickFromXInPolyline can't resolve to a tick outside the region...</span>
-<span id="L1328"><span class="lineNum">    1328</span> <span class="tlaUNC">           0 :     const int newTick = tickFromXInPolyline(key, data, x);</span></span>
-<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaUNC">           0 :     if (newTick == -1) {</span></span>
+<span id="L1317"><span class="lineNum">    1317</span> <span class="tlaUNC">           0 : bool NotationAutomationController::requestAddPoint(const PolylineKey&amp; key, qreal x, qreal y, bool useCurveValue)</span></span>
+<span id="L1318"><span class="lineNum">    1318</span>              : {</span>
+<span id="L1319"><span class="lineNum">    1319</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(key.isValid()) {</span></span>
+<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1321"><span class="lineNum">    1321</span>              :     }</span>
+<span id="L1322"><span class="lineNum">    1322</span>              : </span>
+<span id="L1323"><span class="lineNum">    1323</span> <span class="tlaUNC">           0 :     const Staff* staff = score() ? score()-&gt;staff(key.staffIdx) : nullptr;</span></span>
+<span id="L1324"><span class="lineNum">    1324</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff) {</span></span>
+<span id="L1325"><span class="lineNum">    1325</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1326"><span class="lineNum">    1326</span>              :     }</span>
+<span id="L1327"><span class="lineNum">    1327</span>              : </span>
+<span id="L1328"><span class="lineNum">    1328</span> <span class="tlaUNC">           0 :     const PolylineData data = polylineData(key);</span></span>
+<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(data.polyline) {</span></span>
 <span id="L1330"><span class="lineNum">    1330</span> <span class="tlaUNC">           0 :         return false;</span></span>
 <span id="L1331"><span class="lineNum">    1331</span>              :     }</span>
 <span id="L1332"><span class="lineNum">    1332</span>              : </span>
-<span id="L1333"><span class="lineNum">    1333</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurveKey curveKey = currentCurveKey(staff);</span></span>
-<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurve&amp; curve = automationData()-&gt;curve(curveKey);</span></span>
-<span id="L1335"><span class="lineNum">    1335</span>              : </span>
-<span id="L1336"><span class="lineNum">    1336</span>              :     //! A click lands on the drawn line, which may be clamped, so keep the curve's own value. A dragged point</span>
-<span id="L1337"><span class="lineNum">    1337</span>              :     //! is placed wherever the user dropped it, so its y is used instead...</span>
-<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaUNC">           0 :     const std::optional&lt;muse::real_t&gt; curveValue = useCurveValue ? mu::engraving::evaluateCurveAt(curve, newTick) : std::nullopt;</span></span>
-<span id="L1339"><span class="lineNum">    1339</span>              : </span>
-<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaUNC">           0 :     mu::engraving::AutomationPoint newPoint;</span></span>
-<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaUNC">           0 :     newPoint.value.outValue = curveValue ? *curveValue</span></span>
-<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaUNC">           0 :                               : automationValueFromDisplay(currentAutomationType(), staff, newTick, 1.0 - y);</span></span>
-<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaUNC">           0 :     newPoint.value.inValue = mu::engraving::AutomationPoint::ExplicitArrival { newPoint.value.outValue,</span></span>
-<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 :                                                                                mu::engraving::AutomationPoint::Ease::none() };</span></span>
-<span id="L1345"><span class="lineNum">    1345</span> <span class="tlaUNC">           0 :     newPoint.generated = false;</span></span>
-<span id="L1346"><span class="lineNum">    1346</span>              : </span>
-<span id="L1347"><span class="lineNum">    1347</span>              :     mu::engraving::AutomationPointEdits edits {</span>
-<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaUNC">           0 :         { newTick, SetPoint { newPoint } }</span></span>
-<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaUNC">           0 :     };</span></span>
-<span id="L1350"><span class="lineNum">    1350</span>              : </span>
-<span id="L1351"><span class="lineNum">    1351</span> <span class="tlaUNC">           0 :     editAutomationPoints(curveKey, edits);</span></span>
+<span id="L1333"><span class="lineNum">    1333</span>              :     //! NOTE: No need to clamp x here - tickFromXInPolyline can't resolve to a tick outside the region...</span>
+<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaUNC">           0 :     const int newTick = tickFromXInPolyline(key, data, x);</span></span>
+<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaUNC">           0 :     if (newTick == -1) {</span></span>
+<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1337"><span class="lineNum">    1337</span>              :     }</span>
+<span id="L1338"><span class="lineNum">    1338</span>              : </span>
+<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurveKey curveKey = currentCurveKey(staff);</span></span>
+<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurve&amp; curve = automationData()-&gt;curve(curveKey);</span></span>
+<span id="L1341"><span class="lineNum">    1341</span>              : </span>
+<span id="L1342"><span class="lineNum">    1342</span>              :     //! A click lands on the drawn line, which may be clamped, so keep the curve's own value. A dragged point</span>
+<span id="L1343"><span class="lineNum">    1343</span>              :     //! is placed wherever the user dropped it, so its y is used instead...</span>
+<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 :     const std::optional&lt;muse::real_t&gt; curveValue = useCurveValue ? mu::engraving::evaluateCurveAt(curve, newTick) : std::nullopt;</span></span>
+<span id="L1345"><span class="lineNum">    1345</span>              : </span>
+<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaUNC">           0 :     mu::engraving::AutomationPoint newPoint;</span></span>
+<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaUNC">           0 :     newPoint.value.outValue = curveValue ? *curveValue</span></span>
+<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaUNC">           0 :                               : automationValueFromDisplay(currentAutomationType(), staff, newTick, 1.0 - y);</span></span>
+<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaUNC">           0 :     newPoint.value.inValue = mu::engraving::AutomationPoint::ExplicitArrival { newPoint.value.outValue,</span></span>
+<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaUNC">           0 :                                                                                mu::engraving::AutomationPoint::Ease::none() };</span></span>
+<span id="L1351"><span class="lineNum">    1351</span> <span class="tlaUNC">           0 :     newPoint.generated = false;</span></span>
 <span id="L1352"><span class="lineNum">    1352</span>              : </span>
-<span id="L1353"><span class="lineNum">    1353</span> <span class="tlaUNC">           0 :     return true;</span></span>
-<span id="L1354"><span class="lineNum">    1354</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1355"><span class="lineNum">    1355</span>              : </span>
-<span id="L1356"><span class="lineNum">    1356</span> <span class="tlaUNC">           0 : bool NotationAutomationController::requestRemovePoint(const PointData&amp; pointData, const PolylineKey&amp; key)</span></span>
-<span id="L1357"><span class="lineNum">    1357</span>              : {</span>
-<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(key.isValid()) {</span></span>
-<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1360"><span class="lineNum">    1360</span>              :     }</span>
+<span id="L1353"><span class="lineNum">    1353</span>              :     mu::engraving::AutomationPointEdits edits {</span>
+<span id="L1354"><span class="lineNum">    1354</span> <span class="tlaUNC">           0 :         { newTick, SetPoint { newPoint } }</span></span>
+<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaUNC">           0 :     };</span></span>
+<span id="L1356"><span class="lineNum">    1356</span>              : </span>
+<span id="L1357"><span class="lineNum">    1357</span> <span class="tlaUNC">           0 :     editAutomationPoints(curveKey, edits);</span></span>
+<span id="L1358"><span class="lineNum">    1358</span>              : </span>
+<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaUNC">           0 :     return true;</span></span>
+<span id="L1360"><span class="lineNum">    1360</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L1361"><span class="lineNum">    1361</span>              : </span>
-<span id="L1362"><span class="lineNum">    1362</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationPoint* automationPoint = automationPointAt(key, pointData.tick);</span></span>
-<span id="L1363"><span class="lineNum">    1363</span> <span class="tlaUNC">           0 :     if (!automationPoint || automationPoint-&gt;generated || automationPoint-&gt;itemId.has_value()) {</span></span>
-<span id="L1364"><span class="lineNum">    1364</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1365"><span class="lineNum">    1365</span>              :     }</span>
-<span id="L1366"><span class="lineNum">    1366</span>              : </span>
-<span id="L1367"><span class="lineNum">    1367</span> <span class="tlaUNC">           0 :     const Staff* staff = score() ? score()-&gt;staff(key.staffIdx) : nullptr;</span></span>
-<span id="L1368"><span class="lineNum">    1368</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff) {</span></span>
-<span id="L1369"><span class="lineNum">    1369</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1370"><span class="lineNum">    1370</span>              :     }</span>
-<span id="L1371"><span class="lineNum">    1371</span>              : </span>
-<span id="L1372"><span class="lineNum">    1372</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurveKey curveKey = currentCurveKey(staff);</span></span>
-<span id="L1373"><span class="lineNum">    1373</span>              : </span>
-<span id="L1374"><span class="lineNum">    1374</span>              :     mu::engraving::AutomationPointEdits edits {</span>
-<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaUNC">           0 :         { pointData.tick, ErasePoint {} }</span></span>
-<span id="L1376"><span class="lineNum">    1376</span> <span class="tlaUNC">           0 :     };</span></span>
+<span id="L1362"><span class="lineNum">    1362</span> <span class="tlaUNC">           0 : bool NotationAutomationController::requestRemovePoint(const PointData&amp; pointData, const PolylineKey&amp; key)</span></span>
+<span id="L1363"><span class="lineNum">    1363</span>              : {</span>
+<span id="L1364"><span class="lineNum">    1364</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(key.isValid()) {</span></span>
+<span id="L1365"><span class="lineNum">    1365</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1366"><span class="lineNum">    1366</span>              :     }</span>
+<span id="L1367"><span class="lineNum">    1367</span>              : </span>
+<span id="L1368"><span class="lineNum">    1368</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationPoint* automationPoint = automationPointAt(key, pointData.tick);</span></span>
+<span id="L1369"><span class="lineNum">    1369</span> <span class="tlaUNC">           0 :     if (!automationPoint || automationPoint-&gt;generated || automationPoint-&gt;itemId.has_value()) {</span></span>
+<span id="L1370"><span class="lineNum">    1370</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1371"><span class="lineNum">    1371</span>              :     }</span>
+<span id="L1372"><span class="lineNum">    1372</span>              : </span>
+<span id="L1373"><span class="lineNum">    1373</span> <span class="tlaUNC">           0 :     const Staff* staff = score() ? score()-&gt;staff(key.staffIdx) : nullptr;</span></span>
+<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff) {</span></span>
+<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1376"><span class="lineNum">    1376</span>              :     }</span>
 <span id="L1377"><span class="lineNum">    1377</span>              : </span>
-<span id="L1378"><span class="lineNum">    1378</span> <span class="tlaUNC">           0 :     editAutomationPoints(curveKey, edits);</span></span>
+<span id="L1378"><span class="lineNum">    1378</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurveKey curveKey = currentCurveKey(staff);</span></span>
 <span id="L1379"><span class="lineNum">    1379</span>              : </span>
-<span id="L1380"><span class="lineNum">    1380</span> <span class="tlaUNC">           0 :     return true;</span></span>
-<span id="L1381"><span class="lineNum">    1381</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1382"><span class="lineNum">    1382</span>              : </span>
-<span id="L1383"><span class="lineNum">    1383</span> <span class="tlaUNC">           0 : void NotationAutomationController::editAutomationPoints(const mu::engraving::AutomationCurveKey&amp; key,</span></span>
-<span id="L1384"><span class="lineNum">    1384</span>              :                                                         mu::engraving::AutomationPointEdits&amp; edits)</span>
-<span id="L1385"><span class="lineNum">    1385</span>              : {</span>
-<span id="L1386"><span class="lineNum">    1386</span> <span class="tlaUNC">           0 :     const INotationAutomationPtr notationAutomation = automation();</span></span>
-<span id="L1387"><span class="lineNum">    1387</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(notationAutomation) {</span></span>
-<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1389"><span class="lineNum">    1389</span>              :     }</span>
-<span id="L1390"><span class="lineNum">    1390</span>              : </span>
-<span id="L1391"><span class="lineNum">    1391</span> <span class="tlaUNC">           0 :     notationAutomation-&gt;editPoints(key, edits);</span></span>
-<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1393"><span class="lineNum">    1393</span>              : </span>
-<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaUNC">           0 : NotationAutomationController::PolylineData NotationAutomationController::polylineData(const PolylineKey&amp; key) const</span></span>
-<span id="L1395"><span class="lineNum">    1395</span>              : {</span>
-<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaUNC">           0 :     const auto it = m_polylinesDataMap.find(key);</span></span>
-<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(it != m_polylinesDataMap.end()) {</span></span>
-<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaUNC">           0 :         return PolylineData();</span></span>
-<span id="L1399"><span class="lineNum">    1399</span>              :     }</span>
-<span id="L1400"><span class="lineNum">    1400</span>              : </span>
-<span id="L1401"><span class="lineNum">    1401</span> <span class="tlaUNC">           0 :     return it-&gt;second;</span></span>
-<span id="L1402"><span class="lineNum">    1402</span>              : }</span>
-<span id="L1403"><span class="lineNum">    1403</span>              : </span>
-<span id="L1404"><span class="lineNum">    1404</span> <span class="tlaUNC">           0 : void NotationAutomationController::setPolylinePointsData(const PolylineKey&amp; key, const QVector&lt;PointData&gt;&amp; pointsData)</span></span>
-<span id="L1405"><span class="lineNum">    1405</span>              : {</span>
-<span id="L1406"><span class="lineNum">    1406</span> <span class="tlaUNC">           0 :     const auto it = m_polylinesDataMap.find(key);</span></span>
-<span id="L1407"><span class="lineNum">    1407</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(it != m_polylinesDataMap.end()) {</span></span>
-<span id="L1408"><span class="lineNum">    1408</span> <span class="tlaUNC">           0 :         return;</span></span>
-<span id="L1409"><span class="lineNum">    1409</span>              :     }</span>
-<span id="L1410"><span class="lineNum">    1410</span>              : </span>
-<span id="L1411"><span class="lineNum">    1411</span> <span class="tlaUNC">           0 :     it-&gt;second.pointsData = pointsData;</span></span>
-<span id="L1412"><span class="lineNum">    1412</span>              : }</span>
-<span id="L1413"><span class="lineNum">    1413</span>              : </span>
-<span id="L1414"><span class="lineNum">    1414</span> <span class="tlaUNC">           0 : const mu::engraving::AutomationPoint* NotationAutomationController::automationPointAt(const PolylineKey&amp; key, int tick) const</span></span>
-<span id="L1415"><span class="lineNum">    1415</span>              : {</span>
-<span id="L1416"><span class="lineNum">    1416</span> <span class="tlaUNC">           0 :     const Staff* staff = score() ? score()-&gt;staff(key.staffIdx) : nullptr;</span></span>
-<span id="L1417"><span class="lineNum">    1417</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff &amp;&amp; automationData()) {</span></span>
-<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaUNC">           0 :         return nullptr;</span></span>
-<span id="L1419"><span class="lineNum">    1419</span>              :     }</span>
-<span id="L1420"><span class="lineNum">    1420</span>              : </span>
-<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurveKey curveKey = currentCurveKey(staff);</span></span>
-<span id="L1422"><span class="lineNum">    1422</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurve&amp; curve = automationData()-&gt;curve(curveKey);</span></span>
-<span id="L1423"><span class="lineNum">    1423</span> <span class="tlaUNC">           0 :     const auto it = curve.find(tick);</span></span>
-<span id="L1424"><span class="lineNum">    1424</span> <span class="tlaUNC">           0 :     if (it == curve.end()) {</span></span>
-<span id="L1425"><span class="lineNum">    1425</span> <span class="tlaUNC">           0 :         return nullptr;</span></span>
-<span id="L1426"><span class="lineNum">    1426</span>              :     }</span>
-<span id="L1427"><span class="lineNum">    1427</span>              : </span>
-<span id="L1428"><span class="lineNum">    1428</span> <span class="tlaUNC">           0 :     return &amp;it-&gt;second;</span></span>
-<span id="L1429"><span class="lineNum">    1429</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1430"><span class="lineNum">    1430</span>              : </span>
-<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaUNC">           0 : const DynamicsDisplayRange&amp; NotationAutomationController::dynamicsDisplayRange(const Staff* staff, int tick) const</span></span>
-<span id="L1432"><span class="lineNum">    1432</span>              : {</span>
-<span id="L1433"><span class="lineNum">    1433</span> <span class="tlaUNC">           0 :     const project::INotationProjectPtr notationProject = projectSession()-&gt;project();</span></span>
-<span id="L1434"><span class="lineNum">    1434</span> <span class="tlaUNC">           0 :     const project::IProjectAudioSettingsPtr settings = notationProject ? notationProject-&gt;audioSettings() : nullptr;</span></span>
-<span id="L1435"><span class="lineNum">    1435</span> <span class="tlaUNC">           0 :     const Part* part = staff ? staff-&gt;part() : nullptr;</span></span>
-<span id="L1436"><span class="lineNum">    1436</span> <span class="tlaUNC">           0 :     if (!settings || !part) {</span></span>
-<span id="L1437"><span class="lineNum">    1437</span> <span class="tlaUNC">           0 :         return DEFAULT_DYNAMICS_RANGE;</span></span>
-<span id="L1438"><span class="lineNum">    1438</span>              :     }</span>
-<span id="L1439"><span class="lineNum">    1439</span>              : </span>
-<span id="L1440"><span class="lineNum">    1440</span> <span class="tlaUNC">           0 :     const InstrumentTrackId trackId { part-&gt;id(), part-&gt;instrumentId(Fraction::fromTicks(tick)) };</span></span>
-<span id="L1441"><span class="lineNum">    1441</span> <span class="tlaUNC">           0 :     const bool isMuseSampler = muse::audio::isResourceType(settings-&gt;trackInputParams(trackId).resourceMeta,</span></span>
-<span id="L1442"><span class="lineNum">    1442</span>              :                                                            muse::audio::AudioResourceType::MuseSamplerSoundPack);</span>
-<span id="L1443"><span class="lineNum">    1443</span>              : </span>
-<span id="L1444"><span class="lineNum">    1444</span> <span class="tlaUNC">           0 :     return isMuseSampler ? MUSE_SAMPLER_DYNAMICS_RANGE : DEFAULT_DYNAMICS_RANGE;</span></span>
-<span id="L1445"><span class="lineNum">    1445</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1446"><span class="lineNum">    1446</span>              : </span>
-<span id="L1447"><span class="lineNum">    1447</span>              : // Values are stored normalized [0, 1]; Dynamics rescales that into its own sub-range for display,</span>
-<span id="L1448"><span class="lineNum">    1448</span>              : // Volume and Tempo additionally apply a fader curve, other types map 1:1 onto the display range</span>
-<span id="L1449"><span class="lineNum">    1449</span> <span class="tlaUNC">           0 : double NotationAutomationController::automationValueToDisplay(AutomationType type, const Staff* staff, int tick,</span></span>
-<span id="L1450"><span class="lineNum">    1450</span>              :                                                               muse::real_t value) const</span>
-<span id="L1451"><span class="lineNum">    1451</span>              : {</span>
-<span id="L1452"><span class="lineNum">    1452</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Dynamics) {</span></span>
-<span id="L1453"><span class="lineNum">    1453</span> <span class="tlaUNC">           0 :         return dynamicsValueToDisplay(value, dynamicsDisplayRange(staff, tick));</span></span>
-<span id="L1454"><span class="lineNum">    1454</span>              :     }</span>
-<span id="L1455"><span class="lineNum">    1455</span>              : </span>
-<span id="L1456"><span class="lineNum">    1456</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Volume) {</span></span>
-<span id="L1457"><span class="lineNum">    1457</span> <span class="tlaUNC">           0 :         return volumeValueToDisplay(value);</span></span>
-<span id="L1458"><span class="lineNum">    1458</span>              :     }</span>
-<span id="L1459"><span class="lineNum">    1459</span>              : </span>
-<span id="L1460"><span class="lineNum">    1460</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Tempo) {</span></span>
-<span id="L1461"><span class="lineNum">    1461</span> <span class="tlaUNC">           0 :         const double logicalBpm = mu::engraving::denormalizeTempo(value).toBPM().val;</span></span>
-<span id="L1462"><span class="lineNum">    1462</span> <span class="tlaUNC">           0 :         const double localBpm = tempoLogicalBpmToLocalBpm(logicalBpm);</span></span>
-<span id="L1463"><span class="lineNum">    1463</span> <span class="tlaUNC">           0 :         const double display = localBpm / TEMPO_RANGE_MAX_BPM;</span></span>
-<span id="L1464"><span class="lineNum">    1464</span> <span class="tlaUNC">           0 :         return std::clamp(display, 0.0, 1.0);</span></span>
-<span id="L1465"><span class="lineNum">    1465</span>              :     }</span>
-<span id="L1466"><span class="lineNum">    1466</span>              : </span>
-<span id="L1467"><span class="lineNum">    1467</span> <span class="tlaUNC">           0 :     return std::clamp(static_cast&lt;double&gt;(value), 0.0, 1.0);</span></span>
-<span id="L1468"><span class="lineNum">    1468</span>              : }</span>
-<span id="L1469"><span class="lineNum">    1469</span>              : </span>
-<span id="L1470"><span class="lineNum">    1470</span>              : // existingValue preserves values beyond the display range when the drag lands back at the same clamped edge</span>
-<span id="L1471"><span class="lineNum">    1471</span> <span class="tlaUNC">           0 : muse::real_t NotationAutomationController::automationValueFromDisplay(AutomationType type, const Staff* staff, int tick,</span></span>
-<span id="L1472"><span class="lineNum">    1472</span>              :                                                                       double displayValue,</span>
-<span id="L1473"><span class="lineNum">    1473</span>              :                                                                       std::optional&lt;muse::real_t&gt; existingValue) const</span>
-<span id="L1474"><span class="lineNum">    1474</span>              : {</span>
-<span id="L1475"><span class="lineNum">    1475</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Dynamics) {</span></span>
-<span id="L1476"><span class="lineNum">    1476</span> <span class="tlaUNC">           0 :         const DynamicsDisplayRange&amp; dynamicsRange = dynamicsDisplayRange(staff, tick);</span></span>
-<span id="L1477"><span class="lineNum">    1477</span> <span class="tlaUNC">           0 :         if (existingValue) {</span></span>
-<span id="L1478"><span class="lineNum">    1478</span> <span class="tlaUNC">           0 :             const double existingDisplay = dynamicsValueToDisplay(*existingValue, dynamicsRange);</span></span>
-<span id="L1479"><span class="lineNum">    1479</span> <span class="tlaUNC">           0 :             const bool atTop = muse::RealIsEqualOrMore(displayValue, 1.0) &amp;&amp; muse::RealIsEqualOrMore(existingDisplay, 1.0);</span></span>
-<span id="L1480"><span class="lineNum">    1480</span> <span class="tlaUNC">           0 :             const bool atBottom = muse::RealIsEqualOrLess(displayValue, 0.0) &amp;&amp; muse::RealIsEqualOrLess(existingDisplay, 0.0);</span></span>
-<span id="L1481"><span class="lineNum">    1481</span> <span class="tlaUNC">           0 :             if (atTop || atBottom) {</span></span>
-<span id="L1482"><span class="lineNum">    1482</span> <span class="tlaUNC">           0 :                 return *existingValue;</span></span>
-<span id="L1483"><span class="lineNum">    1483</span>              :             }</span>
-<span id="L1484"><span class="lineNum">    1484</span>              :         }</span>
-<span id="L1485"><span class="lineNum">    1485</span>              : </span>
-<span id="L1486"><span class="lineNum">    1486</span> <span class="tlaUNC">           0 :         return dynamicsValueFromDisplay(displayValue, dynamicsRange);</span></span>
-<span id="L1487"><span class="lineNum">    1487</span>              :     }</span>
-<span id="L1488"><span class="lineNum">    1488</span>              : </span>
-<span id="L1489"><span class="lineNum">    1489</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Volume) {</span></span>
-<span id="L1490"><span class="lineNum">    1490</span> <span class="tlaUNC">           0 :         const double localDb = VOLUME_RANGE_MIN_DB + displayValue * (VOLUME_RANGE_MAX_DB - VOLUME_RANGE_MIN_DB);</span></span>
-<span id="L1491"><span class="lineNum">    1491</span> <span class="tlaUNC">           0 :         const double logicalDb = volumeLocalDbToLogicalDb(localDb);</span></span>
-<span id="L1492"><span class="lineNum">    1492</span> <span class="tlaUNC">           0 :         const double normalized = (logicalDb - VOLUME_RANGE_MIN_DB) / (VOLUME_RANGE_MAX_DB - VOLUME_RANGE_MIN_DB);</span></span>
-<span id="L1493"><span class="lineNum">    1493</span> <span class="tlaUNC">           0 :         return muse::real_t(normalized);</span></span>
-<span id="L1494"><span class="lineNum">    1494</span>              :     }</span>
-<span id="L1495"><span class="lineNum">    1495</span>              : </span>
-<span id="L1496"><span class="lineNum">    1496</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Tempo) {</span></span>
-<span id="L1497"><span class="lineNum">    1497</span> <span class="tlaUNC">           0 :         if (existingValue &amp;&amp; muse::RealIsEqualOrMore(displayValue, 1.0)</span></span>
-<span id="L1498"><span class="lineNum">    1498</span> <span class="tlaUNC">           0 :             &amp;&amp; muse::RealIsEqualOrMore(automationValueToDisplay(type, staff, tick, *existingValue), 1.0)) {</span></span>
-<span id="L1499"><span class="lineNum">    1499</span> <span class="tlaUNC">           0 :             return *existingValue;</span></span>
-<span id="L1500"><span class="lineNum">    1500</span>              :         }</span>
+<span id="L1380"><span class="lineNum">    1380</span>              :     mu::engraving::AutomationPointEdits edits {</span>
+<span id="L1381"><span class="lineNum">    1381</span> <span class="tlaUNC">           0 :         { pointData.tick, ErasePoint {} }</span></span>
+<span id="L1382"><span class="lineNum">    1382</span> <span class="tlaUNC">           0 :     };</span></span>
+<span id="L1383"><span class="lineNum">    1383</span>              : </span>
+<span id="L1384"><span class="lineNum">    1384</span> <span class="tlaUNC">           0 :     editAutomationPoints(curveKey, edits);</span></span>
+<span id="L1385"><span class="lineNum">    1385</span>              : </span>
+<span id="L1386"><span class="lineNum">    1386</span> <span class="tlaUNC">           0 :     return true;</span></span>
+<span id="L1387"><span class="lineNum">    1387</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1388"><span class="lineNum">    1388</span>              : </span>
+<span id="L1389"><span class="lineNum">    1389</span> <span class="tlaUNC">           0 : void NotationAutomationController::editAutomationPoints(const mu::engraving::AutomationCurveKey&amp; key,</span></span>
+<span id="L1390"><span class="lineNum">    1390</span>              :                                                         mu::engraving::AutomationPointEdits&amp; edits)</span>
+<span id="L1391"><span class="lineNum">    1391</span>              : {</span>
+<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaUNC">           0 :     const INotationAutomationPtr notationAutomation = automation();</span></span>
+<span id="L1393"><span class="lineNum">    1393</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(notationAutomation) {</span></span>
+<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1395"><span class="lineNum">    1395</span>              :     }</span>
+<span id="L1396"><span class="lineNum">    1396</span>              : </span>
+<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaUNC">           0 :     notationAutomation-&gt;editPoints(key, edits);</span></span>
+<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1399"><span class="lineNum">    1399</span>              : </span>
+<span id="L1400"><span class="lineNum">    1400</span> <span class="tlaUNC">           0 : NotationAutomationController::PolylineData NotationAutomationController::polylineData(const PolylineKey&amp; key) const</span></span>
+<span id="L1401"><span class="lineNum">    1401</span>              : {</span>
+<span id="L1402"><span class="lineNum">    1402</span> <span class="tlaUNC">           0 :     const auto it = m_polylinesDataMap.find(key);</span></span>
+<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(it != m_polylinesDataMap.end()) {</span></span>
+<span id="L1404"><span class="lineNum">    1404</span> <span class="tlaUNC">           0 :         return PolylineData();</span></span>
+<span id="L1405"><span class="lineNum">    1405</span>              :     }</span>
+<span id="L1406"><span class="lineNum">    1406</span>              : </span>
+<span id="L1407"><span class="lineNum">    1407</span> <span class="tlaUNC">           0 :     return it-&gt;second;</span></span>
+<span id="L1408"><span class="lineNum">    1408</span>              : }</span>
+<span id="L1409"><span class="lineNum">    1409</span>              : </span>
+<span id="L1410"><span class="lineNum">    1410</span> <span class="tlaUNC">           0 : void NotationAutomationController::setPolylinePointsData(const PolylineKey&amp; key, const QVector&lt;PointData&gt;&amp; pointsData)</span></span>
+<span id="L1411"><span class="lineNum">    1411</span>              : {</span>
+<span id="L1412"><span class="lineNum">    1412</span> <span class="tlaUNC">           0 :     const auto it = m_polylinesDataMap.find(key);</span></span>
+<span id="L1413"><span class="lineNum">    1413</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(it != m_polylinesDataMap.end()) {</span></span>
+<span id="L1414"><span class="lineNum">    1414</span> <span class="tlaUNC">           0 :         return;</span></span>
+<span id="L1415"><span class="lineNum">    1415</span>              :     }</span>
+<span id="L1416"><span class="lineNum">    1416</span>              : </span>
+<span id="L1417"><span class="lineNum">    1417</span> <span class="tlaUNC">           0 :     it-&gt;second.pointsData = pointsData;</span></span>
+<span id="L1418"><span class="lineNum">    1418</span>              : }</span>
+<span id="L1419"><span class="lineNum">    1419</span>              : </span>
+<span id="L1420"><span class="lineNum">    1420</span> <span class="tlaUNC">           0 : const mu::engraving::AutomationPoint* NotationAutomationController::automationPointAt(const PolylineKey&amp; key, int tick) const</span></span>
+<span id="L1421"><span class="lineNum">    1421</span>              : {</span>
+<span id="L1422"><span class="lineNum">    1422</span> <span class="tlaUNC">           0 :     const Staff* staff = score() ? score()-&gt;staff(key.staffIdx) : nullptr;</span></span>
+<span id="L1423"><span class="lineNum">    1423</span> <span class="tlaUNC">           0 :     IF_ASSERT_FAILED(staff &amp;&amp; automationData()) {</span></span>
+<span id="L1424"><span class="lineNum">    1424</span> <span class="tlaUNC">           0 :         return nullptr;</span></span>
+<span id="L1425"><span class="lineNum">    1425</span>              :     }</span>
+<span id="L1426"><span class="lineNum">    1426</span>              : </span>
+<span id="L1427"><span class="lineNum">    1427</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurveKey curveKey = currentCurveKey(staff);</span></span>
+<span id="L1428"><span class="lineNum">    1428</span> <span class="tlaUNC">           0 :     const mu::engraving::AutomationCurve&amp; curve = automationData()-&gt;curve(curveKey);</span></span>
+<span id="L1429"><span class="lineNum">    1429</span> <span class="tlaUNC">           0 :     const auto it = curve.find(tick);</span></span>
+<span id="L1430"><span class="lineNum">    1430</span> <span class="tlaUNC">           0 :     if (it == curve.end()) {</span></span>
+<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaUNC">           0 :         return nullptr;</span></span>
+<span id="L1432"><span class="lineNum">    1432</span>              :     }</span>
+<span id="L1433"><span class="lineNum">    1433</span>              : </span>
+<span id="L1434"><span class="lineNum">    1434</span> <span class="tlaUNC">           0 :     return &amp;it-&gt;second;</span></span>
+<span id="L1435"><span class="lineNum">    1435</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1436"><span class="lineNum">    1436</span>              : </span>
+<span id="L1437"><span class="lineNum">    1437</span> <span class="tlaUNC">           0 : const DynamicsDisplayRange&amp; NotationAutomationController::dynamicsDisplayRange(const Staff* staff, int tick) const</span></span>
+<span id="L1438"><span class="lineNum">    1438</span>              : {</span>
+<span id="L1439"><span class="lineNum">    1439</span> <span class="tlaUNC">           0 :     const project::INotationProjectPtr notationProject = projectSession()-&gt;project();</span></span>
+<span id="L1440"><span class="lineNum">    1440</span> <span class="tlaUNC">           0 :     const project::IProjectAudioSettingsPtr settings = notationProject ? notationProject-&gt;audioSettings() : nullptr;</span></span>
+<span id="L1441"><span class="lineNum">    1441</span> <span class="tlaUNC">           0 :     const Part* part = staff ? staff-&gt;part() : nullptr;</span></span>
+<span id="L1442"><span class="lineNum">    1442</span> <span class="tlaUNC">           0 :     if (!settings || !part) {</span></span>
+<span id="L1443"><span class="lineNum">    1443</span> <span class="tlaUNC">           0 :         return DEFAULT_DYNAMICS_RANGE;</span></span>
+<span id="L1444"><span class="lineNum">    1444</span>              :     }</span>
+<span id="L1445"><span class="lineNum">    1445</span>              : </span>
+<span id="L1446"><span class="lineNum">    1446</span> <span class="tlaUNC">           0 :     const InstrumentTrackId trackId { part-&gt;id(), part-&gt;instrumentId(Fraction::fromTicks(tick)) };</span></span>
+<span id="L1447"><span class="lineNum">    1447</span> <span class="tlaUNC">           0 :     const bool isMuseSampler = muse::audio::isResourceType(settings-&gt;trackInputParams(trackId).resourceMeta,</span></span>
+<span id="L1448"><span class="lineNum">    1448</span>              :                                                            muse::audio::AudioResourceType::MuseSamplerSoundPack);</span>
+<span id="L1449"><span class="lineNum">    1449</span>              : </span>
+<span id="L1450"><span class="lineNum">    1450</span> <span class="tlaUNC">           0 :     return isMuseSampler ? MUSE_SAMPLER_DYNAMICS_RANGE : DEFAULT_DYNAMICS_RANGE;</span></span>
+<span id="L1451"><span class="lineNum">    1451</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1452"><span class="lineNum">    1452</span>              : </span>
+<span id="L1453"><span class="lineNum">    1453</span>              : // Values are stored normalized [0, 1]; Dynamics rescales that into its own sub-range for display,</span>
+<span id="L1454"><span class="lineNum">    1454</span>              : // Volume and Tempo additionally apply a fader curve, other types map 1:1 onto the display range</span>
+<span id="L1455"><span class="lineNum">    1455</span> <span class="tlaUNC">           0 : double NotationAutomationController::automationValueToDisplay(AutomationType type, const Staff* staff, int tick,</span></span>
+<span id="L1456"><span class="lineNum">    1456</span>              :                                                               muse::real_t value) const</span>
+<span id="L1457"><span class="lineNum">    1457</span>              : {</span>
+<span id="L1458"><span class="lineNum">    1458</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Dynamics) {</span></span>
+<span id="L1459"><span class="lineNum">    1459</span> <span class="tlaUNC">           0 :         return dynamicsValueToDisplay(value, dynamicsDisplayRange(staff, tick));</span></span>
+<span id="L1460"><span class="lineNum">    1460</span>              :     }</span>
+<span id="L1461"><span class="lineNum">    1461</span>              : </span>
+<span id="L1462"><span class="lineNum">    1462</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Volume) {</span></span>
+<span id="L1463"><span class="lineNum">    1463</span> <span class="tlaUNC">           0 :         return volumeValueToDisplay(value);</span></span>
+<span id="L1464"><span class="lineNum">    1464</span>              :     }</span>
+<span id="L1465"><span class="lineNum">    1465</span>              : </span>
+<span id="L1466"><span class="lineNum">    1466</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Tempo) {</span></span>
+<span id="L1467"><span class="lineNum">    1467</span> <span class="tlaUNC">           0 :         const double logicalBpm = mu::engraving::denormalizeTempo(value).toBPM().val;</span></span>
+<span id="L1468"><span class="lineNum">    1468</span> <span class="tlaUNC">           0 :         const double localBpm = tempoLogicalBpmToLocalBpm(logicalBpm);</span></span>
+<span id="L1469"><span class="lineNum">    1469</span> <span class="tlaUNC">           0 :         const double display = localBpm / TEMPO_RANGE_MAX_BPM;</span></span>
+<span id="L1470"><span class="lineNum">    1470</span> <span class="tlaUNC">           0 :         return std::clamp(display, 0.0, 1.0);</span></span>
+<span id="L1471"><span class="lineNum">    1471</span>              :     }</span>
+<span id="L1472"><span class="lineNum">    1472</span>              : </span>
+<span id="L1473"><span class="lineNum">    1473</span> <span class="tlaUNC">           0 :     return std::clamp(static_cast&lt;double&gt;(value), 0.0, 1.0);</span></span>
+<span id="L1474"><span class="lineNum">    1474</span>              : }</span>
+<span id="L1475"><span class="lineNum">    1475</span>              : </span>
+<span id="L1476"><span class="lineNum">    1476</span>              : // existingValue preserves values beyond the display range when the drag lands back at the same clamped edge</span>
+<span id="L1477"><span class="lineNum">    1477</span> <span class="tlaUNC">           0 : muse::real_t NotationAutomationController::automationValueFromDisplay(AutomationType type, const Staff* staff, int tick,</span></span>
+<span id="L1478"><span class="lineNum">    1478</span>              :                                                                       double displayValue,</span>
+<span id="L1479"><span class="lineNum">    1479</span>              :                                                                       std::optional&lt;muse::real_t&gt; existingValue) const</span>
+<span id="L1480"><span class="lineNum">    1480</span>              : {</span>
+<span id="L1481"><span class="lineNum">    1481</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Dynamics) {</span></span>
+<span id="L1482"><span class="lineNum">    1482</span> <span class="tlaUNC">           0 :         const DynamicsDisplayRange&amp; dynamicsRange = dynamicsDisplayRange(staff, tick);</span></span>
+<span id="L1483"><span class="lineNum">    1483</span> <span class="tlaUNC">           0 :         if (existingValue) {</span></span>
+<span id="L1484"><span class="lineNum">    1484</span> <span class="tlaUNC">           0 :             const double existingDisplay = dynamicsValueToDisplay(*existingValue, dynamicsRange);</span></span>
+<span id="L1485"><span class="lineNum">    1485</span> <span class="tlaUNC">           0 :             const bool atTop = muse::RealIsEqualOrMore(displayValue, 1.0) &amp;&amp; muse::RealIsEqualOrMore(existingDisplay, 1.0);</span></span>
+<span id="L1486"><span class="lineNum">    1486</span> <span class="tlaUNC">           0 :             const bool atBottom = muse::RealIsEqualOrLess(displayValue, 0.0) &amp;&amp; muse::RealIsEqualOrLess(existingDisplay, 0.0);</span></span>
+<span id="L1487"><span class="lineNum">    1487</span> <span class="tlaUNC">           0 :             if (atTop || atBottom) {</span></span>
+<span id="L1488"><span class="lineNum">    1488</span> <span class="tlaUNC">           0 :                 return *existingValue;</span></span>
+<span id="L1489"><span class="lineNum">    1489</span>              :             }</span>
+<span id="L1490"><span class="lineNum">    1490</span>              :         }</span>
+<span id="L1491"><span class="lineNum">    1491</span>              : </span>
+<span id="L1492"><span class="lineNum">    1492</span> <span class="tlaUNC">           0 :         return dynamicsValueFromDisplay(displayValue, dynamicsRange);</span></span>
+<span id="L1493"><span class="lineNum">    1493</span>              :     }</span>
+<span id="L1494"><span class="lineNum">    1494</span>              : </span>
+<span id="L1495"><span class="lineNum">    1495</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Volume) {</span></span>
+<span id="L1496"><span class="lineNum">    1496</span> <span class="tlaUNC">           0 :         const double localDb = VOLUME_RANGE_MIN_DB + displayValue * (VOLUME_RANGE_MAX_DB - VOLUME_RANGE_MIN_DB);</span></span>
+<span id="L1497"><span class="lineNum">    1497</span> <span class="tlaUNC">           0 :         const double logicalDb = volumeLocalDbToLogicalDb(localDb);</span></span>
+<span id="L1498"><span class="lineNum">    1498</span> <span class="tlaUNC">           0 :         const double normalized = (logicalDb - VOLUME_RANGE_MIN_DB) / (VOLUME_RANGE_MAX_DB - VOLUME_RANGE_MIN_DB);</span></span>
+<span id="L1499"><span class="lineNum">    1499</span> <span class="tlaUNC">           0 :         return muse::real_t(normalized);</span></span>
+<span id="L1500"><span class="lineNum">    1500</span>              :     }</span>
 <span id="L1501"><span class="lineNum">    1501</span>              : </span>
-<span id="L1502"><span class="lineNum">    1502</span> <span class="tlaUNC">           0 :         const double localBpm = displayValue * TEMPO_RANGE_MAX_BPM;</span></span>
-<span id="L1503"><span class="lineNum">    1503</span> <span class="tlaUNC">           0 :         const double logicalBpm = tempoLocalBpmToLogicalBpm(localBpm);</span></span>
-<span id="L1504"><span class="lineNum">    1504</span> <span class="tlaUNC">           0 :         const muse::real_t normalized = mu::engraving::normalizeTempo(mu::engraving::BeatsPerSecond::fromBPM(logicalBpm));</span></span>
-<span id="L1505"><span class="lineNum">    1505</span> <span class="tlaUNC">           0 :         return std::clamp(normalized, mu::engraving::MIN_NORMALIZED_TEMPO, mu::engraving::MAX_NORMALIZED_TEMPO);</span></span>
-<span id="L1506"><span class="lineNum">    1506</span>              :     }</span>
+<span id="L1502"><span class="lineNum">    1502</span> <span class="tlaUNC">           0 :     if (type == AutomationType::Tempo) {</span></span>
+<span id="L1503"><span class="lineNum">    1503</span> <span class="tlaUNC">           0 :         if (existingValue &amp;&amp; muse::RealIsEqualOrMore(displayValue, 1.0)</span></span>
+<span id="L1504"><span class="lineNum">    1504</span> <span class="tlaUNC">           0 :             &amp;&amp; muse::RealIsEqualOrMore(automationValueToDisplay(type, staff, tick, *existingValue), 1.0)) {</span></span>
+<span id="L1505"><span class="lineNum">    1505</span> <span class="tlaUNC">           0 :             return *existingValue;</span></span>
+<span id="L1506"><span class="lineNum">    1506</span>              :         }</span>
 <span id="L1507"><span class="lineNum">    1507</span>              : </span>
-<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaUNC">           0 :     return muse::real_t(displayValue);</span></span>
-<span id="L1509"><span class="lineNum">    1509</span>              : }</span>
-<span id="L1510"><span class="lineNum">    1510</span>              : </span>
-<span id="L1511"><span class="lineNum">    1511</span> <span class="tlaUNC">           0 : AutomationType NotationAutomationController::currentAutomationType() const</span></span>
-<span id="L1512"><span class="lineNum">    1512</span>              : {</span>
-<span id="L1513"><span class="lineNum">    1513</span> <span class="tlaUNC">           0 :     return automationTypeOf(notationConfiguration()-&gt;currentAutomationLane());</span></span>
-<span id="L1514"><span class="lineNum">    1514</span>              : }</span>
-<span id="L1515"><span class="lineNum">    1515</span>              : </span>
-<span id="L1516"><span class="lineNum">    1516</span> <span class="tlaUNC">           0 : AutomationCurveKey NotationAutomationController::currentCurveKey(const Staff* staff) const</span></span>
-<span id="L1517"><span class="lineNum">    1517</span>              : {</span>
-<span id="L1518"><span class="lineNum">    1518</span> <span class="tlaUNC">           0 :     return curveKeyFor(notationConfiguration()-&gt;currentAutomationLane(), staff);</span></span>
-<span id="L1519"><span class="lineNum">    1519</span>              : }</span>
-<span id="L1520"><span class="lineNum">    1520</span>              : </span>
-<span id="L1521"><span class="lineNum">    1521</span> <span class="tlaUNC">           0 : INotationAutomationPtr NotationAutomationController::automation() const</span></span>
-<span id="L1522"><span class="lineNum">    1522</span>              : {</span>
-<span id="L1523"><span class="lineNum">    1523</span> <span class="tlaUNC">           0 :     const IMasterNotationPtr masterNotation = projectSession()-&gt;masterNotation();</span></span>
-<span id="L1524"><span class="lineNum">    1524</span> <span class="tlaUNC">           0 :     return masterNotation ? masterNotation-&gt;automation() : nullptr;</span></span>
-<span id="L1525"><span class="lineNum">    1525</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaUNC">           0 :         const double localBpm = displayValue * TEMPO_RANGE_MAX_BPM;</span></span>
+<span id="L1509"><span class="lineNum">    1509</span> <span class="tlaUNC">           0 :         const double logicalBpm = tempoLocalBpmToLogicalBpm(localBpm);</span></span>
+<span id="L1510"><span class="lineNum">    1510</span> <span class="tlaUNC">           0 :         const muse::real_t normalized = mu::engraving::normalizeTempo(mu::engraving::BeatsPerSecond::fromBPM(logicalBpm));</span></span>
+<span id="L1511"><span class="lineNum">    1511</span> <span class="tlaUNC">           0 :         return std::clamp(normalized, mu::engraving::MIN_NORMALIZED_TEMPO, mu::engraving::MAX_NORMALIZED_TEMPO);</span></span>
+<span id="L1512"><span class="lineNum">    1512</span>              :     }</span>
+<span id="L1513"><span class="lineNum">    1513</span>              : </span>
+<span id="L1514"><span class="lineNum">    1514</span> <span class="tlaUNC">           0 :     return muse::real_t(displayValue);</span></span>
+<span id="L1515"><span class="lineNum">    1515</span>              : }</span>
+<span id="L1516"><span class="lineNum">    1516</span>              : </span>
+<span id="L1517"><span class="lineNum">    1517</span> <span class="tlaUNC">           0 : AutomationType NotationAutomationController::currentAutomationType() const</span></span>
+<span id="L1518"><span class="lineNum">    1518</span>              : {</span>
+<span id="L1519"><span class="lineNum">    1519</span> <span class="tlaUNC">           0 :     return automationTypeOf(notationConfiguration()-&gt;currentAutomationLane());</span></span>
+<span id="L1520"><span class="lineNum">    1520</span>              : }</span>
+<span id="L1521"><span class="lineNum">    1521</span>              : </span>
+<span id="L1522"><span class="lineNum">    1522</span> <span class="tlaUNC">           0 : AutomationCurveKey NotationAutomationController::currentCurveKey(const Staff* staff) const</span></span>
+<span id="L1523"><span class="lineNum">    1523</span>              : {</span>
+<span id="L1524"><span class="lineNum">    1524</span> <span class="tlaUNC">           0 :     return curveKeyFor(notationConfiguration()-&gt;currentAutomationLane(), staff);</span></span>
+<span id="L1525"><span class="lineNum">    1525</span>              : }</span>
 <span id="L1526"><span class="lineNum">    1526</span>              : </span>
-<span id="L1527"><span class="lineNum">    1527</span> <span class="tlaUNC">           0 : INotationPtr NotationAutomationController::currentNotation() const</span></span>
+<span id="L1527"><span class="lineNum">    1527</span> <span class="tlaUNC">           0 : INotationAutomationPtr NotationAutomationController::automation() const</span></span>
 <span id="L1528"><span class="lineNum">    1528</span>              : {</span>
-<span id="L1529"><span class="lineNum">    1529</span> <span class="tlaUNC">           0 :     return projectSession()-&gt;currentNotation();</span></span>
-<span id="L1530"><span class="lineNum">    1530</span>              : }</span>
-<span id="L1531"><span class="lineNum">    1531</span>              : </span>
-<span id="L1532"><span class="lineNum">    1532</span> <span class="tlaUNC">           0 : mu::engraving::AutomationDataConstPtr NotationAutomationController::automationData() const</span></span>
-<span id="L1533"><span class="lineNum">    1533</span>              : {</span>
-<span id="L1534"><span class="lineNum">    1534</span> <span class="tlaUNC">           0 :     const INotationAutomationPtr notationAutomation = automation();</span></span>
-<span id="L1535"><span class="lineNum">    1535</span> <span class="tlaUNC">           0 :     return notationAutomation ? notationAutomation-&gt;automationData() : nullptr;</span></span>
-<span id="L1536"><span class="lineNum">    1536</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1529"><span class="lineNum">    1529</span> <span class="tlaUNC">           0 :     const IMasterNotationPtr masterNotation = projectSession()-&gt;masterNotation();</span></span>
+<span id="L1530"><span class="lineNum">    1530</span> <span class="tlaUNC">           0 :     return masterNotation ? masterNotation-&gt;automation() : nullptr;</span></span>
+<span id="L1531"><span class="lineNum">    1531</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1532"><span class="lineNum">    1532</span>              : </span>
+<span id="L1533"><span class="lineNum">    1533</span> <span class="tlaUNC">           0 : INotationPtr NotationAutomationController::currentNotation() const</span></span>
+<span id="L1534"><span class="lineNum">    1534</span>              : {</span>
+<span id="L1535"><span class="lineNum">    1535</span> <span class="tlaUNC">           0 :     return projectSession()-&gt;currentNotation();</span></span>
+<span id="L1536"><span class="lineNum">    1536</span>              : }</span>
 <span id="L1537"><span class="lineNum">    1537</span>              : </span>
-<span id="L1538"><span class="lineNum">    1538</span> <span class="tlaUNC">           0 : mu::engraving::Score* NotationAutomationController::score() const</span></span>
+<span id="L1538"><span class="lineNum">    1538</span> <span class="tlaUNC">           0 : mu::engraving::AutomationDataConstPtr NotationAutomationController::automationData() const</span></span>
 <span id="L1539"><span class="lineNum">    1539</span>              : {</span>
-<span id="L1540"><span class="lineNum">    1540</span> <span class="tlaUNC">           0 :     return currentNotation() ? currentNotation()-&gt;elements()-&gt;msScore() : nullptr;</span></span>
-<span id="L1541"><span class="lineNum">    1541</span>              : }</span>
+<span id="L1540"><span class="lineNum">    1540</span> <span class="tlaUNC">           0 :     const INotationAutomationPtr notationAutomation = automation();</span></span>
+<span id="L1541"><span class="lineNum">    1541</span> <span class="tlaUNC">           0 :     return notationAutomation ? notationAutomation-&gt;automationData() : nullptr;</span></span>
+<span id="L1542"><span class="lineNum">    1542</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1543"><span class="lineNum">    1543</span>              : </span>
+<span id="L1544"><span class="lineNum">    1544</span> <span class="tlaUNC">           0 : mu::engraving::Score* NotationAutomationController::score() const</span></span>
+<span id="L1545"><span class="lineNum">    1545</span>              : {</span>
+<span id="L1546"><span class="lineNum">    1546</span> <span class="tlaUNC">           0 :     return currentNotation() ? currentNotation()-&gt;elements()-&gt;msScore() : nullptr;</span></span>
+<span id="L1547"><span class="lineNum">    1547</span>              : }</span>
         </pre>
               </td>
             </tr>

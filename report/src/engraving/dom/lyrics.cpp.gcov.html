@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -181,39 +181,39 @@
 <span id="L123"><span class="lineNum">     123</span>              : //   isMelisma</span>
 <span id="L124"><span class="lineNum">     124</span>              : //---------------------------------------------------------</span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">        5035 : bool Lyrics::isMelisma() const</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">        5039 : bool Lyrics::isMelisma() const</span></span>
 <span id="L127"><span class="lineNum">     127</span>              : {</span>
 <span id="L128"><span class="lineNum">     128</span>              :     // entered as melisma using underscore?</span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">        5035 :     if (m_ticks &gt; Fraction(0, 1)) {</span></span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         111 :         return true;</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">        5039 :     if (m_ticks &gt; Fraction(0, 1)) {</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         112 :         return true;</span></span>
 <span id="L131"><span class="lineNum">     131</span>              :     }</span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
 <span id="L133"><span class="lineNum">     133</span>              :     // hyphenated?</span>
 <span id="L134"><span class="lineNum">     134</span>              :     // if so, it is a melisma only if there is no lyric in same verse on next CR</span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">        4924 :     if (m_separator &amp;&amp; (m_syllabic == LyricsSyllabic::BEGIN || m_syllabic == LyricsSyllabic::MIDDLE)) {</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">        4927 :     if (m_separator &amp;&amp; (m_syllabic == LyricsSyllabic::BEGIN || m_syllabic == LyricsSyllabic::MIDDLE)) {</span></span>
 <span id="L136"><span class="lineNum">     136</span>              :         // find next CR and check for existence of lyric in same verse and placement (in any voice)</span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">         378 :         const ChordRest* cr = chordRest();</span></span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         378 :         if (cr) {</span></span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">         378 :             const Segment* s = cr-&gt;segment()-&gt;next1();</span></span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">         378 :             const track_idx_t strack = staffIdx() * VOICES;</span></span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">         378 :             const track_idx_t etrack = strack + VOICES;</span></span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         378 :             const track_idx_t lyrTrack = track();</span></span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">         378 :             const ChordRest* lyrVoiceNextCR = s ? s-&gt;nextChordRest(lyrTrack) : nullptr;</span></span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         616 :             for (track_idx_t track = strack; track &lt; etrack; ++track) {</span></span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">         558 :                 const ChordRest* trackNextCR = s ? s-&gt;nextChordRest(track) : nullptr;</span></span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">         558 :                 if (trackNextCR) {</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">         381 :         const ChordRest* cr = chordRest();</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">         381 :         if (cr) {</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">         381 :             const Segment* s = cr-&gt;segment()-&gt;next1();</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">         381 :             const track_idx_t strack = staffIdx() * VOICES;</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">         381 :             const track_idx_t etrack = strack + VOICES;</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         381 :             const track_idx_t lyrTrack = track();</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">         381 :             const ChordRest* lyrVoiceNextCR = s ? s-&gt;nextChordRest(lyrTrack) : nullptr;</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         623 :             for (track_idx_t track = strack; track &lt; etrack; ++track) {</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">         564 :                 const ChordRest* trackNextCR = s ? s-&gt;nextChordRest(track) : nullptr;</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">         564 :                 if (trackNextCR) {</span></span>
 <span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">           7 :                     if (lyrTrack != track &amp;&amp; lyrVoiceNextCR</span></span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         391 :                         &amp;&amp; !lyrVoiceNextCR-&gt;lyrics(m_verse, placement()) &amp;&amp; lyrVoiceNextCR-&gt;tick() &lt; trackNextCR-&gt;tick()) {</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         394 :                         &amp;&amp; !lyrVoiceNextCR-&gt;lyrics(m_verse, placement()) &amp;&amp; lyrVoiceNextCR-&gt;tick() &lt; trackNextCR-&gt;tick()) {</span></span>
 <span id="L149"><span class="lineNum">     149</span>              :                         // There is an intermediary note in a different voice, this is a melisma</span>
 <span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">           1 :                         return true;</span></span>
 <span id="L151"><span class="lineNum">     151</span>              :                     }</span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">         383 :                     if (trackNextCR-&gt;lyrics(m_verse, placement())) {</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">         386 :                     if (trackNextCR-&gt;lyrics(m_verse, placement())) {</span></span>
 <span id="L153"><span class="lineNum">     153</span>              :                         // Next note has lyrics, not a melisma just a dash</span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">         319 :                         return false;</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">         321 :                         return false;</span></span>
 <span id="L155"><span class="lineNum">     155</span>              :                     }</span>
 <span id="L156"><span class="lineNum">     156</span>              :                 }</span>
 <span id="L157"><span class="lineNum">     157</span>              :             }</span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">          58 :             return true;</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">          59 :             return true;</span></span>
 <span id="L159"><span class="lineNum">     159</span>              :         }</span>
 <span id="L160"><span class="lineNum">     160</span>              :     }</span>
 <span id="L161"><span class="lineNum">     161</span>              : </span>
@@ -279,9 +279,9 @@
 <span id="L221"><span class="lineNum">     221</span>              : //   endTick</span>
 <span id="L222"><span class="lineNum">     222</span>              : //---------------------------------------------------------</span>
 <span id="L223"><span class="lineNum">     223</span>              : </span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC tlaBgGNC">         213 : Fraction Lyrics::endTick() const</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC tlaBgGNC">         214 : Fraction Lyrics::endTick() const</span></span>
 <span id="L225"><span class="lineNum">     225</span>              : {</span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">         213 :     return segment()-&gt;tick() + ticks();</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">         214 :     return segment()-&gt;tick() + ticks();</span></span>
 <span id="L227"><span class="lineNum">     227</span>              : }</span>
 <span id="L228"><span class="lineNum">     228</span>              : </span>
 <span id="L229"><span class="lineNum">     229</span>              : //---------------------------------------------------------</span>
@@ -444,19 +444,19 @@
 <span id="L386"><span class="lineNum">     386</span>              : //   getProperty</span>
 <span id="L387"><span class="lineNum">     387</span>              : //---------------------------------------------------------</span>
 <span id="L388"><span class="lineNum">     388</span>              : </span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">       13421 : PropertyValue Lyrics::getProperty(Pid propertyId) const</span></span>
+<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">       13505 : PropertyValue Lyrics::getProperty(Pid propertyId) const</span></span>
 <span id="L390"><span class="lineNum">     390</span>              : {</span>
-<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">       13421 :     switch (propertyId) {</span></span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">       13505 :     switch (propertyId) {</span></span>
 <span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">          38 :     case Pid::SYLLABIC:</span></span>
 <span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">          38 :         return int(m_syllabic);</span></span>
-<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">         476 :     case Pid::LYRIC_TICKS:</span></span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">         476 :         return m_ticks;</span></span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">         461 :     case Pid::VERSE:</span></span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">         461 :         return m_verse;</span></span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">         483 :     case Pid::LYRIC_TICKS:</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">         483 :         return m_ticks;</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">         468 :     case Pid::VERSE:</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">         468 :         return m_verse;</span></span>
 <span id="L398"><span class="lineNum">     398</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::AVOID_BARLINES:</span></span>
 <span id="L399"><span class="lineNum">     399</span> <span class="tlaUNC">           0 :         return m_avoidBarlines;</span></span>
-<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC tlaBgGNC">       12446 :     default:</span></span>
-<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">       12446 :         return TextBase::getProperty(propertyId);</span></span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC tlaBgGNC">       12516 :     default:</span></span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">       12516 :         return TextBase::getProperty(propertyId);</span></span>
 <span id="L402"><span class="lineNum">     402</span>              :     }</span>
 <span id="L403"><span class="lineNum">     403</span>              : }</span>
 <span id="L404"><span class="lineNum">     404</span>              : </span>
@@ -539,28 +539,28 @@
 <span id="L481"><span class="lineNum">     481</span>              : //   propertyDefault</span>
 <span id="L482"><span class="lineNum">     482</span>              : //---------------------------------------------------------</span>
 <span id="L483"><span class="lineNum">     483</span>              : </span>
-<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">       23979 : PropertyValue Lyrics::propertyDefault(Pid id) const</span></span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">       24064 : PropertyValue Lyrics::propertyDefault(Pid id) const</span></span>
 <span id="L485"><span class="lineNum">     485</span>              : {</span>
-<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">       23979 :     switch (id) {</span></span>
-<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">         455 :     case Pid::TEXT_STYLE:</span></span>
-<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">         455 :         return isEven() ? TextStyleType::LYRICS_EVEN : TextStyleType::LYRICS_ODD;</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">       24064 :     switch (id) {</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">         462 :     case Pid::TEXT_STYLE:</span></span>
+<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">         462 :         return isEven() ? TextStyleType::LYRICS_EVEN : TextStyleType::LYRICS_ODD;</span></span>
 <span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">         131 :     case Pid::PLACEMENT:</span></span>
 <span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">         131 :         return style().styleV(Sid::lyricsPlacement);</span></span>
 <span id="L491"><span class="lineNum">     491</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::SYLLABIC:</span></span>
 <span id="L492"><span class="lineNum">     492</span> <span class="tlaUNC">           0 :         return int(LyricsSyllabic::SINGLE);</span></span>
-<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC tlaBgGNC">         443 :     case Pid::LYRIC_TICKS:</span></span>
-<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">         886 :         return Fraction(0, 1);</span></span>
-<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">         443 :     case Pid::VERSE:</span></span>
-<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">         443 :         return 0;</span></span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC tlaBgGNC">         450 :     case Pid::LYRIC_TICKS:</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">         900 :         return Fraction(0, 1);</span></span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">         450 :     case Pid::VERSE:</span></span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">         450 :         return 0;</span></span>
 <span id="L497"><span class="lineNum">     497</span> <span class="tlaUNC tlaBgUNC">           0 :     case Pid::AVOID_BARLINES:</span></span>
 <span id="L498"><span class="lineNum">     498</span> <span class="tlaUNC">           0 :         return style().styleB(Sid::lyricsAvoidBarlines);</span></span>
-<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC tlaBgGNC">        2656 :     case Pid::POSITION:</span></span>
-<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">        2656 :         if (isMelisma()) {</span></span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC tlaBgGNC">        2657 :     case Pid::POSITION:</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">        2657 :         if (isMelisma()) {</span></span>
 <span id="L501"><span class="lineNum">     501</span> <span class="tlaUNC tlaBgUNC">           0 :             return style().styleV(Sid::lyricsMelismaAlign).value&lt;Align&gt;().horizontal;</span></span>
 <span id="L502"><span class="lineNum">     502</span>              :         }</span>
 <span id="L503"><span class="lineNum">     503</span>              :     // fall through</span>
 <span id="L504"><span class="lineNum">     504</span>              :     default:</span>
-<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC tlaBgGNC">       22507 :         return TextBase::propertyDefault(id);</span></span>
+<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC tlaBgGNC">       22571 :         return TextBase::propertyDefault(id);</span></span>
 <span id="L506"><span class="lineNum">     506</span>              :     }</span>
 <span id="L507"><span class="lineNum">     507</span>              : }</span>
 <span id="L508"><span class="lineNum">     508</span>              : </span>
@@ -575,17 +575,17 @@
 <span id="L517"><span class="lineNum">     517</span>              :     }</span>
 <span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">       85657 : }</span></span>
 <span id="L519"><span class="lineNum">     519</span>              : </span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">        4718 : double Lyrics::yRelativeToStaff() const</span></span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">        4724 : double Lyrics::yRelativeToStaff() const</span></span>
 <span id="L521"><span class="lineNum">     521</span>              : {</span>
-<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">        4718 :     const double yOff = staffOffsetY();</span></span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">        4718 :     return pos().y() + chordRest()-&gt;pos().y() + yOff;</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">        4724 :     const double yOff = staffOffsetY();</span></span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">        4724 :     return pos().y() + chordRest()-&gt;pos().y() + yOff;</span></span>
 <span id="L524"><span class="lineNum">     524</span>              : }</span>
 <span id="L525"><span class="lineNum">     525</span>              : </span>
-<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">        2374 : void Lyrics::setYRelativeToStaff(double y)</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">        2377 : void Lyrics::setYRelativeToStaff(double y)</span></span>
 <span id="L527"><span class="lineNum">     527</span>              : {</span>
-<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">        2374 :     const double yOff = staffOffsetY();</span></span>
-<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">        2374 :     mutldata()-&gt;setPosY(y - chordRest()-&gt;pos().y() - yOff);</span></span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">        2374 : }</span></span>
+<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">        2377 :     const double yOff = staffOffsetY();</span></span>
+<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">        2377 :     mutldata()-&gt;setPosY(y - chordRest()-&gt;pos().y() - yOff);</span></span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">        2377 : }</span></span>
 <span id="L531"><span class="lineNum">     531</span>              : </span>
 <span id="L532"><span class="lineNum">     532</span>              : //---------------------------------------------------------</span>
 <span id="L533"><span class="lineNum">     533</span>              : //   forAllLyrics</span>

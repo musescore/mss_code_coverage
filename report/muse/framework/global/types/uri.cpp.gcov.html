@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -92,25 +92,25 @@
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span>              : // muse://module/target/name</span>
 <span id="L36"><span class="lineNum">      36</span>              : </span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC tlaBgGNC">       14012 : static std::string extractPath(const std::string&amp; str)</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC tlaBgGNC">       15362 : static std::string extractPath(const std::string&amp; str)</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : {</span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">       14012 :     auto schemePos = str.find(':');</span></span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">       14012 :     auto paramsPos = str.find('?');</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">       14012 :     auto pathPos= (schemePos != std::string::npos) ? (schemePos + 3) : 0;</span></span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">       14012 :     size_t pathN = (paramsPos != std::string::npos) ? (paramsPos - pathPos) : std::string::npos;</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">       15362 :     auto schemePos = str.find(':');</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">       15362 :     auto paramsPos = str.find('?');</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">       15362 :     auto pathPos= (schemePos != std::string::npos) ? (schemePos + 3) : 0;</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">       15362 :     size_t pathN = (paramsPos != std::string::npos) ? (paramsPos - pathPos) : std::string::npos;</span></span>
 <span id="L43"><span class="lineNum">      43</span>              : </span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">       14012 :     return str.substr(pathPos, pathN);</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">       15362 :     return str.substr(pathPos, pathN);</span></span>
 <span id="L45"><span class="lineNum">      45</span>              : }</span>
 <span id="L46"><span class="lineNum">      46</span>              : </span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">       14011 : Uri::Uri(const std::string&amp; str)</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">       15361 : Uri::Uri(const std::string&amp; str)</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : {</span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">       14011 :     auto schemePos = str.find(':');</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       14011 :     if (schemePos != std::string::npos) {</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">       13914 :         m_scheme = str.substr(0, schemePos);</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">       15361 :     auto schemePos = str.find(':');</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       15361 :     if (schemePos != std::string::npos) {</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">       15264 :         m_scheme = str.substr(0, schemePos);</span></span>
 <span id="L52"><span class="lineNum">      52</span>              :     }</span>
 <span id="L53"><span class="lineNum">      53</span>              : </span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">       14011 :     m_path = extractPath(str);</span></span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">       14011 : }</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">       15361 :     m_path = extractPath(str);</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">       15361 : }</span></span>
 <span id="L56"><span class="lineNum">      56</span>              : </span>
 <span id="L57"><span class="lineNum">      57</span> <span class="tlaUNC tlaBgUNC">           0 : Uri::Uri(const String&amp; str)</span></span>
 <span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC">           0 :     : Uri(str.toStdString())</span></span>
@@ -242,27 +242,27 @@
 <span id="L184"><span class="lineNum">     184</span>              : </span>
 <span id="L185"><span class="lineNum">     185</span>              : // muse://module/target/name?param1=value1&amp;paramn=valuen</span>
 <span id="L186"><span class="lineNum">     186</span>              : </span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">         116 : UriQuery::UriQuery(const std::string&amp; str)</span></span>
-<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">         116 :     : m_uri(str)</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">         121 : UriQuery::UriQuery(const std::string&amp; str)</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">         121 :     : m_uri(str)</span></span>
 <span id="L189"><span class="lineNum">     189</span>              : {</span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">         116 :     parseParams(str, m_params);</span></span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">         116 : }</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">         121 :     parseParams(str, m_params);</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">         121 : }</span></span>
 <span id="L192"><span class="lineNum">     192</span>              : </span>
 <span id="L193"><span class="lineNum">     193</span> <span class="tlaUNC tlaBgUNC">           0 : UriQuery::UriQuery(const String&amp; str)</span></span>
 <span id="L194"><span class="lineNum">     194</span> <span class="tlaUNC">           0 :     : UriQuery(str.toStdString())</span></span>
 <span id="L195"><span class="lineNum">     195</span>              : {</span>
 <span id="L196"><span class="lineNum">     196</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L197"><span class="lineNum">     197</span>              : </span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC tlaBgGNC">          41 : UriQuery::UriQuery(const Uri&amp; uri)</span></span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">          41 :     : m_uri(uri)</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC tlaBgGNC">          44 : UriQuery::UriQuery(const Uri&amp; uri)</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">          44 :     : m_uri(uri)</span></span>
 <span id="L200"><span class="lineNum">     200</span>              : {</span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">          41 : }</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">          44 : }</span></span>
 <span id="L202"><span class="lineNum">     202</span>              : </span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">         116 : void UriQuery::parseParams(const std::string&amp; uri, Params&amp; out) const</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">         121 : void UriQuery::parseParams(const std::string&amp; uri, Params&amp; out) const</span></span>
 <span id="L204"><span class="lineNum">     204</span>              : {</span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">         116 :     auto paramsPos = uri.find('?');</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">         116 :     if (paramsPos == std::string::npos) {</span></span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          88 :         return;</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">         121 :     auto paramsPos = uri.find('?');</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">         121 :     if (paramsPos == std::string::npos) {</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">          93 :         return;</span></span>
 <span id="L208"><span class="lineNum">     208</span>              :     }</span>
 <span id="L209"><span class="lineNum">     209</span>              : </span>
 <span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">          28 :     std::string paramsStr = uri.substr(paramsPos + 1);</span></span>
@@ -352,9 +352,9 @@
 <span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">          15 :     return m_uri.isValid();</span></span>
 <span id="L295"><span class="lineNum">     295</span>              : }</span>
 <span id="L296"><span class="lineNum">     296</span>              : </span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">          37 : const Uri&amp; UriQuery::uri() const</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">          69 : const Uri&amp; UriQuery::uri() const</span></span>
 <span id="L298"><span class="lineNum">     298</span>              : {</span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">          37 :     return m_uri;</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">          69 :     return m_uri;</span></span>
 <span id="L300"><span class="lineNum">     300</span>              : }</span>
 <span id="L301"><span class="lineNum">     301</span>              : </span>
 <span id="L302"><span class="lineNum">     302</span> <span class="tlaUNC tlaBgUNC">           0 : void UriQuery::setScheme(const Uri::Scheme&amp; scheme)</span></span>
@@ -372,19 +372,19 @@
 <span id="L314"><span class="lineNum">     314</span> <span class="tlaUNC">           0 :     m_params = params;</span></span>
 <span id="L315"><span class="lineNum">     315</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L316"><span class="lineNum">     316</span>              : </span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC tlaBgGNC">          57 : Val UriQuery::param(const std::string&amp; key, const Val&amp; def) const</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC tlaBgGNC">          58 : Val UriQuery::param(const std::string&amp; key, const Val&amp; def) const</span></span>
 <span id="L318"><span class="lineNum">     318</span>              : {</span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">          57 :     auto it = m_params.find(key);</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">          57 :     if (it == m_params.end()) {</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">          58 :     auto it = m_params.find(key);</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">          58 :     if (it == m_params.end()) {</span></span>
 <span id="L321"><span class="lineNum">     321</span> <span class="tlaUNC tlaBgUNC">           0 :         return def;</span></span>
 <span id="L322"><span class="lineNum">     322</span>              :     }</span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC tlaBgGNC">          57 :     return it-&gt;second;</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC tlaBgGNC">          58 :     return it-&gt;second;</span></span>
 <span id="L324"><span class="lineNum">     324</span>              : }</span>
 <span id="L325"><span class="lineNum">     325</span>              : </span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         162 : void UriQuery::addParam(const std::string&amp; key, const Val&amp; val)</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">         202 : void UriQuery::addParam(const std::string&amp; key, const Val&amp; val)</span></span>
 <span id="L327"><span class="lineNum">     327</span>              : {</span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">         162 :     m_params[key] = val;</span></span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">         162 : }</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">         202 :     m_params[key] = val;</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">         202 : }</span></span>
 <span id="L330"><span class="lineNum">     330</span>              : </span>
 <span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">           6 : UriQuery&amp; UriQuery::set(const ValMap&amp; vals)</span></span>
 <span id="L332"><span class="lineNum">     332</span>              : {</span>

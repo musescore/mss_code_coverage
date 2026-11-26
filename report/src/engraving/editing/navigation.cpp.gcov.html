@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -1306,16 +1306,16 @@
 <span id="L1248"><span class="lineNum">    1248</span>              : //    - currently used to determine the first lyric of a melisma</span>
 <span id="L1249"><span class="lineNum">    1249</span>              : //---------------------------------------------------------</span>
 <span id="L1250"><span class="lineNum">    1250</span>              : </span>
-<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaGNC tlaBgGNC">          13 : Lyrics* Navigation::lastLyricsInMeasure(const Segment* seg, const staff_idx_t staffIdx, const int no, const PlacementV&amp; placement)</span></span>
+<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaGNC tlaBgGNC">          14 : Lyrics* Navigation::lastLyricsInMeasure(const Segment* seg, const staff_idx_t staffIdx, const int no, const PlacementV&amp; placement)</span></span>
 <span id="L1252"><span class="lineNum">    1252</span>              : {</span>
-<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaGNC">          43 :     while (seg) {</span></span>
-<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaGNC">          37 :         const track_idx_t strack = staffIdx * VOICES;</span></span>
-<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaGNC">          37 :         const track_idx_t etrack = strack + VOICES;</span></span>
-<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaGNC">         158 :         for (track_idx_t track = strack; track &lt; etrack; ++track) {</span></span>
-<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaGNC">         128 :             EngravingItem* el = seg-&gt;element(track);</span></span>
-<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaGNC">         128 :             Lyrics* prevLyrics = el &amp;&amp; el-&gt;isChord() ? toChordRest(el)-&gt;lyrics(no, placement) : nullptr;</span></span>
-<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaGNC">         128 :             if (prevLyrics) {</span></span>
-<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaGNC">           7 :                 return prevLyrics;</span></span>
+<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaGNC">          44 :     while (seg) {</span></span>
+<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaGNC">          38 :         const track_idx_t strack = staffIdx * VOICES;</span></span>
+<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaGNC">          38 :         const track_idx_t etrack = strack + VOICES;</span></span>
+<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaGNC">         159 :         for (track_idx_t track = strack; track &lt; etrack; ++track) {</span></span>
+<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaGNC">         129 :             EngravingItem* el = seg-&gt;element(track);</span></span>
+<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaGNC">         129 :             Lyrics* prevLyrics = el &amp;&amp; el-&gt;isChord() ? toChordRest(el)-&gt;lyrics(no, placement) : nullptr;</span></span>
+<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaGNC">         129 :             if (prevLyrics) {</span></span>
+<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaGNC">           8 :                 return prevLyrics;</span></span>
 <span id="L1261"><span class="lineNum">    1261</span>              :             }</span>
 <span id="L1262"><span class="lineNum">    1262</span>              :         }</span>
 <span id="L1263"><span class="lineNum">    1263</span> <span class="tlaGNC">          30 :         seg = seg-&gt;prev1(mu::engraving::SegmentType::ChordRest);</span></span>

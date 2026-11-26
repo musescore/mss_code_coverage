@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-19 04:14:36</td>
+            <td class="headerValue">2026-11-26 03:55:10</td>
             <td></td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -100,13 +100,13 @@
 <span id="L42"><span class="lineNum">      42</span>              : </span>
 <span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC tlaBgGNC">          87 :     PlaybackSetupData() = default;</span></span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">         869 :     PlaybackSetupData(SoundId id, SoundCategory category, SoundSubCategories&amp;&amp; soundSubCategories = {}, bool supportsSND = false)</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">         869 :         : id(soundIdToString(id)), category(category), supportsSingleNoteDynamics(supportsSND)</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">         881 :     PlaybackSetupData(SoundId id, SoundCategory category, SoundSubCategories&amp;&amp; soundSubCategories = {}, bool supportsSND = false)</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">         881 :         : id(soundIdToString(id)), category(category), supportsSingleNoteDynamics(supportsSND)</span></span>
 <span id="L47"><span class="lineNum">      47</span>              :     {</span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">        1792 :         for (SoundSubCategory subCategory : soundSubCategories) {</span></span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">         923 :             subCategories.push_back(soundSubCategoryToString(subCategory));</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">        1815 :         for (SoundSubCategory subCategory : soundSubCategories) {</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">         934 :             subCategories.push_back(soundSubCategoryToString(subCategory));</span></span>
 <span id="L50"><span class="lineNum">      50</span>              :         }</span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">         869 :     }</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">         881 :     }</span></span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span> <span class="tlaUNC tlaBgUNC">           0 :     PlaybackSetupData(String id, SoundCategory category, StringList&amp;&amp; subCategories = {})</span></span>
 <span id="L54"><span class="lineNum">      54</span> <span class="tlaUNC">           0 :         : id(std::move(id)), subCategories(std::move(subCategories)), category(category)</span></span>
@@ -197,22 +197,22 @@
 <span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC tlaBgGNC">          56 :         return true;</span></span>
 <span id="L140"><span class="lineNum">     140</span>              :     }</span>
 <span id="L141"><span class="lineNum">     141</span>              : </span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         180 :     String toString() const</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         191 :     String toString() const</span></span>
 <span id="L143"><span class="lineNum">     143</span>              :     {</span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         180 :         String result;</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         191 :         String result;</span></span>
 <span id="L145"><span class="lineNum">     145</span>              : </span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">         180 :         if (!subCategories.empty()) {</span></span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">         360 :             result = String(u&quot;%1.%2.%3&quot;)</span></span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         360 :                      .arg(soundCategoryToString(category))</span></span>
-<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">         180 :                      .arg(id)</span></span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">         360 :                      .arg(subCategories.join(u&quot;:&quot;));</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">         191 :         if (!subCategories.empty()) {</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">         382 :             result = String(u&quot;%1.%2.%3&quot;)</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         382 :                      .arg(soundCategoryToString(category))</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">         191 :                      .arg(id)</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">         382 :                      .arg(subCategories.join(u&quot;:&quot;));</span></span>
 <span id="L151"><span class="lineNum">     151</span>              :         } else {</span>
 <span id="L152"><span class="lineNum">     152</span> <span class="tlaUNC tlaBgUNC">           0 :             result = String(u&quot;%1.%2&quot;)</span></span>
 <span id="L153"><span class="lineNum">     153</span> <span class="tlaUNC">           0 :                      .arg(soundCategoryToString(category))</span></span>
 <span id="L154"><span class="lineNum">     154</span> <span class="tlaUNC">           0 :                      .arg(id);</span></span>
 <span id="L155"><span class="lineNum">     155</span>              :         }</span>
 <span id="L156"><span class="lineNum">     156</span>              : </span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC tlaBgGNC">         180 :         return result;</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC tlaBgGNC">         191 :         return result;</span></span>
 <span id="L158"><span class="lineNum">     158</span> <span class="tlaUNC tlaBgUNC">           0 :     }</span></span>
 <span id="L159"><span class="lineNum">     159</span>              : </span>
 <span id="L160"><span class="lineNum">     160</span> <span class="tlaUNC">           0 :     static PlaybackSetupData fromString(const String&amp; str)</span></span>
